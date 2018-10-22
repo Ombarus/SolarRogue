@@ -1,0 +1,119 @@
+Feature :
+- Turn / Action based
+	- Actions can take more or less than a turn
+		- ? Every Action has a AP cost, Each action increase total AP spent. Whoever has spent the less AP is next to move.
+		- could some action start and be changed before they finish ? (guided missile, etc ?)
+- Story ?
+	- Earth is in peril ! Find the last tech to save it !
+	- Explore the center of the galaxy to bring back it's wonders !
+	- 
+- Energy is Life
+	- 0 Energy means death
+	- Actions cost energy
+	- Energy as currency ?
+	- Matter-Energy converter allow you to create stuff using energy
+	- Matter-Energy converter allow you to destroy things to get back energy
+- Hull strength
+- Harvesting ressources from planet & dead enemy ship
+- Ship Equipment :
+	- Engine (move speed)
+	- Weapon (laser, missile, Lance ???)
+	- Truster ? (Dodge)
+	- Shields
+	- Scanner
+- Display :
+	- Console Message
+	- Action Buttons
+	- Ship Status Bar
+	- Inventory / Equip
+- Level-up or item only ?
+	- Level up could 
+		- Increase weapon accuracy, dodge
+		- Should not increase arbitrary ship components like hull HP, or shield strenght or # of hardpoint mounts.
+		- Unless there's some reason, like construction of hardmount point 2 is completed !
+	- Item only :
+		- Hard to explain weapon accuracy increase...
+		- Hull increase can only be achieved by switching ships ?
+- Swap ship with salavage ?
+	- I like the idea, not sure how to implement it mechanically
+	- Damaged ship without destroying it (>1% health) can be borded ?
+		- Destoyed ship could randomly drop a "carcass"
+		- Ships could be found in special area (derelic shipyard, abandonned ship, etc)
+	- Bording ships has (or not) a % of failure
+	
+
+Things to consider :
+
+- https://www.reddit.com/r/roguelikedev/wiki/faq_friday
+- https://www.scirra.com/store/2d-game-sprites/pixel-art-retr-2d-planets-pack-3792
+- SCI-FI items :
+	- Laser (instant, beam of light)
+	- Missile / Torpedo (slow, high-damage, special purpose (electro-magnetic, etc.))
+	- Scanner (ennemy health, planet composition, cloak detection, etc) (Range, Power)
+	- Shield (Absorb ennemy damage, use energy)
+	- Repair Nano-Bot (hull repair)
+	- Warp Engine (Move to other system ? Teleport ?)
+	- Sub-Light Engine / Truster (Move locally, dodge chance, maneuvability)
+	- Life-Support (?)
+	- Turrets (accuracy)
+	- "Cursed" Items (overheat and fuse with console ?)
+	- Fuel Aditive ((ring of hunger / slow digestion) increase / reduce energy use)
+	- Shield Booster ((ring of protection) Increase protection)
+	- Cloaking shield (ring of stealth)
+	- Naugthy Nanobots (ring of aggravate monster ?)
+	- Electric, Heat, Cold, radiation shield ? (ring of protection from cold, heat, etc.)
+	- Diplomatic Comm AI (ring of conflict ?)
+	- Portable Wormhole generator (wand of summon monster and/or wishing ?)
+	- Cargo Hold (bag of holding ?)
+	- Vaccum Generator (Produce energy from thin-air(space) ?)
+	- Off-Planet Backup, Precursors Copy (amulet of life-saving)
+	- Tractor beam (pickup items at a distance ? bring ship closer, even push them back?)
+- SCI-FI theme :
+	- Space Empire Epics
+	- Form a federation ?
+		- Galactic Empires
+	- Uplift species
+		- Intelligence amplification
+	- Interstellar war between organics & machines
+	- Misteries of extinct precursor
+	- Transhumanism
+		- Consciousness
+		- Memory Alteration
+	- Asteroid Mining
+	- Moon Station
+		- Mega-Structure
+	- Singularity
+	- Video phones (maybe in text dialog style ?)
+	- Alien Language
+	- AR / VR ? (illusions ?)
+	- Nanotech, Quantum Physics
+	- Alien Religion
+	- WormHole
+- Civilisations :
+	- Terrans
+	- Neglectful Precursors
+	- Proud Warrior Race
+	- Genocidal Alien (Virus, Planet Destroyer, etc)
+	- Wise / Spiritual Race (Crystal Spires and Togas, Space Elves)
+	- Space Babes (blue/green)
+	- Greys, Little Green Man, Reptilian race
+	- Zombies, Robots, Heritics, Abomination...
+	- Hive Mind
+- Animation manager
+	- animation can pause action phase ?
+- Tileset hiarchy (z-sorting) (floor, walls, items, characters ?)
+- Ability to switch tileset (classic text, clean sci-fi sprite, steam-punk sprite, etc.)
+- Menu engine
+	- Should be able to pop-up any size rectangle with dynamic text and menu options
+		- Rectangle look&feel
+		- How to output text (font, size, etc.)
+		- icons & images ?
+	- Prefab hiarchy ?
+	- Lock & Move menu around ? change layout ?
+- Seemless touch support
+	- Buttons
+- Console Log system
+	- Queue message
+	- Message colors / importance
+- Object data format
+- RNG / Procedural generation
