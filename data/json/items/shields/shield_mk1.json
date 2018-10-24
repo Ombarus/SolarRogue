@@ -1,0 +1,17 @@
+{
+	"name_id":"Shield",
+	"sprite_choice":[
+		"shield"
+	],
+	"equipment": {
+		"slot":"shield",
+		"weight":10.0,
+		"equip_ap":3.0,
+		"unequip_ap":3.0
+	},
+	"shielding": {
+		"energy_cost_per_dam":150.0,
+		"energy_cost_per_ap":1.0,
+		"pierce_chance":0.1
+	}
+}

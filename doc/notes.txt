@@ -68,6 +68,7 @@ Things to consider :
 	- Vaccum Generator (Produce energy from thin-air(space) ?)
 	- Off-Planet Backup, Precursors Copy (amulet of life-saving)
 	- Tractor beam (pickup items at a distance ? bring ship closer, even push them back?)
+	- Gravity field generator (prevent warp, inhibit movement (slow/freeze))
 - SCI-FI theme :
 	- Space Empire Epics
 	- Form a federation ?
@@ -117,3 +118,4 @@ Things to consider :
 	- Message colors / importance
 - Object data format
 - RNG / Procedural generation
+- Multiple Object on same Tile at level loading ?

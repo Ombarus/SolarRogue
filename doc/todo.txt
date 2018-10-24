@@ -1,0 +1,19 @@
+1st step :
+
+- Generate Object using RNG :
+	- Random planet
+	- Random ships (at least 2 types)
+	- Wormholes (up & down)
+- Ability to swap tileset for ascii somehow
+- Data System
+- Move around using touch control & keyboard
+- Basic interaction
+	- Shoot
+	- Pickup
+	- Drop
+	- Use Matter-Energy converter to produce energy
+- Run on Android
+
+polish :
+- smooth camera (a la township?)
+	- smooth zoom limits & exponential zoom

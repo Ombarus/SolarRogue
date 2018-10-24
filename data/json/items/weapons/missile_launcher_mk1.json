@@ -1,0 +1,19 @@
+{
+	"name_id":"Missile Launcher MK1",
+	"unidentified_look":"data/json/items/weapons/missile_launcher_generic.json",
+	"sprite_choice":[
+		"missile_launcher_blue",
+		"missile_launcher_green",
+		"missile_launcher_yellow"
+	],
+	"weapon_data": {
+		"base_dam":5.0,
+		"max_dam":10.0,
+		"ammo":"data/json/items/weapons/missile.json",
+		"fire_energy_cost":100.0
+	},
+	"equipment": {
+		"slot":"small_weapon_mount",
+		"weight":100.0
+	}
+}

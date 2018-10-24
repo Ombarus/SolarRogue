@@ -1,0 +1,26 @@
+{
+	"name_id":"A Simple Probe",
+	"sprite":"probe",
+	"mounts": {
+		"weapon": "data/json/items/weapons/missile_launcher_mk1.json",
+		"shield": "data/json/items/shields/shield_mk1.json"
+	},
+	"ai": {
+		"aggressive":false,
+		"pathfinding":"simple",
+		"run_if_attacked":true
+	},
+	"drop_on_death": [
+		{"id":"data/json/items/weapons/missile_launcher_mk1.json", "chance":0.07},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.1},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
+	],
+	"destroyable": {
+		"hull":10
+	},
+	"moving": {
+		"speed":1.0,
+		"can_use_wormhole":false
+	}
+}

@@ -1,0 +1,11 @@
+{
+	"name_id":"Missile",
+	"sprite_choice":[
+		"missile"
+	],
+	"equipment": {
+		"slot":"cargo",
+		"weight":0.5,
+		"stackable":true
+	}
+}
