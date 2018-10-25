@@ -1,4 +1,5 @@
 {
 	"type":"prop",
-	"sprite":"starry"
+	"sprite":"starry",
+	"z_order":0
 }

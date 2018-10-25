@@ -3,6 +3,7 @@
 	"sprite_choice": [
 		"planet_a", "planet_b", "planet_c"
 	],
+	"z_order":80,
 	"harvestable": {
 		"documentation":"Planets have a 'richness' that determine how many items they can drop before running out (to avoid farming)",
 		"documentation2":"They also have a drop rate that translate to how 'hard' they are to mine. Rich planet might require powerful weapons to mine effectively if drop_rate is low",

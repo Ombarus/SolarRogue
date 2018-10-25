@@ -1,4 +1,5 @@
 {
 	"name_id":"Hydrogen",
-	"sprite":"hydrogen"
+	"sprite":"hydrogen",
+	"z_order":10
 }

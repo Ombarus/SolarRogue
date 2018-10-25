@@ -6,6 +6,7 @@
 		"missile_launcher_green",
 		"missile_launcher_yellow"
 	],
+	"z_order":10,
 	"weapon_data": {
 		"base_dam":5.0,
 		"max_dam":10.0,

@@ -3,6 +3,7 @@
 	"sprite_choice":[
 		"shield"
 	],
+	"z_order":10,
 	"equipment": {
 		"slot":"shield",
 		"weight":10.0,

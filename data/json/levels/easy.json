@@ -1,6 +1,7 @@
 {
 	"theme_name":"data/json/levels/easy.json",
 	"sprite":"wormhole",
+	"z_order":100,
 	"objects": [
 		{"name":"data/json/ships/shuttle.json", "spawn_rate":0.05, "max":5},
 		{"name":"data/json/ships/probe.json", "spawn_rate":0.05, "max":5},
