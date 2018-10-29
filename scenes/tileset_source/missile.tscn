@@ -4,7 +4,7 @@
 
 [node name="missile" type="Sprite"]
 
-position = Vector2( 64, 64 ) 
+position = Vector2( 0, 0 ) 
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 1024, 384, 128, 128 )

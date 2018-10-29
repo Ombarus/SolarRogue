@@ -13,7 +13,7 @@ tileSize = 128
 
 [node name="0" type="Sprite" parent="." index="0"]
 
-position = Vector2( 64, 64 )
+position = Vector2( 0, 0 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 128, 128 )

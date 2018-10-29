@@ -4,7 +4,7 @@
 
 [node name="sun_5" type="Sprite"]
 
-position = Vector2( 64, 64 ) 
+position = Vector2( 0, 0 ) 
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 128, 512, 128, 128 )

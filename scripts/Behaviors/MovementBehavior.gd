@@ -16,6 +16,7 @@ func OnMovement_callback(obj, dir):
 		new_pos.x >= levelLoaderRef.Tile_to_World(levelLoaderRef.levelSize.x) || \
 		new_pos.y >= levelLoaderRef.Tile_to_World(levelLoaderRef.levelSize.y):
 		return
+	#TODO: Collision Detection
 	
 	BehaviorEvents.emit_signal("OnAPUse", obj, obj.base_attributes["moving"]["speed"])
 	

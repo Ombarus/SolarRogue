@@ -4,7 +4,7 @@
 
 [node name="starry" type="Sprite"]
 
-position = Vector2( 64, 64 ) 
+position = Vector2( 0, 0 ) 
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 256, 0, 128, 128 )
