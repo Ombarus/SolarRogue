@@ -1,6 +1,7 @@
 {
 	"name_id":"A Simple Probe",
 	"sprite":"probe",
+	"type":"ship",
 	"z_order":50,
 	"mounts": {
 		"weapon": "data/json/items/weapons/missile_launcher_mk1.json",

@@ -1,5 +1,6 @@
 {
 	"name_id":"A Small Shuttle",
+	"type":"ship",
 	"sprite":"shuttle",
 	"z_order":50,
 	"mounts": {

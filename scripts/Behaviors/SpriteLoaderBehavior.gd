@@ -9,29 +9,21 @@ var levelLoaderRef
 func _ready():
 	levelLoaderRef = get_node(levelLoaderNode)
 	#tileNodeRef = get_node(TileNode)
-	levelLoaderRef.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
+	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 
-func OnObjectLoaded_Callback(obj, parent):
-	if obj.has("sprite"):
+func OnObjectLoaded_Callback(obj):
+	var attrib = obj.base_attributes
+	if attrib.has("sprite"):
 		#TODO: cache load in a dictionary ?
-		var scene = load("res://scenes/tileset_source/" + obj["sprite"] + ".tscn")
+		var scene = load("res://scenes/tileset_source/" + attrib["sprite"] + ".tscn")
 		var node = scene.instance()
-		parent.call_deferred("add_child", node)
-		#var tileIndex = tileNodeRef.tile_set.find_tile_by_name ( obj["sprite"] )
-		#tileNodeRef.set_cellv( pos, tileIndex, flip_x, flip_y, transpose )
-	if obj.has("sprite_choice"):
+		obj.call_deferred("add_child", node)
+	if attrib.has("sprite_choice"):
 		# TODO: handle know/unknown (multiple look for potions in nethack, but always the same look in a given game)
-		var x = int(randf() * obj["sprite_choice"].size())
-		var scene = load("res://scenes/tileset_source/" + obj["sprite_choice"][x] + ".tscn")
+		var x = int(randf() * attrib["sprite_choice"].size())
+		var scene = load("res://scenes/tileset_source/" + attrib["sprite_choice"][x] + ".tscn")
 		var node = scene.instance()
-		parent.call_deferred("add_child", node)
-		#var tileIndex = tileNodeRef.tile_set.find_tile_by_name ( obj["sprite_choice"][x] )
-		#tileNodeRef.set_cellv( pos, tileIndex, flip_x, flip_y, transpose )
-	#if obj.has("sprite_list"):
-	#	for t in obj["sprite_list"]:
-	#		var final_pos = pos + Vector2(t["offset"][0], t["offset"][1])
-	#		var tileIndex = tileNodeRef.tile_set.find_tile_by_name ( t["name"] )
-	#		tileNodeRef.set_cellv( final_pos, tileIndex, flip_x, flip_y, transpose )
+		obj.call_deferred("add_child", node)
 
 func CanDrawSprite(sprite_data, pos):
 	var current_obj_at_pos = levelLoaderRef.GetTileData(pos)

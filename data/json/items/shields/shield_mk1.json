@@ -1,5 +1,6 @@
 {
 	"name_id":"Shield",
+	"type":"shield",
 	"sprite_choice":[
 		"shield"
 	],

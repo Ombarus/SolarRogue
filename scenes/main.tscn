@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://scripts/CamControl.gd" type="Script" id=1]
-[ext_resource path="res://scripts/Behaviors/SpriteLoaderBehavior.gd" type="Script" id=2]
+[ext_resource path="res://scripts/Behaviors/SpriteLoaderBehavior.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Behaviors/PlayerBehavior.gd" type="Script" id=2]
 [ext_resource path="res://scripts/Behaviors/LevelLoaderBehavior.gd" type="Script" id=3]
+[ext_resource path="res://scripts/Behaviors/MovementBehavior.gd" type="Script" id=4]
+[ext_resource path="res://scripts/CamControl.gd" type="Script" id=5]
 
 [node name="Root" type="Node" index="0"]
 
@@ -25,7 +27,31 @@ position = Vector2( -10240, -10240 )
 scale = Vector2( -12800, -12800 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Camera2D" type="Camera2D" parent="." index="2"]
+[node name="Behaviors" type="Node" parent="." index="2"]
+
+[node name="SpriteLoader" type="Node" parent="Behaviors" index="0"]
+
+script = ExtResource( 1 )
+levelLoaderNode = NodePath("../LevelLoader")
+
+[node name="Player" type="Node" parent="Behaviors" index="1"]
+
+script = ExtResource( 2 )
+levelLoaderNode = NodePath("../LevelLoader")
+
+[node name="LevelLoader" type="Node" parent="Behaviors" index="2"]
+
+script = ExtResource( 3 )
+startLevel = "data/json/levels/start.json"
+levelSize = Vector2( 80, 80 )
+tileSize = 128
+
+[node name="Movement" type="Node" parent="Behaviors" index="3"]
+
+script = ExtResource( 4 )
+levelLoaderNode = NodePath("../LevelLoader")
+
+[node name="Camera2D" type="Camera2D" parent="." index="3"]
 
 position = Vector2( 1026.59, 599.176 )
 anchor_mode = 1
@@ -50,24 +76,11 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-script = ExtResource( 1 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Editor", "Limit" ]
 max_zoom = 4.0
 min_zoom = 0.25
-
-[node name="Behaviors" type="Node" parent="." index="3"]
-
-[node name="SpriteLoader" type="Node" parent="Behaviors" index="0"]
-
-script = ExtResource( 2 )
-levelLoaderNode = NodePath("../LevelLoader")
-
-[node name="LevelLoader" type="Node" parent="Behaviors" index="1"]
-
-script = ExtResource( 3 )
-startLevel = "data/json/levels/start.json"
-levelSize = Vector2( 80, 80 )
-tileSize = 128
+levelLoaderNode = NodePath("../Behaviors/LevelLoader")
 
 [node name="GameTiles" type="Node" parent="." index="4"]
 

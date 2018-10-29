@@ -1,5 +1,6 @@
 {
-	"theme_name":"data/json/levels/start.json",
+	"name_id":"data/json/levels/start.json",
+	"type":"wormhole",
 	"sprite":"wormhole",
 	"z_order":100,
 	"objects": [

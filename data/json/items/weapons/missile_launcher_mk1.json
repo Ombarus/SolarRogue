@@ -1,5 +1,6 @@
 {
 	"name_id":"Missile Launcher MK1",
+	"type":"weapon",
 	"unidentified_look":"data/json/items/weapons/missile_launcher_generic.json",
 	"sprite_choice":[
 		"missile_launcher_blue",

@@ -1,5 +1,6 @@
 {
 	"name_id":"A Bright Sun",
+	"type":"sun",
 	"sprite":"sun",
 	"sprite_list": [
 		{"name":"sun_0", "offset":[-1,-1]},

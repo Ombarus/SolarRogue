@@ -40,12 +40,17 @@ Feature :
 		- Destoyed ship could randomly drop a "carcass"
 		- Ships could be found in special area (derelic shipyard, abandonned ship, etc)
 	- Bording ships has (or not) a % of failure
+- Chained Action (wait x turn, go to x,y)
+	- take multiple basic actions
+	- can be interupted
+	- can be resumed ?
 	
 
 Things to consider :
 
 - https://www.reddit.com/r/roguelikedev/wiki/faq_friday
 - https://www.scirra.com/store/2d-game-sprites/pixel-art-retr-2d-planets-pack-3792
+- https://www.deviantart.com/pixel-pax/art/Spaceships-60-98272278
 - SCI-FI items :
 	- Laser (instant, beam of light)
 	- Missile / Torpedo (slow, high-damage, special purpose (electro-magnetic, etc.))

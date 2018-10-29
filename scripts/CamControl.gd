@@ -2,15 +2,17 @@ extends Camera2D
 
 export(float) var max_zoom = 4.0
 export(float) var min_zoom = 0.25
+export(NodePath) var levelLoaderNode
 
+var levelLoaderRef
 var mouse_down = false
 var start_touch_pos
 var start_cam_pos
 
 func _ready():
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
-	pass
+	levelLoaderRef = get_node(levelLoaderNode)
+	var p = levelLoaderRef.objByType["player"][0]
+	self.position = Vector2(p.position.x + (levelLoaderRef.tileSize / 2), p.position.y + (levelLoaderRef.tileSize / 2))
 
 func _process(delta):
 	# Called every frame. Delta is time since last frame.

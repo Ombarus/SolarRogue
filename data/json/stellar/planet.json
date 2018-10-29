@@ -1,5 +1,6 @@
 {
 	"name_id":"A Planet",
+	"type":"planet",
 	"sprite_choice": [
 		"planet_a", "planet_b", "planet_c"
 	],
