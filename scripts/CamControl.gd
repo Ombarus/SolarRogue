@@ -12,7 +12,7 @@ var start_cam_pos
 func _ready():
 	levelLoaderRef = get_node(levelLoaderNode)
 	var p = levelLoaderRef.objByType["player"][0]
-	self.position = Vector2(p.position.x + (levelLoaderRef.tileSize / 2), p.position.y + (levelLoaderRef.tileSize / 2))
+	self.position = p.position
 	BehaviorEvents.connect("OnMovement", self, "OnMovement_callback")
 
 func _process(delta):
@@ -48,4 +48,4 @@ func _zoom_camera(dir):
 func OnMovement_callback(obj, dir):
 	var p = levelLoaderRef.objByType["player"][0]
 	if obj == p:
-		self.position = Vector2(p.position.x + (levelLoaderRef.tileSize / 2), p.position.y + (levelLoaderRef.tileSize / 2))
+		self.position =p.position

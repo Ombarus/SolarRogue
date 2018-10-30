@@ -4,6 +4,7 @@ export(NodePath) var levelLoaderNode
 
 var playerNode = null
 var levelLoaderRef
+var click_start_pos
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -26,9 +27,37 @@ func OnLevelLoaded_Callback():
 func _input(event):
 	var dir = null
 	if event is InputEventMouseButton:
-		if event.is_action_released("touch"):
-			pass
+		if event.is_action_pressed("touch"):
+			click_start_pos = event.position
+		if event.is_action_released("touch") && (click_start_pos - event.position).length_squared() < 5.0:
+			var click_pos = playerNode.get_global_mouse_position()
+			var player_pos = playerNode.position
+			var click_dir = click_pos - player_pos
+			var rot = rad2deg(Vector2(0.0, 0.0).angle_to_point(click_dir)) - 90.0
+			if rot < 0:
+				rot += 360
+			print("player_pos ", player_pos, ", click_pos ", click_pos, ", rot ", rot)
+			
 			# Calculate direction based on touch relative to player position.
+			# dead zone (click on sprite)
+			if abs(click_dir.x) < levelLoaderRef.tileSize / 2 && abs(click_dir.y) < levelLoaderRef.tileSize / 2:
+				dir = null
+			elif rot > 337.5 || rot <= 22.5:
+				dir = Vector2(0,-1) # 8
+			elif rot > 22.5 && rot <= 67.5:
+				dir = Vector2(1,-1) # 9
+			elif rot > 67.5 && rot <= 112.5:
+				dir = Vector2(1,0) # 6
+			elif rot > 112.5 && rot <= 157.5:
+				dir = Vector2(1,1) # 3
+			elif rot > 157.5 && rot <= 202.5:
+				dir = Vector2(0,1) # 2
+			elif rot > 202.5 && rot <= 247.5:
+				dir = Vector2(-1,1) # 1
+			elif rot > 247.5 && rot <= 292.5:
+				dir = Vector2(-1,0) # 4
+			elif rot > 292.5 && rot <= 337.5:
+				dir = Vector2(-1,-1) # 7
 	if event is InputEventKey && event.pressed == false:
 		if event.scancode == KEY_KP_1:
 			dir = Vector2(-1,1)

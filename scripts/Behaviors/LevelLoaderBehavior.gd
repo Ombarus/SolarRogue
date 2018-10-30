@@ -14,11 +14,11 @@ var objByType = {}
 
 func _ready():
 	var bound_line = get_node("/root/Root/Upper-Left-Bound/L1")
-	bound_line.add_point(Vector2(0, 0))
-	bound_line.add_point(Vector2(levelSize.x * tileSize, 0))
+	bound_line.add_point(Vector2(-tileSize/2, -tileSize/2))
+	bound_line.add_point(Vector2(levelSize.x * tileSize, -tileSize/2))
 	bound_line.add_point(Vector2(levelSize.x * tileSize, levelSize.y * tileSize))
-	bound_line.add_point(Vector2(0, levelSize.y * tileSize))
-	bound_line.add_point(Vector2(0, 0))
+	bound_line.add_point(Vector2(-tileSize/2, levelSize.y * tileSize))
+	bound_line.add_point(Vector2(-tileSize/2, -tileSize/2))
 	
 	#TODO: use my own randomizer
 	#randomize()
