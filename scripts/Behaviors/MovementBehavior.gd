@@ -18,7 +18,13 @@ func OnMovement_callback(obj, dir):
 		return
 	#TODO: Collision Detection
 	
-	BehaviorEvents.emit_signal("OnUseAP", obj, obj.base_attributes["moving"]["speed"])
+	var move_speed = obj.base_attributes["moving"]["speed"]
+	if obj.modified_attributes.has("wandering") && obj.modified_attributes["wandering"] == true:
+		move_speed = obj.base_attributes["moving"]["wander_speed"]
+	if not (dir.x == 0 || dir.y == 0):
+		# moving diagonal, multiply by 1.4
+		move_speed *= 1.41421356237
+	BehaviorEvents.emit_signal("OnUseAP", obj, move_speed)
 	
 	obj.position += levelLoaderRef.Tile_to_World(dir)
 	var angle = Vector2(0.0, 0.0).angle_to_point(dir) - deg2rad(90.0)

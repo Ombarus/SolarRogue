@@ -23,7 +23,8 @@
 		"hull":15
 	},
 	"moving": {
-		"speed":1.0,
+		"speed":0.7,
+		"wander_speed":2.5,
 		"can_use_wormhole":false
 	}
 }

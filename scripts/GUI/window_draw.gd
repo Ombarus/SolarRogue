@@ -13,7 +13,7 @@ func _ready():
 	update()
 	
 func init():
-	if _font_size == null and has_node("width_test"):
+	if _font_size == null && has_node("width_test"):
 		var font = get_node("width_test").get_font("font")
 		if font == null:
 			return

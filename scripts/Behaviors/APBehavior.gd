@@ -1,11 +1,15 @@
 extends Node
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+export(NodePath) var LogWindow
+export(int) var day_length = 100
+var log_window_ref
 var action_list = []
+var star_date_turn = 0
+var star_date_minor = 0
+var star_date_major = 0
 
 func _ready():
+	log_window_ref = get_node(LogWindow)
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 	BehaviorEvents.connect("OnUseAP", self, "OnUseAP_Callback")
 
@@ -41,9 +45,28 @@ func NormalizeAP():
 	var top_ap = action_list[0].modified_attributes.action_point
 	if top_ap == 0:
 		return
-	for i in range(1,action_list.size()):
+	for i in range(0,action_list.size()):
 		action_list[i].modified_attributes.action_point -= top_ap
+	star_date_turn += top_ap
+	if star_date_turn >= 100.0:
+		star_date_turn -= 100.0
+		star_date_minor += 1
+	if star_date_minor >= 100.0:
+		star_date_minor -= 100.0
+		star_date_major += 1
+	UpdateLogTitle()
 
+func UpdateLogTitle():
+	if log_window_ref == null:
+		return
+	print(star_date_turn)
+	var title = "Log Stardate "
+	title += str(int(star_date_major))
+	title += "."
+	title += str(int(star_date_minor))
+	title += "."
+	title += str(int(star_date_turn))
+	log_window_ref.title = title
 
 func OnObjectLoaded_Callback(obj):
 	var attrib = obj.base_attributes
