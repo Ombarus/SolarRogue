@@ -5,13 +5,21 @@ export(NodePath) var levelLoaderNode
 var playerNode = null
 var levelLoaderRef
 var click_start_pos
+var lock_input = false # when it's not player turn, inputs are locked
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	levelLoaderRef = get_node(levelLoaderNode)
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
+	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
 	
+func OnObjTurn_Callback(obj):
+	print("Player OnObjTurn_Callback")
+	if obj.base_attributes.type == "player":
+		lock_input = false
+	else:
+		lock_input = true
 	
 func OnLevelLoaded_Callback():
 	if playerNode == null:
@@ -25,6 +33,9 @@ func OnLevelLoaded_Callback():
 		
 	
 func _input(event):
+	if lock_input:
+		return
+		
 	var dir = null
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("touch"):

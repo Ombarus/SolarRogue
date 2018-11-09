@@ -18,7 +18,7 @@ func OnMovement_callback(obj, dir):
 		return
 	#TODO: Collision Detection
 	
-	BehaviorEvents.emit_signal("OnAPUse", obj, obj.base_attributes["moving"]["speed"])
+	BehaviorEvents.emit_signal("OnUseAP", obj, obj.base_attributes["moving"]["speed"])
 	
 	obj.position += levelLoaderRef.Tile_to_World(dir)
 	var angle = Vector2(0.0, 0.0).angle_to_point(dir) - deg2rad(90.0)

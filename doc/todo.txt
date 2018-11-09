@@ -9,12 +9,21 @@
 - Move around using touch control & keyboard
 - Basic interaction
 	- Shoot
+		- Destroy other ships
+		- Spawn resource from planet
 	- Pickup
 	- Drop
+	- Scan
+		- Give health remaining on ships
+		- Give detailed description of planet (rich but hard to mine, poor but easy to mine, etc)
 	- Use Matter-Energy converter to produce energy
+- Basic AI
+	- Ship move
+	- Shoot back or run away if shot
 - Run on Android
 - Log window ?
 
 polish :
 - smooth camera (a la township?)
 	- smooth zoom limits & exponential zoom
+	- drag still remember even tough camera doesn't pass limit
