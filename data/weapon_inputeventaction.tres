@@ -1,0 +1,8 @@
+[gd_resource type="InputEventAction" format=2]
+
+[resource]
+
+device = 0
+action = "ui_weapon"
+pressed = false
+

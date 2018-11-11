@@ -7,7 +7,7 @@
 	"z_order":10,
 	"equipment": {
 		"slot":"cargo",
-		"weight":0.5,
+		"volume":0.5,
 		"stackable":true
 	}
 }

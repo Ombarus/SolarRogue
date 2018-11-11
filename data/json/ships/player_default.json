@@ -2,13 +2,11 @@
 	"name_id":"You",
 	"type":"player",
 	"sprite":"player",
-	"z_order":100000,
 	"action_point":0,
 	"mounts": {
-		"weapon": "data/json/items/weapons/missile_launcher_mk1.json",
+		"small_weapon_mount": "data/json/items/weapons/missile_launcher_mk1.json",
 		"shield": "data/json/items/shields/shield_mk1.json"
 	},
-	"player": true,
 	"destroyable": {
 		"hull":15
 	},

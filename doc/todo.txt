@@ -1,12 +1,8 @@
 1st step :
 
 - Generate Object using RNG :
-	- Random planet
-	- Random ships (at least 2 types)
 	- Wormholes (up & down)
 - Ability to swap tileset for ascii somehow
-- Data System
-- Move around using touch control & keyboard
 - Basic interaction
 	- Shoot
 		- Destroy other ships
@@ -18,12 +14,33 @@
 		- Give detailed description of planet (rich but hard to mine, poor but easy to mine, etc)
 	- Use Matter-Energy converter to produce energy
 - Basic AI
-	- Ship move
 	- Shoot back or run away if shot
 - Run on Android
-- Log window ?
+- GUI
+	- Status
+	- Log window
+	- Buttons
+	- Layouts
+		- modal windows ?
+		- Hiding control when asking question ?
+- FoW (Fog of War)
+	- "remembered" sprite appearance
+	- Not visible sprite
+	- Fog of War "look"
 
 polish :
 - smooth camera (a la township?)
 	- smooth zoom limits & exponential zoom
 	- drag still remember even tough camera doesn't pass limit
+
+- Improve data system
+	- overrides (modifed_attributes)
+	- save and restore modified attributes
+	
+
+DONE :::
+- (AI)Ship move
+- Random planet
+- Random ships (at least 2 types)
+- Data System
+- Move around using touch control & keyboard

@@ -1,6 +1,7 @@
 extends Node
 
 export(NodePath) var levelLoaderNode
+export(NodePath) var WeaponAction
 
 var playerNode = null
 var levelLoaderRef
@@ -11,6 +12,8 @@ func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	levelLoaderRef = get_node(levelLoaderNode)
+	var weapon = get_node(WeaponAction)
+	weapon.connect("pressed", self, "Pressed_Weapon_Callback")
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
 	
@@ -20,6 +23,9 @@ func OnObjTurn_Callback(obj):
 		lock_input = false
 	else:
 		lock_input = true
+	
+func Pressed_Weapon_Callback():
+	BehaviorEvents.emit_signal("OnLogLine", "Weapon System Online. Target ?")
 	
 func OnLevelLoaded_Callback():
 	if playerNode == null:
@@ -32,7 +38,7 @@ func OnLevelLoaded_Callback():
 		playerNode = levelLoaderRef.RequestObject("data/json/ships/player_default.json", levelLoaderRef.World_to_Tile(starting_wormhole.position))
 		
 	
-func _input(event):
+func _unhandled_input(event):
 	if lock_input:
 		return
 		

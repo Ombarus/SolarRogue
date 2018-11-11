@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/Behaviors/APBehavior.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Behaviors/SpriteLoaderBehavior.gd" type="Script" id=2]
@@ -7,12 +7,16 @@
 [ext_resource path="res://scripts/Behaviors/LevelLoaderBehavior.gd" type="Script" id=5]
 [ext_resource path="res://scripts/Behaviors/MovementBehavior.gd" type="Script" id=6]
 [ext_resource path="res://scripts/CamControl.gd" type="Script" id=7]
-[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scripts/GUI/GridDisplay.gd" type="Script" id=8]
+[ext_resource path="res://scripts/GUI/LogSystem.gd" type="Script" id=9]
+[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=11]
 
 [node name="Root" type="Node" index="0"]
 
 [node name="Upper-Left-Bound" type="Node2D" parent="." index="0"]
 
+editor/display_folded = true
 _sections_unfolded = [ "Transform" ]
 
 [node name="L1" type="Line2D" parent="Upper-Left-Bound" index="0"]
@@ -35,7 +39,7 @@ _sections_unfolded = [ "Transform" ]
 [node name="AP" type="Node" parent="Behaviors" index="0"]
 
 script = ExtResource( 1 )
-LogWindow = NodePath("../../GUI/Log")
+LogWindow = NodePath("../../GUI/HUD/Log/LogWindow")
 day_length = 100
 
 [node name="SpriteLoader" type="Node" parent="Behaviors" index="1"]
@@ -47,6 +51,7 @@ levelLoaderNode = NodePath("../LevelLoader")
 
 script = ExtResource( 3 )
 levelLoaderNode = NodePath("../LevelLoader")
+WeaponAction = NodePath("../../GUI/HUD/Buttons/Weapon")
 
 [node name="AI" type="Node" parent="Behaviors" index="3"]
 
@@ -98,7 +103,38 @@ levelLoaderNode = NodePath("../Behaviors/LevelLoader")
 
 [node name="GameTiles" type="Node" parent="." index="4"]
 
-[node name="GUI" type="CanvasLayer" parent="." index="5"]
+[node name="World-GUI" type="Node" parent="." index="5"]
+
+[node name="GridPattern" type="Control" parent="World-GUI" index="0"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="Display" type="Control" parent="World-GUI/GridPattern" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 8 )
+_sections_unfolded = [ "Rect", "Visibility" ]
+
+[node name="Camera-GUI" type="CanvasLayer" parent="." index="6"]
 
 layer = 1
 offset = Vector2( 0, 0 )
@@ -106,20 +142,76 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
-[node name="Log" parent="GUI" index="0" instance=ExtResource( 8 )]
+[node name="HUD" type="Control" parent="Camera-GUI" index="0"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="Log" type="Control" parent="Camera-GUI/HUD" index="0"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 9 )
+
+[node name="LogWindow" parent="Camera-GUI/HUD/Log" index="0" instance=ExtResource( 10 )]
 
 anchor_top = 1.0
 margin_top = -119.0
 margin_right = 0.0
 margin_bottom = 0.0
-_sections_unfolded = [ "Rect" ]
+_sections_unfolded = [ "Anchor", "Rect" ]
 title = "Log Stardate 0.0.0"
+border_style = null
 
-[node name="Status" parent="GUI" index="1" instance=ExtResource( 8 )]
+[node name="Buttons" type="Control" parent="Camera-GUI/HUD" index="1"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="Weapon" parent="Camera-GUI/HUD/Buttons" index="0" instance=ExtResource( 11 )]
+
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = -208.0
+margin_right = 123.0
+margin_bottom = -113.0
+Text = "[w]eapon"
+Action = 87
+
+[node name="Status" parent="Camera-GUI/HUD" index="2" instance=ExtResource( 10 )]
 
 anchor_bottom = 0.0
 margin_right = 0.0
 margin_bottom = 62.0
 content = "The Maveric Hull: [color=lime]==========[/color] Energy : [color=yellow]25000[/color] Shield: Up"
+border_style = null
 
 

@@ -2,34 +2,7 @@
 
 [ext_resource path="res://scripts/GUI/window_draw.gd" type="Script" id=1]
 [ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=2]
-
-[sub_resource type="StyleBoxFlat" id=1]
-
-content_margin_left = -1.0
-content_margin_right = -1.0
-content_margin_top = -1.0
-content_margin_bottom = -1.0
-bg_color = Color( 0, 0, 0, 0.784314 )
-draw_center = true
-border_width_left = 0
-border_width_top = 0
-border_width_right = 0
-border_width_bottom = 0
-border_color = Color( 0.8, 0.8, 0.8, 1 )
-border_blend = false
-corner_radius_top_left = 0
-corner_radius_top_right = 0
-corner_radius_bottom_right = 0
-corner_radius_bottom_left = 0
-corner_detail = 8
-expand_margin_left = 0.0
-expand_margin_right = 0.0
-expand_margin_top = 0.0
-expand_margin_bottom = 0.0
-shadow_color = Color( 0, 0, 0, 0.6 )
-shadow_size = 0
-anti_aliasing = true
-anti_aliasing_size = 1
+[ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=3]
 
 [node name="base" type="Control"]
 
@@ -37,8 +10,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -381.0
-margin_bottom = -243.0
+margin_right = -568.0
+margin_bottom = -327.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -46,9 +19,11 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
+_sections_unfolded = [ "Anchor" ]
 editor_trigger_signal = false
 title = ""
 content = ""
+border_style = "="
 
 [node name="width_test" type="Label" parent="." index="0"]
 
@@ -83,7 +58,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = ExtResource( 3 )
 _sections_unfolded = [ "Size Flags", "Theme", "custom_styles" ]
 
 [node name="contour" type="RichTextLabel" parent="bg" index="0"]
@@ -102,50 +77,40 @@ custom_fonts/mono_font = ExtResource( 2 )
 custom_fonts/normal_font = ExtResource( 2 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
-bbcode_text = "╔═════════════════════════════════════════════════════════════════════════════╗
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-╚═════════════════════════════════════════════════════════════════════════════╝"
+bbcode_text = "╔══════════════════════════════════════════════════════╗
+║                                                      ║
+║                                                      ║
+║                                                      ║
+║                                                      ║
+║                                                      ║
+║                                                      ║
+║                                                      ║
+║                                                      ║
+║                                                      ║
+║                                                      ║
+║                                                      ║
+║                                                      ║
+║                                                      ║
+╚══════════════════════════════════════════════════════╝"
 visible_characters = -1
 percent_visible = 1.0
 meta_underlined = true
 tab_size = 4
-text = "╔═════════════════════════════════════════════════════════════════════════════╗
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-║                                                                             ║
-╚═════════════════════════════════════════════════════════════════════════════╝"
+text = "╔══════════════════════════════════════════════════════╗
+║                                                      ║
+║                                                      ║
+║                                                      ║
+║                                                      ║
+║                                                      ║
+║                                                      ║
+║                                                      ║
+║                                                      ║
+║                                                      ║
+║                                                      ║
+║                                                      ║
+║                                                      ║
+║                                                      ║
+╚══════════════════════════════════════════════════════╝"
 scroll_active = false
 scroll_following = false
 selection_enabled = false

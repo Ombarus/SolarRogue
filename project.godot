@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 BehaviorEvents="*res://scripts/autoload/BehaviorEvents.gd"
+Globals="*res://scripts/autoload/Globals.gd"
 
 [input]
 
