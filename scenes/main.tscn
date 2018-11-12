@@ -1,16 +1,20 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://scripts/Behaviors/APBehavior.gd" type="Script" id=1]
-[ext_resource path="res://scripts/Behaviors/SpriteLoaderBehavior.gd" type="Script" id=2]
-[ext_resource path="res://scripts/Behaviors/PlayerBehavior.gd" type="Script" id=3]
-[ext_resource path="res://scripts/Behaviors/AIBehavior.gd" type="Script" id=4]
-[ext_resource path="res://scripts/Behaviors/LevelLoaderBehavior.gd" type="Script" id=5]
-[ext_resource path="res://scripts/Behaviors/MovementBehavior.gd" type="Script" id=6]
-[ext_resource path="res://scripts/CamControl.gd" type="Script" id=7]
-[ext_resource path="res://scripts/GUI/GridDisplay.gd" type="Script" id=8]
-[ext_resource path="res://scripts/GUI/LogSystem.gd" type="Script" id=9]
-[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scripts/Behaviors/UIManager.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Behaviors/APBehavior.gd" type="Script" id=2]
+[ext_resource path="res://scripts/Behaviors/SpriteLoaderBehavior.gd" type="Script" id=3]
+[ext_resource path="res://scripts/Behaviors/PlayerBehavior.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Behaviors/AIBehavior.gd" type="Script" id=5]
+[ext_resource path="res://scripts/Behaviors/DamageBehavior.gd" type="Script" id=6]
+[ext_resource path="res://scripts/Behaviors/LevelLoaderBehavior.gd" type="Script" id=7]
+[ext_resource path="res://scripts/Behaviors/MovementBehavior.gd" type="Script" id=8]
+[ext_resource path="res://scripts/CamControl.gd" type="Script" id=9]
+[ext_resource path="res://scripts/GUI/GUILayoutBase.gd" type="Script" id=10]
+[ext_resource path="res://scripts/GUI/GridDisplay.gd" type="Script" id=11]
+[ext_resource path="res://scripts/GUI/LogSystem.gd" type="Script" id=12]
+[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=15]
 
 [node name="Root" type="Node" index="0"]
 
@@ -30,44 +34,52 @@ round_precision = 8
 
 [node name="Lower-Right_Bound" type="Node2D" parent="." index="1"]
 
-position = Vector2( -10240, -10240 )
+position = Vector2( -10240, -10241.9 )
 scale = Vector2( -12800, -12800 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Behaviors" type="Node" parent="." index="2"]
 
-[node name="AP" type="Node" parent="Behaviors" index="0"]
+[node name="UIManager" type="Node" parent="Behaviors" index="0"]
 
 script = ExtResource( 1 )
-LogWindow = NodePath("../../GUI/HUD/Log/LogWindow")
-day_length = 100
 
-[node name="SpriteLoader" type="Node" parent="Behaviors" index="1"]
+[node name="AP" type="Node" parent="Behaviors" index="1"]
 
 script = ExtResource( 2 )
-levelLoaderNode = NodePath("../LevelLoader")
+LogWindow = NodePath("../../Camera-GUI/HUD/Log/LogWindow")
+day_length = 100
 
-[node name="Player" type="Node" parent="Behaviors" index="2"]
+[node name="SpriteLoader" type="Node" parent="Behaviors" index="2"]
 
 script = ExtResource( 3 )
 levelLoaderNode = NodePath("../LevelLoader")
-WeaponAction = NodePath("../../GUI/HUD/Buttons/Weapon")
 
-[node name="AI" type="Node" parent="Behaviors" index="3"]
+[node name="Player" type="Node" parent="Behaviors" index="3"]
 
 script = ExtResource( 4 )
 levelLoaderNode = NodePath("../LevelLoader")
+WeaponAction = NodePath("../../Camera-GUI/HUD/Buttons/Weapon")
 
-[node name="LevelLoader" type="Node" parent="Behaviors" index="4"]
+[node name="AI" type="Node" parent="Behaviors" index="4"]
 
 script = ExtResource( 5 )
+levelLoaderNode = NodePath("../LevelLoader")
+
+[node name="Damage" type="Node" parent="Behaviors" index="5"]
+
+script = ExtResource( 6 )
+
+[node name="LevelLoader" type="Node" parent="Behaviors" index="6"]
+
+script = ExtResource( 7 )
 startLevel = "data/json/levels/start.json"
 levelSize = Vector2( 80, 80 )
 tileSize = 128
 
-[node name="Movement" type="Node" parent="Behaviors" index="5"]
+[node name="Movement" type="Node" parent="Behaviors" index="7"]
 
-script = ExtResource( 6 )
+script = ExtResource( 8 )
 levelLoaderNode = NodePath("../LevelLoader")
 
 [node name="Camera2D" type="Camera2D" parent="." index="3"]
@@ -95,7 +107,7 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-script = ExtResource( 7 )
+script = ExtResource( 9 )
 _sections_unfolded = [ "Editor", "Limit" ]
 max_zoom = 4.0
 min_zoom = 0.25
@@ -107,17 +119,18 @@ levelLoaderNode = NodePath("../Behaviors/LevelLoader")
 
 [node name="GridPattern" type="Control" parent="World-GUI" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+script = ExtResource( 10 )
+_sections_unfolded = [ "Mouse", "Visibility" ]
 
 [node name="Display" type="Control" parent="World-GUI/GridPattern" index="0"]
 
@@ -127,12 +140,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 8 )
-_sections_unfolded = [ "Rect", "Visibility" ]
+script = ExtResource( 11 )
+_sections_unfolded = [ "Mouse", "Rect", "Visibility" ]
+line_color = Color( 1, 0, 0, 0.352941 )
 
 [node name="Camera-GUI" type="CanvasLayer" parent="." index="6"]
 
@@ -144,74 +158,83 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="HUD" type="Control" parent="Camera-GUI" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+script = ExtResource( 10 )
+_sections_unfolded = [ "Mouse" ]
 
 [node name="Log" type="Control" parent="Camera-GUI/HUD" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 9 )
+script = ExtResource( 12 )
+_sections_unfolded = [ "Mouse" ]
 
-[node name="LogWindow" parent="Camera-GUI/HUD/Log" index="0" instance=ExtResource( 10 )]
+[node name="LogWindow" parent="Camera-GUI/HUD/Log" index="0" instance=ExtResource( 13 )]
 
 anchor_top = 1.0
-margin_top = -119.0
+margin_top = -146.0
 margin_right = 0.0
 margin_bottom = 0.0
-_sections_unfolded = [ "Anchor", "Rect" ]
+mouse_filter = 2
+_sections_unfolded = [ "Anchor", "Mouse", "Rect" ]
 title = "Log Stardate 0.0.0"
 border_style = null
 
 [node name="Buttons" type="Control" parent="Camera-GUI/HUD" index="1"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+_sections_unfolded = [ "Mouse" ]
 
-[node name="Weapon" parent="Camera-GUI/HUD/Buttons" index="0" instance=ExtResource( 11 )]
+[node name="Weapon" parent="Camera-GUI/HUD/Buttons" index="0" instance=ExtResource( 14 )]
 
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = -208.0
-margin_right = 123.0
-margin_bottom = -113.0
+margin_left = 3.0
+margin_top = -238.0
+margin_right = 124.0
+margin_bottom = -143.0
+mouse_filter = 2
 Text = "[w]eapon"
 Action = 87
 
-[node name="Status" parent="Camera-GUI/HUD" index="2" instance=ExtResource( 10 )]
+[node name="Status" parent="Camera-GUI/HUD" index="2" instance=ExtResource( 13 )]
 
 anchor_bottom = 0.0
 margin_right = 0.0
 margin_bottom = 62.0
+mouse_filter = 2
+_sections_unfolded = [ "Anchor", "Mouse" ]
 content = "The Maveric Hull: [color=lime]==========[/color] Energy : [color=yellow]25000[/color] Shield: Up"
 border_style = null
+
+[node name="DEBUG" type="Node2D" parent="." index="7"]
+
+script = ExtResource( 15 )
 
 

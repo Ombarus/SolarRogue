@@ -13,5 +13,11 @@
 	"moving": {
 		"speed":1.0,
 		"can_use_wormhole":true
+	},
+	"cargo": {
+		"capacity":500,
+		"content":[
+			{"name_id":"data/json/items/weapons/missile.json", "count":5}
+		]
 	}
 }

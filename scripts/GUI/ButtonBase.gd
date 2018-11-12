@@ -7,12 +7,12 @@ signal pressed
 
 func set_text(newval):
 	Text = newval
-	if get_node("btn") != null:
+	if has_node("btn"):
 		get_node("btn").text = Text
 
 func set_action(newval):
 	Action = newval
-	if get_node("btn") != null:
+	if has_node("btn"):
 		get_node("btn").shortcut.shortcut.scancode = Action
 		
 

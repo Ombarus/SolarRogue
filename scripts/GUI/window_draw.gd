@@ -105,7 +105,7 @@ func update():
 	var top_string = string_dict.top_left
 	var side_string = string_dict.side
 	var bottom_string = string_dict.bottom_left
-	var header_string = string_dict.header_right
+	var header_string = string_dict.header_left
 	var repeat_empty = string_dict.repeat_empty
 	var repeat_line = string_dict.repeat_line
 	var repeat_header = string_dict.repeat_header

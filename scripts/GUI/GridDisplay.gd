@@ -1,5 +1,11 @@
 extends Control
 
+export(Color) var line_color = Color(1.0, 1.0, 1.0, 1.0) setget set_line_color
+
+func set_line_color(newval):
+	line_color = newval
+	update()
+
 func _ready():
 	var grid_span = Globals.LevelLoaderRef.levelSize * Globals.LevelLoaderRef.tileSize
 	self.rect_size = grid_span
@@ -8,7 +14,6 @@ func _draw():
 
 	var tilemap_width = Globals.LevelLoaderRef.levelSize.x
 	var tilemap_height = Globals.LevelLoaderRef.levelSize.y
-	var line_color = Color(1.0, 1.0, 1.0, 1.0)
 	var tile_size = Globals.LevelLoaderRef.tileSize
 	
 	draw_set_transform(Vector2(), 0, Vector2(tile_size, tile_size))

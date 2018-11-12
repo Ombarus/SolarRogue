@@ -110,7 +110,7 @@ func World_to_Tile(xy):
 	if typeof(xy) == TYPE_OBJECT:
 		return Vector2(int(xy.x / tileSize), int(xy.y / tileSize))
 	else:
-		return xy / tileSize
+		return int(xy / tileSize)
 	
 func Tile_to_World(xy):
 	if typeof(xy) == TYPE_OBJECT:
