@@ -80,7 +80,8 @@ func OnRequestObjectUnload_Callback(obj):
 	var content = levelTiles[coord.x][coord.y]
 	content.erase(obj)
 	#TODO: Proper Counting, Type in this case is the json filename which I'm not sure I have access here
-	#objCountByType[obj.base_attributes.type] -= 1
+	# For now only used at level init so it should be fine to leave it alone
+	#objCountByType[obj.base_attributes.src] -= 1
 	objByType[obj.base_attributes.type].erase(obj)
 	obj.get_parent().remove_child(obj)
 	obj.queue_free()
@@ -101,6 +102,7 @@ func LoadJSON(filepath):
 		print("Error Line: ", result_json.error_line)
 		print("Error String: ", result_json.error_string)
 		
+	data["src"] = filepath
 	return data
 	
 func ShuffleArray(ar):

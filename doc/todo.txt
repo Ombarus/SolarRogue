@@ -1,14 +1,17 @@
-1st step :
-
+1st step :::
 - Generate Object using RNG :
 	- Wormholes (up & down)
 - Ability to swap tileset for ascii somehow
 - Basic interaction
 	- Shoot
-		- Destroy other ships
-		- Spawn resource from planet
-	- Pickup
+		- select target using keyboard
+		- Use energy when shooting
+		- Spawn items from destoyed ships
 	- Drop
+		- Display inventory
+			- Display volume used / volume capacity
+			- Dialog ok/cancel buttons
+			- Decide on the way to do selection
 	- Scan
 		- Give health remaining on ships
 		- Give detailed description of planet (rich but hard to mine, poor but easy to mine, etc)
@@ -28,7 +31,10 @@
 	- Not visible sprite
 	- Fog of War "look"
 
-polish :
+	
+	
+	
+polish :::
 - smooth camera (a la township?)
 	- smooth zoom limits & exponential zoom
 	- drag still remember even tough camera doesn't pass limit
@@ -37,8 +43,18 @@ polish :
 	- overrides (modifed_attributes)
 	- save and restore modified attributes
 	
+- Read-Only base_attributes to prevent un-savable changes by mistake
+	
 
+	
+	
+	
 DONE :::
+- Pickup
+- Destroy other ships
+- Spawn resource from planet
+		
+		
 - (AI)Ship move
 - Random planet
 - Random ships (at least 2 types)

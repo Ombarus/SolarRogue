@@ -2,6 +2,8 @@ tool
 extends Control
 
 export(bool) var editor_trigger_signal = true setget set_signal
+export(bool) var dialog_ok = false setget set_dialog_ok
+export(bool) var dialog_cancel = false setget set_dialog_cancel
 export(String) var title = "" setget set_title
 export(String) var content = "" setget set_content
 export(String, "═", "─", "━", " ") var border_style = "=" setget set_style
@@ -62,6 +64,14 @@ const string_empty = {
 	"header_right": " "
 }
 
+func set_dialog_ok(val):
+	dialog_ok = val
+	update()
+	
+func set_dialog_cancel(val):
+	dialog_cancel = val
+	update()
+
 func set_style(style):
 	border_style = style
 	if border_style == "═":
@@ -85,7 +95,8 @@ func init():
 			return
 		_font_size = font.get_string_size("a")
 		_window_size = self.get_rect().size
-		self.disconnect("resized", self, "on_size_changed")
+		if self.is_connected("resized", self, "on_size_changed"):
+			self.disconnect("resized", self, "on_size_changed")
 		self.connect("resized", self, "on_size_changed")
 		set_style(border_style)
 	
@@ -99,8 +110,16 @@ func set_content(val):
 	update()
 	
 func update():
-	if _font_size == null:
+	if _font_size == null || not has_node("bg/contour/Ok"):
 		return
+
+	var ok_btn = get_node("bg/contour/Ok")
+	var cancel_btn = get_node("bg/contour/Cancel")
+	
+	if ok_btn:
+		ok_btn.visible = dialog_ok
+	if cancel_btn:
+		cancel_btn.visible = dialog_cancel
 		
 	var top_string = string_dict.top_left
 	var side_string = string_dict.side
@@ -116,7 +135,17 @@ func update():
 	for i in range(0,repeat_width - 2):
 		top_string += repeat_line
 		side_string += repeat_empty
-		bottom_string += repeat_line
+		
+		var start_ok_x = ok_btn.rect_position.x - _font_size.x
+		var end_ok_x = ok_btn.rect_position.x + ok_btn.rect_size.x
+		var start_cancel_x = cancel_btn.rect_position.x - _font_size.x
+		var end_cancel_x = cancel_btn.rect_position.x + cancel_btn.rect_size.x
+		var cur_x = i * _font_size.x + self.rect_position.x
+		if (cur_x < start_ok_x || cur_x > end_ok_x || not dialog_ok) && (cur_x < start_cancel_x || cur_x > end_cancel_x || not dialog_cancel):
+			bottom_string += repeat_line
+		else:
+			bottom_string += repeat_empty
+		
 		header_string += repeat_header
 		
 	top_string += string_dict.top_right

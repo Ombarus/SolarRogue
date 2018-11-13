@@ -2,7 +2,7 @@ tool
 extends Control
 
 export var Text = "" setget set_text
-export(int) var Action = "" setget set_action
+export(ShortCut) var Action = null setget set_action
 signal pressed
 
 func set_text(newval):
@@ -13,11 +13,12 @@ func set_text(newval):
 func set_action(newval):
 	Action = newval
 	if has_node("btn"):
-		get_node("btn").shortcut.shortcut.scancode = Action
+		get_node("btn").shortcut = Action
 		
 
 func _ready():
 	set_text(Text)
+	set_action(Action)
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

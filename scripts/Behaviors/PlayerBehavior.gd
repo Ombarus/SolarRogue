@@ -2,6 +2,8 @@ extends Node
 
 export(NodePath) var levelLoaderNode
 export(NodePath) var WeaponAction
+export(NodePath) var GrabAction
+export(NodePath) var DropAction
 
 var playerNode = null
 var levelLoaderRef
@@ -19,10 +21,29 @@ func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	levelLoaderRef = get_node(levelLoaderNode)
-	var weapon = get_node(WeaponAction)
-	weapon.connect("pressed", self, "Pressed_Weapon_Callback")
+	
+	var action = get_node(WeaponAction)
+	action.connect("pressed", self, "Pressed_Weapon_Callback")
+	action = get_node(GrabAction)
+	action.connect("pressed", self, "Pressed_Grab_Callback")
+	action = get_node(DropAction)
+	action.connect("pressed", self, "Pressed_Drop_Callback")
+	
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
+	
+func Pressed_Grab_Callback():
+	if lock_input:
+		return
+		
+	BehaviorEvents.emit_signal("OnPickup", playerNode, Globals.LevelLoaderRef.World_to_Tile(playerNode.position))
+	
+func Pressed_Drop_Callback():
+	if lock_input:
+		return
+		
+	BehaviorEvents.emit_signal("OnPushGUI", "Inventory")
+	
 	
 func OnObjTurn_Callback(obj):
 	print("Player OnObjTurn_Callback")
@@ -32,6 +53,9 @@ func OnObjTurn_Callback(obj):
 		lock_input = true
 	
 func Pressed_Weapon_Callback():
+	if lock_input:
+		return
+		
 	BehaviorEvents.emit_signal("OnLogLine", "Weapon System Online. Target ?")
 	BehaviorEvents.emit_signal("OnPushGUI", "GridPattern")
 	_input_state = INPUT_STATE.grid_targetting

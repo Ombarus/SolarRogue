@@ -37,7 +37,7 @@ func ProcessHarvesting(target, shooter, weapon_data):
 	if ammo != null && shooter.base_attributes.has("cargo"):
 		ammo_data = Globals.LevelLoaderRef.LoadJSON(ammo)
 		for item in shooter.base_attributes.cargo.content:
-			if item.name_id == ammo && item.count > 0:
+			if item.src == ammo && item.count > 0:
 				ammo_ok = true
 				item.count -= 1
 	
@@ -78,11 +78,16 @@ func ProcessDamage(target, shooter, weapon_data):
 	if ammo == null:
 		ammo_ok = true
 	if ammo != null && shooter.base_attributes.has("cargo"):
+		if not shooter.modified_attributes.has("cargo"):
+			shooter.modified_attributes["cargo"] = {}
+			shooter.modified_attributes.cargo["content"] = shooter.base_attributes.cargo.content
+			shooter.modified_attributes.cargo["capacity"] = shooter.base_attributes.cargo.capacity
 		ammo_data = Globals.LevelLoaderRef.LoadJSON(ammo)
-		for item in shooter.base_attributes.cargo.content:
-			if item.name_id == ammo && item.count > 0:
+		for item in shooter.modified_attributes.cargo.content:
+			if item.src == ammo && item.count > 0:
 				ammo_ok = true
 				item.count -= 1
+				shooter.modified_attributes.cargo.capacity += ammo_data.equipment.volume
 	
 	if not ammo_ok && shooter.base_attributes.type == "player":
 		BehaviorEvents.emit_signal("OnLogLine", "No more " + ammo_data.name_id + " to shoot")
@@ -100,7 +105,6 @@ func ProcessDamage(target, shooter, weapon_data):
 			if shooter.base_attributes.type == "player":
 				BehaviorEvents.emit_signal("OnLogLine", "[color=red]You destroy the ennemy ![/color]")
 			BehaviorEvents.emit_signal("OnRequestObjectUnload", target)
-			#TODO: despawn
 		else:
 			if shooter.base_attributes.type == "player":
 				BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]You do " + str(dam) + " damage[/color]")

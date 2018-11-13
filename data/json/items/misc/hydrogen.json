@@ -2,5 +2,9 @@
 	"name_id":"Hydrogen",
 	"type":"food",
 	"sprite":"hydrogen",
-	"z_order":10
+	"equipment": {
+		"slot":"cargo",
+		"volume":2.0,
+		"stackable":true
+	}
 }

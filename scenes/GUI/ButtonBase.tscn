@@ -1,25 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/GUI/ButtonBase.gd" type="Script" id=1]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=2]
 [ext_resource path="res://data/styles/trans.tres" type="StyleBox" id=3]
-
-[sub_resource type="InputEventKey" id=1]
-
-device = 0
-alt = false
-shift = false
-control = false
-meta = false
-command = false
-pressed = false
-scancode = 87
-unicode = 0
-echo = false
-
-[sub_resource type="ShortCut" id=2]
-
-shortcut = SubResource( 1 )
 
 [node name="Button" type="Control"]
 
@@ -27,8 +10,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 166.0
-margin_bottom = 113.0
+margin_right = 170.0
+margin_bottom = 98.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -38,13 +21,18 @@ size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Material", "Mouse", "Visibility", "custom_styles" ]
 Text = "Weapon"
-Action = 0
+Action = null
 
 [node name="base" parent="." index="0" instance=ExtResource( 2 )]
 
 margin_right = 0.0
 margin_bottom = 0.0
 _sections_unfolded = [ "Anchor", "Mouse", "Visibility" ]
+editor_trigger_signal = true
+dialog_ok = false
+dialog_cancel = false
+title = ""
+content = ""
 border_style = "━"
 
 [node name="btn" type="Button" parent="." index="1"]
@@ -67,7 +55,7 @@ size_flags_vertical = 1
 custom_styles/normal = ExtResource( 3 )
 toggle_mode = false
 enabled_focus_mode = 2
-shortcut = SubResource( 2 )
+shortcut = null
 group = null
 text = "Weapon"
 flat = false

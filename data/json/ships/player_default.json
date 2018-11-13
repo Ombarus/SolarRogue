@@ -17,7 +17,7 @@
 	"cargo": {
 		"capacity":500,
 		"content":[
-			{"name_id":"data/json/items/weapons/missile.json", "count":5}
+			{"src":"data/json/items/weapons/missile.json", "count":5}
 		]
 	}
 }
