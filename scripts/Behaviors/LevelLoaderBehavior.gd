@@ -14,6 +14,7 @@ var objByType = {}
 
 func _ready():
 	Globals.LevelLoaderRef = self
+	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
 	
 	var bound_line = get_node("/root/Root/Upper-Left-Bound/L1")
 	bound_line.add_point(Vector2(-tileSize/2.0, -tileSize/2.0))
@@ -73,7 +74,16 @@ func ExecuteLoadLevel(levelData):
 					break
 					
 	BehaviorEvents.emit_signal("OnLevelLoaded")
-	
+
+func OnRequestObjectUnload_Callback(obj):
+	var coord = World_to_Tile(obj.position)
+	var content = levelTiles[coord.x][coord.y]
+	content.erase(obj)
+	#TODO: Proper Counting, Type in this case is the json filename which I'm not sure I have access here
+	#objCountByType[obj.base_attributes.type] -= 1
+	objByType[obj.base_attributes.type].erase(obj)
+	obj.get_parent().remove_child(obj)
+	obj.queue_free()
 	
 func LoadJSON(filepath):
 	var file = File.new()
@@ -107,14 +117,14 @@ func GetTileData(xy):
 	return levelTiles[xy.x][xy.y]
 	
 func World_to_Tile(xy):
-	if typeof(xy) == TYPE_OBJECT:
-		return Vector2(int(xy.x / tileSize), int(xy.y / tileSize))
+	if typeof(xy) == TYPE_VECTOR2:
+		return Vector2(int(round(xy.x / tileSize)), int(round(xy.y / tileSize)))
 	else:
 		return int(xy / tileSize)
 	
 func Tile_to_World(xy):
-	if typeof(xy) == TYPE_OBJECT:
-		return Vector2(int(xy.x * tileSize), int(xy.y * tileSize))
+	if typeof(xy) == TYPE_VECTOR2:
+		return Vector2(xy.x * tileSize, xy.y * tileSize)
 	else:
 		return xy * tileSize
 	
@@ -142,6 +152,16 @@ func CreateAndInitNode(data, pos):
 	BehaviorEvents.emit_signal("OnObjectLoaded", n)
 	return n
 	
+func UpdatePosition(obj, newPos):	
+	var old_tile = World_to_Tile(obj.position)
+	var new_tile = World_to_Tile(newPos)
+	
+	var content = levelTiles[old_tile.x][old_tile.y]
+	content.erase(obj)
+	levelTiles[new_tile.x][new_tile.y].push_back(obj)
+	
+	obj.position = newPos
+
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.

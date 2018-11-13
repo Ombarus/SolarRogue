@@ -12,6 +12,10 @@ func _ready():
 	log_window_ref = get_node(LogWindow)
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 	BehaviorEvents.connect("OnUseAP", self, "OnUseAP_Callback")
+	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
+	
+func OnRequestObjectUnload_Callback(obj):
+	action_list.erase(obj)
 
 func OnUseAP_Callback(obj, amount):
 	print("Use AP ", amount)

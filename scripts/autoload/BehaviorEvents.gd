@@ -2,6 +2,7 @@ extends Node
 
 
 signal OnObjectLoaded(obj)
+signal OnRequestObjectUnload(obj)
 signal OnLevelLoaded()
 signal OnMovement(obj, dir)
 signal OnUseAP(obj, amount)

@@ -1,4 +1,6 @@
 Feature :
+- Spawning :
+	- (near)Empty level should be repopulated after some time
 - Turn / Action based
 	- Actions can take more or less than a turn
 		- ? Every Action has a AP cost, Each action increase total AP spent. Whoever has spent the less AP is next to move.
@@ -40,6 +42,11 @@ Feature :
 		- Destoyed ship could randomly drop a "carcass"
 		- Ships could be found in special area (derelic shipyard, abandonned ship, etc)
 	- Bording ships has (or not) a % of failure
+	- Your matter-to-energy converter can create a new ship based on some blueprints
+		- Use HUGE amount of energy
+		- You need to have scanned and/or destroyed enough ennemy for your ship's AI to be able to recopy it
+			- Prevents you from being able to copy unique ship that might be too powerful, unless you have some special scanner/ship/item equiped ?
+			- Energy cost means trade-off.
 - Chained Action (wait x turn, go to x,y)
 	- take multiple basic actions
 	- can be interupted

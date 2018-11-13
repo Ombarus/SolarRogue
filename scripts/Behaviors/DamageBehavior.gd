@@ -27,6 +27,24 @@ func OnDealDamage_Callback(target, shooter, weapon_data):
 		ProcessDamage(target, shooter, weapon_data)
 	
 func ProcessHarvesting(target, shooter, weapon_data):
+	var ammo = null
+	if weapon_data.weapon_data.has("ammo"):
+		ammo = weapon_data.weapon_data.ammo
+	var ammo_ok = false
+	var ammo_data = null
+	if ammo == null:
+		ammo_ok = true
+	if ammo != null && shooter.base_attributes.has("cargo"):
+		ammo_data = Globals.LevelLoaderRef.LoadJSON(ammo)
+		for item in shooter.base_attributes.cargo.content:
+			if item.name_id == ammo && item.count > 0:
+				ammo_ok = true
+				item.count -= 1
+	
+	if not ammo_ok && shooter.base_attributes.type == "player":
+		BehaviorEvents.emit_signal("OnLogLine", "No more " + ammo_data.name_id + " to shoot")
+		return
+	
 	var item_left = target.modified_attributes.harvestable.count
 	#TODO modulate chance based on weapon data
 	var chance = target.modified_attributes.harvestable.chance
@@ -43,11 +61,52 @@ func ProcessHarvesting(target, shooter, weapon_data):
 			var y = int(randf() * 3) - 1
 			var offset = Vector2(x,y)
 			Globals.LevelLoaderRef.RequestObject(item_json, Globals.LevelLoaderRef.World_to_Tile(target.position) + offset)
-			BehaviorEvents.emit_signal("OnLogLine", "Some useful material float into orbit")
+		target.modified_attributes.harvestable.count -= drop_count
+		if shooter.base_attributes.type == "player":
+			BehaviorEvents.emit_signal("OnLogLine", "Some useful materials float into orbit")
 	
 	
 func ProcessDamage(target, shooter, weapon_data):
-	pass
+	var min_dam = weapon_data.weapon_data.base_dam
+	var max_dam = weapon_data.weapon_data.max_dam
+	var ammo = null
+	if weapon_data.weapon_data.has("ammo"):
+		ammo = weapon_data.weapon_data.ammo
+	
+	var ammo_ok = false
+	var ammo_data = null
+	if ammo == null:
+		ammo_ok = true
+	if ammo != null && shooter.base_attributes.has("cargo"):
+		ammo_data = Globals.LevelLoaderRef.LoadJSON(ammo)
+		for item in shooter.base_attributes.cargo.content:
+			if item.name_id == ammo && item.count > 0:
+				ammo_ok = true
+				item.count -= 1
+	
+	if not ammo_ok && shooter.base_attributes.type == "player":
+		BehaviorEvents.emit_signal("OnLogLine", "No more " + ammo_data.name_id + " to shoot")
+		return
+		
+	var dam = int((randf() * (max_dam-min_dam)) + min_dam)
+	if dam == 0 && shooter.base_attributes.type == "player":
+		BehaviorEvents.emit_signal("OnLogLine", "Shot missed")
+	else:
+		if not target.modified_attributes.has("destroyable"):
+			target.modified_attributes["destroyable"] = {}
+			target.modified_attributes.destroyable["hull"] = target.base_attributes.destroyable.hull
+		target.modified_attributes.destroyable.hull -= dam
+		if target.modified_attributes.destroyable.hull <= 0:
+			if shooter.base_attributes.type == "player":
+				BehaviorEvents.emit_signal("OnLogLine", "[color=red]You destroy the ennemy ![/color]")
+			BehaviorEvents.emit_signal("OnRequestObjectUnload", target)
+			#TODO: despawn
+		else:
+			if shooter.base_attributes.type == "player":
+				BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]You do " + str(dam) + " damage[/color]")
+	
+		
+	
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
