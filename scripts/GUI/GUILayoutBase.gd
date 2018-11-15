@@ -6,12 +6,6 @@ func _ready():
 	self.set_process_unhandled_input(false)
 	self.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-func _input(ev):
+# overridable function for loading dialog content
+func Init(init_param):
 	pass
-	#print("blehbleh")
-
-func _input_event(ev):
-	print("bleh")
-	
-func _gui_input(event):
-	print("_gui_input of HUD")

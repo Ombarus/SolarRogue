@@ -26,7 +26,7 @@ func OnPickup_Callback(picker, picked):
 	if not picker.modified_attributes.has("cargo"):
 		picker.modified_attributes["cargo"] = {}
 		picker.modified_attributes.cargo["content"] = picker.base_attributes.cargo.content
-		picker.modified_attributes.cargo["capacity"] = picker.base_attributes.cargo.capacity
+		picker.modified_attributes.cargo["capacity"] = 0
 	var inventory_space = picker.modified_attributes.cargo.capacity
 	for obj in filtered_obj:
 		if obj.base_attributes.equipment.volume > inventory_space:

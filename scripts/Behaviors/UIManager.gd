@@ -12,15 +12,17 @@ func _ready():
 func OnLevelLoaded_Callback():
 	BehaviorEvents.disconnect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	# push default UI (might be some main menu or splash screen one day)
-	BehaviorEvents.call_deferred("emit_signal", "OnPushGUI", "HUD")
+	BehaviorEvents.call_deferred("emit_signal", "OnPushGUI", "HUD", null)
 
 func OnGUILoaded_Callback(name, obj):
 	_gui_list[name] = obj
 	obj.visible = false
 	
-func OnPushGUI_Callback(name):
+func OnPushGUI_Callback(name, init_param):
 	#TODO: animate ?
+	#TODO: make sure Layout is not already in stack
 	_gui_list[name].visible = true
+	_gui_list[name].Init(init_param)
 	_stack.push_back(name)
 	
 func OnPopGUI_Callback():

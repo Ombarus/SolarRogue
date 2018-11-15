@@ -8,9 +8,16 @@ export(String) var title = "" setget set_title
 export(String) var content = "" setget set_content
 export(String, "═", "─", "━", " ") var border_style = "=" setget set_style
 
+signal OnOkPressed()
+signal OnCancelPressed()
+
 var _window_size
 var _font_size
 var string_dict = string_double
+
+#var btn_margin_bottom
+#var btn_margin_top
+#var btn_offset = 0
 
 const string_double = {
 	"top_left": "╔",
@@ -89,11 +96,19 @@ func _ready():
 	update()
 	
 func init():
-	if _font_size == null && has_node("width_test"):
+	if has_node("width_test"):
 		var font = get_node("width_test").get_font("font")
 		if font == null:
 			return
-		_font_size = font.get_string_size("a")
+			
+#		btn_margin_bottom = get_node("bg/contour/Ok").margin_bottom + btn_offset
+#		btn_margin_top = get_node("bg/contour/Ok").margin_top + btn_offset
+#		btn_offset = 0
+#		print("offset ", btn_offset, ", btn_margin top,bottom = (", btn_margin_top, ", ", btn_margin_bottom, ")")
+		
+		var test_string = string_dict.side
+		_font_size = font.get_string_size(test_string)
+		_font_size.y = _font_size.y + (0.0595 * _font_size.y) # arbitrary factor that seems to be off in godot
 		_window_size = self.get_rect().size
 		if self.is_connected("resized", self, "on_size_changed"):
 			self.disconnect("resized", self, "on_size_changed")
@@ -110,11 +125,11 @@ func set_content(val):
 	update()
 	
 func update():
-	if _font_size == null || not has_node("bg/contour/Ok"):
+	if _font_size == null || not has_node("bg/contour/Control/Ok"):
 		return
 
-	var ok_btn = get_node("bg/contour/Ok")
-	var cancel_btn = get_node("bg/contour/Cancel")
+	var ok_btn = get_node("bg/contour/Control/Ok")
+	var cancel_btn = get_node("bg/contour/Control/Cancel")
 	
 	if ok_btn:
 		ok_btn.visible = dialog_ok
@@ -129,8 +144,29 @@ func update():
 	var repeat_line = string_dict.repeat_line
 	var repeat_header = string_dict.repeat_header
 	
-	var repeat_width = int(floor((_window_size.x - (_font_size.x/2.0)) / _font_size.x))
-	var repeat_height = int(floor((_window_size.y - (_font_size.y/2.0)) / _font_size.y))
+	var repeat_width = int(floor((_window_size.x) / _font_size.x))
+	var remainder_width = (_window_size.x / _font_size.x) - repeat_width
+	remainder_width = remainder_width * _font_size.x
+	get_node("bg").margin_right = -remainder_width - (_font_size.x / 2.0) # remove half font-size to have the bg be half inside the border
+	get_node("bg/contour").margin_right = remainder_width + (_font_size.x / 2.0)
+	var repeat_height = int(floor((_window_size.y / _font_size.y)))
+	var remainder_height = (_window_size.y / _font_size.y) - repeat_height
+	remainder_height = remainder_height * _font_size.y
+	get_node("bg").margin_bottom = -remainder_height - (_font_size.y / 1.2)
+	get_node("bg/contour").margin_bottom = remainder_height + (_font_size.y / 1.2)
+	
+	get_node("bg/contour/Control/Ok").margin_top = -remainder_height
+	get_node("bg/contour/Control/Ok").margin_bottom = -remainder_height
+	get_node("bg/contour/Control/Cancel").margin_top = -remainder_height
+	get_node("bg/contour/Control/Cancel").margin_bottom = -remainder_height
+	
+#	get_node("bg/contour/Ok").margin_bottom = btn_margin_bottom - remainder_height
+#	get_node("bg/contour/Ok").margin_top = btn_margin_top - remainder_height
+#	get_node("bg/contour/Cancel").margin_bottom = btn_margin_bottom - remainder_height
+#	get_node("bg/contour/Cancel").margin_top = btn_margin_top - remainder_height
+#	print("btn_offset = ", remainder_height)
+#	btn_offset = remainder_height
+
 	
 	for i in range(0,repeat_width - 2):
 		top_string += repeat_line
@@ -138,9 +174,10 @@ func update():
 		
 		var start_ok_x = ok_btn.rect_position.x - _font_size.x
 		var end_ok_x = ok_btn.rect_position.x + ok_btn.rect_size.x
-		var start_cancel_x = cancel_btn.rect_position.x - _font_size.x
+		var start_cancel_x = cancel_btn.rect_position.x - (2*_font_size.x)
 		var end_cancel_x = cancel_btn.rect_position.x + cancel_btn.rect_size.x
-		var cur_x = i * _font_size.x + self.rect_position.x
+		# i+1 because we've already done the 1 char corner
+		var cur_x = (i+1) * _font_size.x + get_node("bg/contour").rect_position.x + get_node("bg/contour").margin_left
 		if (cur_x < start_ok_x || cur_x > end_ok_x || not dialog_ok) && (cur_x < start_cancel_x || cur_x > end_cancel_x || not dialog_cancel):
 			bottom_string += repeat_line
 		else:
@@ -190,3 +227,11 @@ func set_signal(newval):
 #	# Update game logic here.
 #	pass
 
+
+
+func _on_Ok_pressed():
+	emit_signal("OnOkPressed")
+
+
+func _on_Cancel_pressed():
+	emit_signal("OnCancelPressed")

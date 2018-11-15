@@ -42,7 +42,7 @@ func Pressed_Drop_Callback():
 	if lock_input:
 		return
 		
-	BehaviorEvents.emit_signal("OnPushGUI", "Inventory")
+	BehaviorEvents.emit_signal("OnPushGUI", "Inventory", playerNode)
 	
 	
 func OnObjTurn_Callback(obj):
@@ -57,7 +57,7 @@ func Pressed_Weapon_Callback():
 		return
 		
 	BehaviorEvents.emit_signal("OnLogLine", "Weapon System Online. Target ?")
-	BehaviorEvents.emit_signal("OnPushGUI", "GridPattern")
+	BehaviorEvents.emit_signal("OnPushGUI", "GridPattern", null)
 	_input_state = INPUT_STATE.grid_targetting
 	
 func OnLevelLoaded_Callback():
@@ -71,6 +71,8 @@ func OnLevelLoaded_Callback():
 		playerNode = levelLoaderRef.RequestObject("data/json/ships/player_default.json", levelLoaderRef.World_to_Tile(starting_wormhole.position))
 		
 	
+
+
 func _unhandled_input(event):
 	if lock_input:
 		return

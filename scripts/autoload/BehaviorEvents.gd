@@ -12,7 +12,7 @@ signal OnDealDamage(target, shooter, weapon_data)
 signal OnPickup(picker, picked)
 
 signal OnGUILoaded(name, obj)
-signal OnPushGUI(name)
+signal OnPushGUI(name, init_param)
 signal OnPopGUI()
 
 

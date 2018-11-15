@@ -81,7 +81,7 @@ func ProcessDamage(target, shooter, weapon_data):
 		if not shooter.modified_attributes.has("cargo"):
 			shooter.modified_attributes["cargo"] = {}
 			shooter.modified_attributes.cargo["content"] = shooter.base_attributes.cargo.content
-			shooter.modified_attributes.cargo["capacity"] = shooter.base_attributes.cargo.capacity
+			shooter.modified_attributes.cargo["capacity"] = 0
 		ammo_data = Globals.LevelLoaderRef.LoadJSON(ammo)
 		for item in shooter.modified_attributes.cargo.content:
 			if item.src == ammo && item.count > 0:

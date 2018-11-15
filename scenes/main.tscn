@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scripts/Behaviors/UIManager.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Behaviors/APBehavior.gd" type="Script" id=2]
@@ -16,9 +16,11 @@
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=15]
 [ext_resource path="res://data/Weapon_ShortCut.tres" type="ShortCut" id=16]
-[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=17]
+[ext_resource path="res://scripts/GUI/InventoryLayout.gd" type="Script" id=17]
+[ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=18]
+[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=19]
 
-[sub_resource type="InputEventKey" id=3]
+[sub_resource type="InputEventKey" id=1]
 
 device = 0
 alt = false
@@ -31,11 +33,11 @@ scancode = 71
 unicode = 0
 echo = false
 
-[sub_resource type="ShortCut" id=4]
+[sub_resource type="ShortCut" id=2]
 
-shortcut = SubResource( 3 )
+shortcut = SubResource( 1 )
 
-[sub_resource type="InputEventKey" id=5]
+[sub_resource type="InputEventKey" id=3]
 
 device = 0
 alt = false
@@ -48,9 +50,9 @@ scancode = 68
 unicode = 0
 echo = false
 
-[sub_resource type="ShortCut" id=6]
+[sub_resource type="ShortCut" id=4]
 
-shortcut = SubResource( 5 )
+shortcut = SubResource( 3 )
 
 [node name="Root" type="Node" index="0"]
 
@@ -200,11 +202,12 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="HUD" type="Control" parent="Camera-GUI" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = -1.0
+margin_bottom = -1.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -236,9 +239,7 @@ margin_top = -146.0
 margin_right = 0.0
 margin_bottom = 0.0
 mouse_filter = 2
-_sections_unfolded = [ "Anchor", "Mouse", "Rect" ]
-dialog_ok = false
-dialog_cancel = false
+_sections_unfolded = [ "Anchor", "Margin", "Mouse", "Rect" ]
 title = "Log Stardate 0.0.0"
 border_style = null
 
@@ -261,9 +262,9 @@ _sections_unfolded = [ "Mouse" ]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 3.0
-margin_top = -238.0
+margin_top = -235.0
 margin_right = 124.0
-margin_bottom = -143.0
+margin_bottom = -140.0
 mouse_filter = 2
 Text = "[w]eapon"
 Action = ExtResource( 16 )
@@ -272,12 +273,12 @@ Action = ExtResource( 16 )
 
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 3.0
-margin_top = -326.0
-margin_right = 120.0
-margin_bottom = -230.0
+margin_left = 2.0
+margin_top = -324.0
+margin_right = 123.0
+margin_bottom = -232.0
 Text = "[g]rab"
-Action = SubResource( 4 )
+Action = SubResource( 2 )
 
 [node name="Drop" parent="Camera-GUI/HUD/Buttons" index="2" instance=ExtResource( 15 )]
 
@@ -290,7 +291,7 @@ margin_top = -313.0
 margin_right = 4.0
 margin_bottom = -217.0
 Text = "[d]rop"
-Action = SubResource( 6 )
+Action = SubResource( 4 )
 
 [node name="Status" parent="Camera-GUI/HUD" index="2" instance=ExtResource( 14 )]
 
@@ -298,9 +299,7 @@ anchor_bottom = 0.0
 margin_right = 0.0
 margin_bottom = 62.0
 mouse_filter = 2
-_sections_unfolded = [ "Anchor", "Mouse" ]
-dialog_ok = false
-dialog_cancel = false
+_sections_unfolded = [ "Anchor", "Margin", "Mouse", "Rect" ]
 content = "The Maveric Hull: [color=lime]==========[/color] Energy : [color=yellow]25000[/color] Shield: Up"
 border_style = null
 
@@ -316,19 +315,36 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 11 )
+script = ExtResource( 17 )
 
-[node name="base" parent="Camera-GUI/Inventory" index="0" instance=ExtResource( 14 )]
+[node name="ModalBG" type="Panel" parent="Camera-GUI/Inventory" index="0"]
 
-margin_left = 106.0
-margin_top = 23.0
-margin_right = -99.0
-margin_bottom = -27.0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_styles/panel = ExtResource( 18 )
+_sections_unfolded = [ "custom_styles" ]
+
+[node name="base" parent="Camera-GUI/Inventory" index="1" instance=ExtResource( 14 )]
+
+margin_left = 105.0
+margin_top = 16.0
+margin_right = -95.0
+margin_bottom = -50.0
+dialog_ok = true
+dialog_cancel = true
 title = "Inventory"
 
 [node name="DEBUG" type="Node2D" parent="." index="7"]
 
 visible = false
-script = ExtResource( 17 )
+script = ExtResource( 19 )
 
 

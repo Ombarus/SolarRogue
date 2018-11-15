@@ -1,8 +1,45 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/GUI/window_draw.gd" type="Script" id=1]
 [ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=2]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=3]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold.tres" type="DynamicFont" id=4]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItal.tres" type="DynamicFont" id=5]
+[ext_resource path="res://data/fonts/DejaVuSansMonoBold.tres" type="DynamicFont" id=6]
+
+[sub_resource type="InputEventKey" id=1]
+
+device = 0
+alt = false
+shift = false
+control = false
+meta = false
+command = false
+pressed = false
+scancode = 79
+unicode = 0
+echo = false
+
+[sub_resource type="ShortCut" id=2]
+
+shortcut = SubResource( 1 )
+
+[sub_resource type="InputEventKey" id=3]
+
+device = 0
+alt = false
+shift = false
+control = false
+meta = false
+command = false
+pressed = false
+scancode = 67
+unicode = 0
+echo = false
+
+[sub_resource type="ShortCut" id=4]
+
+shortcut = SubResource( 3 )
 
 [node name="base" type="Control"]
 
@@ -10,8 +47,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -568.0
-margin_bottom = -292.0
+margin_right = -694.0
+margin_bottom = -415.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -19,10 +56,10 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Anchor" ]
+_sections_unfolded = [ "Anchor", "Margin", "Rect" ]
 editor_trigger_signal = false
-dialog_ok = true
-dialog_cancel = true
+dialog_ok = false
+dialog_cancel = false
 title = ""
 content = ""
 border_style = "="
@@ -54,6 +91,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 2.0
+margin_right = -6.0
+margin_bottom = -19.8946
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -61,7 +102,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = ExtResource( 3 )
-_sections_unfolded = [ "Size Flags", "Theme", "custom_styles" ]
+_sections_unfolded = [ "Margin", "Size Flags", "Theme", "custom_styles" ]
 
 [node name="contour" type="RichTextLabel" parent="bg" index="0"]
 
@@ -69,8 +110,12 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -3.0
+margin_top = -8.0
+margin_right = 6.0
+margin_bottom = 19.8946
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
+rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -79,44 +124,30 @@ custom_fonts/mono_font = ExtResource( 2 )
 custom_fonts/normal_font = ExtResource( 2 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
-bbcode_text = "╔══════════════════════════════════════════════════════╗
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-╚═════        ══════════════════════════════        ═══╝"
+bbcode_text = "╔═══════════════════════════════════════╗
+║                                       ║
+║                                       ║
+║                                       ║
+║                                       ║
+║                                       ║
+║                                       ║
+║                                       ║
+║                                       ║
+╚═══════════════════════════════════════╝"
 visible_characters = -1
 percent_visible = 1.0
 meta_underlined = true
 tab_size = 4
-text = "╔══════════════════════════════════════════════════════╗
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-║                                                      ║
-╚═════        ══════════════════════════════        ═══╝"
+text = "╔═══════════════════════════════════════╗
+║                                       ║
+║                                       ║
+║                                       ║
+║                                       ║
+║                                       ║
+║                                       ║
+║                                       ║
+║                                       ║
+╚═══════════════════════════════════════╝"
 scroll_active = false
 scroll_following = false
 selection_enabled = false
@@ -140,6 +171,9 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 custom_fonts/mono_font = ExtResource( 2 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
 custom_fonts/normal_font = ExtResource( 2 )
 bbcode_enabled = true
 bbcode_text = ""
@@ -171,6 +205,9 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/mono_font = ExtResource( 2 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
 custom_fonts/normal_font = ExtResource( 2 )
 bbcode_enabled = true
 bbcode_text = ""
@@ -185,16 +222,32 @@ selection_enabled = false
 override_selected_font_color = false
 _sections_unfolded = [ "BBCode", "Margin", "Size Flags", "custom_fonts" ]
 
-[node name="Ok" type="Button" parent="bg/contour" index="3"]
+[node name="Control" type="Control" parent="bg/contour" index="3"]
 
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Theme" ]
+
+[node name="Ok" type="Button" parent="bg/contour/Control" index="0"]
+
+visible = false
 anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0
-margin_left = 48.0
-margin_top = -21.0
-margin_right = 102.0
-margin_bottom = -1.0
+margin_left = 52.0
+margin_top = -4.88501
+margin_right = 106.0
+margin_bottom = -4.88501
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -205,23 +258,24 @@ size_flags_vertical = 1
 custom_styles/normal = ExtResource( 3 )
 toggle_mode = false
 enabled_focus_mode = 2
-shortcut = null
+shortcut = SubResource( 2 )
 group = null
-text = "Ok"
+text = "[O]k"
 flat = false
 align = 1
-_sections_unfolded = [ "Rect", "custom_styles" ]
+_sections_unfolded = [ "Margin", "Rect", "custom_styles" ]
 
-[node name="Cancel" type="Button" parent="bg/contour" index="4"]
+[node name="Cancel" type="Button" parent="bg/contour/Control" index="1"]
 
+visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -104.0
-margin_top = -21.0
-margin_right = -56.0
-margin_bottom = -1.0
+margin_left = -114.0
+margin_top = -4.88501
+margin_right = -60.0
+margin_bottom = -4.88501
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -232,11 +286,15 @@ size_flags_vertical = 1
 custom_styles/normal = ExtResource( 3 )
 toggle_mode = false
 enabled_focus_mode = 2
-shortcut = null
+shortcut = SubResource( 4 )
 group = null
-text = "Cancel"
+text = "[C]ancel"
 flat = false
 align = 1
-_sections_unfolded = [ "custom_styles" ]
+_sections_unfolded = [ "Margin", "Rect", "custom_styles" ]
+
+[connection signal="pressed" from="bg/contour/Control/Ok" to="." method="_on_Ok_pressed"]
+
+[connection signal="pressed" from="bg/contour/Control/Cancel" to="." method="_on_Cancel_pressed"]
 
 
