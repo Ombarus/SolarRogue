@@ -47,8 +47,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -694.0
-margin_bottom = -415.0
+margin_right = -703.0
+margin_bottom = -416.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -61,7 +61,6 @@ editor_trigger_signal = false
 dialog_ok = false
 dialog_cancel = false
 title = ""
-content = ""
 border_style = "="
 
 [node name="width_test" type="Label" parent="." index="0"]
@@ -93,8 +92,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 3.0
 margin_top = 2.0
-margin_right = -6.0
-margin_bottom = -19.8946
+margin_right = -5.0
+margin_bottom = -18.8946
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -112,8 +111,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -3.0
 margin_top = -8.0
-margin_right = 6.0
-margin_bottom = 19.8946
+margin_right = 5.0
+margin_bottom = 18.8946
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -124,30 +123,30 @@ custom_fonts/mono_font = ExtResource( 2 )
 custom_fonts/normal_font = ExtResource( 2 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
-bbcode_text = "╔═══════════════════════════════════════╗
-║                                       ║
-║                                       ║
-║                                       ║
-║                                       ║
-║                                       ║
-║                                       ║
-║                                       ║
-║                                       ║
-╚═══════════════════════════════════════╝"
+bbcode_text = "╔══════════════════════════════════════╗
+║                                      ║
+║                                      ║
+║                                      ║
+║                                      ║
+║                                      ║
+║                                      ║
+║                                      ║
+║                                      ║
+╚══════════════════════════════════════╝"
 visible_characters = -1
 percent_visible = 1.0
 meta_underlined = true
 tab_size = 4
-text = "╔═══════════════════════════════════════╗
-║                                       ║
-║                                       ║
-║                                       ║
-║                                       ║
-║                                       ║
-║                                       ║
-║                                       ║
-║                                       ║
-╚═══════════════════════════════════════╝"
+text = "╔══════════════════════════════════════╗
+║                                      ║
+║                                      ║
+║                                      ║
+║                                      ║
+║                                      ║
+║                                      ║
+║                                      ║
+║                                      ║
+╚══════════════════════════════════════╝"
 scroll_active = false
 scroll_following = false
 selection_enabled = false
@@ -188,41 +187,7 @@ selection_enabled = false
 override_selected_font_color = false
 _sections_unfolded = [ "Anchor", "BBCode", "Grow Direction", "Margin", "Rect", "Size Flags", "custom_fonts" ]
 
-[node name="Content" type="RichTextLabel" parent="bg/contour" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 14.0
-margin_top = 18.0
-margin_right = -24.0
-margin_bottom = -26.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/mono_font = ExtResource( 2 )
-custom_fonts/bold_italics_font = ExtResource( 4 )
-custom_fonts/italics_font = ExtResource( 5 )
-custom_fonts/bold_font = ExtResource( 6 )
-custom_fonts/normal_font = ExtResource( 2 )
-bbcode_enabled = true
-bbcode_text = ""
-visible_characters = -1
-percent_visible = 1.0
-meta_underlined = true
-tab_size = 4
-text = ""
-scroll_active = true
-scroll_following = true
-selection_enabled = false
-override_selected_font_color = false
-_sections_unfolded = [ "BBCode", "Margin", "Size Flags", "custom_fonts" ]
-
-[node name="Control" type="Control" parent="bg/contour" index="3"]
+[node name="Control" type="Control" parent="bg/contour" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -245,9 +210,9 @@ anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0
 margin_left = 52.0
-margin_top = -4.88501
+margin_top = -3.88501
 margin_right = 106.0
-margin_bottom = -4.88501
+margin_bottom = -3.88501
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -273,9 +238,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -114.0
-margin_top = -4.88501
+margin_top = -3.88501
 margin_right = -60.0
-margin_bottom = -4.88501
+margin_bottom = -3.88501
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2

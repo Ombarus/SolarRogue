@@ -1,4 +1,5 @@
 1st step :::
+- fix cargo hold storage volume check with base_attributes & modifed_attributes
 - Generate Object using RNG :
 	- Wormholes (up & down)
 - Ability to swap tileset for ascii somehow

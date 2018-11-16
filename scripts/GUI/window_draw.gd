@@ -5,11 +5,11 @@ export(bool) var editor_trigger_signal = true setget set_signal
 export(bool) var dialog_ok = false setget set_dialog_ok
 export(bool) var dialog_cancel = false setget set_dialog_cancel
 export(String) var title = "" setget set_title
-export(String) var content = "" setget set_content
 export(String, "═", "─", "━", " ") var border_style = "=" setget set_style
 
 signal OnOkPressed()
 signal OnCancelPressed()
+signal OnUpdateLayout()
 
 var _window_size
 var _font_size
@@ -73,11 +73,11 @@ const string_empty = {
 
 func set_dialog_ok(val):
 	dialog_ok = val
-	update()
+	self.emit_signal("OnUpdateLayout")
 	
 func set_dialog_cancel(val):
 	dialog_cancel = val
-	update()
+	self.emit_signal("OnUpdateLayout")
 
 func set_style(style):
 	border_style = style
@@ -89,13 +89,14 @@ func set_style(style):
 		string_dict = string_simple
 	elif border_style == "━":
 		string_dict = string_simple_thick
-	update()
+	self.emit_signal("OnUpdateLayout")
 
 func _ready():
 	init()
-	update()
+	self.emit_signal("OnUpdateLayout")
 	
 func init():
+	print("base init")
 	if has_node("width_test"):
 		var font = get_node("width_test").get_font("font")
 		if font == null:
@@ -110,6 +111,9 @@ func init():
 		_font_size = font.get_string_size(test_string)
 		_font_size.y = _font_size.y + (0.0595 * _font_size.y) # arbitrary factor that seems to be off in godot
 		_window_size = self.get_rect().size
+		if self.is_connected("OnUpdateLayout", self, "update"):
+			self.disconnect("OnUpdateLayout", self, "update")
+		self.connect("OnUpdateLayout", self, "update")
 		if self.is_connected("resized", self, "on_size_changed"):
 			self.disconnect("resized", self, "on_size_changed")
 		self.connect("resized", self, "on_size_changed")
@@ -118,11 +122,7 @@ func init():
 	
 func set_title(val):
 	title = val
-	update()
-	
-func set_content(val):
-	content = val
-	update()
+	self.emit_signal("OnUpdateLayout")
 	
 func update():
 	if _font_size == null || not has_node("bg/contour/Control/Ok"):
@@ -203,18 +203,11 @@ func update():
 	final_window_string += bottom_string
 	
 	get_node("bg/contour").bbcode_text = final_window_string
-	
 	get_node("bg/contour/Title").bbcode_text = title
-	var content_node = get_node("bg/contour/Content")
-	if title.empty():
-		content_node.margin_top = 18
-	else:
-		content_node.margin_top = 54
-	content_node.bbcode_text = content
 
 func on_size_changed():
 	_window_size = self.get_rect().size
-	update()
+	self.emit_signal("OnUpdateLayout")
 
 
 func set_signal(newval):

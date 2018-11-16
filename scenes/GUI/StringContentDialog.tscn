@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scripts/GUI/StringContentDialog.gd" type="Script" id=1]
+[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=2]
+[ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=3]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold.tres" type="DynamicFont" id=4]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItal.tres" type="DynamicFont" id=5]
+[ext_resource path="res://data/fonts/DejaVuSansMonoBold.tres" type="DynamicFont" id=6]
+
+[node name="StringContentDialog" type="Control"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 481.0
+margin_bottom = 336.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 1 )
+editor_trigger_signal = false
+dialog_ok = false
+dialog_cancel = false
+title = ""
+content = ""
+border_style = "="
+
+[node name="base" parent="." index="0" instance=ExtResource( 2 )]
+
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="Content" type="RichTextLabel" parent="base" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 14.0
+margin_top = 18.0
+margin_right = -20.0
+margin_bottom = -24.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 3 )
+bbcode_enabled = true
+bbcode_text = ""
+visible_characters = -1
+percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
+text = ""
+scroll_active = true
+scroll_following = true
+selection_enabled = false
+override_selected_font_color = false
+_sections_unfolded = [ "BBCode" ]
+
+
