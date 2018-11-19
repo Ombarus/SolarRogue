@@ -79,15 +79,13 @@ func ProcessDamage(target, shooter, weapon_data):
 		ammo_ok = true
 	if ammo != null && shooter.base_attributes.has("cargo"):
 		if not shooter.modified_attributes.has("cargo"):
-			shooter.modified_attributes["cargo"] = {}
-			shooter.modified_attributes.cargo["content"] = shooter.base_attributes.cargo.content
-			shooter.modified_attributes.cargo["capacity"] = 0
+			shooter.init_cargo()
 		ammo_data = Globals.LevelLoaderRef.LoadJSON(ammo)
 		for item in shooter.modified_attributes.cargo.content:
 			if item.src == ammo && item.count > 0:
 				ammo_ok = true
 				item.count -= 1
-				shooter.modified_attributes.cargo.capacity += ammo_data.equipment.volume
+				shooter.modified_attributes.cargo.volume_used -= ammo_data.equipment.volume
 	
 	if not ammo_ok && shooter.base_attributes.type == "player":
 		BehaviorEvents.emit_signal("OnLogLine", "No more " + ammo_data.name_id + " to shoot")

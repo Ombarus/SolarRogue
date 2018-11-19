@@ -19,6 +19,11 @@ config/icon="res://icon.png"
 BehaviorEvents="*res://scripts/autoload/BehaviorEvents.gd"
 Globals="*res://scripts/autoload/Globals.gd"
 
+[display]
+
+window/dpi/allow_hidpi=true
+window/stretch/mode="2d"
+
 [input]
 
 zoom_in=[ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":4,"pressed":false,"doubleclick":false,"script":null)
@@ -32,6 +37,9 @@ touch=[ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_n
 
 [rendering]
 
+quality/intended_usage/framebuffer_allocation=0
+quality/2d/use_pixel_snap=true
+quality/filters/use_nearest_mipmap_filter=true
 environment/default_clear_color=Color( 0, 0, 0, 1 )
 environment/default_environment="res://default_env.tres"
 

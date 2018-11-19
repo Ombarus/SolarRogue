@@ -55,6 +55,8 @@ Feature :
 
 Things to consider :
 
+- 1989 : Space Rogue
+	- https://www.youtube.com/user/SpaceGameJunkie/videos
 - https://www.reddit.com/r/roguelikedev/wiki/faq_friday
 - https://www.scirra.com/store/2d-game-sprites/pixel-art-retr-2d-planets-pack-3792
 - https://www.deviantart.com/pixel-pax/art/Spaceships-60-98272278

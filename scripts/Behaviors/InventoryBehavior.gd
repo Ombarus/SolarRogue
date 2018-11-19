@@ -7,6 +7,7 @@ extends Node
 func _ready():
 	BehaviorEvents.connect("OnPickup", self, "OnPickup_Callback")
 	
+	
 func OnPickup_Callback(picker, picked):
 	var picked_obj = []
 	if typeof(picked) == TYPE_VECTOR2:
@@ -24,22 +25,21 @@ func OnPickup_Callback(picker, picked):
 		return
 		
 	if not picker.modified_attributes.has("cargo"):
-		picker.modified_attributes["cargo"] = {}
-		picker.modified_attributes.cargo["content"] = picker.base_attributes.cargo.content
-		picker.modified_attributes.cargo["capacity"] = 0
-	var inventory_space = picker.modified_attributes.cargo.capacity
+		picker.init_cargo()
+	var inventory_space = picker.base_attributes.cargo.capacity - picker.modified_attributes.cargo.volume_used
 	for obj in filtered_obj:
 		if obj.base_attributes.equipment.volume > inventory_space:
 			if picker.base_attributes.type == "player":
 				BehaviorEvents.emit_signal("OnLogLine", "Cannot pick up " + obj.base_attributes.name_id	+ " Cargo holds are full")
 			continue
-		picker.modified_attributes.cargo.capacity -= obj.base_attributes.equipment.volume
+		picker.modified_attributes.cargo.volume_used += obj.base_attributes.equipment.volume
+		inventory_space -= obj.base_attributes.equipment.volume
 		if picker.base_attributes.type == "player":
 				BehaviorEvents.emit_signal("OnLogLine", "Tractor beam has brought " + obj.base_attributes.name_id + " abord")
 		if obj.base_attributes.equipment.stackable:
 			var found = false
 			for item in picker.modified_attributes.cargo.content:
-				if item.src == obj.base_attributes.src:
+				if item.src in obj.base_attributes.src:
 					found = true
 					item.count += 1
 			if not found:

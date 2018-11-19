@@ -1,5 +1,9 @@
 1st step :::
-- fix cargo hold storage volume check with base_attributes & modifed_attributes
+- check if assigning array or dictionary copy or reference content in godot
+- message log when passing over an object
+- Drag-cancel as % of screen resolution
+	- 
+- Godot : Investigate Localization tab
 - Generate Object using RNG :
 	- Wormholes (up & down)
 - Ability to swap tileset for ascii somehow
@@ -8,11 +12,6 @@
 		- select target using keyboard
 		- Use energy when shooting
 		- Spawn items from destoyed ships
-	- Drop
-		- Display inventory
-			- Display volume used / volume capacity
-			- Dialog ok/cancel buttons
-			- Decide on the way to do selection
 	- Scan
 		- Give health remaining on ships
 		- Give detailed description of planet (rich but hard to mine, poor but easy to mine, etc)
@@ -51,6 +50,14 @@ polish :::
 	
 	
 DONE :::
+- fix cargo hold storage volume check with base_attributes & modifed_attributes
+- Drop
+	- Display inventory
+		- Display volume used / volume capacity
+		- Dialog ok/cancel buttons
+		- Decide on the way to do selection
+
+
 - Pickup
 - Destroy other ships
 - Spawn resource from planet

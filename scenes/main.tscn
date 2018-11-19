@@ -303,6 +303,8 @@ content = "The Maveric Hull : [color=lime]==========[/color] Energy : [color=yel
 
 [node name="Inventory" parent="Camera-GUI" index="1" instance=ExtResource( 17 )]
 
+visible = false
+
 [node name="DEBUG" type="Node2D" parent="." index="7"]
 
 visible = false

@@ -41,7 +41,7 @@ echo = false
 
 shortcut = SubResource( 3 )
 
-[node name="base" type="Control"]
+[node name="base" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -151,7 +151,7 @@ scroll_active = false
 scroll_following = false
 selection_enabled = false
 override_selected_font_color = false
-_sections_unfolded = [ "BBCode", "Margin", "Rect", "custom_colors", "custom_fonts" ]
+_sections_unfolded = [ "BBCode", "Margin", "Rect", "Theme", "custom_colors", "custom_fonts" ]
 
 [node name="Title" type="RichTextLabel" parent="bg/contour" index="1"]
 
@@ -193,7 +193,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -20.0
+margin_bottom = -27.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -213,6 +213,7 @@ margin_left = 52.0
 margin_top = -3.88501
 margin_right = 106.0
 margin_bottom = -3.88501
+rect_min_size = Vector2( 0, 28 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -241,6 +242,7 @@ margin_left = -114.0
 margin_top = -3.88501
 margin_right = -60.0
 margin_bottom = -3.88501
+rect_min_size = Vector2( 0, 28 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2

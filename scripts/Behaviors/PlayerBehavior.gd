@@ -42,8 +42,30 @@ func Pressed_Drop_Callback():
 	if lock_input:
 		return
 		
-	BehaviorEvents.emit_signal("OnPushGUI", "Inventory", playerNode)
-	
+	BehaviorEvents.emit_signal("OnPushGUI", "Inventory", {"object":playerNode, "callback_object":self, "callback_method":"OnDropIventory_Callback"})
+
+func OnDropIventory_Callback(dropped_mounts, dropped_cargo):
+	playerNode.init_mounts()
+	var equips = playerNode.modified_attributes.mounts
+	for drop_data in dropped_mounts:
+		for equip in equips:
+			if drop_data == equip:
+				Globals.LevelLoaderRef.RequestObject(playerNode.modified_attributes.mounts[equip], Globals.LevelLoaderRef.World_to_Tile(playerNode.position))
+				playerNode.modified_attributes.mounts[equip] = ""
+				
+	var cargo = playerNode.modified_attributes.cargo.content
+	var index_to_delete = []
+	for drop_data in dropped_cargo:
+		for i in range(cargo.size()):
+			if cargo[i].src == drop_data.src:
+				if cargo[i].count > 1:
+					cargo[i].count -= 1
+				else:
+					index_to_delete.push_back(i)
+				Globals.LevelLoaderRef.RequestObject(cargo[i].src, Globals.LevelLoaderRef.World_to_Tile(playerNode.position))
+					
+	for index in index_to_delete:
+		cargo.remove(index)
 	
 func OnObjTurn_Callback(obj):
 	print("Player OnObjTurn_Callback")

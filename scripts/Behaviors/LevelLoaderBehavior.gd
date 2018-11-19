@@ -88,6 +88,8 @@ func OnRequestObjectUnload_Callback(obj):
 	
 func LoadJSON(filepath):
 	var file = File.new()
+	if not "res://" in filepath:
+		filepath = "res://" + filepath
 	file.open(filepath, file.READ)
 	var text = file.get_as_text()
 	var result_json = JSON.parse(text)
