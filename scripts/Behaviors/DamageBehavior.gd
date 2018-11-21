@@ -106,6 +106,7 @@ func ProcessDamage(target, shooter, weapon_data):
 		else:
 			if shooter.base_attributes.type == "player":
 				BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]You do " + str(dam) + " damage[/color]")
+		BehaviorEvents.emit_signal("OnDamageTaken", target, shooter)
 	
 		
 	

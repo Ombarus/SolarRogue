@@ -119,6 +119,8 @@ func _unhandled_input(event):
 				# Calculate direction based on touch relative to player position.
 				# dead zone (click on sprite)
 				if abs(click_dir.x) < levelLoaderRef.tileSize / 2 && abs(click_dir.y) < levelLoaderRef.tileSize / 2:
+					BehaviorEvents.emit_signal("OnUseAP", playerNode, 1.0)
+					BehaviorEvents.emit_signal("OnLogLine", "Cooling reactor (wait)")
 					dir = null
 				elif rot > 337.5 || rot <= 22.5:
 					dir = Vector2(0,-1) # 8
@@ -154,6 +156,9 @@ func _unhandled_input(event):
 			dir = Vector2(0,-1)
 		if event.scancode == KEY_KP_9:
 			dir = Vector2(1,-1)
+		if event.scancode == KEY_KP_5:
+			BehaviorEvents.emit_signal("OnUseAP", playerNode, 1.0)
+			BehaviorEvents.emit_signal("OnLogLine", "Cooling reactor (wait)")
 	if dir != null:
 		BehaviorEvents.emit_signal("OnMovement", playerNode, dir)
 #		_zoom_camera(-1)

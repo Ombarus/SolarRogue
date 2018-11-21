@@ -1,0 +1,17 @@
+{
+	"name_id":"Short Range Scanner",
+	"type":"scanner",
+	"sprite_choice":[
+		"scanner"
+	],
+	"z_order":10,
+	"equipment": {
+		"slot":"scanner",
+		"volume":10.0,
+		"equip_ap":3.0,
+		"unequip_ap":3.0
+	},
+	"scanning": {
+		"radius":3
+	}
+}

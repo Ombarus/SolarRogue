@@ -5,7 +5,8 @@
 	"action_point":0,
 	"mounts": {
 		"small_weapon_mount": "data/json/items/weapons/missile_launcher_mk1.json",
-		"shield": "data/json/items/shields/shield_mk1.json"
+		"shield": "data/json/items/shields/shield_mk1.json",
+		"scanner": "data/json/items/scanner/scanner_mk1.json"
 	},
 	"destroyable": {
 		"hull":15

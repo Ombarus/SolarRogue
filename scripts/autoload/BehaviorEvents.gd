@@ -9,6 +9,7 @@ signal OnUseAP(obj, amount)
 signal OnObjTurn(obj)
 signal OnLogLine(text)
 signal OnDealDamage(target, shooter, weapon_data)
+signal OnDamageTaken(target, shooter)
 signal OnPickup(picker, picked)
 
 signal OnGUILoaded(name, obj)

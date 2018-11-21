@@ -1,4 +1,5 @@
 1st step :::
+- Load and Save
 - check if assigning array or dictionary copy or reference content in godot
 - message log when passing over an object
 - Drag-cancel as % of screen resolution

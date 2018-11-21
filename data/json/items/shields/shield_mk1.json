@@ -7,7 +7,7 @@
 	"z_order":10,
 	"equipment": {
 		"slot":"shield",
-		"weight":10.0,
+		"volume":10.0,
 		"equip_ap":3.0,
 		"unequip_ap":3.0
 	},

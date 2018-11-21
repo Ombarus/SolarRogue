@@ -23,6 +23,7 @@ Feature :
 	- Truster ? (Dodge)
 	- Shields
 	- Scanner
+	- Cloaking
 - Display :
 	- Console Message
 	- Action Buttons

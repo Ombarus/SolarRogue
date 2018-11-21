@@ -10,6 +10,9 @@ var objCountByType = {}
 var shufflingArray = []
 var current_depth = 0
 var objByType = {}
+var objById = {}
+# TODO: init id when loading saved game
+var _sequence_id = 0 # for giving unique name to objects
 
 
 func _ready():
@@ -135,7 +138,12 @@ func Tile_to_World(xy):
 func RequestObject(path, pos):
 	var data = LoadJSON(path)
 	return CreateAndInitNode(data, pos)
-	
+
+
+#######################################################
+# EVERY OBJECT SHOULD BE CREATED THROUGH HERE
+#######################################################
+
 func CreateAndInitNode(data, pos):
 	var r = get_node("/root/Root/GameTiles")
 	var scene = load("res://scenes/object.tscn")
@@ -153,8 +161,14 @@ func CreateAndInitNode(data, pos):
 		objByType[ data["type"] ].push_back(n)
 		if data["type"] == "wormhole":
 			n.modified_attributes["depth"] = current_depth + 1
+	n.modified_attributes["unique_id"] = _sequence_id
+	objById[_sequence_id] = n
+	_sequence_id += 1
 	BehaviorEvents.emit_signal("OnObjectLoaded", n)
 	return n
+	
+#######################################################
+#######################################################
 	
 func UpdatePosition(obj, newPos):	
 	var old_tile = World_to_Tile(obj.position)

@@ -10,7 +10,8 @@
 	"ai": {
 		"aggressive":false,
 		"pathfinding":"simple",
-		"run_if_attacked":true
+		"run_if_attacked":true,
+		"stop_running_after":5
 	},
 	"drop_on_death": [
 		{"id":"data/json/items/weapons/missile_launcher_mk1.json", "chance":0.07},

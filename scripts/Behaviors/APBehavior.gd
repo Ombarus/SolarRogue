@@ -18,6 +18,7 @@ func OnRequestObjectUnload_Callback(obj):
 	action_list.erase(obj)
 
 func OnUseAP_Callback(obj, amount):
+	obj.modified_attributes["ap"] = true
 	print("Use AP ", amount)
 	var index = action_list.find(obj)
 	if index < 0:
@@ -41,7 +42,10 @@ func OnUseAP_Callback(obj, amount):
 			break
 		
 	print("OnObjTurn Emit ", obj_action.base_attributes.name_id)
-	BehaviorEvents.emit_signal("OnObjTurn", obj_action)
+	# OnobjTurn triggers OnUseAp so this is circular.
+	# The only reason it won't crash right away is that the player waits for input
+	# using call_deferred should allow us to "queue" the OnObjTurn and do them in sequence (or even in parallel)
+	BehaviorEvents.call_deferred("emit_signal", "OnObjTurn", obj_action)
 	
 
 # Top action is always 0 AP. This way when we insert a new object it will be the first to act
