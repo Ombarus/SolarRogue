@@ -1,0 +1,32 @@
+Salut Gab,
+Comment va gameloft ? Toujours sur Grease ? 
+
+
+- Pixel art
+- Inspired by traditional ascii rogue game
+	- Nethack
+	- Dwarf fortress
+- Beautiful mix of pixel art & ascii in cogmind menus and look&feel :
+	- https://youtu.be/Cki73qtA32w?t=583
+	- the green, glitching ascii effect, simple tile pixel art, etc.
+	- https://www.gridsagegames.com/blog/2015/03/tileset-1-0/
+	
+- Features :
+	- Sci-fi ship flying through empty space in solar systems randomly generated ennemy ships, planetes, suns, space stations, etc.
+	  Take wormhole to reach final system and ?
+	- Tactical Turn Based
+		- Probably a lot of time spent in menus / inventory, etc.
+	- Fog of War
+		- Player can equip some scanner on their ship that will allow them to see more-less far
+		- Some kind of "remembered" view of were planets/ships/items where (but could have moved if outside of the Fog of War)
+			- In most other roguelike game you see a grayed-out version of the level but my levels will be mostly empty space so how do player know where they've been ?
+			- Was thinking of hiding a detailed background and reveal it only for where the player has been but it should not interfere with the foreground (maybe different color ?)
+	- 2D tile based
+		- Tiles can be any size (right now 128x128) but it's a square 2D grid top-view
+		- "some" items could take more than one square (the sun in my example)
+	- want to keep in mind multiple platform.
+		- Touch & keyboard friendly
+		- Smaller and larger screen
+		- Not against having a completly different UI for mobile & PC (keyboard shortcut based on PC and touch based on device)
+		
+	

@@ -1,23 +1,31 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=31 format=2]
 
-[ext_resource path="res://scripts/Behaviors/UIManager.gd" type="Script" id=1]
-[ext_resource path="res://scripts/Behaviors/APBehavior.gd" type="Script" id=2]
-[ext_resource path="res://scripts/Behaviors/SpriteLoaderBehavior.gd" type="Script" id=3]
-[ext_resource path="res://scripts/Behaviors/PlayerBehavior.gd" type="Script" id=4]
-[ext_resource path="res://scripts/Behaviors/AIBehavior.gd" type="Script" id=5]
-[ext_resource path="res://scripts/Behaviors/DamageBehavior.gd" type="Script" id=6]
-[ext_resource path="res://scripts/Behaviors/LevelLoaderBehavior.gd" type="Script" id=7]
-[ext_resource path="res://scripts/Behaviors/MovementBehavior.gd" type="Script" id=8]
-[ext_resource path="res://scripts/Behaviors/InventoryBehavior.gd" type="Script" id=9]
-[ext_resource path="res://scripts/CamControl.gd" type="Script" id=10]
-[ext_resource path="res://scripts/GUI/GUILayoutBase.gd" type="Script" id=11]
-[ext_resource path="res://scripts/GUI/GridDisplay.gd" type="Script" id=12]
-[ext_resource path="res://scripts/GUI/LogSystem.gd" type="Script" id=13]
-[ext_resource path="res://scenes/GUI/StringContentDialog.tscn" type="PackedScene" id=14]
-[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=15]
-[ext_resource path="res://data/Weapon_ShortCut.tres" type="ShortCut" id=16]
-[ext_resource path="res://scenes/GUI/Dialogs/SelectableInventory.tscn" type="PackedScene" id=17]
-[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=18]
+[ext_resource path="res://data/textures/procedural-star-bg.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Behaviors/UIManager.gd" type="Script" id=2]
+[ext_resource path="res://scripts/Behaviors/APBehavior.gd" type="Script" id=3]
+[ext_resource path="res://scripts/Behaviors/SpriteLoaderBehavior.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Behaviors/PlayerBehavior.gd" type="Script" id=5]
+[ext_resource path="res://scripts/Behaviors/AIBehavior.gd" type="Script" id=6]
+[ext_resource path="res://scripts/Behaviors/DamageBehavior.gd" type="Script" id=7]
+[ext_resource path="res://scripts/Behaviors/LevelLoaderBehavior.gd" type="Script" id=8]
+[ext_resource path="res://scripts/Behaviors/MovementBehavior.gd" type="Script" id=9]
+[ext_resource path="res://scripts/Behaviors/InventoryBehavior.gd" type="Script" id=10]
+[ext_resource path="res://scripts/CamControl.gd" type="Script" id=11]
+[ext_resource path="res://scripts/GUI/GUILayoutBase.gd" type="Script" id=12]
+[ext_resource path="res://scripts/GUI/GridDisplay.gd" type="Script" id=13]
+[ext_resource path="res://scripts/GUI/LogSystem.gd" type="Script" id=14]
+[ext_resource path="res://scenes/GUI/StringContentDialog.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=16]
+[ext_resource path="res://data/Weapon_ShortCut.tres" type="ShortCut" id=17]
+[ext_resource path="res://scenes/GUI/Dialogs/SelectableInventory.tscn" type="PackedScene" id=18]
+[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=19]
+[ext_resource path="res://scenes/tileset_source/planet_b.tscn" type="PackedScene" id=20]
+[ext_resource path="res://scenes/tileset_source/sun.tscn" type="PackedScene" id=21]
+[ext_resource path="res://scenes/tileset_source/probe.tscn" type="PackedScene" id=22]
+[ext_resource path="res://scenes/tileset_source/wormhole.tscn" type="PackedScene" id=23]
+[ext_resource path="res://scenes/tileset_source/shuttle.tscn" type="PackedScene" id=24]
+[ext_resource path="res://scenes/tileset_source/planet_a.tscn" type="PackedScene" id=25]
+[ext_resource path="res://scenes/tileset_source/planet_c.tscn" type="PackedScene" id=26]
 
 [sub_resource type="InputEventKey" id=1]
 
@@ -55,7 +63,15 @@ shortcut = SubResource( 3 )
 
 [node name="Root" type="Node" index="0"]
 
-[node name="Upper-Left-Bound" type="Node2D" parent="." index="0"]
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+position = Vector2( 5125, 5125 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 10240, 10240 )
+_sections_unfolded = [ "Region", "Transform" ]
+
+[node name="Upper-Left-Bound" type="Node2D" parent="." index="1"]
 
 editor/display_folded = true
 _sections_unfolded = [ "Transform" ]
@@ -69,63 +85,64 @@ texture_mode = 1712250185
 sharp_limit = 2.0
 round_precision = 8
 
-[node name="Lower-Right_Bound" type="Node2D" parent="." index="1"]
+[node name="Lower-Right_Bound" type="Node2D" parent="." index="2"]
 
 position = Vector2( -10240, -10241.9 )
 scale = Vector2( -12800, -12800 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Behaviors" type="Node" parent="." index="2"]
+[node name="Behaviors" type="Node" parent="." index="3"]
 
 [node name="UIManager" type="Node" parent="Behaviors" index="0"]
 
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="AP" type="Node" parent="Behaviors" index="1"]
 
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 LogWindow = NodePath("../../Camera-GUI/HUD/Log/LogWindow")
 day_length = 100
 
 [node name="SpriteLoader" type="Node" parent="Behaviors" index="2"]
 
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 levelLoaderNode = NodePath("../LevelLoader")
 
 [node name="Player" type="Node" parent="Behaviors" index="3"]
 
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 levelLoaderNode = NodePath("../LevelLoader")
 WeaponAction = NodePath("../../Camera-GUI/HUD/Buttons/Weapon")
 GrabAction = NodePath("../../Camera-GUI/HUD/Buttons/Grab")
 DropAction = NodePath("../../Camera-GUI/HUD/Buttons/Drop")
+FTLAction = NodePath("../../Camera-GUI/HUD/Buttons/Wormhole")
 
 [node name="AI" type="Node" parent="Behaviors" index="4"]
 
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 levelLoaderNode = NodePath("../LevelLoader")
 
 [node name="Damage" type="Node" parent="Behaviors" index="5"]
 
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 
 [node name="LevelLoader" type="Node" parent="Behaviors" index="6"]
 
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 startLevel = "data/json/levels/start.json"
 levelSize = Vector2( 80, 80 )
 tileSize = 128
 
 [node name="Movement" type="Node" parent="Behaviors" index="7"]
 
-script = ExtResource( 8 )
+script = ExtResource( 9 )
 levelLoaderNode = NodePath("../LevelLoader")
 
 [node name="Inventory" type="Node" parent="Behaviors" index="8"]
 
-script = ExtResource( 9 )
+script = ExtResource( 10 )
 
-[node name="Camera2D" type="Camera2D" parent="." index="3"]
+[node name="Camera2D" type="Camera2D" parent="." index="4"]
 
 position = Vector2( 1026.59, 599.176 )
 anchor_mode = 1
@@ -150,15 +167,15 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-script = ExtResource( 10 )
+script = ExtResource( 11 )
 _sections_unfolded = [ "Editor", "Limit" ]
 max_zoom = 4.0
 min_zoom = 0.25
 levelLoaderNode = NodePath("../Behaviors/LevelLoader")
 
-[node name="GameTiles" type="Node" parent="." index="4"]
+[node name="GameTiles" type="Node" parent="." index="5"]
 
-[node name="World-GUI" type="Node" parent="." index="5"]
+[node name="World-GUI" type="Node" parent="." index="6"]
 
 [node name="GridPattern" type="Control" parent="World-GUI" index="0"]
 
@@ -172,7 +189,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 11 )
+script = ExtResource( 12 )
 _sections_unfolded = [ "Mouse", "Visibility" ]
 
 [node name="Display" type="Control" parent="World-GUI/GridPattern" index="0"]
@@ -187,11 +204,11 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 12 )
+script = ExtResource( 13 )
 _sections_unfolded = [ "Mouse", "Rect", "Visibility" ]
 line_color = Color( 1, 0, 0, 0.352941 )
 
-[node name="Camera-GUI" type="CanvasLayer" parent="." index="6"]
+[node name="Camera-GUI" type="CanvasLayer" parent="." index="7"]
 
 layer = 1
 offset = Vector2( 0, 0 )
@@ -213,11 +230,12 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 11 )
+script = ExtResource( 12 )
 _sections_unfolded = [ "Mouse" ]
 
 [node name="Log" type="Control" parent="Camera-GUI/HUD" index="0"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -228,10 +246,10 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 13 )
+script = ExtResource( 14 )
 _sections_unfolded = [ "Mouse" ]
 
-[node name="LogWindow" parent="Camera-GUI/HUD/Log" index="0" instance=ExtResource( 14 )]
+[node name="LogWindow" parent="Camera-GUI/HUD/Log" index="0" instance=ExtResource( 15 )]
 
 anchor_top = 1.0
 anchor_right = 1.0
@@ -257,7 +275,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Mouse" ]
 
-[node name="Weapon" parent="Camera-GUI/HUD/Buttons" index="0" instance=ExtResource( 15 )]
+[node name="Weapon" parent="Camera-GUI/HUD/Buttons" index="0" instance=ExtResource( 16 )]
 
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -267,9 +285,9 @@ margin_right = 124.0
 margin_bottom = -140.0
 mouse_filter = 2
 Text = "[w]eapon"
-Action = ExtResource( 16 )
+Action = ExtResource( 17 )
 
-[node name="Grab" parent="Camera-GUI/HUD/Buttons" index="1" instance=ExtResource( 15 )]
+[node name="Grab" parent="Camera-GUI/HUD/Buttons" index="1" instance=ExtResource( 16 )]
 
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -280,20 +298,32 @@ margin_bottom = -232.0
 Text = "[g]rab"
 Action = SubResource( 2 )
 
-[node name="Drop" parent="Camera-GUI/HUD/Buttons" index="2" instance=ExtResource( 15 )]
+[node name="Wormhole" parent="Camera-GUI/HUD/Buttons" index="2" instance=ExtResource( 16 )]
 
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -118.0
-margin_top = -313.0
-margin_right = 4.0
-margin_bottom = -217.0
+margin_left = -121.0
+margin_top = -233.0
+margin_right = 0.0
+margin_bottom = -141.0
+Text = "[>]FTL Back"
+
+[node name="Drop" parent="Camera-GUI/HUD/Buttons" index="3" instance=ExtResource( 16 )]
+
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -120.0
+margin_top = -319.0
+margin_right = 2.0
+margin_bottom = -223.0
 Text = "[d]rop"
 Action = SubResource( 4 )
 
-[node name="Status" parent="Camera-GUI/HUD" index="2" instance=ExtResource( 14 )]
+[node name="Status" parent="Camera-GUI/HUD" index="2" instance=ExtResource( 15 )]
 
 anchor_right = 1.0
 margin_right = 0.0
@@ -301,13 +331,54 @@ margin_bottom = 62.0
 mouse_filter = 2
 content = "The Maveric Hull : [color=lime]==========[/color] Energy : [color=yellow]25000[/color] Shield : Up"
 
-[node name="Inventory" parent="Camera-GUI" index="1" instance=ExtResource( 17 )]
+[node name="Inventory" parent="Camera-GUI" index="1" instance=ExtResource( 18 )]
 
 visible = false
 
-[node name="DEBUG" type="Node2D" parent="." index="7"]
+[node name="DEBUG" type="Node2D" parent="." index="8"]
 
 visible = false
-script = ExtResource( 18 )
+script = ExtResource( 19 )
+
+[node name="temp" type="Node2D" parent="." index="9"]
+
+visible = false
+position = Vector2( 689.19, 217.317 )
+
+[node name="planet_b" parent="temp" index="0" instance=ExtResource( 20 )]
+
+position = Vector2( -36.157, -5.83176 )
+
+[node name="sun" parent="temp" index="1" instance=ExtResource( 21 )]
+
+position = Vector2( 46.7009, 240.177 )
+
+[node name="probe" parent="temp" index="2" instance=ExtResource( 22 )]
+
+position = Vector2( -204.268, 191.962 )
+rotation = -0.785398
+_sections_unfolded = [ "Transform" ]
+
+[node name="wormhole" parent="temp" index="3" instance=ExtResource( 23 )]
+
+position = Vector2( -362.624, -8.63391 )
+
+[node name="shuttle" parent="temp" index="4" instance=ExtResource( 24 )]
+
+position = Vector2( -33.8243, -8.16446 )
+
+[node name="shuttle2" parent="temp" index="5" instance=ExtResource( 24 )]
+
+position = Vector2( -440.695, -105.973 )
+rotation = 1.5708
+_sections_unfolded = [ "Transform" ]
+
+[node name="planet_a" parent="temp" index="6" instance=ExtResource( 25 )]
+
+position = Vector2( -580.844, -101.473 )
+
+[node name="planet_c" parent="temp" index="7" instance=ExtResource( 26 )]
+
+position = Vector2( 307.917, -99.1401 )
 
 

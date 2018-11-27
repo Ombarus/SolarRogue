@@ -9,27 +9,25 @@ func _ready():
 	BehaviorEvents.connect("OnDamageTaken", self, "OnDamageTaken_Callback")
 	
 func OnDamageTaken_Callback(target, shooter):
-	if not target.base_attributes.has("ai"):
+	if target.get_attrib("ai") == null:
 		return
 		
-	if target.base_attributes.ai.run_if_attacked:
-		if not target.modified_attributes.has("ai"):
-			target.modified_attributes["ai"] = {}
-		target.modified_attributes.ai["pathfinding"] = "run_away"
-		target.modified_attributes.ai["run_from"] = shooter.modified_attributes.unique_id
-		target.modified_attributes.ai["unseen_for"] = 0
-		target.modified_attributes["wandering"] = false
+	if target.get_attrib("ai.run_if_attacked") != null:
+		target.set_attrib("ai.pathfinding", "run_away")
+		target.set_attrib("ai.run_from", shooter.modified_attributes.unique_id)
+		target.set_attrib("ai.unseen_for", 0)
+		target.set_attrib("wandering", false)
 	
 func OnObjTurn_Callback(obj):
-	if not obj.base_attributes.has("ai"):
+	if obj.get_attrib("ai") == null:
 		return
 	
 	obj.modified_attributes["ap"] = false
 	
+	var pathfinding = obj.get_attrib("ai.pathfinding")
+		
+	var is_aggressive = obj.get_attrib("ai.aggressive")
 	
-	var pathfinding = obj.base_attributes.ai.pathfinding
-	if obj.modified_attributes.has("ai") and obj.modified_attributes.ai.has("pathfinding"):
-		pathfinding = obj.modified_attributes.ai.pathfinding
 	
 	if pathfinding == "simple":
 		DoSimplePathFinding(obj)
@@ -40,7 +38,7 @@ func OnObjTurn_Callback(obj):
 		BehaviorEvents.emit_signal("OnUseAP", obj, 1.0)
 		
 	if obj.modified_attributes["ap"] == false:
-		print("AI DID NOT DO ANY ACTION. AI SHOULD AT LEAST WAIT FOR 1 TURN ALWAYS !")
+		print("**** AI DID NOT DO ANY ACTION. AI SHOULD AT LEAST WAIT FOR 1 TURN ALWAYS ! *****")
 		BehaviorEvents.emit_signal("OnUseAP", obj, 1.0)
 
 func FindRandomTile():
@@ -49,16 +47,16 @@ func FindRandomTile():
 	return Vector2(x,y)
 
 func DoSimplePathFinding(obj):
-	if not obj.modified_attributes.has("wandering"):
+	if obj.get_attrib("wandering") == null:
 		obj.modified_attributes["wandering"] = true
 	
 	var tile_pos = levelLoaderRef.World_to_Tile(obj.position)
-	if not obj.modified_attributes.has("ai"):
-		obj.modified_attributes["ai"] = {}
-	if not obj.modified_attributes.ai.has("objective") || obj.modified_attributes.ai.objective == tile_pos:
-		obj.modified_attributes.ai["objective"] =  FindRandomTile()
+
+	var cur_objective = obj.get_attrib("ai.objective")
+	if cur_objective == null || cur_objective == tile_pos:
+		obj.set_attrib("ai.objective", FindRandomTile())
 	
-	var target = obj.modified_attributes.ai.objective
+	var target = obj.get_attrib("ai.objective")
 	var move_by = Vector2(0,0)
 	if target.x > tile_pos.x:
 		move_by.x += 1
@@ -78,14 +76,16 @@ func DoRunAwayPathFinding(obj):
 	my_pos = Globals.LevelLoaderRef.World_to_Tile(my_pos)
 	scary_pos = Globals.LevelLoaderRef.World_to_Tile(scary_pos)
 	var scanner_range = 0
-	if obj.base_attributes.mounts.has("scanner") and obj.base_attributes.mounts.scanner != "":
-		var scanner_data = Globals.LevelLoaderRef.LoadJSON(obj.base_attributes.mounts.scanner)
+	var scanner_json = obj.get_attrib("mounts.scanner")
+	if scanner_json != null and scanner_json != "":
+		var scanner_data = Globals.LevelLoaderRef.LoadJSON(scanner_json)
 		scanner_range = scanner_data.scanning.radius
 	var distance = my_pos - scary_pos
 	if distance.length_squared() >= scanner_range * scanner_range:
-		obj.modified_attributes.ai.unseen_for += 1
+		obj.set_attrib("ai.unseen_for", obj.get_attrib("ai.unseen_for") + 1)
 	
-	if obj.modified_attributes.ai.unseen_for > obj.base_attributes.ai.stop_running_after:
+	if obj.get_attrib("ai.unseen_for") > obj.get_attrib("ai.stop_running_after"):
+		#TODO: Maybe wrap this in a method too ?
 		obj.modified_attributes.ai.erase("pathfinding")
 		obj.modified_attributes.ai.erase("run_from")
 		obj.modified_attributes.ai.erase("unseen_for")

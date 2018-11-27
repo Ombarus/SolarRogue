@@ -1,12 +1,7 @@
 1st step :::
-- Load and Save
+- Position of player ship when going up/down wormholes
 - check if assigning array or dictionary copy or reference content in godot
-- message log when passing over an object
-- Drag-cancel as % of screen resolution
-	- 
 - Godot : Investigate Localization tab
-- Generate Object using RNG :
-	- Wormholes (up & down)
 - Ability to swap tileset for ascii somehow
 - Basic interaction
 	- Shoot
@@ -19,7 +14,6 @@
 	- Use Matter-Energy converter to produce energy
 - Basic AI
 	- Shoot back or run away if shot
-- Run on Android
 - GUI
 	- Status
 	- Log window
@@ -36,6 +30,7 @@
 	
 	
 polish :::
+- Drag-cancel as % of screen resolution
 - smooth camera (a la township?)
 	- smooth zoom limits & exponential zoom
 	- drag still remember even tough camera doesn't pass limit
@@ -51,6 +46,13 @@ polish :::
 	
 	
 DONE :::
+- Load and Save
+- Fixed data for wormholes
+
+
+
+- Run on Android
+- message log when passing over an object
 - fix cargo hold storage volume check with base_attributes & modifed_attributes
 - Drop
 	- Display inventory

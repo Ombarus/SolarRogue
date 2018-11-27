@@ -1,4 +1,5 @@
 Feature :
+- dynamically generated spacy background that act as FoW
 - Spawning :
 	- (near)Empty level should be repopulated after some time
 - Turn / Action based

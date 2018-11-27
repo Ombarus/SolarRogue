@@ -19,7 +19,6 @@ func OnRequestObjectUnload_Callback(obj):
 
 func OnUseAP_Callback(obj, amount):
 	obj.modified_attributes["ap"] = true
-	print("Use AP ", amount)
 	var index = action_list.find(obj)
 	if index < 0:
 		return
@@ -37,11 +36,10 @@ func OnUseAP_Callback(obj, amount):
 		if next_ap != top_ap:
 			break
 		# at equal ap, player always go first
-		if next_obj_action.base_attributes.type == "player":
+		if next_obj_action.get_attrib("type") == "player":
 			obj_action = next_obj_action
 			break
 		
-	print("OnObjTurn Emit ", obj_action.base_attributes.name_id)
 	# OnobjTurn triggers OnUseAp so this is circular.
 	# The only reason it won't crash right away is that the player waits for input
 	# using call_deferred should allow us to "queue" the OnObjTurn and do them in sequence (or even in parallel)
@@ -67,7 +65,6 @@ func NormalizeAP():
 func UpdateLogTitle():
 	if log_window_ref == null:
 		return
-	print(star_date_turn)
 	var title = "Log Stardate "
 	title += str(int(star_date_major))
 	title += "."

@@ -96,7 +96,6 @@ func _ready():
 	self.emit_signal("OnUpdateLayout")
 	
 func init():
-	print("base init")
 	if has_node("width_test"):
 		var font = get_node("width_test").get_font("font")
 		if font == null:

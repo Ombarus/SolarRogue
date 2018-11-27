@@ -4,6 +4,7 @@ export(NodePath) var levelLoaderNode
 export(NodePath) var WeaponAction
 export(NodePath) var GrabAction
 export(NodePath) var DropAction
+export(NodePath) var FTLAction
 
 var playerNode = null
 var levelLoaderRef
@@ -28,9 +29,12 @@ func _ready():
 	action.connect("pressed", self, "Pressed_Grab_Callback")
 	action = get_node(DropAction)
 	action.connect("pressed", self, "Pressed_Drop_Callback")
+	action = get_node(FTLAction)
+	action.connect("pressed", self, "Pressed_FTL_Callback")
 	
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
+	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
 	
 func Pressed_Grab_Callback():
 	if lock_input:
@@ -43,6 +47,19 @@ func Pressed_Drop_Callback():
 		return
 		
 	BehaviorEvents.emit_signal("OnPushGUI", "Inventory", {"object":playerNode, "callback_object":self, "callback_method":"OnDropIventory_Callback"})
+
+func Pressed_FTL_Callback():
+	var wormholes = Globals.LevelLoaderRef.objByType["wormhole"]
+	var wormhole = null
+	for w in wormholes:
+		if w.position == playerNode.position:
+			wormhole = w
+			break
+	if wormhole == null:
+		return
+		
+	print("FTL Drive Spooling up!")
+	BehaviorEvents.emit_signal("OnRequestLevelChange", wormhole)
 
 func OnDropIventory_Callback(dropped_mounts, dropped_cargo):
 	playerNode.init_mounts()
@@ -67,10 +84,36 @@ func OnDropIventory_Callback(dropped_mounts, dropped_cargo):
 	for index in index_to_delete:
 		cargo.remove(index)
 	
+func OnRequestObjectUnload_Callback(obj):
+	if obj.get_attrib("type") == "player":
+		playerNode = null
+	
 func OnObjTurn_Callback(obj):
-	print("Player OnObjTurn_Callback")
-	if obj.base_attributes.type == "player":
+	if obj.get_attrib("type") == "player":
 		lock_input = false
+		
+		var moved = obj.get_attrib("moving.moved")
+		if  moved == true:
+			obj.set_attrib("moving.moved", false)
+			var tile_pos = Globals.LevelLoaderRef.World_to_Tile(obj.position)
+			var content = Globals.LevelLoaderRef.levelTiles[tile_pos.x][tile_pos.y]
+			var filtered = []
+			var wormhole = null
+			for c in content:
+				if c != obj and not c.base_attributes.type in ["prop"]:
+					filtered.push_back(c)
+				if c != obj and c.get_attrib("type") in ["wormhole"]:
+					wormhole = c
+			if filtered.size() == 1:
+				BehaviorEvents.emit_signal("OnLogLine", "Ship in range of " + filtered[0].get_attrib("name_id"))
+			elif filtered.size() > 1:
+				BehaviorEvents.emit_signal("OnLogLine", "Multiple Objects Detected")
+			
+			var btn = get_node(FTLAction)
+			if wormhole != null:
+				btn.visible = true
+			else:
+				btn.visible = false
 	else:
 		lock_input = true
 	
@@ -88,9 +131,23 @@ func OnLevelLoaded_Callback():
 		for w in levelLoaderRef.objByType["wormhole"]:
 			if starting_wormhole == null || w.modified_attributes["depth"] < starting_wormhole.modified_attributes["depth"]:
 				starting_wormhole = w
-				
+		
+		var coord = levelLoaderRef.World_to_Tile(starting_wormhole.position)
+		var template = "data/json/ships/player_default.json"
+		var save = Globals.LevelLoaderRef.cur_save
+		var level_id = Globals.LevelLoaderRef.GetLevelID()
+		if save != null && save.has("player_data"):
+			#cur_save.player_data["src"] = objByType["player"][0].get_attrib("src")
+			#cur_save.player_data["position_x"] = World_to_Tile(objByType["player"][0].position).y
+			#cur_save.player_data["position_y"] = World_to_Tile(objByType["player"][0].position).x
+			#cur_save.player_data["modified_attributes"] = objByType["player"][0].modified_attributes
+			template = save.player_data.src
+			coord = Vector2(save.player_data.position_x, save.player_data.position_y)
+			
 		#TODO: Pop menu for player creation ?
-		playerNode = levelLoaderRef.RequestObject("data/json/ships/player_default.json", levelLoaderRef.World_to_Tile(starting_wormhole.position))
+		playerNode = levelLoaderRef.RequestObject("data/json/ships/player_default.json", coord)
+		if save != null && save.has("player_data"):
+			playerNode.modified_attributes = save.player_data.modified_attributes
 		
 	
 
@@ -158,7 +215,17 @@ func _unhandled_input(event):
 			dir = Vector2(1,-1)
 		if event.scancode == KEY_KP_5:
 			BehaviorEvents.emit_signal("OnUseAP", playerNode, 1.0)
-			BehaviorEvents.emit_signal("OnLogLine", "Cooling reactor (wait)")
+			BehaviorEvents.emit_signal("OnLogLine", "Cooling reactor (wait)")			
+		# GODOT cannot give me the real key that was pressed. Only the physical key
+		# in En-US keyboard layout. There's no way to register a shortcut that's on a modifier (like !@#$%^&*())
+		#TODO: Stay updated on this issue on their git tracker. This is serious enough to make me want to change engine
+		#		On the other end. Being open-source I could probably hack something if it becomes too big an issue
+		#		Check out : Godot_src\godot\scene\gui\text_edit.cpp for how they handle acutal text in input forms
+		#		Check out : Godot_src\godot\core\os\input_event.cpp for how shortcut key inputs are handled
+		if (event.scancode == KEY_PERIOD || event.scancode == KEY_COLON) && event.shift == true:
+			Pressed_FTL_Callback()
+		#print(event.scancode)
+		#print ("key_period : ", KEY_PERIOD, ", key_comma : ", KEY_COLON)
 	if dir != null:
 		BehaviorEvents.emit_signal("OnMovement", playerNode, dir)
 #		_zoom_camera(-1)
@@ -181,12 +248,12 @@ func ProcessGridSelection(pos):
 	var tile_content = Globals.LevelLoaderRef.levelTiles[tile.x][tile.y]
 	var potential_targets = []
 	for obj in tile_content:
-		if obj.base_attributes.has("destroyable") || obj.base_attributes.has("harvestable"):
+		if obj.get_attrib("destroyable") != null || obj.get_attrib("harvestable") != null:
 			potential_targets.push_back(obj)
 	if potential_targets.size() == 1:
 		#TODO: pass the right data for the weapon
 		#TODO: Check if player has an equiped weapon
-		var weapon_json = playerNode.base_attributes.mounts.small_weapon_mount
+		var weapon_json = playerNode.get_attrib("mounts.small_weapon_mount")
 		var weapon_data = Globals.LevelLoaderRef.LoadJSON(weapon_json)
 		BehaviorEvents.emit_signal("OnDealDamage", tile_content[0], playerNode, weapon_data)
 	elif potential_targets.size() == 0:

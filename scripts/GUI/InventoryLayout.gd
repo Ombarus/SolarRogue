@@ -63,10 +63,10 @@ func Init(init_param):
 		mount_obj.push_back({"name_id":name, "count":1, "key":key})
 	get_node("base/vbox/Mounts").content = mount_obj
 	
-	var current_load = 0
-	if obj.modified_attributes.has("cargo"):
-		current_load = obj.modified_attributes.cargo.volume_used
-	var capacity = "(" + str(current_load) + " of " + str(obj.base_attributes.cargo.capacity) + " m³)"
+	var current_load = obj.get_attrib("cargo.volume_used")
+	if current_load == null:
+		current_load = 0
+	var capacity = "(" + str(current_load) + " of " + str(obj.get_attrib("cargo.capacity")) + " m³)"
 	get_node("base/vbox/CargoLabel").bbcode_text = "Cargo " + capacity + " :"
 	
 	var cargo_obj = []

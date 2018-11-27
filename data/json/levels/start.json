@@ -1,5 +1,6 @@
 {
-	"name_id":"data/json/levels/start.json",
+	"name_id":"Wormhole",
+	"level_data":"data/json/levels/start.json",
 	"type":"wormhole",
 	"sprite":"wormhole",
 	"z_order":100,

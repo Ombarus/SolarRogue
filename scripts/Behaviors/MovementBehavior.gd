@@ -8,7 +8,7 @@ func _ready():
 	BehaviorEvents.connect("OnMovement", self, "OnMovement_callback")
 	
 func OnMovement_callback(obj, dir):
-	if not obj.base_attributes.has("moving"):
+	if obj.get_attrib("moving") == null:
 		return
 	var new_pos = obj.position + levelLoaderRef.Tile_to_World(dir)
 	if new_pos.x < 0 || \
@@ -18,9 +18,10 @@ func OnMovement_callback(obj, dir):
 		return
 	#TODO: Collision Detection
 	
-	var move_speed = obj.base_attributes["moving"]["speed"]
-	if obj.modified_attributes.has("wandering") && obj.modified_attributes["wandering"] == true:
-		move_speed = obj.base_attributes["moving"]["wander_speed"]
+	var move_speed = obj.get_attrib("moving.speed")
+	var is_wandering = obj.get_attrib("wandering")
+	if is_wandering != null && is_wandering == true:
+		move_speed = obj.get_attrib("moving.wander_speed")
 	if not (dir.x == 0 || dir.y == 0):
 		# moving diagonal, multiply by 1.4
 		move_speed *= 1.41421356237
@@ -30,6 +31,8 @@ func OnMovement_callback(obj, dir):
 	levelLoaderRef.UpdatePosition(obj, newPos)
 	var angle = Vector2(0.0, 0.0).angle_to_point(dir) - deg2rad(90.0)
 	obj.rotation = angle
+	
+	obj.set_attrib("moving.moved", true)
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
