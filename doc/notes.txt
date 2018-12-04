@@ -1,4 +1,6 @@
 Feature :
+- gdnative for android : https://www.sisik.eu/blog/godot/gd-native-on-android
+- admob for godot : https://github.com/kloder-games/godot-admob
 - dynamically generated spacy background that act as FoW
 - Spawning :
 	- (near)Empty level should be repopulated after some time

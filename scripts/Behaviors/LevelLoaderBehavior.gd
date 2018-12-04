@@ -16,6 +16,11 @@ var objById = {}
 var _sequence_id = 0 # for giving unique name to objects
 var _current_level_data = null
 
+func GetTile(coord):
+	if coord.x >= levelTiles.size() || coord.y >= levelTiles[coord.x].size():
+		return []
+	return levelTiles[coord.x][coord.y]
+
 func GetLevelID():
 	return str(current_depth) + _current_level_data.src
 
@@ -92,8 +97,7 @@ func GenerateLevelFromSave(levelData, savedData):
 	for key in savedData:
 		var data = LoadJSON(savedData[key].src)
 		var coord = Vector2(savedData[key].position_x, savedData[key].position_y)
-		n = CreateAndInitNode(data, coord)
-		n.modified_attributes = savedData[key].modified_attributes
+		n = CreateAndInitNode(data, coord, savedData[key].modified_attributes)
 		
 	
 func GenerateLevelFromTemplate(levelData):
@@ -237,16 +241,16 @@ func Tile_to_World(xy):
 	else:
 		return xy * tileSize
 	
-func RequestObject(path, pos):
+func RequestObject(path, pos, modified_data = null):
 	var data = LoadJSON(path)
-	return CreateAndInitNode(data, pos)
+	return CreateAndInitNode(data, pos, modified_data)
 
 
 #######################################################
 # EVERY OBJECT SHOULD BE CREATED THROUGH HERE
 #######################################################
 
-func CreateAndInitNode(data, pos):
+func CreateAndInitNode(data, pos, modified_data = null):
 	var r = get_node("/root/Root/GameTiles")
 	var scene = load("res://scenes/object.tscn")
 	var n = scene.instance()
@@ -255,17 +259,20 @@ func CreateAndInitNode(data, pos):
 		n.set_name(last[-1])
 	n.position = Tile_to_World(pos)
 	n.base_attributes = data
+	if modified_data != null:
+		n.modified_attributes = modified_data
 	r.call_deferred("add_child", n)
 	levelTiles[ pos.x ][ pos.y ].push_back(n)
 	if data.has("type"):
 		if not objByType.has(data["type"]):
 			objByType[ data["type"] ] = []
 		objByType[ data["type"] ].push_back(n)
-		if data["type"] == "wormhole":
+		if data["type"] == "wormhole" and not n.modified_attributes.has("depth"):
 			n.modified_attributes["depth"] = current_depth + 1
-	n.modified_attributes["unique_id"] = _sequence_id
-	objById[_sequence_id] = n
-	_sequence_id += 1
+	if not n.modified_attributes.has("unique_id"):
+		n.modified_attributes["unique_id"] = _sequence_id
+		_sequence_id += 1
+	objById[n.modified_attributes["unique_id"]] = n
 	BehaviorEvents.emit_signal("OnObjectLoaded", n)
 	return n
 	
@@ -281,6 +288,7 @@ func UpdatePosition(obj, newPos):
 	levelTiles[new_tile.x][new_tile.y].push_back(obj)
 	
 	obj.position = newPos
+	BehaviorEvents.emit_signal("OnPositionUpdated", obj)
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

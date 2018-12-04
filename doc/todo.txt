@@ -1,5 +1,13 @@
 1st step :::
+- Memory system :
+	- Desaturation shader for sprites
+	- Pass modified_attributes init param to CreateNode() method
+	- add a "memory" attribute with "reference_unique_id" and "saturation_value"
+	- have either MemoryBehavior or SpriteBehavior (or both together) create the sprite then set the saturation in the shader
 - Position of player ship when going up/down wormholes
+	- Maybe need to pass some "origin" parameter
+		- origin is null, player should be on top wormhole
+		- origin is X,Y, put player at XY
 - check if assigning array or dictionary copy or reference content in godot
 - Godot : Investigate Localization tab
 - Ability to swap tileset for ascii somehow

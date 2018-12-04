@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://data/shaders/Sprite-desaturate.tres" type="Material" id=1]
+[ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=2]
+
+[node name="Node" type="Node" index="0"]
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+material = ExtResource( 1 )
+position = Vector2( 84.5041, 82.7436 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 128, 128 )
+_sections_unfolded = [ "Material", "Region" ]
+
+[node name="Sprite2" type="Sprite" parent="." index="1"]
+
+material = ExtResource( 1 )
+position = Vector2( 252.632, 81.8633 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 512, 0, 128, 128 )
+_sections_unfolded = [ "Material", "Region" ]
+
+[node name="Sprite3" type="Sprite" parent="." index="2"]
+
+material = ExtResource( 1 )
+position = Vector2( 413.718, 80.1028 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 512, 256, 128, 128 )
+_sections_unfolded = [ "Material", "Region" ]
+
+
