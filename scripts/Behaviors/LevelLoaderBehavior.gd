@@ -251,6 +251,7 @@ func RequestObject(path, pos, modified_data = null):
 #######################################################
 
 func CreateAndInitNode(data, pos, modified_data = null):
+	print("createAndInitNode")
 	var r = get_node("/root/Root/GameTiles")
 	var scene = load("res://scenes/object.tscn")
 	var n = scene.instance()

@@ -1,4 +1,4 @@
-tool
+#tool
 extends Sprite
 
 # class member variables go here, for example:
@@ -26,7 +26,12 @@ func set_num_star(newval):
 	_editor_refresh()
 
 func _editor_refresh():
-	if Engine.editor_hint:
+	var tool_disabled = false
+	if get_parent() != null and get_parent().has_method("tool_disabled") and get_parent().tool_disabled() == true:
+		tool_disabled = true
+	if get_parent() == null:
+		tool_disabled = true
+	if Engine.editor_hint and not tool_disabled:
 		_refresh()
 	
 func _refresh():		

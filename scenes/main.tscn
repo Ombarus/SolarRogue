@@ -88,7 +88,7 @@ round_precision = 8
 
 [node name="Lower-Right_Bound" type="Node2D" parent="." index="2"]
 
-position = Vector2( -10225.7, -10245.2 )
+position = Vector2( -10227.7, -10223.2 )
 scale = Vector2( -12800, -12800 )
 _sections_unfolded = [ "Transform" ]
 

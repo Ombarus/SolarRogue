@@ -121,8 +121,8 @@ func _UpdateMemory(obj, scan_radius):
 		#TODO: need to remove unique_id from obj.modified_attributes
 		#TODO: need to generate "memory" modified_attributes component (with 0~1 saturation value & reference unique_id)
 		# no better way to deep copy a dictionary I think
-		var modified_copy = JSON.parse(to_json(obj.modified_attributes))
-		Globals.LevelLoaderRef.RequestObject(obj.get_attrib("src"), obj_tile, obj.modified_attributes)
+		#var modified_copy = JSON.parse(to_json(obj.modified_attributes))
+		#Globals.LevelLoaderRef.RequestObject(obj.get_attrib("src"), obj_tile, obj.modified_attributes)
 	else:
 		obj.visible = true
 	
