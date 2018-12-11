@@ -13,6 +13,8 @@ func get_attrib(path):
 	for s in splices:
 		if sub.has(s):
 			sub = sub[s]
+			if typeof(sub) == TYPE_DICTIONARY and sub.has("disabled") and sub["disabled"] == true:
+				return null
 		else:
 			sub = null
 			break
@@ -22,6 +24,8 @@ func get_attrib(path):
 	for s in splices:
 		if sub.has(s):
 			sub = sub[s]
+			if typeof(sub) == TYPE_DICTIONARY and sub.has("disabled") and sub["disabled"] == true:
+				return null
 		else:
 			sub = null
 			break

@@ -1,32 +1,35 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://data/textures/procedural-star-bg.png" type="Texture" id=1]
-[ext_resource path="res://scripts/Behaviors/UIManager.gd" type="Script" id=2]
-[ext_resource path="res://scripts/Behaviors/APBehavior.gd" type="Script" id=3]
-[ext_resource path="res://scripts/Behaviors/SpriteLoaderBehavior.gd" type="Script" id=4]
-[ext_resource path="res://scripts/Behaviors/PlayerBehavior.gd" type="Script" id=5]
-[ext_resource path="res://scripts/Behaviors/AIBehavior.gd" type="Script" id=6]
-[ext_resource path="res://scripts/Behaviors/DamageBehavior.gd" type="Script" id=7]
-[ext_resource path="res://scripts/Behaviors/MemoryBehavior.gd" type="Script" id=8]
-[ext_resource path="res://scripts/Behaviors/LevelLoaderBehavior.gd" type="Script" id=9]
-[ext_resource path="res://scripts/Behaviors/MovementBehavior.gd" type="Script" id=10]
-[ext_resource path="res://scripts/Behaviors/InventoryBehavior.gd" type="Script" id=11]
-[ext_resource path="res://scripts/CamControl.gd" type="Script" id=12]
-[ext_resource path="res://scripts/GUI/GUILayoutBase.gd" type="Script" id=13]
-[ext_resource path="res://scripts/GUI/GridDisplay.gd" type="Script" id=14]
-[ext_resource path="res://scripts/GUI/LogSystem.gd" type="Script" id=15]
-[ext_resource path="res://scenes/GUI/StringContentDialog.tscn" type="PackedScene" id=16]
-[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=17]
-[ext_resource path="res://data/Weapon_ShortCut.tres" type="ShortCut" id=18]
-[ext_resource path="res://scenes/GUI/Dialogs/SelectableInventory.tscn" type="PackedScene" id=19]
-[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=20]
-[ext_resource path="res://scenes/tileset_source/planet_b.tscn" type="PackedScene" id=21]
-[ext_resource path="res://scenes/tileset_source/sun.tscn" type="PackedScene" id=22]
-[ext_resource path="res://scenes/tileset_source/probe.tscn" type="PackedScene" id=23]
-[ext_resource path="res://scenes/tileset_source/wormhole.tscn" type="PackedScene" id=24]
-[ext_resource path="res://scenes/tileset_source/shuttle.tscn" type="PackedScene" id=25]
-[ext_resource path="res://scenes/tileset_source/planet_a.tscn" type="PackedScene" id=26]
-[ext_resource path="res://scenes/tileset_source/planet_c.tscn" type="PackedScene" id=27]
+[ext_resource path="res://data/shaders/fow_mask.tres" type="Material" id=2]
+[ext_resource path="res://scripts/Behaviors/UIManager.gd" type="Script" id=3]
+[ext_resource path="res://scripts/Behaviors/APBehavior.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Behaviors/SpriteLoaderBehavior.gd" type="Script" id=5]
+[ext_resource path="res://data/shaders/Sprite-desaturate.tres" type="Material" id=6]
+[ext_resource path="res://scripts/Behaviors/PlayerBehavior.gd" type="Script" id=7]
+[ext_resource path="res://scripts/Behaviors/AIBehavior.gd" type="Script" id=8]
+[ext_resource path="res://scripts/Behaviors/DamageBehavior.gd" type="Script" id=9]
+[ext_resource path="res://scripts/Behaviors/MemoryBehavior.gd" type="Script" id=10]
+[ext_resource path="res://scenes/Scanner.gd" type="Script" id=11]
+[ext_resource path="res://scripts/Behaviors/LevelLoaderBehavior.gd" type="Script" id=12]
+[ext_resource path="res://scripts/Behaviors/MovementBehavior.gd" type="Script" id=13]
+[ext_resource path="res://scripts/Behaviors/InventoryBehavior.gd" type="Script" id=14]
+[ext_resource path="res://scripts/CamControl.gd" type="Script" id=15]
+[ext_resource path="res://scripts/GUI/GUILayoutBase.gd" type="Script" id=16]
+[ext_resource path="res://scripts/GUI/GridDisplay.gd" type="Script" id=17]
+[ext_resource path="res://scripts/GUI/LogSystem.gd" type="Script" id=18]
+[ext_resource path="res://scenes/GUI/StringContentDialog.tscn" type="PackedScene" id=19]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=20]
+[ext_resource path="res://data/Weapon_ShortCut.tres" type="ShortCut" id=21]
+[ext_resource path="res://scenes/GUI/Dialogs/SelectableInventory.tscn" type="PackedScene" id=22]
+[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=23]
+[ext_resource path="res://scenes/tileset_source/planet_b.tscn" type="PackedScene" id=24]
+[ext_resource path="res://scenes/tileset_source/sun.tscn" type="PackedScene" id=25]
+[ext_resource path="res://scenes/tileset_source/probe.tscn" type="PackedScene" id=26]
+[ext_resource path="res://scenes/tileset_source/wormhole.tscn" type="PackedScene" id=27]
+[ext_resource path="res://scenes/tileset_source/shuttle.tscn" type="PackedScene" id=28]
+[ext_resource path="res://scenes/tileset_source/planet_a.tscn" type="PackedScene" id=29]
+[ext_resource path="res://scenes/tileset_source/planet_c.tscn" type="PackedScene" id=30]
 
 [sub_resource type="InputEventKey" id=1]
 
@@ -62,7 +65,7 @@ echo = false
 
 shortcut = SubResource( 3 )
 
-[node name="Root" type="Node"]
+[node name="Root" type="Node" index="0"]
 
 [node name="BG" type="Sprite" parent="." index="0"]
 
@@ -71,6 +74,13 @@ texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 10240, 10240 )
 _sections_unfolded = [ "Region", "Transform" ]
+
+[node name="Occlusion" type="Sprite" parent="BG" index="0"]
+
+material = ExtResource( 2 )
+position = Vector2( -64, -64 )
+scale = Vector2( 128, 128 )
+_sections_unfolded = [ "Material", "Transform" ]
 
 [node name="Upper-Left-Bound" type="Node2D" parent="." index="1"]
 
@@ -96,22 +106,23 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="UIManager" type="Node" parent="Behaviors" index="0"]
 
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 
 [node name="AP" type="Node" parent="Behaviors" index="1"]
 
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 LogWindow = NodePath("../../Camera-GUI/HUD/Log/LogWindow")
 day_length = 100
 
 [node name="SpriteLoader" type="Node" parent="Behaviors" index="2"]
 
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 levelLoaderNode = NodePath("../LevelLoader")
+ghost_material = ExtResource( 6 )
 
 [node name="Player" type="Node" parent="Behaviors" index="3"]
 
-script = ExtResource( 5 )
+script = ExtResource( 7 )
 levelLoaderNode = NodePath("../LevelLoader")
 WeaponAction = NodePath("../../Camera-GUI/HUD/Buttons/Weapon")
 GrabAction = NodePath("../../Camera-GUI/HUD/Buttons/Grab")
@@ -120,32 +131,37 @@ FTLAction = NodePath("../../Camera-GUI/HUD/Buttons/Wormhole")
 
 [node name="AI" type="Node" parent="Behaviors" index="4"]
 
-script = ExtResource( 6 )
+script = ExtResource( 8 )
 levelLoaderNode = NodePath("../LevelLoader")
 
 [node name="Damage" type="Node" parent="Behaviors" index="5"]
 
-script = ExtResource( 7 )
+script = ExtResource( 9 )
 
 [node name="Memory" type="Node" parent="Behaviors" index="6"]
 
-script = ExtResource( 8 )
+script = ExtResource( 10 )
+Occluder = NodePath("../../BG/Occlusion")
 
-[node name="LevelLoader" type="Node" parent="Behaviors" index="7"]
+[node name="Scanner" type="Node" parent="Behaviors" index="7"]
 
-script = ExtResource( 9 )
+script = ExtResource( 11 )
+
+[node name="LevelLoader" type="Node" parent="Behaviors" index="8"]
+
+script = ExtResource( 12 )
 startLevel = "data/json/levels/start.json"
 levelSize = Vector2( 80, 80 )
 tileSize = 128
 
-[node name="Movement" type="Node" parent="Behaviors" index="8"]
+[node name="Movement" type="Node" parent="Behaviors" index="9"]
 
-script = ExtResource( 10 )
+script = ExtResource( 13 )
 levelLoaderNode = NodePath("../LevelLoader")
 
-[node name="Inventory" type="Node" parent="Behaviors" index="9"]
+[node name="Inventory" type="Node" parent="Behaviors" index="10"]
 
-script = ExtResource( 11 )
+script = ExtResource( 14 )
 
 [node name="Camera2D" type="Camera2D" parent="." index="4"]
 
@@ -172,7 +188,7 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-script = ExtResource( 12 )
+script = ExtResource( 15 )
 _sections_unfolded = [ "Editor", "Limit" ]
 max_zoom = 4.0
 min_zoom = 0.25
@@ -194,7 +210,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 13 )
+script = ExtResource( 16 )
 _sections_unfolded = [ "Mouse", "Visibility" ]
 
 [node name="Display" type="Control" parent="World-GUI/GridPattern" index="0"]
@@ -209,7 +225,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 14 )
+script = ExtResource( 17 )
 _sections_unfolded = [ "Mouse", "Rect", "Visibility" ]
 line_color = Color( 1, 0, 0, 0.352941 )
 
@@ -236,7 +252,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 13 )
+script = ExtResource( 16 )
 _sections_unfolded = [ "Mouse" ]
 
 [node name="Log" type="Control" parent="Camera-GUI/HUD" index="0"]
@@ -252,10 +268,10 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 15 )
+script = ExtResource( 18 )
 _sections_unfolded = [ "Mouse" ]
 
-[node name="LogWindow" parent="Camera-GUI/HUD/Log" index="0" instance=ExtResource( 16 )]
+[node name="LogWindow" parent="Camera-GUI/HUD/Log" index="0" instance=ExtResource( 19 )]
 
 anchor_top = 1.0
 anchor_right = 1.0
@@ -281,7 +297,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Mouse" ]
 
-[node name="Weapon" parent="Camera-GUI/HUD/Buttons" index="0" instance=ExtResource( 17 )]
+[node name="Weapon" parent="Camera-GUI/HUD/Buttons" index="0" instance=ExtResource( 20 )]
 
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -291,9 +307,9 @@ margin_right = 124.0
 margin_bottom = -140.0
 mouse_filter = 2
 Text = "[w]eapon"
-Action = ExtResource( 18 )
+Action = ExtResource( 21 )
 
-[node name="Grab" parent="Camera-GUI/HUD/Buttons" index="1" instance=ExtResource( 17 )]
+[node name="Grab" parent="Camera-GUI/HUD/Buttons" index="1" instance=ExtResource( 20 )]
 
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -304,7 +320,7 @@ margin_bottom = -232.0
 Text = "[g]rab"
 Action = SubResource( 2 )
 
-[node name="Wormhole" parent="Camera-GUI/HUD/Buttons" index="2" instance=ExtResource( 17 )]
+[node name="Wormhole" parent="Camera-GUI/HUD/Buttons" index="2" instance=ExtResource( 20 )]
 
 anchor_left = 1.0
 anchor_top = 1.0
@@ -316,7 +332,7 @@ margin_right = 0.0
 margin_bottom = -141.0
 Text = "[>]FTL Back"
 
-[node name="Drop" parent="Camera-GUI/HUD/Buttons" index="3" instance=ExtResource( 17 )]
+[node name="Drop" parent="Camera-GUI/HUD/Buttons" index="3" instance=ExtResource( 20 )]
 
 anchor_left = 1.0
 anchor_top = 1.0
@@ -329,7 +345,7 @@ margin_bottom = -223.0
 Text = "[d]rop"
 Action = SubResource( 4 )
 
-[node name="Status" parent="Camera-GUI/HUD" index="2" instance=ExtResource( 16 )]
+[node name="Status" parent="Camera-GUI/HUD" index="2" instance=ExtResource( 19 )]
 
 anchor_right = 1.0
 margin_right = 0.0
@@ -337,53 +353,53 @@ margin_bottom = 62.0
 mouse_filter = 2
 content = "The Maveric Hull : [color=lime]==========[/color] Energy : [color=yellow]25000[/color] Shield : Up"
 
-[node name="Inventory" parent="Camera-GUI" index="1" instance=ExtResource( 19 )]
+[node name="Inventory" parent="Camera-GUI" index="1" instance=ExtResource( 22 )]
 
 visible = false
 
 [node name="DEBUG" type="Node2D" parent="." index="8"]
 
 visible = false
-script = ExtResource( 20 )
+script = ExtResource( 23 )
 
 [node name="temp" type="Node2D" parent="." index="9"]
 
 visible = false
 position = Vector2( 689.19, 217.317 )
 
-[node name="planet_b" parent="temp" index="0" instance=ExtResource( 21 )]
+[node name="planet_b" parent="temp" index="0" instance=ExtResource( 24 )]
 
 position = Vector2( -36.157, -5.83176 )
 
-[node name="sun" parent="temp" index="1" instance=ExtResource( 22 )]
+[node name="sun" parent="temp" index="1" instance=ExtResource( 25 )]
 
 position = Vector2( 46.7009, 240.177 )
 
-[node name="probe" parent="temp" index="2" instance=ExtResource( 23 )]
+[node name="probe" parent="temp" index="2" instance=ExtResource( 26 )]
 
 position = Vector2( -204.268, 191.962 )
 rotation = -0.785398
 _sections_unfolded = [ "Transform" ]
 
-[node name="wormhole" parent="temp" index="3" instance=ExtResource( 24 )]
+[node name="wormhole" parent="temp" index="3" instance=ExtResource( 27 )]
 
 position = Vector2( -362.624, -8.63391 )
 
-[node name="shuttle" parent="temp" index="4" instance=ExtResource( 25 )]
+[node name="shuttle" parent="temp" index="4" instance=ExtResource( 28 )]
 
 position = Vector2( -33.8243, -8.16446 )
 
-[node name="shuttle2" parent="temp" index="5" instance=ExtResource( 25 )]
+[node name="shuttle2" parent="temp" index="5" instance=ExtResource( 28 )]
 
 position = Vector2( -440.695, -105.973 )
 rotation = 1.5708
 _sections_unfolded = [ "Transform" ]
 
-[node name="planet_a" parent="temp" index="6" instance=ExtResource( 26 )]
+[node name="planet_a" parent="temp" index="6" instance=ExtResource( 29 )]
 
 position = Vector2( -580.844, -101.473 )
 
-[node name="planet_c" parent="temp" index="7" instance=ExtResource( 27 )]
+[node name="planet_c" parent="temp" index="7" instance=ExtResource( 30 )]
 
 position = Vector2( 307.917, -99.1401 )
 

@@ -63,8 +63,9 @@ func _editor_refresh():
 		Refresh()
 
 func _ready():
-	Refresh()
-	pass
+	if Engine.editor_hint and debug_refresh == true:
+		return
+	#Refresh()
 
 func Refresh():
 	seed(random_seed)

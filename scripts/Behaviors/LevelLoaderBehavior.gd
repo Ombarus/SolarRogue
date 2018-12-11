@@ -16,6 +16,15 @@ var objById = {}
 var _sequence_id = 0 # for giving unique name to objects
 var _current_level_data = null
 
+func GetCurrentLevelData():
+	return _current_level_data
+
+func GetObjectById(id):
+	if id in objById:
+		return objById[id]
+	else:
+		return null
+
 func GetTile(coord):
 	if coord.x >= levelTiles.size() || coord.y >= levelTiles[coord.x].size():
 		return []
@@ -146,6 +155,7 @@ func _GatherSaveData():
 		output[key]["src"] = objById[key].get_attrib("src")
 		output[key]["position_x"] = World_to_Tile(objById[key].position).x
 		output[key]["position_y"] = World_to_Tile(objById[key].position).y
+		# TODO: Add rotation ! (if ! 0 ?)
 		output[key]["modified_attributes"] = objById[key].modified_attributes
 		
 	return output
@@ -251,7 +261,6 @@ func RequestObject(path, pos, modified_data = null):
 #######################################################
 
 func CreateAndInitNode(data, pos, modified_data = null):
-	print("createAndInitNode")
 	var r = get_node("/root/Root/GameTiles")
 	var scene = load("res://scenes/object.tscn")
 	var n = scene.instance()

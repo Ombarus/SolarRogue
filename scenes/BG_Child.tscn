@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/StarGenerator.gd" type="Script" id=1]
 
-[node name="BG" type="Sprite" index="0"]
+[node name="BG" type="Sprite"]
 
 position = Vector2( 128, 128 )
 script = ExtResource( 1 )

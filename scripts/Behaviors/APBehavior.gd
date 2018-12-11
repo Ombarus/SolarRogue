@@ -74,10 +74,10 @@ func UpdateLogTitle():
 	log_window_ref.title = title
 
 func OnObjectLoaded_Callback(obj):
-	var attrib = obj.base_attributes
-	if attrib.has("action_point"):
-		var start_point = attrib.action_point
-		obj.modified_attributes["action_point"] = start_point
+	var attrib = obj.get_attrib("action_point")
+	if attrib != null:
+		var start_point = attrib
+		obj.set_attrib("action_point", start_point)
 		Insert(obj, start_point)
 		
 	

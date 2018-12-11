@@ -13,6 +13,7 @@ signal OnLogLine(text)
 signal OnDealDamage(target, shooter, weapon_data)
 signal OnDamageTaken(target, shooter)
 signal OnPickup(picker, picked)
+signal OnScannerUpdated(obj)
 
 signal OnGUILoaded(name, obj)
 signal OnPushGUI(name, init_param)

@@ -12,6 +12,6 @@
 		"unequip_ap":3.0
 	},
 	"scanning": {
-		"radius":3
+		"radius":2
 	}
 }

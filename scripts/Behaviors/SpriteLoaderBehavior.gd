@@ -1,6 +1,7 @@
 extends Node
 
 export(NodePath) var levelLoaderNode
+export(Material) var ghost_material
 #export(NodePath) var TileNode
 
 #var tileNodeRef
@@ -13,17 +14,20 @@ func _ready():
 
 func OnObjectLoaded_Callback(obj):
 	var attrib = obj.base_attributes
+	var node = null
 	if attrib.has("sprite"):
 		#TODO: cache load in a dictionary ?
 		var scene = load("res://scenes/tileset_source/" + attrib["sprite"] + ".tscn")
-		var node = scene.instance()
-		obj.call_deferred("add_child", node)
+		node = scene.instance()
 	if attrib.has("sprite_choice"):
 		# TODO: handle know/unknown (multiple look for potions in nethack, but always the same look in a given game)
 		var x = int(randf() * attrib["sprite_choice"].size())
 		var scene = load("res://scenes/tileset_source/" + attrib["sprite_choice"][x] + ".tscn")
-		var node = scene.instance()
-		obj.call_deferred("add_child", node)
+		node = scene.instance()
+		
+	obj.call_deferred("add_child", node)
+	if obj.get_attrib("ghost_memory") != null:
+		node.material = ghost_material
 
 func CanDrawSprite(sprite_data, pos):
 	var current_obj_at_pos = levelLoaderRef.GetTileData(pos)
