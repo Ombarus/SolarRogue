@@ -34,7 +34,7 @@ func ExecuteFullSweep():
 	for key in Globals.LevelLoaderRef.objById:
 		var obj = Globals.LevelLoaderRef.objById[key]
 		var disable_fow = Globals.LevelLoaderRef.GetCurrentLevelData().has("fully_mapped") and Globals.LevelLoaderRef.GetCurrentLevelData().fully_mapped == true
-		if obj in player_scan or obj == _playerNode or disable_fow:
+		if key in player_scan or obj == _playerNode or obj.get_attrib("ghost_memory") != null or disable_fow:
 			obj.visible = true
 		else:
 			obj.visible = false
@@ -112,7 +112,7 @@ func OnScannerUpdated_Callback(obj):
 	
 	for id in new_out_objs:
 		var o = Globals.LevelLoaderRef.GetObjectById(id)
-		if o != null:
+		if o != null and o.get_attrib("ghost_memory") == null:
 			# CREATE A GHOST
 			o.visible = false
 			# no better way to deep copy a dictionary I think

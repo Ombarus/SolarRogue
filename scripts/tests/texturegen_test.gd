@@ -1,4 +1,4 @@
-#tool
+tool
 extends Sprite
 
 export(Vector2) var size = Vector2(256,256) setget set_size

@@ -1,15 +1,16 @@
 1st step :::
-- Memory system :
-	- Desaturation shader for sprites
-	- Pass modified_attributes init param to CreateNode() method
-	- add a "memory" attribute with "reference_unique_id" and "saturation_value"
-	- have either MemoryBehavior or SpriteBehavior (or both together) create the sprite then set the saturation in the shader
+- Memory / scanner issues when going up & down levels (scanner reference deleted objects ? yet it should be clearing it's list when an object is deleted... need investigating)
 - Position of player ship when going up/down wormholes
 	- Maybe need to pass some "origin" parameter
 		- origin is null, player should be on top wormhole
 		- origin is X,Y, put player at XY
 - check if assigning array or dictionary copy or reference content in godot
 - Godot : Investigate Localization tab
+	- You can link CSVs in localization, replace certain resources (like textures) with others and even change the project name based on choosen locale
+	- CSVs file are automatically converted into localization files
+		- use tr() method to get translation from keyboard
+		- button labels and such automatically check if text is a key and translate
+		- for format godot support stuff like "bleh {id}".format({"id":"hello world"})
 - Ability to swap tileset for ascii somehow
 - Basic interaction
 	- Shoot
@@ -21,7 +22,7 @@
 		- Give detailed description of planet (rich but hard to mine, poor but easy to mine, etc)
 	- Use Matter-Energy converter to produce energy
 - Basic AI
-	- Shoot back or run away if shot
+	- Shoot back
 - GUI
 	- Status
 	- Log window
@@ -29,10 +30,6 @@
 	- Layouts
 		- modal windows ?
 		- Hiding control when asking question ?
-- FoW (Fog of War)
-	- "remembered" sprite appearance
-	- Not visible sprite
-	- Fog of War "look"
 
 	
 	
@@ -54,6 +51,16 @@ polish :::
 	
 	
 DONE :::
+- Starting wormhole is invisible because of memory... why ?
+- FoW (Fog of War)
+	- "remembered" sprite appearance
+	- Not visible sprite
+	- Fog of War "look"
+- Memory system :
+	- Desaturation shader for sprites
+	- Pass modified_attributes init param to CreateNode() method
+	- add a "memory" attribute with "reference_unique_id" and "saturation_value"
+	- have either MemoryBehavior or SpriteBehavior (or both together) create the sprite then set the saturation in the shader
 - Load and Save
 - Fixed data for wormholes
 

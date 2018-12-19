@@ -7,6 +7,10 @@ func _ready():
 	BehaviorEvents.connect("OnPositionUpdated", self, "OnPositionUpdated_Callback")
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
+	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
+	
+func OnLevelLoaded_Callback():
+	_up_to_date = false
 
 func OnPositionUpdated_Callback(obj):
 	_up_to_date = false
@@ -22,6 +26,8 @@ func OnRequestObjectUnload_Callback(obj):
 func _process(delta):
 	if _up_to_date == true:
 		return
+		
+	_up_to_date = true
 		
 	for id in _node_id_scanner:
 		var obj = Globals.LevelLoaderRef.GetObjectById(id)

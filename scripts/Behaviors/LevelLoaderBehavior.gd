@@ -86,6 +86,9 @@ func ExecuteLoadLevel(levelData):
 	if cur_save != null && cur_save.size() > 0:
 		var level_id = str(current_depth) + levelData.src
 		if cur_save.modified_levels.has(level_id):
+			startLevel = cur_save.current_level_src
+			current_depth = cur_save.depth
+			_sequence_id = cur_save.current_sequence_id
 			GenerateLevelFromSave(levelData, cur_save.modified_levels[level_id])
 			
 			loaded = true
@@ -190,6 +193,7 @@ func SaveState(level_data):
 
 func OnRequestLevelChange_Callback(wormhole):
 	SaveState(_current_level_data)
+	# should be defferred !
 	ExecuteLoadLevel(wormhole.base_attributes)
 
 func OnRequestObjectUnload_Callback(obj):

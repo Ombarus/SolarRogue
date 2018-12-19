@@ -145,9 +145,12 @@ func OnLevelLoaded_Callback():
 			coord = Vector2(save.player_data.position_x, save.player_data.position_y)
 			
 		#TODO: Pop menu for player creation ?
-		playerNode = levelLoaderRef.RequestObject("data/json/ships/player_default.json", coord)
+		var modififed_attrib = null
 		if save != null && save.has("player_data"):
-			playerNode.modified_attributes = save.player_data.modified_attributes
+			modififed_attrib = save.player_data.modified_attributes
+		# Modified_attrib must be passed during request so that proper IDs can be locked in objByID
+		playerNode = levelLoaderRef.RequestObject("data/json/ships/player_default.json", coord, modififed_attrib)
+		
 		
 	
 

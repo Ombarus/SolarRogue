@@ -1,4 +1,4 @@
-#tool
+tool
 extends Sprite
 
 # class member variables go here, for example:
