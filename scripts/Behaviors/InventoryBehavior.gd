@@ -6,6 +6,9 @@ extends Node
 
 func _ready():
 	BehaviorEvents.connect("OnPickup", self, "OnPickup_Callback")
+	BehaviorEvents.connect("OnDropCargo", self, "OnDropCargo_Callback")
+	BehaviorEvents.connect("OnDropMount", self, "OnDropMount_Callback")
+	BehaviorEvents.connect("OnAddItem", self, "OnAddItem_Callback")
 	
 	
 func OnPickup_Callback(picker, picked):
@@ -51,10 +54,27 @@ func OnPickup_Callback(picker, picked):
 		obj = null
 	filtered_obj.clear() # the objects have been destroyed, just want to make sure I don't forget about it
 	
-	
-	
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func OnDropCargo_Callback(dropper, item_id):
+	var cargo = dropper.get_attrib("cargo.content")
+	var index_to_delete = []
+	for item_data in cargo:
+		if item_data.src == item_id:
+			if item_data.count > 1:
+				item_data.count -= 1
+			else:
+				index_to_delete.push_back(i)
+			Globals.LevelLoaderRef.RequestObject(item_data.src, Globals.LevelLoaderRef.World_to_Tile(dropper.position))
+					
+	for index in index_to_delete:
+		cargo.remove(index)
+	
+func OnDropMount_Callback(dropper, item_id):
+	var equips = dropper.get_attrib("mounts")
+	for equip in equips:
+		if item_id == equip:
+			Globals.LevelLoaderRef.RequestObject(dropper.get_attrib("mounts." + equip), Globals.LevelLoaderRef.World_to_Tile(dropper.position))
+			dropper.set_attrib("mounts." + equip, "")
+
+func OnAddItem_Callback():
+	pass

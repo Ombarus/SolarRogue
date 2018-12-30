@@ -4,6 +4,7 @@ export(NodePath) var levelLoaderNode
 export(NodePath) var WeaponAction
 export(NodePath) var GrabAction
 export(NodePath) var DropAction
+export(NodePath) var CraftingAction
 export(NodePath) var FTLAction
 
 var playerNode = null
@@ -18,6 +19,14 @@ enum INPUT_STATE {
 }
 var _input_state = INPUT_STATE.hud
 
+enum PLAYER_ORIGIN {
+	wormhole,
+	random,
+	saved
+}
+var _current_origin = PLAYER_ORIGIN.saved
+var _wormhole_src = null # for positioning the player when he goes up or down
+
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
@@ -31,10 +40,29 @@ func _ready():
 	action.connect("pressed", self, "Pressed_Drop_Callback")
 	action = get_node(FTLAction)
 	action.connect("pressed", self, "Pressed_FTL_Callback")
+	action = get_node(CraftingAction)
+	action.connect("pressed", self, "Pressed_Crafting_Callback")
 	
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
+	
+func Pressed_Crafting_Callback():
+	if lock_input:
+		return
+	
+	BehaviorEvents.emit_signal("OnPushGUI", "Converter", {"object":playerNode, "callback_object":self, "callback_method":"OnCraft_Callback"})
+	
+func OnCraft_Callback(recipe_data, input_list):
+	var craftingSystem = get_parent().get_node("Crafting")
+	var result = craftingSystem.Craft(recipe_data, input_list, playerNode)
+	if result == Globals.CRAFT_RESULT.success:
+		BehaviorEvents.emit_signal("OnLogLine", "Production sucessful")
+	elif result == Globals.CRAFT_RESULT.not_enough_resources:
+		BehaviorEvents.emit_signal("OnLogLine", "Missing resources")
+	else:
+		BehaviorEvents.emit_signal("OnLogLine", "Not enough energy")
+		
 	
 func Pressed_Grab_Callback():
 	if lock_input:
@@ -57,32 +85,21 @@ func Pressed_FTL_Callback():
 			break
 	if wormhole == null:
 		return
+	
+	var cur_depth = Globals.LevelLoaderRef.current_depth
+	
+	_current_origin = PLAYER_ORIGIN.wormhole
+	_wormhole_src = Globals.LevelLoaderRef._current_level_data.src
 		
-	print("FTL Drive Spooling up!")
 	BehaviorEvents.emit_signal("OnRequestLevelChange", wormhole)
 
 func OnDropIventory_Callback(dropped_mounts, dropped_cargo):
 	playerNode.init_mounts()
-	var equips = playerNode.modified_attributes.mounts
 	for drop_data in dropped_mounts:
-		for equip in equips:
-			if drop_data == equip:
-				Globals.LevelLoaderRef.RequestObject(playerNode.modified_attributes.mounts[equip], Globals.LevelLoaderRef.World_to_Tile(playerNode.position))
-				playerNode.modified_attributes.mounts[equip] = ""
-				
-	var cargo = playerNode.modified_attributes.cargo.content
-	var index_to_delete = []
+		BehaviorEvents.emit_signal("OnDropMount", playerNode, drop_data)
+		
 	for drop_data in dropped_cargo:
-		for i in range(cargo.size()):
-			if cargo[i].src == drop_data.src:
-				if cargo[i].count > 1:
-					cargo[i].count -= 1
-				else:
-					index_to_delete.push_back(i)
-				Globals.LevelLoaderRef.RequestObject(cargo[i].src, Globals.LevelLoaderRef.World_to_Tile(playerNode.position))
-					
-	for index in index_to_delete:
-		cargo.remove(index)
+		BehaviorEvents.emit_signal("OnDropCargo", playerNode, drop_data)
 	
 func OnRequestObjectUnload_Callback(obj):
 	if obj.get_attrib("type") == "player":
@@ -127,22 +144,38 @@ func Pressed_Weapon_Callback():
 	
 func OnLevelLoaded_Callback():
 	if playerNode == null:
-		var starting_wormhole = null
-		for w in levelLoaderRef.objByType["wormhole"]:
-			if starting_wormhole == null || w.modified_attributes["depth"] < starting_wormhole.modified_attributes["depth"]:
-				starting_wormhole = w
 		
-		var coord = levelLoaderRef.World_to_Tile(starting_wormhole.position)
-		var template = "data/json/ships/player_default.json"
 		var save = Globals.LevelLoaderRef.cur_save
+		if save == null or not save.has("player_data"):
+			_current_origin = PLAYER_ORIGIN.wormhole
+		
+		var template = "data/json/ships/player_default.json"
 		var level_id = Globals.LevelLoaderRef.GetLevelID()
-		if save != null && save.has("player_data"):
+		var coord
+		
+		if _current_origin == PLAYER_ORIGIN.random:
+			var x = int(randf() * Globals.LevelLoaderRef.levelSize.x)
+			var y = int(randf() * Globals.LevelLoaderRef.levelSize.y)
+			coord = Vector2(x, y)
+		
+		if _current_origin == PLAYER_ORIGIN.saved && save != null && save.has("player_data"):
 			#cur_save.player_data["src"] = objByType["player"][0].get_attrib("src")
 			#cur_save.player_data["position_x"] = World_to_Tile(objByType["player"][0].position).y
 			#cur_save.player_data["position_y"] = World_to_Tile(objByType["player"][0].position).x
 			#cur_save.player_data["modified_attributes"] = objByType["player"][0].modified_attributes
 			template = save.player_data.src
 			coord = Vector2(save.player_data.position_x, save.player_data.position_y)
+		
+		var starting_wormhole = null
+		if _current_origin == PLAYER_ORIGIN.wormhole:
+			
+			for w in levelLoaderRef.objByType["wormhole"]:
+				var is_src_wormhole = _wormhole_src != null && _wormhole_src == w.get_attrib("src")
+				var is_top_wormhole = starting_wormhole == null || w.modified_attributes["depth"] < starting_wormhole.modified_attributes["depth"]
+				if (_wormhole_src == null && is_top_wormhole) || (is_src_wormhole):
+					starting_wormhole = w
+			
+			coord = levelLoaderRef.World_to_Tile(starting_wormhole.position)
 			
 		#TODO: Pop menu for player creation ?
 		var modififed_attrib = null
@@ -151,7 +184,8 @@ func OnLevelLoaded_Callback():
 		# Modified_attrib must be passed during request so that proper IDs can be locked in objByID
 		playerNode = levelLoaderRef.RequestObject("data/json/ships/player_default.json", coord, modififed_attrib)
 		
-		
+		# always default to saved position
+		_current_origin = PLAYER_ORIGIN.saved
 	
 
 

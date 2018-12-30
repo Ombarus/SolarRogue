@@ -1,9 +1,14 @@
 1st step :::
-- Memory / scanner issues when going up & down levels (scanner reference deleted objects ? yet it should be clearing it's list when an object is deleted... need investigating)
-- Position of player ship when going up/down wormholes
-	- Maybe need to pass some "origin" parameter
-		- origin is null, player should be on top wormhole
-		- origin is X,Y, put player at XY
+- Make converter button invisible if no converter equiped
+- Make energy work
+	- Update hull and energy in status bar
+	- energy to matter converter
+		- design (crafting system ? simple change hydrogen into energy?)
+		- implement new UI for crafting
+	- Assign energy for actions
+	- Use energy when doing actions
+	- Death if no hull or energy
+- Equip items
 - check if assigning array or dictionary copy or reference content in godot
 - Godot : Investigate Localization tab
 	- You can link CSVs in localization, replace certain resources (like textures) with others and even change the project name based on choosen locale
@@ -51,6 +56,11 @@ polish :::
 	
 	
 DONE :::
+- Position of player ship when going up/down wormholes (In the end I just have an enum. Hackish but couldn't figure out a better way)
+	- Maybe need to pass some "origin" parameter
+		- origin is null, player should be on top wormhole
+		- origin is X,Y, put player at XY
+- Memory / scanner issues when going up & down levels (scanner reference deleted objects ? yet it should be clearing it's list when an object is deleted... need investigating)
 - Starting wormhole is invisible because of memory... why ?
 - FoW (Fog of War)
 	- "remembered" sprite appearance

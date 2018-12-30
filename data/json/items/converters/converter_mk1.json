@@ -1,0 +1,20 @@
+{
+	"name_id":"Matter-to-Energy Converter",
+	"type":"converter",
+	"sprite_choice":[
+		"scanner"
+	],
+	"equipment": {
+		"slot":"converter",
+		"volume":20.0,
+		"equip_ap":3.0,
+		"unequip_ap":3.0
+	},
+	"converter": {
+		"maximum_energy":10000,
+		"recipes": [
+			{"name": "Energy", "requirements": [{"type":"food", "amount":1}], "produce":"energy", "amount":1500},
+			{"name": "Missile", "requirements":[{"type":"energy", "amount":500}], "produce":"data/json/items/weapons/missile.json", "amount":1}
+		]
+	}
+}
