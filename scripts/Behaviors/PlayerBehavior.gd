@@ -60,8 +60,10 @@ func OnCraft_Callback(recipe_data, input_list):
 		BehaviorEvents.emit_signal("OnLogLine", "Production sucessful")
 	elif result == Globals.CRAFT_RESULT.not_enough_resources:
 		BehaviorEvents.emit_signal("OnLogLine", "Missing resources")
-	else:
+	elif result == Globals.CRAFT_RESULT.not_enough_energy:
 		BehaviorEvents.emit_signal("OnLogLine", "Not enough energy")
+	else:
+		BehaviorEvents.emit_signal("OnLogLine", "Crafting failed")
 		
 	
 func Pressed_Grab_Callback():
@@ -99,7 +101,7 @@ func OnDropIventory_Callback(dropped_mounts, dropped_cargo):
 		BehaviorEvents.emit_signal("OnDropMount", playerNode, drop_data)
 		
 	for drop_data in dropped_cargo:
-		BehaviorEvents.emit_signal("OnDropCargo", playerNode, drop_data)
+		BehaviorEvents.emit_signal("OnDropCargo", playerNode, drop_data.src)
 	
 func OnRequestObjectUnload_Callback(obj):
 	if obj.get_attrib("type") == "player":

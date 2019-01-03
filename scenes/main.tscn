@@ -384,18 +384,18 @@ Action = SubResource( 6 )
 
 [node name="StatusBar" type="Control" parent="Camera-GUI/HUD" index="2"]
 
-visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 23 )
+_sections_unfolded = [ "Mouse" ]
 warning_energy_level = 5001
 danger_energy_level = 1001
 hull_size = 20
@@ -413,6 +413,8 @@ content = "The Maveric Hull : [color=lime]==========[/color] Energy : [color=yel
 visible = false
 
 [node name="Converter" parent="Camera-GUI" index="2" instance=ExtResource( 25 )]
+
+visible = false
 
 [node name="DEBUG" type="Node2D" parent="." index="8"]
 

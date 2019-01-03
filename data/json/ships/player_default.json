@@ -14,10 +14,13 @@
 	},
 	"moving": {
 		"speed":1.0,
-		"can_use_wormhole":true
+		"can_use_wormhole":true,
+		"energy_cost":50
 	},
 	"cargo": {
 		"capacity":500,
+		"pickup_ap":1.0,
+		"drop_ap":1.0,
 		"content":[
 			{"src":"data/json/items/weapons/missile.json", "count":5}
 		]

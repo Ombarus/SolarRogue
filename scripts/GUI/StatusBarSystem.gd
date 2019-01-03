@@ -9,15 +9,23 @@ var _window
 func _ready():
 	_window = get_node("StatusWindow")
 	BehaviorEvents.connect("OnDamageTaken", self, "OnDamageTaken_Callback")
+	BehaviorEvents.connect("OnEnergyChanged", self, "OnEnergyChanged_Callback")
 	if Globals.LevelLoaderRef == null:
 		BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	else:
 		OnLevelLoaded_Callback()
 
+func OnEnergyChanged_Callback(obj):
+	var is_player = obj.get_attrib("type") == "player"
+	if not is_player:
+		return
+	UpdateStatusBar(obj)
+
 func OnDamageTaken_Callback(target, shooter):
 	var is_player = target.get_attrib("type") == "player"
 	if not is_player:
 		return
+	UpdateStatusBar(target)
 		
 func OnLevelLoaded_Callback():
 	UpdateStatusBar(Globals.LevelLoaderRef.objByType["player"][0])
@@ -48,7 +56,7 @@ func UpdateStatusBar(player_obj):
 			status_str += "[/color][color=gray]"
 			changed_color = true
 		status_str += "="
-	status_str += "[/color] Energy : [color=" + energy_color + "]" + str(cur_energy) + "[/color] Shield : [color=red]Missing[/color]"
+	status_str += "[/color] Energy : [color=%s]%.f[/color] Shield : [color=red]Missing[/color]" % [energy_color, cur_energy]
 	
 	_window.content = status_str
 	

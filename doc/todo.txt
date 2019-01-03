@@ -1,4 +1,6 @@
 1st step :::
+- Free cargo space when dropping stuff
+- Two places where I access cargo content and juste do -= 1. or .remove()... but if the result returned was in BaseAttribute that's dangerous
 - Make converter button invisible if no converter equiped
 - Make energy work
 	- Update hull and energy in status bar
