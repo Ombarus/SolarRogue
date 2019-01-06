@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://data/textures/procedural-star-bg.png" type="Texture" id=1]
 [ext_resource path="res://data/shaders/fow_mask.tres" type="Material" id=2]
@@ -25,14 +25,15 @@
 [ext_resource path="res://scripts/GUI/StatusBarSystem.gd" type="Script" id=23]
 [ext_resource path="res://scenes/GUI/Dialogs/SelectableInventory.tscn" type="PackedScene" id=24]
 [ext_resource path="res://scenes/GUI/Dialogs/Converter.tscn" type="PackedScene" id=25]
-[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=26]
-[ext_resource path="res://scenes/tileset_source/planet_b.tscn" type="PackedScene" id=27]
-[ext_resource path="res://scenes/tileset_source/sun.tscn" type="PackedScene" id=28]
-[ext_resource path="res://scenes/tileset_source/probe.tscn" type="PackedScene" id=29]
-[ext_resource path="res://scenes/tileset_source/wormhole.tscn" type="PackedScene" id=30]
-[ext_resource path="res://scenes/tileset_source/shuttle.tscn" type="PackedScene" id=31]
-[ext_resource path="res://scenes/tileset_source/planet_a.tscn" type="PackedScene" id=32]
-[ext_resource path="res://scenes/tileset_source/planet_c.tscn" type="PackedScene" id=33]
+[ext_resource path="res://scenes/GUI/Dialogs/EquipMenus.tscn" type="PackedScene" id=26]
+[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=27]
+[ext_resource path="res://scenes/tileset_source/planet_b.tscn" type="PackedScene" id=28]
+[ext_resource path="res://scenes/tileset_source/sun.tscn" type="PackedScene" id=29]
+[ext_resource path="res://scenes/tileset_source/probe.tscn" type="PackedScene" id=30]
+[ext_resource path="res://scenes/tileset_source/wormhole.tscn" type="PackedScene" id=31]
+[ext_resource path="res://scenes/tileset_source/shuttle.tscn" type="PackedScene" id=32]
+[ext_resource path="res://scenes/tileset_source/planet_a.tscn" type="PackedScene" id=33]
+[ext_resource path="res://scenes/tileset_source/planet_c.tscn" type="PackedScene" id=34]
 
 [sub_resource type="InputEventKey" id=1]
 
@@ -60,7 +61,7 @@ control = false
 meta = false
 command = false
 pressed = false
-scancode = 68
+scancode = 69
 unicode = 0
 echo = false
 
@@ -84,6 +85,23 @@ echo = false
 [sub_resource type="ShortCut" id=6]
 
 shortcut = SubResource( 5 )
+
+[sub_resource type="InputEventKey" id=7]
+
+device = 0
+alt = false
+shift = false
+control = false
+meta = false
+command = false
+pressed = false
+scancode = 77
+unicode = 0
+echo = false
+
+[sub_resource type="ShortCut" id=8]
+
+shortcut = SubResource( 7 )
 
 [node name="Root" type="Node" index="0"]
 
@@ -149,6 +167,7 @@ GrabAction = NodePath("../../Camera-GUI/HUD/Buttons/Grab")
 DropAction = NodePath("../../Camera-GUI/HUD/Buttons/Drop")
 CraftingAction = NodePath("../../Camera-GUI/HUD/Buttons/Converter")
 FTLAction = NodePath("../../Camera-GUI/HUD/Buttons/Wormhole")
+EquipAction = NodePath("../../Camera-GUI/HUD/Buttons/Equip")
 
 [node name="AI" type="Node" parent="Behaviors" index="4"]
 
@@ -366,7 +385,7 @@ margin_left = -120.0
 margin_top = -321.0
 margin_right = 2.0
 margin_bottom = -225.0
-Text = "[d]rop"
+Text = "[e]ject"
 Action = SubResource( 4 )
 
 [node name="Converter" parent="Camera-GUI/HUD/Buttons" index="4" instance=ExtResource( 21 )]
@@ -381,6 +400,17 @@ margin_right = 3.0
 margin_bottom = -314.0
 Text = "[c]onverter"
 Action = SubResource( 6 )
+
+[node name="Equip" parent="Camera-GUI/HUD/Buttons" index="5" instance=ExtResource( 21 )]
+
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = -411.0
+margin_right = 124.0
+margin_bottom = -320.0
+Text = "[m]ount"
+Action = SubResource( 8 )
 
 [node name="StatusBar" type="Control" parent="Camera-GUI/HUD" index="2"]
 
@@ -416,10 +446,12 @@ visible = false
 
 visible = false
 
+[node name="EquipMenus" parent="Camera-GUI" index="3" instance=ExtResource( 26 )]
+
 [node name="DEBUG" type="Node2D" parent="." index="8"]
 
 visible = false
-script = ExtResource( 26 )
+script = ExtResource( 27 )
 
 [node name="temp" type="Node2D" parent="." index="9"]
 
@@ -427,39 +459,39 @@ editor/display_folded = true
 visible = false
 position = Vector2( 689.19, 217.317 )
 
-[node name="planet_b" parent="temp" index="0" instance=ExtResource( 27 )]
+[node name="planet_b" parent="temp" index="0" instance=ExtResource( 28 )]
 
 position = Vector2( -36.157, -5.83176 )
 
-[node name="sun" parent="temp" index="1" instance=ExtResource( 28 )]
+[node name="sun" parent="temp" index="1" instance=ExtResource( 29 )]
 
 position = Vector2( 46.7009, 240.177 )
 
-[node name="probe" parent="temp" index="2" instance=ExtResource( 29 )]
+[node name="probe" parent="temp" index="2" instance=ExtResource( 30 )]
 
 position = Vector2( -204.268, 191.962 )
 rotation = -0.785398
 _sections_unfolded = [ "Transform" ]
 
-[node name="wormhole" parent="temp" index="3" instance=ExtResource( 30 )]
+[node name="wormhole" parent="temp" index="3" instance=ExtResource( 31 )]
 
 position = Vector2( -362.624, -8.63391 )
 
-[node name="shuttle" parent="temp" index="4" instance=ExtResource( 31 )]
+[node name="shuttle" parent="temp" index="4" instance=ExtResource( 32 )]
 
 position = Vector2( -33.8243, -8.16446 )
 
-[node name="shuttle2" parent="temp" index="5" instance=ExtResource( 31 )]
+[node name="shuttle2" parent="temp" index="5" instance=ExtResource( 32 )]
 
 position = Vector2( -440.695, -105.973 )
 rotation = 1.5708
 _sections_unfolded = [ "Transform" ]
 
-[node name="planet_a" parent="temp" index="6" instance=ExtResource( 32 )]
+[node name="planet_a" parent="temp" index="6" instance=ExtResource( 33 )]
 
 position = Vector2( -580.844, -101.473 )
 
-[node name="planet_c" parent="temp" index="7" instance=ExtResource( 33 )]
+[node name="planet_c" parent="temp" index="7" instance=ExtResource( 34 )]
 
 position = Vector2( 307.917, -99.1401 )
 

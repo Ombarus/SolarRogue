@@ -10,9 +10,8 @@ func _ready():
 	_window = get_node("StatusWindow")
 	BehaviorEvents.connect("OnDamageTaken", self, "OnDamageTaken_Callback")
 	BehaviorEvents.connect("OnEnergyChanged", self, "OnEnergyChanged_Callback")
-	if Globals.LevelLoaderRef == null:
-		BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
-	else:
+	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
+	if Globals.LevelLoaderRef != null:
 		OnLevelLoaded_Callback()
 
 func OnEnergyChanged_Callback(obj):

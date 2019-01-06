@@ -1,5 +1,8 @@
 1st step :::
-- Free cargo space when dropping stuff
+- Generic system to show/hide button based on player inv/equippement
+- Start Menu
+- Result screen on death
+- Equip items
 - Two places where I access cargo content and juste do -= 1. or .remove()... but if the result returned was in BaseAttribute that's dangerous
 - Make converter button invisible if no converter equiped
 - Make energy work
@@ -10,7 +13,6 @@
 	- Assign energy for actions
 	- Use energy when doing actions
 	- Death if no hull or energy
-- Equip items
 - check if assigning array or dictionary copy or reference content in godot
 - Godot : Investigate Localization tab
 	- You can link CSVs in localization, replace certain resources (like textures) with others and even change the project name based on choosen locale
@@ -42,6 +44,11 @@
 	
 	
 polish :::
+- Cache JSONs when loaded 
+	- so I stop getting it from disk everytime I need the attributes of an equiped object,
+	- base_attributes could also be changed to point to the cached data to avoid duplication
+- Change FTL button to say > or < depending on wormhole data
+- When dead FTL button stays invisible ?
 - Drag-cancel as % of screen resolution
 - smooth camera (a la township?)
 	- smooth zoom limits & exponential zoom
@@ -58,6 +65,7 @@ polish :::
 	
 	
 DONE :::
+- Die when 0 energy or 0 hull
 - Position of player ship when going up/down wormholes (In the end I just have an enum. Hackish but couldn't figure out a better way)
 	- Maybe need to pass some "origin" parameter
 		- origin is null, player should be on top wormhole

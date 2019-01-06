@@ -31,6 +31,8 @@ func OnRequestObjectUnload_Callback(obj):
 func ExecuteFullSweep():
 	var level_id = Globals.LevelLoaderRef.GetLevelID()
 	var player_scan = _playerNode.get_attrib("scanner_result.cur_in_range." + level_id)
+	if player_scan == null: # Not sure why this can be null at this point but I crashed once there
+		return
 	for key in Globals.LevelLoaderRef.objById:
 		var obj = Globals.LevelLoaderRef.objById[key]
 		var disable_fow = Globals.LevelLoaderRef.GetCurrentLevelData().has("fully_mapped") and Globals.LevelLoaderRef.GetCurrentLevelData().fully_mapped == true

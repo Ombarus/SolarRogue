@@ -72,6 +72,7 @@ func ProcessDamage(target, shooter, weapon_data):
 	var max_dam = weapon_data.weapon_data.max_dam
 	var ammo = null
 	var is_player = shooter.get_attrib("type") == "player"
+	var is_target_player = target.get_attrib("type") == "player"
 	if weapon_data.weapon_data.has("ammo"):
 		ammo = weapon_data.weapon_data.ammo
 	
@@ -101,6 +102,8 @@ func ProcessDamage(target, shooter, weapon_data):
 		if target.get_attrib("destroyable.hull") <= 0:
 			if is_player:
 				BehaviorEvents.emit_signal("OnLogLine", "[color=red]You destroy the ennemy ![/color]")
+			if is_target_player:
+				BehaviorEvents.emit_signal("OnPlayerDeath")
 			BehaviorEvents.emit_signal("OnRequestObjectUnload", target)
 		else:
 			if is_player:

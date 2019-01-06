@@ -11,14 +11,18 @@ func _ready():
 	BehaviorEvents.connect("OnAddItem", self, "OnAddItem_Callback")
 	BehaviorEvents.connect("OnRemoveItem", self, "OnRemoveItem_Callback")
 	BehaviorEvents.connect("OnUseEnergy", self, "OnUseEnergy_Callback")
+	BehaviorEvents.connect("OnEquipMount", self, "OnEquipMount_Callback")
 	
 func OnUseEnergy_Callback(obj, amount):
 	if amount == 0:
 		return
 	var cur_energy = obj.get_attrib("converter.stored_energy")
 	cur_energy -= amount
-	obj.set_attrib("converter.stored_energy", cur_energy)
-	BehaviorEvents.emit_signal("OnEnergyChanged", obj)
+	if cur_energy <= 0 and obj.get_attrib("type") == "player" :
+		BehaviorEvents.emit_signal("OnPlayerDeath")
+	else:
+		obj.set_attrib("converter.stored_energy", cur_energy)
+		BehaviorEvents.emit_signal("OnEnergyChanged", obj)
 	
 func OnPickup_Callback(picker, picked):
 	var picked_obj = []
@@ -106,6 +110,17 @@ func OnDropMount_Callback(dropper, slot_name):
 		BehaviorEvents.emit_signal("OnUseAP", dropper, data.equipment.unequip_ap)
 	Globals.LevelLoaderRef.RequestObject(item_id, Globals.LevelLoaderRef.World_to_Tile(dropper.position))
 	dropper.set_attrib("mounts." + slot_name, "")
+	
+func OnEquipMount_Callback(equipper, slot_name, item_id):
+	# Check if slot already has something equipped
+	# Remove current equipment (takes AP)
+	# Remove item from cargo
+	# Add item_id to mount point
+	var attrib_getter = "mounts." + slot_name
+	if equipper.get_attrib(attrib_getter) != null and equipper.get_attrib(attrib_getter) != "":
+		BehaviorEvents.emit_signal("OnDropMount", equipper, slot_name)
+	BehaviorEvents.emit_signal("OnRemoveItem", item_id)
+	equipper.set_attrib(attrib_getter, item_id)
 
 #TODO: Fix logic flaws (make sure we're not changing cargo in base_attributes), (check we won't exceed volume before adding)
 func OnAddItem_Callback(picker, item_id):

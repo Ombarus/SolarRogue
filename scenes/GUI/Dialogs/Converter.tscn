@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/GUI/ConverterLayout.gd" type="Script" id=1]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/GUI/Dialogs/CraftingList.gd" type="Script" id=4]
-[ext_resource path="res://scenes/GUI/ScrollListContainer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/GUI/ScrollListContainer.tscn" type="PackedScene" id=4]
 
 [node name="Converter" type="Control"]
 
@@ -85,7 +84,6 @@ select_mode = 0
 allow_reselect = false
 icon_mode = 1
 fixed_icon_size = Vector2( 0, 0 )
-script = ExtResource( 4 )
 _sections_unfolded = [ "Rect", "Size Flags" ]
 
 [node name="VSeparator" type="VSeparator" parent="base/HBoxContainer" index="1"]
@@ -160,7 +158,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="Inventory" parent="base/HBoxContainer/VBoxContainer" index="2" instance=ExtResource( 5 )]
+[node name="Inventory" parent="base/HBoxContainer/VBoxContainer" index="2" instance=ExtResource( 4 )]
 
 anchor_right = 0.0
 anchor_bottom = 0.0

@@ -7,6 +7,7 @@ func _ready():
 	levelLoaderRef = get_node(levelLoaderNode)
 	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
 	BehaviorEvents.connect("OnDamageTaken", self, "OnDamageTaken_Callback")
+
 	
 func OnDamageTaken_Callback(target, shooter):
 	if target.get_attrib("ai") == null:

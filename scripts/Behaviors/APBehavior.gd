@@ -43,8 +43,12 @@ func OnUseAP_Callback(obj, amount):
 	# OnobjTurn triggers OnUseAp so this is circular.
 	# The only reason it won't crash right away is that the player waits for input
 	# using call_deferred should allow us to "queue" the OnObjTurn and do them in sequence (or even in parallel)
-	BehaviorEvents.call_deferred("emit_signal", "OnObjTurn", obj_action)
+	self.call_deferred("validate_emit_OnObjTurn", obj_action)
 	
+func validate_emit_OnObjTurn(obj):
+	# if object has been removed from list before it had a chance to act. Ignore it
+	if action_list.find(obj) != -1:
+		BehaviorEvents.emit_signal("OnObjTurn", obj)
 
 # Top action is always 0 AP. This way when we insert a new object it will be the first to act
 func NormalizeAP():

@@ -6,6 +6,7 @@ export(NodePath) var GrabAction
 export(NodePath) var DropAction
 export(NodePath) var CraftingAction
 export(NodePath) var FTLAction
+export(NodePath) var EquipAction
 
 var playerNode = null
 var levelLoaderRef
@@ -42,10 +43,29 @@ func _ready():
 	action.connect("pressed", self, "Pressed_FTL_Callback")
 	action = get_node(CraftingAction)
 	action.connect("pressed", self, "Pressed_Crafting_Callback")
+	action = get_node(EquipAction)
+	action.connect("pressed", self, "Pressed_Equip_Callback")
 	
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
+	
+func Pressed_Equip_Callback():
+	if lock_input:
+		return
+	
+	BehaviorEvents.emit_signal("OnPushGUI", "EquipMountList", {"object":playerNode, "callback_object":self, "callback_method":"OnEquip_Callback"})
+	
+# mount_to = "converter"
+# mount_item = {"src":"data/json/bleh.json", "count":5}
+func OnEquip_Callback(mount_item, mount_to):
+	BehaviorEvents.emit_signal("OnEquipMount", playerNode, mount_to, mount_item)
+	var converter = playerNode.get_attrib("mounts.converter")
+	var converter_btn = get_node(CraftingAction)
+	if converter == null or converter == "":
+		converter_btn.visible = false
+	else:
+		converter_btn.visible = true
 	
 func Pressed_Crafting_Callback():
 	if lock_input:
@@ -100,6 +120,13 @@ func OnDropIventory_Callback(dropped_mounts, dropped_cargo):
 	for drop_data in dropped_mounts:
 		BehaviorEvents.emit_signal("OnDropMount", playerNode, drop_data)
 		
+	var converter = playerNode.get_attrib("mounts.converter")
+	var converter_btn = get_node(CraftingAction)
+	if converter == null or converter == "":
+		converter_btn.visible = false
+	else:
+		converter_btn.visible = true
+		
 	for drop_data in dropped_cargo:
 		BehaviorEvents.emit_signal("OnDropCargo", playerNode, drop_data.src)
 	
@@ -109,6 +136,7 @@ func OnRequestObjectUnload_Callback(obj):
 	
 func OnObjTurn_Callback(obj):
 	if obj.get_attrib("type") == "player":
+		print("On Player Turn : Unlock Input")
 		lock_input = false
 		
 		var moved = obj.get_attrib("moving.moved")
@@ -134,6 +162,7 @@ func OnObjTurn_Callback(obj):
 			else:
 				btn.visible = false
 	else:
+		print("On AI Turn : LOCK Input !")
 		lock_input = true
 	
 func Pressed_Weapon_Callback():
@@ -145,6 +174,8 @@ func Pressed_Weapon_Callback():
 	_input_state = INPUT_STATE.grid_targetting
 	
 func OnLevelLoaded_Callback():
+	print("OnLevelLoaded : unlock input")
+	lock_input = false
 	if playerNode == null:
 		
 		var save = Globals.LevelLoaderRef.cur_save
@@ -185,6 +216,13 @@ func OnLevelLoaded_Callback():
 			modififed_attrib = save.player_data.modified_attributes
 		# Modified_attrib must be passed during request so that proper IDs can be locked in objByID
 		playerNode = levelLoaderRef.RequestObject("data/json/ships/player_default.json", coord, modififed_attrib)
+		
+		var converter = playerNode.get_attrib("mounts.converter")
+		var converter_btn = get_node(CraftingAction)
+		if converter == null or converter == "":
+			converter_btn.visible = false
+		else:
+			converter_btn.visible = true
 		
 		# always default to saved position
 		_current_origin = PLAYER_ORIGIN.saved

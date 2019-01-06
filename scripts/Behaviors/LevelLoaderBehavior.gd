@@ -37,6 +37,7 @@ func _ready():
 	Globals.LevelLoaderRef = self
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
 	BehaviorEvents.connect("OnRequestLevelChange", self, "OnRequestLevelChange_Callback")
+	BehaviorEvents.connect("OnPlayerDeath", self, "OnPlayerDeath_Callback")
 	
 	var bound_line = get_node("/root/Root/Upper-Left-Bound/L1")
 	bound_line.add_point(Vector2(-tileSize/2.0, -tileSize/2.0))
@@ -208,6 +209,14 @@ func OnRequestObjectUnload_Callback(obj):
 	objByType[obj.base_attributes.type].erase(obj)
 	obj.get_parent().remove_child(obj)
 	obj.queue_free()
+	
+func OnPlayerDeath_Callback():
+	var save_game = Directory.new()
+	save_game.remove("user://savegame.save")
+	var data = LoadJSON(startLevel)
+	if data != null:
+		call_deferred("ExecuteLoadLevel", data)
+	
 	
 func LoadJSON(filepath):
 	var file = File.new()
