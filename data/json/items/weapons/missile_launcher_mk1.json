@@ -11,7 +11,9 @@
 		"base_dam":5.0,
 		"max_dam":10.0,
 		"ammo":"data/json/items/weapons/missile.json",
-		"fire_energy_cost":100.0
+		"fire_range":1.0,
+		"fire_energy_cost":100.0,
+		"fire_speed":1.0
 	},
 	"equipment": {
 		"slot":"small_weapon_mount",

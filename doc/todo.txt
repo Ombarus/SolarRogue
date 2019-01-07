@@ -1,15 +1,17 @@
 1st step :::
-- Start Menu
-- Result screen on death
+- Equipping objects duplicate them !
+- Shields ?
+- Basic AI
+	- Shoot back
+- Look around
+- Improve weapon system
+	- Add lasers (shoot in straight line (left-right-up-down), do not use ammo, use more energy per shot)
+	- Limit grid to weapon range
+	- keyboard aim ?
 - Two places where I access cargo content and juste do -= 1. or .remove()... but if the result returned was in BaseAttribute that's dangerous
 - Make energy work
-	- Update hull and energy in status bar
-	- energy to matter converter
-		- design (crafting system ? simple change hydrogen into energy?)
-		- implement new UI for crafting
 	- Assign energy for actions
 	- Use energy when doing actions
-	- Death if no hull or energy
 - check if assigning array or dictionary copy or reference content in godot
 - Godot : Investigate Localization tab
 	- You can link CSVs in localization, replace certain resources (like textures) with others and even change the project name based on choosen locale
@@ -27,8 +29,6 @@
 		- Give health remaining on ships
 		- Give detailed description of planet (rich but hard to mine, poor but easy to mine, etc)
 	- Use Matter-Energy converter to produce energy
-- Basic AI
-	- Shoot back
 - GUI
 	- Status
 	- Log window
@@ -59,10 +59,18 @@ polish :::
 - Read-Only base_attributes to prevent un-savable changes by mistake
 	
 
-	
+IDEAS:::
+- If you try to produce energy over the maximum of the ship capacity there is a chance you "choke" (engine goes critical and blow up)
 	
 	
 DONE :::
+	- Death if no hull or energy
+	- energy to matter converter
+		- design (crafting system ? simple change hydrogen into energy?)
+		- implement new UI for crafting
+	- Update hull and energy in status bar
+- Start Menu
+- Result screen on death
 - Make converter button invisible if no converter equiped
 - Equip items
 - Die when 0 energy or 0 hull

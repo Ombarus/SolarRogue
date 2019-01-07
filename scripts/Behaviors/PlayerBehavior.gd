@@ -170,7 +170,10 @@ func Pressed_Weapon_Callback():
 		return
 		
 	BehaviorEvents.emit_signal("OnLogLine", "Weapon System Online. Target ?")
-	BehaviorEvents.emit_signal("OnPushGUI", "GridPattern", null)
+	var weapon_json = playerNode.get_attrib("mounts.small_weapon_mount")
+	var weapon_data = Globals.LevelLoaderRef.LoadJSON(weapon_json)
+	BehaviorEvents.emit_signal("OnRequestPlayerTargetting", playerNode, weapon_data)
+	#BehaviorEvents.emit_signal("OnPushGUI", "GridPattern", null)
 	_input_state = INPUT_STATE.grid_targetting
 	
 func OnLevelLoaded_Callback():
@@ -319,7 +322,8 @@ func _unhandled_input(event):
 #		mouse_down = false
 
 func ProcessGridSelection(pos):
-	BehaviorEvents.emit_signal("OnPopGUI")
+	#BehaviorEvents.emit_signal("OnPopGUI")
+	BehaviorEvents.emit_signal("OnClearOverlay")
 	_input_state = INPUT_STATE.cell_targetting
 	var tile = Globals.LevelLoaderRef.World_to_Tile(pos)
 	var tile_content = Globals.LevelLoaderRef.levelTiles[tile.x][tile.y]
@@ -332,7 +336,13 @@ func ProcessGridSelection(pos):
 		#TODO: Check if player has an equiped weapon
 		var weapon_json = playerNode.get_attrib("mounts.small_weapon_mount")
 		var weapon_data = Globals.LevelLoaderRef.LoadJSON(weapon_json)
-		BehaviorEvents.emit_signal("OnDealDamage", tile_content[0], playerNode, weapon_data)
+		var player_tile = Globals.LevelLoaderRef.World_to_Tile(playerNode.position)
+		var fire_radius = weapon_data.weapon_data.fire_range
+		if round((player_tile - tile).length()) > fire_radius or tile.x < 0 or tile.y < 0:
+			BehaviorEvents.emit_signal("OnLogLine", "Target is outside of our ship's weapon sir !")
+			_input_state = INPUT_STATE.hud
+		else:
+			BehaviorEvents.emit_signal("OnDealDamage", tile_content[0], playerNode, weapon_data)
 	elif potential_targets.size() == 0:
 		BehaviorEvents.emit_signal("OnLogLine", "There's nothing there sir...")
 		_input_state = INPUT_STATE.hud

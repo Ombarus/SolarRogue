@@ -12,8 +12,9 @@ func _ready():
 func OnDamageTaken_Callback(target, shooter):
 	if target.get_attrib("ai") == null:
 		return
-		
-	if target.get_attrib("ai.run_if_attacked") != null:
+	
+	var run_if_attacked = target.get_attrib("ai.run_if_attacked")
+	if run_if_attacked != null and run_if_attacked == true:
 		target.set_attrib("ai.pathfinding", "run_away")
 		target.set_attrib("ai.run_from", shooter.modified_attributes.unique_id)
 		target.set_attrib("ai.unseen_for", 0)

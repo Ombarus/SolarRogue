@@ -22,6 +22,8 @@ signal OnAddItem(picker, item_id)
 signal OnRemoveItem(holder, item_id)
 signal OnScannerUpdated(obj)
 signal OnPlayerDeath()
+signal OnRequestPlayerTargetting(player, weapon_data)
+signal OnClearOverlay()
 
 signal OnGUILoaded(name, obj)
 signal OnPushGUI(name, init_param)

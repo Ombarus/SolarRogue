@@ -21,6 +21,10 @@ func OnObjectLoaded_Callback(obj):
 	obj.set_attrib("harvestable.chance", (randf() * (max_rate-min_rate)) + min_rate)
 	
 func OnDealDamage_Callback(target, shooter, weapon_data):
+	if "fire_energy_cost" in weapon_data.weapon_data:
+		BehaviorEvents.emit_signal("OnUseEnergy", shooter, weapon_data.weapon_data.fire_energy_cost)
+	if "fire_speed" in weapon_data.weapon_data:
+		BehaviorEvents.emit_signal("OnUseAP", shooter, weapon_data.weapon_data.fire_speed)
 	if target.get_attrib("harvestable") != null:
 		ProcessHarvesting(target, shooter, weapon_data)
 	else:
@@ -100,6 +104,8 @@ func ProcessDamage(target, shooter, weapon_data):
 	else:
 		target.set_attrib("destroyable.hull", target.get_attrib("destroyable.hull") - dam)
 		if target.get_attrib("destroyable.hull") <= 0:
+			if target.get_attrib("drop_on_death") != null:
+				ProcessDeathSpawns(target)
 			if is_player:
 				BehaviorEvents.emit_signal("OnLogLine", "[color=red]You destroy the ennemy ![/color]")
 			if is_target_player:
@@ -110,7 +116,11 @@ func ProcessDamage(target, shooter, weapon_data):
 				BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]You do " + str(dam) + " damage[/color]")
 		BehaviorEvents.emit_signal("OnDamageTaken", target, shooter)
 	
-		
+	
+func ProcessDeathSpawns(target):
+	for stuff in target.get_attrib("drop_on_death"):
+		if randf() < stuff.chance:
+			Globals.LevelLoaderRef.RequestObject(stuff.id, Globals.LevelLoaderRef.World_to_Tile(target.position))
 	
 
 #func _process(delta):

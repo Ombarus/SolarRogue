@@ -26,6 +26,6 @@
 		]
 	},
 	"converter": {
-		"stored_energy": 100
+		"stored_energy": 10000
 	}
 }
