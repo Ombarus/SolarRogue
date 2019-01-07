@@ -213,9 +213,9 @@ func OnRequestObjectUnload_Callback(obj):
 func OnPlayerDeath_Callback():
 	var save_game = Directory.new()
 	save_game.remove("user://savegame.save")
-	var data = LoadJSON(startLevel)
-	if data != null:
-		call_deferred("ExecuteLoadLevel", data)
+	#var data = LoadJSON(startLevel)
+	#if data != null:
+	#	call_deferred("ExecuteLoadLevel", data)
 	
 	
 func LoadJSON(filepath):

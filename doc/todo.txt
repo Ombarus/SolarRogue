@@ -1,10 +1,7 @@
 1st step :::
-- Generic system to show/hide button based on player inv/equippement
 - Start Menu
 - Result screen on death
-- Equip items
 - Two places where I access cargo content and juste do -= 1. or .remove()... but if the result returned was in BaseAttribute that's dangerous
-- Make converter button invisible if no converter equiped
 - Make energy work
 	- Update hull and energy in status bar
 	- energy to matter converter
@@ -44,6 +41,7 @@
 	
 	
 polish :::
+- Generic system to show/hide button based on player inv/equippement
 - Cache JSONs when loaded 
 	- so I stop getting it from disk everytime I need the attributes of an equiped object,
 	- base_attributes could also be changed to point to the cached data to avoid duplication
@@ -65,6 +63,8 @@ polish :::
 	
 	
 DONE :::
+- Make converter button invisible if no converter equiped
+- Equip items
 - Die when 0 energy or 0 hull
 - Position of player ship when going up/down wormholes (In the end I just have an enum. Hackish but couldn't figure out a better way)
 	- Maybe need to pass some "origin" parameter
