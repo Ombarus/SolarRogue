@@ -172,7 +172,7 @@ func Pressed_Weapon_Callback():
 	BehaviorEvents.emit_signal("OnLogLine", "Weapon System Online. Target ?")
 	var weapon_json = playerNode.get_attrib("mounts.small_weapon_mount")
 	var weapon_data = Globals.LevelLoaderRef.LoadJSON(weapon_json)
-	BehaviorEvents.emit_signal("OnRequestPlayerTargetting", playerNode, weapon_data)
+	BehaviorEvents.emit_signal("OnRequestPlayerTargetting", playerNode, weapon_data, self, "ProcessGridSelection")
 	#BehaviorEvents.emit_signal("OnPushGUI", "GridPattern", null)
 	_input_state = INPUT_STATE.grid_targetting
 	
@@ -244,7 +244,7 @@ func _unhandled_input(event):
 			var click_pos = playerNode.get_global_mouse_position()
 			
 			if _input_state == INPUT_STATE.grid_targetting:
-				ProcessGridSelection(click_pos)
+				BehaviorEvents.emit_signal("OnTargetClick", click_pos)
 			else:
 				var player_pos = playerNode.position
 				var click_dir = click_pos - player_pos
@@ -308,49 +308,9 @@ func _unhandled_input(event):
 		#print ("key_period : ", KEY_PERIOD, ", key_comma : ", KEY_COLON)
 	if dir != null:
 		BehaviorEvents.emit_signal("OnMovement", playerNode, dir)
-#		_zoom_camera(-1)
-#	# Wheel Down Event
-#	elif event.is_action_pressed("zoom_out"):
-#		_zoom_camera(1)
-#	elif event.is_action_pressed("touch"):
-#		start_touch_pos = event.position
-#		start_cam_pos = self.position
-#		mouse_down = true
-#	
-#	
-#	if event.is_action_released("touch"):
-#		mouse_down = false
+
 
 func ProcessGridSelection(pos):
-	#BehaviorEvents.emit_signal("OnPopGUI")
-	BehaviorEvents.emit_signal("OnClearOverlay")
-	_input_state = INPUT_STATE.cell_targetting
-	var tile = Globals.LevelLoaderRef.World_to_Tile(pos)
-	var tile_content = Globals.LevelLoaderRef.levelTiles[tile.x][tile.y]
-	var potential_targets = []
-	for obj in tile_content:
-		if obj.get_attrib("destroyable") != null || obj.get_attrib("harvestable") != null:
-			potential_targets.push_back(obj)
-	if potential_targets.size() == 1:
-		#TODO: pass the right data for the weapon
-		#TODO: Check if player has an equiped weapon
-		var weapon_json = playerNode.get_attrib("mounts.small_weapon_mount")
-		var weapon_data = Globals.LevelLoaderRef.LoadJSON(weapon_json)
-		var player_tile = Globals.LevelLoaderRef.World_to_Tile(playerNode.position)
-		var fire_radius = weapon_data.weapon_data.fire_range
-		if round((player_tile - tile).length()) > fire_radius or tile.x < 0 or tile.y < 0:
-			BehaviorEvents.emit_signal("OnLogLine", "Target is outside of our ship's weapon sir !")
-			_input_state = INPUT_STATE.hud
-		else:
-			BehaviorEvents.emit_signal("OnDealDamage", tile_content[0], playerNode, weapon_data)
-	elif potential_targets.size() == 0:
-		BehaviorEvents.emit_signal("OnLogLine", "There's nothing there sir...")
-		_input_state = INPUT_STATE.hud
-	else:
-		#TODO: choose target popup dialog
-		pass
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+	_input_state = INPUT_STATE.hud
+	return
+	

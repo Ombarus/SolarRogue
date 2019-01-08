@@ -1,4 +1,5 @@
 1st step :::
+- Mersenne Twister
 - Equipping objects duplicate them !
 - Shields ?
 - Basic AI
