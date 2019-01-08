@@ -64,7 +64,7 @@ control = false
 meta = false
 command = false
 pressed = false
-scancode = 69
+scancode = 74
 unicode = 0
 echo = false
 
@@ -398,7 +398,7 @@ margin_left = -120.0
 margin_top = -321.0
 margin_right = 2.0
 margin_bottom = -225.0
-Text = "[e]ject"
+Text = "[j]ettison"
 Action = SubResource( 4 )
 
 [node name="Converter" parent="Camera-GUI/HUD/Buttons" index="4" instance=ExtResource( 23 )]

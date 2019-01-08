@@ -6,8 +6,6 @@
 	- Shoot back
 - Look around
 - Improve weapon system
-	- Add lasers (shoot in straight line (left-right-up-down), do not use ammo, use more energy per shot)
-	- Limit grid to weapon range
 	- keyboard aim ?
 - Two places where I access cargo content and juste do -= 1. or .remove()... but if the result returned was in BaseAttribute that's dangerous
 - Make energy work
@@ -65,6 +63,8 @@ IDEAS:::
 	
 	
 DONE :::
+	- Add lasers (shoot in straight line (left-right-up-down), do not use ammo, use more energy per shot)
+	- Limit grid to weapon range
 	- Death if no hull or energy
 	- energy to matter converter
 		- design (crafting system ? simple change hydrogen into energy?)

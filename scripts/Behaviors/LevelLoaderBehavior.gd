@@ -47,7 +47,10 @@ func _ready():
 	bound_line.add_point(Vector2(-tileSize/2, -tileSize/2))
 	
 	#TODO: use my own randomizer
-	#randomize()
+	# Seems to be working fine. Distribution is pretty flat over huge number of throws.
+	# Average is good
+	# Saving and restoring state seems to work
+	MersenneTwister.set_seed(2)
 	seed( 2 )
 	
 	levelTiles.clear()
