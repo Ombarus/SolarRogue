@@ -5,7 +5,7 @@
 	"action_point":0,
 	"mounts": {
 		"small_weapon_mount": "data/json/items/weapons/missile_launcher_mk1.json",
-		"shield": "data/json/items/shields/shield_mk1.json"
+		"shield": ""
 	},
 	"ai": {
 		"aggressive":false,
@@ -14,7 +14,6 @@
 		"stop_running_after":5
 	},
 	"drop_on_death": [
-		{"id":"data/json/items/weapons/missile_launcher_mk1.json", "chance":0.07},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.2},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}

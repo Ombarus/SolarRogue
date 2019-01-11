@@ -12,8 +12,9 @@
 		"unequip_ap":3.0
 	},
 	"shielding": {
-		"energy_cost_per_dam":150.0,
-		"energy_cost_per_ap":1.0,
-		"pierce_chance":0.1
+		"max_hp":10,
+		"hp_regen_per_ap":0.1,
+		"energy_cost_per_hp":20.0,
+		"pierce_chance":0.01
 	}
 }

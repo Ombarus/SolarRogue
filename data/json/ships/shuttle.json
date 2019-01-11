@@ -4,8 +4,7 @@
 	"sprite":"shuttle",
 	"action_point":0,
 	"mounts": {
-		"small_weapon_mount": "data/json/items/weapons/missile_launcher_mk1.json",
-		"shield": "data/json/items/shields/shield_mk1.json",
+		"small_weapon_mount": "data/json/items/weapons/ai_laser_turret_level01.json",
 		"scanner": "data/json/items/scanners/scanner_mk1.json"
 	},
 	"ai": {
@@ -14,7 +13,7 @@
 		"run_if_attacked":false
 	},
 	"drop_on_death": [
-		{"id":"data/json/items/weapons/missile_launcher_mk1.json", "chance":0.07},
+		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.07},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.1},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},

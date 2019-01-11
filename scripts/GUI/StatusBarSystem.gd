@@ -56,7 +56,28 @@ func UpdateStatusBar(player_obj):
 			status_str += "[/color][color=gray]"
 			changed_color = true
 		status_str += "="
-	status_str += "[/color] Energy : [color=%s]%.f[/color] Shield : [color=red]Missing[/color]" % [energy_color, cur_energy]
+	status_str += "[/color] Energy : [color=%s]%.f[/color] Shield : " % [energy_color, cur_energy]
+	
+	var shield_name = player_obj.get_attrib("mounts.shield")
+	var cur_shield = player_obj.get_attrib("shield.current_hp")
+	if shield_name == null or shield_name == "":
+		status_str += "[color=yellow]Missing[/color]"
+	elif cur_shield != null and cur_shield < 1:
+		status_str += "[color=red]Down![/color]"
+	else:
+		var shield_data = Globals.LevelLoaderRef.LoadJSON(shield_name)
+		if cur_shield == null:
+			cur_shield = shield_data.shielding.max_hp
+		status_str += "[color=aqua]"
+		var shield_per = floor(cur_shield) / shield_data.shielding.max_hp
+		changed_color = false
+		for i in range(hull_size):
+			var bar_per = float(i) / float(hull_size)
+			if bar_per >= shield_per and not changed_color:
+				status_str += "[/color][color=gray]"
+				changed_color = true
+			status_str += "="
+		status_str += "[/color]"
 	
 	_window.content = status_str
 	

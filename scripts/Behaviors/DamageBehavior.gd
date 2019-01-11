@@ -99,7 +99,13 @@ func ProcessDamage(target, shooter, weapon_data):
 		elif is_target_player:
 			BehaviorEvents.emit_signal("OnLogLine", "The ennemy missed")
 	else:
-		target.set_attrib("destroyable.hull", target.get_attrib("destroyable.hull") - dam)
+		var shield_name = target.get_attrib("mounts.shield")
+		var shield_data = null
+		if shield_name != null and shield_name != "":
+			shield_data = Globals.LevelLoaderRef.LoadJSON(shield_name)
+		var dam_absorbed_by_shield = _hit_shield(target, dam, shield_data)
+		var hull_dam = dam - dam_absorbed_by_shield
+		target.set_attrib("destroyable.hull", target.get_attrib("destroyable.hull") - hull_dam)
 		if target.get_attrib("destroyable.hull") <= 0:
 			if target.get_attrib("drop_on_death") != null:
 				ProcessDeathSpawns(target)
@@ -121,6 +127,21 @@ func ProcessDeathSpawns(target):
 		if MersenneTwister.rand_float() < stuff.chance:
 			Globals.LevelLoaderRef.RequestObject(stuff.id, Globals.LevelLoaderRef.World_to_Tile(target.position))
 	
+func _hit_shield(target, dam, shield_data):
+	if shield_data == null or dam == 0:
+		return 0
+		
+	var cur_hp = target.get_attrib("shield.current_hp")
+	if cur_hp == null:
+		cur_hp = shield_data.shielding.max_hp
+	
+	var new_hp = max(0, cur_hp - dam)
+	var absorbed = dam
+	if new_hp <= 0:
+		absorbed = cur_hp
+	
+	target.set_attrib("shield.current_hp", new_hp)
+	return absorbed
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

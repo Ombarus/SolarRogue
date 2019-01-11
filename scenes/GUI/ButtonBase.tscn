@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=2]
 [ext_resource path="res://data/styles/trans.tres" type="StyleBox" id=3]
 
-[node name="Button" type="Control" index="0"]
+[node name="Button" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0

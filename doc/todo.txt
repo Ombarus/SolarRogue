@@ -1,35 +1,19 @@
 1st step :::
-- Repairs ?
-	- Use Energy with converter to restore health ?
-	- nanobot mount that regenerate x health every turn for y energy
-	- no health regen... but implement shield that DO regen
+- "more" button with a list of less common actions (look around, equip/unequip, etc.)
 - re-work Object identification (show as unknown, then remember id-ed stuff)
-- Equipping objects duplicate them !
-- Shields ?
-- Look around
-- Improve weapon system
-	- keyboard aim ?
+- Basic interaction
+	- Look around
+	- Shoot
+		- select target using keyboard
+	- Scan
+		- Give health remaining on ships
+		- Give detailed description of planet (rich but hard to mine, poor but easy to mine, etc)
 - Two places where I access cargo content and juste do -= 1. or .remove()... but if the result returned was in BaseAttribute that's dangerous
 - Make energy work
 	- Assign energy for actions
 	- Use energy when doing actions
 - check if assigning array or dictionary copy or reference content in godot
-- Godot : Investigate Localization tab
-	- You can link CSVs in localization, replace certain resources (like textures) with others and even change the project name based on choosen locale
-	- CSVs file are automatically converted into localization files
-		- use tr() method to get translation from keyboard
-		- button labels and such automatically check if text is a key and translate
-		- for format godot support stuff like "bleh {id}".format({"id":"hello world"})
 - Ability to swap tileset for ascii somehow
-- Basic interaction
-	- Shoot
-		- select target using keyboard
-		- Use energy when shooting
-		- Spawn items from destoyed ships
-	- Scan
-		- Give health remaining on ships
-		- Give detailed description of planet (rich but hard to mine, poor but easy to mine, etc)
-	- Use Matter-Energy converter to produce energy
 - GUI
 	- Status
 	- Log window
@@ -42,6 +26,8 @@
 	
 	
 polish :::
+- Equipping objects duplicate them ! (mis-calling a signal (gotta be careful with parameters, it fail silently))
+- block button shortcuts when dialog is open
 - Generic system to show/hide button based on player inv/equippement
 - Cache JSONs when loaded 
 	- so I stop getting it from disk everytime I need the attributes of an equiped object,
@@ -55,16 +41,26 @@ polish :::
 
 - Improve data system
 	- overrides (modifed_attributes)
-	- save and restore modified attributes
 	
 - Read-Only base_attributes to prevent un-savable changes by mistake
 	
-
+- Godot : Implement Localization
+	- You can link CSVs in localization, replace certain resources (like textures) with others and even change the project name based on choosen locale
+	- CSVs file are automatically converted into localization files
+		- use tr() method to get translation from keyboard
+		- button labels and such automatically check if text is a key and translate
+		- for format godot support stuff like "bleh {id}".format({"id":"hello world"})\
+		
 IDEAS:::
 - If you try to produce energy over the maximum of the ship capacity there is a chance you "choke" (engine goes critical and blow up)
 	
 	
 DONE :::
+- Shields ?
+	- no health regen... but implement shield that DO regen (at the cost of energy ?)
+	- Use Matter-Energy converter to produce energy
+		- Spawn items from destoyed ships
+	- save and restore modified attributes
 - Basic AI
 	- Shoot back
 - Mersenne Twister

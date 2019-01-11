@@ -119,7 +119,7 @@ func OnEquipMount_Callback(equipper, slot_name, item_id):
 	var attrib_getter = "mounts." + slot_name
 	if equipper.get_attrib(attrib_getter) != null and equipper.get_attrib(attrib_getter) != "":
 		BehaviorEvents.emit_signal("OnDropMount", equipper, slot_name)
-	BehaviorEvents.emit_signal("OnRemoveItem", item_id)
+	BehaviorEvents.emit_signal("OnRemoveItem", equipper, item_id)
 	equipper.set_attrib(attrib_getter, item_id)
 
 #TODO: Fix logic flaws (make sure we're not changing cargo in base_attributes), (check we won't exceed volume before adding)

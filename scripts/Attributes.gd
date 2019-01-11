@@ -7,35 +7,38 @@ extends Node2D
 export var base_attributes = {} # can be kept by reference, no need to serialize
 export var modified_attributes = {} # locally modified attribute (like current position). Should be saved !
 
-func get_attrib(path):
+func get_attrib(path, default=null):
 	var splices = path.split(".", false)
 	var sub = modified_attributes
 	for s in splices:
 		if sub.has(s):
 			sub = sub[s]
 			if typeof(sub) == TYPE_DICTIONARY and sub.has("disabled") and sub["disabled"] == true:
-				return null
+				return default
 		else:
 			sub = null
 			break
 	if sub != null:
-		return Check(sub)
+		return Check(sub, default)
 	sub = base_attributes
 	for s in splices:
 		if sub.has(s):
 			sub = sub[s]
 			if typeof(sub) == TYPE_DICTIONARY and sub.has("disabled") and sub["disabled"] == true:
-				return null
+				return default
 		else:
 			sub = null
 			break
-	return Check(sub)
+	return Check(sub, default)
 	
-func Check(val):
+func Check(val, default):
 	if typeof(val) == TYPE_DICTIONARY and val.has("__class"):
 		return str2var(val.value)
 	else:
-		return val
+		if val == null:
+			return default
+		else:
+			return val
 	
 func set_attrib(path, val):
 	var splices = path.split(".", false)

@@ -59,4 +59,5 @@ func Craft(recipe_data, input_list, crafter):
 			BehaviorEvents.emit_signal("OnAddItem", crafter, recipe_data.produce)
 	
 	BehaviorEvents.emit_signal("OnUseEnergy", crafter, -net_energy_change)
+	BehaviorEvents.emit_signal("OnUseAP", crafter, recipe_data.ap_cost)
 	return result

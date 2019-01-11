@@ -58,6 +58,10 @@ func NormalizeAP():
 	var top_ap = action_list[0].modified_attributes.action_point
 	if top_ap == 0:
 		return
+		
+	Globals.total_turn += top_ap
+	Globals.last_delta_turn = top_ap
+	
 	for i in range(0,action_list.size()):
 		action_list[i].modified_attributes.action_point -= top_ap
 	star_date_turn += top_ap
