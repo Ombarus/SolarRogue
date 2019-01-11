@@ -190,8 +190,8 @@ func OnLevelLoaded_Callback():
 		var coord
 		
 		if _current_origin == PLAYER_ORIGIN.random:
-			var x = int(randf() * Globals.LevelLoaderRef.levelSize.x)
-			var y = int(randf() * Globals.LevelLoaderRef.levelSize.y)
+			var x = MersenneTwister.rand(Globals.LevelLoaderRef.levelSize.x)
+			var y = MersenneTwister.rand(Globals.LevelLoaderRef.levelSize.y)
 			coord = Vector2(x, y)
 		
 		if _current_origin == PLAYER_ORIGIN.saved && save != null && save.has("player_data"):

@@ -175,7 +175,7 @@ EquipAction = NodePath("../../Camera-GUI/HUD/Buttons/Equip")
 [node name="AI" type="Node" parent="Behaviors" index="4"]
 
 script = ExtResource( 8 )
-levelLoaderNode = NodePath("../LevelLoader")
+targetting = NodePath("../Targetting")
 
 [node name="Damage" type="Node" parent="Behaviors" index="5"]
 

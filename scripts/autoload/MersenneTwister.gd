@@ -43,7 +43,7 @@ func reset_to_state(newState):
 func get_current_state():
 	return GeneratorState.new(_generator, _index)
 	
-func rand(upper, is_critical):
+func rand(upper, is_critical=false):
 	if upper <= 1:
 		return 0
 	
@@ -65,10 +65,10 @@ func rand(upper, is_critical):
 	#print(myprint)
 	y = y / (RNG_MAX / upper + 1)
 	
-	return y
+	return int(y)
 	
 func rand_float():
-	return float(Rand(10000000, true) / float(10000000))
+	return float(rand(10000000, true) / float(10000000))
 	
 func _generate_numbers():
 	for i in range(0, GENERATOR_ARRAY_SIZE):

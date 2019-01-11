@@ -121,7 +121,7 @@ func GenerateLevelFromTemplate(levelData):
 	if _current_level_data == null:
 		_current_level_data = levelData
 	var allTilesCoord = ShuffleArray(shufflingArray)
-	var i = int(randf() * allTilesCoord.size()) # choose a random spawn point for the entrance
+	var i = MersenneTwister.rand(allTilesCoord.size()) # choose a random spawn point for the entrance
 	# there must always be a wormhole leading back where we came from
 	var n = CreateAndInitNode(_current_level_data, allTilesCoord[i])
 	n.modified_attributes["depth"] = current_depth - 1
@@ -136,7 +136,7 @@ func GenerateLevelFromTemplate(levelData):
 			if obj.has("min") && (!objCountByType.has(obj["name"]) || objCountByType[obj["name"]] < obj["min"]):
 				do_spawn = true
 			if !do_spawn && obj.has("spawn_rate"):
-				if randf() < obj["spawn_rate"]:
+				if MersenneTwister.rand_float() < obj["spawn_rate"]:
 					do_spawn = true
 	
 			if do_spawn:	
@@ -247,7 +247,7 @@ func ShuffleArray(ar):
 	var indexList = range(ar.size())
 	for i in range(ar.size()):
 		#(randf() * (y-x)) + x
-		var x = int(randf() * indexList.size())
+		var x = MersenneTwister.rand(indexList.size())
 		shuffledList.append(ar[indexList[x]])
 		indexList.remove(x)
 	return shuffledList

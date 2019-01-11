@@ -13,8 +13,18 @@
 	"converter": {
 		"maximum_energy":10000,
 		"recipes": [
-			{"name": "Energy", "requirements": [{"type":"food", "amount":1}], "produce":"energy", "amount":1500},
-			{"name": "Missile", "requirements":[{"type":"energy", "amount":500}], "produce":"data/json/items/weapons/missile.json", "amount":1}
+			{
+				"name": "Energy", 
+				"requirements": [{"type":"food", "amount":1}], 
+				"produce":"energy", 
+				"amount":1500
+			},
+			{
+				"name": "Missile", 
+				"requirements":[{"type":"energy", "amount":500}], 
+				"produce":"data/json/items/weapons/missile.json", 
+				"amount":1
+			}
 		]
 	}
 }

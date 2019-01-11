@@ -51,7 +51,8 @@ func UpdateStatusBar(player_obj):
 	var health_per = cur_hull / max_hull
 	var changed_color = false
 	for i in range(hull_size):
-		if i / hull_size >= health_per and not changed_color:
+		var bar_per = float(i) / float(hull_size)
+		if bar_per >= health_per and not changed_color:
 			status_str += "[/color][color=gray]"
 			changed_color = true
 		status_str += "="

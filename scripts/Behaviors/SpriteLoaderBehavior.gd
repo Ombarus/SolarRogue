@@ -21,7 +21,7 @@ func OnObjectLoaded_Callback(obj):
 		node = scene.instance()
 	if attrib.has("sprite_choice"):
 		# TODO: handle know/unknown (multiple look for potions in nethack, but always the same look in a given game)
-		var x = int(randf() * attrib["sprite_choice"].size())
+		var x = MersenneTwister.rand(attrib["sprite_choice"].size())
 		var scene = load("res://scenes/tileset_source/" + attrib["sprite_choice"][x] + ".tscn")
 		node = scene.instance()
 		

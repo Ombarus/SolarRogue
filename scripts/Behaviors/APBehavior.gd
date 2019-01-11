@@ -7,6 +7,7 @@ var action_list = []
 var star_date_turn = 0
 var star_date_minor = 0
 var star_date_major = 0
+var _disable = false
 
 func _ready():
 	log_window_ref = get_node(LogWindow)
@@ -15,6 +16,8 @@ func _ready():
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
 	
 func OnRequestObjectUnload_Callback(obj):
+	if obj.get_attrib("type") == "player":
+		_disable = true
 	action_list.erase(obj)
 
 func OnUseAP_Callback(obj, amount):
@@ -47,7 +50,7 @@ func OnUseAP_Callback(obj, amount):
 	
 func validate_emit_OnObjTurn(obj):
 	# if object has been removed from list before it had a chance to act. Ignore it
-	if action_list.find(obj) != -1:
+	if action_list.find(obj) != -1 and _disable == false:
 		BehaviorEvents.emit_signal("OnObjTurn", obj)
 
 # Top action is always 0 AP. This way when we insert a new object it will be the first to act
@@ -79,6 +82,8 @@ func UpdateLogTitle():
 
 func OnObjectLoaded_Callback(obj):
 	var attrib = obj.get_attrib("action_point")
+	if obj.get_attrib("type") == "player":
+		_disable = false
 	if attrib != null:
 		var start_point = attrib
 		obj.set_attrib("action_point", start_point)

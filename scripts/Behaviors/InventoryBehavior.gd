@@ -14,7 +14,7 @@ func _ready():
 	BehaviorEvents.connect("OnEquipMount", self, "OnEquipMount_Callback")
 	
 func OnUseEnergy_Callback(obj, amount):
-	if amount == 0:
+	if amount == 0 or obj.get_attrib("converter.stored_energy") == null:
 		return
 	var cur_energy = obj.get_attrib("converter.stored_energy")
 	cur_energy -= amount
@@ -86,7 +86,7 @@ func OnDropCargo_Callback(dropper, item_id):
 		drop_speed = 0
 	var total_ap_cost = 0
 	for item in cargo:
-		if item.src == item_id:
+		if item_id in item.src:
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			dropper.set_attrib("cargo.volume_used", dropper.get_attrib("cargo.volume_used") - data.equipment.volume)
 			if item.count > 1:
@@ -132,7 +132,7 @@ func OnAddItem_Callback(picker, item_id):
 	var found = false
 	if "stackable" in data.equipment and data.equipment.stackable == true:
 		for item in cargo:
-			if item.src in item_id:
+			if item_id in item.src:
 				found = true
 				item.count += 1
 	if found == false:
@@ -147,7 +147,7 @@ func OnRemoveItem_Callback(holder, item_id):
 	var index_to_delete = []
 	var i = 0
 	for item in cargo:
-		if item.src == item_id:
+		if item_id in item.src:
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			holder.set_attrib("cargo.volume_used", holder.get_attrib("cargo.volume_used") - data.equipment.volume)
 			if item.count > 1:

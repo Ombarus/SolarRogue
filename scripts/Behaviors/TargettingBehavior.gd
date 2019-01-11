@@ -65,6 +65,49 @@ func IsValidTile(player_tile, target_tile, weapon_data):
 			return false
 		else:
 			return true
+	
+func ClosestFiringSolution(shooter_tile, target_tile, weapon):
+	var shootable_tiles = []
+	var fire_radius = weapon.weapon_data.fire_range
+	var offset = Vector2(0,0)
+	var obj_tile = shooter_tile
+	var bounds = Globals.LevelLoaderRef.levelSize
+	
+	while round(offset.length()) <= (fire_radius+1):
+		while round(offset.length()) <= (fire_radius+1):
+			var tile = obj_tile + offset
+			if IsValidTile(obj_tile, tile, weapon.weapon_data):
+				shootable_tiles.append(tile)
+			if offset.x != 0:
+				offset.x *= -1
+				tile = obj_tile + offset
+				if IsValidTile(obj_tile, tile, weapon.weapon_data):
+					shootable_tiles.append(tile)
+			if offset.y != 0:
+				offset.y *= -1
+				tile = obj_tile + offset
+				if IsValidTile(obj_tile, tile, weapon.weapon_data):
+					shootable_tiles.append(tile)
+			if offset.x != 0:
+				offset.x *= -1
+				tile = obj_tile + offset
+				if IsValidTile(obj_tile, tile, weapon.weapon_data):
+					shootable_tiles.append(tile)
+			offset.y *= -1
+			offset.y += 1
+		offset.y = 0
+		offset.x += 1
+		
+	var min_length = null
+	var best_dist = null
+	for tile in shootable_tiles:
+		var dist = target_tile - tile
+		var length = dist.length()
+		if min_length == null or min_length > length:
+			min_length = length
+			best_dist = dist
+			
+	return best_dist
 		
 
 func _DoTargetting(player, weapon):

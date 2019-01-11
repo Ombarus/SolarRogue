@@ -1,12 +1,37 @@
 extends Node
 
-export(NodePath) var levelLoaderNode
-var levelLoaderRef
+export(NodePath) var targetting
+var _targetting
 
 func _ready():
-	levelLoaderRef = get_node(levelLoaderNode)
+	_targetting = get_node(targetting)
 	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
 	BehaviorEvents.connect("OnDamageTaken", self, "OnDamageTaken_Callback")
+	BehaviorEvents.connect("OnScannerUpdated", self, "OnScannerUpdated_Callback")
+	
+	
+func OnScannerUpdated_Callback(obj):
+	if obj.get_attrib("ai") == null or obj.get_attrib("ai.aggressive") == false:
+		return
+		
+	var level_id = Globals.LevelLoaderRef.GetLevelID()
+	var new_objs = obj.get_attrib("scanner_result.new_in_range." + level_id)
+	#var new_out_objs = obj.get_attrib("scanner_result.new_out_of_range." + level_id)
+	
+	var player = null
+	var in_range = false
+	for id in new_objs:
+		var o = Globals.LevelLoaderRef.GetObjectById(id)
+		if o.get_attrib("type") == "player":
+			in_range = true
+			player = id
+			break
+	
+	if in_range == true:
+		obj.set_attrib("ai.pathfinding", "attack")
+		obj.set_attrib("ai.target", player)
+		obj.set_attrib("wandering", false)
+	
 
 	
 func OnDamageTaken_Callback(target, shooter):
@@ -35,6 +60,8 @@ func OnObjTurn_Callback(obj):
 		DoSimplePathFinding(obj)
 	elif pathfinding == "run_away":
 		DoRunAwayPathFinding(obj)
+	elif pathfinding == "attack":
+		DoAttackPathFinding(obj)
 	else:
 		# For now, just do nothing for one AP
 		BehaviorEvents.emit_signal("OnUseAP", obj, 1.0)
@@ -44,15 +71,29 @@ func OnObjTurn_Callback(obj):
 		BehaviorEvents.emit_signal("OnUseAP", obj, 1.0)
 
 func FindRandomTile():
-	var x = int(randf() * levelLoaderRef.levelSize.x)
-	var y = int(randf() * levelLoaderRef.levelSize.y)
+	var x = MersenneTwister.rand(Globals.LevelLoaderRef.levelSize.x)
+	var y = MersenneTwister.rand(Globals.LevelLoaderRef.levelSize.y)
 	return Vector2(x,y)
+
+func DoAttackPathFinding(obj):
+	var player = Globals.LevelLoaderRef.GetObjectById(obj.get_attrib("ai.target"))
+	var player_tile = Globals.LevelLoaderRef.World_to_Tile(player.position)
+	var obj_tile = Globals.LevelLoaderRef.World_to_Tile(obj.position)
+	var obj_weapon = Globals.LevelLoaderRef.LoadJSON(obj.get_attrib("mounts.small_weapon_mount"))
+	var minimal_move = _targetting.ClosestFiringSolution(obj_tile, player_tile, obj_weapon)
+	if minimal_move.length() == 0:
+		BehaviorEvents.emit_signal("OnDealDamage", player, obj, obj_weapon)
+	else:
+		var move_by = Vector2(0, 0)
+		move_by.x = clamp(minimal_move.x, -1, 1)
+		move_by.y = clamp(minimal_move.y, -1, 1)
+		BehaviorEvents.emit_signal("OnMovement", obj, move_by)
 
 func DoSimplePathFinding(obj):
 	if obj.get_attrib("wandering") == null:
 		obj.modified_attributes["wandering"] = true
 	
-	var tile_pos = levelLoaderRef.World_to_Tile(obj.position)
+	var tile_pos = Globals.LevelLoaderRef.World_to_Tile(obj.position)
 
 	var cur_objective = obj.get_attrib("ai.objective")
 	if cur_objective == null || cur_objective == tile_pos:

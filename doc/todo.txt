@@ -1,9 +1,11 @@
 1st step :::
-- Mersenne Twister
+- Repairs ?
+	- Use Energy with converter to restore health ?
+	- nanobot mount that regenerate x health every turn for y energy
+	- no health regen... but implement shield that DO regen
+- re-work Object identification (show as unknown, then remember id-ed stuff)
 - Equipping objects duplicate them !
 - Shields ?
-- Basic AI
-	- Shoot back
 - Look around
 - Improve weapon system
 	- keyboard aim ?
@@ -63,6 +65,12 @@ IDEAS:::
 	
 	
 DONE :::
+- Basic AI
+	- Shoot back
+- Mersenne Twister
+- BUG: don't consume energy or AP before knowing if we have enough ammo !
+- BUG: when 0 missile in inventory, still shows Missile (but not "1 x" ***) (problem with data being : "data/json/..." and src being : "res://data/json/...")
+- BUG: laser still use missiles ? (forgot to remove ammo from json)
 	- Add lasers (shoot in straight line (left-right-up-down), do not use ammo, use more energy per shot)
 	- Limit grid to weapon range
 	- Death if no hull or energy
