@@ -60,6 +60,7 @@ _sections_unfolded = [ "Anchor", "Margin", "Rect" ]
 editor_trigger_signal = false
 dialog_ok = false
 dialog_cancel = false
+title_height = 1
 title = ""
 border_style = "="
 

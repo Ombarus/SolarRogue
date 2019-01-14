@@ -1,49 +1,102 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/GUI/PopupButton.gd" type="Script" id=1]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=3]
 [ext_resource path="res://data/styles/trans.tres" type="StyleBox" id=4]
+[ext_resource path="res://scripts/GUI/PopupScreenBlock.gd" type="Script" id=5]
+
+[sub_resource type="InputEventKey" id=1]
+
+device = 0
+alt = false
+shift = false
+control = false
+meta = false
+command = false
+pressed = false
+scancode = 77
+unicode = 0
+echo = false
+
+[sub_resource type="ShortCut" id=2]
+
+shortcut = SubResource( 1 )
+
+[sub_resource type="InputEventKey" id=3]
+
+device = 0
+alt = false
+shift = false
+control = false
+meta = false
+command = false
+pressed = false
+scancode = 76
+unicode = 0
+echo = false
+
+[sub_resource type="ShortCut" id=4]
+
+shortcut = SubResource( 3 )
 
 [node name="PopupButton" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 322.0
-margin_bottom = 140.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
+_sections_unfolded = [ "Mouse" ]
 
-[node name="Popup" parent="." index="0" instance=ExtResource( 2 )]
+[node name="PopupSize" type="Control" parent="." index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 327.0
+margin_bottom = 266.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Mouse" ]
+
+[node name="Popup" parent="PopupSize" index="0" instance=ExtResource( 2 )]
 
 visible = false
 margin_right = 0.0
 margin_bottom = 0.0
+title_height = 3
 title = "..."
 border_style = "━"
 
-[node name="Mount" parent="Popup" index="2" instance=ExtResource( 3 )]
+[node name="Mount" parent="PopupSize/Popup" index="2" instance=ExtResource( 3 )]
 
-margin_left = 10.0
-margin_top = 54.0
-margin_right = 149.0
-margin_bottom = 113.0
+margin_left = 15.0
+margin_top = 90.0
+margin_right = 154.0
+margin_bottom = 149.0
 Text = "[m]ount"
+Action = SubResource( 2 )
 
-[node name="Look" parent="Popup" index="3" instance=ExtResource( 3 )]
+[node name="Look" parent="PopupSize/Popup" index="3" instance=ExtResource( 3 )]
 
-margin_left = 155.0
-margin_top = 54.0
-margin_right = 294.0
-margin_bottom = 115.0
+margin_left = 164.0
+margin_top = 90.0
+margin_right = 303.0
+margin_bottom = 151.0
 Text = "[l]ook"
+Action = SubResource( 4 )
 
 [node name="More" parent="." index="1" instance=ExtResource( 3 )]
 
@@ -56,12 +109,12 @@ Text = "..."
 visible = false
 anchor_left = 0.0
 anchor_top = 0.0
-anchor_right = 1.0
+anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 6.0
-margin_top = 4.0
-margin_right = -7.0
-margin_bottom = 37.0
+margin_left = 8.0
+margin_top = 6.0
+margin_right = 313.0
+margin_bottom = 72.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -77,5 +130,25 @@ group = null
 flat = false
 align = 1
 _sections_unfolded = [ "custom_styles" ]
+
+[node name="ScreenBlock" type="Control" parent="." index="3"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 5 )
+_sections_unfolded = [ "Mouse" ]
+
+[connection signal="pressed" from="PopupSize/Popup/Mount" to="." method="_on_Mount_pressed"]
+
+[connection signal="pressed" from="PopupSize/Popup/Look" to="." method="_on_Look_pressed"]
 
 

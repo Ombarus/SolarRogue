@@ -5,6 +5,9 @@ export var Text = "" setget set_text
 export(ShortCut) var Action = null setget set_action
 signal pressed
 
+func get_height_line():
+	return get_node("base").get_height_line()
+
 func set_text(newval):
 	Text = newval
 	if has_node("btn"):

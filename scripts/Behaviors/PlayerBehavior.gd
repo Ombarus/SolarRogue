@@ -6,7 +6,7 @@ export(NodePath) var GrabAction
 export(NodePath) var DropAction
 export(NodePath) var CraftingAction
 export(NodePath) var FTLAction
-export(NodePath) var EquipAction
+export(NodePath) var PopupButtons
 
 var playerNode = null
 var levelLoaderRef
@@ -16,7 +16,8 @@ var lock_input = false # when it's not player turn, inputs are locked
 enum INPUT_STATE {
 	hud,
 	grid_targetting,
-	cell_targetting
+	cell_targetting,
+	look_around
 }
 var _input_state = INPUT_STATE.hud
 
@@ -43,12 +44,19 @@ func _ready():
 	action.connect("pressed", self, "Pressed_FTL_Callback")
 	action = get_node(CraftingAction)
 	action.connect("pressed", self, "Pressed_Crafting_Callback")
-	action = get_node(EquipAction)
-	action.connect("pressed", self, "Pressed_Equip_Callback")
+	action = get_node(PopupButtons)
+	action.connect("mount_pressed", self, "Pressed_Equip_Callback")
+	action.connect("look_pressed", self, "Pressed_Look_Callback")
 	
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
+	
+func Pressed_Look_Callback():
+	if lock_input:
+		return
+	_input_state = INPUT_STATE.look_around
+	BehaviorEvents.emit_signal("OnLogLine", "Select area to scan...")
 	
 func Pressed_Equip_Callback():
 	if lock_input:
@@ -230,7 +238,23 @@ func OnLevelLoaded_Callback():
 		# always default to saved position
 		_current_origin = PLAYER_ORIGIN.saved
 	
-
+func _input(event):
+	if _input_state != INPUT_STATE.look_around or not event is InputEventMouseButton or not event.is_action_released("touch"):
+		return
+		
+	_input_state = INPUT_STATE.hud
+	get_tree().set_input_as_handled()
+	
+	var click_pos = playerNode.get_global_mouse_position()
+	
+	var tile = Globals.LevelLoaderRef.World_to_Tile(click_pos)
+	var tile_content = Globals.LevelLoaderRef.levelTiles[tile.x][tile.y]
+	var str_fmt = "There is %s here"
+	if tile_content.size() == 0:
+		BehaviorEvents.emit_signal("OnLogLine", "Nothing but empty space")
+	for obj in tile_content:
+		BehaviorEvents.emit_signal("OnLogLine", str_fmt % obj.get_attrib("name_id"))
+	
 
 func _unhandled_input(event):
 	if lock_input:
@@ -295,7 +319,11 @@ func _unhandled_input(event):
 			dir = Vector2(1,-1)
 		if event.scancode == KEY_KP_5:
 			BehaviorEvents.emit_signal("OnUseAP", playerNode, 1.0)
-			BehaviorEvents.emit_signal("OnLogLine", "Cooling reactor (wait)")			
+			BehaviorEvents.emit_signal("OnLogLine", "Cooling reactor (wait)")
+		if event.scancode == KEY_M:
+			Pressed_Equip_Callback()
+		if event.scancode == KEY_L:
+			Pressed_Look_Callback()
 		# GODOT cannot give me the real key that was pressed. Only the physical key
 		# in En-US keyboard layout. There's no way to register a shortcut that's on a modifier (like !@#$%^&*())
 		#TODO: Stay updated on this issue on their git tracker. This is serious enough to make me want to change engine

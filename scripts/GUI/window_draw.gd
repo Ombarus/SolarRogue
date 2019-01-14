@@ -4,6 +4,7 @@ extends Control
 export(bool) var editor_trigger_signal = true setget set_signal
 export(bool) var dialog_ok = false setget set_dialog_ok
 export(bool) var dialog_cancel = false setget set_dialog_cancel
+export(int) var title_height = 1 setget set_title_height
 export(String) var title = "" setget set_title
 export(String, "═", "─", "━", " ") var border_style = "=" setget set_style
 
@@ -70,6 +71,13 @@ const string_empty = {
 	"bottom_right": " ",
 	"header_right": " "
 }
+
+func get_height_line():
+	return int(floor((_window_size.y / _font_size.y)))
+
+func set_title_height(val):
+	title_height = val
+	self.emit_signal("OnUpdateLayout")
 
 func set_dialog_ok(val):
 	dialog_ok = val
@@ -192,9 +200,10 @@ func update():
 	var header_height = 2
 	var final_window_string = top_string + "\n"
 	if !title.empty():
-		final_window_string += side_string + "\n"
+		for i in range(title_height):
+			final_window_string += side_string + "\n"
 		final_window_string += header_string + "\n"
-		header_height = 4
+		header_height = 3 + title_height
 	
 	for i in range(0, repeat_height-header_height):
 		final_window_string += side_string + "\n"
