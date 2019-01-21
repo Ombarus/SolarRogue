@@ -1,5 +1,7 @@
 Salut Gab,
-Comment va gameloft ? Toujours sur Grease ? 
+Comment va Gameloft ? Toujours sur Grease ?
+
+
 
 
 - Pixel art
@@ -12,7 +14,7 @@ Comment va gameloft ? Toujours sur Grease ?
 	- https://www.gridsagegames.com/blog/2015/03/tileset-1-0/
 	
 - Features :
-	- Sci-fi ship flying through empty space in solar systems randomly generated ennemy ships, planetes, suns, space stations, etc.
+	- Sci-fi ship flying through empty space in solar systems randomly generated ennemy ships, planets, suns, space stations, etc.
 	  Take wormhole to reach final system and ?
 	- Tactical Turn Based
 		- Probably a lot of time spent in menus / inventory, etc.

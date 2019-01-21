@@ -13,11 +13,14 @@ var levelLoaderRef
 var click_start_pos
 var lock_input = false # when it's not player turn, inputs are locked
 
+var test_data = {}
+
 enum INPUT_STATE {
 	hud,
 	grid_targetting,
 	cell_targetting,
-	look_around
+	look_around,
+	test
 }
 var _input_state = INPUT_STATE.hud
 
@@ -269,6 +272,8 @@ func _unhandled_input(event):
 			
 			if _input_state == INPUT_STATE.grid_targetting:
 				BehaviorEvents.emit_signal("OnTargetClick", click_pos)
+			elif _input_state == INPUT_STATE.test:
+				DO_TEST(click_pos)
 			else:
 				var player_pos = playerNode.position
 				var click_dir = click_pos - player_pos
@@ -332,6 +337,8 @@ func _unhandled_input(event):
 		#		Check out : Godot_src\godot\core\os\input_event.cpp for how shortcut key inputs are handled
 		if (event.scancode == KEY_PERIOD || event.scancode == KEY_COLON) && event.shift == true:
 			Pressed_FTL_Callback()
+		if event.scancode == KEY_T:
+			_input_state = INPUT_STATE.test
 		#print(event.scancode)
 		#print ("key_period : ", KEY_PERIOD, ", key_comma : ", KEY_COLON)
 	if dir != null:
@@ -342,3 +349,12 @@ func ProcessGridSelection(pos):
 	_input_state = INPUT_STATE.hud
 	return
 	
+func DO_TEST(click_pos):
+	var scene = load("res://scenes/tileset_source/MissileFX2.tscn")
+	var n = scene.instance()
+	var player_pos = playerNode.position
+	n.position = player_pos
+	test_data["node"] = n
+	var r = get_node("/root/Root/GameTiles")
+	r.call_deferred("add_child", n)
+	n.Start(click_pos)

@@ -5,7 +5,7 @@ extends Node
 # var b = "textvar"
 
 func _ready():
-	# Called when the node is added to the scene for the first time.
+	# Called when the node is added to the scene for the first time.w
 	# Initialization here
 	BehaviorEvents.connect("OnPlayerDeath", self, "OnPlayerDeath_Callback")
 	

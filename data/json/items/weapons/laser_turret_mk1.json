@@ -6,6 +6,9 @@
 		"missile_launcher_green",
 		"missile_launcher_yellow"
 	],
+	"animation": {
+		"shoot": "scenes/tileset_source/LaserFX01.tscn"
+	},
 	"weapon_data": {
 		"base_dam":7.0,
 		"max_dam":12.0,

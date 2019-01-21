@@ -1,19 +1,28 @@
 1st step :::
-- "more" button with a list of less common actions (look around, equip/unequip, etc.)
+- Animation !
+- Spawning
 - re-work Object identification (show as unknown, then remember id-ed stuff)
 - Basic interaction
 	- Look around
+		- select item using keyboard
 	- Shoot
 		- select target using keyboard
 	- Scan
 		- Give health remaining on ships
 		- Give detailed description of planet (rich but hard to mine, poor but easy to mine, etc)
 - Two places where I access cargo content and juste do -= 1. or .remove()... but if the result returned was in BaseAttribute that's dangerous
-- Make energy work
-	- Assign energy for actions
-	- Use energy when doing actions
+
 - check if assigning array or dictionary copy or reference content in godot
 - Ability to swap tileset for ascii somehow
+- Look & feel
+	- Icons :
+		- Converter
+		- Hydrogen
+		- Scanner
+		- Shield
+		- Laser turret
+		- Missile Launcher
+		- Ship parts ?
 - GUI
 	- Status
 	- Log window
@@ -26,7 +35,6 @@
 	
 	
 polish :::
-- Equipping objects duplicate them ! (mis-calling a signal (gotta be careful with parameters, it fail silently))
 - block button shortcuts when dialog is open
 - Generic system to show/hide button based on player inv/equippement
 - Cache JSONs when loaded 
@@ -56,6 +64,12 @@ IDEAS:::
 	
 	
 DONE :::
+- Make energy work
+	- Assign energy for actions
+	- Use energy when doing actions
+	- Look around
+- "more" button with a list of less common actions (look around, equip/unequip, etc.)
+- Equipping objects duplicate them ! (mis-calling a signal (gotta be careful with parameters, it fail silently))
 - Shields ?
 	- no health regen... but implement shield that DO regen (at the cost of energy ?)
 	- Use Matter-Energy converter to produce energy
