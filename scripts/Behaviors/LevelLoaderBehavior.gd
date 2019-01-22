@@ -15,6 +15,7 @@ var objById = {}
 # TODO: init id when loading saved game
 var _sequence_id = 0 # for giving unique name to objects
 var _current_level_data = null
+var _wait_for_anim = false
 
 func GetCurrentLevelData():
 	return _current_level_data
@@ -38,6 +39,8 @@ func _ready():
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
 	BehaviorEvents.connect("OnRequestLevelChange", self, "OnRequestLevelChange_Callback")
 	BehaviorEvents.connect("OnPlayerDeath", self, "OnPlayerDeath_Callback")
+	BehaviorEvents.connect("OnWaitForAnimation", self, "OnWaitForAnimation_Callback")
+	BehaviorEvents.connect("OnAnimationDone", self, "OnAnimationDone_Callback")
 	
 	var bound_line = get_node("/root/Root/Upper-Left-Bound/L1")
 	bound_line.add_point(Vector2(-tileSize/2.0, -tileSize/2.0))
@@ -195,6 +198,12 @@ func SaveState(level_data):
 	save_game.store_line(to_json(cur_save))
 	save_game.close()
 
+func OnWaitForAnimation_Callback():
+	_wait_for_anim = true
+	
+func OnAnimationDone_Callback():
+	_wait_for_anim = false
+
 func OnRequestLevelChange_Callback(wormhole):
 	SaveState(_current_level_data)
 	# should be defferred !
@@ -210,6 +219,8 @@ func OnRequestObjectUnload_Callback(obj):
 	#TODO: Should I clean ObjById ? I might iterate through it to delete objects so removing them while I iterate is dangerous
 	objById[obj.get_attrib("unique_id")] = null
 	objByType[obj.base_attributes.type].erase(obj)
+	if _wait_for_anim == true:
+		yield(BehaviorEvents, "OnAnimationDone")
 	obj.get_parent().remove_child(obj)
 	obj.queue_free()
 	

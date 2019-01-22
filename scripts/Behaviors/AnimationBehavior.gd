@@ -1,12 +1,18 @@
 extends Node
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+var _wait_for_anim = false
 
 func _ready():
 	BehaviorEvents.connect("OnShotFired", self, "OnShotFired_Callback")
 	BehaviorEvents.connect("OnObjectDestroyed", self, "OnObjectDestroyed_Callback")
+	BehaviorEvents.connect("OnWaitForAnimation", self, "OnWaitForAnimation_Callback")
+	BehaviorEvents.connect("OnAnimationDone", self, "OnAnimationDone_Callback")
+	
+func OnWaitForAnimation_Callback():
+	_wait_for_anim = true
+	
+func OnAnimationDone_Callback():
+	_wait_for_anim = false
 	
 func OnObjectDestroyed_Callback(obj):
 	var destroyed_scene = obj.get_attrib("animation.destroyed")
@@ -17,6 +23,8 @@ func OnObjectDestroyed_Callback(obj):
 		destroyed_scene = "res://" + destroyed_scene
 	
 	var scene = load(destroyed_scene)
+	if _wait_for_anim == true:
+		yield(BehaviorEvents, "OnAnimationDone")
 	var n = scene.instance()
 	var pos = obj.position
 	n.position = pos
