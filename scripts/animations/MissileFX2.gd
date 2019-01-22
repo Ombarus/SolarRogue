@@ -46,5 +46,6 @@ func _process(delta):
 		active = false
 		#get_node("root").position.x = 0
 		_cur_time = 0
+		BehaviorEvents.emit_signal("OnAnimationDone")
 		get_parent().remove_child(self)
 		queue_free()

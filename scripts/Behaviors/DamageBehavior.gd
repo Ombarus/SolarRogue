@@ -22,6 +22,7 @@ func OnObjectLoaded_Callback(obj):
 	
 func OnDealDamage_Callback(target, shooter, weapon_data):
 	if validate_action(target, shooter, weapon_data) == true:
+		BehaviorEvents.emit_signal("OnShotFired", target, shooter, weapon_data)
 		if target.get_attrib("harvestable") != null:
 			ProcessHarvesting(target, shooter, weapon_data)
 		else:
@@ -113,6 +114,7 @@ func ProcessDamage(target, shooter, weapon_data):
 				BehaviorEvents.emit_signal("OnLogLine", "[color=red]You destroy the ennemy ![/color]")
 			if is_target_player:
 				BehaviorEvents.emit_signal("OnPlayerDeath")
+			BehaviorEvents.emit_signal("OnObjectDestroyed", target)
 			BehaviorEvents.emit_signal("OnRequestObjectUnload", target)
 		else:
 			if is_player:

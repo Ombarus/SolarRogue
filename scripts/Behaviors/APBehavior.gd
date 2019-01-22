@@ -8,12 +8,21 @@ var star_date_turn = 0
 var star_date_minor = 0
 var star_date_major = 0
 var _disable = false
+var _waiting_on_anim = false
 
 func _ready():
 	log_window_ref = get_node(LogWindow)
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 	BehaviorEvents.connect("OnUseAP", self, "OnUseAP_Callback")
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
+	BehaviorEvents.connect("OnWaitForAnimation", self, "OnWaitForAnimation_Callback")
+	BehaviorEvents.connect("OnAnimationDone", self, "OnAnimationDone_Callback")
+	
+func OnWaitForAnimation_Callback():
+	_waiting_on_anim = true
+	
+func OnAnimationDone_Callback():
+	_waiting_on_anim = false
 	
 func OnRequestObjectUnload_Callback(obj):
 	if obj.get_attrib("type") == "player":
@@ -46,11 +55,14 @@ func OnUseAP_Callback(obj, amount):
 	# OnobjTurn triggers OnUseAp so this is circular.
 	# The only reason it won't crash right away is that the player waits for input
 	# using call_deferred should allow us to "queue" the OnObjTurn and do them in sequence (or even in parallel)
+	if _waiting_on_anim:
+		yield(BehaviorEvents, "OnAnimationDone")
+		
 	self.call_deferred("validate_emit_OnObjTurn", obj_action)
 	
 func validate_emit_OnObjTurn(obj):
 	# if object has been removed from list before it had a chance to act. Ignore it
-	if action_list.find(obj) != -1 and _disable == false:
+	if action_list.find(obj) != -1 and _disable == false:			
 		BehaviorEvents.emit_signal("OnObjTurn", obj)
 
 # Top action is always 0 AP. This way when we insert a new object it will be the first to act

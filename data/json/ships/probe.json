@@ -7,6 +7,9 @@
 		"small_weapon_mount": "data/json/items/weapons/missile_launcher_mk1.json",
 		"shield": ""
 	},
+	"animation": {
+		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
+	},
 	"ai": {
 		"aggressive":false,
 		"pathfinding":"simple",
