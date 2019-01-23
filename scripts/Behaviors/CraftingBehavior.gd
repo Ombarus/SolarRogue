@@ -34,6 +34,12 @@ func Craft(recipe_data, input_list, crafter):
 						break
 					can_produce = true
 					continue
+		if "src" in require:
+			#var num_req = require["amount"]
+			#TODO: count how many are required (take into account stackable ?)
+			for info in loaded_input_data:
+				if require["src"] in info["src"]:
+					
 		if can_produce == false:
 			if result == Globals.CRAFT_RESULT.success:
 				result = Globals.CRAFT_RESULT.missing_resources

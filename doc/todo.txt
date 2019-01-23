@@ -1,5 +1,8 @@
 1st step :::
-- Animation !
+- BUG: ran out of energy with 3 000 to spare after playing for a while ?
+- BUG: Dropping / removing scanner should update scanner behavior
+- Ship transfer and crafting
+- make sure player cannot generate more energy than max capacity
 - Spawning
 - re-work Object identification (show as unknown, then remember id-ed stuff)
 - Basic interaction
@@ -64,6 +67,7 @@ IDEAS:::
 	
 	
 DONE :::
+- Animation !
 - Make energy work
 	- Assign energy for actions
 	- Use energy when doing actions

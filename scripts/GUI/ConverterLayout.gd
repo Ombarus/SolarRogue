@@ -93,6 +93,9 @@ func _on_CraftingList_item_selected(index):
 	for r in recipe_data.requirements:
 		if "type" in r:
 			_requirement_list.add_item("Type: " + r.type + ", amount : " + str(r.amount))
+		if "src" in r:
+			var d = Globals.LevelLoaderRef.LoadJSON(r.src)
+			_requirement_list.add_item("Item: " + d.name_id + ", amount : " + str(r.amount))
 	_requirement_list.add_item("-------------------------")
 	_requirement_list.add_item("Produces :")
 	if recipe_data.produce == "energy":

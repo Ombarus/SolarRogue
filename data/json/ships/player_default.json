@@ -22,7 +22,7 @@
 		"pickup_ap":1.0,
 		"drop_ap":1.0,
 		"content":[
-			{"src":"data/json/items/weapons/missile.json", "count":5}
+			{"src":"data/json/items/weapons/missile.json", "count":20}
 		]
 	},
 	"converter": {

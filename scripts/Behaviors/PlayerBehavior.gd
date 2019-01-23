@@ -338,7 +338,10 @@ func _unhandled_input(event):
 		if (event.scancode == KEY_PERIOD || event.scancode == KEY_COLON) && event.shift == true:
 			Pressed_FTL_Callback()
 		if event.scancode == KEY_T:
-			_input_state = INPUT_STATE.test
+			if _input_state == INPUT_STATE.test:
+				_input_state = INPUT_STATE.hud
+			else:
+				_input_state = INPUT_STATE.test
 		#print(event.scancode)
 		#print ("key_period : ", KEY_PERIOD, ", key_comma : ", KEY_COLON)
 	if dir != null:
@@ -350,11 +353,4 @@ func ProcessGridSelection(pos):
 	return
 	
 func DO_TEST(click_pos):
-	var scene = load("res://scenes/tileset_source/MissileFX2.tscn")
-	var n = scene.instance()
-	var player_pos = playerNode.position
-	n.position = player_pos
-	test_data["node"] = n
-	var r = get_node("/root/Root/GameTiles")
-	r.call_deferred("add_child", n)
-	n.Start(click_pos)
+	pass

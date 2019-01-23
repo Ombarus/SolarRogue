@@ -16,6 +16,7 @@
 		"run_if_attacked":false
 	},
 	"drop_on_death": [
+		{"id":"data/json/items/misc/shuttle_body.json", "chance":0.7},
 		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.07},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.1},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},

@@ -1,0 +1,30 @@
+{
+	"name_id":"A Small Shuttle",
+	"type":"ship",
+	"sprite":"shuttle",
+	"action_point":0,
+	"mounts": {
+		"small_weapon_mount": "",
+		"shield": "",
+		"scanner": "",
+		"converter": ""
+	},
+	"destroyable": {
+		"hull":15
+	},
+	"moving": {
+		"speed":0.7,
+		"wander_speed":2.5,
+		"can_use_wormhole":true,
+		"energy_cost":50
+	},
+	"cargo": {
+		"capacity":250,
+		"pickup_ap":1.0,
+		"drop_ap":1.0,
+		"content":[]
+	},
+	"converter": {
+		"stored_energy": 10000
+	}
+}
