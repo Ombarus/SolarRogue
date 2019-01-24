@@ -25,9 +25,12 @@ signal OnScannerUpdated(obj)
 signal OnPlayerDeath()
 signal OnObjectDestroyed(obj) # for vfx
 signal OnRequestPlayerTargetting(player, weapon_data, callback_obj, callback_method)
+signal OnRequestBoardTargetting(player, callback_obj, callback_method)
 signal OnTargetClick(click_pos)
+signal OnBoardTargetClick(click_pos)
 signal OnWaitForAnimation()
 signal OnAnimationDone()
+signal OnTransferPlayer(old_player, new_player)
 
 signal OnGUILoaded(name, obj)
 signal OnPushGUI(name, init_param)

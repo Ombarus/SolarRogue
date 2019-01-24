@@ -2,7 +2,7 @@
 	"name_id":"A Simple Probe",
 	"sprite":"probe",
 	"type":"ship",
-	"action_point":0,
+	"boardable":true,
 	"mounts": {
 		"small_weapon_mount": "",
 		"scanner": "",

@@ -3,6 +3,7 @@
 	"type":"player",
 	"sprite":"player",
 	"action_point":0,
+	"boardable":true,
 	"mounts": {
 		"small_weapon_mount": "data/json/items/weapons/missile_launcher_mk1.json",
 		"shield": "data/json/items/shields/shield_mk1.json",
@@ -22,7 +23,8 @@
 		"pickup_ap":1.0,
 		"drop_ap":1.0,
 		"content":[
-			{"src":"data/json/items/weapons/missile.json", "count":20}
+			{"src":"data/json/items/weapons/missile.json", "count":20},
+			{"src":"data/json/items/misc/probe_body.json", "count":1}
 		]
 	},
 	"converter": {

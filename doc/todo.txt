@@ -1,4 +1,6 @@
 1st step :::
+- Work on loot interface
+- BUG: I can target myself !
 - BUG: ran out of energy with 3 000 to spare after playing for a while ?
 - BUG: Dropping / removing scanner should update scanner behavior
 - Ship transfer and crafting

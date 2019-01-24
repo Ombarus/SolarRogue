@@ -19,7 +19,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Rect2( 1408, 384, 128, 128 ), Rect2( 1536, 512, 128, 128 ), Rect2( 1664, 384, 128, 128 ), Rect2( 1536, 512, 128, 128 ), Rect2( 1408, 384, 128, 128 ), Rect2( 1280, 512, 128, 128 ), Rect2( 1152, 384, 128, 128 ), Rect2( 1280, 512, 128, 128 ), Rect2( 1408, 384, 128, 128 ) ]
+"values": [ Rect2( 1408, 384, 128, 128 ), Rect2( 1536, 512, 128, 128 ), Rect2( 1152, 512, 128, 128 ), Rect2( 1536, 512, 128, 128 ), Rect2( 1408, 384, 128, 128 ), Rect2( 1280, 512, 128, 128 ), Rect2( 1152, 384, 128, 128 ), Rect2( 1280, 512, 128, 128 ), Rect2( 1408, 384, 128, 128 ) ]
 }
 
 [node name="probe" type="Sprite"]
@@ -39,6 +39,5 @@ playback_default_blend_time = 0.0
 playback_speed = 1.0
 anims/test = SubResource( 1 )
 blend_times = [  ]
-_sections_unfolded = [ "Playback Options" ]
 
 

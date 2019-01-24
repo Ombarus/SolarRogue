@@ -9,7 +9,7 @@ func Craft(recipe_data, input_list, crafter):
 	var result = Globals.CRAFT_RESULT.success
 	for item in input_list:
 		if typeof(item) == TYPE_STRING and item == "energy":
-			loaded_input_data.push_back({"type":"energy"})
+			loaded_input_data.push_back({"type":"energy", "src":""})
 		else:
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			loaded_input_data.push_back({"data":data, "type":data["type"], "src":item.src, "amount":item.count})
@@ -29,17 +29,21 @@ func Craft(recipe_data, input_list, crafter):
 					can_produce = true
 					continue
 				elif info["type"] == require["type"]:
+					#TODO: handle non-stackable
 					if info["amount"] < require["amount"]:
 						result = Globals.CRAFT_RESULT.not_enough_resources
 						break
 					can_produce = true
 					continue
 		if "src" in require:
-			#var num_req = require["amount"]
 			#TODO: count how many are required (take into account stackable ?)
 			for info in loaded_input_data:
 				if require["src"] in info["src"]:
-					
+					if info["amount"] < require["amount"]:
+						result = Globals.CRAFT_RESULT.not_enough_resources
+						break
+					can_produce = true
+					continue
 		if can_produce == false:
 			if result == Globals.CRAFT_RESULT.success:
 				result = Globals.CRAFT_RESULT.missing_resources
@@ -61,8 +65,13 @@ func Craft(recipe_data, input_list, crafter):
 	if recipe_data.produce == "energy":
 		net_energy_change += recipe_data.amount
 	else:
+		var product_data = Globals.LevelLoaderRef.LoadJSON(recipe_data.produce)
 		for i in range(recipe_data.amount):
-			BehaviorEvents.emit_signal("OnAddItem", crafter, recipe_data.produce)
+			if not "equipment" in product_data:
+				Globals.LevelLoaderRef.RequestObject(recipe_data.produce, Globals.LevelLoaderRef.World_to_Tile(crafter.position))
+			else:
+				#TODO: inventory full ?
+				BehaviorEvents.emit_signal("OnAddItem", crafter, recipe_data.produce)
 	
 	BehaviorEvents.emit_signal("OnUseEnergy", crafter, -net_energy_change)
 	BehaviorEvents.emit_signal("OnUseAP", crafter, recipe_data.ap_cost)

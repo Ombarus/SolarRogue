@@ -13,12 +13,10 @@ var levelLoaderRef
 var click_start_pos
 var lock_input = false # when it's not player turn, inputs are locked
 
-var test_data = {}
-
 enum INPUT_STATE {
 	hud,
-	grid_targetting,
-	cell_targetting,
+	weapon_targetting,
+	board_targetting,
 	look_around,
 	test
 }
@@ -50,10 +48,13 @@ func _ready():
 	action = get_node(PopupButtons)
 	action.connect("mount_pressed", self, "Pressed_Equip_Callback")
 	action.connect("look_pressed", self, "Pressed_Look_Callback")
+	action.connect("board_pressed", self, "Pressed_Board_Callback")
+	action.connect("take_pressed", self, "Pressed_Take_Callback")
 	
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
+	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_Callback")
 	
 func Pressed_Look_Callback():
 	if lock_input:
@@ -66,6 +67,21 @@ func Pressed_Equip_Callback():
 		return
 	
 	BehaviorEvents.emit_signal("OnPushGUI", "EquipMountList", {"object":playerNode, "callback_object":self, "callback_method":"OnEquip_Callback"})
+	
+func Pressed_Board_Callback():
+	if lock_input:
+		return
+		
+	BehaviorEvents.emit_signal("OnLogLine", "Which ship should we transfer control ?")
+	_input_state = INPUT_STATE.board_targetting
+	BehaviorEvents.emit_signal("OnRequestBoardTargetting", playerNode, self, "ProcessGridSelection")
+
+func Pressed_Take_Callback():
+	if lock_input:
+		return
+		
+	
+	
 	
 # mount_to = "converter"
 # mount_item = {"src":"data/json/bleh.json", "count":5}
@@ -185,7 +201,7 @@ func Pressed_Weapon_Callback():
 	var weapon_data = Globals.LevelLoaderRef.LoadJSON(weapon_json)
 	BehaviorEvents.emit_signal("OnRequestPlayerTargetting", playerNode, weapon_data, self, "ProcessGridSelection")
 	#BehaviorEvents.emit_signal("OnPushGUI", "GridPattern", null)
-	_input_state = INPUT_STATE.grid_targetting
+	_input_state = INPUT_STATE.weapon_targetting
 	
 func OnLevelLoaded_Callback():
 	print("OnLevelLoaded : unlock input")
@@ -270,8 +286,12 @@ func _unhandled_input(event):
 		if event.is_action_released("touch") && (click_start_pos - event.position).length_squared() < 5.0:
 			var click_pos = playerNode.get_global_mouse_position()
 			
-			if _input_state == INPUT_STATE.grid_targetting:
+			if _input_state == INPUT_STATE.weapon_targetting:
 				BehaviorEvents.emit_signal("OnTargetClick", click_pos)
+			if _input_state == INPUT_STATE.board_targetting:
+				#TODO: This could use some cleanup, the logic is messy... 
+				#there should be like 2 less events required and the action should be in the callback and not in targetting
+				BehaviorEvents.emit_signal("OnBoardTargetClick", click_pos)
 			elif _input_state == INPUT_STATE.test:
 				DO_TEST(click_pos)
 			else:
@@ -329,6 +349,11 @@ func _unhandled_input(event):
 			Pressed_Equip_Callback()
 		if event.scancode == KEY_L:
 			Pressed_Look_Callback()
+		if event.scancode == KEY_B:
+			Pressed_Board_Callback()
+		if event.scancode == KEY_T:
+			Pressed_Take_Callback()
+		
 		# GODOT cannot give me the real key that was pressed. Only the physical key
 		# in En-US keyboard layout. There's no way to register a shortcut that's on a modifier (like !@#$%^&*())
 		#TODO: Stay updated on this issue on their git tracker. This is serious enough to make me want to change engine
@@ -337,11 +362,6 @@ func _unhandled_input(event):
 		#		Check out : Godot_src\godot\core\os\input_event.cpp for how shortcut key inputs are handled
 		if (event.scancode == KEY_PERIOD || event.scancode == KEY_COLON) && event.shift == true:
 			Pressed_FTL_Callback()
-		if event.scancode == KEY_T:
-			if _input_state == INPUT_STATE.test:
-				_input_state = INPUT_STATE.hud
-			else:
-				_input_state = INPUT_STATE.test
 		#print(event.scancode)
 		#print ("key_period : ", KEY_PERIOD, ", key_comma : ", KEY_COLON)
 	if dir != null:
@@ -351,6 +371,10 @@ func _unhandled_input(event):
 func ProcessGridSelection(pos):
 	_input_state = INPUT_STATE.hud
 	return
+	
+func OnTransferPlayer_Callback(old_player, new_player):
+	playerNode = new_player
+	BehaviorEvents.emit_signal("OnLogLine", "All controls transfered, the ship is ours captain !")
 	
 func DO_TEST(click_pos):
 	pass

@@ -41,6 +41,7 @@ func _ready():
 	BehaviorEvents.connect("OnPlayerDeath", self, "OnPlayerDeath_Callback")
 	BehaviorEvents.connect("OnWaitForAnimation", self, "OnWaitForAnimation_Callback")
 	BehaviorEvents.connect("OnAnimationDone", self, "OnAnimationDone_Callback")
+	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_Callback")
 	
 	var bound_line = get_node("/root/Root/Upper-Left-Bound/L1")
 	bound_line.add_point(Vector2(-tileSize/2.0, -tileSize/2.0))
@@ -197,6 +198,14 @@ func SaveState(level_data):
 	save_game.open("user://savegame.save", File.WRITE)
 	save_game.store_line(to_json(cur_save))
 	save_game.close()
+
+func OnTransferPlayer_Callback(old_player, new_player):
+	objByType[old_player.get_attrib("type")].erase(old_player)
+	old_player.set_attrib("type", "ship")
+	objByType["ship"].push_back(old_player)
+	objByType[new_player.get_attrib("type")].erase(new_player)
+	objByType["player"].push_back(new_player)
+	new_player.set_attrib("type", "player")
 
 func OnWaitForAnimation_Callback():
 	_wait_for_anim = true

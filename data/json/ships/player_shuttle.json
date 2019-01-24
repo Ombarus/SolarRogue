@@ -2,7 +2,7 @@
 	"name_id":"A Small Shuttle",
 	"type":"ship",
 	"sprite":"shuttle",
-	"action_point":0,
+	"boardable":true,
 	"mounts": {
 		"small_weapon_mount": "",
 		"shield": "",

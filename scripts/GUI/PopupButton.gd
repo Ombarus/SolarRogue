@@ -2,6 +2,8 @@ extends Control
 
 signal mount_pressed
 signal look_pressed
+signal board_pressed
+signal take_pressed
 
 onready var _more_btn = get_node("More")
 onready var _close_btn = get_node("Close")
@@ -29,8 +31,20 @@ func Pressed_Close_Callback():
 	_block.visible = false
 
 func _on_Mount_pressed():
+	Pressed_Close_Callback()
 	emit_signal("mount_pressed")
 
 
 func _on_Look_pressed():
+	Pressed_Close_Callback()
 	emit_signal("look_pressed")
+
+
+func _on_Board_pressed():
+	Pressed_Close_Callback()
+	emit_signal("board_pressed")
+
+
+func _on_Take_pressed():
+	Pressed_Close_Callback()
+	emit_signal("take_pressed")

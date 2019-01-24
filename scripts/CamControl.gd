@@ -15,6 +15,7 @@ func _ready():
 	self.position = p.position
 	BehaviorEvents.connect("OnMovement", self, "OnMovement_callback")
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_callback")
+	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_callback")
 
 func _process(delta):
 	# Called every frame. Delta is time since last frame.
@@ -52,3 +53,6 @@ func OnMovement_callback(obj, dir):
 		
 func OnLevelLoaded_callback():
 	OnMovement_callback(levelLoaderRef.objByType["player"][0], null)
+	
+func OnTransferPlayer_callback(old_player, new_player):
+	OnMovement_callback(new_player, null)
