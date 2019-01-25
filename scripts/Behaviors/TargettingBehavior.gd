@@ -3,14 +3,12 @@ extends Node
 var _callback_obj = null
 var _callback_method = null
 var _click_start_pos
-var _playerNode = null
-var _weapon = null
+var _player_node = null
+var _targetting_data = null
 
 func _ready():
-	BehaviorEvents.connect("OnRequestPlayerTargetting", self, "OnRequestPlayerTargetting_Callback")
-	BehaviorEvents.connect("OnRequestBoardTargetting", self, "OnRequestBoardTargetting_Callback")
+	BehaviorEvents.connect("OnRequestTargettingOverlay", self, "OnRequestTargettingOverlay_Callback")
 	BehaviorEvents.connect("OnTargetClick", self, "OnTargetClick_Callback")
-	BehaviorEvents.connect("OnBoardTargetClick", self, "OnBoardTargetClick_Callback")
 	
 func ClearOverlay():
 	var overlay_nodes = get_tree().get_nodes_in_group("overlay")
@@ -18,79 +16,42 @@ func ClearOverlay():
 		n.get_parent().remove_child(n)
 		n.queue_free()
 	
-	
-func OnRequestPlayerTargetting_Callback(player, weapon, callback_obj, callback_method):
+func OnRequestTargettingOverlay_Callback(player, targetting_data, callback_obj, callback_method):
 	_callback_obj = callback_obj
 	_callback_method = callback_method
-	_playerNode = player
-	_weapon = weapon
+	_player_node = player
+	_targetting_data = targetting_data
 	
-	_DoTargetting(player, weapon)
+	_DoTargetting(_player_node, _targetting_data)
 	
-func OnRequestBoardTargetting_Callback(player, callback_obj, callback_method):
-	_callback_obj = callback_obj
-	_callback_method = callback_method
-	_playerNode = player
-	
-	# custom info for targetting a ship to board
-	var targetting_data = {"weapon_data":{"fire_range":1, "fire_pattern":"o"}}
-	_weapon = targetting_data
-	
-	_DoTargetting(player, targetting_data)
-		
-		
-func OnBoardTargetClick_Callback(click_pos):
+func OnTargetClick_Callback(click_pos, target_type):
 	ClearOverlay()
 	
 	var tile = Globals.LevelLoaderRef.World_to_Tile(click_pos)
 	var tile_content = Globals.LevelLoaderRef.levelTiles[tile.x][tile.y]
 	var potential_targets = []
 	for obj in tile_content:
-		if obj.get_attrib("boardable") == true and obj != _playerNode:
+		if target_type == Globals.VALID_TARGET.attack and obj.get_attrib("destroyable") != null || obj.get_attrib("harvestable") != null:
+			potential_targets.push_back(obj)
+		elif target_type == Globals.VALID_TARGET.board and obj.get_attrib("boardable") == true:
+			potential_targets.push_back(obj)
+		elif target_type == Globals.VALID_TARGET.loot and obj.get_attrib("cargo") != null:
 			potential_targets.push_back(obj)
 	if potential_targets.size() == 1:
 		#TODO: pass the right data for the weapon
 		#TODO: Check if player has an equiped weapon
-		var player_tile = Globals.LevelLoaderRef.World_to_Tile(_playerNode.position)
-		if IsValidTile(player_tile, tile, _weapon.weapon_data):
-			BehaviorEvents.emit_signal("OnTransferPlayer", _playerNode, tile_content[0])
+		var player_tile = Globals.LevelLoaderRef.World_to_Tile(_player_node.position)
+		if IsValidTile(player_tile, tile, _targetting_data.weapon_data):
+			_callback_obj.call(_callback_method, tile_content[0])
+			#BehaviorEvents.emit_signal("OnDealDamage", tile_content[0], _player_node, _targetting_data)
 		else:
-			BehaviorEvents.emit_signal("OnLogLine", "Ship must be closer")
+			BehaviorEvents.emit_signal("OnLogLine", "Target is outside of our range sir !")
 	elif potential_targets.size() == 0:
-		BehaviorEvents.emit_signal("OnLogLine", "Ship transfer canceled")
+		_callback_obj.call(_callback_method, null)
 	else:
 		#TODO: choose target popup dialog
 		pass
 	
-	#TODO: decide target here then notify player
-	_callback_obj.call(_callback_method, click_pos)
-		
-func OnTargetClick_Callback(click_pos):
-	ClearOverlay()
-	
-	var tile = Globals.LevelLoaderRef.World_to_Tile(click_pos)
-	var tile_content = Globals.LevelLoaderRef.levelTiles[tile.x][tile.y]
-	var potential_targets = []
-	for obj in tile_content:
-		if obj.get_attrib("destroyable") != null || obj.get_attrib("harvestable") != null:
-			potential_targets.push_back(obj)
-	if potential_targets.size() == 1:
-		#TODO: pass the right data for the weapon
-		#TODO: Check if player has an equiped weapon
-		var player_tile = Globals.LevelLoaderRef.World_to_Tile(_playerNode.position)
-		if IsValidTile(player_tile, tile, _weapon.weapon_data):
-			BehaviorEvents.emit_signal("OnDealDamage", tile_content[0], _playerNode, _weapon)
-		else:
-			BehaviorEvents.emit_signal("OnLogLine", "Target is outside of our ship's weapon sir !")
-	elif potential_targets.size() == 0:
-		BehaviorEvents.emit_signal("OnLogLine", "There's nothing there sir...")
-	else:
-		#TODO: choose target popup dialog
-		pass
-	
-	#TODO: decide target here then notify player
-	_callback_obj.call(_callback_method, click_pos)
-
 func IsValidTile(player_tile, target_tile, weapon_data):
 	var bounds = Globals.LevelLoaderRef.levelSize
 	var fire_radius = weapon_data.fire_range

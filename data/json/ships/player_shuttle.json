@@ -12,11 +12,14 @@
 	"destroyable": {
 		"hull":15
 	},
+	"animation": {
+		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
+	},
 	"moving": {
 		"speed":0.7,
 		"wander_speed":2.5,
 		"can_use_wormhole":true,
-		"energy_cost":50
+		"energy_cost":55
 	},
 	"cargo": {
 		"capacity":250,

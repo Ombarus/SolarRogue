@@ -17,6 +17,7 @@ enum INPUT_STATE {
 	hud,
 	weapon_targetting,
 	board_targetting,
+	loot_targetting,
 	look_around,
 	test
 }
@@ -74,12 +75,17 @@ func Pressed_Board_Callback():
 		
 	BehaviorEvents.emit_signal("OnLogLine", "Which ship should we transfer control ?")
 	_input_state = INPUT_STATE.board_targetting
-	BehaviorEvents.emit_signal("OnRequestBoardTargetting", playerNode, self, "ProcessGridSelection")
+	var targetting_data = {"weapon_data":{"fire_range":1, "fire_pattern":"o"}}
+	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, targetting_data, self, "ProcessBoardSelection")
 
 func Pressed_Take_Callback():
 	if lock_input:
 		return
 		
+	BehaviorEvents.emit_signal("OnLogLine", "Take from what ?")
+	_input_state = INPUT_STATE.loot_targetting
+	var targetting_data = {"weapon_data":{"fire_range":1, "fire_pattern":"o"}}
+	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, targetting_data, self, "ProcessTakeSelection")
 	
 	
 	
@@ -199,8 +205,7 @@ func Pressed_Weapon_Callback():
 	BehaviorEvents.emit_signal("OnLogLine", "Weapon System Online. Target ?")
 	var weapon_json = playerNode.get_attrib("mounts.small_weapon_mount")
 	var weapon_data = Globals.LevelLoaderRef.LoadJSON(weapon_json)
-	BehaviorEvents.emit_signal("OnRequestPlayerTargetting", playerNode, weapon_data, self, "ProcessGridSelection")
-	#BehaviorEvents.emit_signal("OnPushGUI", "GridPattern", null)
+	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, weapon_data, self, "ProcessAttackSelection")
 	_input_state = INPUT_STATE.weapon_targetting
 	
 func OnLevelLoaded_Callback():
@@ -287,11 +292,14 @@ func _unhandled_input(event):
 			var click_pos = playerNode.get_global_mouse_position()
 			
 			if _input_state == INPUT_STATE.weapon_targetting:
-				BehaviorEvents.emit_signal("OnTargetClick", click_pos)
-			if _input_state == INPUT_STATE.board_targetting:
-				#TODO: This could use some cleanup, the logic is messy... 
-				#there should be like 2 less events required and the action should be in the callback and not in targetting
-				BehaviorEvents.emit_signal("OnBoardTargetClick", click_pos)
+				_input_state = INPUT_STATE.hud
+				BehaviorEvents.emit_signal("OnTargetClick", click_pos, Globals.VALID_TARGET.attack)
+			elif _input_state == INPUT_STATE.board_targetting:
+				_input_state = INPUT_STATE.hud
+				BehaviorEvents.emit_signal("OnTargetClick", click_pos, Globals.VALID_TARGET.board)
+			elif _input_state == INPUT_STATE.loot_targetting:
+				_input_state = INPUT_STATE.hud
+				BehaviorEvents.emit_signal("OnTargetClick", click_pos, Globals.VALID_TARGET.loot)
 			elif _input_state == INPUT_STATE.test:
 				DO_TEST(click_pos)
 			else:
@@ -368,9 +376,28 @@ func _unhandled_input(event):
 		BehaviorEvents.emit_signal("OnMovement", playerNode, dir)
 
 
-func ProcessGridSelection(pos):
-	_input_state = INPUT_STATE.hud
-	return
+func ProcessAttackSelection(target):
+	if target == null:
+		BehaviorEvents.emit_signal("OnLogLine", "There's nothing there sir...")
+		return
+		
+	var weapon_json = playerNode.get_attrib("mounts.small_weapon_mount")
+	var weapon_data = Globals.LevelLoaderRef.LoadJSON(weapon_json)
+	BehaviorEvents.emit_signal("OnDealDamage", target, playerNode, weapon_data)
+	
+func ProcessBoardSelection(target):
+	if target != null:
+		BehaviorEvents.emit_signal("OnTransferPlayer", playerNode, target)
+	else:
+		BehaviorEvents.emit_signal("OnLogLine", "Ship transfer canceled")
+	
+func ProcessTakeSelection(target):
+	BehaviorEvents.emit_signal("OnPushGUI", "TransferInventory", {"object1":playerNode, "object2":target, "callback_object":self, "callback_method":"OnTransferItemCompleted_Callback"})
+	
+func OnTransferItemCompleted_Callback(dropped_mounts, dropped_cargo):
+	#TODO: TODO
+	pass
+	
 	
 func OnTransferPlayer_Callback(old_player, new_player):
 	playerNode = new_player

@@ -11,5 +11,11 @@ enum CRAFT_RESULT {
 	missing_resources
 }
 
+enum VALID_TARGET {
+	attack,
+	loot,
+	board
+}
+
 func _ready():
 	pass
