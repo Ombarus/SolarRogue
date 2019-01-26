@@ -1,5 +1,6 @@
 1st step :::
 - Work on loot interface
+	- Save changes on "ok" pressed
 - BUG: Destroying crafted ship is consired player and die ?
 - BUG: I can target myself !
 - BUG: ran out of energy with 3 000 to spare after playing for a while ?

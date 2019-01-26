@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/GUI/TransferInventoryLayout.gd" type="Script" id=1]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
@@ -7,7 +7,9 @@
 [ext_resource path="res://data/fonts/DejaVuSansMonoItalBold.tres" type="DynamicFont" id=5]
 [ext_resource path="res://data/fonts/DejaVuSansMonoItal.tres" type="DynamicFont" id=6]
 [ext_resource path="res://data/fonts/DejaVuSansMonoBold.tres" type="DynamicFont" id=7]
-[ext_resource path="res://scenes/GUI/ScrollListContainer.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/GUI/MountListContainer.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/GUI/CargoListContainer.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=10]
 
 [node name="TransferInventory" type="Control"]
 
@@ -163,7 +165,7 @@ selection_enabled = false
 override_selected_font_color = false
 _sections_unfolded = [ "BBCode", "Rect", "Size Flags" ]
 
-[node name="Cargo" parent="base/HBoxContainer/LShip" index="3" instance=ExtResource( 8 )]
+[node name="Cargo" parent="base/HBoxContainer/LShip" index="3" instance=ExtResource( 9 )]
 
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -190,6 +192,22 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+
+[node name="TakeAll" parent="base/HBoxContainer/VSeparator" index="0" instance=ExtResource( 10 )]
+
+margin_left = -28.0
+margin_top = 295.0
+margin_right = 30.0
+margin_bottom = 355.0
+Text = "<<"
+
+[node name="PutAll" parent="base/HBoxContainer/VSeparator" index="1" instance=ExtResource( 10 )]
+
+margin_left = -29.0
+margin_top = 361.0
+margin_right = 29.0
+margin_bottom = 421.0
+Text = ">>"
 
 [node name="RShip" type="VBoxContainer" parent="base/HBoxContainer" index="2"]
 
@@ -288,7 +306,7 @@ selection_enabled = false
 override_selected_font_color = false
 _sections_unfolded = [ "BBCode", "Rect", "Size Flags" ]
 
-[node name="Cargo" parent="base/HBoxContainer/RShip" index="3" instance=ExtResource( 8 )]
+[node name="Cargo" parent="base/HBoxContainer/RShip" index="3" instance=ExtResource( 9 )]
 
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -298,7 +316,7 @@ margin_right = 308.0
 margin_bottom = 414.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-_sections_unfolded = [ "Margin", "Size Flags" ]
+_sections_unfolded = [ "Size Flags" ]
 
 [node name="RShipName" type="RichTextLabel" parent="base" index="3"]
 
@@ -327,5 +345,9 @@ scroll_active = true
 scroll_following = false
 selection_enabled = false
 override_selected_font_color = false
+
+[connection signal="pressed" from="base/HBoxContainer/VSeparator/TakeAll" to="." method="_on_TakeAll_pressed"]
+
+[connection signal="pressed" from="base/HBoxContainer/VSeparator/PutAll" to="." method="_on_PutAll_pressed"]
 
 

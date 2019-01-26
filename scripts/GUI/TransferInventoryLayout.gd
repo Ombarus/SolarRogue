@@ -65,20 +65,12 @@ func Init(init_param):
 	
 	var mount_obj = []
 	for key in mounts1:
-		var name = key + " : Free"
-		if not mounts1[key].empty():
-			var data = Globals.LevelLoaderRef.LoadJSON(mounts1[key])
-			name = key + " : " + data.name_id
-		mount_obj.push_back({"name_id":name, "count":1, "key":key})
+		mount_obj.push_back({"mount_key":key, "src_key":mounts1[key]})
 	get_node("base/HBoxContainer/LShip/Mounts").content = mount_obj
 	
 	mount_obj = []
 	for key in mounts2:
-		var name = key + " : Free"
-		if not mounts2[key].empty():
-			var data = Globals.LevelLoaderRef.LoadJSON(mounts2[key])
-			name = key + " : " + data.name_id
-		mount_obj.push_back({"name_id":name, "count":1, "key":key})
+		mount_obj.push_back({"mount_key":key, "src_key":mounts2[key]})
 	get_node("base/HBoxContainer/RShip/Mounts").content = mount_obj
 	
 	var current_load = obj1.get_attrib("cargo.volume_used")
@@ -95,26 +87,66 @@ func Init(init_param):
 	
 	var cargo_obj = []
 	for item in cargo1:
-		var data = Globals.LevelLoaderRef.LoadJSON(item.src)
-		var counting = ""
-		if item.count > 1:
-			counting = str(item.count) + "x "
-		cargo_obj.push_back({"name_id": counting + data.name_id, "count":item.count, "key":item})
+		cargo_obj.push_back({"amount":item.count, "src_key":item.src})
 	get_node("base/HBoxContainer/LShip/Cargo").content = cargo_obj
 	
 	cargo_obj = []
 	for item in cargo2:
-		var data = Globals.LevelLoaderRef.LoadJSON(item.src)
-		var counting = ""
-		if item.count > 1:
-			counting = str(item.count) + "x "
-		cargo_obj.push_back({"name_id": counting + data.name_id, "count":item.count, "key":item})
+		cargo_obj.push_back({"amount":item.count, "src_key":item.src})
 	get_node("base/HBoxContainer/RShip/Cargo").content = cargo_obj
 	
 	get_node("base/RShipName").bbcode_text = obj2.get_attrib("name_id")
 	get_node("base").title = obj1.get_attrib("name_id")
+	
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func _on_TakeAll_pressed():
+	var rnode = get_node("base/HBoxContainer/RShip")
+	var lnode = get_node("base/HBoxContainer/LShip")
+	
+	_transfer_all(rnode, lnode)
+
+
+func _on_PutAll_pressed():
+	var rnode = get_node("base/HBoxContainer/RShip")
+	var lnode = get_node("base/HBoxContainer/LShip")
+	
+	_transfer_all(lnode, rnode)
+	
+func _transfer_all(from, to):
+	var cargo_content = to.get_node("Cargo").content
+	
+	var take_mounts = []
+	for data in from.get_node("Mounts").content:
+		if data.src_key == null or data.src_key.empty() == true:
+			take_mounts.push_back({"mount_key":data.mount_key, "src_key":""})
+			continue
+		var jsondata = Globals.LevelLoaderRef.LoadJSON(data.src_key)
+		var added = false
+		for cargo_data in cargo_content:
+			if cargo_data.src_key in data.src_key:
+				var cargojsondata = Globals.LevelLoaderRef.LoadJSON(cargo_data.key)
+				if "stackable" in cargojsondata.equipment and cargojsondata.equipment.stackable == true:
+					cargo_data.amount += 1
+					added = true
+					break
+		if added == false:
+			cargo_content.push_back({"src_key":data.src_key, "amount":1})
+		take_mounts.push_back({"mount_key":data.mount_key, "src_key":""})
+	from.get_node("Mounts").content = take_mounts
+	
+	var take_cargo = []
+	for data in from.get_node("Cargo").content:
+		var jsondata = Globals.LevelLoaderRef.LoadJSON(data.src_key)
+		var added = false
+		#TODO: Check cargo space
+		for cargo_data in cargo_content:
+			if cargo_data.src_key in data.src_key:
+				var cargojsondata = Globals.LevelLoaderRef.LoadJSON(cargo_data.src_key)
+				if "stackable" in cargojsondata.equipment and cargojsondata.equipment.stackable == true:
+					cargo_data.amount += data.amount
+					added = true
+					break
+		if added == false:
+			cargo_content.push_back({"src_key":data.src_key, "amount":data.amount})
+	from.get_node("Cargo").content = take_cargo
+	to.get_node("Cargo").content = cargo_content

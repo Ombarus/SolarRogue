@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/BG_Root.gd" type="Script" id=1]
 
-[node name="BG_Root" type="Node2D"]
+[node name="BG_Root" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 stream_tile_radius = 5

@@ -6,7 +6,7 @@
 [ext_resource path="res://data/styles/trans.tres" type="StyleBox" id=4]
 [ext_resource path="res://scripts/GUI/PopupScreenBlock.gd" type="Script" id=5]
 
-[node name="PopupButton" type="Control"]
+[node name="PopupButton" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -68,7 +68,7 @@ margin_left = 165.0
 margin_top = 160.0
 margin_right = 304.0
 margin_bottom = 219.0
-Text = "[t]ake"
+Text = "[t]ransfer"
 
 [node name="Look" parent="PopupSize/Popup" index="5" instance=ExtResource( 3 )]
 
