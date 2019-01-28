@@ -1,8 +1,9 @@
 extends ScrollContainer
 
 var content = [] setget set_content, get_content
-
 var row_ref = null
+
+signal OnChoiceSelectionChanged(mount_key, src_key, pressed)
 
 func _ready():
 	row_ref = get_node("List/Row")
@@ -35,8 +36,15 @@ func set_content(val):
 			var src_data = Globals.LevelLoaderRef.LoadJSON(v.src_key)
 			display = v.mount_key + " : " + src_data.name_id
 		copy.get_node("Choice/Name").bbcode_text = display
+		copy.get_node("Choice").connect("toggled", self, "toggled_callback", [v.mount_key, v.src_key])
 	
+func toggled_callback(button_pressed, mount_key, src_key):
+	emit_signal("OnChoiceSelectionChanged", mount_key, src_key, button_pressed)
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.
 #	pass
+
+
+func _on_Choice_pressed():
+	print("HALLELUA")

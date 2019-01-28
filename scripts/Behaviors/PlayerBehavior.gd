@@ -394,10 +394,26 @@ func ProcessBoardSelection(target):
 func ProcessTakeSelection(target):
 	BehaviorEvents.emit_signal("OnPushGUI", "TransferInventory", {"object1":playerNode, "object2":target, "callback_object":self, "callback_method":"OnTransferItemCompleted_Callback"})
 	
-func OnTransferItemCompleted_Callback(dropped_mounts, dropped_cargo):
-	#TODO: TODO
-	pass
+func OnTransferItemCompleted_Callback(lobj, l_mounts, l_cargo, robj, r_mounts, r_cargo):
+	lobj.init_mounts()
+	lobj.init_cargo()
+	robj.init_mounts()
+	robj.init_cargo()
 	
+	for item in l_mounts:
+		lobj.set_attrib("mounts." + item.mount_key, item.src_key)
+	for item in r_mounts:
+		robj.set_attrib("mounts." + item.mount_key, item.src_key)
+	
+	var new_content = []
+	for item in l_cargo:
+		new_content.push_back({"src":item.src_key, "count":item.amount})
+	lobj.set_attrib("cargo.content", new_content)
+	
+	new_content = []
+	for item in r_cargo:
+		new_content.push_back({"src":item.src_key, "count":item.amount})
+	robj.set_attrib("cargo.content", new_content)
 	
 func OnTransferPlayer_Callback(old_player, new_player):
 	playerNode = new_player
