@@ -387,7 +387,8 @@ func ProcessAttackSelection(target):
 	
 func ProcessBoardSelection(target):
 	if target != null:
-		BehaviorEvents.emit_signal("OnTransferPlayer", playerNode, target)
+		var pnode = playerNode
+		BehaviorEvents.emit_signal("OnTransferPlayer", pnode, target)
 	else:
 		BehaviorEvents.emit_signal("OnLogLine", "Ship transfer canceled")
 	

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/GUI/MountListContainer.gd" type="Script" id=1]
 [ext_resource path="res://data/styles/trans.tres" type="StyleBox" id=2]
+[ext_resource path="res://scripts/GUI/DragDropTransfer.gd" type="Script" id=3]
 
 [node name="MountScrollContainer" type="ScrollContainer"]
 
@@ -82,7 +83,8 @@ shortcut = null
 group = null
 flat = false
 align = 1
-_sections_unfolded = [ "Margin", "Rect", "Size Flags", "custom_styles" ]
+script = ExtResource( 3 )
+_sections_unfolded = [ "Margin", "Rect", "Size Flags", "Theme", "custom_constants", "custom_styles" ]
 
 [node name="Name" type="RichTextLabel" parent="List/Row/Choice" index="0"]
 

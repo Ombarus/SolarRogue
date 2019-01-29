@@ -1,8 +1,9 @@
 extends ScrollContainer
 
 var content = [] setget set_content, get_content
-
 var row_ref = null
+
+signal OnChoiceDragAndDrop(container_src, container_dst, content_index_src)
 
 func _ready():
 	row_ref = get_node("List/Row")
@@ -38,8 +39,16 @@ func set_content(val):
 			else:
 				display = src_data.name_id
 		copy.get_node("Choice/Name").bbcode_text = display
+		copy.get_node("Choice").MyData = {"origin":self, "content_index":content.size() - 1} # index in content array
 	
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func choice_can_drop_data(node_dest, data):
+	if not "origin" in data:
+		return false
+	if data.origin == self:
+		return false
+	
+	return true
+	
+func choice_drop_data(node_dest, data):
+	#container_src, container_dst, content_index_src
+	emit_signal("OnChoiceDragAndDrop", data.origin, self, data.content_index)

@@ -11,8 +11,12 @@ func _ready():
 	BehaviorEvents.connect("OnDamageTaken", self, "OnDamageTaken_Callback")
 	BehaviorEvents.connect("OnEnergyChanged", self, "OnEnergyChanged_Callback")
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
+	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_Callback")
 	if Globals.LevelLoaderRef != null:
 		OnLevelLoaded_Callback()
+
+func OnTransferPlayer_Callback(old_player, new_player):
+	UpdateStatusBar(new_player)
 
 func OnEnergyChanged_Callback(obj):
 	var is_player = obj.get_attrib("type") == "player"

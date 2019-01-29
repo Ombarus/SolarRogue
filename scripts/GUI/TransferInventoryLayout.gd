@@ -13,6 +13,12 @@ func _ready():
 	get_node("base").connect("OnOkPressed", self, "Ok_Callback")
 	get_node("base").connect("OnCancelPressed", self, "Cancel_Callback")
 	
+	get_node(L_BASE_PATH + "/Mounts").connect("OnChoiceDragAndDrop", self, "OnChoiceDragAndDrop_Callback")
+	get_node(R_BASE_PATH + "/Mounts").connect("OnChoiceDragAndDrop", self, "OnChoiceDragAndDrop_Callback")
+	
+	get_node(L_BASE_PATH + "/Cargo").connect("OnChoiceDragAndDrop", self, "OnChoiceDragAndDrop_Callback")
+	get_node(R_BASE_PATH + "/Cargo").connect("OnChoiceDragAndDrop", self, "OnChoiceDragAndDrop_Callback")
+	
 	#get_node(L_BASE_PATH + "/Mounts/List/Row/Choice").connect("toggled", self, ")
 	
 	#var debug_mounts = []
@@ -121,13 +127,84 @@ func Init(init_param):
 	get_node("base").title = obj1.get_attrib("name_id")
 	
 	get_node(L_BASE_PATH + "/Mounts").connect("OnChoiceSelectionChanged", self, "LMountsChanged_Callback")
+
+func OnChoiceDragAndDrop_Callback(container_src, container_dst, content_index_src):
+	var new_src = []
+	var new_dst = []
+	var old_src = container_src.get_content()
+	var old_dst = container_dst.get_content()
+	var src_data = old_src[content_index_src]
+	var is_src_mount = "mount_key" in old_src[0]
+	var is_dst_mount = "mount_key" in old_dst[0]
+	var dst_data_copy = null
+	var src_json = Globals.LevelLoaderRef.LoadJSON(src_data.src_key)
+	var is_stackable = "stackable" in src_json.equipment and src_json.equipment.stackable == true
 	
-func LMountsChanged_Callback(mount_key, src_key, pressed):
-	print(mount_key)
-	print(src_key)
-	print(pressed)
-
-
+	# Remake set array for the ship that receives the item
+	for item in old_dst:
+		if is_dst_mount == true:
+			new_dst.push_back({"mount_key":item.mount_key, "src_key":item.src_key})
+		else:
+			new_dst.push_back({"src_key":item.src_key, "amount":item.amount})
+	
+	# Update the drag destination to add whatever was received
+	if is_dst_mount == true:
+		var lookup_mount = ""
+		if is_src_mount:
+			lookup_mount = src_data.mount_key
+		else:
+			lookup_mount = src_json.equipment.slot
+		# This could probably done in a single loop (create the new_dst while modifying it at the same time)
+		# But my brain refuses to fathom all the possible conditions
+		# (mount to mount, mount to cargo, cargo to mount, selected to not selected, etc.)
+		# fuck performance, anyway, recreating all the nodes after the drag & drop is definitly more expensive
+		for item in new_dst:
+			if item.mount_key == lookup_mount:
+				dst_data_copy = item.src_key
+				item.src_key = src_data.src_key
+				break
+	else:
+		var found = false
+		if is_stackable == true:
+			for item in new_dst:
+				if item.src_key == src_data.src_key:
+					item.amount += 1
+					found = true
+					break
+		if found == false:
+			new_dst.push_back({"src_key":src_data.src_key, "amount":1})
+	
+	# Remake the drag source that will lose an item	
+	for item in old_src:
+		if is_src_mount == true:
+			new_src.push_back({"mount_key":item.mount_key, "src_key":item.src_key})
+		else:
+			new_src.push_back({"src_key":item.src_key, "amount":item.amount})
+	
+	# Update the array to remove whatever we sent to destination	
+	if is_src_mount == true:
+		for item in new_src:
+			if item.mount_key == src_data.mount_key:
+				if dst_data_copy == null:
+					item.src_key = ""
+				else:
+					item.src_key = dst_data_copy
+	else:
+		var index_to_remove = -1
+		for i in range(new_src.size()):
+			if new_src[i].src_key == src_data.src_key and new_src[i].amount > 1 and is_dst_mount == true:
+				new_src[i].amount -= 1
+				break
+			elif new_src[i].src_key == src_data.src_key:
+				index_to_remove = i
+				break
+		if index_to_remove >= 0:
+			new_src.remove(index_to_remove)
+	
+			
+	container_dst.content = new_dst
+	container_src.content = new_src
+	
 func _on_TakeAll_pressed():
 	var rnode = get_node(R_BASE_PATH)
 	var lnode = get_node(L_BASE_PATH)

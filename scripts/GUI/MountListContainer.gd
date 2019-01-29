@@ -3,7 +3,7 @@ extends ScrollContainer
 var content = [] setget set_content, get_content
 var row_ref = null
 
-signal OnChoiceSelectionChanged(mount_key, src_key, pressed)
+signal OnChoiceDragAndDrop(container_src, container_dst, content_index_src)
 
 func _ready():
 	row_ref = get_node("List/Row")
@@ -36,15 +36,34 @@ func set_content(val):
 			var src_data = Globals.LevelLoaderRef.LoadJSON(v.src_key)
 			display = v.mount_key + " : " + src_data.name_id
 		copy.get_node("Choice/Name").bbcode_text = display
-		copy.get_node("Choice").connect("toggled", self, "toggled_callback", [v.mount_key, v.src_key])
+		copy.get_node("Choice").MyData = {"origin":self, "content_index":content.size() - 1} # index in content array
+		#copy.get_node("Choice").connect("toggled", self, "toggled_callback", [v.mount_key, v.src_key])
 	
-func toggled_callback(button_pressed, mount_key, src_key):
-	emit_signal("OnChoiceSelectionChanged", mount_key, src_key, button_pressed)
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
-
-
-func _on_Choice_pressed():
-	print("HALLELUA")
+func choice_can_drop_data(node_dest, data):
+	if not "origin" in data:
+		return false
+	if data.origin == self:
+		return false
+	var dest_content_data = get_content()[node_dest.MyData.content_index]
+	var src_content_data = data.origin.get_content()[data.content_index]
+	var canMount = true
+	
+	#"equipment": {
+	#	"slot":"small_weapon_mount",
+	#	"volume":100.0
+	#}
+	
+	#TODO: check if item dragged from cargo fits into dest mount
+	if not "mount_key" in src_content_data:
+		var src_data = Globals.LevelLoaderRef.LoadJSON(src_content_data.src_key)
+		if not "slot" in src_data.equipment or src_data.equipment.slot != dest_content_data.mount_key:
+			canMount = false
+	
+	if "mount_key" in src_content_data and dest_content_data.mount_key != src_content_data.mount_key:
+		canMount = false
+	
+	return canMount
+	
+func choice_drop_data(node_dest, data):
+	#container_src, container_dst, content_index_src
+	emit_signal("OnChoiceDragAndDrop", data.origin, self, data.content_index)

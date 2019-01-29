@@ -1,4 +1,9 @@
 1st step :::
+- Probe hull is not consumed when making ships
+- Memory should be copied over to new ship ?
+- Camera should not move when using dialog
+- Transfering item should go through inventory system ?
+- Transfering ship & ship item should take AP
 - Work on loot interface
 	- Save changes on "ok" pressed
 - BUG: Destroying crafted ship is consired player and die ?
@@ -9,6 +14,7 @@
 - make sure player cannot generate more energy than max capacity
 - Spawning
 - re-work Object identification (show as unknown, then remember id-ed stuff)
+- prototype having more than one weapon mount (right now I assume mount points are both type and unique ids)
 - Basic interaction
 	- Look around
 		- select item using keyboard
