@@ -15,6 +15,7 @@ func _ready():
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 	BehaviorEvents.connect("OnUseAP", self, "OnUseAP_Callback")
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
+	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_Callback")
 	BehaviorEvents.connect("OnWaitForAnimation", self, "OnWaitForAnimation_Callback")
 	BehaviorEvents.connect("OnAnimationDone", self, "OnAnimationDone_Callback")
 	
@@ -23,6 +24,10 @@ func OnWaitForAnimation_Callback():
 	
 func OnAnimationDone_Callback():
 	_waiting_on_anim = false
+	
+func OnTransferPlayer_Callback(old_player, new_player):
+	StopAP(old_player)
+	StartAP(new_player, old_player.get_attrib("action_point"))
 	
 func OnRequestObjectUnload_Callback(obj):
 	if obj.get_attrib("type") == "player":
@@ -37,14 +42,14 @@ func OnUseAP_Callback(obj, amount):
 	
 	action_list.remove(index)	
 	obj.modified_attributes.action_point += amount
-	Insert(obj, obj.modified_attributes.action_point)
+	Insert(obj, obj.get_attrib("action_point"))
 	NormalizeAP()
 	
 	var obj_action = action_list[0]
-	var top_ap = obj_action.modified_attributes.action_point
+	var top_ap = obj_action.get_attrib("action_point")
 	for i in range(action_list.size()):
 		var next_obj_action = action_list[i]
-		var next_ap = next_obj_action.modified_attributes.action_point
+		var next_ap = next_obj_action.get_attrib("action_point")
 		if next_ap != top_ap:
 			break
 		# at equal ap, player always go first
@@ -62,7 +67,7 @@ func OnUseAP_Callback(obj, amount):
 	
 func validate_emit_OnObjTurn(obj):
 	# if object has been removed from list before it had a chance to act. Ignore it
-	if action_list.find(obj) != -1 and _disable == false:			
+	if action_list.find(obj) != -1 and _disable == false:
 		BehaviorEvents.emit_signal("OnObjTurn", obj)
 
 # Top action is always 0 AP. This way when we insert a new object it will be the first to act
@@ -95,6 +100,21 @@ func UpdateLogTitle():
 	title += "."
 	title += str(int(star_date_turn))
 	log_window_ref.title = title
+	
+func StopAP(obj):
+	var index = action_list.find(obj)
+	if index < 0:
+		return
+	
+	action_list.remove(index)
+	
+func StartAP(obj, start_point=0):
+	var index = action_list.find(obj)
+	if index >= 0:
+		return
+	
+	obj.set_attrib("action_point", start_point)
+	Insert(obj, start_point)
 
 func OnObjectLoaded_Callback(obj):
 	var attrib = obj.get_attrib("action_point")

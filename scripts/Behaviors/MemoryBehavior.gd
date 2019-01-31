@@ -9,12 +9,16 @@ func _ready():
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 	BehaviorEvents.connect("OnScannerUpdated", self, "OnScannerUpdated_Callback")
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
+	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_Callback")
 
 func OnLevelLoaded_Callback():
 	# Give two frames for scanner to update
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	ExecuteFullSweep()
+	
+func OnTransferPlayer_Callback(old_player, new_player):
+	_playerNode = new_player
 
 func OnObjectLoaded_Callback(obj):
 	if obj.get_attrib("type") == "player":

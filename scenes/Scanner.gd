@@ -8,6 +8,23 @@ func _ready():
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
+	BehaviorEvents.connect("OnMountAdded", self, "OnMountAdded_Callback")
+	BehaviorEvents.connect("OnMountRemoved", self, "OnMountRemoved_Callback")
+	
+func OnMountAdded_Callback(obj, slot, src):
+	if not "scanner" in slot:
+		return
+		
+	if src != null and src != "":
+		_node_id_scanner[obj.get_attrib("unique_id")] = Globals.LevelLoaderRef.LoadJSON(src)
+		_up_to_date = false
+	
+func OnMountRemoved_Callback(obj, slot, src):
+	if not "scanner" in slot:
+		return
+		
+	_node_id_scanner.erase(obj.get_attrib("unique_id"))
+	_up_to_date = false
 	
 func OnLevelLoaded_Callback():
 	_up_to_date = false

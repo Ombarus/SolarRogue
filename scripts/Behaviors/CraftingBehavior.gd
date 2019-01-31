@@ -60,6 +60,12 @@ func Craft(recipe_data, input_list, crafter):
 					for i in range(require["amount"]):
 						BehaviorEvents.emit_signal("OnRemoveItem", crafter, info["src"])
 					continue
+		if "src" in require:
+			for info in loaded_input_data:
+				if info["src"] == require["src"]:
+					for i in range(require["amount"]):
+						BehaviorEvents.emit_signal("OnRemoveItem", crafter, info["src"])
+					continue
 	
 	# Produce the thing
 	if recipe_data.produce == "energy":

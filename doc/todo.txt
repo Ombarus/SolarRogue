@@ -1,19 +1,27 @@
 1st step :::
-- Probe hull is not consumed when making ships
+- BUG: Weird interaction when camera bump limit
+- Loot interface :
+	- Ability to drop cargo if other cargo is empty
+	- Move all cargo button shouldn't affect mounts, there should be a move all mounts button that moves only mounts that fit free spots
+	- when drag & dropping.. highlight mount slot that fit with the object being draged
+- Crafting interface
+	- Automatically check item necessary for recipe (if possible)
+	- Mark missing item in red in description
 - Memory should be copied over to new ship ?
-- Camera should not move when using dialog
 - Transfering item should go through inventory system ?
 - Transfering ship & ship item should take AP
-- Work on loot interface
-	- Save changes on "ok" pressed
-- BUG: Destroying crafted ship is consired player and die ?
-- BUG: I can target myself !
-- BUG: ran out of energy with 3 000 to spare after playing for a while ?
-- BUG: Dropping / removing scanner should update scanner behavior
-- Ship transfer and crafting
+- Tweak: Should be able to hold hulls for crafting scout in scout (at least if drop everything)
+- Tweak: Probe should have higher chance to drop something usefull (at least 2 hydrogen)... or it's not worth wasting a missile on them
+- BUG: Missing 
+		"equip_ap":3.0,
+		"unequip_ap":3.0 for various obj (laser, missile_launcher... ?)
+- BUG: Any random interaction should cancel targetting ?
+- BUG: Shuttle is pointing wrong way
+- Targetting display twice in the middle right quadrant
 - make sure player cannot generate more energy than max capacity
 - Spawning
 - re-work Object identification (show as unknown, then remember id-ed stuff)
+- BUG: Crash when trying to fire when no weapon equipped
 - prototype having more than one weapon mount (right now I assume mount points are both type and unique ids)
 - Basic interaction
 	- Look around
@@ -77,6 +85,18 @@ IDEAS:::
 	
 	
 DONE :::
+- BUG: Hydrogen can spawn outside the map from planet
+- Work on loot interface
+	- Save changes on "ok" pressed
+- Camera should not move when using dialog
+- BUG: changing ship should update converter button visibility (and maybe others ? wormhole ?)
+- BUG: Dropping / removing scanner should update scanner behavior
+- BUG: ran out of energy with 3 000 to spare after playing for a while ? (when shields where full and you got hit, you used all energy since last time you were hit)
+- BUG: I can target myself !
+- Ship transfer and crafting
+- BUG: Destroying crafted ship is consired player and die ? (fixed itself with other fixes ?)
+- BUG: issues with AP when switching ship
+- Probe hull is not consumed when making ships
 - Animation !
 - Make energy work
 	- Assign energy for actions

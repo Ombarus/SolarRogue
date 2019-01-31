@@ -56,6 +56,8 @@ func _ready():
 	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
 	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_Callback")
+	BehaviorEvents.connect("OnMountAdded", self, "OnMountAdded_Callback")
+	BehaviorEvents.connect("OnMountRemoved", self, "OnMountRemoved_Callback")
 	
 func Pressed_Look_Callback():
 	if lock_input:
@@ -87,18 +89,30 @@ func Pressed_Take_Callback():
 	var targetting_data = {"weapon_data":{"fire_range":1, "fire_pattern":"o"}}
 	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, targetting_data, self, "ProcessTakeSelection")
 	
-	
+func OnMountAdded_Callback(obj, mount, src):
+	if obj != playerNode:
+		return
+	if "converter" in mount:
+		var converter_btn = get_node(CraftingAction)
+		if src == null or src == "":
+			converter_btn.visible = false
+		else:
+			converter_btn.visible = true
+
+func OnMountRemoved_Callback(obj, mount, src):
+	if obj != playerNode:
+		return
+	if "converter" in mount:
+		var converter_btn = get_node(CraftingAction)
+		if src == null or src == "":
+			converter_btn.visible = false
+		else:
+			converter_btn.visible = true
 	
 # mount_to = "converter"
 # mount_item = {"src":"data/json/bleh.json", "count":5}
 func OnEquip_Callback(mount_item, mount_to):
 	BehaviorEvents.emit_signal("OnEquipMount", playerNode, mount_to, mount_item)
-	var converter = playerNode.get_attrib("mounts.converter")
-	var converter_btn = get_node(CraftingAction)
-	if converter == null or converter == "":
-		converter_btn.visible = false
-	else:
-		converter_btn.visible = true
 	
 func Pressed_Crafting_Callback():
 	if lock_input:
@@ -393,6 +407,10 @@ func ProcessBoardSelection(target):
 		BehaviorEvents.emit_signal("OnLogLine", "Ship transfer canceled")
 	
 func ProcessTakeSelection(target):
+	if target == null:
+		BehaviorEvents.emit_signal("OnLogLine", "Item transfer canceled")
+		return
+		
 	BehaviorEvents.emit_signal("OnPushGUI", "TransferInventory", {"object1":playerNode, "object2":target, "callback_object":self, "callback_method":"OnTransferItemCompleted_Callback"})
 	
 func OnTransferItemCompleted_Callback(lobj, l_mounts, l_cargo, robj, r_mounts, r_cargo):
@@ -401,24 +419,41 @@ func OnTransferItemCompleted_Callback(lobj, l_mounts, l_cargo, robj, r_mounts, r
 	robj.init_mounts()
 	robj.init_cargo()
 	
+	BehaviorEvents.emit_signal("OnClearMounts", lobj)
+	BehaviorEvents.emit_signal("OnClearMounts", robj)
 	for item in l_mounts:
-		lobj.set_attrib("mounts." + item.mount_key, item.src_key)
+		BehaviorEvents.emit_signal("OnEquipMount", lobj, item.mount_key, item.src_key)
 	for item in r_mounts:
-		robj.set_attrib("mounts." + item.mount_key, item.src_key)
+		BehaviorEvents.emit_signal("OnEquipMount", robj, item.mount_key, item.src_key)
 	
-	var new_content = []
+	BehaviorEvents.emit_signal("OnClearCargo", lobj)
+	BehaviorEvents.emit_signal("OnClearCargo", robj)
 	for item in l_cargo:
-		new_content.push_back({"src":item.src_key, "count":item.amount})
-	lobj.set_attrib("cargo.content", new_content)
+		#TODO: optimize, allow passing how many
+		for i in range(item.amount):
+			BehaviorEvents.emit_signal("OnAddItem", lobj, item.src_key)
 	
-	new_content = []
 	for item in r_cargo:
-		new_content.push_back({"src":item.src_key, "count":item.amount})
-	robj.set_attrib("cargo.content", new_content)
+		for i in range(item.amount):
+			BehaviorEvents.emit_signal("OnAddItem", robj, item.src_key)
+	
+	#TODO: Should the AP use sum the total # of item moved and equip/unequip ap ? (probably ?)
+	if lobj.get_attrib("cargo.pickup_ap") != null:
+		BehaviorEvents.emit_signal("OnUseAP", lobj, lobj.get_attrib("cargo.pickup_ap"))
 	
 func OnTransferPlayer_Callback(old_player, new_player):
 	playerNode = new_player
 	BehaviorEvents.emit_signal("OnLogLine", "All controls transfered, the ship is ours captain !")
+	BehaviorEvents.emit_signal("OnUseAP", new_player, 1.0)
+
+	var converter = new_player.get_attrib("mounts.converter")
+	var converter_btn = get_node(CraftingAction)
+	if converter == null or converter == "":
+		converter_btn.visible = false
+	else:
+		converter_btn.visible = true
+		
+	new_player.set_attrib("moving.moved", true) # to update the wormhole button in next "OnPlayerTurn"
 	
 func DO_TEST(click_pos):
 	pass

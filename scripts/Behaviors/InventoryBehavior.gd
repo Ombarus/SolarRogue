@@ -12,6 +12,8 @@ func _ready():
 	BehaviorEvents.connect("OnRemoveItem", self, "OnRemoveItem_Callback")
 	BehaviorEvents.connect("OnUseEnergy", self, "OnUseEnergy_Callback")
 	BehaviorEvents.connect("OnEquipMount", self, "OnEquipMount_Callback")
+	BehaviorEvents.connect("OnClearMounts", self, "OnClearMounts_Callback")
+	BehaviorEvents.connect("OnClearCargo", self, "OnClearCargo_Callback")
 	
 func OnUseEnergy_Callback(obj, amount):
 	if amount == 0 or obj.get_attrib("converter.stored_energy") == null:
@@ -110,6 +112,7 @@ func OnDropMount_Callback(dropper, slot_name):
 		BehaviorEvents.emit_signal("OnUseAP", dropper, data.equipment.unequip_ap)
 	Globals.LevelLoaderRef.RequestObject(item_id, Globals.LevelLoaderRef.World_to_Tile(dropper.position))
 	dropper.set_attrib("mounts." + slot_name, "")
+	BehaviorEvents.emit_signal("OnMountRemoved", dropper, slot_name, item_id)
 	
 func OnEquipMount_Callback(equipper, slot_name, item_id):
 	# Check if slot already has something equipped
@@ -121,6 +124,7 @@ func OnEquipMount_Callback(equipper, slot_name, item_id):
 		BehaviorEvents.emit_signal("OnDropMount", equipper, slot_name)
 	BehaviorEvents.emit_signal("OnRemoveItem", equipper, item_id)
 	equipper.set_attrib(attrib_getter, item_id)
+	BehaviorEvents.emit_signal("OnMountAdded", equipper, slot_name, item_id)
 
 #TODO: Fix logic flaws (make sure we're not changing cargo in base_attributes), (check we won't exceed volume before adding)
 func OnAddItem_Callback(picker, item_id):
@@ -158,3 +162,19 @@ func OnRemoveItem_Callback(holder, item_id):
 					
 	for index in index_to_delete:
 		cargo.remove(index)
+		
+func OnClearMounts_Callback(holder):
+	if not holder.modified_attributes.has("mounts"):
+		holder.init_mounts()
+	var mounts = holder.get_attrib("mounts")
+	for key in mounts:
+		var item_id = mounts[key]
+		mounts[key] = ""
+		BehaviorEvents.emit_signal("OnMountRemoved", holder, key, item_id)
+	
+func OnClearCargo_Callback(holder):
+	if not holder.modified_attributes.has("cargo"):
+		holder.init_cargo()
+	var cargo = holder.get_attrib("cargo.content")
+	for item in cargo:
+		OnRemoveItem_Callback(holder, item.src)

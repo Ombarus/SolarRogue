@@ -25,7 +25,7 @@ func _process(delta):
 		var deltap = start_touch_pos - cur_pos
 		self.position = start_cam_pos + (deltap * self.zoom)
 
-func _input(event):
+func _unhandled_input(event):
 	# Wheel Up Event
 	if event.is_action_pressed("zoom_in"):
 		_zoom_camera(-1)

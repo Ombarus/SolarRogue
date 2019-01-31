@@ -77,9 +77,12 @@ func ProcessHarvesting(target, shooter, weapon_data):
 	if drop_count == 0 && is_player:
 		BehaviorEvents.emit_signal("OnLogLine", "Your shots did not produce anything useful")
 	else:
+		var bounds = Globals.LevelLoaderRef.levelSize
 		for i in range(drop_count):
 			var x = MersenneTwister.rand(3) - 1
 			var y = MersenneTwister.rand(3) - 1
+			x = clamp(x, 0, bounds.x)
+			y = clamp(y, 0, bounds.y)
 			var offset = Vector2(x,y)
 			Globals.LevelLoaderRef.RequestObject(item_json, Globals.LevelLoaderRef.World_to_Tile(target.position) + offset)
 		target.modified_attributes.harvestable.count -= drop_count
@@ -111,7 +114,10 @@ func ProcessDamage(target, shooter, weapon_data):
 			if target.get_attrib("drop_on_death") != null:
 				ProcessDeathSpawns(target)
 			if is_player:
-				BehaviorEvents.emit_signal("OnLogLine", "[color=red]You destroy the ennemy ![/color]")
+				if target.get_attrib("boardable") == true:
+					BehaviorEvents.emit_signal("OnLogLine", "[color=red]You destroyed one of YOUR ship ![/color]")
+				else:
+					BehaviorEvents.emit_signal("OnLogLine", "[color=red]You destroy the ennemy ![/color]")
 			if is_target_player:
 				BehaviorEvents.emit_signal("OnPlayerDeath")
 			BehaviorEvents.emit_signal("OnObjectDestroyed", target)

@@ -22,6 +22,8 @@ func OnObjTurn_Callback(obj):
 	if cur_hp < max_hp:
 		_process_healing(obj, max_hp, cur_hp, shield_data)
 		
+	obj.set_attrib("shield.last_turn_update", Globals.total_turn)
+		
 		
 func _process_healing(obj, max_hp, cur_hp, shield_data):
 	var last_update = obj.get_attrib("shield.last_turn_update", Globals.total_turn)
@@ -30,7 +32,6 @@ func _process_healing(obj, max_hp, cur_hp, shield_data):
 	
 	var new_hp = min(cur_hp + heal, max_hp)
 	obj.set_attrib("shield.current_hp", new_hp)
-	obj.set_attrib("shield.last_turn_update", Globals.total_turn)
 	BehaviorEvents.emit_signal("OnUseEnergy", obj, energy)
 
 #func _process(delta):

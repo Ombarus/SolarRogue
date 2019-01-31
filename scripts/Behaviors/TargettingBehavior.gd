@@ -31,18 +31,19 @@ func OnTargetClick_Callback(click_pos, target_type):
 	var tile_content = Globals.LevelLoaderRef.levelTiles[tile.x][tile.y]
 	var potential_targets = []
 	for obj in tile_content:
-		if target_type == Globals.VALID_TARGET.attack and obj.get_attrib("destroyable") != null || obj.get_attrib("harvestable") != null:
+		var obj_type = obj.get_attrib("type")
+		if obj_type != "player" and target_type == Globals.VALID_TARGET.attack and (obj.get_attrib("destroyable") != null || obj.get_attrib("harvestable") != null):
 			potential_targets.push_back(obj)
-		elif target_type == Globals.VALID_TARGET.board and obj.get_attrib("boardable") == true:
+		elif obj_type != "player" and target_type == Globals.VALID_TARGET.board and obj.get_attrib("boardable") == true:
 			potential_targets.push_back(obj)
-		elif target_type == Globals.VALID_TARGET.loot and obj.get_attrib("cargo") != null:
+		elif obj_type != "player" and target_type == Globals.VALID_TARGET.loot and obj.get_attrib("cargo") != null:
 			potential_targets.push_back(obj)
 	if potential_targets.size() == 1:
 		#TODO: pass the right data for the weapon
 		#TODO: Check if player has an equiped weapon
 		var player_tile = Globals.LevelLoaderRef.World_to_Tile(_player_node.position)
 		if IsValidTile(player_tile, tile, _targetting_data.weapon_data):
-			_callback_obj.call(_callback_method, tile_content[0])
+			_callback_obj.call(_callback_method, potential_targets[0])
 			#BehaviorEvents.emit_signal("OnDealDamage", tile_content[0], _player_node, _targetting_data)
 		else:
 			BehaviorEvents.emit_signal("OnLogLine", "Target is outside of our range sir !")

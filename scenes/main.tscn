@@ -410,10 +410,11 @@ Action = SubResource( 6 )
 
 [node name="PopupButton" parent="Camera-GUI/HUD/Buttons" index="5" instance=ExtResource( 27 )]
 
+anchor_top = 1.0
+anchor_right = 0.0
 margin_left = 2.0
-margin_top = 188.0
-margin_right = 357.0
-margin_bottom = 334.0
+margin_top = -416.0
+margin_right = 1634.0
 
 [node name="StatusBar" type="Control" parent="Camera-GUI/HUD" index="2"]
 
