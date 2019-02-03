@@ -16,7 +16,7 @@
 	"moving": {
 		"speed":1.0,
 		"can_use_wormhole":true,
-		"energy_cost":50
+		"energy_cost":20
 	},
 	"cargo": {
 		"capacity":500,
@@ -24,7 +24,8 @@
 		"drop_ap":1.0,
 		"content":[
 			{"src":"data/json/items/weapons/missile.json", "count":20},
-			{"src":"data/json/items/misc/probe_body.json", "count":1}
+			{"src":"data/json/items/misc/probe_body.json", "count":1},
+			{"src":"data/json/items/misc/shuttle_body.json", "count":1}
 		]
 	},
 	"converter": {

@@ -17,8 +17,9 @@
 		"stop_running_after":5
 	},
 	"drop_on_death": [
-		{"id":"data/json/items/misc/probe_body.json", "chance":0.7},
-		{"id":"data/json/items/misc/hydrogen.json", "chance":0.2},
+		{"id":"data/json/items/misc/probe_body.json", "chance":0.4},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.3},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.3},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
 	],

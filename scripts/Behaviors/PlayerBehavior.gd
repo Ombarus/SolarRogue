@@ -98,16 +98,22 @@ func OnMountAdded_Callback(obj, mount, src):
 			converter_btn.visible = false
 		else:
 			converter_btn.visible = true
+	if "weapon" in mount:
+		var weapon_btn = get_node(WeaponAction)
+		if src == null or src == "":
+			weapon_btn.visible = false
+		else:
+			weapon_btn.visible = true
 
 func OnMountRemoved_Callback(obj, mount, src):
 	if obj != playerNode:
 		return
 	if "converter" in mount:
 		var converter_btn = get_node(CraftingAction)
-		if src == null or src == "":
-			converter_btn.visible = false
-		else:
-			converter_btn.visible = true
+		converter_btn.visible = false
+	if "weapon" in mount:
+		var weapon_btn = get_node(WeaponAction)
+		weapon_btn.visible = false
 	
 # mount_to = "converter"
 # mount_item = {"src":"data/json/bleh.json", "count":5}
@@ -215,9 +221,13 @@ func OnObjTurn_Callback(obj):
 func Pressed_Weapon_Callback():
 	if lock_input:
 		return
+	
+	var weapon_json = playerNode.get_attrib("mounts.small_weapon_mount")
+	if weapon_json == null or weapon_json.empty() == true:
+		BehaviorEvents.emit_signal("OnLogLine", "Mount some weapon first")
+		return
 		
 	BehaviorEvents.emit_signal("OnLogLine", "Weapon System Online. Target ?")
-	var weapon_json = playerNode.get_attrib("mounts.small_weapon_mount")
 	var weapon_data = Globals.LevelLoaderRef.LoadJSON(weapon_json)
 	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, weapon_data, self, "ProcessAttackSelection")
 	_input_state = INPUT_STATE.weapon_targetting
@@ -302,7 +312,7 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("touch"):
 			click_start_pos = event.position
-		if event.is_action_released("touch") && (click_start_pos - event.position).length_squared() < 5.0:
+		elif event.is_action_released("touch") && (click_start_pos - event.position).length_squared() < 5.0:
 			var click_pos = playerNode.get_global_mouse_position()
 			
 			if _input_state == INPUT_STATE.weapon_targetting:

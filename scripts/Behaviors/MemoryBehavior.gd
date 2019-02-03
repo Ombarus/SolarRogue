@@ -19,6 +19,8 @@ func OnLevelLoaded_Callback():
 	
 func OnTransferPlayer_Callback(old_player, new_player):
 	_playerNode = new_player
+	# Should I duplicate the array here ?
+	new_player.set_attrib("memory", old_player.get_attrib("memory"))
 
 func OnObjectLoaded_Callback(obj):
 	if obj.get_attrib("type") == "player":

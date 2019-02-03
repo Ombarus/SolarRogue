@@ -38,20 +38,23 @@ func OnTargetClick_Callback(click_pos, target_type):
 			potential_targets.push_back(obj)
 		elif obj_type != "player" and target_type == Globals.VALID_TARGET.loot and obj.get_attrib("cargo") != null:
 			potential_targets.push_back(obj)
-	if potential_targets.size() == 1:
-		#TODO: pass the right data for the weapon
-		#TODO: Check if player has an equiped weapon
-		var player_tile = Globals.LevelLoaderRef.World_to_Tile(_player_node.position)
-		if IsValidTile(player_tile, tile, _targetting_data.weapon_data):
-			_callback_obj.call(_callback_method, potential_targets[0])
-			#BehaviorEvents.emit_signal("OnDealDamage", tile_content[0], _player_node, _targetting_data)
-		else:
-			BehaviorEvents.emit_signal("OnLogLine", "Target is outside of our range sir !")
-	elif potential_targets.size() == 0:
+	if potential_targets.size() == 0:
 		_callback_obj.call(_callback_method, null)
 	else:
-		#TODO: choose target popup dialog
-		pass
+		var player_tile = Globals.LevelLoaderRef.World_to_Tile(_player_node.position)
+		if not IsValidTile(player_tile, tile, _targetting_data.weapon_data):
+			BehaviorEvents.emit_signal("OnLogLine", "Target is outside of our range sir !")
+		elif potential_targets.size() == 1:
+			#TODO: pass the right data for the weapon
+			_callback_obj.call(_callback_method, potential_targets[0])
+		else:
+			BehaviorEvents.emit_signal("OnPushGUI", "SelectTarget", {"targets":potential_targets, "callback_object":self, "callback_method":"SelectTarget_Callback"})
+	
+func SelectTarget_Callback(selected_targets):
+	if selected_targets.size() <= 0:
+		_callback_obj.call(_callback_method, null)
+	else:
+		_callback_obj.call(_callback_method, selected_targets[0])
 	
 func IsValidTile(player_tile, target_tile, weapon_data):
 	var bounds = Globals.LevelLoaderRef.levelSize
@@ -155,7 +158,7 @@ func _DoTargetting(player, weapon):
 			if offset.x != 0:
 				offset.x *= -1
 				tile = obj_tile + offset
-				if IsValidTile(obj_tile, tile, weapon.weapon_data):
+				if offset.y != 0 and IsValidTile(obj_tile, tile, weapon.weapon_data):
 					n = scene.instance()
 					r.call_deferred("add_child", n)
 					n.position = Globals.LevelLoaderRef.Tile_to_World(tile)

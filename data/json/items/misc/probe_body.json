@@ -4,7 +4,7 @@
 	"sprite":"probe_body",
 	"equipment": {
 		"slot":"cargo",
-		"volume":200.0,
+		"volume":150.0,
 		"stackable":false
 	}
 }

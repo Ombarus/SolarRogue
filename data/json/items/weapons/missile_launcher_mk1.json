@@ -21,6 +21,8 @@
 	},
 	"equipment": {
 		"slot":"small_weapon_mount",
-		"volume":100.0
+		"volume":100.0,
+		"equip_ap":3.0,
+		"unequip_ap":3.0
 	}
 }

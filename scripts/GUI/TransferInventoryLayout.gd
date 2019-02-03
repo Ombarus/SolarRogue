@@ -135,10 +135,14 @@ func OnChoiceDragAndDrop_Callback(container_src, container_dst, content_index_sr
 	var old_dst = container_dst.get_content()
 	var src_data = old_src[content_index_src]
 	var is_src_mount = "mount_key" in old_src[0]
-	var is_dst_mount = "mount_key" in old_dst[0]
+	var is_dst_mount = false
+	if old_dst.size() > 0:
+		is_dst_mount = "mount_key" in old_dst[0]
 	var dst_data_copy = null
-	var src_json = Globals.LevelLoaderRef.LoadJSON(src_data.src_key)
-	var is_stackable = "stackable" in src_json.equipment and src_json.equipment.stackable == true
+	var src_json = null
+	if src_data.src_key != null and not src_data.src_key.empty():
+		src_json = Globals.LevelLoaderRef.LoadJSON(src_data.src_key)
+	var is_stackable = not src_json == null and "stackable" in src_json.equipment and src_json.equipment.stackable == true
 	
 	# Remake set array for the ship that receives the item
 	for item in old_dst:
@@ -165,14 +169,17 @@ func OnChoiceDragAndDrop_Callback(container_src, container_dst, content_index_sr
 				break
 	else:
 		var found = false
+		var amount = 1
+		if not is_src_mount:
+			amount = src_data.amount
 		if is_stackable == true:
 			for item in new_dst:
 				if item.src_key == src_data.src_key:
-					item.amount += 1
+					item.amount += amount
 					found = true
 					break
 		if found == false:
-			new_dst.push_back({"src_key":src_data.src_key, "amount":1})
+			new_dst.push_back({"src_key":src_data.src_key, "amount":amount})
 	
 	# Remake the drag source that will lose an item	
 	for item in old_src:

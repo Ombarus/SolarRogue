@@ -20,12 +20,16 @@ func _ready():
 func _process(delta):
 	# Called every frame. Delta is time since last frame.
 	# Update game logic here.
-	if mouse_down:
-		var cur_pos = get_viewport().get_mouse_position()
-		var deltap = start_touch_pos - cur_pos
-		self.position = start_cam_pos + (deltap * self.zoom)
+	pass
+	#if mouse_down:
+	#	var cur_pos = get_viewport().get_mouse_position()
+	#	var deltap = start_touch_pos - cur_pos
+	#	self.position = start_cam_pos + (deltap * self.zoom)
 
 func _unhandled_input(event):
+	if levelLoaderRef == null:
+		return
+		
 	# Wheel Up Event
 	if event.is_action_pressed("zoom_in"):
 		_zoom_camera(-1)
@@ -33,10 +37,18 @@ func _unhandled_input(event):
 	elif event.is_action_pressed("zoom_out"):
 		_zoom_camera(1)
 	elif event.is_action_pressed("touch"):
-		start_touch_pos = event.position
-		start_cam_pos = self.position
+		#start_touch_pos = event.position
+		#start_cam_pos = self.position
 		mouse_down = true
-	
+	elif event is  InputEventMouseMotion and mouse_down == true:
+		var new_pos = self.position - (event.relative * self.zoom)
+		var bounds = levelLoaderRef.levelSize
+		var tile_size = levelLoaderRef.tileSize
+		if new_pos.x < 0 or new_pos.x > (bounds.x * tile_size):
+			new_pos.x = self.position.x
+		if new_pos.y < 0 or new_pos.y > (bounds.y * tile_size):
+			new_pos.y = self.position.y
+		self.position = new_pos
 	
 	if event.is_action_released("touch"):
 		mouse_down = false
@@ -56,3 +68,9 @@ func OnLevelLoaded_callback():
 	
 func OnTransferPlayer_callback(old_player, new_player):
 	OnMovement_callback(new_player, null)
+
+func _on_ZoomIn_pressed():
+	_zoom_camera(-1)
+
+func _on_ZoomOut_pressed():
+	_zoom_camera(1)

@@ -41,10 +41,20 @@ func set_content(val):
 		copy.get_node("Choice/Name").bbcode_text = display
 		copy.get_node("Choice").MyData = {"origin":self, "content_index":content.size() - 1} # index in content array
 	
+func can_drop_data(position, data):
+	return choice_can_drop_data(self, data)
+	
+func drop_data(position, data):
+	choice_drop_data(self, data)
+	
 func choice_can_drop_data(node_dest, data):
 	if not "origin" in data:
 		return false
 	if data.origin == self:
+		return false
+		
+	var src_content_data = data.origin.get_content()[data.content_index]
+	if src_content_data.src_key == null or src_content_data.src_key == "":
 		return false
 	
 	return true
