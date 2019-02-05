@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scripts/GUI/WelcomeScreen.gd" type="Script" id=1]
+[ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
+[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold.tres" type="DynamicFont" id=4]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItal.tres" type="DynamicFont" id=5]
+[ext_resource path="res://data/fonts/DejaVuSansMonoBold.tres" type="DynamicFont" id=6]
+[ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=7]
+
+[node name="WelcomeScreen" type="Control"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 1 )
+
+[node name="ModalBG" type="Panel" parent="." index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_styles/panel = ExtResource( 2 )
+_sections_unfolded = [ "custom_styles" ]
+
+[node name="base" parent="." index="1" instance=ExtResource( 3 )]
+
+margin_left = 187.0
+margin_top = 34.0
+margin_right = -183.0
+margin_bottom = -76.0
+dialog_ok = true
+title = "Welcome Ombarus..."
+
+[node name="Content" type="RichTextLabel" parent="base" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 15.0
+margin_top = 49.0
+margin_right = -26.0
+margin_bottom = -34.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "Something went [color=red]wrong[/color]. 
+
+While you were exploring uncharted space the [color=yellow]wormhole[/color] sent you so far you've lost all bearings. 
+What you do know is that your warp engines aren't powerful enough to open it again.
+Use what you have and try to find a way back home.
+[indent]
+Try not to [u]die[/u] or run out of [u]energy[/u]. 
+[i]Weapons can Harvest planets, convert their resources to energy.[/i]
+Look for the [color=red]Ultimate Artifact[/color] : [u]The Converter of Yendor[/u], 
+[/indent]
+Maybe it's powerful enough to bring you home...."
+visible_characters = -1
+percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
+text = "Something went wrong. 
+
+While you were exploring uncharted space the wormhole sent you so far you've lost all bearings. 
+What you do know is that your warp engines aren't powerful enough to open it again.
+Use what you have and try to find a way back home.
+	
+Try not to die or run out of energy. 
+Weapons can Harvest planets, convert their resources to energy.
+Look for the Ultimate Artifact : The Converter of Yendor, 
+
+Maybe it's powerful enough to bring you home...."
+scroll_active = true
+scroll_following = false
+selection_enabled = false
+override_selected_font_color = false
+_sections_unfolded = [ "BBCode", "custom_fonts" ]
+
+

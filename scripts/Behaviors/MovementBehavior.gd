@@ -18,6 +18,12 @@ func OnMovement_callback(obj, dir):
 		return
 	#TODO: Collision Detection
 	
+	var cargo_capacity = obj.get_attrib("cargo.capacity")
+	var cargo_used = obj.get_attrib("cargo.volume_used")
+	if cargo_used != null and cargo_capacity != null and cargo_used > cargo_capacity and obj.get_attrib("type") == "player":
+		BehaviorEvents.emit_signal("OnLogLine", "We have too much cargo, choose what to leave behind before we go")
+		return
+	
 	var move_speed = obj.get_attrib("moving.speed")
 	var energy_cost = obj.get_attrib("moving.energy_cost")
 	if energy_cost == null:

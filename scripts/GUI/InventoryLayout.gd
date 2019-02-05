@@ -64,10 +64,21 @@ func Init(init_param):
 	get_node("base/vbox/Mounts").content = mount_obj
 	
 	var current_load = obj.get_attrib("cargo.volume_used")
+	var cargo_space = obj.get_attrib("cargo.capacity")
 	if current_load == null:
 		current_load = 0
-	var capacity = "(" + str(current_load) + " of " + str(obj.get_attrib("cargo.capacity")) + " m³)"
-	get_node("base/vbox/CargoLabel").bbcode_text = "Cargo " + capacity + " :"
+	
+	var color = ""
+	var end_color = ""
+	if current_load > cargo_space:
+		color="[color=red]"
+		end_color="[/color]"
+	elif current_load > cargo_space * 0.9:
+		color="[color=yellow]"
+		end_color="[/color]"	
+	
+	var capacity = "(" + str(current_load) + " of " + str(cargo_space) + " m³)"
+	get_node("base/vbox/CargoLabel").bbcode_text = color + "Cargo " + capacity + " :" + end_color
 	
 	var cargo_obj = []
 	for item in cargo:

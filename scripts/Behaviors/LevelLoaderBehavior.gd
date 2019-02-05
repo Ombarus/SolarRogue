@@ -16,9 +16,15 @@ var objById = {}
 var _sequence_id = 0 # for giving unique name to objects
 var _current_level_data = null
 var _wait_for_anim = false
+var _global_spawns = {} # to keep track of items that should only appear once in a single game
 
 func GetCurrentLevelData():
 	return _current_level_data
+	
+func GetGlobalSpawn(src):
+	if not src in _global_spawns:
+		return 0
+	return _global_spawns[src]
 
 func GetObjectById(id):
 	if id in objById:
@@ -80,6 +86,7 @@ func _ready():
 		startLevel = cur_save.current_level_src
 		current_depth = cur_save.depth
 		_sequence_id = cur_save.current_sequence_id
+		_global_spawns = cur_save.global_spawns
 	
 	var data = LoadJSON(startLevel)
 	if data != null:
@@ -137,6 +144,8 @@ func GenerateLevelFromTemplate(levelData):
 			var do_spawn = false
 			if objCountByType.has(obj["name"]) && obj.has("max") && objCountByType[obj["name"]] >= obj["max"]:
 				continue
+			if obj.has("global_max") && obj["name"] in _global_spawns && obj["global_max"] >= _global_spawns[obj["name"]]:
+				continue
 			if obj.has("min") && (!objCountByType.has(obj["name"]) || objCountByType[obj["name"]] < obj["min"]):
 				do_spawn = true
 			if !do_spawn && obj.has("spawn_rate"):
@@ -185,6 +194,7 @@ func SaveState(level_data):
 	cur_save["current_sequence_id"] = _sequence_id
 	cur_save["current_level_src"] = _current_level_data["src"]
 	cur_save["player_data"] = {}
+	cur_save["global_spawns"] = _global_spawns
 	cur_save.player_data["src"] = objByType["player"][0].get_attrib("src")
 	cur_save.player_data["position_x"] = World_to_Tile(objByType["player"][0].position).x
 	cur_save.player_data["position_y"] = World_to_Tile(objByType["player"][0].position).y
@@ -320,6 +330,10 @@ func CreateAndInitNode(data, pos, modified_data = null):
 		_sequence_id += 1
 	objById[n.modified_attributes["unique_id"]] = n
 	BehaviorEvents.emit_signal("OnObjectLoaded", n)
+	if modified_data == null: # only count new stuff
+		if not data["src"] in _global_spawns:
+			_global_spawns[data["src"]] = 0
+		_global_spawns[data["src"]] += 1
 	return n
 	
 #######################################################

@@ -13,6 +13,8 @@ func OnLevelLoaded_Callback():
 	BehaviorEvents.disconnect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	# push default UI (might be some main menu or splash screen one day)
 	BehaviorEvents.call_deferred("emit_signal", "OnPushGUI", "HUD", null)
+	if not File.new().file_exists("user://savegame.save"):
+		BehaviorEvents.call_deferred("emit_signal", "OnPushGUI", "WelcomeScreen", null)
 
 func OnGUILoaded_Callback(name, obj):
 	_gui_list[name] = obj

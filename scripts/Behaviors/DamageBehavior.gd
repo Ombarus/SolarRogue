@@ -81,8 +81,8 @@ func ProcessHarvesting(target, shooter, weapon_data):
 		for i in range(drop_count):
 			var x = MersenneTwister.rand(3) - 1
 			var y = MersenneTwister.rand(3) - 1
-			x = clamp(x, 0, bounds.x)
-			y = clamp(y, 0, bounds.y)
+			x = clamp(x, 0, bounds.x-1)
+			y = clamp(y, 0, bounds.y-1)
 			var offset = Vector2(x,y)
 			Globals.LevelLoaderRef.RequestObject(item_json, Globals.LevelLoaderRef.World_to_Tile(target.position) + offset)
 		target.modified_attributes.harvestable.count -= drop_count
@@ -132,7 +132,9 @@ func ProcessDamage(target, shooter, weapon_data):
 	
 func ProcessDeathSpawns(target):
 	for stuff in target.get_attrib("drop_on_death"):
-		if MersenneTwister.rand_float() < stuff.chance:
+		var spawned = Globals.LevelLoaderRef.GetGlobalSpawn(stuff.id)
+		var can_spawn = not "global_max" in stuff or stuff["global_max"] < spawned
+		if can_spawn and MersenneTwister.rand_float() < stuff.chance:
 			Globals.LevelLoaderRef.RequestObject(stuff.id, Globals.LevelLoaderRef.World_to_Tile(target.position))
 	
 func _hit_shield(target, dam, shield_data):

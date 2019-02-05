@@ -33,6 +33,7 @@ signal OnMountRemoved(obj, slot, src)
 signal OnMountAdded(obj, slot, src)
 signal OnClearMounts(obj)
 signal OnClearCargo(obj)
+signal OnUpdateCargoVolume(obj)
 
 signal OnGUILoaded(name, obj)
 signal OnPushGUI(name, init_param)

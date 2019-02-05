@@ -1,10 +1,14 @@
 extends "res://scripts/GUI/GUILayoutBase.gd"
 
+export(NodePath) var InventoryBehaviorPath
+
 var _callback_obj = null
 var _callback_method = ""
 
 var _lobj = null
 var _robj = null
+
+var _inventory_behavior_ref = null
 
 const L_BASE_PATH = "base/HBoxContainer/LShip"
 const R_BASE_PATH = "base/HBoxContainer/RShip"
@@ -19,18 +23,7 @@ func _ready():
 	get_node(L_BASE_PATH + "/Cargo").connect("OnChoiceDragAndDrop", self, "OnChoiceDragAndDrop_Callback")
 	get_node(R_BASE_PATH + "/Cargo").connect("OnChoiceDragAndDrop", self, "OnChoiceDragAndDrop_Callback")
 	
-	#get_node(L_BASE_PATH + "/Mounts/List/Row/Choice").connect("toggled", self, ")
-	
-	#var debug_mounts = []
-	#for i in range(5):
-	#	debug_mounts.push_back({"mount_key":"small weapon module", "src_key":"data/json/items/weapons/missile_launcher_mk1.json"})
-		
-	#var debug_cargo = []
-	#for i in range(5):
-	#	debug_cargo.push_back({"amount":i, "src_key":"data/json/items/weapons/missile.json"})
-	
-	#get_node(L_BASE_PATH + "/Cargo").content = debug_cargo
-	#get_node(L_BASE_PATH + "/Mounts").content = debug_mounts
+	_inventory_behavior_ref = get_node(InventoryBehaviorPath)
 	
 func Ok_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
@@ -212,6 +205,40 @@ func OnChoiceDragAndDrop_Callback(container_src, container_dst, content_index_sr
 	container_dst.content = new_dst
 	container_src.content = new_src
 	
+	_update_cargo_label()
+	
+func _update_cargo_label():
+	var lcargo = get_node(L_BASE_PATH + "/Cargo").content
+	var rcargo = get_node(R_BASE_PATH + "/Cargo").content
+	var l_inv_dict = []
+	for item in lcargo:
+		l_inv_dict.push_back({"src":item.src_key, "count":item.amount})
+	var l_load = _inventory_behavior_ref.GetTotalVolume(l_inv_dict)
+	var l_capacity = _lobj.get_attrib("cargo.capacity")
+		
+	var r_inv_dict = []
+	for item in rcargo:
+		r_inv_dict.push_back({"src":item.src_key, "count":item.amount})
+	var r_load = _inventory_behavior_ref.GetTotalVolume(r_inv_dict)
+	var r_capacity = _robj.get_attrib("cargo.capacity")
+		
+	SetCargoLabel(L_BASE_PATH, l_load, l_capacity)
+	SetCargoLabel(R_BASE_PATH, r_load, r_capacity)
+	
+func SetCargoLabel(base_path, current_load, capacity):
+	if current_load == null:
+		current_load = 0
+	var color = ""
+	var end_color = ""
+	if current_load > capacity:
+		color="[color=red]"
+		end_color="[/color]"
+	elif current_load > capacity * 0.9:
+		color="[color=yellow]"
+		end_color="[/color]"
+	var capacity_str = "(" + str(current_load) + " of " + str(capacity) + " m³)"
+	get_node(base_path + "/CargoLabel").bbcode_text = color + "Cargo " + capacity_str + " :" + end_color
+	
 func _on_TakeAll_pressed():
 	var rnode = get_node(R_BASE_PATH)
 	var lnode = get_node(L_BASE_PATH)
@@ -263,3 +290,5 @@ func _transfer_all(from, to):
 			cargo_content.push_back({"src_key":data.src_key, "amount":data.amount})
 	from.get_node("Cargo").content = take_cargo
 	to.get_node("Cargo").content = cargo_content
+	
+	_update_cargo_label()

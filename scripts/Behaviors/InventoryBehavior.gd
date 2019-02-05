@@ -14,6 +14,7 @@ func _ready():
 	BehaviorEvents.connect("OnEquipMount", self, "OnEquipMount_Callback")
 	BehaviorEvents.connect("OnClearMounts", self, "OnClearMounts_Callback")
 	BehaviorEvents.connect("OnClearCargo", self, "OnClearCargo_Callback")
+	BehaviorEvents.connect("OnUpdateCargoVolume", self, "OnUpdateCargoVolume_Callback")
 	
 func OnUseEnergy_Callback(obj, amount):
 	if amount == 0 or obj.get_attrib("converter.stored_energy") == null:
@@ -51,10 +52,14 @@ func OnPickup_Callback(picker, picked):
 		pickup_speed = 0
 	var total_pickup_ap = 0
 	for obj in filtered_obj:
-		if obj.get_attrib("equipment.volume") > inventory_space:
-			if is_player:
-				BehaviorEvents.emit_signal("OnLogLine", "Cannot pick up " + obj.get_attrib("name_id") + " Cargo holds are full")
-			continue
+		# Allow pickup when over cargo but prevent the player from moving.
+		# I think it's better for usability to let the player take what he wants and then
+		# decide what to drop instead of having to choose beforehand because we stop him from being
+		# over-cargo
+		#if obj.get_attrib("equipment.volume") > inventory_space:
+		#	if is_player:
+		#		BehaviorEvents.emit_signal("OnLogLine", "Cannot pick up " + obj.get_attrib("name_id") + " Cargo holds are full")
+		#	continue
 		picker.set_attrib("cargo.volume_used", picker.get_attrib("cargo.volume_used") + obj.get_attrib("equipment.volume"))
 		inventory_space -= obj.get_attrib("equipment.volume")
 		if is_player:
@@ -178,3 +183,21 @@ func OnClearCargo_Callback(holder):
 	var cargo = holder.get_attrib("cargo.content")
 	for item in cargo:
 		OnRemoveItem_Callback(holder, item.src)
+		
+#objects = [{"src":"bleh.json", "count":3}]
+func GetTotalVolume(objects):
+	var total_volume = 0
+	for item in objects:
+		var data = Globals.LevelLoaderRef.LoadJSON(item.src)
+		var volume = Globals.get_data(data, "equipment.volume")
+		if volume != null:
+			total_volume += data.equipment.volume * item["count"]
+		
+	return total_volume
+	
+	
+func OnUpdateCargoVolume_Callback(obj):
+	obj.init_cargo()
+	var cargo = obj.get_attrib("cargo.content")
+	var total_volume = GetTotalVolume(cargo)
+	obj.set_attrib("cargo.volume_used", total_volume)

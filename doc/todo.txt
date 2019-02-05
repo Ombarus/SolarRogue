@@ -1,12 +1,19 @@
-1st step :::
+TODO :::
+- clean name (always return the id with or without "res:")
+- how to do "global max" ? branch1 should be spawned only once, per game, not per map, some items might be unique too, if they've been spawned, they should never appear again
+- Message if you try to go up the home wormhole
+- Save after each turn
+- make sure player cannot generate more energy than max capacity
+- prototype having more than one weapon mount (right now I assume mount points are both type and unique ids)
+- Tweak: Probe doesn't have enough cargo space to hold any hulls for crafting which means we can be stuck in a probe forever ?
+- fix max cargo. make sure we're never above cargo capacity
+	- check if we always update current cargo volume
 - review multi-tile objects
 	- Collision on each tile but behave as a single entity ?
 - Transfering ship & ship item should take AP
 - BUG: Any random interaction should cancel targetting ?
-- make sure player cannot generate more energy than max capacity
 - Spawning
 - re-work Object identification (show as unknown, then remember id-ed stuff)
-- prototype having more than one weapon mount (right now I assume mount points are both type and unique ids)
 - Basic interaction
 	- Look around
 		- select item using keyboard
@@ -15,7 +22,7 @@
 	- Scan
 		- Give health remaining on ships
 		- Give detailed description of planet (rich but hard to mine, poor but easy to mine, etc)
-- Two places where I access cargo content and juste do -= 1. or .remove()... but if the result returned was in BaseAttribute that's dangerous
+- Two places where I access cargo content and just do -= 1. or .remove()... but if the result returned was in BaseAttribute that's dangerous
 
 - check if assigning array or dictionary copy or reference content in godot
 - Ability to swap tileset for ascii somehow
@@ -76,6 +83,12 @@ IDEAS:::
 	
 	
 DONE :::
+- Welcome Screen
+- transfer window need to update cargo.
+- ship cannot move if over cargo
+
+
+
 - same-tile multi-target selection dialog
 - Tweak: Probe should have higher chance to drop something usefull (at least 2 hydrogen)... or it's not worth wasting a missile on them
 - BUG: Crash when trying to fire when no weapon equipped
