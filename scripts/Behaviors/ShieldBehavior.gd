@@ -6,6 +6,7 @@ extends Node
 
 func _ready():
 	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
+	BehaviorEvents.connect("OnMountAdded", self, "OnMountAdded_Callback")
 	
 func OnObjTurn_Callback(obj):
 	var shield_name = obj.get_attrib("mounts.shield")
@@ -33,8 +34,11 @@ func _process_healing(obj, max_hp, cur_hp, shield_data):
 	var new_hp = min(cur_hp + heal, max_hp)
 	obj.set_attrib("shield.current_hp", new_hp)
 	BehaviorEvents.emit_signal("OnUseEnergy", obj, energy)
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+	
+func OnMountAdded_Callback(obj, slot, src):
+	if slot != "shield" or src == null or src.empty():
+		return
+		
+	var data = Globals.LevelLoaderRef.LoadJSON(src)
+	obj.set_attrib("shield.last_turn_update", Globals.total_turn)
+	

@@ -1,0 +1,16 @@
+{
+	"name_id":"Solar Array",
+	"type":"utility",
+	"sprite_choice":[
+		"shield"
+	],
+	"equipment": {
+		"slot":"utility",
+		"volume":10.0,
+		"equip_ap":3.0,
+		"unequip_ap":3.0
+	},
+	"energy_regen": {
+		"per_turn":10.0
+	}
+}

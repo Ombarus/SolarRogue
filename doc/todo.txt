@@ -1,4 +1,52 @@
+ROAD TO ALPHA :::
+- End screen when leaving top wormhole
+	- Confirmation message
+	- Success ("You are rich") / failure ("You can't leave yet")
+	- Final scoring
+- Generate Level data :
+	- 12 "Main" levels
+		- 1 "Special" level with Converter of Yendor
+	- 3 Branches (for now, 3 level each ? 2 filler & 1 "special")
+		- Human Fortress
+			- Last level should be peaceful and contains a bunch of shop.
+		- Jerg Homeworld
+			- Last level contain a "Queen" boss that spawns ennemies (Queen could drop some garantied artifact ?)
+		- Vorg Homeworld
+			- Last level contains a "Titan" "Cube" boss and lots of loot ?
+	- Equipment (see excel)
+		- Code Feature
+		- Add item to JSON
+		- Add to spawn list everywhere !
+	- Ships
+		- Human (Basic)
+			- Art
+			- Stats
+			- JSON
+		- Jerg (Swarm, no shield, big hull, fast)
+			- Art
+			- Stats
+			- JSON
+		- Vorg (Big shield, effect weapon (disable ship equipment, poison like effects, slow down, etc.)
+			- Art
+			- Stats
+			- JSON
+		- Random Unique boss
+			- Death Star ?
+				- Art
+				- Stats
+				- JSON
+
+
 TODO :::
+- Make energy be consumed per turn, not per move (so that we use energy even when we wait)
+- BUG: Mouse stay stuck if moving camera when sub-menu is up
+- level generation improvement :
+	- have the spawn chance be able to have group of related elements (so I can spawn for example, 3 missiles next to each other 0.1% chance per level)
+		- make for more story like spawns like a missile launcher and 2-3 missile and maybe a broken down prop next to each other but relative position instead of absolute like the sun
+	- revisit spawn chance... could I specify it in chance per level instead of per tile ? would make tweaking level design easier (1 per level is a chance of 0,00015625 !)
+	- Sokoban example : might want to spawn wormhole #1 OR #2.. not both, but definitly at least 1
+	- Nethack : Quest level different by race (I don't have race for now ?)
+	- Dependency ? Castle can spawn between 25-29 but never before medusa
 - clean name (always return the id with or without "res:")
 - how to do "global max" ? branch1 should be spawned only once, per game, not per map, some items might be unique too, if they've been spawned, they should never appear again
 - Message if you try to go up the home wormhole

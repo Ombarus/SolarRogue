@@ -20,7 +20,7 @@
 		"fire_speed":1.0
 	},
 	"equipment": {
-		"slot":"small_weapon_mount",
+		"slot":"weapon",
 		"volume":100.0,
 		"equip_ap":3.0,
 		"unequip_ap":3.0

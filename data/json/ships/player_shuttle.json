@@ -4,7 +4,7 @@
 	"sprite":"shuttle",
 	"boardable":true,
 	"mounts": {
-		"small_weapon_mount": "",
+		"weapon": "",
 		"shield": "",
 		"scanner": "",
 		"converter": ""

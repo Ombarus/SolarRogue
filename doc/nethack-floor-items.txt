@@ -1,9 +1,10 @@
 door
 wall (castle, dirt, dungeon, tree, ...)
 stairs
-altar
+altar ---
 tombstone
 throne
+chest, bag
 sink
 fountain
 water
@@ -15,7 +16,6 @@ cloud
 trap
 statue
 boulder
-chest, bag
 
 
 (400 monstres ?)

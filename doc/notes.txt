@@ -59,6 +59,7 @@ Feature :
 
 Things to consider :
 
+- Hunger in nethack is a encouragement to keep moving.... right now we don't use energy on wait.. maybe we should ?
 - Star "sparkle" : https://en.wikipedia.org/wiki/Point_spread_function
 - 1989 : Space Rogue
 	- https://www.youtube.com/user/SpaceGameJunkie/videos

@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://data/textures/procedural-star-bg.png" type="Texture" id=1]
 [ext_resource path="res://data/shaders/fow_mask.tres" type="Material" id=2]
@@ -6,43 +6,45 @@
 [ext_resource path="res://scripts/Behaviors/APBehavior.gd" type="Script" id=4]
 [ext_resource path="res://scripts/Behaviors/SpriteLoaderBehavior.gd" type="Script" id=5]
 [ext_resource path="res://data/shaders/Sprite-desaturate.tres" type="Material" id=6]
-[ext_resource path="res://scripts/Behaviors/PlayerBehavior.gd" type="Script" id=7]
-[ext_resource path="res://scripts/Behaviors/AIBehavior.gd" type="Script" id=8]
-[ext_resource path="res://scripts/Behaviors/DamageBehavior.gd" type="Script" id=9]
-[ext_resource path="res://scripts/Behaviors/MemoryBehavior.gd" type="Script" id=10]
-[ext_resource path="res://scenes/Scanner.gd" type="Script" id=11]
-[ext_resource path="res://scripts/Behaviors/LevelLoaderBehavior.gd" type="Script" id=12]
-[ext_resource path="res://scripts/Behaviors/MovementBehavior.gd" type="Script" id=13]
-[ext_resource path="res://scripts/Behaviors/InventoryBehavior.gd" type="Script" id=14]
-[ext_resource path="res://scripts/Behaviors/CraftingBehavior.gd" type="Script" id=15]
-[ext_resource path="res://scripts/Behaviors/ScoringBehavior.gd" type="Script" id=16]
-[ext_resource path="res://scripts/Behaviors/TargettingBehavior.gd" type="Script" id=17]
-[ext_resource path="res://scripts/Behaviors/ShieldBehavior.gd" type="Script" id=18]
-[ext_resource path="res://scripts/Behaviors/AnimationBehavior.gd" type="Script" id=19]
-[ext_resource path="res://scripts/CamControl.gd" type="Script" id=20]
-[ext_resource path="res://scripts/GUI/GUILayoutBase.gd" type="Script" id=21]
-[ext_resource path="res://scripts/GUI/GridDisplay.gd" type="Script" id=22]
-[ext_resource path="res://scripts/GUI/LogSystem.gd" type="Script" id=23]
-[ext_resource path="res://scenes/GUI/StringContentDialog.tscn" type="PackedScene" id=24]
-[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=25]
-[ext_resource path="res://data/Weapon_ShortCut.tres" type="ShortCut" id=26]
-[ext_resource path="res://scenes/GUI/PopupButton.tscn" type="PackedScene" id=27]
-[ext_resource path="res://scripts/GUI/StatusBarSystem.gd" type="Script" id=28]
-[ext_resource path="res://scenes/GUI/Dialogs/TransferInventory.tscn" type="PackedScene" id=29]
-[ext_resource path="res://scenes/GUI/Dialogs/SelectableInventory.tscn" type="PackedScene" id=30]
-[ext_resource path="res://scenes/GUI/Dialogs/Converter.tscn" type="PackedScene" id=31]
-[ext_resource path="res://scenes/GUI/Dialogs/EquipMenus.tscn" type="PackedScene" id=32]
-[ext_resource path="res://scenes/GUI/Dialogs/DeathScreen.tscn" type="PackedScene" id=33]
-[ext_resource path="res://scenes/GUI/Dialogs/SelectableTarget.tscn" type="PackedScene" id=34]
-[ext_resource path="res://scenes/GUI/Dialogs/WelcomeScreen.tscn" type="PackedScene" id=35]
-[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=36]
-[ext_resource path="res://scenes/tileset_source/planet_b.tscn" type="PackedScene" id=37]
-[ext_resource path="res://scenes/tileset_source/sun.tscn" type="PackedScene" id=38]
-[ext_resource path="res://scenes/tileset_source/probe.tscn" type="PackedScene" id=39]
-[ext_resource path="res://scenes/tileset_source/wormhole.tscn" type="PackedScene" id=40]
-[ext_resource path="res://scenes/tileset_source/shuttle.tscn" type="PackedScene" id=41]
-[ext_resource path="res://scenes/tileset_source/planet_a.tscn" type="PackedScene" id=42]
-[ext_resource path="res://scenes/tileset_source/planet_c.tscn" type="PackedScene" id=43]
+[ext_resource path="res://scripts/Behaviors/CompactorBehavior.gd" type="Script" id=7]
+[ext_resource path="res://scripts/Behaviors/PlayerBehavior.gd" type="Script" id=8]
+[ext_resource path="res://scripts/Behaviors/AIBehavior.gd" type="Script" id=9]
+[ext_resource path="res://scripts/Behaviors/DamageBehavior.gd" type="Script" id=10]
+[ext_resource path="res://scripts/Behaviors/MemoryBehavior.gd" type="Script" id=11]
+[ext_resource path="res://scenes/Scanner.gd" type="Script" id=12]
+[ext_resource path="res://scripts/Behaviors/LevelLoaderBehavior.gd" type="Script" id=13]
+[ext_resource path="res://scripts/Behaviors/MovementBehavior.gd" type="Script" id=14]
+[ext_resource path="res://scripts/Behaviors/InventoryBehavior.gd" type="Script" id=15]
+[ext_resource path="res://scripts/Behaviors/CraftingBehavior.gd" type="Script" id=16]
+[ext_resource path="res://scripts/Behaviors/ScoringBehavior.gd" type="Script" id=17]
+[ext_resource path="res://scripts/Behaviors/TargettingBehavior.gd" type="Script" id=18]
+[ext_resource path="res://scripts/Behaviors/ShieldBehavior.gd" type="Script" id=19]
+[ext_resource path="res://scripts/Behaviors/AnimationBehavior.gd" type="Script" id=20]
+[ext_resource path="res://scenes/EnergyRegen.gd" type="Script" id=21]
+[ext_resource path="res://scripts/CamControl.gd" type="Script" id=22]
+[ext_resource path="res://scripts/GUI/GUILayoutBase.gd" type="Script" id=23]
+[ext_resource path="res://scripts/GUI/GridDisplay.gd" type="Script" id=24]
+[ext_resource path="res://scripts/GUI/LogSystem.gd" type="Script" id=25]
+[ext_resource path="res://scenes/GUI/StringContentDialog.tscn" type="PackedScene" id=26]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=27]
+[ext_resource path="res://data/Weapon_ShortCut.tres" type="ShortCut" id=28]
+[ext_resource path="res://scenes/GUI/PopupButton.tscn" type="PackedScene" id=29]
+[ext_resource path="res://scripts/GUI/StatusBarSystem.gd" type="Script" id=30]
+[ext_resource path="res://scenes/GUI/Dialogs/TransferInventory.tscn" type="PackedScene" id=31]
+[ext_resource path="res://scenes/GUI/Dialogs/SelectableInventory.tscn" type="PackedScene" id=32]
+[ext_resource path="res://scenes/GUI/Dialogs/Converter.tscn" type="PackedScene" id=33]
+[ext_resource path="res://scenes/GUI/Dialogs/EquipMenus.tscn" type="PackedScene" id=34]
+[ext_resource path="res://scenes/GUI/Dialogs/DeathScreen.tscn" type="PackedScene" id=35]
+[ext_resource path="res://scenes/GUI/Dialogs/SelectableTarget.tscn" type="PackedScene" id=36]
+[ext_resource path="res://scenes/GUI/Dialogs/WelcomeScreen.tscn" type="PackedScene" id=37]
+[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=38]
+[ext_resource path="res://scenes/tileset_source/planet_b.tscn" type="PackedScene" id=39]
+[ext_resource path="res://scenes/tileset_source/sun.tscn" type="PackedScene" id=40]
+[ext_resource path="res://scenes/tileset_source/probe.tscn" type="PackedScene" id=41]
+[ext_resource path="res://scenes/tileset_source/wormhole.tscn" type="PackedScene" id=42]
+[ext_resource path="res://scenes/tileset_source/shuttle.tscn" type="PackedScene" id=43]
+[ext_resource path="res://scenes/tileset_source/planet_a.tscn" type="PackedScene" id=44]
+[ext_resource path="res://scenes/tileset_source/planet_c.tscn" type="PackedScene" id=45]
 
 [sub_resource type="InputEventKey" id=1]
 
@@ -171,9 +173,13 @@ script = ExtResource( 5 )
 levelLoaderNode = NodePath("../LevelLoader")
 ghost_material = ExtResource( 6 )
 
-[node name="Player" type="Node" parent="Behaviors" index="3"]
+[node name="Compactor" type="Node" parent="Behaviors" index="3"]
 
 script = ExtResource( 7 )
+
+[node name="Player" type="Node" parent="Behaviors" index="4"]
+
+script = ExtResource( 8 )
 levelLoaderNode = NodePath("../LevelLoader")
 WeaponAction = NodePath("../../Camera-GUI/HUD/Buttons/Weapon")
 GrabAction = NodePath("../../Camera-GUI/HUD/Buttons/Grab")
@@ -182,59 +188,63 @@ CraftingAction = NodePath("../../Camera-GUI/HUD/Buttons/Converter")
 FTLAction = NodePath("../../Camera-GUI/HUD/Buttons/Wormhole")
 PopupButtons = NodePath("../../Camera-GUI/HUD/Buttons/PopupButton")
 
-[node name="AI" type="Node" parent="Behaviors" index="4"]
-
-script = ExtResource( 8 )
-targetting = NodePath("../Targetting")
-
-[node name="Damage" type="Node" parent="Behaviors" index="5"]
+[node name="AI" type="Node" parent="Behaviors" index="5"]
 
 script = ExtResource( 9 )
+targetting = NodePath("../Targetting")
 
-[node name="Memory" type="Node" parent="Behaviors" index="6"]
+[node name="Damage" type="Node" parent="Behaviors" index="6"]
 
 script = ExtResource( 10 )
-Occluder = NodePath("../../BG/Occlusion")
 
-[node name="Scanner" type="Node" parent="Behaviors" index="7"]
+[node name="Memory" type="Node" parent="Behaviors" index="7"]
 
 script = ExtResource( 11 )
+Occluder = NodePath("../../BG/Occlusion")
 
-[node name="LevelLoader" type="Node" parent="Behaviors" index="8"]
+[node name="Scanner" type="Node" parent="Behaviors" index="8"]
 
 script = ExtResource( 12 )
+
+[node name="LevelLoader" type="Node" parent="Behaviors" index="9"]
+
+script = ExtResource( 13 )
 startLevel = "data/json/levels/start.json"
 levelSize = Vector2( 80, 80 )
 tileSize = 128
 
-[node name="Movement" type="Node" parent="Behaviors" index="9"]
-
-script = ExtResource( 13 )
-levelLoaderNode = NodePath("../LevelLoader")
-
-[node name="Inventory" type="Node" parent="Behaviors" index="10"]
+[node name="Movement" type="Node" parent="Behaviors" index="10"]
 
 script = ExtResource( 14 )
+levelLoaderNode = NodePath("../LevelLoader")
 
-[node name="Crafting" type="Node" parent="Behaviors" index="11"]
+[node name="Inventory" type="Node" parent="Behaviors" index="11"]
 
 script = ExtResource( 15 )
 
-[node name="Scoring" type="Node" parent="Behaviors" index="12"]
+[node name="Crafting" type="Node" parent="Behaviors" index="12"]
 
 script = ExtResource( 16 )
 
-[node name="Targetting" type="Node" parent="Behaviors" index="13"]
+[node name="Scoring" type="Node" parent="Behaviors" index="13"]
 
 script = ExtResource( 17 )
 
-[node name="Shield" type="Node" parent="Behaviors" index="14"]
+[node name="Targetting" type="Node" parent="Behaviors" index="14"]
 
 script = ExtResource( 18 )
 
-[node name="Animation" type="Node" parent="Behaviors" index="15"]
+[node name="Shield" type="Node" parent="Behaviors" index="15"]
 
 script = ExtResource( 19 )
+
+[node name="Animation" type="Node" parent="Behaviors" index="16"]
+
+script = ExtResource( 20 )
+
+[node name="EnergyRegen" type="Node" parent="Behaviors" index="17"]
+
+script = ExtResource( 21 )
 
 [node name="Camera2D" type="Camera2D" parent="." index="4"]
 
@@ -261,7 +271,7 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-script = ExtResource( 20 )
+script = ExtResource( 22 )
 _sections_unfolded = [ "Limit" ]
 max_zoom = 4.0
 min_zoom = 0.25
@@ -285,7 +295,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 21 )
+script = ExtResource( 23 )
 _sections_unfolded = [ "Mouse", "Visibility" ]
 
 [node name="Display" type="Control" parent="World-GUI/GridPattern" index="0"]
@@ -300,7 +310,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 22 )
+script = ExtResource( 24 )
 _sections_unfolded = [ "Mouse", "Rect", "Visibility" ]
 line_color = Color( 1, 0, 0, 0.352941 )
 
@@ -327,7 +337,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 21 )
+script = ExtResource( 23 )
 _sections_unfolded = [ "Mouse" ]
 
 [node name="Log" type="Control" parent="Camera-GUI/HUD" index="0"]
@@ -343,10 +353,10 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 23 )
+script = ExtResource( 25 )
 _sections_unfolded = [ "Mouse" ]
 
-[node name="LogWindow" parent="Camera-GUI/HUD/Log" index="0" instance=ExtResource( 24 )]
+[node name="LogWindow" parent="Camera-GUI/HUD/Log" index="0" instance=ExtResource( 26 )]
 
 anchor_top = 1.0
 anchor_right = 1.0
@@ -372,7 +382,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Mouse" ]
 
-[node name="Weapon" parent="Camera-GUI/HUD/Buttons" index="0" instance=ExtResource( 25 )]
+[node name="Weapon" parent="Camera-GUI/HUD/Buttons" index="0" instance=ExtResource( 27 )]
 
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -382,9 +392,9 @@ margin_right = 124.0
 margin_bottom = -140.0
 mouse_filter = 2
 Text = "[w]eapon"
-Action = ExtResource( 26 )
+Action = ExtResource( 28 )
 
-[node name="Grab" parent="Camera-GUI/HUD/Buttons" index="1" instance=ExtResource( 25 )]
+[node name="Grab" parent="Camera-GUI/HUD/Buttons" index="1" instance=ExtResource( 27 )]
 
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -395,7 +405,7 @@ margin_bottom = -232.0
 Text = "[g]rab"
 Action = SubResource( 2 )
 
-[node name="Wormhole" parent="Camera-GUI/HUD/Buttons" index="2" instance=ExtResource( 25 )]
+[node name="Wormhole" parent="Camera-GUI/HUD/Buttons" index="2" instance=ExtResource( 27 )]
 
 anchor_left = 1.0
 anchor_top = 1.0
@@ -407,7 +417,7 @@ margin_right = 0.0
 margin_bottom = -141.0
 Text = "[>]FTL Back"
 
-[node name="Drop" parent="Camera-GUI/HUD/Buttons" index="3" instance=ExtResource( 25 )]
+[node name="Drop" parent="Camera-GUI/HUD/Buttons" index="3" instance=ExtResource( 27 )]
 
 anchor_left = 1.0
 anchor_top = 1.0
@@ -420,7 +430,7 @@ margin_bottom = -225.0
 Text = "[j]ettison"
 Action = SubResource( 4 )
 
-[node name="Converter" parent="Camera-GUI/HUD/Buttons" index="4" instance=ExtResource( 25 )]
+[node name="Converter" parent="Camera-GUI/HUD/Buttons" index="4" instance=ExtResource( 27 )]
 
 anchor_left = 1.0
 anchor_top = 1.0
@@ -433,7 +443,7 @@ margin_bottom = -314.0
 Text = "[c]onverter"
 Action = SubResource( 6 )
 
-[node name="PopupButton" parent="Camera-GUI/HUD/Buttons" index="5" instance=ExtResource( 27 )]
+[node name="PopupButton" parent="Camera-GUI/HUD/Buttons" index="5" instance=ExtResource( 29 )]
 
 anchor_top = 1.0
 anchor_right = 0.0
@@ -441,7 +451,7 @@ margin_left = 2.0
 margin_top = -416.0
 margin_right = 1634.0
 
-[node name="ZoomIn" parent="Camera-GUI/HUD/Buttons" index="6" instance=ExtResource( 25 )]
+[node name="ZoomIn" parent="Camera-GUI/HUD/Buttons" index="6" instance=ExtResource( 27 )]
 
 anchor_left = 1.0
 anchor_top = 1.0
@@ -454,7 +464,7 @@ margin_bottom = -85.0
 Text = "+"
 Action = SubResource( 8 )
 
-[node name="ZoomOut" parent="Camera-GUI/HUD/Buttons" index="7" instance=ExtResource( 25 )]
+[node name="ZoomOut" parent="Camera-GUI/HUD/Buttons" index="7" instance=ExtResource( 27 )]
 
 anchor_left = 1.0
 anchor_top = 1.0
@@ -481,13 +491,13 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 28 )
+script = ExtResource( 30 )
 _sections_unfolded = [ "Mouse" ]
 warning_energy_level = 5001
 danger_energy_level = 1001
 hull_size = 20
 
-[node name="StatusWindow" parent="Camera-GUI/HUD/StatusBar" index="0" instance=ExtResource( 24 )]
+[node name="StatusWindow" parent="Camera-GUI/HUD/StatusBar" index="0" instance=ExtResource( 26 )]
 
 anchor_right = 1.0
 margin_right = 0.0
@@ -495,37 +505,37 @@ margin_bottom = 62.0
 mouse_filter = 2
 content = "The Maveric Hull : [color=lime]==========[/color] Energy : [color=yellow]25000[/color] Shield : [color=aqua]===============[/color]"
 
-[node name="TransferInventory" parent="Camera-GUI" index="1" instance=ExtResource( 29 )]
+[node name="TransferInventory" parent="Camera-GUI" index="1" instance=ExtResource( 31 )]
 
 visible = false
 InventoryBehaviorPath = NodePath("../../Behaviors/Inventory")
 
-[node name="Inventory" parent="Camera-GUI" index="2" instance=ExtResource( 30 )]
+[node name="Inventory" parent="Camera-GUI" index="2" instance=ExtResource( 32 )]
 
 visible = false
 
-[node name="Converter" parent="Camera-GUI" index="3" instance=ExtResource( 31 )]
+[node name="Converter" parent="Camera-GUI" index="3" instance=ExtResource( 33 )]
 
 visible = false
 
-[node name="EquipMenus" parent="Camera-GUI" index="4" instance=ExtResource( 32 )]
+[node name="EquipMenus" parent="Camera-GUI" index="4" instance=ExtResource( 34 )]
 
-[node name="DeathScreen" parent="Camera-GUI" index="5" instance=ExtResource( 33 )]
-
-visible = false
-
-[node name="SelectTarget" parent="Camera-GUI" index="6" instance=ExtResource( 34 )]
+[node name="DeathScreen" parent="Camera-GUI" index="5" instance=ExtResource( 35 )]
 
 visible = false
 
-[node name="WelcomeScreen" parent="Camera-GUI" index="7" instance=ExtResource( 35 )]
+[node name="SelectTarget" parent="Camera-GUI" index="6" instance=ExtResource( 36 )]
+
+visible = false
+
+[node name="WelcomeScreen" parent="Camera-GUI" index="7" instance=ExtResource( 37 )]
 
 visible = false
 
 [node name="DEBUG" type="Node2D" parent="." index="9"]
 
 visible = false
-script = ExtResource( 36 )
+script = ExtResource( 38 )
 
 [node name="temp" type="Node2D" parent="." index="10"]
 
@@ -533,39 +543,39 @@ editor/display_folded = true
 visible = false
 position = Vector2( 689.19, 217.317 )
 
-[node name="planet_b" parent="temp" index="0" instance=ExtResource( 37 )]
+[node name="planet_b" parent="temp" index="0" instance=ExtResource( 39 )]
 
 position = Vector2( -36.157, -5.83176 )
 
-[node name="sun" parent="temp" index="1" instance=ExtResource( 38 )]
+[node name="sun" parent="temp" index="1" instance=ExtResource( 40 )]
 
 position = Vector2( 46.7009, 240.177 )
 
-[node name="probe" parent="temp" index="2" instance=ExtResource( 39 )]
+[node name="probe" parent="temp" index="2" instance=ExtResource( 41 )]
 
 position = Vector2( -204.268, 191.962 )
 rotation = -0.785398
 _sections_unfolded = [ "Region", "Transform" ]
 
-[node name="wormhole" parent="temp" index="3" instance=ExtResource( 40 )]
+[node name="wormhole" parent="temp" index="3" instance=ExtResource( 42 )]
 
 position = Vector2( -362.624, -8.63391 )
 
-[node name="shuttle" parent="temp" index="4" instance=ExtResource( 41 )]
+[node name="shuttle" parent="temp" index="4" instance=ExtResource( 43 )]
 
 position = Vector2( -33.8243, -8.16446 )
 
-[node name="shuttle2" parent="temp" index="5" instance=ExtResource( 41 )]
+[node name="shuttle2" parent="temp" index="5" instance=ExtResource( 43 )]
 
 position = Vector2( -440.695, -105.973 )
 rotation = 1.5708
 _sections_unfolded = [ "Transform" ]
 
-[node name="planet_a" parent="temp" index="6" instance=ExtResource( 42 )]
+[node name="planet_a" parent="temp" index="6" instance=ExtResource( 44 )]
 
 position = Vector2( -580.844, -101.473 )
 
-[node name="planet_c" parent="temp" index="7" instance=ExtResource( 43 )]
+[node name="planet_c" parent="temp" index="7" instance=ExtResource( 45 )]
 
 position = Vector2( 307.917, -99.1401 )
 

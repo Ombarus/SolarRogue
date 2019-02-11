@@ -4,7 +4,7 @@
 	"type":"ship",
 	"boardable":true,
 	"mounts": {
-		"small_weapon_mount": "",
+		"weapon": "",
 		"scanner": "",
 		"converter": ""
 	},

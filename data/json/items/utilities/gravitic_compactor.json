@@ -1,0 +1,16 @@
+{
+	"name_id":"Gravitic Compactor",
+	"type":"utility",
+	"sprite_choice":[
+		"shield"
+	],
+	"equipment": {
+		"slot":"utility",
+		"volume":10.0,
+		"equip_ap":3.0,
+		"unequip_ap":3.0
+	},
+	"cargo_optimizer": {
+		"per_cargo_space":1.5
+	}
+}

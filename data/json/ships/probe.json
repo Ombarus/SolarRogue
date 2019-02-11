@@ -4,7 +4,7 @@
 	"type":"ship",
 	"action_point":0,
 	"mounts": {
-		"small_weapon_mount": "data/json/items/weapons/missile_launcher_mk1.json",
+		"weapon": "data/json/items/weapons/missile_launcher_mk1.json",
 		"shield": ""
 	},
 	"animation": {
