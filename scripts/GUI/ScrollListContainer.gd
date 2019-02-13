@@ -12,6 +12,8 @@ func get_content():
 	for d in content:
 		var inside = {}
 		inside["key"] = d.key
+		if "index" in d:
+			inside["index"] = d.index
 		inside["name_id"] = d.obj.get_node("Choice/Name").bbcode_text
 		inside["checked"] = d.obj.get_node("Choice").pressed
 		result.push_back(inside)
@@ -27,7 +29,10 @@ func set_content(val):
 		var copy = row_ref.duplicate()
 		copy.visible = true
 		row_ref.get_parent().add_child(copy)
-		content.push_back({"obj": copy, "key": v.key})
+		if "index" in v:
+			content.push_back({"obj": copy, "key": v.key, "index":v.index})
+		else:	
+			content.push_back({"obj": copy, "key": v.key})
 		copy.get_node("Choice/Name").bbcode_text = v.name_id
 	
 #func _process(delta):

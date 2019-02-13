@@ -117,8 +117,8 @@ func OnMountRemoved_Callback(obj, mount, src):
 	
 # mount_to = "converter"
 # mount_item = {"src":"data/json/bleh.json", "count":5}
-func OnEquip_Callback(mount_item, mount_to):
-	BehaviorEvents.emit_signal("OnEquipMount", playerNode, mount_to, mount_item)
+func OnEquip_Callback(mount_item, mount_to, mount_index):
+	BehaviorEvents.emit_signal("OnEquipMount", playerNode, mount_to, mount_index, mount_item)
 	
 func Pressed_Crafting_Callback():
 	if lock_input:

@@ -1,0 +1,36 @@
+{
+	"name_id":"Scout",
+	"type":"player",
+	"sprite":"player",
+	"action_point":0,
+	"boardable":true,
+	"mounts": {
+		"weapon": ["data/json/items/weapons/missile_launcher_mk1.json"],
+		"shield": ["data/json/items/shields/shield_mk1.json"],
+		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
+		"converter": ["data/json/items/converters/converter_mk1.json"],
+		"utility":[""]
+	},
+	"destroyable": {
+		"hull":15
+	},
+	"moving": {
+		"speed":1.0,
+		"can_use_wormhole":true,
+		"energy_cost":20
+	},
+	"cargo": {
+		"capacity":500,
+		"pickup_ap":1.0,
+		"drop_ap":1.0,
+		"content":[
+			{"src":"data/json/items/weapons/missile.json", "count":20},
+			{"src":"data/json/items/misc/probe_body.json", "count":1},
+			{"src":"data/json/items/weapons/laser_turret_mk1.json", "count":1},
+			{"src":"data/json/items/misc/shuttle_body.json", "count":1}
+		]
+	},
+	"converter": {
+		"stored_energy": 10000
+	}
+}

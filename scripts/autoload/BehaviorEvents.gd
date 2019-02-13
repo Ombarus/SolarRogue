@@ -17,8 +17,8 @@ signal OnShotFired(target, shooter, weapon_data) # for VFX
 signal OnDamageTaken(target, shooter) # only fired if damage is > 0
 signal OnPickup(picker, picked)
 signal OnDropCargo(dropper, item_id)
-signal OnDropMount(dropper, item_id)
-signal OnEquipMount(equipper, slot_name, item_id)
+signal OnDropMount(dropper, item_id, index)
+signal OnEquipMount(equipper, slot_name, index, item_id)
 signal OnAddItem(picker, item_id)
 signal OnRemoveItem(holder, item_id)
 signal OnScannerUpdated(obj)

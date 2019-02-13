@@ -3,6 +3,7 @@ extends "res://scripts/GUI/GUILayoutBase.gd"
 var _callback_obj = null
 var _callback_method = ""
 var _mount_to = null
+var _mount_index = null
 
 func _ready():
 	get_node("base").connect("OnOkPressed", self, "Ok_Callback")
@@ -26,7 +27,7 @@ func Ok_Callback():
 		if data.checked == true:
 			mount_item = data.key
 			
-	_callback_obj.call(_callback_method, mount_item.src, _mount_to)
+	_callback_obj.call(_callback_method, mount_item.src, _mount_to, _mount_index)
 	
 	# reset content or we might end up with dangling references
 	get_node("base/vbox/Cargo").content = []
@@ -43,6 +44,7 @@ func Init(init_param):
 	_callback_obj = init_param["callback_object"]
 	_callback_method = init_param["callback_method"]
 	_mount_to = init_param["selected_mount"]
+	_mount_index = init_param["selected_index"]
 	
 	
 	obj.init_cargo()

@@ -18,23 +18,16 @@ func _ready():
 	
 func Ok_Callback():
 	var selected_mount = null
+	var selected_index = null
 	for data in get_node("base/vbox/Mounts").content:
 		if data.checked == true:
 			selected_mount = data.key
+			selected_index = data.index
 			break
 	
 	BehaviorEvents.emit_signal("OnPopGUI")
-	BehaviorEvents.emit_signal("OnPushGUI", "EquipItemList", {"object":_ref_obj, "selected_mount":selected_mount, "callback_object":_callback_obj, "callback_method":_callback_method})
-	#if _callback_obj == null:
-	#	return
-	
-	var dropped_mounts = []
-	for data in get_node("base/vbox/Mounts").content:
-		if data.checked == true:
-			dropped_mounts.push_back(data.key)
-			
-	#_callback_obj.call(_callback_method, dropped_mounts, dropped_cargo)
-	
+	BehaviorEvents.emit_signal("OnPushGUI", "EquipItemList", {"object":_ref_obj, "selected_mount":selected_mount, "selected_index":selected_index, "callback_object":_callback_obj, "callback_method":_callback_method})
+
 	# reset content or we might end up with dangling references
 	get_node("base/vbox/Mounts").content = []
 	
@@ -58,11 +51,14 @@ func Init(init_param):
 	
 	var mount_obj = []
 	for key in mounts:
-		var name = key + " : Free"
-		if not mounts[key].empty():
-			var data = Globals.LevelLoaderRef.LoadJSON(mounts[key])
-			name = key + " : " + data.name_id
-		mount_obj.push_back({"name_id":name, "count":1, "key":key})
+		var count = 0
+		for item in mounts[key]:
+			var name = key + " " + str(count + 1) + " : Free"
+			if not item.empty():
+				var data = Globals.LevelLoaderRef.LoadJSON(item)
+				name = key + " " + str(count + 1) + " : " + data.name_id
+			mount_obj.push_back({"name_id":name, "count":1, "key":key, "index":count})
+			count += 1
 	get_node("base/vbox/Mounts").content = mount_obj
 	
 
