@@ -5,11 +5,11 @@
 	"action_point":0,
 	"boardable":true,
 	"mounts": {
-		"weapon": "data/json/items/weapons/missile_launcher_mk1.json",
-		"shield": "data/json/items/shields/shield_mk1.json",
-		"scanner": "data/json/items/scanners/scanner_mk1.json",
-		"converter": "data/json/items/converters/converter_mk1.json",
-		"utility":""
+		"weapon": ["data/json/items/weapons/missile_launcher_mk1.json"],
+		"shield": ["data/json/items/shields/shield_mk1.json"],
+		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
+		"converter": ["data/json/items/converters/converter_mk1.json"],
+		"utility":[""]
 	},
 	"destroyable": {
 		"hull":15

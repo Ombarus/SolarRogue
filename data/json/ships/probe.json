@@ -4,8 +4,8 @@
 	"type":"ship",
 	"action_point":0,
 	"mounts": {
-		"weapon": "data/json/items/weapons/missile_launcher_mk1.json",
-		"shield": ""
+		"weapon": ["data/json/items/weapons/missile_launcher_mk1.json"],
+		"shield": [""]
 	},
 	"animation": {
 		"destroyed": "scenes/tileset_source/explosion_fx.tscn"

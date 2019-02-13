@@ -4,10 +4,10 @@
 	"sprite":"shuttle",
 	"boardable":true,
 	"mounts": {
-		"weapon": "",
-		"shield": "",
-		"scanner": "",
-		"converter": ""
+		"weapon": [""],
+		"shield": [""],
+		"scanner": [""],
+		"converter": [""]
 	},
 	"destroyable": {
 		"hull":15

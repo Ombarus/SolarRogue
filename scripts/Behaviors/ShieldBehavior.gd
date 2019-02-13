@@ -7,29 +7,76 @@ extends Node
 func _ready():
 	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
 	BehaviorEvents.connect("OnMountAdded", self, "OnMountAdded_Callback")
+	BehaviorEvents.connect("OnMountRemoved", self, "OnMountRemoved_Callback")
+	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
+	
+func _sort_by_shield_size(a, b):
+	var rate_a = a.shielding.max_hp
+	var rate_b = b.shielding.max_hp
+	# reversed sort
+	if rate_a > rate_b:
+		return true
+	return false
+	
+func _sort_by_shield_regen(a, b):
+	var rate_a = a.shielding.hp_regen_per_ap
+	var rate_b = b.shielding.hp_regen_per_ap
+	# reversed sort
+	if rate_a > rate_b:
+		return true
+	return false
+	
+func _get_max_shield(obj):
+	var shields = obj.get_attrib("mounts.shield")
+	var shields_data = Globals.LevelLoaderRef.LoadJSONArray(shields)
+	
+	if shields_data.size() <= 0:
+		return 0
+	
+	shields_data.sort_custom(self, "_sort_by_shield_size")
+	var max_shield = 0
+	var count = 0
+	for data in shields_data:
+		max_shield += (data.shielding.max_hp) / pow(2, count) # 1, 0.5, 0.25, 0.125, etc.
+		count += 1
+		
+	return max_shield
+	
+	
+func OnObjectLoaded_Callback(obj):
+	var cur_shield = obj.get_attrib("shield.current_hp")
+	if cur_shield == null:
+		obj.set_attrib("shield.current_hp", _get_max_shield(obj))
 	
 func OnObjTurn_Callback(obj):
-	var shield_name = obj.get_attrib("mounts.shield")
-	if shield_name == null or shield_name == "":
+	var shields = obj.get_attrib("mounts.shield")
+	var shields_data = Globals.LevelLoaderRef.LoadJSONArray(shields)
+	if shields_data.size() <= 0:
 		return
 	
-	var shield_data = Globals.LevelLoaderRef.LoadJSON(shield_name)
-	var max_hp = shield_data.shielding.max_hp
+	var max_hp = _get_max_shield(obj)
 	var cur_hp = obj.get_attrib("shield.current_hp")
 	if cur_hp == null:
 		obj.set_attrib("shield.current_hp", max_hp)
 		return
 		
 	if cur_hp < max_hp:
-		_process_healing(obj, max_hp, cur_hp, shield_data)
+		_process_healing(obj, max_hp, cur_hp, shields_data)
 		
 	obj.set_attrib("shield.last_turn_update", Globals.total_turn)
 		
 		
-func _process_healing(obj, max_hp, cur_hp, shield_data):
+func _process_healing(obj, max_hp, cur_hp, shields_data):
 	var last_update = obj.get_attrib("shield.last_turn_update", Globals.total_turn)
-	var heal = shield_data.shielding.hp_regen_per_ap * (Globals.total_turn - last_update)
-	var energy = shield_data.shielding.energy_cost_per_hp * (Globals.total_turn - last_update)
+	var heal = 0
+	var energy = 0
+	var count = 0
+	for data in shields_data:
+		heal += data.shielding.hp_regen_per_ap / pow(2, count) # 1, 0.5, 0.25, 0.125, etc.
+		energy += data.shielding.energy_cost_per_hp
+		count += 1
+	heal *= Globals.total_turn - last_update
+	energy *= Globals.total_turn - last_update
 	
 	var new_hp = min(cur_hp + heal, max_hp)
 	obj.set_attrib("shield.current_hp", new_hp)
@@ -38,7 +85,20 @@ func _process_healing(obj, max_hp, cur_hp, shield_data):
 func OnMountAdded_Callback(obj, slot, src):
 	if slot != "shield" or src == null or src.empty():
 		return
-		
+	
+	#TODO: be careful here. What if we had more than one shield and it hasn't been updated ?
 	var data = Globals.LevelLoaderRef.LoadJSON(src)
 	obj.set_attrib("shield.last_turn_update", Globals.total_turn)
 	
+func OnMountRemoved_Callback(obj, slot, src):
+	if slot != "shield" or src == null or src.empty():
+		return
+		
+	var max_hp = _get_max_shield(obj)
+	var cur_hp = obj.get_attrib("shield.current_hp")
+	
+	if cur_hp == null:
+		cur_hp = max_hp
+		
+	cur_hp = min(cur_hp, max_hp)
+	obj.set_attrib("shield.current_hp", cur_hp)

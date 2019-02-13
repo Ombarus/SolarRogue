@@ -4,9 +4,9 @@
 	"type":"ship",
 	"boardable":true,
 	"mounts": {
-		"weapon": "",
-		"scanner": "",
-		"converter": ""
+		"weapon": [""],
+		"scanner": [""],
+		"converter": [""]
 	},
 	"destroyable": {
 		"hull":10

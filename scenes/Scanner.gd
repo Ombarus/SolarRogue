@@ -33,7 +33,11 @@ func OnPositionUpdated_Callback(obj):
 	_up_to_date = false
 	
 func OnObjectLoaded_Callback(obj):
-	var scanner_name = obj.get_attrib("mounts.scanner")
+	var scanners = obj.get_attrib("mounts.scanner")
+	if scanners == null or scanners.size() <= 0:
+		return
+	
+	var scanner_name = scanners[0]
 	if scanner_name != null and scanner_name != "":
 		_node_id_scanner[obj.get_attrib("unique_id")] = Globals.LevelLoaderRef.LoadJSON(scanner_name)
 	

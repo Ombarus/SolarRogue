@@ -9,16 +9,58 @@ func _ready():
 	BehaviorEvents.connect("OnMountAdded", self, "OnMountAdded_Callback")
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 
+func _sort_by_cargo_rate(a, b):
+	var rate_a = a.cargo_optimizer.per_cargo_space
+	var rate_b = b.cargo_optimizer.per_cargo_space
+	# reversed sort
+	if rate_a > rate_b:
+		return true
+	return false
+
 func OnObjectLoaded_Callback(obj):
-	var utility = obj.get_attrib("mounts.utility")
-	if utility != null and not utility.empty():
-		var data = Globals.LevelLoaderRef.LoadJSON(utility)
+	var applied = obj.get_attrib("cargo.applied_bonus")
+	if applied != null and applied == true:
+		return # we loaded a savegame and bonus is already up-to-date
+	
+	var utils = obj.get_attrib("mounts.utility")
+	var utils_data = Globals.LevelLoaderRef.LoadJSONArray(utils)
+	var per_cargo = _get_per_cargo_compounded(utils_data)
+	if per_cargo == null:
+		return
+		
+	var cargo_capacity = obj.get_attrib("cargo.capacity")
+	
+	obj.set_attrib("cargo.capacity", cargo_capacity * per_cargo)
+	obj.set_attrib("cargo.applied_bonus", true)
+	
+func _get_per_cargo_compounded(utils_data):
+	var filtered_cargo = []
+	for data in utils_data:
 		if "cargo_optimizer" in data:
-			obj.init_cargo()
-			var per_cargo = data.cargo_optimizer.per_cargo_space
-			var cargo_capacity = obj.get_attrib("cargo.capacity")
-			
-			obj.set_attrib("cargo.capacity", cargo_capacity * per_cargo)
+			filtered_cargo.push_back(data)
+	
+	if filtered_cargo.size() <= 0:
+		return null
+	
+	filtered_cargo.sort_custom(self, "_sort_by_cargo_rate")
+	var per_cargo = 0
+	var count = 0
+	for data in filtered_cargo:
+		per_cargo += (data.cargo_optimizer.per_cargo_space) / pow(2, count) # 1, 0.5, 0.25, 0.125, etc.
+		count += 1
+	
+	return per_cargo
+	
+	
+func _reset_cargo(obj, utils):
+	var utils_data = Globals.LevelLoaderRef.LoadJSONArray(utils)
+	var per_cargo = _get_per_cargo_compounded(utils_data)
+	if per_cargo < 0:
+		return
+	var cargo_capacity = obj.get_attrib("cargo.capacity")
+	
+	obj.set_attrib("cargo.capacity", cargo_capacity / per_cargo)
+	obj.set_attrib("cargo.applied_bonus", false)
 
 func OnMountAdded_Callback(obj, slot, src):
 	if slot != "utility" or src == null or src.empty():
@@ -26,11 +68,11 @@ func OnMountAdded_Callback(obj, slot, src):
 		
 	var data = Globals.LevelLoaderRef.LoadJSON(src)
 	if "cargo_optimizer" in data:
-		obj.init_cargo()
-		var per_cargo = data.cargo_optimizer.per_cargo_space
-		var cargo_capacity = obj.get_attrib("cargo.capacity")
-		
-		obj.set_attrib("cargo.capacity", cargo_capacity * per_cargo)
+		var utils = obj.get_attrib("mounts.utility")
+		utils.erase(src)
+		_reset_cargo(obj, utils)
+		# have to recompute everything because of stacking
+		OnObjectLoaded_Callback(obj)
 	
 	
 func OnMountRemoved_Callback(obj, slot, src):
@@ -39,8 +81,8 @@ func OnMountRemoved_Callback(obj, slot, src):
 		
 	var data = Globals.LevelLoaderRef.LoadJSON(src)
 	if "cargo_optimizer" in data:
-		obj.init_cargo()
-		var per_cargo = data.cargo_optimizer.per_cargo_space
-		var cargo_capacity = obj.get_attrib("cargo.capacity")
-		
-		obj.set_attrib("cargo.capacity", cargo_capacity / per_cargo)
+		var utils = obj.get_attrib("mounts.utility")
+		utils.push_back(src)
+		_reset_cargo(obj, utils)
+		# have to recompute everything because of stacking
+		OnObjectLoaded_Callback(obj)

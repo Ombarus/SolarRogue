@@ -32,6 +32,24 @@ func OnDamageTaken_Callback(target, shooter):
 		
 func OnLevelLoaded_Callback():
 	UpdateStatusBar(Globals.LevelLoaderRef.objByType["player"][0])
+	
+
+# TODO: !!!!!!! UGLY UGLY UGLY COPY PASTE FROM SHIELD BEHAVIOR !!!!!!!!!!!!!!!!!
+func _get_max_shield(obj):
+	var shields = obj.get_attrib("mounts.shield")
+	var shields_data = Globals.LevelLoaderRef.LoadJSONArray(shields)
+	
+	if shields_data.size() <= 0:
+		return 0
+	
+	shields_data.sort_custom(self, "_sort_by_shield_size")
+	var max_shield = 0
+	var count = 0
+	for data in shields_data:
+		max_shield += (data.shielding.max_hp) / pow(2, count) # 1, 0.5, 0.25, 0.125, etc.
+		count += 1
+		
+	return max_shield
 		
 #The Maveric Hull : [color=lime]==========[/color] Energy : [color=yellow]25000[/color] Shield : Up	
 func UpdateStatusBar(player_obj):
@@ -62,18 +80,22 @@ func UpdateStatusBar(player_obj):
 		status_str += "="
 	status_str += "[/color] Energy : [color=%s]%.f[/color] Shield : " % [energy_color, cur_energy]
 	
-	var shield_name = player_obj.get_attrib("mounts.shield")
+	var shields = player_obj.get_attrib("mounts.shield")
+	var missing_shield = true
+	if shields != null:
+		for shield in shields:
+			if not shield.empty():
+				missing_shield = false
+				break
 	var cur_shield = player_obj.get_attrib("shield.current_hp")
-	if shield_name == null or shield_name == "":
+	if missing_shield:
 		status_str += "[color=yellow]Missing[/color]"
 	elif cur_shield != null and cur_shield < 1:
 		status_str += "[color=red]Down![/color]"
 	else:
-		var shield_data = Globals.LevelLoaderRef.LoadJSON(shield_name)
-		if cur_shield == null:
-			cur_shield = shield_data.shielding.max_hp
+		var max_shield = _get_max_shield(player_obj)
 		status_str += "[color=aqua]"
-		var shield_per = floor(cur_shield) / shield_data.shielding.max_hp
+		var shield_per = floor(cur_shield) / max_shield
 		changed_color = false
 		for i in range(hull_size):
 			var bar_per = float(i) / float(hull_size)

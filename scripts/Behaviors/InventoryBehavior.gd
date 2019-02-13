@@ -109,26 +109,30 @@ func OnDropCargo_Callback(dropper, item_id):
 	for index in index_to_delete:
 		cargo.remove(index)
 	
-func OnDropMount_Callback(dropper, slot_name):
-	var item_id = dropper.get_attrib("mounts." + slot_name)
+func OnDropMount_Callback(dropper, slot_name, index):
+	var items = dropper.get_attrib("mounts." + slot_name)
+	var item_id = items[index]
 	var data = Globals.LevelLoaderRef.LoadJSON(item_id)
 	var drop_ap = 0
 	if "equipment" in data and "unequip_ap" in data.equipment and data.equipment.unequip_ap > 0:
 		BehaviorEvents.emit_signal("OnUseAP", dropper, data.equipment.unequip_ap)
 	Globals.LevelLoaderRef.RequestObject(item_id, Globals.LevelLoaderRef.World_to_Tile(dropper.position))
-	dropper.set_attrib("mounts." + slot_name, "")
+	items[index] = ""
+	dropper.set_attrib("mounts." + slot_name, items)
 	BehaviorEvents.emit_signal("OnMountRemoved", dropper, slot_name, item_id)
 	
-func OnEquipMount_Callback(equipper, slot_name, item_id):
+func OnEquipMount_Callback(equipper, slot_name, index, item_id):
 	# Check if slot already has something equipped
 	# Remove current equipment (takes AP)
 	# Remove item from cargo
 	# Add item_id to mount point
 	var attrib_getter = "mounts." + slot_name
-	if equipper.get_attrib(attrib_getter) != null and equipper.get_attrib(attrib_getter) != "":
+	var items = equipper.get_attrib(attrib_getter)
+	if items != null and items[index] != "":
 		BehaviorEvents.emit_signal("OnDropMount", equipper, slot_name)
 	BehaviorEvents.emit_signal("OnRemoveItem", equipper, item_id)
-	equipper.set_attrib(attrib_getter, item_id)
+	items[index] = item_id
+	equipper.set_attrib(attrib_getter, items)
 	BehaviorEvents.emit_signal("OnMountAdded", equipper, slot_name, item_id)
 
 #TODO: Fix logic flaws (make sure we're not changing cargo in base_attributes), (check we won't exceed volume before adding)
@@ -173,9 +177,11 @@ func OnClearMounts_Callback(holder):
 		holder.init_mounts()
 	var mounts = holder.get_attrib("mounts")
 	for key in mounts:
-		var item_id = mounts[key]
-		mounts[key] = ""
-		BehaviorEvents.emit_signal("OnMountRemoved", holder, key, item_id)
+		var items = mounts[key]
+		for i in range(items.size()):
+			var item_id = items[i]
+			items[i] = ""
+			BehaviorEvents.emit_signal("OnMountRemoved", holder, key, item_id)
 	
 func OnClearCargo_Callback(holder):
 	if not holder.modified_attributes.has("cargo"):

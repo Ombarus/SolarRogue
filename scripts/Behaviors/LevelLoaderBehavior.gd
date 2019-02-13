@@ -272,6 +272,15 @@ func LoadJSON(filepath):
 	data["src"] = filepath
 	return data
 	
+func LoadJSONArray(filepaths):
+	var res = []
+	if filepaths == null:
+		return res
+	for filepath in filepaths:
+		if not filepath.empty():
+			res.push_back(LoadJSON(filepath))
+	return res
+	
 func ShuffleArray(ar):
 	var shuffledList = []
 	var indexList = range(ar.size())

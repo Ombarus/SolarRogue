@@ -4,8 +4,8 @@
 	"sprite":"shuttle",
 	"action_point":0,
 	"mounts": {
-		"weapon": "data/json/items/weapons/ai_laser_turret_level01.json",
-		"scanner": "data/json/items/scanners/scanner_mk1.json"
+		"weapon": ["data/json/items/weapons/ai_laser_turret_level01.json"],
+		"scanner": ["data/json/items/scanners/scanner_mk1.json"]
 	},
 	"animation": {
 		"destroyed": "scenes/tileset_source/explosion_fx.tscn"

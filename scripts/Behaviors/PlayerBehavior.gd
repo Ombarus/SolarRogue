@@ -171,9 +171,9 @@ func Pressed_FTL_Callback():
 func OnDropIventory_Callback(dropped_mounts, dropped_cargo):
 	playerNode.init_mounts()
 	for drop_data in dropped_mounts:
-		BehaviorEvents.emit_signal("OnDropMount", playerNode, drop_data)
+		BehaviorEvents.emit_signal("OnDropMount", playerNode, drop_data.key, drop_data.index)
 		
-	var converter = playerNode.get_attrib("mounts.converter")
+	var converter = playerNode.get_attrib("mounts.converter")[0]
 	var converter_btn = get_node(CraftingAction)
 	if converter == null or converter == "":
 		converter_btn.visible = false
@@ -276,7 +276,7 @@ func OnLevelLoaded_Callback():
 		# Modified_attrib must be passed during request so that proper IDs can be locked in objByID
 		playerNode = levelLoaderRef.RequestObject("data/json/ships/player_default.json", coord, modififed_attrib)
 		
-		var converter = playerNode.get_attrib("mounts.converter")
+		var converter = playerNode.get_attrib("mounts.converter")[0]
 		var converter_btn = get_node(CraftingAction)
 		if converter == null or converter == "":
 			converter_btn.visible = false
@@ -432,9 +432,9 @@ func OnTransferItemCompleted_Callback(lobj, l_mounts, l_cargo, robj, r_mounts, r
 	BehaviorEvents.emit_signal("OnClearMounts", lobj)
 	BehaviorEvents.emit_signal("OnClearMounts", robj)
 	for item in l_mounts:
-		BehaviorEvents.emit_signal("OnEquipMount", lobj, item.mount_key, item.src_key)
+		BehaviorEvents.emit_signal("OnEquipMount", lobj, item.mount_key, item.mount_index, item.src_key)
 	for item in r_mounts:
-		BehaviorEvents.emit_signal("OnEquipMount", robj, item.mount_key, item.src_key)
+		BehaviorEvents.emit_signal("OnEquipMount", robj, item.mount_key, item.mount_index, item.src_key)
 	
 	BehaviorEvents.emit_signal("OnClearCargo", lobj)
 	BehaviorEvents.emit_signal("OnClearCargo", robj)
@@ -456,7 +456,7 @@ func OnTransferPlayer_Callback(old_player, new_player):
 	BehaviorEvents.emit_signal("OnLogLine", "All controls transfered, the ship is ours captain !")
 	BehaviorEvents.emit_signal("OnUseAP", new_player, 1.0)
 
-	var converter = new_player.get_attrib("mounts.converter")
+	var converter = new_player.get_attrib("mounts.converter")[0]
 	var converter_btn = get_node(CraftingAction)
 	if converter == null or converter == "":
 		converter_btn.visible = false

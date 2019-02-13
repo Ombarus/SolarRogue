@@ -119,7 +119,7 @@ func DoRunAwayPathFinding(obj):
 	my_pos = Globals.LevelLoaderRef.World_to_Tile(my_pos)
 	scary_pos = Globals.LevelLoaderRef.World_to_Tile(scary_pos)
 	var scanner_range = 0
-	var scanner_json = obj.get_attrib("mounts.scanner")
+	var scanner_json = obj.get_attrib("mounts.scanner")[0]
 	if scanner_json != null and scanner_json != "":
 		var scanner_data = Globals.LevelLoaderRef.LoadJSON(scanner_json)
 		scanner_range = scanner_data.scanning.radius

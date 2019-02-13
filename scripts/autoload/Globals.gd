@@ -41,4 +41,3 @@ func _check_data(val, default):
 			return default
 		else:
 			return val
-			

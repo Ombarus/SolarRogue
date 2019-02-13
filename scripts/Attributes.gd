@@ -102,6 +102,7 @@ func init_mounts():
 	if modified_attributes.has("mounts") or not base_attributes.has("mounts"):
 		return
 		
+	#TODO: this is just going to create a reference isn't ? Might cause issues if I start caching baseattributes
 	modified_attributes["mounts"] = base_attributes.mounts
 
 func _ready():

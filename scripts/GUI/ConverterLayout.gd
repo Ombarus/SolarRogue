@@ -24,11 +24,6 @@ func Ok_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
 	if _callback_obj == null:
 		return
-	
-	var dropped_mounts = []
-	#for data in get_node("base/vbox/Mounts").content:
-	#	if data.checked == true:
-	#		dropped_mounts.push_back(data.key)
 			
 	var input_list = []
 	for data in get_node("base/HBoxContainer/VBoxContainer/Inventory").content:
@@ -42,24 +37,17 @@ func Ok_Callback():
 			break
 	_callback_obj.call(_callback_method, recipe_data, input_list)
 	
-	# reset content or we might end up with dangling references
-	#get_node("base/vbox/Mounts").content = []
-	#get_node("base/vbox/Cargo").content = []
-	
 	
 func Cancel_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
-	
-	# reset content or we might end up with dangling references
-	#get_node("base/vbox/Mounts").content = []
-	#get_node("base/vbox/Cargo").content = []
+
 	
 func Init(init_param):
 	var obj = init_param["object"]
 	_callback_obj = init_param["callback_object"]
 	_callback_method = init_param["callback_method"]
 	
-	var converter_file = obj.get_attrib("mounts.converter")
+	var converter_file = obj.get_attrib("mounts.converter")[0]
 	_converter_data = Globals.LevelLoaderRef.LoadJSON(converter_file)
 	
 	_craft_list.clear()
