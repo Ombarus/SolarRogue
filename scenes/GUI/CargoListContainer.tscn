@@ -4,7 +4,7 @@
 [ext_resource path="res://data/styles/trans.tres" type="StyleBox" id=2]
 [ext_resource path="res://scripts/GUI/DragDropTransfer.gd" type="Script" id=3]
 
-[node name="CargoScrollContainer" type="ScrollContainer" index="0"]
+[node name="CargoScrollContainer" type="ScrollContainer"]
 
 anchor_left = 0.0
 anchor_top = 0.0

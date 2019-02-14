@@ -3,19 +3,20 @@ extends ScrollContainer
 var content = [] setget set_content, get_content
 var row_ref = null
 
-signal OnChoiceDragAndDrop(container_src, container_dst, content_index_src)
+signal OnChoiceDragAndDrop(container_src, container_dst, content_index_src, content_index_dst)
 
 func _ready():
 	row_ref = get_node("List/Row")
 
 #############	
-#content ===> [{"mount_key":"small_weapon", "src_key":"data/json/item/shield.json"}]
+#content ===> [{"mount_key":"small_weapon", "mount_index":0, "src_key":"data/json/item/shield.json"}]
 #############
 func get_content():
 	var result = []
 	for d in content:
 		var inside = {}
 		inside["mount_key"] = d.mount_key
+		inside["mount_index"] = d.mount_index
 		inside["src_key"] = d.src_key
 		inside["checked"] = d.obj.get_node("Choice").pressed
 		result.push_back(inside)
@@ -30,11 +31,11 @@ func set_content(val):
 		var copy = row_ref.duplicate()
 		copy.visible = true
 		row_ref.get_parent().add_child(copy)
-		content.push_back({"obj": copy, "mount_key": v.mount_key, "src_key":v.src_key})
-		var display = v.mount_key + " : Free"
+		content.push_back({"obj": copy, "mount_key": v.mount_key, "mount_index":v.mount_index, "src_key":v.src_key})
+		var display = v.mount_key + " " + str(v.mount_index+1) + " : Free"
 		if v.src_key != null and v.src_key != "":
 			var src_data = Globals.LevelLoaderRef.LoadJSON(v.src_key)
-			display = v.mount_key + " : " + src_data.name_id
+			display = v.mount_key + " " + str(v.mount_index+1) + " : " + src_data.name_id
 		copy.get_node("Choice/Name").bbcode_text = display
 		copy.get_node("Choice").MyData = {"origin":self, "content_index":content.size() - 1} # index in content array
 		#copy.get_node("Choice").connect("toggled", self, "toggled_callback", [v.mount_key, v.src_key])
@@ -66,4 +67,4 @@ func choice_can_drop_data(node_dest, data):
 	
 func choice_drop_data(node_dest, data):
 	#container_src, container_dst, content_index_src
-	emit_signal("OnChoiceDragAndDrop", data.origin, self, data.content_index)
+	emit_signal("OnChoiceDragAndDrop", data.origin, self, data.content_index, node_dest.MyData.content_index)

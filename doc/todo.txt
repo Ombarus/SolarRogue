@@ -38,6 +38,7 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- transfer drag&drop dialog. Should ask for how many of a stack to transfer
 - Refactor weapon system to work with multiple weapons
 - Refactor all inventory dialog to work with arrayed mounts
 	- equip scene

@@ -36,9 +36,9 @@ func Ok_Callback():
 	var l_new_mounts = []
 	var r_new_mounts = []
 	for data in lnode.get_node("Mounts").content:
-		l_new_mounts.push_back({"mount_key":data.mount_key, "src_key":data.src_key})
+		l_new_mounts.push_back({"mount_key":data.mount_key, "mount_index":data.mount_index, "src_key":data.src_key})
 	for data in rnode.get_node("Mounts").content:
-		r_new_mounts.push_back({"mount_key":data.mount_key, "src_key":data.src_key})
+		r_new_mounts.push_back({"mount_key":data.mount_key, "mount_index":data.mount_index, "src_key":data.src_key})
 			
 	var l_new_cargo = []
 	var r_new_cargo = []
@@ -86,12 +86,18 @@ func Init(init_param):
 	
 	var mount_obj = []
 	for key in mounts1:
-		mount_obj.push_back({"mount_key":key, "src_key":mounts1[key]})
+		var count = 0
+		for item in mounts1[key]:
+			mount_obj.push_back({"mount_key":key, "mount_index":count, "src_key":item})
+			count += 1
 	get_node(L_BASE_PATH + "/Mounts").content = mount_obj
 	
 	mount_obj = []
 	for key in mounts2:
-		mount_obj.push_back({"mount_key":key, "src_key":mounts2[key]})
+		var count = 0
+		for item in mounts2[key]:
+			mount_obj.push_back({"mount_key":key, "mount_index":count, "src_key":item})
+			count += 1
 	get_node(R_BASE_PATH + "/Mounts").content = mount_obj
 	
 	var current_load = obj1.get_attrib("cargo.volume_used")
@@ -121,12 +127,15 @@ func Init(init_param):
 	
 	get_node(L_BASE_PATH + "/Mounts").connect("OnChoiceSelectionChanged", self, "LMountsChanged_Callback")
 
-func OnChoiceDragAndDrop_Callback(container_src, container_dst, content_index_src):
+func OnChoiceDragAndDrop_Callback(container_src, container_dst, content_index_src, content_index_dst):
 	var new_src = []
 	var new_dst = []
 	var old_src = container_src.get_content()
 	var old_dst = container_dst.get_content()
 	var src_data = old_src[content_index_src]
+	var dst_data = null
+	if content_index_dst < old_dst.size():
+		dst_data = old_dst[content_index_dst]
 	var is_src_mount = "mount_key" in old_src[0]
 	var is_dst_mount = false
 	if old_dst.size() > 0:
@@ -140,23 +149,20 @@ func OnChoiceDragAndDrop_Callback(container_src, container_dst, content_index_sr
 	# Remake set array for the ship that receives the item
 	for item in old_dst:
 		if is_dst_mount == true:
-			new_dst.push_back({"mount_key":item.mount_key, "src_key":item.src_key})
+			new_dst.push_back({"mount_key":item.mount_key, "mount_index":item.mount_index, "src_key":item.src_key})
 		else:
 			new_dst.push_back({"src_key":item.src_key, "amount":item.amount})
 	
 	# Update the drag destination to add whatever was received
 	if is_dst_mount == true:
-		var lookup_mount = ""
-		if is_src_mount:
-			lookup_mount = src_data.mount_key
-		else:
-			lookup_mount = src_json.equipment.slot
+		var lookup_mount = dst_data.mount_key
+		var lookup_index = dst_data.mount_index
 		# This could probably done in a single loop (create the new_dst while modifying it at the same time)
 		# But my brain refuses to fathom all the possible conditions
 		# (mount to mount, mount to cargo, cargo to mount, selected to not selected, etc.)
 		# fuck performance, anyway, recreating all the nodes after the drag & drop is definitly more expensive
 		for item in new_dst:
-			if item.mount_key == lookup_mount:
+			if item.mount_key == lookup_mount and item.mount_index == lookup_index:
 				dst_data_copy = item.src_key
 				item.src_key = src_data.src_key
 				break
@@ -177,14 +183,14 @@ func OnChoiceDragAndDrop_Callback(container_src, container_dst, content_index_sr
 	# Remake the drag source that will lose an item	
 	for item in old_src:
 		if is_src_mount == true:
-			new_src.push_back({"mount_key":item.mount_key, "src_key":item.src_key})
+			new_src.push_back({"mount_key":item.mount_key, "mount_index":item.mount_index, "src_key":item.src_key})
 		else:
 			new_src.push_back({"src_key":item.src_key, "amount":item.amount})
 	
 	# Update the array to remove whatever we sent to destination	
 	if is_src_mount == true:
 		for item in new_src:
-			if item.mount_key == src_data.mount_key:
+			if item.mount_key == src_data.mount_key and item.mount_index == src_data.mount_index:
 				if dst_data_copy == null:
 					item.src_key = ""
 				else:
@@ -196,7 +202,7 @@ func OnChoiceDragAndDrop_Callback(container_src, container_dst, content_index_sr
 				new_src[i].amount -= 1
 				break
 			elif new_src[i].src_key == src_data.src_key:
-				index_to_remove = i
+				index_to_remove = i #TODO: What if you only want to move a specific amount ?
 				break
 		if index_to_remove >= 0:
 			new_src.remove(index_to_remove)
@@ -257,10 +263,9 @@ func _transfer_all(from, to):
 	
 	var take_mounts = []
 	for data in from.get_node("Mounts").content:
+		take_mounts.push_back({"mount_key":data.mount_key, "mount_index":data.mount_index, "src_key":""})
 		if data.src_key == null or data.src_key.empty() == true:
-			take_mounts.push_back({"mount_key":data.mount_key, "src_key":""})
 			continue
-		var jsondata = Globals.LevelLoaderRef.LoadJSON(data.src_key)
 		var added = false
 		for cargo_data in cargo_content:
 			if cargo_data.src_key in data.src_key:
@@ -271,7 +276,6 @@ func _transfer_all(from, to):
 					break
 		if added == false:
 			cargo_content.push_back({"src_key":data.src_key, "amount":1})
-		take_mounts.push_back({"mount_key":data.mount_key, "src_key":""})
 	from.get_node("Mounts").content = take_mounts
 	
 	var take_cargo = []

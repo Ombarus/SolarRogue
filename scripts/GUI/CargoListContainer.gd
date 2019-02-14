@@ -2,8 +2,9 @@ extends ScrollContainer
 
 var content = [] setget set_content, get_content
 var row_ref = null
+var MyData = null # just so we don't crash when drag&dropping on an empty cargo
 
-signal OnChoiceDragAndDrop(container_src, container_dst, content_index_src)
+signal OnChoiceDragAndDrop(container_src, container_dst, content_index_src, content_index_dst)
 
 func _ready():
 	row_ref = get_node("List/Row")
@@ -61,4 +62,7 @@ func choice_can_drop_data(node_dest, data):
 	
 func choice_drop_data(node_dest, data):
 	#container_src, container_dst, content_index_src
-	emit_signal("OnChoiceDragAndDrop", data.origin, self, data.content_index)
+	var mydata = 0
+	if node_dest.MyData != null:
+		mydata = node_dest.MyData.content_index
+	emit_signal("OnChoiceDragAndDrop", data.origin, self, data.content_index, mydata)

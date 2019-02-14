@@ -23,7 +23,7 @@ func Ok_Callback():
 	var dropped_mounts = []
 	for data in get_node("base/vbox/Mounts").content:
 		if data.checked == true:
-			dropped_mounts.push_back(data.key)
+			dropped_mounts.push_back({"key":data.key, "index":data.index})
 			
 	var dropped_cargo = []
 	for data in get_node("base/vbox/Cargo").content:
@@ -56,11 +56,14 @@ func Init(init_param):
 	
 	var mount_obj = []
 	for key in mounts:
-		var name = key + " : Free"
-		if not mounts[key].empty():
-			var data = Globals.LevelLoaderRef.LoadJSON(mounts[key])
-			name = key + " : " + data.name_id
-		mount_obj.push_back({"name_id":name, "count":1, "key":key})
+		var count = 0
+		for item in mounts[key]:
+			var name = key + " " + str(count+1) + " : Free"
+			if not item.empty():
+				var data = Globals.LevelLoaderRef.LoadJSON(item)
+				name = key + " " + str(count+1) + " : " + data.name_id
+			mount_obj.push_back({"name_id":name, "count":1, "key":key, "index":count})
+			count += 1
 	get_node("base/vbox/Mounts").content = mount_obj
 	
 	var current_load = obj.get_attrib("cargo.volume_used")
