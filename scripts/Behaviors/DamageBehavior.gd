@@ -107,6 +107,7 @@ func ProcessDamage(target, shooter, weapon_data):
 		var hull_dam = dam - dam_absorbed_by_shield
 		target.set_attrib("destroyable.hull", target.get_attrib("destroyable.hull") - hull_dam)
 		if target.get_attrib("destroyable.hull") <= 0:
+			target.set_attrib("destroyable.destroyed", true) # so other systems can check if their reference is valid or not
 			if target.get_attrib("drop_on_death") != null:
 				ProcessDeathSpawns(target)
 			if is_player:
@@ -133,15 +134,10 @@ func ProcessDeathSpawns(target):
 		if can_spawn and MersenneTwister.rand_float() < stuff.chance:
 			Globals.LevelLoaderRef.RequestObject(stuff.id, Globals.LevelLoaderRef.World_to_Tile(target.position))
 
-func _hit_shield(target, dam, shield_data):
-	#if shield_data == null or shield_data.size() <= 0 or dam == 0:
-	#	return 0
-		
+func _hit_shield(target, dam):
 	var cur_hp = target.get_attrib("shield.current_hp")
 	if cur_hp == null or cur_hp <= 0:
 		return 0
-	#if cur_hp == null:
-	#	cur_hp = shield_data.shielding.max_hp
 	
 	var new_hp = max(0, cur_hp - dam)
 	var absorbed = dam

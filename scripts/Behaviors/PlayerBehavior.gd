@@ -12,6 +12,14 @@ var playerNode = null
 var levelLoaderRef
 var click_start_pos
 var lock_input = false # when it's not player turn, inputs are locked
+var _weapon_shots = []
+
+enum SHOOTING_STATE {
+	init,
+	wait_targetting,
+	wait_damage,
+	done
+}
 
 enum INPUT_STATE {
 	hud,
@@ -222,14 +230,20 @@ func Pressed_Weapon_Callback():
 	if lock_input:
 		return
 	
-	var weapon_json = playerNode.get_attrib("mounts.small_weapon_mount")
-	if weapon_json == null or weapon_json.empty() == true:
+	var weapons = playerNode.get_attrib("mounts.weapon")
+	var weapons_data = Globals.LevelLoaderRef.LoadJSONArray(weapons)
+	if weapons_data == null or weapons_data.size() <= 0:
 		BehaviorEvents.emit_signal("OnLogLine", "Mount some weapon first")
 		return
 		
-	BehaviorEvents.emit_signal("OnLogLine", "Weapon System Online. Target ?")
-	var weapon_data = Globals.LevelLoaderRef.LoadJSON(weapon_json)
-	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, weapon_data, self, "ProcessAttackSelection")
+	_weapon_shots = []
+	for data in weapons_data:
+		_weapon_shots.push_back({"state":SHOOTING_STATE.init, "weapon_data":data})
+		
+	var cur_weapon = _weapon_shots[0]
+	cur_weapon.state = SHOOTING_STATE.wait_targetting
+	BehaviorEvents.emit_signal("OnLogLine", "Firing " + cur_weapon.weapon_data.name_id + ". Target ?")
+	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, cur_weapon.weapon_data, self, "ProcessAttackSelection")
 	_input_state = INPUT_STATE.weapon_targetting
 	
 func OnLevelLoaded_Callback():
@@ -400,14 +414,41 @@ func _unhandled_input(event):
 		BehaviorEvents.emit_signal("OnMovement", playerNode, dir)
 
 
+#TODO: if target is out-of-range the sequence will be aborted. Should probably fix that if you have more than one weapon
 func ProcessAttackSelection(target):
-	if target == null:
+	var cur_weapon = null
+	for shot in _weapon_shots:
+		if shot.state == SHOOTING_STATE.wait_damage:
+			continue
+		elif shot.state == SHOOTING_STATE.wait_targetting:
+			shot["target"] = target
+			shot.state = SHOOTING_STATE.wait_damage
+		elif shot.state == SHOOTING_STATE.init and cur_weapon == null:
+			cur_weapon = shot
+	
+	if cur_weapon != null:
+		cur_weapon.state = SHOOTING_STATE.wait_targetting
+		BehaviorEvents.emit_signal("OnLogLine", "Acknowledged, should we also fire " + cur_weapon.weapon_data.name_id + ". Target ?")
+		BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, cur_weapon.weapon_data, self, "ProcessAttackSelection")
+		_input_state = INPUT_STATE.weapon_targetting
+		return
+	
+	var all_canceled = true
+	for shot in _weapon_shots:
+		if "target" in shot and shot.target != null:
+			all_canceled = false
+			break
+			
+	if all_canceled == true:
 		BehaviorEvents.emit_signal("OnLogLine", "There's nothing there sir...")
 		return
-		
-	var weapon_json = playerNode.get_attrib("mounts.small_weapon_mount")
-	var weapon_data = Globals.LevelLoaderRef.LoadJSON(weapon_json)
-	BehaviorEvents.emit_signal("OnDealDamage", target, playerNode, weapon_data)
+	
+	BehaviorEvents.emit_signal("OnBeginParallelAction", playerNode)
+	for shot in _weapon_shots:
+		var destroyed_state = target.get_attrib("destroyable.destroyed")
+		if shot.target != null and (destroyed_state == null or destroyed_state == false):
+			BehaviorEvents.emit_signal("OnDealDamage", shot.target, playerNode, shot.weapon_data)
+	BehaviorEvents.emit_signal("OnEndParallelAction", playerNode)
 	
 func ProcessBoardSelection(target):
 	if target != null:

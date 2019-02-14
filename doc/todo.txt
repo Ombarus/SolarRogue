@@ -40,6 +40,9 @@ ROAD TO ALPHA :::
 TODO :::
 - transfer drag&drop dialog. Should ask for how many of a stack to transfer
 - Refactor weapon system to work with multiple weapons
+	- add "skip" button to weapon targetting overlay
+	- add "cancel shots" button to targetting overlay
+- BUG: can't fire multiple weapon if we select a target out of range (works if we select empty tiles)
 - Refactor all inventory dialog to work with arrayed mounts
 	- equip scene
 	- jettison scene

@@ -49,7 +49,8 @@ func OnObjTurn_Callback(obj):
 	if obj.get_attrib("ai") == null:
 		return
 	
-	obj.modified_attributes["ap"] = false
+	obj.set_attrib("ap.ai_acted", false)
+	#obj.modified_attributes["ap"] = false
 	
 	var pathfinding = obj.get_attrib("ai.pathfinding")
 		
@@ -66,7 +67,7 @@ func OnObjTurn_Callback(obj):
 		# For now, just do nothing for one AP
 		BehaviorEvents.emit_signal("OnUseAP", obj, 1.0)
 		
-	if obj.modified_attributes["ap"] == false:
+	if obj.get_attrib("ap.ai_acted") == false:
 		print("**** AI DID NOT DO ANY ACTION. AI SHOULD AT LEAST WAIT FOR 1 TURN ALWAYS ! *****")
 		BehaviorEvents.emit_signal("OnUseAP", obj, 1.0)
 
@@ -79,11 +80,23 @@ func DoAttackPathFinding(obj):
 	var player = Globals.LevelLoaderRef.GetObjectById(obj.get_attrib("ai.target"))
 	var player_tile = Globals.LevelLoaderRef.World_to_Tile(player.position)
 	var obj_tile = Globals.LevelLoaderRef.World_to_Tile(obj.position)
-	var obj_weapon = Globals.LevelLoaderRef.LoadJSON(obj.get_attrib("mounts.small_weapon_mount"))
-	var minimal_move = _targetting.ClosestFiringSolution(obj_tile, player_tile, obj_weapon)
-	if minimal_move.length() == 0:
-		BehaviorEvents.emit_signal("OnDealDamage", player, obj, obj_weapon)
-	else:
+	var weapons = obj.get_attrib("mounts.weapon")
+	var weapons_data = Globals.LevelLoaderRef.LoadJSONArray(weapons)
+	#if weapons_data != null and weapons_data.size() > 0
+	
+	var minimal_move = null
+	var shot = false
+	BehaviorEvents.emit_signal("OnBeginParallelAction", obj)
+	for data in weapons_data:
+		var best_move = _targetting.ClosestFiringSolution(obj_tile, player_tile, data)
+		if best_move.length() == 0:
+			BehaviorEvents.emit_signal("OnDealDamage", player, obj, data)
+			shot = true
+		if minimal_move == null or minimal_move.length() > best_move.length():
+			minimal_move = best_move
+	BehaviorEvents.emit_signal("OnEndParallelAction", obj)
+
+	if shot == false:
 		var move_by = Vector2(0, 0)
 		move_by.x = clamp(minimal_move.x, -1, 1)
 		move_by.y = clamp(minimal_move.y, -1, 1)
@@ -119,7 +132,10 @@ func DoRunAwayPathFinding(obj):
 	my_pos = Globals.LevelLoaderRef.World_to_Tile(my_pos)
 	scary_pos = Globals.LevelLoaderRef.World_to_Tile(scary_pos)
 	var scanner_range = 0
-	var scanner_json = obj.get_attrib("mounts.scanner")[0]
+	var scanner = obj.get_attrib("mounts.scanner")
+	var scanner_json = null
+	if scanner != null:
+		scanner_json = scanner[0]
 	if scanner_json != null and scanner_json != "":
 		var scanner_data = Globals.LevelLoaderRef.LoadJSON(scanner_json)
 		scanner_range = scanner_data.scanning.radius

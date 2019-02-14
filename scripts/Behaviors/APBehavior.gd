@@ -19,6 +19,29 @@ func _ready():
 	BehaviorEvents.connect("OnWaitForAnimation", self, "OnWaitForAnimation_Callback")
 	BehaviorEvents.connect("OnAnimationDone", self, "OnAnimationDone_Callback")
 	
+	BehaviorEvents.connect("OnBeginParallelAction", self, "OnBeginParallelAction_Callback")
+	BehaviorEvents.connect("OnEndParallelAction", self, "OnEndParallelAction_Callback")
+
+	
+func OnBeginParallelAction_Callback(obj):
+	obj.set_attrib("ap.is_parallel", true)
+	obj.set_attrib("ap.accumulator", [])
+	
+func OnEndParallelAction_Callback(obj):
+	obj.set_attrib("ap.is_parallel", false)
+	var ap_list = obj.get_attrib("ap.accumulator")
+	if ap_list == null or ap_list.size() <= 0:
+		return
+		
+	var max_ap = 0
+	for ap in ap_list:
+		if max_ap < ap:
+			max_ap = ap
+			
+	if max_ap > 0:
+		OnUseAP_Callback(obj, max_ap)
+	
+	
 func OnWaitForAnimation_Callback():
 	_waiting_on_anim = true
 	
@@ -34,10 +57,14 @@ func OnRequestObjectUnload_Callback(obj):
 		_disable = true
 	action_list.erase(obj)
 
-func OnUseAP_Callback(obj, amount):
-	obj.modified_attributes["ap"] = true
+func OnUseAP_Callback(obj, amount):		
+	obj.set_attrib("ap.ai_acted", true)
 	var index = action_list.find(obj)
 	if index < 0:
+		return
+		
+	if obj.get_attrib("ap.is_parallel") == true:
+		obj.get_attrib("ap.accumulator").push_back(amount)
 		return
 	
 	action_list.remove(index)	
