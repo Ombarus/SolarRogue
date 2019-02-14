@@ -13,7 +13,9 @@
 		"shield": ["data/json/items/shields/shield_mk1.json"],
 		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
 		"converter": ["data/json/items/converters/converter_mk1.json"],
-		"utility":[""]
+		"utility":[
+			""
+		]
 	},
 	"destroyable": {
 		"hull":15
@@ -21,7 +23,7 @@
 	"moving": {
 		"speed":1.0,
 		"can_use_wormhole":true,
-		"energy_cost":20
+		"energy_cost":5
 	},
 	"cargo": {
 		"capacity":500,
@@ -35,6 +37,7 @@
 		]
 	},
 	"converter": {
-		"stored_energy": 10000
+		"stored_energy": 10000,
+		"base_ap_energy_cost":10
 	}
 }

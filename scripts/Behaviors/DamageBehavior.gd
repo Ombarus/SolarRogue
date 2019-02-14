@@ -81,10 +81,11 @@ func ProcessHarvesting(target, shooter, weapon_data):
 		for i in range(drop_count):
 			var x = MersenneTwister.rand(3) - 1
 			var y = MersenneTwister.rand(3) - 1
-			x = clamp(x, 0, bounds.x-1)
-			y = clamp(y, 0, bounds.y-1)
+			var tile = Globals.LevelLoaderRef.World_to_Tile(target.position)
+			x = clamp(tile.x + x, 0, bounds.x-1)
+			y = clamp(tile.y + y, 0, bounds.y-1)
 			var offset = Vector2(x,y)
-			Globals.LevelLoaderRef.RequestObject(item_json, Globals.LevelLoaderRef.World_to_Tile(target.position) + offset)
+			Globals.LevelLoaderRef.RequestObject(item_json, offset)
 		target.modified_attributes.harvestable.count -= drop_count
 		if is_player:
 			BehaviorEvents.emit_signal("OnLogLine", "Some useful materials float into orbit")

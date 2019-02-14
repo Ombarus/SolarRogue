@@ -68,6 +68,9 @@ func OnUseAP_Callback(obj, amount):
 		return
 	
 	action_list.remove(index)	
+	var base_ap_energy_cost = obj.get_attrib("converter.base_ap_energy_cost")
+	if base_ap_energy_cost != null and base_ap_energy_cost > 0:
+		BehaviorEvents.emit_signal("OnUseEnergy", obj, base_ap_energy_cost)
 	obj.modified_attributes.action_point += amount
 	Insert(obj, obj.get_attrib("action_point"))
 	NormalizeAP()

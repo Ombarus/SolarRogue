@@ -32,6 +32,11 @@ func OnDamageTaken_Callback(target, shooter):
 		
 func OnLevelLoaded_Callback():
 	UpdateStatusBar(Globals.LevelLoaderRef.objByType["player"][0])
+	var levelinfo = get_node("StatusWindow/levelinfo")
+	var leveldata = Globals.LevelLoaderRef.GetCurrentLevelData()
+	var json_name = leveldata.src.get_file()
+	json_name = json_name.replace(".json", "")
+	levelinfo.text = json_name
 	
 
 # TODO: !!!!!!! UGLY UGLY UGLY COPY PASTE FROM SHIELD BEHAVIOR !!!!!!!!!!!!!!!!!

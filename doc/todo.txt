@@ -38,18 +38,16 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- Implement consumable interface
+	- UI
+	- JSON
+	- effects
 - transfer drag&drop dialog. Should ask for how many of a stack to transfer
 - Refactor weapon system to work with multiple weapons
 	- add "skip" button to weapon targetting overlay
 	- add "cancel shots" button to targetting overlay
 - BUG: can't fire multiple weapon if we select a target out of range (works if we select empty tiles)
-- Refactor all inventory dialog to work with arrayed mounts
-	- equip scene
-	- jettison scene
-	- transfer scene
 - Refactor equip mount dialog with similar drag&drop instead of two annoying separate popup
-- Check Globals.total_turn - last_update is done after calculating stacking for all systems
-- Make energy be consumed per turn, not per move (so that we use energy even when we wait)
 - BUG: Mouse stay stuck if moving camera when sub-menu is up
 - level generation improvement :
 	- have the spawn chance be able to have group of related elements (so I can spawn for example, 3 missiles next to each other 0.1% chance per level)
@@ -63,12 +61,6 @@ TODO :::
 - Message if you try to go up the home wormhole
 - Save after each turn
 - make sure player cannot generate more energy than max capacity
-- prototype having more than one weapon mount (right now I assume mount points are both type and unique ids)
-	- convert all mount to arrays ?
-	- How to handle weapon mounts with different weapon equipped ? with different range and firing pattern ?
-	- multiple shields. Should one shield empty then the other or both empty at the same rate ? what happen when one shield is bigger than another ?
-	- can you stack the same utility ? (multiple solar arrays, multiple cargo compactor ?) (diminishing return ?)
-	- should stacked shield also provide diminishing return ?
 - Tweak: Probe doesn't have enough cargo space to hold any hulls for crafting which means we can be stuck in a probe forever ?
 - fix max cargo. make sure we're never above cargo capacity
 	- check if we always update current cargo volume
@@ -147,6 +139,22 @@ IDEAS:::
 	
 	
 DONE :::
+- Make energy be consumed per turn, not per move (so that we use energy even when we wait)
+
+
+- prototype having more than one weapon mount (right now I assume mount points are both type and unique ids)
+	- convert all mount to arrays ?
+	- How to handle weapon mounts with different weapon equipped ? with different range and firing pattern ?
+	- multiple shields. Should one shield empty then the other or both empty at the same rate ? what happen when one shield is bigger than another ?
+	- can you stack the same utility ? (multiple solar arrays, multiple cargo compactor ?) (diminishing return ?)
+	- should stacked shield also provide diminishing return ?
+- Check Globals.total_turn - last_update is done after calculating stacking for all systems
+- Refactor all inventory dialog to work with arrayed mounts
+	- equip scene
+	- jettison scene
+	- transfer scene
+	
+	
 - Welcome Screen
 - transfer window need to update cargo.
 - ship cannot move if over cargo
