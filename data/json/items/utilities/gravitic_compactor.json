@@ -1,9 +1,7 @@
 {
 	"name_id":"Gravitic Compactor",
 	"type":"utility",
-	"sprite_choice":[
-		"shield"
-	],
+	"sprite":"gravitic_compactor",
 	"equipment": {
 		"slot":"utility",
 		"volume":10.0,

@@ -1,0 +1,44 @@
+{
+	"name_id":"A Vorg Battleship",
+	"description":"The best attack vessel of the vorg fleet. Vorg battleship have only one mission, kill while not taking a single hit to their Hull",
+	"type":"ship",
+	"sprite":"vorg_battleship",
+	"action_point":0,
+	"mounts": {
+		"weapon": [
+			"data/json/items/weapons/laser_turret_mk1.json", 
+			"data/json/items/weapons/missile_launcher_mk1.json",
+			"data/json/items/weapons/missile_launcher_mk1.json",
+			"data/json/items/weapons/missile_launcher_mk1.json"
+		],
+		"shield": [
+			"data/json/items/shields/shield_mk1.json", 
+			"data/json/items/shields/shield_mk1.json", 
+			"data/json/items/shields/shield_mk1.json", 
+			"data/json/items/shields/shield_mk1.json"],
+		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
+		"converter": ["data/json/items/converters/converter_mk1.json"]
+	},
+	"destroyable": {
+		"hull":35
+	},
+	"moving": {
+		"speed":1.6,
+		"can_use_wormhole":true,
+		"wander_speed":2.5
+	},
+	"ai": {
+		"aggressive":true,
+		"pathfinding":"simple",
+		"run_if_attacked":false
+	},
+	"drop_on_death": [
+		{"id":"data/json/items/misc/battleship_body.json", "chance":0.1},
+		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.01},
+		{"id":"data/json/items/weapons/missile_launcher_mk1.json", "chance":0.08},
+		{"id":"data/json/items/shields/shield_mk1.json", "chance":0.2},
+		{"id":"data/json/items/shields/shield_mk1.json", "chance":0.2},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
+	]
+}

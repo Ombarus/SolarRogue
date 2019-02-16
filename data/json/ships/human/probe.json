@@ -1,0 +1,34 @@
+{
+	"name_id":"A Simple Probe",
+	"sprite":"probe",
+	"type":"ship",
+	"action_point":0,
+	"mounts": {
+		"weapon": ["data/json/items/weapons/missile_launcher_mk1.json"],
+		"shield": [""]
+	},
+	"animation": {
+		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
+	},
+	"ai": {
+		"aggressive":false,
+		"pathfinding":"simple",
+		"run_if_attacked":true,
+		"stop_running_after":7
+	},
+	"drop_on_death": [
+		{"id":"data/json/items/misc/probe_body.json", "chance":0.1},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.8},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.55},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.3},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
+	],
+	"destroyable": {
+		"hull":10
+	},
+	"moving": {
+		"speed":1.3,
+		"wander_speed":2.5,
+		"can_use_wormhole":false
+	}
+}

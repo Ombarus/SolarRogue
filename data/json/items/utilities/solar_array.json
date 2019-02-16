@@ -1,9 +1,7 @@
 {
 	"name_id":"Solar Array",
 	"type":"utility",
-	"sprite_choice":[
-		"shield"
-	],
+	"sprite": "solar_array",
 	"equipment": {
 		"slot":"utility",
 		"volume":10.0,

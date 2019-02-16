@@ -38,6 +38,7 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- up and down wormhole should have different sprite
 - Implement consumable interface
 	- UI
 	- JSON

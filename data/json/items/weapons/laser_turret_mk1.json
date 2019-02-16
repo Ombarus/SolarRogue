@@ -1,11 +1,7 @@
 {
 	"name_id":"Laser Turret MK1",
 	"type":"weapon",
-	"sprite_choice":[
-		"missile_launcher_blue",
-		"missile_launcher_green",
-		"missile_launcher_yellow"
-	],
+	"sprite": "laser_turret",
 	"animation": {
 		"shoot": "scenes/tileset_source/LaserFX01.tscn"
 	},

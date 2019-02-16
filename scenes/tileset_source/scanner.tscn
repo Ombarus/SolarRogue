@@ -6,7 +6,7 @@
 
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 768, 384, 128, 128 )
+region_rect = Rect2( 512, 128, 128, 128 )
 _sections_unfolded = [ "Region" ]
 
 

@@ -1,0 +1,41 @@
+{
+	"name_id":"A Human Frigate",
+	"description":"A utility vessel. Can execute a wide range of functions while part of a fleet but lacks any serious firepower",
+	"type":"ship",
+	"sprite":"human_frigate",
+	"action_point":0,
+	"mounts": {
+		"weapon": [
+			"data/json/items/weapons/laser_turret_mk1.json", 
+			"data/json/items/weapons/laser_turret_mk1.json"
+		],
+		"shield": ["data/json/items/shields/shield_mk1.json"],
+		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
+		"converter": ["data/json/items/converters/converter_mk1.json"],
+		"utility":[
+			"",
+			""
+		]
+	},
+	"destroyable": {
+		"hull":25
+	},
+	"moving": {
+		"speed":1.0,
+		"can_use_wormhole":true,
+		"wander_speed":2.5
+	},
+	"ai": {
+		"aggressive":true,
+		"pathfinding":"simple",
+		"run_if_attacked":false
+	},
+	"drop_on_death": [
+		{"id":"data/json/items/misc/frigate_body.json", "chance":0.1},
+		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.08},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.1},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
+		{"id":"data/json/items/utilities/solar_array.json", "chance":0.05},
+		{"id":"data/json/items/utilities/gravitic_compactor.json", "chance":0.01}
+	]
+}

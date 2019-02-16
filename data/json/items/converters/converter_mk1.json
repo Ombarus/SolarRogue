@@ -1,9 +1,7 @@
 {
 	"name_id":"Matter-to-Energy Converter",
 	"type":"converter",
-	"sprite_choice":[
-		"scanner"
-	],
+	"sprite":"converter",
 	"equipment": {
 		"slot":"converter",
 		"volume":20.0,

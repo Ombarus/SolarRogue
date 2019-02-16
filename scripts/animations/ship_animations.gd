@@ -5,7 +5,7 @@ extends Sprite
 # var b = "textvar"
 
 func _ready():
-	get_node("AnimationPlayer").play("test")
+	pass
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

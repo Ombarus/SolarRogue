@@ -4,7 +4,6 @@
 
 [node name="planet_a" type="Sprite"]
 
-position = Vector2( 0, 0 ) 
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 512, 0, 128, 128 )

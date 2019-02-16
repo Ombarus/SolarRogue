@@ -1,0 +1,41 @@
+{
+	"name_id":"A Human Battleship",
+	"description":"The best attack vessel of the human fleet. Made to shoot down any opposition",
+	"type":"ship",
+	"sprite":"human_battleship",
+	"action_point":0,
+	"mounts": {
+		"weapon": [
+			"data/json/items/weapons/laser_turret_mk1.json", 
+			"data/json/items/weapons/laser_turret_mk1.json",
+			"data/json/items/weapons/missile_launcher_mk1.json"
+		],
+		"shield": ["data/json/items/shields/shield_mk1.json", "data/json/items/shields/shield_mk1.json"],
+		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
+		"converter": ["data/json/items/converters/converter_mk1.json"],
+		"utility":[
+			""
+		]
+	},
+	"destroyable": {
+		"hull":50
+	},
+	"moving": {
+		"speed":1.2,
+		"can_use_wormhole":true,
+		"wander_speed":2.5
+	},
+	"ai": {
+		"aggressive":true,
+		"pathfinding":"simple",
+		"run_if_attacked":false
+	},
+	"drop_on_death": [
+		{"id":"data/json/items/misc/battleship_body.json", "chance":0.1},
+		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.08},
+		{"id":"data/json/items/weapons/missile_launcher_mk1.json", "chance":0.04},
+		{"id":"data/json/items/shields/shield_mk1.json", "chance":0.08},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
+	]
+}

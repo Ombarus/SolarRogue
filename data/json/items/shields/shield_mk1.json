@@ -1,10 +1,7 @@
 {
 	"name_id":"Shield",
 	"type":"shield",
-	"sprite_choice":[
-		"shield"
-	],
-	"z_order":10,
+	"sprite": "shield",
 	"equipment": {
 		"slot":"shield",
 		"volume":10.0,

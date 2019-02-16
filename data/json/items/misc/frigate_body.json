@@ -1,0 +1,10 @@
+{
+	"name_id":"A Frigate Hull Relic",
+	"type":"ingredient",
+	"sprite":"shuttle_body",
+	"equipment": {
+		"slot":"cargo",
+		"volume":190.0,
+		"stackable":false
+	}
+}

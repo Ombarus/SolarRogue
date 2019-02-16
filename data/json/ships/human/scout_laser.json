@@ -1,0 +1,34 @@
+{
+	"name_id":"A Human Scout",
+	"description":"Fast but relatively weak ship",
+	"type":"ship",
+	"sprite":"human_scout",
+	"action_point":0,
+	"mounts": {
+		"weapon": ["data/json/items/weapons/laser_turret_mk1.json"],
+		"scanner": ["data/json/items/scanners/scanner_mk1.json"]
+	},
+	"animation": {
+		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
+	},
+	"ai": {
+		"aggressive":true,
+		"pathfinding":"simple",
+		"run_if_attacked":false
+	},
+	"drop_on_death": [
+		{"id":"data/json/items/misc/shuttle_body.json", "chance":0.1},
+		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.07},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.1},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
+	],
+	"destroyable": {
+		"hull":15
+	},
+	"moving": {
+		"speed":0.7,
+		"wander_speed":2.5,
+		"can_use_wormhole":false
+	}
+}

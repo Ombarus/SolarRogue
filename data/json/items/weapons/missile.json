@@ -4,7 +4,6 @@
 	"sprite_choice":[
 		"missile"
 	],
-	"z_order":10,
 	"equipment": {
 		"slot":"cargo",
 		"volume":0.5,
