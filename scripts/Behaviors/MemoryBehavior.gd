@@ -108,6 +108,7 @@ func OnScannerUpdated_Callback(obj):
 	var level_id = Globals.LevelLoaderRef.GetLevelID()
 	var new_objs = obj.get_attrib("scanner_result.new_in_range." + level_id)
 	var new_out_objs = obj.get_attrib("scanner_result.new_out_of_range." + level_id)
+	var unkown_objs = obj.get_attrib("scanner_result.unknown." + level_id)
 	
 	for id in new_objs:
 		var o = Globals.LevelLoaderRef.GetObjectById(id)
@@ -139,5 +140,18 @@ func OnScannerUpdated_Callback(obj):
 			#var data = {"position":var2str(obj_tile), "sprite":obj.get_attrib("sprite")}
 			#var path = "memory.objects." + str(obj.get_attrib("unique_id"))
 			#_playerNode.set_attrib(path, data)
+	
+	if unkown_objs != null:
+		var all_visible = _playerNode.get_attrib("scanner_result.cur_in_range." + level_id)
+		for id in unkown_objs:
+			var o = Globals.LevelLoaderRef.GetObjectById(id)
+			if o != null and not id in all_visible and o.get_attrib("ghost_memory") == null:
+				#TODO: Create '?' memory
+				var unkown_tile_path = "data/json/props/unknow.json"
+				var modified = {}
+				modified["ghost_memory"] = {"reference_id":o.get_attrib("unique_id")}
+				var n = Globals.LevelLoaderRef.RequestObject(unkown_tile_path, Globals.LevelLoaderRef.World_to_Tile(o.position), modified)
+				o.set_attrib("has_ghost_memory.reference_id", n.get_attrib("unique_id"))
+			
 			
 	_update_occlusion(obj)

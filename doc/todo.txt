@@ -38,6 +38,8 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- New scanner :
+	- Detects unknown large objects, displays them as ghost '?'
 - up and down wormhole should have different sprite
 - Implement consumable interface
 	- UI

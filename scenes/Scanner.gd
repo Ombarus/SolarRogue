@@ -30,6 +30,7 @@ func OnLevelLoaded_Callback():
 	_up_to_date = false
 
 func OnPositionUpdated_Callback(obj):
+	#TODO: this might get expensive. Maybe do some culling before doing a full update
 	_up_to_date = false
 	
 func OnObjectLoaded_Callback(obj):
@@ -129,12 +130,20 @@ func _update_scanned_obj(obj, scanner_data):
 		for id in old_range:
 			if not id in cur_in_range:
 				new_out_of_range.push_back(id)
+				
+	var unkown_objects = []
+	var partial_type = Globals.get_data(scanner_data, "scanning.partial_reveal_type", [])
+	for type in partial_type:
+		if type in Globals.LevelLoaderRef.objByType:
+			for o in Globals.LevelLoaderRef.objByType[type]:
+				unkown_objects.push_back(o.get_attrib("unique_id"))
 			
 	#if new_in_range.size() != 0 or new_out_of_range.size() != 0:
 	#	# for now. Only send an event if the scanner result for the object has significant changes.
 	obj.set_attrib("scanner_result.cur_in_range." + level_id, cur_in_range)
 	obj.set_attrib("scanner_result.new_in_range." + level_id, new_in_range)
 	obj.set_attrib("scanner_result.new_out_of_range." + level_id, new_out_of_range)
+	obj.set_attrib("scanner_result.unknown." + level_id, unkown_objects)
 	obj.set_attrib("scanner_result.scanned_tiles." + level_id, scanned_tiles)
 	BehaviorEvents.emit_signal("OnScannerUpdated", obj)
 	
