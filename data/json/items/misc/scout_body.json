@@ -1,10 +1,10 @@
 {
-	"name_id":"Shuttle Hull Relic",
+	"name_id":"Scout Hull Relic",
 	"type":"ingredient",
-	"sprite":"shuttle_body",
+	"sprite":"scout_hull",
 	"equipment": {
 		"slot":"cargo",
-		"volume":190.0,
+		"volume":150.0,
 		"stackable":false
 	}
 }

@@ -1,0 +1,29 @@
+{
+	"name_id":"A Probe",
+	"type":"ship",
+	"sprite":"probe",
+	"action_point":0,
+	"boardable":true,
+	"mounts": {
+		"scanner": [""],
+		"converter": [""]
+	},
+	"destroyable": {
+		"hull":10
+	},
+	"moving": {
+		"speed":1.3,
+		"can_use_wormhole":true,
+		"energy_cost":1
+	},
+	"cargo": {
+		"capacity":500,
+		"pickup_ap":1.0,
+		"drop_ap":1.0,
+		"content":[]
+	},
+	"converter": {
+		"stored_energy": 10000,
+		"base_ap_energy_cost":5
+	}
+}
