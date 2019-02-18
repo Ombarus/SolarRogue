@@ -1,20 +1,20 @@
 {
-	"name_id":"A Human Scout",
+	"name_id":"A Jerg Scout",
 	"type":"ship",
-	"sprite":"human_scout",
+	"sprite":"jerg_scout",
 	"action_point":0,
 	"boardable":true,
 	"mounts": {
 		"weapon": [""],
-		"shield": [""],
 		"scanner": [""],
-		"converter": [""]
+		"converter": [""],
+		"utility": [""]
 	},
 	"destroyable": {
-		"hull":13
+		"hull":20
 	},
 	"moving": {
-		"speed":1.0,
+		"speed":0.8,
 		"can_use_wormhole":true,
 		"energy_cost":5
 	},

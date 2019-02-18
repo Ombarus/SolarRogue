@@ -1,5 +1,5 @@
 {
-	"name_id":"Matter-to-Energy Converter",
+	"name_id":"A Jerg Matter-to-Energy Converter",
 	"type":"converter",
 	"sprite":"converter",
 	"equipment": {
@@ -33,29 +33,35 @@
 				"amount":1
 			},
 			{
-				"name": "Probe Ship", 
-				"requirements":[{"type":"energy", "amount":2000}, {"src":"data/json/items/misc/probe_body.json", "amount":1}], 
-				"produce":"data/json/ships/player_probe.json",
-				"ap_cost":5.0,
-				"amount":1
-			},
-			{
-				"name": "Shuttle Ship", 
-				"requirements":[{"type":"energy", "amount":2500}, {"src":"data/json/items/misc/shuttle_body.json", "amount":1}], 
-				"produce":"data/json/ships/player_shuttle.json",
-				"ap_cost":5.0,
-				"amount":1
-			},
-			{
-				"name": "(Starting) Scout Ship", 
+				"name": "Jerg Scout", 
 				"requirements":[
 					{"type":"energy", "amount":1800},
-					{"src":"data/json/items/misc/shuttle_body.json", "amount":1},
-					{"src":"data/json/items/misc/probe_body.json", "amount":2}],
-				"produce":"data/json/ships/player_default.json",
+					{"src":"data/json/items/misc/scout_body.json", "amount":1},
+					{"type":"utility", "amount":1}
+				],
+				"produce":"data/json/ships/jerg/player_scout.json",
 				"ap_cost":6.0,
 				"amount":1
-			}
+			},
+			{
+				"name": "Jerg Frigate", 
+				"requirements":[{"type":"energy", "amount":2500}, {"src":"data/json/items/misc/frigate_body.json", "amount":2}], 
+				"produce":"data/json/ships/jerg/player_frigate.json",
+				"ap_cost":7.0,
+				"amount":1
+			},
+			{
+				"name": "Jerg Battleship", 
+				"requirements":[
+					{"type":"energy", "amount":7500},
+					{"src":"data/json/items/misc/battleship_body.json", "amount":1}, 
+					{"src":"data/json/items/misc/frigate_body.json", "amount":1},
+					{"type":"utility", "amount":2}
+				],
+				"produce":"data/json/ships/jerg/player_battleship.json",
+				"ap_cost":8.0,
+				"amount":1
+			},
 		]
 	}
 }

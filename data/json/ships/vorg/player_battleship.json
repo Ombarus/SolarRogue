@@ -1,31 +1,31 @@
 {
-	"name_id":"A Human Scout",
+	"name_id":"A Vorg Battleship",
 	"type":"ship",
-	"sprite":"human_scout",
+	"sprite":"vorg_battleship",
 	"action_point":0,
 	"boardable":true,
 	"mounts": {
-		"weapon": [""],
-		"shield": [""],
+		"weapon": ["", "", "", ""],
+		"shield": ["", "", "", ""],
 		"scanner": [""],
 		"converter": [""]
 	},
 	"destroyable": {
-		"hull":13
+		"hull":35
 	},
 	"moving": {
-		"speed":1.0,
+		"speed":1.6,
 		"can_use_wormhole":true,
-		"energy_cost":5
+		"energy_cost":7
 	},
 	"cargo": {
-		"capacity":500,
+		"capacity":1000,
 		"pickup_ap":1.0,
 		"drop_ap":1.0,
 		"content":[]
 	},
 	"converter": {
 		"stored_energy": 10000,
-		"base_ap_energy_cost":10
+		"base_ap_energy_cost":20
 	}
 }
