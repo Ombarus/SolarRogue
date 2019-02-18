@@ -446,7 +446,7 @@ func ProcessAttackSelection(target):
 	BehaviorEvents.emit_signal("OnBeginParallelAction", playerNode)
 	for shot in _weapon_shots:
 		if shot.target != null:
-			var destroyed_state = target.get_attrib("destroyable.destroyed")
+			var destroyed_state = shot.target.get_attrib("destroyable.destroyed")
 			if destroyed_state == null or destroyed_state == false:
 				BehaviorEvents.emit_signal("OnDealDamage", shot.target, playerNode, shot.weapon_data)
 	BehaviorEvents.emit_signal("OnEndParallelAction", playerNode)

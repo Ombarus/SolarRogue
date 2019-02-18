@@ -1,6 +1,6 @@
 [gd_scene load_steps=48 format=2]
 
-[ext_resource path="res://data/textures/procedural-star-bg.png" type="Texture" id=1]
+[ext_resource path="res://data/textures/space/space-bg_mine.png" type="Texture" id=1]
 [ext_resource path="res://data/shaders/fow_mask.tres" type="Material" id=2]
 [ext_resource path="res://scripts/Behaviors/UIManager.gd" type="Script" id=3]
 [ext_resource path="res://scripts/Behaviors/APBehavior.gd" type="Script" id=4]

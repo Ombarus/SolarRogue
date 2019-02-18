@@ -38,6 +38,7 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- BUG: Question mark pop up with ghost
 - up and down wormhole should have different sprite
 - Implement consumable interface
 	- UI
