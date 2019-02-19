@@ -38,6 +38,8 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+
+- BUG: Changing mounts did not drop the item !
 - BUG: Question mark pop up with ghost
 - up and down wormhole should have different sprite
 - Implement consumable interface

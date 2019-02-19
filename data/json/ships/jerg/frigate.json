@@ -31,11 +31,26 @@
 		"run_if_attacked":true
 	},
 	"drop_on_death": [
+	
+		{"id":"data/json/items/converters/converter_mk2.json", "chance":0.001},
+		{"id":"data/json/items/converters/jerg_converter_mk1.json", "chance":0.06666666667},
+		{"id":"data/json/items/converters/vorg_converter_mk1.json", "chance":0.001},
+		{"id":"data/json/items/misc/battleship_body.json", "chance":0.0},
 		{"id":"data/json/items/misc/frigate_body.json", "chance":0.1},
+		{"id":"data/json/items/misc/probe_body.json", "chance":0.0},
+		{"id":"data/json/items/misc/scout_body.json", "chance":0.0},
+		{"id":"data/json/items/scanners/scanner_mk1.json", "chance":0.01},
+		{"id":"data/json/items/scanners/scanner_mk2.json", "chance":0.05},
+		{"id":"data/json/items/shields/shield_mk1.json", "chance":0.0},
+		{"id":"data/json/items/utilities/gravitic_compactor.json", "chance":0.02},
+		{"id":"data/json/items/utilities/solar_array.json", "chance":0.025},
+		{"id":"data/json/items/utilities/solar_array.json", "chance":0.025},
+		{"id":"data/json/items/weapons/missile_launcher_mk1.json", "chance":0.00},
 		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.08},
+		{"id":"data/json/items/weapons/missile.json", "chance":0.0},
+		
+
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.1},
-		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
-		{"id":"data/json/items/utilities/solar_array.json", "chance":0.05},
-		{"id":"data/json/items/utilities/gravitic_compactor.json", "chance":0.01}
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
 	]
 }
