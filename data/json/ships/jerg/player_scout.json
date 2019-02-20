@@ -2,7 +2,6 @@
 	"name_id":"A Jerg Scout",
 	"type":"ship",
 	"sprite":"jerg_scout",
-	"action_point":0,
 	"boardable":true,
 	"mounts": {
 		"weapon": [""],

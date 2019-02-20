@@ -2,7 +2,6 @@
 	"name_id":"A Jerg Battleship",
 	"type":"ship",
 	"sprite":"jerg_battleship",
-	"action_point":0,
 	"boardable":true,
 	"mounts": {
 		"weapon": ["", ""],

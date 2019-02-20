@@ -8,9 +8,20 @@ func _ready():
 	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
 	BehaviorEvents.connect("OnDamageTaken", self, "OnDamageTaken_Callback")
 	BehaviorEvents.connect("OnScannerUpdated", self, "OnScannerUpdated_Callback")
+	BehaviorEvents.connect("OnAttributeAdded", self, "OnAttributeAdded_Callback")
 	
+	
+func OnAttributeAdded_Callback(obj, added_name):
+	if added_name == "ai":
+		OnObjTurn_Callback(obj)
 	
 func OnScannerUpdated_Callback(obj):
+	if obj.get_attrib("ai.disable_on_interest") == true:
+		var level_id = Globals.LevelLoaderRef.GetLevelID()
+		var new_objs = obj.get_attrib("scanner_result.new_in_range." + level_id)
+		if new_objs.size() > 0:
+			obj.set_attrib("ai.disabled", true)
+			
 	if obj.get_attrib("ai") == null or obj.get_attrib("ai.aggressive") == false:
 		return
 		
@@ -103,7 +114,7 @@ func DoAttackPathFinding(obj):
 		BehaviorEvents.emit_signal("OnMovement", obj, move_by)
 
 func DoSimplePathFinding(obj):
-	if obj.get_attrib("wandering") == null:
+	if obj.get_attrib("wandering") == null and obj.get_attrib("ai.disable_wandering") == null or obj.get_attrib("ai.disable_wandering") == false:
 		obj.modified_attributes["wandering"] = true
 	
 	var tile_pos = Globals.LevelLoaderRef.World_to_Tile(obj.position)
@@ -125,6 +136,10 @@ func DoSimplePathFinding(obj):
 		
 	if move_by.length_squared() > 0:
 		BehaviorEvents.emit_signal("OnMovement", obj, move_by)
+		
+	if tile_pos + move_by == cur_objective:
+		if obj.get_attrib("ai.disable_on_interest") != null and obj.get_attrib("ai.disable_on_interest") == true:
+			obj.set_attrib("ai.disabled", true)
 
 func DoRunAwayPathFinding(obj):
 	var my_pos = obj.position

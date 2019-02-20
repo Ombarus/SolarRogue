@@ -11,7 +11,7 @@
 		"fire_range":3.0,
 		"fire_pattern":"+",
 		"fire_energy_cost":500.0,
-		"fire_speed":0.9
+		"fire_speed":1.0
 	},
 	"equipment": {
 		"slot":"weapon",

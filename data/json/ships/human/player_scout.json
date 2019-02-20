@@ -2,7 +2,6 @@
 	"name_id":"A Human Scout",
 	"type":"ship",
 	"sprite":"human_scout",
-	"action_point":0,
 	"boardable":true,
 	"mounts": {
 		"weapon": [""],

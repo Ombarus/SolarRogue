@@ -52,7 +52,16 @@ func Init(init_param):
 	
 	_craft_list.clear()
 	for recipe_data in _converter_data.converter.recipes:
-		_craft_list.add_item(recipe_data.name)
+		var tex = null
+		var region = null
+		if "icon_texture" in recipe_data:
+			tex = load("res://" + recipe_data.icon_texture)
+			if "icon_region" in recipe_data:
+				var region_data = recipe_data.icon_region
+				region = Rect2(region_data[0], region_data[1], region_data[2], region_data[3])
+		_craft_list.add_item(recipe_data.name, tex)
+		if region != null:
+			_craft_list.set_item_icon_region(_craft_list.get_item_count()-1, region)
 		
 		
 	var cargo = obj.get_attrib("cargo.content")

@@ -2,7 +2,6 @@
 	"name_id":"A Vorg Frigate",
 	"type":"ship",
 	"sprite":"vorg_frigate",
-	"action_point":0,
 	"boardable":true,
 	"mounts": {
 		"weapon": ["", ""],

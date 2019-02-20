@@ -49,6 +49,7 @@ func _unhandled_input(event):
 		if new_pos.y < 0 or new_pos.y > (bounds.y * tile_size):
 			new_pos.y = self.position.y
 		self.position = new_pos
+		BehaviorEvents.emit_signal("OnCameraDragged")
 	
 	if event.is_action_released("touch"):
 		mouse_down = false

@@ -1,7 +1,7 @@
 {
 	"name_id":"A Battleship Hull Relic",
 	"type":"ingredient",
-	"sprite":"shuttle_body",
+	"sprite":"battleship_body",
 	"equipment": {
 		"slot":"cargo",
 		"volume":190.0,

@@ -39,10 +39,10 @@
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
 	],
 	"destroyable": {
-		"hull":15
+		"hull":13
 	},
 	"moving": {
-		"speed":0.7,
+		"speed":1.0,
 		"wander_speed":2.5,
 		"can_use_wormhole":false
 	}

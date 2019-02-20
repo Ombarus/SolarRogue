@@ -6,19 +6,14 @@
 	"boardable":true,
 	"mounts": {
 		"weapon": [
-			"data/json/items/weapons/missile_launcher_mk1.json", 
-			"data/json/items/weapons/missile_launcher_mk1.json",
-			"data/json/items/weapons/laser_turret_mk1.json"
+			"data/json/items/weapons/missile_launcher_mk1.json"
 		],
 		"shield": ["data/json/items/shields/shield_mk1.json"],
-		"scanner": ["data/json/items/scanners/scanner_mk2.json"],
-		"converter": ["data/json/items/converters/converter_mk1.json"],
-		"utility":[
-			""
-		]
+		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
+		"converter": ["data/json/items/converters/converter_mk1.json"]
 	},
 	"destroyable": {
-		"hull":15
+		"hull":13
 	},
 	"moving": {
 		"speed":1.0,
@@ -30,9 +25,7 @@
 		"pickup_ap":1.0,
 		"drop_ap":1.0,
 		"content":[
-			{"src":"data/json/items/weapons/missile.json", "count":20},
-			{"src":"data/json/items/misc/probe_body.json", "count":1},
-			{"src":"data/json/items/weapons/laser_turret_mk1.json", "count":1},
+			{"src":"data/json/items/weapons/missile.json", "count":10},
 			{"src":"data/json/items/misc/scout_body.json", "count":1}
 		]
 	},

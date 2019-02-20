@@ -9,9 +9,9 @@
 		"documentation2":"They also have a drop rate that translate to how 'hard' they are to mine. Rich planet might require powerful weapons to mine effectively if drop_rate is low",
 		
 		"drop":"data/json/items/misc/hydrogen.json",
-		"min_rich":2,
-		"max_rich":20,
-		"min_base_rate":0.1,
-		"max_base_rate":0.95
+		"min_rich":1,
+		"max_rich":17,
+		"min_base_rate":0.05,
+		"max_base_rate":0.4
 	}
 }

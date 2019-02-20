@@ -12,6 +12,7 @@ var playerNode = null
 var levelLoaderRef
 var click_start_pos
 var lock_input = false # when it's not player turn, inputs are locked
+var next_touch_is_a_goto = false # when camera is dragged, instead of moving in a single direction, a touch will make the ship do pathfinding
 var _weapon_shots = []
 
 enum SHOOTING_STATE {
@@ -66,6 +67,11 @@ func _ready():
 	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_Callback")
 	BehaviorEvents.connect("OnMountAdded", self, "OnMountAdded_Callback")
 	BehaviorEvents.connect("OnMountRemoved", self, "OnMountRemoved_Callback")
+	BehaviorEvents.connect("OnCameraDragged", self, "OnCameraDragged_Callback")
+	
+func OnCameraDragged_Callback():
+	if _input_state == INPUT_STATE.hud:
+		next_touch_is_a_goto = true
 	
 func Pressed_Look_Callback():
 	if lock_input:
@@ -196,8 +202,8 @@ func OnRequestObjectUnload_Callback(obj):
 		playerNode = null
 	
 func OnObjTurn_Callback(obj):
-	if obj.get_attrib("type") == "player":
-		print("On Player Turn : Unlock Input")
+	# sometimes we put the player on cruise control. when we give him back control "ai" component will be disabled
+	if obj.get_attrib("type") == "player" and obj.get_attrib("ai") == null:
 		lock_input = false
 		
 		var moved = obj.get_attrib("moving.moved")
@@ -223,7 +229,6 @@ func OnObjTurn_Callback(obj):
 			else:
 				btn.visible = false
 	else:
-		print("On AI Turn : LOCK Input !")
 		lock_input = true
 	
 func Pressed_Weapon_Callback():
@@ -324,9 +329,19 @@ func _unhandled_input(event):
 		
 	var dir = null
 	if event is InputEventMouseButton:
+		print("DoubleClick : " + str(event.doubleclick))
+		print("Position : " + str(playerNode.get_global_mouse_position()))
+		if click_start_pos == null:
+			click_start_pos = Vector2(0,0)
+		var vp_size = get_viewport().size
+		var drag_vec = click_start_pos - event.position
+		var per_drag_x = abs(drag_vec.x / vp_size.x)
+		var per_drag_y = abs(drag_vec.y / vp_size.y)
 		if event.is_action_pressed("touch"):
+			print("touch pressed")
 			click_start_pos = event.position
-		elif event.is_action_released("touch") && (click_start_pos - event.position).length_squared() < 5.0:
+		elif event.is_action_released("touch") && per_drag_x < 0.04 && per_drag_y < 0.04:
+			print("touch released")
 			var click_pos = playerNode.get_global_mouse_position()
 			
 			if _input_state == INPUT_STATE.weapon_targetting:
@@ -342,6 +357,20 @@ func _unhandled_input(event):
 				DO_TEST(click_pos)
 			else:
 				var player_pos = playerNode.position
+				var clicked_tile = Globals.LevelLoaderRef.World_to_Tile(click_pos)
+				if next_touch_is_a_goto == true:
+					var ai_data = {
+						"aggressive":false,
+						"pathfinding":"simple",
+						"disable_on_interest":true,
+						"disable_wandering":true,
+						"objective":clicked_tile
+					}
+					playerNode.set_attrib("ai", ai_data)
+					BehaviorEvents.emit_signal("OnAttributeAdded", playerNode, "ai")
+					next_touch_is_a_goto = false
+					return # not the best middle of function return I've ever done....
+					
 				var click_dir = click_pos - player_pos
 				var rot = rad2deg(Vector2(0.0, 0.0).angle_to_point(click_dir)) - 90.0
 				if rot < 0:
@@ -411,6 +440,7 @@ func _unhandled_input(event):
 		#print(event.scancode)
 		#print ("key_period : ", KEY_PERIOD, ", key_comma : ", KEY_COLON)
 	if dir != null:
+		next_touch_is_a_goto = false
 		BehaviorEvents.emit_signal("OnMovement", playerNode, dir)
 
 

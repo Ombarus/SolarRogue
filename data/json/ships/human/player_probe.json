@@ -2,7 +2,6 @@
 	"name_id":"A Probe",
 	"type":"ship",
 	"sprite":"probe",
-	"action_point":0,
 	"boardable":true,
 	"mounts": {
 		"scanner": [""],

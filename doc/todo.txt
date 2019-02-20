@@ -38,7 +38,12 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-
+- Things that annoy me while playtesting :
+	- touch to goto and stop if something interesting enter sight
+	- crafting MUST allow me to do multiple craft at once
+	- pinch zoom on device
+	- (confirmed ? particle systems do not work on android !) missing some fx on new ships ?
+	- dragging converter list doesn't move the list.. very difficult on device to hit the scroll
 - BUG: Changing mounts did not drop the item !
 - BUG: Question mark pop up with ghost
 - up and down wormhole should have different sprite

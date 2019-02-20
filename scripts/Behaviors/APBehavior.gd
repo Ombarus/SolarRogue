@@ -7,6 +7,7 @@ var action_list = []
 var star_date_turn = 0
 var star_date_minor = 0
 var star_date_major = 0
+var _new_frame = true # When player is somehow disabled make sure we don't loop forever in the same call
 var _disable = false
 var _waiting_on_anim = false
 
@@ -57,7 +58,7 @@ func OnRequestObjectUnload_Callback(obj):
 		_disable = true
 	action_list.erase(obj)
 
-func OnUseAP_Callback(obj, amount):		
+func OnUseAP_Callback(obj, amount):
 	obj.set_attrib("ap.ai_acted", true)
 	var index = action_list.find(obj)
 	if index < 0:
@@ -93,6 +94,8 @@ func OnUseAP_Callback(obj, amount):
 	if _waiting_on_anim:
 		yield(BehaviorEvents, "OnAnimationDone")
 		
+	if obj_action.get_attrib("type") == "player":
+		yield(get_tree(), "idle_frame")
 	self.call_deferred("validate_emit_OnObjTurn", obj_action)
 	
 func validate_emit_OnObjTurn(obj):
@@ -165,6 +168,6 @@ func Insert(obj, action_point):
 	action_list.push_back(obj)
 	
 	
-#func _process(delta):
-#	print(action_list)
+func _process(delta):
+	_new_frame = true
 	
