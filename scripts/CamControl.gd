@@ -38,7 +38,6 @@ func _unhandled_input(event):
 		_zoom_camera(1)
 	elif event.is_action_pressed("touch"):
 		#start_touch_pos = event.position
-		#start_cam_pos = self.position
 		mouse_down = true
 	elif event is  InputEventMouseMotion and mouse_down == true:
 		var new_pos = self.position - (event.relative * self.zoom)
@@ -49,7 +48,14 @@ func _unhandled_input(event):
 		if new_pos.y < 0 or new_pos.y > (bounds.y * tile_size):
 			new_pos.y = self.position.y
 		self.position = new_pos
-		BehaviorEvents.emit_signal("OnCameraDragged")
+		
+		if start_cam_pos != null:
+			var drag_vec = start_cam_pos - self.position
+			var move_trigger = 256.0
+			move_trigger *= move_trigger
+			if drag_vec.length_squared() > move_trigger:
+				BehaviorEvents.emit_signal("OnCameraDragged")
+		
 	
 	if event.is_action_released("touch"):
 		mouse_down = false
@@ -63,6 +69,7 @@ func _zoom_camera(dir):
 func OnMovement_callback(obj, dir):
 	if obj.get_attrib("type") == "player":
 		self.position = obj.position
+		start_cam_pos = self.position
 		
 func OnLevelLoaded_callback():
 	OnMovement_callback(levelLoaderRef.objByType["player"][0], null)

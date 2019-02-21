@@ -129,7 +129,7 @@ func OnEquipMount_Callback(equipper, slot_name, index, item_id):
 	var attrib_getter = "mounts." + slot_name
 	var items = equipper.get_attrib(attrib_getter)
 	if items != null and items[index] != "":
-		BehaviorEvents.emit_signal("OnDropMount", equipper, slot_name)
+		BehaviorEvents.emit_signal("OnDropMount", equipper, slot_name, index)
 	BehaviorEvents.emit_signal("OnRemoveItem", equipper, item_id)
 	items[index] = item_id
 	equipper.set_attrib(attrib_getter, items)
