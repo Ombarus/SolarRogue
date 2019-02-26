@@ -176,7 +176,7 @@ margin_right = 308.0
 margin_bottom = 414.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-_sections_unfolded = [ "Margin", "Size Flags" ]
+_sections_unfolded = [ "Margin", "Mouse", "Size Flags" ]
 
 [node name="VSeparator" type="VSeparator" parent="base/HBoxContainer" index="1"]
 
@@ -317,7 +317,7 @@ margin_right = 308.0
 margin_bottom = 414.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-_sections_unfolded = [ "Size Flags" ]
+_sections_unfolded = [ "Mouse", "Size Flags" ]
 
 [node name="RShipName" type="RichTextLabel" parent="base" index="3"]
 

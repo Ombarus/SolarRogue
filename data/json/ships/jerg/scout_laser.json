@@ -15,7 +15,8 @@
 	"ai": {
 		"aggressive":true,
 		"pathfinding":"simple",
-		"run_if_attacked":false
+		"run_if_attacked":false,
+		"hit_chance":0.6
 	},
 	"drop_on_death": [
 	

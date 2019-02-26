@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/temp.gd" type="Script" id=1]
 [ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=2]
 
-[node name="ItemList" type="ItemList"]
+[node name="ItemList" type="ItemList" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0

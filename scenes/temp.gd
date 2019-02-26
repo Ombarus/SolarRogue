@@ -5,12 +5,12 @@ extends ItemList
 # var b = "textvar"
 
 func _ready():
-	self.add_item("bleh1")
+	self.add_item("[color=blue]bleh1[/color]")
 	self.add_item("bleh2")
 	self.add_item("bleh3")
 	self.add_item("bleh4")
 	self.add_item("bleh5", load("res://icon.png"))
-	set_item_icon_region
+	#set_item_icon_region
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

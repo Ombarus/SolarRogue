@@ -1,6 +1,6 @@
 {
 	"name_id":"Probe Hull Relic",
-	"type":"ingredient",
+	"type":"hull",
 	"sprite":"probe_body",
 	"equipment": {
 		"slot":"cargo",

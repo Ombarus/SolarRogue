@@ -20,7 +20,7 @@
 			},
 			{
 				"name": "Energy from Hull", 
-				"requirements":[{"type":"ingredient", "amount":1}], 
+				"requirements":[{"type":"hull", "amount":1}], 
 				"produce":"energy",
 				"ap_cost":1.0,
 				"amount":250

@@ -1,6 +1,6 @@
 {
 	"name_id":"A Frigate Hull Relic",
-	"type":"ingredient",
+	"type":"hull",
 	"sprite":"frigate_body",
 	"equipment": {
 		"slot":"cargo",

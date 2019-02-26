@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/GUI/ConverterLayout.gd" type="Script" id=1]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/GUI/ScrollListContainer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/GUI/ItemList/CraftNeedRow.tscn" type="PackedScene" id=6]
+[ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=7]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold.tres" type="DynamicFont" id=8]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItal.tres" type="DynamicFont" id=9]
+[ext_resource path="res://data/fonts/DejaVuSansMonoBold.tres" type="DynamicFont" id=10]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=11]
 
 [node name="Converter" type="Control"]
 
@@ -41,7 +48,6 @@ margin_top = 34.0
 margin_right = -183.0
 margin_bottom = -76.0
 dialog_ok = true
-dialog_cancel = true
 title = "Converter"
 border_style = "═"
 
@@ -127,7 +133,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 359.0
-margin_bottom = 200.0
+margin_bottom = 133.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 focus_mode = 2
@@ -140,7 +146,7 @@ select_mode = 0
 allow_reselect = false
 icon_mode = 1
 fixed_icon_size = Vector2( 0, 0 )
-_sections_unfolded = [ "Size Flags" ]
+_sections_unfolded = [ "Size Flags", "custom_colors" ]
 
 [node name="HSeparator" type="HSeparator" parent="base/HBoxContainer/VBoxContainer" index="1"]
 
@@ -148,9 +154,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 204.0
+margin_top = 137.0
 margin_right = 359.0
-margin_bottom = 208.0
+margin_bottom = 141.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -160,15 +166,96 @@ size_flags_vertical = 1
 
 [node name="Inventory" parent="base/HBoxContainer/VBoxContainer" index="2" instance=ExtResource( 4 )]
 
+visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
-margin_top = 212.0
+margin_top = 210.0
 margin_right = 359.0
-margin_bottom = 412.0
+margin_bottom = 408.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 _sections_unfolded = [ "Size Flags" ]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="base/HBoxContainer/VBoxContainer" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 145.0
+margin_right = 359.0
+margin_bottom = 278.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 0
+_sections_unfolded = [ "Size Flags" ]
+
+[node name="Need" parent="base/HBoxContainer/VBoxContainer/HBoxContainer" index="0" instance=ExtResource( 5 )]
+
+margin_right = 177.0
+margin_bottom = 133.0
+size_flags_horizontal = 3
+_sections_unfolded = [ "Size Flags" ]
+Row = ExtResource( 6 )
+DragDropID = "CraftingNeedUse"
+
+[node name="Using" parent="base/HBoxContainer/VBoxContainer/HBoxContainer" index="1" instance=ExtResource( 5 )]
+
+margin_left = 181.0
+margin_right = 359.0
+margin_bottom = 133.0
+size_flags_horizontal = 3
+_sections_unfolded = [ "Size Flags" ]
+Row = ExtResource( 6 )
+DragDropID = "CraftingNeedUse"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="base/HBoxContainer/VBoxContainer" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 282.0
+margin_right = 359.0
+margin_bottom = 307.0
+rect_min_size = Vector2( 0, 25 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/mono_font = ExtResource( 7 )
+custom_fonts/bold_italics_font = ExtResource( 8 )
+custom_fonts/italics_font = ExtResource( 9 )
+custom_fonts/bold_font = ExtResource( 10 )
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "5 Johns for 3500 energy"
+visible_characters = -1
+percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
+text = "5 Johns for 3500 energy"
+scroll_active = false
+scroll_following = false
+selection_enabled = false
+override_selected_font_color = false
+_sections_unfolded = [ "BBCode", "Rect", "custom_fonts" ]
+
+[node name="Craft" parent="base/HBoxContainer/VBoxContainer" index="5" instance=ExtResource( 11 )]
+
+margin_top = 311.0
+margin_right = 359.0
+margin_bottom = 411.0
+rect_min_size = Vector2( 0, 100 )
+_sections_unfolded = [ "Material", "Mouse", "Rect", "Size Flags", "Visibility", "custom_styles" ]
+Text = "Craft"
 
 [connection signal="item_selected" from="base/HBoxContainer/CraftingList" to="." method="_on_CraftingList_item_selected"]
 

@@ -9,9 +9,8 @@
 		"unequip_ap":3.0
 	},
 	"shielding": {
-		"max_hp":10,
-		"hp_regen_per_ap":0.1,
-		"energy_cost_per_hp":20.0,
-		"pierce_chance":0.01
+		"max_hp":15,
+		"hp_regen_per_ap":0.2,
+		"energy_cost_per_hp":22.0
 	}
 }

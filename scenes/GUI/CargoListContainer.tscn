@@ -26,6 +26,7 @@ scroll_vertical_enabled = true
 scroll_vertical = 0
 scroll_deadzone = 0
 script = ExtResource( 1 )
+_sections_unfolded = [ "Mouse" ]
 
 [node name="List" type="VBoxContainer" parent="." index="0"]
 
@@ -41,7 +42,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 alignment = 0
-_sections_unfolded = [ "Size Flags" ]
+_sections_unfolded = [ "Mouse", "Size Flags" ]
 
 [node name="Row" type="HBoxContainer" parent="List" index="0"]
 
@@ -59,7 +60,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 alignment = 0
-_sections_unfolded = [ "Rect", "Size Flags" ]
+_sections_unfolded = [ "Mouse", "Rect", "Size Flags" ]
 
 [node name="Choice" type="Button" parent="List/Row" index="0"]
 
@@ -85,7 +86,7 @@ group = null
 flat = false
 align = 1
 script = ExtResource( 3 )
-_sections_unfolded = [ "Rect", "Size Flags", "custom_styles" ]
+_sections_unfolded = [ "Mouse", "Rect", "Size Flags", "custom_styles" ]
 
 [node name="Name" type="RichTextLabel" parent="List/Row/Choice" index="0"]
 

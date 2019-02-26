@@ -38,14 +38,12 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- BUG: wormhole once appeared right on top of sun and was completly hidden !
 - Things that annoy me while playtesting :
-	- touch to goto and stop if something interesting enter sight
 	- crafting MUST allow me to do multiple craft at once
 	- pinch zoom on device
 	- (confirmed ? particle systems do not work on android !) missing some fx on new ships ?
 	- dragging converter list doesn't move the list.. very difficult on device to hit the scroll
-- BUG: Changing mounts did not drop the item !
-- BUG: Question mark pop up with ghost
 - up and down wormhole should have different sprite
 - Implement consumable interface
 	- UI
@@ -148,6 +146,9 @@ IDEAS:::
 	
 	
 DONE :::
+- BUG: Question mark pop up with ghost
+- BUG: Changing mounts did not drop the item !
+	- touch to goto and stop if something interesting enter sight
 - New scanner :
 	- Detects unknown large objects, displays them as ghost '?'
 - Make energy be consumed per turn, not per move (so that we use energy even when we wait)

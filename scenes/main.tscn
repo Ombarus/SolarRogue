@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://data/textures/space/space-bg_mine.png" type="Texture" id=1]
 [ext_resource path="res://data/shaders/fow_mask.tres" type="Material" id=2]
@@ -37,7 +37,8 @@
 [ext_resource path="res://scenes/GUI/Dialogs/DeathScreen.tscn" type="PackedScene" id=35]
 [ext_resource path="res://scenes/GUI/Dialogs/SelectableTarget.tscn" type="PackedScene" id=36]
 [ext_resource path="res://scenes/GUI/Dialogs/WelcomeScreen.tscn" type="PackedScene" id=37]
-[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=38]
+[ext_resource path="res://scenes/GUI/Dialogs/HowManyDiag.tscn" type="PackedScene" id=38]
+[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=39]
 
 [sub_resource type="InputEventKey" id=1]
 
@@ -317,6 +318,7 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="HUD" type="Control" parent="Camera-GUI" index="0"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -547,10 +549,22 @@ visible = false
 
 visible = false
 
+[node name="HowManyDiag" parent="Camera-GUI" index="8" instance=ExtResource( 38 )]
+
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -158.5
+margin_top = -92.0
+margin_right = 158.5
+margin_bottom = 92.0
+
 [node name="DEBUG" type="Node2D" parent="." index="9"]
 
 visible = false
-script = ExtResource( 38 )
+script = ExtResource( 39 )
 
 [connection signal="pressed" from="Camera-GUI/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_ZoomIn_pressed"]
 

@@ -101,7 +101,13 @@ func DoAttackPathFinding(obj):
 	for data in weapons_data:
 		var best_move = _targetting.ClosestFiringSolution(obj_tile, player_tile, data)
 		if best_move.length() == 0:
-			BehaviorEvents.emit_signal("OnDealDamage", player, obj, data)
+			var chance = obj.get_attrib("ai.hit_chance")
+			if chance == null or MersenneTwister.rand_float() < chance:
+				BehaviorEvents.emit_signal("OnDealDamage", player, obj, data)
+			else:
+				BehaviorEvents.emit_signal("OnLogLine", "The ennemy missed")
+				 # play the animation but no damage
+				BehaviorEvents.emit_signal("OnShotFired_Callback", player, obj, data)
 			shot = true
 		if minimal_move == null or minimal_move.length() > best_move.length():
 			minimal_move = best_move

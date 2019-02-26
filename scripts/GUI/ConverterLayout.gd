@@ -2,15 +2,24 @@ extends "res://scripts/GUI/GUILayoutBase.gd"
 
 var _callback_obj = null
 var _callback_method = ""
+var _obj = null
 
 onready var _craft_list = get_node("base/HBoxContainer/CraftingList")
 onready var _requirement_list = get_node("base/HBoxContainer/VBoxContainer/Requirements")
+onready var _need_list = get_node("base/HBoxContainer/VBoxContainer/HBoxContainer/Need")
+onready var _using_list = get_node("base/HBoxContainer/VBoxContainer/HBoxContainer/Using")
 var _converter_data = null
 var _current_crafting_selected = null
+
+var _orig_data = null
+var _dst_data = null
 
 func _ready():
 	get_node("base").connect("OnOkPressed", self, "Ok_Callback")
 	get_node("base").connect("OnCancelPressed", self, "Cancel_Callback")
+	
+	_need_list.connect("OnDragDropCompleted", self, "OnDropCrafting_Callback")
+	_using_list.connect("OnDragDropCompleted", self, "OnDropCrafting_Callback")
 	
 	#var obj = []
 	#for i in range(5):
@@ -43,11 +52,11 @@ func Cancel_Callback():
 
 	
 func Init(init_param):
-	var obj = init_param["object"]
+	_obj = init_param["object"]
 	_callback_obj = init_param["callback_object"]
 	_callback_method = init_param["callback_method"]
 	
-	var converter_file = obj.get_attrib("mounts.converter")[0]
+	var converter_file = _obj.get_attrib("mounts.converter")[0]
 	_converter_data = Globals.LevelLoaderRef.LoadJSON(converter_file)
 	
 	_craft_list.clear()
@@ -64,7 +73,7 @@ func Init(init_param):
 			_craft_list.set_item_icon_region(_craft_list.get_item_count()-1, region)
 		
 		
-	var cargo = obj.get_attrib("cargo.content")
+	var cargo = _obj.get_attrib("cargo.content")
 	var cargo_obj = []
 	for item in cargo:
 		var data = Globals.LevelLoaderRef.LoadJSON(item.src)
@@ -72,7 +81,7 @@ func Init(init_param):
 		if item.count > 1:
 			counting = str(item.count) + "x "
 		cargo_obj.push_back({"name_id": counting + data.name_id, "count":item.count, "key":item})
-	var cur_energy = obj.get_attrib("converter.stored_energy")
+	var cur_energy = _obj.get_attrib("converter.stored_energy")
 	cargo_obj.push_back({"name_id": str(cur_energy) + " Energy", "count":cur_energy, "key":"energy"})
 	get_node("base/HBoxContainer/VBoxContainer/Inventory").content = cargo_obj
 	
@@ -106,5 +115,66 @@ func _on_CraftingList_item_selected(index):
 			line_str += str(recipe_data.amount) + " "
 		line_str += produce_data.name_id
 		_requirement_list.add_item(line_str)
+		
+		
+	var cargo = _obj.get_attrib("cargo.content")
+	var list_data = []
+	var added_to_data = {}
+	for r in recipe_data.requirements:
+		if "type" in r and r.type == "energy":
+			continue
+		var has_item_to_use = false
+		for item in cargo:
+			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
+			var add_item = false
+			if "type" in r and r.type == data.type:
+				add_item = true
+			if "src" in r and r.src in item.src:
+				add_item = true
+			if add_item == true:
+				has_item_to_use = true
+				if not item.src in added_to_data:
+					list_data.push_back({"src":item.src, "count":item.count})
+					added_to_data[item.src] = true
+		if has_item_to_use == false:
+			if "type" in r:
+				list_data.push_back({"color":"red", "type":r.type, "missing":true})
+			else:
+				list_data.push_back({"color":"red", "src":r.src, "count":r.amount, "missing":true})
+		_need_list.Content = list_data
 	
-	
+func OnDropCrafting_Callback(orig_data, dst_data):
+	_orig_data = orig_data
+	_dst_data = dst_data
+	if orig_data.count > 1:
+		BehaviorEvents.emit_signal("OnPushGUI", "HowManyDiag", {
+			"callback_object":self, 
+			"callback_method":"HowManyDiag_Callback", 
+			"min_value":1, 
+			"max_value":orig_data.count})
+	else:
+		HowManyDiag_Callback(1)
+		
+func HowManyDiag_Callback(num):
+	var content_orig = _orig_data.origin.Content
+	var content_dst = _dst_data.origin.Content
+	if num == _orig_data.count:
+		content_orig.remove(_orig_data.index)
+	else:
+		_orig_data.count -= num
+	var found = false
+	for item in content_dst:
+		if item.src == _orig_data.src:
+			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
+			if data.equipment.stackable == true:
+				item.count += num
+				found = true
+				break
+	if found == false:
+		var new_data = _orig_data.duplicate()
+		new_data.count = num
+		content_dst.push_back(new_data)
+	_orig_data.origin.Content = content_orig
+	_dst_data.origin.Content = content_dst
+		# TODO: either increase count of existing data if stackable or add a new linen to dst_content
+		# then set the list to their new content

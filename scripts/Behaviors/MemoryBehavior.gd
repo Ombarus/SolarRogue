@@ -145,7 +145,7 @@ func OnScannerUpdated_Callback(obj):
 		var all_visible = _playerNode.get_attrib("scanner_result.cur_in_range." + level_id)
 		for id in unkown_objs:
 			var o = Globals.LevelLoaderRef.GetObjectById(id)
-			if o != null and not id in all_visible and o.get_attrib("ghost_memory") == null:
+			if o != null and not id in all_visible and o.get_attrib("ghost_memory") == null and o.get_attrib("has_ghost_memory") == null:
 				#TODO: Create '?' memory
 				var unkown_tile_path = "data/json/props/unknow.json"
 				var modified = {}

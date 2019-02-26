@@ -1,6 +1,6 @@
 {
 	"name_id":"Scout Hull Relic",
-	"type":"ingredient",
+	"type":"hull",
 	"sprite":"scout_hull",
 	"equipment": {
 		"slot":"cargo",
