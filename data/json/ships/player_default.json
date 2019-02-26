@@ -28,6 +28,7 @@
 			{"src":"data/json/items/weapons/missile.json", "count":10},
 			{"src":"data/json/items/misc/scout_body.json", "count":1},
 			{"src":"data/json/items/misc/hydrogen.json", "count":5},
+			{"src":"data/json/items/misc/frigate_body.json", "count":1},
 			{"src":"data/json/items/misc/frigate_body.json", "count":1}
 		]
 	},

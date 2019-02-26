@@ -38,6 +38,9 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- Find a way to show how many of something you already have when crafting
+- BUG: Crash if you mount nothing in mount window
+- Block background in the howmany dialog
 - BUG: wormhole once appeared right on top of sun and was completly hidden !
 - Things that annoy me while playtesting :
 	- crafting MUST allow me to do multiple craft at once

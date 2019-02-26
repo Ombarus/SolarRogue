@@ -18,7 +18,14 @@ func set_row_data(data):
 		var d = Globals.LevelLoaderRef.LoadJSON(data.src)
 		main_text += d.name_id
 	if "missing" in data and data.missing == true:
+		self.disabled = true
 		missing_text += "Missing "
 	get_node("HBoxContainer/RichTextLabel").bbcode_text = bbcode_start + missing_text + count_str + main_text + bbcode_end
 	_metadata = data
 	_metadata["self"] = self
+
+func get_drag_data(position):
+	if "missing" in _metadata and _metadata.missing == true:
+		return null
+		
+	return .get_drag_data(position)

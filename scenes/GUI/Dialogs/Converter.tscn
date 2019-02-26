@@ -179,6 +179,7 @@ _sections_unfolded = [ "Size Flags" ]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="base/HBoxContainer/VBoxContainer" index="3"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -214,7 +215,7 @@ _sections_unfolded = [ "Size Flags" ]
 Row = ExtResource( 6 )
 DragDropID = "CraftingNeedUse"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="base/HBoxContainer/VBoxContainer" index="4"]
+[node name="CraftResultInfo" type="RichTextLabel" parent="base/HBoxContainer/VBoxContainer" index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0

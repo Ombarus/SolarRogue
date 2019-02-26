@@ -8,11 +8,16 @@ onready var _craft_list = get_node("base/HBoxContainer/CraftingList")
 onready var _requirement_list = get_node("base/HBoxContainer/VBoxContainer/Requirements")
 onready var _need_list = get_node("base/HBoxContainer/VBoxContainer/HBoxContainer/Need")
 onready var _using_list = get_node("base/HBoxContainer/VBoxContainer/HBoxContainer/Using")
+onready var _craft_result_info = get_node("base/HBoxContainer/VBoxContainer/CraftResultInfo")
+onready var _craft_button = get_node("base/HBoxContainer/VBoxContainer/Craft")
+
 var _converter_data = null
 var _current_crafting_selected = null
 
 var _orig_data = null
 var _dst_data = null
+
+var _current_how_many = 0
 
 func _ready():
 	get_node("base").connect("OnOkPressed", self, "Ok_Callback")
@@ -20,6 +25,7 @@ func _ready():
 	
 	_need_list.connect("OnDragDropCompleted", self, "OnDropCrafting_Callback")
 	_using_list.connect("OnDragDropCompleted", self, "OnDropCrafting_Callback")
+	_craft_button.connect("pressed", self, "CraftButtonPressed_Callback")
 	
 	#var obj = []
 	#for i in range(5):
@@ -29,7 +35,25 @@ func _ready():
 	#get_node("base/vbox/Cargo").content = obj
 	#get_node("base/vbox/Mounts").content = obj
 	
+func CraftButtonPressed_Callback():
+	if _callback_obj == null:
+		return
+		
+	var input_list = []
+	var using_content = _using_list.Content	
+	var recipe_data = null
+	for r in _converter_data.converter.recipes:
+		if r.name == _current_crafting_selected:
+			recipe_data = r
+			break
+	using_content.push_back("energy")
+	_callback_obj.call(_callback_method, recipe_data, using_content)
+	
+	
 func Ok_Callback():
+	BehaviorEvents.emit_signal("OnPopGUI")
+	return
+	
 	BehaviorEvents.emit_signal("OnPopGUI")
 	if _callback_obj == null:
 		return
@@ -124,6 +148,7 @@ func _on_CraftingList_item_selected(index):
 		if "type" in r and r.type == "energy":
 			continue
 		var has_item_to_use = false
+		var cargo_index = 0
 		for item in cargo:
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			var add_item = false
@@ -133,15 +158,20 @@ func _on_CraftingList_item_selected(index):
 				add_item = true
 			if add_item == true:
 				has_item_to_use = true
-				if not item.src in added_to_data:
+				if not cargo_index in added_to_data:
 					list_data.push_back({"src":item.src, "count":item.count})
-					added_to_data[item.src] = true
+					added_to_data[cargo_index] = true
+			cargo_index += 1
 		if has_item_to_use == false:
 			if "type" in r:
 				list_data.push_back({"color":"red", "type":r.type, "missing":true})
 			else:
 				list_data.push_back({"color":"red", "src":r.src, "count":r.amount, "missing":true})
-		_need_list.Content = list_data
+	_need_list.Content = list_data
+	_using_list.Content = []
+	
+	UpdateCraftButton()
+	
 	
 func OnDropCrafting_Callback(orig_data, dst_data):
 	_orig_data = orig_data
@@ -154,6 +184,7 @@ func OnDropCrafting_Callback(orig_data, dst_data):
 			"max_value":orig_data.count})
 	else:
 		HowManyDiag_Callback(1)
+		
 		
 func HowManyDiag_Callback(num):
 	var content_orig = _orig_data.origin.Content
@@ -176,5 +207,57 @@ func HowManyDiag_Callback(num):
 		content_dst.push_back(new_data)
 	_orig_data.origin.Content = content_orig
 	_dst_data.origin.Content = content_dst
-		# TODO: either increase count of existing data if stackable or add a new linen to dst_content
-		# then set the list to their new content
+	
+	UpdateCraftButton()
+	
+func UpdateCraftButton():
+	_current_crafting_selected = _craft_list.get_item_text(_craft_list.get_selected_items()[0])
+	var recipe_data = null
+	for r in _converter_data.converter.recipes:
+		if r.name == _current_crafting_selected:
+			recipe_data = r
+			break
+			
+	var requirement_count = {}
+	var energy_cost = 0
+	for r in recipe_data.requirements:
+		if "type" in r:
+			if r.type == "energy":
+				energy_cost = r.amount
+			else:
+				requirement_count[r.type] = {"using":0, "need":r.amount}
+		if "src" in r:
+			requirement_count[r.src] = {"using":0, "need":r.amount}
+			
+	var using_content = _using_list.Content
+	# Note, if you have a src AND a type requirement. If an item fits both this will not work... please don't do that !
+	# Yeah... I'll probably do it one day, that's why I'm putting a comment here
+	for item in using_content:
+		for r in requirement_count:
+			if "type" in item and item.type == r:
+				requirement_count[r].using += item.count
+			if "src" in item and item.src == r:
+				requirement_count[r].using += item.count
+	
+	_current_how_many = -1
+	# Special case where were we only need energy so default to making just 1
+	if requirement_count.size() == 0:
+		_current_how_many = 1
+	for r in requirement_count:
+		var can_craft = int(requirement_count[r].using / requirement_count[r].need)
+		if _current_how_many > can_craft or _current_how_many < 0:
+			_current_how_many = can_craft
+			
+	var recipe_name = recipe_data.name
+	var t_color = "[color=lime]"
+	if _current_how_many == 0:
+		t_color = "[color=red]"
+	if _current_how_many > 0:
+		energy_cost *= _current_how_many
+	_craft_result_info.bbcode_text = t_color + str(_current_how_many) + " " + recipe_name + " for " + str(energy_cost) + " energy[/color]"
+	#TODO: might be nice to have a "disabled" look for my custom buttons
+	if _current_how_many > 0:
+		_craft_button.visible = true
+	else:
+		_craft_button.visible = false
+				
