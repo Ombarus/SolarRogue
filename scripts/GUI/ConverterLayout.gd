@@ -233,8 +233,9 @@ func UpdateCraftButton():
 	# Note, if you have a src AND a type requirement. If an item fits both this will not work... please don't do that !
 	# Yeah... I'll probably do it one day, that's why I'm putting a comment here
 	for item in using_content:
+		var d = Globals.LevelLoaderRef.LoadJSON(item.src)
 		for r in requirement_count:
-			if "type" in item and item.type == r:
+			if d.type == r:
 				requirement_count[r].using += item.count
 			if "src" in item and item.src == r:
 				requirement_count[r].using += item.count
@@ -254,6 +255,7 @@ func UpdateCraftButton():
 		t_color = "[color=red]"
 	if _current_how_many > 0:
 		energy_cost *= _current_how_many
+	_current_how_many *= recipe_data.amount
 	_craft_result_info.bbcode_text = t_color + str(_current_how_many) + " " + recipe_name + " for " + str(energy_cost) + " energy[/color]"
 	#TODO: might be nice to have a "disabled" look for my custom buttons
 	if _current_how_many > 0:
