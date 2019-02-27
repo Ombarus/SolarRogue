@@ -29,7 +29,7 @@
 		"aggressive":true,
 		"pathfinding":"simple",
 		"run_if_attacked":false,
-		"hit_chance":0.6
+		"hit_chance":0.8
 	},
 	"drop_on_death": [
 	

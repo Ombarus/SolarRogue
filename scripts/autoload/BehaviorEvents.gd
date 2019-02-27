@@ -38,6 +38,7 @@ signal OnMountAdded(obj, slot, src)
 signal OnClearMounts(obj)
 signal OnClearCargo(obj)
 signal OnUpdateCargoVolume(obj)
+signal OnConsumeItem(obj, item_data)
 
 signal OnGUILoaded(name, obj)
 signal OnPushGUI(name, init_param)

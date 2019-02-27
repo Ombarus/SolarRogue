@@ -63,7 +63,7 @@
 				"name": "Human Frigate", 
 				"icon_texture":"data/textures/space-sprite.png",
 				"icon_region":[896,256,128,128],
-				"requirements":[{"type":"energy", "amount":2500}, {"src":"data/json/items/misc/frigate_body.json", "amount":1}, {"src":"data/json/items/weapons/missile.json", "amount":3}], 
+				"requirements":[{"type":"energy", "amount":2500}, {"src":"data/json/items/misc/frigate_body.json", "amount":1}], 
 				"produce":"data/json/ships/human/player_frigate.json",
 				"ap_cost":7.0,
 				"amount":1

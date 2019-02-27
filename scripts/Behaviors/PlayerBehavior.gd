@@ -3,7 +3,8 @@ extends Node
 export(NodePath) var levelLoaderNode
 export(NodePath) var WeaponAction
 export(NodePath) var GrabAction
-export(NodePath) var DropAction
+export(NodePath) var InventoryAction
+export(NodePath) var InventoryDialog
 export(NodePath) var CraftingAction
 export(NodePath) var FTLAction
 export(NodePath) var PopupButtons
@@ -49,8 +50,8 @@ func _ready():
 	action.connect("pressed", self, "Pressed_Weapon_Callback")
 	action = get_node(GrabAction)
 	action.connect("pressed", self, "Pressed_Grab_Callback")
-	action = get_node(DropAction)
-	action.connect("pressed", self, "Pressed_Drop_Callback")
+	action = get_node(InventoryAction)
+	action.connect("pressed", self, "Pressed_Inventory_Callback")
 	action = get_node(FTLAction)
 	action.connect("pressed", self, "Pressed_FTL_Callback")
 	action = get_node(CraftingAction)
@@ -60,6 +61,10 @@ func _ready():
 	action.connect("look_pressed", self, "Pressed_Look_Callback")
 	action.connect("board_pressed", self, "Pressed_Board_Callback")
 	action.connect("take_pressed", self, "Pressed_Take_Callback")
+	action = get_node(InventoryDialog)
+	action.connect("drop_pressed", self, "OnDropIventory_Callback")
+	action.connect("use_pressed", self, "OnUseInventory_Callback")
+	
 	
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
@@ -159,11 +164,11 @@ func Pressed_Grab_Callback():
 		
 	BehaviorEvents.emit_signal("OnPickup", playerNode, Globals.LevelLoaderRef.World_to_Tile(playerNode.position))
 	
-func Pressed_Drop_Callback():
+func Pressed_Inventory_Callback():
 	if lock_input:
 		return
 		
-	BehaviorEvents.emit_signal("OnPushGUI", "Inventory", {"object":playerNode, "callback_object":self, "callback_method":"OnDropIventory_Callback"})
+	BehaviorEvents.emit_signal("OnPushGUI", "Inventory", {"object":playerNode})
 
 func Pressed_FTL_Callback():
 	var wormholes = Globals.LevelLoaderRef.objByType["wormhole"]
@@ -181,6 +186,17 @@ func Pressed_FTL_Callback():
 	_wormhole_src = Globals.LevelLoaderRef._current_level_data.src
 		
 	BehaviorEvents.emit_signal("OnRequestLevelChange", wormhole)
+
+func OnUseInventory_Callback(key):
+	var data = Globals.LevelLoaderRef.LoadJSON(key)
+	var energy_used = Globals.get_data("consumable.energy")
+	var ap_used = Globals.get_data("consumable.ap")
+	#TODO: emit signal for consumable
+	if ap_used != null and ap_used > 0:
+		BehaviorEvents.emit_signal("OnUseAP", ap_used)
+	if energy_used != null and energy_used > 0:
+		BehaviorEvents.emit_signal("OnUseEnergy", energy_used)
+	
 
 func OnDropIventory_Callback(dropped_mounts, dropped_cargo):
 	playerNode.init_mounts()

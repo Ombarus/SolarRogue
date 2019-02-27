@@ -1,0 +1,14 @@
+{
+	"name_id":"Repair Nanobots",
+	"type":"consumable",
+	"sprite": "repair_nanobots",
+	"consumable": {
+		"ap": 1.0,
+		"energy":500,
+		"number_of_use":1
+	}
+	"hull_regen": {
+		"duration": 5,
+		"point_per_turn":5
+	}
+}

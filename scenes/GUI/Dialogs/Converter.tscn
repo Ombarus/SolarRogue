@@ -1,16 +1,15 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/GUI/ConverterLayout.gd" type="Script" id=1]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/GUI/ScrollListContainer.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/GUI/ItemList/CraftNeedRow.tscn" type="PackedScene" id=6]
-[ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=7]
-[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold.tres" type="DynamicFont" id=8]
-[ext_resource path="res://data/fonts/DejaVuSansMonoItal.tres" type="DynamicFont" id=9]
-[ext_resource path="res://data/fonts/DejaVuSansMonoBold.tres" type="DynamicFont" id=10]
-[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/GUI/ItemList/CraftNeedRow.tscn" type="PackedScene" id=5]
+[ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=6]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold.tres" type="DynamicFont" id=7]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItal.tres" type="DynamicFont" id=8]
+[ext_resource path="res://data/fonts/DejaVuSansMonoBold.tres" type="DynamicFont" id=9]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=10]
 
 [node name="Converter" type="Control"]
 
@@ -164,20 +163,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="Inventory" parent="base/HBoxContainer/VBoxContainer" index="2" instance=ExtResource( 4 )]
-
-visible = false
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 0.0
-margin_top = 210.0
-margin_right = 359.0
-margin_bottom = 408.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-_sections_unfolded = [ "Size Flags" ]
-
-[node name="HBoxContainer" type="HBoxContainer" parent="base/HBoxContainer/VBoxContainer" index="3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="base/HBoxContainer/VBoxContainer" index="2"]
 
 editor/display_folded = true
 anchor_left = 0.0
@@ -196,26 +182,26 @@ size_flags_vertical = 3
 alignment = 0
 _sections_unfolded = [ "Size Flags" ]
 
-[node name="Need" parent="base/HBoxContainer/VBoxContainer/HBoxContainer" index="0" instance=ExtResource( 5 )]
+[node name="Need" parent="base/HBoxContainer/VBoxContainer/HBoxContainer" index="0" instance=ExtResource( 4 )]
 
 margin_right = 177.0
 margin_bottom = 133.0
 size_flags_horizontal = 3
 _sections_unfolded = [ "Size Flags" ]
-Row = ExtResource( 6 )
+Row = ExtResource( 5 )
 DragDropID = "CraftingNeedUse"
 
-[node name="Using" parent="base/HBoxContainer/VBoxContainer/HBoxContainer" index="1" instance=ExtResource( 5 )]
+[node name="Using" parent="base/HBoxContainer/VBoxContainer/HBoxContainer" index="1" instance=ExtResource( 4 )]
 
 margin_left = 181.0
 margin_right = 359.0
 margin_bottom = 133.0
 size_flags_horizontal = 3
 _sections_unfolded = [ "Size Flags" ]
-Row = ExtResource( 6 )
+Row = ExtResource( 5 )
 DragDropID = "CraftingNeedUse"
 
-[node name="CraftResultInfo" type="RichTextLabel" parent="base/HBoxContainer/VBoxContainer" index="4"]
+[node name="CraftResultInfo" type="RichTextLabel" parent="base/HBoxContainer/VBoxContainer" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -231,11 +217,11 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/mono_font = ExtResource( 7 )
-custom_fonts/bold_italics_font = ExtResource( 8 )
-custom_fonts/italics_font = ExtResource( 9 )
-custom_fonts/bold_font = ExtResource( 10 )
-custom_fonts/normal_font = ExtResource( 7 )
+custom_fonts/mono_font = ExtResource( 6 )
+custom_fonts/bold_italics_font = ExtResource( 7 )
+custom_fonts/italics_font = ExtResource( 8 )
+custom_fonts/bold_font = ExtResource( 9 )
+custom_fonts/normal_font = ExtResource( 6 )
 bbcode_enabled = true
 bbcode_text = "5 Johns for 3500 energy"
 visible_characters = -1
@@ -249,7 +235,7 @@ selection_enabled = false
 override_selected_font_color = false
 _sections_unfolded = [ "BBCode", "Rect", "custom_fonts" ]
 
-[node name="Craft" parent="base/HBoxContainer/VBoxContainer" index="5" instance=ExtResource( 11 )]
+[node name="Craft" parent="base/HBoxContainer/VBoxContainer" index="4" instance=ExtResource( 10 )]
 
 margin_top = 311.0
 margin_right = 359.0

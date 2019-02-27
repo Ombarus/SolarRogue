@@ -52,24 +52,7 @@ func CraftButtonPressed_Callback():
 	
 func Ok_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
-	return
-	
-	BehaviorEvents.emit_signal("OnPopGUI")
-	if _callback_obj == null:
-		return
-			
-	var input_list = []
-	for data in get_node("base/HBoxContainer/VBoxContainer/Inventory").content:
-		if data.checked == true:
-			input_list.push_back(data.key)
-	
-	var recipe_data = null
-	for r in _converter_data.converter.recipes:
-		if r.name == _current_crafting_selected:
-			recipe_data = r
-			break
-	_callback_obj.call(_callback_method, recipe_data, input_list)
-	
+		
 	
 func Cancel_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
@@ -95,19 +78,6 @@ func Init(init_param):
 		_craft_list.add_item(recipe_data.name, tex)
 		if region != null:
 			_craft_list.set_item_icon_region(_craft_list.get_item_count()-1, region)
-		
-		
-	var cargo = _obj.get_attrib("cargo.content")
-	var cargo_obj = []
-	for item in cargo:
-		var data = Globals.LevelLoaderRef.LoadJSON(item.src)
-		var counting = ""
-		if item.count > 1:
-			counting = str(item.count) + "x "
-		cargo_obj.push_back({"name_id": counting + data.name_id, "count":item.count, "key":item})
-	var cur_energy = _obj.get_attrib("converter.stored_energy")
-	cargo_obj.push_back({"name_id": str(cur_energy) + " Energy", "count":cur_energy, "key":"energy"})
-	get_node("base/HBoxContainer/VBoxContainer/Inventory").content = cargo_obj
 	
 
 func _on_CraftingList_item_selected(index):
