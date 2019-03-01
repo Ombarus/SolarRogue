@@ -37,6 +37,8 @@ signal OnMountRemoved(obj, slot, src)
 signal OnMountAdded(obj, slot, src)
 signal OnClearMounts(obj)
 signal OnClearCargo(obj)
+signal OnReplaceMounts(obj, new_mounts)
+signal OnReplaceCargo(obj, new_cargo)
 signal OnUpdateCargoVolume(obj)
 signal OnConsumeItem(obj, item_data)
 

@@ -125,7 +125,7 @@ func Init(init_param):
 	get_node("base/RShipName").bbcode_text = obj2.get_attrib("name_id")
 	get_node("base").title = obj1.get_attrib("name_id")
 	
-	get_node(L_BASE_PATH + "/Mounts").connect("OnChoiceSelectionChanged", self, "LMountsChanged_Callback")
+	#get_node(L_BASE_PATH + "/Mounts").connect("OnChoiceSelectionChanged", self, "LMountsChanged_Callback")
 
 func OnChoiceDragAndDrop_Callback(container_src, container_dst, content_index_src, content_index_dst):
 	var new_src = []

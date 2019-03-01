@@ -95,6 +95,7 @@ func OnMountRemoved_Callback(obj, slot, src):
 		return
 		
 	var max_hp = _get_max_shield(obj)
+	
 	var cur_hp = obj.get_attrib("shield.current_hp")
 	
 	if cur_hp == null:

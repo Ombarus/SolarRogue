@@ -14,6 +14,8 @@ func _ready():
 	BehaviorEvents.connect("OnEquipMount", self, "OnEquipMount_Callback")
 	BehaviorEvents.connect("OnClearMounts", self, "OnClearMounts_Callback")
 	BehaviorEvents.connect("OnClearCargo", self, "OnClearCargo_Callback")
+	BehaviorEvents.connect("OnReplaceCargo", self, "OnReplaceCargo_Callback")
+	BehaviorEvents.connect("OnReplaceMounts", self, "OnReplaceMounts_Callback")
 	BehaviorEvents.connect("OnUpdateCargoVolume", self, "OnUpdateCargoVolume_Callback")
 	
 func OnUseEnergy_Callback(obj, amount):
@@ -153,7 +155,7 @@ func OnAddItem_Callback(picker, item_id):
 		
 	picker.set_attrib("cargo.volume_used", picker.get_attrib("cargo.volume_used") + volume)
 	
-func OnRemoveItem_Callback(holder, item_id):
+func OnRemoveItem_Callback(holder, item_id, num_remove=1): #-1 to remove everything
 	if not holder.modified_attributes.has("cargo"):
 		holder.init_cargo()
 	var cargo = holder.get_attrib("cargo.content")
@@ -163,14 +165,39 @@ func OnRemoveItem_Callback(holder, item_id):
 		if item_id in item.src:
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			holder.set_attrib("cargo.volume_used", holder.get_attrib("cargo.volume_used") - data.equipment.volume)
-			if item.count > 1:
-				item.count -= 1
+			if num_remove >= 0 and item.count > num_remove:
+				item.count -= num_remove
 			else:
 				index_to_delete.push_back(i)
 		i += 1
 					
 	for index in index_to_delete:
 		cargo.remove(index)
+		
+
+#TODO: Implement this and replace bad code in player's OnTransferItemCompleted_Callback()	
+func OnReplaceCargo_Callback(obj, new_cargo):
+	pass
+
+# new_mounts [{mount_key, item.mount_index, item.src_key},...]
+func OnReplaceMounts_Callback(obj, new_mounts):
+	if not obj.modified_attributes.has("mounts"):
+		obj.init_mounts()
+	var mounts = obj.get_attrib("mounts")
+	for key in mounts:
+		var items = mounts[key]
+		for i in range(items.size()):
+			var item_id = items[i]
+			var new_mounts_val = null
+			for n in new_mounts:
+				if n.mount_key == key and n.mount_index == i and n.src_key == item_id:
+					break
+				elif n.mount_key == key and n.mount_index == i:
+					items[i] = ""
+					BehaviorEvents.emit_signal("OnMountRemoved", obj, key, item_id)
+					OnEquipMount_Callback(obj, key, i, n.src_key)
+					break
+			
 		
 func OnClearMounts_Callback(holder):
 	if not holder.modified_attributes.has("mounts"):
@@ -186,9 +213,10 @@ func OnClearMounts_Callback(holder):
 func OnClearCargo_Callback(holder):
 	if not holder.modified_attributes.has("cargo"):
 		holder.init_cargo()
-	var cargo = holder.get_attrib("cargo.content")
+	# Need to be a copy since we'll be removing item as we iterate on it
+	var cargo = holder.get_attrib("cargo.content").duplicate()
 	for item in cargo:
-		OnRemoveItem_Callback(holder, item.src)
+		OnRemoveItem_Callback(holder, item.src, -1)
 		
 #objects = [{"src":"bleh.json", "count":3}]
 func GetTotalVolume(objects):

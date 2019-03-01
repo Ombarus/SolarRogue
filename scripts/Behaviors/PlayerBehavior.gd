@@ -108,31 +108,40 @@ func Pressed_Take_Callback():
 	var targetting_data = {"weapon_data":{"fire_range":1, "fire_pattern":"o"}}
 	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, targetting_data, self, "ProcessTakeSelection")
 	
+func UpdateButtonVisibility():
+	var weapons = playerNode.get_attrib("mounts.weapon")
+	var weapon_btn = get_node(WeaponAction)
+	var valid = false
+	for weapon in weapons:
+		if weapon != null and weapon != "":
+			valid = true
+			break
+	if valid == true:
+		weapon_btn.visible = true
+	else:
+		weapon_btn.visible = false
+		
+	var converters = playerNode.get_attrib("mounts.converter")
+	var converter_btn = get_node(CraftingAction)
+	valid = false
+	for c in converters:
+		if c != null and c != "":
+			valid = true
+			break
+	if valid == true:
+		converter_btn.visible = true
+	else:
+		converter_btn.visible = false
+	
 func OnMountAdded_Callback(obj, mount, src):
 	if obj != playerNode:
 		return
-	if "converter" in mount:
-		var converter_btn = get_node(CraftingAction)
-		if src == null or src == "":
-			converter_btn.visible = false
-		else:
-			converter_btn.visible = true
-	if "weapon" in mount:
-		var weapon_btn = get_node(WeaponAction)
-		if src == null or src == "":
-			weapon_btn.visible = false
-		else:
-			weapon_btn.visible = true
+	UpdateButtonVisibility()
 
 func OnMountRemoved_Callback(obj, mount, src):
 	if obj != playerNode:
 		return
-	if "converter" in mount:
-		var converter_btn = get_node(CraftingAction)
-		converter_btn.visible = false
-	if "weapon" in mount:
-		var weapon_btn = get_node(WeaponAction)
-		weapon_btn.visible = false
+	UpdateButtonVisibility()
 	
 # mount_to = "converter"
 # mount_item = {"src":"data/json/bleh.json", "count":5}
@@ -204,12 +213,7 @@ func OnDropIventory_Callback(dropped_mounts, dropped_cargo):
 	for drop_data in dropped_mounts:
 		BehaviorEvents.emit_signal("OnDropMount", playerNode, drop_data.key, drop_data.index)
 		
-	var converter = playerNode.get_attrib("mounts.converter")[0]
-	var converter_btn = get_node(CraftingAction)
-	if converter == null or converter == "":
-		converter_btn.visible = false
-	else:
-		converter_btn.visible = true
+	UpdateButtonVisibility()
 		
 	for drop_data in dropped_cargo:
 		BehaviorEvents.emit_signal("OnDropCargo", playerNode, drop_data.src)
@@ -312,12 +316,7 @@ func OnLevelLoaded_Callback():
 		# Modified_attrib must be passed during request so that proper IDs can be locked in objByID
 		playerNode = levelLoaderRef.RequestObject("data/json/ships/player_default.json", coord, modififed_attrib)
 		
-		var converter = playerNode.get_attrib("mounts.converter")[0]
-		var converter_btn = get_node(CraftingAction)
-		if converter == null or converter == "":
-			converter_btn.visible = false
-		else:
-			converter_btn.visible = true
+		UpdateButtonVisibility()
 		
 		# always default to saved position
 		_current_origin = PLAYER_ORIGIN.saved
@@ -518,12 +517,8 @@ func OnTransferItemCompleted_Callback(lobj, l_mounts, l_cargo, robj, r_mounts, r
 	robj.init_mounts()
 	robj.init_cargo()
 	
-	BehaviorEvents.emit_signal("OnClearMounts", lobj)
-	BehaviorEvents.emit_signal("OnClearMounts", robj)
-	for item in l_mounts:
-		BehaviorEvents.emit_signal("OnEquipMount", lobj, item.mount_key, item.mount_index, item.src_key)
-	for item in r_mounts:
-		BehaviorEvents.emit_signal("OnEquipMount", robj, item.mount_key, item.mount_index, item.src_key)
+	BehaviorEvents.emit_signal("OnReplaceMounts", lobj, l_mounts)
+	BehaviorEvents.emit_signal("OnReplaceMounts", robj, r_mounts)
 	
 	BehaviorEvents.emit_signal("OnClearCargo", lobj)
 	BehaviorEvents.emit_signal("OnClearCargo", robj)
@@ -545,12 +540,8 @@ func OnTransferPlayer_Callback(old_player, new_player):
 	BehaviorEvents.emit_signal("OnLogLine", "All controls transfered, the ship is ours captain !")
 	BehaviorEvents.emit_signal("OnUseAP", new_player, 1.0)
 
-	var converter = new_player.get_attrib("mounts.converter")[0]
-	var converter_btn = get_node(CraftingAction)
-	if converter == null or converter == "":
-		converter_btn.visible = false
-	else:
-		converter_btn.visible = true
+	UpdateButtonVisibility()
+		
 		
 	new_player.set_attrib("moving.moved", true) # to update the wormhole button in next "OnPlayerTurn"
 	

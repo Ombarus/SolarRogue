@@ -22,6 +22,7 @@ func OnRequestTargettingOverlay_Callback(player, targetting_data, callback_obj, 
 	_player_node = player
 	_targetting_data = targetting_data
 	
+	ClearOverlay()
 	_DoTargetting(_player_node, _targetting_data)
 	
 func OnTargetClick_Callback(click_pos, target_type):
