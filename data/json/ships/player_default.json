@@ -26,7 +26,9 @@
 		"drop_ap":1.0,
 		"content":[
 			{"src":"data/json/items/weapons/missile.json", "count":10},
-			{"src":"data/json/items/misc/hydrogen.json", "count":5}
+			{"src":"data/json/items/misc/hydrogen.json", "count":5},
+			{"src":"data/json/items/consumables/repair_nanobots.json", "count":5},
+			{"src":"data/json/items/misc/scout_body.json", "count":1}
 		]
 	},
 	"converter": {

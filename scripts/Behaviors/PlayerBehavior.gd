@@ -189,13 +189,14 @@ func Pressed_FTL_Callback():
 
 func OnUseInventory_Callback(key):
 	var data = Globals.LevelLoaderRef.LoadJSON(key)
-	var energy_used = Globals.get_data("consumable.energy")
-	var ap_used = Globals.get_data("consumable.ap")
-	#TODO: emit signal for consumable
+	var energy_used = Globals.get_data(data, "consumable.energy")
+	var ap_used = Globals.get_data(data, "consumable.ap")
+	BehaviorEvents.emit_signal("OnConsumeItem", playerNode, data)
 	if ap_used != null and ap_used > 0:
-		BehaviorEvents.emit_signal("OnUseAP", ap_used)
+		BehaviorEvents.emit_signal("OnUseAP", playerNode, ap_used)
 	if energy_used != null and energy_used > 0:
-		BehaviorEvents.emit_signal("OnUseEnergy", energy_used)
+		BehaviorEvents.emit_signal("OnUseEnergy", playerNode, energy_used)
+	BehaviorEvents.emit_signal("OnRemoveItem", playerNode, key)
 	
 
 func OnDropIventory_Callback(dropped_mounts, dropped_cargo):

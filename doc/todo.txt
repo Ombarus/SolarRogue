@@ -38,6 +38,8 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- BUG: Transfering mounts duplicate cargo content ?!?
+- Don't potion if not needed !
 - Make craft button craft more than one thing if enough items are in using list
 - Refine Need/Using list in converter UI (maybe a title + some outline for the list?)
 - when ennemies miss the fx doesn't show (but the code is there)

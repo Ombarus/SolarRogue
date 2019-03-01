@@ -93,9 +93,9 @@ func OnUsePressed_Callback():
 	var selected_cargo = []
 	for item in get_node(_cargo_node).content:
 		if item.checked == true:
-			var data = Globals.LevelLoaderRef.LoadJSON(item.key)
+			var data = Globals.LevelLoaderRef.LoadJSON(item.key.src)
 			if "consumable" in data:
-				selected_cargo.push_back(item.key)
+				selected_cargo.push_back(item.key.src)
 	
 	if selected_cargo.size() > 0:
 		emit_signal("use_pressed", selected_cargo[0])

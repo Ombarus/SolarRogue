@@ -44,7 +44,7 @@ echo = false
 
 shortcut = SubResource( 3 )
 
-[node name="Inventory" type="Control" index="0"]
+[node name="Inventory" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0

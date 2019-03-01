@@ -49,6 +49,7 @@
 		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.08},
 		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.01},
 		{"id":"data/json/items/weapons/missile.json", "chance":0.0},
+		{"id":"data/json/items/consumables/repair_nanobots.json", "chance":0.01},
 		
 
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.1},

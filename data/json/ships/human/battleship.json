@@ -51,6 +51,7 @@
 		{"id":"data/json/items/weapons/missile.json", "chance":0.15},
 		{"id":"data/json/items/weapons/missile.json", "chance":0.15},
 		{"id":"data/json/items/weapons/missile.json", "chance":0.15},
+		{"id":"data/json/items/consumables/repair_nanobots.json", "chance":0.01},
 		
 		
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},

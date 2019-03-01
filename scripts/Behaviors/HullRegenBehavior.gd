@@ -1,72 +1,73 @@
 extends Node
-#TODO: Implement Hull Regen from consumable !
+
 func _ready():
 	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
-	BehaviorEvents.connect("OnMountAdded", self, "OnMountAdded_Callback")
+	BehaviorEvents.connect("OnConsumeItem", self, "OnConsumeItem_Callback")
 	
 func OnObjTurn_Callback(obj):
-	var utils = obj.get_attrib("mounts.utility")
-	var utils_data = Globals.LevelLoaderRef.LoadJSONArray(utils)
-	var converters_data = Globals.LevelLoaderRef.LoadJSONArray(obj.get_attrib("mounts.converter"))
-	if utils_data.size() <= 0 or converters_data.size() <= 0:
+	var regen_data = obj.get_attrib("consumable.hull_regen")
+	if regen_data == null:
 		return
 	
-	var filtered_regen = []
-	for data in utils_data:
-		if "energy_regen" in data:
-			filtered_regen.push_back(data)
-			
-	if filtered_regen.size() <= 0:
-		return
-	
-	var max_energ = 0
-	for data in converters_data:
-		max_energ += Globals.get_data(data, "converter.maximum_energy")
-	
-	var cur_energ = obj.get_attrib("converter.stored_energy")
-	
-	if cur_energ == null:
-		return
+	var finished = []
+	var index = 0
+	for active_item in regen_data:
+		var item_data = Globals.LevelLoaderRef.LoadJSON(active_item.data)
+		active_item = _process_healing(obj, active_item, item_data)
+		var turn_since_beginning = active_item.last_turn_update - active_item.first_turn
+		if turn_since_beginning >= item_data.hull_regen.duration:
+			finished.push_back(index)
+		index += 1
 		
-	if cur_energ < max_energ:
-		_process_healing(obj, max_energ, cur_energ, filtered_regen)
-	
-	#TODO: What happen when ap is disabled for a # of turn ?
-	obj.set_attrib("energy_regen.last_turn_update", Globals.total_turn)
-		
-
-func _sort_by_regen_rate(a, b):
-	var rate_a = a.energy_regen.per_turn
-	var rate_b = b.energy_regen.per_turn
-	# reversed sort
-	if rate_a > rate_b:
-		return true
-	return false
-
-func _process_healing(obj, max_energ, cur_energ, filtered_regen):
-	var last_update = obj.get_attrib("energy_regen.last_turn_update", Globals.total_turn)
-	var energy = 0
-	if filtered_regen.size() == 1:
-		energy = filtered_regen[0].energy_regen.per_turn * (Globals.total_turn - last_update)
+	if finished.size() == regen_data.size():
+		obj.modified_attributes.consumable.erase("hull_regen")
 	else:
-		filtered_regen.sort_custom(self, "_sort_by_regen_rate")
-		var count = 0
-		for data in filtered_regen:
-			energy += data.energy_regen.per_turn / pow(2, count)
-			count += 1
-		energy *= Globals.total_turn - last_update
-	var new_energ = min(cur_energ + energy, max_energ)
-	obj.set_attrib("converter.stored_energy", new_energ)
+		for index in finished:
+			regen_data.remove(index)
+		# probably not needed if array is passed as ref... just in case
+		obj.set_attrib("consumable.hull_regen", regen_data)
+	
+	#TODO: do the same thing in consume event in case consumable last only 1 turn
+		
+
+func _process_healing(obj, data, item_data):
+	var last_update = data.last_turn_update
+	
+	var turn_count = Globals.total_turn - last_update
+	var turn_since_beginning = Globals.total_turn - data.first_turn
+	if turn_since_beginning > item_data.hull_regen.duration:
+		turn_count = (Globals.total_turn - data.first_turn) - item_data.hull_regen.duration
+	
+	var heal = 0.0
+	if turn_count > 0.0:
+		heal = item_data.hull_regen.point_per_turn * turn_count
+		var max_hull = obj.base_attributes.destroyable.hull
+		var cur_hull = obj.get_attrib("destroyable.hull")
+		var new_hull = min(max_hull, cur_hull + heal)
+		obj.set_attrib("destroyable.hull", new_hull)
+		
+	
+	data.last_turn_update = Globals.total_turn
+	return data
 	
 	
-func OnMountAdded_Callback(obj, slot, src):
-	if slot != "utility" or src == null or src.empty():
+func OnConsumeItem_Callback(obj, item_data):
+	if not "hull_regen" in item_data:
 		return
 		
-	# TODO: if you have multiple regen installed, should probably do a regular update at that point
-	# at the same time... chances are that if you're adding a mount it's on your turn so you are already up to date
-	# if you had another regen item equiped. This is only in case we skipped the update because you had nothing equiped
-	var data = Globals.LevelLoaderRef.LoadJSON(src)
-	if "energy_regen" in data:
-		obj.set_attrib("energy_regen.last_turn_update", Globals.total_turn)
+	BehaviorEvents.emit_signal("OnLogLine", "[color=yelllow]Nanites deployed ![/color]")
+	
+	var regen_data = obj.get_attrib("consumable.hull_regen")
+	if regen_data == null:
+		regen_data = []
+	
+	# Do one update right away, hence the -1.0 to total_turn
+	var cur_data = {"data":item_data.src, "last_turn_update": Globals.total_turn-1.0, "first_turn": Globals.total_turn-1.0}
+	cur_data = _process_healing(obj, cur_data, item_data)
+	
+	# don't need to keep updating if consumable is instant
+	if item_data.hull_regen.duration > 1.0:
+		regen_data.push_back(cur_data)
+		obj.set_attrib("consumable.hull_regen", regen_data)
+	
 	
