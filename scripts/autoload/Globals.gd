@@ -41,3 +41,9 @@ func _check_data(val, default):
 			return default
 		else:
 			return val
+			
+func clean_path(path):
+	if not "res://" in path and not "user://" in path:
+		path = "res://" + path
+	
+	return path

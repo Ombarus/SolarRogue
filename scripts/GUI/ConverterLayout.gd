@@ -124,7 +124,7 @@ func _on_CraftingList_item_selected(index):
 			var add_item = false
 			if "type" in r and r.type == data.type:
 				add_item = true
-			if "src" in r and r.src in item.src:
+			if "src" in r and Globals.clean_path(r.src) == Globals.clean_path(item.src):
 				add_item = true
 			if add_item == true:
 				has_item_to_use = true
@@ -165,7 +165,7 @@ func HowManyDiag_Callback(num):
 		_orig_data.count -= num
 	var found = false
 	for item in content_dst:
-		if item.src == _orig_data.src:
+		if Globals.clean_path(item.src) == Globals.clean_path(_orig_data.src):
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			if data.equipment.stackable == true:
 				item.count += num
@@ -207,7 +207,7 @@ func UpdateCraftButton():
 		for r in requirement_count:
 			if d.type == r:
 				requirement_count[r].using += item.count
-			if "src" in item and item.src == r:
+			if "src" in item and Globals.clean_path(item.src) == Globals.clean_path(r):
 				requirement_count[r].using += item.count
 	
 	_current_how_many = -1
