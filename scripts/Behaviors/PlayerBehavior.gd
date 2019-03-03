@@ -8,6 +8,7 @@ export(NodePath) var InventoryDialog
 export(NodePath) var CraftingAction
 export(NodePath) var FTLAction
 export(NodePath) var PopupButtons
+export(NodePath) var TargettingHUD
 
 var playerNode = null
 var levelLoaderRef
@@ -65,6 +66,7 @@ func _ready():
 	action.connect("drop_pressed", self, "OnDropIventory_Callback")
 	action.connect("use_pressed", self, "OnUseInventory_Callback")
 	
+	get_node(TargettingHUD).connect("cancel_pressed", self, "cancel_targetting_pressed_Callback")
 	
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
@@ -98,6 +100,8 @@ func Pressed_Board_Callback():
 	_input_state = INPUT_STATE.board_targetting
 	var targetting_data = {"weapon_data":{"fire_range":1, "fire_pattern":"o"}}
 	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, targetting_data, self, "ProcessBoardSelection")
+	BehaviorEvents.emit_signal("OnPopGUI") #HUD
+	BehaviorEvents.emit_signal("OnPushGUI", "TargettingHUD", null)
 
 func Pressed_Take_Callback():
 	if lock_input:
@@ -107,6 +111,8 @@ func Pressed_Take_Callback():
 	_input_state = INPUT_STATE.loot_targetting
 	var targetting_data = {"weapon_data":{"fire_range":1, "fire_pattern":"o"}}
 	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, targetting_data, self, "ProcessTakeSelection")
+	BehaviorEvents.emit_signal("OnPopGUI") #HUD
+	BehaviorEvents.emit_signal("OnPushGUI", "TargettingHUD", null)
 	
 func UpdateButtonVisibility():
 	var weapons = playerNode.get_attrib("mounts.weapon")
@@ -270,6 +276,8 @@ func Pressed_Weapon_Callback():
 	cur_weapon.state = SHOOTING_STATE.wait_targetting
 	BehaviorEvents.emit_signal("OnLogLine", "Firing " + cur_weapon.weapon_data.name_id + ". Target ?")
 	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, cur_weapon.weapon_data, self, "ProcessAttackSelection")
+	BehaviorEvents.emit_signal("OnPopGUI") #HUD
+	BehaviorEvents.emit_signal("OnPushGUI", "TargettingHUD", null)
 	_input_state = INPUT_STATE.weapon_targetting
 	
 func OnLevelLoaded_Callback():
@@ -465,8 +473,15 @@ func _unhandled_input(event):
 		BehaviorEvents.emit_signal("OnMovement", playerNode, dir)
 
 
+func cancel_targetting_pressed_Callback():
+	BehaviorEvents.emit_signal("OnPopGUI")
+	BehaviorEvents.emit_signal("OnPushGUI", "HUD", null)
+	_input_state = INPUT_STATE.hud
+	
+
 #TODO: if target is out-of-range the sequence will be aborted. Should probably fix that if you have more than one weapon
 func ProcessAttackSelection(target):
+	_input_state = INPUT_STATE.hud
 	var cur_weapon = null
 	for shot in _weapon_shots:
 		if shot.state == SHOOTING_STATE.wait_damage:
@@ -483,6 +498,9 @@ func ProcessAttackSelection(target):
 		BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, cur_weapon.weapon_data, self, "ProcessAttackSelection")
 		_input_state = INPUT_STATE.weapon_targetting
 		return
+	
+	BehaviorEvents.emit_signal("OnPopGUI")
+	BehaviorEvents.emit_signal("OnPushGUI", "HUD", null)
 	
 	var all_canceled = true
 	for shot in _weapon_shots:
@@ -503,6 +521,9 @@ func ProcessAttackSelection(target):
 	BehaviorEvents.emit_signal("OnEndParallelAction", playerNode)
 	
 func ProcessBoardSelection(target):
+	BehaviorEvents.emit_signal("OnPopGUI")
+	BehaviorEvents.emit_signal("OnPushGUI", "HUD", null)
+	_input_state = INPUT_STATE.hud
 	if target != null:
 		var pnode = playerNode
 		BehaviorEvents.emit_signal("OnTransferPlayer", pnode, target)
@@ -510,6 +531,9 @@ func ProcessBoardSelection(target):
 		BehaviorEvents.emit_signal("OnLogLine", "Ship transfer canceled")
 	
 func ProcessTakeSelection(target):
+	BehaviorEvents.emit_signal("OnPopGUI")
+	BehaviorEvents.emit_signal("OnPushGUI", "HUD", null)
+	_input_state = INPUT_STATE.hud
 	if target == null:
 		BehaviorEvents.emit_signal("OnLogLine", "Item transfer canceled")
 		return

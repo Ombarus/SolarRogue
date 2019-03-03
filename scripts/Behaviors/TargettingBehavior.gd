@@ -1,14 +1,25 @@
 extends Node
 
+export(NodePath) var TargettingHUD
+
 var _callback_obj = null
 var _callback_method = null
 var _click_start_pos
 var _player_node = null
 var _targetting_data = null
 
+onready var _targetting_hud = get_node(TargettingHUD)
+
 func _ready():
 	BehaviorEvents.connect("OnRequestTargettingOverlay", self, "OnRequestTargettingOverlay_Callback")
 	BehaviorEvents.connect("OnTargetClick", self, "OnTargetClick_Callback")
+	
+	_targetting_hud.connect("skip_pressed", self, "skip_pressed_Callback")
+	_targetting_hud.connect("cancel_pressed", self, "ClearOverlay")
+	
+func skip_pressed_Callback():
+	ClearOverlay()
+	_callback_obj.call(_callback_method, null)
 	
 func ClearOverlay():
 	var overlay_nodes = get_tree().get_nodes_in_group("overlay")

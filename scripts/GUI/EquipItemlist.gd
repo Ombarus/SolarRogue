@@ -27,7 +27,9 @@ func Ok_Callback():
 		if data.checked == true:
 			mount_item = data.key
 			
-	_callback_obj.call(_callback_method, mount_item.src, _mount_to, _mount_index)
+			
+	if mount_item != null:
+		_callback_obj.call(_callback_method, mount_item.src, _mount_to, _mount_index)
 	
 	# reset content or we might end up with dangling references
 	get_node("base/vbox/Cargo").content = []
