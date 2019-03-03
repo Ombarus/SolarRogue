@@ -107,7 +107,7 @@ func DoAttackPathFinding(obj):
 			else:
 				BehaviorEvents.emit_signal("OnLogLine", "The ennemy missed")
 				 # play the animation but no damage
-				BehaviorEvents.emit_signal("OnShotFired_Callback", player, obj, data)
+				BehaviorEvents.emit_signal("OnShotFired", player, obj, data)
 			shot = true
 		if minimal_move == null or minimal_move.length() > best_move.length():
 			minimal_move = best_move
