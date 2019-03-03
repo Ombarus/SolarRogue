@@ -49,6 +49,8 @@ func CraftButtonPressed_Callback():
 	using_content.push_back("energy")
 	_callback_obj.call(_callback_method, recipe_data, using_content)
 	
+	_on_CraftingList_item_selected(_craft_list.get_selected_items()[0])
+	
 	
 func Ok_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")

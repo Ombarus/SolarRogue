@@ -17,68 +17,87 @@ func Craft(recipe_data, input_list, crafter):
 	var cur_energy = crafter.get_attrib("converter.stored_energy")
 	var net_energy_change = 0
 	
-	# Validate that we can produce the thing
-	for require in recipe_data.requirements:
-		can_produce = false
-		if "type" in require: # might eventually support other like "name_id"
-			for info in loaded_input_data:
-				if require["type"] == "energy" and info.type == "energy":
-					if cur_energy < require["amount"]:
-						result = Globals.CRAFT_RESULT.not_enough_energy
-						break
-					can_produce = true
-					continue
-				elif info["type"] == require["type"]:
-					#TODO: handle non-stackable
-					if info["amount"] < require["amount"]:
-						result = Globals.CRAFT_RESULT.not_enough_resources
-						break
-					can_produce = true
-					continue
-		if "src" in require:
-			#TODO: count how many are required (take into account stackable ?)
-			for info in loaded_input_data:
-				if require["src"] in info["src"]:
-					if info["amount"] < require["amount"]:
-						result = Globals.CRAFT_RESULT.not_enough_resources
-						break
-					can_produce = true
-					continue
+	var num_produced = 0
+	
+	# Produce as many as the input_list allows
+	while (can_produce == true):
+		result = Globals.CRAFT_RESULT.success
+		# Validate that we can produce the thing
+		for require in recipe_data.requirements:
+			can_produce = false
+			if "type" in require: # might eventually support other like "name_id"
+				for info in loaded_input_data:
+					if require["type"] == "energy" and info.type == "energy":
+						if (cur_energy+net_energy_change) < require["amount"]:
+							result = Globals.CRAFT_RESULT.not_enough_energy
+							break
+						can_produce = true
+						continue
+					elif info["type"] == require["type"]:
+						if info["amount"] < require["amount"]:
+							result = Globals.CRAFT_RESULT.not_enough_resources
+						else:
+							can_produce = true
+						continue
+			if "src" in require:
+				#TODO: count how many are required (take into account stackable ?)
+				for info in loaded_input_data:
+					if Globals.clean_path(require["src"]) in Globals.clean_path(info["src"]):
+						if info["amount"] < require["amount"]:
+							result = Globals.CRAFT_RESULT.not_enough_resources
+							#break
+						else:
+							can_produce = true
+						continue
+			if can_produce == false:
+				if result == Globals.CRAFT_RESULT.success:
+					result = Globals.CRAFT_RESULT.missing_resources
+				break
+				
 		if can_produce == false:
-			if result == Globals.CRAFT_RESULT.success:
-				result = Globals.CRAFT_RESULT.missing_resources
-			return result
+			break
+		else:
+			result = Globals.CRAFT_RESULT.success
+			
+		# Consume Resources
+		for require in recipe_data.requirements:
+			if "type" in require: # might eventually support other like "name_id"
+				for info in loaded_input_data:
+					if require["type"] == "energy" and info.type == "energy":
+						net_energy_change -= require["amount"]
+						break
+					elif info["type"] == require["type"] and info["amount"] > 0:
+						for i in range(require["amount"]):
+							BehaviorEvents.emit_signal("OnRemoveItem", crafter, info["src"])
+							info.amount -= 1
+						break
+			if "src" in require:
+				for info in loaded_input_data:
+					if Globals.clean_path(info["src"]) == Globals.clean_path(require["src"]) and info["amount"] > 0:
+						for i in range(require["amount"]):
+							BehaviorEvents.emit_signal("OnRemoveItem", crafter, info["src"])
+							info.amount -= 1
+						break
 		
-	# Consume Resources
-	for require in recipe_data.requirements:
-		if "type" in require: # might eventually support other like "name_id"
-			for info in loaded_input_data:
-				if require["type"] == "energy" and info.type == "energy":
-					net_energy_change -= require["amount"]
-					continue
-				elif info["type"] == require["type"]:
-					for i in range(require["amount"]):
-						BehaviorEvents.emit_signal("OnRemoveItem", crafter, info["src"])
-					continue
-		if "src" in require:
-			for info in loaded_input_data:
-				if info["src"] == require["src"]:
-					for i in range(require["amount"]):
-						BehaviorEvents.emit_signal("OnRemoveItem", crafter, info["src"])
-					continue
-	
-	# Produce the thing
-	if recipe_data.produce == "energy":
-		net_energy_change += recipe_data.amount
-	else:
-		var product_data = Globals.LevelLoaderRef.LoadJSON(recipe_data.produce)
-		for i in range(recipe_data.amount):
-			if not "equipment" in product_data:
-				Globals.LevelLoaderRef.RequestObject(recipe_data.produce, Globals.LevelLoaderRef.World_to_Tile(crafter.position))
-			else:
-				#TODO: inventory full ?
-				BehaviorEvents.emit_signal("OnAddItem", crafter, recipe_data.produce)
-	
-	BehaviorEvents.emit_signal("OnUseEnergy", crafter, -net_energy_change)
-	BehaviorEvents.emit_signal("OnUseAP", crafter, recipe_data.ap_cost)
+		# Produce the thing
+		if recipe_data.produce == "energy":
+			net_energy_change += recipe_data.amount
+		else:
+			var product_data = Globals.LevelLoaderRef.LoadJSON(recipe_data.produce)
+			for i in range(recipe_data.amount):
+				if not "equipment" in product_data:
+					Globals.LevelLoaderRef.RequestObject(recipe_data.produce, Globals.LevelLoaderRef.World_to_Tile(crafter.position))
+				else:
+					BehaviorEvents.emit_signal("OnAddItem", crafter, recipe_data.produce)
+		
+		
+		num_produced += 1
+		# Really weird use case for missile that only require energy. Produce only one at a time
+		if recipe_data.requirements.size() == 1 and "type" in recipe_data.requirements[0] and recipe_data.requirements[0].type == "energy":
+			can_produce = false
+			
+	if num_produced > 0:
+		BehaviorEvents.emit_signal("OnUseAP", crafter, recipe_data.ap_cost * num_produced)
+		BehaviorEvents.emit_signal("OnUseEnergy", crafter, -net_energy_change)
+		result = Globals.CRAFT_RESULT.success
 	return result

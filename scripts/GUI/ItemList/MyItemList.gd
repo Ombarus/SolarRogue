@@ -10,7 +10,7 @@ var Content setget set_content, get_content
 
 signal OnDragDropCompleted(origin_data, destination_data)
 
-var _debug = false
+var _debug = true
 onready var _rows_node = get_node("Rows")
 
 func Clear():
@@ -38,7 +38,7 @@ func get_content():
 
 func _ready():
 	if _debug == true:
-		set_content([{"text":"hello"}, {"text":"world"}])
+		set_content([{"text":"hello"}, {"text":"world"}, {"text":"bleh"}])
 
 func bubble_drop(orig_data, dst_data):
 	emit_signal("OnDragDropCompleted", orig_data, dst_data)

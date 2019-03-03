@@ -11,7 +11,7 @@
 [ext_resource path="res://data/fonts/DejaVuSansMonoBold.tres" type="DynamicFont" id=9]
 [ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=10]
 
-[node name="Converter" type="Control" index="0"]
+[node name="Converter" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0

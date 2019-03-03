@@ -69,7 +69,7 @@ func OnPickup_Callback(picker, picked):
 		if obj.get_attrib("equipment.stackable"):
 			var found = false
 			for item in picker.get_attrib("cargo.content"):
-				if item.src in obj.get_attrib("src"):
+				if Globals.clean_path(item.src) == Globals.clean_path(obj.get_attrib("src")):
 					found = true
 					item.count += 1
 			if not found:
@@ -95,7 +95,7 @@ func OnDropCargo_Callback(dropper, item_id):
 		drop_speed = 0
 	var total_ap_cost = 0
 	for item in cargo:
-		if item_id in item.src:
+		if Globals.clean_path(item_id) == Globals.clean_path(item.src):
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			dropper.set_attrib("cargo.volume_used", dropper.get_attrib("cargo.volume_used") - data.equipment.volume)
 			if item.count > 1:
@@ -147,7 +147,7 @@ func OnAddItem_Callback(picker, item_id):
 	var found = false
 	if "stackable" in data.equipment and data.equipment.stackable == true:
 		for item in cargo:
-			if item_id in item.src:
+			if Globals.clean_path(item_id) == Globals.clean_path(item.src):
 				found = true
 				item.count += 1
 	if found == false:
@@ -162,7 +162,7 @@ func OnRemoveItem_Callback(holder, item_id, num_remove=1): #-1 to remove everyth
 	var index_to_delete = []
 	var i = 0
 	for item in cargo:
-		if item_id in item.src:
+		if Globals.clean_path(item_id) == Globals.clean_path(item.src):
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			holder.set_attrib("cargo.volume_used", holder.get_attrib("cargo.volume_used") - data.equipment.volume)
 			if num_remove >= 0 and item.count > num_remove:
@@ -190,7 +190,7 @@ func OnReplaceMounts_Callback(obj, new_mounts):
 			var item_id = items[i]
 			var new_mounts_val = null
 			for n in new_mounts:
-				if n.mount_key == key and n.mount_index == i and n.src_key == item_id:
+				if n.mount_key == key and n.mount_index == i and Globals.clean_path(n.src_key) == Globals.clean_path(item_id):
 					break
 				elif n.mount_key == key and n.mount_index == i:
 					items[i] = ""

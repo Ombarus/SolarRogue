@@ -38,9 +38,7 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- can't craft ship with found body (scout ?)
 - going down wormhole should take ap and/or energy
-- BUG: Touching myself in fast-travel sends me random location
 - Don't potion if not needed !
 - Make craft button craft more than one thing if enough items are in using list
 - Refine Need/Using list in converter UI (maybe a title + some outline for the list?)
@@ -160,6 +158,10 @@ IDEAS:::
 	
 	
 DONE :::
+- BUG: Touching myself in fast-travel sends me random location (ai was choosing a random destination because we were already there)
+- can't craft ship with found body (scout ?) (frigging issue between "res://src" and "src")
+
+
 - BUG: targetting overlay can stack when clicking weapon button multiple time (should pop HUD too maybe ?)
 - BUG: weapon button missing when tranfering ship
 - BUG: Transfering mounts duplicate cargo content ?!?

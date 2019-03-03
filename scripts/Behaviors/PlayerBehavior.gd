@@ -302,7 +302,7 @@ func OnLevelLoaded_Callback():
 		if _current_origin == PLAYER_ORIGIN.wormhole:
 			
 			for w in levelLoaderRef.objByType["wormhole"]:
-				var is_src_wormhole = _wormhole_src != null && _wormhole_src == w.get_attrib("src")
+				var is_src_wormhole = _wormhole_src != null && Globals.clean_path(_wormhole_src) == Globals.clean_path(w.get_attrib("src"))
 				var is_top_wormhole = starting_wormhole == null || w.modified_attributes["depth"] < starting_wormhole.modified_attributes["depth"]
 				if (_wormhole_src == null && is_top_wormhole) || (is_src_wormhole):
 					starting_wormhole = w
@@ -374,6 +374,11 @@ func _unhandled_input(event):
 			else:
 				var player_pos = playerNode.position
 				var clicked_tile = Globals.LevelLoaderRef.World_to_Tile(click_pos)
+				var player_tile = Globals.LevelLoaderRef.World_to_Tile(player_pos)
+				
+				if next_touch_is_a_goto == true and clicked_tile == player_tile:
+					next_touch_is_a_goto = false
+				
 				if next_touch_is_a_goto == true:
 					var ai_data = {
 						"aggressive":false,
