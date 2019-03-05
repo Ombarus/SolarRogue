@@ -352,6 +352,7 @@ func _unhandled_input(event):
 		return
 		
 	var dir = null
+	
 	if event is InputEventMouseButton:
 		print("DoubleClick : " + str(event.doubleclick))
 		print("Position : " + str(playerNode.get_global_mouse_position()))

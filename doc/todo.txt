@@ -41,7 +41,7 @@ TODO :::
 - going down wormhole should take ap and/or energy
 - Don't potion if not needed !
 - stop and/or prevent auto-move when energy low
-- Perf issues on my tablet ?
+- Perf issues on my tablet ? (might be scanner ?)
 - BUG: wormhole once appeared right on top of sun and was completly hidden !
 - Things that annoy me while playtesting :
 	- pinch zoom on device

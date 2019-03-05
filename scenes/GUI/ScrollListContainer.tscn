@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/GUI/ScrollListContainer.gd" type="Script" id=1]
 
-[node name="ScrollContainer" type="ScrollContainer"]
+[node name="ScrollContainer" type="ScrollContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0

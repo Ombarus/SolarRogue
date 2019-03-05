@@ -8,6 +8,10 @@ var levelLoaderRef
 var mouse_down = false
 var start_touch_pos
 var start_cam_pos
+var _orig_dist = 0 # for two-finger pinch distance between both finger
+
+var _touches = {} # for pinch zoom and drag with multiple fingers
+var _debug_cur_touch = 0
 
 func _ready():
 	levelLoaderRef = get_node(levelLoaderNode)
@@ -30,8 +34,24 @@ func _unhandled_input(event):
 	if levelLoaderRef == null:
 		return
 		
+	
+	#if event is InputEventScreenTouch and event.pressed == true:
+	#	_touches[event.index] = event
+	#if event is InputEventScreenTouch and event.pressed == false:
+	#	_touches.erase(event.index)
+	#if event is InputEventScreenDrag and _touches.size() == 2:
+	#	_zoom_camera(-1)
+	
+	#if event is InputEventMagnifyGesture:
+	#	_zoom_camera(event.factor)
+		
+		
+	pretend_multi_touch(event)
+	
+	"""
 	# Wheel Up Event
 	if event.is_action_pressed("zoom_in"):
+		print(event.position)
 		_zoom_camera(-1)
 	# Wheel Down Event
 	elif event.is_action_pressed("zoom_out"):
@@ -59,6 +79,7 @@ func _unhandled_input(event):
 	
 	if event.is_action_released("touch"):
 		mouse_down = false
+	"""
 
 # Zoom Camera
 func _zoom_camera(dir):
@@ -82,3 +103,39 @@ func _on_ZoomIn_pressed():
 
 func _on_ZoomOut_pressed():
 	_zoom_camera(1)
+
+func pretend_multi_touch(event):
+	if event is InputEventKey and event.scancode == KEY_A:
+		if event.pressed:
+			if _debug_cur_touch == 0:
+				_debug_cur_touch = 1
+		else:
+			if _debug_cur_touch == 1:
+				_debug_cur_touch = 0
+		#print(_debug_cur_touch)
+	if event is InputEventMouse:
+		pass
+	if event is InputEventMouseButton:
+		if event.pressed:
+			_touches[_debug_cur_touch] = {"start":event}
+		else:
+			_touches.erase(_debug_cur_touch)
+	if event is InputEventMouseMotion:
+		if _debug_cur_touch in _touches:
+			_touches[_debug_cur_touch]["current"] = event
+			update_pinch_gesture()
+			
+func update_pinch_gesture():
+	if _touches.size() < 2:
+		return
+	
+	var start = (_touches[0].start.position - _touches[1].start.position)
+	var cur = (_touches[0].current.position - _touches[1].current.position)
+	var start_dist = start.length()
+	var cur_dist = cur.length()
+	
+	var zoom_factor = (start_dist - cur_dist) / start_dist
+	var zoom_factor_2d = (start - cur) / start
+	zoom = Vector2(zoom_factor_2d)
+	zoom.x = clamp(zoom.x, min_zoom, max_zoom)
+	zoom.y = clamp(zoom.y, min_zoom, max_zoom)
