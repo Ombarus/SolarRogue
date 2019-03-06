@@ -25,7 +25,14 @@ func Craft(recipe_data, input_list, crafter):
 		# Validate that we can produce the thing
 		for require in recipe_data.requirements:
 			can_produce = false
-			if "type" in require: # might eventually support other like "name_id"
+			if recipe_data.produce == "energy":
+				for info in loaded_input_data:
+					if info.type == "energy":
+						continue
+					if info["amount"] > 0:
+						can_produce = true
+						break
+			elif "type" in require: # might eventually support other like "name_id"
 				for info in loaded_input_data:
 					if require["type"] == "energy" and info.type == "energy":
 						if (cur_energy+net_energy_change) < require["amount"]:
@@ -39,7 +46,7 @@ func Craft(recipe_data, input_list, crafter):
 						else:
 							can_produce = true
 						continue
-			if "src" in require:
+			elif "src" in require:
 				#TODO: count how many are required (take into account stackable ?)
 				for info in loaded_input_data:
 					if Globals.clean_path(require["src"]) in Globals.clean_path(info["src"]):
@@ -60,8 +67,17 @@ func Craft(recipe_data, input_list, crafter):
 			result = Globals.CRAFT_RESULT.success
 			
 		# Consume Resources
+		var consumed_data = []
 		for require in recipe_data.requirements:
-			if "type" in require: # might eventually support other like "name_id"
+			if recipe_data.produce == "energy":
+				for info in loaded_input_data:
+					if info.type == "energy":
+						continue
+					if info["amount"] > 0:
+						BehaviorEvents.emit_signal("OnRemoveItem", crafter, info["src"])
+						consumed_data.push_back({"data":info.data, "amount":require["amount"]})
+						info.amount -= require["amount"] # this works if "amount" is 1... but might cause issues if more
+			elif "type" in require:
 				for info in loaded_input_data:
 					if require["type"] == "energy" and info.type == "energy":
 						net_energy_change -= require["amount"]
@@ -71,7 +87,7 @@ func Craft(recipe_data, input_list, crafter):
 							BehaviorEvents.emit_signal("OnRemoveItem", crafter, info["src"])
 							info.amount -= 1
 						break
-			if "src" in require:
+			elif "src" in require:
 				for info in loaded_input_data:
 					if Globals.clean_path(info["src"]) == Globals.clean_path(require["src"]) and info["amount"] > 0:
 						for i in range(require["amount"]):
@@ -81,7 +97,8 @@ func Craft(recipe_data, input_list, crafter):
 		
 		# Produce the thing
 		if recipe_data.produce == "energy":
-			net_energy_change += recipe_data.amount
+			for d in consumed_data:
+				net_energy_change += d.data.recyclable.energy * d.amount
 		else:
 			var product_data = Globals.LevelLoaderRef.LoadJSON(recipe_data.produce)
 			for i in range(recipe_data.amount):

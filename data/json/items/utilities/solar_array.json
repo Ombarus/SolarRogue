@@ -10,5 +10,8 @@
 	},
 	"energy_regen": {
 		"per_turn":10.0
+	},
+	"recyclable": {
+		"energy": 200
 	}
 }

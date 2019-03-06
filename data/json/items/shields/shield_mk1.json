@@ -12,5 +12,8 @@
 		"max_hp":15,
 		"hp_regen_per_ap":0.2,
 		"energy_cost_per_hp":22.0
+	},
+	"recyclable": {
+		"energy": 200
 	}
 }

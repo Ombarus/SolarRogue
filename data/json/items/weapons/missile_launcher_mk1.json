@@ -19,5 +19,8 @@
 		"volume":100.0,
 		"equip_ap":3.0,
 		"unequip_ap":3.0
+	},
+	"recyclable": {
+		"energy": 200
 	}
 }

@@ -1,0 +1,24 @@
+{
+	"name_id":"A Planet",
+	"type":"planet",
+	"sprite_choice": [
+		"planet_a", "planet_b", "planet_c", "planet_d", "planet_e", "planet_f", "planet_g", "planet_h"
+	],
+	"harvestable": {
+	
+		"inventory_size":[0,10]
+		"pondered_inventory_content": [
+			{"src": "data/json/items/misc/hydrogen.json", "chance":0.25},
+			{"src": "data/json/items/misc/oxygen.json", "chance":0.50},
+			{"src": "data/json/items/misc/uranium.json", "chance":0.1},
+			{"src": "data/json/ships/human/scout_missile.json", "chance":0.8},
+			{"src": "data/json/ships/human/scout_laser.json", "chance":0.8},
+			{"src": "data/json/ships/human/frigate.json", "chance":0.8}
+		]
+		"drop":"data/json/items/misc/hydrogen.json",
+		"min_rich":1,
+		"max_rich":17,
+		"min_base_rate":0.05,
+		"max_base_rate":0.4
+	}
+}

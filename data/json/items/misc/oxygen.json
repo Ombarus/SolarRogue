@@ -1,0 +1,13 @@
+{
+	"name_id":"Oxygen",
+	"type":"food",
+	"sprite":"oxygen",
+	"equipment": {
+		"slot":"cargo",
+		"volume":2.0,
+		"stackable":true
+	},
+	"recyclable": {
+		"energy": 500
+	}
+}

@@ -10,5 +10,8 @@
 	},
 	"cargo_optimizer": {
 		"per_cargo_space":1.5
+	},
+	"recyclable": {
+		"energy": 200
 	}
 }

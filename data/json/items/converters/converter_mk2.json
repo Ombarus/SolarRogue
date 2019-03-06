@@ -12,18 +12,11 @@
 		"maximum_energy":20000,
 		"recipes": [
 			{
-				"name": "Energy", 
-				"requirements": [{"type":"food", "amount":1}], 
+				"name": "Recycle Energy", 
+				"requirements": [{"type":"recyclable", "amount":1}], 
 				"produce":"energy",
 				"ap_cost":1.0,
 				"amount":1600
-			},
-			{
-				"name": "Energy from Hull", 
-				"requirements":[{"type":"hull", "amount":1}], 
-				"produce":"energy",
-				"ap_cost":1.0,
-				"amount":400
 			},
 			{
 				"name": "Missile", 
@@ -61,5 +54,8 @@
 				"amount":1
 			}
 		]
+	},
+	"recyclable": {
+		"energy": 250
 	}
 }

@@ -1,0 +1,13 @@
+{
+	"name_id":"Uranium",
+	"type":"food",
+	"sprite":"uranium",
+	"equipment": {
+		"slot":"cargo",
+		"volume":2.0,
+		"stackable":true
+	},
+	"recyclable": {
+		"energy": 2000
+	}
+}

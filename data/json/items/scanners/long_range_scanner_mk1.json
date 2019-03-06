@@ -1,0 +1,18 @@
+{
+	"name_id":"Long Range Scanner",
+	"type":"scanner",
+	"sprite": "scanner",
+	"z_order":10,
+	"equipment": {
+		"slot":"scanner",
+		"volume":10.0,
+		"equip_ap":3.0,
+		"unequip_ap":3.0
+	},
+	"scanning": {
+		"radius":8
+	},
+	"recyclable": {
+		"energy": 200
+	}
+}

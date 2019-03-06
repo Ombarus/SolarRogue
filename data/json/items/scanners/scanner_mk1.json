@@ -11,5 +11,8 @@
 	},
 	"scanning": {
 		"radius":4
+	},
+	"recyclable": {
+		"energy": 200
 	}
 }

@@ -1,5 +1,5 @@
 {
-	"name_id":"Short Range Scanner",
+	"name_id":"Short Range Scanner MK2",
 	"type":"scanner",
 	"sprite": "scanner",
 	"z_order":10,
@@ -12,5 +12,8 @@
 	"scanning": {
 		"radius":4,
 		"partial_reveal_type": ["planet", "wormhole", "sun"]
+	},
+	"recyclable": {
+		"energy": 250
 	}
 }

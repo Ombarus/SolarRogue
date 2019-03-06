@@ -54,11 +54,16 @@ func CraftButtonPressed_Callback():
 	
 func Ok_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
+	
+	_using_list.Content = []
+	_need_list.Content = []
 		
 	
 func Cancel_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
 
+	_using_list.Content = []
+	_need_list.Content = []
 	
 func Init(init_param):
 	_obj = init_param["object"]
@@ -124,6 +129,8 @@ func _on_CraftingList_item_selected(index):
 		for item in cargo:
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			var add_item = false
+			if recipe_data.produce == "energy" and "recyclable" in data:
+				add_item = true
 			if "type" in r and r.type == data.type:
 				add_item = true
 			if "src" in r and Globals.clean_path(r.src) == Globals.clean_path(item.src):
@@ -189,6 +196,11 @@ func UpdateCraftButton():
 		if r.name == _current_crafting_selected:
 			recipe_data = r
 			break
+	
+	# a bit hackish but the "recycle" recipe is special so better to do it in a separate function	
+	if recipe_data.produce == "energy":
+		special_recycle_update(recipe_data)
+		return
 			
 	var requirement_count = {}
 	var energy_cost = 0
@@ -234,4 +246,24 @@ func UpdateCraftButton():
 		_craft_button.visible = true
 	else:
 		_craft_button.visible = false
-				
+
+func special_recycle_update(recipe_data):
+	var using_content = _using_list.Content
+	var total_items = 0
+	var total_energy = 0
+	for item in using_content:
+		var d = Globals.LevelLoaderRef.LoadJSON(item.src)
+		total_items += item.count
+		total_energy += (d.recyclable.energy * item.count)
+		
+	var color = "[color=lime]"
+	if total_items <= 0:
+		color = "[color=red]"
+	_craft_result_info.bbcode_text = color + "Recycle " + str(total_items) + " items and gain " + str(total_energy) + " energy[/color]"
+	
+	if total_items > 0:
+		_craft_button.visible = true
+	else:
+		_craft_button.visible = false
+	
+	

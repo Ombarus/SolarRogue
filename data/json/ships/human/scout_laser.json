@@ -9,7 +9,7 @@
 		"scanner": ["data/json/items/scanners/scanner_mk1.json"]
 	},
 	"animation": {
-		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
+		"destroyed": "scenes/explosion_fx.tscn"
 	},
 	"ai": {
 		"aggressive":true,

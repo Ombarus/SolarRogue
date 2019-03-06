@@ -1,0 +1,25 @@
+{
+	"name_id":"Laser Turret MK2",
+	"type":"weapon",
+	"sprite": "laser_turret",
+	"animation": {
+		"shoot": "scenes/tileset_source/LaserFX01.tscn"
+	},
+	"weapon_data": {
+		"base_dam":7.0,
+		"max_dam":11.0,
+		"fire_range":3.0,
+		"fire_pattern":"+",
+		"fire_energy_cost":1000.0,
+		"fire_speed":1.0
+	},
+	"equipment": {
+		"slot":"weapon",
+		"volume":100.0,
+		"equip_ap":3.0,
+		"unequip_ap":3.0
+	},
+	"recyclable": {
+		"energy": 250
+	}
+}

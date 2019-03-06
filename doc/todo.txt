@@ -38,6 +38,7 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- Review the fact that crafting takes time so producing energy takes energy = to idle amount...
 - going down wormhole should take ap and/or energy
 - Don't potion if not needed !
 - stop and/or prevent auto-move when energy low
@@ -109,6 +110,8 @@ TODO :::
 	
 	
 polish :::
+- Sort energy recycler need list from most energy to less energy
+- Polish Energy "Recyling" informations in crafting UI
 - Block background in the howmany dialog
 - Find a way to show how many of something you already have when crafting
 - Refine Need/Using list in converter UI (maybe a title + some outline for the list?)

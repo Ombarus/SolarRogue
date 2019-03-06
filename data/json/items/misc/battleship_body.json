@@ -6,5 +6,8 @@
 		"slot":"cargo",
 		"volume":190.0,
 		"stackable":false
+	},
+	"recyclable": {
+		"energy": 350
 	}
 }
