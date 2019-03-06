@@ -534,6 +534,8 @@ max_lines_visible = -1
 
 [node name="TargettingHUD" parent="Camera-GUI" index="1" instance=ExtResource( 32 )]
 
+visible = false
+
 [node name="TransferInventory" parent="Camera-GUI" index="2" instance=ExtResource( 33 )]
 
 visible = false
