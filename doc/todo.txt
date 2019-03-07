@@ -38,6 +38,8 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- BUG: GOTO should not trigger (or cancel) if ship is over-weight
+- Tweak: Probe couuld have a higher chance to drop scanner MK2 than other things in the game
 - Review the fact that crafting takes time so producing energy takes energy = to idle amount...
 - going down wormhole should take ap and/or energy
 - Don't potion if not needed !

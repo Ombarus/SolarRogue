@@ -119,8 +119,6 @@ shortcut = SubResource( 7 )
 
 [node name="Behaviors" type="Node" parent="." index="0"]
 
-editor/display_folded = true
-
 [node name="UIManager" type="Node" parent="Behaviors" index="0"]
 
 script = ExtResource( 1 )

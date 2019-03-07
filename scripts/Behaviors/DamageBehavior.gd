@@ -8,17 +8,58 @@ func _ready():
 	BehaviorEvents.connect("OnDealDamage", self, "OnDealDamage_Callback")
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 	
+	
+func sort_by_chance(a, b):
+	if a.chance > b.chance:
+		return true
+	return false
+	
+	
 func OnObjectLoaded_Callback(obj):
-	if obj.get_attrib("harvestable") == null:
+	# if harvestable.inventory is set then we are loading a savegame and we don't need to init the planet's data
+	if obj.get_attrib("harvestable") == null or obj.get_attrib("harvestable.inventory") != null:
 		return
 	
-	var min_rich = obj.get_attrib("harvestable.min_rich")
-	var max_rich = obj.get_attrib("harvestable.max_rich")
-	var min_rate = obj.get_attrib("harvestable.min_base_rate")
-	var max_rate = obj.get_attrib("harvestable.max_base_rate")
-	obj.modified_attributes["harvestable"] = {}
-	obj.set_attrib("harvestable.count", MersenneTwister.rand(max_rich-min_rich) + min_rich)
-	obj.set_attrib("harvestable.chance", (MersenneTwister.rand_float() * (max_rate-min_rate)) + min_rate)
+	var inv_size = obj.get_attrib("harvestable.inventory_size")
+	var rate = obj.get_attrib("harvestable.base_rate")
+	var defense_chance = obj.get_attrib("harvestable.defense_chance")
+	#var defense_size = obj.get_attrib("harvestable.defense_size")
+	var pondered_inv = obj.get_attrib("harvestable.pondered_inventory_content")
+	pondered_inv.sort_custom(self, "sort_by_chance")
+	
+	var modified_harvestable_data = {}
+	var actual_inv_size = MersenneTwister.rand(inv_size[1]-inv_size[0]) + inv_size[0]
+	modified_harvestable_data["actual_rate"] = (MersenneTwister.rand_float() * (rate[1]-rate[0])) + rate[0]
+	var max_pond_inv = 0
+	for item in pondered_inv:
+		max_pond_inv += item.chance
+	
+	var actual_inv = []
+	for i in range(actual_inv_size):
+		var target = MersenneTwister.rand(max_pond_inv)
+		var selected_item = null
+		var sum = 0
+		for item in pondered_inv:
+			if sum + item.chance > target:
+				selected_item = item.src
+				break
+			sum += item.chance
+		actual_inv.push_back(selected_item)
+		
+	modified_harvestable_data["inventory"] = actual_inv
+	modified_harvestable_data["has_defense"] = MersenneTwister.rand_float() <= defense_chance
+	
+	obj.set_attrib("harvestable", modified_harvestable_data)
+	
+	#if modified_harvestable_data["has_defense"] == true:
+	#	var pondered_ennemies = obj.get_attrib("harvestable.pondered_defense_list")
+	#	pondered_ennemies.sort_custom(self, "sort_by_chance")
+		
+	
+	#obj.modified_attributes["harvestable"] = {}
+	#obj.set_attrib("harvestable.count", MersenneTwister.rand(max_rich-min_rich) + min_rich)
+	#obj.set_attrib("harvestable.chance", (MersenneTwister.rand_float() * (max_rate-min_rate)) + min_rate)
+	
 	
 func OnDealDamage_Callback(target, shooter, weapon_data):
 	if validate_action(target, shooter, weapon_data) == true:
@@ -28,7 +69,13 @@ func OnDealDamage_Callback(target, shooter, weapon_data):
 		else:
 			ProcessDamage(target, shooter, weapon_data)
 	
+	
 func validate_action(target, shooter, weapon_data):
+	var defense_deployed = target.get_attrib("harvestable.defense_deployed")
+	if defense_deployed != null and defense_deployed == true:
+		BehaviorEvents.emit_signal("OnLogLine", "This planet has a colony, let's not push our luck.")
+		return false
+		
 	var ammo = null
 	var is_player = shooter.get_attrib("type") == "player"
 	var is_target_player = target.get_attrib("type") == "player"
@@ -63,34 +110,78 @@ func validate_action(target, shooter, weapon_data):
 	
 	
 func ProcessHarvesting(target, shooter, weapon_data):
+	if target.get_attrib("harvestable.has_defense") == true:
+		ProcessDefense(target, shooter, weapon_data)
+	else:
+		ProcessHarvest(target, shooter, weapon_data)
+		
+		
+func ProcessDefense(target, shooter, weapon_data):
+	var defense_size = target.get_attrib("harvestable.defense_size")
+	var pondered_ennemies = target.get_attrib("harvestable.pondered_defense_list")
+	pondered_ennemies.sort_custom(self, "sort_by_chance")
 	
-	var is_player = shooter.get_attrib("type") == "player"
-	var is_target_player = target.get_attrib("type") == "player"
-	var item_left = target.get_attrib("harvestable.count")
+	var max_pond = 0
+	for item in pondered_ennemies:
+		max_pond += item.chance
+	
+	var spawn_count = MersenneTwister.rand(defense_size[1]-defense_size[0]) + defense_size[0]
+	var ennemies_to_spawn = []
+	for i in range(spawn_count):
+		var roll = MersenneTwister.rand(max_pond)
+		var selected_item = null
+		var sum = 0
+		for item in pondered_ennemies:
+			if sum + item.chance > roll:
+				selected_item = item.src
+				break
+			sum += item.chance
+		ennemies_to_spawn.push_back(selected_item)
+		
+	var bounds = Globals.LevelLoaderRef.levelSize
+	for json in ennemies_to_spawn:
+		var x = MersenneTwister.rand(3) - 1
+		var y = MersenneTwister.rand(3) - 1
+		var tile = Globals.LevelLoaderRef.World_to_Tile(target.position)
+		x = clamp(tile.x + x, 0, bounds.x-1)
+		y = clamp(tile.y + y, 0, bounds.y-1)
+		var offset = Vector2(x,y)
+		Globals.LevelLoaderRef.RequestObject(json, offset)
+		
+	BehaviorEvents.emit_signal("OnLogLine", "[color=red]This planet had a colony and they are NOT happy. They've deployed defenses.[/color]")
+	target.set_attrib("harvestable.defense_deployed", true)
+	
+	
+func ProcessHarvest(target, shooter, weapon_data):
 	#TODO modulate chance based on weapon data
-	var chance = target.get_attrib("harvestable.chance")
-	var item_json = target.get_attrib("harvestable.drop")
-	var drop_count = 0
-	for i in range(item_left):
-		if MersenneTwister.rand_float() < chance:
-			drop_count += 1
-	if drop_count == 0 && is_player:
+	var chance = target.get_attrib("harvestable.actual_rate")
+	var drop_index_list = []
+	var inventory = target.get_attrib("harvestable.inventory")
+	for i in range(inventory.size()):
+		var should_drop = MersenneTwister.rand_float() <= chance
+		if should_drop == true:
+			# NOTICE THE PUSH ***FRONT*** SO WE LATER CAN DELETE WHILE WE ITERATE ON THE ARRAY !
+			drop_index_list.push_front(i)
+
+	var is_player = shooter.get_attrib("type") == "player"	
+	if drop_index_list.size() == 0 && is_player:
 		BehaviorEvents.emit_signal("OnLogLine", "Your shots did not produce anything useful")
 	else:
 		var bounds = Globals.LevelLoaderRef.levelSize
-		for i in range(drop_count):
+		for inv_index in drop_index_list:
 			var x = MersenneTwister.rand(3) - 1
 			var y = MersenneTwister.rand(3) - 1
 			var tile = Globals.LevelLoaderRef.World_to_Tile(target.position)
 			x = clamp(tile.x + x, 0, bounds.x-1)
 			y = clamp(tile.y + y, 0, bounds.y-1)
 			var offset = Vector2(x,y)
-			Globals.LevelLoaderRef.RequestObject(item_json, offset)
-		target.modified_attributes.harvestable.count -= drop_count
+			Globals.LevelLoaderRef.RequestObject(inventory[inv_index], offset)
+			# safe because we're going from last to first so the next index shouldn't change
+			inventory.remove(inv_index)
 		if is_player:
 			BehaviorEvents.emit_signal("OnLogLine", "Some useful materials float into orbit")
-	
-	
+
+
 func ProcessDamage(target, shooter, weapon_data):
 	var is_player = shooter.get_attrib("type") == "player"
 	var is_target_player = target.get_attrib("type") == "player"
@@ -134,6 +225,7 @@ func ProcessDeathSpawns(target):
 		var can_spawn = not "global_max" in stuff or stuff["global_max"] < spawned
 		if can_spawn and MersenneTwister.rand_float() < stuff.chance:
 			Globals.LevelLoaderRef.RequestObject(stuff.id, Globals.LevelLoaderRef.World_to_Tile(target.position))
+
 
 func _hit_shield(target, dam):
 	var cur_hp = target.get_attrib("shield.current_hp")

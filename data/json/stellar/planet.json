@@ -5,13 +5,28 @@
 		"planet_a", "planet_b", "planet_c", "planet_d", "planet_e", "planet_f", "planet_g", "planet_h"
 	],
 	"harvestable": {
-		"documentation":"Planets have a 'richness' that determine how many items they can drop before running out (to avoid farming)",
-		"documentation2":"They also have a drop rate that translate to how 'hard' they are to mine. Rich planet might require powerful weapons to mine effectively if drop_rate is low",
+		"comment1":"planets will be spawned with a certain inventory size between values in 'inventory_size'",
+		"comment2":"the content of each inventory slot will be choosen randomly from the pondered list",
+		"comment3":"the planet will choose a 'harvestable rate' between min and max base rate.",
+		"comment4":"this is the chance that a certain inventory item will be released when the planet is shot with a weapon",
+		"comment5":"defense_chance is the chance that the planet will spawn ennemies when shot",
+		"comment6":"if defense is found to be true, when the planet is shot it will spawn a random defense between values in 'defense_size'",
+		"comment7":"the ennemies will be choosen from the pondered list",
 		
-		"drop":"data/json/items/misc/hydrogen.json",
-		"min_rich":1,
-		"max_rich":17,
-		"min_base_rate":0.05,
-		"max_base_rate":0.4
+		
+		"inventory_size":[1,17],
+		"pondered_inventory_content": [
+			{"src": "data/json/items/misc/hydrogen.json", "chance":25},
+			{"src": "data/json/items/misc/oxygen.json", "chance":50},
+			{"src": "data/json/items/misc/uranium.json", "chance":10}
+		],
+		"base_rate":[0.05, 0.4],
+		"defense_chance":0.0275,
+		"defense_size":[1,3],
+		"pondered_defense_list": [
+			{"src": "data/json/ships/human/scout_missile.json", "chance":80},
+			{"src": "data/json/ships/human/scout_laser.json", "chance":18},
+			{"src": "data/json/ships/human/frigate.json", "chance":2}
+		]
 	}
 }

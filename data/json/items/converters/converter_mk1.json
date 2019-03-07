@@ -44,7 +44,9 @@
 				"icon_region":[512,256,128,128],
 				"requirements":[
 					{"type":"energy", "amount":1800},
-					{"src":"data/json/items/misc/scout_body.json", "amount":1}
+					{"src":"data/json/items/misc/scout_body.json", "amount":1},
+					{"src":"data/json/items/misc/frigate_body.json", "amount":1},
+					{"src":"data/json/items/misc/hydrogen.json", "amount":3}
 				],
 				"produce":"data/json/ships/human/player_scout.json",
 				"ap_cost":6.0,
