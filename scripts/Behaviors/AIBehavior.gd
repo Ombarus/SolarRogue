@@ -143,7 +143,7 @@ func DoSimplePathFinding(obj):
 	if move_by.length_squared() > 0:
 		BehaviorEvents.emit_signal("OnMovement", obj, move_by)
 		
-	if tile_pos + move_by == cur_objective:
+	if tile_pos + move_by == cur_objective or obj.get_attrib("moving.moved") == false:
 		if obj.get_attrib("ai.disable_on_interest") != null and obj.get_attrib("ai.disable_on_interest") == true:
 			obj.set_attrib("ai.disabled", true)
 

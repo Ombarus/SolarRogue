@@ -241,7 +241,7 @@ func OnObjTurn_Callback(obj):
 			var filtered = []
 			var wormhole = null
 			for c in content:
-				if c != obj and not c.base_attributes.type in ["prop"]:
+				if c != obj and not c.get_attrib("type") in ["prop"]:
 					filtered.push_back(c)
 				if c != obj and c.get_attrib("type") in ["wormhole"]:
 					wormhole = c
@@ -303,7 +303,6 @@ func OnLevelLoaded_Callback():
 			#cur_save.player_data["position_x"] = World_to_Tile(objByType["player"][0].position).y
 			#cur_save.player_data["position_y"] = World_to_Tile(objByType["player"][0].position).x
 			#cur_save.player_data["modified_attributes"] = objByType["player"][0].modified_attributes
-			template = save.player_data.src
 			coord = Vector2(save.player_data.position_x, save.player_data.position_y)
 		
 		var starting_wormhole = null
@@ -321,8 +320,9 @@ func OnLevelLoaded_Callback():
 		var modififed_attrib = null
 		if save != null && save.has("player_data"):
 			modififed_attrib = save.player_data.modified_attributes
+			template = save.player_data.src
 		# Modified_attrib must be passed during request so that proper IDs can be locked in objByID
-		playerNode = levelLoaderRef.RequestObject("data/json/ships/player_default.json", coord, modififed_attrib)
+		playerNode = levelLoaderRef.RequestObject(template, coord, modififed_attrib)
 		
 		UpdateButtonVisibility()
 		

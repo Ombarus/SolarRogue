@@ -1,7 +1,7 @@
 extends Control
 
 
-func _unhandled_input(event):
+func _gui_input(event):
 	if self.visible == true and event.is_action_released("touch"):
 		get_parent().Pressed_Close_Callback()
 		get_tree().set_input_as_handled()

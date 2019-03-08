@@ -26,12 +26,12 @@
 		"drop_ap":1.0,
 		"content":[
 			{"src":"data/json/items/weapons/missile.json", "count":10},
-			{"src":"data/json/items/misc/hydrogen.json", "count":10},
+			{"src":"data/json/items/misc/frigate_body.json", "count":1},
 			{"src":"data/json/items/consumables/repair_nanobots.json", "count":1}
 		]
 	},
 	"converter": {
-		"stored_energy": 10000,
+		"stored_energy": 100000,
 		"base_ap_energy_cost":10
 	}
 }

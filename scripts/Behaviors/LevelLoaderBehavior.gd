@@ -238,7 +238,7 @@ func OnRequestObjectUnload_Callback(obj):
 	#objCountByType[obj.base_attributes.src] -= 1
 	#TODO: Should I clean ObjById ? I might iterate through it to delete objects so removing them while I iterate is dangerous
 	objById[obj.get_attrib("unique_id")] = null
-	objByType[obj.base_attributes.type].erase(obj)
+	objByType[obj.get_attrib("type")].erase(obj)
 	if _wait_for_anim == true:
 		yield(BehaviorEvents, "OnAnimationDone")
 	obj.get_parent().remove_child(obj)
@@ -329,11 +329,12 @@ func CreateAndInitNode(data, pos, modified_data = null):
 		n.modified_attributes = modified_data
 	r.call_deferred("add_child", n)
 	levelTiles[ pos.x ][ pos.y ].push_back(n)
-	if data.has("type"):
-		if not objByType.has(data["type"]):
-			objByType[ data["type"] ] = []
-		objByType[ data["type"] ].push_back(n)
-		if data["type"] == "wormhole" and not n.modified_attributes.has("depth"):
+	var obj_type = n.get_attrib("type")
+	if obj_type != null:
+		if not objByType.has(obj_type):
+			objByType[ obj_type ] = []
+		objByType[ obj_type ].push_back(n)
+		if obj_type == "wormhole" and not n.modified_attributes.has("depth"):
 			n.modified_attributes["depth"] = current_depth + 1
 	if not n.modified_attributes.has("unique_id"):
 		n.modified_attributes["unique_id"] = _sequence_id

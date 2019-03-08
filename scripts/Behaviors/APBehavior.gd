@@ -50,8 +50,8 @@ func OnAnimationDone_Callback():
 	_waiting_on_anim = false
 	
 func OnTransferPlayer_Callback(old_player, new_player):
-	StopAP(old_player)
 	StartAP(new_player, old_player.get_attrib("action_point"))
+	StopAP(old_player)
 	
 func OnRequestObjectUnload_Callback(obj):
 	if obj.get_attrib("type") == "player":
@@ -140,6 +140,8 @@ func StopAP(obj):
 		return
 	
 	action_list.remove(index)
+	# without setting action_point disabled, if we load it will end back in the action list
+	obj.set_attrib("action_point", {"disabled":true})
 	
 func StartAP(obj, start_point=0):
 	var index = action_list.find(obj)

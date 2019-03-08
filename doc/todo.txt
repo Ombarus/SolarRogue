@@ -38,16 +38,20 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- BUG: GOTO should not trigger (or cancel) if ship is over-weight
+- Menu button in HUD with "save and quite", "suicide" (eventually "options" too ?)
+- Look button should popup a window with details ?
 - Tweak: Probe couuld have a higher chance to drop scanner MK2 than other things in the game
 - Review the fact that crafting takes time so producing energy takes energy = to idle amount...
+- Review the fact that as you become powerful you will use more energy. Even if the weapons are more efficient, the ennemies will be harder to kill so how to you keep your energy needs in check ?
+	- Homeworld planet should have higher chance of being colonized
+	- Deeper planet could drop more Uranium
+	- Deeper planet could have something even better than Uranium (or battleship might have bigger chance to drop unobtainium)
 - going down wormhole should take ap and/or energy
 - Don't potion if not needed !
 - stop and/or prevent auto-move when energy low
 - Perf issues on my tablet ? (might be scanner ?)
 - BUG: wormhole once appeared right on top of sun and was completly hidden !
 - Things that annoy me while playtesting :
-	- pinch zoom on device
 	- (confirmed ? particle systems do not work on android !) missing some fx on new ships ?
 	- dragging converter list doesn't move the list.. very difficult on device to hit the scroll
 - up and down wormhole should have different sprite
@@ -57,7 +61,6 @@ TODO :::
 	- add "cancel shots" button to targetting overlay
 - BUG: can't fire multiple weapon if we select a target out of range (works if we select empty tiles)
 - Refactor equip mount dialog with similar drag&drop instead of two annoying separate popup
-- BUG: Mouse stay stuck if moving camera when sub-menu is up
 - level generation improvement :
 	- have the spawn chance be able to have group of related elements (so I can spawn for example, 3 missiles next to each other 0.1% chance per level)
 		- make for more story like spawns like a missile launcher and 2-3 missile and maybe a broken down prop next to each other but relative position instead of absolute like the sun
@@ -154,6 +157,13 @@ IDEAS:::
 	
 	
 DONE :::
+- BUG: Mouse stay stuck if moving camera when sub-menu is up
+- BUG: Going down wormhole without scanner make the whole map visible ?
+- BUG: changing level loads default_player instead of saved ship (multiple bugs on this one, some stupid, some less obvious)
+- BUG: GOTO should not trigger (or cancel) if ship is over-weight
+
+
+	- pinch zoom on device
 - Implement consumable interface
 	- UI
 	- JSON

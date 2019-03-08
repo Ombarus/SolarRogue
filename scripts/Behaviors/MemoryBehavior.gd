@@ -21,12 +21,14 @@ func OnTransferPlayer_Callback(old_player, new_player):
 	_playerNode = new_player
 	# Should I duplicate the array here ?
 	new_player.set_attrib("memory", old_player.get_attrib("memory"))
+	_update_occlusion_texture()
 
 func OnObjectLoaded_Callback(obj):
 	if obj.get_attrib("type") == "player":
 		_playerNode = obj
 		BehaviorEvents.disconnect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 		BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
+		_update_occlusion_texture()
 	
 func OnRequestObjectUnload_Callback(obj):
 	if obj == _playerNode:
@@ -37,12 +39,10 @@ func OnRequestObjectUnload_Callback(obj):
 func ExecuteFullSweep():
 	var level_id = Globals.LevelLoaderRef.GetLevelID()
 	var player_scan = _playerNode.get_attrib("scanner_result.cur_in_range." + level_id)
-	if player_scan == null: # Not sure why this can be null at this point but I crashed once there
-		return
 	for key in Globals.LevelLoaderRef.objById:
 		var obj = Globals.LevelLoaderRef.objById[key]
 		var disable_fow = Globals.LevelLoaderRef.GetCurrentLevelData().has("fully_mapped") and Globals.LevelLoaderRef.GetCurrentLevelData().fully_mapped == true
-		if key in player_scan or obj == _playerNode or obj.get_attrib("ghost_memory") != null or disable_fow:
+		if disable_fow or obj == _playerNode or obj.get_attrib("ghost_memory") != null or (player_scan != null and key in player_scan):
 			obj.visible = true
 		else:
 			obj.visible = false
