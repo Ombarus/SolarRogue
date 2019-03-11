@@ -157,6 +157,9 @@ IDEAS:::
 	
 	
 DONE :::
+
+
+
 - BUG: Mouse stay stuck if moving camera when sub-menu is up
 - BUG: Going down wormhole without scanner make the whole map visible ?
 - BUG: changing level loads default_player instead of saved ship (multiple bugs on this one, some stupid, some less obvious)

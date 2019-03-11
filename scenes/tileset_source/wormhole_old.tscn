@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://data/shaders/swirl.tres" type="Material" id=1]
+[ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=2]
+
+[node name="wormhole" type="Sprite"]
+
+material = ExtResource( 1 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 1920, 128, 128, 128 )
+_sections_unfolded = [ "Material", "Region" ]
+
+[node name="wormhole" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 1920, 128, 128, 128 )
+_sections_unfolded = [ "Region" ]
+
+[node name="swirl" type="Sprite" parent="." index="1"]
+
+material = ExtResource( 1 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 1920, 128, 128, 128 )
+_sections_unfolded = [ "Material", "Region" ]
+
+

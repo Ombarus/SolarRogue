@@ -1,11 +1,26 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=1]
 
-[node name="shuttle" type="Sprite" index="0"]
+[sub_resource type="Shader" id=1]
 
+code = "shader_type canvas_item;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+
+render_priority = 0
+shader = SubResource( 1 )
+
+[node name="frigate" type="Sprite"]
+
+material = SubResource( 2 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 896, 256, 128, 128 )
+_sections_unfolded = [ "Material" ]
 
 

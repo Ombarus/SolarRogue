@@ -29,14 +29,14 @@ func _unhandled_input(event):
 		_touches.erase(event.index)
 	if event is InputEventScreenDrag:
 		_touches[event.index]["current"] = event
-		update_pinch_gesture()
+		#update_pinch_gesture()
 
 	# Handle Multi-touch using 'A' key and mouse event instead of Touch event	
 	pretend_multi_touch(event)
 	
 	# Wheel Up Event
 	if event.is_action_pressed("zoom_in"):
-		print(event.position)
+		#print(event.position)
 		_zoom_camera(-1)
 	# Wheel Down Event
 	elif event.is_action_pressed("zoom_out"):
@@ -136,8 +136,20 @@ func update_pinch_gesture():
 		return
 	
 	var zoom_factor = (_touches_info["previous_radius"] - _touches_info["radius"]) / _touches_info["previous_radius"]
-	zoom_factor = zoom.x + zoom_factor
+	var final_zoom = zoom.x + zoom_factor
 
-	zoom = Vector2(zoom_factor,zoom_factor)
+	zoom = Vector2(final_zoom,final_zoom)
 	zoom.x = clamp(zoom.x, min_zoom, max_zoom)
 	zoom.y = clamp(zoom.y, min_zoom, max_zoom)
+		
+	var vp_size = self.get_viewport().size
+	if get_viewport().is_size_override_enabled():
+		vp_size = get_viewport().get_size_override()
+	var old_dist = ((_touches_info["target"] - (vp_size / 2.0))*(zoom-Vector2(zoom_factor, zoom_factor)))
+	var new_dist = ((_touches_info["target"] - (vp_size / 2.0))*zoom)
+	var cam_need_move = old_dist - new_dist
+	self.position += cam_need_move
+	
+	#var to_print = "od.x %f, t.x %f, vp.x %f, zoom.x %f, fac %f, move.x(%f)" % [
+	#	old_dist.x, _touches_info["target"].x, vp_size.x, zoom.x, zoom_factor, cam_need_move.x]
+	#BehaviorEvents.emit_signal("OnLogLine", to_print)

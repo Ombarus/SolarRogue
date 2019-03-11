@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://scripts/Behaviors/UIManager.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Behaviors/APBehavior.gd" type="Script" id=2]
@@ -24,24 +24,25 @@
 [ext_resource path="res://scripts/ParallaxBG.gd" type="Script" id=22]
 [ext_resource path="res://data/shaders/fow_mask.tres" type="Material" id=23]
 [ext_resource path="res://scripts/CamControl.gd" type="Script" id=24]
-[ext_resource path="res://scripts/GUI/GUILayoutBase.gd" type="Script" id=25]
-[ext_resource path="res://scripts/GUI/GridDisplay.gd" type="Script" id=26]
-[ext_resource path="res://scripts/GUI/LogSystem.gd" type="Script" id=27]
-[ext_resource path="res://scenes/GUI/StringContentDialog.tscn" type="PackedScene" id=28]
-[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=29]
-[ext_resource path="res://data/Weapon_ShortCut.tres" type="ShortCut" id=30]
-[ext_resource path="res://scenes/GUI/PopupButton.tscn" type="PackedScene" id=31]
-[ext_resource path="res://scripts/GUI/StatusBarSystem.gd" type="Script" id=32]
-[ext_resource path="res://scenes/GUI/TargettingHUD.tscn" type="PackedScene" id=33]
-[ext_resource path="res://scenes/GUI/Dialogs/TransferInventory.tscn" type="PackedScene" id=34]
-[ext_resource path="res://scenes/GUI/Dialogs/SelectableInventory.tscn" type="PackedScene" id=35]
-[ext_resource path="res://scenes/GUI/Dialogs/Converter.tscn" type="PackedScene" id=36]
-[ext_resource path="res://scenes/GUI/Dialogs/EquipMenus.tscn" type="PackedScene" id=37]
-[ext_resource path="res://scenes/GUI/Dialogs/DeathScreen.tscn" type="PackedScene" id=38]
-[ext_resource path="res://scenes/GUI/Dialogs/SelectableTarget.tscn" type="PackedScene" id=39]
-[ext_resource path="res://scenes/GUI/Dialogs/WelcomeScreen.tscn" type="PackedScene" id=40]
-[ext_resource path="res://scenes/GUI/Dialogs/HowManyDiag.tscn" type="PackedScene" id=41]
-[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=42]
+[ext_resource path="res://scenes/tileset_source/wormhole.tscn" type="PackedScene" id=25]
+[ext_resource path="res://scripts/GUI/GUILayoutBase.gd" type="Script" id=26]
+[ext_resource path="res://scripts/GUI/GridDisplay.gd" type="Script" id=27]
+[ext_resource path="res://scripts/GUI/LogSystem.gd" type="Script" id=28]
+[ext_resource path="res://scenes/GUI/StringContentDialog.tscn" type="PackedScene" id=29]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=30]
+[ext_resource path="res://data/Weapon_ShortCut.tres" type="ShortCut" id=31]
+[ext_resource path="res://scenes/GUI/PopupButton.tscn" type="PackedScene" id=32]
+[ext_resource path="res://scripts/GUI/StatusBarSystem.gd" type="Script" id=33]
+[ext_resource path="res://scenes/GUI/TargettingHUD.tscn" type="PackedScene" id=34]
+[ext_resource path="res://scenes/GUI/Dialogs/TransferInventory.tscn" type="PackedScene" id=35]
+[ext_resource path="res://scenes/GUI/Dialogs/SelectableInventory.tscn" type="PackedScene" id=36]
+[ext_resource path="res://scenes/GUI/Dialogs/Converter.tscn" type="PackedScene" id=37]
+[ext_resource path="res://scenes/GUI/Dialogs/EquipMenus.tscn" type="PackedScene" id=38]
+[ext_resource path="res://scenes/GUI/Dialogs/DeathScreen.tscn" type="PackedScene" id=39]
+[ext_resource path="res://scenes/GUI/Dialogs/SelectableTarget.tscn" type="PackedScene" id=40]
+[ext_resource path="res://scenes/GUI/Dialogs/WelcomeScreen.tscn" type="PackedScene" id=41]
+[ext_resource path="res://scenes/GUI/Dialogs/HowManyDiag.tscn" type="PackedScene" id=42]
+[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=43]
 
 [sub_resource type="InputEventKey" id=1]
 
@@ -288,6 +289,16 @@ levelLoaderNode = NodePath("../Behaviors/LevelLoader")
 
 [node name="GameTiles" type="Node" parent="." index="6"]
 
+[node name="BackBufferCopy" type="BackBufferCopy" parent="GameTiles" index="0"]
+
+copy_mode = 2
+rect = Rect2( -100, -100, 200, 200 )
+
+[node name="wormhole" parent="GameTiles" index="1" instance=ExtResource( 25 )]
+
+visible = false
+position = Vector2( 277.297, 216.471 )
+
 [node name="World-GUI" type="Node" parent="." index="7"]
 
 [node name="GridPattern" type="Control" parent="World-GUI" index="0"]
@@ -302,7 +313,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 25 )
+script = ExtResource( 26 )
 _sections_unfolded = [ "Mouse", "Visibility" ]
 
 [node name="Display" type="Control" parent="World-GUI/GridPattern" index="0"]
@@ -317,7 +328,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 26 )
+script = ExtResource( 27 )
 _sections_unfolded = [ "Mouse", "Rect", "Visibility" ]
 line_color = Color( 1, 0, 0, 0.352941 )
 
@@ -343,7 +354,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 25 )
+script = ExtResource( 26 )
 _sections_unfolded = [ "Mouse" ]
 
 [node name="Log" type="Control" parent="Camera-GUI/HUD" index="0"]
@@ -359,10 +370,11 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 27 )
+script = ExtResource( 28 )
 _sections_unfolded = [ "Mouse" ]
+max_log = 100
 
-[node name="LogWindow" parent="Camera-GUI/HUD/Log" index="0" instance=ExtResource( 28 )]
+[node name="LogWindow" parent="Camera-GUI/HUD/Log" index="0" instance=ExtResource( 29 )]
 
 anchor_top = 1.0
 anchor_right = 1.0
@@ -389,7 +401,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Mouse" ]
 
-[node name="Weapon" parent="Camera-GUI/HUD/Buttons" index="0" instance=ExtResource( 29 )]
+[node name="Weapon" parent="Camera-GUI/HUD/Buttons" index="0" instance=ExtResource( 30 )]
 
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -399,9 +411,9 @@ margin_right = 124.0
 margin_bottom = -140.0
 mouse_filter = 2
 Text = "[w]eapon"
-Action = ExtResource( 30 )
+Action = ExtResource( 31 )
 
-[node name="Grab" parent="Camera-GUI/HUD/Buttons" index="1" instance=ExtResource( 29 )]
+[node name="Grab" parent="Camera-GUI/HUD/Buttons" index="1" instance=ExtResource( 30 )]
 
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -412,7 +424,7 @@ margin_bottom = -232.0
 Text = "[g]rab"
 Action = SubResource( 2 )
 
-[node name="Wormhole" parent="Camera-GUI/HUD/Buttons" index="2" instance=ExtResource( 29 )]
+[node name="Wormhole" parent="Camera-GUI/HUD/Buttons" index="2" instance=ExtResource( 30 )]
 
 anchor_left = 1.0
 anchor_top = 1.0
@@ -424,7 +436,7 @@ margin_right = 0.0
 margin_bottom = -141.0
 Text = "[>]FTL Back"
 
-[node name="Inventory" parent="Camera-GUI/HUD/Buttons" index="3" instance=ExtResource( 29 )]
+[node name="Inventory" parent="Camera-GUI/HUD/Buttons" index="3" instance=ExtResource( 30 )]
 
 anchor_left = 1.0
 anchor_top = 1.0
@@ -437,7 +449,7 @@ margin_bottom = -225.0
 Text = "[i]nventory"
 Action = SubResource( 4 )
 
-[node name="Converter" parent="Camera-GUI/HUD/Buttons" index="4" instance=ExtResource( 29 )]
+[node name="Converter" parent="Camera-GUI/HUD/Buttons" index="4" instance=ExtResource( 30 )]
 
 anchor_left = 1.0
 anchor_top = 1.0
@@ -450,7 +462,7 @@ margin_bottom = -314.0
 Text = "[c]onverter"
 Action = SubResource( 6 )
 
-[node name="PopupButton" parent="Camera-GUI/HUD/Buttons" index="5" instance=ExtResource( 31 )]
+[node name="PopupButton" parent="Camera-GUI/HUD/Buttons" index="5" instance=ExtResource( 32 )]
 
 anchor_top = 1.0
 anchor_right = 0.0
@@ -458,7 +470,7 @@ margin_left = 2.0
 margin_top = -416.0
 margin_right = 1634.0
 
-[node name="ZoomIn" parent="Camera-GUI/HUD/Buttons" index="6" instance=ExtResource( 29 )]
+[node name="ZoomIn" parent="Camera-GUI/HUD/Buttons" index="6" instance=ExtResource( 30 )]
 
 anchor_left = 1.0
 anchor_top = 1.0
@@ -471,7 +483,7 @@ margin_bottom = -85.0
 Text = "+"
 Action = SubResource( 8 )
 
-[node name="ZoomOut" parent="Camera-GUI/HUD/Buttons" index="7" instance=ExtResource( 29 )]
+[node name="ZoomOut" parent="Camera-GUI/HUD/Buttons" index="7" instance=ExtResource( 30 )]
 
 anchor_left = 1.0
 anchor_top = 1.0
@@ -499,13 +511,13 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 32 )
+script = ExtResource( 33 )
 _sections_unfolded = [ "Mouse" ]
 warning_energy_level = 5001
 danger_energy_level = 1001
 hull_size = 20
 
-[node name="StatusWindow" parent="Camera-GUI/HUD/StatusBar" index="0" instance=ExtResource( 28 )]
+[node name="StatusWindow" parent="Camera-GUI/HUD/StatusBar" index="0" instance=ExtResource( 29 )]
 
 anchor_right = 1.0
 margin_right = 0.0
@@ -536,38 +548,38 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="TargettingHUD" parent="Camera-GUI" index="1" instance=ExtResource( 33 )]
+[node name="TargettingHUD" parent="Camera-GUI" index="1" instance=ExtResource( 34 )]
 
 visible = false
 
-[node name="TransferInventory" parent="Camera-GUI" index="2" instance=ExtResource( 34 )]
+[node name="TransferInventory" parent="Camera-GUI" index="2" instance=ExtResource( 35 )]
 
 visible = false
 InventoryBehaviorPath = NodePath("../../Behaviors/Inventory")
 
-[node name="Inventory" parent="Camera-GUI" index="3" instance=ExtResource( 35 )]
+[node name="Inventory" parent="Camera-GUI" index="3" instance=ExtResource( 36 )]
 
 visible = false
 
-[node name="Converter" parent="Camera-GUI" index="4" instance=ExtResource( 36 )]
+[node name="Converter" parent="Camera-GUI" index="4" instance=ExtResource( 37 )]
 
 visible = false
 
-[node name="EquipMenus" parent="Camera-GUI" index="5" instance=ExtResource( 37 )]
+[node name="EquipMenus" parent="Camera-GUI" index="5" instance=ExtResource( 38 )]
 
-[node name="DeathScreen" parent="Camera-GUI" index="6" instance=ExtResource( 38 )]
-
-visible = false
-
-[node name="SelectTarget" parent="Camera-GUI" index="7" instance=ExtResource( 39 )]
+[node name="DeathScreen" parent="Camera-GUI" index="6" instance=ExtResource( 39 )]
 
 visible = false
 
-[node name="WelcomeScreen" parent="Camera-GUI" index="8" instance=ExtResource( 40 )]
+[node name="SelectTarget" parent="Camera-GUI" index="7" instance=ExtResource( 40 )]
 
 visible = false
 
-[node name="HowManyDiag" parent="Camera-GUI" index="9" instance=ExtResource( 41 )]
+[node name="WelcomeScreen" parent="Camera-GUI" index="8" instance=ExtResource( 41 )]
+
+visible = false
+
+[node name="HowManyDiag" parent="Camera-GUI" index="9" instance=ExtResource( 42 )]
 
 visible = false
 anchor_left = 0.5
@@ -582,7 +594,7 @@ margin_bottom = 92.0
 [node name="DEBUG" type="Node2D" parent="." index="9"]
 
 visible = false
-script = ExtResource( 42 )
+script = ExtResource( 43 )
 
 [connection signal="pressed" from="Camera-GUI/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_ZoomIn_pressed"]
 
