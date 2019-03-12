@@ -38,6 +38,13 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- Endgame :
+	- spawn pre-generated modules (group of ennemies, specific planet with specific drop, etc.)
+		- pre-generated modules might have special AI behavior :
+			- group of ennemies should stick together until player is detected then go for the kill in their own way (pathfinding could be "goup" and one "group_leader" ?)
+			- module bounding box... so we don't spawn stuff randomly outside bounds of the level
+	- going up first wormhole check for win condition
+	- improve scoring and leaderboard
 - Menu button in HUD with "save and quite", "suicide" (eventually "options" too ?)
 - Look button should popup a window with details ?
 - Tweak: Probe couuld have a higher chance to drop scanner MK2 than other things in the game

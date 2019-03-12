@@ -7,7 +7,6 @@ var action_list = []
 var star_date_turn = 0
 var star_date_minor = 0
 var star_date_major = 0
-var _new_frame = true # When player is somehow disabled make sure we don't loop forever in the same call
 var _disable = false
 var _waiting_on_anim = false
 
@@ -68,7 +67,7 @@ func OnUseAP_Callback(obj, amount):
 		obj.get_attrib("ap.accumulator").push_back(amount)
 		return
 	
-	action_list.remove(index)	
+	action_list.remove(index)
 	var base_ap_energy_cost = obj.get_attrib("converter.base_ap_energy_cost")
 	if base_ap_energy_cost != null and base_ap_energy_cost > 0:
 		BehaviorEvents.emit_signal("OnUseEnergy", obj, base_ap_energy_cost)
@@ -171,5 +170,5 @@ func Insert(obj, action_point):
 	
 	
 func _process(delta):
-	_new_frame = true
+	pass
 	

@@ -295,6 +295,8 @@ rect = Rect2( -100, -100, 200, 200 )
 
 [node name="World-GUI" type="Node" parent="." index="8"]
 
+editor/display_folded = true
+
 [node name="GridPattern" type="Control" parent="World-GUI" index="0"]
 
 anchor_left = 0.0

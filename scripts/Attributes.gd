@@ -4,6 +4,11 @@ extends Node2D
 # var a = 2
 # var b = "textvar"
 
+export(String, FILE, "*.json") var PreloadData = ""
+#TODO: hack to be able to modify modified_attributes in the editor. Apparently we can edit dictionnary in 3.1 so
+# this shouldn't be needed in 3.1
+export(String, MULTILINE) var PreloadJSON = ""
+
 export var base_attributes = {} # can be kept by reference, no need to serialize
 export var modified_attributes = {} # locally modified attribute (like current position). Should be saved !
 
@@ -106,9 +111,13 @@ func init_mounts():
 	modified_attributes["mounts"] = base_attributes.mounts
 
 func _ready():
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
-	pass
+	if PreloadData == null or PreloadData.empty():
+		return
+		
+	if not PreloadJSON.empty():
+		modified_attributes = JSON.parse(PreloadJSON).result
+	Globals.LevelLoaderRef.RequestObject(PreloadData, Globals.LevelLoaderRef.World_to_Tile(self.global_position), modified_attributes)
+	self.visible = false
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

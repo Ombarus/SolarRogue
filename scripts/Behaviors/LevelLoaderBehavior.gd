@@ -147,14 +147,24 @@ func GenerateLevelFromTemplate(levelData):
 				continue
 			if obj.has("global_max") && obj["name"] in _global_spawns && obj["global_max"] >= _global_spawns[obj["name"]]:
 				continue
+			if obj.has("tile_margin") and ( \
+				tileCoord[0] - obj.tile_margin[0] < 0 or \
+				tileCoord[0] + obj.tile_margin[0] >= levelSize[0] or \
+				tileCoord[1] - obj.tile_margin[1] < 0 or \
+				tileCoord[1] + obj.tile_margin[1] >= levelSize[1]):
+					continue
 			if obj.has("min") && (!objCountByType.has(obj["name"]) || objCountByType[obj["name"]] < obj["min"]):
 				do_spawn = true
 			if !do_spawn && obj.has("spawn_rate"):
 				if MersenneTwister.rand_float() < obj["spawn_rate"]:
 					do_spawn = true
 	
-			if do_spawn:	
-				var data = LoadJSON(obj["name"])
+			if do_spawn:
+				var data = null
+				if ".json" in obj["name"]:
+					data = LoadJSON(obj["name"])
+				else:
+					data = load(obj["name"])
 				if data != null:
 					if objCountByType.has(obj["name"]):
 						objCountByType[obj["name"]] += 1
@@ -164,7 +174,13 @@ func GenerateLevelFromTemplate(levelData):
 					if obj.has("pos"):
 						confirmed_coord = Vector2(obj["pos"][0], obj["pos"][1])
 						
-					n = CreateAndInitNode(data, confirmed_coord)
+					if ".json" in obj["name"]:
+						n = CreateAndInitNode(data, confirmed_coord)
+					else:
+						var r = get_node("/root/Root/GameTiles")
+						n = data.instance()
+						n.position = Tile_to_World(confirmed_coord)
+						r.call_deferred("add_child", n)
 					break
 
 func _GatherSaveData():

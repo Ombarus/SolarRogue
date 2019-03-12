@@ -68,8 +68,10 @@ func OnObjTurn_Callback(obj):
 	var is_aggressive = obj.get_attrib("ai.aggressive")
 	
 	
-	if pathfinding == "simple":
+	if pathfinding == "simple" or pathfinding == "group_leader":
 		DoSimplePathFinding(obj)
+	if pathfinding == "group":
+		DoFollowGroupLeader(obj)
 	elif pathfinding == "run_away":
 		DoRunAwayPathFinding(obj)
 	elif pathfinding == "attack":
@@ -86,6 +88,38 @@ func FindRandomTile():
 	var x = MersenneTwister.rand(Globals.LevelLoaderRef.levelSize.x)
 	var y = MersenneTwister.rand(Globals.LevelLoaderRef.levelSize.y)
 	return Vector2(x,y)
+
+func DoFollowGroupLeader(obj):
+	if obj.get_attrib("ai.target") == null:
+		var level_id = Globals.LevelLoaderRef.GetLevelID()
+		var nearby_objs = obj.get_attrib("scanner_result.cur_in_range." + level_id)
+		for id in nearby_objs:
+			var o = Globals.LevelLoaderRef.GetObjectById(id)
+			if o.get_attrib("ai.pathfinding") == "group_leader":
+				var leader_tile = Globals.LevelLoaderRef.World_to_Tile(o.position)
+				var my_tile = Globals.LevelLoaderRef.World_to_Tile(obj.position)
+				var offset = my_tile - leader_tile
+				obj.set_attrib("ai.target", id)
+				obj.set_attrib("ai.target_offset", offset)
+				
+	var target_id = obj.get_attrib("ai.target")
+	# lost the leader, go back to regular pathfinding
+	if target_id == null:
+		obj.set_attrib("ai.pathfinding", "simple")
+		return
+		
+	var target_obj = Globals.LevelLoaderRef.GetObjectById(target_id)
+	var target_offset = obj.get_attrib("ai.target_offset")
+	target_offset = target_offset.rotated(target_obj.rotation)
+	
+	var desired_tile = Globals.LevelLoaderRef.World_to_Tile(target_obj.position)+target_offset
+	var bounds = Globals.LevelLoaderRef.levelSize
+	desired_tile[0] = clamp(desired_tile[0], 0, bounds.x-1)
+	desired_tile[1] = clamp(desired_tile[1], 0, bounds.y-1)
+	
+	obj.set_attrib("ai.objective", desired_tile)
+	DoSimplePathFinding(obj)
+	
 
 func DoAttackPathFinding(obj):
 	var player = Globals.LevelLoaderRef.GetObjectById(obj.get_attrib("ai.target"))
@@ -124,9 +158,10 @@ func DoSimplePathFinding(obj):
 		obj.modified_attributes["wandering"] = true
 	
 	var tile_pos = Globals.LevelLoaderRef.World_to_Tile(obj.position)
+	var cur_pathfinding = obj.get_attrib("ai.pathfinding")
 
 	var cur_objective = obj.get_attrib("ai.objective")
-	if cur_objective == null || cur_objective == tile_pos:
+	if cur_pathfinding != "group" and (cur_objective == null || cur_objective == tile_pos):
 		obj.set_attrib("ai.objective", FindRandomTile())
 	
 	var target = obj.get_attrib("ai.objective")
@@ -142,6 +177,10 @@ func DoSimplePathFinding(obj):
 		
 	if move_by.length_squared() > 0:
 		BehaviorEvents.emit_signal("OnMovement", obj, move_by)
+	else:
+		# wait a turn if no where to go
+		# Should be only when ai is in a group and waiting for the group's leader
+		BehaviorEvents.emit_signal("OnUseAP", obj, 1.0)
 		
 	if tile_pos + move_by == cur_objective or obj.get_attrib("moving.moved") == false:
 		if obj.get_attrib("ai.disable_on_interest") != null and obj.get_attrib("ai.disable_on_interest") == true:
