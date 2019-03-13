@@ -13,7 +13,7 @@
 		"converter": ["data/json/items/converters/converter_mk1.json"]
 	},
 	"destroyable": {
-		"hull":13
+		"hull":13000000
 	},
 	"moving": {
 		"speed":1.0,

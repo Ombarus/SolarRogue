@@ -1,0 +1,58 @@
+{
+	"name_id":"Converter of Yendor",
+	"type":"converter",
+	"sprite":"converter",
+	"equipment": {
+		"slot":"converter",
+		"volume":100.0,
+		"equip_ap":7.0,
+		"unequip_ap":7.0
+	},
+	"converter": {
+		"maximum_energy":100000,
+		"recipes": [
+			{
+				"name": "Recycle Energy", 
+				"requirements": [{"type":"recyclable", "amount":1}], 
+				"produce":"energy",
+				"ap_cost":1.0,
+				"amount":1600
+			},
+			{
+				"name": "Missile", 
+				"requirements":[{"type":"energy", "amount":500}], 
+				"produce":"data/json/items/weapons/missile.json",
+				"ap_cost":0.5,
+				"amount":1
+			},
+			{
+				"name": "Solar Array", 
+				"requirements":[{"type":"energy", "amount":2000}, {"type":"utility", "amount":2}], 
+				"produce":"data/json/items/utilities/solar_array.json",
+				"ap_cost":5.0,
+				"amount":1
+			},
+			{
+				"name": "Gravitic Compactor", 
+				"requirements":[{"type":"energy", "amount":2000}, {"type":"utility", "amount":2}], 
+				"produce":"data/json/items/utilities/gravitic_compactor.json",
+				"ap_cost":5.0,
+				"amount":1
+			},
+			{
+				"name": "Laser Turret MK1", 
+				"requirements":[{"type":"energy", "amount":4000}, {"type":"weapon", "amount":2}], 
+				"produce":"data/json/items/weapons/laser_turret_mk1.json",
+				"ap_cost":6.0,
+				"amount":1
+			},
+			{
+				"name": "Missile Launcher MK1", 
+				"requirements":[{"type":"energy", "amount":4000}, {"type":"weapon", "amount":2}], 
+				"produce":"data/json/items/weapons/missile_launcher_mk1.json",
+				"ap_cost":6.0,
+				"amount":1
+			}
+		]
+	}
+}
