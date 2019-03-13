@@ -2,6 +2,7 @@
 	"name_id":"Converter of Yendor",
 	"type":"converter",
 	"sprite":"converter",
+	"end_game":true,
 	"equipment": {
 		"slot":"converter",
 		"volume":100.0,

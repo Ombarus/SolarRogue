@@ -199,8 +199,30 @@ func Pressed_FTL_Callback():
 	
 	_current_origin = PLAYER_ORIGIN.wormhole
 	_wormhole_src = Globals.LevelLoaderRef._current_level_data.src
+	
+	if wormhole.base_attributes != Globals.LevelLoaderRef.GetCurrentLevelData():
+		BehaviorEvents.emit_signal("OnRequestLevelChange", wormhole)
+	else:
+		ProcessGoingHome()
 		
-	BehaviorEvents.emit_signal("OnRequestLevelChange", wormhole)
+func ProcessGoingHome():
+	var converter = playerNode.get_attrib("mounts.converter")[0]
+	var converter_data = Globals.LevelLoaderRef.LoadJSON(converter)
+	if Globals.get_data(converter_data, "end_game") == true:
+		BehaviorEvents.emit_signal("OnLogLine", "The Converter of Yendor uses the energy of the wormhole itself to rip a whole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! You made it !")
+		#TODO: end game
+	else:
+		var in_cargo = false
+		var cargo = playerNode.get_attrib("cargo.content")
+		for item in cargo:
+			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
+			if item.count > 0 and Globals.get_data(data, "end_game") == true:
+				in_cargo = true
+				break
+		if in_cargo == true:
+			BehaviorEvents.emit_signal("OnLogLine", "The Converter of Yendor will not work unless it is mounted on the ship !")
+		else:
+			BehaviorEvents.emit_signal("OnPushGUI", "WelcomeScreen", null)
 
 func OnUseInventory_Callback(key):
 	var data = Globals.LevelLoaderRef.LoadJSON(key)

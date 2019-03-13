@@ -1,12 +1,12 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/GUI/PopupButton.gd" type="Script" id=1]
-[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=3]
-[ext_resource path="res://data/styles/trans.tres" type="StyleBox" id=4]
-[ext_resource path="res://scripts/GUI/PopupScreenBlock.gd" type="Script" id=5]
+[ext_resource path="res://scripts/GUI/PopupScreenBlock.gd" type="Script" id=2]
+[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=4]
+[ext_resource path="res://data/styles/trans.tres" type="StyleBox" id=5]
 
-[node name="PopupButton" type="Control" index="0"]
+[node name="PopupButton" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -21,7 +21,23 @@ size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Mouse" ]
 
-[node name="PopupSize" type="Control" parent="." index="0"]
+[node name="ScreenBlock" type="Control" parent="." index="0"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 2 )
+_sections_unfolded = [ "Mouse" ]
+
+[node name="PopupSize" type="Control" parent="." index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -37,7 +53,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Mouse" ]
 
-[node name="Popup" parent="PopupSize" index="0" instance=ExtResource( 2 )]
+[node name="Popup" parent="PopupSize" index="0" instance=ExtResource( 3 )]
 
 visible = false
 margin_right = 0.0
@@ -46,7 +62,7 @@ title_height = 3
 title = "..."
 border_style = "━"
 
-[node name="Mount" parent="PopupSize/Popup" index="2" instance=ExtResource( 3 )]
+[node name="Mount" parent="PopupSize/Popup" index="2" instance=ExtResource( 4 )]
 
 margin_left = 15.0
 margin_top = 90.0
@@ -54,7 +70,7 @@ margin_right = 154.0
 margin_bottom = 149.0
 Text = "[m]ount"
 
-[node name="Board" parent="PopupSize/Popup" index="3" instance=ExtResource( 3 )]
+[node name="Board" parent="PopupSize/Popup" index="3" instance=ExtResource( 4 )]
 
 margin_left = 16.0
 margin_top = 159.0
@@ -62,7 +78,7 @@ margin_right = 155.0
 margin_bottom = 218.0
 Text = "[b]oard"
 
-[node name="Take" parent="PopupSize/Popup" index="4" instance=ExtResource( 3 )]
+[node name="Take" parent="PopupSize/Popup" index="4" instance=ExtResource( 4 )]
 
 margin_left = 165.0
 margin_top = 160.0
@@ -70,7 +86,7 @@ margin_right = 304.0
 margin_bottom = 219.0
 Text = "[t]ransfer"
 
-[node name="Look" parent="PopupSize/Popup" index="5" instance=ExtResource( 3 )]
+[node name="Look" parent="PopupSize/Popup" index="5" instance=ExtResource( 4 )]
 
 margin_left = 164.0
 margin_top = 90.0
@@ -78,13 +94,13 @@ margin_right = 303.0
 margin_bottom = 151.0
 Text = "[l]ook"
 
-[node name="More" parent="." index="1" instance=ExtResource( 3 )]
+[node name="More" parent="." index="2" instance=ExtResource( 4 )]
 
 margin_right = 125.0
 margin_bottom = 96.0
 Text = "..."
 
-[node name="Close" type="Button" parent="." index="2"]
+[node name="Close" type="Button" parent="." index="3"]
 
 visible = false
 anchor_left = 0.0
@@ -102,7 +118,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_styles/normal = ExtResource( 4 )
+custom_styles/normal = ExtResource( 5 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -110,22 +126,6 @@ group = null
 flat = false
 align = 1
 _sections_unfolded = [ "custom_styles" ]
-
-[node name="ScreenBlock" type="Control" parent="." index="3"]
-
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-script = ExtResource( 5 )
-_sections_unfolded = [ "Mouse" ]
 
 [connection signal="pressed" from="PopupSize/Popup/Mount" to="." method="_on_Mount_pressed"]
 
