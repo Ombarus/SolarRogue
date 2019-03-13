@@ -38,6 +38,7 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- BUG: transfering converter of yendor to my inv makes my converter disapear
 - highlight (like targetting overlay) the tile currently under the mouse
 - Endgame :
 	- spawn pre-generated modules (group of ennemies, specific planet with specific drop, etc.)

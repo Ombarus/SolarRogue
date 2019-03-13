@@ -209,8 +209,9 @@ func ProcessGoingHome():
 	var converter = playerNode.get_attrib("mounts.converter")[0]
 	var converter_data = Globals.LevelLoaderRef.LoadJSON(converter)
 	if Globals.get_data(converter_data, "end_game") == true:
-		BehaviorEvents.emit_signal("OnLogLine", "The Converter of Yendor uses the energy of the wormhole itself to rip a whole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! You made it !")
-		#TODO: end game
+		BehaviorEvents.emit_signal("OnLogLine", "The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! You made it !")
+		playerNode.set_attrib("game_won", true)
+		BehaviorEvents.emit_signal("OnPlayerDeath")
 	else:
 		var in_cargo = false
 		var cargo = playerNode.get_attrib("cargo.content")

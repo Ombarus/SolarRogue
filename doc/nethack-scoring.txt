@@ -1,0 +1,32 @@
+- points for each monster killed (by power of monster)
+- points for any learning action (id stuff mostly)
+- points for deepest level reached (+ bonus for really deep level (20+))
+- points for amount of money (90% if dead)
+- points for item in inventory (bonus for artifact, nothing for normal objects, normal value for amulets and gems)
+- points for pets still alive
+
+(in nethack low-score ascension is more prestigious ?)
+
+
+---
+
+DCSS :
+
+- EXP total
+- # of runes collected
+- if you won : # of turn to win
+	- 6 250 000 000 * runes^2 / turns (less turns = more score)
+
+
+--------
+
+Score should reward luck and increadible feats (?) (or a "low score" would be better than a "high" score)
+----
+
+
+Solar rogue ?
+- Amount of energy left (converter of yendor has a max of 100 000)
+- x / turns taken (less turn = more score) (only if gone home) (1 000 000 ?)
+- converter of yendor (100 000)
+- (should have something to encourage exploration (like collecting runes))
+- number of floor reached (* 1000) ?

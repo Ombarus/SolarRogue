@@ -6,6 +6,7 @@ export var levelSize = Vector2(80,80)
 export var tileSize = 128
 
 var cur_save = {}
+var perm_save = {}
 var levelTiles = []
 var objCountByType = {}
 var shufflingArray = []
