@@ -9,6 +9,7 @@ var star_date_minor = 0
 var star_date_major = 0
 var _disable = false
 var _waiting_on_anim = false
+var _need_sort = true
 
 func _ready():
 	log_window_ref = get_node(LogWindow)
@@ -67,35 +68,16 @@ func OnUseAP_Callback(obj, amount):
 		obj.get_attrib("ap.accumulator").push_back(amount)
 		return
 	
-	action_list.remove(index)
 	var base_ap_energy_cost = obj.get_attrib("converter.base_ap_energy_cost")
 	if base_ap_energy_cost != null and base_ap_energy_cost > 0:
 		BehaviorEvents.emit_signal("OnUseEnergy", obj, base_ap_energy_cost)
 	obj.modified_attributes.action_point += amount
-	Insert(obj, obj.get_attrib("action_point"))
-	NormalizeAP()
 	
-	var obj_action = action_list[0]
-	var top_ap = obj_action.get_attrib("action_point")
-	for i in range(action_list.size()):
-		var next_obj_action = action_list[i]
-		var next_ap = next_obj_action.get_attrib("action_point")
-		if next_ap != top_ap:
-			break
-		# at equal ap, player always go first
-		if next_obj_action.get_attrib("type") == "player":
-			obj_action = next_obj_action
-			break
-		
-	# OnobjTurn triggers OnUseAp so this is circular.
-	# The only reason it won't crash right away is that the player waits for input
-	# using call_deferred should allow us to "queue" the OnObjTurn and do them in sequence (or even in parallel)
-	if _waiting_on_anim:
-		yield(BehaviorEvents, "OnAnimationDone")
-		
-	if obj_action.get_attrib("type") == "player":
-		yield(get_tree(), "idle_frame")
-	self.call_deferred("validate_emit_OnObjTurn", obj_action)
+	action_list.erase(obj)
+	Insert(obj, obj.get_attrib("action_point"))
+	
+	_need_sort = true
+	
 	
 func validate_emit_OnObjTurn(obj):
 	# if object has been removed from list before it had a chance to act. Ignore it
@@ -170,5 +152,32 @@ func Insert(obj, action_point):
 	
 	
 func _process(delta):
-	pass
+	if _waiting_on_anim == true or _need_sort == false:
+		return
+		
+	var max_obj_per_turn = 60
+	var cur_obj_index = 0
+	var one_player_update = false
+	
+	while cur_obj_index < max_obj_per_turn and _waiting_on_anim == false and _need_sort == true and one_player_update == false:
+		
+		var obj_action = action_list[0]
+		var top_ap = obj_action.get_attrib("action_point")
+		for i in range(action_list.size()):
+			var next_obj_action = action_list[i]
+			var next_ap = next_obj_action.get_attrib("action_point")
+			if next_ap != top_ap:
+				break
+			# at equal ap, player always go first
+			if next_obj_action.get_attrib("type") == "player":
+				one_player_update = true
+				obj_action = next_obj_action
+				break
+			
+		NormalizeAP()
+		
+		_need_sort = false
+		validate_emit_OnObjTurn(obj_action)
+		cur_obj_index += 1
+		
 	

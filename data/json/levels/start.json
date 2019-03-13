@@ -5,6 +5,6 @@
 	"sprite":"wormhole",
 	"fully_mapped":true,
 	"objects": [
-		{"name":"scenes/level_prefab/JergBattleGroup.tscn", "spawn_rate":1.0, "max":1, "tile_margin":[3,3]}
+		{"name":"scenes/level_prefab/JergBattleGroup.tscn", "spawn_rate":1.0, "max":10, "tile_margin":[3,3]}
 	]
 }

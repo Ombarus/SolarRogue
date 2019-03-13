@@ -70,7 +70,7 @@ func OnObjTurn_Callback(obj):
 	
 	if pathfinding == "simple" or pathfinding == "group_leader":
 		DoSimplePathFinding(obj)
-	if pathfinding == "group":
+	elif pathfinding == "group":
 		DoFollowGroupLeader(obj)
 	elif pathfinding == "run_away":
 		DoRunAwayPathFinding(obj)
@@ -111,6 +111,8 @@ func DoFollowGroupLeader(obj):
 	var target_obj = Globals.LevelLoaderRef.GetObjectById(target_id)
 	var target_offset = obj.get_attrib("ai.target_offset")
 	target_offset = target_offset.rotated(target_obj.rotation)
+	target_offset.x = round(target_offset.x)
+	target_offset.y = round(target_offset.y)
 	
 	var desired_tile = Globals.LevelLoaderRef.World_to_Tile(target_obj.position)+target_offset
 	var bounds = Globals.LevelLoaderRef.levelSize

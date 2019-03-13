@@ -38,6 +38,7 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- highlight (like targetting overlay) the tile currently under the mouse
 - Endgame :
 	- spawn pre-generated modules (group of ennemies, specific planet with specific drop, etc.)
 		- pre-generated modules might have special AI behavior :
