@@ -33,7 +33,7 @@
 				"name": "Probe Ship", 
 				"icon_texture":"data/textures/space-sprite.png",
 				"icon_region":[1664,256,128,128],
-				"requirements":[{"type":"energy", "amount":2000}, {"src":"data/json/items/misc/probe_body.json", "amount":1}], 
+				"requirements":[{"type":"energy", "amount":1500}, {"src":"data/json/items/misc/probe_body.json", "amount":1}], 
 				"produce":"data/json/ships/human/player_probe.json",
 				"ap_cost":5.0,
 				"amount":1
@@ -44,9 +44,7 @@
 				"icon_region":[512,256,128,128],
 				"requirements":[
 					{"type":"energy", "amount":1800},
-					{"src":"data/json/items/misc/scout_body.json", "amount":1},
-					{"src":"data/json/items/misc/frigate_body.json", "amount":1},
-					{"src":"data/json/items/misc/hydrogen.json", "amount":3}
+					{"src":"data/json/items/misc/scout_body.json", "amount":1}
 				],
 				"produce":"data/json/ships/human/player_scout.json",
 				"ap_cost":6.0,

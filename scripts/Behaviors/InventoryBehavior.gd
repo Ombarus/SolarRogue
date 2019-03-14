@@ -164,8 +164,10 @@ func OnRemoveItem_Callback(holder, item_id, num_remove=1): #-1 to remove everyth
 	for item in cargo:
 		if Globals.clean_path(item_id) == Globals.clean_path(item.src):
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
-			holder.set_attrib("cargo.volume_used", holder.get_attrib("cargo.volume_used") - data.equipment.volume)
-			if num_remove >= 0 and item.count > num_remove:
+			if num_remove < 0:
+				num_remove = item.count
+			holder.set_attrib("cargo.volume_used", holder.get_attrib("cargo.volume_used") - data.equipment.volume*num_remove)
+			if item.count > num_remove:
 				item.count -= num_remove
 			else:
 				index_to_delete.push_back(i)

@@ -38,6 +38,7 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- BUG: when transfering between ship.... there seems to be some error in cargo volume calculation
 - BUG: transfering converter of yendor to my inv makes my converter disapear
 - highlight (like targetting overlay) the tile currently under the mouse
 - Endgame :

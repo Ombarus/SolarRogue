@@ -206,7 +206,15 @@ func OnChoiceDragAndDrop_Callback(container_src, container_dst, content_index_sr
 				break
 		if index_to_remove >= 0:
 			new_src.remove(index_to_remove)
-	
+		if is_dst_mount == true and dst_data_copy != null and dst_data_copy != "":
+			var added = false
+			if is_stackable == true:
+				for item in new_src:
+					if item.src_key == dst_data_copy:
+						added = true
+						item.amount += 1
+			if added == false:
+				new_src.push_back({"src_key":dst_data_copy, "amount":1})
 			
 	container_dst.content = new_dst
 	container_src.content = new_src

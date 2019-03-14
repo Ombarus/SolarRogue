@@ -115,7 +115,7 @@ shortcut = SubResource( 7 )
 
 shortcut = SubResource( 7 )
 
-[node name="Root" type="Node"]
+[node name="Root" type="Node" index="0"]
 
 [node name="Behaviors" type="Node" parent="." index="0"]
 
