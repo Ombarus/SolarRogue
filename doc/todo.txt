@@ -38,15 +38,7 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- BUG: Auto-pilot can stay stuck if target is out of bounds
 - BUG: wormhole shader doesn't do anything on my Tablet
-- Endgame :
-	- spawn pre-generated modules (group of ennemies, specific planet with specific drop, etc.)
-		- pre-generated modules might have special AI behavior :
-			- group of ennemies should stick together until player is detected then go for the kill in their own way (pathfinding could be "goup" and one "group_leader" ?)
-			- module bounding box... so we don't spawn stuff randomly outside bounds of the level
-	- going up first wormhole check for win condition
-	- improve scoring and leaderboard
 - Menu button in HUD with "save and quite", "suicide" (eventually "options" too ?)
 - Look button should popup a window with details ?
 - Tweak: Probe couuld have a higher chance to drop scanner MK2 than other things in the game
@@ -166,6 +158,14 @@ IDEAS:::
 	
 	
 DONE :::
+- Endgame :
+	- spawn pre-generated modules (group of ennemies, specific planet with specific drop, etc.)
+		- pre-generated modules might have special AI behavior :
+			- group of ennemies should stick together until player is detected then go for the kill in their own way (pathfinding could be "goup" and one "group_leader" ?)
+			- module bounding box... so we don't spawn stuff randomly outside bounds of the level
+	- going up first wormhole check for win condition
+	- improve scoring and leaderboard
+- BUG: Auto-pilot can stay stuck if target is out of bounds
 - highlight (like targetting overlay) the tile currently under the mouse
 - BUG: when transfering between ship.... there seems to be some error in cargo volume calculation
 - BUG: transfering converter of yendor to my inv makes my converter disapear
