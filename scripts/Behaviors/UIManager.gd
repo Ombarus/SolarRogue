@@ -7,14 +7,15 @@ func _ready():
 	BehaviorEvents.connect("OnGUILoaded", self, "OnGUILoaded_Callback")
 	BehaviorEvents.connect("OnPushGUI", self, "OnPushGUI_Callback")
 	BehaviorEvents.connect("OnPopGUI", self, "OnPopGUI_Callback")
-	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
+	BehaviorEvents.connect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
 
-func OnLevelLoaded_Callback():
-	BehaviorEvents.disconnect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
+func OnPlayerCreated_Callback(player):
+	BehaviorEvents.disconnect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
 	# push default UI (might be some main menu or splash screen one day)
 	BehaviorEvents.call_deferred("emit_signal", "OnPushGUI", "HUD", null)
 	if not File.new().file_exists("user://savegame.save"):
-		BehaviorEvents.call_deferred("emit_signal", "OnPushGUI", "WelcomeScreen", null)
+		var player_name = player.get_attrib("player_name")
+		BehaviorEvents.call_deferred("emit_signal", "OnPushGUI", "WelcomeScreen", {"player_name":player_name})
 
 func OnGUILoaded_Callback(name, obj):
 	_gui_list[name] = obj

@@ -9,5 +9,6 @@ func Ok_Callback():
 		
 	
 func Init(init_param):
-	pass
+	var player_name = init_param["player_name"]
+	get_node("base").title = "Welcome %s..." % player_name
 	

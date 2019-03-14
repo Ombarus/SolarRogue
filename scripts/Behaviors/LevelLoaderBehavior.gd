@@ -13,6 +13,7 @@ var shufflingArray = []
 var current_depth = 0
 var objByType = {}
 var objById = {}
+var num_generated_level = 0
 # TODO: init id when loading saved game
 var _sequence_id = 0 # for giving unique name to objects
 var _current_level_data = null
@@ -103,9 +104,9 @@ func ExecuteLoadLevel(levelData):
 	if cur_save != null && cur_save.size() > 0:
 		var level_id = str(current_depth) + levelData.src
 		if cur_save.modified_levels.has(level_id):
-			startLevel = cur_save.current_level_src
-			current_depth = cur_save.depth
-			_sequence_id = cur_save.current_sequence_id
+			#startLevel = cur_save.current_level_src
+			#current_depth = cur_save.depth
+			#_sequence_id = cur_save.current_sequence_id
 			GenerateLevelFromSave(levelData, cur_save.modified_levels[level_id])
 			
 			loaded = true
@@ -130,6 +131,8 @@ func GenerateLevelFromSave(levelData, savedData):
 		
 	
 func GenerateLevelFromTemplate(levelData):
+	num_generated_level += 1
+	
 	# exceptionaly, when on the first level the wormhole to go "back" is a wormhole to current level
 	if _current_level_data == null:
 		_current_level_data = levelData
@@ -244,6 +247,7 @@ func OnAnimationDone_Callback():
 func OnRequestLevelChange_Callback(wormhole):
 	SaveState(_current_level_data)
 	# should be defferred !
+	current_depth = wormhole.modified_attributes["depth"]
 	ExecuteLoadLevel(wormhole.base_attributes)
 
 func OnRequestObjectUnload_Callback(obj):

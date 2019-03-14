@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/GUI/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://data/fonts/DejaVuSansMonoItal.tres" type="DynamicFont" id=4]
 [ext_resource path="res://data/fonts/DejaVuSansMonoBold.tres" type="DynamicFont" id=5]
 [ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scripts/GUI/MainMenu/Leaderboard.gd" type="Script" id=7]
+[ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/GUI/ItemList/LeaderboardRow.tscn" type="PackedScene" id=9]
 
 [sub_resource type="InputEventKey" id=1]
 
@@ -24,7 +27,7 @@ echo = false
 
 shortcut = SubResource( 1 )
 
-[node name="MainMenu" type="Node"]
+[node name="MainMenu" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
@@ -43,7 +46,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MenuRoot" index="0"]
+[node name="GameTitle" type="RichTextLabel" parent="MenuRoot" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -75,7 +78,7 @@ selection_enabled = false
 override_selected_font_color = false
 _sections_unfolded = [ "Anchor", "BBCode", "Margin", "custom_fonts" ]
 
-[node name="Button" parent="MenuRoot" index="1" instance=ExtResource( 6 )]
+[node name="NewGameBTN" parent="MenuRoot" index="1" instance=ExtResource( 6 )]
 
 margin_left = 446.0
 margin_top = 102.0
@@ -84,6 +87,33 @@ margin_bottom = 197.0
 Text = "[n]ew game"
 Action = SubResource( 2 )
 
-[connection signal="pressed" from="MenuRoot/Button" to="." method="_on_newgame_pressed"]
+[node name="Leaderboard" type="Control" parent="MenuRoot" index="2"]
+
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 15.0
+margin_top = -328.0
+margin_right = -15.0
+margin_bottom = -15.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 7 )
+
+[node name="leaderlist" parent="MenuRoot/Leaderboard" index="0" instance=ExtResource( 8 )]
+
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
+_sections_unfolded = [ "Scroll" ]
+Row = ExtResource( 9 )
+
+[connection signal="pressed" from="MenuRoot/NewGameBTN" to="." method="_on_newgame_pressed"]
 
 

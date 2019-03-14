@@ -19,6 +19,7 @@ config/icon="res://icon.png"
 BehaviorEvents="*res://scripts/autoload/BehaviorEvents.gd"
 Globals="*res://scripts/autoload/Globals.gd"
 MersenneTwister="*res://scripts/autoload/MersenneTwister.gd"
+PermSave="*res://scripts/autoload/PermSave.gd"
 
 [display]
 
