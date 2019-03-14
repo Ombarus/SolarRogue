@@ -38,9 +38,8 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- BUG: when transfering between ship.... there seems to be some error in cargo volume calculation
-- BUG: transfering converter of yendor to my inv makes my converter disapear
-- highlight (like targetting overlay) the tile currently under the mouse
+- BUG: Auto-pilot can stay stuck if target is out of bounds
+- BUG: wormhole shader doesn't do anything on my Tablet
 - Endgame :
 	- spawn pre-generated modules (group of ennemies, specific planet with specific drop, etc.)
 		- pre-generated modules might have special AI behavior :
@@ -167,7 +166,9 @@ IDEAS:::
 	
 	
 DONE :::
-
+- highlight (like targetting overlay) the tile currently under the mouse
+- BUG: when transfering between ship.... there seems to be some error in cargo volume calculation
+- BUG: transfering converter of yendor to my inv makes my converter disapear
 
 
 - BUG: Mouse stay stuck if moving camera when sub-menu is up
