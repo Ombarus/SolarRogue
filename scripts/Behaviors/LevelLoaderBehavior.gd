@@ -317,10 +317,15 @@ func GetTileData(xy):
 	return levelTiles[xy.x][xy.y]
 	
 func World_to_Tile(xy):
+	var res = Vector2(0.0, 0.0)
 	if typeof(xy) == TYPE_VECTOR2:
-		return Vector2(int(round(xy.x / tileSize)), int(round(xy.y / tileSize)))
+		res = Vector2(int(round(xy.x / tileSize)), int(round(xy.y / tileSize)))
 	else:
-		return int(xy / tileSize)
+		res = int(xy / tileSize)
+	
+	res.x = clamp(res.x, 0, levelSize.x-1)
+	res.y = clamp(res.y, 0, levelSize.y-1)
+	return res
 	
 func Tile_to_World(xy):
 	if typeof(xy) == TYPE_VECTOR2:
