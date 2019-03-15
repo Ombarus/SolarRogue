@@ -10,8 +10,8 @@ export(NodePath) var FTLAction
 export(NodePath) var PopupButtons
 export(NodePath) var TargettingHUD
 
-var playerNode = null
-var levelLoaderRef
+var playerNode : Node2D = null
+var levelLoaderRef : Node
 var click_start_pos
 var lock_input = false # when it's not player turn, inputs are locked
 var next_touch_is_a_goto = false # when camera is dragged, instead of moving in a single direction, a touch will make the ship do pathfinding

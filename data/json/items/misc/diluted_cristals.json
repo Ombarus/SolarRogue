@@ -1,0 +1,13 @@
+{
+	"name_id":"Diluted Cristal",
+	"type":"food",
+	"sprite":"cristal",
+	"equipment": {
+		"slot":"cargo",
+		"volume":5.0,
+		"stackable":true
+	},
+	"recyclable": {
+		"energy": 6000
+	}
+}

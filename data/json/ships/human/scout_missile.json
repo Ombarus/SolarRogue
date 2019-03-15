@@ -37,6 +37,19 @@
 		{"id":"data/json/items/weapons/missile.json", "chance":0.2},
 		{"id":"data/json/items/consumables/repair_nanobots.json", "chance":0.01},
 		
+		{"id":"data/json/items/weapons/missile_launcher_mk2.json", "chance":0.012},
+		{"id":"data/json/items/weapons/missile_launcher_mk3.json", "chance":0.012},
+		{"id":"data/json/items/scanners/scanner_mk3.json", "chance":0.01},
+		{"id":"data/json/items/scanners/long_range_scanner_mk1.json", "chance":0.005},
+		{"id":"data/json/items/scanners/long_range_scanner_mk2.json", "chance":0.005},
+		{"id":"data/json/items/scanners/long_range_scanner_mk3.json", "chance":0.005},
+		{"id":"data/json/items/scanners/ultimate_scanner.json", "chance":0.002, "global_max":1},
+		{"id":"data/json/items/misc/oxygen.json", "chance":0.05},
+		{"id":"data/json/items/misc/oxygen.json", "chance":0.05},
+		{"id":"data/json/items/misc/oxygen.json", "chance":0.05},
+		{"id":"data/json/items/misc/uranium.json", "chance":0.02},
+		
+		
 
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.1},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},

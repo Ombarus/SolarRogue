@@ -12,36 +12,16 @@
 [ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=10]
 
 [node name="Converter" type="Control"]
-
-anchor_left = 0.0
-anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 script = ExtResource( 1 )
 
-[node name="ModalBG" type="Panel" parent="." index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
+[node name="ModalBG" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_styles/panel = ExtResource( 2 )
-_sections_unfolded = [ "custom_styles" ]
 
-[node name="base" parent="." index="1" instance=ExtResource( 3 )]
-
+[node name="base" parent="." instance=ExtResource( 3 )]
 margin_left = 187.0
 margin_top = 34.0
 margin_right = -183.0
@@ -50,172 +30,73 @@ dialog_ok = true
 title = "Converter"
 border_style = "═"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="base" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
+[node name="HBoxContainer" type="HBoxContainer" parent="base"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 13.0
 margin_top = 45.0
 margin_right = -20.0
 margin_bottom = -33.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 alignment = 1
 
-[node name="CraftingList" type="ItemList" parent="base/HBoxContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="CraftingList" type="ItemList" parent="base/HBoxContainer"]
 margin_right = 250.0
 margin_bottom = 412.0
 rect_min_size = Vector2( 250, 0 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
 size_flags_vertical = 3
-items = [  ]
-select_mode = 0
-allow_reselect = false
-icon_mode = 1
 fixed_icon_size = Vector2( 64, 64 )
-_sections_unfolded = [ "Icon", "Rect", "Size Flags" ]
 
-[node name="VSeparator" type="VSeparator" parent="base/HBoxContainer" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="VSeparator" type="VSeparator" parent="base/HBoxContainer"]
 margin_left = 254.0
 margin_right = 258.0
 margin_bottom = 412.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="base/HBoxContainer" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="VBoxContainer" type="VBoxContainer" parent="base/HBoxContainer"]
 margin_left = 262.0
 margin_right = 621.0
 margin_bottom = 412.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
-_sections_unfolded = [ "Size Flags" ]
 
-[node name="Requirements" type="ItemList" parent="base/HBoxContainer/VBoxContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Requirements" type="ItemList" parent="base/HBoxContainer/VBoxContainer"]
 margin_right = 359.0
 margin_bottom = 133.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-items = [  ]
-select_mode = 0
-allow_reselect = false
-icon_mode = 1
-fixed_icon_size = Vector2( 0, 0 )
-_sections_unfolded = [ "Size Flags", "custom_colors" ]
 
-[node name="HSeparator" type="HSeparator" parent="base/HBoxContainer/VBoxContainer" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="HSeparator" type="HSeparator" parent="base/HBoxContainer/VBoxContainer"]
 margin_top = 137.0
 margin_right = 359.0
 margin_bottom = 141.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="base/HBoxContainer/VBoxContainer" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="HBoxContainer" type="HBoxContainer" parent="base/HBoxContainer/VBoxContainer"]
 margin_top = 145.0
 margin_right = 359.0
 margin_bottom = 278.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-alignment = 0
-_sections_unfolded = [ "Size Flags" ]
 
-[node name="Need" parent="base/HBoxContainer/VBoxContainer/HBoxContainer" index="0" instance=ExtResource( 4 )]
-
+[node name="Need" parent="base/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 4 )]
 margin_right = 177.0
 margin_bottom = 133.0
 size_flags_horizontal = 3
-_sections_unfolded = [ "Size Flags" ]
 Row = ExtResource( 5 )
 DragDropID = "CraftingNeedUse"
 
-[node name="Using" parent="base/HBoxContainer/VBoxContainer/HBoxContainer" index="1" instance=ExtResource( 4 )]
-
+[node name="Using" parent="base/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 4 )]
 margin_left = 181.0
 margin_right = 359.0
 margin_bottom = 133.0
 size_flags_horizontal = 3
-_sections_unfolded = [ "Size Flags" ]
 Row = ExtResource( 5 )
 DragDropID = "CraftingNeedUse"
 
-[node name="CraftResultInfo" type="RichTextLabel" parent="base/HBoxContainer/VBoxContainer" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="CraftResultInfo" type="RichTextLabel" parent="base/HBoxContainer/VBoxContainer"]
 margin_top = 282.0
 margin_right = 359.0
 margin_bottom = 307.0
 rect_min_size = Vector2( 0, 25 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_fonts/mono_font = ExtResource( 6 )
 custom_fonts/bold_italics_font = ExtResource( 7 )
 custom_fonts/italics_font = ExtResource( 8 )
@@ -223,26 +104,14 @@ custom_fonts/bold_font = ExtResource( 9 )
 custom_fonts/normal_font = ExtResource( 6 )
 bbcode_enabled = true
 bbcode_text = "5 Johns for 3500 energy"
-visible_characters = -1
-percent_visible = 1.0
-meta_underlined = true
-tab_size = 4
 text = "5 Johns for 3500 energy"
 scroll_active = false
-scroll_following = false
-selection_enabled = false
-override_selected_font_color = false
-_sections_unfolded = [ "BBCode", "Rect", "custom_fonts" ]
 
-[node name="Craft" parent="base/HBoxContainer/VBoxContainer" index="4" instance=ExtResource( 10 )]
-
+[node name="Craft" parent="base/HBoxContainer/VBoxContainer" instance=ExtResource( 10 )]
 margin_top = 311.0
 margin_right = 359.0
 margin_bottom = 411.0
 rect_min_size = Vector2( 0, 100 )
-_sections_unfolded = [ "Material", "Mouse", "Rect", "Size Flags", "Visibility", "custom_styles" ]
 Text = "Craft"
 
 [connection signal="item_selected" from="base/HBoxContainer/CraftingList" to="." method="_on_CraftingList_item_selected"]
-
-

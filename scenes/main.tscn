@@ -46,103 +46,52 @@
 [ext_resource path="res://scripts/DEBUG.gd" type="Script" id=44]
 
 [sub_resource type="InputEventKey" id=1]
-
-device = 0
-alt = false
-shift = false
-control = false
-meta = false
-command = false
-pressed = false
 scancode = 71
-unicode = 0
-echo = false
 
 [sub_resource type="ShortCut" id=2]
-
 shortcut = SubResource( 1 )
 
 [sub_resource type="InputEventKey" id=3]
-
-device = 0
-alt = false
-shift = false
-control = false
-meta = false
-command = false
-pressed = false
 scancode = 73
-unicode = 0
-echo = false
 
 [sub_resource type="ShortCut" id=4]
-
 shortcut = SubResource( 3 )
 
 [sub_resource type="InputEventKey" id=5]
-
-device = 0
-alt = false
-shift = false
-control = false
-meta = false
-command = false
-pressed = false
 scancode = 67
-unicode = 0
-echo = false
 
 [sub_resource type="ShortCut" id=6]
-
 shortcut = SubResource( 5 )
 
 [sub_resource type="InputEventKey" id=7]
-
-device = 0
-alt = false
-shift = false
-control = false
-meta = false
-command = false
-pressed = false
 scancode = 45
-unicode = 0
-echo = false
 
 [sub_resource type="ShortCut" id=8]
-
 shortcut = SubResource( 7 )
 
 [sub_resource type="ShortCut" id=9]
-
 shortcut = SubResource( 7 )
 
-[node name="Root" type="Node" index="0"]
+[node name="Root" type="Node"]
 
-[node name="Behaviors" type="Node" parent="." index="0"]
+[node name="Behaviors" type="Node" parent="."]
 
-[node name="UIManager" type="Node" parent="Behaviors" index="0"]
-
+[node name="UIManager" type="Node" parent="Behaviors"]
 script = ExtResource( 1 )
 
-[node name="AP" type="Node" parent="Behaviors" index="1"]
-
+[node name="AP" type="Node" parent="Behaviors"]
 script = ExtResource( 2 )
 LogWindow = NodePath("../../Camera-GUI/HUD/Log/LogWindow")
-day_length = 100
 
-[node name="SpriteLoader" type="Node" parent="Behaviors" index="2"]
-
+[node name="SpriteLoader" type="Node" parent="Behaviors"]
 script = ExtResource( 3 )
 levelLoaderNode = NodePath("../LevelLoader")
 ghost_material = ExtResource( 4 )
 
-[node name="Compactor" type="Node" parent="Behaviors" index="3"]
-
+[node name="Compactor" type="Node" parent="Behaviors"]
 script = ExtResource( 5 )
 
-[node name="Player" type="Node" parent="Behaviors" index="4"]
-
+[node name="Player" type="Node" parent="Behaviors"]
 script = ExtResource( 6 )
 levelLoaderNode = NodePath("../LevelLoader")
 WeaponAction = NodePath("../../Camera-GUI/HUD/Buttons/Weapon")
@@ -154,233 +103,136 @@ FTLAction = NodePath("../../Camera-GUI/HUD/Buttons/Wormhole")
 PopupButtons = NodePath("../../Camera-GUI/HUD/Buttons/PopupButton")
 TargettingHUD = NodePath("../../Camera-GUI/TargettingHUD")
 
-[node name="AI" type="Node" parent="Behaviors" index="5"]
-
+[node name="AI" type="Node" parent="Behaviors"]
 script = ExtResource( 7 )
 targetting = NodePath("../Targetting")
 
-[node name="Damage" type="Node" parent="Behaviors" index="6"]
-
+[node name="Damage" type="Node" parent="Behaviors"]
 script = ExtResource( 8 )
 
-[node name="Memory" type="Node" parent="Behaviors" index="7"]
-
+[node name="Memory" type="Node" parent="Behaviors"]
 script = ExtResource( 9 )
 Occluder = NodePath("../../BG/Occlusion")
 
-[node name="Scanner" type="Node" parent="Behaviors" index="8"]
-
+[node name="Scanner" type="Node" parent="Behaviors"]
 script = ExtResource( 10 )
 
-[node name="Shield" type="Node" parent="Behaviors" index="9"]
-
+[node name="Shield" type="Node" parent="Behaviors"]
 script = ExtResource( 11 )
 
-[node name="LevelLoader" type="Node" parent="Behaviors" index="10"]
-
+[node name="LevelLoader" type="Node" parent="Behaviors"]
 script = ExtResource( 12 )
-startLevel = "data/json/levels/start.json"
-levelSize = Vector2( 80, 80 )
-tileSize = 128
 
-[node name="Movement" type="Node" parent="Behaviors" index="11"]
-
+[node name="Movement" type="Node" parent="Behaviors"]
 script = ExtResource( 13 )
 levelLoaderNode = NodePath("../LevelLoader")
 
-[node name="Inventory" type="Node" parent="Behaviors" index="12"]
-
+[node name="Inventory" type="Node" parent="Behaviors"]
 script = ExtResource( 14 )
 
-[node name="Crafting" type="Node" parent="Behaviors" index="13"]
-
+[node name="Crafting" type="Node" parent="Behaviors"]
 script = ExtResource( 15 )
 
-[node name="Scoring" type="Node" parent="Behaviors" index="14"]
-
+[node name="Scoring" type="Node" parent="Behaviors"]
 script = ExtResource( 16 )
 
-[node name="Targetting" type="Node" parent="Behaviors" index="15"]
-
+[node name="Targetting" type="Node" parent="Behaviors"]
 script = ExtResource( 17 )
 TargettingHUD = NodePath("../../Camera-GUI/TargettingHUD")
 
-[node name="Animation" type="Node" parent="Behaviors" index="16"]
-
+[node name="Animation" type="Node" parent="Behaviors"]
 script = ExtResource( 18 )
 
-[node name="EnergyRegen" type="Node" parent="Behaviors" index="17"]
-
+[node name="EnergyRegen" type="Node" parent="Behaviors"]
 script = ExtResource( 19 )
 
-[node name="HullRegen" type="Node" parent="Behaviors" index="18"]
-
+[node name="HullRegen" type="Node" parent="Behaviors"]
 script = ExtResource( 20 )
 
-[node name="BG" type="Sprite" parent="." index="1"]
-
+[node name="BG" type="Sprite" parent="."]
 position = Vector2( 5125, 5125 )
 texture = ExtResource( 21 )
 region_enabled = true
 region_rect = Rect2( -10240, -10240, 20480, 20480 )
 script = ExtResource( 22 )
-_sections_unfolded = [ "Region", "Transform" ]
 parallax = 4500.0
 
-[node name="Occlusion" type="Sprite" parent="BG" index="0"]
-
+[node name="Occlusion" type="Sprite" parent="BG"]
 material = ExtResource( 23 )
 position = Vector2( -64, -64 )
 scale = Vector2( 128, 128 )
-_sections_unfolded = [ "Material", "Transform" ]
 
-[node name="Upper-Left-Bound" type="Node2D" parent="." index="2"]
-
+[node name="Upper-Left-Bound" type="Node2D" parent="."]
 editor/display_folded = true
-_sections_unfolded = [ "Transform" ]
 
-[node name="L1" type="Line2D" parent="Upper-Left-Bound" index="0"]
-
-points = PoolVector2Array(  )
-width = 10.0
+[node name="L1" type="Line2D" parent="Upper-Left-Bound"]
 default_color = Color( 1, 1, 1, 1 )
 texture_mode = 1712250185
-sharp_limit = 2.0
-round_precision = 8
 
-[node name="Lower-Right_Bound" type="Node2D" parent="." index="3"]
-
+[node name="Lower-Right_Bound" type="Node2D" parent="."]
 position = Vector2( -10227.7, -10223.2 )
 rotation = 3.14159
 scale = Vector2( 12800, 12800 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="Camera2D" type="Camera2D" parent="." index="4"]
-
+[node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 1026.59, 599.176 )
-anchor_mode = 1
-rotating = false
 current = true
-zoom = Vector2( 1, 1 )
 limit_left = -10000
 limit_top = -10000
 limit_right = 1000000
 limit_bottom = 1000000
-limit_smoothed = false
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
-smoothing_enabled = false
-smoothing_speed = 5.0
-offset_v = 0.0
-offset_h = 0.0
-drag_margin_left = 0.2
-drag_margin_top = 0.2
-drag_margin_right = 0.2
-drag_margin_bottom = 0.2
-editor_draw_screen = true
-editor_draw_limits = false
-editor_draw_drag_margin = false
 script = ExtResource( 24 )
-_sections_unfolded = [ "Limit", "Transform" ]
-max_zoom = 4.0
-min_zoom = 0.25
 levelLoaderNode = NodePath("../Behaviors/LevelLoader")
 
-[node name="BackBufferCopy" type="BackBufferCopy" parent="." index="5"]
-
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
 copy_mode = 2
-rect = Rect2( -100, -100, 200, 200 )
 
-[node name="OverlayTiles" type="Node" parent="." index="6"]
+[node name="OverlayTiles" type="Node" parent="."]
 
-[node name="mouse_targetting" type="Node2D" parent="OverlayTiles" index="0"]
-
+[node name="mouse_targetting" type="Node2D" parent="OverlayTiles"]
 script = ExtResource( 25 )
 
-[node name="targetting" parent="OverlayTiles/mouse_targetting" index="0" instance=ExtResource( 26 )]
+[node name="targetting" parent="OverlayTiles/mouse_targetting" instance=ExtResource( 26 )]
 
-[node name="GameTiles" type="Node" parent="." index="7"]
+[node name="GameTiles" type="Node" parent="."]
 
-[node name="World-GUI" type="Node" parent="." index="8"]
-
+[node name="World-GUI" type="Node" parent="."]
 editor/display_folded = true
 
-[node name="GridPattern" type="Control" parent="World-GUI" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
+[node name="GridPattern" type="Control" parent="World-GUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 script = ExtResource( 27 )
-_sections_unfolded = [ "Mouse", "Visibility" ]
 
-[node name="Display" type="Control" parent="World-GUI/GridPattern" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
+[node name="Display" type="Control" parent="World-GUI/GridPattern"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 script = ExtResource( 28 )
-_sections_unfolded = [ "Mouse", "Rect", "Visibility" ]
 line_color = Color( 1, 0, 0, 0.352941 )
 
-[node name="Camera-GUI" type="CanvasLayer" parent="." index="9"]
+[node name="Camera-GUI" type="CanvasLayer" parent="."]
 
-layer = 1
-offset = Vector2( 0, 0 )
-rotation = 0.0
-scale = Vector2( 1, 1 )
-transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-
-[node name="HUD" type="Control" parent="Camera-GUI" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
+[node name="HUD" type="Control" parent="Camera-GUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1.0
 margin_bottom = -1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 script = ExtResource( 27 )
-_sections_unfolded = [ "Mouse" ]
 
-[node name="Log" type="Control" parent="Camera-GUI/HUD" index="0"]
-
+[node name="Log" type="Control" parent="Camera-GUI/HUD"]
 editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -122.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 script = ExtResource( 29 )
-_sections_unfolded = [ "Mouse" ]
-max_log = 100
 
-[node name="LogWindow" parent="Camera-GUI/HUD/Log" index="0" instance=ExtResource( 30 )]
-
+[node name="LogWindow" parent="Camera-GUI/HUD/Log" instance=ExtResource( 30 )]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -388,26 +240,15 @@ margin_top = -146.0
 margin_right = 0.0
 margin_bottom = 0.0
 mouse_filter = 2
-_sections_unfolded = [ "Size Flags" ]
 title = "Log Stardate 0.0.0"
 
-[node name="Buttons" type="Control" parent="Camera-GUI/HUD" index="1"]
-
+[node name="Buttons" type="Control" parent="Camera-GUI/HUD"]
 editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Mouse" ]
 
-[node name="Weapon" parent="Camera-GUI/HUD/Buttons" index="0" instance=ExtResource( 31 )]
-
+[node name="Weapon" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 31 )]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 3.0
@@ -418,8 +259,7 @@ mouse_filter = 2
 Text = "[w]eapon"
 Action = ExtResource( 32 )
 
-[node name="Grab" parent="Camera-GUI/HUD/Buttons" index="1" instance=ExtResource( 31 )]
-
+[node name="Grab" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 31 )]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 2.0
@@ -429,8 +269,7 @@ margin_bottom = -232.0
 Text = "[g]rab"
 Action = SubResource( 2 )
 
-[node name="Wormhole" parent="Camera-GUI/HUD/Buttons" index="2" instance=ExtResource( 31 )]
-
+[node name="Wormhole" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 31 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -441,8 +280,7 @@ margin_right = 0.0
 margin_bottom = -141.0
 Text = "[>]FTL Back"
 
-[node name="Inventory" parent="Camera-GUI/HUD/Buttons" index="3" instance=ExtResource( 31 )]
-
+[node name="Inventory" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 31 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -454,8 +292,7 @@ margin_bottom = -225.0
 Text = "[i]nventory"
 Action = SubResource( 4 )
 
-[node name="Converter" parent="Camera-GUI/HUD/Buttons" index="4" instance=ExtResource( 31 )]
-
+[node name="Converter" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 31 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -467,16 +304,14 @@ margin_bottom = -314.0
 Text = "[c]onverter"
 Action = SubResource( 6 )
 
-[node name="PopupButton" parent="Camera-GUI/HUD/Buttons" index="5" instance=ExtResource( 33 )]
-
+[node name="PopupButton" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 33 )]
 anchor_top = 1.0
 anchor_right = 0.0
 margin_left = 2.0
 margin_top = -416.0
 margin_right = 1634.0
 
-[node name="ZoomIn" parent="Camera-GUI/HUD/Buttons" index="6" instance=ExtResource( 31 )]
-
+[node name="ZoomIn" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 31 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -488,8 +323,7 @@ margin_bottom = -85.0
 Text = "+"
 Action = SubResource( 8 )
 
-[node name="ZoomOut" parent="Camera-GUI/HUD/Buttons" index="7" instance=ExtResource( 31 )]
-
+[node name="ZoomOut" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 31 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -501,38 +335,25 @@ margin_bottom = -86.0
 Text = "-"
 Action = SubResource( 9 )
 
-[node name="StatusBar" type="Control" parent="Camera-GUI/HUD" index="2"]
-
+[node name="StatusBar" type="Control" parent="Camera-GUI/HUD"]
 editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -1.0
 margin_bottom = -1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 script = ExtResource( 34 )
-_sections_unfolded = [ "Mouse" ]
 warning_energy_level = 5001
 danger_energy_level = 1001
-hull_size = 20
 
-[node name="StatusWindow" parent="Camera-GUI/HUD/StatusBar" index="0" instance=ExtResource( 30 )]
-
+[node name="StatusWindow" parent="Camera-GUI/HUD/StatusBar" instance=ExtResource( 30 )]
 anchor_right = 1.0
 margin_right = 0.0
 margin_bottom = 62.0
 mouse_filter = 2
 content = "The Maveric Hull : [color=lime]==========[/color] Energy : [color=yellow]25000[/color] Shield : [color=aqua]===============[/color]"
 
-[node name="levelinfo" type="Label" parent="Camera-GUI/HUD/StatusBar/StatusWindow" index="1"]
-
-anchor_left = 0.0
+[node name="levelinfo" type="Label" parent="Camera-GUI/HUD/StatusBar/StatusWindow"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -540,52 +361,35 @@ margin_left = -18.0
 margin_top = -16.0
 margin_right = -18.0
 margin_bottom = -2.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 text = "start"
 align = 2
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="TargettingHUD" parent="Camera-GUI" index="1" instance=ExtResource( 35 )]
-
+[node name="TargettingHUD" parent="Camera-GUI" instance=ExtResource( 35 )]
 visible = false
 
-[node name="TransferInventory" parent="Camera-GUI" index="2" instance=ExtResource( 36 )]
-
+[node name="TransferInventory" parent="Camera-GUI" instance=ExtResource( 36 )]
 visible = false
 InventoryBehaviorPath = NodePath("../../Behaviors/Inventory")
 
-[node name="Inventory" parent="Camera-GUI" index="3" instance=ExtResource( 37 )]
-
+[node name="Inventory" parent="Camera-GUI" instance=ExtResource( 37 )]
 visible = false
 
-[node name="Converter" parent="Camera-GUI" index="4" instance=ExtResource( 38 )]
-
+[node name="Converter" parent="Camera-GUI" instance=ExtResource( 38 )]
 visible = false
 
-[node name="EquipMenus" parent="Camera-GUI" index="5" instance=ExtResource( 39 )]
+[node name="EquipMenus" parent="Camera-GUI" instance=ExtResource( 39 )]
 
-[node name="DeathScreen" parent="Camera-GUI" index="6" instance=ExtResource( 40 )]
-
+[node name="DeathScreen" parent="Camera-GUI" instance=ExtResource( 40 )]
 visible = false
 
-[node name="SelectTarget" parent="Camera-GUI" index="7" instance=ExtResource( 41 )]
-
+[node name="SelectTarget" parent="Camera-GUI" instance=ExtResource( 41 )]
 visible = false
 
-[node name="WelcomeScreen" parent="Camera-GUI" index="8" instance=ExtResource( 42 )]
-
+[node name="WelcomeScreen" parent="Camera-GUI" instance=ExtResource( 42 )]
 visible = false
 
-[node name="HowManyDiag" parent="Camera-GUI" index="9" instance=ExtResource( 43 )]
-
+[node name="HowManyDiag" parent="Camera-GUI" instance=ExtResource( 43 )]
 visible = false
 anchor_left = 0.5
 anchor_top = 0.5
@@ -596,13 +400,9 @@ margin_top = -92.0
 margin_right = 158.5
 margin_bottom = 92.0
 
-[node name="DEBUG" type="Node2D" parent="." index="10"]
-
+[node name="DEBUG" type="Node2D" parent="."]
 visible = false
 script = ExtResource( 44 )
 
 [connection signal="pressed" from="Camera-GUI/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_ZoomIn_pressed"]
-
 [connection signal="pressed" from="Camera-GUI/HUD/Buttons/ZoomOut" to="Camera2D" method="_on_ZoomOut_pressed"]
-
-

@@ -38,7 +38,7 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- BUG: wormhole shader doesn't do anything on my Tablet
+- BUG: cannot shoot my last missile
 - Menu button in HUD with "save and quite", "suicide" (eventually "options" too ?)
 - Look button should popup a window with details ?
 - Tweak: Probe couuld have a higher chance to drop scanner MK2 than other things in the game
@@ -158,6 +158,8 @@ IDEAS:::
 	
 	
 DONE :::
+- Add ability to spawn from scene template anywhere (not just level creation)
+- BUG: wormhole shader doesn't do anything on my Tablet (updated godot to 3.1)
 - Endgame :
 	- spawn pre-generated modules (group of ennemies, specific planet with specific drop, etc.)
 		- pre-generated modules might have special AI behavior :
