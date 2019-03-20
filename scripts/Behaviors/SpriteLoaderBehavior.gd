@@ -16,8 +16,13 @@ func OnObjectLoaded_Callback(obj):
 	var attrib = obj.base_attributes
 	var node = null
 	if attrib.has("sprite"):
-		#TODO: cache load in a dictionary ?
-		var scene = load("res://scenes/tileset_source/" + attrib["sprite"] + ".tscn")
+		#TODO: cache load in a dictioary ?
+		var sprite_name : String = attrib["sprite"]
+		var cur_depth : int = Globals.LevelLoaderRef.current_depth
+		var worm_depth : int = obj.get_attrib("depth")
+		if attrib.type == "wormhole" and worm_depth <= cur_depth:
+			sprite_name = sprite_name + "_up"
+		var scene = load("res://scenes/tileset_source/" + sprite_name + ".tscn")
 		node = scene.instance()
 	if attrib.has("sprite_choice"):
 		# TODO: handle know/unknown (multiple look for potions in nethack, but always the same look in a given game)

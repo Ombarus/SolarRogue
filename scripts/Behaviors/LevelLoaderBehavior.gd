@@ -88,6 +88,7 @@ func _ready():
 	if cur_save != null and cur_save.size() > 0:
 		startLevel = cur_save.current_level_src
 		current_depth = cur_save.depth
+		num_generated_level = cur_save.generated_levels
 		_sequence_id = cur_save.current_sequence_id
 		_global_spawns = cur_save.global_spawns
 	
@@ -139,8 +140,8 @@ func GenerateLevelFromTemplate(levelData):
 	var allTilesCoord = ShuffleArray(shufflingArray)
 	var i = MersenneTwister.rand(allTilesCoord.size()) # choose a random spawn point for the entrance
 	# there must always be a wormhole leading back where we came from
-	var n = CreateAndInitNode(_current_level_data, allTilesCoord[i])
-	n.modified_attributes["depth"] = current_depth - 1
+	var depth_override = {"depth":current_depth - 1}
+	var n = CreateAndInitNode(_current_level_data, allTilesCoord[i], depth_override)
 	allTilesCoord.remove(i)
 	_current_level_data = levelData
 	
@@ -214,6 +215,7 @@ func SaveState(level_data):
 	cur_save["depth"] = current_depth
 	cur_save["current_sequence_id"] = _sequence_id
 	cur_save["current_level_src"] = _current_level_data["src"]
+	cur_save["generated_levels"] = num_generated_level
 	cur_save["player_data"] = {}
 	cur_save["global_spawns"] = _global_spawns
 	cur_save.player_data["src"] = objByType["player"][0].get_attrib("src")

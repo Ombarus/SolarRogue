@@ -361,21 +361,25 @@ func _input(event):
 		return
 		
 	_input_state = INPUT_STATE.hud
-	get_tree().set_input_as_handled()
+	#get_tree().set_input_as_handled()
 	
 	var click_pos = playerNode.get_global_mouse_position()
 	
 	var tile = Globals.LevelLoaderRef.World_to_Tile(click_pos)
 	var tile_content = Globals.LevelLoaderRef.levelTiles[tile.x][tile.y]
 	var str_fmt = "There is %s here"
-	if tile_content.size() == 0:
-		BehaviorEvents.emit_signal("OnLogLine", "Nothing but empty space")
+	var filtered_content = []
 	for obj in tile_content:
+		if obj.visible == true and obj.get_attrib("has_ghost_memory") == null:
+			filtered_content.push_back(obj)
+	if filtered_content.size() == 0:
+		BehaviorEvents.emit_signal("OnLogLine", "Nothing but empty space")
+	for obj in filtered_content:
 		BehaviorEvents.emit_signal("OnLogLine", str_fmt % obj.get_attrib("name_id"))
 	
 
 func _unhandled_input(event):
-	if lock_input:
+	if lock_input or _input_state == INPUT_STATE.look_around:
 		return
 		
 	var dir = null

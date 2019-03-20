@@ -92,9 +92,8 @@ func validate_action(target, shooter, weapon_data):
 		ammo_data = Globals.LevelLoaderRef.LoadJSON(ammo)
 		for item in shooter.get_attrib("cargo.content"):
 			if ammo in item.src && item.count > 0:
+				BehaviorEvents.emit_signal("OnRemoveItem", shooter, item.src)
 				ammo_ok = true
-				item.count -= 1
-				shooter.set_attrib("cargo.volume_used", shooter.get_attrib("cargo.volume_used") - ammo_data.equipment.volume)
 	
 	if not ammo_ok && is_player:
 		BehaviorEvents.emit_signal("OnLogLine", "No more " + ammo_data.name_id + " to shoot")

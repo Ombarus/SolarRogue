@@ -28,6 +28,7 @@ func Init(init_param):
 	
 	_selector.min_value = init_param["min_value"]
 	_selector.max_value = init_param["max_value"]
+	_selector.value = _selector.max_value
 	
 	_info.bbcode_text = "[center]" + str(_selector.value) + " / " + str(_selector.max_value) + "[/center]"
 	

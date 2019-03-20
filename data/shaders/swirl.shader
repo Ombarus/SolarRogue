@@ -5,6 +5,7 @@ uniform vec2 swirl_center = vec2(0.5,0.5);
 uniform float swirl_radius = 0.2;
 uniform float swirl_amount = 0.2;
 uniform float swirl_power = 2;
+uniform vec4 center_color = vec4(0.7, 0.7, 0.4, 1.0);
 
 float shelf_curve(float x) {
 	return clamp(1.0 - ((2.0*x)*(2.0*x)), 0.0, 1.0);
@@ -93,7 +94,7 @@ void fragment() {
 	c = textureLod(SCREEN_TEXTURE, coords, 0.0).rgba;
 		
 	if (coords.x < 0.0) {
-		c = vec4(0.7, 0.7, 0.4, 1.0);
+		c = center_color;
 	}
 	
 	float blend_alpha = 0.0;

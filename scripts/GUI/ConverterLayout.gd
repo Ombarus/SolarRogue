@@ -176,7 +176,7 @@ func HowManyDiag_Callback(num):
 	for item in content_dst:
 		if Globals.clean_path(item.src) == Globals.clean_path(_orig_data.src):
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
-			if data.equipment.stackable == true:
+			if "stackable" in data.equipment and data.equipment.stackable == true:
 				item.count += num
 				found = true
 				break

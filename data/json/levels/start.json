@@ -3,7 +3,7 @@
 	"level_data":"data/json/levels/start.json",
 	"type":"wormhole",
 	"sprite":"wormhole",
-	"fully_mapped":true,
+	"fully_mapped":false,
 	"objects": [
 		{"name":"data/json/ships/human/scout_missile.json", "spawn_rate":0.002, "max":6},
 		{"name":"data/json/ships/human/scout_laser.json", "spawn_rate":0.001, "max":6},

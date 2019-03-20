@@ -8,23 +8,11 @@
 [ext_resource path="res://data/fonts/DejaVuSansMonoBold.tres" type="DynamicFont" id=6]
 
 [node name="HowManyDiag" type="Control"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_right = 317.0
 margin_bottom = 184.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 script = ExtResource( 1 )
 
-[node name="base" parent="." index="0" instance=ExtResource( 2 )]
-
+[node name="base" parent="." instance=ExtResource( 2 )]
 margin_right = 0.0
 margin_bottom = 0.0
 dialog_ok = true
@@ -32,9 +20,7 @@ dialog_cancel = true
 title = "How Many ?"
 border_style = "─"
 
-[node name="Selector" type="HSlider" parent="base" index="2"]
-
-anchor_left = 0.0
+[node name="Selector" type="HSlider" parent="base"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -42,28 +28,9 @@ margin_left = 26.0
 margin_top = -8.0
 margin_right = -34.0
 margin_bottom = 8.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 0
-min_value = 0.0
-max_value = 100.0
-step = 1.0
-page = 0.0
-value = 0.0
-exp_edit = false
-rounded = false
-editable = true
-tick_count = 0
 ticks_on_borders = false
-focus_mode = 2
 
-[node name="Info" type="RichTextLabel" parent="base" index="3"]
-
-anchor_left = 0.0
+[node name="Info" type="RichTextLabel" parent="base"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -71,12 +38,6 @@ margin_left = 42.0
 margin_top = -36.0
 margin_right = -45.0
 margin_bottom = -19.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_fonts/mono_font = ExtResource( 3 )
 custom_fonts/bold_italics_font = ExtResource( 4 )
 custom_fonts/italics_font = ExtResource( 5 )
@@ -84,17 +45,7 @@ custom_fonts/bold_font = ExtResource( 6 )
 custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
 bbcode_text = "[center]1 / 23[/center]"
-visible_characters = -1
-percent_visible = 1.0
-meta_underlined = true
-tab_size = 4
 text = "1 / 23"
 scroll_active = false
-scroll_following = false
-selection_enabled = false
-override_selected_font_color = false
-_sections_unfolded = [ "BBCode", "custom_fonts" ]
 
 [connection signal="value_changed" from="base/Selector" to="." method="_on_Selector_value_changed"]
-
-

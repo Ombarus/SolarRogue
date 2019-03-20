@@ -8,5 +8,5 @@ shader_param/swirl_center = Vector2( 0.5, 0.5 )
 shader_param/swirl_radius = 0.147
 shader_param/swirl_amount = 5.559
 shader_param/swirl_power = 2.0
-shader_param/center_color = Plane( 0.76, 0.7, 0.42, 1 )
+shader_param/center_color = Plane( 0.48, 0.7, 0.79, 1 )
 
