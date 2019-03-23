@@ -38,13 +38,11 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- BUG: moving while targetting will cancel overlay but won't push back HUD
 - BUG: Crashes because I insert NULL and list data in perm_save ?!?
 - getting shot at should cancel goto
-- BUG: Number of visited solar system need to be saved and restored from save
-- BUG: cannot shoot my last missile
 - Menu button in HUD with "save and quite", "suicide" (eventually "options" too ?)
 - Look button should popup a window with details ?
-- Tweak: Probe couuld have a higher chance to drop scanner MK2 than other things in the game
 - Review the fact that crafting takes time so producing energy takes energy = to idle amount...
 - Review the fact that as you become powerful you will use more energy. Even if the weapons are more efficient, the ennemies will be harder to kill so how to you keep your energy needs in check ?
 	- Homeworld planet should have higher chance of being colonized
@@ -56,12 +54,8 @@ TODO :::
 - Perf issues on my tablet ? (might be scanner ?)
 - BUG: wormhole once appeared right on top of sun and was completly hidden !
 - Things that annoy me while playtesting :
-	- (confirmed ? particle systems do not work on android !) missing some fx on new ships ?
 	- dragging converter list doesn't move the list.. very difficult on device to hit the scroll
 - transfer drag&drop dialog. Should ask for how many of a stack to transfer
-- Refactor weapon system to work with multiple weapons
-	- add "skip" button to weapon targetting overlay
-	- add "cancel shots" button to targetting overlay
 - BUG: can't fire multiple weapon if we select a target out of range (works if we select empty tiles)
 - Refactor equip mount dialog with similar drag&drop instead of two annoying separate popup
 - level generation improvement :
@@ -161,6 +155,20 @@ IDEAS:::
 	
 	
 DONE :::
+- Added shield mk2 & 3 (medium, large)
+- Made rows a bit larger in converter for easier picking with finger
+- Removed "description" in converter because it's just repeating the same informations
+- Added background to modal HowMany dialog
+- Increased damage profile of advanced weapons (mk2 & 3)
+- Scanner mk2 reveals fully big bodies
+- "unknown" marker's position are updated if object moves
+
+
+- Refactor weapon system to work with multiple weapons
+	- add "skip" button to weapon targetting overlay
+	- add "cancel shots" button to targetting overlay
+- Tweak: Probe couuld have a higher chance to drop scanner MK2 than other things in the game
+- BUG: Number of visited solar system need to be saved and restored from save
 - BUG: Ghost missile in inv when 0 missile
 - BUG: Load and save num_generated_level for leaderboard score
 - how_many dialog init to max value

@@ -13,6 +13,6 @@
 		"radius":80
 	},
 	"recyclable": {
-		"energy": 1500
+		"energy": 5000
 	}
 }

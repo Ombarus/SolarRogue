@@ -60,26 +60,26 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="Requirements" type="ItemList" parent="base/HBoxContainer/VBoxContainer"]
+visible = false
 margin_right = 359.0
 margin_bottom = 133.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HSeparator" type="HSeparator" parent="base/HBoxContainer/VBoxContainer"]
-margin_top = 137.0
+visible = false
 margin_right = 359.0
-margin_bottom = 141.0
+margin_bottom = 4.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="base/HBoxContainer/VBoxContainer"]
-margin_top = 145.0
 margin_right = 359.0
-margin_bottom = 278.0
+margin_bottom = 279.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Need" parent="base/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 4 )]
 margin_right = 177.0
-margin_bottom = 133.0
+margin_bottom = 279.0
 size_flags_horizontal = 3
 Row = ExtResource( 5 )
 DragDropID = "CraftingNeedUse"
@@ -87,15 +87,15 @@ DragDropID = "CraftingNeedUse"
 [node name="Using" parent="base/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 4 )]
 margin_left = 181.0
 margin_right = 359.0
-margin_bottom = 133.0
+margin_bottom = 279.0
 size_flags_horizontal = 3
 Row = ExtResource( 5 )
 DragDropID = "CraftingNeedUse"
 
 [node name="CraftResultInfo" type="RichTextLabel" parent="base/HBoxContainer/VBoxContainer"]
-margin_top = 282.0
+margin_top = 283.0
 margin_right = 359.0
-margin_bottom = 307.0
+margin_bottom = 308.0
 rect_min_size = Vector2( 0, 25 )
 custom_fonts/mono_font = ExtResource( 6 )
 custom_fonts/bold_italics_font = ExtResource( 7 )
@@ -108,9 +108,9 @@ text = "5 Johns for 3500 energy"
 scroll_active = false
 
 [node name="Craft" parent="base/HBoxContainer/VBoxContainer" instance=ExtResource( 10 )]
-margin_top = 311.0
+margin_top = 312.0
 margin_right = 359.0
-margin_bottom = 411.0
+margin_bottom = 412.0
 rect_min_size = Vector2( 0, 100 )
 Text = "Craft"
 

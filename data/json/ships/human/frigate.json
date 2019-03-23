@@ -51,6 +51,9 @@
 		{"id":"data/json/items/weapons/missile.json", "chance":0.0},
 		{"id":"data/json/items/consumables/repair_nanobots.json", "chance":0.01},
 		
+		{"id":"data/json/items/shields/shield_mk2.json", "chance":0.045},
+		{"id":"data/json/items/shields/shield_mk3.json", "chance":0.045},
+		
 		{"id":"data/json/items/weapons/missile_launcher_mk2.json", "chance":0.018},
 		{"id":"data/json/items/weapons/missile_launcher_mk3.json", "chance":0.018},
 		{"id":"data/json/items/weapons/laser_turret_mk2.json", "chance":0.018},

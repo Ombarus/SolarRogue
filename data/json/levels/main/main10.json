@@ -36,6 +36,9 @@
 		{"name":"data/json/items/weapons/missile.json", "spawn_rate":0.00001302083333},
 		{"name":"data/json/items/consumables/repair_nanobots.json", "spawn_rate":0.000015625},
 		
+		{"name":"data/json/items/shields/shield_mk2.json", "spawn_rate":0.000016625},
+		{"name":"data/json/items/shields/shield_mk3.json", "spawn_rate":0.000016625},
+		
 		
 		{"name":"data/json/items/weapons/missile_launcher_mk2.json", "spawn_rate":0.00001302083333},
 		{"name":"data/json/items/weapons/missile_launcher_mk3.json", "spawn_rate":0.00001302083333},

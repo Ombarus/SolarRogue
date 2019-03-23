@@ -117,6 +117,16 @@ func _update_scanned_obj(obj, scanner_data):
 		offset.y = 0
 		offset.x += 1
 
+		
+	var always_seen = Globals.get_data(scanner_data, "scanning.full_reveal_type", [])
+	for type in always_seen:
+		if type in Globals.LevelLoaderRef.objByType:
+			for o in Globals.LevelLoaderRef.objByType[type]:
+				var uniq_id = o.get_attrib("unique_id")
+				if not uniq_id in cur_in_range:
+					cur_in_range.push_back(uniq_id)
+
+
 	var level_id = Globals.LevelLoaderRef.GetLevelID()
 	var old_range = obj.get_attrib("scanner_result.cur_in_range." + level_id)
 	var new_in_range = []
@@ -137,6 +147,7 @@ func _update_scanned_obj(obj, scanner_data):
 		if type in Globals.LevelLoaderRef.objByType:
 			for o in Globals.LevelLoaderRef.objByType[type]:
 				unkown_objects.push_back(o.get_attrib("unique_id"))
+				
 			
 	#if new_in_range.size() != 0 or new_out_of_range.size() != 0:
 	#	# for now. Only send an event if the scanner result for the object has significant changes.

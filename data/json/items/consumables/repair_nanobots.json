@@ -16,6 +16,6 @@
 		"stackable":true
 	},
 	"recyclable": {
-		"energy": 100
+		"energy": 500
 	}
 }

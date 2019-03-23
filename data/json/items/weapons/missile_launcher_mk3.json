@@ -21,6 +21,6 @@
 		"unequip_ap":3.0
 	},
 	"recyclable": {
-		"energy": 300
+		"energy": 3000
 	}
 }

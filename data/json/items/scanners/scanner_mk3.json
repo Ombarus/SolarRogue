@@ -11,9 +11,10 @@
 	},
 	"scanning": {
 		"radius":4,
-		"partial_reveal_type": ["planet", "wormhole", "sun", "ship", "weapon", "food", "utility", "hull", "converter", "consumable", "scanner", "shield", "ammo"]
+		"partial_reveal_type": ["ship", "weapon", "food", "utility", "hull", "converter", "consumable", "scanner", "shield", "ammo"],
+		"full_reveal_type": ["planet", "wormhole", "sun"]
 	},
 	"recyclable": {
-		"energy": 300
+		"energy": 2000
 	}
 }

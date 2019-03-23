@@ -6,11 +6,11 @@
 		"shoot": "scenes/tileset_source/LaserFX01.tscn"
 	},
 	"weapon_data": {
-		"base_dam":7.0,
-		"max_dam":11.0,
+		"base_dam":8.0,
+		"max_dam":15.0,
 		"fire_range":3.0,
 		"fire_pattern":"+",
-		"fire_energy_cost":1000.0,
+		"fire_energy_cost":750.0,
 		"fire_speed":1.0
 	},
 	"equipment": {
@@ -20,6 +20,6 @@
 		"unequip_ap":3.0
 	},
 	"recyclable": {
-		"energy": 250
+		"energy": 2500
 	}
 }

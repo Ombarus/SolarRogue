@@ -14,6 +14,6 @@
 		"partial_reveal_type": ["planet", "wormhole", "sun", "ship", "weapon", "food", "utility", "hull", "converter", "consumable", "scanner", "shield", "ammo"]
 	},
 	"recyclable": {
-		"energy": 300
+		"energy": 2500
 	}
 }

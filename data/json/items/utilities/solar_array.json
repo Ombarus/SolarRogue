@@ -12,6 +12,6 @@
 		"per_turn":10.0
 	},
 	"recyclable": {
-		"energy": 200
+		"energy": 1500
 	}
 }

@@ -145,13 +145,18 @@ func OnScannerUpdated_Callback(obj):
 		var all_visible = _playerNode.get_attrib("scanner_result.cur_in_range." + level_id)
 		for id in unkown_objs:
 			var o = Globals.LevelLoaderRef.GetObjectById(id)
-			if o != null and not id in all_visible and o.get_attrib("ghost_memory") == null and o.get_attrib("has_ghost_memory") == null:
-				#TODO: Create '?' memory
-				var unkown_tile_path = "data/json/props/unknow.json"
-				var modified = {}
-				modified["ghost_memory"] = {"reference_id":o.get_attrib("unique_id")}
-				var n = Globals.LevelLoaderRef.RequestObject(unkown_tile_path, Globals.LevelLoaderRef.World_to_Tile(o.position), modified)
-				o.set_attrib("has_ghost_memory.reference_id", n.get_attrib("unique_id"))
+			
+			if o != null and not id in all_visible and o.get_attrib("ghost_memory") == null:
+				if o.get_attrib("has_ghost_memory") != null:
+					var ghost_id = o.get_attrib("has_ghost_memory.reference_id")
+					var ghost = Globals.LevelLoaderRef.GetObjectById(ghost_id)
+					ghost.position = o.position
+				else:
+					var unkown_tile_path = "data/json/props/unknow.json"
+					var modified = {}
+					modified["ghost_memory"] = {"reference_id":o.get_attrib("unique_id"), "is_unknown":true}
+					var n = Globals.LevelLoaderRef.RequestObject(unkown_tile_path, Globals.LevelLoaderRef.World_to_Tile(o.position), modified)
+					o.set_attrib("has_ghost_memory.reference_id", n.get_attrib("unique_id"))
 			
 			
 	_update_occlusion(obj)

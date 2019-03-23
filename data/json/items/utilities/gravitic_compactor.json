@@ -12,6 +12,6 @@
 		"per_cargo_space":1.5
 	},
 	"recyclable": {
-		"energy": 200
+		"energy": 1500
 	}
 }

@@ -1,19 +1,19 @@
 {
-	"name_id":"Shield",
+	"name_id":"Large Shield",
 	"type":"shield",
 	"sprite": "shield",
 	"equipment": {
 		"slot":"shield",
-		"volume":10.0,
+		"volume":15.0,
 		"equip_ap":3.0,
 		"unequip_ap":3.0
 	},
 	"shielding": {
-		"max_hp":15,
-		"hp_regen_per_ap":0.2,
-		"energy_cost_per_hp":22.0
+		"max_hp":45,
+		"hp_regen_per_ap":1.0,
+		"energy_cost_per_hp":30.0
 	},
 	"recyclable": {
-		"energy": 500
+		"energy": 1500
 	}
 }

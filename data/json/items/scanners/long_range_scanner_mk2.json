@@ -14,6 +14,6 @@
 		"partial_reveal_type": ["planet", "wormhole", "sun"]
 	},
 	"recyclable": {
-		"energy": 250
+		"energy": 2000
 	}
 }
