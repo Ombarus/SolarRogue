@@ -8,7 +8,9 @@ var _step = 50
 var _leader_size : int = 0
 
 func _ready():
-	var leaders = PermSave.get_attrib("leaderboard")
+	# Must be done with a str2var because the array AND the dictionaries need to be copies for my custom list view
+	# otherwise we'll end up with dead references in a global objects that will be deleted and everything goes to hell
+	var leaders = str2var(var2str(PermSave.get_attrib("leaderboard")))
 	for i in range(10):
 		leaders.push_back({})
 	_leader_size = leaders.size() + 2
