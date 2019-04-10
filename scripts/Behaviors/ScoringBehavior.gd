@@ -22,9 +22,12 @@ func OnPlayerDeath_Callback():
 	elif player.get_attrib("destroyable.hull") <= 0:
 		message += "The %s has been destroyed" % player_name
 		result = PermSave.END_GAME_STATE.destroyed
-	else:
+	elif player.get_attrib("converter.stored_energy") <= 0:
 		message += "The %s has run out of energy, and you will spend an eternity drifting through empty void" % player_name
 		result = PermSave.END_GAME_STATE.entropy
+	else:
+		message += "The %s self destructed, everyone on board was lost" % player_name
+		result = PermSave.END_GAME_STATE.suicide
 	if game_won == null or game_won == false:
 		message += "\nYou died on the %dth wormhole" % (cur_level+1)
 	message += "\nYou visited %d solar systems" % Globals.LevelLoaderRef.num_generated_level

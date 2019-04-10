@@ -30,6 +30,8 @@ func set_row_data(data):
 		result = "[color=red]died alone on the %dth wormhole[/color]" % (data.died_on+1)
 	elif data.status == PermSave.END_GAME_STATE.destroyed:
 		result = "[color=red]was destroyed on the %dth wormhole[/color]" % (data.died_on+1)
+	elif data.status == PermSave.END_GAME_STATE.suicide:
+		result = "[color=red]self-destructed on the %dth wormhole[/color]" % (data.died_on+1)
 		
 	var flavor_text = "%s, %s after visiting %d systems" % [data.player_name, result, data.generated_levels]
 	

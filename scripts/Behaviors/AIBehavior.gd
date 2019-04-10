@@ -136,7 +136,8 @@ func DoAttackPathFinding(obj):
 	BehaviorEvents.emit_signal("OnBeginParallelAction", obj)
 	for data in weapons_data:
 		var best_move = _targetting.ClosestFiringSolution(obj_tile, player_tile, data)
-		if best_move.length() == 0:
+		var is_destroyed = player.get_attrib("destroyable.destroyed")
+		if best_move.length() == 0 and (is_destroyed == null or is_destroyed == false):
 			var chance = obj.get_attrib("ai.hit_chance")
 			if chance == null or MersenneTwister.rand_float() < chance:
 				BehaviorEvents.emit_signal("OnDealDamage", player, obj, data)

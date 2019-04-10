@@ -4,6 +4,7 @@ extends Node
 enum END_GAME_STATE {
 	destroyed,
 	entropy,
+	suicide,
 	won
 }
 

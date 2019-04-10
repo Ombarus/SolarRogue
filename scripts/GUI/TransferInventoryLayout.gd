@@ -268,6 +268,7 @@ func _on_PutAll_pressed():
 	
 func _transfer_all(from, to):
 	var cargo_content = to.get_node("Cargo").content
+	var mount_content = to.get_node("Mounts").content
 	
 	var take_mounts = []
 	for data in from.get_node("Mounts").content:
@@ -275,16 +276,23 @@ func _transfer_all(from, to):
 		if data.src_key == null or data.src_key.empty() == true:
 			continue
 		var added = false
-		for cargo_data in cargo_content:
-			if cargo_data.src_key in data.src_key:
-				var cargojsondata = Globals.LevelLoaderRef.LoadJSON(cargo_data.key)
-				if "stackable" in cargojsondata.equipment and cargojsondata.equipment.stackable == true:
-					cargo_data.amount += 1
-					added = true
-					break
+		for data_to in mount_content:
+			if data_to.mount_key == data.mount_key and (data_to.src_key == null or data_to.src_key == ""):
+				data_to.src_key = data.src_key
+				added = true
+		
+		if added == false:		
+			for cargo_data in cargo_content:
+				if cargo_data.src_key in data.src_key:
+					var cargojsondata = Globals.LevelLoaderRef.LoadJSON(cargo_data.key)
+					if "stackable" in cargojsondata.equipment and cargojsondata.equipment.stackable == true:
+						cargo_data.amount += 1
+						added = true
+						break
 		if added == false:
 			cargo_content.push_back({"src_key":data.src_key, "amount":1})
 	from.get_node("Mounts").content = take_mounts
+	to.get_node("Mounts").content = mount_content
 	
 	var take_cargo = []
 	for data in from.get_node("Cargo").content:

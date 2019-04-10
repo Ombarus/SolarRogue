@@ -9,6 +9,7 @@ export(NodePath) var CraftingAction
 export(NodePath) var FTLAction
 export(NodePath) var PopupButtons
 export(NodePath) var TargettingHUD
+export(NodePath) var OptionBtn
 
 var playerNode : Node2D = null
 var levelLoaderRef : Node
@@ -65,6 +66,8 @@ func _ready():
 	action = get_node(InventoryDialog)
 	action.connect("drop_pressed", self, "OnDropIventory_Callback")
 	action.connect("use_pressed", self, "OnUseInventory_Callback")
+	action = get_node(OptionBtn)
+	action.connect("pressed", self, "Pressed_Option_Callback")
 	
 	get_node(TargettingHUD).connect("cancel_pressed", self, "cancel_targetting_pressed_Callback")
 	
@@ -608,3 +611,7 @@ func OnTransferPlayer_Callback(old_player, new_player):
 	
 func DO_TEST(click_pos):
 	pass
+
+
+func Pressed_Option_Callback():
+	BehaviorEvents.emit_signal("OnPushGUI", "Options", {})
