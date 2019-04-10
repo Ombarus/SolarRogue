@@ -65,3 +65,8 @@ func clean_path(path):
 		path = "res://" + path
 	
 	return path
+	
+func is_(obj, val):
+	if obj == null or obj != val:
+		return false
+	return true

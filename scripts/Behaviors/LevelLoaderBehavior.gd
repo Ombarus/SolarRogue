@@ -41,6 +41,10 @@ func GetTile(coord):
 
 func GetLevelID():
 	return str(current_depth) + _current_level_data.src
+	
+#func _notification(what):
+#	if what == MainLoop.NOTIFICATION_WM_FOCUS_OUT:
+#		SaveState(_current_level_data)
 
 func _ready():
 	Globals.LevelLoaderRef = self

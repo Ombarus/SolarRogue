@@ -19,14 +19,19 @@ func _ready():
 	BehaviorEvents.connect("OnUpdateCargoVolume", self, "OnUpdateCargoVolume_Callback")
 	
 func OnUseEnergy_Callback(obj, amount):
-	if amount == 0 or obj.get_attrib("converter.stored_energy") == null:
+	var destroyed = obj.get_attrib("destroyable.destroyed")
+	var is_destroyed : bool = destroyed != null and destroyed == true
+	if amount == 0 or obj.get_attrib("converter.stored_energy") == null or is_destroyed:
 		return
+		
 	var cur_energy = obj.get_attrib("converter.stored_energy")
 	cur_energy -= amount
-	if cur_energy <= 0 and obj.get_attrib("type") == "player" :
+	obj.set_attrib("converter.stored_energy", cur_energy)
+	if cur_energy <= 0 and obj.get_attrib("type") == "player":
+		# prevent calling OnPlayerDeath multiple times
+		obj.set_attrib("destroyable.destroyed", true)
 		BehaviorEvents.emit_signal("OnPlayerDeath")
 	else:
-		obj.set_attrib("converter.stored_energy", cur_energy)
 		BehaviorEvents.emit_signal("OnEnergyChanged", obj)
 	
 func OnPickup_Callback(picker, picked):
@@ -104,6 +109,7 @@ func OnDropCargo_Callback(dropper, item_id):
 				index_to_delete.push_back(i)
 			total_ap_cost += drop_speed
 			Globals.LevelLoaderRef.RequestObject(item.src, Globals.LevelLoaderRef.World_to_Tile(dropper.position))
+			break
 		i += 1
 	if total_ap_cost > 0:
 		BehaviorEvents.emit_signal("OnUseAP", dropper, total_ap_cost)

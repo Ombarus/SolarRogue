@@ -86,6 +86,7 @@ func update_leaderboard(player, final_score, result):
 		if leaderboard[i].final_score <= final_score:
 			leaderboard.insert(i, data)
 			data = null
+			break
 	
 	if data != null:
 		leaderboard.push_back(data)

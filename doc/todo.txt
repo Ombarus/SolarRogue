@@ -153,6 +153,13 @@ IDEAS:::
 	
 	
 DONE :::
+- BUG: having more than one non-stackable item of the same type would screw up cargo
+- BUG: Draging the camera while in look-around would cancel look-around
+- BUG: Crashes, NULL and other crazyness still in leaderboard
+
+
+
+
 - Menu button in HUD with "save and quit", "suicide" (eventually "options" too ?)
 - BUG: Crashes because I insert NULL and list data in perm_save ?!?
 - Quality of life : when clicking transfer all... if left ship has weapon and right ship has empty weapon... move to mount instead of cargo

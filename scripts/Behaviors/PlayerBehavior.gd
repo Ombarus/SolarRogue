@@ -360,9 +360,22 @@ func OnLevelLoaded_Callback():
 		_current_origin = PLAYER_ORIGIN.saved
 	
 func _input(event):
-	if _input_state != INPUT_STATE.look_around or not event is InputEventMouseButton or not event.is_action_released("touch"):
+	if _input_state != INPUT_STATE.look_around or not event is InputEventMouseButton:
 		return
 		
+	if click_start_pos == null:
+			click_start_pos = Vector2(0,0)
+	if event.is_action_pressed("touch"):
+		click_start_pos = event.position
+	var vp_size : Vector2 = get_viewport().size
+	var drag_vec : Vector2 = click_start_pos - event.position
+	var per_drag_x : float = abs(drag_vec.x / vp_size.x)
+	var per_drag_y : float = abs(drag_vec.y / vp_size.y)
+	
+	if not event.is_action_released("touch") or per_drag_x > 0.04 or per_drag_y > 0.04:
+		return
+	
+	click_start_pos = Vector2(0,0)
 	_input_state = INPUT_STATE.hud
 	#get_tree().set_input_as_handled()
 	

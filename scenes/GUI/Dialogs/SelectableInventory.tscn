@@ -11,51 +11,20 @@
 [ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=9]
 
 [sub_resource type="InputEventKey" id=1]
-
-device = 0
-alt = false
-shift = false
-control = false
-meta = false
-command = false
-pressed = false
 scancode = 68
-unicode = 0
-echo = false
 
 [sub_resource type="ShortCut" id=2]
-
 shortcut = SubResource( 1 )
 
 [sub_resource type="InputEventKey" id=3]
-
-device = 0
-alt = false
-shift = false
-control = false
-meta = false
-command = false
-pressed = false
 scancode = 85
-unicode = 0
-echo = false
 
 [sub_resource type="ShortCut" id=4]
-
 shortcut = SubResource( 3 )
 
 [node name="Inventory" type="Control"]
-
-anchor_left = 0.0
-anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 script = ExtResource( 1 )
 _drop_btn = NodePath("base/Drop")
 _use_btn = NodePath("base/Use")
@@ -63,23 +32,12 @@ _mounts_node = NodePath("base/HBox/MountVBox/Mounts")
 _cargo_node = NodePath("base/HBox/CargoVBox/Cargo")
 _cargo_label = NodePath("base/HBox/CargoVBox/CargoLabel")
 
-[node name="ModalBG" type="Panel" parent="." index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
+[node name="ModalBG" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_styles/panel = ExtResource( 2 )
-_sections_unfolded = [ "custom_styles" ]
 
-[node name="base" parent="." index="1" instance=ExtResource( 3 )]
-
+[node name="base" parent="." instance=ExtResource( 3 )]
 margin_left = 187.0
 margin_top = 34.0
 margin_right = -183.0
@@ -87,56 +45,25 @@ margin_bottom = -76.0
 dialog_ok = true
 title = "Inventory"
 
-[node name="HBox" type="HBoxContainer" parent="base" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
+[node name="HBox" type="HBoxContainer" parent="base"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 19.0
 margin_top = 51.0
 margin_right = -31.0
 margin_bottom = -138.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-alignment = 0
 
-[node name="MountVBox" type="VBoxContainer" parent="base/HBox" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="MountVBox" type="VBoxContainer" parent="base/HBox"]
 margin_right = 300.0
 margin_bottom = 301.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-alignment = 0
-_sections_unfolded = [ "Size Flags" ]
 
-[node name="MountsLabel" type="RichTextLabel" parent="base/HBox/MountVBox" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="MountsLabel" type="RichTextLabel" parent="base/HBox/MountVBox"]
 margin_right = 300.0
 margin_bottom = 21.0
 rect_min_size = Vector2( 0, 21 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
-size_flags_vertical = 1
 custom_fonts/mono_font = ExtResource( 4 )
 custom_fonts/bold_italics_font = ExtResource( 5 )
 custom_fonts/italics_font = ExtResource( 6 )
@@ -144,19 +71,9 @@ custom_fonts/bold_font = ExtResource( 7 )
 custom_fonts/normal_font = ExtResource( 4 )
 bbcode_enabled = true
 bbcode_text = "[b]Mounts : [/b]"
-visible_characters = -1
-percent_visible = 1.0
-meta_underlined = true
-tab_size = 4
 text = "Mounts : "
-scroll_active = true
-scroll_following = false
-selection_enabled = false
-override_selected_font_color = false
-_sections_unfolded = [ "BBCode", "Rect" ]
 
-[node name="Mounts" parent="base/HBox/MountVBox" index="1" instance=ExtResource( 8 )]
-
+[node name="Mounts" parent="base/HBox/MountVBox" instance=ExtResource( 8 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
@@ -165,41 +82,19 @@ margin_right = 300.0
 margin_bottom = 301.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-_sections_unfolded = [ "Margin", "Size Flags" ]
 
-[node name="CargoVBox" type="VBoxContainer" parent="base/HBox" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="CargoVBox" type="VBoxContainer" parent="base/HBox"]
 margin_left = 304.0
 margin_right = 604.0
 margin_bottom = 301.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-alignment = 0
-_sections_unfolded = [ "Size Flags" ]
 
-[node name="CargoLabel" type="RichTextLabel" parent="base/HBox/CargoVBox" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="CargoLabel" type="RichTextLabel" parent="base/HBox/CargoVBox"]
 margin_right = 300.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 24 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
-size_flags_vertical = 1
 custom_fonts/mono_font = ExtResource( 4 )
 custom_fonts/bold_italics_font = ExtResource( 5 )
 custom_fonts/italics_font = ExtResource( 6 )
@@ -207,19 +102,9 @@ custom_fonts/bold_font = ExtResource( 7 )
 custom_fonts/normal_font = ExtResource( 4 )
 bbcode_enabled = true
 bbcode_text = "[b]Cargo : [/b]"
-visible_characters = -1
-percent_visible = 1.0
-meta_underlined = true
-tab_size = 4
 text = "Cargo : "
-scroll_active = true
-scroll_following = false
-selection_enabled = false
-override_selected_font_color = false
-_sections_unfolded = [ "BBCode", "Rect", "Size Flags" ]
 
-[node name="Cargo" parent="base/HBox/CargoVBox" index="1" instance=ExtResource( 8 )]
-
+[node name="Cargo" parent="base/HBox/CargoVBox" instance=ExtResource( 8 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
@@ -228,10 +113,8 @@ margin_right = 300.0
 margin_bottom = 301.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-_sections_unfolded = [ "Margin", "Size Flags" ]
 
-[node name="Drop" parent="base" index="3" instance=ExtResource( 9 )]
-
+[node name="Drop" parent="base" instance=ExtResource( 9 )]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 41.0
@@ -241,8 +124,7 @@ margin_bottom = -25.0
 Text = "[D]rop"
 Action = SubResource( 2 )
 
-[node name="Use" parent="base" index="4" instance=ExtResource( 9 )]
-
+[node name="Use" parent="base" instance=ExtResource( 9 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -253,5 +135,4 @@ margin_right = -53.0
 margin_bottom = -26.0
 Text = "[U]se"
 Action = SubResource( 4 )
-
 

@@ -76,6 +76,9 @@ func validate_action(target, shooter, weapon_data):
 		BehaviorEvents.emit_signal("OnLogLine", "This planet has a colony, let's not push our luck.")
 		return false
 		
+	if Globals.is_(target.get_attrib("destroyable.destroyed"), true):
+		return false
+		
 	var ammo = null
 	var is_player = shooter.get_attrib("type") == "player"
 	var is_target_player = target.get_attrib("type") == "player"
