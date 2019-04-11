@@ -350,7 +350,7 @@ func OnLevelLoaded_Callback():
 		# Modified_attrib must be passed during request so that proper IDs can be locked in objByID
 		playerNode = levelLoaderRef.RequestObject(template, coord, modififed_attrib)
 		if playerNode.get_attrib("player_name") == null:
-			playerNode.set_attrib("player_name", PermSave.get_attrib("settings.default_name"))
+			playerNode.set_attrib("player_name", PermSave.get_attrib("settings.default_name", "Ombarus"))
 		
 		BehaviorEvents.emit_signal("OnPlayerCreated", playerNode)
 		

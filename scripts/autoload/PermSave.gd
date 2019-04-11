@@ -11,7 +11,7 @@ enum END_GAME_STATE {
 #TODO: Might want to add more info about the player (cargo inventory, # of turn spent, etc.
 var _perm_save = {
 	"settings": {
-		"default_name":"Ombarus"
+		"default_name":null
 	},
 	"leaderboard": [
 		{"player_name":"Ombarus the greatest", "final_score":100000, "status":END_GAME_STATE.won, "generated_levels":20, "died_on":-1},
@@ -29,7 +29,7 @@ func _ready():
 		var file = File.new()
 		file.open(_savefile_name, file.READ)
 		var text = file.get_as_text()
-		var _perm_save = JSON.parse(text)
+		_perm_save = JSON.parse(text).result
 		file.close()
 
 func get_attrib(path, default=null):

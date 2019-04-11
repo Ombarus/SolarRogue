@@ -1,0 +1,80 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scripts/GUI/PlayerName.gd" type="Script" id=1]
+[ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
+[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
+[ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=4]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold.tres" type="DynamicFont" id=5]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItal.tres" type="DynamicFont" id=6]
+[ext_resource path="res://data/fonts/DejaVuSansMonoBold.tres" type="DynamicFont" id=7]
+[ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=8]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 1728, 0, 64, 64 )
+
+[node name="PlayerName" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = ExtResource( 2 )
+
+[node name="base" parent="." instance=ExtResource( 3 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -158.5
+margin_top = -92.0
+margin_right = 158.5
+margin_bottom = 92.0
+dialog_ok = true
+dialog_cancel = true
+title = "Player Name"
+border_style = "─"
+
+[node name="Selector" type="LineEdit" parent="base"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 20.2922
+margin_top = 0.603607
+margin_right = -89.7078
+margin_bottom = 34.6036
+
+[node name="Info" type="RichTextLabel" parent="base"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 42.0
+margin_top = -36.0
+margin_right = -45.0
+margin_bottom = -19.0
+custom_fonts/mono_font = ExtResource( 4 )
+custom_fonts/bold_italics_font = ExtResource( 5 )
+custom_fonts/italics_font = ExtResource( 6 )
+custom_fonts/bold_font = ExtResource( 7 )
+custom_fonts/normal_font = ExtResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[center]What will you be called ?[/center]"
+text = "What will you be called ?"
+scroll_active = false
+
+[node name="Randomize" type="Button" parent="base"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -87.5067
+margin_top = -110.089
+margin_right = -11.5067
+margin_bottom = -40.0889
+icon = SubResource( 1 )
+flat = true
+
+[connection signal="pressed" from="base/Randomize" to="." method="_on_Randomize_pressed"]

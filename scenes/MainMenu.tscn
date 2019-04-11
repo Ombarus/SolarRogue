@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/GUI/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scripts/GUI/MainMenu/Leaderboard.gd" type="Script" id=7]
 [ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/GUI/ItemList/LeaderboardRow.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/GUI/Dialogs/PlayerName.tscn" type="PackedScene" id=10]
 
 [sub_resource type="InputEventKey" id=1]
 scancode = 78
@@ -61,5 +62,8 @@ anchor_bottom = 1.0
 margin_right = 0.0
 margin_bottom = 0.0
 Row = ExtResource( 9 )
+
+[node name="PlayerName" parent="MenuRoot" instance=ExtResource( 10 )]
+visible = false
 
 [connection signal="pressed" from="MenuRoot/NewGameBTN" to="." method="_on_newgame_pressed"]
