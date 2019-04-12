@@ -174,6 +174,10 @@ func update():
 #	print("btn_offset = ", remainder_height)
 #	btn_offset = remainder_height
 
+	if get_parent() != null:
+		var format = "%s : _window_size (%d, %d), _font_size (%d, %d), repeat_width (%d, %d)"
+		format = format % [get_parent().name, _window_size.x, _window_size.y, _font_size.x, _font_size.y, repeat_width, repeat_height]
+		print(format)
 	
 	for i in range(0,repeat_width - 2):
 		top_string += repeat_line

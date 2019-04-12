@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/GUI/ItemList/DefaultRow.gd" type="Script" id=1]
+[ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=2]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold.tres" type="DynamicFont" id=3]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItal.tres" type="DynamicFont" id=4]
+[ext_resource path="res://data/fonts/DejaVuSansMonoBold.tres" type="DynamicFont" id=5]
 
 [node name="DefaultRow" type="Control"]
 anchor_right = 1.0
@@ -13,11 +17,16 @@ script = ExtResource( 1 )
 anchor_right = 1.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer"]
-margin_right = 1024.0
+margin_right = 1280.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_fonts/mono_font = ExtResource( 2 )
+custom_fonts/bold_italics_font = ExtResource( 3 )
+custom_fonts/italics_font = ExtResource( 4 )
+custom_fonts/bold_font = ExtResource( 5 )
+custom_fonts/normal_font = ExtResource( 2 )
 bbcode_enabled = true
 bbcode_text = "Test"
 text = "Test"

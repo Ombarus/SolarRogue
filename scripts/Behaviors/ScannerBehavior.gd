@@ -57,6 +57,9 @@ func _process(delta):
 		_update_scanned_obj(obj, scanner_data)
 			
 func _update_scanned_obj(obj, scanner_data):
+	if Globals.is_(Globals.get_data(scanner_data, "scanning.fully_mapped"), true):
+		return
+		
 	var scan_radius = scanner_data.scanning.radius
 	var cur_in_range = []
 	var offset = Vector2(0,0)

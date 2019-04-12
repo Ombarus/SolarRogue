@@ -39,13 +39,27 @@ func OnRequestObjectUnload_Callback(obj):
 func ExecuteFullSweep():
 	var level_id = Globals.LevelLoaderRef.GetLevelID()
 	var player_scan = _playerNode.get_attrib("scanner_result.cur_in_range." + level_id)
+	var is_ultimate : bool = false
+	var scanners = Globals.LevelLoaderRef.LoadJSONArray(_playerNode.get_attrib("mounts.scanner"))
+	for s_data in scanners:
+		if Globals.is_(Globals.get_data(s_data, "scanning.fully_mapped"), true):
+			is_ultimate = true
+			break
+			
 	for key in Globals.LevelLoaderRef.objById:
 		var obj = Globals.LevelLoaderRef.objById[key]
-		var disable_fow = Globals.LevelLoaderRef.GetCurrentLevelData().has("fully_mapped") and Globals.LevelLoaderRef.GetCurrentLevelData().fully_mapped == true
+		var disable_fow = is_ultimate or (Globals.LevelLoaderRef.GetCurrentLevelData().has("fully_mapped") and Globals.LevelLoaderRef.GetCurrentLevelData().fully_mapped == true)
 		if disable_fow or obj == _playerNode or obj.get_attrib("ghost_memory") != null or (player_scan != null and key in player_scan):
 			obj.visible = true
 		else:
 			obj.visible = false
+		if disable_fow:
+			var tile_memory : Array = []
+			for x in range(Globals.LevelLoaderRef.levelSize.x):
+				for y in range(Globals.LevelLoaderRef.levelSize.y):
+					tile_memory.push_back(0.0)
+			_playerNode.set_attrib("memory." + level_id + ".tiles", tile_memory)
+			_update_occlusion_texture()
 
 func _update_occlusion_texture():
 	var imageTexture = ImageTexture.new()

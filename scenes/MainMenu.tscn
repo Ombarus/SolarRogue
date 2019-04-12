@@ -34,6 +34,7 @@ custom_fonts/mono_font = ExtResource( 2 )
 custom_fonts/bold_italics_font = ExtResource( 3 )
 custom_fonts/italics_font = ExtResource( 4 )
 custom_fonts/bold_font = ExtResource( 5 )
+custom_fonts/normal_font = ExtResource( 2 )
 bbcode_enabled = true
 bbcode_text = "[center]Solar Rogue[/center]"
 text = "Solar Rogue"

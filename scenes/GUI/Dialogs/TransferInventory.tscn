@@ -41,13 +41,13 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="LShip" type="VBoxContainer" parent="base/HBoxContainer"]
-margin_right = 308.0
-margin_bottom = 414.0
+margin_right = 436.0
+margin_bottom = 534.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MountsLabel" type="RichTextLabel" parent="base/HBoxContainer/LShip"]
-margin_right = 308.0
+margin_right = 436.0
 margin_bottom = 21.0
 rect_min_size = Vector2( 0, 21 )
 size_flags_horizontal = 3
@@ -65,15 +65,15 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 25.0
-margin_right = 308.0
-margin_bottom = 203.0
+margin_right = 436.0
+margin_bottom = 263.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CargoLabel" type="RichTextLabel" parent="base/HBoxContainer/LShip"]
-margin_top = 207.0
-margin_right = 308.0
-margin_bottom = 231.0
+margin_top = 267.0
+margin_right = 436.0
+margin_bottom = 291.0
 rect_min_size = Vector2( 0, 24 )
 size_flags_horizontal = 3
 custom_fonts/mono_font = ExtResource( 4 )
@@ -89,16 +89,16 @@ text = "Cargo : "
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
-margin_top = 235.0
-margin_right = 308.0
-margin_bottom = 414.0
+margin_top = 295.0
+margin_right = 436.0
+margin_bottom = 534.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VSeparator" type="VSeparator" parent="base/HBoxContainer"]
-margin_left = 312.0
-margin_right = 316.0
-margin_bottom = 414.0
+margin_left = 440.0
+margin_right = 444.0
+margin_bottom = 534.0
 
 [node name="TakeAll" parent="base/HBoxContainer/VSeparator" instance=ExtResource( 10 )]
 margin_left = -28.0
@@ -115,14 +115,14 @@ margin_bottom = 421.0
 Text = ">>"
 
 [node name="RShip" type="VBoxContainer" parent="base/HBoxContainer"]
-margin_left = 320.0
-margin_right = 628.0
-margin_bottom = 414.0
+margin_left = 448.0
+margin_right = 884.0
+margin_bottom = 534.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MountsLabel" type="RichTextLabel" parent="base/HBoxContainer/RShip"]
-margin_right = 308.0
+margin_right = 436.0
 margin_bottom = 21.0
 rect_min_size = Vector2( 0, 21 )
 size_flags_horizontal = 3
@@ -140,15 +140,15 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 25.0
-margin_right = 308.0
-margin_bottom = 203.0
+margin_right = 436.0
+margin_bottom = 263.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CargoLabel" type="RichTextLabel" parent="base/HBoxContainer/RShip"]
-margin_top = 207.0
-margin_right = 308.0
-margin_bottom = 231.0
+margin_top = 267.0
+margin_right = 436.0
+margin_bottom = 291.0
 rect_min_size = Vector2( 0, 24 )
 size_flags_horizontal = 3
 custom_fonts/mono_font = ExtResource( 4 )
@@ -164,9 +164,9 @@ text = "Cargo : "
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
-margin_top = 235.0
-margin_right = 308.0
-margin_bottom = 414.0
+margin_top = 295.0
+margin_right = 436.0
+margin_bottom = 534.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -177,6 +177,11 @@ margin_left = 2.0
 margin_top = 16.0
 margin_right = 279.0
 margin_bottom = 35.0
+custom_fonts/mono_font = ExtResource( 4 )
+custom_fonts/bold_italics_font = ExtResource( 5 )
+custom_fonts/italics_font = ExtResource( 6 )
+custom_fonts/bold_font = ExtResource( 7 )
+custom_fonts/normal_font = ExtResource( 4 )
 
 [connection signal="pressed" from="base/HBoxContainer/VSeparator/TakeAll" to="." method="_on_TakeAll_pressed"]
 [connection signal="pressed" from="base/HBoxContainer/VSeparator/PutAll" to="." method="_on_PutAll_pressed"]

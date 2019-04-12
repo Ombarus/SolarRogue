@@ -355,13 +355,14 @@ func RequestObject(path, pos, modified_data = null):
 
 func CreateAndInitNode(data, pos, modified_data = null):
 	var r = get_node("/root/Root/GameTiles")
-	var scene = load("res://scenes/object.tscn")
+	var scene = Preloader.BaseObject
 	var n = scene.instance()
 	if data.has("name_id"):
 		var last = data["name_id"].split("/")
 		n.set_name(last[-1])
 	n.position = Tile_to_World(pos)
 	n.base_attributes = data
+	n.modified_attributes = {}
 	if modified_data != null:
 		n.modified_attributes = modified_data
 	r.call_deferred("add_child", n)

@@ -307,7 +307,6 @@ func Pressed_Weapon_Callback():
 	_input_state = INPUT_STATE.weapon_targetting
 	
 func OnLevelLoaded_Callback():
-	print("OnLevelLoaded : unlock input")
 	lock_input = false
 	if playerNode == null:
 		
@@ -401,8 +400,6 @@ func _unhandled_input(event):
 	var dir = null
 	
 	if event is InputEventMouseButton:
-		print("DoubleClick : " + str(event.doubleclick))
-		print("Position : " + str(playerNode.get_global_mouse_position()))
 		if click_start_pos == null:
 			click_start_pos = Vector2(0,0)
 		var vp_size = get_viewport().size
@@ -410,10 +407,8 @@ func _unhandled_input(event):
 		var per_drag_x = abs(drag_vec.x / vp_size.x)
 		var per_drag_y = abs(drag_vec.y / vp_size.y)
 		if event.is_action_pressed("touch"):
-			print("touch pressed")
 			click_start_pos = event.position
 		elif event.is_action_released("touch") && per_drag_x < 0.04 && per_drag_y < 0.04:
-			print("touch released")
 			var click_pos = playerNode.get_global_mouse_position()
 			
 			if _input_state == INPUT_STATE.weapon_targetting:
@@ -452,7 +447,6 @@ func _unhandled_input(event):
 				var rot = rad2deg(Vector2(0.0, 0.0).angle_to_point(click_dir)) - 90.0
 				if rot < 0:
 					rot += 360
-				print("player_pos ", player_pos, ", click_pos ", click_pos, ", rot ", rot)
 				
 				# Calculate direction based on touch relative to player position.
 				# dead zone (click on sprite)

@@ -127,7 +127,7 @@ func ClosestFiringSolution(shooter_tile, target_tile, weapon):
 		
 
 func _DoTargetting(player, weapon):
-	var scene = load("res://scenes/tileset_source/targetting_reticle.tscn")
+	var scene = Preloader.TargettingReticle
 	var player_tile = Globals.LevelLoaderRef.World_to_Tile(player.position)
 	var r = get_node("/root/Root/OverlayTiles")
 	var n = null
