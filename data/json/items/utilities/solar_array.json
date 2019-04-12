@@ -2,6 +2,10 @@
 	"name_id":"Solar Array",
 	"type":"utility",
 	"sprite": "solar_array",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[0,0,128,128]
+	},
 	"equipment": {
 		"slot":"utility",
 		"volume":10.0,

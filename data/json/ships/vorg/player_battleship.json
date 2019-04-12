@@ -2,6 +2,10 @@
 	"name_id":"A Vorg Battleship",
 	"type":"ship",
 	"sprite":"vorg_battleship",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[1536,256,128,128]
+	},
 	"boardable":true,
 	"mounts": {
 		"weapon": ["", "", "", ""],

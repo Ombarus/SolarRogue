@@ -2,6 +2,10 @@
 	"name_id":"Repair Nanobots",
 	"type":"consumable",
 	"sprite": "repair_nanobots",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[768,128,128,128]
+	},
 	"consumable": {
 		"ap": 1.0,
 		"energy":500

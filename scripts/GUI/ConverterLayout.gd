@@ -82,6 +82,15 @@ func Init(init_param):
 			if "icon_region" in recipe_data:
 				var region_data = recipe_data.icon_region
 				region = Rect2(region_data[0], region_data[1], region_data[2], region_data[3])
+		if ".json" in recipe_data.produce:
+			var produce_data = Globals.LevelLoaderRef.LoadJSON(recipe_data.produce)
+			var icon_texture : String = Globals.get_data(produce_data, "icon.texture")
+			var icon_region : Array = Globals.get_data(produce_data, "icon.region")
+			if icon_texture != null:
+				tex = load(Globals.clean_path(icon_texture))
+			if icon_region != null:
+				region = Rect2(icon_region[0], icon_region[1], icon_region[2], icon_region[3])
+			
 		_craft_list.add_item(recipe_data.name, tex)
 		if region != null:
 			_craft_list.set_item_icon_region(_craft_list.get_item_count()-1, region)

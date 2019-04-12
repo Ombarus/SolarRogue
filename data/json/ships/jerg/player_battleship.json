@@ -2,6 +2,10 @@
 	"name_id":"A Jerg Battleship",
 	"type":"ship",
 	"sprite":"jerg_battleship",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[1408,256,128,128]
+	},
 	"boardable":true,
 	"mounts": {
 		"weapon": ["", ""],

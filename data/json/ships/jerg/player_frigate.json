@@ -2,6 +2,10 @@
 	"name_id":"A Jerg Frigate",
 	"type":"ship",
 	"sprite":"jerg_frigate",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[1024,256,128,128]
+	},
 	"boardable":true,
 	"mounts": {
 		"weapon": [""],

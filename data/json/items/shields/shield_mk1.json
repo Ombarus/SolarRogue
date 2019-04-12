@@ -2,6 +2,10 @@
 	"name_id":"Shield",
 	"type":"shield",
 	"sprite": "shield",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[384,128,128,128]
+	},
 	"equipment": {
 		"slot":"shield",
 		"volume":10.0,

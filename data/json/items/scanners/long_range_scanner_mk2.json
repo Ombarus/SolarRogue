@@ -2,7 +2,10 @@
 	"name_id":"Long Range Scanner MK2",
 	"type":"scanner",
 	"sprite": "scanner",
-	"z_order":10,
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[512,128,128,128]
+	},
 	"equipment": {
 		"slot":"scanner",
 		"volume":10.0,

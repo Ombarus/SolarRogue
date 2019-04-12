@@ -2,6 +2,10 @@
 	"name_id":"Gravitic Compactor",
 	"type":"utility",
 	"sprite":"gravitic_compactor",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[128,0,128,128]
+	},
 	"equipment": {
 		"slot":"utility",
 		"volume":10.0,

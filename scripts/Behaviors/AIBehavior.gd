@@ -15,12 +15,53 @@ func OnAttributeAdded_Callback(obj, added_name):
 	if added_name == "ai":
 		OnObjTurn_Callback(obj)
 	
+func ConsiderInterests(obj):
+	var level_id : String = Globals.LevelLoaderRef.GetLevelID()
+	var new_objs : Array = obj.get_attrib("scanner_result.new_in_range." + level_id)
+	var is_player : bool = obj.get_attrib("type") == "player"
+	
+	# Disable if ennemy came in range or never seen item shows up
+	var filtered : Array = []
+	for id in new_objs:
+		var o : Node2D = Globals.LevelLoaderRef.GetObjectById(id)
+		if Globals.is_(o.get_attrib("ai.aggressive"), true):
+			if is_player == true:
+				BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Ennemy ship entered scanner range ![/color]")
+			filtered.push_back(id)
+			break
+		if o.get_attrib("ghost_memory") == null and o.get_attrib("has_ghost_memory") == null:
+			if is_player == true:
+				BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Scanners have picked up a new " + o.get_attrib("type") + "[/color]")
+			filtered.push_back(id)
+			break
+		
+	# Disable if ennemy ship in range
+	var cur_objs : Array = obj.get_attrib("scanner_result.cur_in_range." + level_id)
+	var filtered_cur : Array = []
+	for id in cur_objs:
+		var o : Node2D = Globals.LevelLoaderRef.GetObjectById(id)
+		if Globals.is_(o.get_attrib("ai.aggressive"), true):
+			var e_tile = Globals.LevelLoaderRef.World_to_Tile(o.position)
+			var p_tile = Globals.LevelLoaderRef.World_to_Tile(obj.position)
+			if (e_tile - p_tile).length() < 7.0:
+				# Print stop message ?
+				if is_player == true:
+					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Autopilot canceled, ennemy too close ![/color]")
+				filtered.push_back(id)
+			
+	if filtered.size() > 0:
+		obj.set_attrib("ai.disabled", true)
+		
+	# Disable if energy is low
+	var cur_energy = obj.get_attrib("converter.stored_energy")
+	if cur_energy != null and cur_energy <= 500:
+		if is_player == true:
+			BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Energy too low for autopilot ![/color]")
+		obj.set_attrib("ai.disabled", true)
+	
 func OnScannerUpdated_Callback(obj):
 	if obj.get_attrib("ai.disable_on_interest") == true:
-		var level_id = Globals.LevelLoaderRef.GetLevelID()
-		var new_objs = obj.get_attrib("scanner_result.new_in_range." + level_id)
-		if new_objs.size() > 0:
-			obj.set_attrib("ai.disabled", true)
+		ConsiderInterests(obj)
 			
 	if obj.get_attrib("ai") == null or obj.get_attrib("ai.aggressive") == false:
 		return

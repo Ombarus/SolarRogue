@@ -2,6 +2,10 @@
 	"name_id":"Matter-to-Energy Converter",
 	"type":"converter",
 	"sprite":"converter",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[256,128,128,128]
+	},
 	"equipment": {
 		"slot":"converter",
 		"volume":20.0,
@@ -21,27 +25,21 @@
 				"amount":1500
 			},
 			{
-				"name": "Missile", 
-				"icon_texture":"data/textures/space-sprite.png",
-				"icon_region":[384,0,128,128],
+				"name": "Missile",
 				"requirements":[{"type":"energy", "amount":500}], 
 				"produce":"data/json/items/weapons/missile.json",
 				"ap_cost":0.5,
 				"amount":1
 			},
 			{
-				"name": "Probe Ship", 
-				"icon_texture":"data/textures/space-sprite.png",
-				"icon_region":[1664,256,128,128],
+				"name": "Probe Ship",
 				"requirements":[{"type":"energy", "amount":1500}, {"src":"data/json/items/misc/probe_body.json", "amount":1}], 
 				"produce":"data/json/ships/human/player_probe.json",
 				"ap_cost":5.0,
 				"amount":1
 			},
 			{
-				"name": "(Starting) Human Scout", 
-				"icon_texture":"data/textures/space-sprite.png",
-				"icon_region":[512,256,128,128],
+				"name": "(Starting) Human Scout",
 				"requirements":[
 					{"type":"energy", "amount":1800},
 					{"src":"data/json/items/misc/scout_body.json", "amount":1}
@@ -51,18 +49,14 @@
 				"amount":1
 			},
 			{
-				"name": "Human Frigate", 
-				"icon_texture":"data/textures/space-sprite.png",
-				"icon_region":[896,256,128,128],
+				"name": "Human Frigate",
 				"requirements":[{"type":"energy", "amount":2500}, {"src":"data/json/items/misc/frigate_body.json", "amount":1}], 
 				"produce":"data/json/ships/human/player_frigate.json",
 				"ap_cost":7.0,
 				"amount":1
 			},
 			{
-				"name": "Human Battleship", 
-				"icon_texture":"data/textures/space-sprite.png",
-				"icon_region":[1280,256,128,128],
+				"name": "Human Battleship",
 				"requirements":[
 					{"type":"energy", "amount":7500},
 					{"src":"data/json/items/misc/battleship_body.json", "amount":1}

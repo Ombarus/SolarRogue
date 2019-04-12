@@ -2,6 +2,10 @@
 	"name_id":"A Human Battleship",
 	"type":"ship",
 	"sprite":"human_battleship",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[1280,256,128,128]
+	},
 	"boardable":true,
 	"mounts": {
 		"weapon": ["", "", ""],

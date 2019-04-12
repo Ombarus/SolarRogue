@@ -38,16 +38,20 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- OPTIM : scanner
+	- AI are only interested in player so don't check all surrounding
+	- Can not check empty tile to avoid 80x80 tile check with the ultimate scanner ?
+- OPTIM : loading json cache
+- Jerg move always in group bigger than 1
+- ultimate scanner is still too small (should be double the max size of the board)
 - BUG: Going up a wormhole I got an NULL objById 417 when trying to update the scanner
 - BUG: the "ok" buton can trigger multiple windows (like how many dialog 'ok' and the close converter 'ok')
 - BUG: moving while targetting will cancel overlay but won't push back HUD
-- getting shot at should cancel goto
 - Look button should popup a window with details ?
 - Review the fact that crafting takes time so producing energy takes energy = to idle amount...
 
 - going down wormhole should take ap and/or energy
 - Don't potion if not needed !
-- stop and/or prevent auto-move when energy low
 - Perf issues on my tablet ? (might be scanner ?)
 - BUG: wormhole once appeared right on top of sun and was completly hidden !
 - Things that annoy me while playtesting :
@@ -109,6 +113,7 @@ TODO :::
 	
 	
 polish :::
+- Improve goto message and behavior (still move by 1 is this desired ?)
 - Go back and fix & add all missing shortcuts for all buttons in the UI
 - UI is slightly off on android since update to 3.1 (probably because of native resolution vs stretch settings in project ?)
 - Sort energy recycler need list from most energy to less energy
@@ -153,6 +158,11 @@ IDEAS:::
 	
 	
 DONE :::
+- stop and/or prevent auto-move when energy low
+- getting shot at should cancel goto
+- Add stop message when doing goto ? (Ennemy ship entered scanner range, Ennemy ship too close, discovered planet, etc.)
+
+
 - BUG: having more than one non-stackable item of the same type would screw up cargo
 - BUG: Draging the camera while in look-around would cancel look-around
 - BUG: Crashes, NULL and other crazyness still in leaderboard

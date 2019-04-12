@@ -3,6 +3,10 @@
 	"type":"converter",
 	"sprite":"converter",
 	"end_game":true,
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[256,128,128,128]
+	},
 	"equipment": {
 		"slot":"converter",
 		"volume":100.0,

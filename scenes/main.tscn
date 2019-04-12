@@ -221,7 +221,6 @@ line_color = Color( 1, 0, 0, 0.352941 )
 [node name="Camera-GUI" type="CanvasLayer" parent="."]
 
 [node name="HUD" type="Control" parent="Camera-GUI"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1.0
@@ -248,6 +247,7 @@ mouse_filter = 2
 title = "Log Stardate 0.0.0"
 
 [node name="Buttons" type="Control" parent="Camera-GUI/HUD"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -359,7 +359,6 @@ region_enabled = true
 region_rect = Rect2( 1664, 0, 64, 64 )
 
 [node name="StatusBar" type="Control" parent="Camera-GUI/HUD"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -1.0

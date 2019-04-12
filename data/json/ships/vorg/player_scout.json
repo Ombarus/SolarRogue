@@ -2,6 +2,10 @@
 	"name_id":"A Vorg Scout",
 	"type":"ship",
 	"sprite":"vorg_scout",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[768,256,128,128]
+	},
 	"boardable":true,
 	"mounts": {
 		"weapon": [""],

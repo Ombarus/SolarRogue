@@ -2,6 +2,10 @@
 	"name_id":"A Vorg Frigate",
 	"type":"ship",
 	"sprite":"vorg_frigate",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[1152,256,128,128]
+	},
 	"boardable":true,
 	"mounts": {
 		"weapon": ["", ""],

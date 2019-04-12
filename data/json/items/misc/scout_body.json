@@ -2,6 +2,10 @@
 	"name_id":"Scout Hull Relic",
 	"type":"hull",
 	"sprite":"scout_hull",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[512,384,128,128]
+	},
 	"equipment": {
 		"slot":"cargo",
 		"volume":150.0,

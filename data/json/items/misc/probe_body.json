@@ -2,6 +2,10 @@
 	"name_id":"Probe Hull Relic",
 	"type":"hull",
 	"sprite":"probe_body",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[1664,384,128,128]
+	},
 	"equipment": {
 		"slot":"cargo",
 		"volume":150.0,

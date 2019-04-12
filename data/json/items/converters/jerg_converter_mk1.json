@@ -2,6 +2,10 @@
 	"name_id":"A Jerg Matter-to-Energy Converter",
 	"type":"converter",
 	"sprite":"converter",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[256,128,128,128]
+	},
 	"equipment": {
 		"slot":"converter",
 		"volume":20.0,

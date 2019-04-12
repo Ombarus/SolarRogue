@@ -2,6 +2,10 @@
 	"name_id":"A Jerg Scout",
 	"type":"ship",
 	"sprite":"jerg_scout",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[640,256,128,128]
+	},
 	"boardable":true,
 	"mounts": {
 		"weapon": [""],

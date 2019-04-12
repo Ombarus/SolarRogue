@@ -2,6 +2,10 @@
 	"name_id":"Medium Shield",
 	"type":"shield",
 	"sprite": "shield",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[384,128,128,128]
+	},
 	"equipment": {
 		"slot":"shield",
 		"volume":13.0,

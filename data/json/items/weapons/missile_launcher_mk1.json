@@ -2,6 +2,10 @@
 	"name_id":"Missile Launcher MK1",
 	"type":"weapon",
 	"sprite":"missile_launcher",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[128,128,128,128]
+	},
 	"animation": {
 		"shoot": "scenes/tileset_source/missile_fx.tscn"
 	},

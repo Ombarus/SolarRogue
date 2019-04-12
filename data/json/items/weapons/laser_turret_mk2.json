@@ -2,6 +2,10 @@
 	"name_id":"Laser Turret MK2",
 	"type":"weapon",
 	"sprite": "laser_turret",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[0,128,128,128]
+	},
 	"animation": {
 		"shoot": "scenes/tileset_source/LaserFX01.tscn"
 	},

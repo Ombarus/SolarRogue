@@ -2,6 +2,10 @@
 	"name_id":"A Human Frigate",
 	"type":"ship",
 	"sprite":"human_frigate",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[896,256,128,128]
+	},
 	"boardable":true,
 	"mounts": {
 		"weapon": ["", ""],

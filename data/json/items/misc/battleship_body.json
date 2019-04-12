@@ -2,6 +2,10 @@
 	"name_id":"A Battleship Hull Relic",
 	"type":"hull",
 	"sprite":"battleship_body",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[1280,384,128,128]
+	},
 	"equipment": {
 		"slot":"cargo",
 		"volume":190.0,
