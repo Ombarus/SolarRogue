@@ -17,6 +17,7 @@ ROAD TO ALPHA :::
 		- Code Feature
 		- Add item to JSON
 		- Add to spawn list everywhere !
+		- Add to converter
 	- Ships
 		- Human (Basic)
 			- Art
@@ -38,6 +39,8 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- BUG: turn number is not saved / loaded
+- BUG: Global max seem broken. More than one of the same branch wormhole sometimes spawn
 - OPTIM : scanner
 	- AI are only interested in player so don't check all surrounding
 	- Can not check empty tile to avoid 80x80 tile check with the ultimate scanner ?
@@ -113,6 +116,7 @@ TODO :::
 	
 	
 polish :::
+- Save node's rotation (position is saved but not rot)
 - Improve goto message and behavior (still move by 1 is this desired ?)
 - Go back and fix & add all missing shortcuts for all buttons in the UI
 - UI is slightly off on android since update to 3.1 (probably because of native resolution vs stretch settings in project ?)
@@ -158,6 +162,10 @@ IDEAS:::
 	
 	
 DONE :::
+
+
+
+
 - stop and/or prevent auto-move when energy low
 - getting shot at should cancel goto
 - Add stop message when doing goto ? (Ennemy ship entered scanner range, Ennemy ship too close, discovered planet, etc.)

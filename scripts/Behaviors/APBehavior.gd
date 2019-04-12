@@ -22,7 +22,15 @@ func _ready():
 	
 	BehaviorEvents.connect("OnBeginParallelAction", self, "OnBeginParallelAction_Callback")
 	BehaviorEvents.connect("OnEndParallelAction", self, "OnEndParallelAction_Callback")
-
+	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
+	
+	
+func OnLevelLoaded_Callback():
+	if Globals.total_turn > 0:
+		star_date_major = floor(Globals.total_turn / 100000)
+		star_date_minor = floor(Globals.total_turn / 100)
+		star_date_turn = int(Globals.total_turn) % 100
+	UpdateLogTitle()
 	
 func OnBeginParallelAction_Callback(obj):
 	obj.set_attrib("ap.is_parallel", true)
@@ -96,11 +104,11 @@ func NormalizeAP():
 	for i in range(0,action_list.size()):
 		action_list[i].modified_attributes.action_point -= top_ap
 	star_date_turn += top_ap
-	if star_date_turn >= 100.0:
-		star_date_turn -= 100.0
+	if star_date_turn >= day_length:
+		star_date_turn -= day_length
 		star_date_minor += 1
-	if star_date_minor >= 100.0:
-		star_date_minor -= 100.0
+	if star_date_minor >= day_length:
+		star_date_minor -= day_length
 		star_date_major += 1
 	UpdateLogTitle()
 

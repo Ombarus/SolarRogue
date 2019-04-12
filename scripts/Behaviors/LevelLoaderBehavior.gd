@@ -95,6 +95,7 @@ func _ready():
 		num_generated_level = cur_save.generated_levels
 		_sequence_id = cur_save.current_sequence_id
 		_global_spawns = cur_save.global_spawns
+		Globals.total_turn = cur_save.total_turn
 	
 	var data = LoadJSON(startLevel)
 	if data != null:
@@ -222,6 +223,7 @@ func SaveState(level_data):
 	cur_save["generated_levels"] = num_generated_level
 	cur_save["player_data"] = {}
 	cur_save["global_spawns"] = _global_spawns
+	cur_save["total_turn"] = Globals.total_turn
 	cur_save.player_data["src"] = objByType["player"][0].get_attrib("src")
 	cur_save.player_data["position_x"] = World_to_Tile(objByType["player"][0].position).x
 	cur_save.player_data["position_y"] = World_to_Tile(objByType["player"][0].position).y
@@ -274,6 +276,9 @@ func OnRequestObjectUnload_Callback(obj):
 func OnPlayerDeath_Callback():
 	var save_game = Directory.new()
 	save_game.remove("user://savegame.save")
+	# Maybe this should not be in a Global eh ?
+	Globals.total_turn = 0
+	Globals.last_delta_turn = 0
 	#var data = LoadJSON(startLevel)
 	#if data != null:
 	#	call_deferred("ExecuteLoadLevel", data)

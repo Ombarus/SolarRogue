@@ -6,8 +6,7 @@
 
 [node name="JergBattleGroup" type="Node2D"]
 
-[node name="jerg_battleship" type="Node2D" parent="." index="0"]
-
+[node name="jerg_battleship" type="Node2D" parent="."]
 script = ExtResource( 1 )
 PreloadData = "res://data/json/ships/jerg/battleship.json"
 PreloadJSON = "{
@@ -22,10 +21,9 @@ modified_attributes = {
 
 }
 
-[node name="shuttle" parent="jerg_battleship" index="0" instance=ExtResource( 2 )]
+[node name="shuttle" parent="jerg_battleship" instance=ExtResource( 2 )]
 
-[node name="scout1" type="Node2D" parent="." index="1"]
-
+[node name="scout1" type="Node2D" parent="."]
 position = Vector2( -128, 128 )
 script = ExtResource( 1 )
 PreloadData = "res://data/json/ships/jerg/scout_laser.json"
@@ -42,12 +40,9 @@ modified_attributes = {
 
 }
 
-[node name="shuttle2" parent="scout1" index="0" instance=ExtResource( 3 )]
+[node name="shuttle2" parent="scout1" instance=ExtResource( 3 )]
 
-_sections_unfolded = [ "Transform" ]
-
-[node name="scout2" type="Node2D" parent="." index="2"]
-
+[node name="scout2" type="Node2D" parent="."]
 position = Vector2( 128, 128 )
 script = ExtResource( 1 )
 PreloadData = "res://data/json/ships/jerg/scout_laser.json"
@@ -64,8 +59,5 @@ modified_attributes = {
 
 }
 
-[node name="shuttle3" parent="scout2" index="0" instance=ExtResource( 3 )]
-
-_sections_unfolded = [ "Transform" ]
-
+[node name="shuttle3" parent="scout2" instance=ExtResource( 3 )]
 
