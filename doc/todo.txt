@@ -39,6 +39,8 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- BUG: Loading level doesn't load the same planet sprite ? (because it's random choice ?)
+- Don't drop item when equipping new one, send to cargo
 - BUG: scaling UI issues on android ?
 - ultimate scanner Hack break changes to goto
 - What happen when you switch scanner to objects that go out of scanner range ? (they *SHOULD* become ghosts...)

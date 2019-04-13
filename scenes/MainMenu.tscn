@@ -27,9 +27,8 @@ margin_top = -2.0
 margin_bottom = -2.0
 
 [node name="GameTitle" type="RichTextLabel" parent="MenuRoot"]
-margin_top = 17.0
-margin_right = 1023.0
-margin_bottom = 47.0
+anchor_right = 1.0
+margin_bottom = 43.0
 custom_fonts/mono_font = ExtResource( 2 )
 custom_fonts/bold_italics_font = ExtResource( 3 )
 custom_fonts/italics_font = ExtResource( 4 )
@@ -40,10 +39,12 @@ bbcode_text = "[center]Solar Rogue[/center]"
 text = "Solar Rogue"
 
 [node name="NewGameBTN" parent="MenuRoot" instance=ExtResource( 6 )]
-margin_left = 446.0
-margin_top = 102.0
-margin_right = 585.0
-margin_bottom = 197.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -67.9524
+margin_top = 86.6629
+margin_right = 71.0476
+margin_bottom = 181.663
 Text = "[n]ew game"
 Action = SubResource( 2 )
 

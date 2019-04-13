@@ -420,7 +420,6 @@ visible = false
 visible = false
 
 [node name="DEBUG" type="Node2D" parent="."]
-visible = false
 script = ExtResource( 47 )
 
 [connection signal="pressed" from="Camera-GUI/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_ZoomIn_pressed"]

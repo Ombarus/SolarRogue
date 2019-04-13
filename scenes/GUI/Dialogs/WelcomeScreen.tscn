@@ -39,7 +39,7 @@ custom_fonts/italics_font = ExtResource( 6 )
 custom_fonts/bold_font = ExtResource( 7 )
 custom_fonts/normal_font = ExtResource( 4 )
 bbcode_enabled = true
-bbcode_text = "Something went [color=red]wrong[/color]. 
+bbcode_text = "Something went [color=red]wrong[/color].
 
 While you were exploring uncharted space the [color=yellow]wormhole[/color] sent you so far you've lost all bearings. 
 What you do know is that your warp engines aren't powerful enough to open it again.
@@ -50,7 +50,7 @@ Try not to [u]die[/u] or run out of [u]energy[/u].
 Look for the [color=red]Ultimate Artifact[/color] : [u]The Converter of Yendor[/u], 
 [/indent]
 Maybe it's powerful enough to bring you home...."
-text = "Something went wrong. 
+text = "Something went wrong.
 
 While you were exploring uncharted space the wormhole sent you so far you've lost all bearings. 
 What you do know is that your warp engines aren't powerful enough to open it again.
