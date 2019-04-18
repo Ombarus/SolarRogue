@@ -54,7 +54,7 @@ margin_bottom = 30.8256
 rect_clip_content = false
 custom_fonts/mono_font = ExtResource( 2 )
 custom_fonts/normal_font = ExtResource( 2 )
-custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_colors/default_color = Color( 0.2, 1, 0.2, 1 )
 bbcode_enabled = true
 bbcode_text = "╔══════════════════════════════════════════════════════════════════════╗
 ║                                                                      ║

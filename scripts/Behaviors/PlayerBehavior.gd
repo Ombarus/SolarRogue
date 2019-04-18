@@ -226,7 +226,7 @@ func ProcessGoingHome():
 		if in_cargo == true:
 			BehaviorEvents.emit_signal("OnLogLine", "The Converter of Yendor will not work unless it is mounted on the ship !")
 		else:
-			BehaviorEvents.emit_signal("OnPushGUI", "WelcomeScreen", null)
+			BehaviorEvents.emit_signal("OnPushGUI", "WelcomeScreen", {"player_name":playerNode.get_attrib("player_name")})
 
 func OnUseInventory_Callback(key):
 	var data = Globals.LevelLoaderRef.LoadJSON(key)
@@ -447,6 +447,10 @@ func _unhandled_input(event):
 				var rot = rad2deg(Vector2(0.0, 0.0).angle_to_point(click_dir)) - 90.0
 				if rot < 0:
 					rot += 360
+					
+				var did_other_action : bool = do_contextual_actions(clicked_tile, player_tile)
+				if did_other_action == true:
+					return
 				
 				# Calculate direction based on touch relative to player position.
 				# dead zone (click on sprite)
@@ -514,6 +518,32 @@ func _unhandled_input(event):
 		next_touch_is_a_goto = false
 		BehaviorEvents.emit_signal("OnMovement", playerNode, dir)
 
+
+func do_contextual_actions(tile, player_tile):
+	var content : Array = Globals.LevelLoaderRef.GetTile(tile)
+	for o in content:
+		if o == playerNode:
+			continue
+			
+		if o.get_attrib("type") == "wormhole" and tile == player_tile:
+			Pressed_FTL_Callback()
+			return true
+			
+		if o.get_attrib("destroyable") != null || o.get_attrib("harvestable") != null:
+			Pressed_Weapon_Callback()
+			return true
+		#TODO: If more  than one possible contextual action maybe pop a menu ?
+		#elif o.get_attrib("boardable") == true:
+		#	return true
+		if o.get_attrib("cargo") != null:
+			Pressed_Take_Callback()
+			return true
+			
+		if o.get_attrib("equipment") != null and tile == player_tile:
+			Pressed_Grab_Callback()
+			return true
+			
+	return false
 
 func cancel_targetting_pressed_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
