@@ -224,7 +224,6 @@ script = ExtResource( 29 )
 line_color = Color( 1, 0, 0, 0.352941 )
 
 [node name="Camera-GUI" type="CanvasLayer" parent="."]
-editor/display_folded = true
 
 [node name="HUD" type="Control" parent="Camera-GUI"]
 anchor_right = 1.0

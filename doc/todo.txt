@@ -39,6 +39,8 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- Update Converter recipes with mk2-3, etc.
+- BUG: Contextual touch only if object is visible !
 - BUG: Loading level doesn't load the same planet sprite ? (because it's random choice ?)
 - BUG: scaling UI issues on android ? 
 	- (seem to be a text_width issue with font oversampling)
@@ -50,7 +52,6 @@ TODO :::
 	- AI are only interested in player so don't check all surrounding
 	- Can not check empty tile to avoid 80x80 tile check with the ultimate scanner ?
 - OPTIM : loading json cache
-- ultimate scanner is still too small (should be double the max size of the board)
 - BUG: the "ok" buton can trigger multiple windows (like how many dialog 'ok' and the close converter 'ok')
 - BUG: moving while targetting will cancel overlay but won't push back HUD
 - Look button should popup a window with details ?
@@ -58,7 +59,8 @@ TODO :::
 
 - going down wormhole should take ap and/or energy
 - Don't potion if not needed !
-- Perf issues on my tablet ? (might be shaders ?)
+- Perf issues on my tablet
+	- Text UI take too long to render (1 draw call per char!)
 - BUG: wormhole once appeared right on top of sun and was completly hidden !
 - Things that annoy me while playtesting :
 	- dragging converter list doesn't move the list.. very difficult on device to hit the scroll

@@ -24,12 +24,12 @@ func ConsiderInterests(obj):
 	var filtered : Array = []
 	for id in new_objs:
 		var o : Node2D = Globals.LevelLoaderRef.GetObjectById(id)
-		if Globals.is_(o.get_attrib("ai.aggressive"), true):
+		if o != null and Globals.is_(o.get_attrib("ai.aggressive"), true):
 			if is_player == true:
 				BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Ennemy ship entered scanner range ![/color]")
 			filtered.push_back(id)
 			break
-		if o.get_attrib("ghost_memory") == null and o.get_attrib("has_ghost_memory") == null:
+		if o != null and o.get_attrib("ghost_memory") == null and o.get_attrib("has_ghost_memory") == null:
 			if is_player == true:
 				BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Scanners have picked up a new " + o.get_attrib("type") + "[/color]")
 			filtered.push_back(id)
@@ -40,7 +40,7 @@ func ConsiderInterests(obj):
 	var filtered_cur : Array = []
 	for id in cur_objs:
 		var o : Node2D = Globals.LevelLoaderRef.GetObjectById(id)
-		if Globals.is_(o.get_attrib("ai.aggressive"), true):
+		if o != null and Globals.is_(o.get_attrib("ai.aggressive"), true):
 			var e_tile = Globals.LevelLoaderRef.World_to_Tile(o.position)
 			var p_tile = Globals.LevelLoaderRef.World_to_Tile(obj.position)
 			if (e_tile - p_tile).length() < 7.0:
@@ -72,7 +72,7 @@ func OnScannerUpdated_Callback(obj):
 	var in_range = false
 	for id in new_objs:
 		var o = Globals.LevelLoaderRef.GetObjectById(id)
-		if o.get_attrib("type") == "player":
+		if o != null and o.get_attrib("type") == "player":
 			in_range = true
 			player = id
 			break
@@ -137,7 +137,7 @@ func DoFollowGroupLeader(obj):
 		var nearby_objs = obj.get_attrib("scanner_result.cur_in_range." + level_id)
 		for id in nearby_objs:
 			var o = Globals.LevelLoaderRef.GetObjectById(id)
-			if o.get_attrib("ai.pathfinding") == "group_leader":
+			if o != null and o.get_attrib("ai.pathfinding") == "group_leader":
 				var leader_tile = Globals.LevelLoaderRef.World_to_Tile(o.position)
 				var my_tile = Globals.LevelLoaderRef.World_to_Tile(obj.position)
 				var offset = my_tile - leader_tile

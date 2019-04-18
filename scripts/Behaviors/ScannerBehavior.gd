@@ -72,8 +72,9 @@ func _process(delta):
 		
 	for id in _node_id_scanner:
 		var obj = Globals.LevelLoaderRef.GetObjectById(id)
-		var scanner_data = _node_id_scanner[id]
-		_update_scanned_obj(obj, scanner_data)
+		if obj != null:
+			var scanner_data = _node_id_scanner[id]
+			_update_scanned_obj(obj, scanner_data)
 			
 func _update_scanned_obj(obj, scanner_data):
 	if Globals.is_(Globals.get_data(scanner_data, "scanning.fully_mapped"), true):

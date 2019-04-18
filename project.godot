@@ -60,6 +60,10 @@ touch={
 
 locale_filter=[ 0, [  ] ]
 
+[physics]
+
+common/physics_fps=5
+
 [rendering]
 
 quality/intended_usage/framebuffer_allocation=0
