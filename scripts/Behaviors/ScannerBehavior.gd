@@ -15,9 +15,13 @@ func OnMountAdded_Callback(obj, slot, src):
 	if not "scanner" in slot:
 		return
 		
+	var scanner_data = null
 	if src != null and src != "":
-		_node_id_scanner[obj.get_attrib("unique_id")] = Globals.LevelLoaderRef.LoadJSON(src)
+		scanner_data = Globals.LevelLoaderRef.LoadJSON(src)
+		_node_id_scanner[obj.get_attrib("unique_id")] = scanner_data
 		_up_to_date = false
+	
+	special_update_ultimate(obj, scanner_data)
 	
 func OnMountRemoved_Callback(obj, slot, src):
 	if not "scanner" in slot:
@@ -40,10 +44,25 @@ func OnObjectLoaded_Callback(obj):
 	
 	var scanner_name = scanners[0]
 	if scanner_name != null and scanner_name != "":
-		_node_id_scanner[obj.get_attrib("unique_id")] = Globals.LevelLoaderRef.LoadJSON(scanner_name)
+		var scanner_data = Globals.LevelLoaderRef.LoadJSON(scanner_name)
+		_node_id_scanner[obj.get_attrib("unique_id")] = scanner_data
+		special_update_ultimate(obj, scanner_data)
 	
 func OnRequestObjectUnload_Callback(obj):
 	_node_id_scanner.erase(obj.get_attrib("unique_id"))
+	
+func special_update_ultimate(obj, scanner_data):
+	if scanner_data != null and Globals.is_(Globals.get_data(scanner_data, "scanning.fully_mapped"), true):
+		var level_id : String = Globals.LevelLoaderRef.GetLevelID()
+		var old_range : Array = obj.get_attrib("scanner_result.cur_in_range." + level_id)
+		var cur_in_range := []
+		for key in Globals.LevelLoaderRef.objById:
+			var o : Node2D = Globals.LevelLoaderRef.objById[key]
+			# Removed objects just get set to null so we might have null obj in objById
+			if o != null:
+				cur_in_range.push_back(o.get_attrib("unique_id"))
+			
+		obj.set_attrib("scanner_result.cur_in_range." + level_id, cur_in_range)
 	
 func _process(delta):
 	if _up_to_date == true:

@@ -40,18 +40,17 @@ ROAD TO ALPHA :::
 
 TODO :::
 - BUG: Loading level doesn't load the same planet sprite ? (because it's random choice ?)
-- Don't drop item when equipping new one, send to cargo
-- BUG: scaling UI issues on android ?
-- ultimate scanner Hack break changes to goto
-- What happen when you switch scanner to objects that go out of scanner range ? (they *SHOULD* become ghosts...)
+- BUG: scaling UI issues on android ? 
+	- (seem to be a text_width issue with font oversampling)
+	- Hopefully it can should be fixed ? only happen with my mono custom font,
+	- doesn't happen with godot's default font (maybe because it's not oversampling ?)
+	- https://github.com/godotengine/godot/issues/22580#issue-365322210
 - BUG: Global max seem broken. More than one of the same branch wormhole sometimes spawn
 - OPTIM : scanner
 	- AI are only interested in player so don't check all surrounding
 	- Can not check empty tile to avoid 80x80 tile check with the ultimate scanner ?
 - OPTIM : loading json cache
-- Jerg move always in group bigger than 1
 - ultimate scanner is still too small (should be double the max size of the board)
-- BUG: Going up a wormhole I got an NULL objById 417 when trying to update the scanner
 - BUG: the "ok" buton can trigger multiple windows (like how many dialog 'ok' and the close converter 'ok')
 - BUG: moving while targetting will cancel overlay but won't push back HUD
 - Look button should popup a window with details ?
@@ -59,7 +58,7 @@ TODO :::
 
 - going down wormhole should take ap and/or energy
 - Don't potion if not needed !
-- Perf issues on my tablet ? (might be scanner ?)
+- Perf issues on my tablet ? (might be shaders ?)
 - BUG: wormhole once appeared right on top of sun and was completly hidden !
 - Things that annoy me while playtesting :
 	- dragging converter list doesn't move the list.. very difficult on device to hit the scroll
@@ -166,10 +165,16 @@ IDEAS:::
 	
 	
 DONE :::
+- Don't drop item when equipping new one, send to cargo
+- Swapping scanners would sometime cause crash and/or weird bugs (especially with ultimate scanner)
+- BUG: Going up a wormhole I got an NULL objById 417 when trying to update the scanner
+	- (I think this was because ObjByID sets ids to null when removing ghosts but sometime in the same loop where we reference the ghost)
+- Fixed ultimate_scanner breaking goto auto-stop feature
+- Equip/unequip mount did not take AP
 
 
 
-
+- Jerg move always in group bigger than 1
 - BUG: turn number is not saved / loaded
 
 

@@ -134,13 +134,26 @@ func OnEquipMount_Callback(equipper, slot_name, index, item_id):
 	# Remove current equipment (takes AP)
 	# Remove item from cargo
 	# Add item_id to mount point
+	var new_data : Dictionary = Globals.LevelLoaderRef.LoadJSON(item_id)
 	var attrib_getter = "mounts." + slot_name
 	var items = equipper.get_attrib(attrib_getter)
 	if items != null and items[index] != "":
-		BehaviorEvents.emit_signal("OnDropMount", equipper, slot_name, index)
+		BehaviorEvents.emit_signal("OnAddItem", equipper, items[index])
+		var old_data : Dictionary = Globals.LevelLoaderRef.LoadJSON(items[index])
+		var unequip_ap : int = Globals.get_data(old_data, "equipment.equip_ap")
+		if unequip_ap != null and unequip_ap > 0:
+			BehaviorEvents.emit_signal("OnUseAP", equipper, unequip_ap)
+		if equipper.get_attrib("type") == "player":
+			BehaviorEvents.emit_signal("OnLogLine", "Replaced " + old_data.name_id + " by " + new_data.name_id)
+	elif equipper.get_attrib("type") == "player":
+		BehaviorEvents.emit_signal("OnLogLine", "Installed " + new_data.name_id)
+		
 	BehaviorEvents.emit_signal("OnRemoveItem", equipper, item_id)
 	items[index] = item_id
 	equipper.set_attrib(attrib_getter, items)
+	var equip_ap : int = Globals.get_data(new_data, "equipment.equip_ap")
+	if equip_ap != null and equip_ap > 0:
+		BehaviorEvents.emit_signal("OnUseAP", equipper, equip_ap)
 	BehaviorEvents.emit_signal("OnMountAdded", equipper, slot_name, item_id)
 
 #TODO: Fix logic flaws (make sure we're not changing cargo in base_attributes), (check we won't exceed volume before adding)

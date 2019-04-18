@@ -10,6 +10,14 @@ func _ready():
 	BehaviorEvents.connect("OnScannerUpdated", self, "OnScannerUpdated_Callback")
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_Callback")
+	BehaviorEvents.connect("OnMountAdded", self, "OnMountAdded_Callback")
+
+
+func OnMountAdded_Callback(obj, slot, src):
+	if not "scanner" in slot:
+		return
+		
+	ExecuteFullSweep()
 
 func OnLevelLoaded_Callback():
 	# Give two frames for scanner to update
@@ -48,9 +56,16 @@ func ExecuteFullSweep():
 			
 	for key in Globals.LevelLoaderRef.objById:
 		var obj = Globals.LevelLoaderRef.objById[key]
+		# Removed objects just get set to null so we might have null obj in objById
+		if obj == null:
+			continue
 		var disable_fow = is_ultimate or (Globals.LevelLoaderRef.GetCurrentLevelData().has("fully_mapped") and Globals.LevelLoaderRef.GetCurrentLevelData().fully_mapped == true)
 		if disable_fow or obj == _playerNode or obj.get_attrib("ghost_memory") != null or (player_scan != null and key in player_scan):
 			obj.visible = true
+			if obj != null and obj.get_attrib("has_ghost_memory"):
+				_remove_ghost_from_real(obj)
+			if obj != null and obj.get_attrib("ghost_memory"):
+				_remove_ghost(obj)
 		else:
 			obj.visible = false
 		if disable_fow:

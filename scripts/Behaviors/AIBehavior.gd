@@ -17,7 +17,7 @@ func OnAttributeAdded_Callback(obj, added_name):
 	
 func ConsiderInterests(obj):
 	var level_id : String = Globals.LevelLoaderRef.GetLevelID()
-	var new_objs : Array = obj.get_attrib("scanner_result.new_in_range." + level_id)
+	var new_objs : Array = obj.get_attrib("scanner_result.new_in_range." + level_id, [])
 	var is_player : bool = obj.get_attrib("type") == "player"
 	
 	# Disable if ennemy came in range or never seen item shows up
@@ -36,7 +36,7 @@ func ConsiderInterests(obj):
 			break
 		
 	# Disable if ennemy ship in range
-	var cur_objs : Array = obj.get_attrib("scanner_result.cur_in_range." + level_id)
+	var cur_objs : Array = obj.get_attrib("scanner_result.cur_in_range." + level_id, [])
 	var filtered_cur : Array = []
 	for id in cur_objs:
 		var o : Node2D = Globals.LevelLoaderRef.GetObjectById(id)
@@ -60,8 +60,6 @@ func ConsiderInterests(obj):
 		obj.set_attrib("ai.disabled", true)
 	
 func OnScannerUpdated_Callback(obj):
-	if obj.get_attrib("ai.disable_on_interest") == true:
-		ConsiderInterests(obj)
 			
 	if obj.get_attrib("ai") == null or obj.get_attrib("ai.aggressive") == false:
 		return
@@ -100,6 +98,9 @@ func OnDamageTaken_Callback(target, shooter):
 func OnObjTurn_Callback(obj):
 	if obj.get_attrib("ai") == null:
 		return
+		
+	if obj.get_attrib("ai.disable_on_interest") == true:
+		ConsiderInterests(obj)
 	
 	obj.set_attrib("ap.ai_acted", false)
 	#obj.modified_attributes["ap"] = false
@@ -233,7 +234,10 @@ func DoSimplePathFinding(obj):
 
 func DoRunAwayPathFinding(obj):
 	var my_pos = obj.position
-	var scary_pos = Globals.LevelLoaderRef.objById[obj.modified_attributes.ai.run_from].position
+	var from_id = Globals.LevelLoaderRef.objById[obj.modified_attributes.ai.run_from]
+	var scary_pos := Vector2(0.0, 0.0)
+	if from_id != null:
+		scary_pos = from_id.position
 	my_pos = Globals.LevelLoaderRef.World_to_Tile(my_pos)
 	scary_pos = Globals.LevelLoaderRef.World_to_Tile(scary_pos)
 	var scanner_range = 0
