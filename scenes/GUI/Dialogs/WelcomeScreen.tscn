@@ -30,9 +30,9 @@ title = "Welcome Ombarus..."
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 15.0
-margin_top = 49.0
+margin_top = 47.9193
 margin_right = -26.0
-margin_bottom = -34.0
+margin_bottom = -35.0807
 custom_fonts/mono_font = ExtResource( 4 )
 custom_fonts/bold_italics_font = ExtResource( 5 )
 custom_fonts/italics_font = ExtResource( 6 )
@@ -41,7 +41,8 @@ custom_fonts/normal_font = ExtResource( 4 )
 bbcode_enabled = true
 bbcode_text = "Something went [color=red]wrong[/color].
 
-While you were exploring uncharted space the [color=yellow]wormhole[/color] sent you so far you've lost all bearings. 
+While you were exploring uncharted space the [color=yellow]wormhole[/color] 
+sent you so far you've lost all bearings. 
 What you do know is that your warp engines aren't powerful enough to open it again.
 Use what you have and try to find a way back home.
 [indent]
@@ -52,7 +53,8 @@ Look for the [color=red]Ultimate Artifact[/color] : [u]The Converter of Yendor[/
 Maybe it's powerful enough to bring you home...."
 text = "Something went wrong.
 
-While you were exploring uncharted space the wormhole sent you so far you've lost all bearings. 
+While you were exploring uncharted space the wormhole 
+sent you so far you've lost all bearings. 
 What you do know is that your warp engines aren't powerful enough to open it again.
 Use what you have and try to find a way back home.
 	

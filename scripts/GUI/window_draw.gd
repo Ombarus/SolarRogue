@@ -214,8 +214,8 @@ func update():
 	
 	final_window_string += bottom_string
 	
-	get_node("bg/contour").bbcode_text = final_window_string
-	get_node("bg/contour/Title").bbcode_text = title
+	get_node("bg/contour").text = final_window_string
+	get_node("bg/contour/Title").text = title
 
 func on_size_changed():
 	_window_size = self.get_rect().size

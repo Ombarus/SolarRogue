@@ -13,7 +13,9 @@ func _ready():
 	
 func OnAttributeAdded_Callback(obj, added_name):
 	if added_name == "ai":
-		OnObjTurn_Callback(obj)
+		ConsiderInterests(obj)
+		if obj.get_attrib("ai") != null:
+			OnObjTurn_Callback(obj)
 	
 func ConsiderInterests(obj):
 	var level_id : String = Globals.LevelLoaderRef.GetLevelID()
@@ -167,6 +169,11 @@ func DoFollowGroupLeader(obj):
 
 func DoAttackPathFinding(obj):
 	var player = Globals.LevelLoaderRef.GetObjectById(obj.get_attrib("ai.target"))
+	if player == null:
+		obj.set_attrib("ai.pathfinding", "simple")
+		obj.set_attrib("ai.target", null)
+		obj.set_attrib("wandering", true)
+		return
 	var player_tile = Globals.LevelLoaderRef.World_to_Tile(player.position)
 	var obj_tile = Globals.LevelLoaderRef.World_to_Tile(obj.position)
 	var weapons = obj.get_attrib("mounts.weapon")

@@ -64,8 +64,6 @@ func ExecuteFullSweep():
 			obj.visible = true
 			if obj != null and obj.get_attrib("has_ghost_memory"):
 				_remove_ghost_from_real(obj)
-			if obj != null and obj.get_attrib("ghost_memory"):
-				_remove_ghost(obj)
 		else:
 			obj.visible = false
 		if disable_fow:

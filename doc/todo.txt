@@ -39,6 +39,13 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- Scanner pickups up wormhole on first turn after going up/down when trying auto-pilot
+- contextual click should have priority :
+	1. attack ennemy ship, not planet and especially not boardable ship
+	2. pickup anything lying around
+	3. attack planet
+	4. transfer items
+	5. attack anything attackable ?
 - Update Converter recipes with mk2-3, etc.
 - BUG: Contextual touch only if object is visible !
 - BUG: Loading level doesn't load the same planet sprite ? (because it's random choice ?)
@@ -61,6 +68,8 @@ TODO :::
 - Don't potion if not needed !
 - Perf issues on my tablet
 	- Text UI take too long to render (1 draw call per char!)
+	- https://github.com/godotengine/godot/issues/11797
+	- https://github.com/godotengine/godot/issues/19917
 - BUG: wormhole once appeared right on top of sun and was completly hidden !
 - Things that annoy me while playtesting :
 	- dragging converter list doesn't move the list.. very difficult on device to hit the scroll
@@ -167,6 +176,14 @@ IDEAS:::
 	
 	
 DONE :::
+- Finally removed all "inspired" sprites, sun and planets are my own invention now
+- Revamped space background to be more subtle
+- BUG: switching ship reset ghosts ? (mk2 scanner replaced everything with ? even ghosts I had already seen)
+- Cancelling autopilot without moving still takes 1 turn (like if ennemy is too close to trigger autopilot)
+- try to improve font rendering speed by replacing bbcode with regular labels (2fps gain on my tablet)
+- various crashes fix (by checking for null mostly)
+
+
 - Don't drop item when equipping new one, send to cargo
 - Swapping scanners would sometime cause crash and/or weird bugs (especially with ultimate scanner)
 - BUG: Going up a wormhole I got an NULL objById 417 when trying to update the scanner
