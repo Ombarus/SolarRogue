@@ -521,27 +521,37 @@ func _unhandled_input(event):
 
 func do_contextual_actions(tile, player_tile):
 	var content : Array = Globals.LevelLoaderRef.GetTile(tile)
+	var dist = (tile - player_tile).length()
 	for o in content:
-		if o == playerNode:
+		if o == playerNode or o.visible == false or o.get_attrib("ghost_memory") != null:
 			continue
+			
+		if o.get_attrib("equipment") != null and tile == player_tile:
+			Pressed_Grab_Callback()
+			return true
 			
 		if o.get_attrib("type") == "wormhole" and tile == player_tile:
 			Pressed_FTL_Callback()
 			return true
 			
-		if o.get_attrib("destroyable") != null || o.get_attrib("harvestable") != null:
-			Pressed_Weapon_Callback()
-			return true
-		#TODO: If more  than one possible contextual action maybe pop a menu ?
-		#elif o.get_attrib("boardable") == true:
-		#	return true
-		if o.get_attrib("cargo") != null:
+		if Globals.is_(o.get_attrib("cargo.transferable"), true) and dist < 2.0:
 			Pressed_Take_Callback()
 			return true
 			
-		if o.get_attrib("equipment") != null and tile == player_tile:
-			Pressed_Grab_Callback()
-			return true
+		if o.get_attrib("destroyable") != null || o.get_attrib("harvestable") != null:
+			var targetting_behavior : Node = get_node("../Targetting")
+			
+			var weapons = playerNode.get_attrib("mounts.weapon")
+			var weapons_data = Globals.LevelLoaderRef.LoadJSONArray(weapons)
+			if weapons_data != null and weapons_data.size() > 0:
+				for w in weapons_data:
+					var best_move = targetting_behavior.ClosestFiringSolution(player_tile, tile, w)
+					if best_move.length() == 0:
+						Pressed_Weapon_Callback()
+						return true
+		#TODO: If more  than one possible contextual action maybe pop a menu ?
+		#elif o.get_attrib("boardable") == true:
+		#	return true
 			
 	return false
 

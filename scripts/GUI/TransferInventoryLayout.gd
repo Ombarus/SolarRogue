@@ -280,6 +280,7 @@ func _transfer_all(from, to):
 			if data_to.mount_key == data.mount_key and (data_to.src_key == null or data_to.src_key == ""):
 				data_to.src_key = data.src_key
 				added = true
+				break
 		
 		if added == false:		
 			for cargo_data in cargo_content:

@@ -16,14 +16,16 @@
 		"maximum_energy":10000,
 		"recipes": [
 			{
-				"name": "Recycle Energy", 
+				"name": "Recycle Energy",
+				"icon_texture":"data/textures/space-sprite.png",
+				"icon_region":[256,0,128,128],
 				"requirements": [{"type":"recyclable", "amount":1}], 
 				"produce":"energy",
 				"ap_cost":1.0,
 				"amount":1500
 			},
 			{
-				"name": "Missile", 
+				"name": "Missile",
 				"requirements":[{"type":"energy", "amount":500}], 
 				"produce":"data/json/items/weapons/missile.json",
 				"ap_cost":0.5,

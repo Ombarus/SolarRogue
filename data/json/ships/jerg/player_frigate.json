@@ -25,6 +25,7 @@
 		"capacity":650,
 		"pickup_ap":1.0,
 		"drop_ap":1.0,
+		"transferable":true,
 		"content":[]
 	},
 	"converter": {

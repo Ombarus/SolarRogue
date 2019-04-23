@@ -64,7 +64,7 @@
 				"produce":"data/json/ships/human/player_battleship.json",
 				"ap_cost":8.0,
 				"amount":1
-			},
+			}
 		]
 	},
 	"recyclable": {

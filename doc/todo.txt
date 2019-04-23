@@ -40,14 +40,7 @@ ROAD TO ALPHA :::
 
 TODO :::
 - Scanner pickups up wormhole on first turn after going up/down when trying auto-pilot
-- contextual click should have priority :
-	1. attack ennemy ship, not planet and especially not boardable ship
-	2. pickup anything lying around
-	3. attack planet
-	4. transfer items
-	5. attack anything attackable ?
 - Update Converter recipes with mk2-3, etc.
-- BUG: Contextual touch only if object is visible !
 - BUG: Loading level doesn't load the same planet sprite ? (because it's random choice ?)
 - BUG: scaling UI issues on android ? 
 	- (seem to be a text_width issue with font oversampling)
@@ -176,6 +169,21 @@ IDEAS:::
 	
 	
 DONE :::
+- BUG: "take all" in transfer window would duplicate items if multiple mounts of same type
+- Cleaned up converter mk2 and yendor (not sure of balance)
+- BUG: Can transfer cargo from ennemy ships
+	- What are the conditions if not for having cargo component ?
+		(Added transferable attribute to cargo)
+- contextual click should have priority :
+	1. attack ennemy ship, not planet and especially not boardable ship (check distance)
+	2. pickup anything lying around
+	3. attack planet
+	4. transfer items (check distance)
+	5. attack anything attackable ?
+- BUG: Contextual touch only if object is visible !
+
+
+
 - Finally removed all "inspired" sprites, sun and planets are my own invention now
 - Revamped space background to be more subtle
 - BUG: switching ship reset ghosts ? (mk2 scanner replaced everything with ? even ghosts I had already seen)

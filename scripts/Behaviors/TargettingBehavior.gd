@@ -48,7 +48,7 @@ func OnTargetClick_Callback(click_pos, target_type):
 			potential_targets.push_back(obj)
 		elif obj_type != "player" and target_type == Globals.VALID_TARGET.board and obj.get_attrib("boardable") == true:
 			potential_targets.push_back(obj)
-		elif obj_type != "player" and target_type == Globals.VALID_TARGET.loot and obj.get_attrib("cargo") != null:
+		elif obj_type != "player" and target_type == Globals.VALID_TARGET.loot and Globals.is_(obj.get_attrib("cargo.transferable"), true):
 			potential_targets.push_back(obj)
 	if potential_targets.size() == 0:
 		_callback_obj.call(_callback_method, null)

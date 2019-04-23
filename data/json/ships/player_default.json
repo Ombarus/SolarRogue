@@ -24,9 +24,11 @@
 		"capacity":500,
 		"pickup_ap":1.0,
 		"drop_ap":1.0,
+		"transferable":true,
 		"content":[
 			{"src":"data/json/items/weapons/missile.json", "count":10},
-			{"src":"data/json/items/consumables/repair_nanobots.json", "count":1}
+			{"src":"data/json/items/consumables/repair_nanobots.json", "count":1},
+			{"src":"data/json/items/misc/frigate_body.json", "count":1}
 		]
 	},
 	"converter": {

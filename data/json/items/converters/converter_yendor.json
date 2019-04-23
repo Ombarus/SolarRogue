@@ -17,11 +17,54 @@
 		"maximum_energy":100000,
 		"recipes": [
 			{
-				"name": "Recycle Energy", 
+				"name": "Recycle Energy",
+				"icon_texture":"data/textures/space-sprite.png",
+				"icon_region":[256,0,128,128],
 				"requirements": [{"type":"recyclable", "amount":1}], 
 				"produce":"energy",
 				"ap_cost":1.0,
-				"amount":1600
+				"amount":1500
+			},
+			{
+				"name": "Missile",
+				"requirements":[{"type":"energy", "amount":500}], 
+				"produce":"data/json/items/weapons/missile.json",
+				"ap_cost":0.5,
+				"amount":1
+			},
+			{
+				"name": "Probe Ship",
+				"requirements":[{"type":"energy", "amount":1500}, {"src":"data/json/items/misc/probe_body.json", "amount":1}], 
+				"produce":"data/json/ships/human/player_probe.json",
+				"ap_cost":5.0,
+				"amount":1
+			},
+			{
+				"name": "(Starting) Human Scout",
+				"requirements":[
+					{"type":"energy", "amount":1800},
+					{"src":"data/json/items/misc/scout_body.json", "amount":1}
+				],
+				"produce":"data/json/ships/human/player_scout.json",
+				"ap_cost":6.0,
+				"amount":1
+			},
+			{
+				"name": "Human Frigate",
+				"requirements":[{"type":"energy", "amount":2500}, {"src":"data/json/items/misc/frigate_body.json", "amount":1}], 
+				"produce":"data/json/ships/human/player_frigate.json",
+				"ap_cost":7.0,
+				"amount":1
+			},
+			{
+				"name": "Human Battleship",
+				"requirements":[
+					{"type":"energy", "amount":7500},
+					{"src":"data/json/items/misc/battleship_body.json", "amount":1}
+				],
+				"produce":"data/json/ships/human/player_battleship.json",
+				"ap_cost":8.0,
+				"amount":1
 			},
 			{
 				"name": "Missile", 
@@ -46,15 +89,36 @@
 			},
 			{
 				"name": "Laser Turret MK1", 
-				"requirements":[{"type":"energy", "amount":4000}, {"type":"weapon", "amount":2}], 
+				"requirements":[{"type":"energy", "amount":2000}, {"type":"weapon", "amount":1}], 
 				"produce":"data/json/items/weapons/laser_turret_mk1.json",
 				"ap_cost":6.0,
 				"amount":1
 			},
 			{
 				"name": "Missile Launcher MK1", 
-				"requirements":[{"type":"energy", "amount":4000}, {"type":"weapon", "amount":2}], 
+				"requirements":[{"type":"energy", "amount":2000}, {"type":"weapon", "amount":1}], 
 				"produce":"data/json/items/weapons/missile_launcher_mk1.json",
+				"ap_cost":6.0,
+				"amount":1
+			},
+			{
+				"name": "Laser Turret MK2", 
+				"requirements":[{"type":"energy", "amount":3000}, {"type":"weapon", "amount":2}], 
+				"produce":"data/json/items/weapons/laser_turret_mk2.json",
+				"ap_cost":6.0,
+				"amount":1
+			},
+			{
+				"name": "Missile Launcher MK2", 
+				"requirements":[{"type":"energy", "amount":3000}, {"type":"weapon", "amount":2}], 
+				"produce":"data/json/items/weapons/missile_launcher_mk2.json",
+				"ap_cost":6.0,
+				"amount":1
+			},
+			{
+				"name": "Missile Launcher MK3", 
+				"requirements":[{"type":"energy", "amount":3000}, {"type":"weapon", "amount":2}], 
+				"produce":"data/json/items/weapons/missile_launcher_mk3.json",
 				"ap_cost":6.0,
 				"amount":1
 			}
