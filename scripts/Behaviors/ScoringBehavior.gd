@@ -46,8 +46,11 @@ func CalculateScore(player, game_won):
 	
 	var holding_converter = 0
 	var converter = player.get_attrib("mounts.converter")[0]
-	var converter_data = Globals.LevelLoaderRef.LoadJSON(converter)
-	if Globals.get_data(converter_data, "end_game") == true:
+	var converter_data = null
+	# if you don't have a converter mounted
+	if converter != null and converter != "":
+		converter_data = Globals.LevelLoaderRef.LoadJSON(converter)
+	if converter_data != null and Globals.get_data(converter_data, "end_game") == true:
 		holding_converter += 100000
 	else:
 		var in_cargo = false
@@ -91,6 +94,9 @@ func update_leaderboard(player, final_score, result):
 	if data != null:
 		leaderboard.push_back(data)
 	
+	if leaderboard.size() > 100:
+		leaderboard.pop_back()
+		
 	# will save on disk even tough the leaderboard was passed by ref and it already up to date
 	PermSave.set_attrib("leaderboard", leaderboard)
 

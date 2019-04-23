@@ -3,7 +3,6 @@
 [ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=1]
 
 [sub_resource type="Shader" id=1]
-
 code = "shader_type canvas_item;
 
 void fragment() {
@@ -11,16 +10,12 @@ void fragment() {
 }"
 
 [sub_resource type="ShaderMaterial" id=2]
-
-render_priority = 0
 shader = SubResource( 1 )
 
 [node name="frigate" type="Sprite"]
-
 material = SubResource( 2 )
+z_index = 900
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 896, 256, 128, 128 )
-_sections_unfolded = [ "Material" ]
-
 

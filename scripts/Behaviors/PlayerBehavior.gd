@@ -348,6 +348,7 @@ func OnLevelLoaded_Callback():
 			template = save.player_data.src
 		# Modified_attrib must be passed during request so that proper IDs can be locked in objByID
 		playerNode = levelLoaderRef.RequestObject(template, coord, modififed_attrib)
+		playerNode.z_index = 999
 		if playerNode.get_attrib("player_name") == null:
 			playerNode.set_attrib("player_name", PermSave.get_attrib("settings.default_name", "Ombarus"))
 		
@@ -652,9 +653,12 @@ func OnTransferPlayer_Callback(old_player, new_player):
 	BehaviorEvents.emit_signal("OnUseAP", new_player, 1.0)
 
 	UpdateButtonVisibility()
+	old_player.z_index = 900
+	new_player.z_index = 999
 		
 		
 	new_player.set_attrib("moving.moved", true) # to update the wormhole button in next "OnPlayerTurn"
+	new_player.set_attrib("player_name", old_player.get_attrib("player_name"))
 	
 func DO_TEST(click_pos):
 	pass

@@ -3,39 +3,21 @@
 [ext_resource path="res://scripts/animations/explosion_fx.gd" type="Script" id=1]
 
 [sub_resource type="Gradient" id=1]
-
 offsets = PoolRealArray( 0, 0.805825, 1 )
 colors = PoolColorArray( 0.0703125, 0.0703125, 0.0703125, 1, 0.195313, 0.195313, 0.195313, 1, 1, 1, 1, 0 )
 
 [sub_resource type="GradientTexture" id=2]
-
-flags = 4
 gradient = SubResource( 1 )
-width = 2048
 
 [sub_resource type="Curve" id=3]
-
-min_value = 0.0
-max_value = 1.0
-bake_resolution = 100
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.446417, 0.628906 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.113281 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=4]
-
-flags = 4
-width = 2048
 curve = SubResource( 3 )
 
 [sub_resource type="ParticlesMaterial" id=5]
-
-render_priority = 0
-trail_divisor = 1
-emission_shape = 0
-flag_align_y = false
-flag_rotate_y = false
 flag_disable_z = true
 spread = 180.0
-flatness = 0.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 75.0
 initial_velocity_random = 0.3
@@ -43,56 +25,28 @@ angular_velocity = 50.0
 angular_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-linear_accel = 0.0
 linear_accel_random = 1.0
 radial_accel = 70.0
 radial_accel_random = 1.0
-tangential_accel = 0.0
-tangential_accel_random = 0.0
 damping = 100.0
-damping_random = 0.0
-angle = 0.0
-angle_random = 0.0
 scale = 8.0
-scale_random = 0.0
 scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
-hue_variation = 0.0
-hue_variation_random = 0.0
-anim_speed = 0.0
-anim_speed_random = 0.0
-anim_offset = 0.0
-anim_offset_random = 0.0
-anim_loop = false
-_sections_unfolded = [ "Angular Velocity", "Color", "Damping", "Gravity", "Initial Velocity", "Linear Accel", "Radial Accel", "Scale", "Spread" ]
 
 [sub_resource type="CanvasItemMaterial" id=6]
-
-render_priority = 0
 blend_mode = 1
 light_mode = 1
 
 [sub_resource type="Gradient" id=7]
-
 offsets = PoolRealArray( 0, 0.805825, 1 )
 colors = PoolColorArray( 1, 0, 0, 1, 0.889923, 0.941406, 0, 1, 1, 1, 1, 0 )
 
 [sub_resource type="GradientTexture" id=8]
-
-flags = 4
 gradient = SubResource( 7 )
-width = 2048
 
 [sub_resource type="ParticlesMaterial" id=9]
-
-render_priority = 0
-trail_divisor = 1
-emission_shape = 0
-flag_align_y = false
-flag_rotate_y = false
 flag_disable_z = true
 spread = 180.0
-flatness = 0.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 75.0
 initial_velocity_random = 0.3
@@ -100,56 +54,27 @@ angular_velocity = 50.0
 angular_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-linear_accel = 0.0
 linear_accel_random = 1.0
 radial_accel = 100.0
 radial_accel_random = 1.0
-tangential_accel = 0.0
-tangential_accel_random = 0.0
 damping = 100.0
-damping_random = 0.0
-angle = 0.0
-angle_random = 0.0
 scale = 4.0
-scale_random = 0.0
 scale_curve = SubResource( 4 )
 color_ramp = SubResource( 8 )
-hue_variation = 0.0
-hue_variation_random = 0.0
-anim_speed = 0.0
-anim_speed_random = 0.0
-anim_offset = 0.0
-anim_offset_random = 0.0
-anim_loop = false
-_sections_unfolded = [ "Angular Velocity", "Color", "Damping", "Gravity", "Initial Velocity", "Linear Accel", "Radial Accel", "Scale", "Spread" ]
 
 [sub_resource type="Gradient" id=10]
-
 offsets = PoolRealArray( 0, 0.805825, 1 )
 colors = PoolColorArray( 0, 0.320313, 1, 1, 0.0246429, 0.209556, 0.332031, 1, 1, 1, 1, 0 )
 
 [sub_resource type="GradientTexture" id=11]
-
-flags = 4
 gradient = SubResource( 10 )
-width = 2048
 
 [sub_resource type="CurveTexture" id=12]
-
-flags = 4
-width = 2048
 curve = SubResource( 3 )
 
 [sub_resource type="ParticlesMaterial" id=13]
-
-render_priority = 0
-trail_divisor = 1
-emission_shape = 0
-flag_align_y = false
-flag_rotate_y = false
 flag_disable_z = true
 spread = 180.0
-flatness = 0.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 20.0
 initial_velocity_random = 0.3
@@ -157,101 +82,32 @@ angular_velocity = 50.0
 angular_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-linear_accel = 0.0
 linear_accel_random = 1.0
 radial_accel = 100.0
 radial_accel_random = 1.0
-tangential_accel = 0.0
-tangential_accel_random = 0.0
 damping = 100.0
-damping_random = 0.0
-angle = 0.0
-angle_random = 0.0
 scale = 2.0
-scale_random = 0.0
 scale_curve = SubResource( 12 )
 color_ramp = SubResource( 11 )
-hue_variation = 0.0
-hue_variation_random = 0.0
-anim_speed = 0.0
-anim_speed_random = 0.0
-anim_offset = 0.0
-anim_offset_random = 0.0
-anim_loop = false
-_sections_unfolded = [ "Angular Velocity", "Color", "Damping", "Gravity", "Initial Velocity", "Linear Accel", "Radial Accel", "Scale", "Spread" ]
 
 [node name="Node2D" type="Node2D"]
-
 scale = Vector2( 3, 3 )
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
 ttl = 0.8
 
-[node name="smoke" type="Particles2D" parent="." index="0"]
-
-emitting = true
+[node name="smoke" type="Particles2D" parent="."]
 amount = 25
-lifetime = 1.0
-one_shot = false
-preprocess = 0.0
-speed_scale = 1.0
 explosiveness = 1.0
-randomness = 0.0
-fixed_fps = 0
-fract_delta = true
-visibility_rect = Rect2( -100, -100, 200, 200 )
-local_coords = true
-draw_order = 0
 process_material = SubResource( 5 )
-texture = null
-normal_map = null
-h_frames = 1
-v_frames = 1
-_sections_unfolded = [ "Material", "Process Material", "Textures", "Time" ]
 
-[node name="Particles2D" type="Particles2D" parent="." index="1"]
-
+[node name="Particles2D" type="Particles2D" parent="."]
 material = SubResource( 6 )
-emitting = true
 amount = 200
-lifetime = 1.0
-one_shot = false
-preprocess = 0.0
-speed_scale = 1.0
 explosiveness = 1.0
-randomness = 0.0
-fixed_fps = 0
-fract_delta = true
-visibility_rect = Rect2( -100, -100, 200, 200 )
-local_coords = true
-draw_order = 0
 process_material = SubResource( 9 )
-texture = null
-normal_map = null
-h_frames = 1
-v_frames = 1
-_sections_unfolded = [ "Material", "Process Material", "Textures", "Time" ]
 
-[node name="pieces" type="Particles2D" parent="." index="2"]
-
-emitting = true
+[node name="pieces" type="Particles2D" parent="."]
 amount = 50
-lifetime = 1.0
-one_shot = false
-preprocess = 0.0
-speed_scale = 1.0
 explosiveness = 1.0
-randomness = 0.0
-fixed_fps = 0
-fract_delta = true
-visibility_rect = Rect2( -100, -100, 200, 200 )
-local_coords = true
-draw_order = 0
 process_material = SubResource( 13 )
-texture = null
-normal_map = null
-h_frames = 1
-v_frames = 1
-_sections_unfolded = [ "Material", "Process Material", "Textures", "Time" ]
-
 

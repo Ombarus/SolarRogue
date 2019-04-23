@@ -22,20 +22,25 @@ func ConsiderInterests(obj):
 	var new_objs : Array = obj.get_attrib("scanner_result.new_in_range." + level_id, [])
 	var is_player : bool = obj.get_attrib("type") == "player"
 	
+	# When going down a wormhole, the objects around the wormhole will be "new"
+	# for this turn, but we are not moving yet so it's ok
+	var moved = obj.get_attrib("moving.moved")
+	
 	# Disable if ennemy came in range or never seen item shows up
 	var filtered : Array = []
-	for id in new_objs:
-		var o : Node2D = Globals.LevelLoaderRef.GetObjectById(id)
-		if o != null and Globals.is_(o.get_attrib("ai.aggressive"), true):
-			if is_player == true:
-				BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Ennemy ship entered scanner range ![/color]")
-			filtered.push_back(id)
-			break
-		if o != null and o.get_attrib("ghost_memory") == null and o.get_attrib("has_ghost_memory") == null:
-			if is_player == true:
-				BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Scanners have picked up a new " + o.get_attrib("type") + "[/color]")
-			filtered.push_back(id)
-			break
+	if moved != null and moved == true:
+		for id in new_objs:
+			var o : Node2D = Globals.LevelLoaderRef.GetObjectById(id)
+			if o != null and Globals.is_(o.get_attrib("ai.aggressive"), true):
+				if is_player == true:
+					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Ennemy ship entered scanner range ![/color]")
+				filtered.push_back(id)
+				break
+			if o != null and o.get_attrib("ghost_memory") == null and o.get_attrib("has_ghost_memory") == null:
+				if is_player == true:
+					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Scanners have picked up a new " + o.get_attrib("type") + "[/color]")
+				filtered.push_back(id)
+				break
 		
 	# Disable if ennemy ship in range
 	var cur_objs : Array = obj.get_attrib("scanner_result.cur_in_range." + level_id, [])

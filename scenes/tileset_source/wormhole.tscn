@@ -4,6 +4,7 @@
 [ext_resource path="res://data/shaders/swirl.tres" type="Material" id=2]
 
 [node name="wormhole" type="Node2D"]
+z_index = 7
 
 [node name="sprite" type="Sprite" parent="."]
 visible = false

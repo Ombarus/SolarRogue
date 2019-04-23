@@ -3,10 +3,8 @@
 [ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=1]
 
 [node name="targetting" type="Sprite"]
-
+z_index = 1000
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 1920, 640, 128, 128 )
-_sections_unfolded = [ "Region" ]
-
 

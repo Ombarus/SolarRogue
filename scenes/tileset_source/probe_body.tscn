@@ -2,11 +2,9 @@
 
 [ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=1]
 
-[node name="probe_body" type="Sprite" index="0"]
-
+[node name="probe_body" type="Sprite"]
+z_index = 15
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 1664, 384, 128, 128 )
-_sections_unfolded = [ "Region" ]
-
 

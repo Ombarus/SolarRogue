@@ -39,9 +39,7 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- Scanner pickups up wormhole on first turn after going up/down when trying auto-pilot
-- Update Converter recipes with mk2-3, etc.
-- BUG: Loading level doesn't load the same planet sprite ? (because it's random choice ?)
+- BUG: ship spawned from planetary defence wait 3-4 turns before moving
 - BUG: scaling UI issues on android ? 
 	- (seem to be a text_width issue with font oversampling)
 	- Hopefully it can should be fixed ? only happen with my mono custom font,
@@ -63,7 +61,6 @@ TODO :::
 	- Text UI take too long to render (1 draw call per char!)
 	- https://github.com/godotengine/godot/issues/11797
 	- https://github.com/godotengine/godot/issues/19917
-- BUG: wormhole once appeared right on top of sun and was completly hidden !
 - Things that annoy me while playtesting :
 	- dragging converter list doesn't move the list.. very difficult on device to hit the scroll
 - transfer drag&drop dialog. Should ask for how many of a stack to transfer
@@ -77,7 +74,6 @@ TODO :::
 	- Nethack : Quest level different by race (I don't have race for now ?)
 	- Dependency ? Castle can spawn between 25-29 but never before medusa
 - clean name (always return the id with or without "res:")
-- how to do "global max" ? branch1 should be spawned only once, per game, not per map, some items might be unique too, if they've been spawned, they should never appear again
 - Message if you try to go up the home wormhole
 - Save after each turn
 - make sure player cannot generate more energy than max capacity
@@ -123,6 +119,10 @@ TODO :::
 	
 	
 polish :::
+- include energy used by idle turn in crafting total energy cost
+- should display # of turn when crafting
+- BUG: Loading level doesn't load the same planet sprite ? (because it's random choice ?)
+- what should the vfx z_index be ?
 - Save node's rotation (position is saved but not rot)
 - Improve goto message and behavior (still move by 1 is this desired ?)
 - Go back and fix & add all missing shortcuts for all buttons in the UI
@@ -169,6 +169,16 @@ IDEAS:::
 	
 	
 DONE :::
+- Limit leaderboard to top 100
+- update player name and z_index when changing ship
+- fixed crash when calculating score if no converter installed
+- Scanner pickups up wormhole on first turn after going up/down when trying auto-pilot
+	(was issues with scanner being updated in _process() but go-to happen in  event called by _process() from AP Behavior which is before everything else)
+- Make sure player ship is on top of everything
+	(also added preference, sun is below everything, ennemy ships above everything but player, etc.)
+
+
+- Update Converter recipes with mk2-3, etc.
 - BUG: "take all" in transfer window would duplicate items if multiple mounts of same type
 - Cleaned up converter mk2 and yendor (not sure of balance)
 - BUG: Can transfer cargo from ennemy ships
