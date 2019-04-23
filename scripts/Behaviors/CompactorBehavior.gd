@@ -55,7 +55,7 @@ func _get_per_cargo_compounded(utils_data):
 func _reset_cargo(obj, utils):
 	var utils_data = Globals.LevelLoaderRef.LoadJSONArray(utils)
 	var per_cargo = _get_per_cargo_compounded(utils_data)
-	if per_cargo < 0:
+	if per_cargo == null:
 		return
 	var cargo_capacity = obj.get_attrib("cargo.capacity")
 	
@@ -68,7 +68,7 @@ func OnMountAdded_Callback(obj, slot, src):
 		
 	var data = Globals.LevelLoaderRef.LoadJSON(src)
 	if "cargo_optimizer" in data:
-		var utils = obj.get_attrib("mounts.utility")
+		var utils = str2var(var2str(obj.get_attrib("mounts.utility"))) # work on a duplicate
 		utils.erase(src)
 		_reset_cargo(obj, utils)
 		# have to recompute everything because of stacking

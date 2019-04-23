@@ -13,7 +13,7 @@
 		"unequip_ap":3.0
 	},
 	"energy_regen": {
-		"per_turn":10.0
+		"per_turn":40.0
 	},
 	"recyclable": {
 		"energy": 1500

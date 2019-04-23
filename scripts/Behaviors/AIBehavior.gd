@@ -158,6 +158,11 @@ func DoFollowGroupLeader(obj):
 		return
 		
 	var target_obj = Globals.LevelLoaderRef.GetObjectById(target_id)
+	# lost the leader, go back to regular pathfinding
+	if target_obj == null:
+		obj.set_attrib("ai.pathfinding", "simple")
+		return
+		
 	var target_offset = obj.get_attrib("ai.target_offset")
 	target_offset = target_offset.rotated(target_obj.rotation)
 	target_offset.x = round(target_offset.x)

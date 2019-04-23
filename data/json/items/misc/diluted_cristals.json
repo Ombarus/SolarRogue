@@ -8,6 +8,6 @@
 		"stackable":true
 	},
 	"recyclable": {
-		"energy": 6000
+		"energy": 12000
 	}
 }

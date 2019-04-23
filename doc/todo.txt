@@ -39,6 +39,8 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- human frigate don't play their explosion
+- cancel targetting on key pressed on pc
 - BUG: Crash ScannerBehavior.gd:117 (null instance ?)
 - BUG: ship spawned from planetary defence wait 3-4 turns before moving
 - BUG: scaling UI issues on android ? 
@@ -171,6 +173,9 @@ IDEAS:::
 	
 	
 DONE :::
+- BUGBUGBUG: something weird happens if I try to install a cargo compressor next to solar array
+
+
 - Limit leaderboard to top 100
 - update player name and z_index when changing ship
 - fixed crash when calculating score if no converter installed
