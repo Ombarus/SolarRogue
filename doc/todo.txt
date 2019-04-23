@@ -39,6 +39,7 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- BUG: Crash ScannerBehavior.gd:117 (null instance ?)
 - BUG: ship spawned from planetary defence wait 3-4 turns before moving
 - BUG: scaling UI issues on android ? 
 	- (seem to be a text_width issue with font oversampling)
@@ -119,6 +120,7 @@ TODO :::
 	
 	
 polish :::
+- Highlight last run in leaderboard in main menu
 - include energy used by idle turn in crafting total energy cost
 - should display # of turn when crafting
 - BUG: Loading level doesn't load the same planet sprite ? (because it's random choice ?)
