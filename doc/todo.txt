@@ -39,7 +39,6 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- human frigate don't play their explosion
 - cancel targetting on key pressed on pc
 - BUG: Crash ScannerBehavior.gd:117 (null instance ?)
 - BUG: ship spawned from planetary defence wait 3-4 turns before moving
@@ -173,6 +172,11 @@ IDEAS:::
 	
 	
 DONE :::
+
+
+
+
+- human frigate don't play their explosion
 - BUGBUGBUG: something weird happens if I try to install a cargo compressor next to solar array
 
 

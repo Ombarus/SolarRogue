@@ -148,7 +148,8 @@ func ProcessDefense(target, shooter, weapon_data):
 		x = clamp(tile.x + x, 0, bounds.x-1)
 		y = clamp(tile.y + y, 0, bounds.y-1)
 		var offset = Vector2(x,y)
-		Globals.LevelLoaderRef.RequestObject(json, offset)
+		var modified_attrib : Dictionary = {"action_point":1}
+		Globals.LevelLoaderRef.RequestObject(json, offset, modified_attrib)
 		
 	BehaviorEvents.emit_signal("OnLogLine", "[color=red]This planet had a colony and they are NOT happy. They've deployed defenses.[/color]")
 	target.set_attrib("harvestable.defense_deployed", true)

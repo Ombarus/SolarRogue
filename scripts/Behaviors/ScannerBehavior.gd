@@ -46,6 +46,7 @@ func OnObjectLoaded_Callback(obj):
 	if scanner_name != null and scanner_name != "":
 		var scanner_data = Globals.LevelLoaderRef.LoadJSON(scanner_name)
 		_node_id_scanner[obj.get_attrib("unique_id")] = scanner_data
+		_up_to_date = false
 		special_update_ultimate(obj, scanner_data)
 	
 func OnRequestObjectUnload_Callback(obj):
