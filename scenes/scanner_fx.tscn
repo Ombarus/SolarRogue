@@ -71,12 +71,12 @@ uniform float Amplitude;
 
 
 void vertex() {
-// Sortie:0
+// Output:0
 
 }
 
 void fragment() {
-// Entrée:2
+// Input:2
 	vec3 n_out2p0;
 	n_out2p0 = vec3(UV,0.0);
 
@@ -99,7 +99,7 @@ void fragment() {
 	float n_out13p0;
 	n_out13p0 = Speed;
 
-// Entrée:3
+// Input:3
 	float n_out3p0;
 	n_out3p0 = TIME;
 
@@ -156,14 +156,14 @@ void fragment() {
 	float n_out20p0;
 	n_out20p0 = min( n_out19p0 , n_in20p1 );
 
-// Sortie:0
+// Output:0
 	COLOR.rgb = n_out5p0;
 	COLOR.a = n_out20p0;
 
 }
 
 void light() {
-// Sortie:0
+// Output:0
 
 }
 "
