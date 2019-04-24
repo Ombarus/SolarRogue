@@ -39,7 +39,6 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- Change status bar name with actual ship name
 - Change name of FTL button
 - Look button should popup a window with details ?
 - cancel targetting on key pressed on pc
@@ -174,6 +173,7 @@ IDEAS:::
 	
 DONE :::
 
+- Change status bar name with actual ship name
 - Add question mark in lower-right corner as a sort of "tutorial"
 
 

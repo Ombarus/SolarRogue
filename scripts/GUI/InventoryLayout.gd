@@ -50,7 +50,7 @@ func Init(init_param):
 			if not item.empty():
 				var data = Globals.LevelLoaderRef.LoadJSON(item)
 				name = key + " " + str(count+1) + " : " + data.name_id
-			mount_obj.push_back({"name_id":name, "count":1, "key":key, "index":count})
+			mount_obj.push_back({"name_id":name, "count":1, "key":key, "_index":count})
 			count += 1
 	get_node(_mounts_node).Content = mount_obj
 	
@@ -107,7 +107,7 @@ func OnDropPressed_Callback():
 	var dropped_mounts = []
 	for data in get_node(_mounts_node).Content:
 		if data.selected == true:
-			dropped_mounts.push_back({"key":data.key, "index":data.index})
+			dropped_mounts.push_back({"key":data.key, "index":data._index})
 			
 	var dropped_cargo = []
 	for data in get_node(_cargo_node).Content:

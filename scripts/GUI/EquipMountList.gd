@@ -24,7 +24,7 @@ func Ok_Callback():
 	for data in _mounts.Content:
 		if data.selected == true:
 			selected_mount = data.key
-			selected_index = data.index
+			selected_index = data._index
 			break
 	
 	BehaviorEvents.emit_signal("OnPopGUI")
@@ -59,7 +59,7 @@ func Init(init_param):
 			if not item.empty():
 				var data = Globals.LevelLoaderRef.LoadJSON(item)
 				name = key + " " + str(count + 1) + " : " + data.name_id
-			mount_obj.push_back({"name_id":name, "count":1, "key":key, "index":count})
+			mount_obj.push_back({"name_id":name, "count":1, "key":key, "_index":count})
 			count += 1
 	_mounts.Content = mount_obj
 	

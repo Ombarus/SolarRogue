@@ -282,6 +282,12 @@ func OnObjTurn_Callback(obj):
 			var btn = get_node(FTLAction)
 			if wormhole != null:
 				btn.visible = true
+				var cur_depth : int = Globals.LevelLoaderRef.current_depth
+				var worm_depth : int = wormhole.get_attrib("depth")
+				if worm_depth <= cur_depth:
+					btn.Text = "[<]FTL Back"
+				else:
+					btn.Text = "[>]FTL Forward"
 			else:
 				btn.visible = false
 	else:

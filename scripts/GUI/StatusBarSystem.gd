@@ -59,6 +59,9 @@ func _get_max_shield(obj):
 #The Maveric Hull : [color=lime]==========[/color] Energy : [color=yellow]25000[/color] Shield : Up	
 func UpdateStatusBar(player_obj):
 	var ship_name = "The Maveric" #TODO: make dynamic when we have a title menu
+	var p_name : String = player_obj.get_attrib("player_name")
+	if p_name != null:
+		ship_name = "The " + p_name
 	var cur_hull = player_obj.get_attrib("destroyable.hull")
 	var max_hull = player_obj.base_attributes.destroyable.hull
 	var hull_color = "lime"
