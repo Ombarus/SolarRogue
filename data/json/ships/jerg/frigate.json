@@ -3,6 +3,9 @@
 	"description":"A utility vessel. Can execute a wide range of functions while part of a fleet but lacks any serious firepower. Watch out for Jerg scouts backed by one of their trick frigate",
 	"type":"ship",
 	"sprite":"jerg_frigate",
+	"animation": {
+		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
+	},
 	"action_point":0,
 	"mounts": {
 		"weapon": [

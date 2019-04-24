@@ -3,6 +3,9 @@
 	"description":"The best attack vessel of the jerg fleet. Made to cripple any opposition",
 	"type":"ship",
 	"sprite":"jerg_battleship",
+	"animation": {
+		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
+	},
 	"action_point":0,
 	"mounts": {
 		"weapon": [

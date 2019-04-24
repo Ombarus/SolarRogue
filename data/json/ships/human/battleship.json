@@ -3,6 +3,9 @@
 	"description":"The best attack vessel of the human fleet. Made to shoot down any opposition",
 	"type":"ship",
 	"sprite":"human_battleship",
+	"animation": {
+		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
+	},
 	"action_point":0,
 	"mounts": {
 		"weapon": [
