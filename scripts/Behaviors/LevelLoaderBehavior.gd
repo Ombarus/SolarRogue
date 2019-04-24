@@ -20,6 +20,8 @@ var _current_level_data = null
 var _wait_for_anim = false
 var _global_spawns = {} # to keep track of items that should only appear once in a single game
 
+const _TEST_MID_GAME = false
+
 func GetCurrentLevelData():
 	return _current_level_data
 	
@@ -47,6 +49,8 @@ func GetLevelID():
 #		SaveState(_current_level_data)
 
 func _ready():
+	if _TEST_MID_GAME == true:
+		startLevel = "data/json/levels/main/main08.json"
 	Globals.LevelLoaderRef = self
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
 	BehaviorEvents.connect("OnRequestLevelChange", self, "OnRequestLevelChange_Callback")

@@ -29,7 +29,7 @@
 		"content":[]
 	},
 	"converter": {
-		"stored_energy": 10000,
+		"stored_energy": 20000,
 		"base_ap_energy_cost":12
 	}
 }

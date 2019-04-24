@@ -324,6 +324,8 @@ func OnLevelLoaded_Callback():
 			_current_origin = PLAYER_ORIGIN.wormhole
 		
 		var template = "data/json/ships/player_default.json"
+		if Globals.LevelLoaderRef._TEST_MID_GAME == true:
+			template = "data/json/ships/mid_game_test.json"
 		var level_id = Globals.LevelLoaderRef.GetLevelID()
 		var coord
 		

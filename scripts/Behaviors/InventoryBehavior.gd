@@ -141,12 +141,15 @@ func OnEquipMount_Callback(equipper, slot_name, index, item_id):
 	var items = equipper.get_attrib(attrib_getter)
 	if items != null and items[index] != "":
 		BehaviorEvents.emit_signal("OnAddItem", equipper, items[index])
+		var old_id = items[index]
 		var old_data : Dictionary = Globals.LevelLoaderRef.LoadJSON(items[index])
 		var unequip_ap : int = Globals.get_data(old_data, "equipment.equip_ap")
 		if unequip_ap != null and unequip_ap > 0:
 			BehaviorEvents.emit_signal("OnUseAP", equipper, unequip_ap)
 		if equipper.get_attrib("type") == "player" and old_data != null and new_data != null:
 			BehaviorEvents.emit_signal("OnLogLine", "Replaced " + old_data.name_id + " by " + new_data.name_id)
+		items[index] = ""
+		BehaviorEvents.emit_signal("OnMountRemoved", equipper, slot_name, old_id)
 	elif equipper.get_attrib("type") == "player" and new_data != null:
 		BehaviorEvents.emit_signal("OnLogLine", "Installed " + new_data.name_id)
 		

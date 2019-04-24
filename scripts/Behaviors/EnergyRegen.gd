@@ -56,7 +56,8 @@ func _process_healing(obj, max_energ, cur_energ, filtered_regen):
 			count += 1
 		energy *= Globals.total_turn - last_update
 	var new_energ = min(cur_energ + energy, max_energ)
-	obj.set_attrib("converter.stored_energy", new_energ)
+	BehaviorEvents.emit_signal("OnUseEnergy", obj, -energy)
+	#obj.set_attrib("converter.stored_energy", new_energ)
 	
 	
 func OnMountAdded_Callback(obj, slot, src):

@@ -18,6 +18,9 @@ func _sort_by_cargo_rate(a, b):
 	return false
 
 func OnObjectLoaded_Callback(obj):
+	obj.init_cargo()
+	obj.init_mounts()
+	
 	var applied = obj.get_attrib("cargo.applied_bonus")
 	if applied != null and applied == true:
 		return # we loaded a savegame and bonus is already up-to-date
@@ -81,7 +84,7 @@ func OnMountRemoved_Callback(obj, slot, src):
 		
 	var data = Globals.LevelLoaderRef.LoadJSON(src)
 	if "cargo_optimizer" in data:
-		var utils = obj.get_attrib("mounts.utility")
+		var utils = str2var(var2str(obj.get_attrib("mounts.utility")))
 		utils.push_back(src)
 		_reset_cargo(obj, utils)
 		# have to recompute everything because of stacking

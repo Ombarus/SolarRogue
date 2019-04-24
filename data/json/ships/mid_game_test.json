@@ -1,0 +1,45 @@
+{
+	"name_id":"A Human Frigate",
+	"type":"player",
+	"sprite":"human_frigate",
+	"action_point":0,
+	"boardable":true,
+	"mounts": {
+		"weapon": [
+			"data/json/items/weapons/laser_turret_mk2.json",
+			"data/json/items/weapons/laser_turret_mk1.json"
+		],
+		"shield": ["data/json/items/shields/shield_mk2.json"],
+		"scanner": ["data/json/items/scanners/long_range_scanner_mk2.json"],
+		"converter": ["data/json/items/converters/converter_mk2.json"],
+		"utility":[
+			"data/json/items/utilities/solar_array.json",
+			""
+		]
+	},
+	"destroyable": {
+		"hull":25
+	},
+	"moving": {
+		"speed":1.0,
+		"can_use_wormhole":true,
+		"energy_cost":5
+	},
+	"cargo": {
+		"capacity":650,
+		"pickup_ap":1.0,
+		"drop_ap":1.0,
+		"transferable":true,
+		"content":[
+			{"src":"data/json/items/consumables/repair_nanobots.json", "count":1},
+			{"src":"data/json/items/misc/scout_body.json", "count":1},
+			{"src":"data/json/items/shields/shield_mk1.json", "count":1},
+			{"src":"data/json/items/misc/hydrogen.json", "count":6},
+			{"src":"data/json/items/misc/uranium.json", "count":3}
+		]
+	},
+	"converter": {
+		"stored_energy": 25000,
+		"base_ap_energy_cost":12
+	}
+}

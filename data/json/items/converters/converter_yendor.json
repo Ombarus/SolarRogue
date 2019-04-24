@@ -14,7 +14,7 @@
 		"unequip_ap":7.0
 	},
 	"converter": {
-		"maximum_energy":100000,
+		"maximum_energy":200000,
 		"recipes": [
 			{
 				"name": "Recycle Energy",
