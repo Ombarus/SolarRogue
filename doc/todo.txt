@@ -39,7 +39,9 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- Change name of FTL button
+- Make a late-game level and test late-game balancing
+	- Player should start with a frigate and some utilities and upgraded weapons and shield
+	- Spawn player at level ~8 ?
 - Look button should popup a window with details ?
 - cancel targetting on key pressed on pc
 - BUG: Crash ScannerBehavior.gd:117 (null instance ?)
@@ -173,6 +175,7 @@ IDEAS:::
 	
 DONE :::
 
+- Change name of FTL button
 - Change status bar name with actual ship name
 - Add question mark in lower-right corner as a sort of "tutorial"
 

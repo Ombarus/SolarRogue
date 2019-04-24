@@ -12,8 +12,8 @@ func _ready():
 	#	var name = "A B C D E F G HIJKLMN OPQRST UVWXYZ SOMETHING SOMETHING Item #" + str(i)
 	#	obj.push_back({"name_id":name, "count":3})
 	
-	#get_node("base/vbox/Cargo").content = obj
-	#get_node("base/vbox/Mounts").content = obj
+	#get_node("base/vbox/Cargo").Content = obj
+	#get_node("base/vbox/Mounts").Content = obj
 	
 func Ok_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
@@ -21,20 +21,20 @@ func Ok_Callback():
 		return
 	
 	var selected_targets = []
-	for data in get_node("base/vbox/TargetList").content:
-		if data.checked == true:
+	for data in get_node("base/vbox/TargetList").Content:
+		if data.selected == true:
 			selected_targets.push_back(data.key)
 	_callback_obj.call(_callback_method, selected_targets)
 	
 	# reset content or we might end up with dangling references
-	get_node("base/vbox/TargetList").content = []
+	get_node("base/vbox/TargetList").Content = []
 	
 	
 func Cancel_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
 	
 	# reset content or we might end up with dangling references
-	get_node("base/vbox/TargetList").content = []
+	get_node("base/vbox/TargetList").Content = []
 	
 func Init(init_param):
 	var targets = init_param["targets"]
@@ -44,9 +44,9 @@ func Init(init_param):
 	var target_obj = []
 	for item in targets:
 		target_obj.push_back({"name_id": item.get_attrib("name_id"), "key":item})
-	get_node("base/vbox/TargetList").content = target_obj
+	get_node("base/vbox/TargetList").Content = target_obj
 	
-	#get_node("base").content = result_string
+	#get_node("base").Content = result_string
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
