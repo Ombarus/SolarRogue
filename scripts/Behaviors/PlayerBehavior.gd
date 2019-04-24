@@ -10,6 +10,7 @@ export(NodePath) var FTLAction
 export(NodePath) var PopupButtons
 export(NodePath) var TargettingHUD
 export(NodePath) var OptionBtn
+export(NodePath) var QuestionBtn
 
 var playerNode : Node2D = null
 var levelLoaderRef : Node
@@ -68,6 +69,8 @@ func _ready():
 	action.connect("use_pressed", self, "OnUseInventory_Callback")
 	action = get_node(OptionBtn)
 	action.connect("pressed", self, "Pressed_Option_Callback")
+	action = get_node(QuestionBtn)
+	action.connect("pressed", self, "Pressed_Question_Callback")
 	
 	get_node(TargettingHUD).connect("cancel_pressed", self, "cancel_targetting_pressed_Callback")
 	
@@ -663,6 +666,9 @@ func OnTransferPlayer_Callback(old_player, new_player):
 func DO_TEST(click_pos):
 	pass
 
+
+func Pressed_Question_Callback():
+	BehaviorEvents.emit_signal("OnPushGUI", "Tutorial", {})
 
 func Pressed_Option_Callback():
 	BehaviorEvents.emit_signal("OnPushGUI", "Options", {})

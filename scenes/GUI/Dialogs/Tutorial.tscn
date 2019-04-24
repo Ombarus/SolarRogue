@@ -1,0 +1,116 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scripts/GUI/Tutorial.gd" type="Script" id=1]
+[ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
+[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
+[ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=4]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold.tres" type="DynamicFont" id=5]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItal.tres" type="DynamicFont" id=6]
+[ext_resource path="res://data/fonts/DejaVuSansMonoBold.tres" type="DynamicFont" id=7]
+
+[node name="Tutorial" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="ModalBG" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = ExtResource( 2 )
+
+[node name="base" parent="." instance=ExtResource( 3 )]
+margin_left = 187.0
+margin_top = 34.0
+margin_right = -183.0
+margin_bottom = -76.0
+dialog_ok = true
+title = "MAN(1) Solar Rogue General Commands Manual"
+
+[node name="Content" type="RichTextLabel" parent="base"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 15.0
+margin_top = 48.0
+margin_right = -26.0
+margin_bottom = -9.0
+custom_fonts/mono_font = ExtResource( 4 )
+custom_fonts/bold_italics_font = ExtResource( 5 )
+custom_fonts/italics_font = ExtResource( 6 )
+custom_fonts/bold_font = ExtResource( 7 )
+custom_fonts/normal_font = ExtResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[b]BASIC CONTROLS[/b][indent][Numpad 1 to 9] or [Mouse Clicks on empty space] -- Move Ship
+[Numpad 5] or [Click on self] --------------------- Wait one turn
+[c] or [Converter Button] ------------------------- Open Crafting Menu
+[w] or [Weapon Button] or [Click on Enemies] ------ Switch to Weapon Targetting
+[g] or [Grab Button] ------------------------------ Pickup Items Under You
+[ i] or [Inventory Button] ------------------------ Show Equipment and Cargo. Use and Drop items.
+[>] or [FTL Button] ------------------------------- Activate on top of wormhole to change level
+[+] ----------------------------------------------- Zoom In
+[-] ----------------------------------------------- Zoom Out
+[Gear Icon] --------------------------------------- Main Menu for Saving, Quitting and eventually Options
+[/indent]
+[b]ADVANCED CONTROLS[/b]
+[b]Accessible from the \"...\" Button[/b][indent][m] or [Mount Button] ----------- Install Weapon, Shield, Converter or Scanner onto ship's mount points
+[l] or [Look Button] ------------ Get detailed description of item by clicking on them
+[ b] or [Board Button] ---------- Transfer control to another [u]crafted[/u] ship
+[t] or [Transfer Button] -------- Transfer Inventory from one ship to another
+[/indent]
+[b]HUD INFORMATION[/b]
+[b]Top[/b][indent][Hull] -------- Health of the ship. This does not regenerate. If this falls to 0, it's game over
+[Energy] ------ Every actions in game cost Energy. If this falls to 0, it's game over
+[Shield] ------ Absorb damage before Hull. Uses Energy to regenerate
+[Right Text] -- Name of the current Solar System (Level)[/indent]
+[b]Bottom[/b][indent][Log Stardate] -- Number of turn you've been alive
+[Bottom text] --- Any important information that happened every turn
+[/indent]
+[b]HOW TO PLAY[/b][indent]Move your ship around. Use your mounted weapons to shoot at planets and ships. Pickup dropped resources. Install resources to their respective mount points or convert them into energy using the Converter. If you find empty ship hulls you can craft new ships using your Converter. More powerful Converter can also craft weapon upgrades and alien ships.
+
+Find the most powerful Converter at the bottom of the 12th solar system and bring it back to the first wormhole you appeared from and then go up that wormhole to complete the game !
+
+You won't succeed on your first attempt but try to improve your score on the leaderboard.
+Score is calculated as follow :[indent]Having the Ultimate Converter
+Number of Solar System Explored
+Amount of energy left
+Bonus based on the Number of turn it took to complete the game (faster is better)
+[/indent]
+
+[/indent]"
+text = "BASIC CONTROLS	[Numpad 1 to 9] or [Mouse Clicks on empty space] -- Move Ship
+[Numpad 5] or [Click on self] --------------------- Wait one turn
+[c] or [Converter Button] ------------------------- Open Crafting Menu
+[w] or [Weapon Button] or [Click on Enemies] ------ Switch to Weapon Targetting
+[g] or [Grab Button] ------------------------------ Pickup Items Under You
+[ i] or [Inventory Button] ------------------------ Show Equipment and Cargo. Use and Drop items.
+[>] or [FTL Button] ------------------------------- Activate on top of wormhole to change level
+[+] ----------------------------------------------- Zoom In
+[-] ----------------------------------------------- Zoom Out
+[Gear Icon] --------------------------------------- Main Menu for Saving, Quitting and eventually Options
+
+ADVANCED CONTROLS
+Accessible from the \"...\" Button	[m] or [Mount Button] ----------- Install Weapon, Shield, Converter or Scanner onto ship's mount points
+[l] or [Look Button] ------------ Get detailed description of item by clicking on them
+[ b] or [Board Button] ---------- Transfer control to another crafted ship
+[t] or [Transfer Button] -------- Transfer Inventory from one ship to another
+
+HUD INFORMATION
+Top	[Hull] -------- Health of the ship. This does not regenerate. If this falls to 0, it's game over
+[Energy] ------ Every actions in game cost Energy. If this falls to 0, it's game over
+[Shield] ------ Absorb damage before Hull. Uses Energy to regenerate
+[Right Text] -- Name of the current Solar System (Level)
+Bottom	[Log Stardate] -- Number of turn you've been alive
+[Bottom text] --- Any important information that happened every turn
+
+HOW TO PLAY	Move your ship around. Use your mounted weapons to shoot at planets and ships. Pickup dropped resources. Install resources to their respective mount points or convert them into energy using the Converter. If you find empty ship hulls you can craft new ships using your Converter. More powerful Converter can also craft weapon upgrades and alien ships.
+
+Find the most powerful Converter at the bottom of the 12th solar system and bring it back to the first wormhole you appeared from and then go up that wormhole to complete the game !
+
+You won't succeed on your first attempt but try to improve your score on the leaderboard.
+Score is calculated as follow :	Having the Ultimate Converter
+Number of Solar System Explored
+Amount of energy left
+Bonus based on the Number of turn it took to complete the game (faster is better)
+
+
+"
+

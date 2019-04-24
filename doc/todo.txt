@@ -39,8 +39,9 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- Change status bar name with actual ship name
+- Change name of FTL button
 - Look button should popup a window with details ?
-- Add question mark in lower-right corner as a sort of "tutorial"
 - cancel targetting on key pressed on pc
 - BUG: Crash ScannerBehavior.gd:117 (null instance ?)
 - BUG: scaling UI issues on android ? 
@@ -173,6 +174,7 @@ IDEAS:::
 	
 DONE :::
 
+- Add question mark in lower-right corner as a sort of "tutorial"
 
 
 - BUG: ship spawned from planetary defence wait 3-4 turns before moving

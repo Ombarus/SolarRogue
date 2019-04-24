@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://scripts/Behaviors/UIManager.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Behaviors/MemoryBehavior.gd" type="Script" id=2]
@@ -47,8 +47,9 @@
 [ext_resource path="res://scenes/GUI/Dialogs/HowManyDiag.tscn" type="PackedScene" id=45]
 [ext_resource path="res://scenes/GUI/Dialogs/Options.tscn" type="PackedScene" id=46]
 [ext_resource path="res://scenes/GUI/Dialogs/ValidateDiag.tscn" type="PackedScene" id=47]
-[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=48]
-[ext_resource path="res://scenes/Sample.tscn" type="PackedScene" id=49]
+[ext_resource path="res://scenes/GUI/Dialogs/Tutorial.tscn" type="PackedScene" id=48]
+[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=49]
+[ext_resource path="res://scenes/Sample.tscn" type="PackedScene" id=50]
 
 [sub_resource type="InputEventKey" id=1]
 scancode = 71
@@ -115,6 +116,7 @@ FTLAction = NodePath("../../Camera-GUI/HUD/Buttons/Wormhole")
 PopupButtons = NodePath("../../Camera-GUI/HUD/Buttons/PopupButton")
 TargettingHUD = NodePath("../../Camera-GUI/TargettingHUD")
 OptionBtn = NodePath("../../Camera-GUI/HUD/Buttons/Options")
+QuestionBtn = NodePath("../../Camera-GUI/HUD/Buttons/Question")
 
 [node name="AI" type="Node" parent="Behaviors"]
 script = ExtResource( 9 )
@@ -251,7 +253,6 @@ mouse_filter = 2
 title = "Log Stardate 0.0.0"
 
 [node name="Buttons" type="Control" parent="Camera-GUI/HUD"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -362,6 +363,17 @@ texture = ExtResource( 35 )
 region_enabled = true
 region_rect = Rect2( 1664, 0, 64, 64 )
 
+[node name="Question" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 32 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -116.0
+margin_top = -56.0
+margin_right = -65.9999
+margin_bottom = 4.00006
+Text = "?"
+
 [node name="StatusBar" type="Control" parent="Camera-GUI/HUD"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -424,11 +436,14 @@ visible = false
 [node name="ValidateDiag" parent="Camera-GUI" instance=ExtResource( 47 )]
 visible = false
 
+[node name="Tutorial" parent="Camera-GUI" instance=ExtResource( 48 )]
+visible = false
+
 [node name="DEBUG" type="Node2D" parent="."]
 visible = false
-script = ExtResource( 48 )
+script = ExtResource( 49 )
 
-[node name="Sample" parent="." instance=ExtResource( 49 )]
+[node name="Sample" parent="." instance=ExtResource( 50 )]
 visible = false
 
 [connection signal="pressed" from="Camera-GUI/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_ZoomIn_pressed"]
