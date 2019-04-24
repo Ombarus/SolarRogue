@@ -8,6 +8,7 @@
 [node name="converter" parent="." instance=ExtResource( 1 )]
 PreloadData = "res://data/json/items/misc/battleship_body.json"
 PreloadJSON = "{
+	\"equipment\":{\"disabled\":true},
 	\"cargo\": {
 			\"capacity\":500,
 			\"pickup_ap\":1.0,

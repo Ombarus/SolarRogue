@@ -39,8 +39,6 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- BUG: Can pickup converter of yendor battleship hull and lose converter
-- BUG: Swapping gravitic compactor didn't reset my cargo space
 - Put the name of the weapon in targetting overlay (also put something more clear with boarding and transfering)
 - Make a late-game level and test late-game balancing
 	- Player should start with a frigate and some utilities and upgraded weapons and shield
@@ -177,6 +175,8 @@ IDEAS:::
 	
 	
 DONE :::
+- BUG: Can pickup converter of yendor battleship hull and lose converter
+- BUG: Swapping gravitic compactor didn't reset my cargo space
 
 - Change name of FTL button
 - Change status bar name with actual ship name
