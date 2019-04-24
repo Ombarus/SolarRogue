@@ -22,16 +22,16 @@ func Ok_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
 	
 	# reset content or we might end up with dangling references
-	get_node(_mounts_node).content = []
-	get_node(_cargo_node).content = []
+	get_node(_mounts_node).Content = []
+	get_node(_cargo_node).Content = []
 	
 	
 func Cancel_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
 	
 	# reset content or we might end up with dangling references
-	get_node(_mounts_node).content = []
-	get_node(_cargo_node).content = []
+	get_node(_mounts_node).Content = []
+	get_node(_cargo_node).Content = []
 	
 func Init(init_param):
 	_obj = init_param["object"]
@@ -52,7 +52,7 @@ func Init(init_param):
 				name = key + " " + str(count+1) + " : " + data.name_id
 			mount_obj.push_back({"name_id":name, "count":1, "key":key, "index":count})
 			count += 1
-	get_node(_mounts_node).content = mount_obj
+	get_node(_mounts_node).Content = mount_obj
 	
 	var current_load = _obj.get_attrib("cargo.volume_used")
 	var cargo_space = _obj.get_attrib("cargo.capacity")
@@ -78,7 +78,7 @@ func Init(init_param):
 		if item.count > 1:
 			counting = str(item.count) + "x "
 		cargo_obj.push_back({"name_id": counting + data.name_id, "count":item.count, "key":item})
-	get_node(_cargo_node).content = cargo_obj
+	get_node(_cargo_node).Content = cargo_obj
 	
 
 func OnUsePressed_Callback():
@@ -91,26 +91,27 @@ func OnUsePressed_Callback():
 	#TODO: disable use button if selected object doesn't have "consumable" attribute
 	#TODO: disable use button if more than one item selected
 	var selected_cargo = []
-	for item in get_node(_cargo_node).content:
-		if item.checked == true:
+	for item in get_node(_cargo_node).Content:
+		if item.selected == true:
 			var data = Globals.LevelLoaderRef.LoadJSON(item.key.src)
 			if "consumable" in data:
 				selected_cargo.push_back(item.key.src)
 	
 	if selected_cargo.size() > 0:
 		emit_signal("use_pressed", selected_cargo[0])
+		Init({"object":_obj}) # refresh list
 	else:
 		BehaviorEvents.emit_signal("OnLogLine", "No selected item can be used like that")
 	
 func OnDropPressed_Callback():
 	var dropped_mounts = []
-	for data in get_node(_mounts_node).content:
-		if data.checked == true:
+	for data in get_node(_mounts_node).Content:
+		if data.selected == true:
 			dropped_mounts.push_back({"key":data.key, "index":data.index})
 			
 	var dropped_cargo = []
-	for data in get_node(_cargo_node).content:
-		if data.checked == true:
+	for data in get_node(_cargo_node).Content:
+		if data.selected == true:
 			dropped_cargo.push_back(data.key)
 			
 	emit_signal("drop_pressed", dropped_mounts, dropped_cargo)

@@ -39,6 +39,8 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- Look button should popup a window with details ?
+- Add question mark in lower-right corner as a sort of "tutorial"
 - cancel targetting on key pressed on pc
 - BUG: Crash ScannerBehavior.gd:117 (null instance ?)
 - BUG: scaling UI issues on android ? 
@@ -53,7 +55,6 @@ TODO :::
 - OPTIM : loading json cache
 - BUG: the "ok" buton can trigger multiple windows (like how many dialog 'ok' and the close converter 'ok')
 - BUG: moving while targetting will cancel overlay but won't push back HUD
-- Look button should popup a window with details ?
 - Review the fact that crafting takes time so producing energy takes energy = to idle amount...
 
 - going down wormhole should take ap and/or energy

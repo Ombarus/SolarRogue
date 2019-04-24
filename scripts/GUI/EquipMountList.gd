@@ -4,6 +4,8 @@ var _callback_obj = null
 var _callback_method = ""
 var _ref_obj = null
 
+onready var _mounts = get_node("base/vbox/MountsV2")
+
 func _ready():
 	get_node("base").connect("OnOkPressed", self, "Ok_Callback")
 	get_node("base").connect("OnCancelPressed", self, "Cancel_Callback")
@@ -19,8 +21,8 @@ func _ready():
 func Ok_Callback():
 	var selected_mount = null
 	var selected_index = null
-	for data in get_node("base/vbox/Mounts").content:
-		if data.checked == true:
+	for data in _mounts.Content:
+		if data.selected == true:
 			selected_mount = data.key
 			selected_index = data.index
 			break
@@ -29,14 +31,14 @@ func Ok_Callback():
 	BehaviorEvents.emit_signal("OnPushGUI", "EquipItemList", {"object":_ref_obj, "selected_mount":selected_mount, "selected_index":selected_index, "callback_object":_callback_obj, "callback_method":_callback_method})
 
 	# reset content or we might end up with dangling references
-	get_node("base/vbox/Mounts").content = []
+	_mounts.Content = []
 	
 	
 func Cancel_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
 	
 	# reset content or we might end up with dangling references
-	get_node("base/vbox/Mounts").content = []
+	_mounts.Content = []
 	
 func Init(init_param):
 	var obj = init_param["object"]
@@ -59,7 +61,7 @@ func Init(init_param):
 				name = key + " " + str(count + 1) + " : " + data.name_id
 			mount_obj.push_back({"name_id":name, "count":1, "key":key, "index":count})
 			count += 1
-	get_node("base/vbox/Mounts").content = mount_obj
+	_mounts.Content = mount_obj
 	
 
 #func _process(delta):

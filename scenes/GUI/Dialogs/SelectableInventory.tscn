@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/GUI/InventoryLayout.gd" type="Script" id=1]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
@@ -8,7 +8,10 @@
 [ext_resource path="res://data/fonts/DejaVuSansMonoItal.tres" type="DynamicFont" id=6]
 [ext_resource path="res://data/fonts/DejaVuSansMonoBold.tres" type="DynamicFont" id=7]
 [ext_resource path="res://scenes/GUI/ScrollListContainer.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/GUI/ItemList/MountSelectableRow.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/GUI/ItemList/CargoSelectableRow.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=12]
 
 [sub_resource type="InputEventKey" id=1]
 scancode = 68
@@ -28,8 +31,8 @@ anchor_bottom = 1.0
 script = ExtResource( 1 )
 _drop_btn = NodePath("base/Drop")
 _use_btn = NodePath("base/Use")
-_mounts_node = NodePath("base/HBox/MountVBox/Mounts")
-_cargo_node = NodePath("base/HBox/CargoVBox/Cargo")
+_mounts_node = NodePath("base/HBox/MountVBox/MountsV2")
+_cargo_node = NodePath("base/HBox/CargoVBox/CargoV2")
 _cargo_label = NodePath("base/HBox/CargoVBox/CargoLabel")
 
 [node name="ModalBG" type="Panel" parent="."]
@@ -54,13 +57,13 @@ margin_right = -31.0
 margin_bottom = -138.0
 
 [node name="MountVBox" type="VBoxContainer" parent="base/HBox"]
-margin_right = 300.0
-margin_bottom = 301.0
+margin_right = 428.0
+margin_bottom = 421.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MountsLabel" type="RichTextLabel" parent="base/HBox/MountVBox"]
-margin_right = 300.0
+margin_right = 428.0
 margin_bottom = 21.0
 rect_min_size = Vector2( 0, 21 )
 size_flags_horizontal = 3
@@ -74,24 +77,33 @@ bbcode_text = "[b]Mounts : [/b]"
 text = "Mounts : "
 
 [node name="Mounts" parent="base/HBox/MountVBox" instance=ExtResource( 8 )]
+visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 25.0
-margin_right = 300.0
-margin_bottom = 301.0
+margin_right = 428.0
+margin_bottom = 221.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="MountsV2" parent="base/HBox/MountVBox" instance=ExtResource( 9 )]
+margin_top = 25.0
+margin_right = 428.0
+margin_bottom = 421.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+Row = ExtResource( 10 )
+
 [node name="CargoVBox" type="VBoxContainer" parent="base/HBox"]
-margin_left = 304.0
-margin_right = 604.0
-margin_bottom = 301.0
+margin_left = 432.0
+margin_right = 860.0
+margin_bottom = 421.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CargoLabel" type="RichTextLabel" parent="base/HBox/CargoVBox"]
-margin_right = 300.0
+margin_right = 428.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 24 )
 size_flags_horizontal = 3
@@ -105,16 +117,25 @@ bbcode_text = "[b]Cargo : [/b]"
 text = "Cargo : "
 
 [node name="Cargo" parent="base/HBox/CargoVBox" instance=ExtResource( 8 )]
+visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 28.0
-margin_right = 300.0
-margin_bottom = 301.0
+margin_right = 428.0
+margin_bottom = 222.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Drop" parent="base" instance=ExtResource( 9 )]
+[node name="CargoV2" parent="base/HBox/CargoVBox" instance=ExtResource( 9 )]
+margin_top = 28.0
+margin_right = 428.0
+margin_bottom = 421.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+Row = ExtResource( 11 )
+
+[node name="Drop" parent="base" instance=ExtResource( 12 )]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 41.0
@@ -124,7 +145,7 @@ margin_bottom = -25.0
 Text = "[D]rop"
 Action = SubResource( 2 )
 
-[node name="Use" parent="base" instance=ExtResource( 9 )]
+[node name="Use" parent="base" instance=ExtResource( 12 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0

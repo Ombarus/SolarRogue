@@ -5,6 +5,8 @@ var _callback_method = ""
 var _mount_to = null
 var _mount_index = null
 
+onready var _cargo = get_node("base/vbox/CargoV2")
+
 func _ready():
 	get_node("base").connect("OnOkPressed", self, "Ok_Callback")
 	get_node("base").connect("OnCancelPressed", self, "Cancel_Callback")
@@ -23,8 +25,8 @@ func Ok_Callback():
 		return
 	
 	var mount_item = null
-	for data in get_node("base/vbox/Cargo").content:
-		if data.checked == true:
+	for data in _cargo.Content:
+		if data.selected == true:
 			mount_item = data.key
 			
 			
@@ -32,14 +34,14 @@ func Ok_Callback():
 		_callback_obj.call(_callback_method, mount_item.src, _mount_to, _mount_index)
 	
 	# reset content or we might end up with dangling references
-	get_node("base/vbox/Cargo").content = []
+	_cargo.Content = []
 	
 	
 func Cancel_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
 	
 	# reset content or we might end up with dangling references
-	get_node("base/vbox/Cargo").content = []
+	_cargo.Content = []
 	
 func Init(init_param):
 	var obj = init_param["object"]
@@ -70,7 +72,7 @@ func Init(init_param):
 		if item.count > 1:
 			counting = str(item.count) + "x "
 		cargo_obj.push_back({"name_id": counting + data.name_id, "count":item.count, "key":item})
-	get_node("base/vbox/Cargo").content = cargo_obj
+	_cargo.Content = cargo_obj
 	
 	#get_node("base").content = result_string
 

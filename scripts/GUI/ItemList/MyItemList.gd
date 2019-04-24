@@ -12,7 +12,7 @@ var Content setget set_content, get_content
 
 signal OnDragDropCompleted(origin_data, destination_data)
 
-var _debug = true
+var _debug = false
 onready var _rows_node = get_node("Rows")
 
 func Clear():
