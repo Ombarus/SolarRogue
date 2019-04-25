@@ -39,8 +39,8 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- Put the name of the weapon in targetting overlay (also put something more clear with boarding and transfering)
 - Look button should popup a window with details ?
+	- How to handle multiple item on same tile ? (back and forth button in the dialog ?)
 - cancel targetting on key pressed on pc
 - BUG: scaling UI issues on android ? 
 	- (seem to be a text_width issue with font oversampling)
@@ -171,6 +171,7 @@ IDEAS:::
 	
 	
 DONE :::
+- Put the name of the weapon in targetting overlay (also put something more clear with boarding and transfering)
 - Make a late-game level and test late-game balancing (debug switch in levelloader)
 - BUG: Can pickup converter of yendor battleship hull and lose converterg
 - BUG: Swapping gravitic compactor didn't reset my cargo space

@@ -109,7 +109,8 @@ func Pressed_Board_Callback():
 	var targetting_data = {"weapon_data":{"fire_range":1, "fire_pattern":"o"}}
 	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, targetting_data, self, "ProcessBoardSelection")
 	BehaviorEvents.emit_signal("OnPopGUI") #HUD
-	BehaviorEvents.emit_signal("OnPushGUI", "TargettingHUD", null)
+	var text = "[color=red]Select a ship to board...[/color]"
+	BehaviorEvents.emit_signal("OnPushGUI", "TargettingHUD", {"info_text":text})
 
 func Pressed_Take_Callback():
 	if lock_input:
@@ -120,7 +121,8 @@ func Pressed_Take_Callback():
 	var targetting_data = {"weapon_data":{"fire_range":1, "fire_pattern":"o"}}
 	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, targetting_data, self, "ProcessTakeSelection")
 	BehaviorEvents.emit_signal("OnPopGUI") #HUD
-	BehaviorEvents.emit_signal("OnPushGUI", "TargettingHUD", null)
+	var text = "[color=red]Select a ship to transfer content...[/color]"
+	BehaviorEvents.emit_signal("OnPushGUI", "TargettingHUD", {"info_text":text})
 	
 func UpdateButtonVisibility():
 	var weapons = playerNode.get_attrib("mounts.weapon")
@@ -314,7 +316,8 @@ func Pressed_Weapon_Callback():
 	BehaviorEvents.emit_signal("OnLogLine", "Firing " + cur_weapon.weapon_data.name_id + ". Target ?")
 	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, cur_weapon.weapon_data, self, "ProcessAttackSelection")
 	BehaviorEvents.emit_signal("OnPopGUI") #HUD
-	BehaviorEvents.emit_signal("OnPushGUI", "TargettingHUD", null)
+	var text = "[color=red]Select target for " + cur_weapon.weapon_data.name_id + "...[/color]"
+	BehaviorEvents.emit_signal("OnPushGUI", "TargettingHUD", {"info_text":text})
 	_input_state = INPUT_STATE.weapon_targetting
 	
 func OnLevelLoaded_Callback():

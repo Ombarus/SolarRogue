@@ -31,7 +31,7 @@ margin_right = 155.0
 margin_bottom = 67.0
 Text = "[c]ancel"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="Info" type="RichTextLabel" parent="."]
 anchor_right = 1.0
 margin_left = 17.0
 margin_top = 27.0
