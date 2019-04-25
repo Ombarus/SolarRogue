@@ -18,6 +18,7 @@ var click_start_pos
 var lock_input = false # when it's not player turn, inputs are locked
 var next_touch_is_a_goto = false # when camera is dragged, instead of moving in a single direction, a touch will make the ship do pathfinding
 var _weapon_shots = []
+var _last_unicode = 0
 
 enum SHOOTING_STATE {
 	init,
@@ -45,6 +46,7 @@ var _current_origin = PLAYER_ORIGIN.saved
 var _wormhole_src = null # for positioning the player when he goes up or down
 
 func _ready():
+	OS.set_ime_active(true)
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	levelLoaderRef = get_node(levelLoaderNode)
@@ -487,7 +489,16 @@ func _unhandled_input(event):
 				elif rot > 292.5 && rot <= 337.5:
 					dir = Vector2(-1,-1) # 7
 				
+	if event is InputEventKey and event.pressed == true:
+		if event.unicode != 0:
+			_last_unicode = PoolByteArray([event.unicode]).get_string_from_utf8()
+		else:
+			_last_unicode = ""
+				
 	if event is InputEventKey && event.pressed == false:
+		if _input_state == INPUT_STATE.weapon_targetting or _input_state == INPUT_STATE.board_targetting or _input_state == INPUT_STATE.loot_targetting:
+			get_node(TargettingHUD).emit_signal("cancel_pressed")
+		
 		if event.scancode == KEY_KP_1:
 			dir = Vector2(-1,1)
 		if event.scancode == KEY_KP_2:
@@ -507,14 +518,40 @@ func _unhandled_input(event):
 		if event.scancode == KEY_KP_5:
 			BehaviorEvents.emit_signal("OnUseAP", playerNode, 1.0)
 			BehaviorEvents.emit_signal("OnLogLine", "Cooling reactor (wait)")
-		if event.scancode == KEY_M:
+		if _last_unicode == 'w':
+			Pressed_Weapon_Callback()
+		if _last_unicode == 'g':
+			Pressed_Grab_Callback()
+		if _last_unicode == 'i':
+			Pressed_Inventory_Callback()
+		if _last_unicode == 'c':
+			Pressed_Crafting_Callback()
+		if _last_unicode == 'm':
 			Pressed_Equip_Callback()
-		if event.scancode == KEY_L:
+		if _last_unicode == 'l':
 			Pressed_Look_Callback()
-		if event.scancode == KEY_B:
+		if _last_unicode == 'b':
 			Pressed_Board_Callback()
-		if event.scancode == KEY_T:
+		if _last_unicode == 't':
 			Pressed_Take_Callback()
+		if _last_unicode == '>' or _last_unicode == '<':
+			Pressed_FTL_Callback()
+#		if event.scancode == KEY_W:
+#			Pressed_Weapon_Callback()
+#		if event.scancode == KEY_G:
+#			Pressed_Grab_Callback()
+#		if event.scancode == KEY_I:
+#			Pressed_Inventory_Callback()
+#		if event.scancode == KEY_C:
+#			Pressed_Crafting_Callback()
+#		if event.scancode == KEY_M:
+#			Pressed_Equip_Callback()
+#		if event.scancode == KEY_L:
+#			Pressed_Look_Callback()
+#		if event.scancode == KEY_B:
+#			Pressed_Board_Callback()
+#		if event.scancode == KEY_T:
+#			Pressed_Take_Callback()
 		
 		# GODOT cannot give me the real key that was pressed. Only the physical key
 		# in En-US keyboard layout. There's no way to register a shortcut that's on a modifier (like !@#$%^&*())
@@ -522,8 +559,9 @@ func _unhandled_input(event):
 		#		On the other end. Being open-source I could probably hack something if it becomes too big an issue
 		#		Check out : Godot_src\godot\scene\gui\text_edit.cpp for how they handle acutal text in input forms
 		#		Check out : Godot_src\godot\core\os\input_event.cpp for how shortcut key inputs are handled
-		if (event.scancode == KEY_PERIOD || event.scancode == KEY_COLON) && event.shift == true:
-			Pressed_FTL_Callback()
+		#		https://github.com/godotengine/godot/issues/20527
+		#if (event.scancode == KEY_PERIOD || event.scancode == KEY_COLON) && event.shift == true:
+		#	Pressed_FTL_Callback()
 		#print(event.scancode)
 		#print ("key_period : ", KEY_PERIOD, ", key_comma : ", KEY_COLON)
 	if dir != null:

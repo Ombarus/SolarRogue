@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://scripts/Behaviors/UIManager.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Behaviors/MemoryBehavior.gd" type="Script" id=2]
@@ -51,32 +51,7 @@
 [ext_resource path="res://scripts/DEBUG.gd" type="Script" id=49]
 [ext_resource path="res://scenes/Sample.tscn" type="PackedScene" id=50]
 
-[sub_resource type="InputEventKey" id=1]
-scancode = 71
-
-[sub_resource type="ShortCut" id=2]
-shortcut = SubResource( 1 )
-
-[sub_resource type="InputEventKey" id=3]
-scancode = 73
-
-[sub_resource type="ShortCut" id=4]
-shortcut = SubResource( 3 )
-
-[sub_resource type="InputEventKey" id=5]
-scancode = 67
-
-[sub_resource type="ShortCut" id=6]
-shortcut = SubResource( 5 )
-
-[sub_resource type="InputEventKey" id=7]
-scancode = 45
-
-[sub_resource type="ShortCut" id=8]
-shortcut = SubResource( 7 )
-
 [sub_resource type="ShortCut" id=9]
-shortcut = SubResource( 7 )
 
 [node name="Root" type="Node"]
 
@@ -276,7 +251,6 @@ margin_top = -324.0
 margin_right = 123.0
 margin_bottom = -232.0
 Text = "[g]rab"
-Action = SubResource( 2 )
 
 [node name="Wormhole" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 32 )]
 anchor_left = 1.0
@@ -299,7 +273,6 @@ margin_top = -321.0
 margin_right = 2.0
 margin_bottom = -225.0
 Text = "[i]nventory"
-Action = SubResource( 4 )
 
 [node name="Converter" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 32 )]
 anchor_left = 1.0
@@ -311,7 +284,6 @@ margin_top = -406.0
 margin_right = 3.0
 margin_bottom = -314.0
 Text = "[c]onverter"
-Action = SubResource( 6 )
 
 [node name="PopupButton" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 34 )]
 anchor_top = 1.0
@@ -330,7 +302,6 @@ margin_top = -146.0
 margin_right = -69.0
 margin_bottom = -85.0
 Text = "+"
-Action = SubResource( 8 )
 
 [node name="ZoomOut" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 32 )]
 anchor_left = 1.0

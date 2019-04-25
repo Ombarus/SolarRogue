@@ -40,12 +40,8 @@ ROAD TO ALPHA :::
 
 TODO :::
 - Put the name of the weapon in targetting overlay (also put something more clear with boarding and transfering)
-- Make a late-game level and test late-game balancing
-	- Player should start with a frigate and some utilities and upgraded weapons and shield
-	- Spawn player at level ~8 ?
 - Look button should popup a window with details ?
 - cancel targetting on key pressed on pc
-- BUG: Crash ScannerBehavior.gd:117 (null instance ?)
 - BUG: scaling UI issues on android ? 
 	- (seem to be a text_width issue with font oversampling)
 	- Hopefully it can should be fixed ? only happen with my mono custom font,
@@ -175,7 +171,8 @@ IDEAS:::
 	
 	
 DONE :::
-- BUG: Can pickup converter of yendor battleship hull and lose converter
+- Make a late-game level and test late-game balancing (debug switch in levelloader)
+- BUG: Can pickup converter of yendor battleship hull and lose converterg
 - BUG: Swapping gravitic compactor didn't reset my cargo space
 
 - Change name of FTL button

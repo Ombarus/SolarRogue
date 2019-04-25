@@ -34,12 +34,16 @@ func _unhandled_input(event):
 	# Handle Multi-touch using 'A' key and mouse event instead of Touch event	
 	pretend_multi_touch(event)
 	
+	var key_str = ""
+	if event is InputEventKey and event.unicode != 0:
+		key_str = PoolByteArray([event.unicode]).get_string_from_utf8()
+	
 	# Wheel Up Event
-	if event.is_action_pressed("zoom_in"):
+	if event.is_action_pressed("zoom_in") or key_str == '+':
 		#print(event.position)
 		_zoom_camera(-1)
 	# Wheel Down Event
-	elif event.is_action_pressed("zoom_out"):
+	elif event.is_action_pressed("zoom_out") or key_str == '-':
 		_zoom_camera(1)
 
 # Zoom Camera

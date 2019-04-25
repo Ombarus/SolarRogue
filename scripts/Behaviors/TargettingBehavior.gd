@@ -17,6 +17,7 @@ func _ready():
 	_targetting_hud.connect("skip_pressed", self, "skip_pressed_Callback")
 	_targetting_hud.connect("cancel_pressed", self, "ClearOverlay")
 	
+	
 func skip_pressed_Callback():
 	ClearOverlay()
 	_callback_obj.call(_callback_method, null)
