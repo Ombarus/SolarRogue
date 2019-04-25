@@ -4,6 +4,7 @@ extends Control
 export(bool) var editor_trigger_signal = true setget set_signal
 export(bool) var dialog_ok = false setget set_dialog_ok
 export(bool) var dialog_cancel = false setget set_dialog_cancel
+export(bool) var disabled = false setget set_disabled
 export(int) var title_height = 1 setget set_title_height
 export(String) var title = "" setget set_title
 export(String, "═", "─", "━", " ") var border_style = "=" setget set_style
@@ -98,6 +99,13 @@ func set_style(style):
 	elif border_style == "━":
 		string_dict = string_simple_thick
 	self.emit_signal("OnUpdateLayout")
+	
+func set_disabled(newval):
+	var ok_btn = get_node("bg/contour/Control/Ok")
+	var cancel_btn = get_node("bg/contour/Control/Cancel")
+	ok_btn.disabled = newval
+	cancel_btn.disabled = newval
+	disabled = newval
 
 func _ready():
 	init()

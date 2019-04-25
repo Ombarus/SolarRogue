@@ -9,3 +9,11 @@ func _ready():
 # overridable function for loading dialog content
 func Init(init_param):
 	pass
+	
+# UIManager will call this when something else is pushed on top of this UI
+func OnFocusLost():
+	pass
+	
+# UIManager will call this when whatever was on top of this UI is poped
+func OnFocusGained():
+	pass

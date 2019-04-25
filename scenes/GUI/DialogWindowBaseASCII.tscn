@@ -11,7 +11,7 @@ scancode = 79
 shortcut = SubResource( 1 )
 
 [sub_resource type="InputEventKey" id=3]
-scancode = 67
+scancode = 16777217
 
 [sub_resource type="ShortCut" id=4]
 shortcut = SubResource( 3 )
@@ -104,7 +104,7 @@ margin_bottom = -8.83901
 rect_min_size = Vector2( 0, 28 )
 custom_styles/normal = ExtResource( 3 )
 shortcut = SubResource( 4 )
-text = "[C]ancel"
+text = "[esc]Cancel"
 
 [connection signal="pressed" from="bg/contour/Control/Ok" to="." method="_on_Ok_pressed"]
 [connection signal="pressed" from="bg/contour/Control/Cancel" to="." method="_on_Cancel_pressed"]

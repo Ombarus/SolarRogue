@@ -41,7 +41,7 @@ alignment = 1
 
 [node name="CraftingList" type="ItemList" parent="base/HBoxContainer"]
 margin_right = 250.0
-margin_bottom = 412.0
+margin_bottom = 532.0
 rect_min_size = Vector2( 250, 0 )
 size_flags_vertical = 3
 fixed_icon_size = Vector2( 64, 64 )
@@ -49,12 +49,12 @@ fixed_icon_size = Vector2( 64, 64 )
 [node name="VSeparator" type="VSeparator" parent="base/HBoxContainer"]
 margin_left = 254.0
 margin_right = 258.0
-margin_bottom = 412.0
+margin_bottom = 532.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="base/HBoxContainer"]
 margin_left = 262.0
-margin_right = 621.0
-margin_bottom = 412.0
+margin_right = 877.0
+margin_bottom = 532.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
@@ -72,30 +72,30 @@ margin_right = 359.0
 margin_bottom = 4.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="base/HBoxContainer/VBoxContainer"]
-margin_right = 359.0
-margin_bottom = 279.0
+margin_right = 615.0
+margin_bottom = 399.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Need" parent="base/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 4 )]
-margin_right = 177.0
-margin_bottom = 279.0
+margin_right = 305.0
+margin_bottom = 399.0
 size_flags_horizontal = 3
 Row = ExtResource( 5 )
 DragDropID = "CraftingNeedUse"
 
 [node name="Using" parent="base/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 4 )]
-margin_left = 181.0
-margin_right = 359.0
-margin_bottom = 279.0
+margin_left = 309.0
+margin_right = 615.0
+margin_bottom = 399.0
 size_flags_horizontal = 3
 Row = ExtResource( 5 )
 DragDropID = "CraftingNeedUse"
 
 [node name="CraftResultInfo" type="RichTextLabel" parent="base/HBoxContainer/VBoxContainer"]
-margin_top = 283.0
-margin_right = 359.0
-margin_bottom = 308.0
+margin_top = 403.0
+margin_right = 615.0
+margin_bottom = 428.0
 rect_min_size = Vector2( 0, 25 )
 custom_fonts/mono_font = ExtResource( 6 )
 custom_fonts/bold_italics_font = ExtResource( 7 )
@@ -108,9 +108,9 @@ text = "5 Johns for 3500 energy"
 scroll_active = false
 
 [node name="Craft" parent="base/HBoxContainer/VBoxContainer" instance=ExtResource( 10 )]
-margin_top = 312.0
-margin_right = 359.0
-margin_bottom = 412.0
+margin_top = 432.0
+margin_right = 615.0
+margin_bottom = 532.0
 rect_min_size = Vector2( 0, 100 )
 Text = "Craft"
 

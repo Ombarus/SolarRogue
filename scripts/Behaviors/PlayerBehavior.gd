@@ -497,7 +497,12 @@ func _unhandled_input(event):
 				
 	if event is InputEventKey && event.pressed == false:
 		if _input_state == INPUT_STATE.weapon_targetting or _input_state == INPUT_STATE.board_targetting or _input_state == INPUT_STATE.loot_targetting:
-			get_node(TargettingHUD).emit_signal("cancel_pressed")
+			if _last_unicode == 's':
+				get_node(TargettingHUD).emit_signal("skip_pressed")
+			if _last_unicode == 'c':
+				get_node(TargettingHUD).emit_signal("cancel_pressed")
+			return
+			#get_node(TargettingHUD).emit_signal("cancel_pressed")
 		
 		if event.scancode == KEY_KP_1:
 			dir = Vector2(-1,1)
@@ -536,6 +541,8 @@ func _unhandled_input(event):
 			Pressed_Take_Callback()
 		if _last_unicode == '>' or _last_unicode == '<':
 			Pressed_FTL_Callback()
+		if _last_unicode == '?':
+			Pressed_Question_Callback()
 #		if event.scancode == KEY_W:
 #			Pressed_Weapon_Callback()
 #		if event.scancode == KEY_G:

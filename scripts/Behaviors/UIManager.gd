@@ -26,8 +26,13 @@ func OnPushGUI_Callback(name, init_param):
 	#TODO: make sure Layout is not already in stack
 	_gui_list[name].visible = true
 	_gui_list[name].Init(init_param)
+	if _stack.size() > 0:
+		_gui_list[_stack[-1]].call_deferred("OnFocusLost")
 	_stack.push_back(name)
 	
 func OnPopGUI_Callback():
+	print("Pop " + _stack[-1])
 	_gui_list[_stack[-1]].visible = false
 	_stack.pop_back()
+	if _stack.size() > 0:
+		_gui_list[_stack[-1]].call_deferred("OnFocusGained")

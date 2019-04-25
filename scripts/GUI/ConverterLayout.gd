@@ -65,6 +65,14 @@ func Cancel_Callback():
 	_using_list.Content = []
 	_need_list.Content = []
 	
+	
+func OnFocusGained():
+	get_node("base").disabled = false
+	
+func OnFocusLost():
+	get_node("base").disabled = true
+	
+	
 func Init(init_param):
 	_obj = init_param["object"]
 	_callback_obj = init_param["callback_object"]
