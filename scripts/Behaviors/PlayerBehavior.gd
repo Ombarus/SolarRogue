@@ -313,7 +313,7 @@ func Pressed_Weapon_Callback():
 		
 	var cur_weapon = _weapon_shots[0]
 	cur_weapon.state = SHOOTING_STATE.wait_targetting
-	BehaviorEvents.emit_signal("OnLogLine", "Firing " + cur_weapon.weapon_data.name_id + ". Target ?")
+	#BehaviorEvents.emit_signal("OnLogLine", "Firing " + cur_weapon.weapon_data.name_id + ". Target ?")
 	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, cur_weapon.weapon_data, self, "ProcessAttackSelection")
 	BehaviorEvents.emit_signal("OnPopGUI") #HUD
 	var text = "[color=red]Select target for " + cur_weapon.weapon_data.name_id + "...[/color]"
@@ -636,8 +636,10 @@ func ProcessAttackSelection(target):
 	
 	if cur_weapon != null:
 		cur_weapon.state = SHOOTING_STATE.wait_targetting
-		BehaviorEvents.emit_signal("OnLogLine", "Acknowledged, should we also fire " + cur_weapon.weapon_data.name_id + ". Target ?")
+		#BehaviorEvents.emit_signal("OnLogLine", "Acknowledged, should we also fire " + cur_weapon.weapon_data.name_id + ". Target ?")
 		BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, cur_weapon.weapon_data, self, "ProcessAttackSelection")
+		var text = "[color=red]Select target for " + cur_weapon.weapon_data.name_id + "...[/color]"
+		get_node(TargettingHUD).Init( {"info_text":text} )
 		_input_state = INPUT_STATE.weapon_targetting
 		return
 	
