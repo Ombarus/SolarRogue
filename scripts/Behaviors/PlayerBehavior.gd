@@ -582,21 +582,31 @@ func _unhandled_input(event):
 func do_contextual_actions(tile, player_tile):
 	var content : Array = Globals.LevelLoaderRef.GetTile(tile)
 	var dist = (tile - player_tile).length()
+	var method_to_call : String = ""
+	# This will tell the following loop if it can overwrite a method or not
+	var priority : int = 0
 	for o in content:
 		if o == playerNode or o.visible == false or o.get_attrib("ghost_memory") != null:
 			continue
 			
-		if o.get_attrib("equipment") != null and tile == player_tile:
-			Pressed_Grab_Callback()
-			return true
+		if o.get_attrib("equipment") != null:
+			if tile == player_tile and priority < 100:
+				method_to_call = "Pressed_Grab_Callback"
+				priority = 100
+				continue
+			elif priority < 70:
+				method_to_call = ""
+				priority = 70
 			
-		if o.get_attrib("type") == "wormhole" and tile == player_tile:
-			Pressed_FTL_Callback()
-			return true
+		if o.get_attrib("type") == "wormhole" and tile == player_tile and priority < 80:
+			method_to_call = "Pressed_FTL_Callback"
+			priority = 80
+			continue
 			
-		if Globals.is_(o.get_attrib("cargo.transferable"), true) and dist < 2.0:
-			Pressed_Take_Callback()
-			return true
+		if Globals.is_(o.get_attrib("cargo.transferable"), true) and dist < 2.0 and priority < 90:
+			method_to_call = "Pressed_Take_Callback"
+			priority = 90
+			continue
 			
 		if o.get_attrib("destroyable") != null || o.get_attrib("harvestable") != null:
 			var targetting_behavior : Node = get_node("../Targetting")
@@ -607,11 +617,19 @@ func do_contextual_actions(tile, player_tile):
 				for w in weapons_data:
 					var best_move = targetting_behavior.ClosestFiringSolution(player_tile, tile, w)
 					if best_move.length() == 0:
-						Pressed_Weapon_Callback()
-						return true
+						if o.get_attrib("destroyable") != null and priority < 200:
+							priority = 200 # ennemy ships have very high priority
+							method_to_call = "Pressed_Weapon_Callback"
+						elif priority < 10:
+							priority = 10 # shooting planet is lowest priority
+							method_to_call = "Pressed_Weapon_Callback"
+						break
 		#TODO: If more  than one possible contextual action maybe pop a menu ?
 		#elif o.get_attrib("boardable") == true:
 		#	return true
+	if method_to_call != "":
+		self.call(method_to_call)
+		return true
 			
 	return false
 

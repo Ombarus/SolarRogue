@@ -39,11 +39,8 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- Title doesn't update in weapon HUD
 - Contextual click : if there's an object on a planet... don't attack planet ?
 	- drag & drop to mount from inventory window
-- Drag & drop in inventory crashes game
-- Equip jerg converter crash game
 - Find a way to make a good UI for PC AND mobile... how to adjust font size and such ?
 - Allow clicking outside of the map to move (it has weird behavior now with contextual clicks)
 - Refine Need/Using list in converter UI (maybe a title + some outline for the list?)
@@ -178,6 +175,9 @@ IDEAS:::
 	
 	
 DONE :::
+- Equip jerg converter crash game (CNR)
+- Title doesn't update in weapon HUD
+- Drag & drop in inventory crashes game
 - cancel targetting on key pressed on pc
 - Put the name of the weapon in targetting overlay (also put something more clear with boarding and transfering)
 - Make a late-game level and test late-game balancing (debug switch in levelloader)

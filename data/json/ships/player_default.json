@@ -6,8 +6,7 @@
 	"boardable":true,
 	"mounts": {
 		"weapon": [
-			"data/json/items/weapons/missile_launcher_mk1.json",
-			"data/json/items/weapons/laser_turret_mk1.json"
+			"data/json/items/weapons/missile_launcher_mk1.json"
 		],
 		"shield": ["data/json/items/shields/shield_mk1.json"],
 		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
@@ -28,7 +27,8 @@
 		"transferable":true,
 		"content":[
 			{"src":"data/json/items/weapons/missile.json", "count":10},
-			{"src":"data/json/items/consumables/repair_nanobots.json", "count":1}
+			{"src":"data/json/items/consumables/repair_nanobots.json", "count":1},
+			{"src":"data/json/items/converters/jerg_converter_mk1.json", "count":1}
 		]
 	},
 	"converter": {
