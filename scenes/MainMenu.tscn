@@ -12,7 +12,7 @@
 [ext_resource path="res://scenes/GUI/Dialogs/PlayerName.tscn" type="PackedScene" id=10]
 
 [sub_resource type="InputEventKey" id=1]
-scancode = 78
+scancode = 81
 
 [sub_resource type="ShortCut" id=2]
 shortcut = SubResource( 1 )
@@ -25,10 +25,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -2.0
 margin_bottom = -2.0
+mouse_filter = 2
 
 [node name="GameTitle" type="RichTextLabel" parent="MenuRoot"]
 anchor_right = 1.0
-margin_bottom = 43.0
+margin_top = 12.95
+margin_bottom = 55.95
 custom_fonts/mono_font = ExtResource( 2 )
 custom_fonts/bold_italics_font = ExtResource( 3 )
 custom_fonts/italics_font = ExtResource( 4 )
@@ -41,21 +43,39 @@ text = "Solar Rogue"
 [node name="NewGameBTN" parent="MenuRoot" instance=ExtResource( 6 )]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -67.9524
-margin_top = 86.6629
-margin_right = 71.0476
-margin_bottom = 181.663
+margin_left = -69.0
+margin_top = 176.49
+margin_right = 70.0
+margin_bottom = 279.49
 Text = "[n]ew game"
 Action = SubResource( 2 )
 
+[node name="Continue" parent="MenuRoot" instance=ExtResource( 6 )]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -69.0
+margin_top = 70.0
+margin_right = 70.0
+margin_bottom = 173.0
+Text = "[c]ontinue"
+Action = SubResource( 2 )
+Disabled = true
+
+[node name="Quit" parent="MenuRoot" instance=ExtResource( 6 )]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -69.0
+margin_top = 279.6
+margin_right = 70.0
+margin_bottom = 382.6
+Text = "[q]uit"
+Action = SubResource( 2 )
+
 [node name="Leaderboard" type="Control" parent="MenuRoot"]
-anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 15.0
-margin_top = -328.0
-margin_right = -15.0
-margin_bottom = -15.0
+margin_top = 435.0
+mouse_filter = 1
 script = ExtResource( 7 )
 
 [node name="leaderlist" parent="MenuRoot/Leaderboard" instance=ExtResource( 8 )]
@@ -63,9 +83,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 0.0
 margin_bottom = 0.0
+mouse_filter = 2
 Row = ExtResource( 9 )
 
 [node name="PlayerName" parent="MenuRoot" instance=ExtResource( 10 )]
 visible = false
 
 [connection signal="pressed" from="MenuRoot/NewGameBTN" to="." method="_on_newgame_pressed"]
+[connection signal="pressed" from="MenuRoot/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="MenuRoot/Quit" to="." method="_on_Quit_pressed"]

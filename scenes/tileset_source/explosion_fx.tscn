@@ -92,6 +92,7 @@ color_ramp = SubResource( 11 )
 
 [node name="Node2D" type="Node2D"]
 scale = Vector2( 3, 3 )
+z_index = 1000
 script = ExtResource( 1 )
 ttl = 0.8
 

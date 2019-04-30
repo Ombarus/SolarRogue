@@ -51,7 +51,7 @@
 [ext_resource path="res://scripts/DEBUG.gd" type="Script" id=49]
 [ext_resource path="res://scenes/Sample.tscn" type="PackedScene" id=50]
 
-[sub_resource type="ShortCut" id=9]
+[sub_resource type="ShortCut" id=1]
 
 [node name="Root" type="Node"]
 
@@ -316,7 +316,7 @@ margin_top = -146.0
 margin_right = -1.0
 margin_bottom = -86.0
 Text = "-"
-Action = SubResource( 9 )
+Action = SubResource( 1 )
 
 [node name="Options" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 32 )]
 editor/display_folded = true

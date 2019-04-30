@@ -19,10 +19,14 @@ anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 2 )
 
 [node name="base" parent="." instance=ExtResource( 3 )]
-margin_left = 187.0
-margin_top = 34.0
-margin_right = -183.0
-margin_bottom = -76.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -628.0
+margin_top = -320.0
+margin_right = 620.0
+margin_bottom = 284.0
 dialog_ok = true
 title = "You are dead"
 

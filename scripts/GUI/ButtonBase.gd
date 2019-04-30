@@ -3,7 +3,12 @@ extends Control
 
 export var Text = "" setget set_text
 export(ShortCut) var Action = null setget set_action
+export(bool) var Disabled = false setget set_disabled
 signal pressed
+
+func set_disabled(newval):
+	get_node("btn").disabled = newval
+	Disabled = newval
 
 func get_height_line():
 	return get_node("base").get_height_line()

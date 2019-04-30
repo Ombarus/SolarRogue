@@ -59,15 +59,10 @@ Feature :
 
 Things to consider :
 
-- gaia beyond (ref)
-- starsector art & style very similar to what I have in mind : https://www.youtube.com/watch?v=VDBEy1CUvrw
+
 - Hunger in nethack is a encouragement to keep moving.... right now we don't use energy on wait.. maybe we should ?
-- Star "sparkle" : https://en.wikipedia.org/wiki/Point_spread_function
-- 1989 : Space Rogue
-	- https://www.youtube.com/user/SpaceGameJunkie/videos
+
 - https://www.reddit.com/r/roguelikedev/wiki/faq_friday
-- https://www.scirra.com/store/2d-game-sprites/pixel-art-retr-2d-planets-pack-3792
-- https://www.deviantart.com/pixel-pax/art/Spaceships-60-98272278
 - SCI-FI items :
 	- Laser (instant, beam of light)
 	- Missile / Torpedo (slow, high-damage, special purpose (electro-magnetic, etc.))

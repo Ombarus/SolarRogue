@@ -5,28 +5,18 @@
 [ext_resource path="res://data/textures/visualfx/laser_test.png" type="Texture" id=3]
 
 [node name="MissileFX2" type="Node2D"]
-
 position = Vector2( 0, 75.7018 )
+z_index = 1000
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
-active = false
-ttl = 1.0
 speed = 1000.0
-target = Vector2( 0, 0 )
 
-[node name="root" type="Node2D" parent="." index="0"]
-
+[node name="root" type="Node2D" parent="."]
 script = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
-reset = false
 
-[node name="Sprite" type="Sprite" parent="root" index="0"]
-
+[node name="Sprite" type="Sprite" parent="root"]
 rotation = 1.5708
 scale = Vector2( 1, 1e-005 )
 texture = ExtResource( 3 )
 centered = false
 offset = Vector2( -64, -128 )
-_sections_unfolded = [ "Offset", "Transform" ]
-
 

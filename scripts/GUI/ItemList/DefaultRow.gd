@@ -14,12 +14,14 @@ func get_row_data():
 
 
 func get_drag_data(position):
+	if not "dragdrop_id" in _metadata or _metadata.dragdrop_id == "":
+		return null
 	set_drag_preview(self.duplicate())
 	return _metadata
 	
 	
 func can_drop_data(position, data):
-	if not "dragdrop_id" in data:
+	if not "dragdrop_id" in data or data.dragdrop_id == "":
 		return false
 	return data.dragdrop_id == _metadata.dragdrop_id and data["self"].get_parent() != self.get_parent()
 	

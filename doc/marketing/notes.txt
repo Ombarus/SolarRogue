@@ -19,7 +19,7 @@
 	- Steam
 	- Android
 	- iOS ?
-	- something.io
+	- itch.io
 	- https://gdu.io/ ?
 
 - influencer :
@@ -29,6 +29,8 @@
 - More traditional :
 	- Major website ?
 	- Google Ads
+	
+- Ignatus Zuk (Funded Hypr... could they be some sort of publisher ?)
 
 
 99.5% of sharing happen on facebook, twitter, and some linkedin for business ?

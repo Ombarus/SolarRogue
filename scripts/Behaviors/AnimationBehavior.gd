@@ -48,7 +48,7 @@ func OnShotFired_Callback(target, shooter, weapon):
 	n.position = pos
 	var r = get_node("/root/Root/GameTiles")
 	r.call_deferred("add_child", n)
-	n.Start(target.position)
+	n.Start(target.global_position)
 	
 
 #func _process(delta):

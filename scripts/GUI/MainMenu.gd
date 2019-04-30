@@ -5,8 +5,11 @@ extends Node
 # var b = "textvar"
 
 func _ready():
+	#OS.set_window_fullscreen(true)
 	#BehaviorEvents.connect("OnPushGUI", self, "OnPushGUI_Callback")
 	BehaviorEvents.connect("OnPopGUI", self, "OnPopGUI_Callback")
+	
+	get_node("MenuRoot/Continue").Disabled = not File.new().file_exists("user://savegame.save")
 
 func OnPopGUI_Callback():
 	var name_diag = get_node("MenuRoot/PlayerName")
@@ -19,6 +22,16 @@ func _on_newgame_pressed():
 	
 
 func _on_choose_name_callback(name):
+	var save_game = Directory.new()
+	save_game.remove("user://savegame.save")
+	
 	PermSave.set_attrib("settings.default_name", name)
 	get_tree().change_scene("res://scenes/main.tscn")
 	
+
+func _on_Continue_pressed():
+	get_tree().change_scene("res://scenes/main.tscn")
+
+
+func _on_Quit_pressed():
+	get_tree().quit()
