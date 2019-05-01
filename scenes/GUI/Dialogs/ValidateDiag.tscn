@@ -3,10 +3,10 @@
 [ext_resource path="res://scripts/GUI/ValidateDiag.gd" type="Script" id=1]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
-[ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=4]
-[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold.tres" type="DynamicFont" id=5]
-[ext_resource path="res://data/fonts/DejaVuSansMonoItal.tres" type="DynamicFont" id=6]
-[ext_resource path="res://data/fonts/DejaVuSansMonoBold.tres" type="DynamicFont" id=7]
+[ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=4]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold_text.tres" type="DynamicFont" id=5]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItal_text.tres" type="DynamicFont" id=6]
+[ext_resource path="res://data/fonts/DejaVuSansMonoBold_text.tres" type="DynamicFont" id=7]
 
 [node name="ValidateDiag" type="Control"]
 anchor_right = 1.0
@@ -23,10 +23,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -158.0
+margin_left = -192.0
 margin_top = -92.0
-margin_right = 159.0
-margin_bottom = 98.0
+margin_right = 192.0
+margin_bottom = 92.0
 dialog_ok = true
 dialog_cancel = true
 title = "Confirm"
@@ -36,7 +36,7 @@ border_style = "─"
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 15.0
-margin_top = 55.0
+margin_top = 78.0
 margin_right = -19.0
 margin_bottom = -44.0
 custom_fonts/mono_font = ExtResource( 4 )

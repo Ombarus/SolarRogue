@@ -8,6 +8,7 @@ export(bool) var disabled = false setget set_disabled
 export(int) var title_height = 1 setget set_title_height
 export(String) var title = "" setget set_title
 export(String, "═", "─", "━", " ") var border_style = "=" setget set_style
+export(int) var LineHeightOverride = 20 setget set_line_height
 
 signal OnOkPressed()
 signal OnCancelPressed()
@@ -73,6 +74,20 @@ const string_empty = {
 	"header_right": " "
 }
 
+func GetFrameSize():
+	var repeat_width = int(floor((_window_size.x) / _font_size.x))
+	var repeat_height = int(floor((_window_size.y / _font_size.y)))
+	var frame_size := Vector2(repeat_width*_font_size.x, repeat_height*_font_size.y)
+	var res := Vector2(frame_size.x - (_font_size.x / 1.7), frame_size.y - (_font_size.y))
+	return res
+	
+func GetFrameOffset():
+	return get_node("bg").rect_position
+
+func set_line_height(newval):
+	LineHeightOverride = newval
+	self.emit_signal("OnUpdateLayout")
+
 func get_height_line():
 	return int(floor((_window_size.y / _font_size.y)))
 
@@ -124,7 +139,8 @@ func init():
 		
 		var test_string = string_dict.side
 		_font_size = font.get_string_size(test_string)
-		_font_size.y = _font_size.y + (0.0595 * _font_size.y) # arbitrary factor that seems to be off in godot
+		if LineHeightOverride > 0:
+			_font_size.y = LineHeightOverride
 		_window_size = self.get_rect().size
 		if self.is_connected("OnUpdateLayout", self, "update"):
 			self.disconnect("OnUpdateLayout", self, "update")
@@ -162,18 +178,21 @@ func update():
 	var repeat_width = int(floor((_window_size.x) / _font_size.x))
 	var remainder_width = (_window_size.x / _font_size.x) - repeat_width
 	remainder_width = remainder_width * _font_size.x
-	get_node("bg").margin_right = -remainder_width - (_font_size.x / 2.0) # remove half font-size to have the bg be half inside the border
+	#get_node("bg").margin_right = -remainder_width - (_font_size.x / 2.0) # remove half font-size to have the bg be half inside the border
 	get_node("bg/contour").margin_right = remainder_width + (_font_size.x / 2.0)
 	var repeat_height = int(floor((_window_size.y / _font_size.y)))
 	var remainder_height = (_window_size.y / _font_size.y) - repeat_height
 	remainder_height = remainder_height * _font_size.y
-	get_node("bg").margin_bottom = -remainder_height - (_font_size.y / 1.2)
+	#get_node("bg").margin_bottom = -remainder_height# - (_font_size.y / 2.0)
+	var frame_size := Vector2(repeat_width*_font_size.x, repeat_height*_font_size.y)
+	get_node("bg").rect_size.x = frame_size.x - (_font_size.x / 1.7) # remove half font-size to have the bg be half inside the border
+	get_node("bg").rect_size.y = frame_size.y - (_font_size.y)
 	get_node("bg/contour").margin_bottom = remainder_height + (_font_size.y / 1.2)
 	
-	get_node("bg/contour/Control/Ok").margin_top = -remainder_height
-	get_node("bg/contour/Control/Ok").margin_bottom = -remainder_height
-	get_node("bg/contour/Control/Cancel").margin_top = -remainder_height
-	get_node("bg/contour/Control/Cancel").margin_bottom = -remainder_height
+	ok_btn.margin_top = -remainder_height
+	ok_btn.margin_bottom = -remainder_height
+	cancel_btn.margin_top = -remainder_height
+	cancel_btn.margin_bottom = -remainder_height
 	
 #	get_node("bg/contour/Ok").margin_bottom = btn_margin_bottom - remainder_height
 #	get_node("bg/contour/Ok").margin_top = btn_margin_top - remainder_height
@@ -182,10 +201,10 @@ func update():
 #	print("btn_offset = ", remainder_height)
 #	btn_offset = remainder_height
 
-	#if get_parent() != null:
-	#	var format = "%s : _window_size (%d, %d), _font_size (%d, %d), repeat_width (%d, %d)"
-		#format = format % [get_parent().name, _window_size.x, _window_size.y, _font_size.x, _font_size.y, repeat_width, repeat_height]
-		#print(format)
+	if get_parent() != null:
+		var format = "%s : _window_size (%d, %d), _font_size (%d, %d), repeat_width (%d, %d)"
+		format = format % [get_parent().name, _window_size.x, _window_size.y, _font_size.x, _font_size.y, repeat_width, repeat_height]
+		print(format)
 	
 	for i in range(0,repeat_width - 2):
 		top_string += repeat_line

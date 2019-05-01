@@ -17,8 +17,6 @@ _global_script_class_icons={
 
 config/name="SolarRogue"
 run/main_scene="res://scenes/MainMenu.tscn"
-run/disable_stdout=true
-run/disable_stderr=true
 config/icon="res://icon.png"
 
 [autoload]

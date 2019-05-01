@@ -3,10 +3,10 @@
 [ext_resource path="res://scripts/GUI/Tutorial.gd" type="Script" id=1]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
-[ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=4]
-[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold.tres" type="DynamicFont" id=5]
-[ext_resource path="res://data/fonts/DejaVuSansMonoItal.tres" type="DynamicFont" id=6]
-[ext_resource path="res://data/fonts/DejaVuSansMonoBold.tres" type="DynamicFont" id=7]
+[ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=4]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold_text.tres" type="DynamicFont" id=5]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItal_text.tres" type="DynamicFont" id=6]
+[ext_resource path="res://data/fonts/DejaVuSansMonoBold_text.tres" type="DynamicFont" id=7]
 
 [node name="Tutorial" type="Control"]
 anchor_right = 1.0
@@ -19,10 +19,14 @@ anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 2 )
 
 [node name="base" parent="." instance=ExtResource( 3 )]
-margin_left = 187.0
-margin_top = 34.0
-margin_right = -183.0
-margin_bottom = -76.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -596.0
+margin_top = -329.0
+margin_right = 596.0
+margin_bottom = 329.0
 dialog_ok = true
 title = "MAN(1) Solar Rogue General Commands Manual"
 
@@ -30,9 +34,9 @@ title = "MAN(1) Solar Rogue General Commands Manual"
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 15.0
-margin_top = 48.0
+margin_top = 47.0
 margin_right = -26.0
-margin_bottom = -9.0
+margin_bottom = -64.0
 custom_fonts/mono_font = ExtResource( 4 )
 custom_fonts/bold_italics_font = ExtResource( 5 )
 custom_fonts/italics_font = ExtResource( 6 )
@@ -51,10 +55,11 @@ bbcode_text = "[b]BASIC CONTROLS[/b][indent][Numpad 1 to 9] or [Mouse Clicks on 
 [Gear Icon] --------------------------------------- Main Menu for Saving, Quitting and eventually Options
 [/indent]
 [b]ADVANCED CONTROLS[/b]
-[b]Accessible from the \"...\" Button[/b][indent][m] or [Mount Button] ----------- Install Weapon, Shield, Converter or Scanner onto ship's mount points
-[l] or [Look Button] ------------ Get detailed description of item by clicking on them
-[ b] or [Board Button] ---------- Transfer control to another [u]crafted[/u] ship
-[t] or [Transfer Button] -------- Transfer Inventory from one ship to another
+[b]Accessible from the \"...\" Button[/b][indent]
+[m] or [Mount Button] ----- Install Weapon, Shield, Converter or Scanner onto ship's mount points
+[l] or [Look Button] ------ Get detailed description of item by clicking on them
+[ b] or [Board Button] ---- Transfer control to another [u]crafted[/u] ship
+[t] or [Transfer Button] -- Transfer Inventory from one ship to another
 [/indent]
 [b]HUD INFORMATION[/b]
 [b]Top[/b][indent][Hull] -------- Health of the ship. This does not regenerate. If this falls to 0, it's game over
@@ -88,10 +93,11 @@ text = "BASIC CONTROLS	[Numpad 1 to 9] or [Mouse Clicks on empty space] -- Move 
 [Gear Icon] --------------------------------------- Main Menu for Saving, Quitting and eventually Options
 
 ADVANCED CONTROLS
-Accessible from the \"...\" Button	[m] or [Mount Button] ----------- Install Weapon, Shield, Converter or Scanner onto ship's mount points
-[l] or [Look Button] ------------ Get detailed description of item by clicking on them
-[ b] or [Board Button] ---------- Transfer control to another crafted ship
-[t] or [Transfer Button] -------- Transfer Inventory from one ship to another
+Accessible from the \"...\" Button	
+[m] or [Mount Button] ----- Install Weapon, Shield, Converter or Scanner onto ship's mount points
+[l] or [Look Button] ------ Get detailed description of item by clicking on them
+[ b] or [Board Button] ---- Transfer control to another crafted ship
+[t] or [Transfer Button] -- Transfer Inventory from one ship to another
 
 HUD INFORMATION
 Top	[Hull] -------- Health of the ship. This does not regenerate. If this falls to 0, it's game over

@@ -3,10 +3,10 @@
 [ext_resource path="res://scripts/GUI/HowManyDiag.gd" type="Script" id=1]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
-[ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=4]
-[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold.tres" type="DynamicFont" id=5]
-[ext_resource path="res://data/fonts/DejaVuSansMonoItal.tres" type="DynamicFont" id=6]
-[ext_resource path="res://data/fonts/DejaVuSansMonoBold.tres" type="DynamicFont" id=7]
+[ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=4]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold_text.tres" type="DynamicFont" id=5]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItal_text.tres" type="DynamicFont" id=6]
+[ext_resource path="res://data/fonts/DejaVuSansMonoBold_text.tres" type="DynamicFont" id=7]
 
 [node name="HowManyDiag" type="Control"]
 anchor_right = 1.0
@@ -23,33 +23,35 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -158.5
-margin_top = -92.0
-margin_right = 158.5
-margin_bottom = 92.0
+margin_left = -222.5
+margin_top = -111.5
+margin_right = 222.5
+margin_bottom = 111.5
 dialog_ok = true
 dialog_cancel = true
 title = "How Many ?"
 border_style = "─"
 
 [node name="Selector" type="HSlider" parent="base"]
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 26.0
-margin_top = -8.0
-margin_right = -34.0
-margin_bottom = 26.0
-ticks_on_borders = false
+margin_left = -171.5
+margin_top = -17.0
+margin_right = 171.5
+margin_bottom = 17.0
+rect_scale = Vector2( 1, 2 )
 
 [node name="Info" type="RichTextLabel" parent="base"]
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 42.0
-margin_top = -36.0
-margin_right = -45.0
-margin_bottom = -19.0
+margin_left = -158.0
+margin_top = -40.6865
+margin_right = 158.0
+margin_bottom = -23.6865
 custom_fonts/mono_font = ExtResource( 4 )
 custom_fonts/bold_italics_font = ExtResource( 5 )
 custom_fonts/italics_font = ExtResource( 6 )

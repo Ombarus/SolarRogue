@@ -39,11 +39,15 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- Contextual click : if there's an object on a planet... don't attack planet ?
-	- drag & drop to mount from inventory window
+- Could not install on OnePlus 3T Oreo (test with father's phone)
+- Go back and fix & add all missing shortcuts for all buttons in the UI
+	- Issues in main menu (esc doesn't work ? quit show player name popup, [n] doesn't work ?)
+	- [esc] in main HUD should pop setting diag ?
+- include energy used by idle turn in crafting total energy cost
+- should display # of turn when crafting
+- drag & drop to mount from inventory window
 - Find a way to make a good UI for PC AND mobile... how to adjust font size and such ?
 - Allow clicking outside of the map to move (it has weird behavior now with contextual clicks)
-- Refine Need/Using list in converter UI (maybe a title + some outline for the list?)
 - Look button should popup a window with details ?
 	- How to handle multiple item on same tile ? (back and forth button in the dialog ?)
 - BUG: scaling UI issues on android ? 
@@ -126,13 +130,8 @@ TODO :::
 polish :::
 - welcome screen presentation is lacking (bunch of colors, line length mismatch, italic, bold, underline... need better design)
 - Highlight last run in leaderboard in main menu
-- include energy used by idle turn in crafting total energy cost
-- should display # of turn when crafting
 - BUG: Loading level doesn't load the same planet sprite ? (because it's random choice ?)
-- what should the vfx z_index be ?
 - Save node's rotation (position is saved but not rot)
-- Improve goto message and behavior (still move by 1 is this desired ?)
-- Go back and fix & add all missing shortcuts for all buttons in the UI
 - UI is slightly off on android since update to 3.1 (probably because of native resolution vs stretch settings in project ?)
 - Sort energy recycler need list from most energy to less energy
 - Polish Energy "Recyling" informations in crafting UI
@@ -175,6 +174,10 @@ IDEAS:::
 	
 	
 DONE :::
+- Refine Need/Using list in converter UI (maybe a title + some outline for the list?)
+
+
+- Contextual click : if there's an object on a planet... don't attack planet ?
 - Equip jerg converter crash game (CNR)
 - Title doesn't update in weapon HUD
 - Drag & drop in inventory crashes game

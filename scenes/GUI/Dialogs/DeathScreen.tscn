@@ -3,10 +3,10 @@
 [ext_resource path="res://scripts/GUI/DeathScreen.gd" type="Script" id=1]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
-[ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=4]
-[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold.tres" type="DynamicFont" id=5]
-[ext_resource path="res://data/fonts/DejaVuSansMonoItal.tres" type="DynamicFont" id=6]
-[ext_resource path="res://data/fonts/DejaVuSansMonoBold.tres" type="DynamicFont" id=7]
+[ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=4]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold_text.tres" type="DynamicFont" id=5]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItal_text.tres" type="DynamicFont" id=6]
+[ext_resource path="res://data/fonts/DejaVuSansMonoBold_text.tres" type="DynamicFont" id=7]
 
 [node name="DeathScreen" type="Control"]
 anchor_right = 1.0
@@ -23,10 +23,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -628.0
-margin_top = -320.0
-margin_right = 620.0
-margin_bottom = 284.0
+margin_left = -419.5
+margin_top = -251.0
+margin_right = 419.5
+margin_bottom = 251.0
 dialog_ok = true
 title = "You are dead"
 

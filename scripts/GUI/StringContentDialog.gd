@@ -68,7 +68,7 @@ func _ready():
 func update():
 	var content_node = get_node("base/Content")
 	if _base.title.empty():
-		content_node.margin_top = 18
+		content_node.margin_top = 13
 	else:
 		content_node.margin_top = 54
 	content_node.bbcode_text = content

@@ -21,6 +21,9 @@ func Pressed_More_Callback():
 	_more_btn.visible = false
 	_popup.visible = true
 	_popup.emit_signal("OnUpdateLayout")
+	var nodes = get_tree().get_nodes_in_group("more_btn")
+	for n in nodes:
+		n.get_node("base").emit_signal("OnUpdateLayout")
 	_close_btn.visible = true
 	_block.visible = true
 	

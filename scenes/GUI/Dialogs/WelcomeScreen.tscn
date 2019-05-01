@@ -3,10 +3,10 @@
 [ext_resource path="res://scripts/GUI/WelcomeScreen.gd" type="Script" id=1]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
-[ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=4]
-[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold.tres" type="DynamicFont" id=5]
-[ext_resource path="res://data/fonts/DejaVuSansMonoItal.tres" type="DynamicFont" id=6]
-[ext_resource path="res://data/fonts/DejaVuSansMonoBold.tres" type="DynamicFont" id=7]
+[ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=4]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold_text.tres" type="DynamicFont" id=5]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItal_text.tres" type="DynamicFont" id=6]
+[ext_resource path="res://data/fonts/DejaVuSansMonoBold_text.tres" type="DynamicFont" id=7]
 
 [node name="WelcomeScreen" type="Control"]
 anchor_right = 1.0
@@ -23,10 +23,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -395.5
-margin_top = -195.0
-margin_right = 395.5
-margin_bottom = 195.0
+margin_left = -390.5
+margin_top = -234.0
+margin_right = 390.5
+margin_bottom = 234.0
 dialog_ok = true
 title = "Welcome Ombarus..."
 
@@ -45,25 +45,27 @@ custom_fonts/normal_font = ExtResource( 4 )
 bbcode_enabled = true
 bbcode_text = "Something went [color=red]wrong[/color].
 
-While you were exploring uncharted space the [color=yellow]wormhole[/color] 
-sent you so far you've lost all bearings. 
+While you were exploring uncharted space the [color=yellow]wormhole[/color] sent you so far you've lost all bearings. 
+
 What you do know is that your warp engines aren't powerful enough to open it again.
+
 Use what you have and try to find a way back home.
 [indent]
 Try not to [u]die[/u] or run out of [u]energy[/u]. 
-[i]Weapons can Harvest planets, convert their resources to energy.[/i]
+Weapons can harvest planets, convert their resources to energy.
 Look for the [color=red]Ultimate Artifact[/color] : [u]The Converter of Yendor[/u], 
 [/indent]
 Maybe it's powerful enough to bring you home...."
 text = "Something went wrong.
 
-While you were exploring uncharted space the wormhole 
-sent you so far you've lost all bearings. 
+While you were exploring uncharted space the wormhole sent you so far you've lost all bearings. 
+
 What you do know is that your warp engines aren't powerful enough to open it again.
+
 Use what you have and try to find a way back home.
 	
 Try not to die or run out of energy. 
-Weapons can Harvest planets, convert their resources to energy.
+Weapons can harvest planets, convert their resources to energy.
 Look for the Ultimate Artifact : The Converter of Yendor, 
 
 Maybe it's powerful enough to bring you home...."

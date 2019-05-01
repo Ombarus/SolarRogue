@@ -3,14 +3,14 @@
 [ext_resource path="res://scripts/GUI/PlayerName.gd" type="Script" id=1]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
-[ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=4]
-[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold.tres" type="DynamicFont" id=5]
-[ext_resource path="res://data/fonts/DejaVuSansMonoItal.tres" type="DynamicFont" id=6]
-[ext_resource path="res://data/fonts/DejaVuSansMonoBold.tres" type="DynamicFont" id=7]
+[ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=4]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold_text.tres" type="DynamicFont" id=5]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItal_text.tres" type="DynamicFont" id=6]
+[ext_resource path="res://data/fonts/DejaVuSansMonoBold_text.tres" type="DynamicFont" id=7]
 [ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=8]
 
 [sub_resource type="AtlasTexture" id=1]
-flags = 4
+flags = 2
 atlas = ExtResource( 8 )
 region = Rect2( 1728, 0, 64, 64 )
 
@@ -51,10 +51,10 @@ margin_bottom = 34.6036
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = 42.0
-margin_top = -36.0
-margin_right = -45.0
-margin_bottom = -19.0
+margin_left = 38.9265
+margin_top = -45.2207
+margin_right = -48.0735
+margin_bottom = 3.77933
 custom_fonts/mono_font = ExtResource( 4 )
 custom_fonts/bold_italics_font = ExtResource( 5 )
 custom_fonts/italics_font = ExtResource( 6 )

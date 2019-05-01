@@ -1,13 +1,51 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/GUI/ItemList/DefaultSelectableRow.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=1]
 
-[sub_resource type="ButtonGroup" id=1]
+[node name="Node2D" type="Node2D"]
 
-[node name="test_list" type="Control"]
+[node name="Panel" type="Panel" parent="."]
+margin_right = 994.0
+margin_bottom = 704.0
 
-[node name="MyItemList" parent="." instance=ExtResource( 1 )]
-Row = ExtResource( 2 )
-SelectGroup = SubResource( 1 )
+[node name="Button" parent="." instance=ExtResource( 1 )]
+margin_left = 105.0
+margin_top = 81.0
+margin_right = 411.0
+margin_bottom = 263.0
 
+[node name="bg" parent="Button/base" index="1"]
+margin_right = -3.70587
+margin_bottom = -20.0
+
+[node name="contour" parent="Button/base/bg" index="0"]
+margin_right = 6.0
+margin_bottom = 18.6667
+text = "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃                                    ┃
+┃                                    ┃
+┃                                    ┃
+┃                                    ┃
+┃                                    ┃
+┃                                    ┃
+┃                                    ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"
+
+[node name="Ok" parent="Button/base/bg/contour/Control" index="0"]
+margin_top = -2.0
+margin_bottom = -2.0
+
+[node name="Cancel" parent="Button/base/bg/contour/Control" index="1"]
+margin_top = -2.0
+margin_bottom = -2.0
+
+[node name="btn" parent="Button" index="1"]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 302.294
+margin_bottom = 162.0
+
+
+[editable path="Button"]
+
+[editable path="Button/base"]

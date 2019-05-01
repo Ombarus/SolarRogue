@@ -4,10 +4,9 @@ var _callback_obj = null
 var _callback_method = ""
 var _obj = null
 
-onready var _craft_list = get_node("base/HBoxContainer/CraftingList")
-onready var _requirement_list = get_node("base/HBoxContainer/VBoxContainer/Requirements")
-onready var _need_list = get_node("base/HBoxContainer/VBoxContainer/HBoxContainer/Need")
-onready var _using_list = get_node("base/HBoxContainer/VBoxContainer/HBoxContainer/Using")
+onready var _craft_list = get_node("base/HBoxContainer/Container/CraftingList")
+onready var _need_list = get_node("base/HBoxContainer/VBoxContainer/HBoxContainer/NeedContainer/Need")
+onready var _using_list = get_node("base/HBoxContainer/VBoxContainer/HBoxContainer/UsingContainer/Using")
 onready var _craft_result_info = get_node("base/HBoxContainer/VBoxContainer/CraftResultInfo")
 onready var _craft_button = get_node("base/HBoxContainer/VBoxContainer/Craft")
 
@@ -110,30 +109,7 @@ func _on_CraftingList_item_selected(index):
 	for r in _converter_data.converter.recipes:
 		if r.name == _current_crafting_selected:
 			recipe_data = r
-			break
-		
-	_requirement_list.clear()
-	_requirement_list.add_item("Requirements...")
-	for r in recipe_data.requirements:
-		if "type" in r:
-			_requirement_list.add_item("Type: " + r.type + ", amount : " + str(r.amount))
-		if "src" in r:
-			var d = Globals.LevelLoaderRef.LoadJSON(r.src)
-			_requirement_list.add_item("Item: " + d.name_id + ", amount : " + str(r.amount))
-	_requirement_list.add_item("-------------------------")
-	_requirement_list.add_item("Produces :")
-	if recipe_data.produce == "energy":
-		_requirement_list.add_item(str(recipe_data.amount) + " Energy")
-	else:
-		var produce_data = Globals.LevelLoaderRef.LoadJSON(recipe_data.produce)
-		var line_str = ""
-		if recipe_data.amount == 1:
-			line_str += "a "
-		else:
-			line_str += str(recipe_data.amount) + " "
-		line_str += produce_data.name_id
-		_requirement_list.add_item(line_str)
-		
+			break		
 		
 	var cargo = _obj.get_attrib("cargo.content")
 	var list_data = []
