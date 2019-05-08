@@ -2,6 +2,10 @@
 	"name_id":"Diluted Cristal",
 	"type":"food",
 	"sprite":"cristal",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[1152,128,128,128]
+	},
 	"equipment": {
 		"slot":"cargo",
 		"volume":5.0,

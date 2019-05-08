@@ -39,6 +39,11 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- Achievement
+- Background for bottom_title ship name in status bar
+- No Wait button for mobile (with contextual click it can be tricky to click on yourself)
+- ghost of planets are always the same instead of being themselves ? (because the sprite is randomized ?)
+- transfer window cargo capacity start at -140 ?
 - Could not install on OnePlus 3T Oreo (test with father's phone)
 - Go back and fix & add all missing shortcuts for all buttons in the UI
 	- Issues in main menu (esc doesn't work ? quit show player name popup, [n] doesn't work ?)
@@ -128,6 +133,8 @@ TODO :::
 	
 	
 polish :::
+- Make the planets spin on themselves
+-- (suggestion) from Destragon on youtube : Mousing over things should automatically display the description in the text box at the bottom without requiring you to press l for look.
 - welcome screen presentation is lacking (bunch of colors, line length mismatch, italic, bold, underline... need better design)
 - Highlight last run in leaderboard in main menu
 - BUG: Loading level doesn't load the same planet sprite ? (because it's random choice ?)

@@ -193,7 +193,8 @@ func Pressed_Inventory_Callback():
 	if lock_input:
 		return
 		
-	BehaviorEvents.emit_signal("OnPushGUI", "Inventory", {"object":playerNode})
+	#BehaviorEvents.emit_signal("OnPushGUI", "Inventory", {"object":playerNode})
+	BehaviorEvents.emit_signal("OnPushGUI", "InventoryV2", {"object":playerNode})
 
 func Pressed_FTL_Callback():
 	var wormholes = Globals.LevelLoaderRef.objByType["wormhole"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/GUI/TransferInventoryLayout.gd" type="Script" id=1]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
@@ -10,6 +10,20 @@
 [ext_resource path="res://scenes/GUI/MountListContainer.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/GUI/CargoListContainer.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=10]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 7.0
+content_margin_top = 3.0
+bg_color = Color( 0.8, 0.8, 0.8, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.227451, 0.227451, 0.227451, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.227451, 0.227451, 0.227451, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.227451, 0.227451, 0.227451, 1 )
 
 [node name="TransferInventory" type="Control"]
 anchor_right = 1.0
@@ -36,13 +50,13 @@ anchor_bottom = 1.0
 margin_left = 10.0
 margin_top = 46.0
 margin_right = -16.0
-margin_bottom = -30.0
+margin_bottom = -81.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="LShip" type="VBoxContainer" parent="base/HBoxContainer"]
 margin_right = 436.0
-margin_bottom = 534.0
+margin_bottom = 483.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -51,11 +65,13 @@ margin_right = 436.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
+custom_styles/normal = SubResource( 1 )
 custom_fonts/mono_font = ExtResource( 4 )
 custom_fonts/bold_italics_font = ExtResource( 5 )
 custom_fonts/italics_font = ExtResource( 6 )
 custom_fonts/bold_font = ExtResource( 7 )
 custom_fonts/normal_font = ExtResource( 4 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_enabled = true
 bbcode_text = "[b]Mounts : [/b]"
 text = "Mounts : "
@@ -66,16 +82,17 @@ anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 34.0
 margin_right = 436.0
-margin_bottom = 265.0
+margin_bottom = 239.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CargoLabel" type="RichTextLabel" parent="base/HBoxContainer/LShip"]
-margin_top = 269.0
+margin_top = 243.0
 margin_right = 436.0
-margin_bottom = 299.0
+margin_bottom = 273.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
+custom_styles/normal = SubResource( 2 )
 custom_fonts/mono_font = ExtResource( 4 )
 custom_fonts/bold_italics_font = ExtResource( 5 )
 custom_fonts/italics_font = ExtResource( 6 )
@@ -89,16 +106,16 @@ text = "Cargo : "
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
-margin_top = 303.0
+margin_top = 277.0
 margin_right = 436.0
-margin_bottom = 534.0
+margin_bottom = 483.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VSeparator" type="VSeparator" parent="base/HBoxContainer"]
 margin_left = 440.0
 margin_right = 444.0
-margin_bottom = 534.0
+margin_bottom = 483.0
 
 [node name="TakeAll" parent="base/HBoxContainer/VSeparator" instance=ExtResource( 10 )]
 anchor_left = 0.5
@@ -125,7 +142,7 @@ Text = ">>"
 [node name="RShip" type="VBoxContainer" parent="base/HBoxContainer"]
 margin_left = 448.0
 margin_right = 884.0
-margin_bottom = 534.0
+margin_bottom = 483.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -134,6 +151,7 @@ margin_right = 436.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
+custom_styles/normal = SubResource( 3 )
 custom_fonts/mono_font = ExtResource( 4 )
 custom_fonts/bold_italics_font = ExtResource( 5 )
 custom_fonts/italics_font = ExtResource( 6 )
@@ -149,16 +167,17 @@ anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 34.0
 margin_right = 436.0
-margin_bottom = 265.0
+margin_bottom = 239.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CargoLabel" type="RichTextLabel" parent="base/HBoxContainer/RShip"]
-margin_top = 269.0
+margin_top = 243.0
 margin_right = 436.0
-margin_bottom = 299.0
+margin_bottom = 273.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
+custom_styles/normal = SubResource( 4 )
 custom_fonts/mono_font = ExtResource( 4 )
 custom_fonts/bold_italics_font = ExtResource( 5 )
 custom_fonts/italics_font = ExtResource( 6 )
@@ -172,9 +191,9 @@ text = "Cargo : "
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
-margin_top = 303.0
+margin_top = 277.0
 margin_right = 436.0
-margin_bottom = 534.0
+margin_bottom = 483.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -182,9 +201,9 @@ size_flags_vertical = 3
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = 2.0
-margin_top = 16.0
+margin_top = 13.0
 margin_right = 279.0
-margin_bottom = 35.0
+margin_bottom = 38.0
 custom_fonts/mono_font = ExtResource( 4 )
 custom_fonts/bold_italics_font = ExtResource( 5 )
 custom_fonts/italics_font = ExtResource( 6 )

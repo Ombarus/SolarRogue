@@ -23,13 +23,14 @@ size_flags_horizontal = 3
 
 [node name="Row" type="HBoxContainer" parent="List"]
 visible = false
-margin_right = 969.0
-margin_bottom = 22.0
+margin_right = 1225.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 
 [node name="Choice" type="Button" parent="List/Row"]
-margin_right = 969.0
-margin_bottom = 22.0
+margin_right = 1225.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 0, 22 )
 size_flags_horizontal = 3
 custom_styles/normal = ExtResource( 2 )
@@ -38,9 +39,6 @@ script = ExtResource( 3 )
 [node name="Name" type="RichTextLabel" parent="List/Row/Choice"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 28.0
-margin_top = 6.0
-margin_bottom = -4.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

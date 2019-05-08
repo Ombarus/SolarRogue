@@ -21,7 +21,9 @@ Cruiser, a fast, independent warship. Traditionally, cruisers were the smallest 
     Unprotected cruiser
 Destroyer, a fast and highly maneuverable warship, traditionally incapable of independent action. Originally developed to counter the threat of torpedo boats, they are now the largest independent warship generally seen on the ocean.
 Freighters
-Frigate
+Frigate :
+A warship with a mixed armament, generally lighter than a destroyer and of a kind originally introduced for convoy escort work.
+
 Gunboat
 Torpedo boat, a small, fast surface vessel designed for launching torpedoes
 

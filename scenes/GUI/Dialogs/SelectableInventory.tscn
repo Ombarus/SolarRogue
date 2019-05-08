@@ -152,10 +152,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = 6.61987
-margin_top = -136.832
-margin_right = 145.62
-margin_bottom = -36.8322
+margin_left = 7.0
+margin_top = -137.0
+margin_right = 146.0
+margin_bottom = -28.0
 Text = "[U]se"
 Action = SubResource( 4 )
 

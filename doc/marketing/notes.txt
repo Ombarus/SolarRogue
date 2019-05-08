@@ -1,6 +1,9 @@
 - Teaser Trailer
+	- Should be 1 min
 - reddit
 	- create a /r/solarrogue
+	- https://www.reddit.com/r/shamelessplug/top/?t=all
+	- https://www.reddit.com/r/sideproject
 - Twitter :
 	- #Screenshotsaturday
 	- #Gamedev, #indiedev, #indiegame ?
@@ -21,9 +24,12 @@
 	- iOS ?
 	- itch.io
 	- https://gdu.io/ ?
+	- humble store
 
 - influencer :
 	- https://www.facebook.com/spacegamejunkie - https://www.youtube.com/user/SpaceGameJunkie/videos
+	- https://www.youtube.com/watch?v=pZIzMdsNdFM (ask gamedev featured game of the week ?)
+	- https://www.youtube.com/watch?v=aKthW1TBpWU
 
 
 - More traditional :
@@ -31,6 +37,9 @@
 	- Google Ads
 	
 - Ignatus Zuk (Funded Hypr... could they be some sort of publisher ?)
+
+- https://github.com/mmccaff/PlacesToPostYourStartup
+- https://buildfire.com/free-app-promotion/
 
 
 99.5% of sharing happen on facebook, twitter, and some linkedin for business ?

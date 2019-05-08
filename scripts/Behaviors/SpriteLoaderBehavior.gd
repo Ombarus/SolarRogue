@@ -22,6 +22,8 @@ func OnObjectLoaded_Callback(obj):
 		var worm_depth : int = obj.get_attrib("depth")
 		if attrib.type == "wormhole" and worm_depth <= cur_depth:
 			sprite_name = sprite_name + "_up"
+		#if attrib.type == "wormhole":
+		#	sprite_name = "wormhole_old"
 		var scene = load("res://scenes/tileset_source/" + sprite_name + ".tscn")
 		node = scene.instance()
 	if attrib.has("sprite_choice"):

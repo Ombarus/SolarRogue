@@ -1,5 +1,7 @@
 extends Control
 
+class_name MyItemList
+
 # A scene that will be duplicated to add rows to the list
 export(PackedScene) var Row
 export(String) var DragDropID = ""
@@ -41,7 +43,7 @@ func get_content():
 
 func _ready():
 	if _debug == true:
-		set_content([{"text":"hello"}, {"text":"world"}, {"text":"bleh"}])
+		set_content([{"text":"hello"}, {"text":"world long text"}, {"text":"bleh"}])
 
 ########### DRAG & DROP ###############
 

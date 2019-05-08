@@ -8,9 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Attributes",
+"language": "GDScript",
+"path": "res://scripts/Attributes.gd"
+}, {
+"base": "Control",
+"class": "MyItemList",
+"language": "GDScript",
+"path": "res://scripts/GUI/ItemList/MyItemList.gd"
+} ]
 _global_script_class_icons={
-
+"Attributes": "",
+"MyItemList": ""
 }
 
 [application]
@@ -31,10 +42,9 @@ Preloader="*res://scripts/autoload/Preloader.gd"
 
 window/size/width=1280
 window/size/height=720
-window/size/resizable=false
 window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
-window/stretch/aspect="keep_width"
+window/stretch/aspect="expand"
 
 [input]
 

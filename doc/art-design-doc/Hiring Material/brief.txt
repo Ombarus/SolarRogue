@@ -11,7 +11,12 @@ Hi, I'm Ombarus a Solo Game Developer and I'm Looking for a pixel artist for a 2
 
 This is the current sprite sheet with temporary art. I Need someone to unify the design and establish a style.
 
-[spritesheet img]
+https://www.ombarus.com/img/space-sprite-cropped.png
+https://www.ombarus.com/img/In-Game09.png
+https://www.ombarus.com/img/In-Game02-inv-menu.png
+https://www.ombarus.com/img/item_example.png
+https://www.ombarus.com/img/planet.png
+https://www.ombarus.com/img/ships.png
 
 Some of the styles that caught my eyes, but I'm open to other style too.
 

@@ -1,17 +1,10 @@
-Hi, I'm a Solo Game Developer and I'm Looking for a pixel artist for a 2D top-down space exploration roguelike. Right now the game tiles are 128x128 but the sprites could be anywhere between 64x64 to 384x384 (for the sun).
+Hi, I'm a Solo Game Developer and I'm Looking for a pixel artist for a 2D top-down space exploration roguelike. Right now the game tiles are 128x128 but the sprites could be anywhere between 64x64 to 384x384 (the sun for example takes 3x3 tiles).
 
 I need 10 ships split in 3 different races. Between 4 and 8 planets and a bunch of items that the player can pick up.
 
 I have a let's play video to show the game's curent state : https://youtu.be/wiIFraCAixI
 
 I like this style https://www.deviantart.com/pixel-pax/art/Spaceships-60-98272278
-Or these kind of items : http://pixeljoint.com/pixelart/61876.htm
+and these kind of items : http://pixeljoint.com/pixelart/61876.htm
 
-I'm open to other design. My budget is around 500$. If you're Canadian I can do bank transfer or Paypal.
-
-
-
-
-
-
-----------
+I'm really looking for someone who could give a unique look and feel to the game. My budget is around 500$. If you're Canadian I can do bank transfer or Paypal.

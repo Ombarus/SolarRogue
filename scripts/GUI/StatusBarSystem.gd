@@ -58,7 +58,7 @@ func _get_max_shield(obj):
 		
 #The Maveric Hull : [color=lime]==========[/color] Energy : [color=yellow]25000[/color] Shield : Up	
 func UpdateStatusBar(player_obj):
-	var ship_name = "The Maveric" #TODO: make dynamic when we have a title menu
+	var ship_name = "The Maveric"
 	var p_name : String = player_obj.get_attrib("player_name")
 	if p_name != null:
 		ship_name = "The " + p_name
@@ -76,7 +76,8 @@ func UpdateStatusBar(player_obj):
 	if cur_energy < danger_energy_level:
 		energy_color = "red"
 		
-	var status_str = ship_name + " Hull : [color=" + hull_color + "]"
+	var bottom_title_str = ship_name
+	var status_str = " Hull : [color=" + hull_color + "]"
 	#"gray"
 	var health_per = cur_hull / max_hull
 	var changed_color = false
@@ -114,4 +115,5 @@ func UpdateStatusBar(player_obj):
 		status_str += "[/color]"
 	
 	_window.content = status_str
+	_window.bottom_title = bottom_title_str
 	

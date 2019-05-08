@@ -6,6 +6,7 @@ export(bool) var editor_trigger_signal = true setget set_signal
 export(bool) var dialog_ok = false setget set_dialog_ok
 export(bool) var dialog_cancel = false setget set_dialog_cancel
 export(String) var title = "" setget set_title
+export(String) var bottom_title = "" setget set_bottom_title
 export(String) var content = "" setget set_content
 export(String, "═", "─", "━", " ") var border_style = "=" setget set_style
 
@@ -32,6 +33,11 @@ func set_dialog_cancel(val):
 	if _base:
 		_base.dialog_cancel = dialog_cancel
 		
+func set_bottom_title(val):
+	bottom_title = val
+	if _base:
+		_base.bottom_title = bottom_title
+		
 func set_title(val):
 	title = val
 	if _base:
@@ -57,6 +63,7 @@ func init():
 		_base.disconnect("OnUpdateLayout", self, "update")
 	_base.connect("OnUpdateLayout", self, "update")
 	_base.title = title
+	_base.bottom_title = bottom_title
 	_base.dialog_ok = dialog_ok
 	_base.dialog_cancel = dialog_cancel
 	_base.border_style = border_style

@@ -5,6 +5,7 @@ export(bool) var editor_trigger_signal = true setget set_signal
 export(bool) var dialog_ok = false setget set_dialog_ok
 export(bool) var dialog_cancel = false setget set_dialog_cancel
 export(bool) var disabled = false setget set_disabled
+export(String) var bottom_title = "" setget set_reverse_title
 export(int) var title_height = 1 setget set_title_height
 export(String) var title = "" setget set_title
 export(String, "═", "─", "━", " ") var border_style = "=" setget set_style
@@ -121,6 +122,10 @@ func set_disabled(newval):
 	ok_btn.disabled = newval
 	cancel_btn.disabled = newval
 	disabled = newval
+	
+func set_reverse_title(newval):
+	bottom_title = newval
+	self.emit_signal("OnUpdateLayout")
 
 func _ready():
 	init()
@@ -175,6 +180,14 @@ func update():
 	var repeat_line = string_dict.repeat_line
 	var repeat_header = string_dict.repeat_header
 	
+	var title_width := 0
+	var title_space_needed := 0
+	if bottom_title != null and bottom_title.length() > 0:
+		var f = get_node("bg/contour/Title2").get_font("font")
+		title_width = f.get_string_size(bottom_title).x
+		title_space_needed = int(ceil(title_width / _font_size.x))
+		#title_width = title.length() * _font_size.x
+	
 	var repeat_width = int(floor((_window_size.x) / _font_size.x))
 	var remainder_width = (_window_size.x / _font_size.x) - repeat_width
 	remainder_width = remainder_width * _font_size.x
@@ -201,10 +214,10 @@ func update():
 #	print("btn_offset = ", remainder_height)
 #	btn_offset = remainder_height
 
-	if get_parent() != null:
-		var format = "%s : _window_size (%d, %d), _font_size (%d, %d), repeat_width (%d, %d)"
-		format = format % [get_parent().name, _window_size.x, _window_size.y, _font_size.x, _font_size.y, repeat_width, repeat_height]
-		print(format)
+	#if get_parent() != null:
+	#	var format = "%s : _window_size (%d, %d), _font_size (%d, %d), repeat_width (%d, %d)"
+	#	format = format % [get_parent().name, _window_size.x, _window_size.y, _font_size.x, _font_size.y, repeat_width, repeat_height]
+	#	print(format)
 	
 	for i in range(0,repeat_width - 2):
 		top_string += repeat_line
@@ -225,8 +238,30 @@ func update():
 		
 	top_string += string_dict.top_right
 	side_string += string_dict.side
-	bottom_string += string_dict.bottom_right
+	bottom_string += string_dict.bottom_right 
 	header_string += string_dict.header_right
+	
+	########## MAKING THE BOTTOM TITLE ##################
+	var inverse_title_string := ""
+	if bottom_title != null and bottom_title.length() > 0:
+		inverse_title_string += string_dict.header_left
+		for i in range(title_space_needed):
+			inverse_title_string += string_dict.repeat_header
+		inverse_title_string += string_dict.top_left
+		for i in range(repeat_width - 3 - title_space_needed):
+			inverse_title_string += string_dict.repeat_line
+		inverse_title_string += string_dict.bottom_right + "\n"
+		inverse_title_string += string_dict.side
+		for i in range(title_space_needed):
+			inverse_title_string += string_dict.repeat_empty
+		inverse_title_string += string_dict.side + "\n"
+		inverse_title_string += string_dict.bottom_left
+		for i in range(title_space_needed):
+			inverse_title_string += string_dict.repeat_line
+		inverse_title_string += string_dict.bottom_right
+			
+	
+	#####################################################
 	
 	var header_height = 2
 	var final_window_string = top_string + "\n"
@@ -239,10 +274,15 @@ func update():
 	for i in range(0, repeat_height-header_height):
 		final_window_string += side_string + "\n"
 	
-	final_window_string += bottom_string
+	if bottom_title != null and bottom_title.length() > 0:
+		final_window_string += inverse_title_string
+	else:
+		final_window_string += bottom_string
 	
 	get_node("bg/contour").text = final_window_string
 	get_node("bg/contour/Title").text = title
+	get_node("bg/contour/Title2").text = bottom_title
+
 
 func on_size_changed():
 	_window_size = self.get_rect().size
@@ -253,17 +293,11 @@ func set_signal(newval):
 	editor_trigger_signal = false
 	if Engine.is_editor_hint():
 		init()
-	
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
-
 
 
 func _on_Ok_pressed():
 	emit_signal("OnOkPressed")
-
-
+	
+	
 func _on_Cancel_pressed():
 	emit_signal("OnCancelPressed")

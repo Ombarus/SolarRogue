@@ -4,12 +4,12 @@
 [ext_resource path="res://scenes/GUI/ItemList/DefaultRow.tscn" type="PackedScene" id=2]
 
 [node name="MyItemList" type="ScrollContainer"]
-margin_right = 379.0
-margin_bottom = 225.0
+margin_right = 141.0
+margin_bottom = 303.0
 script = ExtResource( 1 )
 Row = ExtResource( 2 )
 
 [node name="Rows" type="VBoxContainer" parent="."]
-margin_right = 379.0
+margin_right = 141.0
 size_flags_horizontal = 3
 

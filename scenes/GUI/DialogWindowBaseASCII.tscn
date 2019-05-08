@@ -20,8 +20,8 @@ shortcut = SubResource( 3 )
 [node name="base" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -725.0
-margin_bottom = -461.0
+margin_right = -575.0
+margin_bottom = -509.0
 script = ExtResource( 1 )
 editor_trigger_signal = false
 
@@ -36,8 +36,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 3.0
 margin_top = 2.0
-margin_right = -4.70587
-margin_bottom = -37.0
+margin_right = -2.70587
+margin_bottom = -29.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = ExtResource( 3 )
@@ -47,21 +47,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -3.0
 margin_top = -8.0
-margin_right = 7.0
-margin_bottom = 35.6667
+margin_right = 5.0
+margin_bottom = 27.6667
 custom_fonts/font = ExtResource( 2 )
-text = "╔═══════════════════════════════════════════════════════════════════╗
-║                                                                   ║
-║                                                                   ║
-║                                                                   ║
-║                                                                   ║
-║                                                                   ║
-║                                                                   ║
-║                                                                   ║
-║                                                                   ║
-║                                                                   ║
-║                                                                   ║
-╚═══════════════════════════════════════════════════════════════════╝"
+text = "╔══════════════════════════════════════════════════════════════════════════════════════╗
+║                                                                                      ║
+║                                                                                      ║
+║                                                                                      ║
+║                                                                                      ║
+║                                                                                      ║
+║                                                                                      ║
+║                                                                                      ║
+║                                                                                      ║
+╚══════════════════════════════════════════════════════════════════════════════════════╝"
 
 [node name="Title" type="Label" parent="bg/contour"]
 anchor_right = 1.0
@@ -69,6 +67,17 @@ margin_left = 16.0
 margin_top = 20.0
 margin_right = -20.0
 margin_bottom = 39.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
+
+[node name="Title2" type="Label" parent="bg/contour"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -37.9999
+margin_right = -20.2941
+margin_bottom = -15.9999
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 4 )
 
@@ -83,9 +92,9 @@ visible = false
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 35.0
-margin_top = -19.0
+margin_top = -11.0
 margin_right = 121.0
-margin_bottom = -19.0
+margin_bottom = -11.0
 rect_min_size = Vector2( 121, 80 )
 custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 4 )
@@ -99,9 +108,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -164.0
-margin_top = -19.0
+margin_top = -11.0
 margin_right = -43.0
-margin_bottom = -19.0
+margin_bottom = -11.0
 rect_min_size = Vector2( 121, 80 )
 custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 4 )

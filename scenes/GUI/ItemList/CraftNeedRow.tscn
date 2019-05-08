@@ -9,7 +9,7 @@
 
 [node name="DefaultRow" type="Button"]
 anchor_right = 1.0
-rect_min_size = Vector2( 0, 40 )
+rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/disabled = ExtResource( 1 )
@@ -17,15 +17,12 @@ custom_styles/normal = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.5
-margin_top = -10.0
-margin_bottom = 10.0
+anchor_bottom = 1.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer"]
 margin_right = 1280.0
-margin_bottom = 20.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 0, 20 )
 mouse_filter = 2
 size_flags_horizontal = 3
