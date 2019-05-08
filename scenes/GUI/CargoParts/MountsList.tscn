@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=1]
 [ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://data/fonts/DejaVuSansMonoBold_text.tres" type="DynamicFont" id=5]
 [ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=6]
 [ext_resource path="res://scenes/GUI/ItemList/InventoryRowV2.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 7.0
@@ -535,4 +536,25 @@ size_flags_horizontal = 3
 custom_fonts/normal_font = ExtResource( 2 )
 bbcode_text = "5x Hydrogen"
 text = "5x Hydrogen"
+
+[node name="Button2" parent="." instance=ExtResource( 8 )]
+margin_left = 468.21
+margin_top = 225.124
+margin_right = 694.21
+margin_bottom = 369.124
+Text = "> Remove"
+
+[node name="Button3" parent="." instance=ExtResource( 8 )]
+margin_left = 467.013
+margin_top = 367.623
+margin_right = 693.013
+margin_bottom = 511.623
+Text = "Drop"
+
+[node name="Button4" parent="." instance=ExtResource( 8 )]
+margin_left = 469.408
+margin_top = 511.319
+margin_right = 695.408
+margin_bottom = 655.319
+Text = "Use"
 

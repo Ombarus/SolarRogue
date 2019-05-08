@@ -15,12 +15,18 @@ _global_script_classes=[ {
 "path": "res://scripts/Attributes.gd"
 }, {
 "base": "Control",
+"class": "ButtonBase",
+"language": "GDScript",
+"path": "res://scripts/GUI/ButtonBase.gd"
+}, {
+"base": "Control",
 "class": "MyItemList",
 "language": "GDScript",
 "path": "res://scripts/GUI/ItemList/MyItemList.gd"
 } ]
 _global_script_class_icons={
 "Attributes": "",
+"ButtonBase": "",
 "MyItemList": ""
 }
 

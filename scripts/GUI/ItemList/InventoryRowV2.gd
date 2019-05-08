@@ -1,4 +1,4 @@
-extends "res://scripts/GUI/ItemList/DefaultSelectableRow.gd"
+extends "res://scripts/GUI/ItemList/DefaultRow.gd"
 
 export(Theme) var normal_theme = preload("res://data/theme/default_ui_text.tres")
 export(Theme) var header_theme = preload("res://data/theme/header_ui_text.tres")
@@ -9,8 +9,13 @@ export(Theme) var header_theme = preload("res://data/theme/header_ui_text.tres")
 
 # data = {"icon": { "texture":<path>, "region":[x,y,w,h] }, "name_id":<name>, "equipped":false, "header":false}
 func set_row_data(data):
+	_metadata = data
+	_metadata["self"] = self
+	if data.group != null:
+		get_node("BtnWrap/Toggle").group = data.group
+		
 	get_node("Equipped").visible = data.equipped
-	get_node("HBoxContainer/Wrap/Name").bbcode_text = data.name_id
+	get_node("BtnWrap/HBoxContainer/Wrap/Name").bbcode_text = data.name_id
 	
 	var icon_path : String = Globals.get_data(data, "icon.texture")
 	if icon_path != null and icon_path != "":
@@ -20,16 +25,22 @@ func set_row_data(data):
 		t.atlas = load(icon_path)
 		if icon_region != null:
 			t.region = Rect2(icon_region[0], icon_region[1], icon_region[2], icon_region[3])
-		get_node("HBoxContainer/Icon").texture = t
+		get_node("BtnWrap/HBoxContainer/Icon").texture = t
 	else:
-		get_node("HBoxContainer/Icon").texture = null
+		get_node("BtnWrap/HBoxContainer/Icon").texture = null
 		
 	if "header" in data and data.header == true:
-		#TODO: If I ever have a button here it should be disabled and invisible for header rows
 		self.theme = header_theme
-		get_node("HBoxContainer/Icon").visible = false
+		get_node("BtnWrap/Toggle").visible = false
+		get_node("BtnWrap/HBoxContainer/Icon").visible = false
 		get_node("Equipped").visible = false
 	else:
 		self.theme = normal_theme
-		get_node("HBoxContainer/Icon").visible = true
+		get_node("BtnWrap/HBoxContainer/Icon").visible = true
 
+func get_row_data():
+	_metadata["selected"] = get_node("BtnWrap/Toggle").pressed
+	return _metadata
+
+func _on_Toggle_toggled(button_pressed):
+	_metadata.origin.bubble_selection_changed()

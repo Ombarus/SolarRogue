@@ -13,6 +13,7 @@ var Content setget set_content, get_content
 
 
 signal OnDragDropCompleted(origin_data, destination_data)
+signal OnSelectionChanged()
 
 var _debug = false
 onready var _rows_node = get_node("Rows")
@@ -44,6 +45,10 @@ func get_content():
 func _ready():
 	if _debug == true:
 		set_content([{"text":"hello"}, {"text":"world long text"}, {"text":"bleh"}])
+
+########### If row has Selectable Content ###############
+func bubble_selection_changed():
+	emit_signal("OnSelectionChanged")
 
 ########### DRAG & DROP ###############
 

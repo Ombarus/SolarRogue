@@ -39,7 +39,8 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- Achievement
+- Still can get shot before autopilot stop... why ?
+- Achievements
 - Background for bottom_title ship name in status bar
 - No Wait button for mobile (with contextual click it can be tricky to click on yourself)
 - ghost of planets are always the same instead of being themselves ? (because the sprite is randomized ?)

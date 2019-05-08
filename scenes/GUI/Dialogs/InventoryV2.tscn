@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/GUI/InventoryV2.gd" type="Script" id=1]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/GUI/ItemList/InventoryRowV2.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=6]
+
+[sub_resource type="ButtonGroup" id=1]
+
+[sub_resource type="ButtonGroup" id=2]
 
 [node name="InventoryV2" type="Control"]
 anchor_right = 1.0
@@ -31,7 +36,6 @@ margin_right = 413.0
 margin_bottom = 656.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-dialog_ok = true
 title = "Ship's Mounts"
 
 [node name="MyItemList" parent="HBoxContainer/Mounts" instance=ExtResource( 4 )]
@@ -42,6 +46,8 @@ margin_top = 58.0
 margin_right = -21.0
 margin_bottom = -73.0
 Row = ExtResource( 5 )
+DragDropID = "InventoryV2"
+SelectGroup = SubResource( 1 )
 
 [node name="Control" type="Control" parent="HBoxContainer"]
 margin_left = 417.0
@@ -49,6 +55,60 @@ margin_right = 830.0
 margin_bottom = 656.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="DropDrag" parent="HBoxContainer/Control" instance=ExtResource( 4 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
+DragDropID = "InventoryV2"
+
+[node name="Swap" parent="HBoxContainer/Control" instance=ExtResource( 6 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -71.7701
+margin_top = -458.987
+margin_right = 70.2299
+margin_bottom = -356.987
+Text = "<> Swap"
+Disabled = true
+
+[node name="Drop" parent="HBoxContainer/Control" instance=ExtResource( 6 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -71.5403
+margin_top = -342.127
+margin_right = 70.4597
+margin_bottom = -240.127
+Text = "[d]rop"
+Disabled = true
+
+[node name="Use" parent="HBoxContainer/Control" instance=ExtResource( 6 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -71.7738
+margin_top = -227.883
+margin_right = 70.2262
+margin_bottom = -125.883
+Text = "[u]se"
+Disabled = true
+
+[node name="Close" parent="HBoxContainer/Control" instance=ExtResource( 6 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -71.0
+margin_top = -115.684
+margin_right = 71.0
+margin_bottom = -13.6842
+Text = "[c]lose"
 
 [node name="Cargo" parent="HBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
@@ -58,7 +118,6 @@ margin_right = 1248.0
 margin_bottom = 656.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-dialog_cancel = true
 title = "Cargo Holds"
 
 [node name="MyItemList" parent="HBoxContainer/Cargo" instance=ExtResource( 4 )]
@@ -69,4 +128,6 @@ margin_top = 58.0
 margin_right = -21.0
 margin_bottom = -73.0
 Row = ExtResource( 5 )
+DragDropID = "InventoryV2"
+SelectGroup = SubResource( 2 )
 

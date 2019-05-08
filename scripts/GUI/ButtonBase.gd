@@ -1,5 +1,6 @@
 tool
 extends Control
+class_name ButtonBase
 
 export var Text = "" setget set_text
 export(ShortCut) var Action = null setget set_action
