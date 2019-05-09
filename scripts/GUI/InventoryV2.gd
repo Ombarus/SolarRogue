@@ -12,28 +12,77 @@ var _swap_btn : ButtonBase = null
 var _drop_btn : ButtonBase = null
 var _use_btn : ButtonBase = null
 
+var _normal_btns : Control = null
+var _mounting_btns : Control = null
+
 var _dropped_cargo := []
 
 func _ready():
 	get_node("HBoxContainer/Mounts").connect("OnOkPressed", self, "Close_Callback")
 	get_node("HBoxContainer/Cargo").connect("OnCancelPressed", self, "Close_Callback")
-	_remove_btn = get_node("HBoxContainer/Control/Remove")
+	
+	_normal_btns = get_node("HBoxContainer/Control/Normal")
+	_mounting_btns = get_node("HBoxContainer/Control/Mounting")
+	_mounting_btns.get_node("Cancel").connect("pressed", self, "OnCancelMounting_Callback")
+	
+	_remove_btn = get_node("HBoxContainer/Control/Normal/Remove")
 	_remove_btn.connect("pressed", self, "Remove_Callback")
-	_swap_btn = get_node("HBoxContainer/Control/Swap")
+	_swap_btn = get_node("HBoxContainer/Control/Normal/Swap")
 	_swap_btn.connect("pressed", self, "Swap_Callback")
-	_drop_btn = get_node("HBoxContainer/Control/Drop")
+	_drop_btn = get_node("HBoxContainer/Control/Normal/Drop")
 	_drop_btn.connect("pressed", self, "Drop_Callback")
-	_use_btn = get_node("HBoxContainer/Control/Use")
+	_use_btn = get_node("HBoxContainer/Control/Normal/Use")
 	_use_btn.connect("pressed", self, "Use_Callback")
-	get_node("HBoxContainer/Control/Close").connect("pressed", self, "Close_Callback")
+	
+	get_node("HBoxContainer/Control/Normal/Close").connect("pressed", self, "Close_Callback")
 	_mounts_list.connect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
 	_cargo_list.connect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
 
 func Remove_Callback():
-	pass
+	var selected_mount = null
+	var mounts = _mounts_list.Content
+	
+	for item in mounts:
+		if item.selected == true:
+			selected_mount = item
+			break
+	
+	if selected_mount != null and "src" in selected_mount and selected_mount.src != "":
+		BehaviorEvents.emit_signal("OnRemoveMount", _obj, selected_mount.key, selected_mount.idx)
+		Init({"object":_obj})
 
 func Swap_Callback():
-	pass
+	var selected_cargo = null
+	var cargo = _cargo_list.Content
+	
+	for item in cargo:
+		if item.selected == true:
+			selected_cargo = item
+			break
+			
+	if selected_cargo == null:
+		return
+	
+	var data = Globals.LevelLoaderRef.LoadJSON(selected_cargo.src)
+	var desired_slot = Globals.get_data(data, "equipment.slot")
+	if desired_slot == null:
+		return
+		
+	var mount_points = []
+	for item in _mounts_list.Content:
+		if item.key == desired_slot:
+			mount_points.push_back(item)
+	
+	get_node("HBoxContainer/Mounts").title = "Mount Where ?"
+	_cargo_list.Content = [selected_cargo]
+	_mounts_list.Content = mount_points
+	
+	_normal_btns.visible = false
+	_mounting_btns.visible = true
+	
+func OnCancelMounting_Callback():
+	# reset everything without doing anything special
+	Init({"object":_obj})	
 	
 func Drop_Callback():
 	var dropped_mounts = []
@@ -94,6 +143,9 @@ func Close_Callback():
 	
 	
 func Init(init_param):
+	_normal_btns.visible = true
+	_mounting_btns.visible = false
+	get_node("HBoxContainer/Mounts").title = "Ship's Mounts"
 	_obj = init_param["object"]
 	
 	_obj.init_cargo()
@@ -105,11 +157,15 @@ func Init(init_param):
 	var mount_content := []
 	#TODO: order by something consistent
 	for key in mounts:
-		mount_content.push_back({"name_id":key, "equipped":false, "header":true})
-		var items : Array = Globals.LevelLoaderRef.LoadJSONArray(mounts[key])
+		mount_content.push_back({"key":key, "name_id":key, "equipped":false, "header":true})
+		var items : Array = mounts[key]
 		var index = 0
-		for item in items:
-			mount_content.push_back({"src":mounts[key][index], "key":key, "idx":index, "name_id":item.name_id, "equipped":false, "header":false, "icon":item.icon})
+		for src in items:
+			if src != null and src != "":
+				var item = Globals.LevelLoaderRef.LoadJSON(src)
+				mount_content.push_back({"src":mounts[key][index], "key":key, "idx":index, "name_id":item.name_id, "equipped":false, "header":false, "icon":item.icon})
+			else:
+				mount_content.push_back({"src":"", "key":key, "idx":index, "name_id":"Empty", "equipped":false, "header":false})
 			index += 1
 	_mounts_list.Content = mount_content
 	
@@ -137,6 +193,36 @@ func Init(init_param):
 	OnSelectionChanged_Callback()
 
 func OnSelectionChanged_Callback():
+	if _normal_btns.visible == true:
+		UpdateNormalVisibility()
+	else:
+		DoMounting()
+
+func DoMounting():
+	var selected_cargo = null
+	var selected_mount = null
+	
+	var cargo = _cargo_list.Content
+	var mounts = _mounts_list.Content
+	
+	for item in cargo:
+		if item.header == false:
+			selected_cargo = item
+			break
+			
+	for item in mounts:
+		if item.selected == true:
+			selected_mount = item
+			break
+	
+	if selected_mount == null:
+		Init({"object":_obj}) # refresh list
+		return
+		
+	BehaviorEvents.emit_signal("OnEquipMount", _obj, selected_mount.key, selected_mount.idx, selected_cargo.src)
+	Init({"object":_obj}) # refresh list
+
+func UpdateNormalVisibility():
 	var selected_cargo = null
 	var selected_mount = null
 	
@@ -149,7 +235,7 @@ func OnSelectionChanged_Callback():
 			break
 			
 	for item in mounts:
-		if item.selected == true:
+		if item.selected == true and "src" in item and item.src != "":
 			selected_mount = item
 			break
 			
@@ -190,4 +276,3 @@ func OnSelectionChanged_Callback():
 		_remove_btn.Disabled = false
 	else:
 		_remove_btn.Disabled = true
-	

@@ -60,64 +60,84 @@ margin_right = 0.0
 margin_bottom = 0.0
 DragDropID = "InventoryV2"
 
-[node name="Remove" parent="HBoxContainer/Control" instance=ExtResource( 7 )]
+[node name="Normal" type="Control" parent="HBoxContainer/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Remove" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -72.7968
-margin_top = -581.676
-margin_right = 69.2032
-margin_bottom = -479.676
+margin_left = -70.316
+margin_top = -569.731
+margin_right = 71.684
+margin_bottom = -467.731
 Text = "> remove"
 Disabled = true
 
-[node name="Swap" parent="HBoxContainer/Control" instance=ExtResource( 7 )]
+[node name="Swap" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -71.7701
-margin_top = -458.987
-margin_right = 70.2299
-margin_bottom = -356.987
+margin_left = -70.8122
+margin_top = -458.232
+margin_right = 71.1878
+margin_bottom = -356.232
 Text = "< mount"
 Disabled = true
 
-[node name="Drop" parent="HBoxContainer/Control" instance=ExtResource( 7 )]
+[node name="Drop" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -71.5403
-margin_top = -342.127
-margin_right = 70.4597
-margin_bottom = -240.127
+margin_left = -70.4909
+margin_top = -346.732
+margin_right = 71.5091
+margin_bottom = -244.731
 Text = "[d]rop"
 Disabled = true
 
-[node name="Use" parent="HBoxContainer/Control" instance=ExtResource( 7 )]
+[node name="Use" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -71.7738
-margin_top = -227.883
-margin_right = 70.2262
-margin_bottom = -125.883
+margin_left = -70.8397
+margin_top = -225.587
+margin_right = 71.1603
+margin_bottom = -123.587
 Text = "[u]se"
 Disabled = true
 
-[node name="Close" parent="HBoxContainer/Control" instance=ExtResource( 7 )]
+[node name="Close" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -71.0
-margin_top = -115.684
+margin_top = -114.605
 margin_right = 71.0
-margin_bottom = -13.6842
+margin_bottom = -12.605
 Text = "[c]lose"
+
+[node name="Mounting" type="Control" parent="HBoxContainer/Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Cancel" parent="HBoxContainer/Control/Mounting" instance=ExtResource( 7 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -70.8016
+margin_top = -115.385
+margin_right = 70.1984
+margin_bottom = -13.3849
+Text = "[esc]Cancel"
 
 [node name="Cargo" parent="HBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0

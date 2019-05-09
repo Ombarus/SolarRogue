@@ -23,6 +23,7 @@ signal OnDamageTaken(target, shooter) # only fired if damage is > 0
 signal OnPickup(picker, picked)
 signal OnDropCargo(dropper, item_id, count)
 signal OnDropMount(dropper, item_id, index)
+signal OnRemoveMount(dropper, item_id, index)
 signal OnEquipMount(equipper, slot_name, index, item_id)
 signal OnAddItem(picker, item_id)
 signal OnRemoveItem(holder, item_id)

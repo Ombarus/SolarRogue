@@ -8,6 +8,7 @@ func _ready():
 	BehaviorEvents.connect("OnPickup", self, "OnPickup_Callback")
 	BehaviorEvents.connect("OnDropCargo", self, "OnDropCargo_Callback")
 	BehaviorEvents.connect("OnDropMount", self, "OnDropMount_Callback")
+	BehaviorEvents.connect("OnRemoveMount", self, "OnRemoveMount_Callback")
 	BehaviorEvents.connect("OnAddItem", self, "OnAddItem_Callback")
 	BehaviorEvents.connect("OnRemoveItem", self, "OnRemoveItem_Callback")
 	BehaviorEvents.connect("OnUseEnergy", self, "OnUseEnergy_Callback")
@@ -134,8 +135,22 @@ func OnDropMount_Callback(dropper, slot_name, index):
 	dropper.set_attrib("mounts." + slot_name, items)
 	BehaviorEvents.emit_signal("OnMountRemoved", dropper, slot_name, item_id)
 	
+func OnRemoveMount_Callback(dropper, slot_name, index):
+	var items = dropper.get_attrib("mounts." + slot_name)
+	var item_id = items[index]
+	var data = Globals.LevelLoaderRef.LoadJSON(item_id)
+	var drop_ap = 0
+	if "equipment" in data and "unequip_ap" in data.equipment and data.equipment.unequip_ap > 0:
+		BehaviorEvents.emit_signal("OnUseAP", dropper, data.equipment.unequip_ap)
+	#Globals.LevelLoaderRef.RequestObject(item_id, Globals.LevelLoaderRef.World_to_Tile(dropper.position))
+	BehaviorEvents.emit_signal("OnAddItem", dropper, items[index])
+	items[index] = ""
+	dropper.set_attrib("mounts." + slot_name, items)
+	BehaviorEvents.emit_signal("OnMountRemoved", dropper, slot_name, item_id)
+	
 func OnEquipMount_Callback(equipper, slot_name, index, item_id):
 	# Check if slot already has something equipped
+	# Add old item to cargo
 	# Remove current equipment (takes AP)
 	# Remove item from cargo
 	# Add item_id to mount point
