@@ -39,6 +39,7 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- Delete old inventory, old transfer, old mount and all btn and reference to them in code and git
 - Still can get shot before autopilot stop... why ?
 - Achievements
 - Background for bottom_title ship name in status bar
@@ -134,6 +135,7 @@ TODO :::
 	
 	
 polish :::
+- Transfer UI should display player's ship name (crafted ship could have a 1, 2, 3, 4... appended ?)
 - Make the planets spin on themselves
 -- (suggestion) from Destragon on youtube : Mousing over things should automatically display the description in the text box at the bottom without requiring you to press l for look.
 - welcome screen presentation is lacking (bunch of colors, line length mismatch, italic, bold, underline... need better design)

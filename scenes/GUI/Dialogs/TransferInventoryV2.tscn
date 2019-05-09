@@ -1,0 +1,136 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scripts/GUI/TransferInventoryV2.gd" type="Script" id=1]
+[ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
+[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/GUI/ItemList/InventoryRowV2.tscn" type="PackedScene" id=5]
+[ext_resource path="res://data/InventoryV2_btn_group.tres" type="ButtonGroup" id=6]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=7]
+
+[node name="TransferInventoryV2" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="BG" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = ExtResource( 2 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 37.0
+margin_right = -20.0
+margin_bottom = -27.0
+
+[node name="MyShip" parent="HBoxContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 413.0
+margin_bottom = 656.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+title = "Player's Ship"
+
+[node name="MyItemList" parent="HBoxContainer/MyShip" instance=ExtResource( 4 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 19.0
+margin_top = 58.0
+margin_right = -21.0
+margin_bottom = -73.0
+Row = ExtResource( 5 )
+DragDropID = "InventoryV2"
+SelectGroup = ExtResource( 6 )
+CanDropOnList = false
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+margin_left = 417.0
+margin_right = 830.0
+margin_bottom = 656.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Normal" type="Control" parent="HBoxContainer/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Transfer" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -70.0953
+margin_top = -458.942
+margin_right = 71.9047
+margin_bottom = -356.942
+Text = "Transfer"
+Disabled = true
+
+[node name="TakeAll" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -69.774
+margin_top = -347.442
+margin_right = 72.226
+margin_bottom = -245.441
+Text = "<<"
+
+[node name="TransferAll" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -70.1228
+margin_top = -226.297
+margin_right = 71.8772
+margin_bottom = -124.297
+Text = ">>"
+
+[node name="Close" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
+margin_left = 135.5
+margin_top = 541.395
+margin_right = 277.5
+margin_bottom = 643.395
+Text = "[esc]close"
+
+[node name="Control" type="Control" parent="HBoxContainer/Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Cancel" parent="HBoxContainer/Control/Control" instance=ExtResource( 7 )]
+margin_left = 135.717
+margin_top = 540.685
+margin_right = 277.717
+margin_bottom = 642.685
+Text = "[c]ancel"
+
+[node name="OtherShip" parent="HBoxContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 834.0
+margin_right = 1248.0
+margin_bottom = 656.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+title = "A Human Scout"
+
+[node name="MyItemList" parent="HBoxContainer/OtherShip" instance=ExtResource( 4 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 19.0
+margin_top = 58.0
+margin_right = -21.0
+margin_bottom = -73.0
+Row = ExtResource( 5 )
+DragDropID = "InventoryV2"
+SelectGroup = ExtResource( 6 )
+

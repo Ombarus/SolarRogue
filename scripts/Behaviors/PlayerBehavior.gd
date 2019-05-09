@@ -703,7 +703,8 @@ func ProcessTakeSelection(target):
 		BehaviorEvents.emit_signal("OnLogLine", "Item transfer canceled")
 		return
 		
-	BehaviorEvents.emit_signal("OnPushGUI", "TransferInventory", {"object1":playerNode, "object2":target, "callback_object":self, "callback_method":"OnTransferItemCompleted_Callback"})
+	#BehaviorEvents.emit_signal("OnPushGUI", "TransferInventory", {"object1":playerNode, "object2":target, "callback_object":self, "callback_method":"OnTransferItemCompleted_Callback"})
+	BehaviorEvents.emit_signal("OnPushGUI", "TransferInventoryV2", {"object1":playerNode, "object2":target, "callback_object":self, "callback_method":"OnTransferItemCompleted_Callback"})
 	
 func OnTransferItemCompleted_Callback(lobj, l_mounts, l_cargo, robj, r_mounts, r_cargo):
 	lobj.init_mounts()
