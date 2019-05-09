@@ -283,6 +283,7 @@ func UpdateNormalVisibility():
 ############### DRAG & DROP ###################
 
 func OnDragDropCompleted_Callback(origin_data, destination_data):
+	# Drop Item on the ground
 	if destination_data.origin == get_node("HBoxContainer/Control/DropDrag"):
 		var dropped_mounts = []
 		if "key" in origin_data and "idx" in origin_data and origin_data.src != "":
@@ -302,6 +303,15 @@ func OnDragDropCompleted_Callback(origin_data, destination_data):
 			emit_signal("drop_pressed", dropped_mounts, _dropped_cargo)
 			# Update inventory lists
 			Init({"object":_obj})
-	else:	
-		pass
+	# Drop item in cargo
+	elif destination_data.origin == get_node("HBoxContainer/Cargo/MyItemList"):
+		var selected_mount = origin_data
+				
+		if selected_mount != null and "src" in selected_mount and selected_mount.src != "":
+			BehaviorEvents.emit_signal("OnRemoveMount", _obj, selected_mount.key, selected_mount.idx)
+			Init({"object":_obj})
+	# Drop item on Mount point
+	else:
+		BehaviorEvents.emit_signal("OnEquipMount", _obj, destination_data.key, destination_data.idx, origin_data.src)
+		Init({"object":_obj})
 	
