@@ -38,9 +38,39 @@ func set_row_data(data):
 		self.theme = normal_theme
 		get_node("BtnWrap/HBoxContainer/Icon").visible = true
 
+func _on_Toggle_toggled(button_pressed):
+	_metadata.origin.bubble_selection_changed()
+
+################ DRAG & DROP OVERRIDE #########################
+
 func get_row_data():
 	_metadata["selected"] = get_node("BtnWrap/Toggle").pressed
 	return _metadata
-
-func _on_Toggle_toggled(button_pressed):
-	_metadata.origin.bubble_selection_changed()
+	
+func can_drop_data(position, data):
+	if not "dragdrop_id" in data or data.dragdrop_id == "":
+		return false
+	var res : bool = data.dragdrop_id == _metadata.dragdrop_id and data["self"].get_parent() != self.get_parent()
+	if res == false:
+		return res
+	
+	# When dropping in the "empty" list to drop an item on the floor
+	if data.origin.Content.size() == 0:
+		return true
+		
+	# Can always drop a mount anywhere in the cargo list to "remove" a mount
+	if "key" in data and "idx" in data:
+		return true
+	
+	# Sanity check, should always have a "src"
+	if not "src" in data:
+		return false
+		
+	# Dragging something from the cargo holds to a mount points... check if we can actually  mount this here	
+	var json_data = Globals.LevelLoaderRef.LoadJSON(data.src)
+	var slot = Globals.get_data(json_data, "equipment.slot")
+	
+	if slot == null or not "key" in _metadata or slot != _metadata.key:
+		return false
+	
+	return true

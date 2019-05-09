@@ -36,7 +36,10 @@ func _ready():
 	
 	get_node("HBoxContainer/Control/Normal/Close").connect("pressed", self, "Close_Callback")
 	_mounts_list.connect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
+	_mounts_list.connect("OnDragDropCompleted", self, "OnDragDropCompleted_Callback")
 	_cargo_list.connect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
+	_cargo_list.connect("OnDragDropCompleted", self, "OnDragDropCompleted_Callback")
+	get_node("HBoxContainer/Control/DropDrag").connect("OnDragDropCompleted", self, "OnDragDropCompleted_Callback")
 
 func Remove_Callback():
 	var selected_mount = null
@@ -276,3 +279,29 @@ func UpdateNormalVisibility():
 		_remove_btn.Disabled = false
 	else:
 		_remove_btn.Disabled = true
+		
+############### DRAG & DROP ###################
+
+func OnDragDropCompleted_Callback(origin_data, destination_data):
+	if destination_data.origin == get_node("HBoxContainer/Control/DropDrag"):
+		var dropped_mounts = []
+		if "key" in origin_data and "idx" in origin_data and origin_data.src != "":
+			dropped_mounts.push_back(origin_data)
+			
+		_dropped_cargo = []
+		if not "key" in origin_data and not "idx" in origin_data and origin_data.src != "":
+			_dropped_cargo.push_back(origin_data)
+				
+		if _dropped_cargo.size() > 0 and _dropped_cargo[0].count > 1:
+			BehaviorEvents.emit_signal("OnPushGUI", "HowManyDiag", {
+				"callback_object":self, 
+				"callback_method":"HowManyDiag_Callback", 
+				"min_value":1, 
+				"max_value":_dropped_cargo[0].count})
+		else:
+			emit_signal("drop_pressed", dropped_mounts, _dropped_cargo)
+			# Update inventory lists
+			Init({"object":_obj})
+	else:	
+		pass
+	

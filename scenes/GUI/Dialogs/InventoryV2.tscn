@@ -63,6 +63,7 @@ DragDropID = "InventoryV2"
 [node name="Normal" type="Control" parent="HBoxContainer/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 
 [node name="Remove" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
 anchor_left = 0.5
@@ -127,6 +128,7 @@ Text = "[c]lose"
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 
 [node name="Cancel" parent="HBoxContainer/Control/Mounting" instance=ExtResource( 7 )]
 anchor_left = 0.5
