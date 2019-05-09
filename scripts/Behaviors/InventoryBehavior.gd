@@ -89,7 +89,7 @@ func OnPickup_Callback(picker, picked):
 	filtered_obj.clear() # the objects have been destroyed, just want to make sure I don't forget about it
 	
 
-func OnDropCargo_Callback(dropper, item_id):
+func OnDropCargo_Callback(dropper, item_id, count):
 	if not dropper.modified_attributes.has("cargo"):
 		dropper.init_cargo()
 	var cargo = dropper.get_attrib("cargo.content")
@@ -103,12 +103,17 @@ func OnDropCargo_Callback(dropper, item_id):
 		if Globals.clean_path(item_id) == Globals.clean_path(item.src):
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			dropper.set_attrib("cargo.volume_used", dropper.get_attrib("cargo.volume_used") - data.equipment.volume)
-			if item.count > 1:
-				item.count -= 1
+			var amount_dropped = 0
+			if item.count > count:
+				item.count -= count
+				amount_dropped = count
 			else:
+				amount_dropped = item.count
 				index_to_delete.push_back(i)
-			total_ap_cost += drop_speed
-			Globals.LevelLoaderRef.RequestObject(item.src, Globals.LevelLoaderRef.World_to_Tile(dropper.position))
+			total_ap_cost += drop_speed * amount_dropped
+			for i in range(amount_dropped):
+				Globals.LevelLoaderRef.RequestObject(item.src, Globals.LevelLoaderRef.World_to_Tile(dropper.position))
+			# found item, we can quit the loop
 			break
 		i += 1
 	if total_ap_cost > 0:

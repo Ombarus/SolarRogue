@@ -1,16 +1,24 @@
 extends "res://scripts/GUI/GUILayoutBase.gd"
 
+signal drop_pressed(dropped_mounts, dropped_cargo)
+signal use_pressed(key)
+
 onready var _mounts_list : MyItemList = get_node("HBoxContainer/Mounts/MyItemList")
 onready var _cargo_list : MyItemList = get_node("HBoxContainer/Cargo/MyItemList")
 var _obj : Attributes = null
 
+var _remove_btn : ButtonBase = null
 var _swap_btn : ButtonBase = null
 var _drop_btn : ButtonBase = null
 var _use_btn : ButtonBase = null
 
+var _dropped_cargo := []
+
 func _ready():
 	get_node("HBoxContainer/Mounts").connect("OnOkPressed", self, "Close_Callback")
 	get_node("HBoxContainer/Cargo").connect("OnCancelPressed", self, "Close_Callback")
+	_remove_btn = get_node("HBoxContainer/Control/Remove")
+	_remove_btn.connect("pressed", self, "Remove_Callback")
 	_swap_btn = get_node("HBoxContainer/Control/Swap")
 	_swap_btn.connect("pressed", self, "Swap_Callback")
 	_drop_btn = get_node("HBoxContainer/Control/Drop")
@@ -21,14 +29,59 @@ func _ready():
 	_mounts_list.connect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
 	_cargo_list.connect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
 
+func Remove_Callback():
+	pass
+
 func Swap_Callback():
 	pass
 	
 func Drop_Callback():
-	pass
+	var dropped_mounts = []
+	for data in _mounts_list.Content:
+		if data.selected == true:
+			dropped_mounts.push_back(data)
+			
+	_dropped_cargo = []
+	for data in _cargo_list.Content:
+		if data.selected == true:
+			_dropped_cargo.push_back(data)
+			
+	if _dropped_cargo.size() > 0 and _dropped_cargo[0].count > 1:
+		BehaviorEvents.emit_signal("OnPushGUI", "HowManyDiag", {
+			"callback_object":self, 
+			"callback_method":"HowManyDiag_Callback", 
+			"min_value":1, 
+			"max_value":_dropped_cargo[0].count})
+	else:
+		emit_signal("drop_pressed", dropped_mounts, _dropped_cargo)
+		# Update inventory lists
+		Init({"object":_obj})
+	
+	
+func HowManyDiag_Callback(num):
+	_dropped_cargo[0].count = num
+	emit_signal("drop_pressed", [], _dropped_cargo)
+	# Update inventory lists
+	Init({"object":_obj})
 	
 func Use_Callback():
-	pass
+	var selected_mounts = []
+	#TODO: allow using stuff from mounts (might be a special ability of a mount)
+	#for data in get_node(_mounts_node).content:
+	#	if data.checked == true:
+	#		dropped_mounts.push_back({"key":data.key, "index":data.index})
+	var selected_cargo = []
+	for item in _cargo_list.Content:
+		if item.selected == true:
+			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
+			if "consumable" in data:
+				selected_cargo.push_back(item.src)
+	
+	if selected_cargo.size() > 0:
+		emit_signal("use_pressed", selected_cargo[0])
+		Init({"object":_obj}) # refresh list
+	else:
+		BehaviorEvents.emit_signal("OnLogLine", "No selected item can be used like that")
 	
 func Close_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
@@ -56,7 +109,7 @@ func Init(init_param):
 		var items : Array = Globals.LevelLoaderRef.LoadJSONArray(mounts[key])
 		var index = 0
 		for item in items:
-			mount_content.push_back({"src":mounts[key][index], "key":key, "index":index, "name_id":item.name_id, "equipped":false, "header":false, "icon":item.icon})
+			mount_content.push_back({"src":mounts[key][index], "key":key, "idx":index, "name_id":item.name_id, "equipped":false, "header":false, "icon":item.icon})
 			index += 1
 	_mounts_list.Content = mount_content
 	
@@ -79,6 +132,9 @@ func Init(init_param):
 		cargo_content.push_back({"name_id":key, "equipped":false, "header":true})
 		cargo_content += cargo_item_by_category[key]
 	_cargo_list.Content = cargo_content
+	
+	# Init all the buttons to Enable/Disabled state
+	OnSelectionChanged_Callback()
 
 func OnSelectionChanged_Callback():
 	var selected_cargo = null
@@ -117,33 +173,21 @@ func OnSelectionChanged_Callback():
 	else:
 		_drop_btn.Disabled = true
 	
-	###### Setup the swap/install/remove button ######
+	
+	###### Setup the swap/mount button #######
 	_swap_btn.Disabled = true
 	var cargo_slot = null
 	if cargo_data != null:
 		cargo_slot = Globals.get_data(cargo_data, "equipment.slot")
-	var mount_slot = null
-	if mount_data != null:
-		mount_slot = Globals.get_data(mount_data, "equipment.slot")
-		
-	if cargo_data != null and mount_data != null:
-		if cargo_slot != null and cargo_slot == mount_slot:
-			_swap_btn.Text = "<> Swap"
-			_swap_btn.Disabled = false
-			
-	if cargo_slot != null and mount_data == null:
-		var mounted : Array = _obj.get_attrib("mounts." + cargo_slot)
-		var has_free := false
-		if mounted != null:
-			for m in mounted:
-				if m == null or m == "":
-					has_free = true
-					break
-		if has_free:
-			_swap_btn.Text = "< Mount"
-			_swap_btn.Disabled = false
-			
-	if _swap_btn.Disabled == true and mount_slot != null:
-		_swap_btn.Text = "> Remove"
-		_swap_btn.Disabled = false
+		if cargo_slot != null:
+			var mounted : Array = _obj.get_attrib("mounts." + cargo_slot)
+			if mounted != null and mounted.size() > 0:
+				_swap_btn.Disabled = false
+				
+				
+	###### Setup the remove mount button #######
+	if selected_mount != null:
+		_remove_btn.Disabled = false
+	else:
+		_remove_btn.Disabled = true
 	

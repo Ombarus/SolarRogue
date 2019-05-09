@@ -218,8 +218,10 @@ func Pressed_FTL_Callback():
 		
 func ProcessGoingHome():
 	var converter = playerNode.get_attrib("mounts.converter")[0]
-	var converter_data = Globals.LevelLoaderRef.LoadJSON(converter)
-	if Globals.get_data(converter_data, "end_game") == true:
+	var converter_data = null
+	if converter != null and converter != "":
+		converter_data = Globals.LevelLoaderRef.LoadJSON(converter)
+	if converter_data != null and Globals.get_data(converter_data, "end_game") == true:
 		BehaviorEvents.emit_signal("OnLogLine", "The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! You made it !")
 		playerNode.set_attrib("game_won", true)
 		BehaviorEvents.emit_signal("OnPlayerDeath")
@@ -251,12 +253,12 @@ func OnUseInventory_Callback(key):
 func OnDropIventory_Callback(dropped_mounts, dropped_cargo):
 	playerNode.init_mounts()
 	for drop_data in dropped_mounts:
-		BehaviorEvents.emit_signal("OnDropMount", playerNode, drop_data.key, drop_data.index)
+		BehaviorEvents.emit_signal("OnDropMount", playerNode, drop_data.key, drop_data.idx)
 		
 	UpdateButtonVisibility()
 		
 	for drop_data in dropped_cargo:
-		BehaviorEvents.emit_signal("OnDropCargo", playerNode, drop_data.src)
+		BehaviorEvents.emit_signal("OnDropCargo", playerNode, drop_data.src, drop_data.count)
 	
 func OnRequestObjectUnload_Callback(obj):
 	if obj.get_attrib("type") == "player":
