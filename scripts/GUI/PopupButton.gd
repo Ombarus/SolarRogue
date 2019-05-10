@@ -1,6 +1,5 @@
 extends Control
 
-signal mount_pressed
 signal look_pressed
 signal board_pressed
 signal take_pressed
@@ -18,25 +17,27 @@ func _ready():
 	#_popup.title_height = repeat_height
 
 func Pressed_More_Callback():
-	_more_btn.visible = false
-	_popup.visible = true
-	_popup.emit_signal("OnUpdateLayout")
-	var nodes = get_tree().get_nodes_in_group("more_btn")
-	for n in nodes:
-		n.get_node("base").emit_signal("OnUpdateLayout")
-	_close_btn.visible = true
-	_block.visible = true
+	if _popup.visible == false:
+		#_more_btn.visible = false
+		_popup.visible = true
+		_popup.emit_signal("OnUpdateLayout")
+		var nodes = get_tree().get_nodes_in_group("more_btn")
+		for n in nodes:
+			n.get_node("base").emit_signal("OnUpdateLayout")
+		#_close_btn.visible = true
+		_block.visible = true
+	else:
+		#_more_btn.visible = true
+		_popup.visible = false
+		#_close_btn.visible = false
+		_block.visible = false
+		
 	
 func Pressed_Close_Callback():
 	_more_btn.visible = true
 	_popup.visible = false
 	_close_btn.visible = false
 	_block.visible = false
-
-func _on_Mount_pressed():
-	Pressed_Close_Callback()
-	emit_signal("mount_pressed")
-
 
 func _on_Look_pressed():
 	Pressed_Close_Callback()

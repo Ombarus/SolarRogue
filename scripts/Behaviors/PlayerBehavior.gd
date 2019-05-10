@@ -62,7 +62,6 @@ func _ready():
 	action = get_node(CraftingAction)
 	action.connect("pressed", self, "Pressed_Crafting_Callback")
 	action = get_node(PopupButtons)
-	action.connect("mount_pressed", self, "Pressed_Equip_Callback")
 	action.connect("look_pressed", self, "Pressed_Look_Callback")
 	action.connect("board_pressed", self, "Pressed_Board_Callback")
 	action.connect("take_pressed", self, "Pressed_Take_Callback")
@@ -93,13 +92,7 @@ func Pressed_Look_Callback():
 		return
 	_input_state = INPUT_STATE.look_around
 	BehaviorEvents.emit_signal("OnLogLine", "Select area to scan...")
-	
-func Pressed_Equip_Callback():
-	if lock_input:
-		return
-	
-	BehaviorEvents.emit_signal("OnPushGUI", "EquipMountList", {"object":playerNode, "callback_object":self, "callback_method":"OnEquip_Callback"})
-	
+
 func Pressed_Board_Callback():
 	if lock_input:
 		return
@@ -158,12 +151,7 @@ func OnMountRemoved_Callback(obj, mount, src):
 	if obj != playerNode:
 		return
 	UpdateButtonVisibility()
-	
-# mount_to = "converter"
-# mount_item = {"src":"data/json/bleh.json", "count":5}
-func OnEquip_Callback(mount_item, mount_to, mount_index):
-	BehaviorEvents.emit_signal("OnEquipMount", playerNode, mount_to, mount_index, mount_item)
-	
+
 func Pressed_Crafting_Callback():
 	if lock_input:
 		return
@@ -537,8 +525,6 @@ func _unhandled_input(event):
 			Pressed_Inventory_Callback()
 		if _last_unicode == 'c':
 			Pressed_Crafting_Callback()
-		if _last_unicode == 'm':
-			Pressed_Equip_Callback()
 		if _last_unicode == 'l':
 			Pressed_Look_Callback()
 		if _last_unicode == 'b':

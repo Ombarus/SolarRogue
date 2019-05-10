@@ -25,46 +25,47 @@ mouse_filter = 2
 
 [node name="Popup" parent="PopupSize" instance=ExtResource( 3 )]
 visible = false
-margin_right = -4.0
-margin_bottom = 10.0
+margin_left = 159.0
+margin_right = 13.0
+margin_bottom = 95.0
 title_height = 3
-title = "..."
 border_style = "━"
-
-[node name="Mount" parent="PopupSize/Popup" groups=[
-"more_btn",
-] instance=ExtResource( 4 )]
-margin_left = 15.0
-margin_top = 90.0
-margin_right = 152.0
-margin_bottom = 172.0
-Text = "[m]ount"
 
 [node name="Board" parent="PopupSize/Popup" groups=[
 "more_btn",
 ] instance=ExtResource( 4 )]
-margin_left = 15.1197
-margin_top = 166.922
-margin_right = 153.12
-margin_bottom = 247.922
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -69.1198
+margin_top = -120.725
+margin_right = 70.8802
+margin_bottom = -16.7247
 Text = "[b]oard"
 
 [node name="Take" parent="PopupSize/Popup" groups=[
 "more_btn",
 ] instance=ExtResource( 4 )]
-margin_left = 165.0
-margin_top = 167.042
-margin_right = 305.0
-margin_bottom = 251.042
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -68.0
+margin_top = -50.0
+margin_right = 68.0
+margin_bottom = 50.0
 Text = "[t]ransfer"
 
 [node name="Look" parent="PopupSize/Popup" groups=[
 "more_btn",
 ] instance=ExtResource( 4 )]
-margin_left = 164.0
-margin_top = 90.0
-margin_right = 300.0
-margin_bottom = 174.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -69.3802
+margin_top = 25.5273
+margin_right = 67.6198
+margin_bottom = 129.527
 Text = "[l]ook"
 
 [node name="More" parent="." instance=ExtResource( 4 )]
@@ -76,11 +77,10 @@ Text = "..."
 visible = false
 margin_left = 8.0
 margin_top = 6.0
-margin_right = 313.0
-margin_bottom = 72.0
+margin_right = 129.0
+margin_bottom = 79.0
 custom_styles/normal = ExtResource( 5 )
 
-[connection signal="pressed" from="PopupSize/Popup/Mount" to="." method="_on_Mount_pressed"]
 [connection signal="pressed" from="PopupSize/Popup/Board" to="." method="_on_Board_pressed"]
 [connection signal="pressed" from="PopupSize/Popup/Take" to="." method="_on_Take_pressed"]
 [connection signal="pressed" from="PopupSize/Popup/Look" to="." method="_on_Look_pressed"]
