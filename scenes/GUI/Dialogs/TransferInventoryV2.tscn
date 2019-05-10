@@ -45,7 +45,7 @@ margin_bottom = -73.0
 Row = ExtResource( 5 )
 DragDropID = "InventoryV2"
 SelectGroup = ExtResource( 6 )
-CanDropOnList = false
+CanDropOnSelf = true
 
 [node name="Control" type="Control" parent="HBoxContainer"]
 margin_left = 417.0
@@ -133,4 +133,5 @@ margin_bottom = -73.0
 Row = ExtResource( 5 )
 DragDropID = "InventoryV2"
 SelectGroup = ExtResource( 6 )
+CanDropOnSelf = true
 

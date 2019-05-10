@@ -7,6 +7,7 @@ export(PackedScene) var Row
 export(String) var DragDropID = ""
 export(ButtonGroup) var SelectGroup = null
 export(bool) var CanDropOnList = true
+export(bool) var CanDropOnSelf = false
 
 # takes an array of dictionnary information for row initialization
 # returns an array of dictionary with information about row content
@@ -57,7 +58,7 @@ func bubble_drop(orig_data, dst_data):
 	emit_signal("OnDragDropCompleted", orig_data, dst_data)
 	
 func can_drop_data(position, data):
-	return CanDropOnList and data.origin != self and self.DragDropID == data.dragdrop_id
+	return CanDropOnList and (CanDropOnSelf || data.origin != self) and self.DragDropID == data.dragdrop_id
 	
 func drop_data(position, data):
 	emit_signal("OnDragDropCompleted", data, {"origin":self, "count":-1})

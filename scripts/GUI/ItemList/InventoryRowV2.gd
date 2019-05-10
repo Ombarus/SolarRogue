@@ -43,6 +43,13 @@ func _on_Toggle_toggled(button_pressed):
 
 ################ DRAG & DROP OVERRIDE #########################
 
+func get_drag_data(position):
+	if _metadata.src == "":
+		return null
+		
+	return .get_drag_data(position)
+
+
 func get_row_data():
 	_metadata["selected"] = get_node("BtnWrap/Toggle").pressed
 	return _metadata
@@ -50,7 +57,7 @@ func get_row_data():
 func can_drop_data(position, data):
 	if not "dragdrop_id" in data or data.dragdrop_id == "":
 		return false
-	var res : bool = data.dragdrop_id == _metadata.dragdrop_id and data["self"].get_parent() != self.get_parent()
+	var res : bool = data.dragdrop_id == _metadata.dragdrop_id and (data["self"].get_parent() != self.get_parent() or data["origin"].CanDropOnSelf == true)
 	if res == false:
 		return res
 	
@@ -59,7 +66,7 @@ func can_drop_data(position, data):
 		return true
 		
 	# Can always drop a mount anywhere in the cargo list to "remove" a mount
-	if "key" in data and "idx" in data:
+	if "key" in data and "idx" in data and not "key" in _metadata:
 		return true
 	
 	# Sanity check, should always have a "src"

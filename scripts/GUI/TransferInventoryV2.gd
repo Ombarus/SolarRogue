@@ -112,7 +112,7 @@ func Transfer_Callback():
 			to_list.Content = question_content
 			_normal_btns.visible = false
 			_question_btns.visible = true
-		return # ABORT !
+			return # ABORT !
 	
 	if "key" in selected_item and "idx" in selected_item:
 		BehaviorEvents.emit_signal("OnRemoveMount", selected_ship, selected_item.key, selected_item.idx)
@@ -329,5 +329,68 @@ func UpdateNormalVisibility():
 ############### DRAG & DROP ###################
 
 func OnDragDropCompleted_Callback(origin_data, destination_data):
-	pass
+	var origin_ship : Attributes = null
+	var dest_ship : Attributes = null
+	if origin_data.origin == get_node("HBoxContainer/OtherShip/MyItemList"):
+		origin_ship = _robj
+	if origin_data.origin == get_node("HBoxContainer/MyShip/MyItemList"):
+		origin_ship = _lobj
+	if destination_data.origin == get_node("HBoxContainer/OtherShip/MyItemList"):
+		dest_ship = _robj
+	if destination_data.origin == get_node("HBoxContainer/MyShip/MyItemList"):
+		dest_ship = _lobj
+		
+	var dest_is_mount := false
+	if "key" in destination_data and "idx" in destination_data:
+		dest_is_mount = true
+	var origin_is_mount := false
+	if "key" in origin_data and "idx" in origin_data:
+		origin_is_mount = true
+		
+	BehaviorEvents.emit_signal("OnBeginParallelAction", origin_ship)
+	BehaviorEvents.emit_signal("OnBeginParallelAction", dest_ship)
 	
+	# Cargo to Cargo
+	if dest_is_mount == false and origin_is_mount == false and origin_ship != dest_ship:
+		if origin_data.count > 1:
+			_transfered_cargo = origin_data
+			_transfered_ship = origin_ship
+			_transfered_to = dest_ship
+			BehaviorEvents.emit_signal("OnPushGUI", "HowManyDiag", {
+					"callback_object":self, 
+					"callback_method":"HowManyDiag_Callback", 
+					"min_value":1, 
+					"max_value":origin_data.count})
+		else:
+			BehaviorEvents.emit_signal("OnRemoveItem", origin_ship, origin_data.src)
+			BehaviorEvents.emit_signal("OnAddItem", dest_ship, origin_data.src)
+	# Cargo to Mount
+	elif dest_is_mount == true and origin_is_mount == false:
+		BehaviorEvents.emit_signal("OnRemoveItem", origin_ship, origin_data.src)
+		if destination_data.src != "": # Swap
+			BehaviorEvents.emit_signal("OnRemoveMount", dest_ship, destination_data.key, destination_data.idx)
+			BehaviorEvents.emit_signal("OnRemoveItem", dest_ship, destination_data.src)
+			BehaviorEvents.emit_signal("OnAddItem", origin_ship, destination_data.src)
+		BehaviorEvents.emit_signal("OnEquipMount", dest_ship, destination_data.key, destination_data.idx, origin_data.src)
+	# Mount to Cargo
+	elif dest_is_mount == false and origin_is_mount == true:
+		BehaviorEvents.emit_signal("OnRemoveMount", origin_ship, origin_data.key, origin_data.idx)
+		BehaviorEvents.emit_signal("OnRemoveItem", origin_ship, origin_data.src)
+		BehaviorEvents.emit_signal("OnAddItem", dest_ship, origin_data.src)
+	# Mount to Mount
+	elif dest_is_mount == true and origin_is_mount == true:
+		if destination_data.src != "":
+			BehaviorEvents.emit_signal("OnRemoveMount", dest_ship, destination_data.key, destination_data.idx)
+			BehaviorEvents.emit_signal("OnRemoveItem", dest_ship, destination_data.src)
+		if origin_data.src != "":
+			BehaviorEvents.emit_signal("OnRemoveMount", origin_ship, origin_data.key, origin_data.idx)
+			BehaviorEvents.emit_signal("OnRemoveItem", origin_ship, origin_data.src)
+		if destination_data.src != "":
+			BehaviorEvents.emit_signal("OnEquipMount", origin_ship, origin_data.key, origin_data.idx, destination_data.src)
+		if origin_data.src != "":
+			BehaviorEvents.emit_signal("OnEquipMount", dest_ship, destination_data.key, destination_data.idx, origin_data.src)
+	
+	ReInit()
+
+	BehaviorEvents.emit_signal("OnEndParallelAction", origin_ship)
+	BehaviorEvents.emit_signal("OnEndParallelAction", dest_ship)
