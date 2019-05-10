@@ -101,6 +101,8 @@ func Init(init_param):
 		_craft_list.add_item(recipe_data.name, tex)
 		if region != null:
 			_craft_list.set_item_icon_region(_craft_list.get_item_count()-1, region)
+			
+	_craft_button.Disabled = true
 	
 
 func _on_CraftingList_item_selected(index):
@@ -236,9 +238,9 @@ func UpdateCraftButton():
 	_craft_result_info.bbcode_text = t_color + str(_current_how_many) + " " + recipe_name + " for " + str(energy_cost) + " energy[/color]"
 	#TODO: might be nice to have a "disabled" look for my custom buttons
 	if _current_how_many > 0:
-		_craft_button.visible = true
+		_craft_button.Disabled = false
 	else:
-		_craft_button.visible = false
+		_craft_button.Disabled = true
 
 func special_recycle_update(recipe_data):
 	var using_content = _using_list.Content
@@ -255,8 +257,8 @@ func special_recycle_update(recipe_data):
 	_craft_result_info.bbcode_text = color + "Recycle " + str(total_items) + " items and gain " + str(total_energy) + " energy[/color]"
 	
 	if total_items > 0:
-		_craft_button.visible = true
+		_craft_button.Disabled = false
 	else:
-		_craft_button.visible = false
+		_craft_button.Disabled = true
 	
 	

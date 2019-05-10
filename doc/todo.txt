@@ -39,6 +39,7 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- hitting shortcut 'c' while in crafting double-pop the craft window and disable it !
 - Delete old inventory, old transfer, old mount and all btn and reference to them in code and git
 - Still can get shot before autopilot stop... why ?
 - Achievements
