@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://data/theme/default_ui_text.tres" type="Theme" id=1]
+[ext_resource path="res://scripts/GUI/ItemList/CraftingMaterialRow.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.2, 1, 0.2, 1 )
+
+[node name="CraftingMaterialRow" type="Button"]
+margin_right = 377.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+theme = ExtResource( 1 )
+custom_styles/pressed = SubResource( 1 )
+toggle_mode = true
+script = ExtResource( 2 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Wrapper" type="Control" parent="HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+mouse_filter = 2
+
+[node name="Count" type="RichTextLabel" parent="HBoxContainer/Wrapper"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -25.0
+margin_top = -12.5
+margin_right = 25.0
+margin_bottom = 12.5
+rect_min_size = Vector2( 50, 25 )
+mouse_filter = 2
+bbcode_enabled = true
+bbcode_text = "[center][color=black]✓[/color][/center]"
+text = "✓"
+
+[node name="Name" type="RichTextLabel" parent="HBoxContainer"]
+margin_left = 54.0
+margin_top = 12.0
+margin_right = 377.0
+margin_bottom = 37.0
+rect_min_size = Vector2( 0, 25 )
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[color=black]Missile[/color]"
+text = "Missile"
+

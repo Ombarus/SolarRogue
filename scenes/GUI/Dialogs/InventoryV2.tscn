@@ -75,6 +75,7 @@ margin_left = -70.316
 margin_top = -569.731
 margin_right = 71.684
 margin_bottom = -467.731
+size_flags_horizontal = 3
 Text = "> remove"
 Disabled = true
 
@@ -87,6 +88,7 @@ margin_left = -70.8122
 margin_top = -458.232
 margin_right = 71.1878
 margin_bottom = -356.232
+size_flags_horizontal = 3
 Text = "< mount"
 Disabled = true
 
@@ -96,9 +98,10 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -70.4909
-margin_top = -346.732
+margin_top = -347.682
 margin_right = 71.5091
-margin_bottom = -244.731
+margin_bottom = -245.681
+size_flags_horizontal = 3
 Text = "[d]rop"
 Disabled = true
 
@@ -111,6 +114,7 @@ margin_left = -70.8397
 margin_top = -225.587
 margin_right = 71.1603
 margin_bottom = -123.587
+size_flags_horizontal = 3
 Text = "[u]se"
 Disabled = true
 
@@ -123,6 +127,7 @@ margin_left = -71.0
 margin_top = -114.605
 margin_right = 71.0
 margin_bottom = -12.605
+size_flags_horizontal = 3
 Text = "[c]lose"
 
 [node name="Mounting" type="Control" parent="HBoxContainer/Control"]

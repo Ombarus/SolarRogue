@@ -59,8 +59,9 @@ Feature :
 
 Things to consider :
 
-
-- Hunger in nethack is a encouragement to keep moving.... right now we don't use energy on wait.. maybe we should ?
+- (MetaModernism?) Sincerity wrapped in cynicism (https://youtu.be/Ov78c0Kek84?t=1000)
+	- Expose the premise in a cynical way (dating birds, kissing dads, etc.) then surprise the player with good content
+- Relevent to multiple audiences ? Who ?
 
 - https://www.reddit.com/r/roguelikedev/wiki/faq_friday
 - SCI-FI items :

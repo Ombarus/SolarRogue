@@ -77,9 +77,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -69.774
-margin_top = -347.442
+margin_top = -348.839
 margin_right = 72.226
-margin_bottom = -245.441
+margin_bottom = -246.838
 Text = "<<"
 
 [node name="TransferAll" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]

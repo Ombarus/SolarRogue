@@ -39,6 +39,15 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- new Inventory UI doesn't display remaining cargo
+- SOUNDS
+	- Investigate how to trigger basic sounds (buttons, shooting, explosions)
+	- Find free sounds I could use for now
+	- Investigate music style and artists that could do something nice
+		- maybe should have a few different music (do something with music when health is low or ennemy is close, etc ?)
+			- Star Ocean First Departure
+			- Disgaea ?
+			- Final IX battle theme ?
 - hitting shortcut 'c' while in crafting double-pop the craft window and disable it !
 - Delete old inventory, old transfer, old mount and all btn and reference to them in code and git
 - Still can get shot before autopilot stop... why ?

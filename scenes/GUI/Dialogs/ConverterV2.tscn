@@ -1,0 +1,260 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://data/theme/default_ui_text.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/GUI/ItemList/RecipeRow.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/GUI/ItemList/CraftingMaterialRow.tscn" type="PackedScene" id=6]
+
+[node name="ConverterV2" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+
+[node name="Recipes" parent="HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 410.0
+margin_bottom = 680.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+title = "Converter MK1"
+
+[node name="MyItemList" parent="HBoxContainer/Recipes" instance=ExtResource( 3 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 18.0
+margin_top = 58.0
+margin_right = -18.0
+margin_bottom = -31.0
+Row = ExtResource( 4 )
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+margin_left = 414.0
+margin_right = 824.0
+margin_bottom = 680.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 7.0
+margin_right = -9.0
+margin_bottom = -16.0
+
+[node name="IconContainer" type="Control" parent="HBoxContainer/Control/VBoxContainer"]
+margin_right = 369.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 128, 128 )
+size_flags_horizontal = 3
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Control/VBoxContainer/IconContainer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -64.0
+margin_top = -64.0
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 128, 128 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Control/VBoxContainer"]
+margin_top = 132.0
+margin_right = 369.0
+margin_bottom = 282.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RecipeName" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/VBoxContainer"]
+margin_right = 369.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 3
+bbcode_enabled = true
+bbcode_text = "[color=lime]Jerg Battleship[/color]"
+text = "Jerg Battleship"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/Control/VBoxContainer/VBoxContainer"]
+margin_top = 44.0
+margin_right = 369.0
+margin_bottom = 74.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+
+[node name="EnergyLabel" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_right = 170.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 170, 0 )
+text = "Energy Cost...."
+
+[node name="EnergyCost" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 174.0
+margin_right = 369.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+bbcode_enabled = true
+bbcode_text = "2600"
+text = "2600"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/Control/VBoxContainer/VBoxContainer"]
+margin_top = 78.0
+margin_right = 369.0
+margin_bottom = 108.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+
+[node name="TurnLabel" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/VBoxContainer/HBoxContainer3"]
+margin_right = 170.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 170, 0 )
+text = "Production Time"
+
+[node name="TurnCost" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 174.0
+margin_right = 369.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+bbcode_enabled = true
+bbcode_text = "5"
+text = "5"
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Control/VBoxContainer"]
+margin_top = 286.0
+margin_right = 369.0
+margin_bottom = 290.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/Control/VBoxContainer"]
+margin_top = 294.0
+margin_right = 369.0
+margin_bottom = 444.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ShipTitle" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/VBoxContainer2"]
+margin_right = 369.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 3
+bbcode_enabled = true
+bbcode_text = "[color=lime]Ship's Status[/color]"
+text = "Ship's Status"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="HBoxContainer/Control/VBoxContainer/VBoxContainer2"]
+margin_top = 44.0
+margin_right = 369.0
+margin_bottom = 74.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+
+[node name="EnergyShipLabel" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/VBoxContainer2/HBoxContainer4"]
+margin_right = 210.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 210, 0 )
+bbcode_enabled = true
+bbcode_text = "Available Energy.."
+text = "Available Energy.."
+
+[node name="EnergyShip" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/VBoxContainer2/HBoxContainer4"]
+margin_left = 214.0
+margin_right = 369.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+bbcode_enabled = true
+bbcode_text = "[color=lime]5000[/color]"
+text = "5000"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="HBoxContainer/Control/VBoxContainer/VBoxContainer2"]
+margin_top = 78.0
+margin_right = 369.0
+margin_bottom = 108.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+
+[node name="HullShipLabel" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/VBoxContainer2/HBoxContainer5"]
+margin_right = 210.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 210, 0 )
+bbcode_enabled = true
+bbcode_text = "Hull Integrity...."
+text = "Hull Integrity...."
+
+[node name="HullShip" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/VBoxContainer2/HBoxContainer5"]
+margin_left = 214.0
+margin_right = 369.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+bbcode_text = "[color=lime]==========[/color]"
+text = "=========="
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="HBoxContainer/Control/VBoxContainer/VBoxContainer2"]
+margin_top = 112.0
+margin_right = 369.0
+margin_bottom = 142.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+
+[node name="ShieldShipLabel" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/VBoxContainer2/HBoxContainer6"]
+margin_right = 210.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 210, 0 )
+bbcode_enabled = true
+bbcode_text = "Shield............"
+text = "Shield............"
+
+[node name="ShieldLabel" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/VBoxContainer2/HBoxContainer6"]
+margin_left = 214.0
+margin_right = 369.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+bbcode_text = "[color=aqua]==========[/color]"
+text = "=========="
+
+[node name="Craft" parent="HBoxContainer/Control/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 448.0
+margin_right = 369.0
+margin_bottom = 550.0
+rect_min_size = Vector2( 142, 102 )
+Text = "[c]raft"
+
+[node name="Close" parent="HBoxContainer/Control/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 554.0
+margin_right = 369.0
+margin_bottom = 656.0
+rect_min_size = Vector2( 142, 102 )
+Text = "[esc]close"
+
+[node name="Materials" parent="HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 828.0
+margin_right = 1240.0
+margin_bottom = 680.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+title = "Crafting Materials"
+
+[node name="MyItemList" parent="HBoxContainer/Materials" instance=ExtResource( 3 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 18.0
+margin_top = 58.0
+margin_right = -18.0
+margin_bottom = -31.0
+Row = ExtResource( 6 )
+

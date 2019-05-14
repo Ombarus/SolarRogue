@@ -35,6 +35,7 @@
 		- Not against having a completly different UI for mobile & PC (keyboard shortcut based on PC and touch based on device)
 
 inspiration ? 
+Black Paradox background is animated, pixelated and awesome, shield fx and explosion pretty good toostex...
 https://vtrixdev.itch.io/spacefleet
 https://v-ktor.itch.io/star-sprites
 Old game called DonPachi ?
