@@ -17,8 +17,10 @@
 		"recipes": [
 			{
 				"name": "Recycle Energy",
-				"icon_texture":"data/textures/space-sprite.png",
-				"icon_region":[256,0,128,128],
+				"icon": {
+					"texture":"data/textures/space-sprite.png",
+					"region":[256,0,128,128]
+				},
 				"requirements": [{"type":"recyclable", "amount":1}], 
 				"produce":"energy",
 				"ap_cost":1.0,

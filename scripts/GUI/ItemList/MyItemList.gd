@@ -24,6 +24,11 @@ func Clear():
 	for row in _rows_node.get_children():
 		_rows_node.remove_child(row)
 		row.queue_free()
+		
+func select(index):
+	var r = _rows_node.get_children()[index].RowData
+	r["selected"] = true
+	_rows_node.get_children()[index].RowData = r
 
 func set_content(val):
 	Clear()

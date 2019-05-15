@@ -25,28 +25,12 @@ func _sort_by_shield_regen(a, b):
 	if rate_a > rate_b:
 		return true
 	return false
-	
-func _get_max_shield(obj):
-	var shields = obj.get_attrib("mounts.shield")
-	var shields_data = Globals.LevelLoaderRef.LoadJSONArray(shields)
-	
-	if shields_data.size() <= 0:
-		return 0
-	
-	shields_data.sort_custom(self, "_sort_by_shield_size")
-	var max_shield = 0
-	var count = 0
-	for data in shields_data:
-		max_shield += (data.shielding.max_hp) / pow(2, count) # 1, 0.5, 0.25, 0.125, etc.
-		count += 1
-		
-	return max_shield
-	
+
 	
 func OnObjectLoaded_Callback(obj):
 	var cur_shield = obj.get_attrib("shield.current_hp")
 	if cur_shield == null:
-		obj.set_attrib("shield.current_hp", _get_max_shield(obj))
+		obj.set_attrib("shield.current_hp", obj.get_max_shield())
 	
 func OnObjTurn_Callback(obj):
 	var shields = obj.get_attrib("mounts.shield")
@@ -54,7 +38,7 @@ func OnObjTurn_Callback(obj):
 	if shields_data.size() <= 0:
 		return
 	
-	var max_hp = _get_max_shield(obj)
+	var max_hp = obj.get_max_shield()
 	var cur_hp = obj.get_attrib("shield.current_hp")
 	if cur_hp == null:
 		obj.set_attrib("shield.current_hp", max_hp)
@@ -94,7 +78,7 @@ func OnMountRemoved_Callback(obj, slot, src):
 	if slot != "shield" or src == null or src.empty():
 		return
 		
-	var max_hp = _get_max_shield(obj)
+	var max_hp = obj.get_max_shield()
 	
 	var cur_hp = obj.get_attrib("shield.current_hp")
 	

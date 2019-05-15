@@ -39,23 +39,6 @@ func OnLevelLoaded_Callback():
 	levelinfo.text = json_name
 	
 
-# TODO: !!!!!!! UGLY UGLY UGLY COPY PASTE FROM SHIELD BEHAVIOR !!!!!!!!!!!!!!!!!
-func _get_max_shield(obj):
-	var shields = obj.get_attrib("mounts.shield")
-	var shields_data = Globals.LevelLoaderRef.LoadJSONArray(shields)
-	
-	if shields_data.size() <= 0:
-		return 0
-	
-	shields_data.sort_custom(self, "_sort_by_shield_size")
-	var max_shield = 0
-	var count = 0
-	for data in shields_data:
-		max_shield += (data.shielding.max_hp) / pow(2, count) # 1, 0.5, 0.25, 0.125, etc.
-		count += 1
-		
-	return max_shield
-		
 #The Maveric Hull : [color=lime]==========[/color] Energy : [color=yellow]25000[/color] Shield : Up	
 func UpdateStatusBar(player_obj):
 	var ship_name = "The Maveric"
@@ -102,7 +85,7 @@ func UpdateStatusBar(player_obj):
 	elif cur_shield != null and cur_shield < 1:
 		status_str += "[color=red]Down![/color]"
 	else:
-		var max_shield = _get_max_shield(player_obj)
+		var max_shield = player_obj.get_max_shield()
 		status_str += "[color=aqua]"
 		var shield_per = floor(cur_shield) / max_shield
 		changed_color = false

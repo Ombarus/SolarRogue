@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://scripts/Behaviors/UIManager.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Behaviors/MemoryBehavior.gd" type="Script" id=2]
@@ -48,9 +48,10 @@
 [ext_resource path="res://scenes/GUI/Dialogs/Tutorial.tscn" type="PackedScene" id=46]
 [ext_resource path="res://scenes/GUI/Dialogs/InventoryV2.tscn" type="PackedScene" id=47]
 [ext_resource path="res://scenes/GUI/Dialogs/TransferInventoryV2.tscn" type="PackedScene" id=48]
-[ext_resource path="res://scenes/GUI/Dialogs/HowManyDiag.tscn" type="PackedScene" id=49]
-[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=50]
-[ext_resource path="res://scenes/Sample.tscn" type="PackedScene" id=51]
+[ext_resource path="res://scenes/GUI/Dialogs/ConverterV2.tscn" type="PackedScene" id=49]
+[ext_resource path="res://scenes/GUI/Dialogs/HowManyDiag.tscn" type="PackedScene" id=50]
+[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=51]
+[ext_resource path="res://scenes/Sample.tscn" type="PackedScene" id=52]
 
 [sub_resource type="ShortCut" id=1]
 
@@ -414,14 +415,17 @@ visible = false
 [node name="TransferInventoryV2" parent="Camera-GUI" instance=ExtResource( 48 )]
 visible = false
 
-[node name="HowManyDiag" parent="Camera-GUI" instance=ExtResource( 49 )]
+[node name="ConverterV2" parent="Camera-GUI" instance=ExtResource( 49 )]
+visible = false
+
+[node name="HowManyDiag" parent="Camera-GUI" instance=ExtResource( 50 )]
 visible = false
 
 [node name="DEBUG" type="Node2D" parent="."]
 visible = false
-script = ExtResource( 50 )
+script = ExtResource( 51 )
 
-[node name="Sample" parent="." instance=ExtResource( 51 )]
+[node name="Sample" parent="." instance=ExtResource( 52 )]
 visible = false
 
 [connection signal="pressed" from="Camera-GUI/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_ZoomIn_pressed"]

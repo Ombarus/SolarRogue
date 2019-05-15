@@ -156,7 +156,8 @@ func Pressed_Crafting_Callback():
 	if lock_input:
 		return
 	
-	BehaviorEvents.emit_signal("OnPushGUI", "Converter", {"object":playerNode, "callback_object":self, "callback_method":"OnCraft_Callback"})
+	#BehaviorEvents.emit_signal("OnPushGUI", "Converter", {"object":playerNode, "callback_object":self, "callback_method":"OnCraft_Callback"})
+	BehaviorEvents.emit_signal("OnPushGUI", "ConverterV2", {"object":playerNode, "callback_object":self, "callback_method":"OnCraft_Callback"})
 	
 func OnCraft_Callback(recipe_data, input_list):
 	var craftingSystem = get_parent().get_node("Crafting")

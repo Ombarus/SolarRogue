@@ -82,13 +82,12 @@ func Init(init_param):
 	
 	_craft_list.clear()
 	for recipe_data in _converter_data.converter.recipes:
-		var tex = null
-		var region = null
-		if "icon_texture" in recipe_data:
-			tex = load("res://" + recipe_data.icon_texture)
-			if "icon_region" in recipe_data:
-				var region_data = recipe_data.icon_region
-				region = Rect2(region_data[0], region_data[1], region_data[2], region_data[3])
+		var tex = Globals.get_data(recipe_data, "icon.texture")
+		var region = Globals.get_data(recipe_data, "icon.region")
+		if tex != null and tex != "":
+			tex = load(Globals.clean_path(tex))
+			if region != null:
+				region = Rect2(region[0], region[1], region[2], region[3])
 		if ".json" in recipe_data.produce:
 			var produce_data = Globals.LevelLoaderRef.LoadJSON(recipe_data.produce)
 			var icon_texture : String = Globals.get_data(produce_data, "icon.texture")

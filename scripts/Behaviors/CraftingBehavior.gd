@@ -12,7 +12,7 @@ func Craft(recipe_data, input_list, crafter):
 			loaded_input_data.push_back({"type":"energy", "src":""})
 		else:
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
-			loaded_input_data.push_back({"data":data, "type":data["type"], "src":item.src, "amount":item.count})
+			loaded_input_data.push_back({"data":data, "type":data["type"], "src":item.src, "amount":item.selected})
 	var can_produce = true
 	var cur_energy = crafter.get_attrib("converter.stored_energy")
 	var net_energy_change = 0
