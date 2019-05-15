@@ -151,7 +151,7 @@ func UpdateMaterialsList(recipe_data):
 			cargo_index += 1
 		if has_item_to_use == false:
 			if "type" in r:
-				list_data.push_back({"name_id":"Missing " + r.type, "disabled":true})
+				list_data.push_back({"name_id":"Missing " + r.type, "disabled":true, "max":r.amount})
 			else:
 				var d = Globals.LevelLoaderRef.LoadJSON(r.src)
 				list_data.push_back({"name_id":"Missing " + d.name_id, "max":r.amount, "disabled":true})
@@ -191,6 +191,22 @@ func UpdateCraftInfo():
 	
 	####### Turn Cost #######
 	_turn_cost.bbcode_text = "[color=%s]%.1f[/color]" % ["red", _current_data["ap"]]
+	
+	####### In Cargo Count #######
+	var in_cargo : int = 0
+	if ".json" in _current_crafting_selected.produce:
+		var cargo = _obj.get_attrib("cargo.content")
+		for item in cargo:
+			if Globals.clean_path(item.src) == Globals.clean_path(_current_crafting_selected.produce):
+				in_cargo = item.count
+				
+	var n : Container = get_node("HBoxContainer/Control/VBoxContainer/RecipeInfoContainer/InCargoContainer")
+	if in_cargo <= 0:
+		n.visible = false
+	else:
+		n.visible = true
+		n.get_node("InCargo").bbcode_text = str(in_cargo)
+		
 	
 	UpdateCraftButton()
 	

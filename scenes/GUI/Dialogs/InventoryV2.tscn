@@ -64,69 +64,58 @@ DragDropID = "InventoryV2"
 [node name="Normal" type="Control" parent="HBoxContainer/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 67.0
+margin_right = -24.0
+margin_bottom = -125.0
 mouse_filter = 2
 
 [node name="Remove" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -70.316
-margin_top = -569.731
-margin_right = 71.684
-margin_bottom = -467.731
+anchor_right = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
+rect_min_size = Vector2( 0, 102 )
 size_flags_horizontal = 3
 Text = "> remove"
 Disabled = true
 
 [node name="Swap" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -70.8122
-margin_top = -458.232
-margin_right = 71.1878
-margin_bottom = -356.232
+anchor_right = 1.0
+margin_top = 105.0
+margin_right = 0.0
+margin_bottom = 207.0
+rect_min_size = Vector2( 0, 102 )
 size_flags_horizontal = 3
 Text = "< mount"
 Disabled = true
 
 [node name="Drop" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -70.4909
-margin_top = -347.682
-margin_right = 71.5091
-margin_bottom = -245.681
+anchor_right = 1.0
+margin_top = 210.0
+margin_right = 0.0
+margin_bottom = 312.0
+rect_min_size = Vector2( 0, 102 )
 size_flags_horizontal = 3
 Text = "[d]rop"
 Disabled = true
 
 [node name="Use" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -70.8397
-margin_top = -225.587
-margin_right = 71.1603
-margin_bottom = -123.587
+anchor_right = 1.0
+margin_top = 315.0
+margin_right = 0.0
+margin_bottom = 417.0
+rect_min_size = Vector2( 0, 102 )
 size_flags_horizontal = 3
 Text = "[u]se"
 Disabled = true
 
 [node name="Close" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
-anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -71.0
-margin_top = -114.605
-margin_right = 71.0
-margin_bottom = -12.605
+margin_right = 0.0
+margin_bottom = 0.0
+rect_min_size = Vector2( 0, 102 )
 size_flags_horizontal = 3
 Text = "[c]lose"
 
@@ -134,17 +123,20 @@ Text = "[c]lose"
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 18.0
+margin_right = -21.0
+margin_bottom = -24.0
 mouse_filter = 2
 
 [node name="Cancel" parent="HBoxContainer/Control/Mounting" instance=ExtResource( 7 )]
-anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -70.8016
-margin_top = -115.385
-margin_right = 70.1984
-margin_bottom = -13.3849
+margin_top = -100.804
+margin_right = 0.0
+margin_bottom = 1.19617
+rect_min_size = Vector2( 0, 102 )
+size_flags_horizontal = 3
 Text = "[esc]Cancel"
 
 [node name="Cargo" parent="HBoxContainer" instance=ExtResource( 3 )]

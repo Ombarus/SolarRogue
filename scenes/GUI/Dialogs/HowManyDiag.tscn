@@ -42,6 +42,7 @@ margin_top = -17.0
 margin_right = 171.5
 margin_bottom = 17.0
 rect_scale = Vector2( 1, 2 )
+ticks_on_borders = true
 
 [node name="Info" type="RichTextLabel" parent="base"]
 anchor_left = 0.5

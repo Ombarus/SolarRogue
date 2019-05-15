@@ -57,60 +57,65 @@ size_flags_vertical = 3
 [node name="Normal" type="Control" parent="HBoxContainer/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 22.0
+margin_top = 123.0
+margin_right = -29.0
+margin_bottom = -135.0
 mouse_filter = 2
 
 [node name="Transfer" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -70.0953
-margin_top = -458.942
-margin_right = 71.9047
-margin_bottom = -356.942
+anchor_right = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
+rect_min_size = Vector2( 142, 102 )
+size_flags_horizontal = 3
 Text = "Transfer"
 Disabled = true
 
 [node name="TakeAll" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -69.774
-margin_top = -348.839
-margin_right = 72.226
-margin_bottom = -246.838
+anchor_right = 1.0
+margin_top = 105.0
+margin_right = 0.0
+margin_bottom = 207.0
+rect_min_size = Vector2( 142, 102 )
+size_flags_horizontal = 3
 Text = "<<"
 
 [node name="TransferAll" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -70.1228
-margin_top = -226.297
-margin_right = 71.8772
-margin_bottom = -124.297
+anchor_right = 1.0
+margin_top = 210.0
+margin_right = 0.0
+margin_bottom = 312.0
+rect_min_size = Vector2( 142, 102 )
+size_flags_horizontal = 3
 Text = ">>"
 
 [node name="Close" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
-margin_left = 135.5
-margin_top = 541.395
-margin_right = 277.5
-margin_bottom = 643.395
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
+rect_min_size = Vector2( 142, 102 )
+size_flags_horizontal = 3
 Text = "[esc]close"
 
 [node name="Control" type="Control" parent="HBoxContainer/Control"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 21.0
+margin_right = -22.0
+margin_bottom = -134.0
 mouse_filter = 2
 
 [node name="Cancel" parent="HBoxContainer/Control/Control" instance=ExtResource( 7 )]
-margin_left = 135.717
-margin_top = 540.685
-margin_right = 277.717
-margin_bottom = 642.685
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
+rect_min_size = Vector2( 142, 102 )
+size_flags_horizontal = 3
 Text = "[c]ancel"
 
 [node name="OtherShip" parent="HBoxContainer" instance=ExtResource( 3 )]

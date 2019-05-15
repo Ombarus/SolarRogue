@@ -39,6 +39,7 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- "mount where" in inventory shouldn't display if there's only one possible mount position
 - new Inventory UI doesn't display remaining cargo
 - SOUNDS
 	- Investigate how to trigger basic sounds (buttons, shooting, explosions)

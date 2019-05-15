@@ -61,8 +61,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 32.0
 margin_top = 7.0
-margin_right = -9.0
-margin_bottom = -16.0
+margin_right = -25.0
+margin_bottom = -104.0
 
 [node name="IconContainer" type="Control" parent="HBoxContainer/Control/VBoxContainer"]
 editor/display_folded = true
@@ -141,6 +141,28 @@ size_flags_horizontal = 3
 bbcode_enabled = true
 bbcode_text = "5"
 text = "5"
+
+[node name="InCargoContainer" type="HBoxContainer" parent="HBoxContainer/Control/VBoxContainer/RecipeInfoContainer"]
+margin_top = 112.0
+margin_right = 369.0
+margin_bottom = 142.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+
+[node name="InCargoLabel" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/RecipeInfoContainer/InCargoContainer"]
+margin_right = 170.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 170, 0 )
+text = "In Cargo......."
+
+[node name="InCargo" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/RecipeInfoContainer/InCargoContainer"]
+margin_left = 174.0
+margin_right = 369.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+bbcode_enabled = true
+bbcode_text = "0"
+text = "0"
 
 [node name="HSeparator" type="HSeparator" parent="HBoxContainer/Control/VBoxContainer"]
 margin_top = 286.0
@@ -239,17 +261,24 @@ bbcode_text = "[color=aqua]==========[/color]"
 text = "=========="
 
 [node name="Craft" parent="HBoxContainer/Control/VBoxContainer" instance=ExtResource( 7 )]
-margin_top = 448.0
-margin_right = 369.0
-margin_bottom = 550.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -102.0
+margin_right = 0.0
+margin_bottom = 0.0
 rect_min_size = Vector2( 142, 102 )
+size_flags_horizontal = 3
 Text = "[c]raft"
 
 [node name="Close" parent="HBoxContainer/Control/VBoxContainer" instance=ExtResource( 7 )]
-margin_top = 554.0
-margin_right = 369.0
-margin_bottom = 656.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
 rect_min_size = Vector2( 142, 102 )
+size_flags_horizontal = 3
 Text = "[esc]close"
 
 [node name="Materials" parent="HBoxContainer" instance=ExtResource( 4 )]
