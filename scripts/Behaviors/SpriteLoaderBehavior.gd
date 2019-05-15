@@ -13,23 +13,26 @@ func _ready():
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 
 func OnObjectLoaded_Callback(obj):
-	var attrib = obj.base_attributes
 	var node = null
-	if attrib.has("sprite"):
+	if obj.get_attrib("sprite") != null:
 		#TODO: cache load in a dictioary ?
-		var sprite_name : String = attrib["sprite"]
+		var sprite_name : String = obj.get_attrib("sprite")
 		var cur_depth : int = Globals.LevelLoaderRef.current_depth
 		var worm_depth : int = obj.get_attrib("depth")
-		if attrib.type == "wormhole" and worm_depth <= cur_depth:
+		if obj.get_attrib("type") == "wormhole" and worm_depth <= cur_depth:
 			sprite_name = sprite_name + "_up"
 		#if attrib.type == "wormhole":
 		#	sprite_name = "wormhole_old"
 		var scene = load("res://scenes/tileset_source/" + sprite_name + ".tscn")
 		node = scene.instance()
-	if attrib.has("sprite_choice"):
+	elif obj.get_attrib("sprite_choice") != null:
+		var sprite_choice : Array = obj.get_attrib("sprite_choice")
 		# TODO: handle know/unknown (multiple look for potions in nethack, but always the same look in a given game)
-		var x = MersenneTwister.rand(attrib["sprite_choice"].size())
-		var scene = load("res://scenes/tileset_source/" + attrib["sprite_choice"][x] + ".tscn")
+		var x = MersenneTwister.rand(sprite_choice.size())
+		# Save the sprite we chose in modified_attrib so we don't randomize again when loading the level
+		# and also when duplicating the object for ghost memories
+		obj.set_attrib("sprite", sprite_choice[x])
+		var scene = load("res://scenes/tileset_source/" + sprite_choice[x] + ".tscn")
 		node = scene.instance()
 		
 	obj.call_deferred("add_child", node)

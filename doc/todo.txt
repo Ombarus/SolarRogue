@@ -39,8 +39,6 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- "mount where" in inventory shouldn't display if there's only one possible mount position
-- new Inventory UI doesn't display remaining cargo
 - SOUNDS
 	- Investigate how to trigger basic sounds (buttons, shooting, explosions)
 	- Find free sounds I could use for now
@@ -50,7 +48,6 @@ TODO :::
 			- Disgaea ?
 			- Final IX battle theme ?
 - hitting shortcut 'c' while in crafting double-pop the craft window and disable it !
-- Delete old inventory, old transfer, old mount and all btn and reference to them in code and git
 - Still can get shot before autopilot stop... why ?
 - Achievements
 - Background for bottom_title ship name in status bar
@@ -195,6 +192,9 @@ IDEAS:::
 	
 	
 DONE :::
+- Delete old inventory, old transfer, old mount and all btn and reference to them in code and git
+- new Inventory UI doesn't display remaining cargo
+- "mount where" in inventory shouldn't display if there's only one possible mount position
 - Refine Need/Using list in converter UI (maybe a title + some outline for the list?)
 
 
