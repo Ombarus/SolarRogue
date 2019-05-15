@@ -72,16 +72,26 @@ func Swap_Callback():
 		return
 		
 	var mount_points = []
+	var valid_count : int = 0
+	var last_mount = null
 	for item in _mounts_list.Content:
 		if item.key == desired_slot:
+			if item.header == false:
+				last_mount = item
+				valid_count += 1
 			mount_points.push_back(item)
 	
-	get_node("HBoxContainer/Mounts").title = "Mount Where ?"
-	_cargo_list.Content = [selected_cargo]
-	_mounts_list.Content = mount_points
+	if valid_count > 1:
+		get_node("HBoxContainer/Mounts").title = "Mount Where ?"
+		_cargo_list.Content = [selected_cargo]
+		_mounts_list.Content = mount_points
 	
-	_normal_btns.visible = false
-	_mounting_btns.visible = true
+		_normal_btns.visible = false
+		_mounting_btns.visible = true
+	else:
+		BehaviorEvents.emit_signal("OnEquipMount", _obj, last_mount.key, last_mount.idx, selected_cargo.src)
+		Init({"object":_obj}) # refresh list
+		pass
 	
 func OnCancelMounting_Callback():
 	# reset everything without doing anything special
