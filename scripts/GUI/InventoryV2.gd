@@ -202,6 +202,18 @@ func Init(init_param):
 		cargo_content += cargo_item_by_category[key]
 	_cargo_list.Content = cargo_content
 	
+	var current_load = _obj.get_attrib("cargo.volume_used")
+	var cargo_space = _obj.get_attrib("cargo.capacity")
+	
+	var cargo_color = "lime"
+	var cargo_str = ""
+	if current_load > cargo_space:
+		cargo_color="red"
+	elif current_load > cargo_space * 0.9:
+		cargo_color="yellow"
+		
+	get_node("HBoxContainer/Cargo/CargoLabel").bbcode_text = "[right]([color=%s]%.f / %.f[/color])[/right]" % [cargo_color, current_load, cargo_space]
+	
 	# Init all the buttons to Enable/Disabled state
 	OnSelectionChanged_Callback()
 
@@ -262,33 +274,33 @@ func UpdateNormalVisibility():
 	###### Setup the Use button if selected items are "consumable" ######
 	if (cargo_data != null and "consumable" in cargo_data) or \
 		(mount_data != null and "consumable" in mount_data):
-		_use_btn.Disabled = false
+		_disable_button(_use_btn, false)
 	else:
-		_use_btn.Disabled = true
+		_disable_button(_use_btn, true)
 	
 	###### Setup the Drop button if something is selected ######	
 	if selected_cargo != null or selected_mount != null:
-		_drop_btn.Disabled = false
+		_disable_button(_drop_btn, false)
 	else:
-		_drop_btn.Disabled = true
+		_disable_button(_drop_btn, true)
 	
 	
 	###### Setup the swap/mount button #######
-	_swap_btn.Disabled = true
+	_disable_button(_swap_btn, true)
 	var cargo_slot = null
 	if cargo_data != null:
 		cargo_slot = Globals.get_data(cargo_data, "equipment.slot")
 		if cargo_slot != null:
 			var mounted : Array = _obj.get_attrib("mounts." + cargo_slot)
 			if mounted != null and mounted.size() > 0:
-				_swap_btn.Disabled = false
+				_disable_button(_swap_btn, false)
 				
 				
 	###### Setup the remove mount button #######
 	if selected_mount != null:
-		_remove_btn.Disabled = false
+		_disable_button(_remove_btn, false)
 	else:
-		_remove_btn.Disabled = true
+		_disable_button(_remove_btn, true)
 		
 ############### DRAG & DROP ###################
 
@@ -325,3 +337,6 @@ func OnDragDropCompleted_Callback(origin_data, destination_data):
 		BehaviorEvents.emit_signal("OnEquipMount", _obj, destination_data.key, destination_data.idx, origin_data.src)
 		Init({"object":_obj})
 	
+func _disable_button(btn : ButtonBase, is_disabled : bool):
+	#btn.Disabled = is_disabled
+	btn.visible = !is_disabled

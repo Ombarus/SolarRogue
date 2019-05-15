@@ -206,6 +206,30 @@ func ReInit():
 	GenerateContent(_my_ship_list, mounts1, cargo1)
 	GenerateContent(_other_ship_list, mounts2, cargo2)
 	
+	var current_load = _lobj.get_attrib("cargo.volume_used")
+	var cargo_space = _lobj.get_attrib("cargo.capacity")
+	
+	var cargo_color = "lime"
+	var cargo_str = ""
+	if current_load > cargo_space:
+		cargo_color="red"
+	elif current_load > cargo_space * 0.9:
+		cargo_color="yellow"
+		
+	get_node("HBoxContainer/MyShip/CargoLabel").bbcode_text = "[right]([color=%s]%.f / %.f[/color])[/right]" % [cargo_color, current_load, cargo_space]
+	
+	current_load = _robj.get_attrib("cargo.volume_used")
+	cargo_space = _robj.get_attrib("cargo.capacity")
+	
+	cargo_color = "lime"
+	cargo_str = ""
+	if current_load > cargo_space:
+		cargo_color="red"
+	elif current_load > cargo_space * 0.9:
+		cargo_color="yellow"
+		
+	get_node("HBoxContainer/OtherShip/CargoLabel").bbcode_text = "[right]([color=%s]%.f / %.f[/color])[/right]" % [cargo_color, current_load, cargo_space]
+	
 	# Init all the buttons to Enable/Disabled state
 	OnSelectionChanged_Callback()
 	

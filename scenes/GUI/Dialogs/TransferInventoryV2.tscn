@@ -1,22 +1,24 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://scripts/GUI/TransferInventoryV2.gd" type="Script" id=1]
-[ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
-[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/GUI/ItemList/InventoryRowV2.tscn" type="PackedScene" id=5]
-[ext_resource path="res://data/InventoryV2_btn_group.tres" type="ButtonGroup" id=6]
-[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=7]
+[ext_resource path="res://data/theme/default_ui_text.tres" type="Theme" id=1]
+[ext_resource path="res://scripts/GUI/TransferInventoryV2.gd" type="Script" id=2]
+[ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=3]
+[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/GUI/ItemList/InventoryRowV2.tscn" type="PackedScene" id=6]
+[ext_resource path="res://data/InventoryV2_btn_group.tres" type="ButtonGroup" id=7]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=8]
 
 [node name="TransferInventoryV2" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 1 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="BG" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = ExtResource( 2 )
+custom_styles/panel = ExtResource( 3 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
@@ -26,7 +28,7 @@ margin_top = 37.0
 margin_right = -20.0
 margin_bottom = -27.0
 
-[node name="MyShip" parent="HBoxContainer" instance=ExtResource( 3 )]
+[node name="MyShip" parent="HBoxContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 413.0
@@ -35,17 +37,26 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 title = "Player's Ship"
 
-[node name="MyItemList" parent="HBoxContainer/MyShip" instance=ExtResource( 4 )]
+[node name="MyItemList" parent="HBoxContainer/MyShip" instance=ExtResource( 5 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 19.0
 margin_top = 58.0
 margin_right = -21.0
 margin_bottom = -73.0
-Row = ExtResource( 5 )
+Row = ExtResource( 6 )
 DragDropID = "InventoryV2"
-SelectGroup = ExtResource( 6 )
+SelectGroup = ExtResource( 7 )
 CanDropOnSelf = true
+
+[node name="CargoLabel" type="RichTextLabel" parent="HBoxContainer/MyShip"]
+anchor_right = 1.0
+margin_top = 14.0
+margin_right = -30.0
+margin_bottom = 46.0
+bbcode_enabled = true
+bbcode_text = "[right](127/212)[/right]"
+text = "(127/212)"
 
 [node name="Control" type="Control" parent="HBoxContainer"]
 margin_left = 417.0
@@ -63,7 +74,7 @@ margin_right = -29.0
 margin_bottom = -135.0
 mouse_filter = 2
 
-[node name="Transfer" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
+[node name="Transfer" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_right = 1.0
 margin_right = 0.0
 margin_bottom = 0.0
@@ -72,7 +83,7 @@ size_flags_horizontal = 3
 Text = "Transfer"
 Disabled = true
 
-[node name="TakeAll" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
+[node name="TakeAll" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_right = 1.0
 margin_top = 105.0
 margin_right = 0.0
@@ -81,7 +92,7 @@ rect_min_size = Vector2( 142, 102 )
 size_flags_horizontal = 3
 Text = "<<"
 
-[node name="TransferAll" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
+[node name="TransferAll" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_right = 1.0
 margin_top = 210.0
 margin_right = 0.0
@@ -90,7 +101,7 @@ rect_min_size = Vector2( 142, 102 )
 size_flags_horizontal = 3
 Text = ">>"
 
-[node name="Close" parent="HBoxContainer/Control/Normal" instance=ExtResource( 7 )]
+[node name="Close" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -108,7 +119,7 @@ margin_right = -22.0
 margin_bottom = -134.0
 mouse_filter = 2
 
-[node name="Cancel" parent="HBoxContainer/Control/Control" instance=ExtResource( 7 )]
+[node name="Cancel" parent="HBoxContainer/Control/Control" instance=ExtResource( 8 )]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -118,7 +129,7 @@ rect_min_size = Vector2( 142, 102 )
 size_flags_horizontal = 3
 Text = "[c]ancel"
 
-[node name="OtherShip" parent="HBoxContainer" instance=ExtResource( 3 )]
+[node name="OtherShip" parent="HBoxContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 834.0
@@ -128,15 +139,24 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 title = "A Human Scout"
 
-[node name="MyItemList" parent="HBoxContainer/OtherShip" instance=ExtResource( 4 )]
+[node name="MyItemList" parent="HBoxContainer/OtherShip" instance=ExtResource( 5 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 19.0
 margin_top = 58.0
 margin_right = -21.0
 margin_bottom = -73.0
-Row = ExtResource( 5 )
+Row = ExtResource( 6 )
 DragDropID = "InventoryV2"
-SelectGroup = ExtResource( 6 )
+SelectGroup = ExtResource( 7 )
 CanDropOnSelf = true
+
+[node name="CargoLabel" type="RichTextLabel" parent="HBoxContainer/OtherShip"]
+anchor_right = 1.0
+margin_top = 14.0
+margin_right = -30.0
+margin_bottom = 46.0
+bbcode_enabled = true
+bbcode_text = "[right](127/212)[/right]"
+text = "(127/212)"
 

@@ -263,7 +263,7 @@ margin_left = -139.0
 margin_top = -309.0
 margin_right = 0.0
 margin_bottom = -205.0
-Text = "[>]FTL Back"
+Text = "[<]FTL"
 
 [node name="Inventory" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 32 )]
 anchor_left = 1.0
