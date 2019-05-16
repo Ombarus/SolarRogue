@@ -79,6 +79,7 @@ margin_bottom = 0.0
 rect_min_size = Vector2( 0, 102 )
 size_flags_horizontal = 3
 Text = "> remove"
+ShortcutKey = ">"
 
 [node name="Swap" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_right = 1.0
@@ -88,6 +89,7 @@ margin_bottom = 207.0
 rect_min_size = Vector2( 0, 102 )
 size_flags_horizontal = 3
 Text = "< mount"
+ShortcutKey = "<"
 
 [node name="Drop" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_right = 1.0
@@ -97,6 +99,7 @@ margin_bottom = 312.0
 rect_min_size = Vector2( 0, 102 )
 size_flags_horizontal = 3
 Text = "[d]rop"
+ShortcutKey = "d"
 
 [node name="Use" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_right = 1.0
@@ -106,6 +109,7 @@ margin_bottom = 417.0
 rect_min_size = Vector2( 0, 102 )
 size_flags_horizontal = 3
 Text = "[u]se"
+ShortcutKey = "u"
 
 [node name="Close" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_top = 1.0
@@ -115,7 +119,9 @@ margin_right = 0.0
 margin_bottom = 0.0
 rect_min_size = Vector2( 0, 102 )
 size_flags_horizontal = 3
-Text = "[c]lose"
+Text = "[esc] close"
+ShortcutEnum = 16777217
+AlwaysOnShortcut = false
 
 [node name="Mounting" type="Control" parent="HBoxContainer/Control"]
 visible = false
@@ -136,6 +142,8 @@ margin_bottom = 1.19617
 rect_min_size = Vector2( 0, 102 )
 size_flags_horizontal = 3
 Text = "[esc]Cancel"
+ShortcutEnum = 16777217
+AlwaysOnShortcut = false
 
 [node name="Cargo" parent="HBoxContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0

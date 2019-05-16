@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/GUI/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=2]
@@ -10,12 +10,6 @@
 [ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/GUI/ItemList/LeaderboardRow.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/GUI/Dialogs/PlayerName.tscn" type="PackedScene" id=10]
-
-[sub_resource type="InputEventKey" id=1]
-scancode = 81
-
-[sub_resource type="ShortCut" id=2]
-shortcut = SubResource( 1 )
 
 [node name="MainMenu" type="Node"]
 script = ExtResource( 1 )
@@ -48,7 +42,8 @@ margin_top = 176.49
 margin_right = 70.0
 margin_bottom = 279.49
 Text = "[n]ew game"
-Action = SubResource( 2 )
+ShortcutKey = "n"
+AlwaysOnShortcut = false
 
 [node name="Continue" parent="MenuRoot" instance=ExtResource( 6 )]
 anchor_left = 0.5
@@ -58,7 +53,8 @@ margin_top = 70.0
 margin_right = 68.0
 margin_bottom = 170.0
 Text = "[c]ontinue"
-Action = SubResource( 2 )
+ShortcutKey = "c"
+AlwaysOnShortcut = false
 Disabled = true
 
 [node name="Quit" parent="MenuRoot" instance=ExtResource( 6 )]
@@ -69,7 +65,8 @@ margin_top = 279.6
 margin_right = 70.0
 margin_bottom = 382.6
 Text = "[q]uit"
-Action = SubResource( 2 )
+ShortcutKey = "q"
+AlwaysOnShortcut = false
 
 [node name="Leaderboard" type="Control" parent="MenuRoot"]
 anchor_right = 1.0

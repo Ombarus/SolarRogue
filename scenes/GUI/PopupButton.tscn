@@ -43,6 +43,7 @@ margin_top = -120.725
 margin_right = 70.8802
 margin_bottom = -16.7247
 Text = "[b]oard"
+ShortcutKey = "b"
 
 [node name="Take" parent="PopupSize/Popup" groups=[
 "more_btn",
@@ -56,6 +57,7 @@ margin_top = -50.0
 margin_right = 68.0
 margin_bottom = 50.0
 Text = "[t]ransfer"
+ShortcutKey = "t"
 
 [node name="Look" parent="PopupSize/Popup" groups=[
 "more_btn",
@@ -67,6 +69,7 @@ margin_top = 25.5273
 margin_right = 67.6198
 margin_bottom = 129.527
 Text = "[l]ook"
+ShortcutKey = "l"
 
 [node name="More" parent="." instance=ExtResource( 4 )]
 margin_right = 143.0

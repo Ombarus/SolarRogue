@@ -39,21 +39,24 @@ margin_bottom = -35.0
 margin_right = 254.0
 margin_bottom = 75.0
 rect_min_size = Vector2( 0, 75 )
-Text = "Save"
+Text = "[s]ave"
+ShortcutKey = "s"
 
 [node name="Suicide" parent="base/vbox" instance=ExtResource( 4 )]
 margin_top = 79.0
 margin_right = 254.0
 margin_bottom = 154.0
 rect_min_size = Vector2( 0, 75 )
-Text = "Suicide"
+Text = "[r]estart"
+ShortcutKey = "r"
 
 [node name="SaveAndQuit" parent="base/vbox" instance=ExtResource( 4 )]
 margin_top = 158.0
 margin_right = 254.0
 margin_bottom = 233.0
 rect_min_size = Vector2( 0, 75 )
-Text = "Save & Quit"
+Text = "save & [q]uit"
+ShortcutKey = "q"
 
 [connection signal="pressed" from="base/vbox/Save" to="." method="_on_Save_pressed"]
 [connection signal="pressed" from="base/vbox/Suicide" to="." method="_on_Suicide_pressed"]

@@ -270,6 +270,7 @@ margin_bottom = 0.0
 rect_min_size = Vector2( 142, 102 )
 size_flags_horizontal = 3
 Text = "[c]raft"
+ShortcutKey = "c"
 
 [node name="Close" parent="HBoxContainer/Control/VBoxContainer" instance=ExtResource( 7 )]
 anchor_top = 1.0
@@ -280,6 +281,7 @@ margin_bottom = 0.0
 rect_min_size = Vector2( 142, 102 )
 size_flags_horizontal = 3
 Text = "[esc]close"
+ShortcutEnum = 16777217
 
 [node name="Materials" parent="HBoxContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0

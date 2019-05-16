@@ -24,7 +24,9 @@ func OnGUILoaded_Callback(name, obj):
 func OnPushGUI_Callback(name, init_param):
 	#TODO: animate ?
 	#TODO: make sure Layout is not already in stack
+	print("Push " + name)
 	_gui_list[name].visible = true
+	_update_shortcut(_gui_list[name])
 	_gui_list[name].Init(init_param)
 	if _stack.size() > 0:
 		_gui_list[_stack[-1]].call_deferred("OnFocusLost")
@@ -36,3 +38,10 @@ func OnPopGUI_Callback():
 	_stack.pop_back()
 	if _stack.size() > 0:
 		_gui_list[_stack[-1]].call_deferred("OnFocusGained")
+		
+func _update_shortcut(node):
+	for child in node.get_children():
+		if child.has_method("RegisterShortcut"):
+			child.RegisterShortcut()
+		if child.get_child_count() > 0:
+			_update_shortcut(child)

@@ -80,7 +80,8 @@ margin_right = 0.0
 margin_bottom = 0.0
 rect_min_size = Vector2( 142, 102 )
 size_flags_horizontal = 3
-Text = "Transfer"
+Text = "[t]ransfer"
+ShortcutKey = "t"
 Disabled = true
 
 [node name="TakeAll" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
@@ -91,6 +92,7 @@ margin_bottom = 207.0
 rect_min_size = Vector2( 142, 102 )
 size_flags_horizontal = 3
 Text = "<<"
+ShortcutKey = "<"
 
 [node name="TransferAll" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_right = 1.0
@@ -100,6 +102,7 @@ margin_bottom = 312.0
 rect_min_size = Vector2( 142, 102 )
 size_flags_horizontal = 3
 Text = ">>"
+ShortcutKey = ">"
 
 [node name="Close" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_top = 1.0
@@ -110,6 +113,8 @@ margin_bottom = 0.0
 rect_min_size = Vector2( 142, 102 )
 size_flags_horizontal = 3
 Text = "[esc]close"
+ShortcutEnum = 16777217
+AlwaysOnShortcut = false
 
 [node name="Control" type="Control" parent="HBoxContainer/Control"]
 anchor_right = 1.0
@@ -127,7 +132,9 @@ margin_right = 0.0
 margin_bottom = 0.0
 rect_min_size = Vector2( 142, 102 )
 size_flags_horizontal = 3
-Text = "[c]ancel"
+Text = "[esc] cancel"
+ShortcutEnum = 16777217
+AlwaysOnShortcut = false
 
 [node name="OtherShip" parent="HBoxContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0

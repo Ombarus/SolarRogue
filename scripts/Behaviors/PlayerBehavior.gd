@@ -492,10 +492,10 @@ func _unhandled_input(event):
 				
 	if event is InputEventKey && event.pressed == false:
 		if _input_state == INPUT_STATE.weapon_targetting or _input_state == INPUT_STATE.board_targetting or _input_state == INPUT_STATE.loot_targetting:
-			if _last_unicode == 's':
-				get_node(TargettingHUD).emit_signal("skip_pressed")
-			if _last_unicode == 'c':
-				get_node(TargettingHUD).emit_signal("cancel_pressed")
+			#if _last_unicode == 's':
+			#	get_node(TargettingHUD).emit_signal("skip_pressed")
+			#if _last_unicode == 'c':
+			#	get_node(TargettingHUD).emit_signal("cancel_pressed")
 			return
 			#get_node(TargettingHUD).emit_signal("cancel_pressed")
 		
@@ -518,52 +518,6 @@ func _unhandled_input(event):
 		if event.scancode == KEY_KP_5:
 			BehaviorEvents.emit_signal("OnUseAP", playerNode, 1.0)
 			BehaviorEvents.emit_signal("OnLogLine", "Cooling reactor (wait)")
-		if _last_unicode == 'w':
-			Pressed_Weapon_Callback()
-		if _last_unicode == 'g':
-			Pressed_Grab_Callback()
-		if _last_unicode == 'i':
-			Pressed_Inventory_Callback()
-		if _last_unicode == 'c':
-			Pressed_Crafting_Callback()
-		if _last_unicode == 'l':
-			Pressed_Look_Callback()
-		if _last_unicode == 'b':
-			Pressed_Board_Callback()
-		if _last_unicode == 't':
-			Pressed_Take_Callback()
-		if _last_unicode == '>' or _last_unicode == '<':
-			Pressed_FTL_Callback()
-		if _last_unicode == '?':
-			Pressed_Question_Callback()
-#		if event.scancode == KEY_W:
-#			Pressed_Weapon_Callback()
-#		if event.scancode == KEY_G:
-#			Pressed_Grab_Callback()
-#		if event.scancode == KEY_I:
-#			Pressed_Inventory_Callback()
-#		if event.scancode == KEY_C:
-#			Pressed_Crafting_Callback()
-#		if event.scancode == KEY_M:
-#			Pressed_Equip_Callback()
-#		if event.scancode == KEY_L:
-#			Pressed_Look_Callback()
-#		if event.scancode == KEY_B:
-#			Pressed_Board_Callback()
-#		if event.scancode == KEY_T:
-#			Pressed_Take_Callback()
-		
-		# GODOT cannot give me the real key that was pressed. Only the physical key
-		# in En-US keyboard layout. There's no way to register a shortcut that's on a modifier (like !@#$%^&*())
-		#TODO: Stay updated on this issue on their git tracker. This is serious enough to make me want to change engine
-		#		On the other end. Being open-source I could probably hack something if it becomes too big an issue
-		#		Check out : Godot_src\godot\scene\gui\text_edit.cpp for how they handle acutal text in input forms
-		#		Check out : Godot_src\godot\core\os\input_event.cpp for how shortcut key inputs are handled
-		#		https://github.com/godotengine/godot/issues/20527
-		#if (event.scancode == KEY_PERIOD || event.scancode == KEY_COLON) && event.shift == true:
-		#	Pressed_FTL_Callback()
-		#print(event.scancode)
-		#print ("key_period : ", KEY_PERIOD, ", key_comma : ", KEY_COLON)
 	if dir != null:
 		next_touch_is_a_goto = false
 		BehaviorEvents.emit_signal("OnMovement", playerNode, dir)

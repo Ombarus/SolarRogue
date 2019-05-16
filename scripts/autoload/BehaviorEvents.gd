@@ -47,6 +47,9 @@ signal OnConsumeItem(obj, item_data)
 signal OnGUILoaded(name, obj)
 signal OnPushGUI(name, init_param)
 signal OnPopGUI()
+signal OnAddShortcut(key, obj, method)
+signal OnRemoveShortcut(key, obj, method)
+signal OnEnableShortcut(key, obj, method, isEnabled)
 
 
 func _ready():

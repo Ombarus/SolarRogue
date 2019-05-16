@@ -27,4 +27,5 @@ custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 4 )
 text = "Weapon"
 
+[connection signal="visibility_changed" from="." to="." method="_on_Button_visibility_changed"]
 [connection signal="pressed" from="btn" to="." method="_on_btn_pressed"]

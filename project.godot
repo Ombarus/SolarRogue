@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "MyItemList",
 "language": "GDScript",
 "path": "res://scripts/GUI/ItemList/MyItemList.gd"
+}, {
+"base": "Node",
+"class": "ShortcutManager",
+"language": "GDScript",
+"path": "res://scripts/autoload/ShortcutManager.gd"
 } ]
 _global_script_class_icons={
 "Attributes": "",
 "ButtonBase": "",
-"MyItemList": ""
+"MyItemList": "",
+"ShortcutManager": ""
 }
 
 [application]
@@ -43,6 +49,7 @@ Globals="*res://scripts/autoload/Globals.gd"
 MersenneTwister="*res://scripts/autoload/MersenneTwister.gd"
 PermSave="*res://scripts/autoload/PermSave.gd"
 Preloader="*res://scripts/autoload/Preloader.gd"
+ShortcutManager="*res://scripts/autoload/ShortcutManager.gd"
 
 [display]
 
