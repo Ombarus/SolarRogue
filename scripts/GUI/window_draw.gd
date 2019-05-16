@@ -304,6 +304,6 @@ func _on_Cancel_pressed():
 	
 func RegisterShortcut():
 	if dialog_ok == true:
-		BehaviorEvents.emit_signal("OnAddShortcut", "o", self, "_on_OK_pressed")
+		BehaviorEvents.emit_signal("OnAddShortcut", "o", self, "_on_Ok_pressed")
 	if dialog_cancel == true:
 		BehaviorEvents.emit_signal("OnAddShortcut", 16777217, self, "_on_Cancel_pressed")

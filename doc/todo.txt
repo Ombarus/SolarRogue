@@ -53,7 +53,6 @@ TODO :::
 			- Star Ocean First Departure
 			- Disgaea ?
 			- Final IX battle theme ?
-- hitting shortcut 'c' while in crafting double-pop the craft window and disable it !
 - Still can get shot before autopilot stop... why ?
 - Achievements
 - Background for bottom_title ship name in status bar
@@ -193,6 +192,7 @@ IDEAS:::
 	
 	
 DONE :::
+- hitting shortcut 'c' while in crafting double-pop the craft window and disable it ! (fixed by new shortcut manager)
 - include energy used by idle turn in crafting total energy cost
 - Transfering ship & ship item should take AP
 - Review the fact that crafting takes time so producing energy takes energy = to idle amount...

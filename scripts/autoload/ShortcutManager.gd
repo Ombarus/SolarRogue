@@ -43,6 +43,7 @@ func _unhandled_input(event):
 			_last_unicode = ""
 				
 	if event is InputEventKey && event.pressed == false:
+		print("unhandled input " + _last_unicode)
 		if _last_unicode in _current_shortcut_dict:
 			for shortcut in _current_shortcut_dict[_last_unicode]:
 				if not "enabled" in shortcut or shortcut.enabled == true:
