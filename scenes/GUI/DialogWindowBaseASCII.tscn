@@ -1,107 +1,234 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scripts/GUI/window_draw.gd" type="Script" id=1]
-[ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=2]
+[ext_resource path="res://data/theme/default_ui_text.tres" type="Theme" id=1]
+[ext_resource path="res://scripts/GUI/DialogWindowBaseV2.gd" type="Script" id=2]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=3]
-[ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=4]
+[ext_resource path="res://data/textures/dialog_atlas.png" type="Texture" id=4]
 
 [node name="base" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -571.0
-margin_bottom = -509.0
-script = ExtResource( 1 )
-editor_trigger_signal = false
+margin_right = 16.0
+rect_pivot_offset = Vector2( 692, -89 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
 
-[node name="width_test" type="Label" parent="."]
-visible = false
-margin_right = 40.0
-margin_bottom = 14.0
-custom_fonts/font = ExtResource( 2 )
-
-[node name="bg" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 3.0
-margin_top = 2.0
-margin_right = -6.70587
-margin_bottom = -29.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
 custom_styles/panel = ExtResource( 3 )
 
-[node name="contour" type="Label" parent="bg"]
+[node name="Layouts" type="Control" parent="."]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -3.0
-margin_top = -8.0
-margin_right = 9.0
-margin_bottom = 27.6667
-custom_fonts/font = ExtResource( 2 )
-text = "╔══════════════════════════════════════════════════════════════════════════════════════╗
-║                                                                                      ║
-║                                                                                      ║
-║                                                                                      ║
-║                                                                                      ║
-║                                                                                      ║
-║                                                                                      ║
-║                                                                                      ║
-║                                                                                      ║
-╚══════════════════════════════════════════════════════════════════════════════════════╝"
 
-[node name="Title" type="Label" parent="bg/contour"]
+[node name="DoubleTitle" type="NinePatchRect" parent="Layouts"]
+visible = false
 anchor_right = 1.0
-margin_left = 16.0
-margin_top = 20.0
-margin_right = -20.0
-margin_bottom = 39.0
-size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 4 )
+anchor_bottom = 1.0
+margin_bottom = 13.0
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 107, 116 )
+patch_margin_left = 6
+patch_margin_top = 47
+patch_margin_right = 7
+patch_margin_bottom = 6
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
-[node name="Title2" type="Label" parent="bg/contour"]
+[node name="Double" type="NinePatchRect" parent="Layouts"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+region_rect = Rect2( 109, 0, 107, 116 )
+patch_margin_left = 6
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 6
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="DoubleBottom" type="Control" parent="Layouts"]
+editor/display_folded = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Left" type="NinePatchRect" parent="Layouts/DoubleBottom"]
+anchor_right = 0.231
+anchor_bottom = 1.0
+margin_right = 129.31
+texture = ExtResource( 4 )
+region_rect = Rect2( 218, 0, 91, 88 )
+patch_margin_left = 6
+patch_margin_top = 50
+patch_margin_right = 7
+patch_margin_bottom = 6
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Right" type="NinePatchRect" parent="Layouts/DoubleBottom"]
+anchor_left = 0.769
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -403.31
+texture = ExtResource( 4 )
+region_rect = Rect2( 312, 0, 131, 88 )
+patch_margin_left = 3
+patch_margin_top = 51
+patch_margin_right = 7
+patch_margin_bottom = 6
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Single" type="NinePatchRect" parent="Layouts"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+region_rect = Rect2( 449, 0, 63, 92 )
+patch_margin_left = 6
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 6
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="SingleTitle" type="NinePatchRect" parent="Layouts"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+region_rect = Rect2( 444, 94, 68, 92 )
+patch_margin_left = 6
+patch_margin_top = 47
+patch_margin_right = 7
+patch_margin_bottom = 6
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="SingleTitleOk" type="NinePatchRect" parent="Layouts"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+region_rect = Rect2( 197, 122, 185, 98 )
+patch_margin_left = 160
+patch_margin_top = 46
+patch_margin_right = 4
+patch_margin_bottom = 6
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="SingleTitleCancel" type="NinePatchRect" parent="Layouts"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+region_rect = Rect2( 197, 122, 185, 98 )
+patch_margin_left = 4
+patch_margin_top = 46
+patch_margin_right = 159
+patch_margin_bottom = 6
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="SingleTitleOkCancel" type="NinePatchRect" parent="Layouts"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+region_rect = Rect2( 3, 336, 372, 98 )
+patch_margin_left = 162
+patch_margin_top = 46
+patch_margin_right = 159
+patch_margin_bottom = 6
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="DoubleTitleOk" type="NinePatchRect" parent="Layouts"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 119, 191, 104 )
+patch_margin_left = 160
+patch_margin_top = 47
+patch_margin_right = 23
+patch_margin_bottom = 6
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="DoubleTitleCancel" type="NinePatchRect" parent="Layouts"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 119, 191, 104 )
+patch_margin_left = 13
+patch_margin_top = 47
+patch_margin_right = 162
+patch_margin_bottom = 6
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="DoubleTitleOkCancel" type="NinePatchRect" parent="Layouts"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 226, 378, 104 )
+patch_margin_left = 167
+patch_margin_top = 47
+patch_margin_right = 166
+patch_margin_bottom = 6
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="TitleUp" type="RichTextLabel" parent="."]
+anchor_right = 1.0
+margin_left = 14.0
+margin_top = 13.0
+margin_right = -12.0
+margin_bottom = 38.0
+bbcode_enabled = true
+
+[node name="TitleBottom" type="RichTextLabel" parent="."]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 10.0
-margin_top = -37.9999
-margin_right = -20.2941
-margin_bottom = -15.9999
-size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 4 )
+margin_left = 12.0
+margin_top = -34.0
+margin_right = -6.0
+margin_bottom = -9.0
 
-[node name="Control" type="Control" parent="bg/contour"]
+[node name="Btn" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -5.29413
-margin_bottom = -55.6667
+margin_bottom = 30.0
 
-[node name="Ok" type="Button" parent="bg/contour/Control"]
+[node name="Ok" type="Button" parent="Btn"]
 visible = false
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 35.0
-margin_top = -11.0
-margin_right = 121.0
-margin_bottom = -11.0
-rect_min_size = Vector2( 121, 80 )
-custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "[O]k"
+margin_left = 35.7385
+margin_top = -56.224
+margin_right = 150.738
+margin_bottom = -5.224
+text = "[o]k"
 
-[node name="Cancel" type="Button" parent="bg/contour/Control"]
+[node name="Cancel" type="Button" parent="Btn"]
 visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -164.0
-margin_top = -11.0
-margin_right = -43.0
-margin_bottom = -11.0
-rect_min_size = Vector2( 121, 80 )
-custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
+margin_left = -155.657
+margin_top = -56.5074
+margin_right = -34.6573
+margin_bottom = -5.50745
 text = "[esc]Cancel"
 
-[connection signal="pressed" from="bg/contour/Control/Ok" to="." method="_on_Ok_pressed"]
-[connection signal="pressed" from="bg/contour/Control/Cancel" to="." method="_on_Cancel_pressed"]
+[connection signal="pressed" from="Btn/Ok" to="." method="_on_Ok_pressed"]
+[connection signal="pressed" from="Btn/Cancel" to="." method="_on_Cancel_pressed"]

@@ -279,7 +279,7 @@ func update():
 	else:
 		final_window_string += bottom_string
 	
-	get_node("bg/contour").text = final_window_string
+	#get_node("bg/contour").text = final_window_string
 	get_node("bg/contour/Title").text = title
 	get_node("bg/contour/Title2").text = bottom_title
 

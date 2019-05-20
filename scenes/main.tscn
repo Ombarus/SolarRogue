@@ -220,11 +220,13 @@ script = ExtResource( 30 )
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -215.0
-margin_right = 0.0
-margin_bottom = 10.0
+margin_left = 6.0
+margin_top = -205.0
+margin_right = -8.0
+margin_bottom = -26.0
 mouse_filter = 2
 title = "Log Stardate 0.0.0"
+border_style = "═"
 
 [node name="Buttons" type="Control" parent="Camera-GUI/HUD"]
 anchor_right = 1.0
@@ -234,9 +236,9 @@ mouse_filter = 2
 [node name="Weapon" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 32 )]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 3.0
-margin_top = -308.0
-margin_right = 141.0
+margin_left = 10.0
+margin_top = -309.0
+margin_right = 150.0
 margin_bottom = -207.0
 mouse_filter = 2
 Text = "[w]eapon"
@@ -245,10 +247,10 @@ ShortcutKey = "w"
 [node name="Grab" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 32 )]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = -397.0
-margin_right = 144.0
-margin_bottom = -295.0
+margin_left = 10.0
+margin_top = -419.0
+margin_right = 150.0
+margin_bottom = -317.0
 Text = "[g]rab"
 ShortcutKey = "g"
 
@@ -257,10 +259,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -139.0
+margin_left = -149.0
 margin_top = -309.0
-margin_right = 0.0
-margin_bottom = -205.0
+margin_right = -9.0
+margin_bottom = -207.0
 Text = "[<]FTL"
 ShortcutKey = "<"
 
@@ -269,10 +271,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -137.0
-margin_top = -398.0
-margin_right = 1.0
-margin_bottom = -295.0
+margin_left = -149.0
+margin_top = -419.0
+margin_right = -9.0
+margin_bottom = -317.0
 Text = "[i]nv"
 ShortcutKey = "i"
 
@@ -281,30 +283,30 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -138.0
-margin_top = -492.0
-margin_right = 2.0
-margin_bottom = -391.0
+margin_left = -149.0
+margin_top = -529.0
+margin_right = -9.0
+margin_bottom = -427.0
 Text = "[c]onv"
 ShortcutKey = "c"
 
 [node name="PopupButton" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 33 )]
 anchor_top = 1.0
 anchor_right = 0.0
-margin_left = 2.0
-margin_top = -489.0
-margin_right = 1634.0
-margin_bottom = -73.0
+margin_left = 10.0
+margin_top = -529.0
+margin_right = 150.0
+margin_bottom = -113.0
 
 [node name="ZoomIn" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 32 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -140.0
-margin_top = -209.0
-margin_right = -71.0
-margin_bottom = -122.0
+margin_left = -149.0
+margin_top = -200.0
+margin_right = -84.0
+margin_bottom = -135.0
 Text = "+"
 ShortcutKey = "+"
 
@@ -313,10 +315,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -70.0
-margin_top = -210.0
-margin_right = -2.0
-margin_bottom = -123.0
+margin_left = -74.0
+margin_top = -201.0
+margin_right = -9.0
+margin_bottom = -136.0
 Text = "-"
 ShortcutKey = "-"
 
@@ -325,10 +327,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -70.0
-margin_top = -133.0
-margin_right = -1.0
-margin_bottom = -48.0
+margin_left = -74.0
+margin_top = -124.0
+margin_right = -9.0
+margin_bottom = -59.0
 Text = ""
 ShortcutEnum = 16777217
 
@@ -344,15 +346,14 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -140.0
-margin_top = -133.0
-margin_right = -72.0
-margin_bottom = -46.0
+margin_left = -149.0
+margin_top = -124.0
+margin_right = -84.0
+margin_bottom = -59.0
 Text = "?"
 ShortcutKey = "?"
 
 [node name="StatusBar" type="Control" parent="Camera-GUI/HUD"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -1.0
@@ -364,11 +365,14 @@ danger_energy_level = 1001
 
 [node name="StatusWindow" parent="Camera-GUI/HUD/StatusBar" instance=ExtResource( 31 )]
 anchor_right = 1.0
-margin_right = 0.0
-margin_bottom = 77.0
+margin_left = 5.0
+margin_top = 6.0
+margin_right = -3.0
+margin_bottom = 91.0
 mouse_filter = 2
 bottom_title = "The Maveric"
 content = "Hull : [color=lime]==========[/color] Energy : [color=yellow]25000[/color] Shield : [color=aqua]===============[/color]"
+border_style = "═"
 
 [node name="levelinfo" type="Label" parent="Camera-GUI/HUD/StatusBar/StatusWindow"]
 anchor_top = 0.5

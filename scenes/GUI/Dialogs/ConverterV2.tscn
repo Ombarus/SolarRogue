@@ -33,8 +33,8 @@ margin_bottom = -20.0
 [node name="Recipes" parent="HBoxContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 624.0
-margin_bottom = 1040.0
+margin_right = 410.0
+margin_bottom = 680.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 title = "Converter MK1"
@@ -50,9 +50,9 @@ Row = ExtResource( 6 )
 SelectGroup = SubResource( 1 )
 
 [node name="Control" type="Control" parent="HBoxContainer"]
-margin_left = 628.0
-margin_right = 1252.0
-margin_bottom = 1040.0
+margin_left = 414.0
+margin_right = 824.0
+margin_bottom = 680.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -285,9 +285,9 @@ ShortcutEnum = 16777217
 [node name="Materials" parent="HBoxContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1256.0
-margin_right = 1880.0
-margin_bottom = 1040.0
+margin_left = 828.0
+margin_right = 1240.0
+margin_bottom = 680.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 title = "Select Materials"

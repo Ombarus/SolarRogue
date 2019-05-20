@@ -27,21 +27,18 @@ mouse_filter = 2
 visible = false
 margin_left = 159.0
 margin_right = 13.0
-margin_bottom = 95.0
-title_height = 3
+margin_bottom = 79.0
 border_style = "━"
 
 [node name="Board" parent="PopupSize/Popup" groups=[
 "more_btn",
 ] instance=ExtResource( 4 )]
 anchor_left = 0.5
-anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -69.1198
-margin_top = -120.725
-margin_right = 70.8802
-margin_bottom = -16.7247
+margin_left = -70.0
+margin_top = 230.0
+margin_right = 70.0
+margin_bottom = 332.0
 Text = "[b]oard"
 ShortcutKey = "b"
 
@@ -49,13 +46,11 @@ ShortcutKey = "b"
 "more_btn",
 ] instance=ExtResource( 4 )]
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -68.0
-margin_top = -50.0
-margin_right = 68.0
-margin_bottom = 50.0
+margin_left = -70.0
+margin_top = 120.0
+margin_right = 70.0
+margin_bottom = 222.0
 Text = "[t]ransfer"
 ShortcutKey = "t"
 
@@ -64,24 +59,22 @@ ShortcutKey = "t"
 ] instance=ExtResource( 4 )]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -69.3802
-margin_top = 25.5273
-margin_right = 67.6198
-margin_bottom = 129.527
+margin_left = -70.0
+margin_top = 10.0
+margin_right = 70.0
+margin_bottom = 112.0
 Text = "[l]ook"
 ShortcutKey = "l"
 
 [node name="More" parent="." instance=ExtResource( 4 )]
-margin_right = 143.0
-margin_bottom = 103.0
+margin_right = 140.0
+margin_bottom = 102.0
 Text = "..."
 
 [node name="Close" type="Button" parent="."]
 visible = false
-margin_left = 8.0
-margin_top = 6.0
-margin_right = 129.0
-margin_bottom = 79.0
+margin_right = 140.0
+margin_bottom = 102.0
 custom_styles/normal = ExtResource( 5 )
 
 [connection signal="pressed" from="PopupSize/Popup/Board" to="." method="_on_Board_pressed"]

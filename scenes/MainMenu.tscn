@@ -40,36 +40,36 @@ bbcode_enabled = true
 bbcode_text = "[center]Solar Rogue[/center]"
 text = "Solar Rogue"
 
-[node name="NewGameBTN" parent="MenuRoot" instance=ExtResource( 8 )]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -69.0
-margin_top = 176.49
-margin_right = 70.0
-margin_bottom = 279.49
-Text = "[n]ew game"
-ShortcutKey = "n"
-AlwaysOnShortcut = false
-
 [node name="Continue" parent="MenuRoot" instance=ExtResource( 8 )]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -69.0
 margin_top = 70.0
-margin_right = 68.0
-margin_bottom = 170.0
+margin_right = 71.0
+margin_bottom = 172.0
 Text = "[c]ontinue"
 ShortcutKey = "c"
 AlwaysOnShortcut = false
 Disabled = true
 
+[node name="NewGameBTN" parent="MenuRoot" instance=ExtResource( 8 )]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -69.0
+margin_top = 180.0
+margin_right = 71.0
+margin_bottom = 282.0
+Text = "[n]ew game"
+ShortcutKey = "n"
+AlwaysOnShortcut = false
+
 [node name="Quit" parent="MenuRoot" instance=ExtResource( 8 )]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -69.0
-margin_top = 279.6
-margin_right = 70.0
-margin_bottom = 382.6
+margin_top = 290.0
+margin_right = 71.0
+margin_bottom = 392.0
 Text = "[q]uit"
 ShortcutKey = "q"
 AlwaysOnShortcut = false
@@ -94,6 +94,6 @@ visible = false
 margin_top = -2.0
 margin_bottom = -2.0
 
-[connection signal="pressed" from="MenuRoot/NewGameBTN" to="." method="_on_newgame_pressed"]
 [connection signal="pressed" from="MenuRoot/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="MenuRoot/NewGameBTN" to="." method="_on_newgame_pressed"]
 [connection signal="pressed" from="MenuRoot/Quit" to="." method="_on_Quit_pressed"]

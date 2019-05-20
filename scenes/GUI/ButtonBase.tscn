@@ -12,6 +12,9 @@ script = ExtResource( 1 )
 Text = "Weapon"
 
 [node name="base" parent="." instance=ExtResource( 2 )]
+anchor_bottom = 1.0
+margin_left = 0.0
+margin_top = 0.0
 margin_right = 0.0
 margin_bottom = 0.0
 border_style = "━"
@@ -19,10 +22,6 @@ border_style = "━"
 [node name="btn" type="Button" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 3.0
-margin_top = 2.0
-margin_right = -3.70589
-margin_bottom = -22.0
 custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 4 )
 text = "Weapon"
