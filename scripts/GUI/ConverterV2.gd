@@ -30,6 +30,9 @@ func _ready():
 	_material_list.connect("OnSelectionChanged", self, "OnMaterialChanged_Callback")
 	_recipe_list.connect("OnSelectionChanged", self, "OnRecipeChanged_Callback")
 	
+	BehaviorEvents.connect("OnDamageTaken", self, "UpdateShipInfo")
+	BehaviorEvents.connect("OnEnergyChanged", self, "UpdateShipInfo")
+	
 	
 	############ TEST ###########
 	#get_node("HBoxContainer/Materials/MyItemList").Content = [{"max":2, "name_id":"Missing Missile", "disabled":true}, {"max":4, "name_id":"Missile"}, {"max":1, "name_id":"Hydrogen"},{"max":8, "name_id":"Oxygen"}]

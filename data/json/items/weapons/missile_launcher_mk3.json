@@ -4,7 +4,7 @@
 	"sprite":"missile_launcher",
 	"icon": {
 		"texture":"data/textures/space-sprite.png",
-		"region":[128,128,128,128]
+		"region":[160,160,64,64]
 	},
 	"animation": {
 		"shoot": "scenes/tileset_source/missile_fx.tscn"

@@ -39,7 +39,11 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- Fix Shortcut in the MainMenu... I wish I could have the UIManager in MainMenu... is it possible ?
+- Bind "return" key for "ok" btn
+- crash trying to convert 10 missile to energy
+- warp effect when travelling in wormhole (should also be how the game launch when you hit "new game")
+- Converter recipe list has heigher rows than other lists
+- Button size and spacing is uneven
 - Border around level is ugly
 	- give it a "danger" kind a texture ?
 	- remove it and warn the player : "cannot get out of sun's gravity well"
@@ -143,6 +147,7 @@ TODO :::
 	
 	
 polish :::
+- more dynamic Camera ? (shakes when hit, smooth movement, smooth zoom, etc.)
 - Transfer UI should display player's ship name (crafted ship could have a 1, 2, 3, 4... appended ?)
 - Make the planets spin on themselves
 -- (suggestion) from Destragon on youtube : Mousing over things should automatically display the description in the text box at the bottom without requiring you to press l for look.
@@ -192,6 +197,9 @@ IDEAS:::
 	
 	
 DONE :::
+- Can't go fullscreen with the game options (need to trigger it manually in the code)
+
+- Fix Shortcut in the MainMenu... I wish I could have the UIManager in MainMenu... is it possible ?
 - hitting shortcut 'c' while in crafting double-pop the craft window and disable it ! (fixed by new shortcut manager)
 - include energy used by idle turn in crafting total energy cost
 - Transfering ship & ship item should take AP

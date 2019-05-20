@@ -4,7 +4,7 @@
 	"sprite": "shield",
 	"icon": {
 		"texture":"data/textures/space-sprite.png",
-		"region":[384,128,128,128]
+		"region":[416,160,64,64]
 	},
 	"equipment": {
 		"slot":"shield",

@@ -7,22 +7,22 @@
 [ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/GUI/ItemList/CraftingMaterialRow.tscn" type="PackedScene" id=6]
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=1]
 flags = 2
 atlas = ExtResource( 4 )
 region = Rect2( 768, 256, 128, 128 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=2]
 flags = 2
 atlas = ExtResource( 4 )
 region = Rect2( 384, 0, 128, 128 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=3]
 flags = 2
 atlas = ExtResource( 4 )
 region = Rect2( 1408, 256, 128, 128 )
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.933333, 0.831373, 0, 1 )
 
 [node name="Node2D" type="Control"]
@@ -77,7 +77,7 @@ margin_bottom = 50.0
 rect_min_size = Vector2( 60, 0 )
 mouse_filter = 2
 size_flags_vertical = 3
-texture = SubResource( 2 )
+texture = SubResource( 1 )
 expand = true
 stretch_mode = 5
 
@@ -108,7 +108,7 @@ margin_bottom = 50.0
 rect_min_size = Vector2( 60, 0 )
 mouse_filter = 2
 size_flags_vertical = 3
-texture = SubResource( 3 )
+texture = SubResource( 2 )
 expand = true
 stretch_mode = 5
 
@@ -183,7 +183,7 @@ margin_left = -64.0
 margin_right = 64.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 128, 128 )
-texture = SubResource( 4 )
+texture = SubResource( 3 )
 expand = true
 
 [node name="base2" parent="HBoxContainer" instance=ExtResource( 2 )]
@@ -257,7 +257,7 @@ toggle_mode = true
 [node name="Panel2" type="Panel" parent="HBoxContainer/base2/VBoxContainer/Control5"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 6 )
+custom_styles/panel = SubResource( 4 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/base2/VBoxContainer/Control5"]
 anchor_right = 1.0

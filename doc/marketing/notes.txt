@@ -1,5 +1,8 @@
 - Teaser Trailer
 	- Should be 1 min
+	- Derek Lieu graph of rising intensity
+		- pro trailer maker ? Derek Lieu - https://www.derek-lieu.com/
+	- Not a sale pitch, not a gameplay video... Show what is unique about your game (switching ships, space rogue ?)
 - reddit
 	- create a /r/solarrogue
 	- https://www.reddit.com/r/shamelessplug/top/?t=all
@@ -55,3 +58,9 @@ Manage social presence (post on many platform at once ?)
 https://hootsuite.com/plans/free
 
 https://www.youtube.com/watch?v=DBPMeuYxoRk
+
+four p of marketing :
+	- Product : Understand what you're building
+	- Price : Business model (premium, freemium, f2p, etc.)
+	- Place : Distribution, Platform, etc.
+	- Promotion : PR, twitter, sharing, ads

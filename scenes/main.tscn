@@ -38,16 +38,16 @@
 [ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=36]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=37]
 [ext_resource path="res://scenes/GUI/TargettingHUD.tscn" type="PackedScene" id=38]
-[ext_resource path="res://scenes/GUI/Dialogs/DeathScreen.tscn" type="PackedScene" id=39]
-[ext_resource path="res://scenes/GUI/Dialogs/SelectableTarget.tscn" type="PackedScene" id=40]
-[ext_resource path="res://scenes/GUI/Dialogs/WelcomeScreen.tscn" type="PackedScene" id=41]
-[ext_resource path="res://scenes/GUI/Dialogs/Options.tscn" type="PackedScene" id=42]
-[ext_resource path="res://scenes/GUI/Dialogs/ValidateDiag.tscn" type="PackedScene" id=43]
-[ext_resource path="res://scenes/GUI/Dialogs/Tutorial.tscn" type="PackedScene" id=44]
-[ext_resource path="res://scenes/GUI/Dialogs/InventoryV2.tscn" type="PackedScene" id=45]
-[ext_resource path="res://scenes/GUI/Dialogs/TransferInventoryV2.tscn" type="PackedScene" id=46]
-[ext_resource path="res://scenes/GUI/Dialogs/ConverterV2.tscn" type="PackedScene" id=47]
-[ext_resource path="res://scenes/GUI/Dialogs/HowManyDiag.tscn" type="PackedScene" id=48]
+[ext_resource path="res://scenes/GUI/Dialogs/SelectableTarget.tscn" type="PackedScene" id=39]
+[ext_resource path="res://scenes/GUI/Dialogs/Options.tscn" type="PackedScene" id=40]
+[ext_resource path="res://scenes/GUI/Dialogs/ValidateDiag.tscn" type="PackedScene" id=41]
+[ext_resource path="res://scenes/GUI/Dialogs/Tutorial.tscn" type="PackedScene" id=42]
+[ext_resource path="res://scenes/GUI/Dialogs/InventoryV2.tscn" type="PackedScene" id=43]
+[ext_resource path="res://scenes/GUI/Dialogs/TransferInventoryV2.tscn" type="PackedScene" id=44]
+[ext_resource path="res://scenes/GUI/Dialogs/ConverterV2.tscn" type="PackedScene" id=45]
+[ext_resource path="res://scenes/GUI/Dialogs/WelcomeScreen.tscn" type="PackedScene" id=46]
+[ext_resource path="res://scenes/GUI/Dialogs/HowManyDiag.tscn" type="PackedScene" id=47]
+[ext_resource path="res://scenes/GUI/Dialogs/DeathScreen.tscn" type="PackedScene" id=48]
 [ext_resource path="res://scripts/DEBUG.gd" type="Script" id=49]
 [ext_resource path="res://scenes/Sample.tscn" type="PackedScene" id=50]
 
@@ -273,7 +273,7 @@ margin_left = -137.0
 margin_top = -398.0
 margin_right = 1.0
 margin_bottom = -295.0
-Text = "[i]nventory"
+Text = "[i]nv"
 ShortcutKey = "i"
 
 [node name="Converter" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 32 )]
@@ -285,7 +285,7 @@ margin_left = -138.0
 margin_top = -492.0
 margin_right = 2.0
 margin_bottom = -391.0
-Text = "[c]onverter"
+Text = "[c]onv"
 ShortcutKey = "c"
 
 [node name="PopupButton" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 33 )]
@@ -392,34 +392,34 @@ margin_bottom = -601.0
 [node name="TargettingHUD" parent="Camera-GUI" instance=ExtResource( 38 )]
 visible = false
 
-[node name="DeathScreen" parent="Camera-GUI" instance=ExtResource( 39 )]
+[node name="SelectTarget" parent="Camera-GUI" instance=ExtResource( 39 )]
 visible = false
 
-[node name="SelectTarget" parent="Camera-GUI" instance=ExtResource( 40 )]
+[node name="Options" parent="Camera-GUI" instance=ExtResource( 40 )]
 visible = false
 
-[node name="WelcomeScreen" parent="Camera-GUI" instance=ExtResource( 41 )]
+[node name="ValidateDiag" parent="Camera-GUI" instance=ExtResource( 41 )]
 visible = false
 
-[node name="Options" parent="Camera-GUI" instance=ExtResource( 42 )]
+[node name="Tutorial" parent="Camera-GUI" instance=ExtResource( 42 )]
 visible = false
 
-[node name="ValidateDiag" parent="Camera-GUI" instance=ExtResource( 43 )]
+[node name="InventoryV2" parent="Camera-GUI" instance=ExtResource( 43 )]
 visible = false
 
-[node name="Tutorial" parent="Camera-GUI" instance=ExtResource( 44 )]
+[node name="TransferInventoryV2" parent="Camera-GUI" instance=ExtResource( 44 )]
 visible = false
 
-[node name="InventoryV2" parent="Camera-GUI" instance=ExtResource( 45 )]
+[node name="ConverterV2" parent="Camera-GUI" instance=ExtResource( 45 )]
 visible = false
 
-[node name="TransferInventoryV2" parent="Camera-GUI" instance=ExtResource( 46 )]
+[node name="WelcomeScreen" parent="Camera-GUI" instance=ExtResource( 46 )]
 visible = false
 
-[node name="ConverterV2" parent="Camera-GUI" instance=ExtResource( 47 )]
+[node name="HowManyDiag" parent="Camera-GUI" instance=ExtResource( 47 )]
 visible = false
 
-[node name="HowManyDiag" parent="Camera-GUI" instance=ExtResource( 48 )]
+[node name="DeathScreen" parent="Camera-GUI" instance=ExtResource( 48 )]
 visible = false
 
 [node name="DEBUG" type="Node2D" parent="."]

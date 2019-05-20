@@ -8,7 +8,7 @@
 [node name="base" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -575.0
+margin_right = -571.0
 margin_bottom = -509.0
 script = ExtResource( 1 )
 editor_trigger_signal = false
@@ -24,7 +24,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 3.0
 margin_top = 2.0
-margin_right = -2.70587
+margin_right = -6.70587
 margin_bottom = -29.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -35,7 +35,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -3.0
 margin_top = -8.0
-margin_right = 5.0
+margin_right = 9.0
 margin_bottom = 27.6667
 custom_fonts/font = ExtResource( 2 )
 text = "╔══════════════════════════════════════════════════════════════════════════════════════╗

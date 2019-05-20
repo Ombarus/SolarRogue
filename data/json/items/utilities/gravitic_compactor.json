@@ -4,7 +4,7 @@
 	"sprite":"gravitic_compactor",
 	"icon": {
 		"texture":"data/textures/space-sprite.png",
-		"region":[128,0,128,128]
+		"region":[160,32,64,64]
 	},
 	"equipment": {
 		"slot":"utility",

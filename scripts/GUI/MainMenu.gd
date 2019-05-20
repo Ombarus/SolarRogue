@@ -5,7 +5,7 @@ extends Node
 # var b = "textvar"
 
 func _ready():
-	#OS.set_window_fullscreen(true)
+	OS.set_window_fullscreen(true)
 	#BehaviorEvents.connect("OnPushGUI", self, "OnPushGUI_Callback")
 	#BehaviorEvents.connect("OnPopGUI", self, "OnPopGUI_Callback")
 	
