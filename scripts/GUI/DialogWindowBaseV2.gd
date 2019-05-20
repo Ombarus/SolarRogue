@@ -66,6 +66,7 @@ func update_visual():
 	if title.empty() != true:
 		node_to_show += "Title"
 	
+	var panel = get_node("Panel")
 	if bottom_title.empty() != true:
 		node_to_show += "Bottom"
 		var left = get_node("Layouts/DoubleBottom/Left")
@@ -73,12 +74,16 @@ func update_visual():
 		var f = get_node("TitleBottom").get_font("font")
 		var title_width : float = f.get_string_size(bottom_title).x + 50.0
 		var self_width = self.rect_size.x
-		#left.anchor_right = title_width / self_width
-		#right.anchor_left = 1 - (title_width / self_width)
+		left.anchor_right = ANCHOR_BEGIN
+		right.anchor_left = ANCHOR_BEGIN
 		left.rect_position = Vector2(0.0, 0.0)
 		right.rect_position = Vector2(title_width, 0.0)
 		left.rect_size = Vector2(title_width, rect_size.y)
 		right.rect_size = Vector2(self_width - title_width, rect_size.y)
+		panel.visible = false
+	else:
+		panel.visible = true
+		
 	
 	if dialog_ok == true:
 		node_to_show += "Ok"
@@ -97,7 +102,7 @@ func update_visual():
 	get_node("TitleBottom").text = bottom_title
 	
 func on_size_changed():
-	self.emit_signal("OnUpdateLayout")
+	call_deferred("emit_signal", "OnUpdateLayout")
 
 func _on_Ok_pressed():
 	emit_signal("OnOkPressed")

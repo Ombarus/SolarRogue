@@ -69,7 +69,7 @@ size_flags_vertical = 3
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 22.0
-margin_top = 123.0
+margin_top = 49.0
 margin_right = -29.0
 margin_bottom = -135.0
 mouse_filter = 2
@@ -86,9 +86,9 @@ Disabled = true
 
 [node name="TakeAll" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_right = 1.0
-margin_top = 105.0
+margin_top = 110.0
 margin_right = 0.0
-margin_bottom = 207.0
+margin_bottom = 212.0
 rect_min_size = Vector2( 142, 102 )
 size_flags_horizontal = 3
 Text = "<<"
@@ -96,9 +96,9 @@ ShortcutKey = "<"
 
 [node name="TransferAll" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_right = 1.0
-margin_top = 210.0
+margin_top = 220.0
 margin_right = 0.0
-margin_bottom = 312.0
+margin_bottom = 322.0
 rect_min_size = Vector2( 142, 102 )
 size_flags_horizontal = 3
 Text = ">>"
@@ -128,8 +128,8 @@ mouse_filter = 2
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 0.0
-margin_bottom = 0.0
+margin_right = -8.0
+margin_bottom = 102.0
 rect_min_size = Vector2( 142, 102 )
 size_flags_horizontal = 3
 Text = "[esc] cancel"

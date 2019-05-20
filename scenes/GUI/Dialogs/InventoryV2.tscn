@@ -67,7 +67,7 @@ DragDropID = "InventoryV2"
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
-margin_top = 67.0
+margin_top = 44.0
 margin_right = -24.0
 margin_bottom = -125.0
 mouse_filter = 2
@@ -83,9 +83,9 @@ ShortcutKey = ">"
 
 [node name="Swap" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_right = 1.0
-margin_top = 105.0
+margin_top = 110.0
 margin_right = 0.0
-margin_bottom = 207.0
+margin_bottom = 212.0
 rect_min_size = Vector2( 0, 102 )
 size_flags_horizontal = 3
 Text = "< mount"
@@ -93,9 +93,9 @@ ShortcutKey = "<"
 
 [node name="Drop" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_right = 1.0
-margin_top = 210.0
+margin_top = 220.0
 margin_right = 0.0
-margin_bottom = 312.0
+margin_bottom = 322.0
 rect_min_size = Vector2( 0, 102 )
 size_flags_horizontal = 3
 Text = "[d]rop"
@@ -103,9 +103,9 @@ ShortcutKey = "d"
 
 [node name="Use" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_right = 1.0
-margin_top = 315.0
+margin_top = 330.0
 margin_right = 0.0
-margin_bottom = 417.0
+margin_bottom = 432.0
 rect_min_size = Vector2( 0, 102 )
 size_flags_horizontal = 3
 Text = "[u]se"

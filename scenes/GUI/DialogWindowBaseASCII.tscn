@@ -8,7 +8,8 @@
 [node name="base" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 16.0
+margin_right = -560.0
+margin_bottom = -636.0
 rect_pivot_offset = Vector2( 692, -89 )
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
@@ -19,7 +20,6 @@ anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 3 )
 
 [node name="Layouts" type="Control" parent="."]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -50,15 +50,18 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="DoubleBottom" type="Control" parent="Layouts"]
-editor/display_folded = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Left" type="NinePatchRect" parent="Layouts/DoubleBottom"]
-anchor_right = 0.231
+[node name="Left" type="Panel" parent="Layouts/DoubleBottom"]
 anchor_bottom = 1.0
-margin_right = 129.31
+margin_right = 204.0
+custom_styles/panel = ExtResource( 3 )
+
+[node name="Left" type="NinePatchRect" parent="Layouts/DoubleBottom/Left"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 texture = ExtResource( 4 )
 region_rect = Rect2( 218, 0, 91, 88 )
 patch_margin_left = 6
@@ -68,11 +71,19 @@ patch_margin_bottom = 6
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="Right" type="NinePatchRect" parent="Layouts/DoubleBottom"]
-anchor_left = 0.769
+[node name="Right" type="Control" parent="Layouts/DoubleBottom"]
+margin_left = 204.0
+margin_right = 720.0
+margin_bottom = 84.0
+
+[node name="Right" type="Panel" parent="Layouts/DoubleBottom/Right"]
+anchor_right = 1.0
+margin_bottom = 48.0
+custom_styles/panel = ExtResource( 3 )
+
+[node name="Patch" type="NinePatchRect" parent="Layouts/DoubleBottom/Right"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -403.31
 texture = ExtResource( 4 )
 region_rect = Rect2( 312, 0, 131, 88 )
 patch_margin_left = 3
