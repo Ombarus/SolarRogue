@@ -14,7 +14,8 @@
 	},
 	"scanning": {
 		"radius":1,
-		"fully_mapped":true
+		"fully_mapped":true,
+		"level":4
 	},
 	"recyclable": {
 		"energy": 5000

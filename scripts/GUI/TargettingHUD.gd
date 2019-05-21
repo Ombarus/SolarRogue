@@ -14,6 +14,9 @@ func Init(init_param):
 	else:
 		get_node("Info").bbcode_text = _default_info_text
 	
+	if init_param != null and "show_skip" in init_param:
+		get_node("Skip").visible = init_param.show_skip
+	
 func _on_Skip_pressed():
 	emit_signal("skip_pressed")
 

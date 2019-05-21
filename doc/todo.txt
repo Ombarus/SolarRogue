@@ -39,8 +39,10 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- BUG: craft scout, transfer all, notice scout disapear from screen, put back scanner and scout comes back to live (ultimate scanner).
+- "grab" menu when multiple objects ?
 - Bind "return" key for "ok" btn
-- crash trying to convert 10 missile to energy
+- crash trying to convert 10 missile to energy (CNR)
 - warp effect when travelling in wormhole (should also be how the game launch when you hit "new game")
 - Converter recipe list has heigher rows than other lists
 - Button size and spacing is uneven
@@ -197,6 +199,7 @@ IDEAS:::
 	
 	
 DONE :::
+- Broke green background in converter
 - Can't go fullscreen with the game options (need to trigger it manually in the code)
 
 - Fix Shortcut in the MainMenu... I wish I could have the UIManager in MainMenu... is it possible ?

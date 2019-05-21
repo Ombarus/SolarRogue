@@ -13,7 +13,8 @@
 		"unequip_ap":3.0
 	},
 	"scanning": {
-		"radius":8
+		"radius":8,
+		"level":0
 	},
 	"recyclable": {
 		"energy": 1500

@@ -103,7 +103,7 @@ func Pressed_Board_Callback():
 	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, targetting_data, self, "ProcessBoardSelection")
 	BehaviorEvents.emit_signal("OnPopGUI") #HUD
 	var text = "[color=red]Select a ship to board...[/color]"
-	BehaviorEvents.emit_signal("OnPushGUI", "TargettingHUD", {"info_text":text})
+	BehaviorEvents.emit_signal("OnPushGUI", "TargettingHUD", {"info_text":text, "show_skip":false})
 
 func Pressed_Take_Callback():
 	if lock_input:
@@ -115,7 +115,7 @@ func Pressed_Take_Callback():
 	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, targetting_data, self, "ProcessTakeSelection")
 	BehaviorEvents.emit_signal("OnPopGUI") #HUD
 	var text = "[color=red]Select a ship to transfer content...[/color]"
-	BehaviorEvents.emit_signal("OnPushGUI", "TargettingHUD", {"info_text":text})
+	BehaviorEvents.emit_signal("OnPushGUI", "TargettingHUD", {"info_text":text, "show_skip":false})
 	
 func UpdateButtonVisibility():
 	var weapons = playerNode.get_attrib("mounts.weapon")
@@ -309,7 +309,7 @@ func Pressed_Weapon_Callback():
 	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, cur_weapon.weapon_data, self, "ProcessAttackSelection")
 	BehaviorEvents.emit_signal("OnPopGUI") #HUD
 	var text = "[color=red]Select target for " + cur_weapon.weapon_data.name_id + "...[/color]"
-	BehaviorEvents.emit_signal("OnPushGUI", "TargettingHUD", {"info_text":text})
+	BehaviorEvents.emit_signal("OnPushGUI", "TargettingHUD", {"info_text":text, "show_skip":_weapon_shots.size() > 1})
 	_input_state = INPUT_STATE.weapon_targetting
 	
 func OnLevelLoaded_Callback():
@@ -398,7 +398,14 @@ func _input(event):
 			filtered_content.push_back(obj)
 	if filtered_content.size() == 0:
 		BehaviorEvents.emit_signal("OnLogLine", "Nothing but empty space")
+		
+	var scanner_level := 0
+	var scanner_data = Globals.LevelLoaderRef.LoadJSONArray(playerNode.get_attrib("mounts.scanner"))
+	if scanner_data != null and scanner_data.size() > 0:
+		scanner_level = Globals.get_data(scanner_data[0], "scanning.level")
+		
 	for obj in filtered_content:
+		BehaviorEvents.emit_signal("OnPushGUI", "Description", {"obj":obj, "scanner_level":scanner_level})
 		BehaviorEvents.emit_signal("OnLogLine", str_fmt % obj.get_attrib("name_id"))
 	
 

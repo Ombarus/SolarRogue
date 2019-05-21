@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=1]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold_text.tres" type="DynamicFont" id=2]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItal_text.tres" type="DynamicFont" id=3]
+[ext_resource path="res://data/fonts/DejaVuSansMonoBold_text.tres" type="DynamicFont" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 7.0
+content_margin_top = 4.0
+bg_color = Color( 0.882353, 0.882353, 0.882353, 1 )
+
+[node name="RichTextLabel2" type="RichTextLabel"]
+margin_top = 108.0
+margin_right = 341.0
+margin_bottom = 138.0
+rect_min_size = Vector2( 0, 30 )
+custom_styles/normal = SubResource( 1 )
+custom_fonts/mono_font = ExtResource( 1 )
+custom_fonts/bold_italics_font = ExtResource( 2 )
+custom_fonts/italics_font = ExtResource( 3 )
+custom_fonts/bold_font = ExtResource( 4 )
+custom_fonts/normal_font = ExtResource( 1 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[color=black]Shield Mounts[/color]"
+text = "Shield Mounts"
+
