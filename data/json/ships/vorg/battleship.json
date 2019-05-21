@@ -3,6 +3,10 @@
 	"description":"The best attack vessel of the vorg fleet. Vorg battleship have only one mission, kill while not taking a single hit to their Hull",
 	"type":"ship",
 	"sprite":"vorg_battleship",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[1536,256,128,128]
+	},
 	"animation": {
 		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
 	},

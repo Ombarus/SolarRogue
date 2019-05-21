@@ -3,6 +3,10 @@
 	"description":"A utility vessel. Can execute a wide range of functions while part of a fleet but lacks any serious firepower",
 	"type":"ship",
 	"sprite":"human_frigate",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[896,256,128,128]
+	},
 	"animation": {
 		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
 	},

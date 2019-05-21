@@ -3,6 +3,10 @@
 	"description":"Fast but relatively weak ship",
 	"type":"ship",
 	"sprite":"human_scout",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[512,256,128,128]
+	},
 	"action_point":0,
 	"mounts": {
 		"weapon": ["data/json/items/weapons/laser_turret_mk1.json"],

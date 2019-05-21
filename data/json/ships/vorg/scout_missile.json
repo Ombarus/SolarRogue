@@ -3,6 +3,10 @@
 	"description":"Fast but relatively weak ship, Vorg favour solid defense over anything, even their scout come with powerful shields",
 	"type":"ship",
 	"sprite":"vorg_scout",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[768,256,128,128]
+	},
 	"action_point":0,
 	"mounts": {
 		"weapon": ["data/json/items/weapons/missile_launcher_mk1.json"],
