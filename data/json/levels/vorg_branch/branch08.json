@@ -1,5 +1,6 @@
 {
 	"name_id":"Wormhole",
+	"display_name":"The Collective 3",
 	"level_data":"data/json/levels/vorg_branch/branch08.json",
 	"type":"wormhole",
 	"sprite":"wormhole",

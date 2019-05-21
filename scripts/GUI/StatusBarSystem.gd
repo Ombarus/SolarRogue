@@ -34,9 +34,8 @@ func OnLevelLoaded_Callback():
 	UpdateStatusBar(Globals.LevelLoaderRef.objByType["player"][0])
 	var levelinfo = get_node("StatusWindow/levelinfo")
 	var leveldata = Globals.LevelLoaderRef.GetCurrentLevelData()
-	var json_name = leveldata.src.get_file()
-	json_name = json_name.replace(".json", "")
-	levelinfo.text = json_name
+	var name = leveldata.display_name
+	levelinfo.text = name
 	
 
 #The Maveric Hull : [color=lime]==========[/color] Energy : [color=yellow]25000[/color] Shield : Up	

@@ -5,7 +5,7 @@
 	"end_game":true,
 	"icon": {
 		"texture":"data/textures/space-sprite.png",
-		"region":[256,128,128,128]
+		"region":[288,160,64,64]
 	},
 	"equipment": {
 		"slot":"converter",

@@ -1,5 +1,6 @@
 {
 	"name_id":"Wormhole",
+	"display_name":"The Homeworld 1",
 	"level_data":"data/json/levels/human_branch/branch02.json",
 	"type":"wormhole",
 	"sprite":"wormhole",

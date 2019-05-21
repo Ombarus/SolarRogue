@@ -1,5 +1,6 @@
 {
 	"name_id":"Wormhole",
+	"display_name":"The Hive 2",
 	"level_data":"data/json/levels/jerg_branch/branch05.json",
 	"type":"wormhole",
 	"sprite":"wormhole",

@@ -1,5 +1,6 @@
 {
 	"name_id":"Wormhole",
+	"display_name":"Sector 09",
 	"level_data":"data/json/levels/main/main09.json",
 	"type":"wormhole",
 	"sprite":"wormhole",
