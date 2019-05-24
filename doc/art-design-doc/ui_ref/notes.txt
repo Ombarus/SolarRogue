@@ -6,6 +6,18 @@ UI Design notes :
 	- Transparent
 	- Red, White, Blue, Green
 	
+- Animation :
+	- Text appear char per char
+	- windows flash into view
+	- items appear as a wipe on/off (horizontal, vertical, diagonal, etc.)
+	- Principles :
+		- Responsiveness (fast, fluid motion)
+		- Intention (focus toward action (animation lead the way))
+		- Awareness (animation react to player's action (UI follow mouse, etc.))
+		- Consistency (locked button always react the same way)
+		- Physical Intuition (if world is grand, animation should be grand)
+	- tearing effect : https://www.construct.net/en/forum/extending-construct-2/effects-31/effect-tv-flicker-fx-115936
+	- godot hover tween anim : https://godotengine.org/qa/5987/gui-animations
 
 - Common color theme :
 	base

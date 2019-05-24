@@ -53,6 +53,7 @@ TODO :::
 - a way to id player ship when scrolling the map around
 	- button to re-center ?
 	- feedback when in 'goto' mode ?
+	- little arrow showing the player <-- The Ombarus
 - BUG: still have negative inventory sometimes
 - BUG: craft scout, transfer all, notice scout disapear from screen, put back scanner and scout comes back to live (ultimate scanner).
 - "grab" menu when multiple objects ?
