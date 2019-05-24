@@ -1,0 +1,27 @@
+UI Design notes :
+
+- Scifi UI theme :
+	- Holography
+	- Glow
+	- Transparent
+	- Red, White, Blue, Green
+	
+
+- Common color theme :
+	base
+		- Green
+		- Turquoise
+		- Gray/White
+	opposite
+		- orange
+		- red
+	
+
+TIS-100 :
+	- black text, gray background (disabled)
+	- black text, white background (active)
+	- white text, white background (buttons, info, etc)
+	- red text, white background (problem, error)
+	- button "pressed" become thicker line
+	- blinking square white cursor
+	

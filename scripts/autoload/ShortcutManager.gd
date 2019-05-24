@@ -10,9 +10,9 @@ func Add(key, obj, method):
 	#	var error_str = "********OVERRIDING SHORTCUT. %s IS ALREADY REGISTERED TO METHOD %s BUT TRYING TO ADD METHOD %s********"
 	#	error_str = error_str % [key, _current_shortcut_dict[key].method, method]
 	#	print(error_str)
-	var debug_str = "Register key %s to %s.%s"
-	debug_str = debug_str % [str(key), obj.name, method]
-	print(debug_str)
+	#var debug_str = "Register key %s to %s.%s"
+	#debug_str = debug_str % [str(key), obj.name, method]
+	#print(debug_str)
 	if not key in _current_shortcut_dict:
 		_current_shortcut_dict[key] = []
 	_current_shortcut_dict[key].push_back({"obj":obj, "method":method})
@@ -26,9 +26,9 @@ func Remove(key, obj, method):
 		_current_shortcut_dict.erase(key)
 		
 func Enable(key, obj, method, isEnabled):
-	var debug_str = "Enable key %s to %s.%s : %s"
-	debug_str = debug_str % [str(key), obj.name, method, isEnabled]
-	print(debug_str)
+	#var debug_str = "Enable key %s to %s.%s : %s"
+	#debug_str = debug_str % [str(key), obj.name, method, isEnabled]
+	#print(debug_str)
 	
 	if key in _current_shortcut_dict:
 		for shortcut in _current_shortcut_dict[key]:
@@ -43,7 +43,7 @@ func _unhandled_input(event):
 			_last_unicode = ""
 				
 	if event is InputEventKey && event.pressed == false:
-		print("unhandled input " + _last_unicode)
+		#print("unhandled input " + _last_unicode)
 		if _last_unicode in _current_shortcut_dict:
 			for shortcut in _current_shortcut_dict[_last_unicode]:
 				if not "enabled" in shortcut or shortcut.enabled == true:

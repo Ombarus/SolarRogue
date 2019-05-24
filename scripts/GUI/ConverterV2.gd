@@ -344,6 +344,8 @@ func special_recycle_update(recipe_data):
 	var total_items = 0
 	var total_energy = 0
 	for item in using_content:
+		if "disabled" in item and item.disabled == true:
+			continue
 		var d = Globals.LevelLoaderRef.LoadJSON(item.src)
 		total_items += item.selected
 		total_energy += (d.recyclable.energy * item.selected)

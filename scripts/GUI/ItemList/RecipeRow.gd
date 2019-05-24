@@ -23,6 +23,8 @@ func set_row_data(data):
 	if "selected" in data:
 		self.pressed = data.selected
 		pressed_callback()
+		
+	_metadata.origin.connect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
 
 func get_row_data():
 	_metadata["selected"] = self.pressed
@@ -35,4 +37,9 @@ func _ready():
 	connect("pressed", self, "pressed_callback")
 	
 func pressed_callback():
+	get_node("HBoxContainer/Name").add_color_override("font_color", Color(0,0,0))
 	_metadata.origin.bubble_selection_changed()
+
+func OnSelectionChanged_Callback():
+	if self.pressed == false:
+		get_node("HBoxContainer/Name").add_color_override("font_color", Color(1,1,1))

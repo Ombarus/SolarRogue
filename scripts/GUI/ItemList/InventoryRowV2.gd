@@ -37,8 +37,15 @@ func set_row_data(data):
 	else:
 		self.theme = normal_theme
 		get_node("BtnWrap/HBoxContainer/Icon").visible = true
+		
+	_metadata.origin.connect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
+
+func OnSelectionChanged_Callback():
+	if get_node("BtnWrap/Toggle").pressed == false and (not "header" in _metadata or not _metadata.header == true):
+		get_node("BtnWrap/HBoxContainer/Wrap/Name").add_color_override("default_color", Color(1,1,1))
 
 func _on_Toggle_toggled(button_pressed):
+	get_node("BtnWrap/HBoxContainer/Wrap/Name").add_color_override("default_color", Color(0,0,0))
 	_metadata.origin.bubble_selection_changed()
 
 ################ DRAG & DROP OVERRIDE #########################

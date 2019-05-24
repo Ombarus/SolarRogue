@@ -12,6 +12,7 @@ export(String, MULTILINE) var PreloadJSON = ""
 export var base_attributes = {} # can be kept by reference, no need to serialize
 export var modified_attributes = {} # locally modified attribute (like current position). Should be saved !
 
+
 func get_attrib(path, default=null):
 	var splices = path.split(".", false)
 	var sub = modified_attributes

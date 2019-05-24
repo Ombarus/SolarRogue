@@ -16,14 +16,15 @@ editor_trigger_signal = false
 [node name="base" parent="." instance=ExtResource( 2 )]
 margin_right = 0.0
 margin_bottom = 0.0
+border_style = "="
 
 [node name="Content" type="RichTextLabel" parent="base"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 14.0
-margin_top = 13.0
-margin_right = -20.0
-margin_bottom = -35.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/mono_font = ExtResource( 3 )
