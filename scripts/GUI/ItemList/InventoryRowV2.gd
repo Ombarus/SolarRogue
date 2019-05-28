@@ -37,7 +37,9 @@ func set_row_data(data):
 	else:
 		self.theme = normal_theme
 		get_node("BtnWrap/HBoxContainer/Icon").visible = true
-		
+	
+	if _metadata.origin.is_connected("OnSelectionChanged", self, "OnSelectionChanged_Callback"):
+		_metadata.origin.disconnect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
 	_metadata.origin.connect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
 
 func OnSelectionChanged_Callback():

@@ -4,10 +4,10 @@
 	"sprite_choice":[
 		"missile"
 	],
-	"icon": {
+	"icon": [{
 		"texture":"data/textures/space-sprite.png",
 		"region":[384,0,128,128]
-	},
+	}],
 	"equipment": {
 		"slot":"cargo",
 		"volume":0.5,

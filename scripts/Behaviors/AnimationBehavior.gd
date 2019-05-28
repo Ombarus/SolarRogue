@@ -29,8 +29,9 @@ func OnObjectDestroyed_Callback(obj):
 	var pos = obj.position
 	n.position = pos
 	var r = get_node("/root/Root/GameTiles")
-	r.call_deferred("add_child", n)
-	n.Start(pos)
+	call_deferred("safe_start", n, r, pos)
+	#r.call_deferred("add_child", n)
+	#n.Start(pos)
 	
 	
 func OnShotFired_Callback(target, shooter, weapon):
@@ -47,8 +48,13 @@ func OnShotFired_Callback(target, shooter, weapon):
 	var pos = shooter.position
 	n.position = pos
 	var r = get_node("/root/Root/GameTiles")
-	r.call_deferred("add_child", n)
-	n.Start(target.global_position)
+	call_deferred("safe_start", n, r, target.global_position)
+	#r.call_deferred("add_child", n)
+	#n.Start(target.global_position)
+	
+func safe_start(n, r, target_pos):
+	r.add_child(n)
+	n.Start(target_pos)
 	
 
 #func _process(delta):

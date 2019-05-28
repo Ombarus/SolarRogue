@@ -30,14 +30,17 @@ func _ready():
 	_material_list.connect("OnSelectionChanged", self, "OnMaterialChanged_Callback")
 	_recipe_list.connect("OnSelectionChanged", self, "OnRecipeChanged_Callback")
 	
-	BehaviorEvents.connect("OnDamageTaken", self, "UpdateShipInfo")
-	BehaviorEvents.connect("OnEnergyChanged", self, "UpdateShipInfo")
+	BehaviorEvents.connect("OnDamageTaken", self, "OnDamageTaken_Callback")
+	BehaviorEvents.connect("OnEnergyChanged", self, "OnEnergyChanged")
 	
 	
-	############ TEST ###########
-	#get_node("HBoxContainer/Materials/MyItemList").Content = [{"max":2, "name_id":"Missing Missile", "disabled":true}, {"max":4, "name_id":"Missile"}, {"max":1, "name_id":"Hydrogen"},{"max":8, "name_id":"Oxygen"}]
-	#get_node("HBoxContainer/Recipes/MyItemList").Content = [{"name_id":"Missile", "icon": { "texture":"data/textures/space-sprite.png", "region":[256,128,128,128] }}]
-
+func OnDamageTaken_Callback(target, shooter):
+	if _obj != null:
+		UpdateShipInfo()
+	
+func OnEnergyChanged(obj):
+	if _obj != null:
+		UpdateShipInfo()
 
 func CraftButtonPressed_Callback():
 	if _callback_obj == null:
@@ -59,6 +62,7 @@ func Close_Callback():
 	
 	_recipe_list.Content = []
 	_material_list.Content = []
+	_obj = null
 
 
 func OnFocusGained():

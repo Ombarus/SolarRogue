@@ -3,9 +3,6 @@
 [ext_resource path="res://data/shaders/fow_mask.shader" type="Shader" id=1]
 
 [resource]
-
-render_priority = 0
 shader = ExtResource( 1 )
-shader_param/gray_color = Vector3( 0.07, 0.07, 0.12 )
-_sections_unfolded = [ "shader_param" ]
+shader_param/gray_color = Vector3( 0.14, 0.21, 0.54 )
 

@@ -24,6 +24,8 @@ func set_row_data(data):
 		self.pressed = data.selected
 		pressed_callback()
 		
+	if _metadata.origin.is_connected("OnSelectionChanged", self, "OnSelectionChanged_Callback"):
+		_metadata.origin.disconnect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
 	_metadata.origin.connect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
 
 func get_row_data():
