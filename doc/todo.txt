@@ -39,6 +39,8 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- managed to drop and pickup object in same frame resulting in a crash (from inventory window drop an item with a sort of double-click)
+- missile icon gone from recipe menu
 - Settings menu
 	- Windowed, resolution
 	- key binding ?
@@ -50,7 +52,6 @@ TODO :::
 - categories in crafting material list (when more than 4-5 items)
 - add icon in material list in crafting diag
 - leaderboard display improvement (scroll is not ideal yet)
-- fog too subtil
 - a way to id player ship when scrolling the map around
 	- button to re-center ?
 	- feedback when in 'goto' mode ?
@@ -215,6 +216,7 @@ IDEAS:::
 	
 	
 DONE :::
+- fog too subtil
 - planet icons not set (for multiple-target dialog)
 - drag & drop to mount from inventory window
 - can't see red line of targetting HUD when zoomed out

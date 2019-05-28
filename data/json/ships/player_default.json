@@ -27,7 +27,9 @@
 		"transferable":true,
 		"content":[
 			{"src":"data/json/items/weapons/missile.json", "count":10},
-			{"src":"data/json/items/consumables/repair_nanobots.json", "count":1}
+			{"src":"data/json/items/consumables/repair_nanobots.json", "count":1},
+			{"src":"data/json/items/misc/scout_body.json", "count":1},
+			{"src":"data/json/items/weapons/missile_launcher_mk1.json", "count":1}
 		]
 	},
 	"converter": {

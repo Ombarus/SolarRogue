@@ -395,6 +395,7 @@ func OnDragDropCompleted_Callback(origin_data, destination_data):
 			BehaviorEvents.emit_signal("OnRemoveMount", dest_ship, destination_data.key, destination_data.idx)
 			BehaviorEvents.emit_signal("OnRemoveItem", dest_ship, destination_data.src)
 			BehaviorEvents.emit_signal("OnAddItem", origin_ship, destination_data.src)
+		BehaviorEvents.emit_signal("OnAddItem", dest_ship, origin_data.src)
 		BehaviorEvents.emit_signal("OnEquipMount", dest_ship, destination_data.key, destination_data.idx, origin_data.src)
 	# Mount to Cargo
 	elif dest_is_mount == false and origin_is_mount == true:
@@ -410,8 +411,10 @@ func OnDragDropCompleted_Callback(origin_data, destination_data):
 			BehaviorEvents.emit_signal("OnRemoveMount", origin_ship, origin_data.key, origin_data.idx)
 			BehaviorEvents.emit_signal("OnRemoveItem", origin_ship, origin_data.src)
 		if destination_data.src != "":
+			BehaviorEvents.emit_signal("OnAddItem", origin_ship, destination_data.src)
 			BehaviorEvents.emit_signal("OnEquipMount", origin_ship, origin_data.key, origin_data.idx, destination_data.src)
 		if origin_data.src != "":
+			BehaviorEvents.emit_signal("OnAddItem", dest_ship, origin_data.src)
 			BehaviorEvents.emit_signal("OnEquipMount", dest_ship, destination_data.key, destination_data.idx, origin_data.src)
 	
 	ReInit()
