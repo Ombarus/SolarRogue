@@ -95,7 +95,10 @@ func ReInit():
 		if not "icon" in d and ".json" in recipe_data.produce:
 			var produce_data = Globals.LevelLoaderRef.LoadJSON(recipe_data.produce)
 			if "icon" in produce_data:
-				d["icon"] = produce_data.icon
+				if typeof(produce_data.icon) == TYPE_ARRAY:
+					d["icon"] = produce_data.icon[0]
+				else:
+					d["icon"] = produce_data.icon
 		recipe_content.push_back(d)
 
 	_recipe_list.Content = recipe_content

@@ -39,6 +39,7 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- recipe row size != inventory row size
 - managed to drop and pickup object in same frame resulting in a crash (from inventory window drop an item with a sort of double-click)
 - missile icon gone from recipe menu
 - Settings menu

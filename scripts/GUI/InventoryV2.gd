@@ -195,6 +195,8 @@ func Init(init_param):
 		var counting = ""
 		if row.count > 1:
 			counting = str(row.count) + "x "
+		if typeof(data.icon) == TYPE_ARRAY:
+			data.icon = data.icon[0]
 		cargo_item_by_category[cat].push_back({"src":row.src, "count":row.count, "name_id": counting + data.name_id, "equipped":false, "header":false, "icon":data.icon})
 		
 	for key in cargo_item_by_category:
