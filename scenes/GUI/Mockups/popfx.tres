@@ -4,6 +4,6 @@
 
 [resource]
 shader = ExtResource( 1 )
-shader_param/percent = 0.57
+shader_param/percent = 0.7
 shader_param/width = 0.02
 

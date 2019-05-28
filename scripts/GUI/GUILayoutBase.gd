@@ -1,5 +1,7 @@
 extends Control
 
+export(bool) var Transition = true
+
 func _ready():
 	BehaviorEvents.emit_signal("OnGUILoaded", self.name, self)
 	self.set_process_input(false)

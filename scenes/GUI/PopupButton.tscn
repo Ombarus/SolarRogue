@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/GUI/PopupButton.gd" type="Script" id=1]
 [ext_resource path="res://scripts/GUI/PopupScreenBlock.gd" type="Script" id=2]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=4]
 [ext_resource path="res://data/styles/trans.tres" type="StyleBox" id=5]
+[ext_resource path="res://data/animations/popin.tres" type="Animation" id=6]
 
 [node name="PopupButton" type="Control"]
 anchor_right = 1.0
@@ -24,9 +25,9 @@ margin_bottom = 266.0
 mouse_filter = 2
 
 [node name="Popup" parent="PopupSize" instance=ExtResource( 3 )]
-visible = false
-margin_left = 159.0
-margin_right = 13.0
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 132.9
+margin_right = -13.1001
 margin_bottom = 79.0
 border_style = "━"
 
@@ -67,8 +68,8 @@ Text = "[l]ook"
 ShortcutKey = "l"
 
 [node name="More" parent="." instance=ExtResource( 4 )]
-margin_right = 140.0
-margin_bottom = 102.0
+margin_right = 110.0
+margin_bottom = 90.0
 Text = "..."
 
 [node name="Close" type="Button" parent="."]
@@ -76,6 +77,10 @@ visible = false
 margin_right = 140.0
 margin_bottom = 102.0
 custom_styles/normal = ExtResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../PopupSize/Popup")
+anims/popin = ExtResource( 6 )
 
 [connection signal="pressed" from="PopupSize/Popup/Board" to="." method="_on_Board_pressed"]
 [connection signal="pressed" from="PopupSize/Popup/Take" to="." method="_on_Take_pressed"]

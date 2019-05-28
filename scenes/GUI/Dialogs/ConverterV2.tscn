@@ -260,25 +260,29 @@ bbcode_text = "[color=aqua]==========[/color]"
 text = "=========="
 
 [node name="Craft" parent="HBoxContainer/Control/VBoxContainer" instance=ExtResource( 7 )]
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
+margin_left = -152.0
 margin_top = -109.0
-margin_right = 0.0
-margin_bottom = -7.0
-rect_min_size = Vector2( 142, 102 )
+margin_right = 152.0
+margin_bottom = -19.0
+rect_min_size = Vector2( 142, 90 )
 size_flags_horizontal = 3
 Text = "[c]raft"
 ShortcutKey = "c"
 
 [node name="Close" parent="HBoxContainer/Control/VBoxContainer" instance=ExtResource( 7 )]
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
+margin_left = -152.0
 margin_top = 1.0
-margin_right = 0.0
-margin_bottom = 103.0
-rect_min_size = Vector2( 142, 102 )
+margin_right = 152.0
+margin_bottom = 91.0
+rect_min_size = Vector2( 142, 90 )
 size_flags_horizontal = 3
 Text = "[esc]close"
 ShortcutEnum = 16777217

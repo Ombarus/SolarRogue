@@ -21,6 +21,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("../swipe:material:shader_param/percent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.4, 0.7 ]
+}
 
 [node name="popfx" type="Control"]
 anchor_right = 1.0
@@ -33,7 +45,6 @@ mouse_filter = 2
 script = ExtResource( 1 )
 
 [node name="flicker" type="NinePatchRect" parent="."]
-modulate = Color( 1, 1, 1, 0.305882 )
 margin_left = 169.0
 margin_top = 114.0
 margin_right = 404.0
@@ -68,6 +79,7 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
+visible = false
 material = ExtResource( 3 )
 margin_left = 812.0
 margin_top = 74.0

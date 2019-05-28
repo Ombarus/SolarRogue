@@ -1,10 +1,17 @@
 UI Design notes :
 
+- More fonts :
+	- https://www.dafont.com/soniano-sans-unicode.font ?? (http://graphicdesignjunction.com/2013/06/free-fonts-for-elegant-design/)
+
 - Scifi UI theme :
 	- Holography
 	- Glow
 	- Transparent
 	- Red, White, Blue, Green
+	- username, folders, etc. prepend <helm> Ship is out of control !, <engineering> Engine Down !
+		- Log lines could start with '>' like a command prompt
+		- last line of log window could have a flashing square > █
+	- scanline ?
 	
 - Animation :
 	- Text appear char per char
@@ -24,6 +31,8 @@ UI Design notes :
 		- Green
 		- Turquoise
 		- Gray/White
+			- 5% gray
+		- Contrast checker : https://webaim.org/resources/contrastchecker/
 	opposite
 		- orange
 		- red

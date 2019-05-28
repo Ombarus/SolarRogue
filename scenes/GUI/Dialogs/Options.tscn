@@ -34,28 +34,28 @@ margin_left = 61.0
 margin_top = 63.0
 margin_right = -63.0
 margin_bottom = -35.0
-custom_constants/separation = 10
+custom_constants/separation = 22
 
 [node name="Save" parent="base/vbox" instance=ExtResource( 4 )]
 margin_right = 254.0
-margin_bottom = 102.0
-rect_min_size = Vector2( 0, 102 )
+margin_bottom = 90.0
+rect_min_size = Vector2( 0, 90 )
 Text = "[s]ave"
 ShortcutKey = "s"
 
 [node name="Suicide" parent="base/vbox" instance=ExtResource( 4 )]
 margin_top = 112.0
 margin_right = 254.0
-margin_bottom = 214.0
-rect_min_size = Vector2( 0, 102 )
+margin_bottom = 202.0
+rect_min_size = Vector2( 0, 90 )
 Text = "[r]estart"
 ShortcutKey = "r"
 
 [node name="SaveAndQuit" parent="base/vbox" instance=ExtResource( 4 )]
 margin_top = 224.0
 margin_right = 254.0
-margin_bottom = 326.0
-rect_min_size = Vector2( 0, 102 )
+margin_bottom = 314.0
+rect_min_size = Vector2( 0, 90 )
 Text = "save & [q]uit"
 ShortcutKey = "q"
 

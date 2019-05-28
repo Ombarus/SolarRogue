@@ -17,25 +17,28 @@ func _ready():
 	#_popup.title_height = repeat_height
 
 func Pressed_More_Callback():
-	if _popup.visible == false:
+	if _block.visible == false:
 		#_more_btn.visible = false
-		_popup.visible = true
+		#_popup.visible = true
 		_popup.emit_signal("OnUpdateLayout")
+		get_node("AnimationPlayer").play("popin")
 		var nodes = get_tree().get_nodes_in_group("more_btn")
 		for n in nodes:
 			n.get_node("base").emit_signal("OnUpdateLayout")
 		#_close_btn.visible = true
 		_block.visible = true
 	else:
+		get_node("AnimationPlayer").play_backwards("popin")
 		#_more_btn.visible = true
-		_popup.visible = false
+		#_popup.visible = false
 		#_close_btn.visible = false
 		_block.visible = false
 		
 	
 func Pressed_Close_Callback():
 	_more_btn.visible = true
-	_popup.visible = false
+	get_node("AnimationPlayer").play_backwards("popin")
+	#_popup.visible = false
 	_close_btn.visible = false
 	_block.visible = false
 

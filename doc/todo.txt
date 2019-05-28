@@ -39,11 +39,13 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- Log window text not window size
+- Settings menu
+	- Windowed, resolution
+	- key binding ?
+	- language ?
+- customize scroll bar ?
 - don't let planet material spawn under the player
 - death screen need beautification
-- dialog cancel button doesn't fit well
-- can't see red line of targetting HUD when zoomed out
 - add hit FX
 - categories in crafting material list (when more than 4-5 items)
 - planet icons not set (for multiple-target dialog)
@@ -84,7 +86,6 @@ TODO :::
 	- Issues in main menu (esc doesn't work ? quit show player name popup, [n] doesn't work ?)
 	- [esc] in main HUD should pop setting diag ?
 - should display # of turn when crafting
-- drag & drop to mount from inventory window
 - Find a way to make a good UI for PC AND mobile... how to adjust font size and such ?
 - Allow clicking outside of the map to move (it has weird behavior now with contextual clicks)
 - Look button should popup a window with details ?
@@ -165,6 +166,7 @@ TODO :::
 	
 	
 polish :::
+- dialog cancel button doesn't fit well
 - more dynamic Camera ? (shakes when hit, smooth movement, smooth zoom, etc.)
 - Transfer UI should display player's ship name (crafted ship could have a 1, 2, 3, 4... appended ?)
 - Make the planets spin on themselves
@@ -173,7 +175,6 @@ polish :::
 - Highlight last run in leaderboard in main menu
 - BUG: Loading level doesn't load the same planet sprite ? (because it's random choice ?)
 - Save node's rotation (position is saved but not rot)
-- UI is slightly off on android since update to 3.1 (probably because of native resolution vs stretch settings in project ?)
 - Sort energy recycler need list from most energy to less energy
 - Polish Energy "Recyling" informations in crafting UI
 - Block background in the howmany dialog
@@ -215,6 +216,10 @@ IDEAS:::
 	
 	
 DONE :::
+- drag & drop to mount from inventory window
+- can't see red line of targetting HUD when zoomed out
+- Log window text not window size
+- UI is slightly off on android since update to 3.1 (probably because of native resolution vs stretch settings in project ?)
 - Broke green background in converter
 - Can't go fullscreen with the game options (need to trigger it manually in the code)
 

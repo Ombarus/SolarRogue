@@ -32,6 +32,8 @@ func OnObjectLoaded_Callback(obj):
 		# Save the sprite we chose in modified_attrib so we don't randomize again when loading the level
 		# and also when duplicating the object for ghost memories
 		obj.set_attrib("sprite", sprite_choice[x])
+		if obj.get_attrib("icon") != null:
+			obj.set_attrib("icon", obj.get_attrib("icon")[x])
 		var scene = load("res://scenes/tileset_source/" + sprite_choice[x] + ".tscn")
 		node = scene.instance()
 		

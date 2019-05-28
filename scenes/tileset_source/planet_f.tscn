@@ -8,5 +8,5 @@ z_index = 5
 texture = ExtResource( 1 )
 normal_map = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 768, 0, 128, 128 )
+region_rect = Rect2( 384, 512, 256, 256 )
 
