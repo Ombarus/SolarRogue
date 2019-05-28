@@ -103,7 +103,6 @@ func OnDropCargo_Callback(dropper, item_id, count):
 	for item in cargo:
 		if Globals.clean_path(item_id) == Globals.clean_path(item.src):
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
-			dropper.set_attrib("cargo.volume_used", dropper.get_attrib("cargo.volume_used") - data.equipment.volume)
 			var amount_dropped = 0
 			if item.count > count:
 				item.count -= count
@@ -111,6 +110,7 @@ func OnDropCargo_Callback(dropper, item_id, count):
 			else:
 				amount_dropped = item.count
 				index_to_delete.push_back(i)
+			dropper.set_attrib("cargo.volume_used", dropper.get_attrib("cargo.volume_used") - (data.equipment.volume*amount_dropped))
 			total_ap_cost += drop_speed * amount_dropped
 			for i in range(amount_dropped):
 				Globals.LevelLoaderRef.RequestObject(item.src, Globals.LevelLoaderRef.World_to_Tile(dropper.position))
@@ -210,11 +210,12 @@ func OnRemoveItem_Callback(holder, item_id, num_remove=1): #-1 to remove everyth
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			if num_remove < 0:
 				num_remove = item.count
-			holder.set_attrib("cargo.volume_used", holder.get_attrib("cargo.volume_used") - data.equipment.volume*num_remove)
+			holder.set_attrib("cargo.volume_used", holder.get_attrib("cargo.volume_used") - (data.equipment.volume*num_remove))
 			if item.count > num_remove:
 				item.count -= num_remove
 			else:
 				index_to_delete.push_back(i)
+			break
 		i += 1
 					
 	for index in index_to_delete:
