@@ -14,4 +14,13 @@
 	"recyclable": {
 		"energy": 200
 	}
-}
+},
+	"description": {
+		"text":"The remains of this probe hull are still in suprisingly good shape. They could be used as a scaffold for a new Probe, but why ?",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}"}
+			]
+		}
+	}

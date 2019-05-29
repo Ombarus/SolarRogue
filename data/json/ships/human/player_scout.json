@@ -47,7 +47,7 @@
 		"Status": {
 			"min_level":1,
 			"fields": [
-				{"name":"Current hull", "value":"{destroyable.current_hull}"},
+				{"name":"Current hull", "value":"{destroyable.current_hull}", "default":"{destroyable.hull}"},
 				{"name":"Current shield", "value":"{shield.current_hp}"}
 			]
 		}

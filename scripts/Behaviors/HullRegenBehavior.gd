@@ -41,10 +41,10 @@ func _process_healing(obj, data, item_data):
 	var heal = 0.0
 	if turn_count > 0.0:
 		heal = item_data.hull_regen.point_per_turn * turn_count
-		var max_hull = obj.base_attributes.destroyable.hull
-		var cur_hull = obj.get_attrib("destroyable.hull")
+		var max_hull = obj.get_attrib("destroyable.hull")
+		var cur_hull = obj.get_attrib("destroyable.current_hull", max_hull)
 		var new_hull = min(max_hull, cur_hull + heal)
-		obj.set_attrib("destroyable.hull", new_hull)
+		obj.set_attrib("destroyable.current_hull", new_hull)
 		
 	
 	data.last_turn_update = Globals.total_turn

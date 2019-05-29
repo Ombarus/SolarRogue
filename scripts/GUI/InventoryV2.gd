@@ -11,6 +11,7 @@ var _remove_btn : ButtonBase = null
 var _swap_btn : ButtonBase = null
 var _drop_btn : ButtonBase = null
 var _use_btn : ButtonBase = null
+var _desc_btn : ButtonBase = null
 
 var _normal_btns : Control = null
 var _mounting_btns : Control = null
@@ -33,6 +34,8 @@ func _ready():
 	_drop_btn.connect("pressed", self, "Drop_Callback")
 	_use_btn = get_node("HBoxContainer/Control/Normal/Use")
 	_use_btn.connect("pressed", self, "Use_Callback")
+	_desc_btn = get_node("HBoxContainer/Control/Normal/Desc")
+	_desc_btn.connect("pressed", self, "Desc_Callback")
 	
 	get_node("HBoxContainer/Control/Normal/Close").connect("pressed", self, "Close_Callback")
 	_mounts_list.connect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
@@ -40,6 +43,34 @@ func _ready():
 	_cargo_list.connect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
 	_cargo_list.connect("OnDragDropCompleted", self, "OnDragDropCompleted_Callback")
 	get_node("HBoxContainer/Control/DropDrag").connect("OnDragDropCompleted", self, "OnDragDropCompleted_Callback")
+
+func Desc_Callback():
+	var scanner_level := 0
+	var scanner_data = Globals.LevelLoaderRef.LoadJSONArray(_obj.get_attrib("mounts.scanner"))
+	if scanner_data != null and scanner_data.size() > 0:
+		scanner_level = Globals.get_data(scanner_data[0], "scanning.level")
+	
+	var selected = null
+	
+	var cargo = _cargo_list.Content
+	var mounts = _mounts_list.Content
+	
+	for item in cargo:
+		if item.selected == true:
+			selected = item
+			break
+			
+	if selected == null:
+		for item in mounts:
+			if item.selected == true:
+				selected = item
+				break
+		
+	var data = null
+	if selected != null and "src" in selected and selected.src != null and selected.src != "":
+		data = Globals.LevelLoaderRef.LoadJSON(selected.src)
+	
+	BehaviorEvents.emit_signal("OnPushGUI", "Description", {"json":data, "scanner_level":scanner_level})
 
 func Remove_Callback():
 	var selected_mount = null
@@ -303,6 +334,11 @@ func UpdateNormalVisibility():
 		_disable_button(_remove_btn, false)
 	else:
 		_disable_button(_remove_btn, true)
+		
+	###### Can show description button #######
+	
+	_disable_button(_desc_btn, selected_cargo == null and selected_mount == null)
+		
 		
 ############### DRAG & DROP ###################
 

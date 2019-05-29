@@ -10,6 +10,7 @@ var _obj : Attributes = null
 var _transfer_btn : ButtonBase = null
 var _take_all_btn : ButtonBase = null
 var _transfer_all_btn : ButtonBase = null
+var _desc_btn : ButtonBase = null
 
 var _normal_btns : Control = null
 var _question_btns : Control = null
@@ -33,6 +34,8 @@ func _ready():
 	_take_all_btn.connect("pressed", self, "TakeAll_Callback")
 	_transfer_all_btn = get_node("HBoxContainer/Control/Normal/TransferAll")
 	_transfer_all_btn.connect("pressed", self, "TransferAll_Callback")
+	_desc_btn = get_node("HBoxContainer/Control/Normal/Desc")
+	_desc_btn.connect("pressed", self, "Desc_Callback")
 	
 	get_node("HBoxContainer/Control/Control/Cancel").connect("pressed", self, "Cancel_Callback")
 	get_node("HBoxContainer/Control/Normal/Close").connect("pressed", self, "Ok_Callback")
@@ -60,6 +63,53 @@ func Ok_Callback():
 	_my_ship_list.Content = []
 	_other_ship_list.Content = []
 	
+	
+func Desc_Callback():
+	var selected_item = null
+	var selected_ship = null
+	var to_ship = null
+	var from_list = null
+	var to_list = null
+	
+	var left = _my_ship_list.Content
+	
+	var scanner_level := 0
+	var scanner_data = Globals.LevelLoaderRef.LoadJSONArray(_lobj.get_attrib("mounts.scanner"))
+	if scanner_data != null and scanner_data.size() > 0:
+		scanner_level = Globals.get_data(scanner_data[0], "scanning.level")
+	
+	var right = _other_ship_list.Content
+	
+	for item in left:
+		if item.selected == true:
+			selected_item = item
+			selected_ship = _lobj
+			to_ship = _robj
+			from_list = _my_ship_list
+			to_list = _other_ship_list
+			get_node("HBoxContainer/OtherShip").title = "Transfer Where ?"
+			#get_node("HBoxContainer/MyShip").title = _lobj.get_attrib("name_id")
+			break
+	
+	if selected_item == null:
+		for item in right:
+			if item.selected == true and "src" in item and item.src != "":
+				selected_item = item
+				selected_ship = _robj
+				to_ship = _lobj
+				from_list = _other_ship_list
+				to_list = _my_ship_list
+				get_node("HBoxContainer/MyShip").title = "Transfer Where ?"
+				break
+	
+	if selected_item == null:
+		return
+	
+	var data = null
+	if "src" in selected_item and selected_item.src != null and selected_item.src != "":
+		data = Globals.LevelLoaderRef.LoadJSON(selected_item.src)
+	
+	BehaviorEvents.emit_signal("OnPushGUI", "Description", {"json":data, "scanner_level":scanner_level})
 	
 func Transfer_Callback():
 	var selected_item = null
@@ -331,7 +381,7 @@ func UpdateNormalVisibility():
 	var right = _other_ship_list.Content
 	
 	for item in left:
-		if item.selected == true:
+		if item.selected == true and "src" in item and item.src != "":
 			selected_left = item
 			break
 			
@@ -342,13 +392,15 @@ func UpdateNormalVisibility():
 			
 	if selected_left != null:
 		_transfer_btn.Text = "Transfer >"
-		_transfer_btn.Disabled = false
+		_disable_button(_transfer_btn, false)
 	elif selected_right != null:
 		_transfer_btn.Text = "< Transfer"
-		_transfer_btn.Disabled = false
+		_disable_button(_transfer_btn, false)
 	else:
 		_transfer_btn.Text = "Transfer"
-		_transfer_btn.Disabled = true
+		_disable_button(_transfer_btn, true)
+	
+	_disable_button(_desc_btn, selected_left == null and selected_right == null)
 		
 ############### DRAG & DROP ###################
 
@@ -421,3 +473,10 @@ func OnDragDropCompleted_Callback(origin_data, destination_data):
 
 	BehaviorEvents.emit_signal("OnEndParallelAction", origin_ship)
 	BehaviorEvents.emit_signal("OnEndParallelAction", dest_ship)
+	
+	
+
+func _disable_button(btn : ButtonBase, is_disabled : bool):
+	#btn.Disabled = is_disabled
+	btn.visible = !is_disabled
+	

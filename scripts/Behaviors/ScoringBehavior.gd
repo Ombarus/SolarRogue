@@ -19,7 +19,7 @@ func OnPlayerDeath_Callback():
 	if game_won != null and game_won == true:
 		message += "The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. \nYou spool up the engines and glide through it. On the other side HOME is waiting ! \n\nYou made it !"
 		result = PermSave.END_GAME_STATE.won
-	elif player.get_attrib("destroyable.hull") <= 0:
+	elif player.get_attrib("destroyable.current_hull", 1) <= 0:
 		message += "The %s has been destroyed" % player_name
 		result = PermSave.END_GAME_STATE.destroyed
 	elif player.get_attrib("converter.stored_energy") <= 0:

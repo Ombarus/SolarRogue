@@ -15,5 +15,14 @@
 	},
 	"recyclable": {
 		"energy": 200
+	},
+	"description": {
+		"text":"Ammo for the Missile Launcher. Missiles have four system components: targeting, flight system, engine, and warhead",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}"}
+			]
+		}
 	}
 }

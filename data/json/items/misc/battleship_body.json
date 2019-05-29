@@ -13,5 +13,14 @@
 	},
 	"recyclable": {
 		"energy": 750
+	},
+	"description": {
+		"text":"The remains of this battleship hull are still in suprisingly good shape. They could be used as a scaffold for a new Battleship.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}"}
+			]
+		}
 	}
 }

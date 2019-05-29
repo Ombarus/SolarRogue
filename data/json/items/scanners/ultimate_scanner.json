@@ -19,5 +19,24 @@
 	},
 	"recyclable": {
 		"energy": 5000
+	},
+	"description": {
+		"text":"This unique artifact seems to have been built by an ancient race using lost technology. It seems to be able to see everywhere at once using quantum entanglement.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}"},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}"},
+				{"name":"Mount Point", "value":"Scanner"}
+			]
+		},
+		"Scanning": {
+			"min_level":0,
+			"fields": [
+				{"name":"Radius", "value":"Monstrous"},
+				{"name":"Level", "value":"{scanning.level}"},
+				{"name":"Special", "value":"Unique Radar"}
+			]
+		}
 	}
 }

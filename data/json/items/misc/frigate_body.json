@@ -13,5 +13,14 @@
 	},
 	"recyclable": {
 		"energy": 600
+	},
+	"description": {
+		"text":"The remains of this frigate hull are still in suprisingly good shape. They could be used as a scaffold for a new Frigate.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}"}
+			]
+		}
 	}
 }

@@ -2,6 +2,10 @@
 	"name_id":"Scout",
 	"type":"player",
 	"sprite":"player",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[768,256,128,128]
+	},
 	"action_point":0,
 	"boardable":true,
 	"mounts": {
@@ -9,7 +13,7 @@
 			"data/json/items/weapons/missile_launcher_mk1.json"
 		],
 		"shield": ["data/json/items/shields/shield_mk1.json"],
-		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
+		"scanner": ["data/json/items/scanners/scanner_mk2.json"],
 		"converter": ["data/json/items/converters/converter_mk1.json"]
 	},
 	"destroyable": {
@@ -35,5 +39,25 @@
 	"converter": {
 		"stored_energy": 10000,
 		"base_ap_energy_cost":10
+	},
+	"description": {
+		"text":"A small, fast ship for forward exploration.",
+		"Overview": {
+			"min_level":0, 
+			"fields":[
+				{"name":"Max hull", "value":"{destroyable.hull}"},
+				{"name":"Speed", "value":"{moving.speed}"},
+				{"name":"Weapon mounts", "value":"1"},
+				{"name":"Shield mounts", "value":"1"},
+				{"name":"Utility mounts", "value":"0"}
+			]
+		},
+		"Status": {
+			"min_level":1,
+			"fields": [
+				{"name":"Current hull", "value":"{destroyable.current_hull}", "default":"{destroyable.hull}"},
+				{"name":"Current shield", "value":"{shield.current_hp}"}
+			]
+		}
 	}
 }

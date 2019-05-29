@@ -17,5 +17,22 @@
 	},
 	"recyclable": {
 		"energy": 1500
+	},
+	"description": {
+		"text":"Through gravity manipulation this assembly creates a localized warp field inside the cargo bay, effectively reducing cargo size by a significant factor. Stacked compactor provide diminishing returns.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}"},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}"},
+				{"name":"Mount Point", "value":"Utility"}
+			]
+		},
+		"Effect": {
+			"min_level":0,
+			"fields": [
+				{"name":"Cargo Space", "value":"{cargo_optimizer.per_cargo_space} times"}
+			]
+		}
 	}
 }

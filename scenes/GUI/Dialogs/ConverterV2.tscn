@@ -81,6 +81,16 @@ margin_bottom = 64.0
 rect_min_size = Vector2( 128, 128 )
 expand = true
 
+[node name="DescBtn" parent="HBoxContainer/Control/VBoxContainer/IconContainer" instance=ExtResource( 7 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -65.0
+margin_right = 0.0
+margin_bottom = 65.0
+Text = "?"
+ShortcutKey = "?"
+AlwaysOnShortcut = false
+
 [node name="RecipeInfoContainer" type="VBoxContainer" parent="HBoxContainer/Control/VBoxContainer"]
 margin_top = 132.0
 margin_right = 369.0

@@ -13,5 +13,14 @@
 	},
 	"recyclable": {
 		"energy": 12000
+	},
+	"description": {
+		"text":"An extremely hard crystalline mineral used as a power source. It is believed that this material exists in more than three dimensions at the same time and this is somehow related to its properties.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}"}
+			]
+		}
 	}
 }

@@ -200,8 +200,9 @@ func ProcessDamage(target, shooter, weapon_data):
 	else:
 		var dam_absorbed_by_shield = _hit_shield(target, dam)
 		var hull_dam = dam - dam_absorbed_by_shield
-		target.set_attrib("destroyable.hull", target.get_attrib("destroyable.hull") - hull_dam)
-		if target.get_attrib("destroyable.hull") <= 0:
+		var max_hull = target.get_attrib("destroyable.hull")
+		target.set_attrib("destroyable.current_hull", target.get_attrib("destroyable.current_hull", max_hull) - hull_dam)
+		if target.get_attrib("destroyable.current_hull") <= 0:
 			target.set_attrib("destroyable.destroyed", true) # so other systems can check if their reference is valid or not
 			if target.get_attrib("drop_on_death") != null:
 				ProcessDeathSpawns(target)

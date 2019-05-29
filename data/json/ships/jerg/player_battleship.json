@@ -8,10 +8,10 @@
 	},
 	"boardable":true,
 	"mounts": {
-		"weapon": ["", ""],
+		"weapon": ["", "", ""],
 		"scanner": [""],
 		"converter": [""],
-		"utility":["", ""]
+		"utility":["", "", ""]
 	},
 	"destroyable": {
 		"hull":75
@@ -31,5 +31,25 @@
 	"converter": {
 		"stored_energy": 30000,
 		"base_ap_energy_cost":20
+	},
+	"description": {
+		"text":"Battleships are the most powerful type of warship. They have the most shields and weapons in the fleet but their size and mass makes them slow and expensive.",
+		"Overview": {
+			"min_level":0, 
+			"fields":[
+				{"name":"Max hull", "value":"{destroyable.hull}"},
+				{"name":"Speed", "value":"{moving.speed}"},
+				{"name":"Weapon mounts", "value":"3"},
+				{"name":"Shield mounts", "value":"0"},
+				{"name":"Utility mounts", "value":"3"}
+			]
+		},
+		"Status": {
+			"min_level":1,
+			"fields": [
+				{"name":"Current hull", "value":"{destroyable.current_hull}", "default":"{destroyable.hull}"},
+				{"name":"Current shield", "value":"{shield.current_hp}"}
+			]
+		}
 	}
 }

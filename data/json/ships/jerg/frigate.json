@@ -13,11 +13,13 @@
 	"action_point":0,
 	"mounts": {
 		"weapon": [
-			"data/json/items/weapons/laser_turret_mk1.json"
+			"data/json/items/weapons/laser_turret_mk1.json",
+			"data/json/items/weapons/laser_turrent_mk1.json"
 		],
 		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
 		"converter": ["data/json/items/converters/converter_mk1.json"],
 		"utility":[
+			"",
 			"",
 			"",
 			""
@@ -77,5 +79,25 @@
 
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.1},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
-	]
+	],
+	"description": {
+		"text":"A warship with mixed armaments generally used for convoy escort and support work. It's full of utility.",
+		"Overview": {
+			"min_level":0, 
+			"fields":[
+				{"name":"Max hull", "value":"{destroyable.hull}"},
+				{"name":"Speed", "value":"{moving.speed}"},
+				{"name":"Weapon mounts", "value":"2"},
+				{"name":"Shield mounts", "value":"0"},
+				{"name":"Utility mounts", "value":"4"}
+			]
+		},
+		"Status": {
+			"min_level":1,
+			"fields": [
+				{"name":"Current hull", "value":"{destroyable.current_hull}", "default":"{destroyable.hull}"},
+				{"name":"Current shield", "value":"{shield.current_hp}"}
+			]
+		}
+	}
 }

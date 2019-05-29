@@ -8,10 +8,10 @@
 	},
 	"boardable":true,
 	"mounts": {
-		"weapon": [""],
+		"weapon": ["", ""],
 		"scanner": [""],
 		"converter": [""],
-		"utility":["", "", ""]
+		"utility":["", "", "", ""]
 	},
 	"destroyable": {
 		"hull":35
@@ -31,5 +31,25 @@
 	"converter": {
 		"stored_energy": 20000,
 		"base_ap_energy_cost":12
+	},
+	"description": {
+		"text":"A warship with mixed armaments generally used for convoy escort and support work. It's full of utility.",
+		"Overview": {
+			"min_level":0, 
+			"fields":[
+				{"name":"Max hull", "value":"{destroyable.hull}"},
+				{"name":"Speed", "value":"{moving.speed}"},
+				{"name":"Weapon mounts", "value":"2"},
+				{"name":"Shield mounts", "value":"0"},
+				{"name":"Utility mounts", "value":"4"}
+			]
+		},
+		"Status": {
+			"min_level":1,
+			"fields": [
+				{"name":"Current hull", "value":"{destroyable.current_hull}", "default":"{destroyable.hull}"},
+				{"name":"Current shield", "value":"{shield.current_hp}"}
+			]
+		}
 	}
 }

@@ -19,5 +19,24 @@
 	},
 	"recyclable": {
 		"energy": 1000
+	},
+	"description": {
+		"text":"A type of advanced force field that surrounds the ship protecting it against all form of energy and projectile weaponry. Consumes large amount of energy and recharges slowly over time. Stacked shields offer diminishing returns.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}"},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}"},
+				{"name":"Mount Point", "value":"Shield"}
+			]
+		},
+		"Shielding": {
+			"min_level":0,
+			"fields": [
+				{"name":"Max Shield", "value":"{shielding.max_hp} points"},
+				{"name":"Regen Rate", "value":"{shielding.hp_regen_per_ap} point / turn"},
+				{"name":"Energy Cost", "value":"{shielding.energy_cost_per_hp} per point"}
+			]
+		}
 	}
 }

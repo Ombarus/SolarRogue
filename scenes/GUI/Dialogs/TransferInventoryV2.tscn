@@ -82,7 +82,6 @@ rect_min_size = Vector2( 142, 90 )
 size_flags_horizontal = 3
 Text = "[t]ransfer"
 ShortcutKey = "t"
-Disabled = true
 
 [node name="TakeAll" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_right = 1.0
@@ -103,6 +102,17 @@ rect_min_size = Vector2( 142, 90 )
 size_flags_horizontal = 3
 Text = ">>"
 ShortcutKey = ">"
+
+[node name="Desc" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
+anchor_right = 1.0
+margin_top = 330.0
+margin_right = 0.0
+margin_bottom = 420.0
+rect_min_size = Vector2( 142, 90 )
+size_flags_horizontal = 3
+Text = "?"
+ShortcutKey = "?"
+AlwaysOnShortcut = false
 
 [node name="Close" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_top = 1.0

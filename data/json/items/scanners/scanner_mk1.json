@@ -18,5 +18,23 @@
 	},
 	"recyclable": {
 		"energy": 1000
+	},
+	"description": {
+		"text":"Space is vast and dark. Only radars can allow us to see objects in space. This one barely manages to do even that.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}"},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}"},
+				{"name":"Mount Point", "value":"Scanner"}
+			]
+		},
+		"Scanning": {
+			"min_level":0,
+			"fields": [
+				{"name":"Radius", "value":"{scanning.radius}"},
+				{"name":"Level", "value":"{scanning.level}"}
+			]
+		}
 	}
 }

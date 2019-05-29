@@ -14,4 +14,13 @@
 	"recyclable": {
 		"energy": 400
 	}
-}
+},
+	"description": {
+		"text":"The remains of this Scout hull are still in suprisingly good shape. They could be used as a scaffold for a new Scout.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}"}
+			]
+		}
+	}

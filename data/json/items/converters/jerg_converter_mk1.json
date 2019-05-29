@@ -67,5 +67,23 @@
 	},
 	"recyclable": {
 		"energy": 2500
+	},
+	"description": {
+		"text":"A handy device that can convert any matter into energy and vice-versa. Contains the secret blueprints from the Jerg civilisation!",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}"},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}"},
+				{"name":"Mount Point", "value":"Converter"}
+			]
+		},
+		"Converter": {
+			"min_level":0,
+			"fields": [
+				{"name":"Maximum Energy Reserve", "value":"{converter.maximum_energy}"},
+				{"name":"Recipes", "value":"5"}
+			]
+		}
 	}
 }

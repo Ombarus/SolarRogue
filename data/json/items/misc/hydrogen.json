@@ -13,5 +13,14 @@
 	},
 	"recyclable": {
 		"energy": 1000
+	},
+	"description": {
+		"text":"Hydrogen is the most abundant chemical substance in the Universe. It is a colorless, odorless, tasteless, non-toxic, nonmetallic, highly combustible diatomic gas.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}"}
+			]
+		}
 	}
 }

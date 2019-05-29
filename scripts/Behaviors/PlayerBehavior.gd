@@ -394,8 +394,16 @@ func _input(event):
 	var str_fmt = "There is %s here"
 	var filtered_content = []
 	for obj in tile_content:
-		if obj.visible == true and obj.get_attrib("has_ghost_memory") == null:
-			filtered_content.push_back(obj)
+		if obj.visible == true:
+			var stackable = obj.get_attrib("equipment.stackable", false)
+			var skip = false
+			if stackable == true:
+				for item in filtered_content:
+					if item.get_attrib("src") == obj.get_attrib("src"):
+						skip = true
+						break
+			if skip == false:
+				filtered_content.push_back(obj)
 	if filtered_content.size() == 0:
 		BehaviorEvents.emit_signal("OnLogLine", "Nothing but empty space")
 		
@@ -404,10 +412,21 @@ func _input(event):
 	if scanner_data != null and scanner_data.size() > 0:
 		scanner_level = Globals.get_data(scanner_data[0], "scanning.level")
 		
-	for obj in filtered_content:
-		BehaviorEvents.emit_signal("OnPushGUI", "Description", {"obj":obj, "scanner_level":scanner_level})
-		BehaviorEvents.emit_signal("OnLogLine", str_fmt % obj.get_attrib("name_id"))
+	if filtered_content.size() == 1:
+		BehaviorEvents.emit_signal("OnPushGUI", "Description", {"obj":filtered_content[0], "scanner_level":scanner_level})
+	else:
+		BehaviorEvents.emit_signal("OnPushGUI", "SelectTarget", {"targets":filtered_content, "callback_object":self, "callback_method":"LookTarget_Callback"})
+
 	
+func LookTarget_Callback(selected_targets):
+	var scanner_level := 0
+	var scanner_data = Globals.LevelLoaderRef.LoadJSONArray(playerNode.get_attrib("mounts.scanner"))
+	if scanner_data != null and scanner_data.size() > 0:
+		scanner_level = Globals.get_data(scanner_data[0], "scanning.level")
+		
+	if selected_targets.size() > 0:
+		BehaviorEvents.emit_signal("OnPushGUI", "Description", {"obj":selected_targets[0], "scanner_level":scanner_level})
+
 
 func _unhandled_input(event):
 	if lock_input or _input_state == INPUT_STATE.look_around:

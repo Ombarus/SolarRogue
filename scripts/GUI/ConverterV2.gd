@@ -15,6 +15,7 @@ onready var _turn_cost : RichTextLabel = get_node("HBoxContainer/Control/VBoxCon
 onready var _energy_ship : RichTextLabel = get_node("HBoxContainer/Control/VBoxContainer/ShipInfoContainer/HBoxContainer4/EnergyShip")
 onready var _hull_ship : RichTextLabel = get_node("HBoxContainer/Control/VBoxContainer/ShipInfoContainer/HBoxContainer5/HullShip")
 onready var _shield_ship : RichTextLabel = get_node("HBoxContainer/Control/VBoxContainer/ShipInfoContainer/HBoxContainer6/ShieldShip")
+onready var _desc_btn : BaseButton = get_node("HBoxContainer/Control/VBoxContainer/IconContainer/DescBtn")
 
 var _converter_data = null
 var _current_crafting_selected = null
@@ -26,12 +27,23 @@ var _current_data = {"count":0, "ap":0, "energy":0}
 
 func _ready():
 	get_node("HBoxContainer/Control/VBoxContainer/Close").connect("pressed", self, "Close_Callback")
+	_desc_btn.connect("pressed", self, "DescBtn_Callback")
 	_craft_button.connect("pressed", self, "CraftButtonPressed_Callback")
 	_material_list.connect("OnSelectionChanged", self, "OnMaterialChanged_Callback")
 	_recipe_list.connect("OnSelectionChanged", self, "OnRecipeChanged_Callback")
 	
 	BehaviorEvents.connect("OnDamageTaken", self, "OnDamageTaken_Callback")
 	BehaviorEvents.connect("OnEnergyChanged", self, "OnEnergyChanged")
+	
+	
+func DescBtn_Callback():
+	var scanner_level := 0
+	var scanner_data = Globals.LevelLoaderRef.LoadJSONArray(_obj.get_attrib("mounts.scanner"))
+	if scanner_data != null and scanner_data.size() > 0:
+		scanner_level = Globals.get_data(scanner_data[0], "scanning.level")
+		
+	var produce_data = Globals.LevelLoaderRef.LoadJSON(_current_crafting_selected.produce)
+	BehaviorEvents.emit_signal("OnPushGUI", "Description", {"json":produce_data, "scanner_level":scanner_level})
 	
 	
 func OnDamageTaken_Callback(target, shooter):
@@ -105,6 +117,7 @@ func ReInit():
 	_material_list.Content = []
 	
 	_recipe_icon.visible = false
+	_desc_btn.visible = false
 	get_node("HBoxContainer/Control/VBoxContainer/RecipeInfoContainer").visible = false
 	UpdateShipInfo()
 	UpdateCraftButton()
@@ -120,6 +133,8 @@ func OnRecipeChanged_Callback():
 	if _current_crafting_selected == null:
 		ReInit()
 		return
+	
+	_desc_btn.visible = ".json" in _current_crafting_selected.produce
 	
 	if "texture_cache" in _current_crafting_selected:
 		_recipe_icon.visible = true
@@ -229,8 +244,8 @@ func UpdateShipInfo():
 	if p_name != null:
 		ship_name = "The " + p_name + "'s Status"
 		
-	var cur_hull = _obj.get_attrib("destroyable.hull")
-	var max_hull = _obj.base_attributes.destroyable.hull
+	var max_hull = _obj.get_attrib("destroyable.hull")
+	var cur_hull = _obj.get_attrib("destroyable.current_hull", max_hull)
 	var hull_color = "lime"
 	if cur_hull < max_hull / 2.0:
 		hull_color = "yellow"

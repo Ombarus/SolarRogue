@@ -26,5 +26,26 @@
 	},
 	"recyclable": {
 		"energy": 2500
+	},
+	"description": {
+		"text":"Launches a flurry of guided-missile to any target in the viscinity. Improved launch sequence allow for slightly bigger range.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}"},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}"},
+				{"name":"Mount Point", "value":"Weapon"}
+			]
+		},
+		"Weapon Stats": {
+			"min_level":0,
+			"fields": [
+				{"name":"Damage", "value":"{weapon_data.base_dam}~{weapon_data.max_dam}"},
+				{"name":"Range", "value":"{weapon_data.fire_range}"},
+				{"name":"Energy Cost", "value":"{weapon_data.fire_energy_cost}"},
+				{"name":"Speed", "value":"{weapon_data.fire_speed} turns"},
+				{"name":"Ammo", "value":"Missile"}
+			]
+		}
 	}
 }

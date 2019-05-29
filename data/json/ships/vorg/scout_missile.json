@@ -1,6 +1,5 @@
 {
 	"name_id":"A Vorg Scout",
-	"description":"Fast but relatively weak ship, Vorg favour solid defense over anything, even their scout come with powerful shields",
 	"type":"ship",
 	"sprite":"vorg_scout",
 	"icon": {
@@ -76,5 +75,25 @@
 		"content":[
 			{"src":"data/json/items/weapons/missile.json", "count":200}
 		]
+	},
+	"description": {
+		"text":"Fast but relatively weak ship. Vorg favour solid defense over anything, even their scout come with powerful shields",
+		"Overview": {
+			"min_level":0, 
+			"fields":[
+				{"name":"Max hull", "value":"{destroyable.hull}"},
+				{"name":"Speed", "value":"{moving.speed}"},
+				{"name":"Weapon mounts", "value":"1"},
+				{"name":"Shield mounts", "value":"1"},
+				{"name":"Utility mounts", "value":"0"}
+			]
+		},
+		"Status": {
+			"min_level":1,
+			"fields": [
+				{"name":"Current hull", "value":"{destroyable.current_hull}", "default":"{destroyable.hull}"},
+				{"name":"Current shield", "value":"{shield.current_hp}"}
+			]
+		}
 	}
 }

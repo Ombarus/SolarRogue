@@ -67,5 +67,25 @@
 		"speed":0.8,
 		"wander_speed":2.5,
 		"can_use_wormhole":false
+	},
+	"description": {
+		"text":"A small, fast ship for forward exploration. The Jerk Armada usually prefer laser over any other armament.",
+		"Overview": {
+			"min_level":0, 
+			"fields":[
+				{"name":"Max hull", "value":"{destroyable.hull}"},
+				{"name":"Speed", "value":"{moving.speed}"},
+				{"name":"Weapon mounts", "value":"1"},
+				{"name":"Shield mounts", "value":"0"},
+				{"name":"Utility mounts", "value":"1"}
+			]
+		},
+		"Status": {
+			"min_level":1,
+			"fields": [
+				{"name":"Current hull", "value":"{destroyable.current_hull}", "default":"{destroyable.hull}"},
+				{"name":"Current shield", "value":"{shield.current_hp}"}
+			]
+		}
 	}
 }

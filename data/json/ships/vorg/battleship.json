@@ -21,7 +21,6 @@
 		"shield": [
 			"data/json/items/shields/shield_mk1.json", 
 			"data/json/items/shields/shield_mk1.json", 
-			"data/json/items/shields/shield_mk1.json", 
 			"data/json/items/shields/shield_mk1.json"],
 		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
 		"converter": ["data/json/items/converters/converter_mk1.json"]
@@ -84,5 +83,25 @@
 		
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
-	]
+	],
+	"description": {
+		"text":"Battleships are the most powerful type of warship. They have the most shields and weapons in the fleet but their size and mass makes them slow and expensive.",
+		"Overview": {
+			"min_level":0, 
+			"fields":[
+				{"name":"Max hull", "value":"{destroyable.hull}"},
+				{"name":"Speed", "value":"{moving.speed}"},
+				{"name":"Weapon mounts", "value":"4"},
+				{"name":"Shield mounts", "value":"4"},
+				{"name":"Utility mounts", "value":"0"}
+			]
+		},
+		"Status": {
+			"min_level":1,
+			"fields": [
+				{"name":"Current hull", "value":"{destroyable.current_hull}", "default":"{destroyable.hull}"},
+				{"name":"Current shield", "value":"{shield.current_hp}"}
+			]
+		}
+	}
 }

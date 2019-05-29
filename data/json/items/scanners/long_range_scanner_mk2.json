@@ -19,5 +19,24 @@
 	},
 	"recyclable": {
 		"energy": 2000
+	},
+	"description": {
+		"text":"This advanced Radar can detect large gravitational shifts within a solar system.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}"},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}"},
+				{"name":"Mount Point", "value":"Scanner"}
+			]
+		},
+		"Scanning": {
+			"min_level":0,
+			"fields": [
+				{"name":"Radius", "value":"{scanning.radius}"},
+				{"name":"Level", "value":"{scanning.level}"},
+				{"name":"Special", "value":"Detect Large Objects"}
+			]
+		}
 	}
 }

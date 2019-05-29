@@ -18,5 +18,23 @@
 	},
 	"recyclable": {
 		"energy": 1500
+	},
+	"description": {
+		"text":"This extra-powerful radar extends beyond the average weapon range allowing us time to get into a flanking position before battle.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}"},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}"},
+				{"name":"Mount Point", "value":"Scanner"}
+			]
+		},
+		"Scanning": {
+			"min_level":0,
+			"fields": [
+				{"name":"Radius", "value":"{scanning.radius}"},
+				{"name":"Level", "value":"{scanning.level}"}
+			]
+		}
 	}
 }

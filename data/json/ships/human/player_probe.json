@@ -29,5 +29,25 @@
 	"converter": {
 		"stored_energy": 10000,
 		"base_ap_energy_cost":5
+	},
+	"description": {
+		"text":"Harmless. Originally designed to explore Uranus, it's now so far deep it can't see the sun. Comes with various telemetry equipment.",
+		"Overview": {
+			"min_level":0, 
+			"fields":[
+				{"name":"Max hull", "value":"{destroyable.hull}"},
+				{"name":"Speed", "value":"{moving.speed}"},
+				{"name":"Weapon mounts", "value":"0"},
+				{"name":"Shield mounts", "value":"0"},
+				{"name":"Utility mounts", "value":"0"}
+			]
+		},
+		"Status": {
+			"min_level":1,
+			"fields": [
+				{"name":"Current hull", "value":"{destroyable.current_hull}", "default":"{destroyable.hull}"},
+				{"name":"Current shield", "value":"None"}
+			]
+		}
 	}
 }

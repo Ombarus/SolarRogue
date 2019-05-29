@@ -44,8 +44,8 @@ func UpdateStatusBar(player_obj):
 	var p_name : String = player_obj.get_attrib("player_name")
 	if p_name != null:
 		ship_name = "The " + p_name
-	var cur_hull = player_obj.get_attrib("destroyable.hull")
-	var max_hull = player_obj.base_attributes.destroyable.hull
+	var max_hull = player_obj.get_attrib("destroyable.hull")
+	var cur_hull = player_obj.get_attrib("destroyable.current_hull", max_hull)
 	var hull_color = "lime"
 	if cur_hull < max_hull / 2.0:
 		hull_color = "yellow"

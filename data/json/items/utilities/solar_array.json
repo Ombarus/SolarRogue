@@ -17,5 +17,22 @@
 	},
 	"recyclable": {
 		"energy": 1500
+	},
+	"description": {
+		"text":"Solar panels mounted on the ship's hull provide passive energy regeneration. Stacked panels will provide dimishing returns.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}"},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}"},
+				{"name":"Mount Point", "value":"Utility"}
+			]
+		},
+		"Effect": {
+			"min_level":0,
+			"fields": [
+				{"name":"Energy Regen", "value":"{energy_regen.per_turn} / turn"}
+			]
+		}
 	}
 }

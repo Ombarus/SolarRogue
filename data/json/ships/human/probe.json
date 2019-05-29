@@ -40,5 +40,25 @@
 		"speed":1.3,
 		"wander_speed":2.5,
 		"can_use_wormhole":false
+	},
+	"description": {
+		"text":"Harmless. Originally designed to explore Uranus, it's now so far deep it can't see the sun. Comes with various telemetry equipment.",
+		"Overview": {
+			"min_level":0, 
+			"fields":[
+				{"name":"Max hull", "value":"{destroyable.hull}"},
+				{"name":"Speed", "value":"{moving.speed}"},
+				{"name":"Weapon mounts", "value":"0"},
+				{"name":"Shield mounts", "value":"0"},
+				{"name":"Utility mounts", "value":"0"}
+			]
+		},
+		"Status": {
+			"min_level":1,
+			"fields": [
+				{"name":"Current hull", "value":"{destroyable.current_hull}", "default":"{destroyable.hull}"},
+				{"name":"Current shield", "value":"None"}
+			]
+		}
 	}
 }

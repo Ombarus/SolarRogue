@@ -77,5 +77,25 @@
 		"content":[
 			{"src":"data/json/items/weapons/missile.json", "count":200}
 		]
+	},
+	"description": {
+		"text":"A small, fast ship for forward exploration. The Human Armada often alternate between Missile and Laser as standard equipment.",
+		"Overview": {
+			"min_level":0, 
+			"fields":[
+				{"name":"Max hull", "value":"{destroyable.hull}"},
+				{"name":"Speed", "value":"{moving.speed}"},
+				{"name":"Weapon mounts", "value":"1"},
+				{"name":"Shield mounts", "value":"1"},
+				{"name":"Utility mounts", "value":"0"}
+			]
+		},
+		"Status": {
+			"min_level":1,
+			"fields": [
+				{"name":"Current hull", "value":"{destroyable.current_hull}", "default":"{destroyable.hull}"},
+				{"name":"Current shield", "value":"{shield.current_hp}"}
+			]
+		}
 	}
 }
