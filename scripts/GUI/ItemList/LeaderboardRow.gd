@@ -27,13 +27,13 @@ func set_row_data(data):
 	if data.status == PermSave.END_GAME_STATE.won:
 		result = "[color=lime]went HOME[/color]"
 	elif data.status == PermSave.END_GAME_STATE.entropy:
-		result = "[color=red]died alone on the %dth wormhole[/color]" % (data.died_on+1)
+		result = "[color=red]died alone[/color] on wormhole #%d" % (data.died_on+1)
 	elif data.status == PermSave.END_GAME_STATE.destroyed:
-		result = "[color=red]was destroyed on the %dth wormhole[/color]" % (data.died_on+1)
+		result = "[color=red]was destroyed[/color] on wormhole #%d" % (data.died_on+1)
 	elif data.status == PermSave.END_GAME_STATE.suicide:
-		result = "[color=red]self-destructed on the %dth wormhole[/color]" % (data.died_on+1)
+		result = "[color=red]self-destructed[/color] on wormhole #%d" % (data.died_on+1)
 		
-	var flavor_text = "%s, %s after visiting %d systems" % [data.player_name, result, data.generated_levels]
+	var flavor_text = "%s, %s" % [data.player_name, result]
 	
 	get_node("Panel/HBoxContainer/richtext").bbcode_text = flavor_text
 	

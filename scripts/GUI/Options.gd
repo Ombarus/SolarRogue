@@ -28,3 +28,6 @@ func _on_SaveAndQuit_pressed():
 func On_Suicide_Confirmed_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
 	BehaviorEvents.emit_signal("OnPlayerDeath")
+
+func _on_Settings_pressed():
+	BehaviorEvents.emit_signal("OnPushGUI", "Settings", {})

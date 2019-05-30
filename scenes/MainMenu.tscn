@@ -1,18 +1,19 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/GUI/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Behaviors/UIManager.gd" type="Script" id=2]
 [ext_resource path="res://data/animations/popin.tres" type="Animation" id=3]
-[ext_resource path="res://scripts/GUI/MainMenuHUD.gd" type="Script" id=4]
-[ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=5]
-[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold_text.tres" type="DynamicFont" id=6]
-[ext_resource path="res://data/fonts/DejaVuSansMonoItal_text.tres" type="DynamicFont" id=7]
-[ext_resource path="res://data/fonts/DejaVuSansMonoBold_text.tres" type="DynamicFont" id=8]
-[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scripts/GUI/MainMenu/Leaderboard.gd" type="Script" id=10]
-[ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=11]
-[ext_resource path="res://scenes/GUI/ItemList/LeaderboardRow.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/GUI/Dialogs/PlayerName.tscn" type="PackedScene" id=13]
+[ext_resource path="res://data/textures/space/space-bg_mine.png" type="Texture" id=4]
+[ext_resource path="res://scripts/GUI/MainMenuHUD.gd" type="Script" id=5]
+[ext_resource path="res://data/textures/title.png" type="Texture" id=6]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scripts/GUI/MainMenu/Leaderboard.gd" type="Script" id=9]
+[ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/GUI/ItemList/LeaderboardRow.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/GUI/Dialogs/PlayerName.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/GUI/Dialogs/Credits.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/GUI/Dialogs/Settings.tscn" type="PackedScene" id=14]
 
 [node name="MainMenu" type="Node"]
 script = ExtResource( 1 )
@@ -24,84 +25,146 @@ animator = NodePath("PopinAnim")
 [node name="PopinAnim" type="AnimationPlayer" parent="UIManager"]
 anims/popin = ExtResource( 3 )
 
+[node name="BG" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 7
+
 [node name="MenuRoot" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -2.0
 margin_bottom = -2.0
 mouse_filter = 2
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 
-[node name="GameTitle" type="RichTextLabel" parent="MenuRoot"]
+[node name="MenuBtn" type="Control" parent="MenuRoot"]
+anchor_bottom = 1.0
+margin_left = 46.0
+margin_top = 84.0
+margin_right = 429.0
+
+[node name="GameTitle" type="TextureRect" parent="MenuRoot/MenuBtn"]
 anchor_right = 1.0
-margin_top = 12.95
-margin_bottom = 55.95
-custom_fonts/mono_font = ExtResource( 5 )
-custom_fonts/bold_italics_font = ExtResource( 6 )
-custom_fonts/italics_font = ExtResource( 7 )
-custom_fonts/bold_font = ExtResource( 8 )
-custom_fonts/normal_font = ExtResource( 5 )
-bbcode_enabled = true
-bbcode_text = "[center]Solar Rogue[/center]"
-text = "Solar Rogue"
+margin_bottom = 62.0
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 5
 
-[node name="Continue" parent="MenuRoot" instance=ExtResource( 9 )]
+[node name="Continue" parent="MenuRoot/MenuBtn" instance=ExtResource( 7 )]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-margin_left = -69.0
-margin_top = 70.0
-margin_right = 71.0
-margin_bottom = 160.0
+anchor_bottom = 0.5
+margin_left = -70.0
+margin_top = -238.0
+margin_right = 70.0
+margin_bottom = -148.0
 rect_min_size = Vector2( 140, 90 )
 Text = "[c]ontinue"
 ShortcutKey = "c"
 AlwaysOnShortcut = false
 Disabled = true
 
-[node name="NewGameBTN" parent="MenuRoot" instance=ExtResource( 9 )]
+[node name="NewGameBTN" parent="MenuRoot/MenuBtn" instance=ExtResource( 7 )]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-margin_left = -69.0
-margin_top = 180.0
-margin_right = 71.0
-margin_bottom = 270.0
+anchor_bottom = 0.5
+margin_left = -70.0
+margin_top = -128.0
+margin_right = 70.0
+margin_bottom = -38.0
 rect_min_size = Vector2( 140, 90 )
 Text = "[n]ew game"
 ShortcutKey = "n"
 AlwaysOnShortcut = false
 
-[node name="Quit" parent="MenuRoot" instance=ExtResource( 9 )]
+[node name="Setting" parent="MenuRoot/MenuBtn" instance=ExtResource( 7 )]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-margin_left = -69.0
-margin_top = 290.0
-margin_right = 71.0
-margin_bottom = 380.0
+anchor_bottom = 0.5
+margin_left = -70.0
+margin_top = -28.0
+margin_right = 70.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 140, 90 )
+Text = "[s]ettings"
+ShortcutKey = "s"
+AlwaysOnShortcut = false
+
+[node name="Credits" parent="MenuRoot/MenuBtn" instance=ExtResource( 7 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -70.0
+margin_top = 82.0
+margin_right = 70.0
+margin_bottom = 172.0
+rect_min_size = Vector2( 140, 90 )
+Text = "? credits"
+ShortcutKey = "?"
+AlwaysOnShortcut = false
+
+[node name="Quit" parent="MenuRoot/MenuBtn" instance=ExtResource( 7 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -70.0
+margin_top = 192.0
+margin_right = 70.0
+margin_bottom = 282.0
 rect_min_size = Vector2( 140, 90 )
 Text = "[q]uit"
 ShortcutKey = "q"
 AlwaysOnShortcut = false
 
-[node name="Leaderboard" type="Control" parent="MenuRoot"]
+[node name="base" parent="MenuRoot" instance=ExtResource( 8 )]
+editor/display_folded = true
+anchor_left = 1.0
+margin_left = -735.0
+margin_top = 32.0
+margin_right = -34.0
+margin_bottom = -27.0
+
+[node name="Leaderboard" type="Control" parent="MenuRoot/base"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 435.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
 mouse_filter = 1
-script = ExtResource( 10 )
+script = ExtResource( 9 )
 
-[node name="leaderlist" parent="MenuRoot/Leaderboard" instance=ExtResource( 11 )]
+[node name="leaderlist" parent="MenuRoot/base/Leaderboard" instance=ExtResource( 10 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 0.0
 margin_bottom = 0.0
 mouse_filter = 2
-Row = ExtResource( 12 )
+Row = ExtResource( 11 )
 
-[node name="PlayerName" parent="." instance=ExtResource( 13 )]
+[node name="PlayerName" parent="." instance=ExtResource( 12 )]
 visible = false
 margin_top = -2.0
 margin_bottom = -2.0
 
-[connection signal="pressed" from="MenuRoot/Continue" to="." method="_on_Continue_pressed"]
-[connection signal="pressed" from="MenuRoot/NewGameBTN" to="." method="_on_newgame_pressed"]
-[connection signal="pressed" from="MenuRoot/Quit" to="." method="_on_Quit_pressed"]
+[node name="Credits" parent="." instance=ExtResource( 13 )]
+visible = false
+
+[node name="Settings" parent="." instance=ExtResource( 14 )]
+visible = false
+margin_top = -2.0
+margin_bottom = -2.0
+
+[connection signal="pressed" from="MenuRoot/MenuBtn/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="MenuRoot/MenuBtn/NewGameBTN" to="." method="_on_newgame_pressed"]
+[connection signal="pressed" from="MenuRoot/MenuBtn/Setting" to="." method="_on_Setting_pressed"]
+[connection signal="pressed" from="MenuRoot/MenuBtn/Credits" to="." method="_on_Credits_pressed"]
+[connection signal="pressed" from="MenuRoot/MenuBtn/Quit" to="." method="_on_Quit_pressed"]

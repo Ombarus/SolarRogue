@@ -5,11 +5,11 @@ extends Node
 # var b = "textvar"
 
 func _ready():
-	OS.set_window_fullscreen(true)
+	OS.set_window_fullscreen(PermSave.get_attrib("settings.full_screen", false))
 	#BehaviorEvents.connect("OnPushGUI", self, "OnPushGUI_Callback")
 	#BehaviorEvents.connect("OnPopGUI", self, "OnPopGUI_Callback")
 	
-	get_node("MenuRoot/Continue").Disabled = not File.new().file_exists("user://savegame.save")
+	get_node("MenuRoot/MenuBtn/Continue").Disabled = not File.new().file_exists("user://savegame.save")
 	BehaviorEvents.emit_signal("OnPushGUI", "MenuRoot", {})
 
 #func OnPopGUI_Callback():
@@ -35,3 +35,11 @@ func _on_Continue_pressed():
 
 func _on_Quit_pressed():
 	get_tree().quit()
+
+
+func _on_Credits_pressed():
+	BehaviorEvents.emit_signal("OnPushGUI", "Credits", {})
+
+
+func _on_Setting_pressed():
+	BehaviorEvents.emit_signal("OnPushGUI", "Settings", {})

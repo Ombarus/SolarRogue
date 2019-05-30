@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=9 format=2]
+[gd_resource type="Theme" load_steps=11 format=2]
 
 [ext_resource path="res://data/styles/btn_disabled.tres" type="StyleBox" id=1]
 [ext_resource path="res://data/styles/trans.tres" type="StyleBox" id=2]
@@ -8,6 +8,10 @@
 [ext_resource path="res://data/fonts/DejaVuSansMonoItalBold_text.tres" type="DynamicFont" id=6]
 [ext_resource path="res://data/fonts/DejaVuSansMonoItal_text.tres" type="DynamicFont" id=7]
 [ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
 
 [resource]
 default_font = ExtResource( 8 )
@@ -20,6 +24,8 @@ Button/styles/focus = ExtResource( 2 )
 Button/styles/hover = ExtResource( 3 )
 Button/styles/normal = ExtResource( 2 )
 Button/styles/pressed = ExtResource( 4 )
+CheckButton/styles/hover = SubResource( 1 )
+CheckButton/styles/pressed = SubResource( 2 )
 RichTextLabel/fonts/bold_font = ExtResource( 5 )
 RichTextLabel/fonts/bold_italics_font = ExtResource( 6 )
 RichTextLabel/fonts/italics_font = ExtResource( 7 )

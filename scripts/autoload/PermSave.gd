@@ -11,7 +11,8 @@ enum END_GAME_STATE {
 #TODO: Might want to add more info about the player (cargo inventory, # of turn spent, etc.
 var _perm_save = {
 	"settings": {
-		"default_name":null
+		"default_name":null,
+		"full_screen":false
 	},
 	"leaderboard": [
 		{"player_name":"Ombarus the greatest", "final_score":100000, "status":END_GAME_STATE.won, "generated_levels":20, "died_on":-1},
