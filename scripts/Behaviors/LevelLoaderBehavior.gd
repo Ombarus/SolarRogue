@@ -138,6 +138,8 @@ func GenerateLevelFromSave(levelData, savedData):
 		var data = LoadJSON(savedData[key].src)
 		var coord = Vector2(savedData[key].position_x, savedData[key].position_y)
 		n = CreateAndInitNode(data, coord, savedData[key].modified_attributes)
+		if "rotation" in savedData[key]:
+			n.rotation = savedData[key].rotation
 		
 	
 func GenerateLevelFromTemplate(levelData):
@@ -206,7 +208,8 @@ func _GatherSaveData():
 		output[key]["src"] = objById[key].get_attrib("src")
 		output[key]["position_x"] = World_to_Tile(objById[key].position).x
 		output[key]["position_y"] = World_to_Tile(objById[key].position).y
-		# TODO: Add rotation ! (if ! 0 ?)
+		if objById[key].rotation != 0.0:
+			output[key]["rotation"] = objById[key].rotation
 		output[key]["modified_attributes"] = objById[key].modified_attributes
 		
 	return output
@@ -231,6 +234,7 @@ func SaveState(level_data):
 	cur_save.player_data["src"] = objByType["player"][0].get_attrib("src")
 	cur_save.player_data["position_x"] = World_to_Tile(objByType["player"][0].position).x
 	cur_save.player_data["position_y"] = World_to_Tile(objByType["player"][0].position).y
+	cur_save.player_data["rotation"] = objByType["player"][0].rotation
 	cur_save.player_data["modified_attributes"] = objByType["player"][0].modified_attributes
 	var level_id = str(current_depth) + _current_level_data["src"]
 	if not cur_save.has("modified_levels"):

@@ -359,12 +359,16 @@ func OnLevelLoaded_Callback():
 			
 		#TODO: Pop menu for player creation ?
 		var modififed_attrib = null
+		var rot := 0.0
 		if save != null && save.has("player_data"):
 			modififed_attrib = save.player_data.modified_attributes
 			template = save.player_data.src
+			if "rotation" in save.player_data:
+				rot = save.player_data.rotation
 		# Modified_attrib must be passed during request so that proper IDs can be locked in objByID
 		playerNode = levelLoaderRef.RequestObject(template, coord, modififed_attrib)
 		playerNode.z_index = 999
+		playerNode.rotation = rot
 		if playerNode.get_attrib("player_name") == null:
 			playerNode.set_attrib("player_name", PermSave.get_attrib("settings.default_name", "Ombarus"))
 		
