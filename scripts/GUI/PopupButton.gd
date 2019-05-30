@@ -3,6 +3,7 @@ extends Control
 signal look_pressed
 signal board_pressed
 signal take_pressed
+signal wait_pressed
 
 onready var _more_btn = get_node("More")
 onready var _close_btn = get_node("Close")
@@ -55,3 +56,8 @@ func _on_Board_pressed():
 func _on_Take_pressed():
 	Pressed_Close_Callback()
 	emit_signal("take_pressed")
+
+
+func _on_Wait_pressed():
+	#Pressed_Close_Callback()
+	emit_signal("wait_pressed")

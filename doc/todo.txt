@@ -40,12 +40,9 @@ ROAD TO ALPHA :::
 
 TODO :::
 - recipe row size != inventory row size
+- Converter recipe list has heigher rows than other lists
 - managed to drop and pickup object in same frame resulting in a crash (from inventory window drop an item with a sort of double-click)
 	- Also, Unhandled_input is getting called even tough I have a full screen control stopping inputs... why ? (related to drag&drop ?)
-- Settings menu
-	- Windowed, resolution
-	- key binding ?
-	- language ?
 - customize scroll bar ?
 - don't let planet material spawn under the player
 - death screen need beautification
@@ -62,8 +59,6 @@ TODO :::
 - Bind "return" key for "ok" btn
 - crash trying to convert 10 missile to energy (CNR)
 - warp effect when travelling in wormhole (should also be how the game launch when you hit "new game")
-- Converter recipe list has heigher rows than other lists
-- Button size and spacing is uneven
 - Border around level is ugly
 	- give it a "danger" kind a texture ?
 	- remove it and warn the player : "cannot get out of sun's gravity well"
@@ -156,6 +151,12 @@ TODO :::
 	
 	
 polish :::
+- Improve, beautify and add stuff to settings
+	- language
+	- sound volumes
+	- resolution (PC only ?)
+	- vsync (PC only ?)
+	- key bindings (PC only ?)
 - dialog cancel button doesn't fit well
 - more dynamic Camera ? (shakes when hit, smooth movement, smooth zoom, etc.)
 - Transfer UI should display player's ship name (crafted ship could have a 1, 2, 3, 4... appended ?)
@@ -195,6 +196,8 @@ IDEAS:::
 	
 	
 DONE :::
+- Button size and spacing is uneven
+	- Windowed, resolution
 - black text stay stuck when switching between mounts and cargo in inventory dialog
 - BUG: Loading level doesn't load the same planet sprite ? (because it's random choice ?)
 - Polish Energy "Recyling" informations in crafting UI

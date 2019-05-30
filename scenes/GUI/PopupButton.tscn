@@ -17,6 +17,10 @@ script = ExtResource( 1 )
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -1272.0
+margin_top = -963.0
+margin_right = 1304.0
+margin_bottom = 845.0
 script = ExtResource( 2 )
 
 [node name="PopupSize" type="Control" parent="."]
@@ -25,10 +29,10 @@ margin_bottom = 266.0
 mouse_filter = 2
 
 [node name="Popup" parent="PopupSize" instance=ExtResource( 3 )]
-modulate = Color( 1, 1, 1, 0 )
-margin_left = 132.9
-margin_right = -13.1001
-margin_bottom = 79.0
+modulate = Color( 0.129412, 1, 0.129412, 0 )
+margin_left = 133.0
+margin_right = -13.0
+margin_bottom = 186.0
 border_style = "━"
 
 [node name="Board" parent="PopupSize/Popup" groups=[
@@ -39,7 +43,8 @@ anchor_right = 0.5
 margin_left = -70.0
 margin_top = 230.0
 margin_right = 70.0
-margin_bottom = 332.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 110, 90 )
 Text = "[b]oard"
 ShortcutKey = "b"
 
@@ -51,7 +56,8 @@ anchor_right = 0.5
 margin_left = -70.0
 margin_top = 120.0
 margin_right = 70.0
-margin_bottom = 222.0
+margin_bottom = 210.0
+rect_min_size = Vector2( 110, 90 )
 Text = "[t]ransfer"
 ShortcutKey = "t"
 
@@ -63,9 +69,22 @@ anchor_right = 0.5
 margin_left = -70.0
 margin_top = 10.0
 margin_right = 70.0
-margin_bottom = 112.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 110, 90 )
 Text = "[l]ook"
 ShortcutKey = "l"
+
+[node name="Wait" parent="PopupSize/Popup" groups=[
+"more_btn",
+] instance=ExtResource( 4 )]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -70.0
+margin_top = 340.0
+margin_right = 70.0
+margin_bottom = 430.0
+rect_min_size = Vector2( 110, 90 )
+Text = "[5] wait"
 
 [node name="More" parent="." instance=ExtResource( 4 )]
 margin_right = 110.0
@@ -85,3 +104,4 @@ anims/popin = ExtResource( 6 )
 [connection signal="pressed" from="PopupSize/Popup/Board" to="." method="_on_Board_pressed"]
 [connection signal="pressed" from="PopupSize/Popup/Take" to="." method="_on_Take_pressed"]
 [connection signal="pressed" from="PopupSize/Popup/Look" to="." method="_on_Look_pressed"]
+[connection signal="pressed" from="PopupSize/Popup/Wait" to="." method="_on_Wait_pressed"]

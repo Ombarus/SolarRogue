@@ -65,6 +65,7 @@ func _ready():
 	action.connect("look_pressed", self, "Pressed_Look_Callback")
 	action.connect("board_pressed", self, "Pressed_Board_Callback")
 	action.connect("take_pressed", self, "Pressed_Take_Callback")
+	action.connect("wait_pressed", self, "Pressed_Wait_Callback")
 	action = get_node(InventoryDialog)
 	action.connect("drop_pressed", self, "OnDropIventory_Callback")
 	action.connect("use_pressed", self, "OnUseInventory_Callback")
@@ -116,6 +117,13 @@ func Pressed_Take_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI") #HUD
 	var text = "[color=red]Select a ship to transfer content...[/color]"
 	BehaviorEvents.emit_signal("OnPushGUI", "TargettingHUD", {"info_text":text, "show_skip":false})
+	
+func Pressed_Wait_Callback():
+	if lock_input:
+		return
+		
+	BehaviorEvents.emit_signal("OnUseAP", playerNode, 1.0)
+	BehaviorEvents.emit_signal("OnLogLine", "Cooling reactor (wait)")
 	
 func UpdateButtonVisibility():
 	var weapons = playerNode.get_attrib("mounts.weapon")
