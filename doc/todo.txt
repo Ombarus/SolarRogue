@@ -147,9 +147,7 @@ polish :::
 -- (suggestion) from Destragon on youtube : Mousing over things should automatically display the description in the text box at the bottom without requiring you to press l for look.
 - welcome screen presentation is lacking (bunch of colors, line length mismatch, italic, bold, underline... need better design)
 - Highlight last run in leaderboard in main menu
-- Save node's rotation (position is saved but not rot)
 - Sort energy recycler need list from most energy to less energy
-- Tweak: Should be able to hold hulls for crafting scout in scout (at least if drop everything)
 - Loot interface :
 	- when drag & dropping.. highlight mount slot that fit with the object being draged
 - Generic system to show/hide button based on player inv/equippement
@@ -161,9 +159,6 @@ polish :::
 - smooth camera (a la township?)
 	- smooth zoom limits & exponential zoom
 	- drag still remember even tough camera doesn't pass limit
-
-- Improve data system
-	- overrides (modifed_attributes)
 	
 - Read-Only base_attributes to prevent un-savable changes by mistake
 	
@@ -179,6 +174,8 @@ IDEAS:::
 	
 	
 DONE ::: 
+- Tweak: Should be able to hold hulls for crafting scout in scout (at least if drop everything)
+- Save node's rotation (position is saved but not rot)
 - fix max cargo. make sure we're never above cargo capacity
 	- check if we always update current cargo volume
 - Tweak: Probe doesn't have enough cargo space to hold any hulls for crafting which means we can be stuck in a probe forever ? (you can pickup anything now... just won't be able to move)
