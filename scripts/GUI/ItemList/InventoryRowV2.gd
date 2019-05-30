@@ -40,14 +40,17 @@ func set_row_data(data):
 	
 	if _metadata.origin.is_connected("OnSelectionChanged", self, "OnSelectionChanged_Callback"):
 		_metadata.origin.disconnect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
-	_metadata.origin.connect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
 
-func OnSelectionChanged_Callback():
+func UpdateSelection():
 	if get_node("BtnWrap/Toggle").pressed == false and (not "header" in _metadata or not _metadata.header == true):
 		get_node("BtnWrap/HBoxContainer/Wrap/Name").add_color_override("default_color", Color(1,1,1))
 
 func _on_Toggle_toggled(button_pressed):
 	get_node("BtnWrap/HBoxContainer/Wrap/Name").add_color_override("default_color", Color(0,0,0))
+	var group : ButtonGroup = get_node("BtnWrap/Toggle").group
+	if group != null:
+		for btn in group.get_buttons():
+			btn.UpdateSelection()
 	_metadata.origin.bubble_selection_changed()
 
 ################ DRAG & DROP OVERRIDE #########################
@@ -69,6 +72,12 @@ func can_drop_data(position, data):
 	var res : bool = data.dragdrop_id == _metadata.dragdrop_id and (data["self"].get_parent() != self.get_parent() or data["origin"].CanDropOnSelf == true)
 	if res == false:
 		return res
+		
+	# Can't drop mount on self
+	var same_list : bool = data["self"].get_parent() == self.get_parent() 
+	var both_mount : bool = "key" in data and "key" in _metadata and "idx" in data and "idx" in _metadata
+	if same_list and both_mount and data.key == _metadata.key and data.idx == _metadata.idx:
+		return false
 	
 	# When dropping in the "empty" list to drop an item on the floor
 	if data.origin.Content.size() == 0:

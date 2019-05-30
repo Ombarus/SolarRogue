@@ -39,9 +39,6 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- black text stay stuck when switching between mounts and cargo in inventory dialog
-- destroyable.hull should be destroyable.current_hull
-- description if field is null do not display or display (N/A, No Data ?)
 - recipe row size != inventory row size
 - managed to drop and pickup object in same frame resulting in a crash (from inventory window drop an item with a sort of double-click)
 - Settings menu
@@ -140,9 +137,6 @@ TODO :::
 		- select item using keyboard
 	- Shoot
 		- select target using keyboard
-	- Scan
-		- Give health remaining on ships
-		- Give detailed description of planet (rich but hard to mine, poor but easy to mine, etc)
 - Two places where I access cargo content and just do -= 1. or .remove()... but if the result returned was in BaseAttribute that's dangerous
 
 - check if assigning array or dictionary copy or reference content in godot
@@ -156,13 +150,6 @@ TODO :::
 		- Laser turret
 		- Missile Launcher
 		- Ship parts ?
-- GUI
-	- Status
-	- Log window
-	- Buttons
-	- Layouts
-		- modal windows ?
-		- Hiding control when asking question ?
 
 	
 	
@@ -175,26 +162,15 @@ polish :::
 -- (suggestion) from Destragon on youtube : Mousing over things should automatically display the description in the text box at the bottom without requiring you to press l for look.
 - welcome screen presentation is lacking (bunch of colors, line length mismatch, italic, bold, underline... need better design)
 - Highlight last run in leaderboard in main menu
-- BUG: Loading level doesn't load the same planet sprite ? (because it's random choice ?)
 - Save node's rotation (position is saved but not rot)
 - Sort energy recycler need list from most energy to less energy
-- Polish Energy "Recyling" informations in crafting UI
-- Block background in the howmany dialog
-- Find a way to show how many of something you already have when crafting
-- Try to figure out a way the player can see attributes for any objects easily (from any dialogs or HUD)
 - Tweak: Should be able to hold hulls for crafting scout in scout (at least if drop everything)
-- Crafting interface
-	- Automatically check item necessary for recipe (if possible)
-	- Mark missing item in red in description
 - Loot interface :
-	- Move all cargo button shouldn't affect mounts, there should be a move all mounts button that moves only mounts that fit free spots
 	- when drag & dropping.. highlight mount slot that fit with the object being draged
-- block button shortcuts when dialog is open
 - Generic system to show/hide button based on player inv/equippement
 - Cache JSONs when loaded 
 	- so I stop getting it from disk everytime I need the attributes of an equiped object,
 	- base_attributes could also be changed to point to the cached data to avoid duplication
-- Change FTL button to say > or < depending on wormhole data
 - When dead FTL button stays invisible ?
 - Drag-cancel as % of screen resolution
 - smooth camera (a la township?)
@@ -218,6 +194,23 @@ IDEAS:::
 	
 	
 DONE :::
+- black text stay stuck when switching between mounts and cargo in inventory dialog
+- BUG: Loading level doesn't load the same planet sprite ? (because it's random choice ?)
+- Polish Energy "Recyling" informations in crafting UI
+- Block background in the howmany dialog
+- Find a way to show how many of something you already have when crafting
+- Try to figure out a way the player can see attributes for any objects easily (from any dialogs or HUD) (there's a description ? button nearly everywhere now)
+	- Move all cargo button shouldn't affect mounts, there should be a move all mounts button that moves only mounts that fit free spots
+- block button shortcuts when dialog is open
+- Change FTL button to say > or < depending on wormhole data
+- Crafting interface
+	- Automatically check item necessary for recipe (if possible)
+	- Mark missing item in red in description
+- Scan
+		- Give health remaining on ships
+		- Give detailed description of planet (rich but hard to mine, poor but easy to mine, etc)
+- description if field is null do not display or display (N/A, No Data ?)
+- destroyable.hull should be destroyable.current_hull
 - BUG: still have negative inventory sometimes
 - missile icon gone from recipe menu
 - fog too subtil

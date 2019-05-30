@@ -24,3 +24,6 @@ func drop_data(position, data):
 	if _node == null:
 		return
 	_node.call("drop_data", position, data)
+	
+func UpdateSelection():
+	_node.call("UpdateSelection")
