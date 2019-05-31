@@ -41,6 +41,7 @@ func OnUpdateLayout_Callback():
 	btn.rect_position = frame_offset
 
 func _on_btn_pressed():
+	get_node("ClickSFX").play()
 	emit_signal("pressed")
 
 func RegisterShortcut():
@@ -55,3 +56,7 @@ func _on_Button_visibility_changed():
 			BehaviorEvents.emit_signal("OnEnableShortcut", ShortcutKey, self, "_on_btn_pressed", self.is_visible_in_tree())
 		if ShortcutEnum != 0:
 			BehaviorEvents.emit_signal("OnEnableShortcut", ShortcutEnum, self, "_on_btn_pressed", self.is_visible_in_tree())
+
+
+func _on_btn_mouse_entered():
+	get_node("HoverSFX").play()

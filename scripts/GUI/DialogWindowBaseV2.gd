@@ -105,9 +105,11 @@ func on_size_changed():
 	call_deferred("emit_signal", "OnUpdateLayout")
 
 func _on_Ok_pressed():
+	get_node("ClickSFX").play()
 	emit_signal("OnOkPressed")
 	
 func _on_Cancel_pressed():
+	get_node("ClickSFX").play()
 	emit_signal("OnCancelPressed")
 	
 func RegisterShortcut():
@@ -117,3 +119,7 @@ func RegisterShortcut():
 		BehaviorEvents.emit_signal("OnAddShortcut", 16777222, self, "_on_Ok_pressed") # KEY_KP_RETURN
 	if dialog_cancel == true:
 		BehaviorEvents.emit_signal("OnAddShortcut", 16777217, self, "_on_Cancel_pressed")
+
+
+func _on_btn_mouse_entered():
+	get_node("HoverSFX").play()

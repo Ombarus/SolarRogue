@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://data/theme/default_ui_text.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/GUI/DialogWindowBaseV2.gd" type="Script" id=2]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=3]
 [ext_resource path="res://data/textures/dialog_atlas.png" type="Texture" id=4]
+[ext_resource path="res://data/sounds/sfx/btn/hover.wav" type="AudioStream" id=5]
+[ext_resource path="res://data/sounds/sfx/btn/click.wav" type="AudioStream" id=6]
 
 [node name="base" type="Control"]
 anchor_right = 1.0
@@ -242,5 +244,15 @@ margin_right = -31.797
 margin_bottom = -6.30701
 text = "[esc]Cancel"
 
+[node name="HoverSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+bus = "Sfx"
+
+[node name="ClickSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+bus = "Sfx"
+
+[connection signal="mouse_entered" from="Btn/Ok" to="." method="_on_btn_mouse_entered"]
 [connection signal="pressed" from="Btn/Ok" to="." method="_on_Ok_pressed"]
+[connection signal="mouse_entered" from="Btn/Cancel" to="." method="_on_btn_mouse_entered"]
 [connection signal="pressed" from="Btn/Cancel" to="." method="_on_Cancel_pressed"]

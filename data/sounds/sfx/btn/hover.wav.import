@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/hover.wav-0af1217080de6955e0a1088f5251ca79.sample"
+
+[deps]
+
+source_file="res://data/sounds/sfx/btn/hover.wav"
+dest_files=[ "res://.import/hover.wav-0af1217080de6955e0a1088f5251ca79.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

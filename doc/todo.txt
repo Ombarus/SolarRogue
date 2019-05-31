@@ -58,7 +58,6 @@ TODO :::
 	- little arrow showing the player <-- The Ombarus
 - BUG: craft scout, transfer all, notice scout disapear from screen, put back scanner and scout comes back to live (ultimate scanner).
 - "grab" menu when multiple objects ?
-- Bind "return" key for "ok" btn
 - crash trying to convert 10 missile to energy (CNR)
 - warp effect when travelling in wormhole (should also be how the game launch when you hit "new game")
 - Border around level is ugly
@@ -67,12 +66,32 @@ TODO :::
 	- ???
 - SOUNDS
 	- Investigate how to trigger basic sounds (buttons, shooting, explosions)
+		- AudioStreamPlayer (base, 2d, 3d). Works with Wav (sfx) or Ogg (music/dialog)
 	- Find free sounds I could use for now
 	- Investigate music style and artists that could do something nice
 		- maybe should have a few different music (do something with music when health is low or ennemy is close, etc ?)
 			- Star Ocean First Departure
 			- Disgaea ?
 			- Final IX battle theme ?
+	- SFX :
+		- Button hover, click
+		- Moving swoosh ?
+		- engine noise when zoomed in close (2d for when panning the camera)
+		- Beeping for white, yellow and red log messages
+		- Crafting noise for converter
+		- Equip noise for mounting
+		- Shooting Noise (Laser, Missile)
+		- Impact noise (diff for shield and hull ?)
+		- Boom for destruction
+		- Noise for item drop / planet harvest drop ?
+			- different noise for each category of drop ?
+		- Noise for transfer from ship to ship (or same as equip ?)
+		- Use nanobots
+		- Wormhole warp
+		- autopilot interupted ?
+	- music
+		- change music when aggressive ennemy hunting ?
+		
 - Still can get shot before autopilot stop... why ?
 - Achievements
 - Could not install on OnePlus 3T Oreo (test with father's phone)
@@ -174,6 +193,7 @@ IDEAS:::
 	
 	
 DONE ::: 
+- Bind "return" key for "ok" btn
 - Tweak: Should be able to hold hulls for crafting scout in scout (at least if drop everything)
 - Save node's rotation (position is saved but not rot)
 - fix max cargo. make sure we're never above cargo capacity

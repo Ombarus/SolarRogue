@@ -12,7 +12,10 @@ enum END_GAME_STATE {
 var _perm_save = {
 	"settings": {
 		"default_name":null,
-		"full_screen":false
+		"full_screen":false,
+		"master_volume":4.0,
+		"sfx_volume":4.0,
+		"music_volume":4.0
 	},
 	"leaderboard": [
 		{"player_name":"Ombarus the greatest", "final_score":100000, "status":END_GAME_STATE.won, "generated_levels":20, "died_on":-1},

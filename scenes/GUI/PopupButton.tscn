@@ -29,6 +29,7 @@ margin_bottom = 266.0
 mouse_filter = 2
 
 [node name="Popup" parent="PopupSize" instance=ExtResource( 3 )]
+visible = false
 modulate = Color( 0.129412, 1, 0.129412, 0 )
 margin_left = 133.0
 margin_right = -13.0

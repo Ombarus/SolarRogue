@@ -69,13 +69,15 @@ func _process(delta):
 	if _up_to_date == true:
 		return
 		
-	_up_to_date = true
-		
 	for id in _node_id_scanner:
 		var obj = Globals.LevelLoaderRef.GetObjectById(id)
 		if obj != null:
 			var scanner_data = _node_id_scanner[id]
 			_update_scanned_obj(obj, scanner_data)
+	
+	# Put it at the end because when we update ghosts in _updated_scanned_obj we might change their
+	# position which will trigger another scanner update if we're not careful		
+	_up_to_date = true
 			
 func _update_scanned_obj(obj, scanner_data):
 	if Globals.is_(Globals.get_data(scanner_data, "scanning.fully_mapped"), true):

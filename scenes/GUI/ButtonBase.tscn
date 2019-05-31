@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/GUI/ButtonBase.gd" type="Script" id=1]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://data/styles/btn_pressed.tres" type="StyleBox" id=4]
 [ext_resource path="res://data/styles/trans.tres" type="StyleBox" id=5]
 [ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=6]
+[ext_resource path="res://data/sounds/sfx/btn/hover.wav" type="AudioStream" id=7]
+[ext_resource path="res://data/sounds/sfx/btn/click.wav" type="AudioStream" id=8]
 
 [node name="Button" type="Control"]
 margin_right = 226.0
@@ -21,6 +23,8 @@ border_style = "━"
 [node name="btn" type="Button" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = 226.0
+margin_bottom = 144.0
 custom_styles/hover = ExtResource( 3 )
 custom_styles/pressed = ExtResource( 4 )
 custom_styles/focus = ExtResource( 5 )
@@ -31,5 +35,14 @@ custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 text = "Weapon"
 
+[node name="HoverSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+bus = "Sfx"
+
+[node name="ClickSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+bus = "Sfx"
+
 [connection signal="visibility_changed" from="." to="." method="_on_Button_visibility_changed"]
+[connection signal="mouse_entered" from="btn" to="." method="_on_btn_mouse_entered"]
 [connection signal="pressed" from="btn" to="." method="_on_btn_pressed"]
