@@ -1,4 +1,4 @@
-extends Button
+extends "res://scripts/GUI/Audio/ToggleBtnAudio.gd"
 
 export(NodePath) var forward_to = null
 
@@ -7,6 +7,7 @@ var _node : Node = null
 func _ready():
 	if forward_to != null:
 		_node = get_node(forward_to)
+	._ready()
 
 func get_drag_data(position):
 	if _node == null:

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://data/theme/default_ui_text.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/GUI/ItemList/CraftingMaterialRow.gd" type="Script" id=2]
 [ext_resource path="res://data/theme/crafting/all_selection.tres" type="Theme" id=3]
 [ext_resource path="res://data/theme/crafting/partial_selection.tres" type="Theme" id=4]
+[ext_resource path="res://scripts/GUI/Audio/ToggleBtnAudio.gd" type="Script" id=5]
 
 [node name="CraftingMaterialRow" type="Control"]
 margin_right = 377.0
@@ -18,6 +19,7 @@ partial_selection = ExtResource( 4 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 toggle_mode = true
+script = ExtResource( 5 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0

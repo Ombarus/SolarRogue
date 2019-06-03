@@ -6,7 +6,7 @@
 [ext_resource path="res://data/styles/btn_pressed.tres" type="StyleBox" id=4]
 [ext_resource path="res://data/styles/trans.tres" type="StyleBox" id=5]
 [ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=6]
-[ext_resource path="res://data/sounds/sfx/btn/hover.wav" type="AudioStream" id=7]
+[ext_resource path="res://data/sounds/sfx/btn/hover2.wav" type="AudioStream" id=7]
 [ext_resource path="res://data/sounds/sfx/btn/click.wav" type="AudioStream" id=8]
 
 [node name="Button" type="Control"]
@@ -23,8 +23,6 @@ border_style = "━"
 [node name="btn" type="Button" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 226.0
-margin_bottom = 144.0
 custom_styles/hover = ExtResource( 3 )
 custom_styles/pressed = ExtResource( 4 )
 custom_styles/focus = ExtResource( 5 )
@@ -37,6 +35,7 @@ text = "Weapon"
 
 [node name="HoverSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+volume_db = -20.0
 bus = "Sfx"
 
 [node name="ClickSFX" type="AudioStreamPlayer" parent="."]

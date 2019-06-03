@@ -1,10 +1,12 @@
 extends "res://scripts/GUI/ItemList/DefaultRow.gd"
 
+onready var _toggle : Button = get_node("Toggle")
+
 # data : {"name":<recipe_name>, "icon": {"texture":<path>, "region":[x,y,w,h]}, requirements, produce, ap_cost, etc... (see converter recipe.json)}
 func set_row_data(data):
 	_metadata = data
 	if _metadata.group != null:
-		self.group = _metadata.group
+		_toggle.group = _metadata.group
 		
 	get_node("HBoxContainer/Name").text = data.name
 		
@@ -21,7 +23,7 @@ func set_row_data(data):
 		get_node("HBoxContainer/Icon").texture = null
 		
 	if "selected" in data:
-		self.pressed = data.selected
+		_toggle.pressed = data.selected
 		pressed_callback()
 		
 	if _metadata.origin.is_connected("OnSelectionChanged", self, "OnSelectionChanged_Callback"):
@@ -29,19 +31,19 @@ func set_row_data(data):
 	_metadata.origin.connect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
 
 func get_row_data():
-	_metadata["selected"] = self.pressed
+	_metadata["selected"] = _toggle.pressed
 	# Since I'm going to display it in the center of the converter window. It's just more efficient to use the same
 	# copy.
 	_metadata["texture_cache"] = get_node("HBoxContainer/Icon").texture
 	return _metadata
 
 func _ready():
-	connect("pressed", self, "pressed_callback")
+	_toggle.connect("pressed", self, "pressed_callback")
 	
 func pressed_callback():
 	get_node("HBoxContainer/Name").add_color_override("font_color", Color(0,0,0))
 	_metadata.origin.bubble_selection_changed()
 
 func OnSelectionChanged_Callback():
-	if self.pressed == false:
+	if _toggle.pressed == false:
 		get_node("HBoxContainer/Name").add_color_override("font_color", Color(1,1,1))

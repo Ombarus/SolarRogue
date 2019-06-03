@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/animations/MissileFX2.gd" type="Script" id=1]
 [ext_resource path="res://scripts/animations/laser_vfx_test02.gd" type="Script" id=2]
 [ext_resource path="res://data/textures/visualfx/laser_test.png" type="Texture" id=3]
+[ext_resource path="res://data/sounds/sfx/laser/270343__littlerobotsoundfactory__shoot-01-freesound-cc3.wav" type="AudioStream" id=4]
 
 [node name="MissileFX2" type="Node2D"]
 position = Vector2( 0, 75.7018 )
@@ -19,4 +20,8 @@ scale = Vector2( 1, 1e-005 )
 texture = ExtResource( 3 )
 centered = false
 offset = Vector2( -64, -128 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
 
