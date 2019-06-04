@@ -1,3 +1,10 @@
+- Press kit :
+	- Release notes
+		- what is unique, cool about the game
+	- screenshots
+	- video/trailer
+	
+
 - Teaser Trailer
 	- Should be 1 min
 	- Derek Lieu graph of rising intensity
@@ -7,6 +14,7 @@
 	- create a /r/solarrogue
 	- https://www.reddit.com/r/shamelessplug/top/?t=all
 	- https://www.reddit.com/r/sideproject
+	- gamedev, roguelikedev, roguelike, roguelites, indiegaming?
 - Twitter :
 	- #Screenshotsaturday
 	- #Gamedev, #indiedev, #indiegame ?

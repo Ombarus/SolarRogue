@@ -34,4 +34,5 @@ func OnPositionUpdated_Callback(obj):
 		var sfx_root = obj.find_node("MoveSFX", true, false)
 		if sfx_root != null:
 			var playid = MersenneTwister.rand(sfx_root.get_child_count())
-			sfx_root.get_children()[playid].play()
+			if not sfx_root.get_children()[playid].playing:
+				sfx_root.get_children()[playid].play()
