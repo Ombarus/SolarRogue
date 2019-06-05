@@ -65,14 +65,16 @@ func OnDealDamage_Callback(targets, shooter, weapon_data, shot_tile):
 	var shot_fired := false
 	for target in targets:
 		if validate_action(target, shooter, weapon_data) == true:
-			shot_fired = true
+			if shot_fired == false:
+				shot_fired = true
+				# Should only be triggered once per weapon, but needs to happen before we send event for destroyed ship
+				# otherwise we don't know we need to wait for the animation of the shot
+				BehaviorEvents.emit_signal("OnShotFired", shot_tile, shooter, weapon_data)
 			if target.get_attrib("harvestable") != null:
 				ProcessHarvesting(target, shooter, weapon_data)
 			else:
 				ProcessDamage(target, shooter, weapon_data)
 	if shot_fired == true:
-		#TODO: pass position of center of multiple target to OnShotFired
-		BehaviorEvents.emit_signal("OnShotFired", shot_tile, shooter, weapon_data)
 		consume(shooter, weapon_data)
 	
 func consume(shooter, weapon_data):

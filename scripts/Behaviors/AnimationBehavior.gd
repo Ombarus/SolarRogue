@@ -19,8 +19,7 @@ func OnObjectDestroyed_Callback(obj):
 	if destroyed_scene == null:
 		return
 	
-	if not "res://" in destroyed_scene:
-		destroyed_scene = "res://" + destroyed_scene
+	destroyed_scene = Globals.clean_path(destroyed_scene)
 	
 	var scene = load(destroyed_scene)
 	if _wait_for_anim == true:
@@ -30,8 +29,7 @@ func OnObjectDestroyed_Callback(obj):
 	n.position = pos
 	var r = get_node("/root/Root/GameTiles")
 	call_deferred("safe_start", n, r, pos)
-	#r.call_deferred("add_child", n)
-	#n.Start(pos)
+
 	
 	
 func OnShotFired_Callback(shot_tile, shooter, weapon):
@@ -39,18 +37,31 @@ func OnShotFired_Callback(shot_tile, shooter, weapon):
 		return
 		
 	BehaviorEvents.emit_signal("OnWaitForAnimation")
-	var shoot_anim_scene = weapon.animation.shoot
-	if not "res://" in shoot_anim_scene:
-		shoot_anim_scene = "res://" + shoot_anim_scene
+	var shoot_anim_scene = Globals.clean_path(weapon.animation.shoot)
 	
 	var scene = load(shoot_anim_scene)
-	var n = scene.instance()
+	var n : Node2D = scene.instance()
 	var pos = shooter.position
 	n.position = pos
 	var r = get_node("/root/Root/GameTiles")
 	call_deferred("safe_start", n, r, Globals.LevelLoaderRef.Tile_to_World(shot_tile))
-	#r.call_deferred("add_child", n)
-	#n.Start(target.global_position)
+	
+	if _wait_for_anim == true:
+		yield(BehaviorEvents, "OnAnimationDone")
+	
+	var hit_anim : String = Globals.get_data(weapon, "animation.hit")
+	if hit_anim == null:
+		return
+	
+	var area_size : int = Globals.get_data(weapon, "weapon_data.area_effect", 0)
+	scene = load(Globals.clean_path(hit_anim))
+	n = scene.instance()
+	pos = Globals.LevelLoaderRef.Tile_to_World(shot_tile)
+	n.position = pos
+	n.scale.x = n.scale.x * (2.0 * area_size)
+	n.scale.y = n.scale.y * (2.0 * area_size)
+	r = get_node("/root/Root/GameTiles")
+	call_deferred("safe_start", n, r, pos)
 	
 func safe_start(n, r, target_pos):
 	r.add_child(n)
