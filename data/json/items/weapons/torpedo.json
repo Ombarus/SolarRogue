@@ -1,0 +1,26 @@
+{
+	"name_id":"Torpedo",
+	"type":"ammo",
+	"sprite":"missile",
+	"icon": [{
+		"texture":"data/textures/space-sprite.png",
+		"region":[1280,0,128,128]
+	}],
+	"equipment": {
+		"slot":"cargo",
+		"volume":1.0,
+		"stackable":true
+	},
+	"recyclable": {
+		"energy": 350
+	},
+	"description": {
+		"text":"Ammo for the Torpedo Launcher. It's massive but it makes even bigger holes !",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}"}
+			]
+		}
+	}
+}

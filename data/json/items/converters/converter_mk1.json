@@ -34,6 +34,13 @@
 				"amount":1
 			},
 			{
+				"name": "Torpedo",
+				"requirements":[{"type":"energy", "amount":550}], 
+				"produce":"data/json/items/weapons/torpedo.json",
+				"ap_cost":0.7,
+				"amount":1
+			},
+			{
 				"name": "Probe Ship",
 				"requirements":[{"type":"energy", "amount":1500}, {"src":"data/json/items/misc/probe_body.json", "amount":1}], 
 				"produce":"data/json/ships/human/player_probe.json",

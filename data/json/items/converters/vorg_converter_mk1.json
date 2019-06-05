@@ -34,6 +34,13 @@
 				"amount":1
 			},
 			{
+				"name": "Torpedo",
+				"requirements":[{"type":"energy", "amount":550}], 
+				"produce":"data/json/items/weapons/torpedo.json",
+				"ap_cost":0.7,
+				"amount":1
+			},
+			{
 				"name": "Vorg Scout", 
 				"requirements":[
 					{"type":"energy", "amount":1800},

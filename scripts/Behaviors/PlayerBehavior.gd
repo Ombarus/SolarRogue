@@ -11,6 +11,7 @@ export(NodePath) var PopupButtons
 export(NodePath) var TargettingHUD
 export(NodePath) var OptionBtn
 export(NodePath) var QuestionBtn
+export(NodePath) var AreaOfEffectOverlay
 
 var playerNode : Node2D = null
 var levelLoaderRef : Node
@@ -19,6 +20,7 @@ var lock_input = false # when it's not player turn, inputs are locked
 var next_touch_is_a_goto = false # when camera is dragged, instead of moving in a single direction, a touch will make the ship do pathfinding
 var _weapon_shots = []
 var _last_unicode = 0
+var _area_of_effect_overlay : Node2D = null
 
 enum SHOOTING_STATE {
 	init,
@@ -83,6 +85,8 @@ func _ready():
 	BehaviorEvents.connect("OnMountAdded", self, "OnMountAdded_Callback")
 	BehaviorEvents.connect("OnMountRemoved", self, "OnMountRemoved_Callback")
 	BehaviorEvents.connect("OnCameraDragged", self, "OnCameraDragged_Callback")
+	
+	_area_of_effect_overlay = get_node(AreaOfEffectOverlay)
 	
 func OnCameraDragged_Callback():
 	if _input_state == INPUT_STATE.hud:
@@ -380,6 +384,11 @@ func OnLevelLoaded_Callback():
 		_current_origin = PLAYER_ORIGIN.saved
 	
 func _input(event):
+	if event is InputEventMouseMotion and playerNode != null and _area_of_effect_overlay != null:
+		var world_mouse_tile = Globals.LevelLoaderRef.World_to_Tile(playerNode.get_global_mouse_position())
+		var tile_world_center = Globals.LevelLoaderRef.Tile_to_World(world_mouse_tile)
+		_area_of_effect_overlay.position = tile_world_center
+	
 	if _input_state != INPUT_STATE.look_around or not event is InputEventMouseButton:
 		return
 		
@@ -622,7 +631,8 @@ func cancel_targetting_pressed_Callback():
 	
 
 #TODO: if target is out-of-range the sequence will be aborted. Should probably fix that if you have more than one weapon
-func ProcessAttackSelection(target):
+#TODO: when firing multiple weapon. If the slowest weapon would allow the fastest to attack twice it should query twice.
+func ProcessAttackSelection(target, shot_tile):
 	_input_state = INPUT_STATE.hud
 	var cur_weapon = null
 	for shot in _weapon_shots:
@@ -630,6 +640,7 @@ func ProcessAttackSelection(target):
 			continue
 		elif shot.state == SHOOTING_STATE.wait_targetting:
 			shot["target"] = target
+			shot["tile"] = shot_tile
 			shot.state = SHOOTING_STATE.wait_damage
 		elif shot.state == SHOOTING_STATE.init and cur_weapon == null:
 			cur_weapon = shot
@@ -653,18 +664,23 @@ func ProcessAttackSelection(target):
 			break
 			
 	if all_canceled == true:
-		BehaviorEvents.emit_signal("OnLogLine", "There's nothing there sir...")
 		return
 	
 	BehaviorEvents.emit_signal("OnBeginParallelAction", playerNode)
 	for shot in _weapon_shots:
 		if shot.target != null:
-			var destroyed_state = shot.target.get_attrib("destroyable.destroyed")
-			if destroyed_state == null or destroyed_state == false:
-				BehaviorEvents.emit_signal("OnDealDamage", shot.target, playerNode, shot.weapon_data)
+			var valid_target := []
+			if typeof(shot.target) == TYPE_ARRAY:
+				for t in shot.target:
+					var destroyed_state = t.get_attrib("destroyable.destroyed")
+					if destroyed_state == null or destroyed_state == false:
+						valid_target.push_back(t)
+			else:
+				valid_target.push_back(shot.target)	
+			BehaviorEvents.emit_signal("OnDealDamage", valid_target, playerNode, shot.weapon_data, shot.tile)
 	BehaviorEvents.emit_signal("OnEndParallelAction", playerNode)
 	
-func ProcessBoardSelection(target):
+func ProcessBoardSelection(target, tile):
 	BehaviorEvents.emit_signal("OnPopGUI")
 	BehaviorEvents.emit_signal("OnPushGUI", "HUD", null)
 	_input_state = INPUT_STATE.hud
@@ -674,7 +690,7 @@ func ProcessBoardSelection(target):
 	else:
 		BehaviorEvents.emit_signal("OnLogLine", "Ship transfer canceled")
 	
-func ProcessTakeSelection(target):
+func ProcessTakeSelection(target, tile):
 	BehaviorEvents.emit_signal("OnPopGUI")
 	BehaviorEvents.emit_signal("OnPushGUI", "HUD", null)
 	_input_state = INPUT_STATE.hud

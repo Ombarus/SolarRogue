@@ -1,0 +1,54 @@
+{
+	"name_id":"Torpedo Launcher MK1",
+	"type":"weapon",
+	"sprite":"torpedo_launcher",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[1184,32,64,64]
+	},
+	"animation": {
+		"shoot": "scenes/tileset_source/missile_fx.tscn"
+	},
+	"weapon_data": {
+		"base_dam":5.0,
+		"max_dam":8.0,
+		"area_effect":1,
+		"ammo":"data/json/items/weapons/torpedo.json",
+		"fire_range":2.0,
+		"fire_minimum_range":2.0,
+		"fire_pattern":"o",
+		"fire_energy_cost":150.0,
+		"fire_speed":1.2
+	},
+	"equipment": {
+		"slot":"weapon",
+		"volume":150.0,
+		"equip_ap":3.0,
+		"unequip_ap":3.0
+	},
+	"recyclable": {
+		"energy": 1250
+	},
+	"description": {
+		"text":"Can hit multiple ennemies in a area. A short fuse prevents nearby detonation. Sadly it's not long enough to hit far away targets.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}"},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}"},
+				{"name":"Mount Point", "value":"Weapon"}
+			]
+		},
+		"Weapon Stats": {
+			"min_level":0,
+			"fields": [
+				{"name":"Damage", "value":"{weapon_data.base_dam}~{weapon_data.max_dam}"},
+				{"name":"Range", "value":"{weapon_data.fire_range}"},
+				{"name":"Energy Cost", "value":"{weapon_data.fire_energy_cost}"},
+				{"name":"Speed", "value":"{weapon_data.fire_speed} turns"},
+				{"name":"Ammo", "value":"Torpedo"},
+				{"name":"Area", "value":"{weapon_data.area} tiles"}
+			]
+		}
+	}
+}

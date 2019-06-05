@@ -39,6 +39,7 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- Launch weapon effects with a slight offset from center so we can see multiple simultaneous shots
 - Add random derelic you can pickup items from
 	- when trying to pickup derelic should warn player : "not empty" (see final converter of yendor)
 - recipe row size != inventory row size

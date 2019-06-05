@@ -34,7 +34,7 @@ func OnObjectDestroyed_Callback(obj):
 	#n.Start(pos)
 	
 	
-func OnShotFired_Callback(target, shooter, weapon):
+func OnShotFired_Callback(shot_tile, shooter, weapon):
 	if not "animation" in weapon or not "shoot" in weapon.animation:
 		return
 		
@@ -48,7 +48,7 @@ func OnShotFired_Callback(target, shooter, weapon):
 	var pos = shooter.position
 	n.position = pos
 	var r = get_node("/root/Root/GameTiles")
-	call_deferred("safe_start", n, r, target.global_position)
+	call_deferred("safe_start", n, r, Globals.LevelLoaderRef.Tile_to_World(shot_tile))
 	#r.call_deferred("add_child", n)
 	#n.Start(target.global_position)
 	

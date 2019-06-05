@@ -199,7 +199,7 @@ func DoAttackPathFinding(obj):
 		if best_move.length() == 0 and (is_destroyed == null or is_destroyed == false):
 			var chance = obj.get_attrib("ai.hit_chance")
 			if chance == null or MersenneTwister.rand_float() < chance:
-				BehaviorEvents.emit_signal("OnDealDamage", player, obj, data)
+				BehaviorEvents.emit_signal("OnDealDamage", [player], obj, data)
 			else:
 				BehaviorEvents.emit_signal("OnLogLine", "The ennemy missed")
 				 # play the animation but no damage

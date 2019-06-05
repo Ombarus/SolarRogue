@@ -61,13 +61,37 @@ func OnObjectLoaded_Callback(obj):
 	#obj.set_attrib("harvestable.chance", (MersenneTwister.rand_float() * (max_rate-min_rate)) + min_rate)
 	
 	
-func OnDealDamage_Callback(target, shooter, weapon_data):
-	if validate_action(target, shooter, weapon_data) == true:
-		BehaviorEvents.emit_signal("OnShotFired", target, shooter, weapon_data)
-		if target.get_attrib("harvestable") != null:
-			ProcessHarvesting(target, shooter, weapon_data)
-		else:
-			ProcessDamage(target, shooter, weapon_data)
+func OnDealDamage_Callback(targets, shooter, weapon_data, shot_tile):
+	var shot_fired := false
+	for target in targets:
+		if validate_action(target, shooter, weapon_data) == true:
+			shot_fired = true
+			if target.get_attrib("harvestable") != null:
+				ProcessHarvesting(target, shooter, weapon_data)
+			else:
+				ProcessDamage(target, shooter, weapon_data)
+	if shot_fired == true:
+		#TODO: pass position of center of multiple target to OnShotFired
+		BehaviorEvents.emit_signal("OnShotFired", shot_tile, shooter, weapon_data)
+		consume(shooter, weapon_data)
+	
+func consume(shooter, weapon_data):
+	var ammo = null
+	if weapon_data.weapon_data.has("ammo"):
+		ammo = weapon_data.weapon_data.ammo
+	
+	if ammo == null:
+		return null
+	if shooter.get_attrib("cargo") != null:
+		shooter.init_cargo()
+		for item in shooter.get_attrib("cargo.content"):
+			if ammo in item.src && item.count > 0:
+				BehaviorEvents.emit_signal("OnRemoveItem", shooter, item.src)
+				
+	if "fire_energy_cost" in weapon_data.weapon_data:
+		BehaviorEvents.emit_signal("OnUseEnergy", shooter, weapon_data.weapon_data.fire_energy_cost)
+	if "fire_speed" in weapon_data.weapon_data:
+		BehaviorEvents.emit_signal("OnUseAP", shooter, weapon_data.weapon_data.fire_speed)			
 	
 	
 func validate_action(target, shooter, weapon_data):
@@ -81,7 +105,6 @@ func validate_action(target, shooter, weapon_data):
 		
 	var ammo = null
 	var is_player = shooter.get_attrib("type") == "player"
-	var is_target_player = target.get_attrib("type") == "player"
 	if weapon_data.weapon_data.has("ammo"):
 		ammo = weapon_data.weapon_data.ammo
 	
@@ -95,17 +118,17 @@ func validate_action(target, shooter, weapon_data):
 		ammo_data = Globals.LevelLoaderRef.LoadJSON(ammo)
 		for item in shooter.get_attrib("cargo.content"):
 			if ammo in item.src && item.count > 0:
-				BehaviorEvents.emit_signal("OnRemoveItem", shooter, item.src)
+				#BehaviorEvents.emit_signal("OnRemoveItem", shooter, item.src)
 				ammo_ok = true
 	
 	if not ammo_ok && is_player:
 		BehaviorEvents.emit_signal("OnLogLine", "No more " + ammo_data.name_id + " to shoot")
 		return false
 	
-	if "fire_energy_cost" in weapon_data.weapon_data:
-		BehaviorEvents.emit_signal("OnUseEnergy", shooter, weapon_data.weapon_data.fire_energy_cost)
-	if "fire_speed" in weapon_data.weapon_data:
-		BehaviorEvents.emit_signal("OnUseAP", shooter, weapon_data.weapon_data.fire_speed)
+	#if "fire_energy_cost" in weapon_data.weapon_data:
+	#	BehaviorEvents.emit_signal("OnUseEnergy", shooter, weapon_data.weapon_data.fire_energy_cost)
+	#if "fire_speed" in weapon_data.weapon_data:
+	#	BehaviorEvents.emit_signal("OnUseAP", shooter, weapon_data.weapon_data.fire_speed)
 		
 	return true
 		

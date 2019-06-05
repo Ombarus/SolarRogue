@@ -17,8 +17,8 @@ signal OnUseEnergy(obj, amount)
 signal OnEnergyChanged(obj)
 signal OnObjTurn(obj)
 signal OnLogLine(text)
-signal OnDealDamage(target, shooter, weapon_data) # fired before all other validations
-signal OnShotFired(target, shooter, weapon_data) # for VFX
+signal OnDealDamage(targets, shooter, weapon_data, shot_tile) # fired before all other validations
+signal OnShotFired(shot_tile, shooter, weapon_data) # for VFX
 signal OnDamageTaken(target, shooter) # only fired if damage is > 0
 signal OnPickup(picker, picked)
 signal OnDropCargo(dropper, item_id, count)
