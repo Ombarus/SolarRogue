@@ -91,7 +91,8 @@ func consume(shooter, weapon_data):
 				BehaviorEvents.emit_signal("OnRemoveItem", shooter, item.src)
 				
 	if "fire_energy_cost" in weapon_data.weapon_data:
-		BehaviorEvents.emit_signal("OnUseEnergy", shooter, weapon_data.weapon_data.fire_energy_cost)
+		var cost : float = weapon_data.weapon_data.fire_energy_cost * _get_power_amplifier_stack(shooter, "energy_percent")
+		BehaviorEvents.emit_signal("OnUseEnergy", shooter, cost)
 	if "fire_speed" in weapon_data.weapon_data:
 		BehaviorEvents.emit_signal("OnUseAP", shooter, weapon_data.weapon_data.fire_speed)			
 	
@@ -217,6 +218,7 @@ func ProcessDamage(target, shooter, weapon_data):
 	var max_dam = weapon_data.weapon_data.max_dam
 	
 	var dam = MersenneTwister.rand(max_dam-min_dam) + min_dam
+	dam = dam * _get_power_amplifier_stack(shooter, "damage_percent")
 	if dam == 0:
 		if is_player:
 			BehaviorEvents.emit_signal("OnLogLine", "Shot missed")
@@ -255,6 +257,28 @@ func ProcessDeathSpawns(target):
 		if can_spawn and MersenneTwister.rand_float() < stuff.chance:
 			Globals.LevelLoaderRef.RequestObject(stuff.id, Globals.LevelLoaderRef.World_to_Tile(target.position))
 
+func _get_power_amplifier_stack(shooter, type):
+	var utilities : Array = shooter.get_attrib("mounts.utility")
+	var utilities_data : Array = Globals.LevelLoaderRef.LoadJSONArray(utilities)
+	
+	var power_amp := []
+	for data in utilities_data:
+		var boost = Globals.get_data(data, "damage_boost." + type)
+		if boost != null:
+			power_amp.push_back(boost / 100.0) # displayed as percentage, we want a fraction
+			
+	if power_amp.size() <= 0:
+		return 1.0
+	
+	power_amp.sort()
+	power_amp.invert()
+	var max_boost := 0.0
+	var count := 0
+	for val in power_amp:
+		max_boost += val / pow(2, count) # 1, 0.5, 0.25, 0.125, etc.
+		count += 1
+		
+	return max_boost
 
 func _hit_shield(target, dam):
 	var cur_hp = target.get_attrib("shield.current_hp")

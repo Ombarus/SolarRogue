@@ -1,0 +1,40 @@
+{
+	"name_id":"Medium Power Amplifier",
+	"type":"utility",
+	"sprite": "power_amplifier",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[1408,0,128,128]
+	},
+	"equipment": {
+		"slot":"utility",
+		"volume":10.0,
+		"equip_ap":3.0,
+		"unequip_ap":3.0
+	},
+	"damage_boost": {
+		"damage_percent":150.0,
+		"energy_percent":150.0
+	},
+	"recyclable": {
+		"energy": 1000
+	},
+	"description": {
+		"text":"Don't bother running. You'll just die tired. Extra damage at the cost of energy.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}"},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}"},
+				{"name":"Mount Point", "value":"Utility"}
+			]
+		},
+		"Effect": {
+			"min_level":0,
+			"fields": [
+				{"name":"Damage Boost", "value":"{damage_boost.damage_percent}%"},
+				{"name":"Weapon Energy Cost", "value":"{damage_boost.energy_percent}%"}
+			]
+		}
+	}
+}
