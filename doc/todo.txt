@@ -39,6 +39,22 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- Crafting utilities require 2 utility but if you have at least one it won't say you are missing another one
+- Work on Anomalies and status effect
+	- Anomalies should have a chance to be detected (based on scanner level ?)
+	- slow
+	- haste
+	- poison
+	- disable scanner (blind)
+	- disable weapon ?
+	- disable converter ?
+	- teleport
+	- explosion (damage)
+	- Nanites trap (heal ?)
+	- Aggravate (monster come to last known location ?)
+	- Confusion (ship moves in random direction ?)
+	- Energy vortex (lose energy) (% to avoid killing player ? but this can suck if you had 100000 energy and lose 50 000)
+- Improve AI to work with Torpedo (try to avoid shooting allies. Allies can take damage, etc.)
 - Launch weapon effects with a slight offset from center so we can see multiple simultaneous shots
 - Add random derelic you can pickup items from
 	- when trying to pickup derelic should warn player : "not empty" (see final converter of yendor)

@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scripts/Attributes.gd" type="Script" id=1]
 [ext_resource path="res://scenes/tileset_source/jerg_scout.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/tileset_source/jerg_bomber.tscn" type="PackedScene" id=3]
 
 [node name="JergBattleGroup" type="Node2D"]
 
@@ -24,10 +23,10 @@ modified_attributes = {
 
 [node name="shuttle2" parent="scout1" instance=ExtResource( 2 )]
 
-[node name="bomber1" type="Node2D" parent="."]
+[node name="scout2" type="Node2D" parent="."]
 position = Vector2( 128, 0 )
 script = ExtResource( 1 )
-PreloadData = "res://data/json/ships/jerg/bomber.json"
+PreloadData = "res://data/json/ships/jerg/scout_laser.json"
 PreloadJSON = "{
 	\"ai\": {
 		\"pathfinding\":\"group\",
@@ -41,5 +40,5 @@ modified_attributes = {
 
 }
 
-[node name="jerg_scout" parent="bomber1" instance=ExtResource( 3 )]
+[node name="shuttle3" parent="scout2" instance=ExtResource( 2 )]
 

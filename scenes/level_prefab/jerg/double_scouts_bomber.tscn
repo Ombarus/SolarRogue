@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/Attributes.gd" type="Script" id=1]
+[ext_resource path="res://scenes/tileset_source/jerg_bomber.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/tileset_source/jerg_scout.tscn" type="PackedScene" id=3]
+
+[node name="JergBattleGroup" type="Node2D"]
+
+[node name="jerg_battleship" type="Node2D" parent="."]
+script = ExtResource( 1 )
+PreloadData = "res://data/json/ships/jerg/bomber.json"
+PreloadJSON = "{
+	\"ai\": {
+		\"pathfinding\":\"group_leader\"
+	}
+}"
+base_attributes = {
+
+}
+modified_attributes = {
+
+}
+
+[node name="jerg_scout" parent="jerg_battleship" instance=ExtResource( 2 )]
+
+[node name="scout1" type="Node2D" parent="."]
+position = Vector2( -128, 128 )
+script = ExtResource( 1 )
+PreloadData = "res://data/json/ships/jerg/scout_laser.json"
+PreloadJSON = "{
+	\"ai\": {
+		\"pathfinding\":\"group\",
+		\"disable_wandering\":true
+	}
+}"
+base_attributes = {
+
+}
+modified_attributes = {
+
+}
+
+[node name="shuttle2" parent="scout1" instance=ExtResource( 3 )]
+
+[node name="scout2" type="Node2D" parent="."]
+position = Vector2( 128, 128 )
+script = ExtResource( 1 )
+PreloadData = "res://data/json/ships/jerg/scout_laser.json"
+PreloadJSON = "{
+	\"ai\": {
+		\"pathfinding\":\"group\",
+		\"disable_wandering\":true
+	}
+}"
+base_attributes = {
+
+}
+modified_attributes = {
+
+}
+
+[node name="shuttle3" parent="scout2" instance=ExtResource( 3 )]
+

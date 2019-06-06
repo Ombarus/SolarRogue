@@ -43,6 +43,14 @@
 		{"id":"data/json/items/shields/shield_mk2.json", "chance":0.022},
 		{"id":"data/json/items/shields/shield_mk3.json", "chance":0.012},
 		
+		{"id":"data/json/items/weapons/torpedo_launcher_mk1.json", "chance":0.12},
+		{"id":"data/json/items/weapons/torpedo.json", "chance":0.2},
+		{"id":"data/json/items/weapons/torpedo.json", "chance":0.1},
+		{"id":"data/json/items/weapons/torpedo.json", "chance":0.1},
+		{"id":"data/json/items/utilities/power_amplifier.json", "chance":0.0015},
+		{"id":"data/json/items/utilities/power_amplifier_mk2.json", "chance":0.0015},
+		{"id":"data/json/items/utilities/power_amplifier_mk3.json", "chance":0.0015},
+		
 		
 		{"id":"data/json/items/weapons/missile_launcher_mk2.json", "chance":0.012},
 		{"id":"data/json/items/weapons/missile_launcher_mk3.json", "chance":0.012},

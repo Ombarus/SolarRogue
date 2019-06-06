@@ -90,6 +90,27 @@
 				"amount":1
 			},
 			{
+				"name": "Small Power Amplifier", 
+				"requirements":[{"type":"energy", "amount":2000}, {"type":"utility", "amount":2}], 
+				"produce":"data/json/items/utilities/power_amplifier.json",
+				"ap_cost":5.0,
+				"amount":1
+			},
+			{
+				"name": "Medium Power Amplifier", 
+				"requirements":[{"type":"energy", "amount":2500}, {"type":"utility", "amount":2}], 
+				"produce":"data/json/items/utilities/power_amplifier_mk2.json",
+				"ap_cost":5.0,
+				"amount":1
+			},
+			{
+				"name": "Large Power Amplifier", 
+				"requirements":[{"type":"energy", "amount":3000}, {"type":"utility", "amount":2}], 
+				"produce":"data/json/items/utilities/power_amplifier_mk3.json",
+				"ap_cost":5.0,
+				"amount":1
+			},
+			{
 				"name": "Gravitic Compactor", 
 				"requirements":[{"type":"energy", "amount":2000}, {"type":"utility", "amount":2}], 
 				"produce":"data/json/items/utilities/gravitic_compactor.json",

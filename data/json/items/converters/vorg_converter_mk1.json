@@ -52,6 +52,17 @@
 				"amount":1
 			},
 			{
+				"name": "Vorg Bomber",
+				"requirements":[
+					{"type":"energy", "amount":2000},
+					{"src":"data/json/items/misc/scout_body.json", "amount":2},
+					{"type":"shield", "amount":1}
+				],
+				"produce":"data/json/ships/vorg/player_bomber.json",
+				"ap_cost":6.0,
+				"amount":1
+			},
+			{
 				"name": "Vorg Frigate", 
 				"requirements":[
 					{"type":"energy", "amount":2500}, 

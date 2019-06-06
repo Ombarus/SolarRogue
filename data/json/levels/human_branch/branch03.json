@@ -6,7 +6,8 @@
 	"sprite":"wormhole",
 	"fully_mapped":false,
 	"objects": [
-		{"name":"data/json/ships/human/scout_laser.json", "spawn_rate":0.1, "max":12},		
+		{"name":"data/json/ships/human/scout_laser.json", "spawn_rate":0.1, "max":12},
+		{"name":"data/json/ships/human/bomber.json", "spawn_rate":0.05, "max":2},
 		{"name":"data/json/ships/human/probe.json", "spawn_rate":0.1, "max":12},
 		{"name":"data/json/stellar/planet.json", "spawn_rate":0.1, "max":7},
 		{"name":"data/json/stellar/planet_human_homeworld.json", "spawn_rate":0.1, "max":2},
@@ -33,6 +34,12 @@
 		
 		{"name":"data/json/items/shields/shield_mk2.json", "spawn_rate":0.000017625},
 		{"name":"data/json/items/shields/shield_mk3.json", "spawn_rate":0.000007625},
+		
+		{"name":"data/json/items/weapons/torpedo_launcher_mk1.json", "spawn_rate":0.000015625},
+		{"name":"data/json/items/weapons/torpedo.json", "spawn_rate":0.00001302083333},
+		{"name":"data/json/items/utilities/power_amplifier.json", "spawn_rate":0.00001302083333},
+		{"name":"data/json/items/utilities/power_amplifier_mk2.json", "spawn_rate":0.00001302083333},
+		{"name":"data/json/items/utilities/power_amplifier_mk3.json", "spawn_rate":0.00001302083333},
 		
 		
 		{"name":"data/json/items/weapons/missile_launcher_mk2.json", "spawn_rate":0.00001302083333},

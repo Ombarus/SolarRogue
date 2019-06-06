@@ -55,6 +55,12 @@
 		{"id":"data/json/items/misc/oxygen.json", "chance":0.05},
 		{"id":"data/json/items/misc/oxygen.json", "chance":0.05},
 		{"id":"data/json/items/misc/uranium.json", "chance":0.02},
+		
+		{"id":"data/json/items/weapons/torpedo_launcher_mk1.json", "chance":0.012},
+		{"id":"data/json/items/weapons/torpedo.json", "chance":0.01},
+		{"id":"data/json/items/utilities/power_amplifier.json", "chance":0.002},
+		{"id":"data/json/items/utilities/power_amplifier_mk2.json", "chance":0.002},
+		{"id":"data/json/items/utilities/power_amplifier_mk3.json", "chance":0.002},
 	
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.1},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},

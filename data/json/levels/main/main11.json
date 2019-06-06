@@ -36,6 +36,11 @@
 		{"name":"data/json/items/shields/shield_mk2.json", "spawn_rate":0.000016625},
 		{"name":"data/json/items/shields/shield_mk3.json", "spawn_rate":0.000016625},
 		
+		{"name":"data/json/items/weapons/torpedo_launcher_mk1.json", "spawn_rate":0.000015625},
+		{"name":"data/json/items/weapons/torpedo.json", "spawn_rate":0.00001302083333},
+		{"name":"data/json/items/utilities/power_amplifier.json", "spawn_rate":0.00001302083333},
+		{"name":"data/json/items/utilities/power_amplifier_mk2.json", "spawn_rate":0.00001302083333},
+		{"name":"data/json/items/utilities/power_amplifier_mk3.json", "spawn_rate":0.00001302083333},
 		
 		{"name":"data/json/items/weapons/missile_launcher_mk2.json", "spawn_rate":0.00001302083333},
 		{"name":"data/json/items/weapons/missile_launcher_mk3.json", "spawn_rate":0.00001302083333},

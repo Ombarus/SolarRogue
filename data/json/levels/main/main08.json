@@ -7,12 +7,13 @@
 	"fully_mapped":false,
 	"objects": [
 		{"name":"data/json/ships/human/scout_laser.json", "spawn_rate":0.0003125, "max":5},
-		{"name":"data/json/ships/human/scout_missile.json", "spawn_rate":0.0003125, "max":5},
+		{"name":"data/json/ships/human/bomber.json", "spawn_rate":0.0003125, "max":5},
 		{"name":"data/json/ships/human/frigate.json", "spawn_rate":0.1, "max":5},
 		{"name":"data/json/ships/human/battleship.json", "spawn_rate":0.00015625, "max":4},
-		{"name":"scenes/level_prefab/jerg/triple_scouts.tscn", "spawn_rate":0.0003125, "max":3},
+		{"name":"scenes/level_prefab/jerg/double_scouts_bomber.tscn", "spawn_rate":0.0003125, "max":3},
 		{"name":"scenes/level_prefab/jerg/frigate_scouts.tscn", "spawn_rate":0.0003125, "max":2},
 		{"name":"data/json/ships/vorg/scout_missile.json", "spawn_rate":0.00015625, "max":3},
+		{"name":"data/json/ships/vorg/bomber.json", "spawn_rate":0.00015625, "max":1},
 		{"name":"data/json/ships/vorg/frigate.json", "spawn_rate":0.000140625, "max":1},
 		{"name":"data/json/stellar/planetlvl2.json", "spawn_rate":0.1, "max":8},
 		{"name":"data/json/stellar/planetlvl3.json", "spawn_rate":0.1, "max":2},
@@ -50,6 +51,12 @@
 		{"name":"data/json/items/scanners/long_range_scanner_mk3.json", "spawn_rate":0.00001302083333},
 		{"name":"data/json/items/scanners/ultimate_scanner.json", "spawn_rate":0.00001302083333, "global_max":1},
 		{"name":"data/json/items/misc/diluted_cristals.json", "spawn_rate":0.00001302083333},
+		
+		{"name":"data/json/items/weapons/torpedo_launcher_mk1.json", "spawn_rate":0.000015625},
+		{"name":"data/json/items/weapons/torpedo.json", "spawn_rate":0.00001302083333},
+		{"name":"data/json/items/utilities/power_amplifier.json", "spawn_rate":0.00001302083333},
+		{"name":"data/json/items/utilities/power_amplifier_mk2.json", "spawn_rate":0.00001302083333},
+		{"name":"data/json/items/utilities/power_amplifier_mk3.json", "spawn_rate":0.00001302083333},
 		
 		
 		{"name":"data/json/levels/main/main09.json", "spawn_rate":1.0, "max":1},

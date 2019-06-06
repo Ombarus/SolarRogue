@@ -7,7 +7,7 @@
 	"fully_mapped":false,
 	"objects": [
 		{"name":"data/json/ships/vorg/frigate.json", "spawn_rate":0.1, "max":5},
-		{"name":"data/json/ships/vorg/scout_missile.json", "spawn_rate":0.1, "max":4},
+		{"name":"data/json/ships/vorg/bomber.json", "spawn_rate":0.1, "max":4},
 		{"name":"data/json/ships/vorg/battleship.json", "spawn_rate":0.1, "max":5},
 		{"name":"data/json/stellar/planetlvl2.json", "spawn_rate":0.1, "max":2},
 		{"name":"data/json/stellar/planetlvl3.json", "spawn_rate":0.05, "max":1},
@@ -34,6 +34,12 @@
 		
 		{"name":"data/json/items/shields/shield_mk2.json", "spawn_rate":0.000016625},
 		{"name":"data/json/items/shields/shield_mk3.json", "spawn_rate":0.000016625},
+		
+		{"name":"data/json/items/weapons/torpedo_launcher_mk1.json", "spawn_rate":0.000015625},
+		{"name":"data/json/items/weapons/torpedo.json", "spawn_rate":0.00001302083333},
+		{"name":"data/json/items/utilities/power_amplifier.json", "spawn_rate":0.00001302083333},
+		{"name":"data/json/items/utilities/power_amplifier_mk2.json", "spawn_rate":0.00001302083333},
+		{"name":"data/json/items/utilities/power_amplifier_mk3.json", "spawn_rate":0.00001302083333},
 		
 		{"name":"data/json/items/weapons/missile_launcher_mk2.json", "spawn_rate":0.00001302083333},
 		{"name":"data/json/items/weapons/missile_launcher_mk3.json", "spawn_rate":0.00001302083333},

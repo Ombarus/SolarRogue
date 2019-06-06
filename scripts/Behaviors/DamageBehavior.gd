@@ -78,10 +78,16 @@ func OnDealDamage_Callback(targets, shooter, weapon_data, shot_tile):
 		consume(shooter, weapon_data)
 	
 func consume(shooter, weapon_data):
+	if "fire_energy_cost" in weapon_data.weapon_data:
+		var cost : float = weapon_data.weapon_data.fire_energy_cost * _get_power_amplifier_stack(shooter, "energy_percent")
+		BehaviorEvents.emit_signal("OnUseEnergy", shooter, cost)
+	if "fire_speed" in weapon_data.weapon_data:
+		BehaviorEvents.emit_signal("OnUseAP", shooter, weapon_data.weapon_data.fire_speed)
+	
 	var ammo = null
 	if weapon_data.weapon_data.has("ammo"):
 		ammo = weapon_data.weapon_data.ammo
-	
+		
 	if ammo == null:
 		return null
 	if shooter.get_attrib("cargo") != null:
@@ -90,11 +96,6 @@ func consume(shooter, weapon_data):
 			if ammo in item.src && item.count > 0:
 				BehaviorEvents.emit_signal("OnRemoveItem", shooter, item.src)
 				
-	if "fire_energy_cost" in weapon_data.weapon_data:
-		var cost : float = weapon_data.weapon_data.fire_energy_cost * _get_power_amplifier_stack(shooter, "energy_percent")
-		BehaviorEvents.emit_signal("OnUseEnergy", shooter, cost)
-	if "fire_speed" in weapon_data.weapon_data:
-		BehaviorEvents.emit_signal("OnUseAP", shooter, weapon_data.weapon_data.fire_speed)			
 	
 	
 func validate_action(target, shooter, weapon_data):

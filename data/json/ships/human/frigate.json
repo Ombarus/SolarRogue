@@ -75,6 +75,12 @@
 		{"id":"data/json/items/misc/diluted_cristals.json", "chance":0.05},
 		
 		
+		{"id":"data/json/items/weapons/torpedo_launcher_mk1.json", "chance":0.015},
+		{"id":"data/json/items/weapons/torpedo.json", "chance":0.015},
+		{"id":"data/json/items/utilities/power_amplifier.json", "chance":0.05},
+		{"id":"data/json/items/utilities/power_amplifier_mk2.json", "chance":0.05},
+		{"id":"data/json/items/utilities/power_amplifier_mk3.json", "chance":0.05},
+		
 
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.1},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
