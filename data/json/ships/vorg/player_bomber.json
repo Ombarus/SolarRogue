@@ -1,0 +1,55 @@
+{
+	"name_id":"A Vorg Bomber",
+	"type":"ship",
+	"sprite":"vorg_bomber",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[256,1024,128,128]
+	},
+	"boardable":true,
+	"mounts": {
+		"weapon": [""],
+		"shield": ["", ""],
+		"scanner": [""],
+		"converter": [""]
+	},
+	"destroyable": {
+		"hull":15
+	},
+	"moving": {
+		"speed":1.2,
+		"can_use_wormhole":true,
+		"energy_cost":5
+	},
+	"cargo": {
+		"capacity":250,
+		"pickup_ap":1.0,
+		"drop_ap":1.0,
+		"transferable":true,
+		"content":[]
+	},
+	"converter": {
+		"stored_energy": 10000,
+		"base_ap_energy_cost":10
+	},
+	"description": {
+		"text":"Similar in size to scouts but made to carry torpedos. Slightly heavier and slower but more resilient than Scouts.",
+		"Overview": {
+			"min_level":0, 
+			"fields":[
+				{"name":"Max hull", "value":"{destroyable.hull}"},
+				{"name":"Speed", "value":"{moving.speed}"},
+				{"name":"Weapon mounts", "value":"1"},
+				{"name":"Shield mounts", "value":"2"},
+				{"name":"Utility mounts", "value":"0"}
+			]
+		},
+		"Status": {
+			"min_level":1,
+			"fields": [
+				{"name":"Current hull", "value":"{destroyable.current_hull}", "default":"{destroyable.hull}"},
+				{"name":"Current shield", "value":"{shield.current_hp}"}
+			]
+		}
+	}
+}

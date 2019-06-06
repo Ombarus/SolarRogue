@@ -1,0 +1,54 @@
+{
+	"name_id":"A Jerg Bomber",
+	"type":"ship",
+	"sprite":"jerg_scout",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[128,1024,128,128]
+	},
+	"boardable":true,
+	"mounts": {
+		"weapon": [""],
+		"scanner": [""],
+		"converter": [""],
+		"utility": ["", ""]
+	},
+	"destroyable": {
+		"hull":25
+	},
+	"moving": {
+		"speed":1.0,
+		"can_use_wormhole":true,
+		"energy_cost":5
+	},
+	"cargo": {
+		"capacity":600,
+		"pickup_ap":1.0,
+		"drop_ap":1.0,
+		"transferable":true,
+		"content":[]
+	},
+	"converter": {
+		"stored_energy": 10000,
+		"base_ap_energy_cost":10
+	},
+	"description": {
+		"text":"Similar in size to scouts but made to carry torpedos. Slightly heavier and slower but more resilient than Scouts.",
+		"Overview": {
+			"min_level":0, 
+			"fields":[
+				{"name":"Max hull", "value":"{destroyable.hull}"},
+				{"name":"Speed", "value":"{moving.speed}"},
+				{"name":"Weapon mounts", "value":"1"},
+				{"name":"Shield mounts", "value":"0"},
+				{"name":"Utility mounts", "value":"2"}
+			]
+		},
+		"Status": {
+			"min_level":1,
+			"fields": [
+				{"name":"Current hull", "value":"{destroyable.current_hull}", "default":"{destroyable.hull}"}
+			]
+		}
+	}
+}

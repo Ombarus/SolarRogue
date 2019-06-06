@@ -1,0 +1,100 @@
+{
+	"name_id":"A Human Bomber",
+	"type":"ship",
+	"sprite":"human_bomber",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[0,1024,128,128]
+	},
+	"action_point":0,
+	"mounts": {
+		"weapon": ["data/json/items/weapons/torpedo_launcher_mk1.json"],
+		"scanner": ["data/json/items/scanners/scanner_mk1.json"]
+	},
+	"animation": {
+		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
+	},
+	"ai": {
+		"aggressive":true,
+		"pathfinding":"simple",
+		"run_if_attacked":false,
+		"hit_chance":0.8
+	},
+	"drop_on_death": [
+	
+	
+		{"id":"data/json/items/converters/converter_mk2.json", "chance":0.006666666667},
+		{"id":"data/json/items/converters/jerg_converter_mk1.json", "chance":0.0005},
+		{"id":"data/json/items/converters/vorg_converter_mk1.json", "chance":0.0005},
+		{"id":"data/json/items/misc/battleship_body.json", "chance":0.0},
+		{"id":"data/json/items/misc/frigate_body.json", "chance":0.0},
+		{"id":"data/json/items/misc/probe_body.json", "chance":0.0},
+		{"id":"data/json/items/misc/scout_body.json", "chance":0.1},
+		{"id":"data/json/items/scanners/scanner_mk1.json", "chance":0.03333333333},
+		{"id":"data/json/items/scanners/scanner_mk2.json", "chance":0.01333333333},
+		{"id":"data/json/items/shields/shield_mk1.json", "chance":0.02},
+		{"id":"data/json/items/utilities/gravitic_compactor.json", "chance":0.005},
+		{"id":"data/json/items/utilities/solar_array.json", "chance":0.01},
+		{"id":"data/json/items/weapons/missile_launcher_mk1.json", "chance":0.03846153846},
+		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.0},
+		{"id":"data/json/items/weapons/missile.json", "chance":0.2},
+		{"id":"data/json/items/consumables/repair_nanobots.json", "chance":0.01},
+		
+		{"id":"data/json/items/shields/shield_mk2.json", "chance":0.022},
+		{"id":"data/json/items/shields/shield_mk3.json", "chance":0.012},
+		
+		{"id":"data/json/items/weapons/missile_launcher_mk2.json", "chance":0.012},
+		{"id":"data/json/items/weapons/missile_launcher_mk3.json", "chance":0.012},
+		{"id":"data/json/items/scanners/scanner_mk3.json", "chance":0.01},
+		{"id":"data/json/items/scanners/long_range_scanner_mk1.json", "chance":0.005},
+		{"id":"data/json/items/scanners/long_range_scanner_mk2.json", "chance":0.004},
+		{"id":"data/json/items/scanners/long_range_scanner_mk3.json", "chance":0.003},
+		{"id":"data/json/items/scanners/ultimate_scanner.json", "chance":0.002, "global_max":1},
+		{"id":"data/json/items/misc/oxygen.json", "chance":0.05},
+		{"id":"data/json/items/misc/oxygen.json", "chance":0.05},
+		{"id":"data/json/items/misc/oxygen.json", "chance":0.05},
+		{"id":"data/json/items/misc/uranium.json", "chance":0.02},
+		
+		
+
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.1},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
+	],
+	"destroyable": {
+		"hull":15
+	},
+	"moving": {
+		"speed":1.1,
+		"wander_speed":2.5,
+		"can_use_wormhole":false
+	},
+	"cargo": {
+		"capacity":300,
+		"pickup_ap":1.0,
+		"drop_ap":1.0,
+		"content":[
+			{"src":"data/json/items/weapons/torpedo.json", "count":200}
+		]
+	},
+	"description": {
+		"text":"Similar in size to scouts but carries Torpedos. It'll blow everything up or die trying.",
+		"Overview": {
+			"min_level":0, 
+			"fields":[
+				{"name":"Max hull", "value":"{destroyable.hull}"},
+				{"name":"Speed", "value":"{moving.speed}"},
+				{"name":"Weapon mounts", "value":"1"},
+				{"name":"Shield mounts", "value":"1"},
+				{"name":"Utility mounts", "value":"1"}
+			]
+		},
+		"Status": {
+			"min_level":1,
+			"fields": [
+				{"name":"Current hull", "value":"{destroyable.current_hull}", "default":"{destroyable.hull}"},
+				{"name":"Current shield", "value":"{shield.current_hp}"}
+			]
+		}
+	}
+}
