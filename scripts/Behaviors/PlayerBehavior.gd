@@ -361,7 +361,6 @@ func OnLevelLoaded_Callback():
 			
 			coord = levelLoaderRef.World_to_Tile(starting_wormhole.position)
 			
-		#TODO: Pop menu for player creation ?
 		var modififed_attrib = null
 		var rot := 0.0
 		if save != null && save.has("player_data"):

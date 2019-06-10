@@ -37,7 +37,10 @@ func OnMovement_callback(obj, dir):
 		# moving diagonal, multiply by 1.4
 		move_speed *= 1.41421356237
 		energy_cost *= 1.41421356237
-	BehaviorEvents.emit_signal("OnUseAP", obj, move_speed)
+	var special_multiplier = obj.get_attrib("moving.special_multiplier")
+	if special_multiplier == null:
+		special_multiplier = 1.0
+	BehaviorEvents.emit_signal("OnUseAP", obj, move_speed * special_multiplier)
 	BehaviorEvents.emit_signal("OnUseEnergy", obj, energy_cost)
 	
 	var newPos = obj.position + levelLoaderRef.Tile_to_World(dir)

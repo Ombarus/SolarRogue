@@ -43,6 +43,8 @@ signal OnReplaceMounts(obj, new_mounts)
 signal OnReplaceCargo(obj, new_cargo)
 signal OnUpdateCargoVolume(obj)
 signal OnConsumeItem(obj, item_data)
+signal OnTriggerAnomaly(obj, anomaly)
+signal OnAnomalyEffectGone(obj, effect_data)
 
 signal OnGUILoaded(name, obj)
 signal OnPushGUI(name, init_param)

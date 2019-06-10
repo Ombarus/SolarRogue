@@ -15,7 +15,8 @@
 	"scanning": {
 		"radius":8,
 		"partial_reveal_type": ["planet", "wormhole", "sun"],
-		"level":1
+		"level":1,
+		"detection_bonus":0.03
 	},
 	"recyclable": {
 		"energy": 2000

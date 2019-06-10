@@ -14,7 +14,8 @@
 	},
 	"scanning": {
 		"radius":8,
-		"level":0
+		"level":0,
+		"detection_bonus":0.01
 	},
 	"recyclable": {
 		"energy": 1500

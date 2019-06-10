@@ -59,8 +59,14 @@ func ExecuteFullSweep():
 		# Removed objects just get set to null so we might have null obj in objById
 		if obj == null:
 			continue
+			
 		var disable_fow = is_ultimate or (Globals.LevelLoaderRef.GetCurrentLevelData().has("fully_mapped") and Globals.LevelLoaderRef.GetCurrentLevelData().fully_mapped == true)
-		if disable_fow or obj == _playerNode or obj.get_attrib("ghost_memory") != null or (player_scan != null and key in player_scan):
+		var not_invisible_anomaly : bool = obj.get_attrib("anomaly.detected", true) == true
+		var is_player : bool = obj == _playerNode
+		var is_a_ghost : bool = obj.get_attrib("ghost_memory") != null
+		var in_scanner_range : bool = player_scan != null and key in player_scan
+		
+		if  not_invisible_anomaly and (disable_fow or is_player or is_a_ghost or in_scanner_range):
 			obj.visible = true
 			if obj != null and obj.get_attrib("has_ghost_memory"):
 				_remove_ghost_from_real(obj)
@@ -140,7 +146,8 @@ func OnScannerUpdated_Callback(obj):
 	for id in new_objs:
 		var o = Globals.LevelLoaderRef.GetObjectById(id)
 		if o != null:
-			o.visible = true
+			var anomaly_detected = o.get_attrib("anomaly.detected", true)
+			o.visible = anomaly_detected
 		if o != null and o.get_attrib("has_ghost_memory"):
 			_remove_ghost_from_real(o)
 		if o != null and o.get_attrib("ghost_memory"):
@@ -148,7 +155,7 @@ func OnScannerUpdated_Callback(obj):
 	
 	for id in new_out_objs:
 		var o = Globals.LevelLoaderRef.GetObjectById(id)
-		if o != null and o.get_attrib("ghost_memory") == null:
+		if o != null and o.get_attrib("ghost_memory") == null and o.get_attrib("anomaly.detected", true) == true:
 			# CREATE A GHOST
 			o.visible = false
 			# no better way to deep copy a dictionary I think

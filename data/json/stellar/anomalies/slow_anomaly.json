@@ -1,0 +1,20 @@
+{
+	"name_id":"A Random Anomaly",
+	"type":"anomaly",
+	"sprite":"anomaly",
+	"icon": {
+		"texture":"data/textures/space-sprite.png", 
+		"region":[1280,128,128,128]
+	},
+	"anomaly": {
+		"base_detection_chance":0.08,
+		"detected":false,
+		"speed": {
+			"multiplier":2.0,
+			"duration_turn":10
+		}
+	},
+	"description": {
+		"text":"An unknown space anomaly. Scanners indicate that we don't know what it can do."
+	}
+}

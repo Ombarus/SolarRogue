@@ -9,6 +9,7 @@ func _ready():
 	BehaviorEvents.connect("OnDamageTaken", self, "OnDamageTaken_Callback")
 	BehaviorEvents.connect("OnScannerUpdated", self, "OnScannerUpdated_Callback")
 	BehaviorEvents.connect("OnAttributeAdded", self, "OnAttributeAdded_Callback")
+	BehaviorEvents.connect("OnTriggerAnomaly", self, "OnTriggerAnomaly_Callback")
 	
 	
 func OnAttributeAdded_Callback(obj, added_name):
@@ -16,6 +17,10 @@ func OnAttributeAdded_Callback(obj, added_name):
 		ConsiderInterests(obj)
 		if obj.get_attrib("ai") != null:
 			OnObjTurn_Callback(obj)
+	
+func OnTriggerAnomaly_Callback(obj, anomaly):
+	if obj.get_attrib("ai.disable_on_interest", false) == true:
+		obj.set_attrib("ai.disabled", true)
 	
 func ConsiderInterests(obj):
 	var level_id : String = Globals.LevelLoaderRef.GetLevelID()
@@ -36,7 +41,7 @@ func ConsiderInterests(obj):
 					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Ennemy ship entered scanner range ![/color]")
 				filtered.push_back(id)
 				break
-			if o != null and o.get_attrib("ghost_memory") == null and o.get_attrib("has_ghost_memory") == null:
+			if o != null and o.get_attrib("ghost_memory") == null and o.get_attrib("has_ghost_memory") == null and o.get_attrib("anomaly.detected") == null:
 				if is_player == true:
 					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Scanners have picked up a new " + o.get_attrib("type") + "[/color]")
 				filtered.push_back(id)
