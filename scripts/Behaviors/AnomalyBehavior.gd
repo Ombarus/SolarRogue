@@ -14,7 +14,13 @@ func OnLevelLoaded_Callback():
 		var tile = Globals.LevelLoaderRef.World_to_Tile(anomaly.position)
 		if not tile.x in _cached_anomalies:
 			_cached_anomalies[tile.x] = {}
-		var detected : bool = anomaly.get_attrib("anomaly.detected", false)
+		var player : Attributes = Globals.LevelLoaderRef.objByType["player"][0]
+		var anomaly_id = anomaly.get_attrib("unique_id")
+		var level_id = Globals.LevelLoaderRef.GetLevelID()
+		var known_anomalies = player.get_attrib("scanner_result.known_anomalies." + level_id)
+		var detected : bool = false
+		if known_anomalies != null and anomaly_id in known_anomalies:
+			detected = known_anomalies[anomaly_id]
 		anomaly.visible = detected
 		#WARNING: don't want more than one anomaly for a given tile. But it *could* happen ? maybe ?
 		# The way this will work is that only one anomaly will be registered and the other ones will be ignored
@@ -35,7 +41,13 @@ func OnObjTurn_Callback(obj):
 func OnTriggerAnomaly_Callback(obj, anomaly):
 	var is_player = obj.get_attrib("type") == "player"
 	if is_player:
-		anomaly.set_attrib("anomaly.detected", true)
+		var anomaly_id = anomaly.get_attrib("unique_id")
+		var level_id = Globals.LevelLoaderRef.GetLevelID()
+		var known_anomalies = obj.get_attrib("scanner_result.known_anomalies." + level_id)
+		if known_anomalies == null:
+			known_anomalies = {}
+		known_anomalies[anomaly_id] = true
+		obj.set_attrib("scanner_result.known_anomalies." + level_id, known_anomalies)
 		anomaly.visible = true
 	var effect_info = anomaly.get_attrib("anomaly.speed")
 	if effect_info != null:

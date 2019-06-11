@@ -7,8 +7,7 @@
 		"region":[1280,128,128,128]
 	},
 	"anomaly": {
-		"base_detection_chance":0.08,
-		"detected":false,
+		"base_detection_chance":0.03,
 		"speed": {
 			"multiplier":2.0,
 			"duration_turn":10

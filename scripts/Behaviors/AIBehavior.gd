@@ -41,7 +41,11 @@ func ConsiderInterests(obj):
 					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Ennemy ship entered scanner range ![/color]")
 				filtered.push_back(id)
 				break
-			if o != null and o.get_attrib("ghost_memory") == null and o.get_attrib("has_ghost_memory") == null and o.get_attrib("anomaly.detected") == null:
+			var known_anomalies = o.get_attrib("scanner_result.known_anomalies", {})
+			var detected : bool = o.get_attrib("type") != "anomaly"
+			if id in known_anomalies:
+				detected = known_anomalies[id]
+			if o != null and o.get_attrib("ghost_memory") == null and o.get_attrib("has_ghost_memory") == null and detected == true:
 				if is_player == true:
 					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Scanners have picked up a new " + o.get_attrib("type") + "[/color]")
 				filtered.push_back(id)

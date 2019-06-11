@@ -70,18 +70,27 @@ func OnRequestObjectUnload_Callback(obj):
 func do_anomaly_detection(obj):
 	var scanner_data = _node_id_scanner[obj.get_attrib("unique_id")]
 	var bonus : float = Globals.get_data(scanner_data, "scanning.detection_bonus")
+	var level_id : String = Globals.LevelLoaderRef.GetLevelID()
+	var known_anomalies : Dictionary = obj.get_attrib("scanner_result.known_anomalies." + level_id, {})
+	var detectable_obj = obj.get_attrib("scanner_result.cur_in_range." + level_id)
 	var last_check_turn : float = obj.get_attrib("scanner_result.last_anomaly_check", Globals.total_turn - 1.0)
 	var turn_elapsed : float = Globals.total_turn - last_check_turn
 	var whole : int = floor(turn_elapsed)
 	var frac : float = turn_elapsed - whole
 	obj.set_attrib("scanner_result.last_anomaly_check", Globals.total_turn - frac)
 	for i in range(whole):
-		var level_id : String = Globals.LevelLoaderRef.GetLevelID()
-		var detectable_obj = obj.get_attrib("scanner_result.cur_in_range." + level_id)
-		for o in detectable_obj:
-			if o.get_attrib("type") == "anomaly":
-				#TODO: detected should not be a property of o but of scanner_result in obj
-				pass
+		for id in detectable_obj:
+			var o : Attributes = Globals.LevelLoaderRef.objById[id]
+			if o.get_attrib("type") == "anomaly" and (not id in known_anomalies or known_anomalies[id] == false):
+				var chance = o.get_attrib("anomaly.base_detection_chance")
+				chance += bonus
+				if MersenneTwister.rand_float() < chance:
+					known_anomalies[id] = true
+					o.visible = true
+					if obj.get_attrib("type") == "player":
+						BehaviorEvents.emit_signal("OnLogLine", "Scanners have discovered an Anomaly close by")
+						
+	obj.set_attrib("scanner_result.known_anomalies." + level_id, known_anomalies)
 
 func special_update_ultimate(obj, scanner_data):
 	if scanner_data != null and Globals.is_(Globals.get_data(scanner_data, "scanning.fully_mapped"), true):
@@ -140,7 +149,7 @@ func _update_scanned_obj(obj, scanner_data):
 				scanned_tiles.push_back(tile)
 				obj_in_tile = Globals.LevelLoaderRef.GetTile(tile)
 				for o in obj_in_tile:
-					if o == obj:
+					if o == obj or o.get_attrib("ghost_memory") != null:
 						continue
 					cur_in_range.push_back(o.get_attrib("unique_id"))
 			if offset.x != 0:
@@ -152,7 +161,7 @@ func _update_scanned_obj(obj, scanner_data):
 					scanned_tiles.push_back(tile)
 					obj_in_tile = Globals.LevelLoaderRef.GetTile(tile)
 					for o in obj_in_tile:
-						if o == obj:
+						if o == obj or o.get_attrib("ghost_memory") != null:
 							continue
 						cur_in_range.push_back(o.get_attrib("unique_id"))
 			if offset.y != 0:
@@ -164,19 +173,19 @@ func _update_scanned_obj(obj, scanner_data):
 					scanned_tiles.push_back(tile)
 					obj_in_tile = Globals.LevelLoaderRef.GetTile(tile)
 					for o in obj_in_tile:
-						if o == obj:
+						if o == obj or o.get_attrib("ghost_memory") != null:
 							continue
 						cur_in_range.push_back(o.get_attrib("unique_id"))
 			if offset.x != 0:
 				offset.x *= -1
 				tile = obj_tile + offset
-				if round((tile - obj_tile).length()) > scan_radius or tile.x < 0 or tile.x > bounds.x or tile.y < 0 or tile.y > bounds.y:
+				if offset.y == 0 or round((tile - obj_tile).length()) > scan_radius or tile.x < 0 or tile.x > bounds.x or tile.y < 0 or tile.y > bounds.y:
 					pass #obj.visible = false
 				else:
 					scanned_tiles.push_back(tile)
 					obj_in_tile = Globals.LevelLoaderRef.GetTile(tile)
 					for o in obj_in_tile:
-						if o == obj:
+						if o == obj or o.get_attrib("ghost_memory") != null:
 							continue
 						cur_in_range.push_back(o.get_attrib("unique_id"))
 			offset.y *= -1

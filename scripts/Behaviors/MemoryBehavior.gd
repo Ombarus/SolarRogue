@@ -47,6 +47,7 @@ func OnRequestObjectUnload_Callback(obj):
 func ExecuteFullSweep():
 	var level_id = Globals.LevelLoaderRef.GetLevelID()
 	var player_scan = _playerNode.get_attrib("scanner_result.cur_in_range." + level_id)
+	var known_anomalies = _playerNode.get_attrib("scanner_result.known_anomalies." + level_id, {})
 	var is_ultimate : bool = false
 	var scanners = Globals.LevelLoaderRef.LoadJSONArray(_playerNode.get_attrib("mounts.scanner"))
 	for s_data in scanners:
@@ -61,7 +62,7 @@ func ExecuteFullSweep():
 			continue
 			
 		var disable_fow = is_ultimate or (Globals.LevelLoaderRef.GetCurrentLevelData().has("fully_mapped") and Globals.LevelLoaderRef.GetCurrentLevelData().fully_mapped == true)
-		var not_invisible_anomaly : bool = obj.get_attrib("anomaly.detected", true) == true
+		var not_invisible_anomaly : bool = obj.get_attrib("type") != "anomaly" or (key in known_anomalies and known_anomalies[key] == true)
 		var is_player : bool = obj == _playerNode
 		var is_a_ghost : bool = obj.get_attrib("ghost_memory") != null
 		var in_scanner_range : bool = player_scan != null and key in player_scan
@@ -132,6 +133,7 @@ func _remove_ghost_from_real(real):
 	var ref_id = real.get_attrib("has_ghost_memory.reference_id")
 	var ref_obj = Globals.LevelLoaderRef.GetObjectById(ref_id)
 	if ref_obj != null:
+		real.modified_attributes.erase("has_ghost_memory")
 		BehaviorEvents.emit_signal("OnRequestObjectUnload", ref_obj)
 
 func OnScannerUpdated_Callback(obj):
@@ -142,11 +144,12 @@ func OnScannerUpdated_Callback(obj):
 	var new_objs = obj.get_attrib("scanner_result.new_in_range." + level_id)
 	var new_out_objs = obj.get_attrib("scanner_result.new_out_of_range." + level_id)
 	var unkown_objs = obj.get_attrib("scanner_result.unknown." + level_id)
+	var known_anomalies = obj.get_attrib("scanner_result.known_anomalies." + level_id, {})
 	
 	for id in new_objs:
 		var o = Globals.LevelLoaderRef.GetObjectById(id)
 		if o != null:
-			var anomaly_detected = o.get_attrib("anomaly.detected", true)
+			var anomaly_detected = o.get_attrib("type") != "anomaly" or (id in known_anomalies and known_anomalies[id] == true)
 			o.visible = anomaly_detected
 		if o != null and o.get_attrib("has_ghost_memory"):
 			_remove_ghost_from_real(o)
@@ -155,7 +158,10 @@ func OnScannerUpdated_Callback(obj):
 	
 	for id in new_out_objs:
 		var o = Globals.LevelLoaderRef.GetObjectById(id)
-		if o != null and o.get_attrib("ghost_memory") == null and o.get_attrib("anomaly.detected", true) == true:
+		var anomaly_detected = o.get_attrib("type") != "anomaly" or (id in known_anomalies and known_anomalies[id] == true)
+		if o != null and o.get_attrib("ghost_memory") == null and anomaly_detected == true:
+			if o.get_attrib("has_ghost_memory") != null:
+				print("WOAH WTF BBQ !")
 			# CREATE A GHOST
 			o.visible = false
 			# no better way to deep copy a dictionary I think
