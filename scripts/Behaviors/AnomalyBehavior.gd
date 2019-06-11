@@ -9,6 +9,8 @@ func _ready():
 	
 	
 func OnLevelLoaded_Callback():
+	if not "anomaly" in Globals.LevelLoaderRef.objByType:
+		return
 	var anomalies : Array = Globals.LevelLoaderRef.objByType["anomaly"]
 	for anomaly in anomalies:
 		var tile = Globals.LevelLoaderRef.World_to_Tile(anomaly.position)

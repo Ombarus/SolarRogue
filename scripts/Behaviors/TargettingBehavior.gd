@@ -6,6 +6,7 @@ var _callback_obj = null
 var _callback_method = null
 var _player_node = null
 var _targetting_data = null
+var _last_clicked_tile = null
 
 onready var _targetting_hud = get_node(TargettingHUD)
 
@@ -94,6 +95,7 @@ func OnTargetClick_Callback(click_pos, target_type):
 		elif potential_targets.size() > 0 and area_size > 0:
 			_callback_obj.call(_callback_method, potential_targets, tile)
 		else:
+			_last_clicked_tile = tile
 			BehaviorEvents.emit_signal("OnPushGUI", "SelectTarget", {"targets":potential_targets, "callback_object":self, "callback_method":"SelectTarget_Callback"})
 	
 func _gather_tile_contents(tile, targetting_data):
@@ -109,9 +111,9 @@ func _gather_tile_contents(tile, targetting_data):
 	
 func SelectTarget_Callback(selected_targets):
 	if selected_targets.size() <= 0:
-		_callback_obj.call(_callback_method, null)
+		_callback_obj.call(_callback_method, null, _last_clicked_tile)
 	else:
-		_callback_obj.call(_callback_method, selected_targets[0])
+		_callback_obj.call(_callback_method, selected_targets[0], _last_clicked_tile)
 	
 func IsValidTile(player_tile, target_tile, weapon_data):
 	var bounds = Globals.LevelLoaderRef.levelSize

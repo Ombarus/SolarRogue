@@ -81,7 +81,7 @@ func do_anomaly_detection(obj):
 	for i in range(whole):
 		for id in detectable_obj:
 			var o : Attributes = Globals.LevelLoaderRef.objById[id]
-			if o.get_attrib("type") == "anomaly" and (not id in known_anomalies or known_anomalies[id] == false):
+			if o != null and o.get_attrib("type") == "anomaly" and (not id in known_anomalies or known_anomalies[id] == false):
 				var chance = o.get_attrib("anomaly.base_detection_chance")
 				chance += bonus
 				if MersenneTwister.rand_float() < chance:

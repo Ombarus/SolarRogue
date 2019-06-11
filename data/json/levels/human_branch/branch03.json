@@ -14,6 +14,10 @@
 		{"name":"data/json/stellar/sun.json", "min":1, "max":1, "pos":[40,40]},
 		{"name":"data/json/levels/human_branch/branch04.json", "spawn_rate":1.0, "max":1},
 		
+		{"name":"data/json/stellar/anomalies/energy_syphon.json", "spawn_rate":0.00015625, "max":1},
+		{"name":"data/json/stellar/anomalies/blind_anomaly.json", "spawn_rate":0.00015625, "max":1},
+		{"name":"data/json/stellar/anomalies/slow_anomaly.json", "spawn_rate":0.00015625, "max":1},
+		
 		{"name":"data/json/items/converters/converter_mk2.json", "spawn_rate":0.00003125},
 		{"name":"data/json/items/converters/jerg_converter_mk1.json", "spawn_rate":0.0000015625},
 		{"name":"data/json/items/converters/vorg_converter_mk1.json", "spawn_rate":0.0000015625},

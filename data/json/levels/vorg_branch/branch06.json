@@ -14,7 +14,11 @@
 		{"name":"data/json/stellar/planetlvl2.json", "spawn_rate":0.1, "max":7},
 		{"name":"data/json/stellar/planetlvl3.json", "spawn_rate":0.05, "max":1},
 		{"name":"data/json/stellar/planet_vorg_homeworld.json", "spawn_rate":0.05, "max":2},
-		{"name":"data/json/stellar/sun.json", "min":1, "max":1, "pos":[40,40]},		
+		{"name":"data/json/stellar/sun.json", "min":1, "max":1, "pos":[40,40]},
+		
+		{"name":"data/json/stellar/anomalies/energy_syphon.json", "spawn_rate":0.00015625, "max":1},
+		{"name":"data/json/stellar/anomalies/blind_anomaly.json", "spawn_rate":0.00015625, "max":1},
+		{"name":"data/json/stellar/anomalies/slow_anomaly.json", "spawn_rate":0.00015625, "max":1},
 		
 		
 		{"name":"data/json/items/converters/converter_mk2.json", "spawn_rate":0.0000015625},
