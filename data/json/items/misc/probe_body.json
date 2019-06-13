@@ -1,6 +1,6 @@
 {
 	"name_id":"Probe Hull Relic",
-	"type":"hull",
+	"type":"probe_hull",
 	"sprite":"probe_body",
 	"icon": {
 		"texture":"data/textures/space-sprite.png",

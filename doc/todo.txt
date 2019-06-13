@@ -39,6 +39,8 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- ***BUG: if disabled is in the base_attributes we cannot override it in modified_attributes !***
+- when transfering content... can't drag on cargo items to drop into cargo holds
 - Crafting utilities require 2 utility but if you have at least one it won't say you are missing another one
 - Work on Anomalies and status effect
 	- Anomalies should have a chance to be detected (based on scanner level ?)
@@ -48,12 +50,15 @@ TODO :::
 	- disable scanner (blind)
 	- disable weapon ?
 	- disable converter ?
+	- EMP shock empty shields
 	- teleport
 	- explosion (damage)
 	- Nanites trap (heal ?)
 	- Aggravate (monster come to last known location ?)
 	- Confusion (ship moves in random direction ?)
 	- Energy vortex (lose energy) (% to avoid killing player ? but this can suck if you had 100000 energy and lose 50 000)
+	- Naked Singularity (constrict ship, prevent movement until ship can escape it's pull (damage per turn ?))
+	- Complete shutdown (unable to act for X turn)
 - Improve AI to work with Torpedo (try to avoid shooting allies. Allies can take damage, etc.)
 - Launch weapon effects with a slight offset from center so we can see multiple simultaneous shots
 - Add random derelic you can pickup items from

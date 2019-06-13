@@ -1,0 +1,74 @@
+{
+	"name_id":"A Battleship Hull Relic",
+	"type":"battleship_hull",
+	"sprite":"battleship_body",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[1280,384,128,128]
+	},
+	"mounts": {},
+	"equipment": {
+		"disabled":true,
+		"slot":"cargo",
+		"volume":190.0,
+		"stackable":false
+	},
+	"cargo": {
+		"capacity":500,
+		"pickup_ap":1.0,
+		"drop_ap":1.0,
+		"volume_used":100,
+		"transferable":true,
+		"content":[],
+		"random_content_size":[1,5],
+		"random_content": [
+			{"src":"data/json/items/weapons/missile.json", "chance":300},
+			{"src":"data/json/items/misc/oxygen.json", "chance":300},
+			{"src":"data/json/items/misc/hydrogen.json", "chance":300},
+			{"src":"data/json/items/misc/uranium.json", "chance":200},
+			{"src":"data/json/items/weapons/missile_launcher_mk1.json", "chance":80},
+			{"src":"data/json/items/weapons/laser_turret_mk1.json", "chance":80},
+			{"src":"data/json/items/scanners/scanner_mk1.json", "chance":80},
+			{"src":"data/json/items/scanners/long_range_scanner_mk1.json", "chance":70},
+			{"src":"data/json/items/converters/converter_mk1.json", "chance":70, "max":1},
+			
+			{"src":"data/json/items/shields/shield_mk1.json", "chance":60},
+			{"src":"data/json/items/scanners/scanner_mk2.json", "chance":60},
+			{"src":"data/json/items/scanners/long_range_scanner_mk2.json", "chance":60},
+			
+			{"src":"data/json/items/weapons/torpedo.json", "chance":50},
+			{"src":"data/json/items/utilities/gravitic_compactor.json", "chance":40},
+			{"src":"data/json/items/utilities/solar_array.json", "chance":40},
+			{"src":"data/json/items/utilities/power_amplifier.json", "chance":30},
+			{"src":"data/json/items/converters/converter_mk2.json", "chance":0, "max":30},
+			{"src":"data/json/items/consumables/repair_nanobots.json", "chance":30},
+			{"src":"data/json/items/weapons/torpedo_launcher_mk1.json", "chance":30},
+			{"src":"data/json/items/misc/diluted_cristals.json", "chance":20},
+			{"src":"data/json/items/weapons/missile_launcher_mk2.json", "chance":20, "max":1},
+			{"src":"data/json/items/weapons/laser_turret_mk2.json", "chance":20, "max":2},
+			{"src":"data/json/items/shields/shield_mk2.json", "chance":20, "max":2},
+			{"src":"data/json/items/utilities/power_amplifier_mk2.json", "chance":10},
+			
+			{"src":"data/json/items/scanners/scanner_mk3.json", "chance":10},
+			{"src":"data/json/items/scanners/long_range_scanner_mk3.json", "chance":10},
+			{"src":"data/json/items/shields/shield_mk3.json", "chance":10, "max":2},
+			{"src":"data/json/items/utilities/power_amplifier_mk3.json", "chance":6},
+			{"src":"data/json/items/weapons/missile_launcher_mk3.json", "chance":6, "max":1},
+			{"src":"data/json/items/converters/jerg_converter_mk1.json", "chance":2, "max":1},
+			{"src":"data/json/items/converters/vorg_converter_mk1.json", "chance":2, "max":1},
+			{"src":"data/json/items/scanners/ultimate_scanner.json", "chance":1, "global_max":1, "max":1}
+		]
+	},
+	"recyclable": {
+		"energy": 750
+	},
+	"description": {
+		"text":"The remains of this battleship hull are still in suprisingly good shape. They could be used as a scaffold for a new Battleship.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}"}
+			]
+		}
+	}
+}

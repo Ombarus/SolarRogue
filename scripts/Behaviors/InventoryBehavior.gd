@@ -18,6 +18,60 @@ func _ready():
 	BehaviorEvents.connect("OnReplaceCargo", self, "OnReplaceCargo_Callback")
 	BehaviorEvents.connect("OnReplaceMounts", self, "OnReplaceMounts_Callback")
 	BehaviorEvents.connect("OnUpdateCargoVolume", self, "OnUpdateCargoVolume_Callback")
+	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
+	
+
+func sort_by_chance(a, b):
+	if a.chance > b.chance:
+		return true
+	return false
+	
+func OnObjectLoaded_Callback(obj):
+	var choice_table : Array = obj.get_attrib("cargo.random_content", [])
+	if choice_table.size() <= 0:
+		return
+		
+	var inv_size_range = obj.get_attrib("cargo.random_content_size")
+
+	choice_table.sort_custom(self, "sort_by_chance")
+	
+	var actual_inv_size = MersenneTwister.rand(inv_size_range[1]-inv_size_range[0]) + inv_size_range[0]
+	var max_pond_content = 0
+	for item in choice_table:
+		max_pond_content += item.chance
+	
+	var actual_content : Array = obj.get_attrib("cargo.content", [])
+	for i in range(actual_inv_size):
+		var target = MersenneTwister.rand(max_pond_content)
+		var selected_item = null
+		var sum = 0
+		for item in choice_table:
+			if "global_max" in item and Globals.LevelLoaderRef.GetGlobalSpawn(item.src) >= item.global_max:
+				continue
+			if "max" in item and item["max"] <= 0:
+				continue
+			if sum + item.chance > target:
+				selected_item = item.src
+				if "max" in item:
+					item["max"] -= 1
+				break
+			sum += item.chance
+		# Could be null in cases where for example we've reached max on all spawnable objects in the cargo list.
+		# I think it's fine to fail gracefully instead of trying desperatly to add one more item
+		if selected_item != null:
+			var added := false
+			for item in actual_content:
+				if item.src == selected_item:
+					var data = Globals.LevelLoaderRef.LoadJSON(selected_item)
+					var stackable : bool = Globals.get_data(data, "equipment.stackable", false)
+					if stackable == true:
+						added = true
+						item.count += 1
+			if added == false:
+				actual_content.push_back({"src":selected_item, "count":1})
+		
+	obj.set_attrib("cargo.content", actual_content)
+	
 	
 func OnUseEnergy_Callback(obj, amount):
 	var destroyed = obj.get_attrib("destroyable.destroyed")
@@ -35,6 +89,7 @@ func OnUseEnergy_Callback(obj, amount):
 	else:
 		BehaviorEvents.emit_signal("OnEnergyChanged", obj)
 	
+	
 func OnPickup_Callback(picker, picked):
 	var picked_obj = []
 	var is_player = picker.get_attrib("type") == "player"
@@ -47,6 +102,8 @@ func OnPickup_Callback(picker, picked):
 	for obj in picked_obj:
 		if obj.get_attrib("equipment") != null:
 			filtered_obj.push_back(obj)
+		elif ("equipment" in obj.base_attributes or "equipment" in obj.modified_attributes) and obj.get_attrib("cargo.content") != null and is_player:
+			BehaviorEvents.emit_signal("OnLogLine", "We should transfer any remaining items from " + obj.get_attrib("name_id") + " before")
 			
 	if filtered_obj.size() <= 0 && is_player:
 		BehaviorEvents.emit_signal("OnLogLine", "The tractor beam failed to lock on")
@@ -122,6 +179,11 @@ func OnDropCargo_Callback(dropper, item_id, count):
 					
 	for index in index_to_delete:
 		cargo.remove(index)
+		
+	# This has to be done manually as get_attrib will always return null if disabled is true (which is the point)
+	if "equipment" in dropper.modified_attributes or "equipment" in dropper.base_attributes:
+		var should_enable : bool = cargo.size() > 0
+		dropper.set_attrib("equipment.disabled", should_enable)
 	
 func OnDropMount_Callback(dropper, slot_name, index):
 	var items = dropper.get_attrib("mounts." + slot_name)
@@ -199,6 +261,11 @@ func OnAddItem_Callback(picker, item_id):
 		
 	picker.set_attrib("cargo.volume_used", picker.get_attrib("cargo.volume_used") + volume)
 	
+	# This has to be done manually as get_attrib will always return null if disabled is true (which is the point)
+	if "equipment" in picker.modified_attributes or "equipment" in picker.base_attributes:
+		var should_enable : bool = cargo.size() > 0
+		picker.set_attrib("equipment.disabled", should_enable)
+	
 func OnRemoveItem_Callback(holder, item_id, num_remove=1): #-1 to remove everything
 	if not holder.modified_attributes.has("cargo"):
 		holder.init_cargo()
@@ -220,6 +287,12 @@ func OnRemoveItem_Callback(holder, item_id, num_remove=1): #-1 to remove everyth
 					
 	for index in index_to_delete:
 		cargo.remove(index)
+		
+	# This has to be done manually as get_attrib will always return null if disabled is true (which is the point)
+	if "equipment" in holder.modified_attributes or "equipment" in holder.base_attributes:
+		var should_enable : bool = cargo.size() > 0
+		holder.set_attrib("equipment.disabled", should_enable)
+		
 		
 
 #TODO: Implement this and replace bad code in player's OnTransferItemCompleted_Callback()	

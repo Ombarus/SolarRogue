@@ -1,6 +1,6 @@
 {
 	"name_id":"A Frigate Hull Relic",
-	"type":"hull",
+	"type":"frigate_hull",
 	"sprite":"frigate_body",
 	"icon": {
 		"texture":"data/textures/space-sprite.png",

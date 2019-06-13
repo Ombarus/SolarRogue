@@ -18,6 +18,11 @@
 		{"name":"data/json/stellar/anomalies/blind_anomaly.json", "spawn_rate":0.00015625, "max":2},
 		{"name":"data/json/stellar/anomalies/slow_anomaly.json", "spawn_rate":0.00015625, "max":2},
 		
+		{"name":"data/json/items/misc/containers/drop_probe_body.json", "spawn_rate":0.0000625, "max":3},
+		{"name":"data/json/items/misc/containers/drop_scout_body.json", "spawn_rate":0.0000625, "max":2},
+		{"name":"data/json/items/misc/containers/drop_frigate_body.json", "spawn_rate":0.0000325, "max":2},
+		{"name":"data/json/items/misc/containers/drop_battleship_body.json", "spawn_rate":0.0000325, "max":1},
+		
 		
 		
 		{"name":"data/json/items/converters/converter_mk2.json", "spawn_rate":0.00003125},

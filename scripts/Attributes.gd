@@ -27,10 +27,18 @@ func get_attrib(path, default=null):
 	if sub != null:
 		return Check(sub, default)
 	sub = base_attributes
+	var sub_mod = modified_attributes # to check if there's a disabled override
+	var disabled_override = null
 	for s in splices:
+		if sub_mod != null and sub_mod.has(s):
+			sub_mod = sub_mod[s]
+			if typeof(sub_mod) == TYPE_DICTIONARY and sub_mod.has("disabled"):
+				disabled_override = sub_mod["disabled"]
+			else:
+				disabled_override = null
 		if sub.has(s):
 			sub = sub[s]
-			if typeof(sub) == TYPE_DICTIONARY and sub.has("disabled") and sub["disabled"] == true:
+			if (disabled_override != null and disabled_override == true) or (typeof(sub) == TYPE_DICTIONARY and disabled_override == null and sub.has("disabled") and sub["disabled"] == true):
 				return default
 		else:
 			sub = null
@@ -90,7 +98,7 @@ func set_attrib(path, val):
 		print("warning: (", path,  " = ", val, ") trying to serialize an unknown type to JSON")
 	
 	sub[splices[-1]] = val
-			
+
 
 func init_cargo():
 	if modified_attributes.has("cargo") or not base_attributes.has("cargo"):

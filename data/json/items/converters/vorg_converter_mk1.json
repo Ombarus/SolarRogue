@@ -44,7 +44,7 @@
 				"name": "Vorg Scout", 
 				"requirements":[
 					{"type":"energy", "amount":1800},
-					{"src":"data/json/items/misc/scout_body.json", "amount":1},
+					{"type":"scout_hull", "amount":1},
 					{"type":"shield", "amount":1}
 				],
 				"produce":"data/json/ships/vorg/player_scout.json",
@@ -55,7 +55,7 @@
 				"name": "Vorg Bomber",
 				"requirements":[
 					{"type":"energy", "amount":2000},
-					{"src":"data/json/items/misc/scout_body.json", "amount":2},
+					{"type":"scout_hull", "amount":2},
 					{"type":"shield", "amount":1}
 				],
 				"produce":"data/json/ships/vorg/player_bomber.json",
@@ -66,7 +66,7 @@
 				"name": "Vorg Frigate", 
 				"requirements":[
 					{"type":"energy", "amount":2500}, 
-					{"src":"data/json/items/misc/frigate_body.json", "amount":1},
+					{"type":"frigate_hull", "amount":1},
 					{"type":"shield", "amount":1},
 					{"type":"utility", "amount":1}
 				], 
@@ -78,8 +78,8 @@
 				"name": "Vorg Battleship", 
 				"requirements":[
 					{"type":"energy", "amount":7500},
-					{"src":"data/json/items/misc/battleship_body.json", "amount":1}, 
-					{"src":"data/json/items/misc/frigate_body.json", "amount":1},
+					{"type":"battleship_hull", "amount":1}, 
+					{"type":"frigate_hull", "amount":1},
 					{"type":"shield", "amount":2}
 				],
 				"produce":"data/json/ships/vorg/player_battleship.json",

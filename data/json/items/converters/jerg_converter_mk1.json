@@ -44,7 +44,7 @@
 				"name": "Jerg Scout", 
 				"requirements":[
 					{"type":"energy", "amount":1800},
-					{"src":"data/json/items/misc/scout_body.json", "amount":1},
+					{"type":"scout_hull", "amount":1},
 					{"type":"utility", "amount":1}
 				],
 				"produce":"data/json/ships/jerg/player_scout.json",
@@ -55,7 +55,7 @@
 				"name": "Jerg Bomber",
 				"requirements":[
 					{"type":"energy", "amount":2000},
-					{"src":"data/json/items/misc/scout_body.json", "amount":2},
+					{"type":"scout_hull", "amount":2},
 					{"type":"utility", "amount":1}
 				],
 				"produce":"data/json/ships/jerg/player_bomber.json",
@@ -64,7 +64,7 @@
 			},
 			{
 				"name": "Jerg Frigate", 
-				"requirements":[{"type":"energy", "amount":2500}, {"src":"data/json/items/misc/frigate_body.json", "amount":2}], 
+				"requirements":[{"type":"energy", "amount":2500}, {"type":"frigate_hull", "amount":2}], 
 				"produce":"data/json/ships/jerg/player_frigate.json",
 				"ap_cost":7.0,
 				"amount":1
@@ -73,8 +73,8 @@
 				"name": "Jerg Battleship", 
 				"requirements":[
 					{"type":"energy", "amount":7500},
-					{"src":"data/json/items/misc/battleship_body.json", "amount":1}, 
-					{"src":"data/json/items/misc/frigate_body.json", "amount":1},
+					{"type":"battleship_hull", "amount":1}, 
+					{"type":"frigate_hull", "amount":1},
 					{"type":"utility", "amount":2}
 				],
 				"produce":"data/json/ships/jerg/player_battleship.json",

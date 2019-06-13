@@ -1,6 +1,6 @@
 {
 	"name_id":"A Battleship Hull Relic",
-	"type":"hull",
+	"type":"battleship_hull",
 	"sprite":"battleship_body",
 	"icon": {
 		"texture":"data/textures/space-sprite.png",
