@@ -1,5 +1,17 @@
 extends Camera2D
 
+enum SMOOTHING_METHOD {
+	none,
+	fake_exp,
+	real_exp
+}
+export(SMOOTHING_METHOD) var smoothing := SMOOTHING_METHOD.none
+export(float) var fake_divider := 2.0
+export(float) var real_exp := -0.182
+export(float) var slowdown := 0.0
+var _cur_vel := Vector2(0,0)
+var _last_cam_pos := Vector2(0,0)
+
 export(float) var max_zoom = 4.0
 export(float) var min_zoom = 0.25
 export(NodePath) var levelLoaderNode
@@ -10,10 +22,12 @@ var _touches = {} # for pinch zoom and drag with multiple fingers
 var _touches_info = {"num_touch_last_frame":0, "radius":0, "total_pan":0}
 var _debug_cur_touch = 0
 
+
 func _ready():
 	levelLoaderRef = get_node(levelLoaderNode)
 	var p = levelLoaderRef.objByType["player"][0]
 	self.position = p.position
+	_last_cam_pos = self.position
 	BehaviorEvents.connect("OnMovement", self, "OnMovement_callback")
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_callback")
 	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_callback")
@@ -55,11 +69,14 @@ func _zoom_camera(dir):
 func OnMovement_callback(obj, dir):
 	if obj.get_attrib("type") == "player":
 		self.position = obj.position
+		reset_smooth()
 		
 func OnLevelLoaded_callback():
+	_last_cam_pos = self.position
 	OnMovement_callback(levelLoaderRef.objByType["player"][0], null)
 	
 func OnTransferPlayer_callback(old_player, new_player):
+	_last_cam_pos = self.position
 	OnMovement_callback(new_player, null)
 
 func _on_ZoomIn_pressed():
@@ -157,3 +174,53 @@ func update_pinch_gesture():
 	#var to_print = "od.x %f, t.x %f, vp.x %f, zoom.x %f, fac %f, move.x(%f)" % [
 	#	old_dist.x, _touches_info["target"].x, vp_size.x, zoom.x, zoom_factor, cam_need_move.x]
 	#BehaviorEvents.emit_signal("OnLogLine", to_print)
+	
+func reset_smooth():
+	_last_cam_pos = self.position
+	_cur_vel = Vector2(0,0)
+	
+func _process(delta):
+	if delta <= 0:
+		return
+		
+	if slowdown > 0.0:
+		OS.delay_msec(slowdown)
+	if _touches.size() > 0:
+		update_vel(delta)
+	if _touches.size() == 0:
+		#print("DO SMOOTHING")
+		if smoothing == SMOOTHING_METHOD.fake_exp:
+			do_fake_smoothing(delta)
+		elif smoothing == SMOOTHING_METHOD.real_exp:
+			do_real_smoothing(delta)
+	
+func update_vel(delta : float):
+	var cur_cam_pos := self.position
+	var move := _last_cam_pos - cur_cam_pos
+	var move_speed : Vector2 = move / delta
+	_cur_vel = (_cur_vel + move_speed) / 2.0
+	_cur_vel.x = clamp(_cur_vel.x, -10000, 10000)
+	_cur_vel.y = clamp(_cur_vel.y, -10000, 10000)
+	_last_cam_pos = self.position
+	
+	var bleh = "delta = %s, move (%d, %d), move_speed (%d,%d), _cur_vel (%d,%d)"
+	bleh = bleh % [str(delta), move.x, move.y, move_speed.x, move_speed.y, _cur_vel.x, _cur_vel.y]
+	print(bleh)
+	
+func do_fake_smoothing(delta : float):
+	var slowdown = _cur_vel / fake_divider
+	slowdown *= delta
+	_cur_vel -= slowdown
+	self.position -= _cur_vel * delta
+	
+func do_real_smoothing(delta : float):
+	var l = _cur_vel.length()
+	var move_frame = 10 * exp(real_exp * ((log(l/10) / real_exp)+delta))
+	_cur_vel = _cur_vel.normalized() * move_frame
+	self.position -= _cur_vel * delta
+	
+	
+	
+	
+	
+	

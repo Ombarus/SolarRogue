@@ -192,6 +192,9 @@ limit_bottom = 1000000
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
 script = ExtResource( 29 )
+smoothing = 2
+fake_divider = 0.5
+real_exp = -5.0
 levelLoaderNode = NodePath("../Behaviors/LevelLoader")
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="."]

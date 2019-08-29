@@ -39,6 +39,8 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- ***CRASH: Tried to craft a battleship from a frigate and transfer all. Crashed in do_anomaly_detection
+	- var scanner_data = _node_id_scanner[obj.get_attrib("unique_id")] (_node_id_scanner doesn't contain frigate unique_id anymore)
 - ***BUG: if disabled is in the base_attributes we cannot override it in modified_attributes !***
 - when transfering content... can't drag on cargo items to drop into cargo holds
 - Crafting utilities require 2 utility but if you have at least one it won't say you are missing another one
