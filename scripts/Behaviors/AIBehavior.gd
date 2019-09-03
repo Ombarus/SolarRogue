@@ -23,6 +23,8 @@ func OnTriggerAnomaly_Callback(obj, anomaly):
 		obj.set_attrib("ai.disabled", true)
 	
 func ConsiderInterests(obj):
+	if obj.get_attrib("ai.skip_check") > 0:
+		return
 	var level_id : String = Globals.LevelLoaderRef.GetLevelID()
 	var new_objs : Array = obj.get_attrib("scanner_result.new_in_range." + level_id, [])
 	var is_player : bool = obj.get_attrib("type") == "player"
@@ -141,6 +143,10 @@ func OnObjTurn_Callback(obj):
 	if obj.get_attrib("ap.ai_acted") == false:
 		print("**** AI DID NOT DO ANY ACTION. AI SHOULD AT LEAST WAIT FOR 1 TURN ALWAYS ! *****")
 		BehaviorEvents.emit_signal("OnUseAP", obj, 1.0)
+		
+	var skip_check = obj.get_attrib("ai.skip_check")
+	if skip_check != null and skip_check > 0:
+		obj.set_attrib("ai.skip_check", skip_check - 1)
 
 func FindRandomTile():
 	var x = MersenneTwister.rand(Globals.LevelLoaderRef.levelSize.x)

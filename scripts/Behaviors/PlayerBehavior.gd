@@ -17,7 +17,6 @@ var playerNode : Node2D = null
 var levelLoaderRef : Node
 var click_start_pos
 var lock_input = false # when it's not player turn, inputs are locked
-var next_touch_is_a_goto = false # when camera is dragged, instead of moving in a single direction, a touch will make the ship do pathfinding
 var _weapon_shots = []
 var _last_unicode = 0
 var _area_of_effect_overlay : Node2D = null
@@ -84,13 +83,9 @@ func _ready():
 	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_Callback")
 	BehaviorEvents.connect("OnMountAdded", self, "OnMountAdded_Callback")
 	BehaviorEvents.connect("OnMountRemoved", self, "OnMountRemoved_Callback")
-	BehaviorEvents.connect("OnCameraDragged", self, "OnCameraDragged_Callback")
 	
 	_area_of_effect_overlay = get_node(AreaOfEffectOverlay)
 	
-func OnCameraDragged_Callback():
-	if _input_state == INPUT_STATE.hud:
-		next_touch_is_a_goto = true
 	
 func Pressed_Look_Callback():
 	if lock_input:
@@ -482,22 +477,6 @@ func _unhandled_input(event):
 				var clicked_tile = Globals.LevelLoaderRef.World_to_Tile(click_pos)
 				var player_tile = Globals.LevelLoaderRef.World_to_Tile(player_pos)
 				
-				if next_touch_is_a_goto == true and clicked_tile == player_tile:
-					next_touch_is_a_goto = false
-				
-				if next_touch_is_a_goto == true:
-					var ai_data = {
-						"aggressive":false,
-						"pathfinding":"simple",
-						"disable_on_interest":true,
-						"disable_wandering":true,
-						"objective":clicked_tile
-					}
-					playerNode.set_attrib("ai", ai_data)
-					BehaviorEvents.emit_signal("OnAttributeAdded", playerNode, "ai")
-					next_touch_is_a_goto = false
-					return # not the best middle of function return I've ever done....
-					
 				var click_dir = click_pos - player_pos
 				var rot = rad2deg(Vector2(0.0, 0.0).angle_to_point(click_dir)) - 90.0
 				if rot < 0:
@@ -506,29 +485,25 @@ func _unhandled_input(event):
 				var did_other_action : bool = do_contextual_actions(clicked_tile, player_tile)
 				if did_other_action == true:
 					return
-				
-				# Calculate direction based on touch relative to player position.
+					
+					
 				# dead zone (click on sprite)
 				if abs(click_dir.x) < levelLoaderRef.tileSize / 2 && abs(click_dir.y) < levelLoaderRef.tileSize / 2:
 					BehaviorEvents.emit_signal("OnUseAP", playerNode, 1.0)
 					BehaviorEvents.emit_signal("OnLogLine", "Cooling reactor (wait)")
-					dir = null
-				elif rot > 337.5 || rot <= 22.5:
-					dir = Vector2(0,-1) # 8
-				elif rot > 22.5 && rot <= 67.5:
-					dir = Vector2(1,-1) # 9
-				elif rot > 67.5 && rot <= 112.5:
-					dir = Vector2(1,0) # 6
-				elif rot > 112.5 && rot <= 157.5:
-					dir = Vector2(1,1) # 3
-				elif rot > 157.5 && rot <= 202.5:
-					dir = Vector2(0,1) # 2
-				elif rot > 202.5 && rot <= 247.5:
-					dir = Vector2(-1,1) # 1
-				elif rot > 247.5 && rot <= 292.5:
-					dir = Vector2(-1,0) # 4
-				elif rot > 292.5 && rot <= 337.5:
-					dir = Vector2(-1,-1) # 7
+					return
+					
+				# goto click pos
+				var ai_data = {
+					"aggressive":false,
+					"pathfinding":"simple",
+					"disable_on_interest":true,
+					"disable_wandering":true,
+					"skip_check":1, # make sure we move at least one tile, this means when danger is close we move one tile at a time
+					"objective":clicked_tile
+				}
+				playerNode.set_attrib("ai", ai_data)
+				BehaviorEvents.emit_signal("OnAttributeAdded", playerNode, "ai")
 				
 	if event is InputEventKey and event.pressed == true:
 		if event.unicode != 0:
@@ -565,7 +540,7 @@ func _unhandled_input(event):
 			BehaviorEvents.emit_signal("OnUseAP", playerNode, 1.0)
 			BehaviorEvents.emit_signal("OnLogLine", "Cooling reactor (wait)")
 	if dir != null:
-		next_touch_is_a_goto = false
+		#next_touch_is_a_goto = true
 		BehaviorEvents.emit_signal("OnMovement", playerNode, dir)
 
 
