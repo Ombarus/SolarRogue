@@ -68,7 +68,11 @@ func OnRequestObjectUnload_Callback(obj):
 	_node_id_scanner.erase(obj.get_attrib("unique_id"))
 
 func do_anomaly_detection(obj):
-	var scanner_data = _node_id_scanner[obj.get_attrib("unique_id")]
+	var unique_id : int = obj.get_attrib("unique_id")
+	# If the player doesn't have a scanner equipped, we do not do anomaly detection
+	if not unique_id in _node_id_scanner:
+		return
+	var scanner_data = _node_id_scanner[unique_id]
 	var bonus : float = Globals.get_data(scanner_data, "scanning.detection_bonus")
 	var level_id : String = Globals.LevelLoaderRef.GetLevelID()
 	var known_anomalies : Dictionary = obj.get_attrib("scanner_result.known_anomalies." + level_id, {})

@@ -39,10 +39,12 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- ***CRASH: Tried to craft a battleship from a frigate and transfer all. Crashed in do_anomaly_detection
-	- var scanner_data = _node_id_scanner[obj.get_attrib("unique_id")] (_node_id_scanner doesn't contain frigate unique_id anymore)
+- Improve movement feel. People don't notice when the ship is moving and the tap to move one tile is unintuitive
+- ***BUG: still issues when switching ship with ultimate scanner... memory is not created, ships turn invisible, etc.
 - ***BUG: if disabled is in the base_attributes we cannot override it in modified_attributes !***
-- when transfering content... can't drag on cargo items to drop into cargo holds
+- PERF: optimize lists. Seems like if you have 20-30 items in the transfer window there can be quite a delay to load and/or update the list
+	- Do not regen the whole list every time something change
+	- When generating the whole list... do it in a thread ? (or 4-5 per frame ?)
 - Crafting utilities require 2 utility but if you have at least one it won't say you are missing another one
 - Work on Anomalies and status effect
 	- Anomalies should have a chance to be detected (based on scanner level ?)
@@ -176,6 +178,10 @@ TODO :::
 	
 	
 polish :::
+- UI animation
+	- animate health and shield when hit
+	- animate energy when lost or low
+	- animate crafting ?
 - Multiple save slot for different runs ?
 - Improve, beautify and add stuff to settings
 	- language
@@ -217,6 +223,9 @@ IDEAS:::
 	
 	
 DONE ::: 
+- when transfering content... can't drag on cargo items to drop into cargo holds
+- ***CRASH: Tried to craft a battleship from a frigate and transfer all. Crashed in do_anomaly_detection (because we tried to do anomaly detection even without a scanner)
+	- var scanner_data = _node_id_scanner[obj.get_attrib("unique_id")] (_node_id_scanner doesn't contain frigate unique_id anymore)
 - Bind "return" key for "ok" btn
 - Tweak: Should be able to hold hulls for crafting scout in scout (at least if drop everything)
 - Save node's rotation (position is saved but not rot)

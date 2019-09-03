@@ -86,6 +86,10 @@ func can_drop_data(position, data):
 	# Can always drop a mount anywhere in the cargo list to "remove" a mount
 	if "key" in data and "idx" in data and not "key" in _metadata:
 		return true
+		
+	# Cargo on Cargo is valid
+	if not "key" in data and not "key" in _metadata:
+		return true
 	
 	# Sanity check, should always have a "src"
 	if not "src" in data:

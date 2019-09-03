@@ -29,6 +29,7 @@ func OnTransferPlayer_Callback(old_player, new_player):
 	_playerNode = new_player
 	# Should I duplicate the array here ?
 	new_player.set_attrib("memory", old_player.get_attrib("memory"))
+	new_player.visible = true # in case previous ship didn't have scanner and couldn't see the ship
 	_update_occlusion_texture()
 
 func OnObjectLoaded_Callback(obj):
