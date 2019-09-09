@@ -46,7 +46,7 @@ func OnMovement_callback(obj, dir):
 	var newPos = obj.position + levelLoaderRef.Tile_to_World(dir)
 	levelLoaderRef.UpdatePosition(obj, newPos)
 	var angle = Vector2(0.0, 0.0).angle_to_point(dir) - deg2rad(90.0)
-	obj.rotation = angle
+	#obj.rotation = angle
 	
 	obj.set_attrib("moving.moved", true)
 

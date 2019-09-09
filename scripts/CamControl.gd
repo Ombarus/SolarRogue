@@ -203,9 +203,9 @@ func update_vel(delta : float):
 	_cur_vel.y = clamp(_cur_vel.y, -10000, 10000)
 	_last_cam_pos = self.position
 	
-	var bleh = "delta = %s, move (%d, %d), move_speed (%d,%d), _cur_vel (%d,%d)"
-	bleh = bleh % [str(delta), move.x, move.y, move_speed.x, move_speed.y, _cur_vel.x, _cur_vel.y]
-	print(bleh)
+	#var bleh = "delta = %s, move (%d, %d), move_speed (%d,%d), _cur_vel (%d,%d)"
+	#bleh = bleh % [str(delta), move.x, move.y, move_speed.x, move_speed.y, _cur_vel.x, _cur_vel.y]
+	#print(bleh)
 	
 func do_fake_smoothing(delta : float):
 	var slowdown = _cur_vel / fake_divider
