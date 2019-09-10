@@ -5,8 +5,8 @@ func _ready():
 	#self.root_node = "../.."
 
 func OnMovement_Callback(obj, dir):
-	if obj.get_attrib("type") != "player":
-		return
+	#if obj.get_attrib("type") != "player":
+	#	return
 	if obj != self.get_parent().get_parent():
 		return
 	

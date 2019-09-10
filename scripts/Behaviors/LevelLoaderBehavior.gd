@@ -405,7 +405,7 @@ func UpdatePosition(obj, newPos):
 	content.erase(obj)
 	levelTiles[new_tile.x][new_tile.y].push_back(obj)
 	
-	obj.position = newPos
+	#obj.position = newPos
 	BehaviorEvents.emit_signal("OnPositionUpdated", obj)
 
 #func _process(delta):
