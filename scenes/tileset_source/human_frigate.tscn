@@ -15,7 +15,7 @@ shader = SubResource( 1 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "move_-1-1"
-length = 0.6
+length = 0.3
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -36,7 +36,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.6 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( -128, -128 ) ]
@@ -48,7 +48,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.6 ),
+"times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ -45.0 ],
@@ -58,7 +58,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "move_-10"
-length = 0.6
+length = 0.45
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -79,7 +79,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.15, 0.6 ),
+"times": PoolRealArray( 0, 0.15, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( -128, 0 ) ]
@@ -91,7 +91,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.6 ),
+"times": PoolRealArray( 0.45 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ -90.0 ],
@@ -101,7 +101,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=5]
 resource_name = "move_-11"
-length = 0.6
+length = 0.52
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -122,7 +122,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.22, 0.6 ),
+"times": PoolRealArray( 0, 0.22, 0.52 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( -128, 128 ) ]
@@ -134,7 +134,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.6 ),
+"times": PoolRealArray( 0.52 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ -135.0 ],
@@ -143,7 +143,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=6]
-length = 0.6
+length = 0.3
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -152,7 +152,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.6 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, -128 ) ]
@@ -164,7 +164,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.6 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.0 ]
@@ -176,7 +176,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.6 ),
+"times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ 0.0 ],
@@ -228,7 +228,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=8]
-length = 0.6
+length = 0.3
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -249,7 +249,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.6 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 128, -128 ) ]
@@ -261,7 +261,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.6 ),
+"times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ 45.0 ],
@@ -270,7 +270,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=9]
-length = 0.6
+length = 0.45
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -291,7 +291,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.15, 0.6 ),
+"times": PoolRealArray( 0, 0.15, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 128, 0 ) ]
@@ -303,7 +303,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.6 ),
+"times": PoolRealArray( 0.45 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ 90.0 ],
@@ -312,7 +312,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=10]
-length = 0.6
+length = 0.52
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -333,7 +333,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.22, 0.6 ),
+"times": PoolRealArray( 0, 0.22, 0.52 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 128, 128 ) ]
@@ -345,7 +345,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.6 ),
+"times": PoolRealArray( 0.52 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ 135.0 ],
@@ -355,7 +355,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=11]
 resource_name = "move_diag_-1-1"
-length = 0.6
+length = 0.45
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -367,38 +367,38 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.15, 0.3 ),
 "transitions": PoolRealArray( 2, 0.5, 1 ),
 "update": 0,
-"values": [ 45.0, 0.0, -45.0 ]
+"values": [ 0.0, -45.0, -90.0 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:position")
+tracks/1/type = "method"
+tracks/1/path = NodePath("MovementAnimations")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.15, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( -128, -128 ) ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath("MovementAnimations")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.6 ),
+"times": PoolRealArray( 0.45 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ -90.0 ],
 "method": "OnAnimDone_Callback"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.15, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( -181.02, 0 ) ]
+}
 
 [sub_resource type="Animation" id=12]
 resource_name = "move_diag_-10"
-length = 0.6
+length = 0.52
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -410,7 +410,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.22, 0.45 ),
 "transitions": PoolRealArray( 2, 0.5, 1 ),
 "update": 0,
-"values": [ 45.0, -22.5, -90.0 ]
+"values": [ 0.0, -67.5, -135.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:position")
@@ -419,10 +419,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.22, 0.6 ),
+"times": PoolRealArray( 0, 0.22, 0.52 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( -128, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( -90.51, 90.51 ) ]
 }
 tracks/2/type = "method"
 tracks/2/path = NodePath("MovementAnimations")
@@ -431,7 +431,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.6 ),
+"times": PoolRealArray( 0.52 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ -135.0 ],
@@ -453,7 +453,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6 ),
 "transitions": PoolRealArray( 2, 0.5, 1 ),
 "update": 0,
-"values": [ 45.0, 135.0, 225.0 ]
+"values": [ 0.0, 90.0, 180.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:position")
@@ -465,7 +465,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( -128, 128 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 181.02 ) ]
 }
 tracks/2/type = "method"
 tracks/2/path = NodePath("MovementAnimations")
@@ -477,13 +477,13 @@ tracks/2/keys = {
 "times": PoolRealArray( 0.6 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [ -180.0 ],
+"args": [ 180.0 ],
 "method": "OnAnimDone_Callback"
 } ]
 }
 
 [sub_resource type="Animation" id=14]
-length = 0.6
+length = 0.3
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -495,7 +495,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.07, 0.15 ),
 "transitions": PoolRealArray( 2, 0.5, 1 ),
 "update": 0,
-"values": [ 45.0, 21.0, 0.0 ]
+"values": [ 0.0, -21.0, -45.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:position")
@@ -504,10 +504,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.6 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, -128 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( -90.51, -90.51 ) ]
 }
 tracks/2/type = "method"
 tracks/2/path = NodePath("MovementAnimations")
@@ -516,7 +516,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.6 ),
+"times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ -45.0 ],
@@ -526,7 +526,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=15]
 resource_name = "move_diag_01"
-length = 0.6
+length = 0.52
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -538,7 +538,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.22, 0.45 ),
 "transitions": PoolRealArray( 2, 0.5, 1 ),
 "update": 0,
-"values": [ 45.0, 67.5, 180.0 ]
+"values": [ 0.0, 67.5, 135.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:position")
@@ -547,10 +547,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.22, 0.6 ),
+"times": PoolRealArray( 0, 0.22, 0.52 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 128 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 90.51, 90.51 ) ]
 }
 tracks/2/type = "method"
 tracks/2/path = NodePath("MovementAnimations")
@@ -559,7 +559,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.6 ),
+"times": PoolRealArray( 0.52 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ 135.0 ],
@@ -568,7 +568,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=16]
-length = 0.6
+length = 0.3
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -577,10 +577,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.6 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 128, -128 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, -181.02 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:rotation_degrees")
@@ -589,10 +589,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.6 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 45.0, 45.0 ]
+"values": [ 0.0, 0.0 ]
 }
 tracks/2/type = "method"
 tracks/2/path = NodePath("MovementAnimations")
@@ -601,7 +601,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.6 ),
+"times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ 0.0 ],
@@ -610,7 +610,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=17]
-length = 0.6
+length = 0.3
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -622,7 +622,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.07, 0.15 ),
 "transitions": PoolRealArray( 2, 0.5, 1 ),
 "update": 0,
-"values": [ 45.0, 66.0, 90.0 ]
+"values": [ 0.0, 21.0, 45.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:position")
@@ -631,10 +631,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.6 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 128, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 90.51, -90.51 ) ]
 }
 tracks/2/type = "method"
 tracks/2/path = NodePath("MovementAnimations")
@@ -643,7 +643,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.6 ),
+"times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ 45.0 ],
@@ -652,7 +652,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=18]
-length = 0.6
+length = 0.45
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -664,7 +664,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.15, 0.3 ),
 "transitions": PoolRealArray( 2, 0.5, 1 ),
 "update": 0,
-"values": [ 45.0, 90.0, 135.0 ]
+"values": [ 0.0, 45.0, 90.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:position")
@@ -673,10 +673,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.15, 0.6 ),
+"times": PoolRealArray( 0, 0.15, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 128, 128 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 181.02, 0 ) ]
 }
 tracks/2/type = "method"
 tracks/2/path = NodePath("MovementAnimations")
@@ -685,7 +685,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.6 ),
+"times": PoolRealArray( 0.45 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ 90.0 ],

@@ -67,9 +67,10 @@ func _zoom_camera(dir):
 	zoom.y = clamp(zoom.y, min_zoom, max_zoom)
 	
 func OnMovement_callback(obj, dir):
-	if obj.get_attrib("type") == "player":
-		self.position = obj.position
-		reset_smooth()
+	#if obj.get_attrib("type") == "player":
+	#	self.position = obj.position
+	#	reset_smooth()
+	pass
 		
 func OnLevelLoaded_callback():
 	_last_cam_pos = self.position

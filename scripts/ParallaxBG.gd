@@ -22,6 +22,7 @@ func OnTransferPlayer_Callback(old_player, new_player):
 	_update_parallax(new_player)
 
 func _update_parallax(obj):
+	return
 	var bounds = Globals.LevelLoaderRef.levelSize
 	var tile_size = Globals.LevelLoaderRef.tileSize
 	var grid_span = bounds * tile_size

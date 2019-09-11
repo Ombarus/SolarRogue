@@ -2,41 +2,48 @@ extends AnimationPlayer
 
 func _ready():
 	BehaviorEvents.connect("OnMovement", self, "OnMovement_Callback")
+	
+func normalize_deg(var deg : float) -> float:
+	var turns := deg / 180.0
+	var whole := floor(turns)
+	 
+	return 180.0 * (turns-whole)
 
 func OnMovement_Callback(obj, dir):
-	if obj.get_attrib("type") != "player":
+	var root : Node2D = get_node("../..")
+	if obj != root or obj.get_attrib("type") != "player":
 		return
 	
-	# implement movement base on local ship coordinate (move_11, move_01, move_-10, etc.)
-	
 	#convert dir into local dir (consider current rotation of ship)
-	var root : Node2D = get_node("../..")
-	var root_rot_deg : float = rad2deg(root.rotation)
-	var local_dir = dir.rotated(-root.rotation)
+	var is_diag : bool = false
+	var root_rot_deg : float = normalize_deg(rad2deg(root.rotation))
+	var local_dir : Vector2 = dir.rotated(-root.rotation)
 	var anim_to_play = "move_"
 	if (abs(root_rot_deg) > 40.0 and abs(root_rot_deg) < 50.0) or (abs(root_rot_deg) > 130.0 and abs(root_rot_deg) < 140.0):
+		is_diag = true
 		anim_to_play += "diag_"
 		
-	var x : int = round(local_dir.x)
-	var y : int = round(local_dir.y)
+	var x : float = local_dir.x
+	var y : float = local_dir.y
 	
-	if x == 1 and y >= 1:
+	if (not is_diag and x >= 0.9 and y >= 0.9) or (is_diag and x >= 1.4 and abs(y) <= 0.1):
 		anim_to_play += "11"
-	if x == 0 and y >= 1:
+	if (not is_diag and abs(x) <= 0.1 and y >= 0.9) or (is_diag and x >= 0.7 and y >= 0.7):
 		anim_to_play += "01"
-	if x >= 1 and y == 0:
+	if (not is_diag and x >= 0.9 and abs(y) <= 0.1) or (is_diag and x >= 0.7 and y <= -0.7):
 		anim_to_play += "10"
-	if x <= -1 and y >= 1:
+	if (not is_diag and x <= -0.9 and y >= 0.9) or (is_diag and abs(x) <= 0.1 and y >= 1.4):
 		anim_to_play += "-11"
-	if x <= -1 and y == 0:
+	if (not is_diag and x <= -0.9 and abs(y) <= 0.1) or (is_diag and x <= -0.7 and y >= 0.7):
 		anim_to_play += "-10"
-	if x <= -1 and y <= -1:
+	if (not is_diag and x <= -0.9 and y <= -0.9) or (is_diag and x <= -1.4 and abs(y) <= 0.1):
 		anim_to_play += "-1-1"
-	if x == 0 and y <= -1:
+	if (not is_diag and abs(x) <= 0.1 and y <= -0.9) or (is_diag and x <= -0.7 and y <= -0.7):
 		anim_to_play += "0-1"
-	if x >= 1 and y <= -1:
+	if (not is_diag and x >= 0.9 and y <= -0.9) or (is_diag and abs(x) <= 0.1 and y <= -1.4):
 		anim_to_play += "1-1"
 	
+	print("play anim " + anim_to_play)
 	self.play(anim_to_play)
 	BehaviorEvents.emit_signal("OnWaitForAnimation")
 	
