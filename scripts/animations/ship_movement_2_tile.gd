@@ -11,7 +11,7 @@ func normalize_deg(var deg : float) -> float:
 
 func OnMovement_Callback(obj, dir):
 	var root : Node2D = get_node("../..")
-	if obj != root or obj.get_attrib("type") != "player":
+	if obj != root:
 		return
 	
 	#convert dir into local dir (consider current rotation of ship)
@@ -45,13 +45,21 @@ func OnMovement_Callback(obj, dir):
 	
 	print("play anim " + anim_to_play)
 	self.play(anim_to_play)
-	BehaviorEvents.emit_signal("OnWaitForAnimation")
+	root.set_attrib("animation.in_movement", true)
+	#BehaviorEvents.emit_signal("OnWaitForAnimation")
 	
 	
 func OnAnimDone_Callback(var turn_deg : float):
 	var root : Node2D = get_node("../..")
 	root.position += get_node(root_node).position.rotated(root.rotation)
+	# I'm worried that the animation will eventually "drift" (because of floating point) away from the center of the Tiles
+	# These 3 lines should prevent that
+	var tile : Vector2 = Globals.LevelLoaderRef.World_to_Tile(root.position)
+	root.position = Globals.LevelLoaderRef.Tile_to_World(tile)
 	root.rotation += deg2rad(turn_deg)
 	get_node(root_node).rotation = 0
 	get_node(root_node).position = Vector2(0,0)
-	BehaviorEvents.emit_signal("OnAnimationDone")
+	root.set_attrib("animation.in_movement", false)
+	BehaviorEvents.emit_signal("OnPositionUpdated", root)
+	if root.get_attrib("animation.waiting_moving") == true:
+		BehaviorEvents.emit_signal("OnAnimationDone")

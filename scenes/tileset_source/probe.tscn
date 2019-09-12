@@ -1,12 +1,13 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=1]
-[ext_resource path="res://scripts/animations/ship_animations.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Animations/ShipAnimations2.tscn" type="PackedScene" id=2]
 
 [node name="probe" type="Sprite"]
 z_index = 900
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 1664, 256, 128, 128 )
-script = ExtResource( 2 )
+
+[node name="MovementAnimations" parent="." instance=ExtResource( 2 )]
 

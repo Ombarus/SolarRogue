@@ -405,8 +405,10 @@ func UpdatePosition(obj, newPos):
 	content.erase(obj)
 	levelTiles[new_tile.x][new_tile.y].push_back(obj)
 	
-	#obj.position = newPos
-	BehaviorEvents.emit_signal("OnPositionUpdated", obj)
+	var has_movement_anim : bool = obj.find_node("MovementAnimations", true, false) != null
+	if not has_movement_anim:
+		obj.position = newPos
+		BehaviorEvents.emit_signal("OnPositionUpdated", obj)
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

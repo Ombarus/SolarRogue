@@ -39,8 +39,12 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- With new movement anim, the log about what is under your ship is delayed ?
 - New movement (always goto) prevent going on top of something if you can interact with it :/
 - Animate displacement a bit
+	- round up position to grid size to avoid floating point error working with anims
+	- make ai ship animate all at the same time
+	- improve camera follow smooth
 - ***BUG: still issues when switching ship with ultimate scanner... memory is not created, ships turn invisible, etc.
 - ***BUG: if disabled is in the base_attributes we cannot override it in modified_attributes !***
 - PERF: optimize lists. Seems like if you have 20-30 items in the transfer window there can be quite a delay to load and/or update the list

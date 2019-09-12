@@ -194,6 +194,12 @@ func _process(delta):
 			do_fake_smoothing(delta)
 		elif smoothing == SMOOTHING_METHOD.real_exp:
 			do_real_smoothing(delta)
+			
+		var bounds = levelLoaderRef.levelSize
+		var tile_size = levelLoaderRef.tileSize
+		var x : float = clamp(self.position.x, 0, bounds.x * tile_size)
+		var y : float = clamp(self.position.y, 0, bounds.y * tile_size)
+		self.position = Vector2(x,y)
 	
 func update_vel(delta : float):
 	var cur_cam_pos := self.position

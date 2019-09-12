@@ -261,8 +261,17 @@ func OnRequestObjectUnload_Callback(obj):
 		playerNode = null
 	
 func OnObjTurn_Callback(obj):
+	var is_player : bool = obj.get_attrib("type") == "player"
+	
+	# other stuff can happen when moving one block but we have to finish playing the anim
+	# before we go again
+	if is_player and obj.get_attrib("animation.in_movement") == true and obj.get_attrib("animation.waiting_moving") != true:
+		obj.set_attrib("animation.waiting_moving", true)
+		BehaviorEvents.emit_signal("OnWaitForAnimation")
+		return
+		
 	# sometimes we put the player on cruise control. when we give him back control "ai" component will be disabled
-	if obj.get_attrib("type") == "player" and obj.get_attrib("ai") == null:
+	if is_player and obj.get_attrib("ai") == null:
 		lock_input = false
 		
 		var moved = obj.get_attrib("moving.moved")

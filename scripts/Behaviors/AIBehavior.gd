@@ -117,6 +117,13 @@ func OnObjTurn_Callback(obj):
 	if obj.get_attrib("ai") == null:
 		return
 		
+	# other stuff can happen when moving one block but we have to finish playing the anim
+	# before we go again
+	if obj.get_attrib("animation.in_movement") == true:
+		BehaviorEvents.emit_signal("OnWaitForAnimation")
+		obj.set_attrib("animation.waiting_moving", true)
+		return
+		
 	if obj.get_attrib("ai.disable_on_interest") == true:
 		ConsiderInterests(obj)
 	
@@ -199,6 +206,13 @@ func DoAttackPathFinding(obj):
 		obj.set_attrib("ai.target", null)
 		obj.set_attrib("wandering", true)
 		return
+		
+	if player.get_attrib("animation.in_movement") == true:
+		BehaviorEvents.emit_signal("OnWaitForAnimation")
+		player.set_attrib("animation.waiting_moving", true)
+		obj.set_attrib("ap.ai_acted", true) # hack to make the AI exit without using it's turn
+		return
+		
 	var player_tile = Globals.LevelLoaderRef.World_to_Tile(player.position)
 	var obj_tile = Globals.LevelLoaderRef.World_to_Tile(obj.position)
 	var weapons = obj.get_attrib("mounts.weapon")

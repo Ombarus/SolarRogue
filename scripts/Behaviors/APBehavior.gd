@@ -1,4 +1,5 @@
 extends Node
+class_name APBehavior
 
 export(NodePath) var LogWindow
 export(int) var day_length = 100
@@ -55,6 +56,7 @@ func OnWaitForAnimation_Callback():
 	_waiting_on_anim = true
 	
 func OnAnimationDone_Callback():
+	_need_sort = true; # a trick to force the AP Behavior to recheck actions after animations have played
 	_waiting_on_anim = false
 	
 func OnTransferPlayer_Callback(old_player, new_player):
