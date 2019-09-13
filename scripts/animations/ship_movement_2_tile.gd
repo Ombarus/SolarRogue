@@ -43,7 +43,7 @@ func OnMovement_Callback(obj, dir):
 	if (not is_diag and x >= 0.9 and y <= -0.9) or (is_diag and abs(x) <= 0.1 and y <= -1.4):
 		anim_to_play += "1-1"
 	
-	print("play anim " + anim_to_play)
+	#print("play anim " + anim_to_play)
 	self.play(anim_to_play)
 	root.set_attrib("animation.in_movement", true)
 	#BehaviorEvents.emit_signal("OnWaitForAnimation")

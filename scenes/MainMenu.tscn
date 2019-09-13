@@ -69,6 +69,7 @@ margin_bottom = -148.0
 rect_min_size = Vector2( 140, 90 )
 Text = "[c]ontinue"
 ShortcutKey = "c"
+ShortcutEnum = 0
 AlwaysOnShortcut = false
 Disabled = true
 
@@ -84,7 +85,9 @@ margin_bottom = -38.0
 rect_min_size = Vector2( 140, 90 )
 Text = "[n]ew game"
 ShortcutKey = "n"
+ShortcutEnum = 0
 AlwaysOnShortcut = false
+Disabled = false
 
 [node name="Setting" parent="MenuRoot/MenuBtn" instance=ExtResource( 8 )]
 anchor_left = 0.5
@@ -98,7 +101,9 @@ margin_bottom = 62.0
 rect_min_size = Vector2( 140, 90 )
 Text = "[s]ettings"
 ShortcutKey = "s"
+ShortcutEnum = 0
 AlwaysOnShortcut = false
+Disabled = false
 
 [node name="Credits" parent="MenuRoot/MenuBtn" instance=ExtResource( 8 )]
 anchor_left = 0.5
@@ -112,7 +117,9 @@ margin_bottom = 172.0
 rect_min_size = Vector2( 140, 90 )
 Text = "? credits"
 ShortcutKey = "?"
+ShortcutEnum = 0
 AlwaysOnShortcut = false
+Disabled = false
 
 [node name="Quit" parent="MenuRoot/MenuBtn" instance=ExtResource( 8 )]
 anchor_left = 0.5
@@ -126,7 +133,9 @@ margin_bottom = 282.0
 rect_min_size = Vector2( 140, 90 )
 Text = "[q]uit"
 ShortcutKey = "q"
+ShortcutEnum = 0
 AlwaysOnShortcut = false
+Disabled = false
 
 [node name="base" parent="MenuRoot" instance=ExtResource( 9 )]
 editor/display_folded = true
@@ -135,6 +144,12 @@ margin_left = -735.0
 margin_top = 32.0
 margin_right = -34.0
 margin_bottom = -27.0
+dialog_ok = false
+dialog_cancel = false
+disabled = false
+bottom_title = ""
+title = ""
+border_style = "═"
 
 [node name="Leaderboard" type="Control" parent="MenuRoot/base"]
 anchor_right = 1.0

@@ -1,14 +1,7 @@
 extends Camera2D
 
-enum SMOOTHING_METHOD {
-	none,
-	fake_exp,
-	real_exp
-}
-export(SMOOTHING_METHOD) var smoothing := SMOOTHING_METHOD.none
-export(float) var fake_divider := 2.0
-export(float) var real_exp := -0.182
-export(float) var slowdown := 0.0
+export(float) var pan_smooth := -5
+export(float) var follow_smooth : float
 var _cur_vel := Vector2(0,0)
 var _last_cam_pos := Vector2(0,0)
 
@@ -21,7 +14,6 @@ var levelLoaderRef
 var _touches = {} # for pinch zoom and drag with multiple fingers
 var _touches_info = {"num_touch_last_frame":0, "radius":0, "total_pan":0}
 var _debug_cur_touch = 0
-
 
 func _ready():
 	levelLoaderRef = get_node(levelLoaderNode)
@@ -184,16 +176,16 @@ func _process(delta):
 	if delta <= 0:
 		return
 		
-	if slowdown > 0.0:
-		OS.delay_msec(slowdown)
+	var target : Attributes = levelLoaderRef.objByType["player"][0]
+	if target.get_attrib("animation.in_movement") == true:
+		self.position = target.get_child(0).global_position
+		align() # otherwise the camera viewport is updated one frame behind the position of the player, creating jerkiness
+	#smooth_goto(target, delta)
+		
 	if _touches.size() > 0:
 		update_vel(delta)
 	if _touches.size() == 0:
-		#print("DO SMOOTHING")
-		if smoothing == SMOOTHING_METHOD.fake_exp:
-			do_fake_smoothing(delta)
-		elif smoothing == SMOOTHING_METHOD.real_exp:
-			do_real_smoothing(delta)
+		do_real_smoothing(delta)
 			
 		var bounds = levelLoaderRef.levelSize
 		var tile_size = levelLoaderRef.tileSize
@@ -214,19 +206,17 @@ func update_vel(delta : float):
 	#bleh = bleh % [str(delta), move.x, move.y, move_speed.x, move_speed.y, _cur_vel.x, _cur_vel.y]
 	#print(bleh)
 	
-func do_fake_smoothing(delta : float):
-	var slowdown = _cur_vel / fake_divider
-	slowdown *= delta
-	_cur_vel -= slowdown
-	self.position -= _cur_vel * delta
-	
 func do_real_smoothing(delta : float):
 	var l = _cur_vel.length()
-	var move_frame = 10 * exp(real_exp * ((log(l/10) / real_exp)+delta))
+	var move_frame = 10 * exp(pan_smooth * ((log(l/10) / pan_smooth)+delta))
 	_cur_vel = _cur_vel.normalized() * move_frame
 	self.position -= _cur_vel * delta
 	
-	
+func smooth_goto(target : Attributes, delta : float):
+	var vec : Vector2 = target.position - self.position
+	var l = vec.length()
+	var move_frame = 10 * exp(follow_smooth * ((log(l/10) / follow_smooth)+delta))
+	self.position += vec.normalized() * move_frame * delta
 	
 	
 	

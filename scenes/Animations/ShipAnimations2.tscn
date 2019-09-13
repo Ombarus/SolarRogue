@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/animations/ship_movement_2_tile.gd" type="Script" id=1]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "move_-1-1"
 length = 0.3
 step = 0.01
@@ -45,7 +45,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "move_-10"
 length = 0.45
 step = 0.01
@@ -88,7 +88,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "move_-11"
 length = 0.52
 step = 0.01
@@ -131,7 +131,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 length = 0.3
 step = 0.01
 tracks/0/type = "value"
@@ -173,7 +173,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=5]
 resource_name = "move_01"
 length = 0.6
 step = 0.01
@@ -216,7 +216,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=6]
 length = 0.3
 step = 0.01
 tracks/0/type = "value"
@@ -258,7 +258,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=7]
 length = 0.45
 step = 0.01
 tracks/0/type = "value"
@@ -300,7 +300,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=8]
 length = 0.52
 step = 0.01
 tracks/0/type = "value"
@@ -342,7 +342,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=9]
 resource_name = "move_diag_-1-1"
 length = 0.45
 step = 0.01
@@ -385,7 +385,7 @@ tracks/2/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( -181.02, 0 ) ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=10]
 resource_name = "move_diag_-10"
 length = 0.52
 step = 0.01
@@ -428,7 +428,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=11]
 resource_name = "move_diag_-11"
 length = 0.6
 step = 0.01
@@ -471,7 +471,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=12]
 length = 0.3
 step = 0.01
 tracks/0/type = "value"
@@ -513,7 +513,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=13]
 resource_name = "move_diag_01"
 length = 0.52
 step = 0.01
@@ -556,7 +556,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=14]
 length = 0.3
 step = 0.01
 tracks/0/type = "value"
@@ -598,7 +598,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=15]
 length = 0.3
 step = 0.01
 tracks/0/type = "value"
@@ -640,7 +640,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=16]
 length = 0.45
 step = 0.01
 tracks/0/type = "value"
@@ -683,21 +683,21 @@ tracks/2/keys = {
 }
 
 [node name="MovementAnimations" type="AnimationPlayer"]
-anims/move_-1-1 = SubResource( 3 )
-anims/move_-10 = SubResource( 4 )
-anims/move_-11 = SubResource( 5 )
-anims/move_0-1 = SubResource( 6 )
-anims/move_01 = SubResource( 7 )
-anims/move_1-1 = SubResource( 8 )
-anims/move_10 = SubResource( 9 )
-anims/move_11 = SubResource( 10 )
-anims/move_diag_-1-1 = SubResource( 11 )
-anims/move_diag_-10 = SubResource( 12 )
-anims/move_diag_-11 = SubResource( 13 )
-anims/move_diag_0-1 = SubResource( 14 )
-anims/move_diag_01 = SubResource( 15 )
-anims/move_diag_1-1 = SubResource( 16 )
-anims/move_diag_10 = SubResource( 17 )
-anims/move_diag_11 = SubResource( 18 )
+anims/move_-1-1 = SubResource( 1 )
+anims/move_-10 = SubResource( 2 )
+anims/move_-11 = SubResource( 3 )
+anims/move_0-1 = SubResource( 4 )
+anims/move_01 = SubResource( 5 )
+anims/move_1-1 = SubResource( 6 )
+anims/move_10 = SubResource( 7 )
+anims/move_11 = SubResource( 8 )
+anims/move_diag_-1-1 = SubResource( 9 )
+anims/move_diag_-10 = SubResource( 10 )
+anims/move_diag_-11 = SubResource( 11 )
+anims/move_diag_0-1 = SubResource( 12 )
+anims/move_diag_01 = SubResource( 13 )
+anims/move_diag_1-1 = SubResource( 14 )
+anims/move_diag_10 = SubResource( 15 )
+anims/move_diag_11 = SubResource( 16 )
 script = ExtResource( 1 )
 

@@ -12,8 +12,9 @@ func _ready():
 	
 
 func OnMovement_Callback(obj, dir):
-	if obj.get_attrib("type") == "player":
-		_update_parallax(obj)
+	#if obj.get_attrib("type") == "player":
+	#	_update_parallax(obj)
+	pass
 		
 func OnLevelLoaded_Callback():
 	_update_parallax(Globals.LevelLoaderRef.objByType["player"][0])
@@ -22,16 +23,19 @@ func OnTransferPlayer_Callback(old_player, new_player):
 	_update_parallax(new_player)
 
 func _update_parallax(obj):
-	return
 	var bounds = Globals.LevelLoaderRef.levelSize
 	var tile_size = Globals.LevelLoaderRef.tileSize
 	var grid_span = bounds * tile_size
 	
 	var default_pos = grid_span / 2.0
 	var player_pos = obj.position
+	if obj.get_child_count() > 0:
+		player_pos = obj.get_child(0).global_position
 	var offset_from_center = player_pos - default_pos
 	var offset_per_pix = Vector2(parallax, parallax) / default_pos
 	var cur_offset = offset_per_pix * offset_from_center
 	self.position = default_pos + cur_offset
 	get_node("Occlusion").position = -cur_offset
 	
+func _process(delta):
+	_update_parallax(Globals.LevelLoaderRef.objByType["player"][0])

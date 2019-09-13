@@ -28,11 +28,11 @@
 [ext_resource path="res://scripts/ParallaxBG.gd" type="Script" id=26]
 [ext_resource path="res://data/shaders/fow_mask.tres" type="Material" id=27]
 [ext_resource path="res://scenes/scanner_fx.tscn" type="PackedScene" id=28]
-[ext_resource path="res://scripts/CamControl.gd" type="Script" id=29]
-[ext_resource path="res://scripts/GUI/mouse_targetting.gd" type="Script" id=30]
-[ext_resource path="res://scenes/tileset_source/targetting_reticle.tscn" type="PackedScene" id=31]
-[ext_resource path="res://scripts/GUI/GUILayoutBase.gd" type="Script" id=32]
-[ext_resource path="res://scripts/GUI/GridDisplay.gd" type="Script" id=33]
+[ext_resource path="res://scripts/GUI/mouse_targetting.gd" type="Script" id=29]
+[ext_resource path="res://scenes/tileset_source/targetting_reticle.tscn" type="PackedScene" id=30]
+[ext_resource path="res://scripts/GUI/GUILayoutBase.gd" type="Script" id=31]
+[ext_resource path="res://scripts/GUI/GridDisplay.gd" type="Script" id=32]
+[ext_resource path="res://scripts/CamControl.gd" type="Script" id=33]
 [ext_resource path="res://scripts/GUI/LogSystem.gd" type="Script" id=34]
 [ext_resource path="res://scenes/GUI/StringContentDialog.tscn" type="PackedScene" id=35]
 [ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=36]
@@ -61,6 +61,7 @@
 [node name="Root" type="Node"]
 
 [node name="Behaviors" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Ambience" type="Node" parent="Behaviors"]
 editor/display_folded = true
@@ -182,30 +183,15 @@ position = Vector2( -10227.7, -10223.2 )
 rotation = 3.14159
 scale = Vector2( 12800, 12800 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 704, 448 )
-current = true
-limit_left = -10000
-limit_top = -10000
-limit_right = 1000000
-limit_bottom = 1000000
-drag_margin_h_enabled = false
-drag_margin_v_enabled = false
-script = ExtResource( 29 )
-smoothing = 2
-fake_divider = 0.5
-real_exp = -5.0
-levelLoaderNode = NodePath("../Behaviors/LevelLoader")
-
 [node name="BackBufferCopy" type="BackBufferCopy" parent="."]
 copy_mode = 2
 
 [node name="OverlayTiles" type="Node" parent="."]
 
 [node name="mouse_targetting" type="Node2D" parent="OverlayTiles"]
-script = ExtResource( 30 )
+script = ExtResource( 29 )
 
-[node name="targetting" parent="OverlayTiles/mouse_targetting" instance=ExtResource( 31 )]
+[node name="targetting" parent="OverlayTiles/mouse_targetting" instance=ExtResource( 30 )]
 
 [node name="AreaOfEffect" type="Node2D" parent="OverlayTiles"]
 position = Vector2( 704, 448 )
@@ -219,14 +205,27 @@ editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-script = ExtResource( 32 )
+script = ExtResource( 31 )
 
 [node name="Display" type="Control" parent="World-GUI/GridPattern"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-script = ExtResource( 33 )
+script = ExtResource( 32 )
 line_color = Color( 1, 0, 0, 0.352941 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 704, 448 )
+current = true
+limit_left = -10000
+limit_top = -10000
+limit_right = 1000000
+limit_bottom = 1000000
+drag_margin_h_enabled = false
+drag_margin_v_enabled = false
+script = ExtResource( 33 )
+follow_smooth = -10.0
+levelLoaderNode = NodePath("../Behaviors/LevelLoader")
 
 [node name="Camera-GUI" type="CanvasLayer" parent="."]
 
@@ -237,7 +236,7 @@ anchor_bottom = 1.0
 margin_right = -1.0
 margin_bottom = -1.0
 mouse_filter = 2
-script = ExtResource( 32 )
+script = ExtResource( 31 )
 Transition = false
 
 [node name="Log" type="Control" parent="Camera-GUI/HUD"]
@@ -259,7 +258,11 @@ margin_top = -205.0
 margin_right = -14.0
 margin_bottom = -15.0
 mouse_filter = 2
+dialog_ok = false
+dialog_cancel = false
 title = "Log Stardate 0.0.0"
+bottom_title = ""
+content = ""
 border_style = "═"
 
 [node name="Buttons" type="Control" parent="Camera-GUI/HUD"]
@@ -278,6 +281,9 @@ rect_min_size = Vector2( 110, 90 )
 mouse_filter = 2
 Text = "[w]eapon"
 ShortcutKey = "w"
+ShortcutEnum = 0
+AlwaysOnShortcut = true
+Disabled = false
 
 [node name="Grab" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 36 )]
 anchor_top = 1.0
@@ -289,6 +295,9 @@ margin_bottom = -329.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[g]rab"
 ShortcutKey = "g"
+ShortcutEnum = 0
+AlwaysOnShortcut = true
+Disabled = false
 
 [node name="Wormhole" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 36 )]
 anchor_left = 1.0
@@ -302,6 +311,9 @@ margin_bottom = -219.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[<]FTL"
 ShortcutKey = "<"
+ShortcutEnum = 0
+AlwaysOnShortcut = true
+Disabled = false
 
 [node name="Inventory" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 36 )]
 anchor_left = 1.0
@@ -315,6 +327,9 @@ margin_bottom = -329.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[i]nv"
 ShortcutKey = "i"
+ShortcutEnum = 0
+AlwaysOnShortcut = true
+Disabled = false
 
 [node name="Converter" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 36 )]
 anchor_left = 1.0
@@ -328,6 +343,9 @@ margin_bottom = -439.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[c]onv"
 ShortcutKey = "c"
+ShortcutEnum = 0
+AlwaysOnShortcut = true
+Disabled = false
 
 [node name="PopupButton" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 37 )]
 anchor_top = 1.0
@@ -348,6 +366,9 @@ margin_right = -84.0
 margin_bottom = -135.0
 Text = "+"
 ShortcutKey = "+"
+ShortcutEnum = 0
+AlwaysOnShortcut = true
+Disabled = false
 
 [node name="ZoomOut" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 36 )]
 anchor_left = 1.0
@@ -360,6 +381,9 @@ margin_right = -9.0
 margin_bottom = -136.0
 Text = "-"
 ShortcutKey = "-"
+ShortcutEnum = 0
+AlwaysOnShortcut = true
+Disabled = false
 
 [node name="Options" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 36 )]
 anchor_left = 1.0
@@ -371,7 +395,10 @@ margin_top = -124.0
 margin_right = -9.0
 margin_bottom = -59.0
 Text = ""
+ShortcutKey = ""
 ShortcutEnum = 16777217
+AlwaysOnShortcut = true
+Disabled = false
 
 [node name="Sprite" type="Sprite" parent="Camera-GUI/HUD/Buttons/Options"]
 position = Vector2( 32, 33 )
@@ -391,6 +418,9 @@ margin_right = -84.0
 margin_bottom = -59.0
 Text = "?"
 ShortcutKey = "?"
+ShortcutEnum = 0
+AlwaysOnShortcut = true
+Disabled = false
 
 [node name="StatusBar" type="Control" parent="Camera-GUI/HUD"]
 editor/display_folded = true
@@ -410,6 +440,9 @@ margin_top = 6.0
 margin_right = -3.0
 margin_bottom = 91.0
 mouse_filter = 2
+dialog_ok = false
+dialog_cancel = false
+title = ""
 bottom_title = "The Maveric"
 content = "Hull : [color=lime]==========[/color] Energy : [color=yellow]25000[/color] Shield : [color=aqua]===============[/color]"
 border_style = "═"
@@ -432,6 +465,12 @@ visible = false
 margin_top = 1.0
 margin_right = -1114.0
 margin_bottom = -601.0
+dialog_ok = false
+dialog_cancel = false
+disabled = false
+bottom_title = ""
+title = ""
+border_style = "═"
 
 [node name="TargettingHUD" parent="Camera-GUI" instance=ExtResource( 42 )]
 visible = false
