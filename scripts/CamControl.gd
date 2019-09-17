@@ -176,9 +176,13 @@ func _process(delta):
 	if delta <= 0:
 		return
 		
+	if not "player" in Globals.LevelLoaderRef.objByType or Globals.LevelLoaderRef.objByType["player"].size() <= 0:
+		return
+		
 	var target : Attributes = levelLoaderRef.objByType["player"][0]
 	if target.get_attrib("animation.in_movement") == true:
 		self.position = target.get_child(0).global_position
+		_last_cam_pos = self.position
 		align() # otherwise the camera viewport is updated one frame behind the position of the player, creating jerkiness
 	#smooth_goto(target, delta)
 		

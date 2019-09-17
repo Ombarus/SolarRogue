@@ -38,4 +38,5 @@ func _update_parallax(obj):
 	get_node("Occlusion").position = -cur_offset
 	
 func _process(delta):
-	_update_parallax(Globals.LevelLoaderRef.objByType["player"][0])
+	if "player" in Globals.LevelLoaderRef.objByType and Globals.LevelLoaderRef.objByType["player"].size() > 0:
+		_update_parallax(Globals.LevelLoaderRef.objByType["player"][0])
