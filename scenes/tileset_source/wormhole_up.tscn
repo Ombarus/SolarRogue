@@ -1,20 +1,141 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=1]
-[ext_resource path="res://data/shaders/swirl_blue.tres" type="Material" id=2]
+[ext_resource path="res://data/textures/visualfx/explosion_test_gb.png" type="Texture" id=1]
 
-[node name="wormhole" type="Node2D"]
-z_index = 7
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
 
-[node name="sprite" type="Sprite" parent="."]
-visible = false
+uniform float strength = 200.0;
+uniform vec4 color_multiplier = vec4(1.0, 1.0, 1.0, 1.0);
+
+vec2 tex_center_in_screen_uv(vec2 tex_uv, vec2 screen_uv, vec2 texture_pixel_size, vec2 screen_pixel_size) {
+	vec2 dist_tex = vec2(0.5, 0.5) - tex_uv;
+	vec2 dist_pixel = dist_tex / texture_pixel_size;
+	vec2 dist_screen = dist_pixel * screen_pixel_size;
+	// Not sure why I need this but it works !
+	dist_screen.y *= -1.0;
+	return screen_uv + dist_screen;
+}
+
+
+
+// WORKS PERFECT SWIRL
+void fragment() {
+	vec2 uv = UV;
+	vec2 screen_uv = SCREEN_UV;
+	vec2 tex_size = TEXTURE_PIXEL_SIZE;
+	vec2 screen_size = SCREEN_PIXEL_SIZE;
+	//vec2 center_tex_screen_uv = vec2(0.5,0.5);
+	vec2 center_tex_screen_uv = tex_center_in_screen_uv(uv, screen_uv, tex_size, screen_size);
+	float aspect = SCREEN_PIXEL_SIZE.y / SCREEN_PIXEL_SIZE.x;
+	
+	vec2 rel = (uv - vec2(0.5, 0.5));
+	float angle = length(rel)*strength;
+	// not required but help for visualization to keep it within 0 and 2pi when debugging
+	angle = fract(angle / (2.0*3.14159265)) * (2.0*3.14159265);
+	
+	mat2 rot = mat2(vec2(cos(angle),-sin(angle)),vec2(sin(angle),cos(angle)));
+	vec2 coord = screen_uv - center_tex_screen_uv;
+    rel = vec2(coord.x * aspect, coord.y) * rot;
+    vec2 final_uv = clamp(vec2((rel.x/aspect) + center_tex_screen_uv.x, rel.y + center_tex_screen_uv.y),vec2(0,0),vec2(1,1));
+	
+	vec4 final_color = textureLod(SCREEN_TEXTURE, final_uv, 0.0);
+	
+	float dist_center = length(uv - vec2(0.5, 0.5));
+	
+	vec2 tex_uv = UV;
+	tex_uv = (tex_uv - vec2(0.5, 0.5)) * rot;
+	tex_uv = clamp(tex_uv + vec2(0.5, 0.5), vec2(0,0), vec2(1,1));
+	vec4 tex_color = textureLod(TEXTURE, tex_uv, 0.0) * 2.0;
+	//tex_color *= color_multiplier;
+	final_color = mix(tex_color, final_color, dist_center*4.0);
+	
+	// black middle hole
+	
+	float mult = -10.0 * dist_center + 6.0;
+	//float mult = -30.0 * dist_center + 16.0;
+	if (dist_center >= 0.2) {
+		mult = clamp(mult, 1.0, 4.0);
+		final_color *= mult;
+	}
+	else {
+		//mult = 200.0 * dist_center - 30.0;
+		mult = 80.0 * dist_center - 12.0;
+		mult = clamp(mult, 0.0, 4.0);
+		final_color *= mult;
+	}
+	
+	final_color *= color_multiplier;
+	
+	// Blend at the corner
+	
+	vec4 normal_color = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0);
+	float mixer = clamp(dist_center*2.0, 0.0, 1.0);
+	final_color = mix(final_color, normal_color, mixer);
+	
+	//COLOR.rgba = vec4(angle / (2.0 * 3.14159265), 0.0, 0.0, 1.0);
+	COLOR.rgba = final_color;
+}
+
+
+
+// WORKS PERFECT SWIRL
+/*
+void fragment() {
+	vec2 uv = UV;
+	vec2 screen_uv = SCREEN_UV;
+	vec2 tex_size = TEXTURE_PIXEL_SIZE;
+	vec2 screen_size = SCREEN_PIXEL_SIZE;
+	//vec2 center_tex_screen_uv = vec2(0.5,0.5);
+	vec2 center_tex_screen_uv = tex_center_in_screen_uv(uv, screen_uv, tex_size, screen_size);
+	float aspect = SCREEN_PIXEL_SIZE.y / SCREEN_PIXEL_SIZE.x;
+	
+	vec2 rel = (uv - vec2(0.5, 0.5));
+	float angle = length(rel)*strength;
+	// not required but help for visualization to keep it within 0 and 2pi when debugging
+	angle = fract(angle / (2.0*3.14159265)) * (2.0*3.14159265);
+	
+	mat2 rot = mat2(vec2(cos(angle),-sin(angle)),vec2(sin(angle),cos(angle)));
+	vec2 coord = screen_uv - center_tex_screen_uv;
+    rel = vec2(coord.x * aspect, coord.y) * rot;
+    vec2 final_uv = clamp(vec2((rel.x/aspect) + center_tex_screen_uv.x, rel.y + center_tex_screen_uv.y),vec2(0,0),vec2(1,1));
+	
+	//COLOR.rgba = vec4(angle / (2.0 * 3.14159265), 0.0, 0.0, 1.0);
+	COLOR.rgba = textureLod(SCREEN_TEXTURE, final_uv, 0.0);
+}
+*/"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/strength = 18.2
+shader_param/color_multiplier = Plane( 0.17, 0.42, 2.28, 1 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "rotating"
+length = 10.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 10 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[node name="Node2D" type="Node2D"]
+
+[node name="fx" type="Sprite" parent="."]
+material = SubResource( 2 )
+scale = Vector2( 5, 5 )
 texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 1920, 128, 128, 128 )
+region_rect = Rect2( 0, 0, 128, 128 )
 
-[node name="swirl" type="Sprite" parent="."]
-material = ExtResource( 2 )
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 1792, 0, 384, 384 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="fx"]
+autoplay = "rotating"
+anims/rotating = SubResource( 3 )
 
