@@ -1,0 +1,108 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://data/textures/tests/cross.png" type="Texture" id=1]
+[ext_resource path="res://data/textures/space/space-bg_mine.png" type="Texture" id=2]
+[ext_resource path="res://data/textures/title.png" type="Texture" id=3]
+[ext_resource path="res://data/textures/tests/plus2048.png" type="Texture" id=4]
+[ext_resource path="res://data/textures/tests/cross128.png" type="Texture" id=5]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float strength = 200.0;
+
+vec2 tex_center_in_screen_uv(vec2 tex_uv, vec2 screen_uv, vec2 texture_pixel_size, vec2 screen_pixel_size) {
+	vec2 dist_tex = vec2(0.5, 0.5) - tex_uv;
+	vec2 dist_pixel = dist_tex / texture_pixel_size;
+	vec2 dist_screen = dist_pixel * screen_pixel_size;
+	// Not sure why I need this but it works !
+	dist_screen.y *= -1.0;
+	return screen_uv + dist_screen;
+}
+
+
+
+// WORKS PERFECT SWIRL
+void fragment() {
+	vec2 uv = UV;
+	vec2 screen_uv = SCREEN_UV;
+	vec2 tex_size = TEXTURE_PIXEL_SIZE;
+	vec2 screen_size = SCREEN_PIXEL_SIZE;
+	//vec2 center_tex_screen_uv = vec2(0.5,0.5);
+	vec2 center_tex_screen_uv = tex_center_in_screen_uv(uv, screen_uv, tex_size, screen_size);
+	float aspect = SCREEN_PIXEL_SIZE.y / SCREEN_PIXEL_SIZE.x;
+	
+	vec2 rel = (uv - vec2(0.5, 0.5));
+	float angle = length(rel)*strength;
+	// not required but help for visualization to keep it within 0 and 2pi when debugging
+	angle = fract(angle / (2.0*3.14159265)) * (2.0*3.14159265);
+	
+	mat2 rot = mat2(vec2(cos(angle),-sin(angle)),vec2(sin(angle),cos(angle)));
+	vec2 coord = screen_uv - center_tex_screen_uv;
+    rel = vec2(coord.x * aspect, coord.y) * rot;
+    vec2 final_uv = clamp(vec2((rel.x/aspect) + center_tex_screen_uv.x, rel.y + center_tex_screen_uv.y),vec2(0,0),vec2(1,1));
+	
+	//COLOR.rgba = vec4(angle / (2.0 * 3.14159265), 0.0, 0.0, 1.0);
+	COLOR.rgba = textureLod(SCREEN_TEXTURE, final_uv, 0.0);
+}
+
+
+
+// WORKS PERFECT SWIRL
+/*
+void fragment() {
+	vec2 uv = UV;
+	vec2 screen_uv = SCREEN_UV;
+	vec2 tex_size = TEXTURE_PIXEL_SIZE;
+	vec2 screen_size = SCREEN_PIXEL_SIZE;
+	//vec2 center_tex_screen_uv = vec2(0.5,0.5);
+	vec2 center_tex_screen_uv = tex_center_in_screen_uv(uv, screen_uv, tex_size, screen_size);
+	float aspect = SCREEN_PIXEL_SIZE.y / SCREEN_PIXEL_SIZE.x;
+	
+	vec2 rel = (uv - vec2(0.5, 0.5));
+	float angle = length(rel)*strength;
+	// not required but help for visualization to keep it within 0 and 2pi when debugging
+	angle = fract(angle / (2.0*3.14159265)) * (2.0*3.14159265);
+	
+	mat2 rot = mat2(vec2(cos(angle),-sin(angle)),vec2(sin(angle),cos(angle)));
+	vec2 coord = screen_uv - center_tex_screen_uv;
+    rel = vec2(coord.x * aspect, coord.y) * rot;
+    vec2 final_uv = clamp(vec2((rel.x/aspect) + center_tex_screen_uv.x, rel.y + center_tex_screen_uv.y),vec2(0,0),vec2(1,1));
+	
+	//COLOR.rgba = vec4(angle / (2.0 * 3.14159265), 0.0, 0.0, 1.0);
+	COLOR.rgba = textureLod(SCREEN_TEXTURE, final_uv, 0.0);
+}
+*/"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/strength = 14.5
+
+[node name="ShaderToy" type="Node2D"]
+
+[node name="cross" type="Sprite" parent="."]
+visible = false
+position = Vector2( 398.7, 361.673 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )
+
+[node name="bg" type="Sprite" parent="."]
+position = Vector2( 1017.9, 1007.15 )
+texture = ExtResource( 2 )
+
+[node name="title" type="Sprite" parent="."]
+visible = false
+position = Vector2( 643.634, 404.922 )
+texture = ExtResource( 3 )
+
+[node name="plus2048" type="Sprite" parent="."]
+visible = false
+position = Vector2( 605.342, 405.875 )
+texture = ExtResource( 4 )
+
+[node name="fx" type="Sprite" parent="."]
+material = SubResource( 2 )
+position = Vector2( 389.874, 459.914 )
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 128, 128 )
+

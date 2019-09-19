@@ -93,12 +93,15 @@ void fragment() {
 	coords = swirl3(coords, center, swirl_radius, swirl_amount);
 	c = textureLod(SCREEN_TEXTURE, coords, 0.0).rgba;
 		
-	if (coords.x < 0.0) {
-		c = center_color;
-	}
+	float d = length(screen_uv - center);
 	
-	float blend_alpha = 0.0;
-	c = vec4(c.r + (c_tex.r*c_tex.a*blend_alpha), c.g + (c_tex.g*c_tex.a*blend_alpha), c.b + (c_tex.b*c_tex.a*0.0), 1.0);
+	c_tex = vec4(100.0*exp(((log(d/10.0)))), 0.0, 0.0, 1.0);
+	//if (coords.x < 0.0) {
+	//	c = center_color;
+	//}
+	
+	float blend_alpha = 1.0;
+	c = vec4(c.r + (c_tex.r*c_tex.a*blend_alpha), c.g + (c_tex.g*c_tex.a*blend_alpha), c.b + (c_tex.b*c_tex.a*blend_alpha), 1.0);
 	
     COLOR.rgba = c;
 	//COLOR.rgb = vec3(r, 0.0, 0.0);
