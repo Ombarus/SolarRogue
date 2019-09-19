@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -55,8 +55,9 @@
 [ext_resource path="res://scenes/GUI/Dialogs/DeathScreen.tscn" type="PackedScene" id=53]
 [ext_resource path="res://scenes/GUI/Dialogs/Description.tscn" type="PackedScene" id=54]
 [ext_resource path="res://scenes/GUI/Debug/APBehaviorDebug.tscn" type="PackedScene" id=55]
-[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=56]
-[ext_resource path="res://scenes/Sample.tscn" type="PackedScene" id=57]
+[ext_resource path="res://scenes/warp_trail_test.tscn" type="PackedScene" id=56]
+[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=57]
+[ext_resource path="res://scenes/Sample.tscn" type="PackedScene" id=58]
 
 [node name="Root" type="Node"]
 
@@ -156,6 +157,7 @@ script = ExtResource( 23 )
 script = ExtResource( 24 )
 
 [node name="BG" type="Sprite" parent="."]
+editor/display_folded = true
 position = Vector2( 5120, 5120 )
 texture = ExtResource( 25 )
 region_enabled = true
@@ -187,6 +189,7 @@ scale = Vector2( 12800, 12800 )
 copy_mode = 2
 
 [node name="OverlayTiles" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="mouse_targetting" type="Node2D" parent="OverlayTiles"]
 script = ExtResource( 29 )
@@ -228,6 +231,7 @@ follow_smooth = -10.0
 levelLoaderNode = NodePath("../Behaviors/LevelLoader")
 
 [node name="Camera-GUI" type="CanvasLayer" parent="."]
+editor/display_folded = true
 
 [node name="HUD" type="Control" parent="Camera-GUI"]
 editor/display_folded = true
@@ -520,11 +524,16 @@ margin_right = -148.0
 margin_bottom = -314.0
 AP_behavior_path = NodePath("../../Behaviors/AP")
 
+[node name="Loading-FX" type="CanvasLayer" parent="."]
+
+[node name="Node2D" parent="Loading-FX" instance=ExtResource( 56 )]
+visible = false
+
 [node name="DEBUG" type="Node2D" parent="."]
 visible = false
-script = ExtResource( 56 )
+script = ExtResource( 57 )
 
-[node name="Sample" parent="." instance=ExtResource( 57 )]
+[node name="Sample" parent="." instance=ExtResource( 58 )]
 visible = false
 
 [connection signal="pressed" from="Camera-GUI/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_ZoomIn_pressed"]
