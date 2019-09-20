@@ -31,7 +31,11 @@ func OnDamageTaken_Callback(target, shooter):
 	UpdateStatusBar(target)
 		
 func OnLevelLoaded_Callback():
-	UpdateStatusBar(Globals.LevelLoaderRef.objByType["player"][0])
+	var p := Globals.get_first_player()
+	if p == null:
+		return
+		
+	UpdateStatusBar(p)
 	var levelinfo = get_node("StatusWindow/levelinfo")
 	var leveldata = Globals.LevelLoaderRef.GetCurrentLevelData()
 	var name = leveldata.display_name

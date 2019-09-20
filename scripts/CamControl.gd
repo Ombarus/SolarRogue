@@ -16,13 +16,14 @@ var _touches_info = {"num_touch_last_frame":0, "radius":0, "total_pan":0}
 var _debug_cur_touch = 0
 
 func _ready():
+	var p = Globals.get_first_player()
 	levelLoaderRef = get_node(levelLoaderNode)
-	var p = levelLoaderRef.objByType["player"][0]
-	self.position = p.position
-	_last_cam_pos = self.position
-	BehaviorEvents.connect("OnMovement", self, "OnMovement_callback")
-	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_callback")
+	BehaviorEvents.connect("OnPlayerCreated", self, "OnPlayerCreated_callback")
 	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_callback")
+	
+	if p != null:
+		self.position = p.position
+		_last_cam_pos = self.position
 
 func _unhandled_input(event):
 	if levelLoaderRef == null:
@@ -58,19 +59,16 @@ func _zoom_camera(dir):
 	zoom.x = clamp(zoom.x, min_zoom, max_zoom)
 	zoom.y = clamp(zoom.y, min_zoom, max_zoom)
 	
-func OnMovement_callback(obj, dir):
-	#if obj.get_attrib("type") == "player":
-	#	self.position = obj.position
-	#	reset_smooth()
-	pass
-		
-func OnLevelLoaded_callback():
+func CenterCam(obj):
+	self.position = obj.position
 	_last_cam_pos = self.position
-	OnMovement_callback(levelLoaderRef.objByType["player"][0], null)
+	reset_smooth()
+		
+func OnPlayerCreated_callback(var player):
+	CenterCam(player)
 	
 func OnTransferPlayer_callback(old_player, new_player):
-	_last_cam_pos = self.position
-	OnMovement_callback(new_player, null)
+	CenterCam(new_player)
 
 func _on_ZoomIn_pressed():
 	_zoom_camera(-1)

@@ -39,6 +39,9 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- ***BUG*** : again autopilot didn't stop when I was getting shot...
+- ***BUG*** : interaction button is late by 1 move
+- ***BUG*** : when changing level camera should teleport
 - New movement (always goto) prevent going on top of something if you can interact with it :/
 - With new movement anim, the log about what is under your ship is delayed ?
 - ***BUG: still issues when switching ship with ultimate scanner... memory is not created, ships turn invisible, etc.

@@ -17,6 +17,11 @@ enum VALID_TARGET {
 	board
 }
 
+func get_first_player() -> Node2D:
+	if "player" in Globals.LevelLoaderRef.objByType and Globals.LevelLoaderRef.objByType["player"].size() > 0:
+		return Globals.LevelLoaderRef.objByType["player"][0]
+	return null
+
 # Copy-pasta from Attribute.gd, but with enough small changes that I'm not sure I want to unify this
 func get_data(obj, path, default=null):
 	if obj == null:

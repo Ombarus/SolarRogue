@@ -4,6 +4,9 @@ extends Node
 export var startLevel = "data/json/levels/start.json"
 export var levelSize = Vector2(80,80)
 export var tileSize = 128
+export(NodePath) var LoadingNode : NodePath
+
+onready var _loading : Node2D = get_node(LoadingNode)
 
 var cur_save = {}
 var perm_save = {}
@@ -103,12 +106,12 @@ func _ready():
 	
 	var data = LoadJSON(startLevel)
 	if data != null:
-		ExecuteLoadLevel(data)
+		yield(ExecuteLoadLevel(data), "completed")
 		
 	
 func ExecuteLoadLevel(levelData):
 	#TODO: Optimize (maybe hide node and unload in a thread or 5-6 per frame)
-	_UnloadLevel()
+	yield(_UnloadLevel(), "completed")
 	
 	var loaded = false
 	if cur_save != null && cur_save.size() > 0:
@@ -117,16 +120,17 @@ func ExecuteLoadLevel(levelData):
 			#startLevel = cur_save.current_level_src
 			#current_depth = cur_save.depth
 			#_sequence_id = cur_save.current_sequence_id
-			GenerateLevelFromSave(levelData, cur_save.modified_levels[level_id])
+			yield(GenerateLevelFromSave(levelData, cur_save.modified_levels[level_id]), "completed")
 			
 			loaded = true
 	
 	if not loaded:
-		GenerateLevelFromTemplate(levelData)
+		yield(GenerateLevelFromTemplate(levelData), "completed")
 					
 	BehaviorEvents.emit_signal("OnLevelLoaded")
 	
 func GenerateLevelFromSave(levelData, savedData):
+	yield(get_tree(), "idle_frame")
 	#output[key] = {}
 	#output[key]["src"] = objById[key].get_attrib("src")
 	#output[key]["position_x"] = World_to_Tile(objById[key].position).x
@@ -134,6 +138,8 @@ func GenerateLevelFromSave(levelData, savedData):
 	#output[key]["modified_attributes"] = objById[key].modified_attributes
 	_current_level_data = levelData
 	var n = null
+	var start_time : int = OS.get_ticks_msec()
+	var cur_time : int = start_time
 	for key in savedData:
 		var data = LoadJSON(savedData[key].src)
 		var coord = Vector2(savedData[key].position_x, savedData[key].position_y)
@@ -141,8 +147,17 @@ func GenerateLevelFromSave(levelData, savedData):
 		if "rotation" in savedData[key]:
 			n.rotation = savedData[key].rotation
 		
+		cur_time = OS.get_ticks_msec()
+		if cur_time - start_time > 33:
+			start_time = cur_time
+			yield(get_tree(), "idle_frame")
+		
 	
 func GenerateLevelFromTemplate(levelData):
+	yield(get_tree(), "idle_frame")
+	var start_time : int = OS.get_ticks_msec()
+	var cur_time : int = start_time
+	
 	num_generated_level += 1
 	
 	# exceptionaly, when on the first level the wormhole to go "back" is a wormhole to current level
@@ -157,6 +172,12 @@ func GenerateLevelFromTemplate(levelData):
 	_current_level_data = levelData
 	
 	for tileCoord in allTilesCoord:
+		
+		cur_time = OS.get_ticks_msec()
+		if cur_time - start_time > 33:
+			start_time = cur_time
+			yield(get_tree(), "idle_frame")
+		
 		for obj in levelData["objects"]:
 			var do_spawn = false
 			if objCountByType.has(obj["name"]) && obj.has("max") && objCountByType[obj["name"]] >= obj["max"]:
@@ -200,6 +221,9 @@ func GenerateLevelFromTemplate(levelData):
 					break
 
 func _GatherSaveData():
+	yield(get_tree(), "idle_frame")
+	var start_time : int = OS.get_ticks_msec()
+	var cur_time : int = start_time
 	var output = {}
 	for key in objById:
 		if objById[key] == null or objById[key].get_attrib("type") == "player":
@@ -212,18 +236,31 @@ func _GatherSaveData():
 			output[key]["rotation"] = objById[key].rotation
 		output[key]["modified_attributes"] = objById[key].modified_attributes
 		
+		cur_time = OS.get_ticks_msec()
+		if cur_time - start_time > 33:
+			start_time = cur_time
+			yield(get_tree(), "idle_frame")
+		
 	return output
 	
 func _UnloadLevel():
+	yield(get_tree(), "idle_frame")
+	var start_time : int = OS.get_ticks_msec()
+	var cur_time : int = start_time
 	for key in objById:
 		if objById[key] != null:
 			BehaviorEvents.emit_signal("OnRequestObjectUnload", objById[key])
+		
+		cur_time = OS.get_ticks_msec()
+		if cur_time - start_time > 33:
+			start_time = cur_time
+			yield(get_tree(), "idle_frame")
 		
 	objById.clear()
 	objCountByType.clear()
 
 func SaveState(level_data):
-	var data_to_save = _GatherSaveData()
+	var data_to_save : Dictionary = yield(_GatherSaveData(), "completed")
 	cur_save["depth"] = current_depth
 	cur_save["current_sequence_id"] = _sequence_id
 	cur_save["current_level_src"] = _current_level_data["src"]
@@ -261,10 +298,12 @@ func OnAnimationDone_Callback():
 	_wait_for_anim = false
 
 func OnRequestLevelChange_Callback(wormhole):
-	SaveState(_current_level_data)
+	set_loading(true)
+	yield(SaveState(_current_level_data), "completed")
 	# should be defferred !
 	current_depth = wormhole.modified_attributes["depth"]
-	ExecuteLoadLevel(wormhole.base_attributes)
+	yield(ExecuteLoadLevel(wormhole.base_attributes), "completed")
+	set_loading(false)
 
 func OnRequestObjectUnload_Callback(obj):
 	var coord = World_to_Tile(obj.position)
@@ -410,7 +449,10 @@ func UpdatePosition(obj, newPos):
 		obj.position = newPos
 		BehaviorEvents.emit_signal("OnPositionUpdated", obj)
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func set_loading(var is_loading : bool):
+	if _loading == null:
+		return
+		
+	get_node("../../BG").visible = !is_loading
+	get_node("../../GameTiles").visible = !is_loading
+	_loading.visible = is_loading

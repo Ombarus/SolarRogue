@@ -17,6 +17,9 @@ func OnMovement_Callback(obj, dir):
 	pass
 		
 func OnLevelLoaded_Callback():
+	var player := Globals.get_first_player()
+	if player == null:
+		return
 	_update_parallax(Globals.LevelLoaderRef.objByType["player"][0])
 	
 func OnTransferPlayer_Callback(old_player, new_player):

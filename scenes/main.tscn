@@ -62,7 +62,6 @@
 [node name="Root" type="Node"]
 
 [node name="Behaviors" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Ambience" type="Node" parent="Behaviors"]
 editor/display_folded = true
@@ -132,6 +131,7 @@ script = ExtResource( 16 )
 
 [node name="LevelLoader" type="Node" parent="Behaviors"]
 script = ExtResource( 17 )
+LoadingNode = NodePath("../../Loading-FX/Starfield")
 
 [node name="Movement" type="Node" parent="Behaviors"]
 script = ExtResource( 18 )
@@ -199,7 +199,7 @@ script = ExtResource( 29 )
 [node name="AreaOfEffect" type="Node2D" parent="OverlayTiles"]
 position = Vector2( 704, 448 )
 
-[node name="GameTiles" type="Node" parent="."]
+[node name="GameTiles" type="Node2D" parent="."]
 
 [node name="World-GUI" type="Node" parent="."]
 editor/display_folded = true
@@ -231,7 +231,6 @@ follow_smooth = -10.0
 levelLoaderNode = NodePath("../Behaviors/LevelLoader")
 
 [node name="Camera-GUI" type="CanvasLayer" parent="."]
-editor/display_folded = true
 
 [node name="HUD" type="Control" parent="Camera-GUI"]
 editor/display_folded = true
@@ -526,7 +525,7 @@ AP_behavior_path = NodePath("../../Behaviors/AP")
 
 [node name="Loading-FX" type="CanvasLayer" parent="."]
 
-[node name="Node2D" parent="Loading-FX" instance=ExtResource( 56 )]
+[node name="Starfield" parent="Loading-FX" instance=ExtResource( 56 )]
 visible = false
 
 [node name="DEBUG" type="Node2D" parent="."]

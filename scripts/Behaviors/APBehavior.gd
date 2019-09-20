@@ -164,7 +164,7 @@ func Insert(obj, action_point):
 	
 	
 func _process(delta):
-	if _waiting_on_anim == true or _need_sort == false:
+	if _waiting_on_anim == true or _need_sort == false or action_list.size() <= 0:
 		return
 		
 	var max_obj_per_turn = 60
