@@ -700,4 +700,5 @@ anims/move_diag_1-1 = SubResource( 14 )
 anims/move_diag_10 = SubResource( 15 )
 anims/move_diag_11 = SubResource( 16 )
 script = ExtResource( 1 )
+animation_scale = 2.2
 

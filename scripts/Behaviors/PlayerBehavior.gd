@@ -263,6 +263,9 @@ func OnRequestObjectUnload_Callback(obj):
 func OnObjTurn_Callback(obj):
 	var is_player : bool = obj.get_attrib("type") == "player"
 	
+	if obj.get_attrib("animation.waiting_moving") == true:
+		return
+	
 	# other stuff can happen when moving one block but we have to finish playing the anim
 	# before we go again
 	if is_player and obj.get_attrib("animation.in_movement") == true and obj.get_attrib("animation.waiting_moving") != true:

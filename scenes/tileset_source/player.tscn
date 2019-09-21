@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=1]
 [ext_resource path="res://data/textures/space-sprite_normal.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://data/sounds/sfx/ships/move2.wav" type="AudioStream" id=4]
 [ext_resource path="res://data/sounds/sfx/ships/move3.wav" type="AudioStream" id=5]
 [ext_resource path="res://data/sounds/music/enginehum3-openstreetart-cc3-kurt.ogg" type="AudioStream" id=6]
+[ext_resource path="res://scenes/Animations/ShipAnimations2.tscn" type="PackedScene" id=7]
 
 [node name="player" type="Sprite"]
 z_index = 999
@@ -38,4 +39,6 @@ bus = "Sfx"
 stream = ExtResource( 6 )
 max_distance = 100.0
 attenuation = 1.68179
+
+[node name="MovementAnimations" parent="." instance=ExtResource( 7 )]
 

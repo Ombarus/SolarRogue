@@ -153,7 +153,7 @@ func _update_scanned_obj(obj, scanner_data):
 				scanned_tiles.push_back(tile)
 				obj_in_tile = Globals.LevelLoaderRef.GetTile(tile)
 				for o in obj_in_tile:
-					if o == obj or o.get_attrib("ghost_memory") != null:
+					if o == obj:
 						continue
 					cur_in_range.push_back(o.get_attrib("unique_id"))
 			if offset.x != 0:
@@ -165,7 +165,7 @@ func _update_scanned_obj(obj, scanner_data):
 					scanned_tiles.push_back(tile)
 					obj_in_tile = Globals.LevelLoaderRef.GetTile(tile)
 					for o in obj_in_tile:
-						if o == obj or o.get_attrib("ghost_memory") != null:
+						if o == obj:
 							continue
 						cur_in_range.push_back(o.get_attrib("unique_id"))
 			if offset.y != 0:
@@ -177,7 +177,7 @@ func _update_scanned_obj(obj, scanner_data):
 					scanned_tiles.push_back(tile)
 					obj_in_tile = Globals.LevelLoaderRef.GetTile(tile)
 					for o in obj_in_tile:
-						if o == obj or o.get_attrib("ghost_memory") != null:
+						if o == obj:
 							continue
 						cur_in_range.push_back(o.get_attrib("unique_id"))
 			if offset.x != 0:
@@ -189,7 +189,7 @@ func _update_scanned_obj(obj, scanner_data):
 					scanned_tiles.push_back(tile)
 					obj_in_tile = Globals.LevelLoaderRef.GetTile(tile)
 					for o in obj_in_tile:
-						if o == obj or o.get_attrib("ghost_memory") != null:
+						if o == obj:
 							continue
 						cur_in_range.push_back(o.get_attrib("unique_id"))
 			offset.y *= -1
@@ -219,7 +219,9 @@ func _update_scanned_obj(obj, scanner_data):
 				new_in_range.push_back(id)
 		for id in old_range:
 			if not id in cur_in_range:
-				new_out_of_range.push_back(id)
+				# Object (like a ship) could have been deleted
+				if Globals.LevelLoaderRef.GetObjectById(id) != null:
+					new_out_of_range.push_back(id)
 				
 	var unkown_objects = []
 	var partial_type = Globals.get_data(scanner_data, "scanning.partial_reveal_type", [])

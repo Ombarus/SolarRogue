@@ -1,7 +1,10 @@
 extends AnimationPlayer
 
+export(float) var animation_scale := 1.0
+
 func _ready():
 	BehaviorEvents.connect("OnMovement", self, "OnMovement_Callback")
+	self.playback_speed = animation_scale
 	
 func normalize_deg(var deg : float) -> float:
 	var turns := deg / 180.0
@@ -62,4 +65,5 @@ func OnAnimDone_Callback(var turn_deg : float):
 	root.set_attrib("animation.in_movement", false)
 	BehaviorEvents.emit_signal("OnPositionUpdated", root)
 	if root.get_attrib("animation.waiting_moving") == true:
+		root.set_attrib("animation.waiting_moving", false)
 		BehaviorEvents.emit_signal("OnAnimationDone")
