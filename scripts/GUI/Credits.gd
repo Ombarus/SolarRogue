@@ -5,9 +5,10 @@ func _ready():
 	
 	
 func Ok_Callback():
+	get_node("base").disabled = true
 	BehaviorEvents.emit_signal("OnPopGUI")
 		
 	
 func Init(init_param):
-	pass
+	get_node("base").disabled = false
 	

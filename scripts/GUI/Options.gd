@@ -6,11 +6,12 @@ func _ready():
 	
 		
 func Init(init_param):
-	pass
+	get_node("base").disabled = false
 	
 
 func Ok_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
+	get_node("base").disabled = true
 
 func _on_Save_pressed():
 	Globals.LevelLoaderRef.SaveState(Globals.LevelLoaderRef.GetCurrentLevelData())

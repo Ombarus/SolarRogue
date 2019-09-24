@@ -72,7 +72,6 @@ stream = ExtResource( 2 )
 bus = "Music"
 
 [node name="UIManager" type="Node" parent="Behaviors"]
-editor/display_folded = true
 script = ExtResource( 3 )
 animator = NodePath("PopingAnimator")
 
@@ -468,12 +467,6 @@ visible = false
 margin_top = 1.0
 margin_right = -1114.0
 margin_bottom = -601.0
-dialog_ok = false
-dialog_cancel = false
-disabled = false
-bottom_title = ""
-title = ""
-border_style = "═"
 
 [node name="TargettingHUD" parent="Camera-GUI" instance=ExtResource( 42 )]
 visible = false

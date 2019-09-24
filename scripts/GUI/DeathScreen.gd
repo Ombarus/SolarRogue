@@ -9,10 +9,12 @@ func _ready():
 	
 func Ok_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
+	get_node("base").disabled = true
 	_callback_obj.call(_callback_method)
 	
 	
 func Init(init_param):
+	get_node("base").disabled = false
 	var text = init_param["text"]
 	_callback_obj = init_param["callback_object"]
 	_callback_method = init_param["callback_method"]

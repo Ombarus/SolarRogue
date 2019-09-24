@@ -58,6 +58,7 @@ func Cancel_Callback():
 	
 func Ok_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
+	get_node("base").disabled = true
 	
 	# reset content or we might end up with dangling references
 	_my_ship_list.Content = []
@@ -237,6 +238,7 @@ func Init(init_param):
 	ReInit()
 	
 func ReInit():
+	get_node("base").disabled = false
 	_lobj.init_cargo()
 	_lobj.init_mounts()
 	_robj.init_cargo()

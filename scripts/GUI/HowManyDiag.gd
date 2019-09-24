@@ -12,6 +12,7 @@ func _ready():
 
 func Ok_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
+	get_node("base").disabled = true # prevent multi-click that would pop unwanted GUI
 	
 	if _callback_obj == null:
 		return
@@ -21,8 +22,10 @@ func Ok_Callback():
 	
 func Cancel_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
+	get_node("base").disabled = true
 	
 func Init(init_param):
+	get_node("base").disabled = false
 	_callback_obj = init_param["callback_object"]
 	_callback_method = init_param["callback_method"]
 	

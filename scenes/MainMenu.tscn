@@ -144,12 +144,6 @@ margin_left = -735.0
 margin_top = 32.0
 margin_right = -34.0
 margin_bottom = -27.0
-dialog_ok = false
-dialog_cancel = false
-disabled = false
-bottom_title = ""
-title = ""
-border_style = "═"
 
 [node name="Leaderboard" type="Control" parent="MenuRoot/base"]
 anchor_right = 1.0

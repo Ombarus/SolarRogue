@@ -38,7 +38,9 @@ func ConsiderInterests(obj):
 	if moved != null and moved == true:
 		for id in new_objs:
 			var o : Node2D = Globals.LevelLoaderRef.GetObjectById(id)
-			if o != null and Globals.is_(o.get_attrib("ai.aggressive"), true):
+			if o == null:
+				continue
+			if Globals.is_(o.get_attrib("ai.aggressive"), true):
 				if is_player == true:
 					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Ennemy ship entered scanner range ![/color]")
 				filtered.push_back(id)
@@ -47,7 +49,7 @@ func ConsiderInterests(obj):
 			var detected : bool = o.get_attrib("type") != "anomaly"
 			if id in known_anomalies:
 				detected = known_anomalies[id]
-			if o != null and o.get_attrib("ghost_memory") == null and o.get_attrib("has_ghost_memory") == null and detected == true:
+			if o.get_attrib("ghost_memory") == null and o.get_attrib("has_ghost_memory") == null and detected == true:
 				if is_player == true:
 					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Scanners have picked up a new " + o.get_attrib("type") + "[/color]")
 				filtered.push_back(id)

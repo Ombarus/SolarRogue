@@ -41,7 +41,6 @@ ROAD TO ALPHA :::
 TODO :::
 - ***BUG*** : again autopilot didn't stop when I was getting shot...
 - New movement (always goto) prevent going on top of something if you can interact with it :/
-- With new movement anim, the log about what is under your ship is delayed ?
 - ***BUG: still issues when switching ship with ultimate scanner... memory is not created, ships turn invisible, etc.
 - ***BUG: if disabled is in the base_attributes we cannot override it in modified_attributes !***
 - PERF: optimize lists. Seems like if you have 20-30 items in the transfer window there can be quite a delay to load and/or update the list
@@ -225,6 +224,7 @@ IDEAS:::
 	
 	
 DONE ::: 
+- With new movement anim, the log about what is under your ship is delayed ?
 - ***BUG*** : when changing level camera should teleport
 - ***BUG*** : interaction button is late by 1 move
 - New camera tapping on the screen moves the camera weirdly

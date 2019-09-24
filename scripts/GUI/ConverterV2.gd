@@ -71,6 +71,7 @@ func CraftButtonPressed_Callback():
 
 func Close_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
+	get_node("HBoxContainer/Control/VBoxContainer/Close").Disabled = true
 	
 	_recipe_list.Content = []
 	_material_list.Content = []
@@ -87,6 +88,7 @@ func OnFocusLost():
 
 
 func Init(init_param):
+	get_node("HBoxContainer/Control/VBoxContainer/Close").Disabled = false
 	_obj = init_param["object"]
 	_callback_obj = init_param["callback_object"]
 	_callback_method = init_param["callback_method"]

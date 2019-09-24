@@ -6,9 +6,11 @@ func _ready():
 	
 func Ok_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
+	get_node("base").disabled = true
 		
 	
 func Init(init_param):
+	get_node("base").disabled = false
 	var player_name = init_param["player_name"]
 	get_node("base").title = "Welcome %s..." % player_name
 	

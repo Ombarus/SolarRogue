@@ -10,6 +10,7 @@ func _ready():
 	
 func Cancel_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
+	get_node("base").disabled = true
 	
 	# reset content or we might end up with dangling references
 	get_node("base/TargetList").Content = []
@@ -24,11 +25,13 @@ func SelectionChanged_Callback():
 			selected_targets.push_back(data.key)
 	if selected_targets.size() > 0:
 		BehaviorEvents.emit_signal("OnPopGUI")
+		get_node("base").disabled = true
 		_callback_obj.call(_callback_method, selected_targets)
 		# reset content or we might end up with dangling references
 		get_node("base/TargetList").Content = []
 	
 func Init(init_param):
+	get_node("base").disabled = false
 	var targets = init_param["targets"]
 	_callback_obj = init_param["callback_object"]
 	_callback_method = init_param["callback_method"]

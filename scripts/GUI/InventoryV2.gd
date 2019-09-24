@@ -178,6 +178,9 @@ func Use_Callback():
 	
 func Close_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
+	get_node("HBoxContainer/Mounts").disabled = true
+	get_node("HBoxContainer/Cargo").disabled = true
+	get_node("HBoxContainer/Control/Normal/Close").Disabled = true
 	
 	var c = _cargo_list.Content
 	
@@ -187,6 +190,10 @@ func Close_Callback():
 	
 	
 func Init(init_param):
+	get_node("HBoxContainer/Mounts").disabled = false
+	get_node("HBoxContainer/Cargo").disabled = false
+	get_node("HBoxContainer/Control/Normal/Close").Disabled = false
+	
 	_normal_btns.visible = true
 	_mounting_btns.visible = false
 	get_node("HBoxContainer/Mounts").title = "Ship's Mounts"

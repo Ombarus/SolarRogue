@@ -97,7 +97,9 @@ func update_visual():
 	if has_node(node_to_show) == true:
 		get_node(node_to_show).visible = true
 	get_node("Btn/Ok").visible = dialog_ok
+	get_node("Btn/Ok").disabled = disabled
 	get_node("Btn/Cancel").visible = dialog_cancel
+	get_node("Btn/Cancel").disabled = disabled
 	get_node("TitleUp").bbcode_text = title
 	get_node("TitleBottom").text = bottom_title
 	

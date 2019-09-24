@@ -11,9 +11,11 @@ func _ready():
 	
 func Ok_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
+	get_node("base").disabled = true
 		
 	
 func Init(init_param):
+	get_node("base").disabled = false
 	var scanner_level : int = init_param["scanner_level"]
 	
 	if "obj" in init_param and init_param.obj != null:
