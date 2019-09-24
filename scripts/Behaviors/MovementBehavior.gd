@@ -46,6 +46,8 @@ func OnMovement_callback(obj, dir):
 	var newPos = obj.position + levelLoaderRef.Tile_to_World(dir)
 	levelLoaderRef.UpdatePosition(obj, newPos)
 	
+	BehaviorEvents.emit_signal("OnMovementValidated", obj, dir)
+	
 	var has_movement_anim : bool = obj.find_node("MovementAnimations", true, false) != null
 	if not has_movement_anim:
 		var angle = Vector2(0.0, 0.0).angle_to_point(dir) - deg2rad(90.0)

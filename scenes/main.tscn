@@ -72,6 +72,7 @@ stream = ExtResource( 2 )
 bus = "Music"
 
 [node name="UIManager" type="Node" parent="Behaviors"]
+editor/display_folded = true
 script = ExtResource( 3 )
 animator = NodePath("PopingAnimator")
 
@@ -174,12 +175,14 @@ position = Vector2( 5120, 5120 )
 
 [node name="Upper-Left-Bound" type="Node2D" parent="."]
 editor/display_folded = true
+visible = false
 
 [node name="L1" type="Line2D" parent="Upper-Left-Bound"]
 default_color = Color( 1, 1, 1, 1 )
 texture_mode = 1712250185
 
 [node name="Lower-Right_Bound" type="Node2D" parent="."]
+visible = false
 position = Vector2( -10227.7, -10223.2 )
 rotation = 3.14159
 scale = Vector2( 12800, 12800 )

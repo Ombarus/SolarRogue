@@ -3,7 +3,7 @@ extends AnimationPlayer
 export(float) var animation_scale := 1.0
 
 func _ready():
-	BehaviorEvents.connect("OnMovement", self, "OnMovement_Callback")
+	BehaviorEvents.connect("OnMovementValidated", self, "OnMovement_Callback")
 	self.playback_speed = animation_scale
 	
 func normalize_deg(var deg : float) -> float:

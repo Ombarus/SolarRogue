@@ -69,7 +69,6 @@ func _ready():
 	bound_line.add_point(Vector2(-tileSize/2, levelSize.y * tileSize - tileSize/2.0))
 	bound_line.add_point(Vector2(-tileSize/2, -tileSize/2))
 	
-	#TODO: use my own randomizer
 	# Seems to be working fine. Distribution is pretty flat over huge number of throws.
 	# Average is good
 	# Saving and restoring state seems to work
@@ -110,7 +109,6 @@ func _ready():
 		
 	
 func ExecuteLoadLevel(levelData):
-	#TODO: Optimize (maybe hide node and unload in a thread or 5-6 per frame)
 	yield(_UnloadLevel(), "completed")
 	
 	var loaded = false
@@ -308,6 +306,8 @@ func OnRequestLevelChange_Callback(wormhole):
 func OnRequestObjectUnload_Callback(obj):
 	var coord = World_to_Tile(obj.position)
 	var content = levelTiles[coord.x][coord.y]
+	if content.find(obj) == -1:
+		print("COULD NOT FIND " + obj.get_attrib("src") + " AT TILE (" + str(coord.x) + ", " + str(coord.y) + "), obj is at world (" + str(obj.position) + ")")
 	content.erase(obj)
 	
 	#TODO: Proper Counting, Type in this case is the json filename which I'm not sure I have access here
@@ -455,4 +455,5 @@ func set_loading(var is_loading : bool):
 		
 	get_node("../../BG").visible = !is_loading
 	get_node("../../GameTiles").visible = !is_loading
+	get_node("../../base_green").visible = !is_loading
 	_loading.visible = is_loading

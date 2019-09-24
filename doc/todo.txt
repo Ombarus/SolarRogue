@@ -39,6 +39,8 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- ****BUG*** : clicking outside the world (but on the ship) sends the ship in random location
+- Craft button should be grayed if not enough energy (right now does nothing when clicked)
 - ***BUG*** : again autopilot didn't stop when I was getting shot...
 - New movement (always goto) prevent going on top of something if you can interact with it :/
 - ***BUG: still issues when switching ship with ultimate scanner... memory is not created, ships turn invisible, etc.

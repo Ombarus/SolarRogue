@@ -7,7 +7,7 @@ var _node : Node = null
 func _ready():
 	if forward_to != null:
 		_node = get_node(forward_to)
-	._ready()
+	#._ready()
 
 func get_drag_data(position):
 	if _node == null:

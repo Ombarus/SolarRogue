@@ -1,0 +1,12 @@
+- crashes :
+
+	- ScannerBehavior.gd:158, get_attrib on a null instance
+		- GetTile returned an array with 3 objects, one null
+		
+		
+	- AnomalyBehavior.gd:40 emit_signal("OnTriggerAnomaly")
+		- obj is not a valid object (was destroyed, is null)
+			- couldn't see any var in debugger
+	= ScannerBehavior.gd:26, anomaly is null
+		- lot of null obj in _cached_anomalies in AnomalyBehavior.gd
+		---- FIXED ? probably needed to reset the anomaly cache on level change

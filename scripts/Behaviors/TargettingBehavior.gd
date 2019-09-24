@@ -20,7 +20,7 @@ func _ready():
 	
 func skip_pressed_Callback():
 	ClearOverlay()
-	_callback_obj.call(_callback_method, null)
+	_callback_obj.call(_callback_method, null, null)
 	
 func ClearOverlay():
 	var overlay_nodes = get_tree().get_nodes_in_group("overlay")

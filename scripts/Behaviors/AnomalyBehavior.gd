@@ -9,6 +9,7 @@ func _ready():
 	
 	
 func OnLevelLoaded_Callback():
+	_cached_anomalies = {} # reset anomaly cache
 	if not "anomaly" in Globals.LevelLoaderRef.objByType:
 		return
 	var anomalies : Array = Globals.LevelLoaderRef.objByType["anomaly"]
