@@ -14,7 +14,7 @@ func normalize_deg(var deg : float) -> float:
 
 func OnMovement_Callback(obj, dir):
 	var root : Node2D = get_node("../..")
-	if obj != root:
+	if obj != root or obj.get_attrib("ghost_memory") != null:
 		return
 	
 	#convert dir into local dir (consider current rotation of ship)

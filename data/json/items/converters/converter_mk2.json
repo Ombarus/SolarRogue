@@ -85,13 +85,6 @@
 				"amount":1
 			},
 			{
-				"name": "Missile", 
-				"requirements":[{"type":"energy", "amount":500}], 
-				"produce":"data/json/items/weapons/missile.json",
-				"ap_cost":0.5,
-				"amount":1
-			},
-			{
 				"name": "Solar Array", 
 				"requirements":[{"type":"energy", "amount":2000}, {"type":"utility", "amount":2}], 
 				"produce":"data/json/items/utilities/solar_array.json",

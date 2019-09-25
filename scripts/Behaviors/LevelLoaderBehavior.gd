@@ -105,7 +105,9 @@ func _ready():
 	
 	var data = LoadJSON(startLevel)
 	if data != null:
+		set_loading(true)
 		yield(ExecuteLoadLevel(data), "completed")
+		set_loading(false)
 		
 	
 func ExecuteLoadLevel(levelData):
@@ -126,6 +128,7 @@ func ExecuteLoadLevel(levelData):
 		yield(GenerateLevelFromTemplate(levelData), "completed")
 					
 	BehaviorEvents.emit_signal("OnLevelLoaded")
+	
 	
 func GenerateLevelFromSave(levelData, savedData):
 	yield(get_tree(), "idle_frame")
@@ -307,7 +310,8 @@ func OnRequestObjectUnload_Callback(obj):
 	var coord = World_to_Tile(obj.position)
 	var content = levelTiles[coord.x][coord.y]
 	if content.find(obj) == -1:
-		print("COULD NOT FIND " + obj.get_attrib("src") + " AT TILE (" + str(coord.x) + ", " + str(coord.y) + "), obj is at world (" + str(obj.position) + ")")
+		print("COULD NOT FIND " + str(obj) + " AT TILE (" + str(coord.x) + ", " + str(coord.y) + "), obj is at world (" + str(obj.position) + ")")
+
 	content.erase(obj)
 	
 	#TODO: Proper Counting, Type in this case is the json filename which I'm not sure I have access here
@@ -445,14 +449,20 @@ func UpdatePosition(obj, newPos):
 	levelTiles[new_tile.x][new_tile.y].push_back(obj)
 	
 	var has_movement_anim : bool = obj.find_node("MovementAnimations", true, false) != null
+	# ghost are not moved with animation because they teleport when scanner update
+	has_movement_anim = has_movement_anim and obj.get_attrib("ghost_memory") == null
 	if not has_movement_anim:
 		obj.position = newPos
 		BehaviorEvents.emit_signal("OnPositionUpdated", obj)
 
 func set_loading(var is_loading : bool):
+	if is_loading == true:
+		get_node("../AP").OnWaitForAnimation_Callback()
+	if is_loading == false:
+		get_node("../AP").OnAnimationDone_Callback()
+	
 	if _loading == null:
-		return
-		
+		return	
 	get_node("../../BG").visible = !is_loading
 	get_node("../../GameTiles").visible = !is_loading
 	get_node("../../base_green").visible = !is_loading

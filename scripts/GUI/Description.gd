@@ -18,6 +18,8 @@ func Init(init_param):
 	get_node("base").disabled = false
 	var scanner_level : int = init_param["scanner_level"]
 	
+	_obj = null
+	_json = {}
 	if "obj" in init_param and init_param.obj != null:
 		_obj = init_param["obj"]
 	if "json" in init_param and init_param.json != null:

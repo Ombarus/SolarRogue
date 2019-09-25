@@ -39,6 +39,12 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- if wormhole.base_attributes != Globals.LevelLoaderRef.GetCurrentLevelData(): doesn't work ! I'm never going home T_T
+- can't craft solar array because require 2 utility but they don't stack
+- doing a transfer all I lost one of two equiped solar array !
+- drag-drop item from inventory to ground drop all amplifier in one shot ?
+- ? when transfering cargo from hull relic gives description of hull instead of selected item
+- Diluted crystal icon is pretty small
 - ****BUG*** : clicking outside the world (but on the ship) sends the ship in random location
 - Craft button should be grayed if not enough energy (right now does nothing when clicked)
 - ***BUG*** : again autopilot didn't stop when I was getting shot...
