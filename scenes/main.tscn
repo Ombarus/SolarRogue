@@ -286,9 +286,6 @@ rect_min_size = Vector2( 110, 90 )
 mouse_filter = 2
 Text = "[w]eapon"
 ShortcutKey = "w"
-ShortcutEnum = 0
-AlwaysOnShortcut = true
-Disabled = false
 
 [node name="Grab" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 36 )]
 anchor_top = 1.0
@@ -300,9 +297,6 @@ margin_bottom = -329.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[g]rab"
 ShortcutKey = "g"
-ShortcutEnum = 0
-AlwaysOnShortcut = true
-Disabled = false
 
 [node name="Wormhole" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 36 )]
 anchor_left = 1.0
@@ -316,9 +310,6 @@ margin_bottom = -219.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[<]FTL"
 ShortcutKey = "<"
-ShortcutEnum = 0
-AlwaysOnShortcut = true
-Disabled = false
 
 [node name="Inventory" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 36 )]
 anchor_left = 1.0
@@ -332,9 +323,6 @@ margin_bottom = -329.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[i]nv"
 ShortcutKey = "i"
-ShortcutEnum = 0
-AlwaysOnShortcut = true
-Disabled = false
 
 [node name="Converter" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 36 )]
 anchor_left = 1.0
@@ -348,9 +336,6 @@ margin_bottom = -439.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[c]onv"
 ShortcutKey = "c"
-ShortcutEnum = 0
-AlwaysOnShortcut = true
-Disabled = false
 
 [node name="PopupButton" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 37 )]
 anchor_top = 1.0
@@ -371,9 +356,6 @@ margin_right = -84.0
 margin_bottom = -135.0
 Text = "+"
 ShortcutKey = "+"
-ShortcutEnum = 0
-AlwaysOnShortcut = true
-Disabled = false
 
 [node name="ZoomOut" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 36 )]
 anchor_left = 1.0
@@ -386,9 +368,6 @@ margin_right = -9.0
 margin_bottom = -136.0
 Text = "-"
 ShortcutKey = "-"
-ShortcutEnum = 0
-AlwaysOnShortcut = true
-Disabled = false
 
 [node name="Options" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 36 )]
 anchor_left = 1.0
@@ -400,10 +379,7 @@ margin_top = -124.0
 margin_right = -9.0
 margin_bottom = -59.0
 Text = ""
-ShortcutKey = ""
 ShortcutEnum = 16777217
-AlwaysOnShortcut = true
-Disabled = false
 
 [node name="Sprite" type="Sprite" parent="Camera-GUI/HUD/Buttons/Options"]
 position = Vector2( 32, 33 )
@@ -423,9 +399,6 @@ margin_right = -84.0
 margin_bottom = -59.0
 Text = "?"
 ShortcutKey = "?"
-ShortcutEnum = 0
-AlwaysOnShortcut = true
-Disabled = false
 
 [node name="StatusBar" type="Control" parent="Camera-GUI/HUD"]
 editor/display_folded = true

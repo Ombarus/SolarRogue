@@ -208,6 +208,7 @@ func TransferAll(from, to, from_list, to_list):
 			for to_item in to_content:
 				if "src" in to_item and "key" in to_item and (to_item.src == null or to_item.src == "") and to_item.key == item.key:
 					BehaviorEvents.emit_signal("OnEquipMount", to, to_item.key, to_item.idx, item.src)
+					to_item.src = item.src # to signal the rest of the loop that this slot is now occupied before the actual refresh in reinit()
 					added = true
 					break
 				index += 1

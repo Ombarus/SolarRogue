@@ -6,7 +6,7 @@
 	"boardable":true,
 	"mounts": {
 		"weapon": [
-			"data/json/items/weapons/laser_turret_mk2.json",
+			"data/json/items/weapons/laser_turret_mk1.json",
 			"data/json/items/weapons/laser_turret_mk1.json"
 		],
 		"shield": ["data/json/items/shields/shield_mk2.json"],
@@ -32,7 +32,7 @@
 		"transferable":true,
 		"content":[
 			{"src":"data/json/items/consumables/repair_nanobots.json", "count":1},
-			{"src":"data/json/items/misc/scout_body.json", "count":1},
+			{"src":"data/json/items/misc/frigate_body.json", "count":1},
 			{"src":"data/json/items/shields/shield_mk1.json", "count":1},
 			{"src":"data/json/items/misc/hydrogen.json", "count":6},
 			{"src":"data/json/items/misc/uranium.json", "count":3}

@@ -39,9 +39,9 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- if wormhole.base_attributes != Globals.LevelLoaderRef.GetCurrentLevelData(): doesn't work ! I'm never going home T_T
+- order categories in inventory/transfer (weapon, shield, scanner, converter, utility, cargo ?)
+- ****BUG*** rare crash when drag-dropping stuff from inventory to ground where it tries to pickup the item we're currently dropping and it hasn't been added to world yet so it crash in get_parent()
 - can't craft solar array because require 2 utility but they don't stack
-- doing a transfer all I lost one of two equiped solar array !
 - drag-drop item from inventory to ground drop all amplifier in one shot ?
 - ? when transfering cargo from hull relic gives description of hull instead of selected item
 - Diluted crystal icon is pretty small
@@ -231,7 +231,9 @@ IDEAS:::
 - If you try to produce energy over the maximum of the ship capacity there is a chance you "choke" (engine goes critical and blow up)
 	
 	
-DONE ::: 
+DONE :::
+- doing a transfer all I lost one of two equiped solar array ! 
+- if wormhole.base_attributes != Globals.LevelLoaderRef.GetCurrentLevelData(): doesn't work ! I'm never going home T_T
 - With new movement anim, the log about what is under your ship is delayed ?
 - ***BUG*** : when changing level camera should teleport
 - ***BUG*** : interaction button is late by 1 move
