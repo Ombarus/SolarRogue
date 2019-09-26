@@ -22,10 +22,8 @@ ROAD TO ALPHA :::
 TODO :::
 - order categories in inventory/transfer (weapon, shield, scanner, converter, utility, cargo ?)
 - ****BUG*** rare crash when drag-dropping stuff from inventory to ground where it tries to pickup the item we're currently dropping and it hasn't been added to world yet so it crash in get_parent()
-- can't craft solar array because require 2 utility but they don't stack
-- ****BUG*** : clicking outside the world (but on the ship) sends the ship in random location
 - Craft button should be grayed if not enough energy (right now does nothing when clicked)
-- ***BUG*** : again autopilot didn't stop when I was getting shot...
+- ****BUG*** : clicking outside the world (but on the ship) sends the ship in random location
 - New movement (always goto) prevent going on top of something if you can interact with it :/
 - ***BUG: still issues when switching ship with ultimate scanner... memory is not created, ships turn invisible, etc.
 - ***BUG: if disabled is in the base_attributes we cannot override it in modified_attributes !***
@@ -210,6 +208,8 @@ IDEAS:::
 	
 	
 DONE :::
+- can't craft solar array because require 2 utility but they don't stack
+- ***BUG*** : again autopilot didn't stop when I was getting shot...
 - Diluted crystal icon is pretty small
 - ? when transfering cargo from hull relic gives description of hull instead of selected item
 - drag-drop item from inventory to ground drop all amplifier in one shot ? CNR (might be fixed with transfer all ?)

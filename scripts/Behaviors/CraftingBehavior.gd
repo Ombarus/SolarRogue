@@ -25,6 +25,7 @@ func Craft(recipe_data, input_list, crafter):
 		# Validate that we can produce the thing
 		for require in recipe_data.requirements:
 			can_produce = false
+			require["will_still_need"] = require["amount"]
 			if recipe_data.produce == "energy":
 				for info in loaded_input_data:
 					if info.type == "energy":
@@ -41,21 +42,32 @@ func Craft(recipe_data, input_list, crafter):
 						can_produce = true
 						continue
 					elif info["type"] == require["type"]:
-						if info["amount"] < require["amount"]:
-							result = Globals.CRAFT_RESULT.not_enough_resources
-						else:
-							can_produce = true
-						continue
+						var holding = info["amount"]
+						if "will_consume" in info:
+							holding -= info["will_consume"]
+						if holding > 0:
+							if not "will_consume" in info:
+								info["will_consume"] = 0
+							info["will_consume"] += min(require["will_still_need"], holding)
+							require["will_still_need"] -= min(require["will_still_need"], holding)
+							if require["will_still_need"] <= 0:
+								can_produce = true
+								continue
 			elif "src" in require:
 				#TODO: count how many are required (take into account stackable ?)
 				for info in loaded_input_data:
 					if Globals.clean_path(require["src"]) in Globals.clean_path(info["src"]):
-						if info["amount"] < require["amount"]:
-							result = Globals.CRAFT_RESULT.not_enough_resources
-							#break
-						else:
-							can_produce = true
-						continue
+						var holding = info["amount"]
+						if "will_consume" in info:
+							holding -= info["will_consume"]
+						if holding > 0:
+							if not "will_consume" in info:
+								info["will_consume"] = 0
+							info["will_consume"] += min(require["will_still_need"], holding)
+							require["will_still_need"] -= min(require["will_still_need"], holding)
+							if require["will_still_need"] <= 0:
+								can_produce = true
+								continue
 			if can_produce == false:
 				if result == Globals.CRAFT_RESULT.success:
 					result = Globals.CRAFT_RESULT.missing_resources
@@ -78,22 +90,28 @@ func Craft(recipe_data, input_list, crafter):
 						consumed_data.push_back({"data":info.data, "amount":require["amount"]})
 						info.amount -= require["amount"] # this works if "amount" is 1... but might cause issues if more
 			elif "type" in require:
+				var consumed = 0
 				for info in loaded_input_data:
 					if require["type"] == "energy" and info.type == "energy":
 						net_energy_change -= require["amount"]
 						break
 					elif info["type"] == require["type"] and info["amount"] > 0:
-						for i in range(require["amount"]):
+						for i in range(min(require["amount"], info["amount"])):
 							BehaviorEvents.emit_signal("OnRemoveItem", crafter, info["src"])
+							consumed += 1
 							info.amount -= 1
-						break
+						if consumed >= require["amount"]:
+							break
 			elif "src" in require:
+				var consumed = 0
 				for info in loaded_input_data:
 					if Globals.clean_path(info["src"]) == Globals.clean_path(require["src"]) and info["amount"] > 0:
-						for i in range(require["amount"]):
+						for i in range(min(require["amount"], info["amount"])):
 							BehaviorEvents.emit_signal("OnRemoveItem", crafter, info["src"])
+							consumed += 1
 							info.amount -= 1
-						break
+						if consumed >= require["amount"]:
+							break
 		
 		# Produce the thing
 		if recipe_data.produce == "energy":

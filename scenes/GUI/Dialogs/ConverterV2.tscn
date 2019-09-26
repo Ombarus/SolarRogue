@@ -89,9 +89,7 @@ margin_right = 0.0
 margin_bottom = 65.0
 Text = "?"
 ShortcutKey = "?"
-ShortcutEnum = 0
 AlwaysOnShortcut = false
-Disabled = false
 
 [node name="RecipeInfoContainer" type="VBoxContainer" parent="HBoxContainer/Control/VBoxContainer"]
 margin_top = 132.0
@@ -284,9 +282,6 @@ rect_min_size = Vector2( 142, 90 )
 size_flags_horizontal = 3
 Text = "[c]raft"
 ShortcutKey = "c"
-ShortcutEnum = 0
-AlwaysOnShortcut = true
-Disabled = false
 
 [node name="Close" parent="HBoxContainer/Control/VBoxContainer" instance=ExtResource( 7 )]
 anchor_left = 0.5
@@ -300,10 +295,7 @@ margin_bottom = 91.0
 rect_min_size = Vector2( 142, 90 )
 size_flags_horizontal = 3
 Text = "[esc]close"
-ShortcutKey = ""
 ShortcutEnum = 16777217
-AlwaysOnShortcut = true
-Disabled = false
 
 [node name="Materials" parent="HBoxContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0
