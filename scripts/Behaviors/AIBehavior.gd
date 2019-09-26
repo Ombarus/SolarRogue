@@ -128,6 +128,10 @@ func OnObjTurn_Callback(obj):
 		
 	if obj.get_attrib("ai.disable_on_interest") == true:
 		ConsiderInterests(obj)
+		if obj.get_attrib("ai") == null:
+			# hack to force AP Behavior to re-evaluate player after disabling AI in the same turn
+			BehaviorEvents.emit_signal("OnUseAP", obj, 0.01)
+			return
 	
 	obj.set_attrib("ap.ai_acted", false)
 	#obj.modified_attributes["ap"] = false

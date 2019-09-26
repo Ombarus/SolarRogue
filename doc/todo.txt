@@ -23,7 +23,6 @@ TODO :::
 - order categories in inventory/transfer (weapon, shield, scanner, converter, utility, cargo ?)
 - ****BUG*** rare crash when drag-dropping stuff from inventory to ground where it tries to pickup the item we're currently dropping and it hasn't been added to world yet so it crash in get_parent()
 - can't craft solar array because require 2 utility but they don't stack
-- Diluted crystal icon is pretty small
 - ****BUG*** : clicking outside the world (but on the ship) sends the ship in random location
 - Craft button should be grayed if not enough energy (right now does nothing when clicked)
 - ***BUG*** : again autopilot didn't stop when I was getting shot...
@@ -211,6 +210,7 @@ IDEAS:::
 	
 	
 DONE :::
+- Diluted crystal icon is pretty small
 - ? when transfering cargo from hull relic gives description of hull instead of selected item
 - drag-drop item from inventory to ground drop all amplifier in one shot ? CNR (might be fixed with transfer all ?)
 - doing a transfer all I lost one of two equiped solar array ! 
