@@ -207,10 +207,11 @@ func Pressed_FTL_Callback():
 	_current_origin = PLAYER_ORIGIN.wormhole
 	_wormhole_src = Globals.LevelLoaderRef._current_level_data.src
 	
-	if wormhole.base_attributes != Globals.LevelLoaderRef.GetCurrentLevelData():
-		BehaviorEvents.emit_signal("OnRequestLevelChange", wormhole)
-	else:
+	var cur_lvl : Dictionary = Globals.LevelLoaderRef.GetCurrentLevelData()
+	if wormhole.get_attrib("going_home") == true and "going_home" in cur_lvl and cur_lvl["going_home"] == true:
 		ProcessGoingHome()
+	else:
+		BehaviorEvents.emit_signal("OnRequestLevelChange", wormhole)
 		
 func ProcessGoingHome():
 	var converter = playerNode.get_attrib("mounts.converter")[0]

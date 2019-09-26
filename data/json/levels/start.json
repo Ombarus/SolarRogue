@@ -1,6 +1,7 @@
 {
 	"name_id":"Wormhole",
 	"display_name":"The Beginning",
+	"going_home":true,
 	"level_data":"data/json/levels/start.json",
 	"type":"wormhole",
 	"sprite":"wormhole",
