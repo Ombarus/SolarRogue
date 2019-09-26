@@ -4,7 +4,7 @@
 	"sprite":"torpedo_launcher",
 	"icon": {
 		"texture":"data/textures/space-sprite.png",
-		"region":[1184,32,64,64]
+		"region":[1152,0,128,128]
 	},
 	"animation": {
 		"shoot": "scenes/tileset_source/missile_fx.tscn",

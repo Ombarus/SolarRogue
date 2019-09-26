@@ -4,7 +4,7 @@
 	"sprite": "scanner",
 	"icon": {
 		"texture":"data/textures/space-sprite.png",
-		"region":[544,160,64,64]
+		"region":[512,128,128,128]
 	},
 	"equipment": {
 		"slot":"scanner",

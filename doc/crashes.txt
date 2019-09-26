@@ -2,6 +2,9 @@
 
 	- ScannerBehavior.gd:158, get_attrib on a null instance
 		- GetTile returned an array with 3 objects, one null
+		- COULD NOT FIND [Node2D:4340] AT TILE (35, 26), obj is at world ((4480, 3328))
+			content (17, 24) [[Node2D:4358]]
+			content (40, 21) [[Node2D:4340]]
 		
 		
 	- AnomalyBehavior.gd:40 emit_signal("OnTriggerAnomaly")

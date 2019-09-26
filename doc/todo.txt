@@ -1,11 +1,5 @@
 ROAD TO ALPHA :::
-- End screen when leaving top wormhole
-	- Confirmation message
-	- Success ("You are rich") / failure ("You can't leave yet")
-	- Final scoring
 - Generate Level data :
-	- 12 "Main" levels
-		- 1 "Special" level with Converter of Yendor
 	- 3 Branches (for now, 3 level each ? 2 filler & 1 "special")
 		- Human Fortress
 			- Last level should be peaceful and contains a bunch of shop.
@@ -13,37 +7,22 @@ ROAD TO ALPHA :::
 			- Last level contain a "Queen" boss that spawns ennemies (Queen could drop some garantied artifact ?)
 		- Vorg Homeworld
 			- Last level contains a "Titan" "Cube" boss and lots of loot ?
-	- Equipment (see excel)
-		- Code Feature
-		- Add item to JSON
-		- Add to spawn list everywhere !
-		- Add to converter
 	- Ships
-		- Human (Basic)
-			- Art
-			- Stats
-			- JSON
-		- Jerg (Swarm, no shield, big hull, fast)
-			- Art
-			- Stats
-			- JSON
-		- Vorg (Big shield, effect weapon (disable ship equipment, poison like effects, slow down, etc.)
-			- Art
-			- Stats
-			- JSON
 		- Random Unique boss
 			- Death Star ?
 				- Art
 				- Stats
 				- JSON
+- Fx weapons
+- bosses
+- shops
+- ennemy that can spawn reiforcement ?
 
 
 TODO :::
 - order categories in inventory/transfer (weapon, shield, scanner, converter, utility, cargo ?)
 - ****BUG*** rare crash when drag-dropping stuff from inventory to ground where it tries to pickup the item we're currently dropping and it hasn't been added to world yet so it crash in get_parent()
 - can't craft solar array because require 2 utility but they don't stack
-- drag-drop item from inventory to ground drop all amplifier in one shot ?
-- ? when transfering cargo from hull relic gives description of hull instead of selected item
 - Diluted crystal icon is pretty small
 - ****BUG*** : clicking outside the world (but on the ship) sends the ship in random location
 - Craft button should be grayed if not enough energy (right now does nothing when clicked)
@@ -232,6 +211,8 @@ IDEAS:::
 	
 	
 DONE :::
+- ? when transfering cargo from hull relic gives description of hull instead of selected item
+- drag-drop item from inventory to ground drop all amplifier in one shot ? CNR (might be fixed with transfer all ?)
 - doing a transfer all I lost one of two equiped solar array ! 
 - if wormhole.base_attributes != Globals.LevelLoaderRef.GetCurrentLevelData(): doesn't work ! I'm never going home T_T
 - With new movement anim, the log about what is under your ship is delayed ?
