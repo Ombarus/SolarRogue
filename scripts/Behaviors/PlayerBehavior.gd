@@ -457,7 +457,7 @@ func LookTarget_Callback(selected_targets):
 
 
 func _unhandled_input(event):
-	if lock_input or _input_state == INPUT_STATE.look_around:
+	if lock_input or _input_state == INPUT_STATE.look_around or playerNode == null:
 		return
 		
 	var dir = null

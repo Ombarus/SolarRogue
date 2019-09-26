@@ -182,6 +182,8 @@ func UpdateMaterialsList(recipe_data):
 			else:
 				var d = Globals.LevelLoaderRef.LoadJSON(r.src)
 				list_data.push_back({"name_id":"Missing " + d.name_id, "max":r.amount, "disabled":true})
+	if _current_crafting_selected.produce != "energy" and _obj.get_attrib("converter.stored_energy") <= _current_data["energy"]:
+		list_data.push_back({"name_id": "Not enough energy", "disabled":true, "max":1})
 	_material_list.Content = list_data
 	
 	
@@ -389,8 +391,12 @@ func _get_idle_turn_energy_cost(num_turn):
 		return 0
 
 func UpdateCraftButton():
-	if _current_data["count"] > 0:
+	if _current_data["count"] > 0 and (_current_crafting_selected.produce == "energy" or _obj.get_attrib("converter.stored_energy") > _current_data["energy"]):
 		_craft_button.Disabled = false
 	else:
+		if _current_crafting_selected != null and _current_crafting_selected.produce != "energy" and _obj.get_attrib("converter.stored_energy") <= _current_data["energy"]:
+			_craft_button.Text = "Not Enough Energy!"
+		else:
+			_craft_button.Text = "[c]raft"
 		_craft_button.Disabled = true
 	
