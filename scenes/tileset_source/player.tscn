@@ -16,7 +16,6 @@ region_enabled = true
 region_rect = Rect2( 512, 256, 128, 128 )
 
 [node name="MoveSFX" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="choice1" type="AudioStreamPlayer2D" parent="MoveSFX"]
 stream = ExtResource( 3 )
@@ -37,8 +36,9 @@ bus = "Sfx"
 
 [node name="EngineHum" type="AudioStreamPlayer2D" parent="BG"]
 stream = ExtResource( 6 )
-max_distance = 100.0
-attenuation = 1.68179
+max_distance = 500.0
+attenuation = 1.62451
+bus = "Sfx"
 
 [node name="MovementAnimations" parent="." instance=ExtResource( 7 )]
 

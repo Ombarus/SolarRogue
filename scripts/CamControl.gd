@@ -58,6 +58,7 @@ func _zoom_camera(dir):
 	zoom += Vector2(0.1, 0.1) * dir
 	zoom.x = clamp(zoom.x, min_zoom, max_zoom)
 	zoom.y = clamp(zoom.y, min_zoom, max_zoom)
+	BehaviorEvents.emit_signal("OnCameraZoomed", zoom)
 	
 func CenterCam(obj):
 	self.position = obj.position
@@ -153,6 +154,7 @@ func update_pinch_gesture():
 	zoom = Vector2(final_zoom,final_zoom)
 	zoom.x = clamp(zoom.x, min_zoom, max_zoom)
 	zoom.y = clamp(zoom.y, min_zoom, max_zoom)
+	BehaviorEvents.emit_signal("OnCameraZoomed", zoom)
 		
 	var vp_size = self.get_viewport().size
 	if get_viewport().is_size_override_enabled():

@@ -20,22 +20,22 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- Interupt crafting if shot ?
-- order categories in inventory/transfer (weapon, shield, scanner, converter, utility, cargo ?)
-- ****BUG*** rare crash when drag-dropping stuff from inventory to ground where it tries to pickup the item we're currently dropping and it hasn't been added to world yet so it crash in get_parent()
+- add hit FX
+
+- managed to drop and pickup object in same frame resulting in a crash (from inventory window drop an item with a sort of double-click)
+	- Also, Unhandled_input is getting called even tough I have a full screen control stopping inputs... why ? (related to drag&drop ?)
+	- ****BUG*** rare crash when drag-dropping stuff from inventory to ground where it tries to pickup the item we're currently dropping and it hasn't been added to world yet so it crash in get_parent()
 - Allow clicking outside of the map to move (it has weird behavior now with contextual clicks)
 - New movement (always goto) prevent going on top of something if you can interact with it :/
 - ***BUG: still issues when switching ship with ultimate scanner... memory is not created, ships turn invisible, etc.
+- Launch weapon effects with a slight offset from center so we can see multiple simultaneous shots
 - ***BUG: if disabled is in the base_attributes we cannot override it in modified_attributes !***
 - PERF: optimize lists. Seems like if you have 20-30 items in the transfer window there can be quite a delay to load and/or update the list
 	- Do not regen the whole list every time something change
 	- When generating the whole list... do it in a thread ? (or 4-5 per frame ?)
 - Work on Anomalies and status effect
-	- Anomalies should have a chance to be detected (based on scanner level ?)
-	- slow
 	- haste
 	- poison
-	- disable scanner (blind)
 	- disable weapon ?
 	- disable converter ?
 	- EMP shock empty shields
@@ -44,21 +44,16 @@ TODO :::
 	- Nanites trap (heal ?)
 	- Aggravate (monster come to last known location ?)
 	- Confusion (ship moves in random direction ?)
-	- Energy vortex (lose energy) (% to avoid killing player ? but this can suck if you had 100000 energy and lose 50 000)
 	- Naked Singularity (constrict ship, prevent movement until ship can escape it's pull (damage per turn ?))
 	- Complete shutdown (unable to act for X turn)
 - Improve AI to work with Torpedo (try to avoid shooting allies. Allies can take damage, etc.)
-- Launch weapon effects with a slight offset from center so we can see multiple simultaneous shots
 - Add random derelic you can pickup items from
 	- when trying to pickup derelic should warn player : "not empty" (see final converter of yendor)
 - recipe row size != inventory row size
 - Converter recipe list has heigher rows than other lists
-- managed to drop and pickup object in same frame resulting in a crash (from inventory window drop an item with a sort of double-click)
-	- Also, Unhandled_input is getting called even tough I have a full screen control stopping inputs... why ? (related to drag&drop ?)
 - customize scroll bar ?
 - don't let planet material spawn under the player
 - death screen need beautification
-- add hit FX
 - categories in crafting material list (when more than 4-5 items)
 - add icon in material list in crafting diag
 - leaderboard display improvement (scroll is not ideal yet)
@@ -69,21 +64,13 @@ TODO :::
 - BUG: craft scout, transfer all, notice scout disapear from screen, put back scanner and scout comes back to live (ultimate scanner).
 - "grab" menu when multiple objects ?
 - crash trying to convert 10 missile to energy (CNR)
+- Interupt crafting if shot ?
 - Border around level is ugly
 	- give it a "danger" kind a texture ?
 	- remove it and warn the player : "cannot get out of sun's gravity well"
 	- ???
 - SOUNDS
-	- Investigate how to trigger basic sounds (buttons, shooting, explosions)
-		- AudioStreamPlayer (base, 2d, 3d). Works with Wav (sfx) or Ogg (music/dialog)
-	- Find free sounds I could use for now
-	- Investigate music style and artists that could do something nice
-		- maybe should have a few different music (do something with music when health is low or ennemy is close, etc ?)
-			- Star Ocean First Departure
-			- Disgaea ?
-			- Final IX battle theme ?
 	- SFX :
-		- Button hover, click
 		- Moving swoosh ?
 		- engine noise when zoomed in close (2d for when panning the camera)
 		- Beeping for white, yellow and red log messages
@@ -98,15 +85,15 @@ TODO :::
 		- Use nanobots
 		- Wormhole warp
 		- autopilot interupted ?
+		- alert when low energy
+		- alert when low hull
 	- music
 		- change music when aggressive ennemy hunting ?
 		
 - Achievements
 - Could not install on OnePlus 3T Oreo (test with father's phone)
-- Go back and fix & add all missing shortcuts for all buttons in the UI
-	- Issues in main menu (esc doesn't work ?
 - Find a way to make a good UI for PC AND mobile... how to adjust font size and such ?
-- BUG: Global max seem broken. More than one of the same branch wormhole sometimes spawn
+- BUG: Global max seem broken. More than one of the same branch wormhole sometimes spawn (CNR ?)
 - OPTIM : scanner
 	- AI are only interested in player so don't check all surrounding
 	- Can not check empty tile to avoid 80x80 tile check with the ultimate scanner ?
@@ -121,7 +108,6 @@ TODO :::
 	- https://github.com/godotengine/godot/issues/19917
 - Things that annoy me while playtesting :
 	- dragging converter list doesn't move the list.. very difficult on device to hit the scroll
-- BUG: can't fire multiple weapon if we select a target out of range (works if we select empty tiles)
 - level generation improvement :
 	- revisit spawn chance... could I specify it in chance per level instead of per tile ? would make tweaking level design easier (1 per level is a chance of 0,00015625 !)
 	- Sokoban example : might want to spawn wormhole #1 OR #2.. not both, but definitly at least 1
@@ -134,7 +120,6 @@ TODO :::
 	- Collision on each tile but behave as a single entity ?
 - BUG: Any random interaction should cancel targetting ?
 - Spawning
-- re-work Object identification (show as unknown, then remember id-ed stuff)
 - Basic interaction
 	- Look around
 		- select item using keyboard
@@ -157,6 +142,7 @@ TODO :::
 	
 	
 polish :::
+- anomalies should be more than 1x1 tiles ?
 - UI animation
 	- animate health and shield when hit
 	- animate energy when lost or low
@@ -189,6 +175,7 @@ polish :::
 	- drag still remember even tough camera doesn't pass limit
 	
 - Read-Only base_attributes to prevent un-savable changes by mistake
+- re-work Object identification (show as unknown, then remember id-ed stuff)
 	
 - Godot : Implement Localization
 	- You can link CSVs in localization, replace certain resources (like textures) with others and even change the project name based on choosen locale
@@ -202,6 +189,23 @@ IDEAS:::
 	
 	
 DONE :::
+- BUG: can't fire multiple weapon if we select a target out of range (works if we select empty tiles) (I *think* this is fixed?)
+- Go back and fix & add all missing shortcuts for all buttons in the UI
+	- Issues in main menu (esc doesn't work ?
+	- Investigate music style and artists that could do something nice
+		- maybe should have a few different music (do something with music when health is low or ennemy is close, etc ?)
+			- Star Ocean First Departure
+			- Disgaea ?
+			- Final IX battle theme ?
+		- Button hover, click
+	- Investigate how to trigger basic sounds (buttons, shooting, explosions)
+		- AudioStreamPlayer (base, 2d, 3d). Works with Wav (sfx) or Ogg (music/dialog)
+	- Find free sounds I could use for now
+	- slow
+	- disable scanner (blind)
+	- Energy vortex (lose energy) (% to avoid killing player ? but this can suck if you had 100000 energy and lose 50 000)
+	- Anomalies should have a chance to be detected (based on scanner level ?)
+- order categories in inventory/transfer (weapon, shield, scanner, converter, utility, cargo ?)
 - Crafting utilities require 2 utility but if you have at least one it won't say you are missing another one
 - ****BUG*** : clicking outside the world (but on the ship) sends the ship in random location
 	- have the spawn chance be able to have group of related elements (so I can spawn for example, 3 missiles next to each other 0.1% chance per level)

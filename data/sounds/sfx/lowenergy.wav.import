@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/lowenergy.wav-8ad787843d7ede36d490c2ef5594fb4b.sample"
+
+[deps]
+
+source_file="res://data/sounds/sfx/lowenergy.wav"
+dest_files=[ "res://.import/lowenergy.wav-8ad787843d7ede36d490c2ef5594fb4b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
