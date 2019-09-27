@@ -82,9 +82,6 @@ rect_min_size = Vector2( 0, 90 )
 size_flags_horizontal = 3
 Text = "> remove"
 ShortcutKey = ">"
-ShortcutEnum = 0
-AlwaysOnShortcut = true
-Disabled = false
 
 [node name="Swap" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_right = 1.0
@@ -95,9 +92,6 @@ rect_min_size = Vector2( 0, 90 )
 size_flags_horizontal = 3
 Text = "< mount"
 ShortcutKey = "<"
-ShortcutEnum = 0
-AlwaysOnShortcut = true
-Disabled = false
 
 [node name="Drop" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_right = 1.0
@@ -108,9 +102,6 @@ rect_min_size = Vector2( 0, 90 )
 size_flags_horizontal = 3
 Text = "[d]rop"
 ShortcutKey = "d"
-ShortcutEnum = 0
-AlwaysOnShortcut = true
-Disabled = false
 
 [node name="Use" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_right = 1.0
@@ -121,9 +112,6 @@ rect_min_size = Vector2( 0, 90 )
 size_flags_horizontal = 3
 Text = "[u]se"
 ShortcutKey = "u"
-ShortcutEnum = 0
-AlwaysOnShortcut = true
-Disabled = false
 
 [node name="Desc" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_right = 1.0
@@ -134,9 +122,7 @@ rect_min_size = Vector2( 0, 90 )
 size_flags_horizontal = 3
 Text = "?"
 ShortcutKey = "?"
-ShortcutEnum = 0
 AlwaysOnShortcut = false
-Disabled = false
 
 [node name="Close" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
 anchor_left = 0.5
@@ -150,10 +136,8 @@ margin_bottom = 0.0
 rect_min_size = Vector2( 0, 90 )
 size_flags_horizontal = 3
 Text = "[esc] close"
-ShortcutKey = ""
 ShortcutEnum = 16777217
 AlwaysOnShortcut = false
-Disabled = false
 
 [node name="Mounting" type="Control" parent="HBoxContainer/Control"]
 anchor_right = 1.0
@@ -173,10 +157,8 @@ margin_bottom = -10.804
 rect_min_size = Vector2( 0, 90 )
 size_flags_horizontal = 3
 Text = "[esc]Cancel"
-ShortcutKey = ""
 ShortcutEnum = 16777217
 AlwaysOnShortcut = false
-Disabled = false
 
 [node name="Cargo" parent="HBoxContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0

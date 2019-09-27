@@ -286,10 +286,14 @@ func ReInit():
 	# Init all the buttons to Enable/Disabled state
 	OnSelectionChanged_Callback()
 	
+func sort_categories(var a, var b):
+	return a > b
+	
 func GenerateContent(list_node, mounts, cargo):
 	var mount_content := []
-	#TODO: order by something consistent
-	for key in mounts:
+	var keys = mounts.keys()
+	keys.sort_custom(self, "sort_categories")
+	for key in keys:
 		mount_content.push_back({"key":key, "name_id":key, "equipped":false, "header":true})
 		var items : Array = mounts[key]
 		var index = 0

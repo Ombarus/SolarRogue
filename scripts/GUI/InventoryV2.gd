@@ -188,6 +188,10 @@ func Close_Callback():
 	_mounts_list.Content = []
 	_cargo_list.Content = []
 	
+
+func sort_categories(var a, var b):
+	return a > b
+	
 	
 func Init(init_param):
 	get_node("HBoxContainer/Mounts").disabled = false
@@ -206,8 +210,9 @@ func Init(init_param):
 	var mounts : Dictionary = _obj.modified_attributes.mounts
 	
 	var mount_content := []
-	#TODO: order by something consistent
-	for key in mounts:
+	var keys : Array = mounts.keys()
+	keys.sort_custom(self, "sort_categories")
+	for key in keys:
 		mount_content.push_back({"key":key, "name_id":key, "equipped":false, "header":true})
 		var items : Array = mounts[key]
 		var index = 0
@@ -222,12 +227,13 @@ func Init(init_param):
 	
 	var cargo_content := []
 	var cargo_item_by_category := {}
-	#TODO: order by something consistent
 	for row in cargo:
 		var data = Globals.LevelLoaderRef.LoadJSON(row.src)
 		var cat : String = data.equipment.slot
+		if "consumable" in data:
+			cat = "consumable"
 		if cat == "cargo" or cat == null or cat == "":
-			cat = "Others"
+			cat = "others"
 		if not cat in cargo_item_by_category:
 			cargo_item_by_category[cat] = []
 		var counting = ""
@@ -237,7 +243,9 @@ func Init(init_param):
 			data.icon = data.icon[0]
 		cargo_item_by_category[cat].push_back({"src":row.src, "count":row.count, "name_id": counting + data.name_id, "equipped":false, "header":false, "icon":data.icon})
 		
-	for key in cargo_item_by_category:
+	keys = cargo_item_by_category.keys()
+	keys.sort_custom(self, "sort_categories")
+	for key in keys:
 		cargo_content.push_back({"name_id":key, "equipped":false, "header":true})
 		cargo_content += cargo_item_by_category[key]
 	_cargo_list.Content = cargo_content

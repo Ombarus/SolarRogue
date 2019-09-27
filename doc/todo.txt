@@ -30,7 +30,6 @@ TODO :::
 - PERF: optimize lists. Seems like if you have 20-30 items in the transfer window there can be quite a delay to load and/or update the list
 	- Do not regen the whole list every time something change
 	- When generating the whole list... do it in a thread ? (or 4-5 per frame ?)
-- Crafting utilities require 2 utility but if you have at least one it won't say you are missing another one
 - Work on Anomalies and status effect
 	- Anomalies should have a chance to be detected (based on scanner level ?)
 	- slow
@@ -203,6 +202,7 @@ IDEAS:::
 	
 	
 DONE :::
+- Crafting utilities require 2 utility but if you have at least one it won't say you are missing another one
 - ****BUG*** : clicking outside the world (but on the ship) sends the ship in random location
 	- have the spawn chance be able to have group of related elements (so I can spawn for example, 3 missiles next to each other 0.1% chance per level)
 		- make for more story like spawns like a missile launcher and 2-3 missile and maybe a broken down prop next to each other but relative position instead of absolute like the sun
