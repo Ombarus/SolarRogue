@@ -20,9 +20,9 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- Interupt crafting if shot ?
 - order categories in inventory/transfer (weapon, shield, scanner, converter, utility, cargo ?)
 - ****BUG*** rare crash when drag-dropping stuff from inventory to ground where it tries to pickup the item we're currently dropping and it hasn't been added to world yet so it crash in get_parent()
-- ****BUG*** : clicking outside the world (but on the ship) sends the ship in random location
 - Allow clicking outside of the map to move (it has weird behavior now with contextual clicks)
 - New movement (always goto) prevent going on top of something if you can interact with it :/
 - ***BUG: still issues when switching ship with ultimate scanner... memory is not created, ships turn invisible, etc.
@@ -203,6 +203,7 @@ IDEAS:::
 	
 	
 DONE :::
+- ****BUG*** : clicking outside the world (but on the ship) sends the ship in random location
 	- have the spawn chance be able to have group of related elements (so I can spawn for example, 3 missiles next to each other 0.1% chance per level)
 		- make for more story like spawns like a missile launcher and 2-3 missile and maybe a broken down prop next to each other but relative position instead of absolute like the sun
 - Still can get shot before autopilot stop... why ?

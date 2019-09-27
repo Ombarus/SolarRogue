@@ -1,5 +1,7 @@
 extends "res://scripts/GUI/GUILayoutBase.gd"
 
+export(NodePath) var CraftingBehavior : NodePath
+
 var _callback_obj = null
 var _callback_method = ""
 var _obj = null
@@ -16,6 +18,8 @@ onready var _energy_ship : RichTextLabel = get_node("HBoxContainer/Control/VBoxC
 onready var _hull_ship : RichTextLabel = get_node("HBoxContainer/Control/VBoxContainer/ShipInfoContainer/HBoxContainer5/HullShip")
 onready var _shield_ship : RichTextLabel = get_node("HBoxContainer/Control/VBoxContainer/ShipInfoContainer/HBoxContainer6/ShieldShip")
 onready var _desc_btn : BaseButton = get_node("HBoxContainer/Control/VBoxContainer/IconContainer/DescBtn")
+
+onready var _behavior = get_node(CraftingBehavior)
 
 var _converter_data = null
 var _current_crafting_selected = null
@@ -154,7 +158,9 @@ func OnRecipeChanged_Callback():
 func UpdateMaterialsList(recipe_data):
 	var cargo = _obj.get_attrib("cargo.content")
 	var list_data = []
+	var input_data = []
 	var added_to_data = {}
+		
 	for r in recipe_data.requirements:
 		if "type" in r and r.type == "energy":
 			continue
@@ -174,16 +180,30 @@ func UpdateMaterialsList(recipe_data):
 				if not cargo_index in added_to_data:
 					var d = Globals.LevelLoaderRef.LoadJSON(item.src)
 					list_data.push_back({"name_id":d.name_id, "max":item.count, "src":item.src})
+					input_data.push_back({"name_id":d.name_id, "max":item.count, "src":item.src, "selected":item.count})
 					added_to_data[cargo_index] = true
 			cargo_index += 1
-		if has_item_to_use == false:
-			if "type" in r:
-				list_data.push_back({"name_id":"Missing " + r.type, "disabled":true, "max":r.amount})
-			else:
-				var d = Globals.LevelLoaderRef.LoadJSON(r.src)
-				list_data.push_back({"name_id":"Missing " + d.name_id, "max":r.amount, "disabled":true})
-	if _current_crafting_selected.produce != "energy" and _obj.get_attrib("converter.stored_energy") <= _current_data["energy"]:
-		list_data.push_back({"name_id": "Not enough energy", "disabled":true, "max":1})
+		#if has_item_to_use == false:
+		#	if "type" in r:
+		#		list_data.push_back({"name_id":"Missing " + r.type, "disabled":true, "max":r.amount})
+		#	else:
+		#		var d = Globals.LevelLoaderRef.LoadJSON(r.src)
+		#		list_data.push_back({"name_id":"Missing " + d.name_id, "max":r.amount, "disabled":true})
+	
+	input_data.push_back("energy")
+	var missing = []
+	var loaded_input_data = _behavior.LoadInput(input_data)
+	var can_produce = _behavior.TestRequirements(recipe_data, loaded_input_data, _obj.get_attrib("converter.stored_energy"), missing)
+	
+	for require in missing:
+		if "type" in require and require.type == "energy":
+			pass # for now this will be handled by the updateCraftButton()
+		elif "type" in require:
+			list_data.push_front({"name_id": "Missing " + require.type, "disabled":true, "max":require.amount})
+		elif "src" in require:
+			var d = Globals.LevelLoaderRef.LoadJSON(require.src)
+			list_data.push_back({"name_id":"Missing " + d.name_id, "disabled":true, "max":require.amount})
+	
 	_material_list.Content = list_data
 	
 	

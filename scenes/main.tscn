@@ -468,6 +468,7 @@ visible = false
 
 [node name="ConverterV2" parent="Camera-GUI" instance=ExtResource( 49 )]
 visible = false
+CraftingBehavior = NodePath("../../Behaviors/Crafting")
 
 [node name="Settings" parent="Camera-GUI" instance=ExtResource( 50 )]
 visible = false

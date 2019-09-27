@@ -3,16 +3,91 @@ extends Node
 # recipe_data = {"name": "Energy", "requirements": [{"type":"food", "amount":1}], "produce":"energy", "amount":1500}
 # input_list = ["data/json/items/weapons/missile.json", "data/json/items/weapons/missile.json", ...]
 # crafter = Node with Attributes.gd
-func Craft(recipe_data, input_list, crafter):
-	# Init, Read and load data we will need
+
+func LoadInput(var input_list : Array) -> Array:
 	var loaded_input_data = []
-	var result = Globals.CRAFT_RESULT.success
 	for item in input_list:
 		if typeof(item) == TYPE_STRING and item == "energy":
 			loaded_input_data.push_back({"type":"energy", "src":""})
 		else:
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			loaded_input_data.push_back({"data":data, "type":data["type"], "src":item.src, "amount":item.selected})
+	return loaded_input_data
+
+
+func TestRequirements(var recipe_data : Dictionary, var loaded_input_data : Array, var energy_budget : float, var missing_out = null):
+	var can_produce = true
+	var src_requirements := []
+	var type_requirements := []
+	var energy_requirements := 0.0
+	if missing_out == null:
+		missing_out = []
+	
+	# Complete exception if 'recycling' energy instead of producing items
+	if recipe_data.produce == "energy":
+		can_produce = false
+		for input_data in loaded_input_data:
+			if input_data.type == "energy":
+				continue
+			if input_data["amount"] > 0:
+				can_produce = true
+				break
+		return can_produce
+	
+	# go from most specific to most generic so we make sure we don't use a specific item as a generic item
+	# if another generic item could have been used freing the specific item for src requirements
+	for require in recipe_data.requirements:
+		if "src" in require:
+			src_requirements.push_back(require)
+		elif "type" in require:
+			if require["type"] == "energy":
+				energy_requirements = require["amount"]
+			else:
+				type_requirements.push_back(require)
+	
+	for require in src_requirements:
+		var total_needed : int = require["amount"]
+		for input_data in loaded_input_data:
+			if Globals.clean_path(require["src"]) in Globals.clean_path(input_data["src"]):
+				var holding = input_data["amount"]
+				if "will_consume" in input_data:
+					holding -= input_data["will_consume"]
+				if holding > 0:
+					if not "will_consume" in input_data:
+						input_data["will_consume"] = 0
+					input_data["will_consume"] += min(total_needed, holding)
+					total_needed -= min(total_needed, holding)
+		if total_needed > 0:
+			missing_out.push_back(require)
+			
+	for require in type_requirements:
+		var total_needed : int = require["amount"]
+		for input_data in loaded_input_data:
+			if input_data["type"] == require["type"]:
+				var holding = input_data["amount"]
+				if "will_consume" in input_data:
+					holding -= input_data["will_consume"]
+				if holding > 0:
+					if not "will_consume" in input_data:
+						input_data["will_consume"] = 0
+					input_data["will_consume"] += min(total_needed, holding)
+					total_needed -= min(total_needed, holding)
+		if total_needed > 0:
+			missing_out.push_back(require)
+			
+	if energy_budget <= energy_requirements:
+		missing_out.push_back({"type":"energy", "src":""})
+		
+	if missing_out.size() > 0:
+		return false
+	else:
+		return true
+	
+	
+func Craft(recipe_data, input_list, crafter):
+	# Init, Read and load data we will need
+	var loaded_input_data := LoadInput(input_list)
+	var result = Globals.CRAFT_RESULT.not_enough_resources # kinda obsolete since the UI won't let you try to craft stuff if you don't have the requirements
 	var can_produce = true
 	var cur_energy = crafter.get_attrib("converter.stored_energy")
 	var net_energy_change = 0
@@ -23,60 +98,9 @@ func Craft(recipe_data, input_list, crafter):
 	while (can_produce == true):
 		result = Globals.CRAFT_RESULT.success
 		# Validate that we can produce the thing
-		for require in recipe_data.requirements:
-			can_produce = false
-			require["will_still_need"] = require["amount"]
-			if recipe_data.produce == "energy":
-				for info in loaded_input_data:
-					if info.type == "energy":
-						continue
-					if info["amount"] > 0:
-						can_produce = true
-						break
-			elif "type" in require: # might eventually support other like "name_id"
-				for info in loaded_input_data:
-					if require["type"] == "energy" and info.type == "energy":
-						if (cur_energy+net_energy_change) < require["amount"]:
-							result = Globals.CRAFT_RESULT.not_enough_energy
-							break
-						can_produce = true
-						continue
-					elif info["type"] == require["type"]:
-						var holding = info["amount"]
-						if "will_consume" in info:
-							holding -= info["will_consume"]
-						if holding > 0:
-							if not "will_consume" in info:
-								info["will_consume"] = 0
-							info["will_consume"] += min(require["will_still_need"], holding)
-							require["will_still_need"] -= min(require["will_still_need"], holding)
-							if require["will_still_need"] <= 0:
-								can_produce = true
-								continue
-			elif "src" in require:
-				#TODO: count how many are required (take into account stackable ?)
-				for info in loaded_input_data:
-					if Globals.clean_path(require["src"]) in Globals.clean_path(info["src"]):
-						var holding = info["amount"]
-						if "will_consume" in info:
-							holding -= info["will_consume"]
-						if holding > 0:
-							if not "will_consume" in info:
-								info["will_consume"] = 0
-							info["will_consume"] += min(require["will_still_need"], holding)
-							require["will_still_need"] -= min(require["will_still_need"], holding)
-							if require["will_still_need"] <= 0:
-								can_produce = true
-								continue
-			if can_produce == false:
-				if result == Globals.CRAFT_RESULT.success:
-					result = Globals.CRAFT_RESULT.missing_resources
-				break
-				
+		can_produce = TestRequirements(recipe_data, loaded_input_data, cur_energy+net_energy_change)
 		if can_produce == false:
 			break
-		else:
-			result = Globals.CRAFT_RESULT.success
 			
 		# Consume Resources
 		var consumed_data = []
