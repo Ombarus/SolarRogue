@@ -488,6 +488,7 @@ func _unhandled_input(event):
 			else:
 				var player_pos = playerNode.position
 				var clicked_tile = Globals.LevelLoaderRef.World_to_Tile(click_pos)
+				click_pos = Globals.LevelLoaderRef.Tile_to_World(clicked_tile) # in case we clicked outside the world's bounds
 				var player_tile = Globals.LevelLoaderRef.World_to_Tile(player_pos)
 				
 				var click_dir = click_pos - player_pos

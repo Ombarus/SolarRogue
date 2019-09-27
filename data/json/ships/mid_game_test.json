@@ -41,7 +41,7 @@
 		]
 	},
 	"converter": {
-		"stored_energy": 250,
+		"stored_energy": 25000,
 		"base_ap_energy_cost":12
 	}
 }

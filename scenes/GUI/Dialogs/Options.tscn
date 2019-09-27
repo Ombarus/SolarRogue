@@ -56,8 +56,8 @@ margin_top = 224.0
 margin_right = 254.0
 margin_bottom = 314.0
 rect_min_size = Vector2( 0, 90 )
-Text = "[p]arameters"
-ShortcutKey = "p"
+Text = "[o]ptions"
+ShortcutKey = "o"
 
 [node name="SaveAndQuit" parent="base/vbox" instance=ExtResource( 4 )]
 margin_top = 336.0
