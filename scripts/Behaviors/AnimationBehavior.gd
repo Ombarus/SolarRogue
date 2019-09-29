@@ -7,12 +7,25 @@ func _ready():
 	BehaviorEvents.connect("OnObjectDestroyed", self, "OnObjectDestroyed_Callback")
 	BehaviorEvents.connect("OnWaitForAnimation", self, "OnWaitForAnimation_Callback")
 	BehaviorEvents.connect("OnAnimationDone", self, "OnAnimationDone_Callback")
+	BehaviorEvents.connect("OnDamageTaken", self, "OnDamageTaken_Callback")
 	
 func OnWaitForAnimation_Callback():
 	_wait_for_anim = true
 	
 func OnAnimationDone_Callback():
 	_wait_for_anim = false
+	
+func OnDamageTaken_Callback(target, shooter):
+	
+	if _wait_for_anim == true:
+		yield(BehaviorEvents, "OnAnimationDone")
+	# temp
+	
+	if target.has_node("scout/overlay/AnimationPlayer"):
+		var tmp_hit = target.get_node("scout/overlay/AnimationPlayer")
+		tmp_hit.play("blink_hit")
+	
+	######
 	
 func OnObjectDestroyed_Callback(obj):
 	var destroyed_scene = obj.get_attrib("animation.destroyed")
@@ -53,7 +66,7 @@ func OnShotFired_Callback(shot_tile, shooter, weapon):
 	if hit_anim == null:
 		return
 	
-	var area_size : int = Globals.get_data(weapon, "weapon_data.area_effect", 0)
+	var area_size : int = Globals.get_data(weapon, "weapon_data.area_effect", 0.5)
 	scene = load(Globals.clean_path(hit_anim))
 	n = scene.instance()
 	pos = Globals.LevelLoaderRef.Tile_to_World(shot_tile)

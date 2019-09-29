@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://data/sounds/sfx/ships/move1.wav" type="AudioStream" id=1]
+[ext_resource path="res://data/sounds/sfx/ships/move2.wav" type="AudioStream" id=2]
+[ext_resource path="res://data/sounds/sfx/ships/move3.wav" type="AudioStream" id=3]
+
+[node name="MoveSFX" type="Node2D"]
+
+[node name="choice1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
+volume_db = 5.0
+bus = "Sfx"
+
+[node name="choice2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
+volume_db = 5.0
+bus = "Sfx"
+
+[node name="choice3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = 5.0
+bus = "Sfx"
+

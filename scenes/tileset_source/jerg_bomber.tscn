@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Animations/ShipAnimations2.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/sfx/Human_MoveSFX.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/sfx/Human_Ship_BG.tscn" type="PackedScene" id=4]
 
 [node name="jerg_scout" type="Sprite"]
 z_index = 900
@@ -10,4 +12,8 @@ region_enabled = true
 region_rect = Rect2( 128, 1024, 128, 128 )
 
 [node name="MovementAnimations" parent="." instance=ExtResource( 2 )]
+
+[node name="MoveSFX" parent="." instance=ExtResource( 3 )]
+
+[node name="BG" parent="." instance=ExtResource( 4 )]
 

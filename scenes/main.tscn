@@ -67,6 +67,7 @@
 [node name="Behaviors" type="Node" parent="."]
 
 [node name="Ambience" type="Node" parent="Behaviors"]
+editor/display_folded = true
 script = ExtResource( 1 )
 
 [node name="BG" type="AudioStreamPlayer" parent="Behaviors/Ambience"]
