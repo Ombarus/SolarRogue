@@ -19,13 +19,10 @@ func OnDamageTaken_Callback(target, shooter):
 	
 	if _wait_for_anim == true:
 		yield(BehaviorEvents, "OnAnimationDone")
-	# temp
-	
-	if target.has_node("scout/overlay/AnimationPlayer"):
-		var tmp_hit = target.get_node("scout/overlay/AnimationPlayer")
-		tmp_hit.play("blink_hit")
-	
-	######
+
+	var hit_root : Node = target.find_node("hit_fx", true, false)
+	if hit_root != null:
+		hit_root.play_hull_hit()
 	
 func OnObjectDestroyed_Callback(obj):
 	var destroyed_scene = obj.get_attrib("animation.destroyed")

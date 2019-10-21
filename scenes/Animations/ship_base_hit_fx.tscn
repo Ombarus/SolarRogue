@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scripts/animations/ship_hit_fx.gd" type="Script" id=1]
+[ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=2]
+[ext_resource path="res://scripts/animations/particle_instancer.gd" type="Script" id=3]
+[ext_resource path="res://scenes/tileset_source/hull_hit_fx.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Animation" id=2]
+resource_name = "blink_hit"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("overlay:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.55, 0.8 ),
+"transitions": PoolRealArray( 0.406126, 2.14355, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 0.960784, 1, 0.298039, 0.552941 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("particle_placeholder")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "instanciate"
+} ]
+}
+
+[node name="hit_fx" type="Node2D"]
+script = ExtResource( 1 )
+region_override = Rect2( 512, 256, 128, 128 )
+
+[node name="overlay" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+material = SubResource( 1 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 512, 256, 128, 128 )
+
+[node name="particle_placeholder" type="Node2D" parent="."]
+script = ExtResource( 3 )
+FXScene = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/blink_hit = SubResource( 2 )
+

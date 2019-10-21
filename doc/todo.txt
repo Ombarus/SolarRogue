@@ -20,6 +20,7 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- Spawned on top of sun. Wormhole looks weird
 - object with ghost unless they're agressive should not stop goto
 - tutorial ?
 - add hit FX
