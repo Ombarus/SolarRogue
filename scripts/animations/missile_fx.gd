@@ -2,6 +2,8 @@ extends Node2D
 
 export(float) var ttl = 1.0
 export(float) var arc_deg = 180.0
+export(Vector2) var rand_offset_x = Vector2(0.0, 0.0)
+export(Vector2) var rand_offset_y = Vector2(0.0, 0.0)
 
 var _active = false
 var _target = Vector2(0.0, 0.0)
@@ -9,6 +11,7 @@ var _radial_speed_deg = 0.0
 var _cur_time = 0.0
 var _orig_vec = Vector2(0.0, 0.0)
 var _center = Vector2(0.0, 0.0)
+var _random_offset : Vector2
 
 const DEBUG = false
 
@@ -28,7 +31,12 @@ func _unhandled_input(event):
 func Start(target):
 	_active = true
 	get_node("body_root/Sprite/AnimationPlayer").play("moving")
-	_target = target
+	
+	var x : float = (float(MersenneTwister.rand((rand_offset_x.y - rand_offset_x.x) * 1000)) / 1000.0) + rand_offset_x.x
+	var y : float = (float(MersenneTwister.rand((rand_offset_y.y - rand_offset_y.x) * 1000)) / 1000.0) + rand_offset_y.x
+	_random_offset = Vector2(x, y)
+	
+	_target = target + _random_offset
 	var dir = _target - position
 	_orig_vec = dir / 2.0
 	_center = position + _orig_vec

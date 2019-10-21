@@ -65,6 +65,7 @@
 [node name="Root" type="Node"]
 
 [node name="Behaviors" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Ambience" type="Node" parent="Behaviors"]
 editor/display_folded = true

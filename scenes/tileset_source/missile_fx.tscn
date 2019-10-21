@@ -48,6 +48,8 @@ color_ramp = SubResource( 3 )
 [node name="missile_fx" type="Node2D"]
 z_index = 1000
 script = ExtResource( 1 )
+rand_offset_x = Vector2( -30, 30 )
+rand_offset_y = Vector2( -30, 30 )
 
 [node name="body_root" type="Node2D" parent="."]
 

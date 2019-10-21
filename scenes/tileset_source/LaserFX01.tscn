@@ -10,6 +10,9 @@ position = Vector2( 0, 75.7018 )
 z_index = 1000
 script = ExtResource( 1 )
 speed = 1000.0
+rand_speed = Vector2( -350, 500 )
+rand_offset_x = Vector2( -30, 30 )
+rand_offset_y = Vector2( -30, 30 )
 
 [node name="root" type="Node2D" parent="."]
 script = ExtResource( 2 )
