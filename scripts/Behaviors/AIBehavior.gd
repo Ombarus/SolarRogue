@@ -49,8 +49,9 @@ func ConsiderInterests(obj):
 			var detected : bool = o.get_attrib("type") != "anomaly"
 			if id in known_anomalies:
 				detected = known_anomalies[id]
-			if o.get_attrib("ghost_memory") == null and o.get_attrib("has_ghost_memory") == null and detected == true:
+			if o.get_attrib("memory.was_seen_by", false) == false and detected == true:
 				if is_player == true:
+					o.set_attrib("memory.was_seen_by", true)
 					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Scanners have picked up a new " + o.get_attrib("type") + "[/color]")
 				filtered.push_back(id)
 				break

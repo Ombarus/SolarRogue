@@ -21,10 +21,8 @@ ROAD TO ALPHA :::
 
 TODO :::
 - Spawned on top of sun. Wormhole looks weird
-- object with ghost unless they're agressive should not stop goto
 - tutorial ?
-- add hit FX
-	- hull hit, shield hit, sfx
+- add hit SFX
 - managed to drop and pickup object in same frame resulting in a crash (from inventory window drop an item with a sort of double-click)
 	- Also, Unhandled_input is getting called even tough I have a full screen control stopping inputs... why ? (related to drag&drop ?)
 	- ****BUG*** rare crash when drag-dropping stuff from inventory to ground where it tries to pickup the item we're currently dropping and it hasn't been added to world yet so it crash in get_parent()
@@ -192,6 +190,8 @@ IDEAS:::
 	
 	
 DONE :::
+- object with ghost unless they're agressive should not stop goto
+hull hit, shield hit, 
 - BUG: can't fire multiple weapon if we select a target out of range (works if we select empty tiles) (I *think* this is fixed?)
 - Go back and fix & add all missing shortcuts for all buttons in the UI
 	- Issues in main menu (esc doesn't work ?
