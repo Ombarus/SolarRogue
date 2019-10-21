@@ -22,7 +22,11 @@ func OnDamageTaken_Callback(target, shooter):
 
 	var hit_root : Node = target.find_node("hit_fx", true, false)
 	if hit_root != null:
-		hit_root.play_hull_hit()
+		var shield_hp = target.get_attrib("shield.current_hp")
+		if shield_hp != null and shield_hp > 0:
+			hit_root.play_shield_hit()
+		else:
+			hit_root.play_hull_hit()
 	
 func OnObjectDestroyed_Callback(obj):
 	var destroyed_scene = obj.get_attrib("animation.destroyed")

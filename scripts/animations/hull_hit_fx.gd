@@ -6,12 +6,14 @@ var _cur_time = 0.0
 var _active = false
 
 func _ready():
-	get_node("Particles2D").emitting = true
+	if has_node("Particles2D"):
+		get_node("Particles2D").emitting = true
 	_cur_time = 0
 	_active = true
 	
 func Start(target):
-	get_node("Particles2D").emitting = true
+	if has_node("Particles2D"):
+		get_node("Particles2D").emitting = true
 	_cur_time = 0
 	_active = true
 

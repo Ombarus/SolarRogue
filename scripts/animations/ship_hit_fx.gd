@@ -7,3 +7,6 @@ func _ready():
 
 func play_hull_hit():
 	get_node("AnimationPlayer").play("blink_hit")
+
+func play_shield_hit():
+	get_node("AnimationPlayer").play("shield_hit")

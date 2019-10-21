@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/animations/hull_hit_fx.gd" type="Script" id=1]
+[ext_resource path="res://data/textures/space/space-bg_mine.png" type="Texture" id=2]
+[ext_resource path="res://data/textures/visualfx/shield_hit.png" type="Texture" id=3]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+//render_mode blend_add;
+
+void fragment() {
+	vec2 center_uv = (UV - 0.5) * 2.0;
+	float radius = length(center_uv);
+	vec3 normal = vec3(center_uv.x, center_uv.y, sqrt(1.0 - center_uv.x*center_uv.x - center_uv.y*center_uv.y));
+	normal = normalize(normal);
+	vec2 tex_coord = fract(vec2(0.5 + atan(normal.x, normal.z) / (2.0 * 3.14159265) + TIME*0.05, asin(normal.y) / 3.14159265 - 0.5)*2.0+TIME*0.05);
+	vec4 col = textureLod(TEXTURE, tex_coord, 1.0);
+	col.rgb = 1.0 - col.rgb;
+	col.a = clamp(1.0 - normal.z*1.0, 0.03, 1.0);
+	//col.rgb = vec3(1.0,0.0,0.0);
+	if (radius >= 0.89) {
+	//if (col.a >= 1.0) {
+		//col.rgb = vec3(1.0,0.0,0.0);
+		col.a = mix(0.0, 1.0, clamp(1.0-radius/0.1, 0.0, 1.0));
+		//col.a = clamp(col.a, 0.0, 1.0);
+		col.a = clamp(-1.0/0.1 * radius+10.0, 0.0, 1.0);
+	}
+	vec4 shield_col = vec4(0.0, 0.82, 0.82, 1.0) * col;
+	
+	col = mix(col, shield_col, radius);
+	
+	float wave = (sin(TIME*8.0 + (center_uv.x*2.0)) + 1.0) / 2.0;
+	wave -= 0.2;
+	wave = clamp(wave, 0.0, 1.0);
+	
+	col.a = col.a * wave;
+	
+    COLOR = col*2.0;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[node name="shield_fx_root" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 2 )
+
+[node name="shield_fx" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="shield_fx"]
+material = SubResource( 2 )
+texture = ExtResource( 3 )
+region_rect = Rect2( 1408, 128, 128, 128 )
+
