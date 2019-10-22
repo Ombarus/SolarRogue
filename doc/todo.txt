@@ -20,6 +20,8 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- Check what ressources are used and exported to reduce package size
+- Generate icons, banner, etc. for android release
 - Spawned on top of sun. Wormhole looks weird
 - tutorial ?
 - add hit SFX
@@ -29,8 +31,11 @@ TODO :::
 - Allow clicking outside of the map to move (it has weird behavior now with contextual clicks)
 - New movement (always goto) prevent going on top of something if you can interact with it :/
 - ***BUG: still issues when switching ship with ultimate scanner... memory is not created, ships turn invisible, etc.
-- Launch weapon effects with a slight offset from center so we can see multiple simultaneous shots
 - ***BUG: if disabled is in the base_attributes we cannot override it in modified_attributes !***
+- PERF: Render on Tablet is slow. Even main menu I only get ~20fps... in-game I max at 17, 6-7 while moving...
+		- Update scanner is slow.
+		- Could maybe update a bit less AI each frame
+		- Mostly seems to be rendering is pretty slow... Not sure what is slow, not so many textures, maybe I can improve the shaders ? Could it be the text again ? Overdraw ?
 - PERF: optimize lists. Seems like if you have 20-30 items in the transfer window there can be quite a delay to load and/or update the list
 	- Do not regen the whole list every time something change
 	- When generating the whole list... do it in a thread ? (or 4-5 per frame ?)
@@ -190,6 +195,7 @@ IDEAS:::
 	
 	
 DONE :::
+- Launch weapon effects with a slight offset from center so we can see multiple simultaneous shots
 - object with ghost unless they're agressive should not stop goto
 hull hit, shield hit, 
 - BUG: can't fire multiple weapon if we select a target out of range (works if we select empty tiles) (I *think* this is fixed?)
