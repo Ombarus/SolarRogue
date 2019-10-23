@@ -20,11 +20,12 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- Don't rediscover stuff is STILL not fixed
+- equilize sounds to similar db
 - Check what ressources are used and exported to reduce package size
 - Generate icons, banner, etc. for android release
 - Spawned on top of sun. Wormhole looks weird
 - tutorial ?
-- add hit SFX
 - managed to drop and pickup object in same frame resulting in a crash (from inventory window drop an item with a sort of double-click)
 	- Also, Unhandled_input is getting called even tough I have a full screen control stopping inputs... why ? (related to drag&drop ?)
 	- ****BUG*** rare crash when drag-dropping stuff from inventory to ground where it tries to pickup the item we're currently dropping and it hasn't been added to world yet so it crash in get_parent()
@@ -77,13 +78,14 @@ TODO :::
 	- ???
 - SOUNDS
 	- SFX :
+		- hull hit
+		- shield hit
 		- xMoving swoosh ?
 		- xengine noise when zoomed in close (2d for when panning the camera)
 		- Beeping for white, yellow and red log messages
 		- xCrafting noise for converter
 		- Equip noise for mounting
 		- xShooting Noise (Laser, Missile)
-		- Impact noise (diff for shield and hull ?)
 		- xBoom for destruction
 		- Noise for item drop / planet harvest drop ?
 			- different noise for each category of drop ?
@@ -95,6 +97,7 @@ TODO :::
 		- xAlert when low hull
 	- music
 		- change music when aggressive ennemy hunting ?
+		- Main Menu music
 		
 - Achievements
 - Could not install on OnePlus 3T Oreo (test with father's phone)

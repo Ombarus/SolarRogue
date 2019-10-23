@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_wpn_missilelaunch.wav-8e50a6de4059ca9392523060571dcaff.sample"
+
+[deps]
+
+source_file="res://data/sounds/sfx/missile/sfx_wpn_missilelaunch.wav"
+dest_files=[ "res://.import/sfx_wpn_missilelaunch.wav-8e50a6de4059ca9392523060571dcaff.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

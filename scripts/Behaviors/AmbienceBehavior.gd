@@ -12,6 +12,10 @@ func _ready():
 	BehaviorEvents.connect("OnDamageTaken", self, "OnDamageTaken_Callback")
 	BehaviorEvents.connect("OnEnergyChanged", self, "OnEnergyChanged_Callback")
 	BehaviorEvents.connect("OnCrafting", self, "OnCrafting_Callback")
+	BehaviorEvents.connect("OnMountRemoved", self, "OnMountChanged_Callback")
+	BehaviorEvents.connect("OnMountAdded", self, "OnMountChanged_Callback")
+	#BehaviorEvents.connect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
+	BehaviorEvents.connect("OnRequestLevelChange", self, "OnPlayerCreated_Callback")
 	
 	var vol : float = PermSave.get_attrib("settings.master_volume", 8.0)
 	_set_bus_volume("Master", vol)
@@ -28,6 +32,19 @@ func _set_bus_volume(bus_name, vol):
 		AudioServer.set_bus_mute(bus, true)
 	else:
 		AudioServer.set_bus_mute(bus, false)
+	
+func OnPlayerCreated_Callback(player):
+	var sfx : AudioStreamPlayer = get_node("Warp")
+	if sfx.playing == true:
+		return
+	sfx.play()
+	
+func OnMountChanged_Callback(obj, slot, src):
+	var sfx : AudioStreamPlayer = get_node("Mount")
+	if obj.get_attrib("type") != "player" or sfx.playing == true:
+		return
+		
+	sfx.play()
 	
 func OnLevelLoaded_Callback():
 	if has_node("BG") == true:

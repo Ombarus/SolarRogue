@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/animations/ship_hit_fx.gd" type="Script" id=1]
 [ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=2]
 [ext_resource path="res://scripts/animations/particle_instancer.gd" type="Script" id=3]
 [ext_resource path="res://scenes/tileset_source/hull_hit_fx.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/tileset_source/shield_fx_root.tscn" type="PackedScene" id=5]
+[ext_resource path="res://data/sounds/sfx/impact/hull/sfx_wpn_cannon2.wav" type="AudioStream" id=6]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
@@ -39,6 +40,18 @@ tracks/1/keys = {
 "args": [  ],
 "method": "instanciate"
 } ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("hull_hit_sfx:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -80,4 +93,9 @@ FXScene = ExtResource( 5 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/blink_hit = SubResource( 2 )
 anims/shield_hit = SubResource( 3 )
+
+[node name="hull_hit_sfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+
+[node name="shield_hit_sfx" type="AudioStreamPlayer2D" parent="."]
 

@@ -110,7 +110,7 @@ margin_top = 82.0
 margin_right = 70.0
 margin_bottom = 172.0
 rect_min_size = Vector2( 140, 90 )
-Text = "? credits"
+Text = "[?] credits"
 ShortcutKey = "?"
 AlwaysOnShortcut = false
 
@@ -129,7 +129,6 @@ ShortcutKey = "q"
 AlwaysOnShortcut = false
 
 [node name="base" parent="MenuRoot" instance=ExtResource( 9 )]
-editor/display_folded = true
 anchor_left = 1.0
 margin_left = -735.0
 margin_top = 32.0
