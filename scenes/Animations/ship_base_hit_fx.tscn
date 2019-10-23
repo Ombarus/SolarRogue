@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/animations/ship_hit_fx.gd" type="Script" id=1]
 [ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/tileset_source/hull_hit_fx.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/tileset_source/shield_fx_root.tscn" type="PackedScene" id=5]
 [ext_resource path="res://data/sounds/sfx/impact/hull/sfx_wpn_cannon2.wav" type="AudioStream" id=6]
+[ext_resource path="res://data/sounds/sfx/impact/shield/space shield sounds - 1.wav" type="AudioStream" id=7]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
@@ -70,6 +71,18 @@ tracks/0/keys = {
 "method": "instanciate"
 } ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("shield_hit_sfx:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [node name="hit_fx" type="Node2D"]
 script = ExtResource( 1 )
@@ -98,4 +111,5 @@ anims/shield_hit = SubResource( 3 )
 stream = ExtResource( 6 )
 
 [node name="shield_hit_sfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
 

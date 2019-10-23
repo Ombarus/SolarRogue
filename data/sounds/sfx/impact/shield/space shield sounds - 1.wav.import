@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/space shield sounds - 1.wav-31f7eef3f397dcb88ecad4f7ec20b6aa.sample"
+
+[deps]
+
+source_file="res://data/sounds/sfx/impact/shield/space shield sounds - 1.wav"
+dest_files=[ "res://.import/space shield sounds - 1.wav-31f7eef3f397dcb88ecad4f7ec20b6aa.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

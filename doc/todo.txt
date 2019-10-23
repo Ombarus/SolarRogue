@@ -20,7 +20,7 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- Don't rediscover stuff is STILL not fixed
+- translation
 - equilize sounds to similar db
 - Check what ressources are used and exported to reduce package size
 - Generate icons, banner, etc. for android release
@@ -78,26 +78,28 @@ TODO :::
 	- ???
 - SOUNDS
 	- SFX :
-		- hull hit
-		- shield hit
+		- revisit moving noise
+		- xhull hit
+		- xshield hit
 		- xMoving swoosh ?
 		- xengine noise when zoomed in close (2d for when panning the camera)
 		- Beeping for white, yellow and red log messages
 		- xCrafting noise for converter
-		- Equip noise for mounting
+		- xEquip noise for mounting
 		- xShooting Noise (Laser, Missile)
 		- xBoom for destruction
 		- Noise for item drop / planet harvest drop ?
 			- different noise for each category of drop ?
 		- Noise for transfer from ship to ship (or same as equip ?)
 		- Use nanobots
-		- Wormhole warp
+		- xWormhole warp
 		- autopilot interupted ?
 		- xAlert when low energy
 		- xAlert when low hull
 	- music
 		- change music when aggressive ennemy hunting ?
 		- Main Menu music
+		- Credit / success screen
 		
 - Achievements
 - Could not install on OnePlus 3T Oreo (test with father's phone)
