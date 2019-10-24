@@ -23,6 +23,7 @@ signal OnDealDamage(targets, shooter, weapon_data, shot_tile) # fired before all
 signal OnShotFired(shot_tile, shooter, weapon_data) # for VFX
 signal OnDamageTaken(target, shooter) # only fired if damage is > 0
 signal OnPickup(picker, picked)
+signal OnObjectPicked(picker)
 signal OnDropCargo(dropper, item_id, count)
 signal OnDropMount(dropper, item_id, index)
 signal OnRemoveMount(dropper, item_id, index)

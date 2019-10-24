@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/gb-equip-test.wav-5002953cd4b3bd5cf9146844d7ec37aa.sample"
+
+[deps]
+
+source_file="res://data/sounds/sfx/inventory/gb-equip-test.wav"
+dest_files=[ "res://.import/gb-equip-test.wav-5002953cd4b3bd5cf9146844d7ec37aa.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

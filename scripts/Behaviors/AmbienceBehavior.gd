@@ -17,6 +17,10 @@ func _ready():
 	#BehaviorEvents.connect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
 	BehaviorEvents.connect("OnRequestLevelChange", self, "OnPlayerCreated_Callback")
 	
+	BehaviorEvents.connect("OnDropCargo", self, "OnDrop_Callback")
+	BehaviorEvents.connect("OnDropMount", self, "OnDrop_Callback")
+	BehaviorEvents.connect("OnObjectPicked", self, "OnPickup_Callback")
+	
 	var vol : float = PermSave.get_attrib("settings.master_volume", 8.0)
 	_set_bus_volume("Master", vol)
 	vol = PermSave.get_attrib("settings.sfx_volume", 8.0)
@@ -32,6 +36,20 @@ func _set_bus_volume(bus_name, vol):
 		AudioServer.set_bus_mute(bus, true)
 	else:
 		AudioServer.set_bus_mute(bus, false)
+	
+func OnDrop_Callback(dropper, item_id, countorindex):
+	var is_player = dropper.get_attrib("type") == "player"
+	if not is_player:
+		return
+		
+	get_node("Drop").play()
+	
+func OnPickup_Callback(picker):
+	var is_player = picker.get_attrib("type") == "player"
+	if not is_player:
+		return
+		
+	get_node("Grab").play()
 	
 func OnPlayerCreated_Callback(player):
 	var sfx : AudioStreamPlayer = get_node("Warp")

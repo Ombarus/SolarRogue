@@ -60,6 +60,7 @@ func bubble_selection_changed():
 ########### DRAG & DROP ###############
 
 func bubble_drop(orig_data, dst_data):
+	get_tree().set_input_as_handled()
 	emit_signal("OnDragDropCompleted", orig_data, dst_data)
 	
 func can_drop_data(position, data):

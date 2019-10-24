@@ -143,6 +143,7 @@ func OnPickup_Callback(picker, picked):
 		BehaviorEvents.emit_signal("OnRequestObjectUnload", obj)
 		obj = null
 	if total_pickup_ap > 0:
+		BehaviorEvents.emit_signal("OnObjectPicked", picker)
 		BehaviorEvents.emit_signal("OnUseAP", picker, total_pickup_ap)
 	filtered_obj.clear() # the objects have been destroyed, just want to make sure I don't forget about it
 	
