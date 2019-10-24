@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/animations/MissileFX2.gd" type="Script" id=1]
 [ext_resource path="res://scripts/animations/laser_vfx_test02.gd" type="Script" id=2]
 [ext_resource path="res://data/textures/visualfx/laser_test.png" type="Texture" id=3]
-[ext_resource path="res://data/sounds/sfx/laser/270343__littlerobotsoundfactory__shoot-01-freesound-cc3.wav" type="AudioStream" id=4]
+[ext_resource path="res://data/sounds/sfx/laser/laser3.wav" type="AudioStream" id=4]
 
 [node name="MissileFX2" type="Node2D"]
 position = Vector2( 0, 75.7018 )
@@ -28,3 +28,4 @@ offset = Vector2( -64, -128 )
 stream = ExtResource( 4 )
 autoplay = true
 
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_AudioStreamPlayer2D_finished"]

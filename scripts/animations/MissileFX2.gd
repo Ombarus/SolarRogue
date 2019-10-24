@@ -14,6 +14,7 @@ var _origin = Vector2(0.0, 0.0)
 var _increment = Vector2(1.0, 0.0)
 var _actual_speed = speed
 var _random_offset : Vector2
+var _delete_me = false
 
 func set_active(newval):
 	active = newval
@@ -32,6 +33,7 @@ func Start(t):
 	target = t+_random_offset
 	_cur_time = 0
 	active = true
+	_delete_me = false
 	get_node("root").set_reset(true)
 	_ttl = ttl
 	var speed_offset : float = (float(MersenneTwister.rand((rand_speed.y - rand_speed.x) * 1000)) / 1000.0) + rand_speed.x
@@ -46,6 +48,12 @@ func Start(t):
 
 
 func _process(delta):
+	if active == false and _delete_me == true:
+		_cur_time += delta
+		if _cur_time >= ttl:
+			get_parent().remove_child(self)
+			queue_free()
+			
 	if active == false:
 		return
 		
@@ -56,8 +64,9 @@ func _process(delta):
 	
 	if _cur_time >= _ttl:
 		active = false
-		#get_node("root").position.x = 0
+		visible = false
+		_delete_me = true
 		_cur_time = 0
 		BehaviorEvents.emit_signal("OnAnimationDone")
-		get_parent().remove_child(self)
-		queue_free()
+		#get_parent().remove_child(self)
+		#queue_free()

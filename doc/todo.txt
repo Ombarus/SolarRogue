@@ -79,6 +79,8 @@ TODO :::
 - SOUNDS
 	- SFX :
 		- revisit moving noise
+		- Replace flagdrop with something NOT CC3 ? or I have to add link to license, state if I did any changes, etc. https://creativecommons.org/licenses/by/3.0/
+		- Replace 270343__littlerobotsoundfactory__shoot-01-freesound-cc3.wav with something NOT CC3 ?
 		- xhull hit
 		- xshield hit
 		- xMoving swoosh ?

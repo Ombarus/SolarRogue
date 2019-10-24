@@ -110,7 +110,7 @@ margin_top = 82.0
 margin_right = 70.0
 margin_bottom = 172.0
 rect_min_size = Vector2( 140, 90 )
-Text = "[?] credits"
+Text = "[?]credits"
 ShortcutKey = "?"
 AlwaysOnShortcut = false
 
