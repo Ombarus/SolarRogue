@@ -20,15 +20,20 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- Save after each turn
+- missing missile icon in transfer window
 - translation
+	- Godot : Implement Localization
+		- You can link CSVs in localization, replace certain resources (like textures) with others and even change the project name based on choosen locale
+		- CSVs file are automatically converted into localization files
+			- use tr() method to get translation from keyboard
+			- button labels and such automatically check if text is a key and translate
+			- for format godot support stuff like "bleh {id}".format({"id":"hello world"})\
 - equilize sounds to similar db
 - Check what ressources are used and exported to reduce package size
 - Generate icons, banner, etc. for android release
 - Spawned on top of sun. Wormhole looks weird
 - tutorial ?
-- managed to drop and pickup object in same frame resulting in a crash (from inventory window drop an item with a sort of double-click)
-	- Also, Unhandled_input is getting called even tough I have a full screen control stopping inputs... why ? (related to drag&drop ?)
-	- ****BUG*** rare crash when drag-dropping stuff from inventory to ground where it tries to pickup the item we're currently dropping and it hasn't been added to world yet so it crash in get_parent()
 - Allow clicking outside of the map to move (it has weird behavior now with contextual clicks)
 - New movement (always goto) prevent going on top of something if you can interact with it :/
 - ***BUG: still issues when switching ship with ultimate scanner... memory is not created, ships turn invisible, etc.
@@ -53,7 +58,6 @@ TODO :::
 	- Confusion (ship moves in random direction ?)
 	- Naked Singularity (constrict ship, prevent movement until ship can escape it's pull (damage per turn ?))
 	- Complete shutdown (unable to act for X turn)
-- Improve AI to work with Torpedo (try to avoid shooting allies. Allies can take damage, etc.)
 - Add random derelic you can pickup items from
 	- when trying to pickup derelic should warn player : "not empty" (see final converter of yendor)
 - recipe row size != inventory row size
@@ -78,26 +82,14 @@ TODO :::
 	- ???
 - SOUNDS
 	- SFX :
+		- no sound when transfering cargo (but mount is ok)
 		- revisit moving noise
-		- Replace flagdrop with something NOT CC3 ? or I have to add link to license, state if I did any changes, etc. https://creativecommons.org/licenses/by/3.0/
-		- Replace 270343__littlerobotsoundfactory__shoot-01-freesound-cc3.wav with something NOT CC3 ?
-		- xhull hit
-		- xshield hit
-		- xMoving swoosh ?
-		- xengine noise when zoomed in close (2d for when panning the camera)
 		- Beeping for white, yellow and red log messages
-		- xCrafting noise for converter
-		- xEquip noise for mounting
-		- xShooting Noise (Laser, Missile)
-		- xBoom for destruction
 		- Noise for item drop / planet harvest drop ?
 			- different noise for each category of drop ?
 		- Noise for transfer from ship to ship (or same as equip ?)
 		- Use nanobots
-		- xWormhole warp
 		- autopilot interupted ?
-		- xAlert when low energy
-		- xAlert when low hull
 	- music
 		- change music when aggressive ennemy hunting ?
 		- Main Menu music
@@ -111,8 +103,6 @@ TODO :::
 	- AI are only interested in player so don't check all surrounding
 	- Can not check empty tile to avoid 80x80 tile check with the ultimate scanner ?
 - OPTIM : loading json cache
-- BUG: moving while targetting will cancel overlay but won't push back HUD
-
 - going down wormhole should take ap and/or energy
 - Don't potion if not needed !
 - Perf issues on my tablet
@@ -127,11 +117,11 @@ TODO :::
 	- Nethack : Quest level different by race (I don't have race for now ?)
 	- Dependency ? Castle can spawn between 25-29 but never before medusa
 - Message if you try to go up the home wormhole
-- Save after each turn
 - make sure player cannot generate more energy than max capacity
 - review multi-tile objects
 	- Collision on each tile but behave as a single entity ?
-- BUG: Any random interaction should cancel targetting ?
+- BUG: Any random interaction should cancel targetting ? (CNR)
+- BUG: moving while targetting will cancel overlay but won't push back HUD (CNR)
 - Spawning
 - Basic interaction
 	- Look around
@@ -139,8 +129,6 @@ TODO :::
 	- Shoot
 		- select target using keyboard
 - Two places where I access cargo content and just do -= 1. or .remove()... but if the result returned was in BaseAttribute that's dangerous
-
-- check if assigning array or dictionary copy or reference content in godot
 - Look & feel
 	- Icons :
 		- Converter
@@ -189,19 +177,31 @@ polish :::
 	
 - Read-Only base_attributes to prevent un-savable changes by mistake
 - re-work Object identification (show as unknown, then remember id-ed stuff)
+- Improve AI to work with Torpedo (try to avoid shooting allies. Allies can take damage, etc.)
 	
-- Godot : Implement Localization
-	- You can link CSVs in localization, replace certain resources (like textures) with others and even change the project name based on choosen locale
-	- CSVs file are automatically converted into localization files
-		- use tr() method to get translation from keyboard
-		- button labels and such automatically check if text is a key and translate
-		- for format godot support stuff like "bleh {id}".format({"id":"hello world"})\
 		
 IDEAS:::
 - If you try to produce energy over the maximum of the ship capacity there is a chance you "choke" (engine goes critical and blow up)
 	
 	
 DONE :::
+- managed to drop and pickup object in same frame resulting in a crash (from inventory window drop an item with a sort of double-click)
+	- Also, Unhandled_input is getting called even tough I have a full screen control stopping inputs... why ? (related to drag&drop ?)
+	- ****BUG*** rare crash when drag-dropping stuff from inventory to ground where it tries to pickup the item we're currently dropping and it hasn't been added to world yet so it crash in get_parent()
+	- (I put a "get_tree().set_input_as_handled()" in the drag-and-drop call... should fix the issue)
+		- xReplace flagdrop with something NOT CC3 ? or I have to add link to license, state if I did any changes, etc. https://creativecommons.org/licenses/by/3.0/
+		- xReplace 270343__littlerobotsoundfactory__shoot-01-freesound-cc3.wav with something NOT CC3 ?
+		- xhull hit
+		- xshield hit
+		- xMoving swoosh ?
+		- xengine noise when zoomed in close (2d for when panning the camera)
+		- xWormhole warp
+		- xAlert when low energy
+		- xAlert when low hull
+		- xCrafting noise for converter
+		- xEquip noise for mounting
+		- xShooting Noise (Laser, Missile)
+		- xBoom for destruction
 - Launch weapon effects with a slight offset from center so we can see multiple simultaneous shots
 - object with ghost unless they're agressive should not stop goto
 hull hit, shield hit, 
