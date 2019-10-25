@@ -102,6 +102,7 @@ func OnScannerUpdated_Callback(obj):
 		obj.set_attrib("ai.pathfinding", "attack")
 		obj.set_attrib("ai.target", player)
 		obj.set_attrib("wandering", false)
+		BehaviorEvents.emit_signal("OnStatusChanged", obj)
 	
 
 	
