@@ -20,15 +20,14 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- Dropping torpedo dropped missile ?!?
+- art
+	- missile icon
+	- torpedo icon
+	- converter ?
+- Still issues with "detected" objects. If we blow up a planet, the "food" will be considered never seen until we move then it interup the move
 - difficulty (for youtuber like spacegamejunkie.... this is too tough right now)
-- Outline :
-	- Fix desaturation on Wormholes ?
-	- Remove outline on ghost
-	- boardable ship outlined in white ?
-	- test boardable ship
-- Some way to differenciate my ship from others.
 - Save after each turn
-- missing missile icon in transfer window
 - translation
 	- Godot : Implement Localization
 		- You can link CSVs in localization, replace certain resources (like textures) with others and even change the project name based on choosen locale
@@ -190,6 +189,13 @@ IDEAS:::
 	
 	
 DONE :::
+- missing missile icon in transfer window
+- Some way to differenciate my ship from others.
+- Outline :
+	- Fix desaturation on Wormholes ?
+	- Remove outline on ghost
+	- boardable ship outlined in white ?
+	- test boardable ship
 	- fix desaturation with new layout of ships
 - Make the planets spin on themselves
 	- Would have to change planet design... they would need to be seen from "top". Deformation from rotation looks strange, Also planet with moons or rings would need to be split into multiple parts.

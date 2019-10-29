@@ -160,7 +160,7 @@ func OnScannerUpdated_Callback(obj):
 	for id in new_out_objs:
 		var o = Globals.LevelLoaderRef.GetObjectById(id)
 		var anomaly_detected = o.get_attrib("type") != "anomaly" or (id in known_anomalies and known_anomalies[id] == true)
-		if o != null and o.get_attrib("ghost_memory") == null and anomaly_detected == true:
+		if o != null and o.get_attrib("ghost_memory") == null and anomaly_detected == true and o.get_attrib("no_ghost") != true:
 			if o.get_attrib("has_ghost_memory") != null:
 				print("WOAH WTF BBQ !")
 			# CREATE A GHOST

@@ -1,7 +1,7 @@
 {
 	"name_id":"Torpedo",
 	"type":"ammo",
-	"sprite":"missile",
+	"sprite":"torpedo",
 	"icon": [{
 		"texture":"data/textures/space-sprite.png",
 		"region":[1280,0,128,128]
