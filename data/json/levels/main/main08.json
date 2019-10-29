@@ -5,6 +5,7 @@
 	"type":"wormhole",
 	"sprite":"wormhole",
 	"fully_mapped":false,
+	"no_ghost":true,
 	"objects": [
 		{"name":"data/json/ships/human/scout_laser.json", "spawn_rate":0.0003125, "max":5},
 		{"name":"data/json/ships/human/bomber.json", "spawn_rate":0.0003125, "max":5},

@@ -5,6 +5,7 @@
 	"type":"wormhole",
 	"sprite":"wormhole",
 	"fully_mapped":false,
+	"no_ghost":true,
 	"objects": [
 		{"name":"scenes/level_prefab/jerg/double_scouts.tscn", "spawn_rate":0.1, "max":10},
 		{"name":"scenes/level_prefab/jerg/frigate_scouts.tscn", "spawn_rate":0.0003125, "max":4},

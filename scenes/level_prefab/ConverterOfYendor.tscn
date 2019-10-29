@@ -34,7 +34,6 @@ region_enabled = true
 region_rect = Rect2( 1280, 384, 128, 128 )
 
 [node name="human_battleship" parent="." instance=ExtResource( 1 )]
-editor/display_folded = true
 position = Vector2( 0, -128 )
 PreloadData = "res://data/json/ships/human/battleship.json"
 PreloadJSON = "{

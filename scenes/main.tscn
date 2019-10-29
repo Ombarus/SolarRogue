@@ -545,7 +545,6 @@ AP_behavior_path = NodePath("../../Behaviors/AP")
 visible = false
 
 [node name="DEBUG" type="Node2D" parent="."]
-visible = false
 script = ExtResource( 65 )
 
 [node name="Sample" parent="." instance=ExtResource( 66 )]

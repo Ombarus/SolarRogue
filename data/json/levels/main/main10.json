@@ -5,6 +5,7 @@
 	"type":"wormhole",
 	"sprite":"wormhole",
 	"fully_mapped":false,
+	"no_ghost":true,
 	"objects": [
 		{"name":"data/json/ships/human/battleship.json", "spawn_rate":0.00046875, "max":3},
 		{"name":"scenes/level_prefab/jerg/frigate_scouts.tscn", "spawn_rate":0.00028125, "max":3},

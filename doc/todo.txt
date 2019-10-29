@@ -20,6 +20,7 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- get rid of normal map ref in sprites
 - Dropping torpedo dropped missile ?!?
 - art
 	- missile icon

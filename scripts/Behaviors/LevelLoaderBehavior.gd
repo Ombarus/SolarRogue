@@ -168,7 +168,10 @@ func GenerateLevelFromTemplate(levelData):
 	var i = MersenneTwister.rand(allTilesCoord.size()) # choose a random spawn point for the entrance
 	# there must always be a wormhole leading back where we came from
 	var depth_override = {"depth":current_depth - 1}
-	var n = CreateAndInitNode(_current_level_data, allTilesCoord[i], depth_override)
+	var spawn_point = allTilesCoord[i]
+	if "force_pos" in _current_level_data:
+		spawn_point = Vector2(_current_level_data["force_pos"][0], _current_level_data["force_pos"][1])
+	var n = CreateAndInitNode(_current_level_data, spawn_point, depth_override)
 	allTilesCoord.remove(i)
 	_current_level_data = levelData
 	

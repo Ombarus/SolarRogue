@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/object.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/tileset_source/planet_d.tscn" type="PackedScene" id=2]
+
+[node name="Tutorial" type="Node2D"]
+
+[node name="planet" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -768 )
+PreloadData = "res://data/json/stellar/planet.json"
+PreloadJSON = "{
+\"sprite_choice\": [\"planet_d\"],
+\"icon\":[{\"texture\":\"data/textures/space-sprite.png\", \"region\":[896,0,128,128]}],
+\"harvestable\": {
+	\"inventory_size\":[1,1],
+	\"pondered_inventory_content\": [	{\"src\": \"data/json/items/misc/uranium.json\", \"chance\":10}],
+	\"base_rate\":[1.0, 1.0],
+	\"defense_chance\":0.0
+}
+}"
+base_attributes = {
+
+}
+modified_attributes = {
+
+}
+
+[node name="planet_a" parent="planet" instance=ExtResource( 2 )]
+
