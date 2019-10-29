@@ -16,7 +16,7 @@ z_index = 900
 [node name="MovementAnimations" parent="." instance=ExtResource( 3 )]
 
 [node name="outline" type="Sprite" parent="."]
-modulate = Color( 1, 0, 0, 1 )
+modulate = Color( 1, 1, 1, 0 )
 texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 640, 768, 128, 128 )

@@ -1,7 +1,7 @@
 {
 	"name_id":"Scout",
 	"type":"player",
-	"sprite":"player",
+	"sprite":"human_scout",
 	"icon": {
 		"texture":"data/textures/space-sprite.png",
 		"region":[768,256,128,128]
@@ -31,7 +31,8 @@
 		"transferable":true,
 		"content":[
 			{"src":"data/json/items/weapons/missile.json", "count":10},
-			{"src":"data/json/items/consumables/repair_nanobots.json", "count":1}
+			{"src":"data/json/items/consumables/repair_nanobots.json", "count":1},
+			{"src":"data/json/items/misc/scout_body.json", "count":1}
 		]
 	},
 	"converter": {

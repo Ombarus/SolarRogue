@@ -20,7 +20,12 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- fix desaturation with new layout of ships
+- difficulty (for youtuber like spacegamejunkie.... this is too tough right now)
+- Outline :
+	- Fix desaturation on Wormholes ?
+	- Remove outline on ghost
+	- boardable ship outlined in white ?
+	- test boardable ship
 - Some way to differenciate my ship from others.
 - Save after each turn
 - missing missile icon in transfer window
@@ -185,6 +190,7 @@ IDEAS:::
 	
 	
 DONE :::
+	- fix desaturation with new layout of ships
 - Make the planets spin on themselves
 	- Would have to change planet design... they would need to be seen from "top". Deformation from rotation looks strange, Also planet with moons or rings would need to be split into multiple parts.
 - managed to drop and pickup object in same frame resulting in a crash (from inventory window drop an item with a sort of double-click)

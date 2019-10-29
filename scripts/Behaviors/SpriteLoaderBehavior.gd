@@ -36,10 +36,21 @@ func OnObjectLoaded_Callback(obj):
 			obj.set_attrib("icon", obj.get_attrib("icon")[x])
 		var scene = load("res://scenes/tileset_source/" + sprite_choice[x] + ".tscn")
 		node = scene.instance()
-		
-	obj.call_deferred("add_child", node)
+	
+	self.call_deferred("add_child_and_set_material", obj, node)
+	#obj.call_deferred("add_child", node)
+
+func add_child_and_set_material(obj, child):
+	obj.add_child(child)
 	if obj.get_attrib("ghost_memory") != null:
-		node.material = ghost_material
+		if child is Sprite:
+			child.material = ghost_material
+		for subchild in child.get_children():
+			if subchild is Sprite:
+				subchild.material = ghost_material
+	else:
+		BehaviorEvents.emit_signal("OnStatusChanged", obj)
+	
 
 func CanDrawSprite(sprite_data, pos):
 	var current_obj_at_pos = levelLoaderRef.GetTileData(pos)
@@ -62,18 +73,3 @@ func CanDrawSprite(sprite_data, pos):
 		print(sprite_level, " >= ", max_level, " at ", pos)
 		return false
 		
-	
-#s = Sprite.new() # Create a new sprite!
-#add_child(s) # Add it as a child of this node.
-#s.queue_free() # Queues the Node for deletion at the end of the current Frame.
-
-#var scene = load("res://myscene.tscn") # Will load when the script is instanced.
-#var scene = preload("res://myscene.tscn") # Will load when parsing the script.
-#var node = scene.instance()
-#add_child(node)
-		
-		
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass

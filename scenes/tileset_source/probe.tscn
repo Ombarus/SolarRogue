@@ -11,6 +11,7 @@ z_index = 900
 
 [node name="outline" type="Sprite" parent="."]
 texture = ExtResource( 2 )
+modulate = Color( 1, 1, 1, 0 )
 region_enabled = true
 region_rect = Rect2( 1664, 768, 128, 128 )
 
