@@ -1,21 +1,40 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/GUI/ButtonBase.gd" type="Script" id=1]
-[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=2]
-[ext_resource path="res://data/styles/btn_hover.tres" type="StyleBox" id=3]
-[ext_resource path="res://data/styles/btn_pressed.tres" type="StyleBox" id=4]
-[ext_resource path="res://data/styles/trans.tres" type="StyleBox" id=5]
-[ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=6]
-[ext_resource path="res://data/sounds/sfx/btn/hover2.wav" type="AudioStream" id=7]
-[ext_resource path="res://data/sounds/sfx/btn/click.wav" type="AudioStream" id=8]
+[ext_resource path="res://data/styles/animated_btn.tres" type="StyleBox" id=2]
+[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
+[ext_resource path="res://data/styles/btn_hover.tres" type="StyleBox" id=4]
+[ext_resource path="res://data/styles/btn_pressed.tres" type="StyleBox" id=5]
+[ext_resource path="res://data/styles/trans.tres" type="StyleBox" id=6]
+[ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=7]
+[ext_resource path="res://data/sounds/sfx/btn/hover2.wav" type="AudioStream" id=8]
+[ext_resource path="res://data/sounds/sfx/btn/click.wav" type="AudioStream" id=9]
+
+[sub_resource type="Animation" id=1]
+resource_name = "highlight"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:HighlightStyle:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 0 ) ]
+}
 
 [node name="Button" type="Control"]
 margin_right = 226.0
 margin_bottom = 144.0
 script = ExtResource( 1 )
 Text = "Weapon"
+HighlightStyle = ExtResource( 2 )
 
-[node name="base" parent="." instance=ExtResource( 2 )]
+[node name="base" parent="." instance=ExtResource( 3 )]
 margin_right = 0.0
 margin_bottom = 0.0
 border_style = "━"
@@ -23,24 +42,27 @@ border_style = "━"
 [node name="btn" type="Button" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/hover = ExtResource( 3 )
-custom_styles/pressed = ExtResource( 4 )
-custom_styles/focus = ExtResource( 5 )
-custom_styles/normal = ExtResource( 5 )
-custom_fonts/font = ExtResource( 6 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 6 )
+custom_styles/normal = ExtResource( 6 )
+custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 text = "Weapon"
 
 [node name="HoverSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
+stream = ExtResource( 8 )
 volume_db = -20.0
 bus = "Sfx"
 
 [node name="ClickSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
+stream = ExtResource( 9 )
 bus = "Sfx"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/highlight = SubResource( 1 )
 
 [connection signal="visibility_changed" from="." to="." method="_on_Button_visibility_changed"]
 [connection signal="mouse_entered" from="btn" to="." method="_on_btn_mouse_entered"]

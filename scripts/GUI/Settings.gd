@@ -40,3 +40,10 @@ func value_changed_Callback(value, bus, save_name):
 		AudioServer.set_bus_mute(bus, true)
 	else:
 		AudioServer.set_bus_mute(bus, false)
+
+
+func _on_TutoCheck_toggled(button_pressed):
+	var was_enabled : bool = PermSave.get_attrib("tutorial.enabled")
+	PermSave.set_attrib("tutorial.enabled", button_pressed)
+	if was_enabled == false and button_pressed == true:
+		Globals.TutorialRef.emit_signal("ResetTuto")

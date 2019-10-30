@@ -8,7 +8,10 @@ export(int) var ShortcutEnum = 0
 export(bool) var AlwaysOnShortcut = true
 #export(ShortCut) var Action = null setget set_action
 export(bool) var Disabled = false setget set_disabled
+export(StyleBox) var HighlightStyle
 signal pressed
+
+var _prev_style : StyleBox = null
 
 func set_disabled(newval):
 	get_node("btn").disabled = newval
@@ -24,15 +27,23 @@ func set_text(newval):
 		
 
 func _ready():
+	BehaviorEvents.connect("OnHighlightUIElement", self, "Hightlight_Callback")
+	BehaviorEvents.connect("OnResetHighlight", self, "ResetHightlight_Callback")
 	get_node("base").connect("OnUpdateLayout", self, "OnUpdateLayout_Callback")
 	set_text(Text)
 	OnUpdateLayout_Callback()
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func ResetHightlight_Callback():
+	get_node("AnimationPlayer").stop(true)
+	if _prev_style != null:
+		get_node("btn").set('custom_styles/normal', _prev_style)
 
+func Hightlight_Callback(id):
+	if name == id:
+		get_node("AnimationPlayer").play("highlight")
+		_prev_style = get_node("btn").get("custom_styles/normal")
+		get_node("btn").set('custom_styles/normal', HighlightStyle)
+		
 func OnUpdateLayout_Callback():
 	var frame_size : Vector2 = get_node("base").GetFrameSize()
 	var frame_offset : Vector2 = get_node("base").GetFrameOffset()
@@ -43,6 +54,8 @@ func OnUpdateLayout_Callback():
 func _on_btn_pressed():
 	get_node("ClickSFX").play()
 	emit_signal("pressed")
+	if get_node("btn").get("custom_styles/normal") == HighlightStyle:
+		BehaviorEvents.emit_signal("OnResetHighlight")
 
 func RegisterShortcut():
 	if ShortcutKey != "":

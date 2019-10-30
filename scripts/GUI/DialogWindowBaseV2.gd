@@ -1,5 +1,6 @@
 tool
 extends Control
+class_name MyWindow
 
 export(bool) var dialog_ok = false setget set_dialog_ok
 export(bool) var dialog_cancel = false setget set_dialog_cancel

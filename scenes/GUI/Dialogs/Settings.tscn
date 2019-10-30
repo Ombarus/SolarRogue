@@ -39,16 +39,55 @@ margin_top = 59.0
 margin_right = -13.0
 margin_bottom = -41.0
 
-[node name="Label2" type="Label" parent="base/VBoxContainer"]
+[node name="Label3" type="Label" parent="base/VBoxContainer"]
 margin_right = 756.0
 margin_bottom = 22.0
+theme = ExtResource( 4 )
+text = "Gameplay"
+
+[node name="Enable Tutorial" type="Panel" parent="base/VBoxContainer"]
+margin_top = 26.0
+margin_right = 756.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+custom_styles/panel = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="base/VBoxContainer/Enable Tutorial"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = -0.814484
+margin_bottom = -0.814484
+text = "Tutorial"
+valign = 1
+
+[node name="TutoCheck" type="CheckButton" parent="base/VBoxContainer/Enable Tutorial"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -76.0
+margin_top = -20.0
+margin_bottom = 20.0
+pressed = true
+
+[node name="spacer2" type="Label" parent="base/VBoxContainer"]
+margin_top = 60.0
+margin_right = 756.0
+margin_bottom = 82.0
+
+[node name="Label2" type="Label" parent="base/VBoxContainer"]
+margin_top = 86.0
+margin_right = 756.0
+margin_bottom = 108.0
 theme = ExtResource( 4 )
 text = "Video"
 
 [node name="FullScreen" type="Panel" parent="base/VBoxContainer"]
-margin_top = 26.0
+margin_top = 112.0
 margin_right = 756.0
-margin_bottom = 56.0
+margin_bottom = 142.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 5 )
@@ -72,21 +111,21 @@ margin_top = -20.0
 margin_bottom = 20.0
 
 [node name="spacer" type="Label" parent="base/VBoxContainer"]
-margin_top = 60.0
+margin_top = 146.0
 margin_right = 756.0
-margin_bottom = 82.0
+margin_bottom = 168.0
 
 [node name="Label" type="Label" parent="base/VBoxContainer"]
-margin_top = 86.0
+margin_top = 172.0
 margin_right = 756.0
-margin_bottom = 108.0
+margin_bottom = 194.0
 theme = ExtResource( 4 )
 text = "Sound"
 
 [node name="MasterVolume" type="Panel" parent="base/VBoxContainer"]
-margin_top = 112.0
+margin_top = 198.0
 margin_right = 756.0
-margin_bottom = 142.0
+margin_bottom = 228.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 6 )
@@ -114,11 +153,12 @@ max_value = 81.0
 step = 0.1
 value = 1.0
 exp_edit = true
+ticks_on_borders = false
 
 [node name="SFXVolume" type="Panel" parent="base/VBoxContainer"]
-margin_top = 146.0
+margin_top = 232.0
 margin_right = 756.0
-margin_bottom = 176.0
+margin_bottom = 262.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 5 )
@@ -146,9 +186,9 @@ value = 1.0
 exp_edit = true
 
 [node name="MusicVolume" type="Panel" parent="base/VBoxContainer"]
-margin_top = 180.0
+margin_top = 266.0
 margin_right = 756.0
-margin_bottom = 210.0
+margin_bottom = 296.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 6 )
@@ -176,5 +216,7 @@ max_value = 81.0
 step = 0.5
 value = 1.0
 exp_edit = true
+ticks_on_borders = false
 
+[connection signal="toggled" from="base/VBoxContainer/Enable Tutorial/TutoCheck" to="." method="_on_TutoCheck_toggled"]
 [connection signal="toggled" from="base/VBoxContainer/FullScreen/CheckButton" to="." method="_on_CheckButton_toggled"]

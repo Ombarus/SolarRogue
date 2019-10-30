@@ -20,6 +20,19 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- Tutorial
+	- steps :
+		- movement -- done
+		- pickup -- done
+		- shoot planet -- done
+		- view neutral blue highlight
+		- view ennemy red highlight
+		- converter, recycle energy
+		- converter, make missile
+		- inventory, equip new items
+		- wormhole
+	- Tuto Skip Prompt
+	- Auto-size tuto prompt
 - get rid of normal map ref in sprites
 - Dropping torpedo dropped missile ?!?
 - art
@@ -190,6 +203,9 @@ IDEAS:::
 	
 	
 DONE :::
+	- Menu option to re-enable Tuto
+	- Tuto Prompt
+	- Tuto Behavior
 - missing missile icon in transfer window
 - Some way to differenciate my ship from others.
 - Outline :

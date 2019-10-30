@@ -21,6 +21,8 @@ func OnPlayerCreated_Callback(player):
 	if not File.new().file_exists("user://savegame.save"):
 		var player_name = player.get_attrib("player_name")
 		BehaviorEvents.call_deferred("emit_signal", "OnPushGUI", "WelcomeScreen", {"player_name":player_name})
+	else: # Middle of the game, tuto can start now. Start of game we wait till welcome screen is gone
+		Globals.TutorialRef.emit_signal("StartTuto")
 
 func OnGUILoaded_Callback(name, obj):
 	_gui_list[name] = obj
@@ -51,6 +53,7 @@ func OnPopGUI_Callback():
 		_gui_list[_stack[-1]].visible = false
 	_stack.pop_back()
 	if _stack.size() > 0:
+		BehaviorEvents.emit_signal("OnGUIChanged", _stack[-1])
 		_gui_list[_stack[-1]].call_deferred("OnFocusGained")
 		
 func _update_shortcut(node):
