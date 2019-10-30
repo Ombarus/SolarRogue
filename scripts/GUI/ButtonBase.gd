@@ -36,10 +36,12 @@ func _ready():
 func ResetHightlight_Callback():
 	get_node("AnimationPlayer").stop(true)
 	if _prev_style != null:
+		print(name + " RESET Highlight")
 		get_node("btn").set('custom_styles/normal', _prev_style)
 
 func Hightlight_Callback(id):
 	if name == id:
+		print("highlight " + id)
 		get_node("AnimationPlayer").play("highlight")
 		_prev_style = get_node("btn").get("custom_styles/normal")
 		get_node("btn").set('custom_styles/normal', HighlightStyle)
@@ -52,10 +54,10 @@ func OnUpdateLayout_Callback():
 	btn.rect_position = frame_offset
 
 func _on_btn_pressed():
-	get_node("ClickSFX").play()
-	emit_signal("pressed")
 	if get_node("btn").get("custom_styles/normal") == HighlightStyle:
 		BehaviorEvents.emit_signal("OnResetHighlight")
+	get_node("ClickSFX").play()
+	emit_signal("pressed")
 
 func RegisterShortcut():
 	if ShortcutKey != "":

@@ -1,12 +1,10 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=1]
-[ext_resource path="res://data/textures/space-sprite_normal.png" type="Texture" id=2]
 
 [node name="planet_c" type="Sprite"]
 z_index = 5
 texture = ExtResource( 1 )
-normal_map = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 384, 512, 256, 256 )
 

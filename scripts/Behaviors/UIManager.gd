@@ -29,9 +29,10 @@ func OnGUILoaded_Callback(name, obj):
 	obj.visible = false
 	
 func OnPushGUI_Callback(name, init_param):
-	#TODO: animate ?
 	#TODO: make sure Layout is not already in stack
 	print("Push " + name)
+	if _animator != null and _animator.is_playing():
+		yield(_animator, "animation_finished")
 	if _animator != null and _gui_list[name].Transition != false:
 		_gui_list[name].modulate = Color(1.0, 1.0, 1.0, 0.0)
 		_animator.root_node = _gui_list[name].get_path()
@@ -42,6 +43,7 @@ func OnPushGUI_Callback(name, init_param):
 	if _stack.size() > 0:
 		_gui_list[_stack[-1]].call_deferred("OnFocusLost")
 	_stack.push_back(name)
+	BehaviorEvents.emit_signal("OnGUIChanged", _stack[-1])
 	
 func OnPopGUI_Callback():
 	print("Pop " + _stack[-1])

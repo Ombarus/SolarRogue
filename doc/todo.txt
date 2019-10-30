@@ -27,17 +27,14 @@ TODO :::
 		- shoot planet -- done
 		- view neutral blue highlight
 		- view ennemy red highlight
-		- converter, recycle energy
+		- converter, recycle energy -- done, with issues
 		- converter, make missile
-		- inventory, equip new items
+		- inventory, equip new items -- done, with issues
 		- wormhole
+	- Find a way to prevent multiple tuto at the same time (issue with tuto prompt pushing on top of each others)
 	- Tuto Skip Prompt
 	- Auto-size tuto prompt
-- get rid of normal map ref in sprites
-- Dropping torpedo dropped missile ?!?
 - art
-	- missile icon
-	- torpedo icon
 	- converter ?
 - Still issues with "detected" objects. If we blow up a planet, the "food" will be considered never seen until we move then it interup the move
 - difficulty (for youtuber like spacegamejunkie.... this is too tough right now)
@@ -203,6 +200,8 @@ IDEAS:::
 	
 	
 DONE :::
+- Dropping torpedo dropped missile ?!?
+- get rid of normal map ref in sprites
 	- Menu option to re-enable Tuto
 	- Tuto Prompt
 	- Tuto Behavior
