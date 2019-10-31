@@ -8,7 +8,7 @@ enum END_GAME_STATE {
 	won
 }
 
-const CURRENT_VERSION := 2
+const CURRENT_VERSION := 3
 
 #TODO: Might want to add more info about the player (cargo inventory, # of turn spent, etc.
 var _perm_save = {

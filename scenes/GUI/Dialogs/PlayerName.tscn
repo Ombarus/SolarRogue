@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/GUI/PlayerName.gd" type="Script" id=1]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
@@ -9,10 +9,16 @@
 [ext_resource path="res://data/fonts/DejaVuSansMonoBold_text.tres" type="DynamicFont" id=7]
 [ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=8]
 
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.0980392, 0.0980392, 0.0980392, 1 )
+
 [sub_resource type="AtlasTexture" id=1]
 flags = 2
 atlas = ExtResource( 8 )
 region = Rect2( 1728, 0, 64, 64 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.0980392, 0.0980392, 0.0980392, 1 )
 
 [node name="PlayerName" type="Control"]
 anchor_right = 1.0
@@ -29,52 +35,78 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -194.0
-margin_top = -92.0
-margin_right = 195.0
-margin_bottom = 129.0
+margin_left = -222.0
+margin_top = -169.0
+margin_right = 222.0
+margin_bottom = 169.0
 dialog_ok = true
 dialog_cancel = true
 title = "Player Name"
 border_style = "─"
 
-[node name="Selector" type="LineEdit" parent="base"]
-anchor_top = 0.5
+[node name="Control" type="Control" parent="base"]
 anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = 20.2922
-margin_top = 0.603607
-margin_right = -89.7078
-margin_bottom = 34.6036
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 79.0
+margin_right = -23.0
+margin_bottom = -34.0
 
-[node name="Info" type="RichTextLabel" parent="base"]
-anchor_top = 0.5
+[node name="Selector" type="LineEdit" parent="base/Control"]
 anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = 38.9265
-margin_top = -45.2207
-margin_right = -48.0735
-margin_bottom = 3.77933
+margin_left = -0.016
+margin_top = 39.426
+margin_right = -105.232
+margin_bottom = 71.426
+custom_styles/normal = SubResource( 2 )
+
+[node name="Info" type="RichTextLabel" parent="base/Control"]
+anchor_right = 1.0
+margin_bottom = 35.0
 custom_fonts/mono_font = ExtResource( 4 )
 custom_fonts/bold_italics_font = ExtResource( 5 )
 custom_fonts/italics_font = ExtResource( 6 )
 custom_fonts/bold_font = ExtResource( 7 )
 custom_fonts/normal_font = ExtResource( 4 )
 bbcode_enabled = true
-bbcode_text = "[center]What will you be called ?[/center]"
+bbcode_text = "What will you be called ?"
 text = "What will you be called ?"
 scroll_active = false
 
-[node name="Randomize" type="Button" parent="base"]
+[node name="Randomize" type="Button" parent="base/Control"]
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -86.5314
-margin_top = -123.744
-margin_right = -10.5314
-margin_bottom = -53.7437
+margin_left = -71.568
+margin_top = 16.105
+margin_right = 4.43201
+margin_bottom = 86.1053
 icon = SubResource( 1 )
 flat = true
 
-[connection signal="pressed" from="base/Randomize" to="." method="_on_Randomize_pressed"]
+[node name="Info2" type="RichTextLabel" parent="base/Control"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -109.238
+margin_bottom = -74.2383
+custom_fonts/mono_font = ExtResource( 4 )
+custom_fonts/bold_italics_font = ExtResource( 5 )
+custom_fonts/italics_font = ExtResource( 6 )
+custom_fonts/bold_font = ExtResource( 7 )
+custom_fonts/normal_font = ExtResource( 4 )
+bbcode_enabled = true
+bbcode_text = "Difficulty ?"
+text = "Difficulty ?"
+scroll_active = false
+
+[node name="Difficulty" type="OptionButton" parent="base/Control"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -71.0
+margin_right = -167.0
+margin_bottom = -39.0
+custom_styles/normal = SubResource( 3 )
+text = "Harder"
+
+[connection signal="pressed" from="base/Control/Randomize" to="." method="_on_Randomize_pressed"]

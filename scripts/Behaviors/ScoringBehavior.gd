@@ -31,7 +31,9 @@ func OnPlayerDeath_Callback():
 	if game_won == null or game_won == false:
 		message += "\nYou died on the %dth wormhole" % (cur_level+1)
 	message += "\nYou visited %d solar systems" % Globals.LevelLoaderRef.num_generated_level
-	message += "\nDifficulty multiplier : %d" % (player.get_attrib("lowest_diff") + 1)
+	var lowest_diff = player.get_attrib("lowest_diff")
+	lowest_diff += 1
+	message += "\nDifficulty multiplier : %d" % lowest_diff
 		
 	var score = CalculateScore(player, game_won)
 	update_leaderboard(player, score, result)

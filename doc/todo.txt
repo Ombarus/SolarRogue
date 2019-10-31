@@ -20,15 +20,10 @@ ROAD TO ALPHA :::
 
 
 TODO :::
-- leaderboard doesn't have scroll bar ?
 - Settings improvements ?
 	- remap keys ?
 	- vsync, resolution, windowed, etc ?
 - Difficulty
-	- give a base-rate bonus on easier diff
-	- increase inventory on easier diff
-	- save in the player the "lowest" difficulty the player set. Then write it in the leaderboard.
-	- Give a big points bonus for higher diff
 	- add drop-down to name selection on new game
 - Tutorial
 	- grab & conv where highlighted together then when I clicked conv it became gray (null _old_style ?)
@@ -209,6 +204,11 @@ IDEAS:::
 	
 	
 DONE :::
+	- give a base-rate bonus on easier diff
+	- increase inventory on easier diff
+	- save in the player the "lowest" difficulty the player set. Then write it in the leaderboard.
+	- Give a big points bonus for higher diff
+- leaderboard doesn't have scroll bar ?
 	- Find a way to prevent multiple tuto at the same time (issue with tuto prompt pushing on top of each others)
 	- Auto-size tuto prompt
 - Dropping torpedo dropped missile ?!?

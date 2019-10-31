@@ -4,7 +4,7 @@ var _callback_obj : Node = null
 var _callback_method : String = ""
 var _random_index : int = 0
 
-onready var _selector = get_node("base/Selector")
+onready var _selector = get_node("base/Control/Selector")
 
 var random_names : Array = [
 	"Voyager", "Endeavour", "Atlantis", "Sputnik", "Falcon", "Challenger", "Curosity", 
@@ -16,10 +16,20 @@ var random_names : Array = [
 func _ready():
 	get_node("base").connect("OnOkPressed", self, "Ok_Callback")
 	get_node("base").connect("OnCancelPressed", self, "Cancel_Callback")
+	
+	var diff_options : OptionButton = get_node("base/Control/Difficulty")
+	diff_options.add_item("Normal", 0)
+	diff_options.add_item("Hard", 1)
+	diff_options.add_item("Harder", 2)
+	diff_options.add_item("Hardest", 3)
+	diff_options.add_item("Not Happening...", 4)
 
 func Ok_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
 	get_node("base").disabled = true
+	var diff_options : OptionButton = get_node("base/Control/Difficulty")
+	var selected_diff = diff_options.get_selected_id()
+	PermSave.set_attrib("settings.difficulty", selected_diff)
 	
 	if _callback_obj == null:
 		return
@@ -45,6 +55,10 @@ func Init(init_param):
 		_random_index += 1
 		
 	_selector.text = def_name
+	
+	var diff_options : OptionButton = get_node("base/Control/Difficulty")
+	var default_diff : int = PermSave.get_attrib("settings.difficulty")
+	diff_options.select(default_diff)
 	
 func _on_Randomize_pressed():
 	var name : String = random_names[_random_index]
