@@ -18,10 +18,20 @@ func Ok_Callback():
 		
 	
 func Init(init_param):
-	get_node("base").disabled = false
+	var base = get_node("base")
+	base.disabled = false
 	_text.bbcode_text = init_param.text
 	_title.title = init_param.title
 	if "callback_object" in init_param:
 		_callback_obj = init_param.callback_object
 		_callback_method = init_param.callback_method
+		
+	var desired_width : int = init_param.text.length() * 0.72258 + 194.0# arbitrary relation
+	desired_width = clamp(desired_width, 200, 500)
+	var desired_height : int = desired_width * (224.0 / 436.0) # arbitrary aspect ratio
+	base.margin_top = -desired_height
+	base.margin_bottom = desired_height
+	base.margin_left = -desired_width
+	base.margin_right = desired_width
+	
 	

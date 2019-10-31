@@ -153,7 +153,6 @@ max_value = 81.0
 step = 0.1
 value = 1.0
 exp_edit = true
-ticks_on_borders = false
 
 [node name="SFXVolume" type="Panel" parent="base/VBoxContainer"]
 margin_top = 232.0
@@ -216,7 +215,6 @@ max_value = 81.0
 step = 0.5
 value = 1.0
 exp_edit = true
-ticks_on_borders = false
 
 [connection signal="toggled" from="base/VBoxContainer/Enable Tutorial/TutoCheck" to="." method="_on_TutoCheck_toggled"]
 [connection signal="toggled" from="base/VBoxContainer/FullScreen/CheckButton" to="." method="_on_CheckButton_toggled"]

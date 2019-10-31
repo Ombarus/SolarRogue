@@ -11,7 +11,6 @@ func _ready():
 	connect("ResetTuto", self, "ResetTuto_Callback")
 	BehaviorEvents.connect("OnGUIChanged", self, "OnGUIChanged_Callback")
 	BehaviorEvents.connect("OnScannerUpdated", self, "OnScannerUpdated_Callback")
-	BehaviorEvents.connect("OnPositionUpdated", self, "OnPositionUpdated_Callback")
 	BehaviorEvents.connect("OnObjectPicked", self, "OnPickup_Callback")
 	
 func StartTuto_Callback():
@@ -53,6 +52,9 @@ func ResetTuto_Callback():
 	StartTuto_Callback()
 	
 func OnGUIChanged_Callback(current_menu):
+	if Active == false:
+		return
+		
 	if current_menu == "ConverterV2":
 		var player : Attributes = Globals.get_first_player() 
 		var steps : Array = PermSave.get_attrib("tutorial.completed_steps")
@@ -94,7 +96,7 @@ func OnGUIChanged_Callback(current_menu):
 			BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "Captain, order the helm to move by using the numpad keys, clicking or taping the screen", "title":"Tutorial: Ship Movement", "callback_object":self, "callback_method":"Movement_Done_Callback"})
 			
 func OnScannerUpdated_Callback(obj):
-	if obj.get_attrib("type") != "player":
+	if Active == false or obj.get_attrib("type") != "player":
 		return
 		
 	var level_id = Globals.LevelLoaderRef.GetLevelID()
@@ -106,6 +108,7 @@ func OnScannerUpdated_Callback(obj):
 	var steps : Array = PermSave.get_attrib("tutorial.completed_steps")
 	var done := false # only one tuto prompt at a time, in order of priority
 	
+	#TODO: check also currently in scanner range in case we need to trigger multiple tutorials
 	if not "outline_red" in steps:
 		for id in new_objs:
 			var o = Globals.LevelLoaderRef.GetObjectById(id)
@@ -164,21 +167,9 @@ func OnScannerUpdated_Callback(obj):
 				BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "Captain, the ship's scanners have detected base elements that could be used to power the ship. Get on top of it and use the tractor beam to bring it into our cargo holds.", "title":"Tutorial: Energy", "callback_object":self, "callback_method":"Food_Scan_Done_Callback"})
 				BehaviorEvents.emit_signal("OnHighlightUIElement", "Grab")
 				break
-			
-			
-func OnPositionUpdated_Callback(obj):
-	if obj.get_attrib("type") != "player":
-		return
-		
-	var level_id = Globals.LevelLoaderRef.GetLevelID()
-	var cur_objs = obj.get_attrib("scanner_result.cur_in_range." + level_id)
-	var new_objs = obj.get_attrib("scanner_result.new_in_range." + level_id)
-	
-	#var best_move = _targetting.ClosestFiringSolution(obj_tile, player_tile, data)
-
 
 func OnPickup_Callback(picker : Attributes):
-	if picker.get_attrib("type") != "player":
+	if Active == false or picker.get_attrib("type") != "player":
 		return
 		
 	var steps : Array = PermSave.get_attrib("tutorial.completed_steps")
@@ -196,10 +187,6 @@ func OnPickup_Callback(picker : Attributes):
 				BehaviorEvents.emit_signal("OnHighlightUIElement", "Converter")
 				done = true
 				break
-				#if not "pre_conv_inv" in steps:
-				#	steps.push_back("pre_equip_inv")
-				#	PermSave.set_attrib("tutorial.completed_steps", steps)
-				#	break
 	
 	if not done and not "equip_inv" in steps:
 		for item in cargo:
@@ -211,8 +198,4 @@ func OnPickup_Callback(picker : Attributes):
 					BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "Captain, we've picked up an item that could be mounted on our ship. Please head to the inventory screen for more info.", "title":"Tutorial: Inventory", "callback_object":self, "callback_method":"Pre_Equip_Inv_Callback"})
 					BehaviorEvents.emit_signal("OnHighlightUIElement", "Inventory")
 					break
-					#if not "pre_equip_inv" in steps:
-					#	steps.push_back("pre_equip_inv")
-					#	PermSave.set_attrib("tutorial.completed_steps", steps)
-					#	return
 	

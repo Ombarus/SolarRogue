@@ -46,4 +46,7 @@ func _on_TutoCheck_toggled(button_pressed):
 	var was_enabled : bool = PermSave.get_attrib("tutorial.enabled")
 	PermSave.set_attrib("tutorial.enabled", button_pressed)
 	if was_enabled == false and button_pressed == true:
-		Globals.TutorialRef.emit_signal("ResetTuto")
+		if Globals.TutorialRef != null:
+			Globals.TutorialRef.emit_signal("ResetTuto")
+		else:
+			PermSave.set_attrib("tutorial.completed_steps", [])

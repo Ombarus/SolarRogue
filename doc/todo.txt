@@ -21,15 +21,16 @@ ROAD TO ALPHA :::
 
 TODO :::
 - Tutorial
+	- grab & conv where highlighted together then when I clicked conv it became gray (null _old_style ?)
 	- steps :
 		- movement -- done
 		- pickup -- done
 		- shoot planet -- done
-		- view neutral blue highlight
-		- view ennemy red highlight
-		- converter, recycle energy -- done, with issues
+		- view neutral blue highlight -- done
+		- view ennemy red highlight -- done
+		- converter, recycle energy -- done, (would like to highlight one step at a time)
 		- converter, make missile
-		- inventory, equip new items -- done, with issues
+		- inventory, equip new items -- done, (would like to highlight one step at a time)
 		- wormhole
 	- Find a way to prevent multiple tuto at the same time (issue with tuto prompt pushing on top of each others)
 	- Tuto Skip Prompt

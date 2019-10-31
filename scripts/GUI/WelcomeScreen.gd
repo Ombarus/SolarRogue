@@ -5,8 +5,8 @@ func _ready():
 	
 	
 func Ok_Callback():
-	BehaviorEvents.emit_signal("OnPopGUI")
 	Globals.TutorialRef.emit_signal("StartTuto")
+	BehaviorEvents.emit_signal("OnPopGUI")
 	get_node("base").disabled = true
 		
 	
