@@ -37,4 +37,3 @@ func set_row_data(data):
 	
 	get_node("Panel/HBoxContainer/richtext").bbcode_text = flavor_text
 	
-	

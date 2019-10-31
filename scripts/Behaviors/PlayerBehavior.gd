@@ -84,8 +84,19 @@ func _ready():
 	BehaviorEvents.connect("OnMountAdded", self, "OnMountAdded_Callback")
 	BehaviorEvents.connect("OnMountRemoved", self, "OnMountRemoved_Callback")
 	BehaviorEvents.connect("OnAPUsed", self, "OnAPUsed_Callback")
+	BehaviorEvents.connect("OnDifficultyChanged", self, "OnDifficultyChanged_Callback")
 	
 	_area_of_effect_overlay = get_node(AreaOfEffectOverlay)
+	
+func OnDifficultyChanged_Callback(new_diff):
+	if playerNode == null:
+		return
+		
+	if Globals.total_turn == 0:
+		playerNode.set_attrib("lowest_diff", new_diff)
+	else:
+		var cur_diff = playerNode.get_attrib("lowest_diff")
+		playerNode.set_attrib("lowest_diff", min(cur_diff, new_diff))
 	
 func OnAPUsed_Callback(obj, amount):
 	if obj != playerNode:
@@ -388,6 +399,8 @@ func OnLevelLoaded_Callback():
 		playerNode.rotation = rot
 		if playerNode.get_attrib("player_name") == null:
 			playerNode.set_attrib("player_name", PermSave.get_attrib("settings.default_name", "Ombarus"))
+		if playerNode.get_attrib("lowest_diff") == null:
+			playerNode.set_attrib("lowest_diff", PermSave.get_attrib("settings.difficulty"))
 		
 		BehaviorEvents.emit_signal("OnPlayerCreated", playerNode)
 		

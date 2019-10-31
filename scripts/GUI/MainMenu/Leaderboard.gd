@@ -16,12 +16,14 @@ func _ready():
 		leaders.push_back({})
 	_leader_size = leaders.size() + 2
 	_cur_scroll = -(self.rect_size.y + (0.3*self.rect_size.y))
-	get_node("leaderlist").Content = leaders
+	var leaderlist = get_node("leaderlist")
+	leaderlist.Content = leaders
 	
-	var scrollbar = get_node("leaderlist").get_v_scrollbar()
+	var scrollbar = leaderlist.get_v_scrollbar()
+	
 	scrollbar.allow_lesser = true
 	scrollbar.allow_greater = true
-	get_node("leaderlist").set_v_scroll(_cur_scroll)
+	leaderlist.set_v_scroll(_cur_scroll)
 
 func _process(delta):
 	if _cancel_scroll > 0:
@@ -39,6 +41,7 @@ func _process(delta):
 		#_step = 0
 		_cur_scroll = -(self.rect_size.y + (0.3*self.rect_size.y))
 		
+
 func _gui_input(event):
 	if event is InputEventMouseButton:
 		_cancel_scroll = 10.0

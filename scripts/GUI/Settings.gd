@@ -5,6 +5,8 @@ onready var _vol_sfx: HSlider = get_node("base/VBoxContainer/SFXVolume/SFXSlider
 onready var _vol_music: HSlider = get_node("base/VBoxContainer/MusicVolume/MusicSlider")
 onready var _diff_options: OptionButton = get_node("base/VBoxContainer/Difficulty/DiffOptions")
 
+var _diff_changed := false
+
 func _ready():
 	get_node("base").connect("OnOkPressed", self, "Ok_Callback")
 	_vol_master.connect("value_changed", self, "value_changed_Callback", [AudioServer.get_bus_index("Master"), "master_volume"])
@@ -19,10 +21,13 @@ func _ready():
 	
 	
 func Ok_Callback():
+	if _diff_changed == true:
+		BehaviorEvents.emit_signal("OnDifficultyChanged", PermSave.get_attrib("settings.difficulty"))
 	BehaviorEvents.emit_signal("OnPopGUI")
 		
 	
 func Init(init_param):
+	_diff_changed = false
 	var fs : bool = PermSave.get_attrib("settings.full_screen", false)
 	get_node("base/VBoxContainer/FullScreen/CheckButton").pressed = fs
 	
@@ -62,4 +67,5 @@ func _on_TutoCheck_toggled(button_pressed):
 			PermSave.set_attrib("tutorial.completed_steps", [])
 
 func _on_DiffOptions_item_selected(ID):
+	_diff_changed = true
 	PermSave.set_attrib("settings.difficulty", ID)

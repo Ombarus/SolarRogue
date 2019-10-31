@@ -31,10 +31,11 @@ func OnPlayerDeath_Callback():
 	if game_won == null or game_won == false:
 		message += "\nYou died on the %dth wormhole" % (cur_level+1)
 	message += "\nYou visited %d solar systems" % Globals.LevelLoaderRef.num_generated_level
+	message += "\nDifficulty multiplier : %d" % (player.get_attrib("lowest_diff") + 1)
 		
 	var score = CalculateScore(player, game_won)
 	update_leaderboard(player, score, result)
-	message += "\nYour final score is : " + str(score)
+	message += "\n\nYour final score is : " + str(score)
 	BehaviorEvents.emit_signal("OnPushGUI", "DeathScreen", {"text":message, "callback_object":self, "callback_method":"ScoreDone_Callback"})
 
 func CalculateScore(player, game_won):
@@ -73,7 +74,9 @@ func CalculateScore(player, game_won):
 	var num_generated_level = Globals.LevelLoaderRef.num_generated_level
 	final_score += 1000 * num_generated_level
 	
-	return final_score
+	var difficulty_boost = player.get_attrib("lowest_diff") + 1 #0 to 4, make it 1 to 5 as multiplier
+	
+	return final_score * difficulty_boost
 	
 func update_leaderboard(player, final_score, result):
 	#{"player_name":"Ombarus the greatest", "final_score":100000, "status":END_GAME_STATE.won, "generated_levels":20, "died_on":-1},

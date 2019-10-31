@@ -68,4 +68,3 @@ func can_drop_data(position, data):
 	
 func drop_data(position, data):
 	emit_signal("OnDragDropCompleted", data, {"origin":self, "count":-1})
-	

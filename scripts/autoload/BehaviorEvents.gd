@@ -51,6 +51,7 @@ signal OnTriggerAnomaly(obj, anomaly)
 signal OnAnomalyEffectGone(obj, effect_data)
 signal OnCrafting(crafter, result)
 signal OnStatusChanged(obj)
+signal OnDifficultyChanged(newdiff)
 
 signal OnGUILoaded(name, obj)
 signal OnPushGUI(name, init_param)
