@@ -227,6 +227,10 @@ func DoAttackPathFinding(obj):
 	var weapons_data = Globals.LevelLoaderRef.LoadJSONArray(weapons)
 	#if weapons_data != null and weapons_data.size() > 0
 	
+	var cur_difficulty : int = PermSave.get_attrib("settings.difficulty")
+	var diff_chance_mult : float = 1.0
+	diff_chance_mult = (4.0 - cur_difficulty) / 2.0
+	
 	var minimal_move = null
 	var shot = false
 	BehaviorEvents.emit_signal("OnBeginParallelAction", obj)
@@ -235,6 +239,7 @@ func DoAttackPathFinding(obj):
 		var is_destroyed = player.get_attrib("destroyable.destroyed")
 		if best_move.length() == 0 and (is_destroyed == null or is_destroyed == false):
 			var chance = obj.get_attrib("ai.hit_chance")
+			chance = 1.0 - (diff_chance_mult * (1.0 - chance))
 			if chance == null or MersenneTwister.rand_float() < chance:
 				BehaviorEvents.emit_signal("OnDealDamage", [player], obj, data, player_tile)
 			else:

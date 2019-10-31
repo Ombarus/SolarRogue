@@ -72,7 +72,6 @@
 [node name="Root" type="Node"]
 
 [node name="Behaviors" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Ambience" type="Node" parent="Behaviors"]
 editor/display_folded = true
@@ -286,6 +285,7 @@ levelLoaderNode = NodePath("../Behaviors/LevelLoader")
 [node name="Camera-GUI" type="CanvasLayer" parent="."]
 
 [node name="HUD" type="Control" parent="Camera-GUI"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1.0
@@ -313,11 +313,7 @@ margin_top = -205.0
 margin_right = -14.0
 margin_bottom = -15.0
 mouse_filter = 2
-dialog_ok = false
-dialog_cancel = false
 title = "Log Stardate 0.0.0"
-bottom_title = ""
-content = ""
 border_style = "═"
 
 [node name="Buttons" type="Control" parent="Camera-GUI/HUD"]
@@ -469,9 +465,6 @@ margin_top = 6.0
 margin_right = -3.0
 margin_bottom = 91.0
 mouse_filter = 2
-dialog_ok = false
-dialog_cancel = false
-title = ""
 bottom_title = "The Maveric"
 content = "Hull : [color=lime]==========[/color] Energy : [color=yellow]25000[/color] Shield : [color=aqua]===============[/color]"
 border_style = "═"
@@ -548,6 +541,7 @@ AP_behavior_path = NodePath("../../Behaviors/AP")
 visible = false
 
 [node name="Loading-FX" type="CanvasLayer" parent="."]
+editor/display_folded = true
 
 [node name="Starfield" parent="Loading-FX" instance=ExtResource( 66 )]
 visible = false

@@ -93,7 +93,7 @@ func OnGUIChanged_Callback(current_menu):
 	elif current_menu == "HUD":
 		var steps : Array = PermSave.get_attrib("tutorial.completed_steps")
 		if not "movement" in steps:
-			BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "Captain, order the helm to move by using the numpad keys, clicking or taping the screen", "title":"Tutorial: Ship Movement", "callback_object":self, "callback_method":"Movement_Done_Callback"})
+			BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "Captain, order the helm to move by using the numpad keys, clicking or taping the screen\n\n[i]You can turn off tutorial prompts in the settings[/i]", "title":"Tutorial: Ship Movement", "callback_object":self, "callback_method":"Movement_Done_Callback"})
 			
 func OnScannerUpdated_Callback(obj):
 	if Active == false or obj.get_attrib("type") != "player":

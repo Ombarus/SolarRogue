@@ -36,12 +36,10 @@ func _ready():
 func ResetHightlight_Callback():
 	get_node("AnimationPlayer").stop(true)
 	if _prev_style != null:
-		print(name + " RESET Highlight")
 		get_node("btn").set('custom_styles/normal', _prev_style)
 
 func Hightlight_Callback(id):
 	if name == id:
-		print("highlight " + id)
 		get_node("AnimationPlayer").play("highlight")
 		_prev_style = get_node("btn").get("custom_styles/normal")
 		get_node("btn").set('custom_styles/normal', HighlightStyle)

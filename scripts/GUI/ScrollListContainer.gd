@@ -20,7 +20,6 @@ func get_content():
 	return result
 
 func set_content(val):
-	print(content)
 	for d in content:
 		d.obj.get_parent().remove_child(d.obj)
 		d.obj.queue_free()

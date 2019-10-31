@@ -89,6 +89,7 @@ func OnUseAP_Callback(obj, amount):
 	Insert(obj, obj.get_attrib("action_point"))
 	
 	_need_sort = true
+	BehaviorEvents.emit_signal("OnAPUsed", obj, amount)
 	
 	
 func validate_emit_OnObjTurn(obj):

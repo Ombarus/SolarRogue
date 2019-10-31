@@ -83,9 +83,15 @@ func _ready():
 	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_Callback")
 	BehaviorEvents.connect("OnMountAdded", self, "OnMountAdded_Callback")
 	BehaviorEvents.connect("OnMountRemoved", self, "OnMountRemoved_Callback")
+	BehaviorEvents.connect("OnAPUsed", self, "OnAPUsed_Callback")
 	
 	_area_of_effect_overlay = get_node(AreaOfEffectOverlay)
 	
+func OnAPUsed_Callback(obj, amount):
+	if obj != playerNode:
+		return
+	
+	lock_input = true
 	
 func Pressed_Look_Callback():
 	if lock_input:
@@ -263,7 +269,7 @@ func OnRequestObjectUnload_Callback(obj):
 	
 func OnObjTurn_Callback(obj):
 	var is_player : bool = obj.get_attrib("type") == "player"
-	
+
 	if obj.get_attrib("animation.waiting_moving") == true:
 		return
 	
@@ -463,6 +469,7 @@ func _unhandled_input(event):
 	var dir = null
 	
 	if event is InputEventMouseButton:
+		
 		if click_start_pos == null:
 			click_start_pos = Vector2(0,0)
 		var vp_size = get_viewport().size

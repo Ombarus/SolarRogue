@@ -17,7 +17,6 @@ var _base = null
 
 func set_signal(newval):
 	editor_trigger_signal = false
-	print("set_signal")
 	if Engine.is_editor_hint():
 		init()
 		if _base:
@@ -54,7 +53,6 @@ func set_style(val):
 		_base.border_style = border_style
 
 func init():
-	print("stringcontent init")
 	if not has_node("base"):
 		return
 		

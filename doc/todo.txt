@@ -20,6 +20,14 @@ ROAD TO ALPHA :::
 
 
 TODO :::
+- Settings improvements ?
+	- remap keys ?
+	- vsync, resolution, windowed, etc ?
+- Difficulty
+	- give a base-rate bonus on easier diff
+	- increase inventory on easier diff
+	- save in the player the "lowest" difficulty the player set. Then write it in the leaderboard.
+	- Give a big points bonus for higher diff
 - Tutorial
 	- grab & conv where highlighted together then when I clicked conv it became gray (null _old_style ?)
 	- steps :
@@ -32,9 +40,7 @@ TODO :::
 		- converter, make missile
 		- inventory, equip new items -- done, (would like to highlight one step at a time)
 		- wormhole
-	- Find a way to prevent multiple tuto at the same time (issue with tuto prompt pushing on top of each others)
 	- Tuto Skip Prompt
-	- Auto-size tuto prompt
 - art
 	- converter ?
 - Still issues with "detected" objects. If we blow up a planet, the "food" will be considered never seen until we move then it interup the move
@@ -201,6 +207,8 @@ IDEAS:::
 	
 	
 DONE :::
+	- Find a way to prevent multiple tuto at the same time (issue with tuto prompt pushing on top of each others)
+	- Auto-size tuto prompt
 - Dropping torpedo dropped missile ?!?
 - get rid of normal map ref in sprites
 	- Menu option to re-enable Tuto

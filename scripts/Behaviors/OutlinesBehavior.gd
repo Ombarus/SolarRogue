@@ -31,10 +31,8 @@ func UpdateColor(obj : Attributes):
 	
 	var ai_target : Attributes = Globals.LevelLoaderRef.GetObjectById(obj.get_attrib("ai.target"))
 	if obj.get_attrib("type") == "player":
-		print("type == player")
 		outline.modulate = Color(1.0, 1.0, 1.0, 0.0)
 	elif obj.get_attrib("boardable") == true:
-		print("boardable == true")
 		outline.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	elif obj.get_attrib("ai.aggressive", false) == true and ai_target != null and ai_target.get_attrib("type") == "player" :
 		outline.modulate = Color(1.0, 0.0, 0.0, 1.0)

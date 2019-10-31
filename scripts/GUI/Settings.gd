@@ -3,12 +3,19 @@ extends "res://scripts/GUI/GUILayoutBase.gd"
 onready var _vol_master: HSlider = get_node("base/VBoxContainer/MasterVolume/MasterSlider")
 onready var _vol_sfx: HSlider = get_node("base/VBoxContainer/SFXVolume/SFXSlider")
 onready var _vol_music: HSlider = get_node("base/VBoxContainer/MusicVolume/MusicSlider")
+onready var _diff_options: OptionButton = get_node("base/VBoxContainer/Difficulty/DiffOptions")
 
 func _ready():
 	get_node("base").connect("OnOkPressed", self, "Ok_Callback")
 	_vol_master.connect("value_changed", self, "value_changed_Callback", [AudioServer.get_bus_index("Master"), "master_volume"])
 	_vol_sfx.connect("value_changed", self, "value_changed_Callback", [AudioServer.get_bus_index("Sfx"), "sfx_volume"])
 	_vol_music.connect("value_changed", self, "value_changed_Callback", [AudioServer.get_bus_index("Music"), "music_volume"])
+	
+	_diff_options.add_item("Normal")
+	_diff_options.add_item("Hard")
+	_diff_options.add_item("Harder")
+	_diff_options.add_item("Hardest")
+	_diff_options.add_item("Not Happening...")
 	
 	
 func Ok_Callback():
@@ -25,6 +32,9 @@ func Init(init_param):
 	_vol_sfx.value = vol
 	vol = PermSave.get_attrib("settings.music_volume", 12.0)
 	_vol_music.value = vol
+	
+	var diff : int = PermSave.get_attrib("settings.difficulty", 2)
+	_diff_options.select(diff)
 	
 
 func _on_CheckButton_toggled(button_pressed):
@@ -50,3 +60,6 @@ func _on_TutoCheck_toggled(button_pressed):
 			Globals.TutorialRef.emit_signal("ResetTuto")
 		else:
 			PermSave.set_attrib("tutorial.completed_steps", [])
+
+func _on_DiffOptions_item_selected(ID):
+	PermSave.set_attrib("settings.difficulty", ID)
