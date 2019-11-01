@@ -91,6 +91,7 @@ region_override = Rect2( 512, 256, 128, 128 )
 [node name="overlay" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0 )
 material = SubResource( 1 )
+position = Vector2( 0, -0.225933 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 512, 256, 128, 128 )
@@ -109,7 +110,9 @@ anims/shield_hit = SubResource( 3 )
 
 [node name="hull_hit_sfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
+bus = "Sfx"
 
 [node name="shield_hit_sfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 7 )
+bus = "Sfx"
 

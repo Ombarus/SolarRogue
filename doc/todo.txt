@@ -1,23 +1,7 @@
-ROAD TO ALPHA :::
-- Generate Level data :
-	- 3 Branches (for now, 3 level each ? 2 filler & 1 "special")
-		- Human Fortress
-			- Last level should be peaceful and contains a bunch of shop.
-		- Jerg Homeworld
-			- Last level contain a "Queen" boss that spawns ennemies (Queen could drop some garantied artifact ?)
-		- Vorg Homeworld
-			- Last level contains a "Titan" "Cube" boss and lots of loot ?
-	- Ships
-		- Random Unique boss
-			- Death Star ?
-				- Art
-				- Stats
-				- JSON
-- Fx weapons
-- bosses
-- shops
-- ennemy that can spawn reiforcement ?
-
+RELEASE CHECKLIST :::
+- Check player starting inventory
+- levelLoader.gd => test_mid_game is false
+- compilation set to release (debug unchecked)
 
 TODO :::
 - Settings improvements ?

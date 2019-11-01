@@ -69,3 +69,8 @@ func _on_TutoCheck_toggled(button_pressed):
 func _on_DiffOptions_item_selected(ID):
 	_diff_changed = true
 	PermSave.set_attrib("settings.difficulty", ID)
+
+
+func _on_vsync_toggled(button_pressed):
+	OS.set_use_vsync(button_pressed)
+	PermSave.set_attrib("settings.vsync", button_pressed)

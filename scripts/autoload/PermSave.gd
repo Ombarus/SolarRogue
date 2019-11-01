@@ -8,7 +8,7 @@ enum END_GAME_STATE {
 	won
 }
 
-const CURRENT_VERSION := 3
+const CURRENT_VERSION := 4
 
 #TODO: Might want to add more info about the player (cargo inventory, # of turn spent, etc.
 var _perm_save = {
@@ -16,6 +16,7 @@ var _perm_save = {
 	"settings": {
 		"default_name":null,
 		"full_screen":false,
+		"vsync":true,
 		"master_volume":4.0,
 		"sfx_volume":4.0,
 		"music_volume":4.0,
