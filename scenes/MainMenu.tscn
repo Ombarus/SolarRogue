@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/GUI/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://scenes/GUI/Dialogs/PlayerName.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/GUI/Dialogs/Credits.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/GUI/Dialogs/Settings.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/GUI/Debug/FPSCounter.tscn" type="PackedScene" id=16]
 
 [node name="MainMenu" type="Node"]
 script = ExtResource( 1 )
@@ -165,6 +166,12 @@ visible = false
 visible = false
 margin_top = -2.0
 margin_bottom = -2.0
+
+[node name="FPSCounter" parent="." instance=ExtResource( 16 )]
+margin_left = 15.7517
+margin_top = 14.3197
+margin_right = 141.752
+margin_bottom = 50.3197
 
 [connection signal="pressed" from="MenuRoot/MenuBtn/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="MenuRoot/MenuBtn/NewGameBTN" to="." method="_on_newgame_pressed"]

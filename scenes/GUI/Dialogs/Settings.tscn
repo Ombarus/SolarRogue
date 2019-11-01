@@ -25,9 +25,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -390.5
-margin_top = -234.814
+margin_top = -247.0
 margin_right = 390.5
-margin_bottom = 233.186
+margin_bottom = 247.0
 dialog_ok = true
 title = "Settings"
 
@@ -46,6 +46,7 @@ theme = ExtResource( 4 )
 text = "Gameplay"
 
 [node name="Enable Tutorial" type="Panel" parent="base/VBoxContainer"]
+editor/display_folded = true
 margin_top = 26.0
 margin_right = 756.0
 margin_bottom = 56.0
@@ -73,6 +74,7 @@ margin_bottom = 20.0
 pressed = true
 
 [node name="Difficulty" type="Panel" parent="base/VBoxContainer"]
+editor/display_folded = true
 margin_top = 60.0
 margin_right = 756.0
 margin_bottom = 90.0
@@ -99,22 +101,50 @@ margin_top = -20.0
 margin_bottom = 20.0
 text = "Normal"
 
-[node name="spacer2" type="Label" parent="base/VBoxContainer"]
+[node name="FPS" type="Panel" parent="base/VBoxContainer"]
 margin_top = 94.0
 margin_right = 756.0
-margin_bottom = 116.0
+margin_bottom = 124.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+custom_styles/panel = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="base/VBoxContainer/FPS"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = -0.814484
+margin_bottom = -0.814484
+text = "Display FPS"
+valign = 1
+
+[node name="FPSCounter" type="CheckButton" parent="base/VBoxContainer/FPS"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -76.0
+margin_top = -20.0
+margin_bottom = 20.0
+pressed = true
+
+[node name="spacer2" type="Label" parent="base/VBoxContainer"]
+margin_top = 128.0
+margin_right = 756.0
+margin_bottom = 150.0
 
 [node name="Label2" type="Label" parent="base/VBoxContainer"]
-margin_top = 120.0
+margin_top = 154.0
 margin_right = 756.0
-margin_bottom = 142.0
+margin_bottom = 176.0
 theme = ExtResource( 4 )
 text = "Video"
 
 [node name="FullScreen" type="Panel" parent="base/VBoxContainer"]
-margin_top = 146.0
+editor/display_folded = true
+margin_top = 180.0
 margin_right = 756.0
-margin_bottom = 176.0
+margin_bottom = 210.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 5 )
@@ -138,9 +168,10 @@ margin_top = -20.0
 margin_bottom = 20.0
 
 [node name="VSync" type="Panel" parent="base/VBoxContainer"]
-margin_top = 180.0
+editor/display_folded = true
+margin_top = 214.0
 margin_right = 756.0
-margin_bottom = 210.0
+margin_bottom = 244.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 5 )
@@ -164,21 +195,21 @@ margin_top = -20.0
 margin_bottom = 20.0
 
 [node name="spacer" type="Label" parent="base/VBoxContainer"]
-margin_top = 214.0
+margin_top = 248.0
 margin_right = 756.0
-margin_bottom = 236.0
+margin_bottom = 270.0
 
 [node name="Label" type="Label" parent="base/VBoxContainer"]
-margin_top = 240.0
+margin_top = 274.0
 margin_right = 756.0
-margin_bottom = 262.0
+margin_bottom = 296.0
 theme = ExtResource( 4 )
 text = "Sound"
 
 [node name="MasterVolume" type="Panel" parent="base/VBoxContainer"]
-margin_top = 266.0
+margin_top = 300.0
 margin_right = 756.0
-margin_bottom = 296.0
+margin_bottom = 330.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 6 )
@@ -208,9 +239,9 @@ value = 1.0
 exp_edit = true
 
 [node name="SFXVolume" type="Panel" parent="base/VBoxContainer"]
-margin_top = 300.0
+margin_top = 334.0
 margin_right = 756.0
-margin_bottom = 330.0
+margin_bottom = 364.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 5 )
@@ -239,9 +270,9 @@ exp_edit = true
 ticks_on_borders = true
 
 [node name="MusicVolume" type="Panel" parent="base/VBoxContainer"]
-margin_top = 334.0
+margin_top = 368.0
 margin_right = 756.0
-margin_bottom = 364.0
+margin_bottom = 398.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 6 )
@@ -272,5 +303,6 @@ exp_edit = true
 
 [connection signal="toggled" from="base/VBoxContainer/Enable Tutorial/TutoCheck" to="." method="_on_TutoCheck_toggled"]
 [connection signal="item_selected" from="base/VBoxContainer/Difficulty/DiffOptions" to="." method="_on_DiffOptions_item_selected"]
+[connection signal="toggled" from="base/VBoxContainer/FPS/FPSCounter" to="." method="_on_FPSCounter_toggled"]
 [connection signal="toggled" from="base/VBoxContainer/FullScreen/CheckButton" to="." method="_on_vsync_toggled"]
 [connection signal="toggled" from="base/VBoxContainer/VSync/CheckButton" to="." method="_on_CheckButton_toggled"]

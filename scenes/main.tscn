@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -65,9 +65,10 @@
 [ext_resource path="res://scenes/GUI/Dialogs/Description.tscn" type="PackedScene" id=63]
 [ext_resource path="res://scenes/GUI/Debug/APBehaviorDebug.tscn" type="PackedScene" id=64]
 [ext_resource path="res://scenes/GUI/Dialogs/TutoPrompt.tscn" type="PackedScene" id=65]
-[ext_resource path="res://scenes/warp_trail_test.tscn" type="PackedScene" id=66]
-[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=67]
-[ext_resource path="res://scenes/Sample.tscn" type="PackedScene" id=68]
+[ext_resource path="res://scenes/GUI/Debug/FPSCounter.tscn" type="PackedScene" id=66]
+[ext_resource path="res://scenes/warp_trail_test.tscn" type="PackedScene" id=67]
+[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=68]
+[ext_resource path="res://scenes/Sample.tscn" type="PackedScene" id=69]
 
 [node name="Root" type="Node"]
 
@@ -285,6 +286,7 @@ levelLoaderNode = NodePath("../Behaviors/LevelLoader")
 [node name="Camera-GUI" type="CanvasLayer" parent="."]
 
 [node name="HUD" type="Control" parent="Camera-GUI"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1.0
@@ -316,6 +318,7 @@ title = "Log Stardate 0.0.0"
 border_style = "═"
 
 [node name="Buttons" type="Control" parent="Camera-GUI/HUD"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -538,17 +541,27 @@ AP_behavior_path = NodePath("../../Behaviors/AP")
 [node name="TutoPrompt" parent="Camera-GUI" instance=ExtResource( 65 )]
 visible = false
 
+[node name="FPSCounter" parent="Camera-GUI" instance=ExtResource( 66 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -134.0
+margin_top = -53.0
+margin_right = -12.0
+margin_bottom = -12.0
+
 [node name="Loading-FX" type="CanvasLayer" parent="."]
 editor/display_folded = true
 
-[node name="Starfield" parent="Loading-FX" instance=ExtResource( 66 )]
+[node name="Starfield" parent="Loading-FX" instance=ExtResource( 67 )]
 visible = false
 
 [node name="DEBUG" type="Node2D" parent="."]
 visible = false
-script = ExtResource( 67 )
+script = ExtResource( 68 )
 
-[node name="Sample" parent="." instance=ExtResource( 68 )]
+[node name="Sample" parent="." instance=ExtResource( 69 )]
 visible = false
 
 [connection signal="pressed" from="Camera-GUI/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_ZoomIn_pressed"]

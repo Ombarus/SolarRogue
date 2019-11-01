@@ -41,6 +41,9 @@ func Init(init_param):
 	var diff : int = PermSave.get_attrib("settings.difficulty", 2)
 	_diff_options.select(diff)
 	
+	var show_fps : bool = PermSave.get_attrib("settings.display_fps")
+	get_node("base/VBoxContainer/FPS/FPSCounter").pressed = show_fps
+	
 
 func _on_CheckButton_toggled(button_pressed):
 	OS.set_window_fullscreen(button_pressed)
@@ -74,3 +77,11 @@ func _on_DiffOptions_item_selected(ID):
 func _on_vsync_toggled(button_pressed):
 	OS.set_use_vsync(button_pressed)
 	PermSave.set_attrib("settings.vsync", button_pressed)
+
+
+func _on_FPSCounter_toggled(button_pressed):
+	PermSave.set_attrib("settings.display_fps", button_pressed)
+	if button_pressed:
+		BehaviorEvents.emit_signal("OnShowGUI", "FPSCounter", {})
+	else:
+		BehaviorEvents.emit_signal("OnHideGUI", "FPSCounter")

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://data/theme/default_ui_text.tres" type="Theme" id=1]
+[ext_resource path="res://scripts/GUI/Debug/FPSCounter.gd" type="Script" id=2]
+
+[node name="FPSCounter" type="Control"]
+margin_right = 1280.0
+margin_bottom = 720.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 1, 0.984314, 0, 1 )
+text = "FPS : 30.0"
+valign = 1
+

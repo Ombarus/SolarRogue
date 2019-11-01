@@ -13,6 +13,16 @@ func _ready():
 	BehaviorEvents.connect("OnPushGUI", self, "OnPushGUI_Callback")
 	BehaviorEvents.connect("OnPopGUI", self, "OnPopGUI_Callback")
 	BehaviorEvents.connect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
+	BehaviorEvents.connect("OnShowGUI", self, "OnShowGUI_Callback")
+	BehaviorEvents.connect("OnHideGUI", self, "OnHideGUI_Callback")
+	
+
+func OnShowGUI_Callback(name, init_param):
+	_gui_list[name].visible = true
+	_gui_list[name].Init(init_param)
+	
+func OnHideGUI_Callback(name):
+	_gui_list[name].visible = false
 
 func OnPlayerCreated_Callback(player):
 	BehaviorEvents.disconnect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
