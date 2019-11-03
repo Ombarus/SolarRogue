@@ -4,9 +4,7 @@ RELEASE CHECKLIST :::
 - compilation set to release (debug unchecked)
 
 TODO :::
-- Settings improvements ?
-	- remap keys ?
-	- vsync, resolution, windowed, etc ?
+- custom cursor ?
 - Difficulty
 	- add drop-down to name selection on new game
 - Tutorial
@@ -188,8 +186,11 @@ IDEAS:::
 	
 	
 DONE :::
+- Settings improvements ?
+	- remap keys ?
+	- vsync, resolution, windowed, etc ?
 	- give a base-rate bonus on easier diff
-	- increase inventory on easier diff
+	- increase planet inventory on easier diff
 	- save in the player the "lowest" difficulty the player set. Then write it in the leaderboard.
 	- Give a big points bonus for higher diff
 - leaderboard doesn't have scroll bar ?
