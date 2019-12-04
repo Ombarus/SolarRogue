@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Deep Beep_gb.wav-b1702b4f9cbd0cb39b1d166498f74bbf.sample"
+
+[deps]
+
+source_file="res://data/sounds/sfx/explosion/Deep Beep_gb.wav"
+dest_files=[ "res://.import/Deep Beep_gb.wav-b1702b4f9cbd0cb39b1d166498f74bbf.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

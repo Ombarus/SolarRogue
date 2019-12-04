@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_exp_planet_gb02.wav-c1a2a58c9732a694a6138ba0251fba39.sample"
+
+[deps]
+
+source_file="res://data/sounds/sfx/explosion/sfx_exp_planet_gb02.wav"
+dest_files=[ "res://.import/sfx_exp_planet_gb02.wav-c1a2a58c9732a694a6138ba0251fba39.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
