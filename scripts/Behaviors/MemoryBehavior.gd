@@ -193,7 +193,7 @@ func OnScannerUpdated_Callback(obj):
 					var ghost = Globals.LevelLoaderRef.GetObjectById(ghost_id)
 					Globals.LevelLoaderRef.UpdatePosition(ghost, o.position)
 					#ghost.position = o.position # Don't ever ever do this with a Attribute Object... LevelLoader will get confused
-				else:
+				elif not (o.get_attrib("no_ghost") == true and o.visible == true):
 					var unkown_tile_path = "data/json/props/unknow.json"
 					var modified = {}
 					modified["ghost_memory"] = {"reference_id":o.get_attrib("unique_id"), "is_unknown":true}

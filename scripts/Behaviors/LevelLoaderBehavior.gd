@@ -177,12 +177,14 @@ func GenerateLevelFromTemplate(levelData):
 	allTilesCoord.remove(i)
 	_current_level_data = levelData
 	
+	var cur_tile_index := 0
 	for tileCoord in allTilesCoord:
-		
+		cur_tile_index += 1
 		cur_time = OS.get_ticks_msec()
-		if cur_time - start_time > 33:
-			start_time = cur_time
-			yield(get_tree(), "idle_frame")
+		#if cur_time - start_time > 33:
+		#	BehaviorEvents.emit_signal("OnLogLine", "Loading : " + str(cur_tile_index) + " / " + str(allTilesCoord.size()))
+		#	yield(get_tree(), "idle_frame")
+		#	start_time = cur_time
 		
 		for obj in levelData["objects"]:
 			var do_spawn = false
@@ -471,4 +473,5 @@ func set_loading(var is_loading : bool):
 	get_node("../../BG").visible = !is_loading
 	get_node("../../GameTiles").visible = !is_loading
 	get_node("../../base_green").visible = !is_loading
+	get_node("../../Camera-GUI/HUD").visible = !is_loading
 	_loading.visible = is_loading

@@ -20,7 +20,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if _behavior == null and self.visible == true:
+	if _behavior == null or self.visible == false:
 		return
 		
 	var to_display : String = ""

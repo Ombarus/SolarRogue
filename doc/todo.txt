@@ -4,9 +4,14 @@ RELEASE CHECKLIST :::
 - compilation set to release (debug unchecked)
 
 TODO :::
+- HitFX & SFX for planets
+- Goto on tablet... to help with accuracy. Highlight the cell on tap and move on release ?
+- Issue with yield() while loading on my tablet... loading takes hours
+- If player has Missile Launcher and 0 missile... trigger converter missile crafting tuto
+- **BUG** transfer doesn't set name of ship
+- **BUG** fullscreen doesn't work
+- wormhole shader spiral is weird when not at 1:1 zoom
 - custom cursor ?
-- Difficulty
-	- add drop-down to name selection on new game
 - Tutorial
 	- grab & conv where highlighted together then when I clicked conv it became gray (null _old_style ?)
 	- steps :
@@ -23,7 +28,6 @@ TODO :::
 - art
 	- converter ?
 - Still issues with "detected" objects. If we blow up a planet, the "food" will be considered never seen until we move then it interup the move
-- difficulty (for youtuber like spacegamejunkie.... this is too tough right now)
 - Save after each turn
 - translation
 	- Godot : Implement Localization
@@ -186,6 +190,10 @@ IDEAS:::
 	
 	
 DONE :::
+- difficulty (for youtuber like spacegamejunkie.... this is too tough right now)
+- Difficulty
+	- add drop-down to name selection on new game
+- wormhole show '?' when out of mk2 range
 - Settings improvements ?
 	- remap keys ?
 	- vsync, resolution, windowed, etc ?

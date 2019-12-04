@@ -35,6 +35,7 @@ func ConsiderInterests(obj):
 	
 	# Disable if ennemy came in range or never seen item shows up
 	var filtered : Array = []
+	var known_anomalies = obj.get_attrib("scanner_result.known_anomalies", {})
 	if moved != null and moved == true:
 		for id in new_objs:
 			var o : Node2D = Globals.LevelLoaderRef.GetObjectById(id)
@@ -45,7 +46,6 @@ func ConsiderInterests(obj):
 					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Ennemy ship entered scanner range ![/color]")
 				filtered.push_back(id)
 				break
-			var known_anomalies = o.get_attrib("scanner_result.known_anomalies", {})
 			var detected : bool = o.get_attrib("type") != "anomaly"
 			if id in known_anomalies:
 				detected = known_anomalies[id]
@@ -69,6 +69,13 @@ func ConsiderInterests(obj):
 				if is_player == true:
 					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Autopilot canceled, ennemy too close ![/color]")
 				filtered.push_back(id)
+		if o != null:
+			var detected : bool = o.get_attrib("type") != "anomaly"
+			if id in known_anomalies:
+				detected = known_anomalies[id]
+			if o.get_attrib("memory.was_seen_by", false) == false and detected == true:
+				if is_player == true:
+					o.set_attrib("memory.was_seen_by", true)
 			
 	if filtered.size() > 0:
 		obj.set_attrib("ai.disabled", true)
