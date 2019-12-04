@@ -27,7 +27,6 @@ TODO :::
 	- Tuto Skip Prompt
 - art
 	- converter ?
-- Still issues with "detected" objects. If we blow up a planet, the "food" will be considered never seen until we move then it interup the move
 - Save after each turn
 - translation
 	- Godot : Implement Localization
@@ -190,6 +189,7 @@ IDEAS:::
 	
 	
 DONE :::
+- Still issues with "detected" objects. If we blow up a planet, the "food" will be considered never seen until we move then it interup the move
 - difficulty (for youtuber like spacegamejunkie.... this is too tough right now)
 - Difficulty
 	- add drop-down to name selection on new game

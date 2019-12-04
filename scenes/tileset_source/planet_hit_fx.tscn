@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/animations/planet_hit_fx.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Animations/planet_hit_inst.tscn" type="PackedScene" id=2]
+
+[node name="planet_hit_fx" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Sprite" parent="." instance=ExtResource( 2 )]
+position = Vector2( 18.7704, 33.5592 )
+
+[node name="Sprite2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 22.752, 1.7064 )
+
+[node name="Sprite3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 2.84399, -22.1832 )
+
+[node name="Sprite4" parent="." instance=ExtResource( 2 )]
+position = Vector2( -21.6144, 7.39439 )
+
+[node name="Sprite5" parent="." instance=ExtResource( 2 )]
+position = Vector2( -18.7704, -22.1832 )
+

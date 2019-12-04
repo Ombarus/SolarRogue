@@ -219,6 +219,8 @@ func ProcessHarvest(target, shooter, weapon_data):
 			inventory.remove(inv_index)
 		if is_player:
 			BehaviorEvents.emit_signal("OnLogLine", "Some useful materials float into orbit")
+			
+	BehaviorEvents.emit_signal("OnDamageTaken", target, shooter)
 
 
 func ProcessDamage(target, shooter, weapon_data):
