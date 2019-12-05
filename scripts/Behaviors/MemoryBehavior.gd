@@ -65,7 +65,7 @@ func ExecuteFullSweep():
 		var disable_fow = is_ultimate or (Globals.LevelLoaderRef.GetCurrentLevelData().has("fully_mapped") and Globals.LevelLoaderRef.GetCurrentLevelData().fully_mapped == true)
 		var not_invisible_anomaly : bool = obj.get_attrib("type") != "anomaly" or (key in known_anomalies and known_anomalies[key] == true)
 		var is_player : bool = obj == _playerNode
-		var is_a_ghost : bool = obj.get_attrib("ghost_memory") != null
+		var is_a_ghost : bool = obj.get_attrib("ghost_memory") != null or obj.get_attrib("is_fake_ghost_memory", false) == true
 		var in_scanner_range : bool = player_scan != null and key in player_scan
 		
 		if  not_invisible_anomaly and (disable_fow or is_player or is_a_ghost or in_scanner_range):
@@ -156,6 +156,8 @@ func OnScannerUpdated_Callback(obj):
 			_remove_ghost_from_real(o)
 		if o != null and o.get_attrib("ghost_memory"):
 			_remove_ghost(o)
+		if o != null and o.get_attrib("is_fake_ghost_memory", false) == true:
+			o.set_attrib("is_fake_ghost_memory", false)
 	
 	for id in new_out_objs:
 		var o = Globals.LevelLoaderRef.GetObjectById(id)
@@ -174,13 +176,8 @@ func OnScannerUpdated_Callback(obj):
 			n.set_attrib("ai.disabled", true) # trick way to disable a component from base_attributes because I cannot remove stuff from it
 			n.rotation =  o.rotation
 			o.set_attrib("has_ghost_memory.reference_id", n.get_attrib("unique_id"))
-			
-			# UPDATE PLAYER MEMORY
-			#var obj_tile = Globals.LevelLoaderRef.World_to_Tile(o.position)
-			#var player_tile = Globals.LevelLoaderRef.World_to_Tile(_playerNode.position)
-			#var data = {"position":var2str(obj_tile), "sprite":obj.get_attrib("sprite")}
-			#var path = "memory.objects." + str(obj.get_attrib("unique_id"))
-			#_playerNode.set_attrib(path, data)
+		elif o != null and o.get_attrib("no_ghost") == true:
+			o.set_attrib("is_fake_ghost_memory", true)
 	
 	if unkown_objs != null:
 		var all_visible = _playerNode.get_attrib("scanner_result.cur_in_range." + level_id)
@@ -193,7 +190,7 @@ func OnScannerUpdated_Callback(obj):
 					var ghost = Globals.LevelLoaderRef.GetObjectById(ghost_id)
 					Globals.LevelLoaderRef.UpdatePosition(ghost, o.position)
 					#ghost.position = o.position # Don't ever ever do this with a Attribute Object... LevelLoader will get confused
-				elif not (o.get_attrib("no_ghost") == true and o.visible == true):
+				elif o.get_attrib("is_fake_ghost_memory", false) == false:
 					var unkown_tile_path = "data/json/props/unknow.json"
 					var modified = {}
 					modified["ghost_memory"] = {"reference_id":o.get_attrib("unique_id"), "is_unknown":true}
