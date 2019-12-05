@@ -414,6 +414,9 @@ func _input(event):
 		var world_mouse_tile = Globals.LevelLoaderRef.World_to_Tile(playerNode.get_global_mouse_position())
 		var tile_world_center = Globals.LevelLoaderRef.Tile_to_World(world_mouse_tile)
 		_area_of_effect_overlay.position = tile_world_center
+		
+	if (event is InputEventMouseButton or event is InputEventKey) and playerNode != null and playerNode.get_attrib("ai") != null and playerNode.get_attrib("ai.disable_on_interest", false) == true and playerNode.get_attrib("ai.skip_check") <= 0:
+		playerNode.set_attrib("ai.disabled", true)
 	
 	if _input_state != INPUT_STATE.look_around or not event is InputEventMouseButton:
 		return

@@ -4,7 +4,6 @@ RELEASE CHECKLIST :::
 - compilation set to release (debug unchecked)
 
 TODO :::
-- **BUG** equipping an mk2 scanner hides the wormhole to a '?'
 - tap on the screen should cancel autopilot
 - **BUG** tap (or click) sometime move the camera around
 - Goto on tablet... to help with accuracy. Highlight the cell on tap and move on release ?
@@ -191,6 +190,7 @@ IDEAS:::
 	
 	
 DONE :::
+- **BUG** equipping an mk2 scanner hides the wormhole to a '?'
 - **BUG** transfer doesn't set name of ship
 - **BUG** fullscreen doesn't work
 - HitFX & SFX for planets
