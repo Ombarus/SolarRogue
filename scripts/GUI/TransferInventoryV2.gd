@@ -246,7 +246,7 @@ func ReInit():
 	_robj.init_mounts()
 	
 	get_node("HBoxContainer/OtherShip").title = _robj.get_attrib("name_id")
-	get_node("HBoxContainer/MyShip").title = _lobj.get_attrib("name_id")
+	get_node("HBoxContainer/MyShip").title = _lobj.get_attrib("player_name", _lobj.get_attrib("name_id"))
 	
 	var cargo1 = _lobj.get_attrib("cargo.content")
 	var mounts1 = _lobj.get_attrib("mounts")

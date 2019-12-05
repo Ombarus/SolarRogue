@@ -35,7 +35,12 @@ margin_right = 413.0
 margin_bottom = 656.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+dialog_ok = false
+dialog_cancel = false
+disabled = false
+bottom_title = ""
 title = "Player's Ship"
+border_style = "═"
 
 [node name="MyItemList" parent="HBoxContainer/MyShip" instance=ExtResource( 5 )]
 anchor_right = 1.0
@@ -157,7 +162,12 @@ margin_right = 1248.0
 margin_bottom = 656.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+dialog_ok = false
+dialog_cancel = false
+disabled = false
+bottom_title = ""
 title = "A Human Scout"
+border_style = "═"
 
 [node name="MyItemList" parent="HBoxContainer/OtherShip" instance=ExtResource( 5 )]
 anchor_right = 1.0
