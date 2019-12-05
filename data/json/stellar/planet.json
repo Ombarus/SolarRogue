@@ -2,7 +2,7 @@
 	"name_id":"A Planet",
 	"type":"planet",
 	"sprite_choice": [
-		"planet_a"
+		"planet_a", "planet_b", "planet_c", "planet_d", "planet_e", "planet_f", "planet_g", "planet_h"
 	],
 	"icon": [
 		{"texture":"data/textures/space-sprite.png", "region":[512,0,128,128]},
