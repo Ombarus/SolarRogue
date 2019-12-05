@@ -31,6 +31,9 @@ func Init(init_param):
 	var fs : bool = PermSave.get_attrib("settings.full_screen", false)
 	get_node("base/VBoxContainer/FullScreen/CheckButton").pressed = fs
 	
+	var vsync : bool = PermSave.get_attrib("settings.vsync", true)
+	get_node("base/VBoxContainer/VSync/CheckButton").pressed = vsync
+	
 	var vol : float = PermSave.get_attrib("settings.master_volume", 8.0)
 	_vol_master.value = vol
 	vol = PermSave.get_attrib("settings.sfx_volume", 8.0)
@@ -45,7 +48,7 @@ func Init(init_param):
 	get_node("base/VBoxContainer/FPS/FPSCounter").pressed = show_fps
 	
 
-func _on_CheckButton_toggled(button_pressed):
+func _on_fullscreen_toggled(button_pressed):
 	OS.set_window_fullscreen(button_pressed)
 	PermSave.set_attrib("settings.full_screen", button_pressed)
 

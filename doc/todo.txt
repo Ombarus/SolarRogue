@@ -4,7 +4,6 @@ RELEASE CHECKLIST :::
 - compilation set to release (debug unchecked)
 
 TODO :::
-- HitFX & SFX for planets
 - Goto on tablet... to help with accuracy. Highlight the cell on tap and move on release ?
 - Issue with yield() while loading on my tablet... loading takes hours
 - If player has Missile Launcher and 0 missile... trigger converter missile crafting tuto
@@ -27,6 +26,7 @@ TODO :::
 	- Tuto Skip Prompt
 - art
 	- converter ?
+	- planet_vfx
 - Save after each turn
 - translation
 	- Godot : Implement Localization
@@ -189,6 +189,7 @@ IDEAS:::
 	
 	
 DONE :::
+- HitFX & SFX for planets
 - Still issues with "detected" objects. If we blow up a planet, the "food" will be considered never seen until we move then it interup the move
 - difficulty (for youtuber like spacegamejunkie.... this is too tough right now)
 - Difficulty

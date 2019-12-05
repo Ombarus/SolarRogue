@@ -28,7 +28,11 @@ margin_top = -234.0
 margin_right = 390.5
 margin_bottom = 234.0
 dialog_ok = true
+dialog_cancel = false
+disabled = false
+bottom_title = ""
 title = "Thanks for playing Solar Rogue !"
+border_style = "═"
 
 [node name="Content" type="RichTextLabel" parent="base"]
 anchor_right = 1.0
@@ -51,6 +55,9 @@ Guillaume Bouvier AKA Ombarus
 [b]Art[/b]
 Credit to Spyridon Kontis
 
+[b]Additionnal Art[/b]
+The Frogatto & Friends team - www.frogatto.com (planet VFX)
+
 [b]Sounds from around the web[/b]
 Juhani Junkala
 Bart
@@ -61,7 +68,7 @@ Licensed under Creative Commons: By Attribution 3.0
 http://creativecommons.org/licenses/by/3.0/
 
 [b]Made with[/b]
-Godot Engine, Krita, SunVox, Bfxr
+Godot Engine, Krita, SunVox, Bfxr, Audacity
 
 [/center]"
 text = "
@@ -71,6 +78,9 @@ Guillaume Bouvier AKA Ombarus
 
 Art
 Credit to Spyridon Kontis
+
+Additionnal Art
+The Frogatto & Friends team - www.frogatto.com (planet VFX)
 
 Sounds from around the web
 Juhani Junkala
@@ -82,7 +92,7 @@ Licensed under Creative Commons: By Attribution 3.0
 http://creativecommons.org/licenses/by/3.0/
 
 Made with
-Godot Engine, Krita, SunVox, Bfxr
+Godot Engine, Krita, SunVox, Bfxr, Audacity
 
 "
 
