@@ -4,8 +4,6 @@ RELEASE CHECKLIST :::
 - compilation set to release (debug unchecked)
 
 TODO :::
-- **BUG** tap (or click) sometime move the camera around
-	- seems to happen when you click while we're smoothing the pan after a drag.
 - apply planet explosion to other planets (right now just planet_a)
 - Goto on tablet... to help with accuracy. Highlight the cell on tap and move on release ?
 - Issue with yield() while loading on my tablet... loading takes hours
@@ -191,6 +189,8 @@ IDEAS:::
 	
 	
 DONE :::
+- **BUG** tap (or click) sometime move the camera around
+	- seems to happen when you click while we're smoothing the pan after a drag.
 - tap on the screen should cancel autopilot
 - **BUG** equipping an mk2 scanner hides the wormhole to a '?'
 - **BUG** transfer doesn't set name of ship
