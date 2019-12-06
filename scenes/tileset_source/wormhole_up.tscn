@@ -126,7 +126,7 @@ shader_param/strength = 21.36
 shader_param/outer_slope = -15.95
 shader_param/inner_slope = 59.76
 shader_param/intersection_dist = 0.2
-shader_param/intersection_mult = 2.39
+shader_param/intersection_mult = 3.34
 shader_param/color_multiplier = Plane( 0.17, 0.42, 2.28, 1 )
 
 [sub_resource type="Animation" id=3]

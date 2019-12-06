@@ -6,6 +6,12 @@
 code = "shader_type canvas_item;
 
 uniform float strength = 200.0;
+
+uniform float outer_slope = -10.0;
+uniform float inner_slope = 80.0;
+uniform float intersection_dist = 0.2;
+uniform float intersection_mult = 4.0;
+
 uniform vec4 color_multiplier = vec4(1.0, 1.0, 1.0, 1.0);
 
 vec2 tex_center_in_screen_uv(vec2 tex_uv, vec2 screen_uv, vec2 texture_pixel_size, vec2 screen_pixel_size) {
@@ -20,20 +26,23 @@ vec2 tex_center_in_screen_uv(vec2 tex_uv, vec2 screen_uv, vec2 texture_pixel_siz
 
 
 // WORKS PERFECT SWIRL
+
 void fragment() {
+	// Get the sprite's center in screen UVs
 	vec2 uv = UV;
 	vec2 screen_uv = SCREEN_UV;
 	vec2 tex_size = TEXTURE_PIXEL_SIZE;
 	vec2 screen_size = SCREEN_PIXEL_SIZE;
-	//vec2 center_tex_screen_uv = vec2(0.5,0.5);
 	vec2 center_tex_screen_uv = tex_center_in_screen_uv(uv, screen_uv, tex_size, screen_size);
 	float aspect = SCREEN_PIXEL_SIZE.y / SCREEN_PIXEL_SIZE.x;
 	
+	// Calculate the spiral based on the distance from center
 	vec2 rel = (uv - vec2(0.5, 0.5));
 	float angle = length(rel)*strength;
 	// not required but help for visualization to keep it within 0 and 2pi when debugging
 	angle = fract(angle / (2.0*3.14159265)) * (2.0*3.14159265);
 	
+	// Rotation matrix
 	mat2 rot = mat2(vec2(cos(angle),-sin(angle)),vec2(sin(angle),cos(angle)));
 	vec2 coord = screen_uv - center_tex_screen_uv;
     rel = vec2(coord.x * aspect, coord.y) * rot;
@@ -41,39 +50,38 @@ void fragment() {
 	
 	vec4 final_color = textureLod(SCREEN_TEXTURE, final_uv, 0.0);
 	
+	// Do the same thing with a custom texture for added \"punch\"
 	float dist_center = length(uv - vec2(0.5, 0.5));
 	
 	vec2 tex_uv = UV;
 	tex_uv = (tex_uv - vec2(0.5, 0.5)) * rot;
 	tex_uv = clamp(tex_uv + vec2(0.5, 0.5), vec2(0,0), vec2(1,1));
 	vec4 tex_color = textureLod(TEXTURE, tex_uv, 0.0) * 2.0;
-	//tex_color *= color_multiplier;
 	final_color = mix(tex_color, final_color, dist_center*4.0);
 	
-	// black middle hole
+	// black middle hole	
+	float mult = 1.0;
+	float b1 = intersection_mult - (outer_slope * intersection_dist);
+	float b2 = intersection_mult - (inner_slope * intersection_dist);
 	
-	float mult = -10.0 * dist_center + 6.0;
-	//float mult = -30.0 * dist_center + 16.0;
-	if (dist_center >= 0.2) {
-		mult = clamp(mult, 1.0, 4.0);
+	if (dist_center >= intersection_dist) {
+		mult = outer_slope * dist_center + b1;
+		mult = clamp(mult, 1.0, intersection_mult);
 		final_color *= mult;
 	}
 	else {
-		//mult = 200.0 * dist_center - 30.0;
-		mult = 80.0 * dist_center - 12.0;
-		mult = clamp(mult, 0.0, 4.0);
+		mult = inner_slope * dist_center + b2;
+		mult = clamp(mult, 0.0, intersection_mult);
 		final_color *= mult;
 	}
 	
 	final_color *= color_multiplier;
 	
 	// Blend at the corner
-	
 	vec4 normal_color = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0);
 	float mixer = clamp(dist_center*2.0, 0.0, 1.0);
 	final_color = mix(final_color, normal_color, mixer);
 	
-	//COLOR.rgba = vec4(angle / (2.0 * 3.14159265), 0.0, 0.0, 1.0);
 	COLOR.rgba = final_color;
 }
 
@@ -100,14 +108,25 @@ void fragment() {
     rel = vec2(coord.x * aspect, coord.y) * rot;
     vec2 final_uv = clamp(vec2((rel.x/aspect) + center_tex_screen_uv.x, rel.y + center_tex_screen_uv.y),vec2(0,0),vec2(1,1));
 	
-	//COLOR.rgba = vec4(angle / (2.0 * 3.14159265), 0.0, 0.0, 1.0);
-	COLOR.rgba = textureLod(SCREEN_TEXTURE, final_uv, 0.0);
+	vec4 final_color = textureLod(SCREEN_TEXTURE, final_uv, 0.0);
+	float dist_center = length(uv - vec2(0.5, 0.5));
+	if (dist_center < 0.1) {
+		final_color = vec4(0.0, 0.0, 0.0, 1.0);
+	}
+	
+	//COLOR.rgba = mix(vec4(r, 0.0, 0.0, 1.0), textureLod(SCREEN_TEXTURE, final_uv, 0.0), 0.5);
+	//COLOR.rgba = vec4(r, 0.0, 0.0, 1.0);
+	COLOR.rgba = final_color;
 }
 */"
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
-shader_param/strength = 18.2
+shader_param/strength = 21.36
+shader_param/outer_slope = -15.95
+shader_param/inner_slope = 59.76
+shader_param/intersection_dist = 0.2
+shader_param/intersection_mult = 3.14
 shader_param/color_multiplier = Plane( 0.85, 0.97, 0.24, 1 )
 
 [sub_resource type="Animation" id=3]
