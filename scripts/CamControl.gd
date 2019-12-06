@@ -83,6 +83,9 @@ func update_touch_info():
 		_touches_info["total_pan"] = 0
 		return
 		
+	if _touches_info["num_touch_last_frame"] == 0:
+		reset_smooth()
+		
 	var avg_touch = Vector2(0,0)
 	for key in _touches:
 		avg_touch += _touches[key].current.position
@@ -197,7 +200,7 @@ func _process(delta):
 		var y : float = clamp(self.position.y, 0, bounds.y * tile_size)
 		self.position = Vector2(x,y)
 	
-func update_vel(delta : float):
+func update_vel(delta : float):		
 	var cur_cam_pos := self.position
 	var move := _last_cam_pos - cur_cam_pos
 	var move_speed : Vector2 = move / delta
