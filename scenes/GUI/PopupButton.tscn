@@ -86,6 +86,7 @@ margin_right = 70.0
 margin_bottom = 430.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[5] wait"
+ShortcutKey = "5"
 
 [node name="More" parent="." instance=ExtResource( 4 )]
 margin_right = 110.0
