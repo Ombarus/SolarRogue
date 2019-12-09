@@ -190,7 +190,7 @@ func GenerateLevelFromTemplate(levelData):
 			var do_spawn = false
 			if objCountByType.has(obj["name"]) && obj.has("max") && objCountByType[obj["name"]] >= obj["max"]:
 				continue
-			if obj.has("global_max") && obj["name"] in _global_spawns && obj["global_max"] >= _global_spawns[obj["name"]]:
+			if obj.has("global_max") && Globals.clean_path(obj["name"]) in _global_spawns && obj["global_max"] >= _global_spawns[Globals.clean_path(obj["name"])]:
 				continue
 			if obj.has("tile_margin") and ( \
 				tileCoord[0] - obj.tile_margin[0] < 0 or \
@@ -439,9 +439,10 @@ func CreateAndInitNode(data, pos, modified_data = null):
 	objById[n.modified_attributes["unique_id"]] = n
 	BehaviorEvents.emit_signal("OnObjectLoaded", n)
 	if modified_data == null: # only count new stuff
-		if not data["src"] in _global_spawns:
-			_global_spawns[data["src"]] = 0
-		_global_spawns[data["src"]] += 1
+		var clean_path = Globals.clean_path(data["src"])
+		if not clean_path in _global_spawns:
+			_global_spawns[clean_path] = 0
+		_global_spawns[clean_path] += 1
 	return n
 	
 #######################################################

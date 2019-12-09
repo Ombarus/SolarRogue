@@ -2,9 +2,10 @@ RELEASE CHECKLIST :::
 - Check player starting inventory
 - levelLoader.gd => test_mid_game is false
 - compilation set to release (debug unchecked)
+- save after each turn, save when quit
 
 TODO :::
-- zoom out now sometimes pan in a weird way
+- wait shortcut says 5 but doesn't work
 - Mobile only "features" ?
 	- Hide "Quit" button (iOS or Mobile in general)
 	- Pinch-Zoom tuto ?
@@ -29,7 +30,6 @@ TODO :::
 	- Tuto Skip Prompt
 - art
 	- converter ?
-	- planet_vfx
 - Save after each turn
 - translation
 	- Godot : Implement Localization
@@ -192,6 +192,7 @@ IDEAS:::
 	
 	
 DONE :::
+- zoom out now sometimes pan in a weird way
 - Zoom button should keep zooming on pressed
 - scrollwheel should zoom toward mouse
 - apply planet explosion to other planets (right now just planet_a)
