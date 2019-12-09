@@ -5,32 +5,27 @@ RELEASE CHECKLIST :::
 - save after each turn, save when quit
 
 TODO :::
-- wait shortcut says 5 but doesn't work
+- "enemy", pas "ennemy"
+- Main Menu music
+- Message if you try to go up the home wormhole
+	- beside displaying the intro msg... add a warning log : "can't open wormhole right now, find something that can"
+- touch-scroll lists ?
+- Add random derelic you can pickup items from
+	- when trying to pickup derelic should warn player : "not empty" (see final converter of yendor)
+- recipe row size != inventory row size
+- Converter recipe list has heigher rows than other lists
+- investigate steam and itch.io
+- ***BUG: still issues when switching ship with ultimate scanner... memory is not created, ships turn invisible, etc.
+- why do I keep mixing up inventory and converter ?
+- Issue with yield() while loading on my tablet... loading takes hours
+	- perf : iterating over all tiles while loading might be a bit much ?
 - Mobile only "features" ?
 	- Hide "Quit" button (iOS or Mobile in general)
 	- Pinch-Zoom tuto ?
-- Goto on tablet... to help with accuracy. Highlight the cell on tap and move on release ?
-- Issue with yield() while loading on my tablet... loading takes hours
-	- perf : iterating over all tiles while loading might be a bit much ?
-- If player has Missile Launcher and 0 missile... trigger converter missile crafting tuto
-- wormhole shader spiral is weird when not at 1:1 zoom
-- custom cursor ?
 - Tutorial
 	- grab & conv where highlighted together then when I clicked conv it became gray (null _old_style ?)
-	- steps :
-		- movement -- done
-		- pickup -- done
-		- shoot planet -- done
-		- view neutral blue highlight -- done
-		- view ennemy red highlight -- done
-		- converter, recycle energy -- done, (would like to highlight one step at a time)
-		- converter, make missile
-		- inventory, equip new items -- done, (would like to highlight one step at a time)
-		- wormhole
-	- Tuto Skip Prompt
 - art
 	- converter ?
-- Save after each turn
 - translation
 	- Godot : Implement Localization
 		- You can link CSVs in localization, replace certain resources (like textures) with others and even change the project name based on choosen locale
@@ -38,16 +33,79 @@ TODO :::
 			- use tr() method to get translation from keyboard
 			- button labels and such automatically check if text is a key and translate
 			- for format godot support stuff like "bleh {id}".format({"id":"hello world"})\
-- equilize sounds to similar db
-- Check what ressources are used and exported to reduce package size
-- Generate icons, banner, etc. for android release
-- Spawned on top of sun. Wormhole looks weird
-- tutorial ?
-- Allow clicking outside of the map to move (it has weird behavior now with contextual clicks)
-- New movement (always goto) prevent going on top of something if you can interact with it :/
-- ***BUG: still issues when switching ship with ultimate scanner... memory is not created, ships turn invisible, etc.
-- ***BUG: if disabled is in the base_attributes we cannot override it in modified_attributes !***
+- Generate icons, banner, etc. for android/ios/pc release
+- customize scroll bar visual ?
+- death screen need beautification
+- leaderboard display improvement (scroll is not ideal yet)
+- BUG: craft scout, transfer all, notice scout disapear from screen, put back scanner and scout comes back to live (ultimate scanner).
+- SOUNDS
+	- SFX :
+		- no sound when transfering cargo (but mount is ok)
+		- revisit moving noise
+		- Use nanobots
+	- music
+		- Credit / success screen
+		
+- Achievements
+- Android tests :
+	- Ask my father to install
+	- Ask mom to install phone + tablet (take screenshot of font size on HHHDPI phone/tablet)
+	- Install on aya's phone
+	- Try Clara's phone ?
+- review multi-tile objects
+	- Collision on each tile but behave as a single entity ?
+
+	
+	
+	
+polish :::
+- Basic interaction
+	- Look around
+		- select item using keyboard
+	- Shoot
+		- select target using keyboard
+- Spawning
+- BUG: Any random interaction should cancel targetting ? (CNR)
+- BUG: moving while targetting will cancel overlay but won't push back HUD (CNR)
+- make sure player cannot generate more energy than max capacity
+SOUNDS:
+	SFX:
+		- Beeping for white, yellow and red log messages
+		- different noise for each category of drop ?
+		- Noise for transfer from ship to ship (or same as equip ?)
+		- autopilot interupted ?
+	MUSIC:
+		- change music when aggressive ennemy hunting ?
+- level generation improvement :
+	- revisit spawn chance... could I specify it in chance per level instead of per tile ? would make tweaking level design easier (1 per level is a chance of 0,00015625 !)
+	- Sokoban example : might want to spawn wormhole #1 OR #2.. not both, but definitly at least 1
+	- Nethack : Quest level different by race (I don't have race for now ?)
+	- Dependency ? Castle can spawn between 25-29 but never before medusa
+- Don't potion if not needed !
+- going down wormhole should take ap and/or energy
+- Border around level is ugly
+	- give it a "danger" kind a texture ?
+	- remove it and warn the player : "cannot get out of sun's gravity well"
+	- ???
+- add icon in material list in crafting diag
+- categories in crafting material list (when more than 4-5 items)
+- a way to id player ship when scrolling the map around
+	- button to re-center ?
+	- feedback when in 'goto' mode ?
+	- little arrow showing the player <-- The Ombarus
+- "grab" menu when multiple objects ?
+- crash trying to convert 10 missile to energy (CNR)
+- Interupt crafting if shot ?
+- don't let planet material spawn under the player
+- OPTIM : loading json cache
+- OPTIM : scanner
+	- AI are only interested in player so don't check all surrounding
+	- Can not check empty tile to avoid 80x80 tile check with the ultimate scanner ?
 - PERF: Render on Tablet is slow. Even main menu I only get ~20fps... in-game I max at 17, 6-7 while moving...
+		- Perf issues on my tablet
+			- Text UI take too long to render (1 draw call per char!)
+			- https://github.com/godotengine/godot/issues/11797
+			- https://github.com/godotengine/godot/issues/19917
 		- Update scanner is slow.
 		- Could maybe update a bit less AI each frame
 		- Mostly seems to be rendering is pretty slow... Not sure what is slow, not so many textures, maybe I can improve the shaders ? Could it be the text again ? Overdraw ?
@@ -67,91 +125,18 @@ TODO :::
 	- Confusion (ship moves in random direction ?)
 	- Naked Singularity (constrict ship, prevent movement until ship can escape it's pull (damage per turn ?))
 	- Complete shutdown (unable to act for X turn)
-- Add random derelic you can pickup items from
-	- when trying to pickup derelic should warn player : "not empty" (see final converter of yendor)
-- recipe row size != inventory row size
-- Converter recipe list has heigher rows than other lists
-- customize scroll bar ?
-- don't let planet material spawn under the player
-- death screen need beautification
-- categories in crafting material list (when more than 4-5 items)
-- add icon in material list in crafting diag
-- leaderboard display improvement (scroll is not ideal yet)
-- a way to id player ship when scrolling the map around
-	- button to re-center ?
-	- feedback when in 'goto' mode ?
-	- little arrow showing the player <-- The Ombarus
-- BUG: craft scout, transfer all, notice scout disapear from screen, put back scanner and scout comes back to live (ultimate scanner).
-- "grab" menu when multiple objects ?
-- crash trying to convert 10 missile to energy (CNR)
-- Interupt crafting if shot ?
-- Border around level is ugly
-	- give it a "danger" kind a texture ?
-	- remove it and warn the player : "cannot get out of sun's gravity well"
-	- ???
-- SOUNDS
-	- SFX :
-		- no sound when transfering cargo (but mount is ok)
-		- revisit moving noise
-		- Beeping for white, yellow and red log messages
-		- Noise for item drop / planet harvest drop ?
-			- different noise for each category of drop ?
-		- Noise for transfer from ship to ship (or same as equip ?)
-		- Use nanobots
-		- autopilot interupted ?
-	- music
-		- change music when aggressive ennemy hunting ?
-		- Main Menu music
-		- Credit / success screen
-		
-- Achievements
-- Could not install on OnePlus 3T Oreo (test with father's phone)
-- Find a way to make a good UI for PC AND mobile... how to adjust font size and such ?
-- BUG: Global max seem broken. More than one of the same branch wormhole sometimes spawn (CNR ?)
-- OPTIM : scanner
-	- AI are only interested in player so don't check all surrounding
-	- Can not check empty tile to avoid 80x80 tile check with the ultimate scanner ?
-- OPTIM : loading json cache
-- going down wormhole should take ap and/or energy
-- Don't potion if not needed !
-- Perf issues on my tablet
-	- Text UI take too long to render (1 draw call per char!)
-	- https://github.com/godotengine/godot/issues/11797
-	- https://github.com/godotengine/godot/issues/19917
-- Things that annoy me while playtesting :
-	- dragging converter list doesn't move the list.. very difficult on device to hit the scroll
-- level generation improvement :
-	- revisit spawn chance... could I specify it in chance per level instead of per tile ? would make tweaking level design easier (1 per level is a chance of 0,00015625 !)
-	- Sokoban example : might want to spawn wormhole #1 OR #2.. not both, but definitly at least 1
-	- Nethack : Quest level different by race (I don't have race for now ?)
-	- Dependency ? Castle can spawn between 25-29 but never before medusa
-- Message if you try to go up the home wormhole
-- make sure player cannot generate more energy than max capacity
-- review multi-tile objects
-	- Collision on each tile but behave as a single entity ?
-- BUG: Any random interaction should cancel targetting ? (CNR)
-- BUG: moving while targetting will cancel overlay but won't push back HUD (CNR)
-- Spawning
-- Basic interaction
-	- Look around
-		- select item using keyboard
-	- Shoot
-		- select target using keyboard
-- Two places where I access cargo content and just do -= 1. or .remove()... but if the result returned was in BaseAttribute that's dangerous
-- Look & feel
-	- Icons :
-		- Converter
-		- Hydrogen
-		- Scanner
-		- Shield
-		- Laser turret
-		- Missile Launcher
-		- Ship parts ?
-
-	
-	
-	
-polish :::
+- ***BUG: if disabled is in the base_attributes we cannot override it in modified_attributes !***
+- New movement (always goto) prevent going on top of something if you can interact with it :/
+- Allow clicking outside of the map to move (it has weird behavior now with contextual clicks)
+- Spawned on top of sun. Wormhole looks weird
+- equilize sounds to similar db
+- Tuto :
+	- steps :
+		- If player has Missile Launcher and 0 missile... trigger converter missile crafting tuto
+		- wormhole
+	- Tuto Skip Prompt
+- wormhole shader spiral is weird when not at 1:1 zoom
+- Goto on tablet... to help with accuracy. Highlight the cell on tap and move on release ?
 - anomalies should be more than 1x1 tiles ?
 - UI animation
 	- animate health and shield when hit
@@ -192,6 +177,9 @@ IDEAS:::
 	
 	
 DONE :::
+- BUG: Global max seem broken. More than one of the same branch wormhole sometimes spawn (should be fixed... src had res:// in)
+- Check what ressources are used and exported to reduce package size
+- wait shortcut says 5 but doesn't work
 - zoom out now sometimes pan in a weird way
 - Zoom button should keep zooming on pressed
 - scrollwheel should zoom toward mouse

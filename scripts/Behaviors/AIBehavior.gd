@@ -33,7 +33,7 @@ func ConsiderInterests(obj):
 	# for this turn, but we are not moving yet so it's ok
 	var moved = obj.get_attrib("moving.moved")
 	
-	# Disable if ennemy came in range or never seen item shows up
+	# Disable if enemy came in range or never seen item shows up
 	var filtered : Array = []
 	var known_anomalies = obj.get_attrib("scanner_result.known_anomalies", {})
 	if moved != null and moved == true:
@@ -43,7 +43,7 @@ func ConsiderInterests(obj):
 				continue
 			if Globals.is_(o.get_attrib("ai.aggressive"), true):
 				if is_player == true:
-					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Ennemy ship entered scanner range ![/color]")
+					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Enemy ship entered scanner range ![/color]")
 				filtered.push_back(id)
 				break
 			var detected : bool = o.get_attrib("type") != "anomaly"
@@ -56,7 +56,7 @@ func ConsiderInterests(obj):
 				filtered.push_back(id)
 				break
 		
-	# Disable if ennemy ship in range
+	# Disable if enemy ship in range
 	var cur_objs : Array = obj.get_attrib("scanner_result.cur_in_range." + level_id, [])
 	var filtered_cur : Array = []
 	for id in cur_objs:
@@ -67,7 +67,7 @@ func ConsiderInterests(obj):
 			if (e_tile - p_tile).length() < 7.0:
 				# Print stop message ?
 				if is_player == true:
-					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Autopilot canceled, ennemy too close ![/color]")
+					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Autopilot canceled, enemy too close ![/color]")
 				filtered.push_back(id)
 		if o != null:
 			var detected : bool = o.get_attrib("type") != "anomaly"
@@ -250,7 +250,7 @@ func DoAttackPathFinding(obj):
 			if chance == null or MersenneTwister.rand_float() < chance:
 				BehaviorEvents.emit_signal("OnDealDamage", [player], obj, data, player_tile)
 			else:
-				BehaviorEvents.emit_signal("OnLogLine", "The ennemy missed")
+				BehaviorEvents.emit_signal("OnLogLine", "The enemy missed")
 				 # play the animation but no damage
 				BehaviorEvents.emit_signal("OnShotFired", player_tile, obj, data)
 				BehaviorEvents.emit_signal("OnUseAP", obj, Globals.get_data(data, "weapon_data.fire_speed"))

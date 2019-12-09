@@ -31,7 +31,7 @@
 		"energy": 1250
 	},
 	"description": {
-		"text":"Can hit multiple ennemies in a area. A short fuse prevents nearby detonation. Sadly it's not long enough to hit far away targets.",
+		"text":"Can hit multiple enemies in a area. A short fuse prevents nearby detonation. Sadly it's not long enough to hit far away targets.",
 		"Overview": {
 			"min_level":0,
 			"fields":[

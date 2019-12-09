@@ -61,8 +61,8 @@ func OnObjectLoaded_Callback(obj):
 	obj.set_attrib("harvestable", modified_harvestable_data)
 	
 	#if modified_harvestable_data["has_defense"] == true:
-	#	var pondered_ennemies = obj.get_attrib("harvestable.pondered_defense_list")
-	#	pondered_ennemies.sort_custom(self, "sort_by_chance")
+	#	var pondered_enemies = obj.get_attrib("harvestable.pondered_defense_list")
+	#	pondered_enemies.sort_custom(self, "sort_by_chance")
 		
 	
 	#obj.modified_attributes["harvestable"] = {}
@@ -156,28 +156,28 @@ func ProcessHarvesting(target, shooter, weapon_data):
 		
 func ProcessDefense(target, shooter, weapon_data):
 	var defense_size = target.get_attrib("harvestable.defense_size")
-	var pondered_ennemies = target.get_attrib("harvestable.pondered_defense_list")
-	pondered_ennemies.sort_custom(self, "sort_by_chance")
+	var pondered_enemies = target.get_attrib("harvestable.pondered_defense_list")
+	pondered_enemies.sort_custom(self, "sort_by_chance")
 	
 	var max_pond = 0
-	for item in pondered_ennemies:
+	for item in pondered_enemies:
 		max_pond += item.chance
 	
 	var spawn_count = MersenneTwister.rand(defense_size[1]-defense_size[0]) + defense_size[0]
-	var ennemies_to_spawn = []
+	var enemies_to_spawn = []
 	for i in range(spawn_count):
 		var roll = MersenneTwister.rand(max_pond)
 		var selected_item = null
 		var sum = 0
-		for item in pondered_ennemies:
+		for item in pondered_enemies:
 			if sum + item.chance > roll:
 				selected_item = item.src
 				break
 			sum += item.chance
-		ennemies_to_spawn.push_back(selected_item)
+		enemies_to_spawn.push_back(selected_item)
 		
 	var bounds = Globals.LevelLoaderRef.levelSize
-	for json in ennemies_to_spawn:
+	for json in enemies_to_spawn:
 		var x = MersenneTwister.rand(3) - 1
 		var y = MersenneTwister.rand(3) - 1
 		var tile = Globals.LevelLoaderRef.World_to_Tile(target.position)
@@ -235,7 +235,7 @@ func ProcessDamage(target, shooter, weapon_data):
 		if is_player:
 			BehaviorEvents.emit_signal("OnLogLine", "Shot missed")
 		elif is_target_player:
-			BehaviorEvents.emit_signal("OnLogLine", "The ennemy missed")
+			BehaviorEvents.emit_signal("OnLogLine", "The enemy missed")
 	else:
 		var dam_absorbed_by_shield = _hit_shield(target, dam)
 		var hull_dam = dam - dam_absorbed_by_shield
@@ -249,7 +249,7 @@ func ProcessDamage(target, shooter, weapon_data):
 				if target.get_attrib("boardable") == true:
 					BehaviorEvents.emit_signal("OnLogLine", "[color=red]You destroyed one of YOUR ship ![/color]")
 				else:
-					BehaviorEvents.emit_signal("OnLogLine", "[color=red]You destroy the ennemy ![/color]")
+					BehaviorEvents.emit_signal("OnLogLine", "[color=red]You destroy the enemy ![/color]")
 			if is_target_player:
 				BehaviorEvents.emit_signal("OnPlayerDeath")
 			BehaviorEvents.emit_signal("OnObjectDestroyed", target)

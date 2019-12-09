@@ -620,7 +620,7 @@ func do_contextual_actions(tile, player_tile):
 					var best_move = targetting_behavior.ClosestFiringSolution(player_tile, tile, w)
 					if best_move.length() == 0:
 						if o.get_attrib("destroyable") != null and priority < 200:
-							priority = 200 # ennemy ships have very high priority
+							priority = 200 # enemy ships have very high priority
 							method_to_call = "Pressed_Weapon_Callback"
 						elif priority < 10:
 							priority = 10 # shooting planet is lowest priority
