@@ -57,18 +57,18 @@ func _unhandled_input(event):
 		zoom_factor = 1.5 * zoom.x
 		
 	if zoom_factor != 0.0:
-		if event is InputEventMouse:
-			var zoom_var = 0.1 * zoom_factor
+		var prev_zoom : Vector2 = zoom
+		_zoom_camera(zoom_factor)
+		var new_zoom : Vector2 = zoom
+		if event is InputEventMouse and abs((prev_zoom - new_zoom).length_squared()) > 0.00001:
 			var pos = event.position
-			
 			var vp_size = self.get_viewport().size
 			if get_viewport().is_size_override_enabled():
 				vp_size = get_viewport().get_size_override()
-			var old_dist = ((event.position - (vp_size / 2.0))*zoom)
-			var new_dist = ((event.position - (vp_size / 2.0))*(zoom+Vector2(zoom_var, zoom_var)))
+			var old_dist = ((event.position - (vp_size / 2.0))*prev_zoom)
+			var new_dist = ((event.position - (vp_size / 2.0))*new_zoom)
 			var cam_need_move = old_dist - new_dist
 			self.position += cam_need_move
-		_zoom_camera(zoom_factor)
 
 # Zoom Camera
 func _zoom_camera(dir):
