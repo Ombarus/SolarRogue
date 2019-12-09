@@ -286,7 +286,6 @@ levelLoaderNode = NodePath("../Behaviors/LevelLoader")
 [node name="Camera-GUI" type="CanvasLayer" parent="."]
 
 [node name="HUD" type="Control" parent="Camera-GUI"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1.0
@@ -318,7 +317,6 @@ title = "Log Stardate 0.0.0"
 border_style = "═"
 
 [node name="Buttons" type="Control" parent="Camera-GUI/HUD"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -403,7 +401,6 @@ margin_top = -200.0
 margin_right = -84.0
 margin_bottom = -135.0
 Text = "+"
-ShortcutKey = "+"
 
 [node name="ZoomOut" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 45 )]
 anchor_left = 1.0
@@ -415,7 +412,6 @@ margin_top = -201.0
 margin_right = -9.0
 margin_bottom = -136.0
 Text = "-"
-ShortcutKey = "-"
 
 [node name="Options" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 45 )]
 anchor_left = 1.0
@@ -488,12 +484,6 @@ visible = false
 margin_top = 1.0
 margin_right = -1114.0
 margin_bottom = -601.0
-dialog_ok = false
-dialog_cancel = false
-disabled = false
-bottom_title = ""
-title = ""
-border_style = "═"
 
 [node name="TargettingHUD" parent="Camera-GUI" instance=ExtResource( 51 )]
 visible = false
@@ -570,5 +560,7 @@ script = ExtResource( 68 )
 [node name="Sample" parent="." instance=ExtResource( 69 )]
 visible = false
 
-[connection signal="pressed" from="Camera-GUI/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_ZoomIn_pressed"]
-[connection signal="pressed" from="Camera-GUI/HUD/Buttons/ZoomOut" to="Camera2D" method="_on_ZoomOut_pressed"]
+[connection signal="down" from="Camera-GUI/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_ZoomIn_down"]
+[connection signal="up" from="Camera-GUI/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_Zoom_up"]
+[connection signal="down" from="Camera-GUI/HUD/Buttons/ZoomOut" to="Camera2D" method="_on_ZoomOut_down"]
+[connection signal="up" from="Camera-GUI/HUD/Buttons/ZoomOut" to="Camera2D" method="_on_Zoom_up"]

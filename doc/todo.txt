@@ -4,6 +4,11 @@ RELEASE CHECKLIST :::
 - compilation set to release (debug unchecked)
 
 TODO :::
+- Mobile only "features" ?
+	- Hide "Quit" button (iOS or Mobile in general)
+	- Pinch-Zoom tuto ?
+- Zoom button should keep zooming on pressed
+- scrollwheel should zoom toward mouse
 - Goto on tablet... to help with accuracy. Highlight the cell on tap and move on release ?
 - Issue with yield() while loading on my tablet... loading takes hours
 	- perf : iterating over all tiles while loading might be a bit much ?

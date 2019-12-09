@@ -10,6 +10,8 @@ export(bool) var AlwaysOnShortcut = true
 export(bool) var Disabled = false setget set_disabled
 export(StyleBox) var HighlightStyle
 signal pressed
+signal down
+signal up
 
 var _prev_style : StyleBox = null
 
@@ -73,3 +75,11 @@ func _on_Button_visibility_changed():
 
 func _on_btn_mouse_entered():
 	get_node("HoverSFX").play()
+
+
+func _on_btn_button_down():
+	emit_signal("down")
+
+
+func _on_btn_button_up():
+	emit_signal("up")

@@ -65,5 +65,7 @@ bus = "Sfx"
 anims/highlight = SubResource( 1 )
 
 [connection signal="visibility_changed" from="." to="." method="_on_Button_visibility_changed"]
+[connection signal="button_down" from="btn" to="." method="_on_btn_button_down"]
+[connection signal="button_up" from="btn" to="." method="_on_btn_button_up"]
 [connection signal="mouse_entered" from="btn" to="." method="_on_btn_mouse_entered"]
 [connection signal="pressed" from="btn" to="." method="_on_btn_pressed"]
