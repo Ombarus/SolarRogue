@@ -251,6 +251,7 @@ func ProcessGoingHome():
 			BehaviorEvents.emit_signal("OnLogLine", "The Converter of Yendor will not work unless it is mounted on the ship !")
 		else:
 			BehaviorEvents.emit_signal("OnPushGUI", "WelcomeScreen", {"player_name":playerNode.get_attrib("player_name")})
+			BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]This wormhole emits a strange energy signature that prevents you from jumping back home![/color]")
 
 func OnUseInventory_Callback(key):
 	var data = Globals.LevelLoaderRef.LoadJSON(key)
