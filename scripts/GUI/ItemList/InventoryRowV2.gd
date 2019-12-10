@@ -56,7 +56,7 @@ func _on_Toggle_toggled(button_pressed):
 ################ DRAG & DROP OVERRIDE #########################
 
 func get_drag_data(position):
-	if _metadata.src == "":
+	if not "src" in _metadata or _metadata.src == "":
 		return null
 		
 	return .get_drag_data(position)
