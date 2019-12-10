@@ -17,14 +17,14 @@ region = Rect2( 256, 0, 128, 128 )
 
 [node name="InventoryRowV2" type="VBoxContainer"]
 margin_right = 939.0
-margin_bottom = 61.0
+margin_bottom = 50.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="BtnWrap" type="Control" parent="."]
 margin_right = 939.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 0, 32 )
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
 
 [node name="Toggle" type="Button" parent="BtnWrap"]
 anchor_right = 1.0
@@ -36,30 +36,41 @@ forward_to = NodePath("../..")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BtnWrap"]
 margin_right = 939.0
-margin_bottom = 32.0
+margin_bottom = 50.0
 mouse_filter = 2
 
 [node name="Icon" type="TextureRect" parent="BtnWrap/HBoxContainer"]
-margin_right = 32.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
 mouse_filter = 2
 texture = SubResource( 1 )
 expand = true
 
 [node name="Wrap" type="Control" parent="BtnWrap/HBoxContainer"]
-margin_left = 36.0
+margin_left = 54.0
 margin_right = 939.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 0, 32 )
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="BG" type="RichTextLabel" parent="BtnWrap/HBoxContainer/Wrap"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 12.0
+margin_bottom = -11.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/normal_font = ExtResource( 6 )
+
 [node name="Name" type="RichTextLabel" parent="BtnWrap/HBoxContainer/Wrap"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 7.0
+margin_top = 12.0
+margin_bottom = -11.0
 mouse_filter = 2
 size_flags_horizontal = 3
 custom_fonts/normal_font = ExtResource( 6 )

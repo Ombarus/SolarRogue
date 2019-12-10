@@ -8,7 +8,6 @@ TODO :::
 - touch-scroll lists ?
 - Add random derelic you can pickup items from
 	- when trying to pickup derelic should warn player : "not empty" (see final converter of yendor)
-- recipe row size != inventory row size
 - Converter recipe list has heigher rows than other lists
 - investigate steam and itch.io
 - ***BUG: still issues when switching ship with ultimate scanner... memory is not created, ships turn invisible, etc.
@@ -173,6 +172,7 @@ IDEAS:::
 	
 	
 DONE :::
+- recipe row size != inventory row size
 - Main Menu music
 - Message if you try to go up the home wormhole
 	- beside displaying the intro msg... add a warning log : "can't open wormhole right now, find something that can"
