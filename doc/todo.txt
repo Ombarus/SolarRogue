@@ -5,7 +5,6 @@ RELEASE CHECKLIST :::
 - save after each turn, save when quit
 
 TODO :::
-- Main Menu music
 - touch-scroll lists ?
 - Add random derelic you can pickup items from
 	- when trying to pickup derelic should warn player : "not empty" (see final converter of yendor)
@@ -174,6 +173,7 @@ IDEAS:::
 	
 	
 DONE :::
+- Main Menu music
 - Message if you try to go up the home wormhole
 	- beside displaying the intro msg... add a warning log : "can't open wormhole right now, find something that can"
 - "enemy", pas "ennemy"

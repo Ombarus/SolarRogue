@@ -67,6 +67,7 @@ bbcode_text = "Laser Turret MK1"
 text = "Laser Turret MK1"
 
 [node name="Equipped" type="Control" parent="."]
+visible = false
 margin_top = 36.0
 margin_right = 939.0
 margin_bottom = 61.0
