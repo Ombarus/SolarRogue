@@ -17,6 +17,8 @@ func _ready():
 func OnObjTurn_Callback(obj):
 	if obj.get_attrib("type") == "player":
 		do_anomaly_detection(obj)
+		# need to make sure everything is invisible if we removed our scanner
+		process_empty_scanner(obj)
 	
 func OnAnomalyEffectGone_Callback(obj, effect_data):
 	if Globals.get_data(effect_data, "type") == "scanner":
@@ -67,6 +69,21 @@ func OnObjectLoaded_Callback(obj):
 func OnRequestObjectUnload_Callback(obj):
 	_node_id_scanner.erase(obj.get_attrib("unique_id"))
 
+func process_empty_scanner(obj):
+	var scanners = obj.get_attrib("mounts.scanner")
+	if scanners == null or scanners.size() <= 0:
+		return
+		
+	var scanner_name = scanners[0]
+	if scanner_name == null or scanner_name == "":
+		var level_id = Globals.LevelLoaderRef.GetLevelID()
+		var cur_in_range = obj.get_attrib("scanner_result.cur_in_range." + level_id, [])
+		if cur_in_range.size() > 0:
+			obj.set_attrib("scanner_result.new_out_of_range." + level_id, cur_in_range)
+			obj.set_attrib("scanner_result.cur_in_range." + level_id, [])
+			BehaviorEvents.emit_signal("OnScannerUpdated", obj)
+	
+
 func do_anomaly_detection(obj):
 	var unique_id : int = obj.get_attrib("unique_id")
 	# If the player doesn't have a scanner equipped, we do not do anomaly detection
@@ -104,7 +121,7 @@ func special_update_ultimate(obj, scanner_data):
 		for key in Globals.LevelLoaderRef.objById:
 			var o : Node2D = Globals.LevelLoaderRef.objById[key]
 			# Removed objects just get set to null so we might have null obj in objById
-			if o != null:
+			if o != null and o != obj:
 				cur_in_range.push_back(o.get_attrib("unique_id"))
 			
 		obj.set_attrib("scanner_result.cur_in_range." + level_id, cur_in_range)

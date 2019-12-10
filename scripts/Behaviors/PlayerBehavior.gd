@@ -210,6 +210,9 @@ func Pressed_Inventory_Callback():
 	BehaviorEvents.emit_signal("OnPushGUI", "InventoryV2", {"object":playerNode})
 
 func Pressed_FTL_Callback():
+	if lock_input:
+		return
+		
 	var wormholes = Globals.LevelLoaderRef.objByType["wormhole"]
 	var wormhole = null
 	for w in wormholes:
@@ -276,7 +279,7 @@ func OnDropIventory_Callback(dropped_mounts, dropped_cargo):
 		BehaviorEvents.emit_signal("OnDropCargo", playerNode, drop_data.src, drop_data.count)
 	
 func OnRequestObjectUnload_Callback(obj):
-	if obj.get_attrib("type") == "player":
+	if obj.get_attrib("type") == "player" and obj.get_attrib("ghost_memory") == null:
 		playerNode = null
 	
 func OnObjTurn_Callback(obj):

@@ -5,17 +5,16 @@ RELEASE CHECKLIST :::
 - save after each turn, save when quit
 
 TODO :::
-- touch-scroll lists ?
-- Add random derelic you can pickup items from
-	- when trying to pickup derelic should warn player : "not empty" (see final converter of yendor)
-- Converter recipe list has heigher rows than other lists
+- ***BUG: planet_hit_fx plays when creating ghost ! (remove scanner for full fx)
 - investigate steam and itch.io
 - ***BUG: still issues when switching ship with ultimate scanner... memory is not created, ships turn invisible, etc.
+- BUG: craft scout, transfer all, notice scout disapear from screen, put back scanner and scout comes back to live (ultimate scanner).
 - why do I keep mixing up inventory and converter ?
 - Issue with yield() while loading on my tablet... loading takes hours
 	- perf : iterating over all tiles while loading might be a bit much ?
 - Mobile only "features" ?
 	- Hide "Quit" button (iOS or Mobile in general)
+	- smaller list rows on PC ?
 - Tutorial
 	- grab & conv where highlighted together then when I clicked conv it became gray (null _old_style ?)
 - art
@@ -31,7 +30,6 @@ TODO :::
 - customize scroll bar visual ?
 - death screen need beautification
 - leaderboard display improvement (scroll is not ideal yet)
-- BUG: craft scout, transfer all, notice scout disapear from screen, put back scanner and scout comes back to live (ultimate scanner).
 - SOUNDS
 	- SFX :
 		- no sound when transfering cargo (but mount is ok)
@@ -172,6 +170,10 @@ IDEAS:::
 	
 	
 DONE :::
+- Converter recipe list has heigher rows than other lists
+- Add random derelic you can pickup items from
+	- when trying to pickup derelic should warn player : "not empty" (see final converter of yendor)
+- touch-scroll lists ?
 - recipe row size != inventory row size
 - Main Menu music
 - Message if you try to go up the home wormhole
