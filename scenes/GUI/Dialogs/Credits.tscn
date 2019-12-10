@@ -28,11 +28,7 @@ margin_top = -234.0
 margin_right = 390.5
 margin_bottom = 234.0
 dialog_ok = true
-dialog_cancel = false
-disabled = false
-bottom_title = ""
 title = "Thanks for playing Solar Rogue !"
-border_style = "═"
 
 [node name="Content" type="RichTextLabel" parent="base"]
 anchor_right = 1.0
@@ -67,6 +63,11 @@ Bart
 Licensed under Creative Commons: By Attribution 3.0
 http://creativecommons.org/licenses/by/3.0/
 
+Neon by Scott Buckley | https://soundcloud.com/scottbuckley
+Music promoted by https://www.free-stock-music.com
+Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+
 [b]Made with[/b]
 Godot Engine, Krita, SunVox, Bfxr, Audacity
 
@@ -90,6 +91,11 @@ Music
 \"Future Setting B\" Kevin MacLeod (incompetech.com)
 Licensed under Creative Commons: By Attribution 3.0
 http://creativecommons.org/licenses/by/3.0/
+
+Neon by Scott Buckley | https://soundcloud.com/scottbuckley
+Music promoted by https://www.free-stock-music.com
+Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
 
 Made with
 Godot Engine, Krita, SunVox, Bfxr, Audacity

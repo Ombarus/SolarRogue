@@ -1,21 +1,22 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scripts/GUI/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=2]
-[ext_resource path="res://scripts/Behaviors/UIManager.gd" type="Script" id=3]
-[ext_resource path="res://data/animations/popin.tres" type="Animation" id=4]
-[ext_resource path="res://data/textures/space/space-bg_mine.png" type="Texture" id=5]
-[ext_resource path="res://scripts/GUI/MainMenuHUD.gd" type="Script" id=6]
-[ext_resource path="res://data/textures/title.png" type="Texture" id=7]
-[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scripts/GUI/MainMenu/Leaderboard.gd" type="Script" id=10]
-[ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=11]
-[ext_resource path="res://scenes/GUI/ItemList/LeaderboardRow.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/GUI/Dialogs/PlayerName.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/GUI/Dialogs/Credits.tscn" type="PackedScene" id=14]
-[ext_resource path="res://scenes/GUI/Dialogs/Settings.tscn" type="PackedScene" id=15]
-[ext_resource path="res://scenes/GUI/Debug/FPSCounter.tscn" type="PackedScene" id=16]
+[ext_resource path="res://data/sounds/music/scott-buckley-neon.ogg" type="AudioStream" id=3]
+[ext_resource path="res://scripts/Behaviors/UIManager.gd" type="Script" id=4]
+[ext_resource path="res://data/animations/popin.tres" type="Animation" id=5]
+[ext_resource path="res://data/textures/space/space-bg_mine.png" type="Texture" id=6]
+[ext_resource path="res://scripts/GUI/MainMenuHUD.gd" type="Script" id=7]
+[ext_resource path="res://data/textures/title.png" type="Texture" id=8]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scripts/GUI/MainMenu/Leaderboard.gd" type="Script" id=11]
+[ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/GUI/ItemList/LeaderboardRow.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/GUI/Dialogs/PlayerName.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/GUI/Dialogs/Credits.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/GUI/Dialogs/Settings.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/GUI/Debug/FPSCounter.tscn" type="PackedScene" id=17]
 
 [node name="MainMenu" type="Node"]
 script = ExtResource( 1 )
@@ -23,17 +24,21 @@ script = ExtResource( 1 )
 [node name="Ambience" type="Node" parent="."]
 script = ExtResource( 2 )
 
+[node name="OnLoad" type="AudioStreamPlayer" parent="Ambience"]
+stream = ExtResource( 3 )
+bus = "Music"
+
 [node name="UIManager" type="Node" parent="."]
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 animator = NodePath("PopinAnim")
 
 [node name="PopinAnim" type="AnimationPlayer" parent="UIManager"]
-anims/popin = ExtResource( 4 )
+anims/popin = ExtResource( 5 )
 
 [node name="BG" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 expand = true
 stretch_mode = 7
 
@@ -43,9 +48,10 @@ anchor_bottom = 1.0
 margin_top = -2.0
 margin_bottom = -2.0
 mouse_filter = 2
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 
 [node name="MenuBtn" type="Control" parent="MenuRoot"]
+editor/display_folded = true
 anchor_bottom = 1.0
 margin_left = 46.0
 margin_top = 84.0
@@ -54,11 +60,11 @@ margin_right = 429.0
 [node name="GameTitle" type="TextureRect" parent="MenuRoot/MenuBtn"]
 anchor_right = 1.0
 margin_bottom = 62.0
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 expand = true
 stretch_mode = 5
 
-[node name="Continue" parent="MenuRoot/MenuBtn" instance=ExtResource( 8 )]
+[node name="Continue" parent="MenuRoot/MenuBtn" instance=ExtResource( 9 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -73,7 +79,7 @@ ShortcutKey = "c"
 AlwaysOnShortcut = false
 Disabled = true
 
-[node name="NewGameBTN" parent="MenuRoot/MenuBtn" instance=ExtResource( 8 )]
+[node name="NewGameBTN" parent="MenuRoot/MenuBtn" instance=ExtResource( 9 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -87,7 +93,7 @@ Text = "[n]ew game"
 ShortcutKey = "n"
 AlwaysOnShortcut = false
 
-[node name="Setting" parent="MenuRoot/MenuBtn" instance=ExtResource( 8 )]
+[node name="Setting" parent="MenuRoot/MenuBtn" instance=ExtResource( 9 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -101,7 +107,7 @@ Text = "[s]ettings"
 ShortcutKey = "s"
 AlwaysOnShortcut = false
 
-[node name="Credits" parent="MenuRoot/MenuBtn" instance=ExtResource( 8 )]
+[node name="Credits" parent="MenuRoot/MenuBtn" instance=ExtResource( 9 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -115,7 +121,7 @@ Text = "[?]credits"
 ShortcutKey = "?"
 AlwaysOnShortcut = false
 
-[node name="Quit" parent="MenuRoot/MenuBtn" instance=ExtResource( 8 )]
+[node name="Quit" parent="MenuRoot/MenuBtn" instance=ExtResource( 9 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -129,7 +135,8 @@ Text = "[q]uit"
 ShortcutKey = "q"
 AlwaysOnShortcut = false
 
-[node name="base" parent="MenuRoot" instance=ExtResource( 9 )]
+[node name="base" parent="MenuRoot" instance=ExtResource( 10 )]
+editor/display_folded = true
 anchor_left = 1.0
 margin_left = -735.0
 margin_top = 32.0
@@ -144,30 +151,30 @@ margin_top = 10.0
 margin_right = -10.0
 margin_bottom = -10.0
 mouse_filter = 1
-script = ExtResource( 10 )
+script = ExtResource( 11 )
 
-[node name="leaderlist" parent="MenuRoot/base/Leaderboard" instance=ExtResource( 11 )]
+[node name="leaderlist" parent="MenuRoot/base/Leaderboard" instance=ExtResource( 12 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 0.0
 margin_bottom = 0.0
 mouse_filter = 1
-Row = ExtResource( 12 )
+Row = ExtResource( 13 )
 
-[node name="PlayerName" parent="." instance=ExtResource( 13 )]
+[node name="PlayerName" parent="." instance=ExtResource( 14 )]
 visible = false
 margin_top = -2.0
 margin_bottom = -2.0
 
-[node name="Credits" parent="." instance=ExtResource( 14 )]
+[node name="Credits" parent="." instance=ExtResource( 15 )]
 visible = false
 
-[node name="Settings" parent="." instance=ExtResource( 15 )]
+[node name="Settings" parent="." instance=ExtResource( 16 )]
 visible = false
 margin_top = -2.0
 margin_bottom = -2.0
 
-[node name="FPSCounter" parent="." instance=ExtResource( 16 )]
+[node name="FPSCounter" parent="." instance=ExtResource( 17 )]
 margin_left = 15.7517
 margin_top = 14.3197
 margin_right = 141.752

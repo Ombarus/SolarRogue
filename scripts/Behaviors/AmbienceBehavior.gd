@@ -28,6 +28,9 @@ func _ready():
 	vol = PermSave.get_attrib("settings.music_volume", 12.0)
 	_set_bus_volume("Music", vol)
 	
+	if has_node("OnLoad") == true:
+		get_node("OnLoad").play()
+	
 	
 func _set_bus_volume(bus_name, vol):
 	var bus : int = AudioServer.get_bus_index(bus_name)

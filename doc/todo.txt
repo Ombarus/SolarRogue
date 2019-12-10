@@ -5,10 +5,7 @@ RELEASE CHECKLIST :::
 - save after each turn, save when quit
 
 TODO :::
-- "enemy", pas "ennemy"
 - Main Menu music
-- Message if you try to go up the home wormhole
-	- beside displaying the intro msg... add a warning log : "can't open wormhole right now, find something that can"
 - touch-scroll lists ?
 - Add random derelic you can pickup items from
 	- when trying to pickup derelic should warn player : "not empty" (see final converter of yendor)
@@ -21,7 +18,6 @@ TODO :::
 	- perf : iterating over all tiles while loading might be a bit much ?
 - Mobile only "features" ?
 	- Hide "Quit" button (iOS or Mobile in general)
-	- Pinch-Zoom tuto ?
 - Tutorial
 	- grab & conv where highlighted together then when I clicked conv it became gray (null _old_style ?)
 - art
@@ -59,6 +55,7 @@ TODO :::
 	
 	
 polish :::
+	- Pinch-Zoom tuto ?
 - Basic interaction
 	- Look around
 		- select item using keyboard
@@ -177,6 +174,9 @@ IDEAS:::
 	
 	
 DONE :::
+- Message if you try to go up the home wormhole
+	- beside displaying the intro msg... add a warning log : "can't open wormhole right now, find something that can"
+- "enemy", pas "ennemy"
 - BUG: Global max seem broken. More than one of the same branch wormhole sometimes spawn (should be fixed... src had res:// in)
 - Check what ressources are used and exported to reduce package size
 - wait shortcut says 5 but doesn't work
