@@ -30,6 +30,8 @@ func OnTransferPlayer_Callback(old_player, new_player):
 	# Should I duplicate the array here ?
 	new_player.set_attrib("memory", old_player.get_attrib("memory"))
 	new_player.visible = true # in case previous ship didn't have scanner and couldn't see the ship
+	if new_player.get_attrib("has_ghost_memory") != null:
+		_remove_ghost_from_real(new_player)
 	_update_occlusion_texture()
 
 func OnObjectLoaded_Callback(obj):
@@ -161,7 +163,7 @@ func OnScannerUpdated_Callback(obj):
 	
 	for id in new_out_objs:
 		var o = Globals.LevelLoaderRef.GetObjectById(id)
-		var anomaly_detected = o.get_attrib("type") != "anomaly" or (id in known_anomalies and known_anomalies[id] == true)
+		var anomaly_detected = o != null and (o.get_attrib("type") != "anomaly" or (id in known_anomalies and known_anomalies[id] == true))
 		if o != null and o.get_attrib("ghost_memory") == null and anomaly_detected == true and o.get_attrib("no_ghost") != true:
 			if o.get_attrib("has_ghost_memory") != null:
 				print("WOAH WTF BBQ !")

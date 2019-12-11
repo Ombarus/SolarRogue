@@ -6,6 +6,9 @@
 		"texture":"data/textures/space-sprite.png",
 		"region":[1408,256,128,128]
 	},
+	"animation": {
+		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
+	},
 	"boardable":true,
 	"mounts": {
 		"weapon": ["", "", ""],

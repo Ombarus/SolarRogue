@@ -11,6 +11,9 @@
 		"scanner": [""],
 		"converter": [""]
 	},
+	"animation": {
+		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
+	},
 	"destroyable": {
 		"hull":10
 	},

@@ -70,11 +70,12 @@ func OnTargetClick_Callback(click_pos, target_type):
 	var potential_targets = []
 	for obj in tile_content:
 		var obj_type = obj.get_attrib("type")
-		if obj_type != "player" and target_type == Globals.VALID_TARGET.attack and (obj.get_attrib("destroyable") != null || obj.get_attrib("harvestable") != null):
+		var is_ghost = obj.get_attrib("ghost_memory") != null
+		if not is_ghost and obj_type != "player" and target_type == Globals.VALID_TARGET.attack and (obj.get_attrib("destroyable") != null || obj.get_attrib("harvestable") != null):
 			potential_targets.push_back(obj)
-		elif obj_type != "player" and target_type == Globals.VALID_TARGET.board and obj.get_attrib("boardable") == true:
+		elif not is_ghost and obj_type != "player" and target_type == Globals.VALID_TARGET.board and obj.get_attrib("boardable") == true:
 			potential_targets.push_back(obj)
-		elif obj_type != "player" and target_type == Globals.VALID_TARGET.loot and Globals.is_(obj.get_attrib("cargo.transferable"), true):
+		elif not is_ghost and obj_type != "player" and target_type == Globals.VALID_TARGET.loot and Globals.is_(obj.get_attrib("cargo.transferable"), true):
 			potential_targets.push_back(obj)
 	if potential_targets.size() == 0:
 		BehaviorEvents.emit_signal("OnLogLine", "There's nothing there sir...")
