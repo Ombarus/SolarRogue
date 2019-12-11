@@ -334,11 +334,13 @@ Text = "[w]eapon"
 ShortcutKey = "w"
 
 [node name="Grab" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 45 )]
+anchor_left = 1.0
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1160.0
+margin_left = -119.0
 margin_top = -529.0
-margin_right = 1270.0
+margin_right = -9.0
 margin_bottom = -439.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[g]rab"
@@ -371,13 +373,11 @@ Text = "[i]nv"
 ShortcutKey = "i"
 
 [node name="Converter" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 45 )]
-anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -1269.0
+margin_left = 10.0
 margin_top = -419.0
-margin_right = -1159.0
+margin_right = 120.0
 margin_bottom = -329.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[c]onv"
@@ -445,7 +445,6 @@ Text = "?"
 ShortcutKey = "?"
 
 [node name="StatusBar" type="Control" parent="Camera-GUI/HUD"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -1.0
