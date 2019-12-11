@@ -26,6 +26,5 @@ region_enabled = true
 region_rect = Rect2( 1664, 1024, 128, 128 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "boom"
 anims/boom = SubResource( 1 )
 
