@@ -9,6 +9,7 @@ export(bool) var AlwaysOnShortcut = true
 #export(ShortCut) var Action = null setget set_action
 export(bool) var Disabled = false setget set_disabled
 export(StyleBox) var HighlightStyle
+export(bool) var IsHUD = false
 signal pressed
 signal down
 signal up
@@ -31,9 +32,16 @@ func set_text(newval):
 func _ready():
 	BehaviorEvents.connect("OnHighlightUIElement", self, "Hightlight_Callback")
 	BehaviorEvents.connect("OnResetHighlight", self, "ResetHightlight_Callback")
+	BehaviorEvents.connect("OnHUDVisiblityChanged", self, "OnHUDVisiblityChanged_Callback")
 	get_node("base").connect("OnUpdateLayout", self, "OnUpdateLayout_Callback")
 	set_text(Text)
 	OnUpdateLayout_Callback()
+	if IsHUD == true:
+		self.visible = not PermSave.get_attrib("settings.hide_hud")
+
+func OnHUDVisiblityChanged_Callback():
+	if IsHUD:
+		self.visible = not PermSave.get_attrib("settings.hide_hud")
 
 func ResetHightlight_Callback():
 	get_node("AnimationPlayer").stop(true)

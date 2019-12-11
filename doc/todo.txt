@@ -6,7 +6,6 @@ RELEASE CHECKLIST :::
 
 TODO :::
 - investigate steam and itch.io
-- why do I keep mixing up inventory and converter ?
 - Issue with yield() while loading on my tablet... loading takes hours
 	- perf : iterating over all tiles while loading might be a bit much ?
 - Mobile only "features" ?
@@ -48,7 +47,9 @@ TODO :::
 	
 	
 polish :::
-	- Pinch-Zoom tuto ?
+- why do I keep mixing up inventory and converter ?
+	- still improvement to be made ?
+- Pinch-Zoom tuto ?
 - Basic interaction
 	- Look around
 		- select item using keyboard

@@ -64,6 +64,7 @@ signal OnEnableShortcut(key, obj, method, isEnabled)
 signal OnGUIChanged(current_menu)
 signal OnHighlightUIElement(element_name)
 signal OnResetHighlight()
+signal OnHUDVisiblityChanged()
 
 
 func _ready():

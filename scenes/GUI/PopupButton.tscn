@@ -92,6 +92,7 @@ ShortcutKey = "5"
 margin_right = 110.0
 margin_bottom = 90.0
 Text = "..."
+IsHUD = true
 
 [node name="Close" type="Button" parent="."]
 visible = false

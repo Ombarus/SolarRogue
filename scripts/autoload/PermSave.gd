@@ -8,7 +8,7 @@ enum END_GAME_STATE {
 	won
 }
 
-const CURRENT_VERSION := 5
+const CURRENT_VERSION := 6
 
 #TODO: Might want to add more info about the player (cargo inventory, # of turn spent, etc.
 var _perm_save = {
@@ -21,7 +21,8 @@ var _perm_save = {
 		"sfx_volume":4.0,
 		"music_volume":4.0,
 		"difficulty":2,
-		"display_fps":false
+		"display_fps":false,
+		"hide_hud":false
 	},
 	"leaderboard": [
 		{"player_name":"Ombarus the greatest", "final_score":100000, "status":END_GAME_STATE.won, "generated_levels":20, "died_on":-1},

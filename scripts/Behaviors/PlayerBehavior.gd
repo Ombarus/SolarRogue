@@ -142,6 +142,7 @@ func Pressed_Wait_Callback():
 	BehaviorEvents.emit_signal("OnLogLine", "Cooling reactor (wait)")
 	
 func UpdateButtonVisibility():
+	var hide_hud = PermSave.get_attrib("settings.hide_hud")
 	var weapons = playerNode.get_attrib("mounts.weapon")
 	var weapon_btn = get_node(WeaponAction)
 	var valid = false
@@ -149,10 +150,8 @@ func UpdateButtonVisibility():
 		if weapon != null and weapon != "":
 			valid = true
 			break
-	if valid == true:
-		weapon_btn.visible = true
-	else:
-		weapon_btn.visible = false
+	valid = valid and not hide_hud
+	weapon_btn.visible = valid
 		
 	var converters = playerNode.get_attrib("mounts.converter")
 	var converter_btn = get_node(CraftingAction)
@@ -161,10 +160,8 @@ func UpdateButtonVisibility():
 		if c != null and c != "":
 			valid = true
 			break
-	if valid == true:
-		converter_btn.visible = true
-	else:
-		converter_btn.visible = false
+	valid = valid and not hide_hud	
+	converter_btn.visible = valid
 	
 func OnMountAdded_Callback(obj, mount, src):
 	if obj != playerNode:

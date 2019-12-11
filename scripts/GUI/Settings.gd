@@ -1,9 +1,9 @@
 extends "res://scripts/GUI/GUILayoutBase.gd"
 
-onready var _vol_master: HSlider = get_node("base/VBoxContainer/MasterVolume/MasterSlider")
-onready var _vol_sfx: HSlider = get_node("base/VBoxContainer/SFXVolume/SFXSlider")
-onready var _vol_music: HSlider = get_node("base/VBoxContainer/MusicVolume/MusicSlider")
-onready var _diff_options: OptionButton = get_node("base/VBoxContainer/Difficulty/DiffOptions")
+onready var _vol_master: HSlider = get_node("base/ScrollContainer/VBoxContainer/MasterVolume/MasterSlider")
+onready var _vol_sfx: HSlider = get_node("base/ScrollContainer/VBoxContainer/SFXVolume/SFXSlider")
+onready var _vol_music: HSlider = get_node("base/ScrollContainer/VBoxContainer/MusicVolume/MusicSlider")
+onready var _diff_options: OptionButton = get_node("base/ScrollContainer/VBoxContainer/Difficulty/DiffOptions")
 
 var _diff_changed := false
 
@@ -29,10 +29,10 @@ func Ok_Callback():
 func Init(init_param):
 	_diff_changed = false
 	var fs : bool = PermSave.get_attrib("settings.full_screen", false)
-	get_node("base/VBoxContainer/FullScreen/CheckButton").pressed = fs
+	get_node("base/ScrollContainer/VBoxContainer/FullScreen/CheckButton").pressed = fs
 	
 	var vsync : bool = PermSave.get_attrib("settings.vsync", true)
-	get_node("base/VBoxContainer/VSync/CheckButton").pressed = vsync
+	get_node("base/ScrollContainer/VBoxContainer/VSync/CheckButton").pressed = vsync
 	
 	var vol : float = PermSave.get_attrib("settings.master_volume", 8.0)
 	_vol_master.value = vol
@@ -45,7 +45,10 @@ func Init(init_param):
 	_diff_options.select(diff)
 	
 	var show_fps : bool = PermSave.get_attrib("settings.display_fps")
-	get_node("base/VBoxContainer/FPS/FPSCounter").pressed = show_fps
+	get_node("base/ScrollContainer/VBoxContainer/FPS/FPSCounter").pressed = show_fps
+	
+	var show_hud : bool = PermSave.get_attrib("settings.hide_hud")
+	get_node("base/ScrollContainer/VBoxContainer/HideHUD/HideHUD").pressed = show_hud
 	
 
 func _on_fullscreen_toggled(button_pressed):
@@ -88,3 +91,8 @@ func _on_FPSCounter_toggled(button_pressed):
 		BehaviorEvents.emit_signal("OnShowGUI", "FPSCounter", {})
 	else:
 		BehaviorEvents.emit_signal("OnHideGUI", "FPSCounter")
+
+
+func _on_HideHUD_toggled(button_pressed):
+	PermSave.set_attrib("settings.hide_hud", button_pressed)
+	BehaviorEvents.emit_signal("OnHUDVisiblityChanged")
