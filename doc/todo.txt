@@ -5,10 +5,7 @@ RELEASE CHECKLIST :::
 - save after each turn, save when quit
 
 TODO :::
-- ***BUG: planet_hit_fx plays when creating ghost ! (remove scanner for full fx)
 - investigate steam and itch.io
-- ***BUG: still issues when switching ship with ultimate scanner... memory is not created, ships turn invisible, etc.
-- BUG: craft scout, transfer all, notice scout disapear from screen, put back scanner and scout comes back to live (ultimate scanner).
 - why do I keep mixing up inventory and converter ?
 - Issue with yield() while loading on my tablet... loading takes hours
 	- perf : iterating over all tiles while loading might be a bit much ?
@@ -170,6 +167,9 @@ IDEAS:::
 	
 	
 DONE :::
+- ***BUG: planet_hit_fx plays when creating ghost ! (remove scanner for full fx)
+- ***BUG: still issues when switching ship with ultimate scanner... memory is not created, ships turn invisible, etc.
+- BUG: craft scout, transfer all, notice scout disapear from screen, put back scanner and scout comes back to live (ultimate scanner).
 - Converter recipe list has heigher rows than other lists
 - Add random derelic you can pickup items from
 	- when trying to pickup derelic should warn player : "not empty" (see final converter of yendor)
