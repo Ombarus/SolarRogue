@@ -6,7 +6,9 @@ RELEASE CHECKLIST :::
 
 TODO :::
 - hold touch always does goto ?
-- **BUG** : I borded a ghost by transfering all my stuff and having the no scanner allowed me to board a ghost !
+	- force goto visual should not pop up if in targetting
+	- show visual on touch_pressed on device
+	- fix issues with Torpedo area of effect on device
 - tuto highlight should be removed if player uses shortcut or contextual click too
 - investigate steam and itch.io
 - Issue with yield() while loading on my tablet... loading takes hours
@@ -50,6 +52,7 @@ TODO :::
 	
 	
 polish :::
+- boarding a ship that doesn't have a scanner doesn't hide and create ghost for object that were visible
 - why do I keep mixing up inventory and converter ?
 	- still improvement to be made ?
 - Pinch-Zoom tuto ?
@@ -171,6 +174,7 @@ IDEAS:::
 	
 	
 DONE :::
+- **BUG** : I borded a ghost by transfering all my stuff and having the no scanner allowed me to board a ghost !
 - ***BUG: planet_hit_fx plays when creating ghost ! (remove scanner for full fx)
 - ***BUG: still issues when switching ship with ultimate scanner... memory is not created, ships turn invisible, etc.
 - BUG: craft scout, transfer all, notice scout disapear from screen, put back scanner and scout comes back to live (ultimate scanner).

@@ -125,11 +125,16 @@ func do_multitouch_pan():
 		new_pos.x = self.position.x
 	if new_pos.y < 0 or new_pos.y > (bounds.y * tile_size):
 		new_pos.y = self.position.y
-		
-	_touches_info["total_pan"] += (self.position - new_pos).length()
-	var move_trigger = 256.0
-	if _touches_info["total_pan"] > move_trigger:
-		BehaviorEvents.emit_signal("OnCameraDragged")
+	
+	# hackish way to trigger OnCameraDragged only once per continuous touch
+	if _touches_info["total_pan"] >= 0:
+		var move : Vector2 = self.position - new_pos
+		var vp_size = get_viewport().size
+		move = move / vp_size
+		_touches_info["total_pan"] += move.length()
+		if _touches_info["total_pan"] > 0.1:
+			BehaviorEvents.emit_signal("OnCameraDragged")
+			_touches_info["total_pan"] = -1.0
 		
 	self.position = new_pos
 	

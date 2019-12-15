@@ -16,6 +16,7 @@ export(NodePath) var AreaOfEffectOverlay
 var playerNode : Node2D = null
 var levelLoaderRef : Node
 var click_start_pos
+var click_start_time
 var lock_input = false # when it's not player turn, inputs are locked
 var _weapon_shots = []
 var _last_unicode = 0
@@ -34,9 +35,11 @@ enum INPUT_STATE {
 	board_targetting,
 	loot_targetting,
 	look_around,
+	camera_dragged,
 	test
 }
 var _input_state = INPUT_STATE.hud
+var _saved_input_state = INPUT_STATE.hud
 
 enum PLAYER_ORIGIN {
 	wormhole,
@@ -85,6 +88,7 @@ func _ready():
 	BehaviorEvents.connect("OnMountRemoved", self, "OnMountRemoved_Callback")
 	BehaviorEvents.connect("OnAPUsed", self, "OnAPUsed_Callback")
 	BehaviorEvents.connect("OnDifficultyChanged", self, "OnDifficultyChanged_Callback")
+	BehaviorEvents.connect("OnCameraDragged", self, "OnCameraDragged_Callback")
 	
 	_area_of_effect_overlay = get_node(AreaOfEffectOverlay)
 	
@@ -478,6 +482,10 @@ func LookTarget_Callback(selected_targets):
 	if selected_targets.size() > 0:
 		BehaviorEvents.emit_signal("OnPushGUI", "Description", {"obj":selected_targets[0], "scanner_level":scanner_level})
 
+func OnCameraDragged_Callback():
+	if _input_state != INPUT_STATE.camera_dragged:
+		_saved_input_state = _input_state
+		_input_state = INPUT_STATE.camera_dragged
 
 func _unhandled_input(event):
 	if lock_input or _input_state == INPUT_STATE.look_around or playerNode == null:
@@ -486,16 +494,9 @@ func _unhandled_input(event):
 	var dir = null
 	
 	if event is InputEventMouseButton:
-		
-		if click_start_pos == null:
-			click_start_pos = Vector2(0,0)
-		var vp_size = get_viewport().size
-		var drag_vec = click_start_pos - event.position
-		var per_drag_x = abs(drag_vec.x / vp_size.x)
-		var per_drag_y = abs(drag_vec.y / vp_size.y)
 		if event.is_action_pressed("touch"):
-			click_start_pos = event.position
-		elif event.is_action_released("touch") && per_drag_x < 0.04 && per_drag_y < 0.04:
+			click_start_time = OS.get_ticks_msec()
+		elif event.is_action_released("touch") && _input_state != INPUT_STATE.camera_dragged :
 			var click_pos = playerNode.get_global_mouse_position()
 			
 			if _input_state == INPUT_STATE.weapon_targetting:
@@ -520,9 +521,11 @@ func _unhandled_input(event):
 				if rot < 0:
 					rot += 360
 					
-				var did_other_action : bool = do_contextual_actions(clicked_tile, player_tile)
-				if did_other_action == true:
-					return
+				# Hold to avoid contextual default action
+				if click_start_time + (1.2 * 1000) > OS.get_ticks_msec():
+					var did_other_action : bool = do_contextual_actions(clicked_tile, player_tile)
+					if did_other_action == true:
+						return
 					
 					
 				# dead zone (click on sprite)
@@ -542,6 +545,8 @@ func _unhandled_input(event):
 				}
 				playerNode.set_attrib("ai", ai_data)
 				BehaviorEvents.emit_signal("OnAttributeAdded", playerNode, "ai")
+		elif event.is_action_released("touch") && _input_state == INPUT_STATE.camera_dragged:
+			_input_state = _saved_input_state
 				
 	if event is InputEventKey and event.pressed == true:
 		if event.unicode != 0:

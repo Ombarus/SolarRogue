@@ -242,7 +242,6 @@ scale = Vector2( 12800, 12800 )
 copy_mode = 2
 
 [node name="OverlayTiles" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="mouse_targetting" type="Node2D" parent="OverlayTiles"]
 script = ExtResource( 38 )
@@ -545,6 +544,7 @@ AP_behavior_path = NodePath("../../Behaviors/AP")
 visible = false
 
 [node name="FPSCounter" parent="Camera-GUI" instance=ExtResource( 66 )]
+visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
