@@ -11,7 +11,6 @@ export(NodePath) var PopupButtons
 export(NodePath) var TargettingHUD
 export(NodePath) var OptionBtn
 export(NodePath) var QuestionBtn
-export(NodePath) var AreaOfEffectOverlay
 
 var playerNode : Node2D = null
 var levelLoaderRef : Node
@@ -20,7 +19,6 @@ var click_start_time
 var lock_input = false # when it's not player turn, inputs are locked
 var _weapon_shots = []
 var _last_unicode = 0
-var _area_of_effect_overlay : Node2D = null
 
 enum SHOOTING_STATE {
 	init,
@@ -85,7 +83,6 @@ func _ready():
 	BehaviorEvents.connect("OnDifficultyChanged", self, "OnDifficultyChanged_Callback")
 	BehaviorEvents.connect("OnCameraDragged", self, "OnCameraDragged_Callback")
 	
-	_area_of_effect_overlay = get_node(AreaOfEffectOverlay)
 	
 func OnDifficultyChanged_Callback(new_diff):
 	if playerNode == null:
@@ -409,12 +406,7 @@ func OnLevelLoaded_Callback():
 		# always default to saved position
 		_current_origin = PLAYER_ORIGIN.saved
 	
-func _input(event):
-	if event is InputEventMouseMotion and playerNode != null and _area_of_effect_overlay != null:
-		var world_mouse_tile = Globals.LevelLoaderRef.World_to_Tile(playerNode.get_global_mouse_position())
-		var tile_world_center = Globals.LevelLoaderRef.Tile_to_World(world_mouse_tile)
-		_area_of_effect_overlay.position = tile_world_center
-		
+func _input(event):		
 	if (event is InputEventMouseButton or event is InputEventKey) and playerNode != null and playerNode.get_attrib("ai") != null and playerNode.get_attrib("ai.disable_on_interest", false) == true and playerNode.get_attrib("ai.skip_check") <= 0:
 		playerNode.set_attrib("ai.disabled", true)
 	

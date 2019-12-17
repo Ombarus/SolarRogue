@@ -159,7 +159,6 @@ PopupButtons = NodePath("../../Camera-GUI/HUD/Buttons/PopupButton")
 TargettingHUD = NodePath("../../Camera-GUI/TargettingHUD")
 OptionBtn = NodePath("../../Camera-GUI/HUD/Buttons/Options")
 QuestionBtn = NodePath("../../Camera-GUI/HUD/Buttons/Question")
-AreaOfEffectOverlay = NodePath("../../OverlayTiles/AreaOfEffect")
 
 [node name="AI" type="Node" parent="Behaviors"]
 script = ExtResource( 20 )
@@ -247,9 +246,6 @@ copy_mode = 2
 script = ExtResource( 38 )
 
 [node name="targetting" parent="OverlayTiles/mouse_targetting" instance=ExtResource( 39 )]
-
-[node name="AreaOfEffect" type="Node2D" parent="OverlayTiles"]
-position = Vector2( 704, 448 )
 
 [node name="GameTiles" type="Node2D" parent="."]
 

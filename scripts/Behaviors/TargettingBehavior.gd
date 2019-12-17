@@ -50,7 +50,7 @@ func _DoAreaOverlay(_player_node, targetting_data):
 	
 	var scene = Preloader.TargettingReticle
 	var bounds = Globals.LevelLoaderRef.levelSize
-	var r : Node2D = get_node("/root/Root/OverlayTiles/AreaOfEffect")
+	var r : Node2D = get_node("/root/Root/OverlayTiles/mouse_targetting")
 	var n : Node2D = null
 	var mouse_tile : Vector2 = Globals.LevelLoaderRef.World_to_Tile(_player_node.get_global_mouse_position())
 	for offset_x in range(-area_size, area_size+1):
