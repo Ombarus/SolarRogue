@@ -5,11 +5,6 @@ RELEASE CHECKLIST :::
 - save after each turn, save when quit
 
 TODO :::
-- hold touch always does goto ?
-	- CRASH when in sub-menu (death screen)
-	- force goto visual should not pop up if in targetting
-	- show visual on touch_pressed on device
-	- fix issues with Torpedo area of effect on device
 - tuto highlight should be removed if player uses shortcut or contextual click too
 - investigate steam and itch.io
 - Issue with yield() while loading on my tablet... loading takes hours
@@ -175,6 +170,11 @@ IDEAS:::
 	
 	
 DONE :::
+- hold touch always does goto ?
+	- CRASH when in sub-menu (death screen)
+	- force goto visual should not pop up if in targetting
+	- show visual on touch_pressed on device
+	- fix issues with Torpedo area of effect on device
 - **BUG** : I borded a ghost by transfering all my stuff and having the no scanner allowed me to board a ghost !
 - ***BUG: planet_hit_fx plays when creating ghost ! (remove scanner for full fx)
 - ***BUG: still issues when switching ship with ultimate scanner... memory is not created, ships turn invisible, etc.

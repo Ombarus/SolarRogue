@@ -176,17 +176,18 @@ func GenerateLevelFromTemplate(levelData):
 	var n = CreateAndInitNode(_current_level_data, spawn_point, depth_override)
 	allTilesCoord.remove(i)
 	_current_level_data = levelData
+	var levelDataObj = levelData["objects"]
 	
 	var cur_tile_index := 0
 	for tileCoord in allTilesCoord:
 		cur_tile_index += 1
 		cur_time = OS.get_ticks_msec()
-		#if cur_time - start_time > 33:
-		#	BehaviorEvents.emit_signal("OnLogLine", "Loading : " + str(cur_tile_index) + " / " + str(allTilesCoord.size()))
-		#	yield(get_tree(), "idle_frame")
-		#	start_time = cur_time
+		if cur_time - start_time > 33:
+			#BehaviorEvents.emit_signal("OnLogLine", "Loading : " + str(cur_tile_index) + " / " + str(allTilesCoord.size()))
+			yield(get_tree(), "idle_frame")
+			start_time = cur_time
 		
-		for obj in levelData["objects"]:
+		for obj in levelDataObj:
 			var do_spawn = false
 			if objCountByType.has(obj["name"]) && obj.has("max") && objCountByType[obj["name"]] >= obj["max"]:
 				continue

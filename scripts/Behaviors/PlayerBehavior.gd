@@ -512,6 +512,7 @@ func _unhandled_input(event):
 				if click_start_time == null or click_start_time + (1.2 * 1000) > OS.get_ticks_msec():
 					var did_other_action : bool = do_contextual_actions(clicked_tile, player_tile)
 					if did_other_action == true:
+						BehaviorEvents.emit_signal("OnResetHighlight")
 						return
 				click_start_time = null
 					
