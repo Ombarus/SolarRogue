@@ -517,11 +517,11 @@ func _unhandled_input(event):
 					rot += 360
 					
 				# Hold to avoid contextual default action
-				if click_start_time + (1.2 * 1000) > OS.get_ticks_msec():
+				if click_start_time == null or click_start_time + (1.2 * 1000) > OS.get_ticks_msec():
 					var did_other_action : bool = do_contextual_actions(clicked_tile, player_tile)
 					if did_other_action == true:
 						return
-					
+				click_start_time = null
 					
 				# dead zone (click on sprite)
 				if abs(click_dir.x) < levelLoaderRef.tileSize / 2 && abs(click_dir.y) < levelLoaderRef.tileSize / 2:

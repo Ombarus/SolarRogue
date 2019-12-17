@@ -23,10 +23,10 @@ func normalize_deg(var deg : float) -> float:
 	return 180.0 * (turns-whole)
 	
 func _input(event):
-	if event is InputEventScreenTouch:
-		self.visible == false # For some reason this doesn't work here ?!?
-		self.set_process_input(false)
-		return
+	#if event is InputEventScreenTouch:
+	#	self.visible == false # For some reason this doesn't work here ?!?
+	#	self.set_process_input(false)
+	#	return
 		
 	if event is InputEventMouseMotion:
 		var world_mouse_tile = Globals.LevelLoaderRef.World_to_Tile(get_global_mouse_position())
@@ -44,12 +44,21 @@ func _input(event):
 			
 			var dir : Vector2 = mouse_pos - player_pos
 			var angle : float = dir.angle_to(Vector2(-1.0, 0.0))
+			self.visible = true
 			get_node("targetting/GotoArrow").rotation = -angle
 			get_node("targetting/AnimationPlayer").play("goto")
 		else:
-			self.visible = true
+			if OS.has_touchscreen_ui_hint(): # On mobile only show when player tap on screen
+				if event.is_action_pressed("touch"):
+					self.visible = true
+				else:
+					self.visible = false
+			else: # On PC, keep it visible as the "mouse cursor"
+				self.visible = true
 			get_node("targetting/AnimationPlayer").play("idle")
 
 func _process(delta):
-	if self.is_processing_input() == false:
-		self.visible = false
+	if self.visible == true:
+		var world_mouse_tile = Globals.LevelLoaderRef.World_to_Tile(get_global_mouse_position())
+		var tile_world_center = Globals.LevelLoaderRef.Tile_to_World(world_mouse_tile)
+		self.position = tile_world_center
