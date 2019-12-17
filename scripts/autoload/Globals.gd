@@ -18,6 +18,16 @@ enum VALID_TARGET {
 	board
 }
 
+enum INPUT_STATE {
+	hud,
+	weapon_targetting,
+	board_targetting,
+	loot_targetting,
+	look_around,
+	camera_dragged,
+	test
+}
+
 func get_first_player() -> Node2D:
 	if "player" in Globals.LevelLoaderRef.objByType and Globals.LevelLoaderRef.objByType["player"].size() > 0:
 		return Globals.LevelLoaderRef.objByType["player"][0]

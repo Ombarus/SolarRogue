@@ -29,17 +29,12 @@ enum SHOOTING_STATE {
 	done
 }
 
-enum INPUT_STATE {
-	hud,
-	weapon_targetting,
-	board_targetting,
-	loot_targetting,
-	look_around,
-	camera_dragged,
-	test
-}
-var _input_state = INPUT_STATE.hud
-var _saved_input_state = INPUT_STATE.hud
+var _input_state = Globals.INPUT_STATE.hud setget set_input_state
+var _saved_input_state = Globals.INPUT_STATE.hud
+
+func set_input_state(newval):
+	_input_state = newval
+	BehaviorEvents.emit_signal("OnPlayerInputStateChanged", playerNode, newval)
 
 enum PLAYER_ORIGIN {
 	wormhole,
@@ -111,7 +106,7 @@ func OnAPUsed_Callback(obj, amount):
 func Pressed_Look_Callback():
 	if lock_input:
 		return
-	_input_state = INPUT_STATE.look_around
+	set_input_state(Globals.INPUT_STATE.look_around)
 	BehaviorEvents.emit_signal("OnLogLine", "Select area to scan...")
 
 func Pressed_Board_Callback():
@@ -119,7 +114,7 @@ func Pressed_Board_Callback():
 		return
 		
 	BehaviorEvents.emit_signal("OnLogLine", "Which ship should we transfer control ?")
-	_input_state = INPUT_STATE.board_targetting
+	set_input_state(Globals.INPUT_STATE.board_targetting)
 	var targetting_data = {"weapon_data":{"fire_range":1, "fire_pattern":"o"}}
 	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, targetting_data, self, "ProcessBoardSelection")
 	BehaviorEvents.emit_signal("OnPopGUI") #HUD
@@ -131,7 +126,7 @@ func Pressed_Take_Callback():
 		return
 		
 	BehaviorEvents.emit_signal("OnLogLine", "Take from what ?")
-	_input_state = INPUT_STATE.loot_targetting
+	set_input_state(Globals.INPUT_STATE.loot_targetting)
 	var targetting_data = {"weapon_data":{"fire_range":1, "fire_pattern":"o"}}
 	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, targetting_data, self, "ProcessTakeSelection")
 	BehaviorEvents.emit_signal("OnPopGUI") #HUD
@@ -352,7 +347,7 @@ func Pressed_Weapon_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI") #HUD
 	var text = "[color=red]Select target for " + cur_weapon.weapon_data.name_id + "...[/color]"
 	BehaviorEvents.emit_signal("OnPushGUI", "TargettingHUD", {"info_text":text, "show_skip":_weapon_shots.size() > 1})
-	_input_state = INPUT_STATE.weapon_targetting
+	set_input_state(Globals.INPUT_STATE.weapon_targetting)
 	
 func OnLevelLoaded_Callback():
 	lock_input = false
@@ -423,7 +418,7 @@ func _input(event):
 	if (event is InputEventMouseButton or event is InputEventKey) and playerNode != null and playerNode.get_attrib("ai") != null and playerNode.get_attrib("ai.disable_on_interest", false) == true and playerNode.get_attrib("ai.skip_check") <= 0:
 		playerNode.set_attrib("ai.disabled", true)
 	
-	if _input_state != INPUT_STATE.look_around or not event is InputEventMouseButton:
+	if _input_state != Globals.INPUT_STATE.look_around or not event is InputEventMouseButton:
 		return
 		
 	if click_start_pos == null:
@@ -439,7 +434,7 @@ func _input(event):
 		return
 	
 	click_start_pos = Vector2(0,0)
-	_input_state = INPUT_STATE.hud
+	set_input_state(Globals.INPUT_STATE.hud)
 	#get_tree().set_input_as_handled()
 	
 	var click_pos = playerNode.get_global_mouse_position()
@@ -483,12 +478,12 @@ func LookTarget_Callback(selected_targets):
 		BehaviorEvents.emit_signal("OnPushGUI", "Description", {"obj":selected_targets[0], "scanner_level":scanner_level})
 
 func OnCameraDragged_Callback():
-	if _input_state != INPUT_STATE.camera_dragged:
+	if _input_state != Globals.INPUT_STATE.camera_dragged:
 		_saved_input_state = _input_state
-		_input_state = INPUT_STATE.camera_dragged
+		set_input_state(Globals.INPUT_STATE.camera_dragged)
 
 func _unhandled_input(event):
-	if lock_input or _input_state == INPUT_STATE.look_around or playerNode == null:
+	if lock_input or _input_state == Globals.INPUT_STATE.look_around or playerNode == null:
 		return
 		
 	var dir = null
@@ -496,19 +491,19 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("touch"):
 			click_start_time = OS.get_ticks_msec()
-		elif event.is_action_released("touch") && _input_state != INPUT_STATE.camera_dragged :
+		elif event.is_action_released("touch") && _input_state != Globals.INPUT_STATE.camera_dragged :
 			var click_pos = playerNode.get_global_mouse_position()
 			
-			if _input_state == INPUT_STATE.weapon_targetting:
-				_input_state = INPUT_STATE.hud
+			if _input_state == Globals.INPUT_STATE.weapon_targetting:
+				set_input_state(Globals.INPUT_STATE.hud)
 				BehaviorEvents.emit_signal("OnTargetClick", click_pos, Globals.VALID_TARGET.attack)
-			elif _input_state == INPUT_STATE.board_targetting:
-				_input_state = INPUT_STATE.hud
+			elif _input_state == Globals.INPUT_STATE.board_targetting:
+				set_input_state(Globals.INPUT_STATE.hud)
 				BehaviorEvents.emit_signal("OnTargetClick", click_pos, Globals.VALID_TARGET.board)
-			elif _input_state == INPUT_STATE.loot_targetting:
-				_input_state = INPUT_STATE.hud
+			elif _input_state == Globals.INPUT_STATE.loot_targetting:
+				set_input_state(Globals.INPUT_STATE.hud)
 				BehaviorEvents.emit_signal("OnTargetClick", click_pos, Globals.VALID_TARGET.loot)
-			elif _input_state == INPUT_STATE.test:
+			elif _input_state == Globals.INPUT_STATE.test:
 				DO_TEST(click_pos)
 			else:
 				var player_pos = playerNode.position
@@ -545,8 +540,8 @@ func _unhandled_input(event):
 				}
 				playerNode.set_attrib("ai", ai_data)
 				BehaviorEvents.emit_signal("OnAttributeAdded", playerNode, "ai")
-		elif event.is_action_released("touch") && _input_state == INPUT_STATE.camera_dragged:
-			_input_state = _saved_input_state
+		elif event.is_action_released("touch") && _input_state == Globals.INPUT_STATE.camera_dragged:
+			set_input_state(_saved_input_state)
 				
 	if event is InputEventKey and event.pressed == true:
 		if event.unicode != 0:
@@ -555,7 +550,7 @@ func _unhandled_input(event):
 			_last_unicode = ""
 				
 	if event is InputEventKey && event.pressed == false:
-		if _input_state == INPUT_STATE.weapon_targetting or _input_state == INPUT_STATE.board_targetting or _input_state == INPUT_STATE.loot_targetting:
+		if _input_state == Globals.INPUT_STATE.weapon_targetting or _input_state == Globals.INPUT_STATE.board_targetting or _input_state == Globals.INPUT_STATE.loot_targetting:
 			#if _last_unicode == 's':
 			#	get_node(TargettingHUD).emit_signal("skip_pressed")
 			#if _last_unicode == 'c':
@@ -644,13 +639,13 @@ func do_contextual_actions(tile, player_tile):
 func cancel_targetting_pressed_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
 	BehaviorEvents.emit_signal("OnPushGUI", "HUD", null)
-	_input_state = INPUT_STATE.hud
+	set_input_state(Globals.INPUT_STATE.hud)
 	
 
 #TODO: if target is out-of-range the sequence will be aborted. Should probably fix that if you have more than one weapon
 #TODO: when firing multiple weapon. If the slowest weapon would allow the fastest to attack twice it should query twice.
 func ProcessAttackSelection(target, shot_tile):
-	_input_state = INPUT_STATE.hud
+	set_input_state(Globals.INPUT_STATE.hud)
 	var cur_weapon = null
 	for shot in _weapon_shots:
 		if shot.state == SHOOTING_STATE.wait_damage:
@@ -668,7 +663,7 @@ func ProcessAttackSelection(target, shot_tile):
 		BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, cur_weapon.weapon_data, self, "ProcessAttackSelection")
 		var text = "[color=red]Select target for " + cur_weapon.weapon_data.name_id + "...[/color]"
 		get_node(TargettingHUD).Init( {"info_text":text} )
-		_input_state = INPUT_STATE.weapon_targetting
+		set_input_state(Globals.INPUT_STATE.weapon_targetting)
 		return
 	
 	BehaviorEvents.emit_signal("OnPopGUI")
@@ -700,7 +695,7 @@ func ProcessAttackSelection(target, shot_tile):
 func ProcessBoardSelection(target, tile):
 	BehaviorEvents.emit_signal("OnPopGUI")
 	BehaviorEvents.emit_signal("OnPushGUI", "HUD", null)
-	_input_state = INPUT_STATE.hud
+	set_input_state(Globals.INPUT_STATE.hud)
 	if target != null:
 		var pnode = playerNode
 		BehaviorEvents.emit_signal("OnTransferPlayer", pnode, target)
@@ -710,7 +705,7 @@ func ProcessBoardSelection(target, tile):
 func ProcessTakeSelection(target, tile):
 	BehaviorEvents.emit_signal("OnPopGUI")
 	BehaviorEvents.emit_signal("OnPushGUI", "HUD", null)
-	_input_state = INPUT_STATE.hud
+	set_input_state(Globals.INPUT_STATE.hud)
 	if target == null:
 		BehaviorEvents.emit_signal("OnLogLine", "Item transfer canceled")
 		return

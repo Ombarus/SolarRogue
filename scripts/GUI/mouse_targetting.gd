@@ -1,10 +1,18 @@
 extends Node2D
 
 var click_start_pos : Vector2
+var enable_goto := true
 
 func _ready():
 	BehaviorEvents.connect("OnCameraDragged", self, "OnCameraDragged_Callback")
+	BehaviorEvents.connect("OnPlayerInputStateChanged", self, "OnPlayerInputStateChanged_Callback")
 	
+func OnPlayerInputStateChanged_Callback(playerObj, inputState):
+	if inputState == Globals.INPUT_STATE.hud:
+		enable_goto = true
+	else:
+		enable_goto = false
+
 func OnCameraDragged_Callback():
 	self.visible = false
 	
@@ -26,33 +34,18 @@ func _input(event):
 		self.position = tile_world_center
 		
 	if event is InputEventMouseButton:
-		if event.is_action_pressed("touch"):
+		if event.is_action_pressed("touch") and enable_goto == true:
 			click_start_pos = event.position
 			var player := Globals.get_first_player()
+			if player == null:
+				return
 			var mouse_pos : Vector2 = Globals.LevelLoaderRef.World_to_Tile(get_global_mouse_position())
 			var player_pos : Vector2 = Globals.LevelLoaderRef.World_to_Tile(player.position)
 			
 			var dir : Vector2 = mouse_pos - player_pos
 			var angle : float = dir.angle_to(Vector2(-1.0, 0.0))
-			angle = rad2deg(angle)
-			#angle = normalize_deg(angle)
-			print(angle)
-			if angle < 22 and angle >= -22: # 0
-				get_node("targetting/AnimationPlayer").play("goto_w")
-			if angle < 67 and angle >= 22: # 45
-				get_node("targetting/AnimationPlayer").play("goto_sw")
-			if angle < 112 and angle >= 67: # 90
-				get_node("targetting/AnimationPlayer").play("goto_s")
-			if angle < 157 and angle >= 112: # 135
-				get_node("targetting/AnimationPlayer").play("goto_se")
-			if angle < -113 and angle >= -158: # 225 -135
-				get_node("targetting/AnimationPlayer").play("goto_ne")
-			if angle < -68 and angle >= -113: # 270 -90
-				get_node("targetting/AnimationPlayer").play("goto_n")
-			if angle < -23 and angle >= -68: # 315 -45
-				get_node("targetting/AnimationPlayer").play("goto_nw")
-			if angle < -158 or angle >= 157: # 180
-				get_node("targetting/AnimationPlayer").play("goto_e")
+			get_node("targetting/GotoArrow").rotation = -angle
+			get_node("targetting/AnimationPlayer").play("goto")
 		else:
 			self.visible = true
 			get_node("targetting/AnimationPlayer").play("idle")

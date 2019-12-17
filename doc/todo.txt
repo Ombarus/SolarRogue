@@ -6,6 +6,7 @@ RELEASE CHECKLIST :::
 
 TODO :::
 - hold touch always does goto ?
+	- CRASH when in sub-menu (death screen)
 	- force goto visual should not pop up if in targetting
 	- show visual on touch_pressed on device
 	- fix issues with Torpedo area of effect on device
