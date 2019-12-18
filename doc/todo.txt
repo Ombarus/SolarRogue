@@ -5,10 +5,7 @@ RELEASE CHECKLIST :::
 - save after each turn, save when quit
 
 TODO :::
-- tuto highlight should be removed if player uses shortcut or contextual click too
 - investigate steam and itch.io
-- Issue with yield() while loading on my tablet... loading takes hours
-	- perf : iterating over all tiles while loading might be a bit much ?
 - Mobile only "features" ?
 	- Hide "Quit" button (iOS or Mobile in general)
 	- smaller list rows on PC ?
@@ -170,6 +167,9 @@ IDEAS:::
 	
 	
 DONE :::
+- tuto highlight should be removed if player uses shortcut or contextual click too
+- Issue with yield() while loading on my tablet... loading takes hours
+	- perf : iterating over all tiles while loading might be a bit much ?
 - hold touch always does goto ?
 	- CRASH when in sub-menu (death screen)
 	- force goto visual should not pop up if in targetting

@@ -6,6 +6,7 @@ extends Sprite
 # var b = "textvar"
 
 func _ready():
+	get_node("../RichTextLabel").set_text(tr("TEST"))
 	pass
 
 func _input(event):

@@ -86,3 +86,14 @@ func is_(obj, val):
 	if obj == null or obj != val:
 		return false
 	return true
+
+func mytr(text):
+	if OS.is_debug_build():
+		if not text in Preloader.EnTable:
+			print("TR: No english translation for " + text)
+		if not text in Preloader.FrTable:
+			print("TR: No french translation for " + text)
+		if not text in Preloader.JaTable:
+			print("TR: No japanese translation for " + text)
+			
+	return tr(text)

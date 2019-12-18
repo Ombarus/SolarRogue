@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://data/textures/tests/grid.png" type="Texture" id=1]
 [ext_resource path="res://data/textures/visualfx/explosion_test_gb.png" type="Texture" id=2]
 [ext_resource path="res://scenes/temp.gd" type="Script" id=3]
+[ext_resource path="res://data/theme/default_ui_text.tres" type="Theme" id=4]
+[ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=5]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -149,4 +151,48 @@ script = ExtResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = -533.0
+margin_top = -191.0
+margin_right = -368.0
+margin_bottom = -151.0
+theme = ExtResource( 4 )
+custom_fonts/mono_font = ExtResource( 5 )
+custom_fonts/bold_italics_font = ExtResource( 5 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 5 )
+custom_fonts/normal_font = ExtResource( 5 )
+bbcode_enabled = true
+bbcode_text = "TEST"
+text = "TEST"
+
+[node name="Label" type="Label" parent="."]
+margin_left = -255.0
+margin_top = -329.0
+margin_right = 278.0
+margin_bottom = -136.0
+custom_fonts/font = ExtResource( 5 )
+text = "‣‣₩₩λλ
+ݤݤݗ	ݗ	
+┵┵╗╗
+⛔♻♛
+⽖⾦
+I eat Carrot こんにちは日本 For Lunch"
+
+[node name="Label2" type="Label" parent="."]
+margin_left = -601.982
+margin_top = -46.3644
+margin_right = -68.9821
+margin_bottom = 146.636
+custom_fonts/font = ExtResource( 5 )
+text = "TEST"
+
+[node name="Button" type="Button" parent="."]
+margin_left = -540.0
+margin_top = -120.0
+margin_right = -346.0
+margin_bottom = -83.0
+custom_fonts/font = ExtResource( 5 )
+text = "TEST"
 

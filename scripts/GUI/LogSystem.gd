@@ -5,6 +5,8 @@ export(int) var max_log = 100
 var _log_lines = []
 var _window
 
+var translator
+
 func _ready():
 	_window = get_node("LogWindow")
 	BehaviorEvents.connect("OnLogLine", self, "OnLogLine_CallBack")
@@ -12,7 +14,8 @@ func _ready():
 func OnLogLine_CallBack(text):
 	if _log_lines.size() > max_log:
 		_log_lines.pop_front()
-	_log_lines.push_back(text)
+		
+	_log_lines.push_back(Globals.mytr(text))
 	update_log()
 
 func update_log():

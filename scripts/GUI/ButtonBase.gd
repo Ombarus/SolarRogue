@@ -36,11 +36,11 @@ func _ready():
 	get_node("base").connect("OnUpdateLayout", self, "OnUpdateLayout_Callback")
 	set_text(Text)
 	OnUpdateLayout_Callback()
-	if IsHUD == true:
+	if IsHUD == true and Engine.is_editor_hint() == false:
 		self.visible = not PermSave.get_attrib("settings.hide_hud")
 
 func OnHUDVisiblityChanged_Callback():
-	if IsHUD:
+	if IsHUD and Engine.is_editor_hint() == false:
 		self.visible = not PermSave.get_attrib("settings.hide_hud")
 
 func ResetHightlight_Callback():
