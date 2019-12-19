@@ -19,7 +19,7 @@ signal OnEndParallelAction(obj)
 signal OnUseEnergy(obj, amount)
 signal OnEnergyChanged(obj)
 signal OnObjTurn(obj)
-signal OnLogLine(text)
+signal OnLogLine(text, fmt)
 signal OnDealDamage(targets, shooter, weapon_data, shot_tile) # fired before all other validations
 signal OnShotFired(shot_tile, shooter, weapon_data) # for VFX
 signal OnDamageTaken(target, shooter) # only fired if damage is > 0

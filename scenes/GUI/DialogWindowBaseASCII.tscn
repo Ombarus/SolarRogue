@@ -207,6 +207,7 @@ margin_top = 13.0
 margin_right = -12.0
 margin_bottom = 38.0
 bbcode_enabled = true
+scroll_active = false
 
 [node name="TitleBottom" type="RichTextLabel" parent="."]
 anchor_top = 1.0
@@ -216,6 +217,7 @@ margin_left = 12.0
 margin_top = -34.0
 margin_right = -6.0
 margin_bottom = -9.0
+scroll_active = false
 
 [node name="Btn" type="Control" parent="."]
 anchor_right = 1.0

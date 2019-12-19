@@ -256,9 +256,9 @@ func ProcessDamage(target, shooter, weapon_data):
 			BehaviorEvents.emit_signal("OnRequestObjectUnload", target)
 		else:
 			if is_player:
-				BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]You do " + str(dam) + " damage[/color]")
+				BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]You do %d damage[/color]", [dam])
 			elif is_target_player:
-				BehaviorEvents.emit_signal("OnLogLine", "[color=red]You take " + str(dam) + " damage[/color]")
+				BehaviorEvents.emit_signal("OnLogLine", "[color=red]You take %d damage[/color]", [dam])
 		BehaviorEvents.emit_signal("OnDamageTaken", target, shooter)
 	
 	

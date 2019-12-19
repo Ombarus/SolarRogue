@@ -11,11 +11,11 @@ func _ready():
 	_window = get_node("LogWindow")
 	BehaviorEvents.connect("OnLogLine", self, "OnLogLine_CallBack")
 	
-func OnLogLine_CallBack(text):
+func OnLogLine_CallBack(text, fmt=[]):
 	if _log_lines.size() > max_log:
 		_log_lines.pop_front()
 		
-	_log_lines.push_back(Globals.mytr(text))
+	_log_lines.push_back(Globals.mytr(text, fmt))
 	update_log()
 
 func update_log():

@@ -87,13 +87,12 @@ func is_(obj, val):
 		return false
 	return true
 
-func mytr(text):
-	if OS.is_debug_build():
-		if not text in Preloader.EnTable:
-			print("TR: No english translation for " + text)
-		if not text in Preloader.FrTable:
-			print("TR: No french translation for " + text)
-		if not text in Preloader.JaTable:
-			print("TR: No japanese translation for " + text)
+func mytr(text, fmt=[]):
+	var result : String = tr(text)
+	if OS.is_debug_build() and result == text and TranslationServer.get_locale() != "en":
+		print("====> [TR] : No %s translation for %s" % [TranslationServer.get_locale(), text])
+		
+	if not fmt.empty():
+		result = tr(text) % fmt
 			
-	return tr(text)
+	return result

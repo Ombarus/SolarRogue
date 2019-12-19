@@ -1,2 +1,9 @@
 id,en,fr,ja
-TEST,"hello world","bonjour le monde","こんにちは日本"
+[color=yellow]Scanners have picked up a new planet[/color], [color=yellow]Scanners have picked up a new planet[/color], [color=yellow]Le radar a détecté une nouvelle planète[/color], [color=yellow]新しい惑星発見[/color]
+Your shots did not produce anything useful,Your shots did not produce anything useful,Le bombardement a échoué,何も取れなかった
+Cooling reactor (wait),Cooling reactor (wait),Réacteur stabilisé (Attendre 1 tour),一度待つ
+[color=yellow]You do %d damage[/color],[color=yellow]You do %d damage[/color],[color=yellow]Le tir fait %d de dommage[/color],[color=yellow]%d ダメージに打つった[/color]
+[color=red]You take %d damage[/color],[color=red]You take %d damage[/color],[color=red]Nous avons reçu %d de dommage[/color],[color=red]%d ダメージが貰った[/color]
+[color=red]You destroy the enemy ![/color],[color=red]You destroy the enemy ![/color],[color=red]Vous avez détruit l'ennemi ![/color],[color=red]敵が倒れた！[/color]
+Ship in range of %s,Ship in range of %s,Nous survolons un %s,%sが近くに通る
+Multiple Objects Detected,Multiple Objects Detected,Plusieurs Objects,色々な物
