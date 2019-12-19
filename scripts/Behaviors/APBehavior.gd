@@ -120,12 +120,7 @@ func NormalizeAP():
 func UpdateLogTitle():
 	if log_window_ref == null:
 		return
-	var title = "Log Stardate "
-	title += str(int(star_date_major))
-	title += "."
-	title += str(int(star_date_minor))
-	title += "."
-	title += str(int(star_date_turn))
+	var title = Globals.mytr("Log Stardate %d.%d.%d", [star_date_major, star_date_minor, star_date_turn])
 	log_window_ref.title = title
 	
 func StopAP(obj):

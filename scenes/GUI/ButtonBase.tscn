@@ -31,7 +31,6 @@ tracks/0/keys = {
 margin_right = 226.0
 margin_bottom = 144.0
 script = ExtResource( 1 )
-Text = "Weapon"
 HighlightStyle = ExtResource( 2 )
 
 [node name="base" parent="." instance=ExtResource( 3 )]
@@ -50,7 +49,6 @@ custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-text = "Weapon"
 
 [node name="HoverSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )

@@ -38,7 +38,10 @@ func set_reverse_title(newval):
 	emit_signal("OnUpdateLayout")
 	
 func set_title(newval):
-	title = newval
+	if Engine.editor_hint or newval == "":
+		title = newval
+	else:
+		title = Globals.mytr(newval)
 	emit_signal("OnUpdateLayout")
 	
 func set_style(newval):

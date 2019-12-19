@@ -110,7 +110,7 @@ func consume(shooter, weapon_data):
 func validate_action(target, shooter, weapon_data):
 	var defense_deployed = target.get_attrib("harvestable.defense_deployed")
 	if defense_deployed != null and defense_deployed == true:
-		BehaviorEvents.emit_signal("OnLogLine", "This planet has a colony, let's not push our luck.")
+		BehaviorEvents.emit_signal("OnLogLine", "This planet has a colony, let's not push our luck")
 		return false
 		
 	if Globals.is_(target.get_attrib("destroyable.destroyed"), true):
@@ -135,7 +135,7 @@ func validate_action(target, shooter, weapon_data):
 				ammo_ok = true
 	
 	if not ammo_ok && is_player:
-		BehaviorEvents.emit_signal("OnLogLine", "No more " + ammo_data.name_id + " to shoot")
+		BehaviorEvents.emit_signal("OnLogLine", "No more %s to shoot", [Globals.mytr(ammo_data.name_id)])
 		return false
 	
 	#if "fire_energy_cost" in weapon_data.weapon_data:

@@ -24,7 +24,10 @@ func get_height_line():
 	return get_node("base").get_height_line()
 
 func set_text(newval):
-	Text = newval
+	if Engine.editor_hint or newval == "":
+		Text = newval
+	else:
+		Text = Globals.mytr(newval)
 	if has_node("btn"):
 		get_node("btn").text = Text
 		
@@ -34,7 +37,7 @@ func _ready():
 	BehaviorEvents.connect("OnResetHighlight", self, "ResetHightlight_Callback")
 	BehaviorEvents.connect("OnHUDVisiblityChanged", self, "OnHUDVisiblityChanged_Callback")
 	get_node("base").connect("OnUpdateLayout", self, "OnUpdateLayout_Callback")
-	set_text(Text)
+	#set_text(Text)
 	OnUpdateLayout_Callback()
 	if IsHUD == true and Engine.is_editor_hint() == false:
 		self.visible = not PermSave.get_attrib("settings.hide_hud")

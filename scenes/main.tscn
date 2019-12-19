@@ -423,7 +423,6 @@ margin_left = -74.0
 margin_top = -124.0
 margin_right = -9.0
 margin_bottom = -59.0
-Text = ""
 ShortcutEnum = 16777217
 
 [node name="Sprite" type="Sprite" parent="Camera-GUI/HUD/Buttons/Options"]

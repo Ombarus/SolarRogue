@@ -1,5 +1,4 @@
 id,en,fr,ja
-[color=yellow]Scanners have picked up a new planet[/color], [color=yellow]Scanners have picked up a new planet[/color], [color=yellow]Le radar a détecté une nouvelle planète[/color], [color=yellow]新しい惑星発見[/color]
 Your shots did not produce anything useful,Your shots did not produce anything useful,Le bombardement a échoué,何も取れなかった
 Cooling reactor (wait),Cooling reactor (wait),Réacteur stabilisé (Attendre 1 tour),一度待つ
 [color=yellow]You do %d damage[/color],[color=yellow]You do %d damage[/color],[color=yellow]Le tir fait %d de dommage[/color],[color=yellow]%d ダメージに打つった[/color]
@@ -7,3 +6,109 @@ Cooling reactor (wait),Cooling reactor (wait),Réacteur stabilisé (Attendre 1 t
 [color=red]You destroy the enemy ![/color],[color=red]You destroy the enemy ![/color],[color=red]Vous avez détruit l'ennemi ![/color],[color=red]敵が倒れた！[/color]
 Ship in range of %s,Ship in range of %s,Nous survolons un %s,%sが近くに通る
 Multiple Objects Detected,Multiple Objects Detected,Plusieurs Objects,色々な物
+There's nothing there sir...,There's nothing there sir...,Il n'y a rien ici...,ここは何も無い...
+Target is outside of our range sir !,Target is outside of our range sir !,La cible est hors de porté Commandant !,届かない船長！
+Scanners have discovered an Anomaly close by,Scanners have discovered an Anomaly close by,Le radar à détecté une anomalie dans les environs,異常発見
+Select area to scan...,Select area to scan...,Sélectionnez une région…,どこ？
+Which ship should we transfer control ?,Which ship should we transfer control ?,Quel vaisseau voulez-vous prendre contrôle?,戦艦を選ぶ
+Take from what ?,Take from what ?,Prendre d’où?,どこから取る？
+Production sucessful,Production sucessful,Production réussi,Production sucessful
+Missing resources,Missing resources,Ressource manquante,Missing resources
+Not enough energy,Not enough energy,Pas assez d’énergie,Not enough energy
+Crafting failed,Crafting failed,Production échoué,Crafting failed
+The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! You made it !,The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! You made it !,"Le convertisseur de Yendor assimile l’énergie du trou noir lui-même et ouvre une brèche dans l’espace. Sans hésiter, vous engagé les réacteurs. De l’autre côté, un monde familié vous attend, vous avez réussi, vous êtes enfin chez vous !",The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! You made it !
+The Converter of Yendor will not work unless it is mounted on the ship !,The Converter of Yendor will not work unless it is mounted on the ship !,Le convertisseur de Yendor doit être monté sur le vaisseau!,The Converter of Yendor will not work unless it is mounted on the ship !
+[color=yellow]This wormhole emits a strange energy signature that prevents you from jumping back home![/color],[color=yellow]This wormhole emits a strange energy signature that prevents you from jumping back home![/color],[color=yellow]Ce trou noir émet une énergie inconnue qui vous empêche de retourner chez vous[/color],[color=yellow]This wormhole emits a strange energy signature that prevents you from jumping back home![/color]
+Mount some weapon first,Mount some weapon first,Vous devez monté une arme,Mount some weapon first
+Nothing but empty space,Nothing but empty space,Il n'y a rien ici…,Nothing but empty space
+Ship transfer canceled,Ship transfer canceled,Transfer cancellé,Ship transfer canceled
+Item transfer canceled,Item transfer canceled,Aucun item transferé,Item transfer canceled
+"All controls transfered, the ship is ours captain !","All controls transfered, the ship is ours captain !","Transfer complété, le vaisseau nous appartient Commandant!","All controls transfered, the ship is ours captain !"
+"We have too much cargo, choose what to leave behind before we go","We have too much cargo, choose what to leave behind before we go","Nous avons trop de cargo, choisissez ce que nous laisserons ici","We have too much cargo, choose what to leave behind before we go"
+We should transfer any remaining items from %s before,We should transfer any remaining items from %s before,%s contient encore des items qui doivent être transféré avant,We should transfer any remaining items from %s before
+The tractor beam failed to lock on,The tractor beam failed to lock on,Le rayon tracteur n’a rien trouvé,The tractor beam failed to lock on
+Tractor beam has brought %s abord,Tractor beam has brought %s abord,Le rayon tracteur a ramené %s à bord,Tractor beam has brought %s abord
+Replaced %s by %s,Replaced %s by %s,%s remplacé par %s,Replaced %s by %s
+Installed %s,Installed %s,%s Installé,Installed %s
+[color=yelllow]Nanites deployed ![/color],[color=yelllow]Nanites deployed ![/color],[color=yelllow]Nanites déployées ![/color],[color=yelllow]Nanites deployed ![/color]
+"This planet has a colony, let's not push our luck","This planet has a colony, let's not push our luck","Cette planète est colonisée, n’exagérons pas","This planet has a colony, let's not push our luck"
+No more %s to shoot,No more %s to shoot,Nous n’avons plus de %s,No more %s to shoot
+[color=red]This planet had a colony and they are NOT happy. They've deployed defenses.[/color],[color=red]This planet had a colony and they are NOT happy. They've deployed defenses.[/color],[color=red]Cette planète a une colonie. Ils ont déployé leurs défenses.[/color],[color=red]This planet had a colony and they are NOT happy. They've deployed defenses.[/color]
+Some useful materials float into orbit,Some useful materials float into orbit,Des matériaux utiles flottent en orbite,Some useful materials float into orbit
+Shot missed,Shot missed,Tir manqué,Shot missed
+The enemy missed,The enemy missed,L’ennemi vous manque,The enemy missed
+[color=red]You destroyed one of YOUR ship ![/color],[color=red]You destroyed one of YOUR ship ![/color],[color=red]Vous avez détruit un de vos propre vaisseau ![/color],[color=red]You destroyed one of YOUR ship ![/color]
+"[color=yellow]The anomaly has corrupted your warp drives, engine at half power[/color]","[color=yellow]The anomaly has corrupted your warp drives, engine at half power[/color]","[color=yellow]L’anomalie affecte les réacteurs, vitesse réduite à 50%[/color]","[color=yellow]The anomaly has corrupted your warp drives, engine at half power[/color]"
+[color=yellow]The anomaly is syphoning energy from the ship ![/color],[color=yellow]The anomaly is syphoning energy from the ship ![/color],[color=yellow]L’anomalie syphone l’énergie du vaisseau ![/color],[color=yellow]The anomaly is syphoning energy from the ship ![/color]
+"[color=lime]The anomaly was full of free energy, we're gaining energy ![/color]","[color=lime]The anomaly was full of free energy, we're gaining energy ![/color]",[color=lime]L’anomalie à une charge énergétique si dense qu’elle recharge le vaisseau ![/color],"[color=lime]The anomaly was full of free energy, we're gaining energy ![/color]"
+[color=yellow]A magnetic pulse from the Anomaly has disabled our scanners ![/color],[color=yellow]A magnetic pulse from the Anomaly has disabled our scanners ![/color],[color=yellow]Le champs électro-magnétique de l’anomalie corrompt notre radar ![/color],[color=yellow]A magnetic pulse from the Anomaly has disabled our scanners ![/color]
+[color=lime]The anomaly resonate with our scanners giving them a boost ![/color],[color=lime]The anomaly resonate with our scanners giving them a boost ![/color],[color=lime]Les ondes magnétiques de l’anomalie résonnent avec notre radar et augmente sa porté ![/color],[color=lime]The anomaly resonate with our scanners giving them a boost ![/color]
+"[color=lime]Purge complete, all system back online[/color]","[color=lime]Purge complete, all system back online[/color]","[color=lime]Purge complété, systèmes nominal[/color]","[color=lime]Purge complete, all system back online[/color]"
+[color=lime]The energy Syphon has subsided[/color],[color=lime]The energy Syphon has subsided[/color],[color=lime]Le syphon d’énergie s’affaibli[/color],[color=lime]The energy Syphon has subsided[/color]
+[color=lime]Scanners are back to normal[/color],[color=lime]Scanners are back to normal[/color],[color=lime]Le radar fonctionne à nouveau[/color],[color=lime]Scanners are back to normal[/color]
+[color=yellow]Enemy ship entered scanner range ![/color],[color=yellow]Enemy ship entered scanner range ![/color],[color=yellow]Vaisseau ennemi détecté ![/color],[color=yellow]Enemy ship entered scanner range ![/color]
+[color=yellow]Scanners have picked up a new %s[/color],[color=yellow]Scanners have picked up a new %s[/color],[color=yellow]Nos radars détectent un nouveau %s[/color],[color=yellow]Scanners have picked up a new %s[/color]
+"[color=yellow]Autopilot canceled, enemy too close ![/color]","[color=yellow]Autopilot canceled, enemy too close ![/color]","[color=yellow]Autopilot interrompu, ennemi dangeureusement proche ![/color]","[color=yellow]Autopilot canceled, enemy too close ![/color]"
+[color=yellow]Energy too low for autopilot ![/color],[color=yellow]Energy too low for autopilot ![/color],"[color=yellow]Autopilot interrompu, energie dangeureusement faible ![/color]",[color=yellow]Energy too low for autopilot ![/color]
+Game saved,Game saved,Partie Sauvegardé,Game saved
+No selected item can be used like that,No selected item can be used like that,Aucun objet ne peut être utilisé,No selected item can be used like that
+Choose Target,Choose Target,Choisir une cible,Choose Target
+Game Menu,Game Menu,Menu Principal,Game Menu
+Confirm,Confirm,Confirmer,Confirm
+MAN(1) Solar Rogue General Commands Manual,MAN(1) Solar Rogue General Commands Manual,MAN(1) Solar Rogue Manuel des Commandes,MAN(1) Solar Rogue General Commands Manual
+Ship's Mounts,Ship's Mounts,Points d’ancrage,Ship's Mounts
+Cargo Holds,Cargo Holds,Cargo,Cargo Holds
+Player's Ship,Player's Ship,Vaisseau du joueur,Player's Ship
+Select Materials,Select Materials,Choix des matériaux,Select Materials
+Settings,Settings,Configuration,Settings
+How Many ?,How Many ?,Combien ?,How Many ?
+You are dead,You are dead,Vous êtes mort,You are dead
+Log Stardate %d.%d.%d,Log Stardate %d.%d.%d,Journal Stardate %d.%d.%d,Log Stardate %d.%d.%d
+[b]oard,[b]oard,[b]embar,[b]oard
+[t]ransfer,[t]ransfer,[t]ransfert,[t]ransfer
+[l]ook,[l]ook,[l]analyse,[l]ook
+[5] wait,[5] wait,[5]attendre,[5] wait
+...,...,...,...
+[s]kip,[s]kip,[s]auter,[s]kip
+[esc]cancel,[esc]cancel,[esc]annuler,[esc]cancel
+[s]ave,[s]ave,[s]auvegarde,[s]ave
+[r]estart,[r]estart,[r]ecommancer,[r]estart
+[o]ptions,[o]ptions,[o]ptions,[o]ptions
+save & [q]uit,save & [q]uit,sauvegarde & [q]uitter,save & [q]uit
+> remove,> remove,> retirer,> remove
+< mount,< mount,< monté,< mount
+[d]rop,[d]rop,[d]expulser,[d]rop
+[u]se,[u]se,[u]tiliser,[u]se
+?,?,?,?
+[esc] close,[esc] close,[esc]fermer,[esc] close
+[esc]Cancel,[esc]Cancel,[esc]annuler,[esc]Cancel
+<<,<<,<<,<<
+>>,>>,>>,>>
+[esc]close,[esc]close,[esc]fermer,[esc]close
+[esc] cancel,[esc] cancel,[esc]annuler,[esc] cancel
+[c]raft,[c]raft,[c]produire,[c]raft
+...,...,...,...
+[c]onv,[c]onv,[c]onv,[c]onv
+[w]eapon,[w]eapon,[w]tir,[w]eapon
+[g]rab,[g]rab,[g]prend,[g]rab
+[i]nv,[i]nv,[i]nv,[i]nv
+[<]FTL,[<]FTL,[<]Saut,[<]FTL
+,,,
+"Captain, Lets refill our energy by converting this %s\n1. Select 'Recycle Energy' from the list on the left\n2. Select the '%s' on the right\n3. Click the 'Craft' Button","Captain, Lets refill our energy by converting this %s\n1. Select 'Recycle Energy' from the list on the left\n2. Select the '%s' on the right\n3. Click the 'Craft' Button","Commandant, Récupérons de l’énergie en convertissant %s\n1. Choisir ‘Recyclage’ dans la liste de gauche\n2. Choisir %s à droite\n3. Clicker sur le bouton ‘Produire’","Captain, Lets refill our energy by converting this %s\n1. Select 'Recycle Energy' from the list on the left\n2. Select the '%s' on the right\n3. Click the 'Craft' Button"
+Tutorial: Converter,Tutorial: Converter,Tutorial: Convertisseur,Tutorial: Converter
+"Captain, To equip our new %s just select it in the cargo list on the right and select the 'mount' button to install or replace the currently equiped %s","Captain, To equip our new %s just select it in the cargo list on the right and select the 'mount' button to install or replace the currently equiped %s","Commandant, Pour équiper notre nouveau %s il suffit de le sélectionner dans la liste à droite et clicker sur le bouton ‘monté’ pour l’installer ou remplacé le %s actuel","Captain, To equip our new %s just select it in the cargo list on the right and select the 'mount' button to install or replace the currently equiped %s"
+Tutorial: Inventory,Tutorial: Inventory,Tutorial: Inventaire,Tutorial: Inventory
+"Captain, order the helm to move by using the numpad keys, clicking or taping the screen\n\n[i]You can turn off tutorial prompts in the settings[/i]","Captain, order the helm to move by using the numpad keys, clicking or taping the screen\n\n[i]You can turn off tutorial prompts in the settings[/i]","Commandant, donnez vos ordres au pilotes avec le pavé numérique, en cliquant ou en tapant dans l’écran\n\n[i]Vous pouvez désactiver les tutoriels dans le menu d’options[/i]","Captain, order the helm to move by using the numpad keys, clicking or taping the screen\n\n[i]You can turn off tutorial prompts in the settings[/i]"
+Tutorial: Ship Movement,Tutorial: Ship Movement,Tutorial: Déplacement,Tutorial: Ship Movement
+"Captain, an unkown ship has entered our scanner range. It's weapon are powered-up and it's headed for our us.\n\nTarget deemed hostile will be marked in [color=red]red[/color].","Captain, an unkown ship has entered our scanner range. It's weapon are powered-up and it's headed for our us.\n\nTarget deemed hostile will be marked in [color=red]red[/color].","Commandant, Un vaisseau inconnu s’approche. Nous détectons un armement et ils sont en approche.\n\nLes cibles hostiles seront marquées en [color=red]rouge[/color]","Captain, an unkown ship has entered our scanner range. It's weapon are powered-up and it's headed for our us.\n\nTarget deemed hostile will be marked in [color=red]red[/color]."
+"Tutorial: Tactical, Hostiles","Tutorial: Tactical, Hostiles","Tutorial: Tactical, Hostiles","Tutorial: Tactical, Hostiles"
+"Captain, an unkown ship has entered our scanner range. No weapon signature detected, it's ignoring us.\n\nTarget deemed neutral will be marked in [color=blue]blue[/color].\n\n[i]hint: they're easy pickings...[/i]","Captain, an unkown ship has entered our scanner range. No weapon signature detected, it's ignoring us.\n\nTarget deemed neutral will be marked in [color=blue]blue[/color].\n\n[i]hint: they're easy pickings...[/i]","Commandant, un vaisseau inconnu s’approche. Il n’est pas armé et semble nous ignorer.\n\nLes cibles neutres seront marquées en [color=blue]bleu[/color].\n\n[i]conseil : Ce sont des cibles faciles…[/i]","Captain, an unkown ship has entered our scanner range. No weapon signature detected, it's ignoring us.\n\nTarget deemed neutral will be marked in [color=blue]blue[/color].\n\n[i]hint: they're easy pickings...[/i]"
+"Tutorial: Tactical, Neutral","Tutorial: Tactical, Neutral","Tutorial: Tactiques, Neutre","Tutorial: Tactical, Neutral"
+"Captain, this is one of our ships. We can board it and transfer equipments.\n\nBoardable targets will be marked in white.","Captain, this is one of our ships. We can board it and transfer equipments.\n\nBoardable targets will be marked in white.","Commandant, Ce vaisseau fait parti de notre flotte. Nous pouvons transférer contrôles et équipements.\n\nLes cibles contrôlables seront marquées en blanc","Captain, this is one of our ships. We can board it and transfer equipments.\n\nBoardable targets will be marked in white."
+"Tutorial: Tactical, Boarding","Tutorial: Tactical, Boarding","Tutorial: Tactical, Embarquement","Tutorial: Tactical, Boarding"
+"Captain, the ship's scanners have detected a planet close by. We should get close within firing range and shoot a few missiles, we could get useful materials from the debris.","Captain, the ship's scanners have detected a planet close by. We should get close within firing range and shoot a few missiles, we could get useful materials from the debris.","Commandant, Nos radars indique une planète à proximité. Nous devrions nous en approcher et faire feu, les planètes contiennent généralement des matériaux utiles.","Captain, the ship's scanners have detected a planet close by. We should get close within firing range and shoot a few missiles, we could get useful materials from the debris."
+Tutorial: Harvesting,Tutorial: Harvesting,Tutorial: Récolter,Tutorial: Harvesting
+"Captain, the ship's scanners have detected base elements that could be used to power the ship. Get on top of it and use the tractor beam to bring it into our cargo holds.","Captain, the ship's scanners have detected base elements that could be used to power the ship. Get on top of it and use the tractor beam to bring it into our cargo holds.","Commandant, Nos radars ont détecté des éléments de base pouvant servir à alimenter le vaisseau. Dirigez-vous dessus et utilisez le rayon tracteur pour les amener à bord","Captain, the ship's scanners have detected base elements that could be used to power the ship. Get on top of it and use the tractor beam to bring it into our cargo holds."
+Tutorial: Energy,Tutorial: Energy,Tutorial: Energie,Tutorial: Energy
+"Captain, we've picked up an item that could be used to refuel the ship. click on the [c]onv button to warm up our energy-to-matter converter","Captain, we've picked up an item that could be used to refuel the ship. click on the [c]onv button to warm up our energy-to-matter converter","Commandant, nous avons dans nos soutes un item qui pourrait ré-énergiser le vaisseau. Clickez sur le bouton [c]onv pour réchauffer notre convertisseur d’énergie","Captain, we've picked up an item that could be used to refuel the ship. click on the [c]onv button to warm up our energy-to-matter converter"
+"Captain, we've picked up an item that could be mounted on our ship. Please head to the inventory screen for more info.","Captain, we've picked up an item that could be mounted on our ship. Please head to the inventory screen for more info.","Commandant, nous avons dans nos soutes un item qui pourrait être monté sur le vaisseau. Allez dans l’inventaire pour plus d’information.","Captain, we've picked up an item that could be mounted on our ship. Please head to the inventory screen for more info."

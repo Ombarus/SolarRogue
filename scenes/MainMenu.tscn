@@ -74,7 +74,7 @@ margin_top = -238.0
 margin_right = 70.0
 margin_bottom = -148.0
 rect_min_size = Vector2( 140, 90 )
-Text = "[c]ontinue"
+Text = ""
 ShortcutKey = "c"
 AlwaysOnShortcut = false
 Disabled = true
@@ -89,7 +89,7 @@ margin_top = -128.0
 margin_right = 70.0
 margin_bottom = -38.0
 rect_min_size = Vector2( 140, 90 )
-Text = "[n]ew game"
+Text = ""
 ShortcutKey = "n"
 AlwaysOnShortcut = false
 
@@ -103,7 +103,7 @@ margin_top = -18.0
 margin_right = 70.0
 margin_bottom = 72.0
 rect_min_size = Vector2( 140, 90 )
-Text = "[s]ettings"
+Text = ""
 ShortcutKey = "s"
 AlwaysOnShortcut = false
 
@@ -117,7 +117,7 @@ margin_top = 92.0
 margin_right = 70.0
 margin_bottom = 182.0
 rect_min_size = Vector2( 140, 90 )
-Text = "[?]credits"
+Text = ""
 ShortcutKey = "?"
 AlwaysOnShortcut = false
 
@@ -131,7 +131,7 @@ margin_top = 202.0
 margin_right = 70.0
 margin_bottom = 292.0
 rect_min_size = Vector2( 140, 90 )
-Text = "[q]uit"
+Text = ""
 ShortcutKey = "q"
 AlwaysOnShortcut = false
 

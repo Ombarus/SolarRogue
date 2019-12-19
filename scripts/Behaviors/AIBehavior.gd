@@ -52,7 +52,7 @@ func ConsiderInterests(obj):
 			if o.get_attrib("memory.was_seen_by", false) == false and detected == true:
 				if is_player == true:
 					o.set_attrib("memory.was_seen_by", true)
-					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Scanners have picked up a new " + o.get_attrib("type") + "[/color]")
+					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Scanners have picked up a new %s[/color]", [Globals.mytr(o.get_attrib("type"))])
 				filtered.push_back(id)
 				break
 		

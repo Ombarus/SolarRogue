@@ -103,7 +103,7 @@ func OnPickup_Callback(picker, picked):
 		if obj.get_attrib("equipment") != null:
 			filtered_obj.push_back(obj)
 		elif ("equipment" in obj.base_attributes or "equipment" in obj.modified_attributes) and obj.get_attrib("cargo.content") != null and is_player:
-			BehaviorEvents.emit_signal("OnLogLine", "We should transfer any remaining items from " + obj.get_attrib("name_id") + " before")
+			BehaviorEvents.emit_signal("OnLogLine", "We should transfer any remaining items from %s before", [Globals.mytr(obj.get_attrib("name_id"))])
 			
 	if filtered_obj.size() <= 0 && is_player:
 		BehaviorEvents.emit_signal("OnLogLine", "The tractor beam failed to lock on")
@@ -128,7 +128,7 @@ func OnPickup_Callback(picker, picked):
 		picker.set_attrib("cargo.volume_used", picker.get_attrib("cargo.volume_used") + obj.get_attrib("equipment.volume"))
 		inventory_space -= obj.get_attrib("equipment.volume")
 		if is_player:
-				BehaviorEvents.emit_signal("OnLogLine", "Tractor beam has brought " + obj.get_attrib("name_id") + " abord")
+				BehaviorEvents.emit_signal("OnLogLine", "Tractor beam has brought %s abord", [Globals.mytr(obj.get_attrib("name_id"))])
 		if obj.get_attrib("equipment.stackable"):
 			var found = false
 			for item in picker.get_attrib("cargo.content"):
@@ -230,11 +230,11 @@ func OnEquipMount_Callback(equipper, slot_name, index, item_id):
 		if unequip_ap != null and unequip_ap > 0:
 			BehaviorEvents.emit_signal("OnUseAP", equipper, unequip_ap)
 		if equipper.get_attrib("type") == "player" and old_data != null and new_data != null:
-			BehaviorEvents.emit_signal("OnLogLine", "Replaced " + old_data.name_id + " by " + new_data.name_id)
+			BehaviorEvents.emit_signal("OnLogLine", "Replaced %s by %s", [Globals.mytr(old_data.name_id), Globals.mytr(new_data.name_id)])
 		items[index] = ""
 		BehaviorEvents.emit_signal("OnMountRemoved", equipper, slot_name, old_id)
 	elif equipper.get_attrib("type") == "player" and new_data != null:
-		BehaviorEvents.emit_signal("OnLogLine", "Installed " + new_data.name_id)
+		BehaviorEvents.emit_signal("OnLogLine", "Installed %s", [Globals.mytr(new_data.name_id)])
 		
 	BehaviorEvents.emit_signal("OnRemoveItem", equipper, item_id)
 	items[index] = item_id

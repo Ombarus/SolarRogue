@@ -13,5 +13,5 @@ func Ok_Callback():
 func Init(init_param):
 	get_node("base").disabled = false
 	var player_name = init_param["player_name"]
-	get_node("base").title = "Welcome %s..." % player_name
+	get_node("base").title = Globals.mytr("Welcome %s...", [player_name])
 	

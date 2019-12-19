@@ -20,8 +20,14 @@ func Ok_Callback():
 func Init(init_param):
 	var base = get_node("base")
 	base.disabled = false
-	_text.bbcode_text = init_param.text
-	_title.title = init_param.title
+	var text_fmt = []
+	if "text_fmt" in init_param:
+		text_fmt = init_param.text_fmt
+	_text.bbcode_text = Globals.mytr(init_param.text, text_fmt)
+	var title_fmt : Array = []
+	if "title_fmt" in init_param:
+		title_fmt = init_param.title_fmt
+	_title.title = Globals.mytr(init_param.title, title_fmt)
 	if "callback_object" in init_param:
 		_callback_obj = init_param.callback_object
 		_callback_method = init_param.callback_method

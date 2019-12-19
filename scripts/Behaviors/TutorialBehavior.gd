@@ -66,7 +66,7 @@ func OnGUIChanged_Callback(current_menu):
 				var type = Globals.get_data(data, "type")
 				var name : String = Globals.get_data(data, "name_id")
 				if type == "food":
-					BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "Captain, Lets refill our energy by converting this " +  name + "\n1. Select 'Recycle Energy' from the list on the left\n2. Select the '" + name + "' on the right\n3. Click the 'Craft' Button", "title":"Tutorial: Converter"})
+					BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "Captain, Lets refill our energy by converting this %s\n1. Select 'Recycle Energy' from the list on the left\n2. Select the '%s' on the right\n3. Click the 'Craft' Button", "text_fmt":[name, name], "title":"Tutorial: Converter"})
 					BehaviorEvents.emit_signal("OnHighlightUIElement", "Swap")
 					steps.push_back("conv_inv")
 					PermSave.set_attrib("tutorial.completed_steps", steps)
@@ -84,7 +84,7 @@ func OnGUIChanged_Callback(current_menu):
 				if slot != null:
 					var available_slot : bool = player.get_attrib("mounts." + slot, []).size() > 0
 					if available_slot == true:
-						BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "Captain, To equip our new " + slot + " just select it in the cargo list on the right and select the 'mount' button to install or replace the currently equiped " + slot, "title":"Tutorial: Inventory"})
+						BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "Captain, To equip our new %s just select it in the cargo list on the right and select the 'mount' button to install or replace the currently equiped %s", "text_fmt":[slot, slot], "title":"Tutorial: Inventory"})
 						BehaviorEvents.emit_signal("OnHighlightUIElement", "Craft")
 						steps.push_back("equip_inv")
 						PermSave.set_attrib("tutorial.completed_steps", steps)
