@@ -19,7 +19,7 @@ func _on_Save_pressed():
 
 
 func _on_Suicide_pressed():
-	BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"callback_object":self, "callback_method":"On_Suicide_Confirmed_Callback", "custom_text":"Are you sure ?\nThe Savegame will be deleted"})
+	BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"callback_object":self, "callback_method":"On_Suicide_Confirmed_Callback", "custom_text":"CONFIRM delete save"})
 
 
 func _on_SaveAndQuit_pressed():

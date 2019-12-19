@@ -51,7 +51,6 @@ mouse_filter = 2
 script = ExtResource( 7 )
 
 [node name="MenuBtn" type="Control" parent="MenuRoot"]
-editor/display_folded = true
 anchor_bottom = 1.0
 margin_left = 46.0
 margin_top = 84.0
@@ -74,7 +73,7 @@ margin_top = -238.0
 margin_right = 70.0
 margin_bottom = -148.0
 rect_min_size = Vector2( 140, 90 )
-Text = ""
+Text = "[c]ontinue"
 ShortcutKey = "c"
 AlwaysOnShortcut = false
 Disabled = true
@@ -89,7 +88,7 @@ margin_top = -128.0
 margin_right = 70.0
 margin_bottom = -38.0
 rect_min_size = Vector2( 140, 90 )
-Text = ""
+Text = "[n]ew game"
 ShortcutKey = "n"
 AlwaysOnShortcut = false
 
@@ -103,7 +102,7 @@ margin_top = -18.0
 margin_right = 70.0
 margin_bottom = 72.0
 rect_min_size = Vector2( 140, 90 )
-Text = ""
+Text = "[s]ettings"
 ShortcutKey = "s"
 AlwaysOnShortcut = false
 
@@ -117,7 +116,7 @@ margin_top = 92.0
 margin_right = 70.0
 margin_bottom = 182.0
 rect_min_size = Vector2( 140, 90 )
-Text = ""
+Text = "[?]credits"
 ShortcutKey = "?"
 AlwaysOnShortcut = false
 
@@ -131,7 +130,7 @@ margin_top = 202.0
 margin_right = 70.0
 margin_bottom = 292.0
 rect_min_size = Vector2( 140, 90 )
-Text = ""
+Text = "[q]uit"
 ShortcutKey = "q"
 AlwaysOnShortcut = false
 

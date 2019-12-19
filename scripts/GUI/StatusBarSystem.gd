@@ -63,7 +63,7 @@ func UpdateStatusBar(player_obj):
 		energy_color = "red"
 		
 	var bottom_title_str = ship_name
-	var status_str = " Hull : [color=" + hull_color + "]"
+	var status_str = Globals.mytr("Hull") + ":[color=" + hull_color + "]"
 	#"gray"
 	var health_per = cur_hull / max_hull
 	var changed_color = false
@@ -73,7 +73,7 @@ func UpdateStatusBar(player_obj):
 			status_str += "[/color][color=gray]"
 			changed_color = true
 		status_str += "="
-	status_str += "[/color] Energy : [color=%s]%.f[/color] Shield : " % [energy_color, cur_energy]
+	status_str += "[/color]   %s:[color=%s]%.f[/color]   %s:" % [Globals.mytr("Energy"), energy_color, cur_energy, Globals.mytr("Shield")]
 	
 	var shields = player_obj.get_attrib("mounts.shield")
 	var missing_shield = true
@@ -84,9 +84,9 @@ func UpdateStatusBar(player_obj):
 				break
 	var cur_shield = player_obj.get_attrib("shield.current_hp")
 	if missing_shield:
-		status_str += "[color=yellow]Missing[/color]"
+		status_str += "[color=yellow]%s[/color]" % [Globals.mytr("Missing")]
 	elif cur_shield != null and cur_shield < 1:
-		status_str += "[color=red]Down![/color]"
+		status_str += "[color=red]%s[/color]" % [Globals.mytr("Down!")]
 	else:
 		var max_shield = player_obj.get_max_shield()
 		status_str += "[color=aqua]"

@@ -52,7 +52,7 @@ bbcode_text = "[b]BASIC CONTROLS[/b][indent][Numpad 1 to 9] or [Mouse Clicks on 
 [>] or [FTL Button] ------------------------------- Activate on top of wormhole to change level
 [+] ----------------------------------------------- Zoom In
 [-] ----------------------------------------------- Zoom Out
-[Gear Icon] --------------------------------------- Main Menu for Saving, Quitting and eventually Options
+[Gear Icon] --------------------------------------- Main Menu for Saving, Quitting and Options
 [/indent]
 [b]ADVANCED CONTROLS[/b]
 [b]Accessible from the \"...\" Button[/b][indent]
@@ -90,7 +90,7 @@ text = "BASIC CONTROLS	[Numpad 1 to 9] or [Mouse Clicks on empty space] -- Move 
 [>] or [FTL Button] ------------------------------- Activate on top of wormhole to change level
 [+] ----------------------------------------------- Zoom In
 [-] ----------------------------------------------- Zoom Out
-[Gear Icon] --------------------------------------- Main Menu for Saving, Quitting and eventually Options
+[Gear Icon] --------------------------------------- Main Menu for Saving, Quitting and Options
 
 ADVANCED CONTROLS
 Accessible from the \"...\" Button	

@@ -32,4 +32,4 @@ func Init(init_param):
 	if "custom_text" in init_param:
 		info_text = init_param["custom_text"]
 	
-	_info.bbcode_text = "[center]%s[/center]" % info_text
+	_info.bbcode_text = "[center]%s[/center]" % Globals.mytr(info_text)

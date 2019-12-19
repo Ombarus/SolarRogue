@@ -66,7 +66,7 @@ func OnGUIChanged_Callback(current_menu):
 				var type = Globals.get_data(data, "type")
 				var name : String = Globals.get_data(data, "name_id")
 				if type == "food":
-					BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "Captain, Lets refill our energy by converting this %s\n1. Select 'Recycle Energy' from the list on the left\n2. Select the '%s' on the right\n3. Click the 'Craft' Button", "text_fmt":[name, name], "title":"Tutorial: Converter"})
+					BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "TUTO refill our energy", "text_fmt":[name, name], "title":"Tutorial: Converter"})
 					BehaviorEvents.emit_signal("OnHighlightUIElement", "Swap")
 					steps.push_back("conv_inv")
 					PermSave.set_attrib("tutorial.completed_steps", steps)
@@ -84,7 +84,7 @@ func OnGUIChanged_Callback(current_menu):
 				if slot != null:
 					var available_slot : bool = player.get_attrib("mounts." + slot, []).size() > 0
 					if available_slot == true:
-						BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "Captain, To equip our new %s just select it in the cargo list on the right and select the 'mount' button to install or replace the currently equiped %s", "text_fmt":[slot, slot], "title":"Tutorial: Inventory"})
+						BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "TUTO equip our new", "text_fmt":[slot, slot], "title":"Tutorial: Inventory"})
 						BehaviorEvents.emit_signal("OnHighlightUIElement", "Craft")
 						steps.push_back("equip_inv")
 						PermSave.set_attrib("tutorial.completed_steps", steps)
@@ -93,7 +93,7 @@ func OnGUIChanged_Callback(current_menu):
 	elif current_menu == "HUD":
 		var steps : Array = PermSave.get_attrib("tutorial.completed_steps")
 		if not "movement" in steps:
-			BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "Captain, order the helm to move by using the numpad keys, clicking or taping the screen\n\n[i]You can turn off tutorial prompts in the settings[/i]", "title":"Tutorial: Ship Movement", "callback_object":self, "callback_method":"Movement_Done_Callback"})
+			BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "TUTO order the helm", "title":"Tutorial: Ship Movement", "callback_object":self, "callback_method":"Movement_Done_Callback"})
 			
 func OnScannerUpdated_Callback(obj):
 	if Active == false or obj.get_attrib("type") != "player":
@@ -116,7 +116,7 @@ func OnScannerUpdated_Callback(obj):
 				var outline : Sprite = o.find_node("outline", true, false)
 				if outline != null:
 					if outline.modulate == Color(1.0, 0.0, 0.0, 1.0):
-						BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "Captain, an unkown ship has entered our scanner range. It's weapon are powered-up and it's headed for our us.\n\nTarget deemed hostile will be marked in [color=red]red[/color].", "title":"Tutorial: Tactical, Hostiles", "callback_object":self, "callback_method":"Outline_Red_Callback"})
+						BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "TUTO deemed hostile", "title":"Tutorial: Tactical, Hostiles", "callback_object":self, "callback_method":"Outline_Red_Callback"})
 						done = true
 			
 	if done == true:
@@ -129,7 +129,7 @@ func OnScannerUpdated_Callback(obj):
 				var outline : Sprite = o.find_node("outline", true, false)
 				if outline != null:
 					if outline.modulate == Color(0.0, 0.0, 1.0, 1.0):
-						BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "Captain, an unkown ship has entered our scanner range. No weapon signature detected, it's ignoring us.\n\nTarget deemed neutral will be marked in [color=blue]blue[/color].\n\n[i]hint: they're easy pickings...[/i]", "title":"Tutorial: Tactical, Neutral", "callback_object":self, "callback_method":"Outline_Blue_Callback"})
+						BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "TUTO deemed neutral", "title":"Tutorial: Tactical, Neutral", "callback_object":self, "callback_method":"Outline_Blue_Callback"})
 						done = true
 	
 	if done == true:
@@ -142,7 +142,7 @@ func OnScannerUpdated_Callback(obj):
 				var outline : Sprite = o.find_node("outline", true, false)
 				if outline != null:
 					if outline.modulate == Color(1.0, 1.0, 1.0, 1.0):
-						BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "Captain, this is one of our ships. We can board it and transfer equipments.\n\nBoardable targets will be marked in white.", "title":"Tutorial: Tactical, Boarding", "callback_object":self, "callback_method":"Outline_White_Callback"})
+						BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "TUTO Boardable targets", "title":"Tutorial: Tactical, Boarding", "callback_object":self, "callback_method":"Outline_White_Callback"})
 						done = true
 	
 	if done == true:
@@ -152,7 +152,7 @@ func OnScannerUpdated_Callback(obj):
 		for id in new_objs:
 			var o = Globals.LevelLoaderRef.GetObjectById(id)
 			if o != null and o.get_attrib("type") == "planet" and not "planet_scan" in steps:
-				BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "Captain, the ship's scanners have detected a planet close by. We should get close within firing range and shoot a few missiles, we could get useful materials from the debris.", "title":"Tutorial: Harvesting", "callback_object":self, "callback_method":"Planet_Scan_Done_Callback"})
+				BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "TUTO planet close by", "title":"Tutorial: Harvesting", "callback_object":self, "callback_method":"Planet_Scan_Done_Callback"})
 				BehaviorEvents.emit_signal("OnHighlightUIElement", "Weapon")
 				done = true
 				break
@@ -164,7 +164,7 @@ func OnScannerUpdated_Callback(obj):
 		for id in new_objs:
 			var o = Globals.LevelLoaderRef.GetObjectById(id)
 			if o != null and o.get_attrib("type") == "food" and not "food_scan" in steps:
-				BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "Captain, the ship's scanners have detected base elements that could be used to power the ship. Get on top of it and use the tractor beam to bring it into our cargo holds.", "title":"Tutorial: Energy", "callback_object":self, "callback_method":"Food_Scan_Done_Callback"})
+				BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "TUTO base elements", "title":"Tutorial: Energy", "callback_object":self, "callback_method":"Food_Scan_Done_Callback"})
 				BehaviorEvents.emit_signal("OnHighlightUIElement", "Grab")
 				break
 
@@ -183,7 +183,7 @@ func OnPickup_Callback(picker : Attributes):
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			var type = Globals.get_data(data, "type")
 			if type == "food":
-				BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "Captain, we've picked up an item that could be used to refuel the ship. click on the [c]onv button to warm up our energy-to-matter converter", "title":"Tutorial: Converter", "callback_object":self, "callback_method":"Pre_Conv_Inv_Callback"})
+				BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "TUTO the [c]onv button", "title":"Tutorial: Converter", "callback_object":self, "callback_method":"Pre_Conv_Inv_Callback"})
 				BehaviorEvents.emit_signal("OnHighlightUIElement", "Converter")
 				done = true
 				break
@@ -195,7 +195,7 @@ func OnPickup_Callback(picker : Attributes):
 			if slot != null:
 				var available_slot : bool = picker.get_attrib("mounts." + slot, []).size() > 0
 				if available_slot == true:
-					BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "Captain, we've picked up an item that could be mounted on our ship. Please head to the inventory screen for more info.", "title":"Tutorial: Inventory", "callback_object":self, "callback_method":"Pre_Equip_Inv_Callback"})
+					BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "TUTO mount on ship", "title":"Tutorial: Inventory", "callback_object":self, "callback_method":"Pre_Equip_Inv_Callback"})
 					BehaviorEvents.emit_signal("OnHighlightUIElement", "Inventory")
 					break
 	

@@ -12,7 +12,7 @@ func Init(init_param):
 	if init_param != null and "info_text" in init_param:
 		get_node("Info").bbcode_text = init_param.info_text
 	else:
-		get_node("Info").bbcode_text = _default_info_text
+		get_node("Info").bbcode_text = Globals.mytr(_default_info_text)
 	
 	if init_param != null and "show_skip" in init_param:
 		get_node("Skip").visible = init_param.show_skip
