@@ -209,3 +209,25 @@ anomaly,anomaly,anomalie,異常
 planet,planet,planète,惑星 
 sun,sun,soleil,太陽
 others,others,autres,その他
+Language,Language,Langue,言語
+Tutorial,Tutorial,Tutoriel,チュートリアル
+Difficulty,Difficulty,Difficulté,難易
+Display FPS,Display FPS,Affiché FPS,Display FPS
+Hide HUD Buttons (shortcut only),Hide HUD Buttons (shortcut only),Caché HUD (mode raccourcis),Hide HUD Buttons (shortcut only)
+Full Screen,Full Screen,Plein Écran,Full Screen
+VSync,VSync,VSync,VSync
+Gameplay,Gameplay,Jeu,Gameplay
+Video,Video,Vidéo,画像
+Sound,Sound,Son,音
+Master Volume,Master Volume,Volume Principal,Master Volume
+SFX Volume,SFX Volume,Volume Effects,SFX Volume
+Music Volume,Music Volume,Volume Musique,Music Volume
+Settings,Settings,Paramètres,設定
+French,French,Français,フランス語
+English,English,Anglais,英語
+Japanese,Japanese,Japonais,日本語
+Normal,Normal,Normale,普通
+Hard,Hard,Difficile,難しい
+Harder,Harder,Très Difficile,超難しい
+Hardest,Hardest,Trop Difficile,激難しい
+Not Happening...,Not Happening...,Nope...,無理。。。

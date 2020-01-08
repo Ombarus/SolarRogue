@@ -9,6 +9,8 @@ export(String) var bottom_title = "" setget set_reverse_title
 export(String) var title = "" setget set_title
 export(String, "═", "─", "━", " ") var border_style = "═" setget set_style
 
+var translate_title := false
+
 signal OnUpdateLayout()
 signal OnOkPressed()
 signal OnCancelPressed()
@@ -38,17 +40,23 @@ func set_reverse_title(newval):
 	emit_signal("OnUpdateLayout")
 	
 func set_title(newval, translate=true):
-	if translate == false or Engine.editor_hint or newval == "":
-		title = newval
-	else:
-		title = Globals.mytr(newval)
+	translate_title = translate
+	title = newval
 	emit_signal("OnUpdateLayout")
 	
 func set_style(newval):
 	border_style = newval
 	emit_signal("OnUpdateLayout")
+
+func OnLocaleChanged_Callback():
+	emit_signal("OnUpdateLayout")
 	
 func _ready():
+	
+	if BehaviorEvents.is_connected("OnLocaleChanged", self, "OnLocaleChanged_Callback"):
+		BehaviorEvents.disconnect("OnLocaleChanged", self, "OnLocaleChanged_Callback")
+	BehaviorEvents.connect("OnLocaleChanged", self, "OnLocaleChanged_Callback")
+	
 	if is_connected("OnUpdateLayout", self, "update_visual"):
 		disconnect("OnUpdateLayout", self, "update_visual")
 	connect("OnUpdateLayout", self, "update_visual")
@@ -56,6 +64,7 @@ func _ready():
 	if is_connected("resized", self, "on_size_changed"):
 		disconnect("resized", self, "on_size_changed")
 	connect("resized", self, "on_size_changed")
+	
 	update_visual()
 	
 func update_visual():
@@ -104,7 +113,10 @@ func update_visual():
 	get_node("Btn/Ok").disabled = disabled
 	get_node("Btn/Cancel").visible = dialog_cancel
 	get_node("Btn/Cancel").disabled = disabled
-	get_node("TitleUp").bbcode_text = title
+	if translate_title == false or Engine.editor_hint or title == "":
+		get_node("TitleUp").bbcode_text = title
+	else:
+		get_node("TitleUp").bbcode_text = Globals.mytr(title)
 	get_node("TitleBottom").text = bottom_title
 	
 func on_size_changed():
