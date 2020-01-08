@@ -24,18 +24,21 @@ func get_height_line():
 	return get_node("base").get_height_line()
 
 func set_text(newval):
-	if Engine.editor_hint or newval == "":
-		Text = newval
-	else:
-		Text = Globals.mytr(newval)
+	Text = newval
+	var trans_text = Text
+	if not Engine.editor_hint and newval != "":
+		trans_text = Globals.mytr(newval)
 	if has_node("btn"):
-		get_node("btn").text = Text
+		get_node("btn").text = trans_text
 		
+func OnLocaleChanged_Callback():
+	set_text(Text)
 
 func _ready():
 	BehaviorEvents.connect("OnHighlightUIElement", self, "Hightlight_Callback")
 	BehaviorEvents.connect("OnResetHighlight", self, "ResetHightlight_Callback")
 	BehaviorEvents.connect("OnHUDVisiblityChanged", self, "OnHUDVisiblityChanged_Callback")
+	BehaviorEvents.connect("OnLocaleChanged", self, "OnLocaleChanged_Callback")
 	get_node("base").connect("OnUpdateLayout", self, "OnUpdateLayout_Callback")
 	#set_text(Text)
 	OnUpdateLayout_Callback()

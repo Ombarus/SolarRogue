@@ -129,8 +129,8 @@ Select Target...,Select Target...,Choix de cible...,Select Target...
 [color=red]Select target for %s...[/color],[color=red]Select target for %s...[/color],[color=red]Choisir la cible pour %s...[/color],[color=red]Select target for %s...[/color]
 CONFIRM delete save,Are you sure ?\nThe Savegame will be deleted,Etes-vous certain ?\nLa sauvegarde sera détruite,Are you sure ?\nThe Savegame will be deleted
 Are you sure ?,Are you sure ?,Etes-vous certain ?,Are you sure ?
-Missing ,Missing ,Manque ,無 
-Cargo Contents,Cargo Contents,Contenu,内容
+Missing %s,Missing %s,Manque %s,%s 無 
+Cargo Contents,Cargo Contents,Soutes,内容
 Empty,Empty,Libre,空
 Repair Nanobots,Repair Nanobots,Nanobots Réparateur,修理ナノマシン
 Matter-to-Energy Converter,Matter-to-Energy Converter,Convertisseur d’énergie,Matter-to-Energy Converter
@@ -187,3 +187,25 @@ A Vorg Scout,A Vorg Scout,Un Éclaireur Vorg,Un Éclaireur Vorg
 A Random Anomaly,A Random Anomaly,Une Anomalie,Une Anomalie
 A Planet,A Planet,Une Planète,Une Planète
 A Bright Sun,A Bright Sun,Un Soleil Radieux,Un Soleil Radieux
+Transfer Where ?,Transfer Where ?,Transférer où ?,どこ？
+No information available,No information available,Information Manquante,空
+consumable,consumable,consommation,消耗品 
+converter,converter,convertisseur,converter
+battleship_hull,battleship hull,coque de cuirassé,battleship hull
+frigate_hull,frigate hull,coque de frégate,frigate hull
+probe_hull,probe hull,coque de sonde,probe hull
+scout_hull,scout hull,coque d’éclaireur,scout hull
+food,energy source,source d’énergie,エネルギー用
+scanner,scanner,radar,スキャナー
+shield,shield,bouclier,盾 
+utility,utility,accessoire,付き物
+weapon,weapon,armement,武器
+ammo,ammo,munition,弾薬 
+wormhole,wormhole,trou noir,ワームホール
+prop,prop,prop,prop
+ship,ship,vaisseau,戦艦
+player,player,joueur,プレーヤー
+anomaly,anomaly,anomalie,異常 
+planet,planet,planète,惑星 
+sun,sun,soleil,太陽
+others,others,autres,その他

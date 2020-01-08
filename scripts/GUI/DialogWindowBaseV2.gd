@@ -37,8 +37,8 @@ func set_reverse_title(newval):
 	bottom_title = newval
 	emit_signal("OnUpdateLayout")
 	
-func set_title(newval):
-	if Engine.editor_hint or newval == "":
+func set_title(newval, translate=true):
+	if translate == false or Engine.editor_hint or newval == "":
 		title = newval
 	else:
 		title = Globals.mytr(newval)

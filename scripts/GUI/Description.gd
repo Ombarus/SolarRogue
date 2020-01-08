@@ -25,13 +25,13 @@ func Init(init_param):
 	if "json" in init_param and init_param.json != null:
 		_json = init_param["json"]
 	
-	get_node("base").title = get_custom("name_id")
+	get_node("base").title = Globals.mytr(get_custom("name_id"))
 	
 	var base_desc : String = get_custom("description.text")
 	if base_desc != null:
-		get_node("base/VBoxContainer/BaseDesc").text = base_desc
+		get_node("base/VBoxContainer/BaseDesc").text = Globals.mytr(base_desc)
 	else:
-		get_node("base/VBoxContainer/BaseDesc").text = "No information available"
+		get_node("base/VBoxContainer/BaseDesc").text = Globals.mytr("No information available")
 		get_node("base/VBoxContainer/MyItemList").Content = []
 		return
 		

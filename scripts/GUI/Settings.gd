@@ -4,6 +4,7 @@ onready var _vol_master: HSlider = get_node("base/ScrollContainer/VBoxContainer/
 onready var _vol_sfx: HSlider = get_node("base/ScrollContainer/VBoxContainer/SFXVolume/SFXSlider")
 onready var _vol_music: HSlider = get_node("base/ScrollContainer/VBoxContainer/MusicVolume/MusicSlider")
 onready var _diff_options: OptionButton = get_node("base/ScrollContainer/VBoxContainer/Difficulty/DiffOptions")
+onready var _lang_options: OptionButton = get_node("base/ScrollContainer/VBoxContainer/Language/LangOption")
 
 var _diff_changed := false
 
@@ -18,6 +19,13 @@ func _ready():
 	_diff_options.add_item("Harder")
 	_diff_options.add_item("Hardest")
 	_diff_options.add_item("Not Happening...")
+	
+	_lang_options.add_item("English")
+	_lang_options.set_item_metadata(0, "en")
+	_lang_options.add_item("French")
+	_lang_options.set_item_metadata(1, "fr")
+	_lang_options.add_item("Japanese")
+	_lang_options.set_item_metadata(2, "ja")
 	
 	
 func Ok_Callback():
@@ -49,6 +57,17 @@ func Init(init_param):
 	
 	var show_hud : bool = PermSave.get_attrib("settings.hide_hud")
 	get_node("base/ScrollContainer/VBoxContainer/HideHUD/HideHUD").pressed = show_hud
+	
+	var lang : String = PermSave.get_attrib("settings.lang", TranslationServer.get_locale())
+	_lang_options.select(get_lang_by_metadata(lang))
+	
+
+func get_lang_by_metadata(lang):
+	for i in range(_lang_options.get_item_count()):
+		if lang == _lang_options.get_item_metadata(i):
+			return i
+			
+	return 0
 	
 
 func _on_fullscreen_toggled(button_pressed):
@@ -96,3 +115,10 @@ func _on_FPSCounter_toggled(button_pressed):
 func _on_HideHUD_toggled(button_pressed):
 	PermSave.set_attrib("settings.hide_hud", button_pressed)
 	BehaviorEvents.emit_signal("OnHUDVisiblityChanged")
+
+
+func _on_LangOption_item_selected(ID):
+	var lang_str : String = _lang_options.get_item_metadata(ID)
+	PermSave.set_attrib("settings.lang", lang_str)
+	TranslationServer.set_locale(lang_str)
+	BehaviorEvents.emit_signal("OnLocaleChanged")

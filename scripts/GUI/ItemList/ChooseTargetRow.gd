@@ -22,7 +22,7 @@ func set_row_data(data):
 	else:
 		get_node("HBoxContainer/Wrapper/TextureRect").texture = null
 		
-	get_node("HBoxContainer/Name").text = data.name_id
+	get_node("HBoxContainer/Name").text = Globals.mytr(data.name_id)
 		
 	
 func get_row_data():

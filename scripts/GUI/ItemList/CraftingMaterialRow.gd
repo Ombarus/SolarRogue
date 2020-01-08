@@ -38,7 +38,10 @@ func pressed_callback():
 
 func select(num):
 	if num == 0:
-		get_node("HBoxContainer/Name").text = Globals.mytr(_metadata.name_id)
+		if "display_name_id" in _metadata:
+			get_node("HBoxContainer/Name").text = _metadata.display_name_id
+		else:
+			get_node("HBoxContainer/Name").text = Globals.mytr(_metadata.name_id)
 		get_node("HBoxContainer/Wrapper/Count").text = str(_metadata.max)+"x"
 		self.theme = normal_theme
 		_metadata["selected"] = 0
@@ -48,13 +51,19 @@ func select(num):
 			_toggle.visible = false
 	elif num == _metadata.max:
 		_toggle.pressed = true
-		get_node("HBoxContainer/Name").text = Globals.mytr(_metadata.name_id)
+		if "display_name_id" in _metadata:
+			get_node("HBoxContainer/Name").text = _metadata.display_name_id
+		else:
+			get_node("HBoxContainer/Name").text = Globals.mytr(_metadata.name_id)
 		get_node("HBoxContainer/Wrapper/Count").text = "✓"
 		self.theme = full_selection
 		_metadata["selected"] = _metadata.max
 	else:
 		_toggle.pressed = true
-		get_node("HBoxContainer/Name").text = Globals.mytr(_metadata.name_id)
+		if "display_name_id" in _metadata:
+			get_node("HBoxContainer/Name").text = _metadata.display_name_id
+		else:
+			get_node("HBoxContainer/Name").text = Globals.mytr(_metadata.name_id)
 		get_node("HBoxContainer/Wrapper/Count").text = str(num) + "/" + str(_metadata.max)
 		self.theme = partial_selection
 		_metadata["selected"] = num

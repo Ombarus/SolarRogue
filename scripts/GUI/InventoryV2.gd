@@ -241,7 +241,7 @@ func Init(init_param):
 			counting = str(row.count) + "x "
 		if typeof(data.icon) == TYPE_ARRAY:
 			data.icon = data.icon[0]
-		cargo_item_by_category[cat].push_back({"src":row.src, "count":row.count, "name_id": counting + data.name_id, "equipped":false, "header":false, "icon":data.icon})
+		cargo_item_by_category[cat].push_back({"src":row.src, "count":row.count, "display_name_id": counting + Globals.mytr(data.name_id), "name_id": counting + Globals.mytr(data.name_id), "equipped":false, "header":false, "icon":data.icon})
 		
 	keys = cargo_item_by_category.keys()
 	keys.sort_custom(self, "sort_categories")

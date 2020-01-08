@@ -12,8 +12,15 @@ func _ready():
 	BehaviorEvents.connect("OnEnergyChanged", self, "OnEnergyChanged_Callback")
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_Callback")
+	BehaviorEvents.connect("OnLocaleChanged", self, "OnLocaleChanged_Callback")
 	if Globals.LevelLoaderRef != null:
 		OnLevelLoaded_Callback()
+
+func OnLocaleChanged_Callback():
+	var p := Globals.get_first_player()
+	if p == null:
+		return
+	UpdateStatusBar(p)
 
 func OnTransferPlayer_Callback(old_player, new_player):
 	UpdateStatusBar(new_player)

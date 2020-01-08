@@ -7,6 +7,10 @@ extends Node
 func _ready():
 	OS.set_window_fullscreen(PermSave.get_attrib("settings.full_screen", false))
 	OS.set_use_vsync(PermSave.get_attrib("settings.vsync", true))
+	var lang = PermSave.get_attrib("settings.lang")
+	if lang != null:
+		TranslationServer.set_locale(lang)
+		BehaviorEvents.emit_signal("OnLocaleChanged")
 	#BehaviorEvents.connect("OnPushGUI", self, "OnPushGUI_Callback")
 	#BehaviorEvents.connect("OnPopGUI", self, "OnPopGUI_Callback")
 	

@@ -129,7 +129,7 @@ func Transfer_Callback():
 			to_ship = _robj
 			from_list = _my_ship_list
 			to_list = _other_ship_list
-			get_node("HBoxContainer/OtherShip").title = "Transfer Where ?"
+			get_node("HBoxContainer/OtherShip").title = Globals.mytr("Transfer Where ?")
 			#get_node("HBoxContainer/MyShip").title = _lobj.get_attrib("name_id")
 			break
 	
@@ -141,7 +141,7 @@ func Transfer_Callback():
 				to_ship = _lobj
 				from_list = _other_ship_list
 				to_list = _my_ship_list
-				get_node("HBoxContainer/MyShip").title = "Transfer Where ?"
+				get_node("HBoxContainer/MyShip").title = Globals.mytr("Transfer Where ?")
 				break
 	
 	if selected_item == null:
@@ -313,7 +313,7 @@ func GenerateContent(list_node, mounts, cargo):
 			counting = str(row.count) + "x "
 		if typeof(data.icon) == TYPE_ARRAY:
 			data.icon = data.icon[0]
-		mount_content.push_back({"src":row.src, "count":row.count, "name_id": counting + Globals.mytr(data.name_id), "equipped":false, "header":false, "icon":data.icon})
+		mount_content.push_back({"src":row.src, "count":row.count, "display_name_id": counting + Globals.mytr(data.name_id), "name_id": counting + Globals.mytr(data.name_id), "equipped":false, "header":false, "icon":data.icon})
 
 	list_node.Content = mount_content
 

@@ -14,21 +14,14 @@ TODO :::
 	- grab & conv where highlighted together then when I clicked conv it became gray (null _old_style ?)
 - art
 	- converter ?
+- delete craft_need_row.tscn ?
 - translation
-	- translation name_id
-	- translate mount_key
-	- translate type (for conv "missing food")
-	- check mount selection and empty mount title
+	- settings menu items
 	- langage setting menu
-	- Can't detect if translation is present or not
-	- Global TR in LogLine doesn't work with dynamic string (like you took X damage)
-	
-	- Godot : Implement Localization
-		- You can link CSVs in localization, replace certain resources (like textures) with others and even change the project name based on choosen locale
-		- CSVs file are automatically converted into localization files
-			- use tr() method to get translation from keyboard
-			- button labels and such automatically check if text is a key and translate
-			- for format godot support stuff like "bleh {id}".format({"id":"hello world"})\
+	- main menu leaderboard ?
+	- button highlight broken ?
+	- translate converter recipes
+	- check mount selection and empty mount title
 - Generate icons, banner, etc. for android/ios/pc release
 - customize scroll bar visual ?
 - death screen need beautification
@@ -176,6 +169,13 @@ IDEAS:::
 	
 	
 DONE :::
+	
+	- Godot : Implement Localization
+		- You can link CSVs in localization, replace certain resources (like textures) with others and even change the project name based on choosen locale
+		- CSVs file are automatically converted into localization files
+			- use tr() method to get translation from keyboard
+			- button labels and such automatically check if text is a key and translate
+			- for format godot support stuff like "bleh {id}".format({"id":"hello world"})\
 - tuto highlight should be removed if player uses shortcut or contextual click too
 - Issue with yield() while loading on my tablet... loading takes hours
 	- perf : iterating over all tiles while loading might be a bit much ?

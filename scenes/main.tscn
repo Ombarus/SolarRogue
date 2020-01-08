@@ -73,7 +73,6 @@
 [node name="Root" type="Node"]
 
 [node name="Behaviors" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Ambience" type="Node" parent="Behaviors"]
 editor/display_folded = true
@@ -283,7 +282,6 @@ levelLoaderNode = NodePath("../Behaviors/LevelLoader")
 [node name="Camera-GUI" type="CanvasLayer" parent="."]
 
 [node name="HUD" type="Control" parent="Camera-GUI"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1.0

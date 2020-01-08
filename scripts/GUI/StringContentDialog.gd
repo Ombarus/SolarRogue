@@ -37,10 +37,10 @@ func set_bottom_title(val):
 	if _base:
 		_base.bottom_title = bottom_title
 		
-func set_title(val):
+func set_title(val, translate=true):
 	title = val
 	if _base:
-		_base.title = title
+		_base.set_title(title, translate)
 	
 func set_content(val):
 	content = val

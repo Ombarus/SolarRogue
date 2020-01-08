@@ -66,6 +66,7 @@ signal OnGUIChanged(current_menu)
 signal OnHighlightUIElement(element_name)
 signal OnResetHighlight()
 signal OnHUDVisiblityChanged()
+signal OnLocaleChanged()
 
 
 func _ready():

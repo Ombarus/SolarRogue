@@ -44,6 +44,12 @@ var _wormhole_src = null # for positioning the player when he goes up or down
 
 func _ready():
 	OS.set_ime_active(true)
+	
+	var lang = PermSave.get_attrib("settings.lang")
+	if lang != null and TranslationServer.get_locale() != lang:
+		TranslationServer.set_locale(lang)
+		BehaviorEvents.emit_signal("OnLocaleChanged")
+		
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	levelLoaderRef = get_node(levelLoaderNode)

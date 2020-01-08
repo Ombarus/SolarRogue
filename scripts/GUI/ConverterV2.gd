@@ -199,10 +199,10 @@ func UpdateMaterialsList(recipe_data):
 		if "type" in require and require.type == "energy":
 			pass # for now this will be handled by the updateCraftButton()
 		elif "type" in require:
-			list_data.push_front({"name_id": Globals.mytr("Missing ") + Globals.mytr(require.type), "disabled":true, "max":require.amount})
+			list_data.push_front({"display_name_id":Globals.mytr("Missing %s", Globals.mytr(require.type)), "name_id": Globals.mytr("Missing %s", Globals.mytr(require.type)), "disabled":true, "max":require.amount})
 		elif "src" in require:
 			var d = Globals.LevelLoaderRef.LoadJSON(require.src)
-			list_data.push_back({"name_id":Globals.mytr("Missing ") + Globals.mytr(d.name_id), "disabled":true, "max":require.amount})
+			list_data.push_back({"display_name_id":Globals.mytr("Missing %s", Globals.mytr(d.name_id)), "name_id":Globals.mytr("Missing %s", Globals.mytr(d.name_id)), "disabled":true, "max":require.amount})
 	
 	_material_list.Content = list_data
 	

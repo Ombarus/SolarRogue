@@ -25,6 +25,10 @@ func _ready():
 	BehaviorEvents.connect("OnEndParallelAction", self, "OnEndParallelAction_Callback")
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	
+	BehaviorEvents.connect("OnLocaleChanged", self, "OnLocaleChanged_Callback")
+	
+func OnLocaleChanged_Callback():
+	UpdateLogTitle()
 	
 func OnLevelLoaded_Callback():
 	if Globals.total_turn > 0:
@@ -121,7 +125,7 @@ func UpdateLogTitle():
 	if log_window_ref == null:
 		return
 	var title = Globals.mytr("Log Stardate %d.%d.%d", [star_date_major, star_date_minor, star_date_turn])
-	log_window_ref.title = title
+	log_window_ref.set_title(title, false)
 	
 func StopAP(obj):
 	var index = action_list.find(obj)

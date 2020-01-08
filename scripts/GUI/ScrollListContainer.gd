@@ -14,7 +14,7 @@ func get_content():
 		inside["key"] = d.key
 		if "index" in d:
 			inside["index"] = d.index
-		inside["name_id"] = d.obj.get_node("Choice/Name").bbcode_text
+		inside["name_id"] = d.name_id
 		inside["checked"] = d.obj.get_node("Choice").pressed
 		result.push_back(inside)
 	return result
@@ -29,9 +29,9 @@ func set_content(val):
 		copy.visible = true
 		row_ref.get_parent().add_child(copy)
 		if "index" in v:
-			content.push_back({"obj": copy, "key": v.key, "index":v.index})
+			content.push_back({"obj": copy, "key": v.key, "name_id":v.name_id, "index":v.index})
 		else:	
-			content.push_back({"obj": copy, "key": v.key})
+			content.push_back({"obj": copy, "name_id":v.name_id, "key": v.key})
 		copy.get_node("Choice/Name").bbcode_text = Globals.mytr(v.name_id)
 	
 #func _process(delta):
