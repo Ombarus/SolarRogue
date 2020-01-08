@@ -64,7 +64,7 @@ func OnGUIChanged_Callback(current_menu):
 			for item in cargo:
 				var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 				var type = Globals.get_data(data, "type")
-				var name : String = Globals.get_data(data, "name_id")
+				var name : String = Globals.mytr(Globals.get_data(data, "name_id"))
 				if type == "food":
 					BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "TUTO refill our energy", "text_fmt":[name, name], "title":"Tutorial: Converter"})
 					BehaviorEvents.emit_signal("OnHighlightUIElement", "Swap")

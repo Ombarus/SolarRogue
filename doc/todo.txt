@@ -8,12 +8,18 @@ TODO :::
 - investigate steam and itch.io
 - Mobile only "features" ?
 	- Hide "Quit" button (iOS or Mobile in general)
+	- Help should only talk about touch controls on mobile ?
 	- smaller list rows on PC ?
 - Tutorial
 	- grab & conv where highlighted together then when I clicked conv it became gray (null _old_style ?)
 - art
 	- converter ?
 - translation
+	- translation name_id
+	- translate mount_key
+	- translate type (for conv "missing food")
+	- check mount selection and empty mount title
+	- langage setting menu
 	- Can't detect if translation is present or not
 	- Global TR in LogLine doesn't work with dynamic string (like you took X damage)
 	

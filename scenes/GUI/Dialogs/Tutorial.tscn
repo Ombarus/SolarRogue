@@ -30,7 +30,10 @@ margin_bottom = 311.0
 dialog_ok = true
 title = "MAN(1) Solar Rogue General Commands Manual"
 
-[node name="Content" type="RichTextLabel" parent="base"]
+[node name="en" type="RichTextLabel" parent="base" groups=[
+"Tuto_Lang",
+]]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 15.0
@@ -56,10 +59,10 @@ bbcode_text = "[b]BASIC CONTROLS[/b][indent][Numpad 1 to 9] or [Mouse Clicks on 
 [/indent]
 [b]ADVANCED CONTROLS[/b]
 [b]Accessible from the \"...\" Button[/b][indent]
-[m] or [Mount Button] ----- Install Weapon, Shield, Converter or Scanner onto ship's mount points
 [l] or [Look Button] ------ Get detailed description of item by clicking on them
 [ b] or [Board Button] ---- Transfer control to another [u]crafted[/u] ship
 [t] or [Transfer Button] -- Transfer Inventory from one ship to another
+[Wait Button] ------------- Wait one turn
 [/indent]
 [b]HUD INFORMATION[/b]
 [b]Top[/b][indent][Hull] -------- Health of the ship. This does not regenerate. If this falls to 0, it's game over
@@ -78,6 +81,7 @@ Score is calculated as follow :[indent]Having the Ultimate Converter
 Number of Solar System Explored
 Amount of energy left
 Bonus based on the Number of turn it took to complete the game (faster is better)
+Multiplied by your difficulty
 [/indent]
 
 [/indent]"
@@ -94,10 +98,10 @@ text = "BASIC CONTROLS	[Numpad 1 to 9] or [Mouse Clicks on empty space] -- Move 
 
 ADVANCED CONTROLS
 Accessible from the \"...\" Button	
-[m] or [Mount Button] ----- Install Weapon, Shield, Converter or Scanner onto ship's mount points
 [l] or [Look Button] ------ Get detailed description of item by clicking on them
 [ b] or [Board Button] ---- Transfer control to another crafted ship
 [t] or [Transfer Button] -- Transfer Inventory from one ship to another
+[Wait Button] ------------- Wait one turn
 
 HUD INFORMATION
 Top	[Hull] -------- Health of the ship. This does not regenerate. If this falls to 0, it's game over
@@ -116,6 +120,197 @@ Score is calculated as follow :	Having the Ultimate Converter
 Number of Solar System Explored
 Amount of energy left
 Bonus based on the Number of turn it took to complete the game (faster is better)
+Multiplied by your difficulty
+
+
+"
+
+[node name="fr" type="RichTextLabel" parent="base" groups=[
+"Tuto_Lang",
+]]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 15.0
+margin_top = 47.0
+margin_right = -26.0
+margin_bottom = -64.0
+custom_fonts/mono_font = ExtResource( 4 )
+custom_fonts/bold_italics_font = ExtResource( 5 )
+custom_fonts/italics_font = ExtResource( 6 )
+custom_fonts/bold_font = ExtResource( 7 )
+custom_fonts/normal_font = ExtResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[b]CONTROLES DE BASE[/b][indent][Pavé 1 à 9] ou [Clicker dans l'espace] ------ Déplacement
+[Pavé 5] ou [Clicker sur soi-même] ----------- Attendre un tour
+[c] ou [Bouton Conv] ------------------------- Menu de fabrication
+[w] ou [Button Tir] ou [Click sur les ennemis]-Mode sélection de cible
+[g] ou [Button Prend] ------------------------ Ramasse les items sous le vaisseau
+[ i] ou [Button Inventaire] ------------------ Liste d'équipement et de cargo. Permet d'utilisé, d'équipé et de disposé des items.
+[>] ou [Button Saut] ------------------------- Active le Trou Noir pour changer de niveau
+[+] ------------------------------------------ Zoom Plus
+[-] ------------------------------------------ Zoom Moins
+[Icône d'engrenage] -------------------------- Menu Principale pour Sauvegarder, Quitter et changer les Options
+[/indent]
+[b]CONTROLES AVANCES[/b]
+[b]Appuyez sur le bouton \"...\"[/b][indent]
+[l] ou [Button Analyze] ---- Affiche une description détaillé de l'item en clickant dessus
+[ b] ou [Boutton Embar] ---- Transfer les controles vers un autre vaisseau [u]fabriqué[/u]
+[t] ou [Boutton Transfert] - Transfert de l'inventaire entre vaisseau
+[Boutton Attendre] --------- Attendre un tour
+[/indent]
+[b]HUD[/b]
+[b]Haut[/b][indent][Intégrité] -------- Point de vie du vaisseau. Ne se régénère pas naturellement. La partie est finit si l'intégrité tombe à 0.
+[Energie] ------ Toutes les actions dans le jeu prennent de l'énergie. La partie est finit si vous n'avez plus d'énergie.
+[Bouclier] ------ Protège l'intégrité. Se régénère lentement en utilisant de l'énergie
+[Texte à droite] -- Nom du système solaire (niveau) actuel[/indent]
+[b]En bas[/b][indent][Journal Stardate] -- Nombre de tour survécu
+[Texte] --- Toute information importante sur ce qui s'est passé au dernier tour
+[/indent]
+[b]COMMENT JOUER[/b][indent]Explorez chaque niveau. Utilisez votre armement pour tirer la plupart des planètes et des vaisseaux que vous rencontrez. Ramassez toutes les ressources que vous trouverez. Installez ce que vous pouvez à partir de l'inventaire ou convertissez les items en énergie dans le convertisseur. Si vous trouvez une coque vide vous pouvez l'utiliser pour créer un nouveau vaisseau à l'aide du convertisseur. Certain convertisseur sont plus puissant et peuvent donner accès à des armes plus fortes ou des vaissaux extra-terrestre.
+
+Pour complété le jeu, il faut trouver le Convertisseur de Yendor au fin fond du 12e Système Solaire et le ramener au tout premier Trou Noir où vous êtes apparu la première fois. Avec le Convertisseur équippé il vous suffit alors de faire le Saut !
+
+Il est pratiquement impossible de réussir le jeu du premier coup. Mais essayez d'amilioré votre pointage final d'une partie à l'autre.
+Le pointage est calculé comme suit :[indent]Avoir le Convertisseur Ultime
+Le nombre de système solaire exploré
+La quantité d'énergie à la fin de la partie
+Un bonus basé sur le nombre de tour joué (moins de tour donne un plus gros bonus)
+Le tout multiplié par la difficulté choisit
+[/indent]
+
+[/indent]"
+text = "CONTROLES DE BASE	[Pavé 1 à 9] ou [Clicker dans l'espace] ------ Déplacement
+[Pavé 5] ou [Clicker sur soi-même] ----------- Attendre un tour
+[c] ou [Bouton Conv] ------------------------- Menu de fabrication
+[w] ou [Button Tir] ou [Click sur les ennemis]-Mode sélection de cible
+[g] ou [Button Prend] ------------------------ Ramasse les items sous le vaisseau
+[ i] ou [Button Inventaire] ------------------ Liste d'équipement et de cargo. Permet d'utilisé, d'équipé et de disposé des items.
+[>] ou [Button Saut] ------------------------- Active le Trou Noir pour changer de niveau
+[+] ------------------------------------------ Zoom Plus
+[-] ------------------------------------------ Zoom Moins
+[Icône d'engrenage] -------------------------- Menu Principale pour Sauvegarder, Quitter et changer les Options
+
+CONTROLES AVANCES
+Appuyez sur le bouton \"...\"	
+[l] ou [Button Analyze] ---- Affiche une description détaillé de l'item en clickant dessus
+[ b] ou [Boutton Embar] ---- Transfer les controles vers un autre vaisseau fabriqué
+[t] ou [Boutton Transfert] - Transfert de l'inventaire entre vaisseau
+[Boutton Attendre] --------- Attendre un tour
+
+HUD
+Haut	[Intégrité] -------- Point de vie du vaisseau. Ne se régénère pas naturellement. La partie est finit si l'intégrité tombe à 0.
+[Energie] ------ Toutes les actions dans le jeu prennent de l'énergie. La partie est finit si vous n'avez plus d'énergie.
+[Bouclier] ------ Protège l'intégrité. Se régénère lentement en utilisant de l'énergie
+[Texte à droite] -- Nom du système solaire (niveau) actuel
+En bas	[Journal Stardate] -- Nombre de tour survécu
+[Texte] --- Toute information importante sur ce qui s'est passé au dernier tour
+
+COMMENT JOUER	Explorez chaque niveau. Utilisez votre armement pour tirer la plupart des planètes et des vaisseaux que vous rencontrez. Ramassez toutes les ressources que vous trouverez. Installez ce que vous pouvez à partir de l'inventaire ou convertissez les items en énergie dans le convertisseur. Si vous trouvez une coque vide vous pouvez l'utiliser pour créer un nouveau vaisseau à l'aide du convertisseur. Certain convertisseur sont plus puissant et peuvent donner accès à des armes plus fortes ou des vaissaux extra-terrestre.
+
+Pour complété le jeu, il faut trouver le Convertisseur de Yendor au fin fond du 12e Système Solaire et le ramener au tout premier Trou Noir où vous êtes apparu la première fois. Avec le Convertisseur équippé il vous suffit alors de faire le Saut !
+
+Il est pratiquement impossible de réussir le jeu du premier coup. Mais essayez d'amilioré votre pointage final d'une partie à l'autre.
+Le pointage est calculé comme suit :	Avoir le Convertisseur Ultime
+Le nombre de système solaire exploré
+La quantité d'énergie à la fin de la partie
+Un bonus basé sur le nombre de tour joué (moins de tour donne un plus gros bonus)
+Le tout multiplié par la difficulté choisit
+
+
+"
+
+[node name="jp" type="RichTextLabel" parent="base" groups=[
+"Tuto_Lang",
+]]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 15.0
+margin_top = 47.0
+margin_right = -26.0
+margin_bottom = -64.0
+custom_fonts/mono_font = ExtResource( 4 )
+custom_fonts/bold_italics_font = ExtResource( 5 )
+custom_fonts/italics_font = ExtResource( 6 )
+custom_fonts/bold_font = ExtResource( 7 )
+custom_fonts/normal_font = ExtResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[b]BASIC CONTROLS[/b][indent][Numpad 1 to 9] or [Mouse Clicks on empty space] -- Move Ship
+[Numpad 5] or [Click on self] --------------------- Wait one turn
+[c] or [Converter Button] ------------------------- Open Crafting Menu
+[w] or [Weapon Button] or [Click on Enemies] ------ Switch to Weapon Targetting
+[g] or [Grab Button] ------------------------------ Pickup Items Under You
+[ i] or [Inventory Button] ------------------------ Show Equipment and Cargo. Use and Drop items.
+[>] or [FTL Button] ------------------------------- Activate on top of wormhole to change level
+[+] ----------------------------------------------- Zoom In
+[-] ----------------------------------------------- Zoom Out
+[Gear Icon] --------------------------------------- Main Menu for Saving, Quitting and Options
+[/indent]
+[b]ADVANCED CONTROLS[/b]
+[b]Accessible from the \"...\" Button[/b][indent]
+[l] or [Look Button] ------ Get detailed description of item by clicking on them
+[ b] or [Board Button] ---- Transfer control to another [u]crafted[/u] ship
+[t] or [Transfer Button] -- Transfer Inventory from one ship to another
+[Wait Button] ------------- Wait one turn
+[/indent]
+[b]HUD INFORMATION[/b]
+[b]Top[/b][indent][Hull] -------- Health of the ship. This does not regenerate. If this falls to 0, it's game over
+[Energy] ------ Every actions in game cost Energy. If this falls to 0, it's game over
+[Shield] ------ Absorb damage before Hull. Uses Energy to regenerate
+[Right Text] -- Name of the current Solar System (Level)[/indent]
+[b]Bottom[/b][indent][Log Stardate] -- Number of turn you've been alive
+[Bottom text] --- Any important information that happened every turn
+[/indent]
+[b]HOW TO PLAY[/b][indent]Move your ship around. Use your mounted weapons to shoot at planets and ships. Pickup dropped resources. Install resources to their respective mount points or convert them into energy using the Converter. If you find empty ship hulls you can craft new ships using your Converter. More powerful Converter can also craft weapon upgrades and alien ships.
+
+Find the most powerful Converter at the bottom of the 12th solar system and bring it back to the first wormhole you appeared from and then go up that wormhole to complete the game !
+
+You won't succeed on your first attempt but try to improve your score on the leaderboard.
+Score is calculated as follow :[indent]Having the Ultimate Converter
+Number of Solar System Explored
+Amount of energy left
+Bonus based on the Number of turn it took to complete the game (faster is better)
+Multiplied by your difficulty
+[/indent]
+
+[/indent]"
+text = "BASIC CONTROLS	[Numpad 1 to 9] or [Mouse Clicks on empty space] -- Move Ship
+[Numpad 5] or [Click on self] --------------------- Wait one turn
+[c] or [Converter Button] ------------------------- Open Crafting Menu
+[w] or [Weapon Button] or [Click on Enemies] ------ Switch to Weapon Targetting
+[g] or [Grab Button] ------------------------------ Pickup Items Under You
+[ i] or [Inventory Button] ------------------------ Show Equipment and Cargo. Use and Drop items.
+[>] or [FTL Button] ------------------------------- Activate on top of wormhole to change level
+[+] ----------------------------------------------- Zoom In
+[-] ----------------------------------------------- Zoom Out
+[Gear Icon] --------------------------------------- Main Menu for Saving, Quitting and Options
+
+ADVANCED CONTROLS
+Accessible from the \"...\" Button	
+[l] or [Look Button] ------ Get detailed description of item by clicking on them
+[ b] or [Board Button] ---- Transfer control to another crafted ship
+[t] or [Transfer Button] -- Transfer Inventory from one ship to another
+[Wait Button] ------------- Wait one turn
+
+HUD INFORMATION
+Top	[Hull] -------- Health of the ship. This does not regenerate. If this falls to 0, it's game over
+[Energy] ------ Every actions in game cost Energy. If this falls to 0, it's game over
+[Shield] ------ Absorb damage before Hull. Uses Energy to regenerate
+[Right Text] -- Name of the current Solar System (Level)
+Bottom	[Log Stardate] -- Number of turn you've been alive
+[Bottom text] --- Any important information that happened every turn
+
+HOW TO PLAY	Move your ship around. Use your mounted weapons to shoot at planets and ships. Pickup dropped resources. Install resources to their respective mount points or convert them into energy using the Converter. If you find empty ship hulls you can craft new ships using your Converter. More powerful Converter can also craft weapon upgrades and alien ships.
+
+Find the most powerful Converter at the bottom of the 12th solar system and bring it back to the first wormhole you appeared from and then go up that wormhole to complete the game !
+
+You won't succeed on your first attempt but try to improve your score on the leaderboard.
+Score is calculated as follow :	Having the Ultimate Converter
+Number of Solar System Explored
+Amount of energy left
+Bonus based on the Number of turn it took to complete the game (faster is better)
+Multiplied by your difficulty
 
 
 "

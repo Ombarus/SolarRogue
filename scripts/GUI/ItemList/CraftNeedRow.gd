@@ -16,10 +16,10 @@ func set_row_data(data):
 		main_text = data.type
 	elif "src" in data:
 		var d = Globals.LevelLoaderRef.LoadJSON(data.src)
-		main_text += d.name_id
+		main_text += Globals.mytr(d.name_id)
 	if "missing" in data and data.missing == true:
 		self.disabled = true
-		missing_text += "Missing "
+		missing_text += Globals.mytr("Missing ")
 	get_node("HBoxContainer/RichTextLabel").bbcode_text = bbcode_start + missing_text + count_str + main_text + bbcode_end
 	_metadata = data
 	_metadata["self"] = self

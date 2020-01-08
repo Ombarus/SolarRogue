@@ -93,7 +93,6 @@ save & [q]uit,save & [q]uit,sauvegarde & [q]uitter,save & [q]uit
 [g]rab,[g]rab,[g]prend,[g]rab
 [i]nv,[i]nv,[i]nv,[i]nv
 [<]FTL,[<]FTL,[<]Saut,[<]FTL
-,,,
 TUTO refill our energy,"Captain, Lets refill our energy by converting this %s\n1. Select 'Recycle Energy' from the list on the left\n2. Select the '%s' on the right\n3. Click the 'Craft' Button","Commandant, Récupérons de l’énergie en convertissant %s\n1. Choisir ‘Recyclage’ dans la liste de gauche\n2. Choisir %s à droite\n3. Cliquer sur le bouton ‘Produire’","Captain, Lets refill our energy by converting this %s\n1. Select 'Recycle Energy' from the list on the left\n2. Select the '%s' on the right\n3. Click the 'Craft' Button"
 Tutorial: Converter,Tutorial: Converter,Tutoriel: Convertisseur,Tutorial: Converter
 TUTO equip our new,"Captain, To equip our new %s just select it in the cargo list on the right and select the 'mount' button to install or replace the currently equiped %s","Commandant, Pour équiper notre nouveau %s il suffit de le sélectionner dans la liste à droite et cliquer sur le bouton ‘monté’ pour l’installer ou remplacé le %s actuel","Captain, To equip our new %s just select it in the cargo list on the right and select the 'mount' button to install or replace the currently equiped %s"
@@ -130,3 +129,61 @@ Select Target...,Select Target...,Choix de cible...,Select Target...
 [color=red]Select target for %s...[/color],[color=red]Select target for %s...[/color],[color=red]Choisir la cible pour %s...[/color],[color=red]Select target for %s...[/color]
 CONFIRM delete save,Are you sure ?\nThe Savegame will be deleted,Etes-vous certain ?\nLa sauvegarde sera détruite,Are you sure ?\nThe Savegame will be deleted
 Are you sure ?,Are you sure ?,Etes-vous certain ?,Are you sure ?
+Missing ,Missing ,Manque ,無 
+Cargo Contents,Cargo Contents,Contenu,内容
+Empty,Empty,Libre,空
+Repair Nanobots,Repair Nanobots,Nanobots Réparateur,修理ナノマシン
+Matter-to-Energy Converter,Matter-to-Energy Converter,Convertisseur d’énergie,Matter-to-Energy Converter
+Matter-to-Energy Converter MK2,Matter-to-Energy Converter MK2,Convertisseur d’énergie V2,Convertisseur d’énergie V2
+Converter of Yendor,Converter of Yendor,Convertisseur de Yendor,Convertisseur de Yendor
+A Jerg Matter-to-Energy Converter,A Jerg Matter-to-Energy Converter,Convertisseur Jerg,Convertisseur Jerg
+A Vorg Matter-to-Energy Converter,A Vorg Matter-to-Energy Converter,Convertisseur Vorg,Convertisseur Vorg
+A Battleship Hull Relic,A Battleship Hull Relic,Coque de Cuirassé,Coque de Cuirassé
+A Frigate Hull Relic,A Frigate Hull Relic,Coque de Frégate,Coque de Frégate
+Probe Hull Relic,Probe Hull Relic,Coque de Sonde,Coque de Sonde
+Scout Hull Relic,Scout Hull Relic,Coque d’éclaireur,Coque d’éclaireur
+Diluted Cristal,Diluted Cristal,Cristaux de Dilution,Cristaux de Dilution
+Hydrogen,Hydrogen,Hydrogène,Hydrogène
+Oxygen,Oxygen,Oxygène,Oxygène
+Uranium,Uranium,Uranium,Uranium
+Long Range Scanner,Long Range Scanner,Radar Longue Porté,Radar Longue Porté
+Long Range Scanner MK2,Long Range Scanner MK2,Radar Longue Porté V2,Radar Longue Porté V2
+Long Range Scanner MK3,Long Range Scanner MK3,Radar Longue Porté V3,Radar Longue Porté V3
+Short Range Scanner,Short Range Scanner,Radar,Radar
+Short Range Scanner MK2,Short Range Scanner MK2,Radar V2,Radar V2
+Short Range Scanner MK3,Short Range Scanner MK3,Radar V3,Radar V3
+Ultimate Scanner,Ultimate Scanner,Le Radar Ultime,Le Radar Ultime
+Shield,Shield,Bouclier,Bouclier
+Medium Shield,Medium Shield,Bouclier Grande Capacité,Bouclier Grande Capacité
+Large Shield,Large Shield,Bouclier Extra Grande Capacité,Bouclier Extra Grande Capacité
+Gravitic Compactor,Gravitic Compactor,Compresseur Gravitationnel,Compresseur Gravitationnel
+Small Power Amplifier,Small Power Amplifier,Petit Amplificateur de Puissance,Petit Amplificateur de Puissance
+Medium Power Amplifier,Medium Power Amplifier,Amplificateur de Puissance Amélioré,Amplificateur de Puissance Amélioré
+Large Power Amplifier,Large Power Amplifier,Grand Amplificateur de Puissance,Grand Amplificateur de Puissance
+Solar Array,Solar Array,Panneaux Solaires,Panneaux Solaires
+Laser Turret MK1,Laser Turret MK1,Tourelle Laser V1,Tourelle Laser V1
+Laser Turret MK2,Laser Turret MK2,Tourelle Laser V2,Tourelle Laser V2
+Missile,Missile,Missile,Missile
+Missile Launcher MK1,Missile Launcher MK1,Lance-Missile V1,Lance-Missile V1
+Missile Launcher MK2,Missile Launcher MK2,Lance-Missile V2,Lance-Missile V2
+Missile Launcher MK3,Missile Launcher MK3,Lance-Missile V3,Lance-Missile V3
+Torpedo,Torpedo,Torpille,Torpille
+Torpedo Launcher MK1,Torpedo Launcher MK1,Lance-Torpilles V1,Lance-Torpilles V1
+Wormhole,Wormhole,Trou Noir,Trou Noir
+Unknown Object,Unknown Object,Object Inconnu,Object Inconnu
+A Human Battleship,A Human Battleship,Un Cuirassé Humain,Un Cuirassé Humain
+A Human Bomber,A Human Bomber,Un Bombardier Humain,Un Bombardier Humain
+A Human Frigate,A Human Frigate,Une Frégate Humaine,Une Frégate Humaine
+A Probe,A Probe,Une Sonde,Une Sonde
+A Human Scout,A Human Scout,Un Éclaireur Humain,Un Éclaireur Humain
+A Jerg Battleship,A Jerg Battleship,Un Cuirassé Jerg,Un Cuirassé Jerg
+A Jerg Bomber,A Jerg Bomber,Un Bombardier Jerg,Un Bombardier Jerg
+A Jerg Frigate,A Jerg Frigate,Une Frégate Jerg,Une Frégate Jerg
+A Jerg Scout,A Jerg Scout,Un Éclaireur Jerg,Un Éclaireur Jerg
+A Vorg Battleship,A Vorg Battleship,Un Cuirassé Vorg,Un Cuirassé Vorg
+A Vorg Bomber,A Vorg Bomber,Un Bombardier Vorg,Un Bombardier Vorg
+A Vorg Frigate,A Vorg Frigate,Une Frégate Vorg,Une Frégate Vorg
+A Vorg Scout,A Vorg Scout,Un Éclaireur Vorg,Un Éclaireur Vorg
+A Random Anomaly,A Random Anomaly,Une Anomalie,Une Anomalie
+A Planet,A Planet,Une Planète,Une Planète
+A Bright Sun,A Bright Sun,Un Soleil Radieux,Un Soleil Radieux

@@ -32,10 +32,10 @@ func set_content(val):
 		copy.visible = true
 		row_ref.get_parent().add_child(copy)
 		content.push_back({"obj": copy, "mount_key": v.mount_key, "mount_index":v.mount_index, "src_key":v.src_key})
-		var display = v.mount_key + " " + str(v.mount_index+1) + " : Free"
+		var display = Globals.mytr(v.mount_key) + " " + str(v.mount_index+1) + " : Free"
 		if v.src_key != null and v.src_key != "":
 			var src_data = Globals.LevelLoaderRef.LoadJSON(v.src_key)
-			display = v.mount_key + " " + str(v.mount_index+1) + " : " + src_data.name_id
+			display = Globals.mytr(v.mount_key) + " " + str(v.mount_index+1) + " : " + Globals.mytr(src_data.name_id)
 		copy.get_node("Choice/Name").bbcode_text = display
 		copy.get_node("Choice").MyData = {"origin":self, "content_index":content.size() - 1} # index in content array
 		#copy.get_node("Choice").connect("toggled", self, "toggled_callback", [v.mount_key, v.src_key])

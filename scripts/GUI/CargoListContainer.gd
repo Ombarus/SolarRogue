@@ -36,9 +36,9 @@ func set_content(val):
 		if v.src_key != null and v.src_key != "":
 			var src_data = Globals.LevelLoaderRef.LoadJSON(v.src_key)
 			if "stackable" in src_data.equipment and src_data.equipment.stackable == true:
-				display = str(v.amount) + "x " + src_data.name_id
+				display = str(v.amount) + "x " + Globals.mytr(src_data.name_id)
 			else:
-				display = src_data.name_id
+				display = Globals.mytr(src_data.name_id)
 		copy.get_node("Choice/Name").bbcode_text = display
 		copy.get_node("Choice").MyData = {"origin":self, "content_index":content.size() - 1} # index in content array
 	

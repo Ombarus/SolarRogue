@@ -15,7 +15,10 @@ func set_row_data(data):
 		get_node("BtnWrap/Toggle").group = data.group
 		
 	get_node("Equipped").visible = data.equipped
-	get_node("BtnWrap/HBoxContainer/Wrap/Name").bbcode_text = data.name_id
+	if "display_name_id" in data:
+		get_node("BtnWrap/HBoxContainer/Wrap/Name").bbcode_text = data.display_name_id
+	else:
+		get_node("BtnWrap/HBoxContainer/Wrap/Name").bbcode_text = Globals.mytr(data.name_id)
 	
 	var icon_path : String = Globals.get_data(data, "icon.texture")
 	if icon_path != null and icon_path != "":

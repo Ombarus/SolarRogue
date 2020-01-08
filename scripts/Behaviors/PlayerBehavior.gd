@@ -305,7 +305,7 @@ func OnObjTurn_Callback(obj):
 				if c != obj and c.get_attrib("type") in ["wormhole"]:
 					wormhole = c
 			if filtered.size() == 1:
-				BehaviorEvents.emit_signal("OnLogLine", "Ship in range of %s", [filtered[0].get_attrib("name_id")])
+				BehaviorEvents.emit_signal("OnLogLine", "Ship in range of %s", [Globals.mytr(filtered[0].get_attrib("name_id"))])
 			elif filtered.size() > 1:
 				BehaviorEvents.emit_signal("OnLogLine", "Multiple Objects Detected")
 			
@@ -342,7 +342,7 @@ func Pressed_Weapon_Callback():
 	#BehaviorEvents.emit_signal("OnLogLine", "Firing " + cur_weapon.weapon_data.name_id + ". Target ?")
 	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, cur_weapon.weapon_data, self, "ProcessAttackSelection")
 	BehaviorEvents.emit_signal("OnPopGUI") #HUD
-	var text = Globals.mytr("[color=red]Select target for %s...[/color]", [cur_weapon.weapon_data.name_id])
+	var text = Globals.mytr("[color=red]Select target for %s...[/color]", [Globals.mytr(cur_weapon.weapon_data.name_id)])
 	BehaviorEvents.emit_signal("OnPushGUI", "TargettingHUD", {"info_text":text, "show_skip":_weapon_shots.size() > 1})
 	set_input_state(Globals.INPUT_STATE.weapon_targetting)
 	
@@ -654,7 +654,7 @@ func ProcessAttackSelection(target, shot_tile):
 		cur_weapon.state = SHOOTING_STATE.wait_targetting
 		#BehaviorEvents.emit_signal("OnLogLine", "Acknowledged, should we also fire " + cur_weapon.weapon_data.name_id + ". Target ?")
 		BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, cur_weapon.weapon_data, self, "ProcessAttackSelection")
-		var text = Globals.mytr("[color=red]Select target for %s...[/color]", [cur_weapon.weapon_data.name_id])
+		var text = Globals.mytr("[color=red]Select target for %s...[/color]", [Globals.mytr(cur_weapon.weapon_data.name_id)])
 		get_node(TargettingHUD).Init( {"info_text":text} )
 		set_input_state(Globals.INPUT_STATE.weapon_targetting)
 		return

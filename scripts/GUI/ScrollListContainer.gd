@@ -32,7 +32,7 @@ func set_content(val):
 			content.push_back({"obj": copy, "key": v.key, "index":v.index})
 		else:	
 			content.push_back({"obj": copy, "key": v.key})
-		copy.get_node("Choice/Name").bbcode_text = v.name_id
+		copy.get_node("Choice/Name").bbcode_text = Globals.mytr(v.name_id)
 	
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
