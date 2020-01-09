@@ -128,7 +128,7 @@ func OnScannerUpdated_Callback(obj):
 			if o != null:
 				var outline : Sprite = o.find_node("outline", true, false)
 				if outline != null:
-					if outline.modulate == Color(0.0, 0.0, 1.0, 1.0):
+					if outline.modulate == Color(0.0, 0.0, 1.0, 1.0) and o.get_attrib("ai.aggressive", false) == false:
 						BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "TUTO deemed neutral", "title":"Tutorial: Tactical, Neutral", "callback_object":self, "callback_method":"Outline_Blue_Callback"})
 						done = true
 	
@@ -178,7 +178,7 @@ func OnPickup_Callback(picker : Attributes):
 	var done := false
 	
 	# do it in separate loop to guaranty the priority
-	if not "conv_inv" in steps:
+	if not "pre_conv_inv" in steps:
 		for item in cargo:
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			var type = Globals.get_data(data, "type")
@@ -188,7 +188,7 @@ func OnPickup_Callback(picker : Attributes):
 				done = true
 				break
 	
-	if not done and not "equip_inv" in steps:
+	if not done and not "pre_equip_inv" in steps:
 		for item in cargo:
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			var slot = Globals.get_data(data, "equipment.slot")

@@ -16,8 +16,7 @@ TODO :::
 	- converter ?
 - delete craft_need_row.tscn ?
 - translation
-	- settings menu items
-	- langage setting menu
+	- welcome screen
 	- main menu leaderboard ?
 	- button highlight broken ?
 	- translate converter recipes
@@ -169,6 +168,8 @@ IDEAS:::
 	
 	
 DONE :::
+	- langage setting menu
+	- settings menu items
 	
 	- Godot : Implement Localization
 		- You can link CSVs in localization, replace certain resources (like textures) with others and even change the project name based on choosen locale
