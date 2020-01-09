@@ -87,6 +87,16 @@ func is_(obj, val):
 		return false
 	return true
 
+func mytr2(text, fmt={}):
+	var result : String = tr(text)
+	if OS.is_debug_build() and result == text and TranslationServer.get_locale() != "en":
+		print("====> [TR] : No %s translation for %s" % [TranslationServer.get_locale(), text])
+		
+	if not fmt.empty():
+		result = tr(text).format(fmt)
+			
+	return result
+
 func mytr(text, fmt=[]):
 	var result : String = tr(text)
 	if OS.is_debug_build() and result == text and TranslationServer.get_locale() != "en":

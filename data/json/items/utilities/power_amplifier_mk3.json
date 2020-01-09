@@ -24,16 +24,16 @@
 		"Overview": {
 			"min_level":0,
 			"fields":[
-				{"name":"Cargo Volume", "value":"{equipment.volume}"},
-				{"name":"Equip Turn", "value":"{equipment.equip_ap}"},
+				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
 				{"name":"Mount Point", "value":"Utility"}
 			]
 		},
 		"Effect": {
 			"min_level":0,
 			"fields": [
-				{"name":"Damage Boost", "value":"{damage_boost.damage_percent}%"},
-				{"name":"Weapon Energy Cost", "value":"{damage_boost.energy_percent}%"}
+				{"name":"Damage Boost", "value":"{damage_boost.damage_percent}%", "translate_value":false},
+				{"name":"Weapon Energy Cost", "value":"{damage_boost.energy_percent}%", "translate_value":false}
 			]
 		}
 	}

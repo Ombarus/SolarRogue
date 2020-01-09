@@ -94,16 +94,16 @@
 		"Overview": {
 			"min_level":0,
 			"fields":[
-				{"name":"Cargo Volume", "value":"{equipment.volume}"},
-				{"name":"Equip Turn", "value":"{equipment.equip_ap}"},
-				{"name":"Mount Point", "value":"Converter"}
+				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
+				{"name":"Mount Point", "value":"Converter", "translate_value":true}
 			]
 		},
 		"Converter": {
 			"min_level":0,
 			"fields": [
-				{"name":"Maximum Energy Reserve", "value":"{converter.maximum_energy}"},
-				{"name":"Recipes", "value":"6"}
+				{"name":"Maximum Energy Reserve", "value":"{converter.maximum_energy}", "translate_value":false},
+				{"name":"Recipes", "value":"8", "translate_value":false}
 			]
 		}
 	}

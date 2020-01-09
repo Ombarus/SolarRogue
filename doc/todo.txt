@@ -1,10 +1,16 @@
 RELEASE CHECKLIST :::
 - Check player starting inventory
+- review description of all item to make sure they match the data
 - levelLoader.gd => test_mid_game is false
 - compilation set to release (debug unchecked)
 - save after each turn, save when quit
 
 TODO :::
+- balance jerg. They don't have shield so they're converter should have the recipe for nanobots
+	- maybe I could give the jerg a permanent regenerating hull ? (since they're "biological" ships)
+- planet description
+- look & tap triggers interactable objects
+- wormhole icon in target select screen
 - investigate steam and itch.io
 - Mobile only "features" ?
 	- Hide "Quit" button (iOS or Mobile in general)
@@ -17,9 +23,7 @@ TODO :::
 - delete craft_need_row.tscn ?
 - translation
 	- Description window
-	- welcome screen
 	- main menu leaderboard ?
-	- button highlight broken ?
 	- translate converter recipes
 	- check mount selection and empty mount title
 - Generate icons, banner, etc. for android/ios/pc release
@@ -169,6 +173,8 @@ IDEAS:::
 	
 	
 DONE :::
+	- button highlight broken ?
+	- welcome screen
 	- langage setting menu
 	- settings menu items
 	

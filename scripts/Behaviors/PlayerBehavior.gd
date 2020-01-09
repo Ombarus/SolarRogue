@@ -420,7 +420,7 @@ func _input(event):
 		return
 		
 	if click_start_pos == null:
-			click_start_pos = Vector2(0,0)
+		click_start_pos = Vector2(0,0)
 	if event.is_action_pressed("touch"):
 		click_start_pos = event.position
 	var vp_size : Vector2 = get_viewport().size
@@ -428,12 +428,14 @@ func _input(event):
 	var per_drag_x : float = abs(drag_vec.x / vp_size.x)
 	var per_drag_y : float = abs(drag_vec.y / vp_size.y)
 	
+	get_tree().set_input_as_handled()
+	
 	if not event.is_action_released("touch") or per_drag_x > 0.04 or per_drag_y > 0.04:
 		return
 	
 	click_start_pos = Vector2(0,0)
+	print("player::_input set input to HUD")
 	set_input_state(Globals.INPUT_STATE.hud)
-	#get_tree().set_input_as_handled()
 	
 	var click_pos = playerNode.get_global_mouse_position()
 	
@@ -452,8 +454,6 @@ func _input(event):
 						break
 			if skip == false:
 				filtered_content.push_back(obj)
-	if filtered_content.size() == 0:
-		BehaviorEvents.emit_signal("OnLogLine", "Nothing but empty space")
 		
 	var scanner_level := 0
 	var scanner_data = Globals.LevelLoaderRef.LoadJSONArray(playerNode.get_attrib("mounts.scanner"))
@@ -462,8 +462,10 @@ func _input(event):
 		
 	if filtered_content.size() == 1:
 		BehaviorEvents.emit_signal("OnPushGUI", "Description", {"obj":filtered_content[0], "scanner_level":scanner_level})
-	else:
+	elif filtered_content.size() > 1:
 		BehaviorEvents.emit_signal("OnPushGUI", "SelectTarget", {"targets":filtered_content, "callback_object":self, "callback_method":"LookTarget_Callback"})
+	else:
+		BehaviorEvents.emit_signal("OnLogLine", "Nothing but empty space")
 
 	
 func LookTarget_Callback(selected_targets):
@@ -478,6 +480,7 @@ func LookTarget_Callback(selected_targets):
 func OnCameraDragged_Callback():
 	if _input_state != Globals.INPUT_STATE.camera_dragged:
 		_saved_input_state = _input_state
+		print("player::OnCameraDragged_Callback set input to CAMERA_DRAGGED")
 		set_input_state(Globals.INPUT_STATE.camera_dragged)
 
 func _unhandled_input(event):
@@ -490,6 +493,7 @@ func _unhandled_input(event):
 		if event.is_action_pressed("touch"):
 			click_start_time = OS.get_ticks_msec()
 		elif event.is_action_released("touch") && _input_state != Globals.INPUT_STATE.camera_dragged :
+			print("player::_unhandled_input handle release")
 			var click_pos = playerNode.get_global_mouse_position()
 			
 			if _input_state == Globals.INPUT_STATE.weapon_targetting:
@@ -540,6 +544,7 @@ func _unhandled_input(event):
 				playerNode.set_attrib("ai", ai_data)
 				BehaviorEvents.emit_signal("OnAttributeAdded", playerNode, "ai")
 		elif event.is_action_released("touch") && _input_state == Globals.INPUT_STATE.camera_dragged:
+			print("player::_unhandled_input reset drag")
 			set_input_state(_saved_input_state)
 				
 	if event is InputEventKey and event.pressed == true:

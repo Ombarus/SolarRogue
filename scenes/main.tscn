@@ -61,11 +61,11 @@
 [ext_resource path="res://scenes/GUI/Dialogs/Settings.tscn" type="PackedScene" id=59]
 [ext_resource path="res://scenes/GUI/Dialogs/WelcomeScreen.tscn" type="PackedScene" id=60]
 [ext_resource path="res://scenes/GUI/Dialogs/HowManyDiag.tscn" type="PackedScene" id=61]
-[ext_resource path="res://scenes/GUI/Dialogs/DeathScreen.tscn" type="PackedScene" id=62]
-[ext_resource path="res://scenes/GUI/Dialogs/Description.tscn" type="PackedScene" id=63]
-[ext_resource path="res://scenes/GUI/Debug/APBehaviorDebug.tscn" type="PackedScene" id=64]
-[ext_resource path="res://scenes/GUI/Dialogs/TutoPrompt.tscn" type="PackedScene" id=65]
-[ext_resource path="res://scenes/GUI/Debug/FPSCounter.tscn" type="PackedScene" id=66]
+[ext_resource path="res://scenes/GUI/Dialogs/Description.tscn" type="PackedScene" id=62]
+[ext_resource path="res://scenes/GUI/Debug/APBehaviorDebug.tscn" type="PackedScene" id=63]
+[ext_resource path="res://scenes/GUI/Dialogs/TutoPrompt.tscn" type="PackedScene" id=64]
+[ext_resource path="res://scenes/GUI/Debug/FPSCounter.tscn" type="PackedScene" id=65]
+[ext_resource path="res://scenes/GUI/Dialogs/DeathScreen.tscn" type="PackedScene" id=66]
 [ext_resource path="res://scenes/warp_trail_test.tscn" type="PackedScene" id=67]
 [ext_resource path="res://scripts/DEBUG.gd" type="Script" id=68]
 [ext_resource path="res://scenes/Sample.tscn" type="PackedScene" id=69]
@@ -524,13 +524,10 @@ visible = false
 [node name="HowManyDiag" parent="Camera-GUI" instance=ExtResource( 61 )]
 visible = false
 
-[node name="DeathScreen" parent="Camera-GUI" instance=ExtResource( 62 )]
+[node name="Description" parent="Camera-GUI" instance=ExtResource( 62 )]
 visible = false
 
-[node name="Description" parent="Camera-GUI" instance=ExtResource( 63 )]
-visible = false
-
-[node name="ApDebugWindow" parent="Camera-GUI" instance=ExtResource( 64 )]
+[node name="ApDebugWindow" parent="Camera-GUI" instance=ExtResource( 63 )]
 visible = false
 margin_left = 854.0
 margin_top = 132.0
@@ -538,10 +535,10 @@ margin_right = -148.0
 margin_bottom = -314.0
 AP_behavior_path = NodePath("../../Behaviors/AP")
 
-[node name="TutoPrompt" parent="Camera-GUI" instance=ExtResource( 65 )]
+[node name="TutoPrompt" parent="Camera-GUI" instance=ExtResource( 64 )]
 visible = false
 
-[node name="FPSCounter" parent="Camera-GUI" instance=ExtResource( 66 )]
+[node name="FPSCounter" parent="Camera-GUI" instance=ExtResource( 65 )]
 visible = false
 anchor_left = 1.0
 anchor_top = 1.0
@@ -551,6 +548,9 @@ margin_left = -134.0
 margin_top = -53.0
 margin_right = -12.0
 margin_bottom = -12.0
+
+[node name="DeathScreen" parent="Camera-GUI" instance=ExtResource( 66 )]
+visible = false
 
 [node name="Loading-FX" type="CanvasLayer" parent="."]
 editor/display_folded = true

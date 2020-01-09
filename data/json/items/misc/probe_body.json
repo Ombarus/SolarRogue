@@ -20,7 +20,7 @@
 		"Overview": {
 			"min_level":0,
 			"fields":[
-				{"name":"Cargo Volume", "value":"{equipment.volume}"}
+				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false}
 			]
 		}
 	}

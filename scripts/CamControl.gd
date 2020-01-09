@@ -17,16 +17,31 @@ var _debug_cur_touch = 0
 
 var _zoomin : bool = false
 var _zoomout : bool = false
+var _enable_input : bool = false
 
 func _ready():
 	var p = Globals.get_first_player()
 	levelLoaderRef = get_node(levelLoaderNode)
 	BehaviorEvents.connect("OnPlayerCreated", self, "OnPlayerCreated_callback")
 	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_callback")
+	BehaviorEvents.connect("OnPlayerInputStateChanged", self, "OnPlayerInputStateChanged_callback")
 	
 	if p != null:
 		self.position = p.position
 		_last_cam_pos = self.position
+		
+# Very ugly hack so that when we're in "look around" mode everything else is locked but the camera still handle inputs
+func OnPlayerInputStateChanged_callback(playerObj, inputState):
+	if inputState == Globals.INPUT_STATE.look_around:
+		_enable_input = true
+	else:
+		_enable_input = false
+		
+func _input(event):
+	if _enable_input == false:
+		return
+	
+	_unhandled_input(event)
 
 func _unhandled_input(event):
 	if levelLoaderRef == null:

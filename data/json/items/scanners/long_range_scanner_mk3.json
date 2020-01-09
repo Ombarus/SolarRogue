@@ -26,16 +26,16 @@
 		"Overview": {
 			"min_level":0,
 			"fields":[
-				{"name":"Cargo Volume", "value":"{equipment.volume}"},
-				{"name":"Equip Turn", "value":"{equipment.equip_ap}"},
+				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
 				{"name":"Mount Point", "value":"Scanner"}
 			]
 		},
 		"Scanning": {
 			"min_level":0,
 			"fields": [
-				{"name":"Radius", "value":"{scanning.radius}"},
-				{"name":"Level", "value":"{scanning.level}"},
+				{"name":"Radius", "value":"{scanning.radius}", "translate_value":false},
+				{"name":"Level", "value":"{scanning.level}", "translate_value":false},
 				{"name":"Special", "value":"Detect Small Objects"}
 			]
 		}

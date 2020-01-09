@@ -27,16 +27,16 @@
 		"Overview": {
 			"min_level":0, 
 			"fields":[
-				{"name":"Cargo Volume", "value":"{equipment.volume}"},
-				{"name":"Turn used", "value":"{consumable.ap}"},
-				{"name":"Energy used", "value":"{consumable.energy}"}
+				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false},
+				{"name":"Turn used", "value":"{consumable.ap}", "translate_value":false},
+				{"name":"Energy used", "value":"{consumable.energy}", "translate_value":false}
 			]
 		},
 		"Effect": {
 			"min_level":0,
 			"fields": [
-				{"name":"Duration", "value":"{hull_regen.duration} turns"},
-				{"name":"hp/turn", "value":"{hull_regen.point_per_turn}"}
+				{"name":"Duration", "value":"{hull_regen.duration} turns", "translate_value":true},
+				{"name":"hp/turn", "value":"{hull_regen.point_per_turn}", "translate_value":false}
 			]
 		}
 	}

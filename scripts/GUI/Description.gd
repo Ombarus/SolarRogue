@@ -64,7 +64,10 @@ func Init(init_param):
 				formatdict[names[i]] = val
 			
 			if formatdict.size() > 0:
-				row.value = row.value.format(formatdict)
+				if not "translate_value" in row or row.translate_value == true:
+					row.value = Globals.mytr2(row.value, formatdict)
+				else:
+					row.value = row.value.format(formatdict)
 			
 			if is_valid == true:
 				final_list.push_back(row)
