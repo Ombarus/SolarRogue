@@ -72,7 +72,7 @@ Log Stardate %d.%d.%d,Log Stardate %d.%d.%d,Journal Stardate %d.%d.%d,Log Starda
 [s]kip,[s]kip,[s]auter,[s]kip
 [esc]cancel,[esc]cancel,[esc]annuler,[esc]cancel
 [s]ave,[s]ave,[s]auvegarde,[s]ave
-[r]estart,[r]estart,[r]ecommancer,[r]estart
+[r]estart,[r]estart,[r]ecommencer,[r]estart
 [o]ptions,[o]ptions,[o]ptions,[o]ptions
 save & [q]uit,save & [q]uit,sauvegarde & [q]uitter,save & [q]uit
 > remove,> remove,> retirer,> remove
@@ -231,3 +231,4 @@ Hard,Hard,Difficile,難しい
 Harder,Harder,Très Difficile,超難しい
 Hardest,Hardest,Trop Difficile,激難しい
 Not Happening...,Not Happening...,Nope...,無理。。。
+Welcome %s...,Welcome %s...,Bienvenue %s...,Solar Rogueへようこそ%s...

@@ -16,6 +16,7 @@ TODO :::
 	- converter ?
 - delete craft_need_row.tscn ?
 - translation
+	- Description window
 	- welcome screen
 	- main menu leaderboard ?
 	- button highlight broken ?

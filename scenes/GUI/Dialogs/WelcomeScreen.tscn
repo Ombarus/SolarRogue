@@ -23,14 +23,102 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -390.5
-margin_top = -234.0
-margin_right = 390.5
-margin_bottom = 234.0
+margin_left = -421.5
+margin_top = -259.5
+margin_right = 421.5
+margin_bottom = 259.5
 dialog_ok = true
 title = "Welcome Ombarus..."
 
-[node name="Content" type="RichTextLabel" parent="base"]
+[node name="en" type="RichTextLabel" parent="base" groups=[
+"welcome_lang",
+]]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 15.0
+margin_top = 47.9193
+margin_right = -26.0
+margin_bottom = -35.0807
+custom_fonts/mono_font = ExtResource( 4 )
+custom_fonts/bold_italics_font = ExtResource( 5 )
+custom_fonts/italics_font = ExtResource( 6 )
+custom_fonts/bold_font = ExtResource( 7 )
+custom_fonts/normal_font = ExtResource( 4 )
+bbcode_enabled = true
+bbcode_text = "Something went [color=red]wrong[/color].
+
+While you were exploring uncharted space the [color=yellow]wormhole[/color] sent you so far you've lost all bearings. 
+
+What you do know is that your warp engines aren't powerful enough to open it again.
+
+Use what you have and try to find a way back home.
+[indent]
+Try not to [u]die[/u] or run out of [u]energy[/u]. 
+Weapons can harvest planets, convert their resources to energy.
+Look for the ultimate artifact : [u]The Converter of Yendor[/u], 
+[/indent]
+Maybe it's powerful enough to bring you home...."
+text = "Something went wrong.
+
+While you were exploring uncharted space the wormhole sent you so far you've lost all bearings. 
+
+What you do know is that your warp engines aren't powerful enough to open it again.
+
+Use what you have and try to find a way back home.
+	
+Try not to die or run out of energy. 
+Weapons can harvest planets, convert their resources to energy.
+Look for the ultimate artifact : The Converter of Yendor, 
+
+Maybe it's powerful enough to bring you home...."
+
+[node name="fr" type="RichTextLabel" parent="base" groups=[
+"welcome_lang",
+]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 15.0
+margin_top = 47.9193
+margin_right = -26.0
+margin_bottom = -35.0807
+custom_fonts/mono_font = ExtResource( 4 )
+custom_fonts/bold_italics_font = ExtResource( 5 )
+custom_fonts/italics_font = ExtResource( 6 )
+custom_fonts/bold_font = ExtResource( 7 )
+custom_fonts/normal_font = ExtResource( 4 )
+bbcode_enabled = true
+bbcode_text = "C'est la  [color=red]panique[/color].
+
+Un [color=yellow]trou noir[/color] non répertorié vous a transporté bien plus loin que ce qui devrait être possible.
+
+Ce qui est clair c'est que votre moteur hyperspatial n'est pas assez puissant pour ré-engager le trou noir.
+
+Utilisez vos ressources pour retrouver votre chemin.
+[indent]
+Ne laissez pas votre [u]intégrité[/u] ou votre [u]énergie[/u] tomber à 0.
+Vos armes peuvent être utilisé sur les planètes pour récolter des ressources.
+Cherchez l'artifact ultime : [u]Le Convertisseur de Yendor,[/u]
+[/indent]
+C'est sans doute la seule chose assez puissante pour vous ramener chez vous..."
+text = "C'est la  panique.
+
+Un trou noir non répertorié vous a transporté bien plus loin que ce qui devrait être possible.
+
+Ce qui est clair c'est que votre moteur hyperspatial n'est pas assez puissant pour ré-engager le trou noir.
+
+Utilisez vos ressources pour retrouver votre chemin.
+	
+Ne laissez pas votre intégrité ou votre énergie tomber à 0.
+Vos armes peuvent être utilisé sur les planètes pour récolter des ressources.
+Cherchez l'artifact ultime : Le Convertisseur de Yendor,
+
+C'est sans doute la seule chose assez puissante pour vous ramener chez vous..."
+
+[node name="ja" type="RichTextLabel" parent="base" groups=[
+"welcome_lang",
+]]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 15.0
