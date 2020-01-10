@@ -11,6 +11,7 @@ var _cancel_scroll = 0
 func _ready():
 	# Must be done with a str2var because the array AND the dictionaries need to be copies for my custom list view
 	# otherwise we'll end up with dead references in a global objects that will be deleted and everything goes to hell
+	BehaviorEvents.connect("OnLocaleChanged", self, "OnLocaleChanged_Callback")
 	var leaders = str2var(var2str(PermSave.get_attrib("leaderboard")))
 	for i in range(10):
 		leaders.push_back({})
@@ -24,6 +25,10 @@ func _ready():
 	scrollbar.allow_lesser = true
 	scrollbar.allow_greater = true
 	leaderlist.set_v_scroll(_cur_scroll)
+	
+func OnLocaleChanged_Callback():
+	var leaderlist = get_node("leaderlist")
+	leaderlist.Content = leaderlist.Content
 
 func _process(delta):
 	if _cancel_scroll > 0:

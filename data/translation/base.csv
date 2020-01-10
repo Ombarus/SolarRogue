@@ -346,3 +346,7 @@ Shield............,Shield............,Bouclier..........,Shield............
 Production Time,Production Time,Temps Production,Production Time
 Special,Special,Spécial,Special
 Jerg Regen,Jerg Regen,Régen Jerg,Jerg Regen
+%s [color=lime]went HOME[/color],%s [color=lime]went HOME[/color],%s [color=lime]a SURVÉCU![/color],%sは[color=lime]帰りました！[/color]
+%s [color=red]died alone[/color] on wormhole #%d,%s [color=red]died alone[/color] on wormhole #%d,%s [color=red]est mort seul[/color] au niveau #%d,%sはワームホール%dに[color=red]一人で死んだ[/color]
+%s [color=red]was destroyed[/color] on wormhole #%d,%s [color=red]was destroyed[/color] on wormhole #%d,%s [color=red]s'est fait tué[/color] au niveau #%d,%sはワームホール%dに[color=red]殺された[/color]
+%s [color=red]self-destructed[/color] on wormhole #%d,%s [color=red]self-destructed[/color] on wormhole #%d,%s [color=red]s'est suicidé[/color] au niveau #%d,%sはワームホール%dに[color=red]自殺した[/color]

@@ -7,7 +7,6 @@ RELEASE CHECKLIST :::
 
 TODO :::
 - planet description
-- wormhole icon in target select screen
 - investigate steam and itch.io
 - Mobile only "features" ?
 	- Hide "Quit" button (iOS or Mobile in general)
@@ -19,7 +18,6 @@ TODO :::
 	- converter ?
 - delete craft_need_row.tscn ?
 - translation
-	- main menu leaderboard ?
 	- check mount selection and empty mount title
 - Generate icons, banner, etc. for android/ios/pc release
 - customize scroll bar visual ?
@@ -168,6 +166,8 @@ IDEAS:::
 	
 	
 DONE :::
+	- main menu leaderboard ?
+- wormhole icon in target select screen
 - balance jerg. They don't have shield so they're converter should have the recipe for nanobots
 	- maybe I could give the jerg a permanent regenerating hull ? (since they're "biological" ships)
 - look & tap triggers interactable objects

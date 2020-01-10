@@ -25,15 +25,15 @@ func set_row_data(data):
 	get_node("Panel/HBoxContainer/score").bbcode_text = str(data.final_score)
 	var result = ""
 	if data.status == PermSave.END_GAME_STATE.won:
-		result = "[color=lime]went HOME[/color]"
+		result = Globals.mytr("%s [color=lime]went HOME[/color]", [data.player_name])
 	elif data.status == PermSave.END_GAME_STATE.entropy:
-		result = "[color=red]died alone[/color] on wormhole #%d" % (data.died_on+1)
+		result = Globals.mytr("%s [color=red]died alone[/color] on wormhole #%d", [data.player_name, (data.died_on+1)])
 	elif data.status == PermSave.END_GAME_STATE.destroyed:
-		result = "[color=red]was destroyed[/color] on wormhole #%d" % (data.died_on+1)
+		result = Globals.mytr("%s [color=red]was destroyed[/color] on wormhole #%d", [data.player_name, (data.died_on+1)])
 	elif data.status == PermSave.END_GAME_STATE.suicide:
-		result = "[color=red]self-destructed[/color] on wormhole #%d" % (data.died_on+1)
+		result = Globals.mytr("%s [color=red]self-destructed[/color] on wormhole #%d", [data.player_name, (data.died_on+1)])
 		
-	var flavor_text = "%s, %s" % [data.player_name, result]
+	var flavor_text = result
 	
 	get_node("Panel/HBoxContainer/richtext").bbcode_text = flavor_text
 	
