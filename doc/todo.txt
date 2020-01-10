@@ -22,7 +22,6 @@ TODO :::
 	- converter ?
 - delete craft_need_row.tscn ?
 - translation
-	- Description window
 	- main menu leaderboard ?
 	- translate converter recipes
 	- check mount selection and empty mount title
@@ -173,6 +172,7 @@ IDEAS:::
 	
 	
 DONE :::
+	- Description window
 	- button highlight broken ?
 	- welcome screen
 	- langage setting menu

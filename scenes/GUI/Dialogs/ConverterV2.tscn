@@ -115,15 +115,16 @@ rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 
 [node name="EnergyLabel" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/RecipeInfoContainer/HBoxContainer2"]
-margin_right = 170.0
+margin_right = 200.0
 margin_bottom = 30.0
-rect_min_size = Vector2( 170, 0 )
+rect_min_size = Vector2( 200, 0 )
 text = "Energy Cost...."
 
 [node name="EnergyCost" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/RecipeInfoContainer/HBoxContainer2"]
-margin_left = 174.0
+margin_left = 204.0
 margin_right = 369.0
 margin_bottom = 30.0
+rect_min_size = Vector2( 75, 0 )
 size_flags_horizontal = 3
 bbcode_enabled = true
 bbcode_text = "2600"
@@ -136,14 +137,15 @@ margin_bottom = 108.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 
-[node name="TurnLabel" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/RecipeInfoContainer/HBoxContainer3"]
-margin_right = 170.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 170, 0 )
+[node name="TurnLabel" type="Label" parent="HBoxContainer/Control/VBoxContainer/RecipeInfoContainer/HBoxContainer3"]
+margin_top = 4.0
+margin_right = 200.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 200, 0 )
 text = "Production Time"
 
 [node name="TurnCost" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/RecipeInfoContainer/HBoxContainer3"]
-margin_left = 174.0
+margin_left = 204.0
 margin_right = 369.0
 margin_bottom = 30.0
 size_flags_horizontal = 3
@@ -158,14 +160,15 @@ margin_bottom = 142.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 
-[node name="InCargoLabel" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/RecipeInfoContainer/InCargoContainer"]
-margin_right = 170.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 170, 0 )
+[node name="InCargoLabel" type="Label" parent="HBoxContainer/Control/VBoxContainer/RecipeInfoContainer/InCargoContainer"]
+margin_top = 4.0
+margin_right = 200.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 200, 0 )
 text = "In Cargo......."
 
 [node name="InCargo" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/RecipeInfoContainer/InCargoContainer"]
-margin_left = 174.0
+margin_left = 204.0
 margin_right = 369.0
 margin_bottom = 30.0
 size_flags_horizontal = 3
@@ -179,7 +182,6 @@ margin_right = 369.0
 margin_bottom = 290.0
 
 [node name="ShipInfoContainer" type="VBoxContainer" parent="HBoxContainer/Control/VBoxContainer"]
-editor/display_folded = true
 margin_top = 294.0
 margin_right = 369.0
 margin_bottom = 444.0
@@ -202,12 +204,11 @@ margin_bottom = 74.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 
-[node name="EnergyShipLabel" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/ShipInfoContainer/HBoxContainer4"]
+[node name="EnergyShipLabel" type="Label" parent="HBoxContainer/Control/VBoxContainer/ShipInfoContainer/HBoxContainer4"]
+margin_top = 4.0
 margin_right = 210.0
-margin_bottom = 30.0
+margin_bottom = 26.0
 rect_min_size = Vector2( 210, 0 )
-bbcode_enabled = true
-bbcode_text = "Available Energy.."
 text = "Available Energy.."
 
 [node name="EnergyShip" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/ShipInfoContainer/HBoxContainer4"]
@@ -226,12 +227,11 @@ margin_bottom = 108.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 
-[node name="HullShipLabel" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/ShipInfoContainer/HBoxContainer5"]
+[node name="HullShipLabel" type="Label" parent="HBoxContainer/Control/VBoxContainer/ShipInfoContainer/HBoxContainer5"]
+margin_top = 4.0
 margin_right = 210.0
-margin_bottom = 30.0
+margin_bottom = 26.0
 rect_min_size = Vector2( 210, 0 )
-bbcode_enabled = true
-bbcode_text = "Hull Integrity...."
 text = "Hull Integrity...."
 
 [node name="HullShip" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/ShipInfoContainer/HBoxContainer5"]
@@ -251,12 +251,11 @@ margin_bottom = 142.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 
-[node name="ShieldShipLabel" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/ShipInfoContainer/HBoxContainer6"]
+[node name="ShieldShipLabel" type="Label" parent="HBoxContainer/Control/VBoxContainer/ShipInfoContainer/HBoxContainer6"]
+margin_top = 4.0
 margin_right = 210.0
-margin_bottom = 30.0
+margin_bottom = 26.0
 rect_min_size = Vector2( 210, 0 )
-bbcode_enabled = true
-bbcode_text = "Shield............"
 text = "Shield............"
 
 [node name="ShieldShip" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/ShipInfoContainer/HBoxContainer6"]

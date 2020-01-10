@@ -100,6 +100,8 @@ func Init(init_param):
 	var converter_file = _obj.get_attrib("mounts.converter")[0]
 	_converter_data = Globals.LevelLoaderRef.LoadJSON(converter_file)
 	
+	get_node("HBoxContainer/Recipes").title = _converter_data.name_id
+	
 	ReInit()
 	
 func ReInit():
@@ -220,9 +222,9 @@ func UpdateCraftInfo():
 	if _current_data["count"] == 0:
 		#recipe_name_str = "Cannot Craft " + _current_crafting_selected.name
 		recipe_color_str = "red"
-	recipe_name_str = "Craft " + str(_current_data["count"]) + " " + _current_crafting_selected.name
+	recipe_name_str = Globals.mytr("Craft %d %s", [_current_data["count"], Globals.mytr(_current_crafting_selected.name)])
 	if _current_crafting_selected.produce == "energy":
-		recipe_name_str = "Recycle " + str(_current_data["count"]) + " Item(s)"
+		recipe_name_str = Globals.mytr("Recycle %d Item(s)", [_current_data["count"]])
 		
 	_recipe_name.bbcode_text = "[color=%s]%s[/color]" % [recipe_color_str, recipe_name_str]
 	
@@ -230,7 +232,7 @@ func UpdateCraftInfo():
 	var energy_label_str : String = "Energy Cost...."
 	if _current_crafting_selected.produce == "energy":
 		energy_label_str = "Energy Gain...."
-	get_node("HBoxContainer/Control/VBoxContainer/RecipeInfoContainer/HBoxContainer2/EnergyLabel").bbcode_text = energy_label_str
+	get_node("HBoxContainer/Control/VBoxContainer/RecipeInfoContainer/HBoxContainer2/EnergyLabel").bbcode_text = Globals.mytr(energy_label_str)
 	
 	####### Energy Cost #######
 	var energy_color = "red"
@@ -266,7 +268,7 @@ func UpdateShipInfo():
 	var ship_color : String = "lime"
 	var p_name : String = _obj.get_attrib("player_name")
 	if p_name != null:
-		ship_name = "The " + p_name + "'s Status"
+		ship_name = Globals.mytr("The %s's Status", [p_name])
 		
 	var max_hull = _obj.get_attrib("destroyable.hull")
 	var cur_hull = _obj.get_attrib("destroyable.current_hull", max_hull)
@@ -311,11 +313,11 @@ func UpdateShipInfo():
 	var cur_shield = _obj.get_attrib("shield.current_hp")
 	var shield_str : String = ""
 	if missing_shield:
-		shield_str += "[color=yellow]Missing[/color]"
+		shield_str += "[color=yellow]%s[/color]" % Globals.mytr("Missing")
 		if ship_color != "red":
 			ship_color = "yellow"
 	elif cur_shield != null and cur_shield < 1:
-		shield_str += "[color=red]Down![/color]"
+		shield_str += "[color=red]%s[/color]" % Globals.mytr("Down!")
 		ship_color = "red"
 	else:
 		var max_shield = _obj.get_max_shield()

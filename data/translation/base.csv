@@ -319,3 +319,28 @@ A warship with mixed armaments generally used for convoy escort and support work
 Fast but relatively weak ship.,Fast but relatively weak ship.,Un vaisseau rapide mais plutôt fragile.,Fast but relatively weak ship.
 An unknown space anomaly. Scanners indicate that we have no idea what it does.,An unknown space anomaly. Scanners indicate that we have no idea what it does.,Une Anomalie dans l’espace. Nos analyses ne nous permettent pas de déterminer son effet,An unknown space anomaly. Scanners indicate that we have no idea what it does.
 Similar in size to scouts but made to carry torpedos. Slightly heavier and slower but more resilient than Scouts.,Similar in size to scouts but made to carry torpedos. Slightly heavier and slower but more resilient than Scouts.,De taille similaire aux éclaireurs mais transporte des torpilles. Un peu plus solide qu'un éclaireur mais aussi un peu plus lent.,Similar in size to scouts but made to carry torpedos. Slightly heavier and slower but more resilient than Scouts.
+Recycle Energy,Recycle Energy,Recyclage d’énergie,Recycle Energy
+Probe Ship,Probe Ship,Sonde,Probe Ship
+(Starting) Human Scout,(Starting) Human Scout,Éclaireur Humain,(Starting) Human Scout
+Human Bomber,Human Bomber,Bombardier Humain,Human Bomber
+Human Frigate,Human Frigate,Frégate Humaine,Human Frigate
+Human Battleship,Human Battleship,Cuirassé Humain,Human Battleship
+Jerg Scout,Jerg Scout,Éclaireur Jerg,Jerg Scout
+Jerg Bomber,Jerg Bomber,Bombardier Jerg,Jerg Bomber
+Jerg Frigate,Jerg Frigate,Frégate Jerg,Jerg Frigate
+Jerg Battleship,Jerg Battleship,Cuirassé Jerg,Jerg Battleship
+Vorg Scout,Vorg Scout,Éclaireur Vorg,Vorg Scout
+Vorg Bomber,Vorg Bomber,Bombardier Vorg,Vorg Bomber
+Vorg Frigate,Vorg Frigate,Frégate Vorg,Vorg Frigate
+Vorg Battleship,Vorg Battleship,Cuirassé Vorg,Vorg Battleship
+Craft %d %s,Craft %d %s,Produire %d %s,Craft %d %s
+Recycle %d Item(s),Recycle %d Item(s),Recycler %d Item(s),Recycle %d Item(s)
+Energy Cost....,Energy Cost....,Coût en Énergie,Energy Cost....
+Energy Gain....,Energy Gain....,Gain d'Énergie.,Energy Gain....
+The %s's Status,The %s's Status,État du %s,The %s's Status
+Not Enough Energy!,Not Enough Energy!,Pas Assez d'Énergie!,Not Enough Energy!
+In Cargo.......,In Cargo.......,Stock..........,In Cargo.......
+Available Energy..,Available Energy..,Énergie Disponible,Available Energy..
+Hull Integrity....,Hull Integrity....,Intégrité.........,Hull Integrity....
+Shield............,Shield............,Bouclier..........,Shield............
+Production Time,Production Time,Temps Production,Production Time

@@ -8,7 +8,7 @@ func set_row_data(data):
 	if _metadata.group != null:
 		_toggle.group = _metadata.group
 		
-	get_node("HBoxContainer/Name").text = data.name
+	get_node("HBoxContainer/Name").text = Globals.mytr(data.name)
 		
 	var icon_path : String = Globals.get_data(data, "icon.texture")
 	if icon_path != null and icon_path != "":
