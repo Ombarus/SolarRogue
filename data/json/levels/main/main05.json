@@ -6,6 +6,10 @@
 	"sprite":"wormhole",
 	"fully_mapped":false,
 	"no_ghost":true,
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[1536,0,128,128]
+	},
 	"objects": [
 		{"name":"data/json/ships/human/scout_laser.json", "spawn_rate":0.1, "max":5},
 		{"name":"data/json/ships/human/scout_missile.json", "spawn_rate":0.1, "max":5},

@@ -6,6 +6,10 @@
 	"sprite":"wormhole",
 	"fully_mapped":false,
 	"no_ghost":true,
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[1536,0,128,128]
+	},
 	"objects": [
 		{"name":"scenes/level_prefab/jerg/frigate_scouts.tscn", "spawn_rate":0.1, "max":4},
 		{"name":"scenes/level_prefab/jerg/triple_scouts.tscn", "spawn_rate":0.1, "max":6},

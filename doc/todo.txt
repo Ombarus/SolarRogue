@@ -6,8 +6,6 @@ RELEASE CHECKLIST :::
 - save after each turn, save when quit
 
 TODO :::
-- balance jerg. They don't have shield so they're converter should have the recipe for nanobots
-	- maybe I could give the jerg a permanent regenerating hull ? (since they're "biological" ships)
 - planet description
 - wormhole icon in target select screen
 - investigate steam and itch.io
@@ -170,6 +168,8 @@ IDEAS:::
 	
 	
 DONE :::
+- balance jerg. They don't have shield so they're converter should have the recipe for nanobots
+	- maybe I could give the jerg a permanent regenerating hull ? (since they're "biological" ships)
 - look & tap triggers interactable objects
 	- translate converter recipes
 	- Description window

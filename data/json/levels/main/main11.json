@@ -6,6 +6,10 @@
 	"sprite":"wormhole",
 	"fully_mapped":false,
 	"no_ghost":true,
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[1536,0,128,128]
+	},
 	"objects": [
 		{"name":"scenes/level_prefab/ConverterOfYendor.tscn", "spawn_rate":1.0, "max":1, "global_max":1, "tile_margin":[26,26]},
 		{"name":"data/json/ships/human/battleship.json", "spawn_rate":0.1, "max":6},

@@ -4,6 +4,10 @@
 	"sprite":"human_frigate",
 	"action_point":0,
 	"boardable":true,
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[896,256,128,128]
+	},
 	"mounts": {
 		"weapon": [
 			"data/json/items/weapons/laser_turret_mk1.json",
