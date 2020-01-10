@@ -56,6 +56,7 @@ func OnObjectLoaded_Callback(obj):
 		actual_inv.push_back(selected_item)
 		
 	modified_harvestable_data["inventory"] = actual_inv
+	modified_harvestable_data["actual_inventory_size"] = actual_inv_size
 	modified_harvestable_data["has_defense"] = MersenneTwister.rand_float() <= defense_chance
 	
 	obj.set_attrib("harvestable", modified_harvestable_data)
@@ -217,6 +218,7 @@ func ProcessHarvest(target, shooter, weapon_data):
 			Globals.LevelLoaderRef.RequestObject(inventory[inv_index], offset)
 			# safe because we're going from last to first so the next index shouldn't change
 			inventory.remove(inv_index)
+		target.set_attrib("harvestable.actual_inventory_size", inventory.size())
 		if is_player:
 			BehaviorEvents.emit_signal("OnLogLine", "Some useful materials float into orbit")
 			

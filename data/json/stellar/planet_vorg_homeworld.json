@@ -4,6 +4,16 @@
 	"sprite_choice": [
 		"planet_a", "planet_b", "planet_c", "planet_d", "planet_e", "planet_f", "planet_g", "planet_h"
 	],
+	"icon": [
+		{"texture":"data/textures/space-sprite.png", "region":[512,0,128,128]},
+		{"texture":"data/textures/space-sprite.png", "region":[640,0,128,128]},
+		{"texture":"data/textures/space-sprite.png", "region":[768,0,128,128]},
+		{"texture":"data/textures/space-sprite.png", "region":[896,0,128,128]},
+		{"texture":"data/textures/space-sprite.png", "region":[1024,0,128,128]},
+		{"texture":"data/textures/space-sprite.png", "region":[440,568,144,144]},
+		{"texture":"data/textures/space-sprite.png", "region":[696,568,144,144]},
+		{"texture":"data/textures/space-sprite.png", "region":[112,752,160,160]}
+	],
 	"harvestable": {
 		"comment1":"planets will be spawned with a certain inventory size between values in 'inventory_size'",
 		"comment2":"the content of each inventory slot will be choosen randomly from the pondered list",
@@ -28,5 +38,21 @@
 			{"src": "data/json/ships/vorg/battleship.json", "chance":10},
 			{"src": "data/json/ships/vorg/frigate.json", "chance":20}
 		]
+	},
+	"description": {
+		"text":"Planets are a rich source of base materials for feeding the energy converter of the ship.",
+		"Composition": {
+			"min_level":2,
+			"fields": [
+				{"name":"Valuables", "value":"{harvestable.actual_inventory_size}", "translate_value":false},
+				{"name":"Drop Chance", "value":"{harvestable.actual_rate}", "translate_value":false}
+			]
+		},
+		"Life Scan": {
+			"min_level":3,
+			"fields": [
+				{"name":"Is Colonized", "value":"{harvestable.has_defense}"}
+			]
+		}
 	}
 }

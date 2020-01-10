@@ -350,3 +350,9 @@ Jerg Regen,Jerg Regen,Régen Jerg,Jerg Regen
 %s [color=red]died alone[/color] on wormhole #%d,%s [color=red]died alone[/color] on wormhole #%d,%s [color=red]est mort seul[/color] au niveau #%d,%sはワームホール%dに[color=red]一人で死んだ[/color]
 %s [color=red]was destroyed[/color] on wormhole #%d,%s [color=red]was destroyed[/color] on wormhole #%d,%s [color=red]s'est fait tué[/color] au niveau #%d,%sはワームホール%dに[color=red]殺された[/color]
 %s [color=red]self-destructed[/color] on wormhole #%d,%s [color=red]self-destructed[/color] on wormhole #%d,%s [color=red]s'est suicidé[/color] au niveau #%d,%sはワームホール%dに[color=red]自殺した[/color]
+Planets are a rich source of base materials for feeding the energy converter of the ship.,Planets are a rich source of base materials for feeding the energy converter of the ship.,Les planètes sont de bonnes sources de ressources pour alimenter le convertisseur du vaisseau.,Planets are a rich source of base materials for feeding the energy converter of the ship.
+Valuables,Valuables,Ressources,Valuables
+Drop Chance,Drop Chance,Chance d'obtenir,Drop Chance
+Is Colonized,Is Colonized,Est colonisée,Is Colonized
+False,False,Non,False
+True,True,Oui,True

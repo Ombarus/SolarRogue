@@ -38,5 +38,21 @@
 			{"src": "data/json/ships/human/scout_laser.json", "chance":18},
 			{"src": "data/json/ships/human/frigate.json", "chance":2}
 		]
+	},
+	"description": {
+		"text":"Planets are a rich source of base materials for feeding the energy converter of the ship.",
+		"Composition": {
+			"min_level":2,
+			"fields": [
+				{"name":"Valuables", "value":"{harvestable.actual_inventory_size}", "translate_value":false},
+				{"name":"Drop Chance", "value":"{harvestable.actual_rate}", "translate_value":false}
+			]
+		},
+		"Life Scan": {
+			"min_level":3,
+			"fields": [
+				{"name":"Is Colonized", "value":"{harvestable.has_defense}"}
+			]
+		}
 	}
 }

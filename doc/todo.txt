@@ -6,6 +6,7 @@ RELEASE CHECKLIST :::
 - save after each turn, save when quit
 
 TODO :::
+- planet icon in target window
 - planet description
 - investigate steam and itch.io
 - Mobile only "features" ?
