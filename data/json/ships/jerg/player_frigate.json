@@ -35,6 +35,11 @@
 		"stored_energy": 20000,
 		"base_ap_energy_cost":12
 	},
+	"consumable": {
+		"hull_regen": [
+			{"data":"data/json/items/special/jerg_natural_regen.json"}
+		]
+	},
 	"description": {
 		"text":"A warship with mixed armaments generally used for convoy escort and support work. It's full of utility.",
 		"Overview": {
@@ -44,7 +49,8 @@
 				{"name":"Speed", "value":"{moving.speed}", "translate_value":false},
 				{"name":"Weapon mounts", "value":"2", "translate_value":false},
 				{"name":"Shield mounts", "value":"0", "translate_value":false},
-				{"name":"Utility mounts", "value":"4", "translate_value":false}
+				{"name":"Utility mounts", "value":"4", "translate_value":false},
+				{"name":"Special", "value": "Jerg Regen"}
 			]
 		},
 		"Status": {

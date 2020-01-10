@@ -9,7 +9,6 @@ TODO :::
 - balance jerg. They don't have shield so they're converter should have the recipe for nanobots
 	- maybe I could give the jerg a permanent regenerating hull ? (since they're "biological" ships)
 - planet description
-- look & tap triggers interactable objects
 - wormhole icon in target select screen
 - investigate steam and itch.io
 - Mobile only "features" ?
@@ -23,7 +22,6 @@ TODO :::
 - delete craft_need_row.tscn ?
 - translation
 	- main menu leaderboard ?
-	- translate converter recipes
 	- check mount selection and empty mount title
 - Generate icons, banner, etc. for android/ios/pc release
 - customize scroll bar visual ?
@@ -172,6 +170,8 @@ IDEAS:::
 	
 	
 DONE :::
+- look & tap triggers interactable objects
+	- translate converter recipes
 	- Description window
 	- button highlight broken ?
 	- welcome screen

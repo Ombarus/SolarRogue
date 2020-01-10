@@ -4,6 +4,7 @@ func _ready():
 	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
 	BehaviorEvents.connect("OnConsumeItem", self, "OnConsumeItem_Callback")
 	
+	
 func OnObjTurn_Callback(obj):
 	var regen_data = obj.get_attrib("consumable.hull_regen")
 	if regen_data == null:
@@ -15,7 +16,7 @@ func OnObjTurn_Callback(obj):
 		var item_data = Globals.LevelLoaderRef.LoadJSON(active_item.data)
 		active_item = _process_healing(obj, active_item, item_data)
 		var turn_since_beginning = active_item.last_turn_update - active_item.first_turn
-		if turn_since_beginning >= item_data.hull_regen.duration:
+		if item_data.hull_regen.duration >= 0 and turn_since_beginning >= item_data.hull_regen.duration:
 			finished.push_back(index)
 		index += 1
 		
@@ -31,11 +32,17 @@ func OnObjTurn_Callback(obj):
 		
 
 func _process_healing(obj, data, item_data):
+	if not "last_turn_update" in data:
+		data["last_turn_update"] = Globals.total_turn-1.0
+		
+	if not "first_turn" in data:
+		data["first_turn"] = Globals.total_turn-1.0
+	
 	var last_update = data.last_turn_update
 	
 	var turn_count = Globals.total_turn - last_update
 	var turn_since_beginning = Globals.total_turn - data.first_turn
-	if turn_since_beginning > item_data.hull_regen.duration:
+	if item_data.hull_regen.duration >= 0 and turn_since_beginning > item_data.hull_regen.duration:
 		turn_count = (Globals.total_turn - data.first_turn) - item_data.hull_regen.duration
 	
 	var heal = 0.0

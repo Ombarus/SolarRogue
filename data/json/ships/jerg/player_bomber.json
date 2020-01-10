@@ -35,6 +35,11 @@
 		"stored_energy": 10000,
 		"base_ap_energy_cost":10
 	},
+	"consumable": {
+		"hull_regen": [
+			{"data":"data/json/items/special/jerg_natural_regen.json"}
+		]
+	},
 	"description": {
 		"text":"Similar in size to scouts but made to carry torpedos. Slightly heavier and slower but more resilient than Scouts.",
 		"Overview": {
@@ -44,7 +49,8 @@
 				{"name":"Speed", "value":"{moving.speed}", "translate_value":false},
 				{"name":"Weapon mounts", "value":"1", "translate_value":false},
 				{"name":"Shield mounts", "value":"0", "translate_value":false},
-				{"name":"Utility mounts", "value":"2", "translate_value":false}
+				{"name":"Utility mounts", "value":"2", "translate_value":false},
+				{"name":"Special", "value": "Jerg Regen"}
 			]
 		},
 		"Status": {

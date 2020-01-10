@@ -40,6 +40,11 @@
 		"run_if_attacked":false,
 		"hit_chance":0.8
 	},
+	"consumable": {
+		"hull_regen": [
+			{"data":"data/json/items/special/jerg_natural_regen.json"}
+		]
+	},
 	"drop_on_death": [
 	
 		{"id":"data/json/items/converters/converter_mk2.json", "chance":0.001},
@@ -93,7 +98,8 @@
 				{"name":"Speed", "value":"{moving.speed}", "translate_value":false},
 				{"name":"Weapon mounts", "value":"2", "translate_value":false},
 				{"name":"Shield mounts", "value":"0", "translate_value":false},
-				{"name":"Utility mounts", "value":"4", "translate_value":false}
+				{"name":"Utility mounts", "value":"4", "translate_value":false},
+				{"name":"Special", "value": "Jerg Regen"}
 			]
 		},
 		"Status": {
