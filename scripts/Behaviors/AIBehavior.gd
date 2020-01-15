@@ -93,7 +93,7 @@ func OnScannerUpdated_Callback(obj):
 		return
 		
 	var level_id = Globals.LevelLoaderRef.GetLevelID()
-	var new_objs = obj.get_attrib("scanner_result.new_in_range." + level_id)
+	var new_objs = obj.get_attrib("scanner_result.new_in_range." + level_id, [])
 	#var new_out_objs = obj.get_attrib("scanner_result.new_out_of_range." + level_id)
 	
 	var player = null
@@ -178,7 +178,7 @@ func FindRandomTile():
 func DoFollowGroupLeader(obj):
 	if obj.get_attrib("ai.target") == null:
 		var level_id = Globals.LevelLoaderRef.GetLevelID()
-		var nearby_objs = obj.get_attrib("scanner_result.cur_in_range." + level_id)
+		var nearby_objs = obj.get_attrib("scanner_result.cur_in_range." + level_id, [])
 		for id in nearby_objs:
 			var o = Globals.LevelLoaderRef.GetObjectById(id)
 			if o != null and o.get_attrib("ai.pathfinding") == "group_leader":

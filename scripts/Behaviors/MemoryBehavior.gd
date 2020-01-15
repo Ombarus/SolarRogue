@@ -119,7 +119,7 @@ func _tag_tile(tile):
 
 func _update_occlusion(o):
 	var level_id = Globals.LevelLoaderRef.GetLevelID()
-	var scanned_tiles = o.get_attrib("scanner_result.scanned_tiles." + level_id)
+	var scanned_tiles = o.get_attrib("scanner_result.scanned_tiles." + level_id, [])
 	for t in scanned_tiles:
 		_tag_tile(t)
 	_update_occlusion_texture()
@@ -144,9 +144,9 @@ func OnScannerUpdated_Callback(obj):
 		return
 		
 	var level_id = Globals.LevelLoaderRef.GetLevelID()
-	var new_objs = obj.get_attrib("scanner_result.new_in_range." + level_id)
-	var new_out_objs = obj.get_attrib("scanner_result.new_out_of_range." + level_id)
-	var unkown_objs = obj.get_attrib("scanner_result.unknown." + level_id)
+	var new_objs = obj.get_attrib("scanner_result.new_in_range." + level_id, [])
+	var new_out_objs = obj.get_attrib("scanner_result.new_out_of_range." + level_id, [])
+	var unkown_objs = obj.get_attrib("scanner_result.unknown." + level_id, [])
 	var known_anomalies = obj.get_attrib("scanner_result.known_anomalies." + level_id, {})
 	
 	for id in new_objs:
@@ -182,7 +182,7 @@ func OnScannerUpdated_Callback(obj):
 			o.set_attrib("is_fake_ghost_memory", true)
 	
 	if unkown_objs != null:
-		var all_visible = _playerNode.get_attrib("scanner_result.cur_in_range." + level_id)
+		var all_visible = _playerNode.get_attrib("scanner_result.cur_in_range." + level_id, [])
 		for id in unkown_objs:
 			var o = Globals.LevelLoaderRef.GetObjectById(id)
 			

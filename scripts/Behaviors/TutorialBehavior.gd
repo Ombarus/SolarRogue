@@ -100,9 +100,9 @@ func OnScannerUpdated_Callback(obj):
 		return
 		
 	var level_id = Globals.LevelLoaderRef.GetLevelID()
-	var new_objs = obj.get_attrib("scanner_result.new_in_range." + level_id)
-	var new_out_objs = obj.get_attrib("scanner_result.new_out_of_range." + level_id)
-	var unkown_objs = obj.get_attrib("scanner_result.unknown." + level_id)
+	var new_objs = obj.get_attrib("scanner_result.new_in_range." + level_id, [])
+	var new_out_objs = obj.get_attrib("scanner_result.new_out_of_range." + level_id, [])
+	var unkown_objs = obj.get_attrib("scanner_result.unknown." + level_id, [])
 	var known_anomalies = obj.get_attrib("scanner_result.known_anomalies." + level_id, {})
 	
 	var steps : Array = PermSave.get_attrib("tutorial.completed_steps")

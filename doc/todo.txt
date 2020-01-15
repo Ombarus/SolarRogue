@@ -6,8 +6,6 @@ RELEASE CHECKLIST :::
 - save after each turn, save when quit
 
 TODO :::
-- planet icon in target window
-- planet description
 - investigate steam and itch.io
 - Mobile only "features" ?
 	- Hide "Quit" button (iOS or Mobile in general)
@@ -167,6 +165,8 @@ IDEAS:::
 	
 	
 DONE :::
+- planet description
+- planet icon in target window
 	- main menu leaderboard ?
 - wormhole icon in target select screen
 - balance jerg. They don't have shield so they're converter should have the recipe for nanobots

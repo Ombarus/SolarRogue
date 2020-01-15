@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://data/theme/default_ui_text.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/GUI/TransferInventoryV2.gd" type="Script" id=2]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=3]
-[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/GUI/ItemList/InventoryRowV2.tscn" type="PackedScene" id=6]
-[ext_resource path="res://data/InventoryV2_btn_group.tres" type="ButtonGroup" id=7]
-[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scripts/GUI/InputConsumer.gd" type="Script" id=4]
+[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/GUI/ItemList/InventoryRowV2.tscn" type="PackedScene" id=7]
+[ext_resource path="res://data/InventoryV2_btn_group.tres" type="ButtonGroup" id=8]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=9]
 
 [node name="TransferInventoryV2" type="Control"]
 anchor_right = 1.0
@@ -19,6 +20,7 @@ script = ExtResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 3 )
+script = ExtResource( 4 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
@@ -28,30 +30,25 @@ margin_top = 37.0
 margin_right = -20.0
 margin_bottom = -27.0
 
-[node name="MyShip" parent="HBoxContainer" instance=ExtResource( 4 )]
+[node name="MyShip" parent="HBoxContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 413.0
 margin_bottom = 656.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-dialog_ok = false
-dialog_cancel = false
-disabled = false
-bottom_title = ""
 title = "Player's Ship"
-border_style = "═"
 
-[node name="MyItemList" parent="HBoxContainer/MyShip" instance=ExtResource( 5 )]
+[node name="MyItemList" parent="HBoxContainer/MyShip" instance=ExtResource( 6 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 19.0
 margin_top = 58.0
 margin_right = -21.0
 margin_bottom = -17.0
-Row = ExtResource( 6 )
+Row = ExtResource( 7 )
 DragDropID = "InventoryV2"
-SelectGroup = ExtResource( 7 )
+SelectGroup = ExtResource( 8 )
 CanDropOnSelf = true
 
 [node name="CargoLabel" type="RichTextLabel" parent="HBoxContainer/MyShip"]
@@ -79,7 +76,7 @@ margin_right = 152.0
 margin_bottom = 522.0
 mouse_filter = 2
 
-[node name="Transfer" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
+[node name="Transfer" parent="HBoxContainer/Control/Normal" instance=ExtResource( 9 )]
 anchor_right = 1.0
 margin_right = 0.0
 margin_bottom = 90.0
@@ -88,7 +85,7 @@ size_flags_horizontal = 3
 Text = "[t]ransfer"
 ShortcutKey = "t"
 
-[node name="TakeAll" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
+[node name="TakeAll" parent="HBoxContainer/Control/Normal" instance=ExtResource( 9 )]
 anchor_right = 1.0
 margin_top = 110.0
 margin_right = 0.0
@@ -98,7 +95,7 @@ size_flags_horizontal = 3
 Text = "<<"
 ShortcutKey = "<"
 
-[node name="TransferAll" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
+[node name="TransferAll" parent="HBoxContainer/Control/Normal" instance=ExtResource( 9 )]
 anchor_right = 1.0
 margin_top = 220.0
 margin_right = 0.0
@@ -108,7 +105,7 @@ size_flags_horizontal = 3
 Text = ">>"
 ShortcutKey = ">"
 
-[node name="Desc" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
+[node name="Desc" parent="HBoxContainer/Control/Normal" instance=ExtResource( 9 )]
 anchor_right = 1.0
 margin_top = 330.0
 margin_right = 0.0
@@ -119,7 +116,7 @@ Text = "?"
 ShortcutKey = "?"
 AlwaysOnShortcut = false
 
-[node name="Close" parent="HBoxContainer/Control/Normal" instance=ExtResource( 8 )]
+[node name="Close" parent="HBoxContainer/Control/Normal" instance=ExtResource( 9 )]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -139,7 +136,7 @@ margin_right = -22.0
 margin_bottom = -134.0
 mouse_filter = 2
 
-[node name="Cancel" parent="HBoxContainer/Control/Control" instance=ExtResource( 8 )]
+[node name="Cancel" parent="HBoxContainer/Control/Control" instance=ExtResource( 9 )]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -154,7 +151,7 @@ Text = "[esc] cancel"
 ShortcutEnum = 16777217
 AlwaysOnShortcut = false
 
-[node name="OtherShip" parent="HBoxContainer" instance=ExtResource( 4 )]
+[node name="OtherShip" parent="HBoxContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 834.0
@@ -162,23 +159,18 @@ margin_right = 1248.0
 margin_bottom = 656.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-dialog_ok = false
-dialog_cancel = false
-disabled = false
-bottom_title = ""
 title = "A Human Scout"
-border_style = "═"
 
-[node name="MyItemList" parent="HBoxContainer/OtherShip" instance=ExtResource( 5 )]
+[node name="MyItemList" parent="HBoxContainer/OtherShip" instance=ExtResource( 6 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 19.0
 margin_top = 58.0
 margin_right = -21.0
 margin_bottom = -17.0
-Row = ExtResource( 6 )
+Row = ExtResource( 7 )
 DragDropID = "InventoryV2"
-SelectGroup = ExtResource( 7 )
+SelectGroup = ExtResource( 8 )
 CanDropOnSelf = true
 
 [node name="CargoLabel" type="RichTextLabel" parent="HBoxContainer/OtherShip"]

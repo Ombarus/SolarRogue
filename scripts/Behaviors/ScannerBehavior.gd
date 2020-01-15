@@ -93,7 +93,7 @@ func do_anomaly_detection(obj):
 	var bonus : float = Globals.get_data(scanner_data, "scanning.detection_bonus")
 	var level_id : String = Globals.LevelLoaderRef.GetLevelID()
 	var known_anomalies : Dictionary = obj.get_attrib("scanner_result.known_anomalies." + level_id, {})
-	var detectable_obj = obj.get_attrib("scanner_result.cur_in_range." + level_id)
+	var detectable_obj = obj.get_attrib("scanner_result.cur_in_range." + level_id, [])
 	var last_check_turn : float = obj.get_attrib("scanner_result.last_anomaly_check", Globals.total_turn - 1.0)
 	var turn_elapsed : float = Globals.total_turn - last_check_turn
 	var whole : int = floor(turn_elapsed)
@@ -116,7 +116,7 @@ func do_anomaly_detection(obj):
 func special_update_ultimate(obj, scanner_data):
 	if scanner_data != null and Globals.is_(Globals.get_data(scanner_data, "scanning.fully_mapped"), true):
 		var level_id : String = Globals.LevelLoaderRef.GetLevelID()
-		var old_range : Array = obj.get_attrib("scanner_result.cur_in_range." + level_id)
+		var old_range : Array = obj.get_attrib("scanner_result.cur_in_range." + level_id, [])
 		var cur_in_range := []
 		for key in Globals.LevelLoaderRef.objById:
 			var o : Node2D = Globals.LevelLoaderRef.objById[key]

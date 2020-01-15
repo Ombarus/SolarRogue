@@ -33,7 +33,6 @@ title = "MAN(1) Solar Rogue General Commands Manual"
 [node name="en" type="RichTextLabel" parent="base" groups=[
 "Tuto_Lang",
 ]]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 15.0
