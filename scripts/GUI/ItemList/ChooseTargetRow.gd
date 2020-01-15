@@ -7,6 +7,9 @@ onready var _toggle = get_node("Toggle")
 # data {"name_id":"Missile', "icon": {"texture":<path>, "region":[x,y,w,h]}}
 func set_row_data(data):
 	_metadata = data
+	if _toggle == null:
+		return
+		
 	if _metadata.group != null:
 		_toggle.group = _metadata.group
 		
@@ -31,6 +34,8 @@ func get_row_data():
 
 func _ready():
 	_toggle.connect("pressed", self, "pressed_callback")
+	if _metadata != null:
+		set_row_data(_metadata)
 	
 func pressed_callback():
 	_metadata.origin.bubble_selection_changed()

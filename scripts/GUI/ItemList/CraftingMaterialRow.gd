@@ -9,6 +9,10 @@ onready var _toggle = get_node("Toggle")
 # data {"max":5, "name_id":"Missile', "selected":2, "disabled":true}
 func set_row_data(data):
 	_metadata = data
+	
+	if _toggle == null:
+		return
+		
 	if _metadata.group != null:
 		_toggle.group = _metadata.group
 	
@@ -21,6 +25,9 @@ func set_row_data(data):
 
 func _ready():
 	_toggle.connect("pressed", self, "pressed_callback")
+	if _metadata != null:
+		select(0)
+	
 	
 func pressed_callback():
 	if _toggle.pressed == false:

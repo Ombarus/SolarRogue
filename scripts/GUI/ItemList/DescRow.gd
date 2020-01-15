@@ -18,6 +18,10 @@ onready var _indent = get_node("HBoxContainer/Indent")
 func set_row_data(data):
 	_metadata = data
 	_metadata["self"] = self
+	
+	# Have to wait for the OnReady
+	if _name == null:
+		return
 
 	_name.text = data.name
 		
@@ -34,3 +38,7 @@ func set_row_data(data):
 		_value.visible = true
 		_spacer.visible = false
 		_indent.visible = true
+
+func _ready():
+	if _metadata != null:
+		set_row_data(_metadata)

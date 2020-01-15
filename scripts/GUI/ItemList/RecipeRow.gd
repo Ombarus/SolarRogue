@@ -5,6 +5,11 @@ onready var _toggle : Button = get_node("Toggle")
 # data : {"name":<recipe_name>, "icon": {"texture":<path>, "region":[x,y,w,h]}, requirements, produce, ap_cost, etc... (see converter recipe.json)}
 func set_row_data(data):
 	_metadata = data
+	# OnReady is called after the row is added to the scene
+	# but now for layout to flow properly we have to use call_defered
+	# to add to scene so OnReady might not have been called yet
+	if _toggle == null:
+		return
 	if _metadata.group != null:
 		_toggle.group = _metadata.group
 		
@@ -39,6 +44,8 @@ func get_row_data():
 
 func _ready():
 	_toggle.connect("pressed", self, "pressed_callback")
+	if _metadata != null:
+		set_row_data(_metadata)
 	
 func pressed_callback():
 	get_node("HBoxContainer/Name").add_color_override("font_color", Color(0,0,0))

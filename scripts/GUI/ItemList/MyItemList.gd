@@ -35,13 +35,15 @@ func set_content(val):
 	var count = 0
 	for row in val:
 		var n = Row.instance()
-		_rows_node.add_child(n)
+		_rows_node.call_deferred("add_child", n)
 		row["origin"] = self
 		row["group"] = SelectGroup
 		row["index"] = count
 		row["dragdrop_id"] = DragDropID
 		count += 1
 		n.RowData = row
+	#self.minimum_size_changed()
+	#self.call_deferred("update")
 	
 func get_content():
 	var content = []
@@ -50,6 +52,7 @@ func get_content():
 	return content
 
 func _ready():
+	#Clear()
 	if _debug == true:
 		set_content([{"text":"hello"}, {"text":"world long text"}, {"text":"bleh"}])
 

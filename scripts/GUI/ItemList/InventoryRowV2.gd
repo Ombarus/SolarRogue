@@ -14,11 +14,11 @@ func set_row_data(data):
 	if data.group != null:
 		get_node("BtnWrap/Toggle").group = data.group
 		
-	get_node("Equipped").visible = data.equipped
+	#get_node("Equipped").visible = data.equipped
 	if "display_name_id" in data:
-		get_node("BtnWrap/HBoxContainer/Wrap/Name").bbcode_text = data.display_name_id
+		get_node("BtnWrap/HBoxContainer/Wrap/Name").text = data.display_name_id
 	else:
-		get_node("BtnWrap/HBoxContainer/Wrap/Name").bbcode_text = Globals.mytr(data.name_id)
+		get_node("BtnWrap/HBoxContainer/Wrap/Name").text = Globals.mytr(data.name_id)
 	
 	var icon_path : String = Globals.get_data(data, "icon.texture")
 	if icon_path != null and icon_path != "":
@@ -36,13 +36,16 @@ func set_row_data(data):
 		self.theme = header_theme
 		get_node("BtnWrap/Toggle").visible = false
 		get_node("BtnWrap/HBoxContainer/Icon").visible = false
-		get_node("Equipped").visible = false
+		#get_node("Equipped").visible = false
 	else:
 		self.theme = normal_theme
 		get_node("BtnWrap/HBoxContainer/Icon").visible = true
 	
 	if _metadata.origin.is_connected("OnSelectionChanged", self, "OnSelectionChanged_Callback"):
 		_metadata.origin.disconnect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
+	
+	#self.minimum_size_changed()
+	#self.call_deferred("update")
 
 func UpdateSelection():
 	if get_node("BtnWrap/Toggle").pressed == false and (not "header" in _metadata or not _metadata.header == true):

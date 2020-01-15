@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://data/theme/default_ui_text.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/GUI/ItemList/InventoryRowV2.gd" type="Script" id=2]
@@ -6,9 +6,6 @@
 [ext_resource path="res://scripts/GUI/DragDropCatcher.gd" type="Script" id=4]
 [ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=5]
 [ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=6]
-[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold_text.tres" type="DynamicFont" id=7]
-[ext_resource path="res://data/fonts/DejaVuSansMonoItal_text.tres" type="DynamicFont" id=8]
-[ext_resource path="res://data/fonts/DejaVuSansMonoBold_text.tres" type="DynamicFont" id=9]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 2
@@ -16,13 +13,13 @@ atlas = ExtResource( 5 )
 region = Rect2( 256, 0, 128, 128 )
 
 [node name="InventoryRowV2" type="VBoxContainer"]
-margin_right = 939.0
+margin_right = 849.0
 margin_bottom = 50.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="BtnWrap" type="Control" parent="."]
-margin_right = 939.0
+margin_right = 849.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
 mouse_filter = 1
@@ -37,8 +34,8 @@ script = ExtResource( 4 )
 forward_to = NodePath("../..")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BtnWrap"]
-margin_right = 939.0
-margin_bottom = 50.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="Icon" type="TextureRect" parent="BtnWrap/HBoxContainer"]
@@ -51,7 +48,7 @@ expand = true
 
 [node name="Wrap" type="Control" parent="BtnWrap/HBoxContainer"]
 margin_left = 54.0
-margin_right = 939.0
+margin_right = 849.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
 mouse_filter = 2
@@ -67,37 +64,15 @@ mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/normal_font = ExtResource( 6 )
+scroll_active = false
 
-[node name="Name" type="RichTextLabel" parent="BtnWrap/HBoxContainer/Wrap"]
+[node name="Name" type="Label" parent="BtnWrap/HBoxContainer/Wrap"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 12.0
-margin_bottom = -11.0
-mouse_filter = 2
+rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
-custom_fonts/normal_font = ExtResource( 6 )
-bbcode_text = "Laser Turret MK1"
 text = "Laser Turret MK1"
-
-[node name="Equipped" type="Control" parent="."]
-visible = false
-margin_top = 36.0
-margin_right = 939.0
-margin_bottom = 61.0
-rect_min_size = Vector2( 0, 25 )
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Equipped"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 64.0
-rect_min_size = Vector2( 0, 20 )
-custom_fonts/mono_font = ExtResource( 6 )
-custom_fonts/bold_italics_font = ExtResource( 7 )
-custom_fonts/italics_font = ExtResource( 8 )
-custom_fonts/bold_font = ExtResource( 9 )
-custom_fonts/normal_font = ExtResource( 6 )
-bbcode_enabled = true
-bbcode_text = "(equipped)"
-text = "(equipped)"
+valign = 1
+autowrap = true
 
 [connection signal="toggled" from="BtnWrap/Toggle" to="." method="_on_Toggle_toggled"]

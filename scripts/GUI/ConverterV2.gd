@@ -68,9 +68,11 @@ func CraftButtonPressed_Callback():
 	_callback_obj.call(_callback_method, _current_crafting_selected, using_content)
 	
 	var last_selected :int = _current_crafting_selected.index
-	#TODO: stay on the same recipe after re-init
+	
 	ReInit()
-	_recipe_list.select(last_selected)
+	# ReInit now add child on the next frame for layout reason. So give it
+	# a chance to populate before we re-select the previous recipe
+	_recipe_list.call_deferred("select", last_selected)
 
 
 func Close_Callback():

@@ -34,7 +34,7 @@
 		"Scanning": {
 			"min_level":0,
 			"fields": [
-				{"name":"Radius", "value":"Monstrous", "translate_value":false},
+				{"name":"Radius", "value":"Monstrous"},
 				{"name":"Level", "value":"{scanning.level}", "translate_value":false},
 				{"name":"Special", "value":"Unique Radar"}
 			]
