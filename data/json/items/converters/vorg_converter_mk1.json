@@ -4,7 +4,7 @@
 	"sprite":"converter",
 	"icon": {
 		"texture":"data/textures/space-sprite.png",
-		"region":[288,160,64,64]
+		"region":[256,128,128,128]
 	},
 	"equipment": {
 		"slot":"converter",
