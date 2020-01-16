@@ -17,7 +17,7 @@
 		],
 		"shield": ["data/json/items/shields/shield_mk1.json"],
 		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
-		"converter": ["data/json/items/converters/converter_yendor.json"]
+		"converter": ["data/json/items/converters/converter_mk1.json"]
 	},
 	"destroyable": {
 		"hull":13

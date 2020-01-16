@@ -6,7 +6,6 @@ RELEASE CHECKLIST :::
 - save after each turn, save when quit
 
 TODO :::
-- translate death screen
 - investigate steam and itch.io
 - Mobile only "features" ?
 	- Hide "Quit" button (iOS or Mobile in general)
@@ -19,7 +18,6 @@ TODO :::
 	- check mount selection and empty mount title
 - Generate icons, banner, etc. for android/ios/pc release
 - customize scroll bar visual ?
-- death screen need beautification
 - leaderboard display improvement (scroll is not ideal yet)
 - SOUNDS
 	- SFX :
@@ -164,6 +162,8 @@ IDEAS:::
 	
 	
 DONE :::
+- death screen need beautification
+- translate death screen
 - multiline item names in list ?
 - art
 	- converter ?
