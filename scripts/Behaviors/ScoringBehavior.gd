@@ -13,32 +13,43 @@ func OnPlayerDeath_Callback():
 	var player = Globals.LevelLoaderRef.objByType["player"][0]
 	var cur_level = Globals.LevelLoaderRef.current_depth
 	var player_name = player.get_attrib("player_name")
-	var message = ""
+	var message_v2 := ""
+	var message_success := ""
 	var game_won = player.get_attrib("game_won")
 	var result = null
 	if game_won != null and game_won == true:
-		message += "The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. \nYou spool up the engines and glide through it. On the other side HOME is waiting ! \n\nYou made it !"
+		message_success += Globals.mytr("SUCCESS_CONGRATS")
+		message_v2 += player_name
 		result = PermSave.END_GAME_STATE.won
 	elif player.get_attrib("destroyable.current_hull", 1) <= 0:
-		message += "The %s has been destroyed" % player_name
+		var killer_name = Globals.mytr(player.get_attrib("destroyable.damage_source"))
+		message_v2 += Globals.mytr("Killed by %s", [killer_name])
 		result = PermSave.END_GAME_STATE.destroyed
 	elif player.get_attrib("converter.stored_energy") <= 0:
-		message += "The %s has run out of energy, and you will spend an eternity drifting through empty void" % player_name
+		message_v2 += Globals.mytr("Stranded")
 		result = PermSave.END_GAME_STATE.entropy
 	else:
-		message += "The %s self destructed, everyone on board was lost" % player_name
+		message_v2 += Globals.mytr("self destructed")
 		result = PermSave.END_GAME_STATE.suicide
 	if game_won == null or game_won == false:
-		message += "\nYou died on the %dth wormhole" % (cur_level+1)
-	message += "\nYou visited %d solar systems" % Globals.LevelLoaderRef.num_generated_level
+		message_v2 += "\n" + Globals.mytr("on the %dth wormhole", [cur_level+1])
+	message_v2 += "\n" + Globals.mytr("Saw %d solar systems", [Globals.LevelLoaderRef.num_generated_level])
 	var lowest_diff = player.get_attrib("lowest_diff")
 	lowest_diff += 1
-	message += "\nDifficulty multiplier : %d" % lowest_diff
+	message_v2 += "\n" + Globals.mytr("Difficulty : %d", [lowest_diff])
 		
 	var score = CalculateScore(player, game_won)
 	update_leaderboard(player, score, result)
-	message += "\n\nYour final score is : " + str(score)
-	BehaviorEvents.emit_signal("OnPushGUI", "DeathScreen", {"text":message, "callback_object":self, "callback_method":"ScoreDone_Callback"})
+	message_v2 += "\n\n%d" % score
+	var death_screen_data = {
+		"player_name": player_name,
+		"epitaph": message_v2,
+		"message_success": message_success,
+		"is_success": game_won != null and game_won == true,
+		"callback_object":self,
+		"callback_method":"ScoreDone_Callback"
+	}
+	BehaviorEvents.emit_signal("OnPushGUI", "DeathScreen", death_screen_data)
 
 func CalculateScore(player, game_won):
 	var final_score = 0
@@ -70,7 +81,7 @@ func CalculateScore(player, game_won):
 	
 	# Add x / turns
 	if game_won != null and game_won == true:
-		var turn_score = 1000000.0 / Globals.total_turn
+		var turn_score = 1000000.0 / (Globals.total_turn+1)
 		final_score += round(turn_score)
 		
 	var num_generated_level = Globals.LevelLoaderRef.num_generated_level

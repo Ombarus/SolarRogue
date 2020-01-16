@@ -357,3 +357,11 @@ Is Colonized,Is Colonized,Est colonisée,Is Colonized
 False,False,Non,False
 True,True,Oui,True
 Monstrous,Monstrous,Monstrueux,Monstrous
+SUCCESS_CONGRATS,"The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! \n\nYou made it !","Le Convertisseur de Yendor absorbe l'énergie du trou noir lui-même pour ouvrir une brêche dans l'espace. Doucement, vous engagé les moteurs et de l'autre côté se trouve un territoire bien connu. \n\nVous avez réussi !","The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! \n\nYou made it !"
+Killed by %s,Killed by %s,Tué par %s,%sを殺された
+Stranded,Stranded,Sans Énergie,Stranded
+self destructed,self destructed,suicidé,自殺
+on the %dth wormhole,on the %dth wormhole,au %de trou noir,on the %dth wormhole
+Saw %d solar systems,Saw %d solar systems,A vu %d systèmes,Saw %d solar systems
+Difficulty : %d,Difficulty : %d,Difficulté : %d,Difficulty : %d
+You WON!,You WON!,C'est Gagné!,勝ちました！

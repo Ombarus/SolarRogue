@@ -6,7 +6,7 @@ RELEASE CHECKLIST :::
 - save after each turn, save when quit
 
 TODO :::
-- multiline item names in list ?
+- translate death screen
 - investigate steam and itch.io
 - Mobile only "features" ?
 	- Hide "Quit" button (iOS or Mobile in general)
@@ -164,6 +164,7 @@ IDEAS:::
 	
 	
 DONE :::
+- multiline item names in list ?
 - art
 	- converter ?
 - planet description

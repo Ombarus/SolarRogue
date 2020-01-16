@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/GUI/DeathScreen.gd" type="Script" id=1]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://data/fonts/DejaVuSansMonoItalBold_text.tres" type="DynamicFont" id=4]
 [ext_resource path="res://data/fonts/DejaVuSansMonoItal_text.tres" type="DynamicFont" id=5]
 [ext_resource path="res://data/fonts/DejaVuSansMonoBold_text.tres" type="DynamicFont" id=6]
+[ext_resource path="res://scripts/tests/EarthAsciiAnim.gd" type="Script" id=7]
+[ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
@@ -25,24 +27,1835 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -338.5
-margin_top = -251.0
-margin_right = 338.5
-margin_bottom = 251.0
+margin_left = -360.0
+margin_top = -326.0
+margin_right = 360.0
+margin_bottom = 331.0
 dialog_ok = true
 title = "You are dead"
 
-[node name="Content" type="RichTextLabel" parent="base"]
+[node name="tombstone" type="RichTextLabel" parent="base"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 15.0
-margin_top = 49.0
+margin_left = 95.0
+margin_top = 76.0
 margin_right = -26.0
-margin_bottom = -34.0
+margin_bottom = -55.0
 custom_fonts/mono_font = ExtResource( 3 )
 custom_fonts/bold_italics_font = ExtResource( 4 )
 custom_fonts/italics_font = ExtResource( 5 )
 custom_fonts/bold_font = ExtResource( 6 )
 custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
+bbcode_text = "      
+                      _|_
+                     `-|-`
+                       |
+                 __.-'~^~`-.__
+            .--\"\"             \"\"--.
+           /        _     _        '.
+          |        |_) | |_)        |
+          |        | \\ | |          |
+          |                         |
+          |                         |
+          |                         |
+          |                         |
+          |                         |
+          |                         |
+          |                         |
+          |                         |
+          |                         |
+          |                         |
+          |                         |
+       /\\-|                         |/\\.
+      .-\\\\`=.......................=`//-\"."
+text = "      
+                      _|_
+                     `-|-`
+                       |
+                 __.-'~^~`-.__
+            .--\"\"             \"\"--.
+           /        _     _        '.
+          |        |_) | |_)        |
+          |        | \\ | |          |
+          |                         |
+          |                         |
+          |                         |
+          |                         |
+          |                         |
+          |                         |
+          |                         |
+          |                         |
+          |                         |
+          |                         |
+          |                         |
+       /\\-|                         |/\\.
+      .-\\\\`=.......................=`//-\"."
+
+[node name="Earth" type="Control" parent="base"]
+editor/display_folded = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -65.0
+margin_top = 140.0
+margin_bottom = -25.0
+script = ExtResource( 7 )
+frame_rate = 0.25
+
+[node name="tombstone01" type="RichTextLabel" parent="base/Earth"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = -10.0
+custom_fonts/mono_font = ExtResource( 8 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "               _-o#&&*''''?d:>b\\_
+          _o/\"`''  '',, dMF9MMMMMHo_
+       .o&#'        `\"MbHMMMMMMMMMMMHo.
+     .o\"\" '         vodM*$&&HMMMMMMMMMM?.
+    ,'              $M&ood,~'`(&##MMMMMMH\\
+   /               ,MMMMMMM#b?#bobMMMMHMMML
+  &              ?MMMMMMMMMMMMMMMMM7MMM$R*Hk
+ ?$.            :MMMMMMMMMMMMMMMMMMM/HMMM|`*L
+|               |MMMMMMMMMMMMMMMMMMMMbMH'   T,
+$H#:            `*MMMMMMMMMMMMMMMMMMMMb#}'  `?
+]MMH#             \"\"*\"\"\"\"*#MMMMMMMMMMMMM'    -
+MMMMMb_                   |MMMMMMMMMMMP'     :
+HMMMMMMMHo                 `MMMMMMMMMT       .
+?MMMMMMMMP                  9MMMMMMMM}       -
+-?MMMMMMM                  |MMMMMMMMM?,d-    '
+ :|MMMMMM-                 `MMMMMMMT .M|.   :
+  .9MMM[                    &MMMMM*' `'    .
+   :9MMk                    `MMM#\"        -
+     &M}                     `          .-
+      `&.                             .
+        `~,   .                     ./
+            . _                  .-
+              '`--._,dd###pp=\"\"'"
+text = "               _-o#&&*''''?d:>b\\_
+          _o/\"`''  '',, dMF9MMMMMHo_
+       .o&#'        `\"MbHMMMMMMMMMMMHo.
+     .o\"\" '         vodM*$&&HMMMMMMMMMM?.
+    ,'              $M&ood,~'`(&##MMMMMMH\\
+   /               ,MMMMMMM#b?#bobMMMMHMMML
+  &              ?MMMMMMMMMMMMMMMMM7MMM$R*Hk
+ ?$.            :MMMMMMMMMMMMMMMMMMM/HMMM|`*L
+|               |MMMMMMMMMMMMMMMMMMMMbMH'   T,
+$H#:            `*MMMMMMMMMMMMMMMMMMMMb#}'  `?
+]MMH#             \"\"*\"\"\"\"*#MMMMMMMMMMMMM'    -
+MMMMMb_                   |MMMMMMMMMMMP'     :
+HMMMMMMMHo                 `MMMMMMMMMT       .
+?MMMMMMMMP                  9MMMMMMMM}       -
+-?MMMMMMM                  |MMMMMMMMM?,d-    '
+ :|MMMMMM-                 `MMMMMMMT .M|.   :
+  .9MMM[                    &MMMMM*' `'    .
+   :9MMk                    `MMM#\"        -
+     &M}                     `          .-
+      `&.                             .
+        `~,   .                     ./
+            . _                  .-
+              '`--._,dd###pp=\"\"'"
+
+[node name="tombstone02" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              _v->#H#P? \"':o<>\\_
+          .,dP` `''  \"'-o.+H6&MMMHo_
+        oHMH9'         `?&bHMHMMMMMMHo.
+      oMP\"' '           ooMP*#&HMMMMMMM?.
+    ,M*          -     `*MSdob//`^&##MMMH\\
+   d*'                .,MMMMMMH#o>#ooMMMMMb
+  HM-                :HMMMMMMMMMMMMMMM&HM[R\\
+ d\"Z\\.               9MMMMMMMMMMMMMMMMM[HMM|:
+-H    -              MMMMMMMMMMMMMMMMMMMbMP' :
+:??Mb#               `9MMMMMMMMMMMMMMMMMMH#! .
+: MMMMH#,              \"*\"\"\"\"`#HMMMMMMMMMMH  -
+||MMMMMM6\\.                    {MMMMMMMMMH'  :
+:|MMMMMMMMMMHo                 `9MMMMMMMM'   .
+. HMMMMMMMMMMP'                 !MMMMMMMM    `
+- `#MMMMMMMMM                   HMMMMMMM*,/  :
+ :  ?MMMMMMMF                   HMMMMMM',P' :
+  .  HMMMMR'                    {MMMMP' ^' -
+   : `HMMMT                     iMMH'     .'
+    -.`HMH                               .
+      -:*H                            . '
+        -`\\,,    .                  .-
+          ' .  _                 .-`
+              '`~\\.__,obb#q==~'''
+"
+text = "              _v->#H#P? \"':o<>\\_
+          .,dP` `''  \"'-o.+H6&MMMHo_
+        oHMH9'         `?&bHMHMMMMMMHo.
+      oMP\"' '           ooMP*#&HMMMMMMM?.
+    ,M*          -     `*MSdob//`^&##MMMH\\
+   d*'                .,MMMMMMH#o>#ooMMMMMb
+  HM-                :HMMMMMMMMMMMMMMM&HM[R\\
+ d\"Z\\.               9MMMMMMMMMMMMMMMMM[HMM|:
+-H    -              MMMMMMMMMMMMMMMMMMMbMP' :
+:??Mb#               `9MMMMMMMMMMMMMMMMMMH#! .
+: MMMMH#,              \"*\"\"\"\"`#HMMMMMMMMMMH  -
+||MMMMMM6\\.                    {MMMMMMMMMH'  :
+:|MMMMMMMMMMHo                 `9MMMMMMMM'   .
+. HMMMMMMMMMMP'                 !MMMMMMMM    `
+- `#MMMMMMMMM                   HMMMMMMM*,/  :
+ :  ?MMMMMMMF                   HMMMMMM',P' :
+  .  HMMMMR'                    {MMMMP' ^' -
+   : `HMMMT                     iMMH'     .'
+    -.`HMH                               .
+      -:*H                            . '
+        -`\\,,    .                  .-
+          ' .  _                 .-`
+              '`~\\.__,obb#q==~'''
+"
+
+[node name="tombstone03" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              .ovr:HMM#?:`' >b\\_
+          .,:&Hi' `'   \"' \\\\|&bSMHo_
+        oHMMM#*}          `?&dMMMMMMHo.
+     .dMMMH\"''''           ,oHH*&&9MMMM?.
+    ,MMM*'                 `*M\\bd<|\"*&#MH\\
+   dHH?'                   :MMMMMM#bd#odMML
+  H' |\\                  `dMMMMMMMMMMMMMM9Mk
+ JL/\"7+,.                `MMMMMMMMMMMMMMMH9ML
+-`Hp     '               |MMMMMMMMMMMMMMMMHH|:
+:  \\\\#M#d?                `HMMMMMMMMMMMMMMMMH.
+.   JMMMMM##,              ``*\"\"'\"*#MMMMMMMMH
+-. ,MMMMMMMM6o_                    |MMMMMMMM':
+:  |MMMMMMMMMMMMMb\\                 TMMMMMMT :
+.   ?MMMMMMMMMMMMM'                 :MMMMMM|.`
+-    ?HMMMMMMMMMM:                  HMMMMMM\\|:
+ :     9MMMMMMMMH'                 `MMMMMP.P.
+  .    `MMMMMMT''                   HMMM*''-
+   -    TMMMMM'                     MM*'  -
+    '.   HMM#                            -
+      -. `9M:                          .'
+        -. `b,,    .                . '
+          '-\\   .,               .-`
+              '-:b~\\\\_,oddq==--\"
+"
+text = "              .ovr:HMM#?:`' >b\\_
+          .,:&Hi' `'   \"' \\\\|&bSMHo_
+        oHMMM#*}          `?&dMMMMMMHo.
+     .dMMMH\"''''           ,oHH*&&9MMMM?.
+    ,MMM*'                 `*M\\bd<|\"*&#MH\\
+   dHH?'                   :MMMMMM#bd#odMML
+  H' |\\                  `dMMMMMMMMMMMMMM9Mk
+ JL/\"7+,.                `MMMMMMMMMMMMMMMH9ML
+-`Hp     '               |MMMMMMMMMMMMMMMMHH|:
+:  \\\\#M#d?                `HMMMMMMMMMMMMMMMMH.
+.   JMMMMM##,              ``*\"\"'\"*#MMMMMMMMH
+-. ,MMMMMMMM6o_                    |MMMMMMMM':
+:  |MMMMMMMMMMMMMb\\                 TMMMMMMT :
+.   ?MMMMMMMMMMMMM'                 :MMMMMM|.`
+-    ?HMMMMMMMMMM:                  HMMMMMM\\|:
+ :     9MMMMMMMMH'                 `MMMMMP.P.
+  .    `MMMMMMT''                   HMMM*''-
+   -    TMMMMM'                     MM*'  -
+    '.   HMM#                            -
+      -. `9M:                          .'
+        -. `b,,    .                . '
+          '-\\   .,               .-`
+              '-:b~\\\\_,oddq==--\"
+"
+
+[node name="tombstone04" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              _oo##'9MMHb':'-,o_
+          .oH\":HH$' \"\"'  \"' -\\7*R&o_
+       .oHMMMHMH#9:          \"\\bMMMMHo.
+      dMMMMMM*\"\"'`'           .oHM\"H9MM?.
+    ,MMMMMM'                   \"HLbd<|?&H\\
+   JMMH#H'                     |MMMMM#b>bHb
+  :MH  .\"\\                   `|MMMMMMMMMMMM&
+ .:M:d-\"|:b..                 9MMMMMMMMMMMMM+
+:  \"*H|      -                &MMMMMMMMMMMMMH:
+.    `LvdHH#d?                `?MMMMMMMMMMMMMb
+:      iMMMMMMH#b               `\"*\"'\"#HMMMMMM
+.   . ,MMMMMMMMMMb\\.                   {MMMMMH
+-     |MMMMMMMMMMMMMMHb,               `MMMMM|
+:      |MMMMMMMMMMMMMMH'                &MMMM,
+-       `#MMMMMMMMMMMM                 |MMMM6-
+ :        `MMMMMMMMMM+                 ]MMMT/
+  .       `MMMMMMMP\"                   HMM*`
+   -       |MMMMMH'                   ,M#'-
+    '.     :MMMH|                       .-
+      .     |MM                        -
+       ` .   `#?..    .             ..'
+           -.     _.             .-
+              '-|.#qo__,,ob=~~-''
+"
+text = "              _oo##'9MMHb':'-,o_
+          .oH\":HH$' \"\"'  \"' -\\7*R&o_
+       .oHMMMHMH#9:          \"\\bMMMMHo.
+      dMMMMMM*\"\"'`'           .oHM\"H9MM?.
+    ,MMMMMM'                   \"HLbd<|?&H\\
+   JMMH#H'                     |MMMMM#b>bHb
+  :MH  .\"\\                   `|MMMMMMMMMMMM&
+ .:M:d-\"|:b..                 9MMMMMMMMMMMMM+
+:  \"*H|      -                &MMMMMMMMMMMMMH:
+.    `LvdHH#d?                `?MMMMMMMMMMMMMb
+:      iMMMMMMH#b               `\"*\"'\"#HMMMMMM
+.   . ,MMMMMMMMMMb\\.                   {MMMMMH
+-     |MMMMMMMMMMMMMMHb,               `MMMMM|
+:      |MMMMMMMMMMMMMMH'                &MMMM,
+-       `#MMMMMMMMMMMM                 |MMMM6-
+ :        `MMMMMMMMMM+                 ]MMMT/
+  .       `MMMMMMMP\"                   HMM*`
+   -       |MMMMMH'                   ,M#'-
+    '.     :MMMH|                       .-
+      .     |MM                        -
+       ` .   `#?..    .             ..'
+           -.     _.             .-
+              '-|.#qo__,,ob=~~-''
+"
+
+[node name="tombstone05" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              _ooppH[`MMMD::--\\_
+          .oHMMMR:\"&MZ\\ `\"'  \"  |$-_
+       ..dMMMMMMMMdMMM#9\\        `'HHo.
+     . ,dMMMMMMMMMMM\"`' `           ?MP?.
+    . |MMMMMMMMMMM'                 `\"$b&\\
+   -  |MMMMHH##M'                     HMMH?
+  -   TTMM|    >..                   \\MMMMMH
+ :     |MM\\,#-\"\"$~b\\.                `MMMMMM+
+.       ``\"H&#        -               &MMMMMM|
+:            *\\v,#MHddc.              `9MMMMMb
+.               MMMMMMMM##\\             `\"\":HM
+-          .  .HMMMMMMMMMMRo_.              |M
+:             |MMMMMMMMMMMMMMMM#\\           :M
+-              `HMMMMMMMMMMMMMMM'           |T
+:               `*HMMMMMMMMMMMM'            H'
+ :                 MMMMMMMMMMM|            |T
+  .                MMMMMMMM?'             ./
+  `.               MMMMMMH'              ./
+    -.            |MMMH#'                .
+      .           `MM*                . '
+        -.         #M: .    .       .-
+          ` .         .,         .-
+              '-.-~ooHH__,,v~--`"
+text = "              _ooppH[`MMMD::--\\_
+          .oHMMMR:\"&MZ\\ `\"'  \"  |$-_
+       ..dMMMMMMMMdMMM#9\\        `'HHo.
+     . ,dMMMMMMMMMMM\"`' `           ?MP?.
+    . |MMMMMMMMMMM'                 `\"$b&\\
+   -  |MMMMHH##M'                     HMMH?
+  -   TTMM|    >..                   \\MMMMMH
+ :     |MM\\,#-\"\"$~b\\.                `MMMMMM+
+.       ``\"H&#        -               &MMMMMM|
+:            *\\v,#MHddc.              `9MMMMMb
+.               MMMMMMMM##\\             `\"\":HM
+-          .  .HMMMMMMMMMMRo_.              |M
+:             |MMMMMMMMMMMMMMMM#\\           :M
+-              `HMMMMMMMMMMMMMMM'           |T
+:               `*HMMMMMMMMMMMM'            H'
+ :                 MMMMMMMMMMM|            |T
+  .                MMMMMMMM?'             ./
+  `.               MMMMMMH'              ./
+    -.            |MMMH#'                .
+      .           `MM*                . '
+        -.         #M: .    .       .-
+          ` .         .,         .-
+              '-.-~ooHH__,,v~--`"
+
+[node name="tombstone06" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "             _ood>H&H&Z?#M#b-\\.
+          .\\HMMMMMR?`\\M6b.\"`' ''``v.
+       .. .MMMMMMMMMMHMMM#&.      ``~o.
+     .   ,HMMMMMMMMMMMM*\"'-`          &b.
+    .   .MMMMMMMMMMMMH'               `\"&\\
+   -     RMMMMM#H##R'                   4Mb
+  -      |7MMM'    ?::                 `|MMb
+ /         HMM__#|`\"\\>?v..              `MMML
+.           `\"'#Hd|       `              9MMM:
+-                |\\,\\?HH#bbL             `9MMb
+:                   !MMMMMMMH#b,          `\"\"T
+.              .   ,MMMMMMMMMMMbo.           |
+:                  4MMMMMMMMMMMMMMMHo        |
+:                   ?MMMMMMMMMMMMMMM?        :
+-.                   `#MMMMMMMMMMMM:        .-
+ :                     |MMMMMMMMMM?         .
+  -                    JMMMMMMMT'          :
+  `.                   MMMMMMH'           -
+    -.                |MMM#*`            -
+      .               HMH'            . '
+        -.            #H:.          .-
+          ` .           .\\       .-
+              '-..-+oodHL_,--/-`
+"
+text = "             _ood>H&H&Z?#M#b-\\.
+          .\\HMMMMMR?`\\M6b.\"`' ''``v.
+       .. .MMMMMMMMMMHMMM#&.      ``~o.
+     .   ,HMMMMMMMMMMMM*\"'-`          &b.
+    .   .MMMMMMMMMMMMH'               `\"&\\
+   -     RMMMMM#H##R'                   4Mb
+  -      |7MMM'    ?::                 `|MMb
+ /         HMM__#|`\"\\>?v..              `MMML
+.           `\"'#Hd|       `              9MMM:
+-                |\\,\\?HH#bbL             `9MMb
+:                   !MMMMMMMH#b,          `\"\"T
+.              .   ,MMMMMMMMMMMbo.           |
+:                  4MMMMMMMMMMMMMMMHo        |
+:                   ?MMMMMMMMMMMMMMM?        :
+-.                   `#MMMMMMMMMMMM:        .-
+ :                     |MMMMMMMMMM?         .
+  -                    JMMMMMMMT'          :
+  `.                   MMMMMMH'           -
+    -.                |MMM#*`            -
+      .               HMH'            . '
+        -.            #H:.          .-
+          ` .           .\\       .-
+              '-..-+oodHL_,--/-`
+"
+
+[node name="tombstone07" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              _,\\?dZkMHF&$*q#b..
+          .//9MMMMMMM?:'HM\\\\\"`-''`..
+       ..`  :MMMMMMMMMMHMMMMH?_    `-\\
+     .     .dMMMMMMMMMMMMMM'\"'\"       `\\.
+    .      |MMMMMMMMMMMMMR              \\\\
+   -        T9MMMMMHH##M\"                `?
+  :          (9MMM'    !':.               &k
+ .:            HMM\\_?p \"\":-b\\.            `ML
+-                \"'\"H&#,       :           |M|
+:                     ?\\,\\dMH#b#.           9b
+:                        |MMMMMMM##,        `*
+:                   .   +MMMMMMMMMMMo_       -
+:                       HMMMMMMMMMMMMMM#,    :
+:                        9MMMMMMMMMMMMMH'    .
+: .                       *HMMMMMMMMMMP     .'
+ :                          MMMMMMMMMH'     .
+  -                        :MMMMMMM'`      .
+  `.                       9MMMMM*'       -
+    -.                    {MMM#'         :
+      -                  |MM\"          .'
+       `.                &M'..  .   ..'
+          ' .             ._     .-
+              '-. -voboo#&:,-.-`"
+text = "              _,\\?dZkMHF&$*q#b..
+          .//9MMMMMMM?:'HM\\\\\"`-''`..
+       ..`  :MMMMMMMMMMHMMMMH?_    `-\\
+     .     .dMMMMMMMMMMMMMM'\"'\"       `\\.
+    .      |MMMMMMMMMMMMMR              \\\\
+   -        T9MMMMMHH##M\"                `?
+  :          (9MMM'    !':.               &k
+ .:            HMM\\_?p \"\":-b\\.            `ML
+-                \"'\"H&#,       :           |M|
+:                     ?\\,\\dMH#b#.           9b
+:                        |MMMMMMM##,        `*
+:                   .   +MMMMMMMMMMMo_       -
+:                       HMMMMMMMMMMMMMM#,    :
+:                        9MMMMMMMMMMMMMH'    .
+: .                       *HMMMMMMMMMMP     .'
+ :                          MMMMMMMMMH'     .
+  -                        :MMMMMMM'`      .
+  `.                       9MMMMM*'       -
+    -.                    {MMM#'         :
+      -                  |MM\"          .'
+       `.                &M'..  .   ..'
+          ' .             ._     .-
+              '-. -voboo#&:,-.-`"
+
+[node name="tombstone08" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "             _oo:\\bk99M[<$$+b\\.
+           .$*\"MMMMMMMM[:\"\\Mb\\?^\" .
+       . '`    HMMMMMMMMMMHMMMM+?.  `.
+     .        .HMMMMMMMMMMMMMMP\"''     .
+    .         `MMMMMMMMMMMMMM|         -`.
+   -           `&MMMMMMHH##H:             :
+  :             `(*MMM}    `|\\             |
+ : `-              ?MMb__#|\"\"`|+v..         \\
+.                    `''*H#b       -        :|
+:                         `*\\v,#M#b#,        \\
+.                             9MMMMMMHb.     :
+:                        .   #MMMMMMMMMb\\    -
+-                           .HMMMMMMMMMMMMb  :
+:                            `MMMMMMMMMMMMH  .
+-:  .                         `#MMMMMMMMMP   '
+ :                              ]MMMMMMMH'  :
+  -                            ,MMMMMM?'   .
+  `:                           HMMMMH\"    -
+    -.                       .HMM#*     .-
+     `.                     .HH*'     .
+       `-.                  &R\".    .-
+           -.               ._   .-
+              '-. .voodoodc?..-`
+"
+text = "             _oo:\\bk99M[<$$+b\\.
+           .$*\"MMMMMMMM[:\"\\Mb\\?^\" .
+       . '`    HMMMMMMMMMMHMMMM+?.  `.
+     .        .HMMMMMMMMMMMMMMP\"''     .
+    .         `MMMMMMMMMMMMMM|         -`.
+   -           `&MMMMMMHH##H:             :
+  :             `(*MMM}    `|\\             |
+ : `-              ?MMb__#|\"\"`|+v..         \\
+.                    `''*H#b       -        :|
+:                         `*\\v,#M#b#,        \\
+.                             9MMMMMMHb.     :
+:                        .   #MMMMMMMMMb\\    -
+-                           .HMMMMMMMMMMMMb  :
+:                            `MMMMMMMMMMMMH  .
+-:  .                         `#MMMMMMMMMP   '
+ :                              ]MMMMMMMH'  :
+  -                            ,MMMMMM?'   .
+  `:                           HMMMMH\"    -
+    -.                       .HMM#*     .-
+     `.                     .HH*'     .
+       `-.                  &R\".    .-
+           -.               ._   .-
+              '-. .voodoodc?..-`
+"
+
+[node name="tombstone09" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              _\\oo\\?ddk9MRbS>v\\_
+          ..:>*\"\"MMMMMMMMM:?|H?$?-.
+       ..- -     \"HMMMMMMMMMMHMMMH\\_-.
+     .            dMMMMMMMMMMMMMMT\"    .
+    .             TMMMMMMMMMMMMMM       `.
+   -               `&HMMMMMM#H#H:         .
+  -                 `\\7HMMH     |\\.        .
+ :    `                 HMM\\_?c`\"\"+?\\..     :
+-                         \"``#&#|      .     -
+:                              `?,\\#MHdb.    .
+:                                 |MMMMMH#.  :
+:                            .   ,HMMMMMMMb, -
+: '                              4MMMMMMMMMMH`
+:   .                             9MMMMMMMMMT-
+:.`                               `#MMMMMMMH '
+ :      '                           HMMMMMH':
+  -                                |MMMMH\" -
+  `:                              |MMMH*' .'
+    '?                           dMM#'   .
+      \\.                       .dH\"    .'
+        -.                    ,M'-  ..'
+          ` .                .. ..-`
+              '-. .\\ooooboo<^.-`"
+text = "              _\\oo\\?ddk9MRbS>v\\_
+          ..:>*\"\"MMMMMMMMM:?|H?$?-.
+       ..- -     \"HMMMMMMMMMMHMMMH\\_-.
+     .            dMMMMMMMMMMMMMMT\"    .
+    .             TMMMMMMMMMMMMMM       `.
+   -               `&HMMMMMM#H#H:         .
+  -                 `\\7HMMH     |\\.        .
+ :    `                 HMM\\_?c`\"\"+?\\..     :
+-                         \"``#&#|      .     -
+:                              `?,\\#MHdb.    .
+:                                 |MMMMMH#.  :
+:                            .   ,HMMMMMMMb, -
+: '                              4MMMMMMMMMMH`
+:   .                             9MMMMMMMMMT-
+:.`                               `#MMMMMMMH '
+ :      '                           HMMMMMH':
+  -                                |MMMMH\" -
+  `:                              |MMMH*' .'
+    '?                           dMM#'   .
+      \\.                       .dH\"    .'
+        -.                    ,M'-  ..'
+          ` .                .. ..-`
+              '-. .\\ooooboo<^.-`"
+
+[node name="tombstone10" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              _o,:o?\\?dM&MHcc~,.
+          ..^':&#\"\"HMMMMMMMM$:?&&?.
+        .`  -`      'HMMMMMMMMMHMMMp\\.
+     . '             |MMMMMMMMMMMMMM\"' .
+    .                `9MMMMMMMMMMMMM    -.
+   -                   `*9MMMMMHH##[      .
+  -                     `\\Z9MMM    `~\\     .
+ :       '|                 ?MMb_?p\"\"-?v..  :
+-                             `\"'*&#,    -   .
+:                                  `?,oHH#?  .
+--                                    |MMMMH,:
+:                                 .  |MMMMMM6,
+:   -                                |MMMMMMMM
+?                                     HMMMMMMP
+-- . '                                |HMMMMM'
+ :.`     .  '                          JMMMM+
+  \\                                   ,MMMP:
+   :                                 |MMH?:
+    -:\\.                            dM#\" .
+       \\                          ,H*' .'
+        -.                       d':..'
+          ` .                  .,.-
+              '-.. .\\oooodov~^-`"
+text = "              _o,:o?\\?dM&MHcc~,.
+          ..^':&#\"\"HMMMMMMMM$:?&&?.
+        .`  -`      'HMMMMMMMMMHMMMp\\.
+     . '             |MMMMMMMMMMMMMM\"' .
+    .                `9MMMMMMMMMMMMM    -.
+   -                   `*9MMMMMHH##[      .
+  -                     `\\Z9MMM    `~\\     .
+ :       '|                 ?MMb_?p\"\"-?v..  :
+-                             `\"'*&#,    -   .
+:                                  `?,oHH#?  .
+--                                    |MMMMH,:
+:                                 .  |MMMMMM6,
+:   -                                |MMMMMMMM
+?                                     HMMMMMMP
+-- . '                                |HMMMMM'
+ :.`     .  '                          JMMMM+
+  \\                                   ,MMMP:
+   :                                 |MMH?:
+    -:\\.                            dM#\" .
+       \\                          ,H*' .'
+        -.                       d':..'
+          ` .                  .,.-
+              '-.. .\\oooodov~^-`"
+
+[node name="tombstone11" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              _o\\:,??\\??MR9#cb\\_
+          .v/''':&#\"\"#HMMMMMMM$?*d\\.
+       ..~' - -`      `\"#MMMMMMMMMMMHv.
+     .-'                 HMMMMMMMMMMMR!.
+    :                    `9MMMMMMMMMMM| -.
+   .                       `*9MMMMMH##|   .
+  -                          `(#MMH   `:,  .
+ :           '|                 `HMb_>/\"|\\,.:
+.'                                `\"'#&b   - .
+:                                      ?\\oHH?.
+:                                        !MMM&
+:  .                                  .  HMMMM
+/.      -                               -MMMMM
+\\`.                                      9MMMP
+:. .  . -                                |MMM'
+ \\... '                                  .MMT
+  &.                                    .dMP
+   \\,                                  .HM*
+    \\. `\\.                            ,H&'
+     `- `| -                        ,&':
+       `.                         ,/\\ '
+          '-..                  _.-
+              \"---.._\\o,oov+--'\""
+text = "              _o\\:,??\\??MR9#cb\\_
+          .v/''':&#\"\"#HMMMMMMM$?*d\\.
+       ..~' - -`      `\"#MMMMMMMMMMMHv.
+     .-'                 HMMMMMMMMMMMR!.
+    :                    `9MMMMMMMMMMM| -.
+   .                       `*9MMMMMH##|   .
+  -                          `(#MMH   `:,  .
+ :           '|                 `HMb_>/\"|\\,.:
+.'                                `\"'#&b   - .
+:                                      ?\\oHH?.
+:                                        !MMM&
+:  .                                  .  HMMMM
+/.      -                               -MMMMM
+\\`.                                      9MMMP
+:. .  . -                                |MMM'
+ \\... '                                  .MMT
+  &.                                    .dMP
+   \\,                                  .HM*
+    \\. `\\.                            ,H&'
+     `- `| -                        ,&':
+       `.                         ,/\\ '
+          '-..                  _.-
+              \"---.._\\o,oov+--'\""
+
+[node name="tombstone12" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              _,d?,:?o?:?HM>#b\\_
+          ..H*\"''`'H#*\"**MMMMMM6$$v_
+        v//\"   - ``      `'#MMMMMMMMHo.
+      /\"`                   |MMMMMMMMMM:.
+    ,>                       `HMMMMMMMMH:.
+   :                           `#HMMMMHH\\ -
+  '                              `Z#MM,  `,:
+ :               '\\                 ?HH_>:`\\,
+:                                     \"'*&| `:
+.                                         <\\Hb
+:                                           MM
+:                                        . iMM
+Mb\\.                                       {MM
+::.`-       -                              !MP
+`&.   .  .  -                              :M'
+ 9H,  \\  '                                 |T
+  HM?                                     ,P
+   *ML                                   ??
+    :&.   `o                           .d'
+      ':  |T                          /\"
+        -.                         .<''
+          `...                  ..-
+              \"`-=.,_,,,oov-~.-`"
+text = "              _,d?,:?o?:?HM>#b\\_
+          ..H*\"''`'H#*\"**MMMMMM6$$v_
+        v//\"   - ``      `'#MMMMMMMMHo.
+      /\"`                   |MMMMMMMMMM:.
+    ,>                       `HMMMMMMMMH:.
+   :                           `#HMMMMHH\\ -
+  '                              `Z#MM,  `,:
+ :               '\\                 ?HH_>:`\\,
+:                                     \"'*&| `:
+.                                         <\\Hb
+:                                           MM
+:                                        . iMM
+Mb\\.                                       {MM
+::.`-       -                              !MP
+`&.   .  .  -                              :M'
+ 9H,  \\  '                                 |T
+  HM?                                     ,P
+   *ML                                   ??
+    :&.   `o                           .d'
+      ':  |T                          /\"
+        -.                         .<''
+          `...                  ..-
+              \"`-=.,_,,,oov-~.-`"
+
+[node name="tombstone13" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              _,oc>?_:b?o?HH#b\\_
+          .v/99*\"\"\" '*H#\"\"*HMMMMMZ,_
+        oH* /\"   -   '      \"`#MMMMM#o.
+     ./*>-                     `MMMMMMMb
+    ,b/'                        `#MMMMMMM\\
+   :'                             ``HMMMMb:
+  /-                                `|&MH `\\
+ /                   `-.               |Hb??\\
+,-  '                                    \"`&,.
+1                                           \\}
+!.                                           T
+$,.                                        . 1
+?`M??.                                       M
+?.::| '\\        -                            ?
+ M?&.    .   .  -                           ,'
+ 9MMH\\   ..  '           `                  .
+  HMMM#.                                   :'
+   9#MMb                                 ..
+    -:\"#     `b.                        .-
+      . `    {!                        /
+        -                           ,-'
+          ' .                    .-
+             ```^==\\_.,,,ov--\\-`
+"
+text = "              _,oc>?_:b?o?HH#b\\_
+          .v/99*\"\"\" '*H#\"\"*HMMMMMZ,_
+        oH* /\"   -   '      \"`#MMMMM#o.
+     ./*>-                     `MMMMMMMb
+    ,b/'                        `#MMMMMMM\\
+   :'                             ``HMMMMb:
+  /-                                `|&MH `\\
+ /                   `-.               |Hb??\\
+,-  '                                    \"`&,.
+1                                           \\}
+!.                                           T
+$,.                                        . 1
+?`M??.                                       M
+?.::| '\\        -                            ?
+ M?&.    .   .  -                           ,'
+ 9MMH\\   ..  '           `                  .
+  HMMM#.                                   :'
+   9#MMb                                 ..
+    -:\"#     `b.                        .-
+      . `    {!                        /
+        -                           ,-'
+          ' .                    .-
+             ```^==\\_.,,,ov--\\-`
+"
+
+[node name="tombstone14" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              _\\o##??,:io??$#b\\_
+          .oH#\"H9*\"\"\" \"`#H*\"*#MMMHo_
+        oHMM- -'    -  ''     ``*HMMHo.
+      dM#S>-`                     ?MMMM?.
+    ,&&,/'                         \"#MMMH\\
+   d?-\"                              `*HMMb
+  H?                                   \"ZHb:
+ /:                        \\              H?L
+|:|   .                                    `*:
+:?:                                          \\
+>\"                                           :
+M|\\,_                                        |
+!|\":HH?-'.                                   :
+:^'_:?\"\\ `--         -                       .
+- |ML?b      .   ..  -                       -
+ :HMMMMH\\    \\               `              :
+  >MMMMMM#.                                .
+   ^M*HMMM|                               -
+    `. `\"#+     `?v                     .`
+      .   `-    +?'                    -
+       ` .                          ..'
+           - .                   .-
+              \"`\\b=p?.._\\\\vv---`"
+text = "              _\\o##??,:io??$#b\\_
+          .oH#\"H9*\"\"\" \"`#H*\"*#MMMHo_
+        oHMM- -'    -  ''     ``*HMMHo.
+      dM#S>-`                     ?MMMM?.
+    ,&&,/'                         \"#MMMH\\
+   d?-\"                              `*HMMb
+  H?                                   \"ZHb:
+ /:                        \\              H?L
+|:|   .                                    `*:
+:?:                                          \\
+>\"                                           :
+M|\\,_                                        |
+!|\":HH?-'.                                   :
+:^'_:?\"\\ `--         -                       .
+- |ML?b      .   ..  -                       -
+ :HMMMMH\\    \\               `              :
+  >MMMMMM#.                                .
+   ^M*HMMM|                               -
+    `. `\"#+     `?v                     .`
+      .   `-    +?'                    -
+       ` .                          ..'
+           - .                   .-
+              \"`\\b=p?.._\\\\vv---`"
+
+[node name="tombstone15" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              _,o#bH\\??::?o?cbo_
+          .o#MH#**SH\"\"' \"`*H#\"*#MHo_
+        oHMMMH^  ^\"    -  `      '*HHo.
+     .dMMM#\">>-                     `HM?.
+    ,MH:R_o/                         `*MH\\
+   dMM' '                               \"ML
+  HMR! '                                 `#k
+ d&'.                          -.          `L
+:M ::     `                                 `-
+/| !|                                        -
+k.$-\"                                        :
+}9R:!,,_.                                    .
+\\::\\':`*M#\\-'.                               -
+: \"''..:\"!`\\  '-          -                  `
+-   ,HMb.H|      .    _   -                 .'
+ : ,MMMMMMMb.    ..                         .
+  .`HMMMMMMMM?                             .
+  `.`9M#*HMMMM                            :
+    -.'   \"##*      `b,                  .
+      .      `     ,/'                 .'
+       ` .                          ..'
+           - .                  ..-
+              \"`*#d##c.._\\v----`
+"
+text = "              _,o#bH\\??::?o?cbo_
+          .o#MH#**SH\"\"' \"`*H#\"*#MHo_
+        oHMMMH^  ^\"    -  `      '*HHo.
+     .dMMM#\">>-                     `HM?.
+    ,MH:R_o/                         `*MH\\
+   dMM' '                               \"ML
+  HMR! '                                 `#k
+ d&'.                          -.          `L
+:M ::     `                                 `-
+/| !|                                        -
+k.$-\"                                        :
+}9R:!,,_.                                    .
+\\::\\':`*M#\\-'.                               -
+: \"''..:\"!`\\  '-          -                  `
+-   ,HMb.H|      .    _   -                 .'
+ : ,MMMMMMMb.    ..                         .
+  .`HMMMMMMMM?                             .
+  `.`9M#*HMMMM                            :
+    -.'   \"##*      `b,                  .
+      .      `     ,/'                 .'
+       ` .                          ..'
+           - .                  ..-
+              \"`*#d##c.._\\v----`
+"
+
+[node name="tombstone16" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              _,o#&oHb?\\o::d?>\\_
+          .oHHMMM#**$M\"\"` \"`*HH\"#&o_
+        oHMMMMMMD' .''    -  '    ``bo.
+     .dMMMMMH*'/|-                   `\\b.
+    ,MMMM?T|_o/                        `\\\\
+   dMMMMP  ''                            `|
+  HMMMH& -                                `\\
+ /MH7' :                          --        :
+-:MM  {.      .                              .
+:i?' .!&                                     .
+:{, o| '                                     :
+-T?9M\\:-'o,_                                 .
+: \\?::``\"`?9MHo./..                          -
+.  '\"`'^ _.`\"!\"^.  `-         -              `
+-      ,bMM?.M\\       .    .  -      .      .'
+ :   .oMMMMMMMMb.    ..   `                 .
+  .  `HMMMMMMMMMMb                         -
+   -   9MH*#HMMMMH                        .'
+    '.  '   `\"*##'      `b.              :
+      .         `     .d''             .'
+        -.                          . '
+           -.                    .-`
+              \"`*##H###:._\\--.-`"
+text = "              _,o#&oHb?\\o::d?>\\_
+          .oHHMMM#**$M\"\"` \"`*HH\"#&o_
+        oHMMMMMMD' .''    -  '    ``bo.
+     .dMMMMMH*'/|-                   `\\b.
+    ,MMMM?T|_o/                        `\\\\
+   dMMMMP  ''                            `|
+  HMMMH& -                                `\\
+ /MH7' :                          --        :
+-:MM  {.      .                              .
+:i?' .!&                                     .
+:{, o| '                                     :
+-T?9M\\:-'o,_                                 .
+: \\?::``\"`?9MHo./..                          -
+.  '\"`'^ _.`\"!\"^.  `-         -              `
+-      ,bMM?.M\\       .    .  -      .      .'
+ :   .oMMMMMMMMb.    ..   `                 .
+  .  `HMMMMMMMMMMb                         -
+   -   9MH*#HMMMMH                        .'
+    '.  '   `\"*##'      `b.              :
+      .         `     .d''             .'
+        -.                          . '
+           -.                    .-`
+              \"`*##H###:._\\--.-`"
+
+[node name="tombstone17" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              _oo#H&d#b?\\b:_>>\\_
+          .oHMMMMMMH*\"*9R\"'-``*#P\\-_
+        oHMMMMMMMMM$  .\"       '   `^-
+     .dMMMMMMMMH*\",?-                 '\\.
+    ,MMMMMMM:?}.,d'                     `.
+   dMMMMMMMH  /''                         :
+  HMMMMMMM&' -                             -
+ dPTMMP>' :                           -.    :
+|? -MM}  .\\                                  .
+J' ::*'  -$L                                 .
+:  ?b .,H- '                                 :
+-  |6.&MP:: !.,_.                            -
+:   `\\:: \"' \"`:\"MM#,-^,            -         :
+-     ````:' _.:\"?``\\   `-                   .
+:         .?bMML.]#        -   _  `      .  .'
+ -      .o#MMMMMMMMH\\     \\.          .     .
+  -     `HMMMMMMMMMMMH                     :
+  `.     `HMM#*#MMMMMH'                   -
+    -.     '    ``##*'      i+           :
+      -            `'     v/'          .'
+       `-                           ..'
+          ' .                    .-
+              \"`*##HMH##:__,-.-`"
+text = "              _oo#H&d#b?\\b:_>>\\_
+          .oHMMMMMMH*\"*9R\"'-``*#P\\-_
+        oHMMMMMMMMM$  .\"       '   `^-
+     .dMMMMMMMMH*\",?-                 '\\.
+    ,MMMMMMM:?}.,d'                     `.
+   dMMMMMMMH  /''                         :
+  HMMMMMMM&' -                             -
+ dPTMMP>' :                           -.    :
+|? -MM}  .\\                                  .
+J' ::*'  -$L                                 .
+:  ?b .,H- '                                 :
+-  |6.&MP:: !.,_.                            -
+:   `\\:: \"' \"`:\"MM#,-^,            -         :
+-     ````:' _.:\"?``\\   `-                   .
+:         .?bMML.]#        -   _  `      .  .'
+ -      .o#MMMMMMMMH\\     \\.          .     .
+  -     `HMMMMMMMMMMMH                     :
+  `.     `HMM#*#MMMMMH'                   -
+    -.     '    ``##*'      i+           :
+      -            `'     v/'          .'
+       `-                           ..'
+          ' .                    .-
+              \"`*##HMH##:__,-.-`"
+
+[node name="tombstone18" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              _oo##Mbb&bo??o_>\\_
+          .oHMMMMMMMMM**#?M*' \"?*&..
+        oHMMMMMMMMMMMM4  `\"      -  `.
+     .dMMMMMMMMMMMM#\"\\?.-              .
+    ,MMMMMMMMMM}\"9:_,d'                 -.
+   dMMMMMMMMMMM|  ^''                     .
+  &MMMMMMMMMMH\\  -                         .
+ :{M*\"MMMPT\"' :                         `-. :
+.'M'  'MMM.  -T,       .                     .
+- k   i:?''  -|&                             .
+: `  -o&  .,H- \"                             :
+-     `M:`HMP|:'!.o._.                       .
+:      \"<:::'<^ '\"``9MH#,-^ .                -
+-         '''``''._.`\"?`^|   ^        -      :
+:              ?#dMM_.M?       .   .  -    ..'
+ :          ,ddMMMMMMMMMb.    ..   '        .
+  .         TMMMMMMMMMMMMM,                :
+   -         ?MMH**#MMMMMH'               :
+    '.        '     \"`##*'      &.       :
+      -.               `'    ,~\"       .'
+        -.                          ..'
+          ` .                    .-
+             ```*##HMMMH#<:,..-`
+"
+text = "              _oo##Mbb&bo??o_>\\_
+          .oHMMMMMMMMM**#?M*' \"?*&..
+        oHMMMMMMMMMMMM4  `\"      -  `.
+     .dMMMMMMMMMMMM#\"\\?.-              .
+    ,MMMMMMMMMM}\"9:_,d'                 -.
+   dMMMMMMMMMMM|  ^''                     .
+  &MMMMMMMMMMH\\  -                         .
+ :{M*\"MMMPT\"' :                         `-. :
+.'M'  'MMM.  -T,       .                     .
+- k   i:?''  -|&                             .
+: `  -o&  .,H- \"                             :
+-     `M:`HMP|:'!.o._.                       .
+:      \"<:::'<^ '\"``9MH#,-^ .                -
+-         '''``''._.`\"?`^|   ^        -      :
+:              ?#dMM_.M?       .   .  -    ..'
+ :          ,ddMMMMMMMMMb.    ..   '        .
+  .         TMMMMMMMMMMMMM,                :
+   -         ?MMH**#MMMMMH'               :
+    '.        '     \"`##*'      &.       :
+      -.               `'    ,~\"       .'
+        -.                          ..'
+          ` .                    .-
+             ```*##HMMMH#<:,..-`
+"
+
+[node name="tombstone19" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              _,dd#HMb&dHo?\\?:\\_
+          .oHMMMMMMMMMMMH***9P'`\"\\v.
+        oHMMMMMMMMMMMMMMM>  `'      -.
+     .dMMMMMMMMMMMMMMMH*'|~-'          .
+    ,MMMMMMMMMMMMM6>`H._,&              -.
+   dMMMMMMMMMMMMMMM|  `\"                  .
+  H*MMMMMMMMMMMMMH&. -                     .
+ d' HMM\"\"&MMMPT'' :.                      `.-
+,'  MP   `TMMM,   |:        .                -
+|   #:    ? *\"   : &L                        :
+!   `'   /?H   ,#r `'                        :
+.         ?M: HMM^<~->,o._                   :
+:          `9:::'`*-``':`9MHb,|-,         '  :
+.             `\"''':' :_ \"\"!\"^.  `|          :
+`.                 _dbHM6_|H.      .   . '  .'
+ \\              _odHMMMMMMMMH,    ..  `     :
+ `-             |MMMMMMMMMMMMM|            :
+  `.             9MMH**#MMMMMH'           :
+    -.            '     \"?##\"      d     :
+      .                    '    ,/\"    .'
+       `..                          ..'
+          `  .                   .-
+              '`\"#HHMMMMM#<>..-`"
+text = "              _,dd#HMb&dHo?\\?:\\_
+          .oHMMMMMMMMMMMH***9P'`\"\\v.
+        oHMMMMMMMMMMMMMMM>  `'      -.
+     .dMMMMMMMMMMMMMMMH*'|~-'          .
+    ,MMMMMMMMMMMMM6>`H._,&              -.
+   dMMMMMMMMMMMMMMM|  `\"                  .
+  H*MMMMMMMMMMMMMH&. -                     .
+ d' HMM\"\"&MMMPT'' :.                      `.-
+,'  MP   `TMMM,   |:        .                -
+|   #:    ? *\"   : &L                        :
+!   `'   /?H   ,#r `'                        :
+.         ?M: HMM^<~->,o._                   :
+:          `9:::'`*-``':`9MHb,|-,         '  :
+.             `\"''':' :_ \"\"!\"^.  `|          :
+`.                 _dbHM6_|H.      .   . '  .'
+ \\              _odHMMMMMMMMH,    ..  `     :
+ `-             |MMMMMMMMMMMMM|            :
+  `.             9MMH**#MMMMMH'           :
+    -.            '     \"?##\"      d     :
+      .                    '    ,/\"    .'
+       `..                          ..'
+          `  .                   .-
+              '`\"#HHMMMMM#<>..-`"
+
+[node name="tombstone20" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              _oo##bHMb&d#bd,>\\_
+          .oHMMMMMMMMMMMMMM***9R\"-..
+        oHMMMMMMMMMMMMMMMMMH\\  ?   `-.
+     .dMMMMMMMMMMMMMMMMMMM#\".}-'       .
+    ,MMMMMMMMMMMMMMMMM6/`H _o}          -.
+   dMMMMMMMMMMMMMMMMMMML  `''             .
+  HbP*HMMMMMMMMMMMMMMM*: -                 ,
+ dMH' `MMMP'\"HMMMR'T\"  :                    :
+|H'   -MR'   `?MMMb    P,       .            .
+1&     *|     |.`*\"  .-`&|                   .
+M'      \"    |\\&|  .,#~ \"'                   :
+T             :HL.|HMH\\c~`|v,\\_              :
+|              `\"|:::':`-`` '\"MM#\\-'.       -:
+%                 ``'``'`' :_ '?'`| ``.      :
+||,                     ,#dMM?.M?      .  .` -
+ ?\\                 .,odMMMMMMMMM?    \\  `  :
+  /                 |MMMMMMMMMMMMM:        .'
+  `.                 TMMH#*9MMMMM*        :
+    -.               `      \"*#*'    ,:  .
+      .                       `   .v'' .'
+       `.                           ..'
+          '- .                   .-
+              \"`\\+HHMMMMMMHr~.-`
+"
+text = "              _oo##bHMb&d#bd,>\\_
+          .oHMMMMMMMMMMMMMM***9R\"-..
+        oHMMMMMMMMMMMMMMMMMH\\  ?   `-.
+     .dMMMMMMMMMMMMMMMMMMM#\".}-'       .
+    ,MMMMMMMMMMMMMMMMM6/`H _o}          -.
+   dMMMMMMMMMMMMMMMMMMML  `''             .
+  HbP*HMMMMMMMMMMMMMMM*: -                 ,
+ dMH' `MMMP'\"HMMMR'T\"  :                    :
+|H'   -MR'   `?MMMb    P,       .            .
+1&     *|     |.`*\"  .-`&|                   .
+M'      \"    |\\&|  .,#~ \"'                   :
+T             :HL.|HMH\\c~`|v,\\_              :
+|              `\"|:::':`-`` '\"MM#\\-'.       -:
+%                 ``'``'`' :_ '?'`| ``.      :
+||,                     ,#dMM?.M?      .  .` -
+ ?\\                 .,odMMMMMMMMM?    \\  `  :
+  /                 |MMMMMMMMMMMMM:        .'
+  `.                 TMMH#*9MMMMM*        :
+    -.               `      \"*#*'    ,:  .
+      .                       `   .v'' .'
+       `.                           ..'
+          '- .                   .-
+              \"`\\+HHMMMMMMHr~.-`
+"
+
+[node name="tombstone21" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              _,,>#b&HMHd&&bb>\\_
+          _oHMMMMMMMMMMMMMMMMH**H:.
+        oHMMMMMMMMMMMMMMMMMMMM#v`?  `.
+     .dMMMMMMMMMMMMMMMMMMMMMMH*`+|     .
+    ,MMMMMMMMMMMMMMMMMMMMMb|?+.,H       -.
+   ddHMMMMMMMMMMMMMMMMMMMMMb  `'          .
+  HMMkZ**HMMMMMMMMMMMMMMMMH\\  -   .        :
+ dTMMM*  `9MMMP'\"*MMMMPT\"` ..               :
+|M6H''    4MP'   `\"HMMM|   !|.      .        .
+1MHp'      #L      $ *\"'  .-:&.              .
+MMM'        \"     q:H.  .o#-``'              :
+MM'                ?H?.|MMH::::-o,_.         -
+M[                  `*?:::'|` `\"`:9MH\\~-.    `
+&M.                     \"\"'`'^'.:.`?'`. '|  -:
+`M|d,                       .dbHM[.1?     .. :
+ 9||| .                  _obMMMMMMMMH,   .  :
+  H.^                    MMMMMMMMMMMM}     -
+   \\                     |MMH#*HMMMMH'    .'
+    .                    `      `#*'   ,:-
+     `                           '' .-'.
+       `.                           .-
+          '- .                   .-`
+              '`\\bqHMMMMMMHHb--`"
+text = "              _,,>#b&HMHd&&bb>\\_
+          _oHMMMMMMMMMMMMMMMMH**H:.
+        oHMMMMMMMMMMMMMMMMMMMM#v`?  `.
+     .dMMMMMMMMMMMMMMMMMMMMMMH*`+|     .
+    ,MMMMMMMMMMMMMMMMMMMMMb|?+.,H       -.
+   ddHMMMMMMMMMMMMMMMMMMMMMb  `'          .
+  HMMkZ**HMMMMMMMMMMMMMMMMH\\  -   .        :
+ dTMMM*  `9MMMP'\"*MMMMPT\"` ..               :
+|M6H''    4MP'   `\"HMMM|   !|.      .        .
+1MHp'      #L      $ *\"'  .-:&.              .
+MMM'        \"     q:H.  .o#-``'              :
+MM'                ?H?.|MMH::::-o,_.         -
+M[                  `*?:::'|` `\"`:9MH\\~-.    `
+&M.                     \"\"'`'^'.:.`?'`. '|  -:
+`M|d,                       .dbHM[.1?     .. :
+ 9||| .                  _obMMMMMMMMH,   .  :
+  H.^                    MMMMMMMMMMMM}     -
+   \\                     |MMH#*HMMMMH'    .'
+    .                    `      `#*'   ,:-
+     `                           '' .-'.
+       `.                           .-
+          '- .                   .-`
+              '`\\bqHMMMMMMHHb--`"
+
+[node name="tombstone22" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              .,:,#&6dHHHb&##o\\_
+          .oHHMMMMMMMMMMMMMMMMMH*\\,.
+        oHMMMMMMMMMMMMMMMMMMMMMMHb:'-.
+     .dMMMMMMMMMMMMMMMMMMMMMMMMMH|\\/'  .
+    ,&HMMMMMMMMMMMMMMMMMMMMMMM/\"&.,d.   -.
+   dboMMHMMMMMMMMMMMMMMMMMMMMMML `'       .
+  HMHMMM$Z***MMMMMMMMMMMMMMMMMM|.-         .
+ dMM}MMMM#'  `9MMMH?\"`MMMMR'T'  _           :
+|MMMbM#''     |MM\"    ``MMMH.   <_           .
+dMMMM#&        *&.     .?`*\"   .'&:          .
+MMMMMH-         `'    -v/H   .dD \"'  '       :
+MMMM*                  `*M: 4MM*::-!v,_      :
+MMMM                     `*?::\" \"'``\"?9Mb::. :
+&MMM,                       `\"'\"'|\"._ \"?`| - :
+`MMM}.H                          ,#dM[_H   ..:
+ 9MMi`M: .                   .ooHMMMMMMM,  ..
+  9Mb `-                     1MMMMMMMMMM|  :
+   ?M                        |MM#*#MMMM*  .
+    -.                       `     |#\"' ,'
+      .                            -\" v`
+        -.                          .-
+           - .                   . `
+              '-*#d#HHMMMMHH#\"-'"
+text = "              .,:,#&6dHHHb&##o\\_
+          .oHHMMMMMMMMMMMMMMMMMH*\\,.
+        oHMMMMMMMMMMMMMMMMMMMMMMHb:'-.
+     .dMMMMMMMMMMMMMMMMMMMMMMMMMH|\\/'  .
+    ,&HMMMMMMMMMMMMMMMMMMMMMMM/\"&.,d.   -.
+   dboMMHMMMMMMMMMMMMMMMMMMMMMML `'       .
+  HMHMMM$Z***MMMMMMMMMMMMMMMMMM|.-         .
+ dMM}MMMM#'  `9MMMH?\"`MMMMR'T'  _           :
+|MMMbM#''     |MM\"    ``MMMH.   <_           .
+dMMMM#&        *&.     .?`*\"   .'&:          .
+MMMMMH-         `'    -v/H   .dD \"'  '       :
+MMMM*                  `*M: 4MM*::-!v,_      :
+MMMM                     `*?::\" \"'``\"?9Mb::. :
+&MMM,                       `\"'\"'|\"._ \"?`| - :
+`MMM}.H                          ,#dM[_H   ..:
+ 9MMi`M: .                   .ooHMMMMMMM,  ..
+  9Mb `-                     1MMMMMMMMMM|  :
+   ?M                        |MM#*#MMMM*  .
+    -.                       `     |#\"' ,'
+      .                            -\" v`
+        -.                          .-
+           - .                   . `
+              '-*#d#HHMMMMHH#\"-'"
+
+[node name="tombstone23" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              _,<_:&S6dHHHb&bb\\_
+          .odHMMMMMMMMMMMMMMMMMMM}-_
+       .oHMMMMMMMMMMMMMMMMMMMMMMMM#d:.
+      ?9MMMMMMMMMMMMMMMMMMMMMMMMMMMH-$ .
+    ,::dHMMMMMMMMMMMMMMMMMMMMMMMMH:\\.?? -.
+   dMdboHMMHMMMMMMMMMMMMMMMMMMMMMMH, '    .
+  HMMMM7MMMb$R***MMMMMMMMMMMMMMMMMH\\ -     .
+ dMMMMM/MMMMM*   `$MMMM*'\"*MMMM?&'  .       :
+|MMMMMMb1H*'       HMP'    '9MMM|   &.    .  .
+dMMMMMMM##~`       `#\\      |.`*\"  .-9.      :
+9MMMMMMMM*           `     |v7?  .,H `' `    :
+SMMMMMMH'                   '9M_-MMH::-\\v_   :
+:HMMMMM                       `\\_:\"'|'`':9Mv\\.
+-|MMMMM,                         \"\"`'`':.`?\\ \\
+`:MMMMM}.d}                         .?bM6,|  |
+ :?MMM6  M|  .                   .,oHMMMMM| /
+  .?MMM- `'                      &MMMMMMMM|.
+   -`HM-                         HMH#*MMM?:
+    '.                           '   `#*:`
+      -                              -'/
+       ` .                          . '
+          ` .                    . `
+              '--##HH#HMMMHH#\"\"`
+"
+text = "              _,<_:&S6dHHHb&bb\\_
+          .odHMMMMMMMMMMMMMMMMMMM}-_
+       .oHMMMMMMMMMMMMMMMMMMMMMMMM#d:.
+      ?9MMMMMMMMMMMMMMMMMMMMMMMMMMMH-$ .
+    ,::dHMMMMMMMMMMMMMMMMMMMMMMMMH:\\.?? -.
+   dMdboHMMHMMMMMMMMMMMMMMMMMMMMMMH, '    .
+  HMMMM7MMMb$R***MMMMMMMMMMMMMMMMMH\\ -     .
+ dMMMMM/MMMMM*   `$MMMM*'\"*MMMM?&'  .       :
+|MMMMMMb1H*'       HMP'    '9MMM|   &.    .  .
+dMMMMMMM##~`       `#\\      |.`*\"  .-9.      :
+9MMMMMMMM*           `     |v7?  .,H `' `    :
+SMMMMMMH'                   '9M_-MMH::-\\v_   :
+:HMMMMM                       `\\_:\"'|'`':9Mv\\.
+-|MMMMM,                         \"\"`'`':.`?\\ \\
+`:MMMMM}.d}                         .?bM6,|  |
+ :?MMM6  M|  .                   .,oHMMMMM| /
+  .?MMM- `'                      &MMMMMMMM|.
+   -`HM-                         HMH#*MMM?:
+    '.                           '   `#*:`
+      -                              -'/
+       ` .                          . '
+          ` .                    . `
+              '--##HH#HMMMHH#\"\"`
+"
+
+[node name="tombstone24" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              _o,d_?dZdoHHHb#b\\_
+          .vdMMMMMMMMMMMMMMMMMMMMH\\.
+       .,HHMMMMMMMMMMMMMMMMMMMMMMMMH&,.
+      /?RMMMMMMMMMMMMMMMMMMMMMMMMMMMMH|..
+    ,\\?>`T#RMMMMMMMMMMMMMMMMMMMMMMMM6`\\|/
+   dMMbd#ooHMMMHMMMMMMMMMMMMMMMMMMMMMH,`' '
+  HMMMMMMMTMMMMb$ZP**HMMMMMMMMMMMMMMMM|.   :
+ dMMMMMMMM}$MMMMMH'   `HMMMH?\"`MMMM?T' .    :
+|MMMMMMMMMMoMH*''      `MM?    ``MMM|  +\\    .
+1MMMMMMMMMMMb#/         ?#?      |`#\"  -T:   :
+*'HMMMMMMMMMM*'           \"     ~?&  .?} ' ' .
+- 4MMMMMMMMP\"                    `M? HMTc:\\\\.:
+: `MMMMMMM[                       \"#:::`>`\"?M{
+.  |MMMMMMH.                        ``'``'_`:-
+-  |MMMMMMM|.dD                         ,#Mb\\'
+ :  *MMMMM: iM|  .                   _oHMMMM:
+  .  ?MMMM'  \"'                     ,MMMMMMP
+   :  `HMH                          JM#*MMT
+    -.  '                           `   #'
+      .                                /
+        -.            -              .'
+           -.                    . `
+              '--=&&MH##HMHH#\"\"\""
+text = "              _o,d_?dZdoHHHb#b\\_
+          .vdMMMMMMMMMMMMMMMMMMMMH\\.
+       .,HHMMMMMMMMMMMMMMMMMMMMMMMMH&,.
+      /?RMMMMMMMMMMMMMMMMMMMMMMMMMMMMH|..
+    ,\\?>`T#RMMMMMMMMMMMMMMMMMMMMMMMM6`\\|/
+   dMMbd#ooHMMMHMMMMMMMMMMMMMMMMMMMMMH,`' '
+  HMMMMMMMTMMMMb$ZP**HMMMMMMMMMMMMMMMM|.   :
+ dMMMMMMMM}$MMMMMH'   `HMMMH?\"`MMMM?T' .    :
+|MMMMMMMMMMoMH*''      `MM?    ``MMM|  +\\    .
+1MMMMMMMMMMMb#/         ?#?      |`#\"  -T:   :
+*'HMMMMMMMMMM*'           \"     ~?&  .?} ' ' .
+- 4MMMMMMMMP\"                    `M? HMTc:\\\\.:
+: `MMMMMMM[                       \"#:::`>`\"?M{
+.  |MMMMMMH.                        ``'``'_`:-
+-  |MMMMMMM|.dD                         ,#Mb\\'
+ :  *MMMMM: iM|  .                   _oHMMMM:
+  .  ?MMMM'  \"'                     ,MMMMMMP
+   :  `HMH                          JM#*MMT
+    -.  '                           `   #'
+      .                                /
+        -.            -              .'
+           -.                    . `
+              '--=&&MH##HMHH#\"\"\""
+
+[node name="tombstone25" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "              .-:?,Z?:&$dHH##b\\_
+           ,:bqRMMMMMMMMMMMMMMMMMHo.
+        .?HHHMMMMMMMMMMMMMMMMMMMMMMMHo.
+      -o/*M9MMMMMMMMMMMMMMMMMMMMMMMMMMMv
+    .:H\\b\\'|?#HHMMMMMMMMMMMMMMMMMMMMMM6?Z\\
+   .?MMMHbdbbodMMMMHMMMMMMMMMMMMMMMMMMMM\\':
+  :MMMMMMMMMMM7MMMMb?6P**#MMMMMMMMMMMMMMM_ :
+ \\MMMMMMMMMMMMb^MMMMMM?   `*MMMM*\"`MMMR<' . -
+.1MMMMMMMMMMMMMb]M#\"\"       9MR'   `?MMb  \\. :
+-MMMMMMMMMMMMMMMH##|`        *&.     |`*' .\\ .
+-?\"\"*MMMMMMMMMMMMM'            '    |?b  ,}\" :
+:    MMMMMMMMMMH'                    `M_|M}r\\?
+.    `MMMMMMMMM'                      `$_:`'\"H
+-     TMMMMMMMM,                        '\"``::
+:     {MMMMMMMM| oH|                      .#M-
+ :    `9MMMMMM' .MP   .                 ,oMMT
+  .     HMMMMP'  `'                    ,MMMP
+   -     `MMH'                         HH9*
+    '.    `                           ` .'
+      -                               . '
+       ` .               -          .-
+          ` .                    .-
+              ' -==pHMMH##HH#\"\"\"
+"
+text = "              .-:?,Z?:&$dHH##b\\_
+           ,:bqRMMMMMMMMMMMMMMMMMHo.
+        .?HHHMMMMMMMMMMMMMMMMMMMMMMMHo.
+      -o/*M9MMMMMMMMMMMMMMMMMMMMMMMMMMMv
+    .:H\\b\\'|?#HHMMMMMMMMMMMMMMMMMMMMMM6?Z\\
+   .?MMMHbdbbodMMMMHMMMMMMMMMMMMMMMMMMMM\\':
+  :MMMMMMMMMMM7MMMMb?6P**#MMMMMMMMMMMMMMM_ :
+ \\MMMMMMMMMMMMb^MMMMMM?   `*MMMM*\"`MMMR<' . -
+.1MMMMMMMMMMMMMb]M#\"\"       9MR'   `?MMb  \\. :
+-MMMMMMMMMMMMMMMH##|`        *&.     |`*' .\\ .
+-?\"\"*MMMMMMMMMMMMM'            '    |?b  ,}\" :
+:    MMMMMMMMMMH'                    `M_|M}r\\?
+.    `MMMMMMMMM'                      `$_:`'\"H
+-     TMMMMMMMM,                        '\"``::
+:     {MMMMMMMM| oH|                      .#M-
+ :    `9MMMMMM' .MP   .                 ,oMMT
+  .     HMMMMP'  `'                    ,MMMP
+   -     `MMH'                         HH9*
+    '.    `                           ` .'
+      -                               . '
+       ` .               -          .-
+          ` .                    .-
+              ' -==pHMMH##HH#\"\"\"
+"
+
+[node name="tombstone26" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "            _..-:b&::&?&&##bo_
+          ...?-#&9MMMMMMMMMMMMMMMHo_
+       .. .1&#MMHMMMMMMMMMMMMMMMMMMMHo.
+     .  .o/##R9MMMMMMMMMMMMMMMMMMMMMMMM?.
+    .- |MSd?|'`$?#HMMMMMMMMMMMMMMMMMMMMMH\\
+   -  dMMMMHbd##oodMMMM#MMMMMMMMMMMMMMMMMH:
+  - JMMMMMMMMMMMMM7HMMMH$SR***MMMMMMMMMMMMb>
+ : {MMMMMMMMMMMMMMM`9MMMMMH'  ``HMMM?\"*MM[| :
+- |MMMMMMMMMMMMMMMMM
+- ?\"\"*MMMMMMMMMMMMM'            '    |?b  ,}\":
+:     MMMMMMMMMMH'                    `M_|M}r?
+.     `MMMMMMMMM'                      `$_:`'H
+-      TMMMMMMMM,                        '\"``:
+:      {MMMMMMMM| oH|                      .#-
+ :     `9MMMMMM' .MP   .                 ,oMT
+  .      HMMMMP'  `'                    ,MMP
+   -      `MMH'                         HH*
+    '.     `                           ` .'
+      -                               . '
+       ` .               -          .-
+          ` .                    .-
+              ' -==pHMMH##HH#\"\"\""
+text = "            _..-:b&::&?&&##bo_
+          ...?-#&9MMMMMMMMMMMMMMMHo_
+       .. .1&#MMHMMMMMMMMMMMMMMMMMMMHo.
+     .  .o/##R9MMMMMMMMMMMMMMMMMMMMMMMM?.
+    .- |MSd?|'`$?#HMMMMMMMMMMMMMMMMMMMMMH\\
+   -  dMMMMHbd##oodMMMM#MMMMMMMMMMMMMMMMMH:
+  - JMMMMMMMMMMMMM7HMMMH$SR***MMMMMMMMMMMMb>
+ : {MMMMMMMMMMMMMMM`9MMMMMH'  ``HMMM?\"*MM[| :
+- |MMMMMMMMMMMMMMMMM
+- ?\"\"*MMMMMMMMMMMMM'            '    |?b  ,}\":
+:     MMMMMMMMMMH'                    `M_|M}r?
+.     `MMMMMMMMM'                      `$_:`'H
+-      TMMMMMMMM,                        '\"``:
+:      {MMMMMMMM| oH|                      .#-
+ :     `9MMMMMM' .MP   .                 ,oMT
+  .      HMMMMP'  `'                    ,MMP
+   -      `MMH'                         HH*
+    '.     `                           ` .'
+      -                               . '
+       ` .               -          .-
+          ` .                    .-
+              ' -==pHMMH##HH#\"\"\""
+
+[node name="tombstone27" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "            _..-:b&::&?&&##bo_
+          ...  ?-#&9MMMMMMMMMMMMMHo_
+       ..    1&#MMHMMMMMMMMMMMMMMMMMHo.
+     .    .o/##R9MMMMMMMMMMMMMMMMMMMMMM?.
+    .-   |MSd?|'`$?#HMMMMMMMMMMMMMMMMMMMH\\
+   -    dMMMMHbd##oodMMMM#MMMMMMMMMMMMMMMH:
+  -   JMMMMMMMMMMMMM7HMMMH$SR***MMMMMMMMMMb>
+ :   {MMMMMMMMMMMMMMM`9MMMMMH'  ``HMMM?\"*MM :
+-   |MMMMMMMMMMMMMMMMM                       :
+-   ?\"\"*MMMMMMMMMMMMM'            '    |?b  \":
+:       MMMMMMMMMMH'                    `M_|M?
+.       `MMMMMMMMM'                      `$_:H
+-        TMMMMMMMM,                        '\":
+:        {MMMMMMMM| oH|                      -
+ :       `9MMMMMM' .MP   .                 ,T
+  .        HMMMMP'  `'                    ,P
+   -        `MMH'                         *
+    '.       `                         ` .'
+      -                             . '
+       ` .                 -        .-
+          ` .                    .-
+              ' -==pHMMH##HH#\"\"\""
+text = "            _..-:b&::&?&&##bo_
+          ...  ?-#&9MMMMMMMMMMMMMHo_
+       ..    1&#MMHMMMMMMMMMMMMMMMMMHo.
+     .    .o/##R9MMMMMMMMMMMMMMMMMMMMMM?.
+    .-   |MSd?|'`$?#HMMMMMMMMMMMMMMMMMMMH\\
+   -    dMMMMHbd##oodMMMM#MMMMMMMMMMMMMMMH:
+  -   JMMMMMMMMMMMMM7HMMMH$SR***MMMMMMMMMMb>
+ :   {MMMMMMMMMMMMMMM`9MMMMMH'  ``HMMM?\"*MM :
+-   |MMMMMMMMMMMMMMMMM                       :
+-   ?\"\"*MMMMMMMMMMMMM'            '    |?b  \":
+:       MMMMMMMMMMH'                    `M_|M?
+.       `MMMMMMMMM'                      `$_:H
+-        TMMMMMMMM,                        '\":
+:        {MMMMMMMM| oH|                      -
+ :       `9MMMMMM' .MP   .                 ,T
+  .        HMMMMP'  `'                    ,P
+   -        `MMH'                         *
+    '.       `                         ` .'
+      -                             . '
+       ` .                 -        .-
+          ` .                    .-
+              ' -==pHMMH##HH#\"\"\""
+
+[node name="tombstone28" type="RichTextLabel" parent="base/Earth"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 62.0
+margin_right = 60.0
+margin_bottom = 22.0
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 5 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "            _..-:b&::&?&&##bo_
+          ...    ?-#&9MMMMMMMMMMMHo_
+       ..      1&#MMHMMMMMMMMMMMMMMMHo.
+     .      .o/##R9MMMMMMMMMMMMMMMMMMMM?.
+    .-     |MSd?|'`$?#HMMMMMMMMMMMMMMMMMH\\
+   -      dMMMMHbd##oodMMMM#MMMMMMMMMMMMMH:
+  -     JMMMMMMMMMMMMM7HMMMH$SR***MMMMMMMMb>
+ :     {MMMMMMMMMMMMMMM`9MMMMMH'  ``HMMM?\"* :
+-     |MMMMMMMMMMMMMMMMM                     :
+-     ?\"\"*MMMMMMMMMMMMM'            '    |?b\":
+:         MMMMMMMMMMH'                    `M_?
+.         `MMMMMMMMM'                      `$H
+-          TMMMMMMMM,                        :
+:          {MMMMMMMM| oH|                    -
+ :         `9MMMMMM' .MP   .                ,
+  .          HMMMMP'  `'                   ,
+   -          `MMH'                       *
+    '.         `                       ` .'
+      -                               . '
+       ` .                   -      .-
+          ` .                    .-
+              ' -==pHMMH##HH#\"\"\""
+text = "            _..-:b&::&?&&##bo_
+          ...    ?-#&9MMMMMMMMMMMHo_
+       ..      1&#MMHMMMMMMMMMMMMMMMHo.
+     .      .o/##R9MMMMMMMMMMMMMMMMMMMM?.
+    .-     |MSd?|'`$?#HMMMMMMMMMMMMMMMMMH\\
+   -      dMMMMHbd##oodMMMM#MMMMMMMMMMMMMH:
+  -     JMMMMMMMMMMMMM7HMMMH$SR***MMMMMMMMb>
+ :     {MMMMMMMMMMMMMMM`9MMMMMH'  ``HMMM?\"* :
+-     |MMMMMMMMMMMMMMMMM                     :
+-     ?\"\"*MMMMMMMMMMMMM'            '    |?b\":
+:         MMMMMMMMMMH'                    `M_?
+.         `MMMMMMMMM'                      `$H
+-          TMMMMMMMM,                        :
+:          {MMMMMMMM| oH|                    -
+ :         `9MMMMMM' .MP   .                ,
+  .          HMMMMP'  `'                   ,
+   -          `MMH'                       *
+    '.         `                       ` .'
+      -                               . '
+       ` .                   -      .-
+          ` .                    .-
+              ' -==pHMMH##HH#\"\"\""
+
+[node name="Name" type="Label" parent="base"]
+margin_left = 211.0
+margin_top = 298.62
+margin_right = 496.0
+margin_bottom = 336.62
+align = 1
+valign = 1
+
+[node name="Epitaph" type="Label" parent="base"]
+margin_left = 218.0
+margin_top = 353.0
+margin_right = 489.0
+margin_bottom = 557.0
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Success" type="Label" parent="base"]
+margin_left = 8.0
+margin_top = 53.0
+margin_right = 708.0
+margin_bottom = 200.0
+align = 1
+autowrap = true
+
+[node name="Success2" type="Label" parent="base"]
+margin_left = 426.0
+margin_top = 233.0
+margin_right = 698.0
+margin_bottom = 635.0
+align = 1
+autowrap = true
 

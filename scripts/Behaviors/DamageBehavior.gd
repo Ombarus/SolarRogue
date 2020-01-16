@@ -261,6 +261,7 @@ func ProcessDamage(target, shooter, weapon_data):
 				BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]You do %d damage[/color]", [dam])
 			elif is_target_player:
 				BehaviorEvents.emit_signal("OnLogLine", "[color=red]You take %d damage[/color]", [dam])
+		target.set_attrib("destroyable.damage_source", shooter.get_attrib("name_id"))
 		BehaviorEvents.emit_signal("OnDamageTaken", target, shooter)
 	
 	

@@ -15,8 +15,31 @@ func Ok_Callback():
 	
 func Init(init_param):
 	get_node("base").disabled = false
-	var text = init_param["text"]
 	_callback_obj = init_param["callback_object"]
 	_callback_method = init_param["callback_method"]
-	get_node("base/Content").bbcode_text = text
+	
+	var success : bool = init_param["is_success"]
+	
+	get_node("base/Name").text = init_param["player_name"]
+	get_node("base/Epitaph").text = init_param["epitaph"]
+	get_node("base/Success2").text = init_param["epitaph"]
+	get_node("base/Success").text = init_param["message_success"]
+	
+	if success == true:
+		get_node("base/tombstone").visible = false
+		get_node("base/Earth").visible = true
+		get_node("base/Name").visible = false
+		get_node("base/Epitaph").visible = false
+		get_node("base/Success").visible = true
+		get_node("base/Success2").visible = true
+		get_node("base").title = "You WON!"
+	else:
+		get_node("base/tombstone").visible = true
+		get_node("base/Earth").visible = false
+		get_node("base/Name").visible = true
+		get_node("base/Epitaph").visible = true
+		get_node("base/Success").visible = false
+		get_node("base/Success2").visible = false
+		get_node("base").title = "You are dead"
+	
 	
