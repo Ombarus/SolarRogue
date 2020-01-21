@@ -134,7 +134,7 @@ Cargo Contents,Cargo Contents,Soutes,内容
 Empty,Empty,Libre,空
 Repair Nanobots,Repair Nanobots,Nanobots Réparateur,修理ナノマシン
 Matter-to-Energy Converter,Matter-to-Energy Converter,Convertisseur d’énergie,Matter-to-Energy Converter
-Matter-to-Energy Converter MK2,Matter-to-Energy Converter MK2,Convertisseur d’énergie V2,Convertisseur d’énergie V2
+Matter-to-Energy Converter MK2,Matter-to-Energy Converter MK2,Convertisseur d’énergie v2,Convertisseur d’énergie V2
 Converter of Yendor,Converter of Yendor,Convertisseur de Yendor,Convertisseur de Yendor
 A Jerg Matter-to-Energy Converter,A Jerg Matter-to-Energy Converter,Convertisseur Jerg,Convertisseur Jerg
 A Vorg Matter-to-Energy Converter,A Vorg Matter-to-Energy Converter,Convertisseur Vorg,Convertisseur Vorg
@@ -147,11 +147,11 @@ Hydrogen,Hydrogen,Hydrogène,Hydrogène
 Oxygen,Oxygen,Oxygène,Oxygène
 Uranium,Uranium,Uranium,Uranium
 Long Range Scanner,Long Range Scanner,Radar Longue Porté,Radar Longue Porté
-Long Range Scanner MK2,Long Range Scanner MK2,Radar Longue Porté V2,Radar Longue Porté V2
-Long Range Scanner MK3,Long Range Scanner MK3,Radar Longue Porté V3,Radar Longue Porté V3
+Long Range Scanner MK2,Long Range Scanner MK2,Radar Longue Porté v2,Radar Longue Porté V2
+Long Range Scanner MK3,Long Range Scanner MK3,Radar Longue Porté v3,Radar Longue Porté V3
 Short Range Scanner,Short Range Scanner,Radar,Radar
-Short Range Scanner MK2,Short Range Scanner MK2,Radar V2,Radar V2
-Short Range Scanner MK3,Short Range Scanner MK3,Radar V3,Radar V3
+Short Range Scanner MK2,Short Range Scanner MK2,Radar v2,Radar V2
+Short Range Scanner MK3,Short Range Scanner MK3,Radar v3,Radar V3
 Ultimate Scanner,Ultimate Scanner,Le Radar Ultime,Le Radar Ultime
 Shield,Shield,Bouclier,Bouclier
 Medium Shield,Medium Shield,Bouclier Grande Capacité,Bouclier Grande Capacité
@@ -161,14 +161,14 @@ Small Power Amplifier,Small Power Amplifier,Petit Amplificateur de Puissance,Pet
 Medium Power Amplifier,Medium Power Amplifier,Amplificateur de Puissance Amélioré,Amplificateur de Puissance Amélioré
 Large Power Amplifier,Large Power Amplifier,Grand Amplificateur de Puissance,Grand Amplificateur de Puissance
 Solar Array,Solar Array,Panneaux Solaires,Panneaux Solaires
-Laser Turret MK1,Laser Turret MK1,Tourelle Laser V1,Tourelle Laser V1
-Laser Turret MK2,Laser Turret MK2,Tourelle Laser V2,Tourelle Laser V2
+Laser Turret MK1,Laser Turret MK1,Tourelle Laser v1,Laser Turret MK1
+Laser Turret MK2,Laser Turret MK2,Tourelle Laser v2,Laser Turret MK2
 Missile,Missile,Missile,Missile
-Missile Launcher MK1,Missile Launcher MK1,Lance-Missile V1,Lance-Missile V1
-Missile Launcher MK2,Missile Launcher MK2,Lance-Missile V2,Lance-Missile V2
-Missile Launcher MK3,Missile Launcher MK3,Lance-Missile V3,Lance-Missile V3
+Missile Launcher MK1,Missile Launcher MK1,Lance-Missile v1,Missile Launcher MK1
+Missile Launcher MK2,Missile Launcher MK2,Lance-Missile v2,Missile Launcher MK2
+Missile Launcher MK3,Missile Launcher MK3,Lance-Missile v3,Missile Launcher MK3
 Torpedo,Torpedo,Torpille,Torpille
-Torpedo Launcher MK1,Torpedo Launcher MK1,Lance-Torpilles V1,Lance-Torpilles V1
+Torpedo Launcher MK1,Torpedo Launcher MK1,Lance-Torpilles v1,Torpedo Launcher MK1
 Wormhole,Wormhole,Trou Noir,Trou Noir
 Unknown Object,Unknown Object,Object Inconnu,Object Inconnu
 A Human Battleship,A Human Battleship,Un Cuirassé Humain,Un Cuirassé Humain
@@ -357,7 +357,7 @@ Is Colonized,Is Colonized,Est colonisée,Is Colonized
 False,False,Non,False
 True,True,Oui,True
 Monstrous,Monstrous,Monstrueux,Monstrous
-SUCCESS_CONGRATS,"The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! \n\nYou made it !","Le Convertisseur de Yendor absorbe l'énergie du trou noir lui-même pour ouvrir une brêche dans l'espace. Doucement, vous engagé les moteurs et de l'autre côté se trouve un territoire bien connu. \n\nVous avez réussi !","The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! \n\nYou made it !"
+SUCCESS_CONGRATS,The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! \n\nYou made it !,"Le Convertisseur de Yendor absorbe l'énergie du trou noir lui-même pour ouvrir une brêche dans l'espace. Doucement, vous engagé les moteurs et de l'autre côté se trouve un territoire bien connu. \n\nVous avez réussi !",The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! \n\nYou made it !
 Killed by %s,Killed by %s,Tué par %s,%sを殺された
 Stranded,Stranded,Sans Énergie,Stranded
 self destructed,self destructed,suicidé,自殺

@@ -1,0 +1,50 @@
+Solar Rogue :
+Latest game preview : https://youtu.be/9mJ2FOBU_dY 
+Turn-based Space exploration meet Roguelike. I wanted to use most of the ideas in Nethack but convert them to a space game (swords are lasers, characters & NPCs are ships, Traps are Nebulas, etc.) I think it's become a bit more of a tactic type game than a true roguelike. But even tough it's not ASCII, has some animations and doesn't have classes or an experience system I still think it feels very much like a traditional roguelike when played.
+
+I'm a big fan of Nethack and I've slowly been working my way up with DCSS, Dwarf Fortress and most recently CDDA. I'm also a big fan of sci-fi. mid-2018 me and my wife moved back to Japan so I took this opportunity to jump into solo game dev (previously I worked for a big game studio for 8 years). I needed a game that would get me motivated, wouldn't require too much art (I suck at art) and something I thought I could control scope creep.
+
+I based the game from an aweful prototype I made years ago and tried to expend from there. https://imgur.com/a/jWgWtXx
+
+summary of 2019 :
+Development started late 2018 but most of it was done in 2019, broken up with other real life interruptions which prevented me from getting as far as I would have liked.
+
+From the beginning I set myself the unrealistic expectation of developping something with both traditionnal roguelike controls and a good touch-screen friendly GUI at the same time. Because of this I nearly had to give up on Godot because the basic input mapping scheme wouldn't allow me to make shortcuts like I wanted (you can't have shortcut for buttons with modifier like '<' or '&', etc). I was really proud of myself when I managed to 
+circumvent input mapping in Godot to get any keys and created a shortcut system to be able to trigger anything. You still need the mouse to select items but it's already pretty good.
+https://github.com/Ombarus/SolarRogue/commit/35f3f3cabd7f222e496776738b42cf0417535e68#diff-2bf3680d2ed26c197e1148abc74b4f60
+
+For someone who's got no art ability I'm pretty proud of some of the shaders I've come up with
+	-wormhole (they're basically the "stairs" in my game and I wanted them to feel unique and special) https://youtu.be/eRipppUCxME
+	-scanner fx (The only way I could find to show the grid without it looking weird in space) https://youtu.be/a_WWbgT_3Ro
+	-fog of war (Not as fancy as the others but a cool trick to show explored area of the map, each pixel of the texture is a tile in game and I just set the alpha per tile and scale the result) https://youtu.be/tPfVjaARv8c
+
+On the minus side.
+Design wise I think the game still hurt because there's no actual "level" since you can go anywhere (why wouldn't you ? this is space after all). There's no tricky terrain or clever way to use doors to block enemies or something like that so it's hard to keep it interesting. I'm hoping to reduce the issue when I have much more content to populate the levels with.
+
+When I started I was thinking of doing something like the very impressive menus in Cogmind where everything is animated ASCII characters. I tried really hard but finally had to give up when I realized that my tablet was running the game at 5fps because of all the text that needed to be rendered on the screen. Apparently Godot is not very fast at rendering text compared to well, most other stuff. There was many other issues, font oversampling causing issues with alignment. Fonts not scaling properly and more I forget. I still have an ASCII look for my dialogs & buttons but they're textures now, they actually look better too !
+
+My most recent pain is trying to implement some form of localization. This took way longer than I expected and it's not 100% yet. So many grammar issues to deal with !
+
+plan for 2020 :
+My hope for 2020 is to release a first version on as many platform as I can (iOS, Android, Steam (maybe, no experience there), itch.io, etc.) This is probably going to be something like version 0.1.0. I think the game still need a lot of content to be a real game. But I can't keep working on the game for 5 years without some sort of hope for revenu and feedback so I'm hoping that some kind of early access will help me keep up the development.
+
+I have a lot of ideas on how to improve the game and add more content that I'm really excited about.
+I need to do lots of world building / game design stuff :
+- Runes in DCSS gave me the idea of having a "crew" of say 7~9 people and throughout the game each crew member would face a deadly threat (poisoned, teleported away, assimilated, gone rogue, etc.) and would require a kind of unique "side-quest" to recover. These would mostly be optional like rune collection in DCSS but when you complete the game you would get a message like : "John, Harry and Marry went home, leaving behind Pickard and Steph...".
+- So many ideas for more guns, more ships, more hazards and items!
+- Meaningful side-branches. Right now I have side-branches themed around each races in the game but there's no reason to go there.
+- I'd like to add NPCs you can interact with (other than to shoot them) like stations or trading ships.
+
+Commercial plans
+I've released some app on iOS and Android before but I need to figure out how I'm going to do some actual marketing, distribution and release on more platform. I want to reach as far and wide as I can but I have no idea what I'm doing, I'm just hoping I won't crash and burn too fast...
+
+links ;
+	- website https://www.ombarus.com/, 
+	- twitter https://twitter.com/ombarus1
+	- discord https://discord.gg/8vUQuqh
+	- youtube https://www.youtube.com/channel/UCscoqrVcMbZwv5jIpKVYpDg
+	- instagram http://instagram.com/ombarus1 (I use my instagram more to chronicle my experience of Japan than programming stuff)
+
+tag : [2020 in RoguelikeDev] Solar Rogue
+
+

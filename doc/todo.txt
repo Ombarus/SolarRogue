@@ -6,6 +6,14 @@ RELEASE CHECKLIST :::
 - save after each turn, save when quit
 
 TODO :::
+- tests :
+	- rip name & message not centered on mobile ?
+	- description manquante Coque de sonde ?
+	- transfer ship. get attacked. used nanites. died. didn't end
+- to review :
+	- converter recipes and structure
+	- branches should give SOMETHING
+	- could vorg be more distinct ? (unique recipes? something other than shield make their ship unique?)
 - investigate steam and itch.io
 - Mobile only "features" ?
 	- Hide "Quit" button (iOS or Mobile in general)
@@ -162,6 +170,7 @@ IDEAS:::
 	
 	
 DONE :::
+	- fr: V1 should be v1
 - death screen need beautification
 - translate death screen
 - multiline item names in list ?
