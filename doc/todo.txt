@@ -7,9 +7,9 @@ RELEASE CHECKLIST :::
 
 TODO :::
 - tests :
+	- on transfer player, if ultimate scanner... clear all ghost, do full sweep
+	- transfering with ultimate scanner.... ishh
 	- rip name & message not centered on mobile ?
-	- description manquante Coque de sonde ?
-	- transfer ship. get attacked. used nanites. died. didn't end
 - to review :
 	- converter recipes and structure
 	- branches should give SOMETHING
@@ -170,6 +170,8 @@ IDEAS:::
 	
 	
 DONE :::
+	- description manquante Coque de sonde ?
+	- transfer ship. get attacked. used nanites. died. didn't end
 	- fr: V1 should be v1
 - death screen need beautification
 - translate death screen

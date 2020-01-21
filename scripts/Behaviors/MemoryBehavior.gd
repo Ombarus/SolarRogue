@@ -33,6 +33,7 @@ func OnTransferPlayer_Callback(old_player, new_player):
 	if new_player.get_attrib("has_ghost_memory") != null:
 		_remove_ghost_from_real(new_player)
 	_update_occlusion_texture()
+	ExecuteFullSweep()
 
 func OnObjectLoaded_Callback(obj):
 	if obj.get_attrib("type") == "player":

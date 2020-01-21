@@ -753,6 +753,7 @@ func OnTransferPlayer_Callback(old_player, new_player):
 		
 	new_player.set_attrib("moving.moved", true) # to update the wormhole button in next "OnPlayerTurn"
 	new_player.set_attrib("player_name", old_player.get_attrib("player_name"))
+	new_player.set_attrib("lowest_diff", old_player.get_attrib("lowest_diff"))
 	
 func DO_TEST(click_pos):
 	pass

@@ -13,6 +13,29 @@ func _ready():
 	BehaviorEvents.connect("OnTriggerAnomaly", self, "OnTriggerAnomaly_Callback")
 	BehaviorEvents.connect("OnAnomalyEffectGone", self, "OnAnomalyEffectGone_Callback")
 	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
+	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_Callback")
+
+func OnTransferPlayer_Callback(old_player, new_player):
+	var scanners = new_player.get_attrib("mounts.scanner")
+	if scanners == null or scanners.size() <= 0:
+		update_no_scanner(old_player, new_player)
+		return
+	
+	var scanner_name = scanners[0]
+	if scanner_name != null and scanner_name != "":
+		var scanner_data = Globals.LevelLoaderRef.LoadJSON(scanner_name)
+		_up_to_date = false
+		special_update_ultimate(new_player, scanner_data)
+	else:
+		update_no_scanner(old_player, new_player)
+		
+func update_no_scanner(old_player, new_player):
+	var level_id : String = Globals.LevelLoaderRef.GetLevelID()
+	new_player.set_attrib("scanner_result.new_out_of_range." + level_id, old_player.get_attrib("scanner_result.cur_in_range." + level_id))
+	new_player.set_attrib("scanner_result.cur_in_range." + level_id, [])
+	new_player.set_attrib("scanner_result.new_in_range." + level_id, [])
+	new_player.set_attrib("scanner_result.unknown." + level_id, [])
+	BehaviorEvents.emit_signal("OnScannerUpdated", new_player)
 
 func OnObjTurn_Callback(obj):
 	if obj.get_attrib("type") == "player":
@@ -125,6 +148,10 @@ func special_update_ultimate(obj, scanner_data):
 				cur_in_range.push_back(o.get_attrib("unique_id"))
 			
 		obj.set_attrib("scanner_result.cur_in_range." + level_id, cur_in_range)
+		
+		obj.set_attrib("scanner_result.new_in_range." + level_id, [])
+		obj.set_attrib("scanner_result.new_out_of_range." + level_id, [])
+		obj.set_attrib("scanner_result.unknown." + level_id, [])
 	
 func _process(delta):
 	if _up_to_date == true:
