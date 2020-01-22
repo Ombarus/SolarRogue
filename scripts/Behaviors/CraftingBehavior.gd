@@ -33,6 +33,22 @@ func TestRequirements(var recipe_data : Dictionary, var loaded_input_data : Arra
 				can_produce = true
 				break
 		return can_produce
+		
+	# Another exception for disassembling spare_parts
+	if recipe_data.produce == "spare_parts":
+		can_produce = false
+		for input_data in loaded_input_data:
+			if input_data.type == "energy":
+				continue
+			if input_data["amount"] > 0:
+				can_produce = true
+				energy_requirements += input_data.data.disassembling.energy_cost * input_data["amount"]
+				break
+		if energy_budget <= energy_requirements:
+			can_produce = false
+			missing_out.push_back({"type":"energy", "src":""})
+		return can_produce
+			
 	
 	# go from most specific to most generic so we make sure we don't use a specific item as a generic item
 	# if another generic item could have been used freing the specific item for src requirements
@@ -113,6 +129,14 @@ func Craft(recipe_data, input_list, crafter):
 						BehaviorEvents.emit_signal("OnRemoveItem", crafter, info["src"])
 						consumed_data.push_back({"data":info.data, "amount":require["amount"]})
 						info.amount -= require["amount"] # this works if "amount" is 1... but might cause issues if more
+			elif recipe_data.produce == "spare_parts":
+				for info in loaded_input_data:
+					if info.type == "energy":
+						continue
+					if info["amount"] > 0:
+						BehaviorEvents.emit_signal("OnRemoveItem", crafter, info["src"])
+						consumed_data.push_back({"data":info.data, "amount":require["amount"]})
+						info.amount -= require["amount"] # this works if "amount" is 1... but might cause issues if more
 			elif "type" in require:
 				var consumed = 0
 				for info in loaded_input_data:
@@ -138,7 +162,12 @@ func Craft(recipe_data, input_list, crafter):
 							break
 		
 		# Produce the thing
-		if recipe_data.produce == "energy":
+		if recipe_data.produce == "spare_parts":
+			for d in consumed_data:
+				net_energy_change -= d.data.disassembling.energy_cost * d.amount
+				for i in range(d.data.disassembling.count):
+					BehaviorEvents.emit_signal("OnAddItem", crafter, d.data.disassembling.produce)
+		elif recipe_data.produce == "energy":
 			for d in consumed_data:
 				net_energy_change += d.data.recyclable.energy * d.amount
 		else:

@@ -41,6 +41,7 @@
 			{"src":"data/json/items/misc/diluted_cristals.json", "count":6},
 			{"src":"data/json/items/misc/uranium.json", "count":3},
 			{"src":"data/json/items/utilities/solar_array.json", "count":1},
+			{"src":"data/json/items/misc/spare_parts.json", "count":10},
 			{"src":"data/json/items/utilities/solar_array.json", "count":1}
 		]
 	},

@@ -20,6 +20,11 @@
 	"recyclable": {
 		"energy": 1500
 	},
+	"disassembling": {
+		"produce":"data/json/items/misc/spare_parts.json",
+		"count":4,
+		"energy_cost":1000
+	},
 	"description": {
 		"text":"A military grade force field that surrounds the ship protecting it against all form of energy and projectile weaponry. Consumes large amount of energy and recharges slowly over time. Stacked shields offer diminishing returns.",
 		"Overview": {

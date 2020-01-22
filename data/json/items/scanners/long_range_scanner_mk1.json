@@ -20,6 +20,11 @@
 	"recyclable": {
 		"energy": 1500
 	},
+	"disassembling": {
+		"produce":"data/json/items/misc/spare_parts.json",
+		"count":1,
+		"energy_cost":500
+	},
 	"description": {
 		"text":"This extra-powerful radar extends beyond the average weapon range allowing us time to get into a flanking position before battle.",
 		"Overview": {

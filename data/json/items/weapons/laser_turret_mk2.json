@@ -26,6 +26,11 @@
 	"recyclable": {
 		"energy": 2500
 	},
+	"disassembling": {
+		"produce":"data/json/items/misc/spare_parts.json",
+		"count":2,
+		"energy_cost":700
+	},
 	"description": {
 		"text":"Highly cohesive beam of high-energy photons allows long range targetting in a straight line.",
 		"Overview": {

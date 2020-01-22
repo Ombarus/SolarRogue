@@ -175,6 +175,8 @@ func UpdateMaterialsList(recipe_data):
 			var add_item = false
 			if recipe_data.produce == "energy" and "recyclable" in data:
 				add_item = true
+			if recipe_data.produce == "spare_parts" and "disassembling" in data:
+				add_item = true
 			if "type" in r and r.type == data.type:
 				add_item = true
 			if "src" in r and Globals.clean_path(r.src) == Globals.clean_path(item.src):
@@ -200,7 +202,7 @@ func UpdateMaterialsList(recipe_data):
 	var can_produce = _behavior.TestRequirements(recipe_data, loaded_input_data, _obj.get_attrib("converter.stored_energy"), missing)
 	
 	for require in missing:
-		if "type" in require and require.type == "energy":
+		if "type" in require and (require.type == "energy" or require.type == "disassembling"):
 			pass # for now this will be handled by the updateCraftButton()
 		elif "type" in require:
 			list_data.push_front({"display_name_id":Globals.mytr("Missing %s", Globals.mytr(require.type)), "name_id": Globals.mytr("Missing %s", Globals.mytr(require.type)), "disabled":true, "max":require.amount})
@@ -224,9 +226,12 @@ func UpdateCraftInfo():
 	if _current_data["count"] == 0:
 		#recipe_name_str = "Cannot Craft " + _current_crafting_selected.name
 		recipe_color_str = "red"
-	recipe_name_str = Globals.mytr("Craft %d %s", [_current_data["count"], Globals.mytr(_current_crafting_selected.name)])
 	if _current_crafting_selected.produce == "energy":
 		recipe_name_str = Globals.mytr("Recycle %d Item(s)", [_current_data["count"]])
+	elif _current_crafting_selected.produce == "spare_parts":
+		recipe_name_str = Globals.mytr("%d Item(s) for %d Spare Part(s)", [_current_data["count"], _current_data["spare_parts"]])
+	else:
+		recipe_name_str = Globals.mytr("Craft %d %s", [_current_data["count"], Globals.mytr(_current_crafting_selected.name)])
 		
 	_recipe_name.bbcode_text = "[color=%s]%s[/color]" % [recipe_color_str, recipe_name_str]
 	
@@ -348,6 +353,10 @@ func OnMaterialChanged_Callback():
 		special_recycle_update(_current_crafting_selected)
 		return
 		
+	if _current_crafting_selected.produce == "spare_parts":
+		special_disassemble_update(_current_crafting_selected)
+		return
+		
 	var requirement_count = {}
 	var energy_cost = 0
 	for r in _current_crafting_selected.requirements:
@@ -403,6 +412,27 @@ func special_recycle_update(recipe_data):
 	_current_data["count"] = total_items
 	_current_data["ap"] = total_items * recipe_data.ap_cost
 	_current_data["energy"] = total_energy - _get_idle_turn_energy_cost(_current_data["ap"])
+		
+	UpdateCraftInfo()
+
+
+func special_disassemble_update(recipe_data):
+	var using_content = _material_list.Content
+	var total_items = 0
+	var total_energy = 0
+	var total_spare_parts = 0
+	for item in using_content:
+		if "disabled" in item and item.disabled == true:
+			continue
+		var d = Globals.LevelLoaderRef.LoadJSON(item.src)
+		total_items += item.selected
+		total_energy += (d.disassembling.energy_cost * item.selected)
+		total_spare_parts = d.disassembling.count * item.selected
+
+	_current_data["count"] = total_items
+	_current_data["ap"] = total_items * recipe_data.ap_cost
+	_current_data["energy"] = total_energy - _get_idle_turn_energy_cost(_current_data["ap"])
+	_current_data["spare_parts"] = total_spare_parts
 		
 	UpdateCraftInfo()
 

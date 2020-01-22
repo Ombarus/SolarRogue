@@ -19,6 +19,11 @@
 	"recyclable": {
 		"energy": 500
 	},
+	"disassembling": {
+		"produce":"data/json/items/misc/spare_parts.json",
+		"count":1,
+		"energy_cost":500
+	},
 	"description": {
 		"text":"Don't bother running. You'll just die tired. Extra damage at the cost of energy.",
 		"Overview": {

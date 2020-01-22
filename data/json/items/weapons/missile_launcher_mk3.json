@@ -27,6 +27,11 @@
 	"recyclable": {
 		"energy": 3000
 	},
+	"disassembling": {
+		"produce":"data/json/items/misc/spare_parts.json",
+		"count":4,
+		"energy_cost":1000
+	},
 	"description": {
 		"text":"Launches a flurry of guided-missile to any target in the viscinity. Extra missile bays allow for stacked shooting and reloading, allowing near-continuous shooting.",
 		"Overview": {

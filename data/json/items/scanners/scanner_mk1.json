@@ -20,6 +20,11 @@
 	"recyclable": {
 		"energy": 1000
 	},
+	"disassembling": {
+		"produce":"data/json/items/misc/spare_parts.json",
+		"count":1,
+		"energy_cost":500
+	},
 	"description": {
 		"text":"Space is vast and dark. Only radars can allow us to see objects in space. This one barely manages to do even that.",
 		"Overview": {

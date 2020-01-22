@@ -20,6 +20,11 @@
 	"recyclable": {
 		"energy": 500
 	},
+	"disassembling": {
+		"produce":"data/json/items/misc/spare_parts.json",
+		"count":1,
+		"energy_cost":500
+	},
 	"description": {
 		"text":"A type of force field that surrounds the ship protecting it against all form of energy and projectile weaponry. Consumes large amount of energy and recharges slowly over time. Stacked shields offer diminishing returns.",
 		"Overview": {

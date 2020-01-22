@@ -86,6 +86,11 @@
 	"recyclable": {
 		"energy": 2500
 	},
+	"disassembling": {
+		"produce":"data/json/items/misc/spare_parts.json",
+		"count":2,
+		"energy_cost":700
+	},
 	"description": {
 		"text":"A handy device that can convert any matter into energy and vice-versa. Contains the secret blueprints from the Jerg civilisation!",
 		"Overview": {

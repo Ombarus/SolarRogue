@@ -21,6 +21,11 @@
 	"recyclable": {
 		"energy": 2500
 	},
+	"disassembling": {
+		"produce":"data/json/items/misc/spare_parts.json",
+		"count":4,
+		"energy_cost":1000
+	},
 	"description": {
 		"text":"This advanced Radar can detect minute gravitational shifts within a solar system.",
 		"Overview": {
