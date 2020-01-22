@@ -24,7 +24,7 @@
 		"comment7":"the enemies will be choosen from the pondered list",
 		
 		
-		"inventory_size":[1,17],
+		"inventory_size":[4,17],
 		"pondered_inventory_content": [
 			{"src": "data/json/items/misc/hydrogen.json", "chance":25},
 			{"src": "data/json/items/misc/oxygen.json", "chance":50},

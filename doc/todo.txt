@@ -7,9 +7,10 @@ RELEASE CHECKLIST :::
 
 TODO :::
 - tests :
-	- on transfer player, if ultimate scanner... clear all ghost, do full sweep
-	- transfering with ultimate scanner.... ishh
+	- recipe scroll is not 100% fixed on touch
+	- balance :  first 2 level should garanty 1-5 items when shooting planet (easy_planet)
 	- rip name & message not centered on mobile ?
+		- Same damn issue with scaling of font and oversampling
 - to review :
 	- converter recipes and structure
 	- branches should give SOMETHING
@@ -170,6 +171,8 @@ IDEAS:::
 	
 	
 DONE :::
+	- on transfer player, if ultimate scanner... clear all ghost, do full sweep
+	- transfering with ultimate scanner.... ishh
 	- description manquante Coque de sonde ?
 	- transfer ship. get attacked. used nanites. died. didn't end
 	- fr: V1 should be v1
