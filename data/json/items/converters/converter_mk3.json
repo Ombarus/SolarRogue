@@ -1,5 +1,5 @@
 {
-	"name_id":"A Jerg Matter-to-Energy Converter",
+	"name_id":"Military Grade Converter",
 	"type":"converter",
 	"sprite":"converter",
 	"icon": {
@@ -13,7 +13,7 @@
 		"unequip_ap":3.0
 	},
 	"converter": {
-		"maximum_energy":15000,
+		"maximum_energy":100000,
 		"recipes": [
 			{
 				"name": "Recycle Energy",
@@ -52,51 +52,47 @@
 				"amount":1
 			},
 			{
-				"name": "Jerg Scout", 
+				"name": "Probe Ship",
+				"requirements":[{"type":"energy", "amount":1500}, {"type":"probe_hull", "amount":1}], 
+				"produce":"data/json/ships/human/player_probe.json",
+				"ap_cost":5.0,
+				"amount":1
+			},
+			{
+				"name": "(Starting) Human Scout",
 				"requirements":[
 					{"type":"energy", "amount":1800},
-					{"type":"scout_hull", "amount":1},
-					{"type":"utility", "amount":1}
+					{"type":"scout_hull", "amount":1}
 				],
-				"produce":"data/json/ships/jerg/player_scout.json",
+				"produce":"data/json/ships/human/player_scout.json",
 				"ap_cost":6.0,
 				"amount":1
 			},
 			{
-				"name": "Jerg Bomber",
+				"name": "Human Bomber",
 				"requirements":[
 					{"type":"energy", "amount":2000},
-					{"type":"scout_hull", "amount":2},
-					{"type":"utility", "amount":1}
+					{"type":"scout_hull", "amount":2}
 				],
-				"produce":"data/json/ships/jerg/player_bomber.json",
+				"produce":"data/json/ships/human/player_bomber.json",
 				"ap_cost":6.0,
 				"amount":1
 			},
 			{
-				"name": "Jerg Frigate", 
-				"requirements":[{"type":"energy", "amount":2500}, {"type":"frigate_hull", "amount":2}], 
-				"produce":"data/json/ships/jerg/player_frigate.json",
+				"name": "Human Frigate",
+				"requirements":[{"type":"energy", "amount":2500}, {"type":"frigate_hull", "amount":1}], 
+				"produce":"data/json/ships/human/player_frigate.json",
 				"ap_cost":7.0,
 				"amount":1
 			},
 			{
-				"name": "Jerg Battleship", 
+				"name": "Human Battleship",
 				"requirements":[
 					{"type":"energy", "amount":7500},
-					{"type":"battleship_hull", "amount":1}, 
-					{"type":"frigate_hull", "amount":1},
-					{"type":"utility", "amount":2}
+					{"type":"battleship_hull", "amount":1}
 				],
-				"produce":"data/json/ships/jerg/player_battleship.json",
+				"produce":"data/json/ships/human/player_battleship.json",
 				"ap_cost":8.0,
-				"amount":1
-			},
-			{
-				"name": "Repair Nanobots", 
-				"requirements":[{"type":"energy", "amount":1350}],
-				"produce":"data/json/items/consumables/repair_nanobots.json",
-				"ap_cost":4.0,
 				"amount":1
 			},
 			{
@@ -121,10 +117,24 @@
 				"amount":1
 			},
 			{
+				"name": "Medium Shield", 
+				"requirements":[{"type":"energy", "amount":1000}, {"type":"spare_parts", "amount":4}], 
+				"produce":"data/json/items/shields/shield_mk2.json",
+				"ap_cost":5.0,
+				"amount":1
+			},
+			{
 				"name": "Laser Turret MK2", 
 				"requirements":[{"type":"energy", "amount":1000}, {"type":"spare_parts", "amount":4}], 
 				"produce":"data/json/items/weapons/laser_turret_mk2.json",
 				"ap_cost":5.0,
+				"amount":1
+			},
+			{
+				"name": "Missile Launcher MK3", 
+				"requirements":[{"type":"energy", "amount":1500}, {"type":"spare_parts", "amount":8}], 
+				"produce":"data/json/items/weapons/missile_launcher_mk3.json",
+				"ap_cost":6.0,
 				"amount":1
 			},
 			{
@@ -135,31 +145,31 @@
 				"amount":1
 			},
 			{
-				"name": "Short Range Scanner MK2", 
-				"requirements":[{"type":"energy", "amount":1000}, {"type":"spare_parts", "amount":4}], 
-				"produce":"data/json/items/scanners/scanner_mk2.json",
-				"ap_cost":5.0,
+				"name": "Short Range Scanner MK3", 
+				"requirements":[{"type":"energy", "amount":1500}, {"type":"spare_parts", "amount":8}], 
+				"produce":"data/json/items/scanners/scanner_mk3.json",
+				"ap_cost":6.0,
 				"amount":1
 			},
 			{
-				"name": "Long Range Scanner MK2", 
-				"requirements":[{"type":"energy", "amount":1350}, {"type":"spare_parts", "amount":6}], 
-				"produce":"data/json/items/scanners/long_range_scanner_mk2.json",
-				"ap_cost":5.0,
+				"name": "Long Range Scanner MK3", 
+				"requirements":[{"type":"energy", "amount":1800}, {"type":"spare_parts", "amount":10}], 
+				"produce":"data/json/items/scanners/long_range_scanner_mk3.json",
+				"ap_cost":6.0,
 				"amount":1
 			}
 		]
 	},
 	"recyclable": {
-		"energy": 2500
+		"energy": 2000
 	},
 	"disassembling": {
 		"produce":"data/json/items/misc/spare_parts.json",
-		"count":3,
+		"count":4,
 		"energy_cost":700
 	},
 	"description": {
-		"text":"A handy device that can convert any matter into energy and vice-versa. Contains the secret blueprints from the Jerg civilisation!",
+		"text":"A handy device that can convert any matter into energy and vice-versa. More advanced blueprints require military grade converter.",
 		"Overview": {
 			"min_level":0,
 			"fields":[
@@ -172,7 +182,7 @@
 			"min_level":0,
 			"fields": [
 				{"name":"Maximum Energy Reserve", "value":"{converter.maximum_energy}", "translate_value":false},
-				{"name":"Recipes", "value":"8", "translate_value":false}
+				{"name":"Recipes", "value":"14", "translate_value":false}
 			]
 		}
 	}

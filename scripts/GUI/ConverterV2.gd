@@ -62,7 +62,6 @@ func CraftButtonPressed_Callback():
 	if _callback_obj == null:
 		return
 		
-	var input_list = []
 	var using_content = _material_list.Content	
 	using_content.push_back("energy")
 	_callback_obj.call(_callback_method, _current_crafting_selected, using_content)
@@ -189,26 +188,26 @@ func UpdateMaterialsList(recipe_data):
 					input_data.push_back({"name_id":d.name_id, "max":item.count, "src":item.src, "selected":item.count})
 					added_to_data[cargo_index] = true
 			cargo_index += 1
-		#if has_item_to_use == false:
-		#	if "type" in r:
-		#		list_data.push_back({"name_id":"Missing " + r.type, "disabled":true, "max":r.amount})
-		#	else:
-		#		var d = Globals.LevelLoaderRef.LoadJSON(r.src)
-		#		list_data.push_back({"name_id":"Missing " + d.name_id, "max":r.amount, "disabled":true})
-	
+	var using_content = _material_list.Content	
+	using_content.push_back("energy")
+			
+			
 	input_data.push_back("energy")
 	var missing = []
-	var loaded_input_data = _behavior.LoadInput(input_data)
+	var loaded_input_data = _behavior.LoadInput(using_content)
 	var can_produce = _behavior.TestRequirements(recipe_data, loaded_input_data, _obj.get_attrib("converter.stored_energy"), missing)
 	
 	for require in missing:
+		var missing_count : String = ""
+		if require["amount"] > 1:
+			missing_count = " " + str(require["amount"])
 		if "type" in require and (require.type == "energy" or require.type == "disassembling"):
 			pass # for now this will be handled by the updateCraftButton()
 		elif "type" in require:
-			list_data.push_front({"display_name_id":Globals.mytr("Missing %s", Globals.mytr(require.type)), "name_id": Globals.mytr("Missing %s", Globals.mytr(require.type)), "disabled":true, "max":require.amount})
+			list_data.push_front({"display_name_id":Globals.mytr("Missing%s %s", [missing_count, Globals.mytr(require.type)]), "name_id": Globals.mytr("Missing%s %s", [missing_count, Globals.mytr(require.type)]), "disabled":true, "max":require.amount})
 		elif "src" in require:
 			var d = Globals.LevelLoaderRef.LoadJSON(require.src)
-			list_data.push_back({"display_name_id":Globals.mytr("Missing %s", Globals.mytr(d.name_id)), "name_id":Globals.mytr("Missing %s", Globals.mytr(d.name_id)), "disabled":true, "max":require.amount})
+			list_data.push_back({"display_name_id":Globals.mytr("Missing%s %s", [missing_count, Globals.mytr(d.name_id)]), "name_id":Globals.mytr("Missing%s %s", [missing_count, Globals.mytr(d.name_id)]), "disabled":true, "max":require.amount})
 	
 	_material_list.Content = list_data
 	
@@ -397,6 +396,37 @@ func OnMaterialChanged_Callback():
 	_current_data["count"] *= _current_crafting_selected.amount
 	
 	UpdateCraftInfo()
+	
+	using_content.push_back("energy")
+	var missing = []
+	var loaded_input_data = _behavior.LoadInput(using_content)
+	var can_produce = _behavior.TestRequirements(_current_crafting_selected, loaded_input_data, _obj.get_attrib("converter.stored_energy"), missing)
+	
+	var list_data = _material_list.Content
+	var index := 0
+	for list_data in list_data:
+		if "disabled" in list_data and list_data.disabled == true:
+			var name_id := ""
+			var display_name_id := ""
+			if missing.size() > index:
+				var missing_data = missing[index]
+				var missing_count : String = ""
+				if missing_data["amount"] > 1:
+					missing_count = " " + str(missing_data["amount"])
+				if "type" in missing_data and (missing_data.type == "energy" or missing_data.type == "disassembling"):
+					pass # for now this will be handled by the updateCraftButton()
+				elif "type" in missing_data:
+					name_id = Globals.mytr("Missing%s %s", [missing_count, Globals.mytr(missing_data.type)])
+					display_name_id = Globals.mytr("Missing%s %s", [missing_count, Globals.mytr(missing_data.type)])
+				elif "src" in missing_data:
+					var d = Globals.LevelLoaderRef.LoadJSON(missing_data.src)
+					name_id = Globals.mytr("Missing%s %s", [missing_count, Globals.mytr(d.name_id)])
+					display_name_id = Globals.mytr("Missing%s %s", [missing_count, Globals.mytr(d.name_id)])
+			list_data.name_id = name_id
+			list_data.display_name_id = display_name_id
+			index += 1
+	_material_list.UpdateContent(list_data)
+	
 
 func special_recycle_update(recipe_data):
 	var using_content = _material_list.Content
@@ -427,7 +457,7 @@ func special_disassemble_update(recipe_data):
 		var d = Globals.LevelLoaderRef.LoadJSON(item.src)
 		total_items += item.selected
 		total_energy += (d.disassembling.energy_cost * item.selected)
-		total_spare_parts = d.disassembling.count * item.selected
+		total_spare_parts += d.disassembling.count * item.selected
 
 	_current_data["count"] = total_items
 	_current_data["ap"] = total_items * recipe_data.ap_cost

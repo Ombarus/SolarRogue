@@ -27,6 +27,17 @@
 				"amount":1500
 			},
 			{
+				"name": "Disassemble",
+				"icon": {
+					"texture":"data/textures/space-sprite.png",
+					"region":[1536,128,128,128]
+				},
+				"requirements": [{"type":"disassembling", "amount":1}], 
+				"produce":"spare_parts",
+				"ap_cost":1.0,
+				"amount":1500
+			},
+			{
 				"name": "Missile",
 				"requirements":[{"type":"energy", "amount":500}], 
 				"produce":"data/json/items/weapons/missile.json",
@@ -86,6 +97,48 @@
 				"ap_cost":8.0,
 				"amount":1
 			},
+			{
+				"name": "Large Power Amplifier", 
+				"requirements":[{"type":"energy", "amount":1500}, {"type":"spare_parts", "amount":8}], 
+				"produce":"data/json/items/utilities/power_amplifier_mk3.json",
+				"ap_cost":6.0,
+				"amount":1
+			},
+			{
+				"name": "Large Shield", 
+				"requirements":[{"type":"energy", "amount":1500}, {"type":"spare_parts", "amount":8}], 
+				"produce":"data/json/items/shields/shield_mk3.json",
+				"ap_cost":6.0,
+				"amount":1
+			},
+			{
+				"name": "Missile Launcher MK3", 
+				"requirements":[{"type":"energy", "amount":1500}, {"type":"spare_parts", "amount":8}], 
+				"produce":"data/json/items/weapons/missile_launcher_mk3.json",
+				"ap_cost":6.0,
+				"amount":1
+			},
+			{
+				"name": "Torpedo Launcher", 
+				"requirements":[{"type":"energy", "amount":800}, {"type":"spare_parts", "amount":3}], 
+				"produce":"data/json/items/weapons/torpedo_launcher_mk1.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
+				"name": "Short Range Scanner MK2", 
+				"requirements":[{"type":"energy", "amount":1000}, {"type":"spare_parts", "amount":4}], 
+				"produce":"data/json/items/scanners/scanner_mk2.json",
+				"ap_cost":5.0,
+				"amount":1
+			},
+			{
+				"name": "Long Range Scanner MK2", 
+				"requirements":[{"type":"energy", "amount":1350}, {"type":"spare_parts", "amount":6}], 
+				"produce":"data/json/items/scanners/long_range_scanner_mk2.json",
+				"ap_cost":5.0,
+				"amount":1
+			}
 		]
 	},
 	"recyclable": {
@@ -93,7 +146,7 @@
 	},
 	"disassembling": {
 		"produce":"data/json/items/misc/spare_parts.json",
-		"count":2,
+		"count":3,
 		"energy_cost":700
 	},
 	"description": {

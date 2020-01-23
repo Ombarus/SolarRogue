@@ -7,6 +7,8 @@ extends Node
 func LoadInput(var input_list : Array) -> Array:
 	var loaded_input_data = []
 	for item in input_list:
+		if "disabled" in item and item.disabled == true:
+			continue
 		if typeof(item) == TYPE_STRING and item == "energy":
 			loaded_input_data.push_back({"type":"energy", "src":""})
 		else:

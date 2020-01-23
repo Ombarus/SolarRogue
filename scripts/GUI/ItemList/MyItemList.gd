@@ -50,6 +50,12 @@ func get_content():
 	for row in _rows_node.get_children():
 		content.push_back(row.RowData)
 	return content
+	
+func UpdateContent(val):
+	var count := 0
+	for row in _rows_node.get_children():
+		row.UpdateContent(val[count])
+		count += 1
 
 func _ready():
 	#Clear()

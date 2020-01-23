@@ -19,9 +19,12 @@ func set_row_data(data):
 	select(0)
 	
 		
-#func get_row_data():
-	#_metadata["selected"] = self.pressed
-#	return _metadata
+func UpdateContent(data):
+	_metadata = data
+	var num : int = 0
+	if "selected" in _metadata:
+		num = _metadata["selected"]
+	select(num, true)
 
 func _ready():
 	_toggle.connect("pressed", self, "pressed_callback")
@@ -43,7 +46,7 @@ func pressed_callback():
 			"min_value":1, 
 			"max_value":_metadata.max})
 
-func select(num):
+func select(num, skip_event=false):
 	if num == 0:
 		if "display_name_id" in _metadata:
 			get_node("HBoxContainer/Name").text = _metadata.display_name_id
@@ -74,5 +77,7 @@ func select(num):
 		get_node("HBoxContainer/Wrapper/Count").text = str(num) + "/" + str(_metadata.max)
 		self.theme = partial_selection
 		_metadata["selected"] = num
-	_metadata.origin.bubble_selection_changed()
+		
+	if skip_event == false:
+		_metadata.origin.bubble_selection_changed()
 		

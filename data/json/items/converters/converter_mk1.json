@@ -86,13 +86,31 @@
 				"amount":1
 			},
 			{
-				"name": "Human Battleship",
-				"requirements":[
-					{"type":"energy", "amount":7500},
-					{"type":"battleship_hull", "amount":1}
-				],
-				"produce":"data/json/ships/human/player_battleship.json",
-				"ap_cost":8.0,
+				"name": "Shield", 
+				"requirements":[{"type":"energy", "amount":600}, {"type":"spare_parts", "amount":2}], 
+				"produce":"data/json/items/shields/shield_mk1.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
+				"name": "Missile Launcher MK1", 
+				"requirements":[{"type":"energy", "amount":600}, {"type":"spare_parts", "amount":2}], 
+				"produce":"data/json/items/weapons/missile_launcher_mk1.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
+				"name": "Short Range Scanner", 
+				"requirements":[{"type":"energy", "amount":600}, {"type":"spare_parts", "amount":2}], 
+				"produce":"data/json/items/scanners/scanner_mk1.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
+				"name": "Long Range Scanner", 
+				"requirements":[{"type":"energy", "amount":800}, {"type":"spare_parts", "amount":3}], 
+				"produce":"data/json/items/scanners/long_range_scanner_mk1.json",
+				"ap_cost":4.0,
 				"amount":1
 			}
 		]

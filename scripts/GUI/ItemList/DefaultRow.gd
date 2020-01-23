@@ -12,6 +12,8 @@ func set_row_data(data):
 func get_row_data():
 	return _metadata
 
+func UpdateContent(data):
+	pass
 
 func get_drag_data(position):
 	if not "dragdrop_id" in _metadata or _metadata.dragdrop_id == "":
