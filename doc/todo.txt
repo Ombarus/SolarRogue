@@ -6,6 +6,10 @@ RELEASE CHECKLIST :::
 - save after each turn, save when quit
 
 TODO :::
+- non-stackable items aren't counted well in cargo of converter
+- order recipes
+- add converter mk3 to drop lists
+- garantie drop jerg/vorg converter in homeworld
 - tests :
 	- recipe scroll is not 100% fixed on touch
 	- balance :  first 2 level should garanty 1-5 items when shooting planet (easy_planet)

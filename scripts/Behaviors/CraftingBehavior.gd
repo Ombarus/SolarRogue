@@ -63,6 +63,9 @@ func TestRequirements(var recipe_data : Dictionary, var loaded_input_data : Arra
 			else:
 				type_requirements.push_back(require)
 	
+	for input_data in loaded_input_data:
+		input_data["will_consume"] = 0
+	
 	for require in src_requirements:
 		var total_needed : int = require["amount"]
 		for input_data in loaded_input_data:
@@ -70,9 +73,7 @@ func TestRequirements(var recipe_data : Dictionary, var loaded_input_data : Arra
 				var holding = input_data["amount"]
 				if "will_consume" in input_data:
 					holding -= input_data["will_consume"]
-				if holding > 0:
-					if not "will_consume" in input_data:
-						input_data["will_consume"] = 0
+				if holding >= 0:
 					input_data["will_consume"] += min(total_needed, holding)
 					total_needed -= min(total_needed, holding)
 		if total_needed > 0:
@@ -85,9 +86,7 @@ func TestRequirements(var recipe_data : Dictionary, var loaded_input_data : Arra
 				var holding = input_data["amount"]
 				if "will_consume" in input_data:
 					holding -= input_data["will_consume"]
-				if holding > 0:
-					if not "will_consume" in input_data:
-						input_data["will_consume"] = 0
+				if holding >= 0:
 					input_data["will_consume"] += min(total_needed, holding)
 					total_needed -= min(total_needed, holding)
 		if total_needed > 0:
