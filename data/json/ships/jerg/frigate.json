@@ -48,6 +48,7 @@
 	"drop_on_death": [
 	
 		{"id":"data/json/items/converters/converter_mk2.json", "chance":0.001},
+		{"id":"data/json/items/converters/converter_mk3.json", "chance":0.001},
 		{"id":"data/json/items/converters/jerg_converter_mk1.json", "chance":0.06666666667},
 		{"id":"data/json/items/converters/vorg_converter_mk1.json", "chance":0.001},
 		{"id":"data/json/items/misc/battleship_body.json", "chance":0.0},

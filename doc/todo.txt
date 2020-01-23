@@ -6,8 +6,6 @@ RELEASE CHECKLIST :::
 - save after each turn, save when quit
 
 TODO :::
-- non-stackable items aren't counted well in cargo of converter
-- order recipes
 - add converter mk3 to drop lists
 - garantie drop jerg/vorg converter in homeworld
 - tests :
@@ -175,6 +173,8 @@ IDEAS:::
 	
 	
 DONE :::
+- non-stackable items aren't counted well in cargo of converter
+- order recipes
 	- on transfer player, if ultimate scanner... clear all ghost, do full sweep
 	- transfering with ultimate scanner.... ishh
 	- description manquante Coque de sonde ?
