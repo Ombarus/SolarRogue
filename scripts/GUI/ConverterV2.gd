@@ -255,7 +255,7 @@ func UpdateCraftInfo():
 		var cargo = _obj.get_attrib("cargo.content")
 		for item in cargo:
 			if Globals.clean_path(item.src) == Globals.clean_path(_current_crafting_selected.produce):
-				in_cargo = item.count
+				in_cargo += item.count
 				
 	var n : Container = get_node("HBoxContainer/Control/VBoxContainer/RecipeInfoContainer/InCargoContainer")
 	if in_cargo <= 0:
