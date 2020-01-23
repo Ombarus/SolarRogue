@@ -6,8 +6,8 @@ RELEASE CHECKLIST :::
 - save after each turn, save when quit
 
 TODO :::
-- add converter mk3 to drop lists
 - garantie drop jerg/vorg converter in homeworld
+- long-range mk3 scanner doesn't have the same abilities as short one
 - tests :
 	- recipe scroll is not 100% fixed on touch
 	- balance :  first 2 level should garanty 1-5 items when shooting planet (easy_planet)

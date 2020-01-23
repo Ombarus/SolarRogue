@@ -199,7 +199,7 @@ func UpdateMaterialsList(recipe_data):
 	
 	for require in missing:
 		var missing_count : String = ""
-		if require["amount"] > 1:
+		if "amount" in require and require["amount"] > 1:
 			missing_count = " " + str(require["amount"])
 		if "type" in require and (require.type == "energy" or require.type == "disassembling"):
 			pass # for now this will be handled by the updateCraftButton()
