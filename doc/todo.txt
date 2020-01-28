@@ -4,11 +4,15 @@ RELEASE CHECKLIST :::
 - levelLoader.gd => test_mid_game is false
 - compilation set to release (debug unchecked)
 - save after each turn, save when quit
+- remove sample & debug nodes in main.tscn ?
 
 TODO :::
 - garantie drop jerg/vorg converter in homeworld
 - long-range mk3 scanner doesn't have the same abilities as short one
+	- I don't like that you see planets... yet I really want a way to distinguish big object from small with mk3
 - tests :
+	- being able to shoot mk3 twice when other guns are equiped doesn't work ?
+	- check cargo. I probably shouldn't be able to hold 2 shields, 2 scanners, 12 missile and a bunch of other stuff in a scout
 	- recipe scroll is not 100% fixed on touch
 	- balance :  first 2 level should garanty 1-5 items when shooting planet (easy_planet)
 	- rip name & message not centered on mobile ?

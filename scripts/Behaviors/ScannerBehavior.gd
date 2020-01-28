@@ -35,6 +35,7 @@ func update_no_scanner(old_player, new_player):
 	new_player.set_attrib("scanner_result.cur_in_range." + level_id, [])
 	new_player.set_attrib("scanner_result.new_in_range." + level_id, [])
 	new_player.set_attrib("scanner_result.unknown." + level_id, [])
+	new_player.set_attrib("scanner_result.unknown2." + level_id, [])
 	BehaviorEvents.emit_signal("OnScannerUpdated", new_player)
 
 func OnObjTurn_Callback(obj):
@@ -152,6 +153,7 @@ func special_update_ultimate(obj, scanner_data):
 		obj.set_attrib("scanner_result.new_in_range." + level_id, [])
 		obj.set_attrib("scanner_result.new_out_of_range." + level_id, [])
 		obj.set_attrib("scanner_result.unknown." + level_id, [])
+		obj.set_attrib("scanner_result.unknown2." + level_id, [])
 	
 func _process(delta):
 	if _up_to_date == true:
@@ -241,14 +243,21 @@ func _update_scanned_obj(obj, scanner_data):
 		offset.y = 0
 		offset.x += 1
 
-		
-	var always_seen = Globals.get_data(scanner_data, "scanning.full_reveal_type", [])
-	for type in always_seen:
+
+	var unkown_objects2 = []
+	var partial_type2 = Globals.get_data(scanner_data, "scanning.full_reveal_type", [])
+	for type in partial_type2:
 		if type in Globals.LevelLoaderRef.objByType:
 			for o in Globals.LevelLoaderRef.objByType[type]:
-				var uniq_id = o.get_attrib("unique_id")
-				if not uniq_id in cur_in_range:
-					cur_in_range.push_back(uniq_id)
+				unkown_objects2.push_back(o.get_attrib("unique_id"))
+		
+	#var always_seen = Globals.get_data(scanner_data, "scanning.full_reveal_type", [])
+	#for type in always_seen:
+	#	if type in Globals.LevelLoaderRef.objByType:
+	#		for o in Globals.LevelLoaderRef.objByType[type]:
+	#			var uniq_id = o.get_attrib("unique_id")
+	#			if not uniq_id in cur_in_range:
+	#				cur_in_range.push_back(uniq_id)
 
 
 	var level_id = Globals.LevelLoaderRef.GetLevelID()
@@ -281,6 +290,7 @@ func _update_scanned_obj(obj, scanner_data):
 	obj.set_attrib("scanner_result.new_in_range." + level_id, new_in_range)
 	obj.set_attrib("scanner_result.new_out_of_range." + level_id, new_out_of_range)
 	obj.set_attrib("scanner_result.unknown." + level_id, unkown_objects)
+	obj.set_attrib("scanner_result.unknown2." + level_id, unkown_objects2)
 	obj.set_attrib("scanner_result.scanned_tiles." + level_id, scanned_tiles)
 	BehaviorEvents.emit_signal("OnScannerUpdated", obj)
 	

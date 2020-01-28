@@ -148,6 +148,7 @@ func OnScannerUpdated_Callback(obj):
 	var new_objs = obj.get_attrib("scanner_result.new_in_range." + level_id, [])
 	var new_out_objs = obj.get_attrib("scanner_result.new_out_of_range." + level_id, [])
 	var unkown_objs = obj.get_attrib("scanner_result.unknown." + level_id, [])
+	var unkown_objs2 = obj.get_attrib("scanner_result.unknown2." + level_id, [])
 	var known_anomalies = obj.get_attrib("scanner_result.known_anomalies." + level_id, {})
 	
 	for id in new_objs:
@@ -199,6 +200,23 @@ func OnScannerUpdated_Callback(obj):
 					modified["ghost_memory"] = {"reference_id":o.get_attrib("unique_id"), "is_unknown":true}
 					var n = Globals.LevelLoaderRef.RequestObject(unkown_tile_path, Globals.LevelLoaderRef.World_to_Tile(o.position), modified)
 					o.set_attrib("has_ghost_memory.reference_id", n.get_attrib("unique_id"))
+	
+	if unkown_objs2 != null:
+		var all_visible = _playerNode.get_attrib("scanner_result.cur_in_range." + level_id, [])
+		for id in unkown_objs2:
+			var o = Globals.LevelLoaderRef.GetObjectById(id)
 			
+			if o != null and not id in all_visible and o.get_attrib("ghost_memory") == null:
+				if o.get_attrib("has_ghost_memory") != null:
+					var ghost_id = o.get_attrib("has_ghost_memory.reference_id")
+					var ghost = Globals.LevelLoaderRef.GetObjectById(ghost_id)
+					Globals.LevelLoaderRef.UpdatePosition(ghost, o.position)
+					#ghost.position = o.position # Don't ever ever do this with a Attribute Object... LevelLoader will get confused
+				elif o.get_attrib("is_fake_ghost_memory", false) == false:
+					var unkown_tile_path = "data/json/props/unknow2.json"
+					var modified = {}
+					modified["ghost_memory"] = {"reference_id":o.get_attrib("unique_id"), "is_unknown":true}
+					var n = Globals.LevelLoaderRef.RequestObject(unkown_tile_path, Globals.LevelLoaderRef.World_to_Tile(o.position), modified)
+					o.set_attrib("has_ghost_memory.reference_id", n.get_attrib("unique_id"))		
 			
 	_update_occlusion(obj)

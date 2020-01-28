@@ -42,7 +42,7 @@ func OnObjectLoaded_Callback(obj):
 
 func add_child_and_set_material(obj, child):
 	obj.add_child(child)
-	if obj.get_attrib("ghost_memory") != null:
+	if obj.get_attrib("ghost_memory") != null and obj.get_attrib("no_ghost", false) == false:
 		if child is Sprite:
 			child.material = ghost_material
 		for subchild in child.get_children():

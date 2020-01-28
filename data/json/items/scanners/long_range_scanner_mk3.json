@@ -14,7 +14,8 @@
 	},
 	"scanning": {
 		"radius":8,
-		"partial_reveal_type": ["planet", "wormhole", "sun", "ship", "weapon", "food", "utility", "hull", "converter", "consumable", "scanner", "shield", "ammo"],
+		"partial_reveal_type": ["planet", "wormhole", "sun"],
+		"full_reveal_type": ["ship", "weapon", "food", "utility", "hull", "converter", "consumable", "scanner", "shield", "ammo"],
 		"level":2,
 		"detection_bonus":0.06
 	},
