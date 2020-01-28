@@ -14,12 +14,14 @@ region = Rect2( 1408, 256, 128, 128 )
 margin_right = 372.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
+mouse_filter = 1
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Toggle" type="Button" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 toggle_mode = true
 script = ExtResource( 3 )
 
