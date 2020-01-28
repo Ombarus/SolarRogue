@@ -54,10 +54,10 @@ Music
 
 Made with
 * [Godot Engine](https://godotengine.org/),
-* [Krita](https://krita.org/), 
-* [SunVox](https://www.warmplace.ru/soft/sunvox/),
-* [Bfxr](https://www.bfxr.net/), 
-* [Audacity](https://www.audacityteam.org/)
+  [Krita](https://krita.org/), 
+  [SunVox](https://www.warmplace.ru/soft/sunvox/),
+  [Bfxr](https://www.bfxr.net/), 
+  [Audacity](https://www.audacityteam.org/)
 
 
 ## License
