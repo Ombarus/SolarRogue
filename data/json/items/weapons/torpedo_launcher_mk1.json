@@ -23,7 +23,7 @@
 	},
 	"equipment": {
 		"slot":"weapon",
-		"volume":150.0,
+		"volume":60.0,
 		"equip_ap":3.0,
 		"unequip_ap":3.0
 	},

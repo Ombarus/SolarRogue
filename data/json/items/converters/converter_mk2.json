@@ -8,7 +8,7 @@
 	},
 	"equipment": {
 		"slot":"converter",
-		"volume":20.0,
+		"volume":55.0,
 		"equip_ap":3.0,
 		"unequip_ap":3.0
 	},

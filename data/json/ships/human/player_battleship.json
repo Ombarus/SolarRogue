@@ -26,7 +26,7 @@
 		"energy_cost":7
 	},
 	"cargo": {
-		"capacity":1000,
+		"capacity":2000,
 		"pickup_ap":1.0,
 		"drop_ap":1.0,
 		"transferable":true,

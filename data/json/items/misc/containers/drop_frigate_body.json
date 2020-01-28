@@ -13,7 +13,7 @@
 		"comment2":"false so that the body (hull) can also be picked up",
 		"disabled":true,
 		"slot":"cargo",
-		"volume":190.0,
+		"volume":200.0,
 		"stackable":false
 	},
 	"cargo": {

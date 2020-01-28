@@ -10,7 +10,7 @@
 	"equipment": {
 		"disabled":true,
 		"slot":"cargo",
-		"volume":150.0,
+		"volume":100.0,
 		"stackable":false
 	},
 	"cargo": {

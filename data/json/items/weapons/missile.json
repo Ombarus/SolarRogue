@@ -10,7 +10,7 @@
 	}],
 	"equipment": {
 		"slot":"cargo",
-		"volume":0.5,
+		"volume":2,
 		"stackable":true
 	},
 	"recyclable": {
