@@ -1,13 +1,14 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://data/theme/default_ui_text.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/GUI/ConverterV2.gd" type="Script" id=2]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=3]
-[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/GUI/ItemList/RecipeRow.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/GUI/ItemList/CraftingMaterialRow.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scripts/GUI/InputConsumer.gd" type="Script" id=4]
+[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/GUI/ItemList/RecipeRow.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/GUI/ItemList/CraftingMaterialRow.tscn" type="PackedScene" id=9]
 
 [sub_resource type="ButtonGroup" id=1]
 
@@ -21,6 +22,7 @@ script = ExtResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 3 )
+script = ExtResource( 4 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
@@ -30,7 +32,7 @@ margin_top = 20.0
 margin_right = -20.0
 margin_bottom = -20.0
 
-[node name="Recipes" parent="HBoxContainer" instance=ExtResource( 4 )]
+[node name="Recipes" parent="HBoxContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 410.0
@@ -39,14 +41,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 title = "Converter MK1"
 
-[node name="MyItemList" parent="HBoxContainer/Recipes" instance=ExtResource( 5 )]
+[node name="MyItemList" parent="HBoxContainer/Recipes" instance=ExtResource( 6 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 18.0
 margin_top = 58.0
 margin_right = -18.0
 margin_bottom = -31.0
-Row = ExtResource( 6 )
+Row = ExtResource( 7 )
 SelectGroup = SubResource( 1 )
 
 [node name="Control" type="Control" parent="HBoxContainer"]
@@ -81,7 +83,7 @@ margin_bottom = 64.0
 rect_min_size = Vector2( 128, 128 )
 expand = true
 
-[node name="DescBtn" parent="HBoxContainer/Control/VBoxContainer/IconContainer" instance=ExtResource( 7 )]
+[node name="DescBtn" parent="HBoxContainer/Control/VBoxContainer/IconContainer" instance=ExtResource( 8 )]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -65.0
@@ -268,7 +270,7 @@ bbcode_enabled = true
 bbcode_text = "[color=aqua]==========[/color]"
 text = "=========="
 
-[node name="Craft" parent="HBoxContainer/Control/VBoxContainer" instance=ExtResource( 7 )]
+[node name="Craft" parent="HBoxContainer/Control/VBoxContainer" instance=ExtResource( 8 )]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -282,7 +284,7 @@ size_flags_horizontal = 3
 Text = "[c]raft"
 ShortcutKey = "c"
 
-[node name="Close" parent="HBoxContainer/Control/VBoxContainer" instance=ExtResource( 7 )]
+[node name="Close" parent="HBoxContainer/Control/VBoxContainer" instance=ExtResource( 8 )]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -296,7 +298,7 @@ size_flags_horizontal = 3
 Text = "[esc]close"
 ShortcutEnum = 16777217
 
-[node name="Materials" parent="HBoxContainer" instance=ExtResource( 4 )]
+[node name="Materials" parent="HBoxContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 828.0
@@ -306,12 +308,12 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 title = "Select Materials"
 
-[node name="MyItemList" parent="HBoxContainer/Materials" instance=ExtResource( 5 )]
+[node name="MyItemList" parent="HBoxContainer/Materials" instance=ExtResource( 6 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 18.0
 margin_top = 58.0
 margin_right = -18.0
 margin_bottom = -31.0
-Row = ExtResource( 8 )
+Row = ExtResource( 9 )
 

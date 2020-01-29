@@ -67,9 +67,9 @@ func CanDrawSprite(sprite_data, pos):
 			max_level = obj["z_order"]
 			
 	if sprite_level >= max_level:
-		print(sprite_level, " >= ", max_level, " at ", pos)
+		#print(sprite_level, " >= ", max_level, " at ", pos)
 		return true
 	else:
-		print(sprite_level, " >= ", max_level, " at ", pos)
+		#print(sprite_level, " >= ", max_level, " at ", pos)
 		return false
 		

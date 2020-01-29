@@ -33,13 +33,13 @@ func OnMovement_Callback(obj, dir):
 		self.play("rot_45")
 		
 	if rot_deg >= 5.0 or rot_deg <= -5.0:
-		print("WAIT FOR ANIM")
+		#print("WAIT FOR ANIM")
 		BehaviorEvents.emit_signal("OnWaitForAnimation")
 		
 func OnAnimationDone_Callback(offset_deg):
 	get_node(root_node).get_parent().rotation += deg2rad(offset_deg)
 	get_node(root_node).rotation = 0
 	
-	print("ANIM DONE")
+	#print("ANIM DONE")
 	BehaviorEvents.emit_signal("OnAnimationDone")
 	
