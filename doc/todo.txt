@@ -7,6 +7,12 @@ RELEASE CHECKLIST :::
 - remove sample & debug nodes in main.tscn ?
 
 TODO :::
+- *BUG* Going back up the wormhole for sector1 was placed right spack in the middle of the level on top of the sun. How is this possible ?
+	- It's in THEORY possible since I take a random position for the up wormhole it could end up in 40,40 on top of the sun.
+- Tuto when reaching the end : "That it! the converter is inside the broken battleship hull somewhere in the middle of the system. There's a huge war going on and you're going to have to go right through it! They're not going to make it easy for you!"
+- We have too much cargo to move still used a turn !
+- I don't set the rotation of ghosts when they move with MK3 radar
+- Move on press down and keep moving until point of interest or button up ?
 - translation
 	- review missing translation
 - tests :

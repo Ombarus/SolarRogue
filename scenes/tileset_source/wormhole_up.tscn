@@ -147,6 +147,7 @@ tracks/0/keys = {
 }
 
 [node name="Node2D" type="Node2D"]
+z_index = 10
 
 [node name="fx" type="Sprite" parent="."]
 material = SubResource( 2 )
