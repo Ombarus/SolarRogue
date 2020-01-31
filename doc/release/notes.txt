@@ -1,5 +1,7 @@
 general :
 	- Privacy Policy page
+	- Description
+	- Title : Solar Rogue
 
 itch.io :
 	- Title
@@ -7,7 +9,22 @@ itch.io :
 	- Title Image :
 		- min 315x250, recommended 630x500
 	- Screenshot : Any size, rec 3 to 5
+	- youtube trailer
 	- Classification : Video Game
+	
+Google Play :
+	- Tags
+	- Hi-res icon 512x512 32bit png
+		- No more transparent background ?
+	- Screenshot jpg or 24-bit png (no alpha). min 2, max 8 per type
+		- Phone
+		- Tablet
+		- Android TV
+		- Wear OS
+	- Feature Graphic 1024x500 (no alpha)
+	- Promo Graphic 180x120 (no alpha)
+	- TV Banner ? (1280 x 720)
+	- Promo video ?
 
 steam :
 	- App fee 100$
@@ -30,6 +47,16 @@ steam :
 		- Bundle Asset ? 707x232
 
 iOS :
+	- Privacy Policy
+	- Subtitle (max 30char)
+	- Promo Text (170 char)
+	- Description (4000 char)
+	- Keywords
+	- Support URL
+	- Marketing URL
+	- Icon (avoid transparency) png (180 to 1024 ?)
+	- up to 3 trailers and 10 screenshots per device
+	- https://help.apple.com/app-store-connect/#/devd274dd925
 	- required 1242x2208 (portrait and/or landscape), 2048x2732
 		- 6.5" : 1242x2688
 		- 5.5" : 1242x2208
@@ -47,5 +74,4 @@ iOS :
 		- Apple Watch (312x390)
 		- translate screenshots ?
 
-EA ? :
-	-
+Epic :

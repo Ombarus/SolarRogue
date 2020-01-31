@@ -1,0 +1,53 @@
+- Solar Rogue privacy policy link on website
+- solarrogue.com ?
+- Title : Solar Rogue
+- Tagline : (<30char)
+- Short Description : (<170char)
+- Long Description
+- Trailer
+
+Banner ?
+	- 630x500 (itch)
+	- 1024x500 (android)
+	- 180x120 (android)
+	- 460x215 (steam)
+	- 231x87 (steam)
+	- 184x69 (steam)
+	- 1438x810 (page background steam)
+	
+Icons ?
+	- 32x32 (steam)
+	- 512x512 (android)
+	- 36x36 (android) (fb/bg)
+	- 48x48 (android) (fb/bg)
+	- 72x72 (android) (fb/bg)
+	- 96x96 (android) (fb/bg)
+	- 144x144 (android) (fb/bg)
+	- 192x192 (android) (fb/bg)
+	- 40x40 (ios)
+	- 50x50 (ios)
+	- 60x60 (ios)
+	- 57x57 (ios)
+	- 58x58 (ios)
+	- 72x72 (ios)
+	- 76x76 (ios)
+	- 80x80 (ios)
+	- 87x87 (ios)
+	- 100x100 (ios)
+	- 114x114 (ios)
+	- 120x120 (ios)
+	- 152x152 (ios)
+	- 167x167 (ios)
+	- 180x180 (ios)
+	- 1024x1024 (ios)
+
+Screenshots ?
+	- 1920x1080 (steam)
+	- 1280x800 (10" tablet android) x 8
+	- 1079x1919 (phone android) x 8
+	- 2208x1242 (iphone 5.5) x 8
+	- 2688x1242 (iphone 6.5) x 8
+	- 2732x2048 (ipad) x 8
+	
+Splash / Loading screen
+	- See F:\Dev\Projects\Framework7\DiceThrowCor\res\screen\android
