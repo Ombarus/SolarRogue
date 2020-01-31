@@ -114,7 +114,7 @@ func do_anomaly_detection(obj):
 	if not unique_id in _node_id_scanner:
 		return
 	var scanner_data = _node_id_scanner[unique_id]
-	var bonus : float = Globals.get_data(scanner_data, "scanning.detection_bonus")
+	var bonus : float = Globals.get_data(scanner_data, "scanning.detection_bonus", 0.0)
 	var level_id : String = Globals.LevelLoaderRef.GetLevelID()
 	var known_anomalies : Dictionary = obj.get_attrib("scanner_result.known_anomalies." + level_id, {})
 	var detectable_obj = obj.get_attrib("scanner_result.cur_in_range." + level_id, [])

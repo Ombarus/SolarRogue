@@ -1,0 +1,13 @@
+Banners for store :
+	- name of the game or not ? Solar Rogue
+	- 1024x500, can be resized to 460x215 and a version with padding 630x500
+	- Smaller version, wider banner for steam search result and google promo banner
+		Google promo at 180x120 but should be able to crop to fit 231x87 & 184x69
+		
+Cleanup & improve 
+	- mine_missile.png. If you think it could be a bit cleaner
+	- mine_rocket3.png. If you think it could be a bit cleaner
+
+Rework
+	- mine_spare_partsv2.png. Really love the look. But I can't get the shading right to work with the rest of the game. Some details are a bit strange too. Should most definitly look like a circuit board.
+	- Power Amplifier. Is it possible to make something that look like the Quad-Damage in Quake but fit with the rest of the game ? I hate the one I tried to make.

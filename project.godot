@@ -33,19 +33,13 @@ _global_script_classes=[ {
 "class": "MyWindow",
 "language": "GDScript",
 "path": "res://scripts/GUI/DialogWindowBaseV2.gd"
-}, {
-"base": "Node",
-"class": "ShortcutManager",
-"language": "GDScript",
-"path": "res://scripts/autoload/ShortcutManager.gd"
 } ]
 _global_script_class_icons={
 "APBehavior": "",
 "Attributes": "",
 "ButtonBase": "",
 "MyItemList": "",
-"MyWindow": "",
-"ShortcutManager": ""
+"MyWindow": ""
 }
 
 [application]

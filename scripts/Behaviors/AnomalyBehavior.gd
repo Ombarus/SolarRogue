@@ -67,9 +67,7 @@ func OnTriggerAnomaly_Callback(obj, anomaly):
 	
 	effect_info = anomaly.get_attrib("anomaly.energy")
 	if effect_info != null:
-		var amount : float = Globals.get_data(effect_info, "amount")
-		if amount == null:
-			amount = 0
+		var amount : float = Globals.get_data(effect_info, "amount", 0)
 		var duration = Globals.get_data(effect_info, "duration_turn")
 		if duration == null or duration <= 0:
 			BehaviorEvents.emit_signal("OnUseEnergy", obj, -amount)

@@ -273,7 +273,7 @@ func ProcessDeathSpawns(target):
 			Globals.LevelLoaderRef.RequestObject(stuff.id, Globals.LevelLoaderRef.World_to_Tile(target.position))
 
 func _get_power_amplifier_stack(shooter, type):
-	var utilities : Array = shooter.get_attrib("mounts.utility")
+	var utilities : Array = shooter.get_attrib("mounts.utility", [])
 	var utilities_data : Array = Globals.LevelLoaderRef.LoadJSONArray(utilities)
 	
 	var power_amp := []

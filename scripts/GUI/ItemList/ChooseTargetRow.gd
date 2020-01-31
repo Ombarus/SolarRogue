@@ -13,13 +13,13 @@ func set_row_data(data):
 	if _metadata.group != null:
 		_toggle.group = _metadata.group
 		
-	var icon_path : String = Globals.get_data(data, "icon.texture")
-	if icon_path != null and icon_path != "":
+	var icon_path : String = Globals.get_data(data, "icon.texture", "")
+	if icon_path != "":
 		icon_path = Globals.clean_path(icon_path)
-		var icon_region : Array = Globals.get_data(data, "icon.region")
+		var icon_region : Array = Globals.get_data(data, "icon.region", [])
 		var t := AtlasTexture.new()
 		t.atlas = load(icon_path)
-		if icon_region != null:
+		if icon_region.size() > 0:
 			t.region = Rect2(icon_region[0], icon_region[1], icon_region[2], icon_region[3])
 		get_node("HBoxContainer/Wrapper/TextureRect").texture = t
 	else:

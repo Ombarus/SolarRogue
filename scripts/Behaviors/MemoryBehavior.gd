@@ -88,7 +88,7 @@ func ExecuteFullSweep():
 func _update_occlusion_texture():
 	var imageTexture = ImageTexture.new()
 	var dynImage = Image.new()
-    
+	
 	var level_id = Globals.LevelLoaderRef.GetLevelID()
 	var tile_memory = _playerNode.get_attrib("memory." + level_id + ".tiles")
 	if tile_memory == null:
@@ -96,7 +96,7 @@ func _update_occlusion_texture():
 		dynImage.fill(Color(1.0,1.0,1.0,1.0))
 	else:
 		dynImage.create_from_data(Globals.LevelLoaderRef.levelSize.x,Globals.LevelLoaderRef.levelSize.y,false,Image.FORMAT_R8, tile_memory)
-    
+	
 	imageTexture.create_from_image(dynImage)
 	_occluder_ref.texture = imageTexture
 	imageTexture.resource_name = "The created texture!"

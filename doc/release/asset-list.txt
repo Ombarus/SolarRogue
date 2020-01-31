@@ -13,7 +13,7 @@ Banner ?
 	- 460x215 (steam)
 	- 231x87 (steam)
 	- 184x69 (steam)
-	- 1438x810 (page background steam)
+	- 1438x810 (page background steam) (super dark. Most games seem to put a gameplay screenshot ?)
 	
 Icons ?
 	- 32x32 (steam)

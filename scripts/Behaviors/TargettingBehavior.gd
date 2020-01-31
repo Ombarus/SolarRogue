@@ -44,8 +44,8 @@ func OnRequestTargettingOverlay_Callback(player, targetting_data, callback_obj, 
 	_DoAreaOverlay(_player_node, _targetting_data)
 	
 func _DoAreaOverlay(_player_node, targetting_data):
-	var area_size : int = Globals.get_data(targetting_data, "weapon_data.area_effect")
-	if area_size == null or area_size == 0:
+	var area_size : int = Globals.get_data(targetting_data, "weapon_data.area_effect", 0)
+	if area_size == 0:
 		return
 	
 	var scene = Preloader.TargettingReticle
@@ -83,9 +83,7 @@ func OnTargetClick_Callback(click_pos, target_type):
 	else:
 		var player_tile = Globals.LevelLoaderRef.World_to_Tile(_player_node.position)
 		
-		var area_size : int = Globals.get_data(_targetting_data, "weapon_data.area_effect")
-		if area_size == null:
-			area_size = 0
+		var area_size : int = Globals.get_data(_targetting_data, "weapon_data.area_effect", 0)
 			
 		if not IsValidTile(player_tile, tile, _targetting_data.weapon_data):
 			BehaviorEvents.emit_signal("OnLogLine", "Target is outside of our range sir !")
@@ -100,9 +98,7 @@ func OnTargetClick_Callback(click_pos, target_type):
 			BehaviorEvents.emit_signal("OnPushGUI", "SelectTarget", {"targets":potential_targets, "callback_object":self, "callback_method":"SelectTarget_Callback"})
 	
 func _gather_tile_contents(tile, targetting_data):
-	var area_size : int = Globals.get_data(targetting_data, "weapon_data.area_effect")
-	if area_size == null:
-		area_size = 0
+	var area_size : int = Globals.get_data(targetting_data, "weapon_data.area_effect", 0)
 	var tile_content := []
 	for x in range(tile.x - area_size, tile.x + area_size+1):
 		for y in range(tile.y - area_size, tile.y + area_size+1):

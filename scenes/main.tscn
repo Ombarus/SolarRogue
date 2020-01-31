@@ -75,7 +75,6 @@
 [node name="Behaviors" type="Node" parent="."]
 
 [node name="Ambience" type="Node" parent="Behaviors"]
-editor/display_folded = true
 script = ExtResource( 1 )
 
 [node name="BG" type="AudioStreamPlayer" parent="Behaviors/Ambience"]
@@ -117,7 +116,6 @@ volume_db = -3.575
 bus = "Sfx"
 
 [node name="UIManager" type="Node" parent="Behaviors"]
-editor/display_folded = true
 script = ExtResource( 10 )
 animator = NodePath("PopingAnimator")
 
@@ -223,7 +221,6 @@ scale = Vector2( 128, 128 )
 position = Vector2( 5120, 5120 )
 
 [node name="Upper-Left-Bound" type="Node2D" parent="."]
-editor/display_folded = true
 visible = false
 
 [node name="L1" type="Line2D" parent="Upper-Left-Bound"]
@@ -240,7 +237,6 @@ scale = Vector2( 12800, 12800 )
 copy_mode = 2
 
 [node name="OverlayTiles" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="mouse_targetting" type="Node2D" parent="OverlayTiles"]
 script = ExtResource( 38 )
@@ -250,7 +246,6 @@ script = ExtResource( 38 )
 [node name="GameTiles" type="Node2D" parent="."]
 
 [node name="World-GUI" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="GridPattern" type="Control" parent="World-GUI"]
 anchor_right = 1.0
@@ -272,8 +267,6 @@ limit_left = -10000
 limit_top = -10000
 limit_right = 1000000
 limit_bottom = 1000000
-drag_margin_h_enabled = false
-drag_margin_v_enabled = false
 script = ExtResource( 42 )
 follow_smooth = -10.0
 levelLoaderNode = NodePath("../Behaviors/LevelLoader")
@@ -281,7 +274,6 @@ levelLoaderNode = NodePath("../Behaviors/LevelLoader")
 [node name="Camera-GUI" type="CanvasLayer" parent="."]
 
 [node name="HUD" type="Control" parent="Camera-GUI"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1.0
@@ -291,7 +283,6 @@ script = ExtResource( 40 )
 Transition = false
 
 [node name="Log" type="Control" parent="Camera-GUI/HUD"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 506.0
@@ -313,7 +304,6 @@ title = "Log Stardate 0.0.0"
 border_style = "═"
 
 [node name="Buttons" type="Control" parent="Camera-GUI/HUD"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -449,7 +439,6 @@ ShortcutKey = "?"
 IsHUD = true
 
 [node name="StatusBar" type="Control" parent="Camera-GUI/HUD"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -1.0
@@ -553,7 +542,6 @@ margin_bottom = -12.0
 visible = false
 
 [node name="Loading-FX" type="CanvasLayer" parent="."]
-editor/display_folded = true
 
 [node name="Starfield" parent="Loading-FX" instance=ExtResource( 67 )]
 visible = false
@@ -564,7 +552,6 @@ script = ExtResource( 68 )
 
 [node name="Sample" parent="." instance=ExtResource( 69 )]
 visible = false
-
 [connection signal="down" from="Camera-GUI/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_ZoomIn_down"]
 [connection signal="up" from="Camera-GUI/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_Zoom_up"]
 [connection signal="down" from="Camera-GUI/HUD/Buttons/ZoomOut" to="Camera2D" method="_on_ZoomOut_down"]

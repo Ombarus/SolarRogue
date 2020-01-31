@@ -63,8 +63,8 @@ func OnShotFired_Callback(shot_tile, shooter, weapon):
 	if _wait_for_anim == true:
 		yield(BehaviorEvents, "OnAnimationDone")
 	
-	var hit_anim : String = Globals.get_data(weapon, "animation.hit")
-	if hit_anim == null:
+	var hit_anim : String = Globals.get_data(weapon, "animation.hit", "")
+	if hit_anim == "":
 		return
 	
 	var area_size : int = Globals.get_data(weapon, "weapon_data.area_effect", 0.5)

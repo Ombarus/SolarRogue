@@ -177,7 +177,6 @@ margin_left = 15.7517
 margin_top = 14.3197
 margin_right = 141.752
 margin_bottom = 50.3197
-
 [connection signal="pressed" from="MenuRoot/MenuBtn/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="MenuRoot/MenuBtn/NewGameBTN" to="." method="_on_newgame_pressed"]
 [connection signal="pressed" from="MenuRoot/MenuBtn/Setting" to="." method="_on_Setting_pressed"]

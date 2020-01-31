@@ -24,4 +24,3 @@ RichTextLabel/fonts/bold_italics_font = ExtResource( 3 )
 RichTextLabel/fonts/italics_font = ExtResource( 4 )
 RichTextLabel/fonts/mono_font = ExtResource( 1 )
 RichTextLabel/fonts/normal_font = ExtResource( 1 )
-

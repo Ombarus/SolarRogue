@@ -226,8 +226,8 @@ func OnEquipMount_Callback(equipper, slot_name, index, item_id):
 		BehaviorEvents.emit_signal("OnAddItem", equipper, items[index])
 		var old_id = items[index]
 		var old_data : Dictionary = Globals.LevelLoaderRef.LoadJSON(items[index])
-		var unequip_ap : int = Globals.get_data(old_data, "equipment.equip_ap")
-		if unequip_ap != null and unequip_ap > 0:
+		var unequip_ap : int = Globals.get_data(old_data, "equipment.equip_ap", 0)
+		if unequip_ap > 0:
 			BehaviorEvents.emit_signal("OnUseAP", equipper, unequip_ap)
 		if equipper.get_attrib("type") == "player" and old_data != null and new_data != null:
 			BehaviorEvents.emit_signal("OnLogLine", "Replaced %s by %s", [Globals.mytr(old_data.name_id), Globals.mytr(new_data.name_id)])
@@ -239,8 +239,8 @@ func OnEquipMount_Callback(equipper, slot_name, index, item_id):
 	BehaviorEvents.emit_signal("OnRemoveItem", equipper, item_id)
 	items[index] = item_id
 	equipper.set_attrib(attrib_getter, items)
-	var equip_ap : int = Globals.get_data(new_data, "equipment.equip_ap")
-	if equip_ap != null and equip_ap > 0:
+	var equip_ap : int = Globals.get_data(new_data, "equipment.equip_ap", 0)
+	if equip_ap > 0:
 		BehaviorEvents.emit_signal("OnUseAP", equipper, equip_ap)
 	BehaviorEvents.emit_signal("OnMountAdded", equipper, slot_name, item_id)
 

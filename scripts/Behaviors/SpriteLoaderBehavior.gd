@@ -18,7 +18,7 @@ func OnObjectLoaded_Callback(obj):
 		#TODO: cache load in a dictioary ?
 		var sprite_name : String = obj.get_attrib("sprite")
 		var cur_depth : int = Globals.LevelLoaderRef.current_depth
-		var worm_depth : int = obj.get_attrib("depth")
+		var worm_depth : int = obj.get_attrib("depth", 0)
 		if obj.get_attrib("type") == "wormhole" and worm_depth <= cur_depth:
 			sprite_name = sprite_name + "_up"
 		#if attrib.type == "wormhole":

@@ -1,5 +1,4 @@
 extends Node
-class_name ShortcutManager
 
 var _current_shortcut_dict : Dictionary = {}
 var _shortcut_stack : Array = []
