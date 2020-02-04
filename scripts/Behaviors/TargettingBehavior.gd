@@ -103,7 +103,6 @@ func _gather_tile_contents(tile, targetting_data):
 	for x in range(tile.x - area_size, tile.x + area_size+1):
 		for y in range(tile.y - area_size, tile.y + area_size+1):
 			tile_content += Globals.LevelLoaderRef.levelTiles[x][y]
-			
 	return tile_content
 	
 func SelectTarget_Callback(selected_targets):

@@ -405,6 +405,8 @@ func OnMaterialChanged_Callback():
 	var list_data = _material_list.Content
 	var index := 0
 	for list_data in list_data:
+		if missing.size() > index and missing[index].type == "energy":
+			index += 1
 		if "disabled" in list_data and list_data.disabled == true:
 			var name_id := ""
 			var display_name_id := ""

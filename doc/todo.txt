@@ -7,6 +7,7 @@ RELEASE CHECKLIST :::
 - remove sample & debug nodes in main.tscn ?
 
 TODO :::
+- *** Crash if crafting not enough energy ***
 - *BUG* Going back up the wormhole for sector1 was placed right spack in the middle of the level on top of the sun. How is this possible ?
 	- It's in THEORY possible since I take a random position for the up wormhole it could end up in 40,40 on top of the sun.
 - Tuto when reaching the end : "That it! the converter is inside the broken battleship hull somewhere in the middle of the system. There's a huge war going on and you're going to have to go right through it! They're not going to make it easy for you!"
@@ -55,6 +56,8 @@ TODO :::
 	
 	
 polish :::
+- parallax background should follow the camera instead of the ship !
+	- There could be more than one level too to add to the effect
 - boarding a ship that doesn't have a scanner doesn't hide and create ghost for object that were visible
 - why do I keep mixing up inventory and converter ?
 	- still improvement to be made ?

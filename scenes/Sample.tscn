@@ -1,31 +1,17 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/tileset_source/sun.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/tileset_source/human_battleship.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/tileset_source/planet_a.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/tileset_source/planet_b.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/tileset_source/planet_c.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/tileset_source/jerg_frigate.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/tileset_source/planet_a.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/tileset_source/wormhole.tscn" type="PackedScene" id=3]
 
 [node name="Sample" type="Node2D"]
 
 [node name="sun" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1152, 640 )
+position = Vector2( 1024, 384 )
 
-[node name="shuttle" parent="." instance=ExtResource( 2 )]
-position = Vector2( 384, 256 )
-rotation = 2.35619
+[node name="planet_a" parent="." instance=ExtResource( 2 )]
+position = Vector2( 896, 256 )
 
-[node name="planet_a" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1024, 256 )
-
-[node name="planet_b" parent="." instance=ExtResource( 4 )]
-position = Vector2( 768, 128 )
-
-[node name="planet_c" parent="." instance=ExtResource( 5 )]
-position = Vector2( 512, 384 )
-
-[node name="shuttle2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 128, 512 )
-rotation = 1.5708
+[node name="Node2D" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1152, 512 )
 

@@ -300,7 +300,11 @@ margin_top = -205.0
 margin_right = -14.0
 margin_bottom = -15.0
 mouse_filter = 2
+dialog_ok = false
+dialog_cancel = false
 title = "Log Stardate 0.0.0"
+bottom_title = ""
+content = ""
 border_style = "═"
 
 [node name="Buttons" type="Control" parent="Camera-GUI/HUD"]
@@ -319,6 +323,9 @@ rect_min_size = Vector2( 110, 90 )
 mouse_filter = 2
 Text = "[w]eapon"
 ShortcutKey = "w"
+ShortcutEnum = 0
+AlwaysOnShortcut = true
+Disabled = false
 IsHUD = true
 
 [node name="Grab" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 45 )]
@@ -333,6 +340,9 @@ margin_bottom = -439.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[g]rab"
 ShortcutKey = "g"
+ShortcutEnum = 0
+AlwaysOnShortcut = true
+Disabled = false
 IsHUD = true
 
 [node name="Wormhole" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 45 )]
@@ -347,6 +357,9 @@ margin_bottom = -219.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[<]FTL"
 ShortcutKey = "<"
+ShortcutEnum = 0
+AlwaysOnShortcut = true
+Disabled = false
 IsHUD = true
 
 [node name="Inventory" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 45 )]
@@ -361,6 +374,9 @@ margin_bottom = -329.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[i]nv"
 ShortcutKey = "i"
+ShortcutEnum = 0
+AlwaysOnShortcut = true
+Disabled = false
 IsHUD = true
 
 [node name="Converter" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 45 )]
@@ -373,6 +389,9 @@ margin_bottom = -329.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[c]onv"
 ShortcutKey = "c"
+ShortcutEnum = 0
+AlwaysOnShortcut = true
+Disabled = false
 IsHUD = true
 
 [node name="PopupButton" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 46 )]
@@ -393,6 +412,10 @@ margin_top = -200.0
 margin_right = -84.0
 margin_bottom = -135.0
 Text = "+"
+ShortcutKey = ""
+ShortcutEnum = 0
+AlwaysOnShortcut = true
+Disabled = false
 IsHUD = true
 
 [node name="ZoomOut" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 45 )]
@@ -405,6 +428,10 @@ margin_top = -201.0
 margin_right = -9.0
 margin_bottom = -136.0
 Text = "-"
+ShortcutKey = ""
+ShortcutEnum = 0
+AlwaysOnShortcut = true
+Disabled = false
 IsHUD = true
 
 [node name="Options" parent="Camera-GUI/HUD/Buttons" instance=ExtResource( 45 )]
@@ -416,7 +443,12 @@ margin_left = -74.0
 margin_top = -124.0
 margin_right = -9.0
 margin_bottom = -59.0
+Text = ""
+ShortcutKey = ""
 ShortcutEnum = 16777217
+AlwaysOnShortcut = true
+Disabled = false
+IsHUD = false
 
 [node name="Sprite" type="Sprite" parent="Camera-GUI/HUD/Buttons/Options"]
 position = Vector2( 32, 33 )
@@ -436,6 +468,9 @@ margin_right = -84.0
 margin_bottom = -59.0
 Text = "?"
 ShortcutKey = "?"
+ShortcutEnum = 0
+AlwaysOnShortcut = true
+Disabled = false
 IsHUD = true
 
 [node name="StatusBar" type="Control" parent="Camera-GUI/HUD"]
@@ -455,6 +490,9 @@ margin_top = 6.0
 margin_right = -3.0
 margin_bottom = 91.0
 mouse_filter = 2
+dialog_ok = false
+dialog_cancel = false
+title = ""
 bottom_title = "The Maveric"
 content = "Hull : [color=lime]==========[/color] Energy : [color=yellow]25000[/color] Shield : [color=aqua]===============[/color]"
 border_style = "═"
@@ -477,6 +515,12 @@ visible = false
 margin_top = 1.0
 margin_right = -1114.0
 margin_bottom = -601.0
+dialog_ok = false
+dialog_cancel = false
+disabled = false
+bottom_title = ""
+title = ""
+border_style = "═"
 
 [node name="TargettingHUD" parent="Camera-GUI" instance=ExtResource( 51 )]
 visible = false
