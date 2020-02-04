@@ -7,7 +7,6 @@ RELEASE CHECKLIST :::
 - remove sample & debug nodes in main.tscn ?
 
 TODO :::
-- *** Crash if crafting not enough energy ***
 - *BUG* Going back up the wormhole for sector1 was placed right spack in the middle of the level on top of the sun. How is this possible ?
 	- It's in THEORY possible since I take a random position for the up wormhole it could end up in 40,40 on top of the sun.
 - Tuto when reaching the end : "That it! the converter is inside the broken battleship hull somewhere in the middle of the system. There's a huge war going on and you're going to have to go right through it! They're not going to make it easy for you!"
@@ -180,6 +179,7 @@ IDEAS:::
 	
 	
 DONE :::
+- *** Crash if crafting not enough energy ***
 - rapid clicks sometimes still move the ship while in the menus
 - cleanup some logs
 	- converter recipes and structure

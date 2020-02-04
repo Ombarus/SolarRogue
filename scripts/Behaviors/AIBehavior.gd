@@ -162,7 +162,8 @@ func OnObjTurn_Callback(obj):
 		# For now, just do nothing for one AP
 		BehaviorEvents.emit_signal("OnUseAP", obj, 1.0)
 		
-	if obj.get_attrib("ap.ai_acted") == false:
+	# ai might have been disabled for the player so don't force it to act
+	if obj.get_attrib("ai") != null and obj.get_attrib("ap.ai_acted") == false:
 		print("**** AI DID NOT DO ANY ACTION. AI SHOULD AT LEAST WAIT FOR 1 TURN ALWAYS ! *****")
 		BehaviorEvents.emit_signal("OnUseAP", obj, 1.0)
 		
