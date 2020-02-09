@@ -339,8 +339,8 @@ func UpdateNormalVisibility():
 	if cargo_data != null:
 		cargo_slot = Globals.get_data(cargo_data, "equipment.slot")
 		if cargo_slot != null:
-			var mounted : Array = _obj.get_attrib("mounts." + cargo_slot)
-			if mounted != null and mounted.size() > 0:
+			var mounted : Array = _obj.get_attrib("mounts." + cargo_slot, [])
+			if mounted.size() > 0:
 				_disable_button(_swap_btn, false)
 				
 				

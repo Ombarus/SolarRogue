@@ -92,7 +92,7 @@ touch={
 
 [locale]
 
-test="en"
+test="fr"
 locale_filter=[ 0, [  ] ]
 translations=PoolStringArray( "res://data/translation/base.en.translation", "res://data/translation/base.fr.translation", "res://data/translation/base.ja.translation" )
 translation_remaps={

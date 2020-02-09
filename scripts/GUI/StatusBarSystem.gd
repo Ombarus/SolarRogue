@@ -54,7 +54,7 @@ func UpdateStatusBar(player_obj):
 	var ship_name = "The Maveric"
 	var p_name : String = player_obj.get_attrib("player_name")
 	if p_name != null:
-		ship_name = "The " + p_name
+		ship_name = Globals.mytr("The %s", [p_name])
 	var max_hull = player_obj.get_attrib("destroyable.hull")
 	var cur_hull = player_obj.get_attrib("destroyable.current_hull", max_hull)
 	var hull_color = "lime"

@@ -300,11 +300,7 @@ margin_top = -205.0
 margin_right = -14.0
 margin_bottom = -15.0
 mouse_filter = 2
-dialog_ok = false
-dialog_cancel = false
 title = "Log Stardate 0.0.0"
-bottom_title = ""
-content = ""
 border_style = "═"
 
 [node name="Buttons" type="Control" parent="Camera-GUI/HUD"]
@@ -490,9 +486,6 @@ margin_top = 6.0
 margin_right = -3.0
 margin_bottom = 91.0
 mouse_filter = 2
-dialog_ok = false
-dialog_cancel = false
-title = ""
 bottom_title = "The Maveric"
 content = "Hull : [color=lime]==========[/color] Energy : [color=yellow]25000[/color] Shield : [color=aqua]===============[/color]"
 border_style = "═"

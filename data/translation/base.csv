@@ -129,7 +129,6 @@ Select Target...,Select Target...,Choix de cible...,Select Target...
 [color=red]Select target for %s...[/color],[color=red]Select target for %s...[/color],[color=red]Choisir la cible pour %s...[/color],[color=red]Select target for %s...[/color]
 CONFIRM delete save,Are you sure ?\nThe Savegame will be deleted,Etes-vous certain ?\nLa sauvegarde sera détruite,Are you sure ?\nThe Savegame will be deleted
 Are you sure ?,Are you sure ?,Etes-vous certain ?,Are you sure ?
-Missing %s,Missing %s,Manque %s,%s 無 
 Cargo Contents,Cargo Contents,Soutes,内容
 Empty,Empty,Libre,空
 Repair Nanobots,Repair Nanobots,Nanobots Réparateur,修理ナノマシン
@@ -365,3 +364,11 @@ on the %dth wormhole,on the %dth wormhole,au %de trou noir,on the %dth wormhole
 Saw %d solar systems,Saw %d solar systems,A vu %d systèmes,Saw %d solar systems
 Difficulty : %d,Difficulty : %d,Difficulté : %d,Difficulty : %d
 You WON!,You WON!,C'est Gagné!,勝ちました！
+The %s,The %s,Le %s,%s戦艦
+Disassemble,Disassemble,Désasembler,解体
+A Simple Probe,A Simple Probe,Une Simple Sonde,ボロボロな探査船
+[>]FTL,[>]FTL,[>]Saut,[>]FTL
+%d Item(s) for %d Spare Part(s),%d Item(s) for %d Spare Part(s),%d Item(s) pour %d Pièces Détachées,%d Item(s) for %d Spare Part(s)
+"Highly sensitive, easy to drop parts. Difficult to replicate but can be salvaged from any sufficiently advanced technology.","Highly sensitive, easy to drop parts. Difficult to replicate but can be salvaged from any sufficiently advanced technology.","Composantes très sensibles et difficile à répliquer mais peuvent parfois être récupérées en désassemblant certains items de haute technologie.","Highly sensitive, easy to drop parts. Difficult to replicate but can be salvaged from any sufficiently advanced technology."
+Spare Parts,Spare Parts,Pièces Détachées,Spare Parts
+Missing%s %s,Missing%s %s,%s %s Manquante,%s%s足りない

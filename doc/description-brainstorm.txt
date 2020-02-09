@@ -1,0 +1,59 @@
+Roguelike
+Permadeath
+Top-Down
+Randomly generated Solar Systems
+Turned-based Tactical Gameplay
+Space Opera
+Space Exploration
+Alien
+Stranded
+Lost in space
+Unexplored region of the universe
+find its way back home
+Treacherous
+Scifi
+Laser, Phaser, Missile, Torpedo
+Crafting
+Wormhole
+Converter of Yendor
+Matter-to-Energy Converter
+Starving
+Anomaly, Wormhole, Planet, Sun, Derelic Ships
+Pixel art by Spyros
+Insipired by all the great scifi tropes!
+Sarcastically difficult
+Touch Screen Gaming
+
+
+
+13 ships
+6 weapons
+2 dozen+ items
+8 different planets
+12 main levels and 3 optional branches
+3 races each with unique ships
+
+
+Sometimes the RNG will require you to make all the sacrifices and know every details of the game just to make it past the 3rd system. Sometimes you'll get the best gun after killing your first ennemy and die from pure overconfidence. Either way, you'll come back for more.
+
+Captain, We the crew would like to go home.
+
+Solar rogue is a space exploration adventure in the purest tradition of roguelike. Featuring procedurally generated solar systems, perma-death, tactical turned-based gameplay and a variety of ships, planets and ennemy to challenge!
+
+The year is 2371, The Federation Scout Ship <insert name> is patrolling the borders of known space in a region called the Bermuda Triangle. Deep in uncharted space you jump through an unrepertoried wormhole. It should have been a simple jump, but now things will never be the same...
+
+Something went wrong. While you were exploring uncharted space the wormhole took you somewhere unknown. What you do know is that your warp engine aren't powerful enough to open it again. Use what you have and try to find a way back to civilization
+
+Start with the most basic ship and equipment. Look for ressources to survive. Craft or "acquire" better weapons, new ships and meet new ennemies!
+
+Can you find the ultimate artifact to bring you home ?
+
+loot everything you can in order to survive
+
+(inspired by sproggywood)
+Bring your crew home, a turn-based tactical roguelike space opera. Craft new ship and explore procedurally generated solar systems.
+
+----
+
+Link to discord for tips and trick ?
+

@@ -84,7 +84,8 @@ func OnGUIChanged_Callback(current_menu):
 				if slot != null:
 					var available_slot : bool = player.get_attrib("mounts." + slot, []).size() > 0
 					if available_slot == true:
-						BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "TUTO equip our new", "text_fmt":[slot, slot], "title":"Tutorial: Inventory"})
+						var tr_slot = Globals.mytr(slot)
+						BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "TUTO equip our new", "text_fmt":[tr_slot, tr_slot], "title":"Tutorial: Inventory"})
 						BehaviorEvents.emit_signal("OnHighlightUIElement", "Craft")
 						steps.push_back("equip_inv")
 						PermSave.set_attrib("tutorial.completed_steps", steps)

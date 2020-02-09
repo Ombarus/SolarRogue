@@ -7,33 +7,57 @@ RELEASE CHECKLIST :::
 - remove sample & debug nodes in main.tscn ?
 
 TODO :::
-- *BUG* Going back up the wormhole for sector1 was placed right spack in the middle of the level on top of the sun. How is this possible ?
-	- It's in THEORY possible since I take a random position for the up wormhole it could end up in 40,40 on top of the sun.
-- Tuto when reaching the end : "That it! the converter is inside the broken battleship hull somewhere in the middle of the system. There's a huge war going on and you're going to have to go right through it! They're not going to make it easy for you!"
-- We have too much cargo to move still used a turn !
-- I don't set the rotation of ghosts when they move with MK3 radar
-- Move on press down and keep moving until point of interest or button up ?
+ERROR: emit_signal: Error calling method from signal 'finished': 'Node2D(MissileFX2.gd)::_on_AudioStreamPlayer2D_finished': Method not found..
+   At: core/object.cpp:1228
+Release prep :
+	- Title : Solar Rogue
+	- Short Desc : Can you save yourself? Can you save your crew?
+	- Medium Desc : 
+	- Store Long Desc
+	- Trailer
+	- screenshots
+		- ios (emulated ?)
+		- android tablet
+		- android phone
+		- pc (1920x1080)
+	- Website
+		- Link to steam, ios, itch, google
+		- embeded trailer
+		- description, title, etc.
+		- contact
+	- Privacy Policy page
+
+- Create steam dev acount and start process of publishing my game
 - translation
 	- review missing translation
-- tests :
-	- being able to shoot mk3 twice when other guns are equiped doesn't work ?
-	- balance :  first 2 level should garanty 1-5 items when shooting planet (easy_planet)
-	- rip name & message not centered on mobile ?
-		- Same damn issue with scaling of font and oversampling
-- to review :
-	- branches should give SOMETHING
-	- could vorg be more distinct ? (unique recipes? something other than shield make their ship unique?)
-- investigate steam and itch.io
+		- (name of ship in HUD)
+		- Disassemble
+		- A Simple Probe (description)
+		- [>]FTL
+		- %d Item(s) for %d Spare Part(s)
+		- mount tuto in inventory, "Scanner" wasn't translated
+		- Missing%s %s
+		
 - Mobile only "features" ?
 	- Hide "Quit" button (iOS or Mobile in general)
+		- On mobile could go back to main menu ?
 	- Help should only talk about touch controls on mobile ?
 	- smaller list rows on PC ?
+	- remove option to hide HUD
 - Tutorial
 	- grab & conv where highlighted together then when I clicked conv it became gray (null _old_style ?)
-- delete craft_need_row.tscn ?
 - Generate icons, banner, etc. for android/ios/pc release
-- customize scroll bar visual ?
 - leaderboard display improvement (scroll is not ideal yet)
+- Android tests :
+	- Ask my father to install
+	- Ask mom to install phone + tablet (take screenshot of font size on HHHDPI phone/tablet)
+	- Install on aya's phone
+	- Try Clara's phone ?
+
+	
+	
+	
+polish :::
 - SOUNDS
 	- SFX :
 		- no sound when transfering cargo (but mount is ok)
@@ -43,18 +67,22 @@ TODO :::
 		- Credit / success screen
 		
 - Achievements
-- Android tests :
-	- Ask my father to install
-	- Ask mom to install phone + tablet (take screenshot of font size on HHHDPI phone/tablet)
-	- Install on aya's phone
-	- Try Clara's phone ?
+- customize scroll bar visual ?
+- to review :
+	- branches should give SOMETHING
+	- could vorg be more distinct ? (unique recipes? something other than shield make their ship unique?)
+- being able to shoot mk3 twice when other guns are equiped doesn't work ?
+- balance :  first 2 level should garanty 1-5 items when shooting planet (easy_planet)
+- rip name & message not centered on mobile ?
+	- Same damn issue with scaling of font and oversampling
 - review multi-tile objects
 	- Collision on each tile but behave as a single entity ?
-
-	
-	
-	
-polish :::
+- *BUG* Going back up the wormhole for sector1 was placed right spack in the middle of the level on top of the sun. How is this possible ?
+	- It's in THEORY possible since I take a random position for the up wormhole it could end up in 40,40 on top of the sun.
+- Tuto when reaching the end : "That it! the converter is inside the broken battleship hull somewhere in the middle of the system. There's a huge war going on and you're going to have to go right through it! They're not going to make it easy for you!"
+- I don't set the rotation of ghosts when they move with MK3 radar
+- Move on press down and keep moving until point of interest or button up ?
+- modulate sun color (blue, red, yellow, etc. main sequence colors)
 - parallax background should follow the camera instead of the ship !
 	- There could be more than one level too to add to the effect
 - boarding a ship that doesn't have a scanner doesn't hide and create ghost for object that were visible
@@ -179,6 +207,8 @@ IDEAS:::
 	
 	
 DONE :::
+- delete craft_need_row.tscn ?
+- We have too much cargo to move still used a turn !
 - *** Crash if crafting not enough energy ***
 - rapid clicks sometimes still move the ship while in the menus
 - cleanup some logs
