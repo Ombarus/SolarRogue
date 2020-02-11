@@ -169,7 +169,7 @@
 		"energy_cost":700
 	},
 	"description": {
-		"text":"A handy device that can convert any matter into energy and vice-versa. More advanced blueprints require military grade converter.",
+		"text":"A handy device that can convert any matter into energy and vice-versa. This IS a military grade converter.",
 		"Overview": {
 			"min_level":0,
 			"fields":[

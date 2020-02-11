@@ -67,5 +67,8 @@
 		{"name":"data/json/items/misc/diluted_cristals.json", "spawn_rate":0.00001302083333},
 		
 		{"name":"data/json/levels/jerg_branch/branch06.json", "spawn_rate":1.0, "max":1}
-	]
+	],
+	"description": {
+		"text":"Wormholes allow us to travel between solar systems. Blue wormhole bring us closer to home. Yellow wormhole send us deeper into the unknown."
+	}
 }

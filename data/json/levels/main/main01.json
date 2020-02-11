@@ -21,5 +21,8 @@
 		{"name":"data/json/stellar/anomalies/energy_syphon.json", "spawn_rate":0.000052, "max":1},
 		{"name":"data/json/stellar/anomalies/blind_anomaly.json", "spawn_rate":0.000052, "max":1},
 		{"name":"data/json/stellar/anomalies/slow_anomaly.json", "spawn_rate":0.000052, "max":1}
-	]
+	],
+	"description": {
+		"text":"Wormholes allow us to travel between solar systems. Blue wormhole bring us closer to home. Yellow wormhole send us deeper into the unknown."
+	}
 }

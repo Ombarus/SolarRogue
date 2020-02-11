@@ -25,10 +25,10 @@ func Init(init_param):
 	if "json" in init_param and init_param.json != null:
 		_json = init_param["json"]
 	
-	get_node("base").title = Globals.mytr(get_custom("name_id"))
+	get_node("base").title = Globals.mytr(get_custom("name_id", ""))
 	
-	var base_desc : String = get_custom("description.text")
-	if base_desc != null:
+	var base_desc : String = get_custom("description.text", "")
+	if base_desc != "":
 		get_node("base/VBoxContainer/BaseDesc").text = Globals.mytr(base_desc)
 	else:
 		get_node("base/VBoxContainer/BaseDesc").text = Globals.mytr("No information available")
@@ -36,7 +36,7 @@ func Init(init_param):
 		return
 		
 	# need to make a copy or we end up overwriting the base attributes
-	var cat_dict : Dictionary = str2var(var2str(get_custom("description")))
+	var cat_dict : Dictionary = str2var(var2str(get_custom("description", {})))
 	var final_list := []
 	for key in cat_dict:
 		if key == "text" or scanner_level < cat_dict[key].min_level:
@@ -97,8 +97,8 @@ func get_names(txt) -> Array:
 		
 	return res
 	
-func get_custom(path):
+func get_custom(path, default=null):
 	if _obj != null:
-		return _obj.get_attrib(path)
+		return _obj.get_attrib(path, default)
 	else:
-		return Globals.get_data(_json, path)
+		return Globals.get_data(_json, path, default)

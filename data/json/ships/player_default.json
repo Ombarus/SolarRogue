@@ -4,7 +4,7 @@
 	"sprite":"human_scout",
 	"icon": {
 		"texture":"data/textures/space-sprite.png",
-		"region":[768,256,128,128]
+		"region":[512,256,128,128]
 	},
 	"animation": {
 		"destroyed": "scenes/tileset_source/explosion_fx.tscn"

@@ -22,5 +22,8 @@
 		{"name":"data/json/stellar/anomalies/energy_syphon.json", "spawn_rate":0.000052, "max":1},
 		{"name":"data/json/stellar/anomalies/blind_anomaly.json", "spawn_rate":0.000052, "max":1},
 		{"name":"data/json/stellar/anomalies/slow_anomaly.json", "spawn_rate":0.000052, "max":1}
-	]
+	],
+	"description": {
+		"text":"Wormholes allow us to travel between solar systems. This wormhole emits strange quarks and won't let us through. Maybe if we had some special item we could go home...."
+	}
 }

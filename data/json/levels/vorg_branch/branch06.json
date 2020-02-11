@@ -71,5 +71,8 @@
 		
 		
 		{"name":"data/json/levels/vorg_branch/branch07.json", "spawn_rate":1.0, "max":1}
-	]
+	],
+	"description": {
+		"text":"Wormholes allow us to travel between solar systems. Blue wormhole bring us closer to home. Yellow wormhole send us deeper into the unknown."
+	}
 }

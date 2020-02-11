@@ -508,12 +508,6 @@ visible = false
 margin_top = 1.0
 margin_right = -1114.0
 margin_bottom = -601.0
-dialog_ok = false
-dialog_cancel = false
-disabled = false
-bottom_title = ""
-title = ""
-border_style = "═"
 
 [node name="TargettingHUD" parent="Camera-GUI" instance=ExtResource( 51 )]
 visible = false

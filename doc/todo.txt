@@ -30,13 +30,6 @@ Release prep :
 - Create steam dev acount and start process of publishing my game
 - translation
 	- review missing translation
-		- (name of ship in HUD)
-		- Disassemble
-		- A Simple Probe (description)
-		- [>]FTL
-		- %d Item(s) for %d Spare Part(s)
-		- mount tuto in inventory, "Scanner" wasn't translated
-		- Missing%s %s
 		
 - Mobile only "features" ?
 	- Hide "Quit" button (iOS or Mobile in general)
