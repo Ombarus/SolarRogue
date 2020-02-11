@@ -297,6 +297,7 @@ func OnObjTurn_Callback(obj):
 	# sometimes we put the player on cruise control. when we give him back control "ai" component will be disabled
 	if is_player and obj.get_attrib("ai") == null:
 		lock_input = false
+		Globals.LevelLoaderRef.SaveState(Globals.LevelLoaderRef.GetCurrentLevelData())
 		
 		var moved = obj.get_attrib("moving.moved")
 		if  moved == true:

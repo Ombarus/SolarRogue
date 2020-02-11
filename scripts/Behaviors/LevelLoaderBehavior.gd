@@ -234,16 +234,40 @@ func _GatherSaveData():
 	var start_time : int = OS.get_ticks_msec()
 	var cur_time : int = start_time
 	var output = {}
+	var one_obj = null
 	for key in objById:
-		if objById[key] == null or objById[key].get_attrib("type") == "player":
+		one_obj = objById[key]
+		if one_obj == null or one_obj.get_attrib("type") == "player":
 			continue
 		output[key] = {}
-		output[key]["src"] = objById[key].get_attrib("src")
-		output[key]["position_x"] = World_to_Tile(objById[key].position).x
-		output[key]["position_y"] = World_to_Tile(objById[key].position).y
-		if objById[key].rotation != 0.0:
-			output[key]["rotation"] = objById[key].rotation
-		output[key]["modified_attributes"] = objById[key].modified_attributes
+		output[key]["src"] = one_obj.get_attrib("src")
+		var tile = World_to_Tile(one_obj.position)
+		
+		# One hell of a hack. Because AIs can move in parallel, we might end up trying to save
+		# while a ship is moving. It's fine but we need to make 100% sure we save the right tile
+		# and right now there's no guaranty that the ship is on the right tile if it's animating, so
+		# Normally I would do "wait for animation" but I don't want to delay the saving.
+		# the only solution I can think of is to look for it. It can't be more than 1 tile away from 
+		# it's destination
+		if one_obj.get_attrib("animation.in_movement") == true:
+			var found := false
+			for offset_x in range(-1, 2):
+				for offset_y in range(-1, 2):
+					var content : Array = GetTile(Vector2(tile.x + offset_x,tile.y + offset_y))
+					if one_obj in content:
+						tile = Vector2(tile.x + offset_x,tile.y + offset_y)
+						found = true
+						break
+				if found == true:
+					break
+			
+		#############################################################################################
+			
+		output[key]["position_x"] = tile.x
+		output[key]["position_y"] = tile.y
+		if one_obj.rotation != 0.0:
+			output[key]["rotation"] = one_obj.rotation
+		output[key]["modified_attributes"] = one_obj.modified_attributes
 		
 		cur_time = OS.get_ticks_msec()
 		if cur_time - start_time > 33:
@@ -438,6 +462,8 @@ func CreateAndInitNode(data, pos, modified_data = null):
 		n.modified_attributes["unique_id"] = _sequence_id
 		_sequence_id += 1
 	objById[n.modified_attributes["unique_id"]] = n
+	if n.get_attrib("animation.in_movement") == true:
+		n.set_attrib("animation.in_movement", false)
 	BehaviorEvents.emit_signal("OnObjectLoaded", n)
 	if modified_data == null: # only count new stuff
 		var clean_path = Globals.clean_path(data["src"])
