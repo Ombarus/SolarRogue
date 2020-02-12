@@ -9,10 +9,10 @@
 [ext_resource path="res://data/fonts/DejaVuSansMonoBold_text.tres" type="DynamicFont" id=7]
 [ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=8]
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0980392, 0.0980392, 0.0980392, 1 )
 
-[sub_resource type="AtlasTexture" id=1]
+[sub_resource type="AtlasTexture" id=2]
 flags = 2
 atlas = ExtResource( 8 )
 region = Rect2( 1728, 0, 64, 64 )
@@ -24,6 +24,9 @@ bg_color = Color( 0.0980392, 0.0980392, 0.0980392, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
@@ -58,7 +61,11 @@ margin_left = -0.016
 margin_top = 39.426
 margin_right = -105.232
 margin_bottom = 71.426
-custom_styles/normal = SubResource( 2 )
+custom_styles/normal = SubResource( 1 )
+max_length = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Info" type="RichTextLabel" parent="base/Control"]
 anchor_right = 1.0
@@ -80,7 +87,7 @@ margin_left = -71.568
 margin_top = 16.105
 margin_right = 4.43201
 margin_bottom = 86.1053
-icon = SubResource( 1 )
+icon = SubResource( 2 )
 flat = true
 
 [node name="Info2" type="RichTextLabel" parent="base/Control"]
@@ -108,5 +115,4 @@ margin_right = -167.0
 margin_bottom = -39.0
 custom_styles/normal = SubResource( 3 )
 text = "Harder"
-
 [connection signal="pressed" from="base/Control/Randomize" to="." method="_on_Randomize_pressed"]

@@ -3,6 +3,7 @@ extends "res://scripts/GUI/GUILayoutBase.gd"
 var _callback_obj : Node = null
 var _callback_method : String = ""
 var _random_index : int = 0
+var _cur_offset : int = 0
 
 onready var _selector = get_node("base/Control/Selector")
 
@@ -25,6 +26,10 @@ func _ready():
 	diff_options.add_item("Not Happening...", 4)
 
 func Ok_Callback():
+	if OS.get_virtual_keyboard_height() > 0 or _selector.text == "":
+		OS.hide_virtual_keyboard()
+		return
+		
 	BehaviorEvents.emit_signal("OnPopGUI")
 	get_node("base").disabled = true
 	var diff_options : OptionButton = get_node("base/Control/Difficulty")
@@ -65,3 +70,13 @@ func _on_Randomize_pressed():
 	_random_index += 1
 	_random_index = _random_index % random_names.size()
 	_selector.text = name
+	
+func _process(delta):
+	var cur_height := OS.get_virtual_keyboard_height()
+	if cur_height > 0 and _cur_offset == 0:
+		_cur_offset = get_node("base").rect_position.y
+		get_node("base").rect_position.y = 0
+	elif cur_height <= 0 and _cur_offset != 0:
+		get_node("base").rect_position.y = _cur_offset
+		_cur_offset = 0
+		

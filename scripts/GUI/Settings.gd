@@ -61,6 +61,9 @@ func Init(init_param):
 	var lang : String = PermSave.get_attrib("settings.lang", TranslationServer.get_locale())
 	_lang_options.select(get_lang_by_metadata(lang))
 	
+	var tuto_active : bool = PermSave.get_attrib("tutorial.enabled", true)
+	get_node("base/ScrollContainer/VBoxContainer/Enable Tutorial/TutoCheck").pressed = tuto_active
+	
 
 func get_lang_by_metadata(lang):
 	for i in range(_lang_options.get_item_count()):

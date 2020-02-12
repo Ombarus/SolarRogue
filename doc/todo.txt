@@ -5,8 +5,10 @@ RELEASE CHECKLIST :::
 - compilation set to release (debug unchecked)
 - save after each turn, save when quit
 - remove sample & debug nodes in main.tscn ?
+- test signing on fresh fresh install on windows 10 (laptop?)
 
 TODO :::
+- Launching the game in english doesn't update the leaderboard language ?
 ERROR: emit_signal: Error calling method from signal 'finished': 'Node2D(MissileFX2.gd)::_on_AudioStreamPlayer2D_finished': Method not found..
    At: core/object.cpp:1228
 Release prep :

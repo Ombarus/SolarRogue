@@ -45,8 +45,10 @@ _global_script_class_icons={
 [application]
 
 config/name="SolarRogue"
+config/description="Something went wrong. While you were exploring uncharted space the wormhole took you somewhere unknown. What you do know is that your warp engine aren't powerful enough to open it again. Use what you have and try to find a way back to civilization"
 run/main_scene="res://scenes/MainMenu.tscn"
 config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
@@ -92,7 +94,6 @@ touch={
 
 [locale]
 
-test="fr"
 locale_filter=[ 0, [  ] ]
 translations=PoolStringArray( "res://data/translation/base.en.translation", "res://data/translation/base.fr.translation", "res://data/translation/base.ja.translation" )
 translation_remaps={
@@ -115,6 +116,11 @@ common/physics_fps=5
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
 quality/2d/use_pixel_snap=true
+threads/thread_model=2
+quality/directional_shadow/size=512
+quality/directional_shadow/size.mobile=256
+quality/shadow_atlas/size=512
+quality/shadow_atlas/size.mobile=256
 quality/filters/use_nearest_mipmap_filter=true
 environment/default_clear_color=Color( 0, 0, 0, 1 )
 environment/default_environment="res://default_env.tres"

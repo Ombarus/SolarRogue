@@ -14,7 +14,7 @@ func _ready():
 	BehaviorEvents.connect("OnObjectPicked", self, "OnPickup_Callback")
 	
 func StartTuto_Callback():
-	Active = PermSave.get_attrib("tutorial.enabled")
+	Active = true
 		
 func Movement_Done_Callback():
 	Complete_Step("movement")
@@ -52,7 +52,7 @@ func ResetTuto_Callback():
 	StartTuto_Callback()
 	
 func OnGUIChanged_Callback(current_menu):
-	if Active == false:
+	if Active == false or PermSave.get_attrib("tutorial.enabled", true) == false:
 		return
 		
 	if current_menu == "ConverterV2":
@@ -97,7 +97,7 @@ func OnGUIChanged_Callback(current_menu):
 			BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "TUTO order the helm", "title":"Tutorial: Ship Movement", "callback_object":self, "callback_method":"Movement_Done_Callback"})
 			
 func OnScannerUpdated_Callback(obj):
-	if Active == false or obj.get_attrib("type") != "player":
+	if Active == false or obj.get_attrib("type") != "player" or PermSave.get_attrib("tutorial.enabled", true) == false:
 		return
 		
 	var level_id = Globals.LevelLoaderRef.GetLevelID()
@@ -169,7 +169,7 @@ func OnScannerUpdated_Callback(obj):
 				break
 
 func OnPickup_Callback(picker : Attributes):
-	if Active == false or picker.get_attrib("type") != "player":
+	if Active == false or picker.get_attrib("type") != "player" or PermSave.get_attrib("tutorial.enabled", true) == false:
 		return
 		
 	var steps : Array = PermSave.get_attrib("tutorial.completed_steps")
