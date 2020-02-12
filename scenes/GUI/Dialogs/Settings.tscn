@@ -80,6 +80,9 @@ anchor_bottom = 1.0
 margin_left = -256.0
 margin_bottom = -3.8147e-06
 text = "English"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Enable Tutorial" type="Panel" parent="base/ScrollContainer/VBoxContainer"]
 margin_top = 80.0

@@ -66,6 +66,9 @@ func Init(init_param):
 	
 
 func get_lang_by_metadata(lang):
+	print("before %s" % lang)
+	lang = lang.split("_")[0]
+	print("after %s" % lang)
 	for i in range(_lang_options.get_item_count()):
 		if lang == _lang_options.get_item_metadata(i):
 			return i

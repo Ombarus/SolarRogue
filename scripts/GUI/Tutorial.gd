@@ -15,6 +15,7 @@ func Init(init_param):
 	get_node("base").disabled = false
 	
 	var locale := TranslationServer.get_locale()
+	locale = locale.split("_")[0]
 	var contents : Array = get_tree().get_nodes_in_group("Tuto_Lang")
 	var found := false
 	for content in contents:

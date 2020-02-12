@@ -18,6 +18,7 @@ func Init(init_param):
 	get_node("base").title = Globals.mytr("Welcome %s...", [player_name])
 	
 	var locale := TranslationServer.get_locale()
+	locale = locale.split("_")[0]
 	var contents : Array = get_tree().get_nodes_in_group("welcome_lang")
 	var found := false
 	for content in contents:
