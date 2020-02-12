@@ -20,6 +20,9 @@ margin_top = -2.13022
 margin_right = -2.45557
 margin_bottom = -2.13019
 custom_styles/panel = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="base" parent="." instance=ExtResource( 3 )]
 anchor_left = 0.5
@@ -43,7 +46,7 @@ margin_bottom = -36.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="base/ScrollContainer"]
 margin_right = 725.0
-margin_bottom = 466.0
+margin_bottom = 666.0
 rect_min_size = Vector2( 725, 0 )
 size_flags_vertical = 3
 
@@ -56,8 +59,8 @@ text = "Gameplay"
 [node name="Language" type="Panel" parent="base/ScrollContainer/VBoxContainer"]
 margin_top = 26.0
 margin_right = 725.0
-margin_bottom = 56.0
-rect_min_size = Vector2( 0, 30 )
+margin_bottom = 76.0
+rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 5 )
 
@@ -72,19 +75,17 @@ valign = 1
 
 [node name="LangOption" type="OptionButton" parent="base/ScrollContainer/VBoxContainer/Language"]
 anchor_left = 1.0
-anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -220.0
-margin_top = -20.0
-margin_bottom = 20.0
+anchor_bottom = 1.0
+margin_left = -256.0
+margin_bottom = -3.8147e-06
 text = "English"
 
 [node name="Enable Tutorial" type="Panel" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 60.0
+margin_top = 80.0
 margin_right = 725.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 0, 30 )
+margin_bottom = 130.0
+rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 6 )
 
@@ -105,16 +106,21 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -76.0
-margin_top = -20.0
-margin_bottom = 20.0
+margin_left = -100.487
+margin_top = -37.2712
+margin_right = -36.4868
+margin_bottom = 12.7288
+rect_scale = Vector2( 1.5, 1.5 )
 pressed = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Difficulty" type="Panel" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 94.0
+margin_top = 134.0
 margin_right = 725.0
-margin_bottom = 124.0
-rect_min_size = Vector2( 0, 30 )
+margin_bottom = 184.0
+rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 5 )
 
@@ -129,19 +135,17 @@ valign = 1
 
 [node name="DiffOptions" type="OptionButton" parent="base/ScrollContainer/VBoxContainer/Difficulty"]
 anchor_left = 1.0
-anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -220.0
-margin_top = -20.0
-margin_bottom = 20.0
+anchor_bottom = 1.0
+margin_left = -256.0
+margin_bottom = -3.8147e-06
 text = "Normal"
 
 [node name="FPS" type="Panel" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 128.0
+margin_top = 188.0
 margin_right = 725.0
-margin_bottom = 158.0
-rect_min_size = Vector2( 0, 30 )
+margin_bottom = 238.0
+rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 6 )
 
@@ -155,20 +159,22 @@ text = "Display FPS"
 valign = 1
 
 [node name="FPSCounter" type="CheckButton" parent="base/ScrollContainer/VBoxContainer/FPS"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -76.0
-margin_top = -20.0
-margin_bottom = 20.0
+anchor_left = 1.009
+anchor_top = 0.532
+anchor_right = 1.009
+anchor_bottom = 0.532
+margin_left = -120.15
+margin_top = -30.1842
+margin_right = -44.1495
+margin_bottom = 9.8158
+rect_scale = Vector2( 1.5, 1.5 )
 pressed = true
 
 [node name="HideHUD" type="Panel" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 162.0
+margin_top = 242.0
 margin_right = 725.0
-margin_bottom = 192.0
-rect_min_size = Vector2( 0, 30 )
+margin_bottom = 292.0
+rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 5 )
 
@@ -186,28 +192,30 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -76.0
-margin_top = -20.0
-margin_bottom = 20.0
+margin_left = -115.601
+margin_top = -29.9808
+margin_right = -39.6012
+margin_bottom = 10.0192
+rect_scale = Vector2( 1.5, 1.5 )
 pressed = true
 
 [node name="spacer2" type="Label" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 196.0
+margin_top = 296.0
 margin_right = 725.0
-margin_bottom = 218.0
+margin_bottom = 318.0
 
 [node name="Label2" type="Label" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 222.0
+margin_top = 322.0
 margin_right = 725.0
-margin_bottom = 244.0
+margin_bottom = 344.0
 theme = ExtResource( 4 )
 text = "Video"
 
 [node name="FullScreen" type="Panel" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 248.0
+margin_top = 348.0
 margin_right = 725.0
-margin_bottom = 278.0
-rect_min_size = Vector2( 0, 30 )
+margin_bottom = 398.0
+rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 5 )
 
@@ -225,15 +233,17 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -76.0
-margin_top = -20.0
-margin_bottom = 20.0
+margin_left = -110.799
+margin_top = -28.1759
+margin_right = -34.7986
+margin_bottom = 11.8241
+rect_scale = Vector2( 1.5, 1.5 )
 
 [node name="VSync" type="Panel" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 282.0
+margin_top = 402.0
 margin_right = 725.0
-margin_bottom = 312.0
-rect_min_size = Vector2( 0, 30 )
+margin_bottom = 452.0
+rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 6 )
 
@@ -251,27 +261,29 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -76.0
-margin_top = -20.0
-margin_bottom = 20.0
+margin_left = -113.098
+margin_top = -31.3776
+margin_right = -37.0978
+margin_bottom = 8.62243
+rect_scale = Vector2( 1.5, 1.5 )
 
 [node name="spacer" type="Label" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 316.0
+margin_top = 456.0
 margin_right = 725.0
-margin_bottom = 338.0
+margin_bottom = 478.0
 
 [node name="Label" type="Label" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 342.0
+margin_top = 482.0
 margin_right = 725.0
-margin_bottom = 364.0
+margin_bottom = 504.0
 theme = ExtResource( 4 )
 text = "Sound"
 
 [node name="MasterVolume" type="Panel" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 368.0
+margin_top = 508.0
 margin_right = 725.0
-margin_bottom = 398.0
-rect_min_size = Vector2( 0, 30 )
+margin_bottom = 558.0
+rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 5 )
 
@@ -289,10 +301,11 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_top = -20.0
-margin_right = 341.0
-margin_bottom = 20.0
-rect_scale = Vector2( -1, 1 )
+margin_left = -1.98633
+margin_top = -29.7086
+margin_right = 339.014
+margin_bottom = 10.2914
+rect_scale = Vector2( -1, 1.5 )
 min_value = 1.0
 max_value = 81.0
 step = 0.1
@@ -301,10 +314,10 @@ exp_edit = true
 ticks_on_borders = true
 
 [node name="SFXVolume" type="Panel" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 402.0
+margin_top = 562.0
 margin_right = 725.0
-margin_bottom = 432.0
-rect_min_size = Vector2( 0, 30 )
+margin_bottom = 612.0
+rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 6 )
 
@@ -320,10 +333,11 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_top = -20.0
-margin_right = 341.0
-margin_bottom = 20.0
-rect_scale = Vector2( -1, 1 )
+margin_left = -1.89075
+margin_top = -28.8235
+margin_right = 339.109
+margin_bottom = 11.1765
+rect_scale = Vector2( -1, 1.5 )
 min_value = 1.0
 max_value = 81.0
 step = 0.5
@@ -332,10 +346,10 @@ exp_edit = true
 ticks_on_borders = true
 
 [node name="MusicVolume" type="Panel" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 436.0
+margin_top = 616.0
 margin_right = 725.0
-margin_bottom = 466.0
-rect_min_size = Vector2( 0, 30 )
+margin_bottom = 666.0
+rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 5 )
 
@@ -353,10 +367,11 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_top = -20.0
-margin_right = 341.0
-margin_bottom = 20.0
-rect_scale = Vector2( -1, 1 )
+margin_left = -1.2605
+margin_top = -30.084
+margin_right = 339.74
+margin_bottom = 9.91601
+rect_scale = Vector2( -1, 1.5 )
 min_value = 1.0
 max_value = 81.0
 step = 0.5
