@@ -27,6 +27,12 @@ func _ready():
 	_lang_options.add_item("Japanese")
 	_lang_options.set_item_metadata(2, "ja")
 	
+	if Globals.is_mobile():
+		get_node("base/ScrollContainer/VBoxContainer/HideHUD").visible = false
+		get_node("base/ScrollContainer/VBoxContainer/Label2").visible = false
+		get_node("base/ScrollContainer/VBoxContainer/FullScreen").visible = false
+		get_node("base/ScrollContainer/VBoxContainer/VSync").visible = false
+	
 	
 func Ok_Callback():
 	if _diff_changed == true:

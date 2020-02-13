@@ -16,6 +16,9 @@ func _ready():
 	
 	get_node("MenuRoot/MenuBtn/Continue").Disabled = not File.new().file_exists("user://savegame.save")
 	BehaviorEvents.emit_signal("OnPushGUI", "MenuRoot", {})
+	
+	if Globals.is_ios():
+		get_node("MenuRoot/MenuBtn/Quit").visible = false
 
 #func OnPopGUI_Callback():
 #	var name_diag = get_node("PlayerName")

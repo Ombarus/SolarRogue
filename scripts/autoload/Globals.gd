@@ -106,3 +106,18 @@ func mytr(text, fmt=[]):
 		result = tr(text) % fmt
 			
 	return result
+
+func is_mobile():
+	#"Android", "Haiku", "iOS", "HTML5", "OSX", "Server", "Windows", "UWP", "X11"
+	var os_name := OS.get_name()
+	if os_name == "Android" or os_name == "iOS" or os_name == "UWP":
+		return true
+	
+	return false
+	
+func is_ios():
+	var os_name := OS.get_name()
+	if os_name == "iOS":
+		return true
+	
+	return false
