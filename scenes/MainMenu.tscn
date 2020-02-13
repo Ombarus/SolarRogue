@@ -150,6 +150,9 @@ margin_right = -10.0
 margin_bottom = -10.0
 mouse_filter = 1
 script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="leaderlist" parent="MenuRoot/base/Leaderboard" instance=ExtResource( 12 )]
 anchor_right = 1.0

@@ -8,8 +8,6 @@ RELEASE CHECKLIST :::
 - test signing on fresh fresh install on windows 10 (laptop?)
 
 TODO :::
-ERROR: emit_signal: Error calling method from signal 'finished': 'Node2D(MissileFX2.gd)::_on_AudioStreamPlayer2D_finished': Method not found..
-   At: core/object.cpp:1228
 Release prep :
 	- Title : Solar Rogue
 	- Short Desc : Can you save yourself? Can you save your crew?
@@ -201,6 +199,8 @@ IDEAS:::
 	
 	
 DONE :::
+ERROR: emit_signal: Error calling method from signal 'finished': 'Node2D(MissileFX2.gd)::_on_AudioStreamPlayer2D_finished': Method not found..
+   At: core/object.cpp:1228
 - Launching the game in english doesn't update the leaderboard language ?
 - save and quit on ios should bring to main menu
 - delete craft_need_row.tscn ?

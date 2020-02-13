@@ -13,10 +13,9 @@ func _ready():
 	# otherwise we'll end up with dead references in a global objects that will be deleted and everything goes to hell
 	BehaviorEvents.connect("OnLocaleChanged", self, "OnLocaleChanged_Callback")
 	var leaders = str2var(var2str(PermSave.get_attrib("leaderboard")))
-	for i in range(10):
+	for i in range(5):
 		leaders.push_back({})
-	_leader_size = leaders.size() + 2
-	_cur_scroll = -(self.rect_size.y + (0.3*self.rect_size.y))
+	_leader_size = leaders.size()
 	var leaderlist = get_node("leaderlist")
 	leaderlist.Content = leaders
 	
@@ -24,7 +23,7 @@ func _ready():
 	
 	scrollbar.allow_lesser = true
 	scrollbar.allow_greater = true
-	leaderlist.set_v_scroll(_cur_scroll)
+	call_deferred("init_scroll")
 	
 func OnLocaleChanged_Callback():
 	# We set the language at launch which means the leaderboard dynamic rows aren't setup yet, 
@@ -35,22 +34,27 @@ func Deferred_LocaleChange():
 	var leaderlist = get_node("leaderlist")
 	leaderlist.Content = leaderlist.Content
 	
+func init_scroll():
+	var n = get_node("leaderlist")
+	_cancel_scroll = 5.0
+	_cur_scroll = 0
+	n.set_v_scroll(_cur_scroll)
 
 func _process(delta):
+	var n = get_node("leaderlist")
 	if _cancel_scroll > 0:
 		_cancel_scroll -= delta
-		var scrollbar = get_node("leaderlist").get_v_scrollbar()
-		_cur_scroll = get_node("leaderlist").get_v_scroll()
+		var scrollbar = n.get_v_scrollbar()
+		_cur_scroll = n.get_v_scroll()
 		return
 		
-	# Called every frame. Delta is time since last frame.
-	# Update game logic here.
+	var max_scroll_size : int = _leader_size * n.GetRowHeight()
 	_cur_scroll += _step * delta
-	get_node("leaderlist").set_v_scroll(_cur_scroll)
-	var scrollbar = get_node("leaderlist").get_v_scrollbar()
-	if _cur_scroll > (_leader_size * 20 + (self.rect_size.y)):
+	if _cur_scroll > max_scroll_size:
 		#_step = 0
-		_cur_scroll = -(self.rect_size.y + (0.3*self.rect_size.y))
+		_cur_scroll = -(self.rect_size.y)
+		
+	n.set_v_scroll(_cur_scroll)
 		
 
 func _gui_input(event):

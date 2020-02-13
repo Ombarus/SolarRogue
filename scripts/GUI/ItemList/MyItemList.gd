@@ -20,6 +20,12 @@ signal OnSelectionChanged()
 var _debug = false
 onready var _rows_node = get_node("Rows")
 
+func GetRowHeight() -> int:
+	if _rows_node.get_children().size() <= 0:
+		return -1
+		
+	return _rows_node.get_children()[0].rect_size.y
+
 func Clear():
 	for row in _rows_node.get_children():
 		_rows_node.remove_child(row)
