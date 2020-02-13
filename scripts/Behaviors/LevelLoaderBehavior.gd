@@ -293,6 +293,8 @@ func _UnloadLevel():
 	objCountByType.clear()
 
 func SaveState(level_data):
+	if objByType["player"][0].get_attrib("destroyable.destroyed", false) == true:
+		return
 	var data_to_save : Dictionary = yield(_GatherSaveData(), "completed")
 	cur_save["depth"] = current_depth
 	cur_save["current_sequence_id"] = _sequence_id
