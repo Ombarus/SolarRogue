@@ -24,7 +24,10 @@ func _on_Suicide_pressed():
 
 func _on_SaveAndQuit_pressed():
 	_on_Save_pressed()
-	get_tree().quit()
+	if Globals.is_ios():
+		get_tree().change_scene("res://scenes/MainMenu.tscn")
+	else:
+		get_tree().quit()
 
 func On_Suicide_Confirmed_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")

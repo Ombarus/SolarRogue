@@ -27,8 +27,14 @@ func _ready():
 	leaderlist.set_v_scroll(_cur_scroll)
 	
 func OnLocaleChanged_Callback():
+	# We set the language at launch which means the leaderboard dynamic rows aren't setup yet, 
+	# defer the call just for that case
+	call_deferred("Deferred_LocaleChange")
+	
+func Deferred_LocaleChange():
 	var leaderlist = get_node("leaderlist")
 	leaderlist.Content = leaderlist.Content
+	
 
 func _process(delta):
 	if _cancel_scroll > 0:

@@ -32,4 +32,3 @@ custom_fonts/normal_font = ExtResource( 2 )
 bbcode_enabled = true
 bbcode_text = "Test"
 text = "Test"
-

@@ -19,7 +19,7 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="root"]
 rotation = 1.5708
-scale = Vector2( 1, 1e-005 )
+scale = Vector2( 1, 1e-05 )
 texture = ExtResource( 3 )
 centered = false
 offset = Vector2( -64, -128 )
@@ -28,5 +28,3 @@ offset = Vector2( -64, -128 )
 stream = ExtResource( 4 )
 autoplay = true
 bus = "Sfx"
-
-[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_AudioStreamPlayer2D_finished"]

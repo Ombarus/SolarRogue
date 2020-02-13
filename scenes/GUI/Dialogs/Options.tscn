@@ -42,10 +42,6 @@ margin_bottom = 90.0
 rect_min_size = Vector2( 0, 90 )
 Text = "[s]ave"
 ShortcutKey = "s"
-ShortcutEnum = 0
-AlwaysOnShortcut = true
-Disabled = false
-IsHUD = false
 
 [node name="Suicide" parent="base/vbox" instance=ExtResource( 4 )]
 margin_top = 112.0
@@ -54,10 +50,6 @@ margin_bottom = 202.0
 rect_min_size = Vector2( 0, 90 )
 Text = "[r]estart"
 ShortcutKey = "r"
-ShortcutEnum = 0
-AlwaysOnShortcut = true
-Disabled = false
-IsHUD = false
 
 [node name="Settings" parent="base/vbox" instance=ExtResource( 4 )]
 margin_top = 224.0
@@ -66,10 +58,6 @@ margin_bottom = 314.0
 rect_min_size = Vector2( 0, 90 )
 Text = "[o]ptions"
 ShortcutKey = "o"
-ShortcutEnum = 0
-AlwaysOnShortcut = true
-Disabled = false
-IsHUD = false
 
 [node name="SaveAndQuit" parent="base/vbox" instance=ExtResource( 4 )]
 margin_top = 336.0
@@ -78,10 +66,6 @@ margin_bottom = 426.0
 rect_min_size = Vector2( 0, 90 )
 Text = "save & [q]uit"
 ShortcutKey = "q"
-ShortcutEnum = 0
-AlwaysOnShortcut = true
-Disabled = false
-IsHUD = false
 [connection signal="pressed" from="base/vbox/Save" to="." method="_on_Save_pressed"]
 [connection signal="pressed" from="base/vbox/Suicide" to="." method="_on_Suicide_pressed"]
 [connection signal="pressed" from="base/vbox/Settings" to="." method="_on_Settings_pressed"]
