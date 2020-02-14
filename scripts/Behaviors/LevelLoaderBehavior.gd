@@ -516,4 +516,5 @@ func set_loading(var is_loading : bool):
 	get_node("../../GameTiles").visible = !is_loading
 	get_node("../../base_green").visible = !is_loading
 	get_node("../../Camera-GUI/HUD").visible = !is_loading
+	ShortcutManager.Enabled = !is_loading
 	_loading.visible = is_loading

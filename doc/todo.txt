@@ -8,7 +8,7 @@ RELEASE CHECKLIST :::
 - test signing on fresh fresh install on windows 10 (laptop?)
 
 TODO :::
-- esc doesn't work in inv window or conv
+- **CRASH** tried to change level twice by hitting the shortcut quickly... Shortcut can be activated during loading :/
 Release prep :
 	- Title : Solar Rogue
 	- Short Desc : Can you save yourself? Can you save your crew?
@@ -195,6 +195,7 @@ IDEAS:::
 	
 	
 DONE :::
+- esc doesn't work in inv window or conv
 - I don't set the rotation of ghosts when they move with MK3 radar
 - Tuto when reaching the end : "That it! the converter is inside the broken battleship hull somewhere in the middle of the system. There's a huge war going on and you're going to have to go right through it! They're not going to make it easy for you!"
 - *BUG* Going back up the wormhole for sector1 was placed right spack in the middle of the level on top of the sun. How is this possible ?

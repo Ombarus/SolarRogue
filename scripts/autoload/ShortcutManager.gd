@@ -4,6 +4,8 @@ var _current_shortcut_dict : Dictionary = {}
 var _shortcut_stack : Array = []
 var _last_unicode = 0
 
+var Enabled = true
+
 func Add(key, obj, method, onpress=false):
 	#if key in _current_shortcut_dict:
 	#	var error_str = "********OVERRIDING SHORTCUT. %s IS ALREADY REGISTERED TO METHOD %s BUT TRYING TO ADD METHOD %s********"
@@ -35,6 +37,9 @@ func Enable(key, obj, method, isEnabled):
 				shortcut["enabled"] = isEnabled
 	
 func _unhandled_input(event):
+	if Enabled == false:
+		return
+		
 	if event is InputEventKey and event.pressed == true:
 		if event.unicode != 0:
 			_last_unicode = PoolByteArray([event.unicode]).get_string_from_utf8()
