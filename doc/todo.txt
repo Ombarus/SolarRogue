@@ -68,8 +68,6 @@ polish :::
 	- Same damn issue with scaling of font and oversampling
 - review multi-tile objects
 	- Collision on each tile but behave as a single entity ?
-- *BUG* Going back up the wormhole for sector1 was placed right spack in the middle of the level on top of the sun. How is this possible ?
-	- It's in THEORY possible since I take a random position for the up wormhole it could end up in 40,40 on top of the sun.
 - Tuto when reaching the end : "That it! the converter is inside the broken battleship hull somewhere in the middle of the system. There's a huge war going on and you're going to have to go right through it! They're not going to make it easy for you!"
 - I don't set the rotation of ghosts when they move with MK3 radar
 - Move on press down and keep moving until point of interest or button up ?
@@ -198,6 +196,8 @@ IDEAS:::
 	
 	
 DONE :::
+- *BUG* Going back up the wormhole for sector1 was placed right spack in the middle of the level on top of the sun. How is this possible ?
+	- It's in THEORY possible since I take a random position for the up wormhole it could end up in 40,40 on top of the sun.
 - leaderboard display improvement (scroll is not ideal yet)
 ERROR: emit_signal: Error calling method from signal 'finished': 'Node2D(MissileFX2.gd)::_on_AudioStreamPlayer2D_finished': Method not found..
    At: core/object.cpp:1228

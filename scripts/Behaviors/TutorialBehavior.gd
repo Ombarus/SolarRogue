@@ -12,6 +12,7 @@ func _ready():
 	BehaviorEvents.connect("OnGUIChanged", self, "OnGUIChanged_Callback")
 	BehaviorEvents.connect("OnScannerUpdated", self, "OnScannerUpdated_Callback")
 	BehaviorEvents.connect("OnObjectPicked", self, "OnPickup_Callback")
+	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	
 func StartTuto_Callback():
 	Active = true
@@ -50,6 +51,15 @@ func Complete_Step(step_name):
 func ResetTuto_Callback():
 	PermSave.set_attrib("tutorial.completed_steps", [])
 	StartTuto_Callback()
+
+func level_tuto_done():
+	var data = Globals.LevelLoaderRef.GetCurrentLevelData()
+	Complete_Step(data["tuto_trigger"]["id"])
+	
+func OnLevelLoaded_Callback():
+	var data = Globals.LevelLoaderRef.GetCurrentLevelData()
+	if "tuto_trigger" in data:
+		BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": data["tuto_trigger"]["text"], "text_fmt":[], "title":"Tutorial: Converter", "callback_object":self, "callback_method":"level_tuto_done"})
 	
 func OnGUIChanged_Callback(current_menu):
 	if Active == false or PermSave.get_attrib("tutorial.enabled", true) == false:
