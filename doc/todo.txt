@@ -8,6 +8,7 @@ RELEASE CHECKLIST :::
 - test signing on fresh fresh install on windows 10 (laptop?)
 
 TODO :::
+- esc doesn't work in inv window or conv
 Release prep :
 	- Title : Solar Rogue
 	- Short Desc : Can you save yourself? Can you save your crew?

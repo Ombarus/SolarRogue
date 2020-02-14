@@ -290,6 +290,9 @@ margin_right = -1.0
 margin_bottom = -1.0
 mouse_filter = 2
 script = ExtResource( 40 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 Transition = false
 
 [node name="Log" type="Control" parent="Camera-GUI/HUD"]
@@ -427,6 +430,7 @@ margin_top = -124.0
 margin_right = -9.0
 margin_bottom = -59.0
 ShortcutEnum = 16777217
+AlwaysOnShortcut = false
 
 [node name="Sprite" type="Sprite" parent="Camera-GUI/HUD/Buttons/Options"]
 position = Vector2( 32, 33 )

@@ -13,3 +13,4 @@ func _unhandled_input(event):
 		return
 	
 	get_tree().set_input_as_handled()
+	ShortcutManager._unhandled_input(event)

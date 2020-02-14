@@ -24,7 +24,7 @@ margin_left = -189.0
 margin_top = -308.0
 margin_right = 189.0
 margin_bottom = 245.0
-dialog_ok = true
+dialog_cancel = true
 title = "Game Menu"
 
 [node name="vbox" type="VBoxContainer" parent="base"]

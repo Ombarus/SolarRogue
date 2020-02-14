@@ -553,16 +553,6 @@ func _unhandled_input(event):
 			_last_unicode = PoolByteArray([event.unicode]).get_string_from_utf8()
 		else:
 			_last_unicode = ""
-				
-	if event is InputEventKey && event.pressed == false:
-		if _input_state == Globals.INPUT_STATE.weapon_targetting or _input_state == Globals.INPUT_STATE.board_targetting or _input_state == Globals.INPUT_STATE.loot_targetting:
-			#if _last_unicode == 's':
-			#	get_node(TargettingHUD).emit_signal("skip_pressed")
-			#if _last_unicode == 'c':
-			#	get_node(TargettingHUD).emit_signal("cancel_pressed")
-			return
-			#get_node(TargettingHUD).emit_signal("cancel_pressed")
-		
 		if event.scancode == KEY_KP_1:
 			dir = Vector2(-1,1)
 		if event.scancode == KEY_KP_2:
@@ -579,6 +569,16 @@ func _unhandled_input(event):
 			dir = Vector2(0,-1)
 		if event.scancode == KEY_KP_9:
 			dir = Vector2(1,-1)
+				
+	if event is InputEventKey && event.pressed == false:
+		if _input_state == Globals.INPUT_STATE.weapon_targetting or _input_state == Globals.INPUT_STATE.board_targetting or _input_state == Globals.INPUT_STATE.loot_targetting:
+			#if _last_unicode == 's':
+			#	get_node(TargettingHUD).emit_signal("skip_pressed")
+			#if _last_unicode == 'c':
+			#	get_node(TargettingHUD).emit_signal("cancel_pressed")
+			return
+			#get_node(TargettingHUD).emit_signal("cancel_pressed")
+		
 		if event.scancode == KEY_KP_5:
 			BehaviorEvents.emit_signal("OnUseAP", playerNode, 1.0)
 			BehaviorEvents.emit_signal("OnLogLine", "Cooling reactor (wait)")

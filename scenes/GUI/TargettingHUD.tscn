@@ -12,6 +12,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Skip" parent="." instance=ExtResource( 2 )]
 anchor_left = 1.0
@@ -35,6 +38,7 @@ margin_bottom = 51.0
 rect_min_size = Vector2( 140, 102 )
 Text = "[esc]cancel"
 ShortcutEnum = 16777217
+AlwaysOnShortcut = false
 
 [node name="Info" type="RichTextLabel" parent="."]
 anchor_right = 1.0
@@ -49,6 +53,5 @@ custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
 bbcode_text = "[color=red]Select Target...[/color]"
 text = "Select Target..."
-
 [connection signal="pressed" from="Skip" to="." method="_on_Skip_pressed"]
 [connection signal="pressed" from="Cancel" to="." method="_on_Cancel_pressed"]

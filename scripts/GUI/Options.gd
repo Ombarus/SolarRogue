@@ -3,6 +3,7 @@ extends "res://scripts/GUI/GUILayoutBase.gd"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node("base").connect("OnOkPressed", self, "Ok_Callback")
+	get_node("base").connect("OnCancelPressed", self, "Ok_Callback")
 	
 		
 func Init(init_param):
