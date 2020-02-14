@@ -193,6 +193,8 @@ func OnScannerUpdated_Callback(obj):
 					var ghost_id = o.get_attrib("has_ghost_memory.reference_id")
 					var ghost = Globals.LevelLoaderRef.GetObjectById(ghost_id)
 					Globals.LevelLoaderRef.UpdatePosition(ghost, o.position)
+					if ghost.get_attrib("ghost_memory.is_unknown", false) == false:
+						ghost.rotation = o.rotation
 					#ghost.position = o.position # Don't ever ever do this with a Attribute Object... LevelLoader will get confused
 				elif o.get_attrib("is_fake_ghost_memory", false) == false:
 					var unkown_tile_path = "data/json/props/unknow.json"
@@ -211,6 +213,8 @@ func OnScannerUpdated_Callback(obj):
 					var ghost_id = o.get_attrib("has_ghost_memory.reference_id")
 					var ghost = Globals.LevelLoaderRef.GetObjectById(ghost_id)
 					Globals.LevelLoaderRef.UpdatePosition(ghost, o.position)
+					if ghost.get_attrib("ghost_memory.is_unknown", false) == false:
+						ghost.rotation = o.rotation
 					#ghost.position = o.position # Don't ever ever do this with a Attribute Object... LevelLoader will get confused
 				elif o.get_attrib("is_fake_ghost_memory", false) == false:
 					var unkown_tile_path = "data/json/props/unknow2.json"

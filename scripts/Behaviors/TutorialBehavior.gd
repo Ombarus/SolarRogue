@@ -57,6 +57,7 @@ func level_tuto_done():
 	Complete_Step(data["tuto_trigger"]["id"])
 	
 func OnLevelLoaded_Callback():
+	yield(get_tree(), "idle_frame") # give a chance for the HUD to pop up before tutorials
 	var data = Globals.LevelLoaderRef.GetCurrentLevelData()
 	if "tuto_trigger" in data:
 		BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": data["tuto_trigger"]["text"], "text_fmt":[], "title":"Tutorial: Converter", "callback_object":self, "callback_method":"level_tuto_done"})
