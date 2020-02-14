@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -33,7 +33,7 @@
 [ext_resource path="res://scripts/Behaviors/EnergyRegen.gd" type="Script" id=31]
 [ext_resource path="res://scripts/Behaviors/HullRegenBehavior.gd" type="Script" id=32]
 [ext_resource path="res://scripts/Behaviors/TutorialBehavior.gd" type="Script" id=33]
-[ext_resource path="res://data/textures/space/space-bg_mine.png" type="Texture" id=34]
+[ext_resource path="res://data/textures/space/space-bg_mine-p1.png" type="Texture" id=34]
 [ext_resource path="res://scripts/ParallaxBG.gd" type="Script" id=35]
 [ext_resource path="res://data/shaders/fow_mask.tres" type="Material" id=36]
 [ext_resource path="res://scenes/scanner_fx.tscn" type="PackedScene" id=37]
@@ -69,6 +69,7 @@
 [ext_resource path="res://scenes/warp_trail_test.tscn" type="PackedScene" id=67]
 [ext_resource path="res://scripts/DEBUG.gd" type="Script" id=68]
 [ext_resource path="res://scenes/Sample.tscn" type="PackedScene" id=69]
+[ext_resource path="res://data/textures/space/space-bg_mine-p2.png" type="Texture" id=70]
 
 [node name="Root" type="Node"]
 
@@ -210,7 +211,16 @@ texture = ExtResource( 34 )
 region_enabled = true
 region_rect = Rect2( -10240, -10240, 20480, 20480 )
 script = ExtResource( 35 )
-parallax = 4500.0
+parallax = 1500.0
+camera = NodePath("../Camera2D")
+
+[node name="BG2" type="Sprite" parent="BG"]
+texture = ExtResource( 70 )
+region_enabled = true
+region_rect = Rect2( -10240, -10240, 20480, 20480 )
+script = ExtResource( 35 )
+parallax = 600.0
+camera = NodePath("../../Camera2D")
 
 [node name="Occlusion" type="Sprite" parent="BG"]
 material = ExtResource( 36 )
