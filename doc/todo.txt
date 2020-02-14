@@ -39,7 +39,6 @@ Release prep :
 - Tutorial
 	- grab & conv where highlighted together then when I clicked conv it became gray (null _old_style ?)
 - Generate icons, banner, etc. for android/ios/pc release
-- leaderboard display improvement (scroll is not ideal yet)
 - Android tests :
 	- Ask my father to install
 	- Ask mom to install phone + tablet (take screenshot of font size on HHHDPI phone/tablet)
@@ -199,6 +198,7 @@ IDEAS:::
 	
 	
 DONE :::
+- leaderboard display improvement (scroll is not ideal yet)
 ERROR: emit_signal: Error calling method from signal 'finished': 'Node2D(MissileFX2.gd)::_on_AudioStreamPlayer2D_finished': Method not found..
    At: core/object.cpp:1228
 - Launching the game in english doesn't update the leaderboard language ?

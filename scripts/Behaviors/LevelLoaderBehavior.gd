@@ -171,12 +171,22 @@ func GenerateLevelFromTemplate(levelData):
 	# there must always be a wormhole leading back where we came from
 	var depth_override = {"depth":current_depth - 1}
 	var spawn_point = allTilesCoord[i]
+	var levelDataObj = levelData["objects"]
+	var idx = 0
+	# make sure we don't take the spot of the sun or something else with a hardcoded position
+	while idx < levelDataObj.size():
+		var obj = levelDataObj[idx]
+		if obj.has("pos") and spawn_point[0] == obj.pos[0] and spawn_point[1] == obj.pos[1]:
+			i = (i+1) % allTilesCoord.size()
+			spawn_point = allTilesCoord[i]
+			idx = 0
+		else:
+			idx += 1
 	if "force_pos" in _current_level_data:
 		spawn_point = Vector2(_current_level_data["force_pos"][0], _current_level_data["force_pos"][1])
 	var n = CreateAndInitNode(_current_level_data, spawn_point, depth_override)
 	allTilesCoord.remove(i)
 	_current_level_data = levelData
-	var levelDataObj = levelData["objects"]
 	
 	var cur_tile_index := 0
 	for tileCoord in allTilesCoord:
@@ -199,6 +209,8 @@ func GenerateLevelFromTemplate(levelData):
 				tileCoord[1] - obj.tile_margin[1] < 0 or \
 				tileCoord[1] + obj.tile_margin[1] >= levelSize[1]):
 					continue
+			if obj.has("pos") and (obj.pos[0] != tileCoord[0] or obj.pos[1] != tileCoord[1]):
+				continue
 			if obj.has("min") && (!objCountByType.has(obj["name"]) || objCountByType[obj["name"]] < obj["min"]):
 				do_spawn = true
 			if !do_spawn && obj.has("spawn_rate"):
@@ -217,8 +229,8 @@ func GenerateLevelFromTemplate(levelData):
 					else:
 						objCountByType[obj["name"]] = 1
 					var confirmed_coord = tileCoord
-					if obj.has("pos"):
-						confirmed_coord = Vector2(obj["pos"][0], obj["pos"][1])
+					#if obj.has("pos"):
+					#	confirmed_coord = Vector2(obj["pos"][0], obj["pos"][1])
 						
 					if ".json" in obj["name"]:
 						n = CreateAndInitNode(data, confirmed_coord)
