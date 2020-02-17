@@ -79,8 +79,8 @@ func ExecuteFullSweep():
 			obj.visible = false
 		if disable_fow:
 			var tile_memory : Array = []
-			for x in range(Globals.LevelLoaderRef.levelSize.x):
-				for y in range(Globals.LevelLoaderRef.levelSize.y):
+			for x in range(Globals.LevelLoaderRef.levelSize.x + 2):
+				for y in range(Globals.LevelLoaderRef.levelSize.y + 2):
 					tile_memory.push_back(0.0)
 			_playerNode.set_attrib("memory." + level_id + ".tiles", tile_memory)
 			_update_occlusion_texture()
@@ -92,10 +92,10 @@ func _update_occlusion_texture():
 	var level_id = Globals.LevelLoaderRef.GetLevelID()
 	var tile_memory = _playerNode.get_attrib("memory." + level_id + ".tiles")
 	if tile_memory == null:
-		dynImage.create(Globals.LevelLoaderRef.levelSize.x,Globals.LevelLoaderRef.levelSize.y,false,Image.FORMAT_R8)
+		dynImage.create(Globals.LevelLoaderRef.levelSize.x+2,Globals.LevelLoaderRef.levelSize.y+2,false,Image.FORMAT_R8)
 		dynImage.fill(Color(1.0,1.0,1.0,1.0))
 	else:
-		dynImage.create_from_data(Globals.LevelLoaderRef.levelSize.x,Globals.LevelLoaderRef.levelSize.y,false,Image.FORMAT_R8, tile_memory)
+		dynImage.create_from_data(Globals.LevelLoaderRef.levelSize.x+2,Globals.LevelLoaderRef.levelSize.y+2,false,Image.FORMAT_R8, tile_memory)
 	
 	imageTexture.create_from_image(dynImage)
 	_occluder_ref.texture = imageTexture
@@ -109,13 +109,14 @@ func _tag_tile(tile):
 	var tile_memory = _playerNode.get_attrib("memory." + level_id + ".tiles")
 	if tile_memory == null:
 		tile_memory = []
-		for x in range(Globals.LevelLoaderRef.levelSize.x):
-			for y in range(Globals.LevelLoaderRef.levelSize.y):
-				tile_memory.push_back(255.0)
+		for x in range(Globals.LevelLoaderRef.levelSize.x + 2):
+			for y in range(Globals.LevelLoaderRef.levelSize.y + 2):
+				if x == 0 or y == 0 or x == Globals.LevelLoaderRef.levelSize.x+1 or y == Globals.LevelLoaderRef.levelSize.y + 1:
+					tile_memory.push_back(0.0)
+				else:
+					tile_memory.push_back(255.0)
 				
-	var player_tile = Globals.LevelLoaderRef.World_to_Tile(_playerNode.position)
-	tile_memory[(tile.y * Globals.LevelLoaderRef.levelSize.x) + tile.x] = 0.0
-		
+	tile_memory[((tile.y+1) * (Globals.LevelLoaderRef.levelSize.x+2)) + (tile.x+1)] = 0.0
 	_playerNode.set_attrib("memory." + level_id + ".tiles", tile_memory)
 
 func _update_occlusion(o):

@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/tileset_source/sun.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/tileset_source/planet_a.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/tileset_source/wormhole.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/tileset_source/asteroid02.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/tileset_source/asteroid01.tscn" type="PackedScene" id=5]
 
 [node name="Sample" type="Node2D"]
 
@@ -16,53 +14,3 @@ position = Vector2( 896, 256 )
 
 [node name="Node2D" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1152, 512 )
-
-[node name="asteroid01" parent="." instance=ExtResource( 5 )]
-position = Vector2( 128, 0 )
-
-[node name="asteroid02" parent="." instance=ExtResource( 5 )]
-position = Vector2( 256, 0 )
-
-[node name="asteroid04" parent="." instance=ExtResource( 5 )]
-position = Vector2( 384, 0 )
-
-[node name="asteroid03" parent="." instance=ExtResource( 5 )]
-position = Vector2( 512, 0 )
-
-[node name="asteroid08" parent="." instance=ExtResource( 5 )]
-position = Vector2( 640, 0 )
-
-[node name="asteroid07" parent="." instance=ExtResource( 5 )]
-position = Vector2( 768, 0 )
-
-[node name="asteroid06" parent="." instance=ExtResource( 5 )]
-position = Vector2( 896, 0 )
-
-[node name="asteroid05" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1024, 0 )
-
-[node name="Node2D2" type="Node2D" parent="."]
-
-[node name="asteroid02" parent="Node2D2" instance=ExtResource( 4 )]
-position = Vector2( 0, 128 )
-
-[node name="asteroid03" parent="Node2D2" instance=ExtResource( 4 )]
-position = Vector2( 0, 256 )
-
-[node name="asteroid05" parent="Node2D2" instance=ExtResource( 4 )]
-position = Vector2( 0, 384 )
-
-[node name="asteroid04" parent="Node2D2" instance=ExtResource( 4 )]
-position = Vector2( 0, 512 )
-
-[node name="asteroid09" parent="Node2D2" instance=ExtResource( 4 )]
-position = Vector2( 0, 640 )
-
-[node name="asteroid08" parent="Node2D2" instance=ExtResource( 4 )]
-position = Vector2( 0, 768 )
-
-[node name="asteroid07" parent="Node2D2" instance=ExtResource( 4 )]
-position = Vector2( 0, 896 )
-
-[node name="asteroid06" parent="Node2D2" instance=ExtResource( 4 )]
-position = Vector2( 0, 1024 )
