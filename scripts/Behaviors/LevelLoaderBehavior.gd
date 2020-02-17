@@ -115,6 +115,8 @@ func _ready():
 func ExecuteLoadLevel(levelData):
 	yield(_UnloadLevel(), "completed")
 	
+	BehaviorEvents.emit_signal("OnStartLoadLevel")
+	
 	var loaded = false
 	if cur_save != null && cur_save.size() > 0:
 		var level_id = str(current_depth) + levelData.src

@@ -4,6 +4,7 @@ extends Node
 signal OnObjectLoaded(obj)
 signal OnRequestObjectUnload(obj)
 signal OnRequestLevelChange(level)
+signal OnStartLoadLevel()
 signal OnLevelLoaded()
 signal OnPlayerCreated(player)
 signal OnAttributeAdded(obj, added_name)

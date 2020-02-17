@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/BorderTile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/BorderGenerator.gd" type="Script" id=3]
+
+[node name="BorderTiles" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Defaults" type="Node2D" parent="."]
+
+[node name="Default1" parent="Defaults" instance=ExtResource( 2 )]
+frequency = 0.05
+
+[node name="Default2" parent="Defaults" instance=ExtResource( 2 )]
+position = Vector2( 128, 0 )
+region_rect = Rect2( 1024, 512, 128, 128 )
+frequency = 0.3
+
+[node name="Default3" parent="Defaults" instance=ExtResource( 2 )]
+position = Vector2( 256, 0 )
+region_rect = Rect2( 1152, 512, 128, 128 )
+
+[node name="Default4" parent="Defaults" instance=ExtResource( 2 )]
+position = Vector2( 384, 0 )
+region_rect = Rect2( 1280, 512, 128, 128 )
+frequency = 0.4
+
+[node name="Default5" parent="Defaults" instance=ExtResource( 2 )]
+position = Vector2( 512, 0 )
+region_rect = Rect2( 1408, 512, 128, 128 )
+
+[node name="Border" type="Node2D" parent="."]

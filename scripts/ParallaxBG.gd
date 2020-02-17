@@ -43,7 +43,7 @@ func _update_parallax(obj):
 	var cur_offset = offset_per_pix * offset_from_center
 	self.position = default_pos + cur_offset
 	if has_node("Occlusion"):
-		get_node("Occlusion").position = -cur_offset
+		get_node("Occlusion").position = Vector2(-cur_offset.x - 64, -cur_offset.y-64)
 	
 func _process(delta):
 	if "player" in Globals.LevelLoaderRef.objByType and Globals.LevelLoaderRef.objByType["player"].size() > 0:

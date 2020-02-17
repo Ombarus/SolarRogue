@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=1]
+[ext_resource path="res://scripts/BorderData.gd" type="Script" id=2]
+
+[node name="BorderTile" type="Sprite"]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 896, 512, 128, 128 )
+script = ExtResource( 2 )

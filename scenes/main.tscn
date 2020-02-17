@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -70,6 +70,7 @@
 [ext_resource path="res://scripts/DEBUG.gd" type="Script" id=68]
 [ext_resource path="res://scenes/Sample.tscn" type="PackedScene" id=69]
 [ext_resource path="res://data/textures/space/space-bg_mine-p2.png" type="Texture" id=70]
+[ext_resource path="res://scenes/BorderGenerator.tscn" type="PackedScene" id=71]
 
 [node name="Root" type="Node"]
 
@@ -224,11 +225,13 @@ camera = NodePath("../../Camera2D")
 
 [node name="Occlusion" type="Sprite" parent="BG"]
 material = ExtResource( 36 )
-position = Vector2( -64, -64 )
+position = Vector2( -128, -128 )
 scale = Vector2( 128, 128 )
 
 [node name="base_green" parent="." instance=ExtResource( 37 )]
 position = Vector2( 5120, 5120 )
+
+[node name="BorderTiles" parent="." instance=ExtResource( 71 )]
 
 [node name="Upper-Left-Bound" type="Node2D" parent="."]
 visible = false
