@@ -2,10 +2,10 @@
 	"name_id":"Torpedo",
 	"type":"ammo",
 	"sprite":"torpedo",
-	"icon": [{
+	"icon": {
 		"texture":"data/textures/space-sprite.png",
 		"region":[1280,0,128,128]
-	}],
+	},
 	"equipment": {
 		"slot":"cargo",
 		"volume":3.0,
