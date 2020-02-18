@@ -8,6 +8,7 @@ export(NodePath) var LoadingNode : NodePath
 
 onready var _loading : Node2D = get_node(LoadingNode)
 
+var _save_thread := Thread.new()
 var cur_save = {}
 var perm_save = {}
 var levelTiles = []
@@ -307,7 +308,7 @@ func _UnloadLevel():
 	objCountByType.clear()
 
 func SaveState(level_data):
-	if objByType["player"][0].get_attrib("destroyable.destroyed", false) == true:
+	if _save_thread.is_active() or objByType["player"][0].get_attrib("destroyable.destroyed", false) == true:
 		return
 	var data_to_save : Dictionary = yield(_GatherSaveData(), "completed")
 	cur_save["depth"] = current_depth
@@ -327,10 +328,18 @@ func SaveState(level_data):
 		cur_save["modified_levels"] = {}
 	cur_save.modified_levels[level_id] = data_to_save
 	#TODO: Add versionning
+	_save_thread.start(self, "save_thread", cur_save)
+	
+
+func save_thread(cur_save):
+	var cur_time = OS.get_ticks_msec()
 	var save_game = File.new()
 	save_game.open("user://savegame.save", File.WRITE)
 	save_game.store_line(to_json(cur_save))
 	save_game.close()
+	print("save took %.4f sec" % ((OS.get_ticks_msec() - cur_time)/1000.0))
+	_save_thread.call_deferred("wait_to_finish")
+	
 
 func OnTransferPlayer_Callback(old_player, new_player):
 	objByType[old_player.get_attrib("type")].erase(old_player)
@@ -518,5 +527,6 @@ func set_loading(var is_loading : bool):
 	get_node("../../GameTiles").visible = !is_loading
 	get_node("../../base_green").visible = !is_loading
 	get_node("../../Camera-GUI/HUD").visible = !is_loading
+	get_node("../../BorderTiles").visible = !is_loading
 	ShortcutManager.Enabled = !is_loading
 	_loading.visible = is_loading

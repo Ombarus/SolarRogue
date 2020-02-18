@@ -8,6 +8,8 @@ RELEASE CHECKLIST :::
 - test signing on fresh fresh install on windows 10 (laptop?)
 
 TODO :::
+- **CRASH** inventoryv2. Drag-drop selected item crashes
+- seems like I can move before animation is done with keyboard keysc
 Release prep :
 	- Title : Solar Rogue
 	- Short Desc : Can you save yourself? Can you save your crew?
@@ -194,6 +196,7 @@ IDEAS:::
 	
 	
 DONE :::
+- loading : make boardertile invisible
 - **CRASH** tried to change level twice by hitting the shortcut quickly... Shortcut can be activated during loading :/
 - esc doesn't work in inv window or conv
 - I don't set the rotation of ghosts when they move with MK3 radar

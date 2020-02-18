@@ -11,6 +11,7 @@ export(Theme) var header_theme = preload("res://data/theme/header_ui_text.tres")
 func set_row_data(data):
 	_metadata = data
 	_metadata["self"] = self
+	_metadata["selected"] = false
 	if data.group != null:
 		get_node("BtnWrap/Toggle").group = data.group
 		
@@ -69,7 +70,8 @@ func get_drag_data(position):
 
 
 func get_row_data():
-	_metadata["selected"] = get_node("BtnWrap/Toggle").pressed
+	print(get_node("BtnWrap/HBoxContainer/Wrap/Name").text)
+	#_metadata["selected"] = get_node("BtnWrap/Toggle").pressed
 	return _metadata
 	
 func can_drop_data(position, data):
