@@ -53,6 +53,11 @@ func UpdateSelection():
 		get_node("BtnWrap/HBoxContainer/Wrap/Name").add_color_override("default_color", Color(1,1,1))
 
 func _on_Toggle_toggled(button_pressed):
+	# drag and dropping a selected node would crash because we duplicate the node for creating
+	# the drag preview and it'll trigger a bunch of selection refresh on fake data
+	# only way I could think of stopping it is to check if _metadata is null
+	if _metadata == null:
+		return
 	get_node("BtnWrap/HBoxContainer/Wrap/Name").add_color_override("default_color", Color(0,0,0))
 	var group : ButtonGroup = get_node("BtnWrap/Toggle").group
 	if group != null:
@@ -70,8 +75,7 @@ func get_drag_data(position):
 
 
 func get_row_data():
-	print(get_node("BtnWrap/HBoxContainer/Wrap/Name").text)
-	#_metadata["selected"] = get_node("BtnWrap/Toggle").pressed
+	_metadata["selected"] = get_node("BtnWrap/Toggle").pressed
 	return _metadata
 	
 func can_drop_data(position, data):

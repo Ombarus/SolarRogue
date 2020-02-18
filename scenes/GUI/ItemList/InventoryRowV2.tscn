@@ -31,6 +31,9 @@ mouse_filter = 1
 custom_styles/pressed = ExtResource( 3 )
 toggle_mode = true
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 forward_to = NodePath("../..")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BtnWrap"]
@@ -74,5 +77,7 @@ size_flags_horizontal = 3
 text = "Laser Turret MK1"
 valign = 1
 autowrap = true
-
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="toggled" from="BtnWrap/Toggle" to="." method="_on_Toggle_toggled"]

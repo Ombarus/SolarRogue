@@ -332,12 +332,12 @@ func SaveState(level_data):
 	
 
 func save_thread(cur_save):
-	var cur_time = OS.get_ticks_msec()
+	#var cur_time = OS.get_ticks_msec()
 	var save_game = File.new()
 	save_game.open("user://savegame.save", File.WRITE)
 	save_game.store_line(to_json(cur_save))
 	save_game.close()
-	print("save took %.4f sec" % ((OS.get_ticks_msec() - cur_time)/1000.0))
+	#print("save took %.4f sec" % ((OS.get_ticks_msec() - cur_time)/1000.0))
 	_save_thread.call_deferred("wait_to_finish")
 	
 
