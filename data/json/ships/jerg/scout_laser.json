@@ -50,9 +50,9 @@
 		{"id":"data/json/items/shields/shield_mk3.json", "chance":0.012},
 		
 		{"id":"data/json/items/weapons/laser_turret_mk2.json", "chance":0.012},
-		{"id":"data/json/items/scanners/scanner_mk3.json", "chance":0.01},
-		{"id":"data/json/items/scanners/long_range_scanner_mk1.json", "chance":0.005},
-		{"id":"data/json/items/scanners/long_range_scanner_mk2.json", "chance":0.005},
+		{"id":"data/json/items/scanners/scanner_mk3.json", "chance":0.005},
+		{"id":"data/json/items/scanners/long_range_scanner_mk1.json", "chance":0.01},
+		{"id":"data/json/items/scanners/long_range_scanner_mk2.json", "chance":0.01},
 		{"id":"data/json/items/scanners/long_range_scanner_mk3.json", "chance":0.005},
 		{"id":"data/json/items/scanners/ultimate_scanner.json", "chance":0.002, "global_max":1},
 		{"id":"data/json/items/misc/oxygen.json", "chance":0.05},

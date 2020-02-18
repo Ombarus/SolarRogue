@@ -26,11 +26,11 @@
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.55},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.3},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
-		{"id":"data/json/items/scanners/scanner_mk2.json", "chance":0.05},
-		{"id":"data/json/items/scanners/scanner_mk3.json", "chance":0.02},
-		{"id":"data/json/items/scanners/long_range_scanner_mk1.json", "chance":0.02},
-		{"id":"data/json/items/scanners/long_range_scanner_mk2.json", "chance":0.015},
-		{"id":"data/json/items/scanners/long_range_scanner_mk3.json", "chance":0.010},
+		{"id":"data/json/items/scanners/scanner_mk2.json", "chance":0.035},
+		{"id":"data/json/items/scanners/scanner_mk3.json", "chance":0.012},
+		{"id":"data/json/items/scanners/long_range_scanner_mk1.json", "chance":0.03},
+		{"id":"data/json/items/scanners/long_range_scanner_mk2.json", "chance":0.02},
+		{"id":"data/json/items/scanners/long_range_scanner_mk3.json", "chance":0.012},
 		{"id":"data/json/items/scanners/ultimate_scanner.json", "chance":0.01, "global_max":1}
 	],
 	"destroyable": {

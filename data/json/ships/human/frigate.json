@@ -66,7 +66,7 @@
 		{"id":"data/json/items/weapons/missile_launcher_mk2.json", "chance":0.018},
 		{"id":"data/json/items/weapons/missile_launcher_mk3.json", "chance":0.018},
 		{"id":"data/json/items/weapons/laser_turret_mk2.json", "chance":0.018},
-		{"id":"data/json/items/scanners/scanner_mk3.json", "chance":0.045},
+		{"id":"data/json/items/scanners/scanner_mk3.json", "chance":0.020},
 		{"id":"data/json/items/scanners/long_range_scanner_mk1.json", "chance":0.040},
 		{"id":"data/json/items/scanners/long_range_scanner_mk2.json", "chance":0.027},
 		{"id":"data/json/items/scanners/long_range_scanner_mk3.json", "chance":0.015},
