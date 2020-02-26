@@ -137,7 +137,7 @@
 			"min_level":0,
 			"fields": [
 				{"name":"Maximum Energy Reserve", "value":"{converter.maximum_energy}", "translate_value":false},
-				{"name":"Recipes", "value":"8", "translate_value":false}
+				{"name":"Recipes", "value":"12", "translate_value":false}
 			]
 		}
 	}
