@@ -8,7 +8,7 @@ RELEASE CHECKLIST :::
 - test signing on fresh fresh install on windows 10 (laptop?)
 
 TODO :::
-- **CRASH** inventoryv2. Drag-drop selected item crashes
+- # recipes in converter description might be wrong
 - seems like I can move before animation is done with keyboard keysc
 Release prep :
 	- Title : Solar Rogue
@@ -51,6 +51,7 @@ Release prep :
 	
 	
 polish :::
+- pressing shortcut "l" to look when hud is in "hidden" mode on PC makes "..." button appear
 - SOUNDS
 	- SFX :
 		- no sound when transfering cargo (but mount is ok)
@@ -196,6 +197,7 @@ IDEAS:::
 	
 	
 DONE :::
+- **CRASH** inventoryv2. Drag-drop selected item crashes
 - loading : make boardertile invisible
 - **CRASH** tried to change level twice by hitting the shortcut quickly... Shortcut can be activated during loading :/
 - esc doesn't work in inv window or conv
