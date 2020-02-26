@@ -65,13 +65,6 @@ func _ready():
 	BehaviorEvents.connect("OnAnimationDone", self, "OnAnimationDone_Callback")
 	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_Callback")
 	
-	var bound_line = get_node("/root/Root/Upper-Left-Bound/L1")
-	bound_line.add_point(Vector2(-tileSize/2.0, -tileSize/2.0))
-	bound_line.add_point(Vector2(levelSize.x * tileSize - tileSize/2.0, -tileSize/2.0))
-	bound_line.add_point(Vector2(levelSize.x * tileSize - tileSize/2.0, levelSize.y * tileSize - tileSize/2.0))
-	bound_line.add_point(Vector2(-tileSize/2, levelSize.y * tileSize - tileSize/2.0))
-	bound_line.add_point(Vector2(-tileSize/2, -tileSize/2))
-	
 	# Seems to be working fine. Distribution is pretty flat over huge number of throws.
 	# Average is good
 	# Saving and restoring state seems to work

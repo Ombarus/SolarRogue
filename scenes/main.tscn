@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -40,7 +40,6 @@
 [ext_resource path="res://scripts/GUI/mouse_targetting.gd" type="Script" id=38]
 [ext_resource path="res://scenes/tileset_source/targetting_reticle.tscn" type="PackedScene" id=39]
 [ext_resource path="res://scripts/GUI/GUILayoutBase.gd" type="Script" id=40]
-[ext_resource path="res://scripts/GUI/GridDisplay.gd" type="Script" id=41]
 [ext_resource path="res://scripts/CamControl.gd" type="Script" id=42]
 [ext_resource path="res://scripts/GUI/LogSystem.gd" type="Script" id=43]
 [ext_resource path="res://scenes/GUI/StringContentDialog.tscn" type="PackedScene" id=44]
@@ -67,8 +66,6 @@
 [ext_resource path="res://scenes/GUI/Debug/FPSCounter.tscn" type="PackedScene" id=65]
 [ext_resource path="res://scenes/GUI/Dialogs/DeathScreen.tscn" type="PackedScene" id=66]
 [ext_resource path="res://scenes/warp_trail_test.tscn" type="PackedScene" id=67]
-[ext_resource path="res://scripts/DEBUG.gd" type="Script" id=68]
-[ext_resource path="res://scenes/Sample.tscn" type="PackedScene" id=69]
 [ext_resource path="res://data/textures/space/space-bg_mine-p2.png" type="Texture" id=70]
 [ext_resource path="res://scenes/BorderGenerator.tscn" type="PackedScene" id=71]
 
@@ -233,19 +230,6 @@ position = Vector2( 5120, 5120 )
 
 [node name="BorderTiles" parent="." instance=ExtResource( 71 )]
 
-[node name="Upper-Left-Bound" type="Node2D" parent="."]
-visible = false
-
-[node name="L1" type="Line2D" parent="Upper-Left-Bound"]
-default_color = Color( 1, 1, 1, 1 )
-texture_mode = 1712250185
-
-[node name="Lower-Right_Bound" type="Node2D" parent="."]
-visible = false
-position = Vector2( -10227.7, -10223.2 )
-rotation = 3.14159
-scale = Vector2( 12800, 12800 )
-
 [node name="BackBufferCopy" type="BackBufferCopy" parent="."]
 copy_mode = 2
 
@@ -259,19 +243,6 @@ script = ExtResource( 38 )
 [node name="GameTiles" type="Node2D" parent="."]
 
 [node name="World-GUI" type="Node" parent="."]
-
-[node name="GridPattern" type="Control" parent="World-GUI"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-script = ExtResource( 40 )
-
-[node name="Display" type="Control" parent="World-GUI/GridPattern"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-script = ExtResource( 41 )
-line_color = Color( 1, 0, 0, 0.352941 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 704, 448 )
@@ -564,13 +535,6 @@ visible = false
 [node name="Loading-FX" type="CanvasLayer" parent="."]
 
 [node name="Starfield" parent="Loading-FX" instance=ExtResource( 67 )]
-visible = false
-
-[node name="DEBUG" type="Node2D" parent="."]
-visible = false
-script = ExtResource( 68 )
-
-[node name="Sample" parent="." instance=ExtResource( 69 )]
 visible = false
 [connection signal="down" from="Camera-GUI/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_ZoomIn_down"]
 [connection signal="up" from="Camera-GUI/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_Zoom_up"]
