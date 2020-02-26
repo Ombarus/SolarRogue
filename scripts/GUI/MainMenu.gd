@@ -14,18 +14,18 @@ func _ready():
 	#BehaviorEvents.connect("OnPushGUI", self, "OnPushGUI_Callback")
 	#BehaviorEvents.connect("OnPopGUI", self, "OnPopGUI_Callback")
 	
-	get_node("MenuRoot/MenuBtn/Continue").Disabled = not File.new().file_exists("user://savegame.save")
+	get_node("SafeArea/MenuRoot/MenuBtn/Continue").Disabled = not File.new().file_exists("user://savegame.save")
 	BehaviorEvents.emit_signal("OnPushGUI", "MenuRoot", {})
 	
 	if Globals.is_ios():
-		get_node("MenuRoot/MenuBtn/Quit").visible = false
+		get_node("SafeArea/MenuRoot/MenuBtn/Quit").visible = false
 
 #func OnPopGUI_Callback():
 #	var name_diag = get_node("PlayerName")
 #	name_diag.visible = false
 
 func _on_newgame_pressed():
-	var name_diag = get_node("PlayerName")
+	var name_diag = get_node("SafeArea/PlayerName")
 	BehaviorEvents.emit_signal("OnPushGUI", "PlayerName", {"callback_object":self, "callback_method":"_on_choose_name_callback"})
 	
 

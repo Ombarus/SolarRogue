@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scripts/GUI/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://scenes/GUI/Dialogs/Credits.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scenes/GUI/Dialogs/Settings.tscn" type="PackedScene" id=16]
 [ext_resource path="res://scenes/GUI/Debug/FPSCounter.tscn" type="PackedScene" id=17]
+[ext_resource path="res://scripts/GUI/SafeArea.gd" type="Script" id=18]
 
 [node name="MainMenu" type="Node"]
 script = ExtResource( 1 )
@@ -42,28 +43,39 @@ texture = ExtResource( 6 )
 expand = true
 stretch_mode = 7
 
-[node name="MenuRoot" type="Control" parent="."]
+[node name="SafeArea" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuRoot" type="Control" parent="SafeArea"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -2.0
 margin_bottom = -2.0
 mouse_filter = 2
 script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="MenuBtn" type="Control" parent="MenuRoot"]
+[node name="MenuBtn" type="Control" parent="SafeArea/MenuRoot"]
 anchor_bottom = 1.0
 margin_left = 46.0
 margin_top = 84.0
 margin_right = 429.0
 
-[node name="GameTitle" type="TextureRect" parent="MenuRoot/MenuBtn"]
+[node name="GameTitle" type="TextureRect" parent="SafeArea/MenuRoot/MenuBtn"]
 anchor_right = 1.0
 margin_bottom = 62.0
 texture = ExtResource( 8 )
 expand = true
 stretch_mode = 5
 
-[node name="Continue" parent="MenuRoot/MenuBtn" instance=ExtResource( 9 )]
+[node name="Continue" parent="SafeArea/MenuRoot/MenuBtn" instance=ExtResource( 9 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -78,7 +90,7 @@ ShortcutKey = "c"
 AlwaysOnShortcut = false
 Disabled = true
 
-[node name="NewGameBTN" parent="MenuRoot/MenuBtn" instance=ExtResource( 9 )]
+[node name="NewGameBTN" parent="SafeArea/MenuRoot/MenuBtn" instance=ExtResource( 9 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -92,7 +104,7 @@ Text = "[n]ew game"
 ShortcutKey = "n"
 AlwaysOnShortcut = false
 
-[node name="Setting" parent="MenuRoot/MenuBtn" instance=ExtResource( 9 )]
+[node name="Setting" parent="SafeArea/MenuRoot/MenuBtn" instance=ExtResource( 9 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -106,7 +118,7 @@ Text = "[s]ettings"
 ShortcutKey = "s"
 AlwaysOnShortcut = false
 
-[node name="Credits" parent="MenuRoot/MenuBtn" instance=ExtResource( 9 )]
+[node name="Credits" parent="SafeArea/MenuRoot/MenuBtn" instance=ExtResource( 9 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -120,7 +132,7 @@ Text = "[?]credits"
 ShortcutKey = "?"
 AlwaysOnShortcut = false
 
-[node name="Quit" parent="MenuRoot/MenuBtn" instance=ExtResource( 9 )]
+[node name="Quit" parent="SafeArea/MenuRoot/MenuBtn" instance=ExtResource( 9 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -134,14 +146,14 @@ Text = "[q]uit"
 ShortcutKey = "q"
 AlwaysOnShortcut = false
 
-[node name="base" parent="MenuRoot" instance=ExtResource( 10 )]
+[node name="base" parent="SafeArea/MenuRoot" instance=ExtResource( 10 )]
 anchor_left = 1.0
 margin_left = -735.0
 margin_top = 32.0
 margin_right = -34.0
 margin_bottom = -27.0
 
-[node name="Leaderboard" type="Control" parent="MenuRoot/base"]
+[node name="Leaderboard" type="Control" parent="SafeArea/MenuRoot/base"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -154,7 +166,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="leaderlist" parent="MenuRoot/base/Leaderboard" instance=ExtResource( 12 )]
+[node name="leaderlist" parent="SafeArea/MenuRoot/base/Leaderboard" instance=ExtResource( 12 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 0.0
@@ -162,26 +174,26 @@ margin_bottom = 0.0
 mouse_filter = 1
 Row = ExtResource( 13 )
 
-[node name="PlayerName" parent="." instance=ExtResource( 14 )]
+[node name="PlayerName" parent="SafeArea" instance=ExtResource( 14 )]
 visible = false
 margin_top = -2.0
 margin_bottom = -2.0
 
-[node name="Credits" parent="." instance=ExtResource( 15 )]
+[node name="Credits" parent="SafeArea" instance=ExtResource( 15 )]
 visible = false
 
-[node name="Settings" parent="." instance=ExtResource( 16 )]
+[node name="Settings" parent="SafeArea" instance=ExtResource( 16 )]
 visible = false
 margin_top = -2.0
 margin_bottom = -2.0
 
-[node name="FPSCounter" parent="." instance=ExtResource( 17 )]
+[node name="FPSCounter" parent="SafeArea" instance=ExtResource( 17 )]
 margin_left = 15.7517
 margin_top = 14.3197
 margin_right = 141.752
 margin_bottom = 50.3197
-[connection signal="pressed" from="MenuRoot/MenuBtn/Continue" to="." method="_on_Continue_pressed"]
-[connection signal="pressed" from="MenuRoot/MenuBtn/NewGameBTN" to="." method="_on_newgame_pressed"]
-[connection signal="pressed" from="MenuRoot/MenuBtn/Setting" to="." method="_on_Setting_pressed"]
-[connection signal="pressed" from="MenuRoot/MenuBtn/Credits" to="." method="_on_Credits_pressed"]
-[connection signal="pressed" from="MenuRoot/MenuBtn/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="SafeArea/MenuRoot/MenuBtn/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="SafeArea/MenuRoot/MenuBtn/NewGameBTN" to="." method="_on_newgame_pressed"]
+[connection signal="pressed" from="SafeArea/MenuRoot/MenuBtn/Setting" to="." method="_on_Setting_pressed"]
+[connection signal="pressed" from="SafeArea/MenuRoot/MenuBtn/Credits" to="." method="_on_Credits_pressed"]
+[connection signal="pressed" from="SafeArea/MenuRoot/MenuBtn/Quit" to="." method="_on_Quit_pressed"]
