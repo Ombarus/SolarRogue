@@ -1,5 +1,5 @@
 [gd_scene load_steps=11 format=2]
-
+ 
 [ext_resource path="res://scripts/GUI/DeathScreen.gd" type="Script" id=1]
 [ext_resource path="res://scripts/GUI/InputConsumer.gd" type="Script" id=2]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
