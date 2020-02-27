@@ -10,7 +10,7 @@
 	},
 	"mounts": {
 		"weapon": [
-			"data/json/items/weapons/laser_turret_mk2.json",
+			"data/json/items/weapons/torpedo_launcher_mk1.json",
 			"data/json/items/weapons/laser_turret_mk2.json"
 		],
 		"shield": ["data/json/items/shields/shield_mk3.json"],

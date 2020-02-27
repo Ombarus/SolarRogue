@@ -8,6 +8,12 @@ RELEASE CHECKLIST :::
 - test signing on fresh fresh install on windows 10 (laptop?)
 
 TODO :::
+- today :
+	- save bug
+	- 0.1.1 for Sam
+	- torpedo vfx
+	- fix carriage return
+	- 0.1.1 everything + test android / pc
 - # recipes in converter description might be wrong
 - seems like I can move before animation is done with keyboard keysc
 Release prep :

@@ -7,7 +7,7 @@
 		"region":[1152,0,128,128]
 	},
 	"animation": {
-		"shoot": "scenes/tileset_source/missile_fx.tscn",
+		"shoot": "scenes/tileset_source/torpedo_fx.tscn",
 		"hit": "scenes/tileset_source/explosion_fx.tscn"
 	},
 	"weapon_data": {
