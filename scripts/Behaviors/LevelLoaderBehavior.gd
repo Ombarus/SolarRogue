@@ -5,10 +5,12 @@ export var startLevel = "data/json/levels/start.json"
 export var levelSize = Vector2(80,80)
 export var tileSize = 128
 export(NodePath) var LoadingNode : NodePath
+export(NodePath) var SaveManager : NodePath = "../LocalSave"
 
 onready var _loading : Node2D = get_node(LoadingNode)
+onready var _save_manager : Node = get_node(SaveManager)
 
-var _save_thread := Thread.new()
+var _save
 var cur_save = {}
 var perm_save = {}
 var levelTiles = []
@@ -56,7 +58,7 @@ func _ready():
 	
 	
 	if _TEST_MID_GAME == true:
-		startLevel = "data/json/levels/main/main08.json"
+		startLevel = "data/json/levels/main/main02.json"
 	Globals.LevelLoaderRef = self
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
 	BehaviorEvents.connect("OnRequestLevelChange", self, "OnRequestLevelChange_Callback")
@@ -80,8 +82,8 @@ func _ready():
 			shufflingArray.push_back(Vector2(x, y))
 	
 	
-	if File.new().file_exists("user://savegame.save"):
-		cur_save = LoadJSON("user://savegame.save")
+	cur_save = _save_manager.get_latest_save()
+	
 	#cur_save["depth"] = current_depth
 	#cur_save["current_sequence_id"] = _sequence_id
 	#cur_save["current_level_src"] = _current_level_data["src"]
@@ -300,10 +302,16 @@ func _UnloadLevel():
 	objById.clear()
 	objCountByType.clear()
 
-func SaveState(level_data):
-	if _save_thread.is_active() or objByType["player"][0].get_attrib("destroyable.destroyed", false) == true:
+func SaveStateAndQuit(level_data):
+	if objByType["player"][0].get_attrib("destroyable.destroyed", false) == true:
+		if Globals.is_ios():
+			get_tree().change_scene("res://scenes/MainMenu.tscn")
+		else:
+			get_tree().quit()
 		return
+			
 	var data_to_save : Dictionary = yield(_GatherSaveData(), "completed")
+	cur_save["timestamp"] = OS.get_unix_time()
 	cur_save["depth"] = current_depth
 	cur_save["current_sequence_id"] = _sequence_id
 	cur_save["current_level_src"] = _current_level_data["src"]
@@ -321,18 +329,34 @@ func SaveState(level_data):
 		cur_save["modified_levels"] = {}
 	cur_save.modified_levels[level_id] = data_to_save
 	#TODO: Add versionning
-	_save_thread.start(self, "save_thread", cur_save)
+	_save_manager.save_and_quit(cur_save)
 	
 
-func save_thread(cur_save):
-	#var cur_time = OS.get_ticks_msec()
-	var save_game = File.new()
-	save_game.open("user://savegame.save", File.WRITE)
-	save_game.store_line(to_json(cur_save))
-	save_game.close()
-	#print("save took %.4f sec" % ((OS.get_ticks_msec() - cur_time)/1000.0))
-	_save_thread.call_deferred("wait_to_finish")
-	
+func SaveState(level_data):
+	if _save_manager.is_saving() or objByType["player"][0].get_attrib("destroyable.destroyed", false) == true:
+		return
+	var data_to_save : Dictionary = yield(_GatherSaveData(), "completed")
+	cur_save["timestamp"] = OS.get_unix_time()
+	cur_save["depth"] = current_depth
+	cur_save["current_sequence_id"] = _sequence_id
+	cur_save["current_level_src"] = _current_level_data["src"]
+	cur_save["generated_levels"] = num_generated_level
+	cur_save["player_data"] = {}
+	cur_save["global_spawns"] = _global_spawns
+	cur_save["total_turn"] = Globals.total_turn
+	cur_save.player_data["src"] = objByType["player"][0].get_attrib("src")
+	cur_save.player_data["position_x"] = World_to_Tile(objByType["player"][0].position).x
+	cur_save.player_data["position_y"] = World_to_Tile(objByType["player"][0].position).y
+	cur_save.player_data["rotation"] = objByType["player"][0].rotation
+	cur_save.player_data["modified_attributes"] = objByType["player"][0].modified_attributes
+	var level_id = str(current_depth) + _current_level_data["src"]
+	if not cur_save.has("modified_levels"):
+		cur_save["modified_levels"] = {}
+	cur_save.modified_levels[level_id] = data_to_save
+	#TODO: Add versionning
+	_save_manager.start_save(cur_save)
+	#_save_thread.start(self, "save_thread", cur_save)
+
 
 func OnTransferPlayer_Callback(old_player, new_player):
 	objByType[old_player.get_attrib("type")].erase(old_player)
@@ -376,8 +400,7 @@ func OnRequestObjectUnload_Callback(obj):
 	obj.queue_free()
 	
 func OnPlayerDeath_Callback():
-	var save_game = Directory.new()
-	save_game.remove("user://savegame.save")
+	_save_manager.delete_save()
 	# Maybe this should not be in a Global eh ?
 	Globals.total_turn = 0
 	Globals.last_delta_turn = 0
@@ -403,8 +426,9 @@ func LoadJSON(filepath):
 		print("Error: ", result_json.error)
 		print("Error Line: ", result_json.error_line)
 		print("Error String: ", result_json.error_string)
-		
-	data["src"] = filepath
+	
+	if data != null:
+		data["src"] = filepath
 	return data
 	
 func LoadJSONArray(filepaths):

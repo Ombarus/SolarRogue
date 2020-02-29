@@ -8,12 +8,11 @@ RELEASE CHECKLIST :::
 - test signing on fresh fresh install on windows 10 (laptop?)
 
 TODO :::
-- today :
-	- save bug
-	- 0.1.1 for Sam
-	- torpedo vfx
-	- fix carriage return
-	- 0.1.1 everything + test android / pc
+- **CRASH** crashed while fighting a frigate with a bomber & ultimate scanner & missile launcher v2 & large shield in french
+	- Seems to have corrumpted the savefile ? (empty save file)
+	- maybe it was an error while saving ? (thread related ?)
+	- on android
+				-------- Need to make a flip-flop save and keep a backup
 - # recipes in converter description might be wrong
 - seems like I can move before animation is done with keyboard keysc
 Release prep :

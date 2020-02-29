@@ -10,11 +10,11 @@
 	},
 	"mounts": {
 		"weapon": [
-			"data/json/items/weapons/torpedo_launcher_mk1.json",
+			"data/json/items/weapons/laser_turret_mk2.json",
 			"data/json/items/weapons/laser_turret_mk2.json"
 		],
 		"shield": ["data/json/items/shields/shield_mk3.json"],
-		"scanner": ["data/json/items/scanners/long_range_scanner_mk3.json"],
+		"scanner": ["data/json/items/scanners/ultimate_scanner.json"],
 		"converter": ["data/json/items/converters/converter_mk1.json"],
 		"utility":[
 			"data/json/items/utilities/solar_array.json",

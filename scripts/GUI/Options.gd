@@ -24,11 +24,7 @@ func _on_Suicide_pressed():
 
 
 func _on_SaveAndQuit_pressed():
-	_on_Save_pressed()
-	if Globals.is_ios():
-		get_tree().change_scene("res://scenes/MainMenu.tscn")
-	else:
-		get_tree().quit()
+	Globals.LevelLoaderRef.SaveStateAndQuit(Globals.LevelLoaderRef.GetCurrentLevelData())
 
 func On_Suicide_Confirmed_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
