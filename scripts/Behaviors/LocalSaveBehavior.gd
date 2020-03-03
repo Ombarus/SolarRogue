@@ -45,7 +45,7 @@ func get_latest_save():
 	var use_save2 := false
 	if save1 == null and save2 != null:
 		use_save2 = true
-	elif save1 == {} and save2 != null and save2 != {}:
+	elif save1 != null and save1.empty() and save2 != null and not save2.empty():
 		use_save2 = true
 	elif save1 != null and save2 != null and "timestamp" in save2 and "timestamp" in save1 and save2["timestamp"] > save1["timestamp"]:
 		use_save2 = true
