@@ -158,30 +158,52 @@ func GenerateLevelFromTemplate(levelData):
 	yield(get_tree(), "idle_frame")
 	var start_time : int = OS.get_ticks_msec()
 	var cur_time : int = start_time
+	var blocked_tiles : Dictionary = {}
 	
 	num_generated_level += 1
-	
 	# exceptionaly, when on the first level the wormhole to go "back" is a wormhole to current level
 	if _current_level_data == null:
 		_current_level_data = levelData
 	var allTilesCoord = ShuffleArray(shufflingArray)
-	var i = MersenneTwister.rand(allTilesCoord.size()) # choose a random spawn point for the entrance
+	var levelDataObj = levelData["objects"]
+	
+	# Try to spawn object with a hardcoded position (like the sun)
+	# they have priority over randomly positionned stuff
+	for obj in levelDataObj:
+		var do_spawn = false
+		if objCountByType.has(obj["name"]) && obj.has("max") && objCountByType[obj["name"]] >= obj["max"]:
+				continue
+		if obj.has("global_max") && Globals.clean_path(obj["name"]) in _global_spawns && obj["global_max"] >= _global_spawns[Globals.clean_path(obj["name"])]:
+			continue
+		if obj.has("pos"):
+			if obj.has("min") && (!objCountByType.has(obj["name"]) || objCountByType[obj["name"]] < obj["min"]):
+				do_spawn = true
+			if !do_spawn && obj.has("spawn_rate"):
+				if MersenneTwister.rand_float() < obj["spawn_rate"]:
+					do_spawn = true
+		if do_spawn:
+			_do_spawn(obj, Vector2(obj["pos"][0], obj["pos"][1]), blocked_tiles)
+	
+	var i := 0
+	
+	#var i = MersenneTwister.rand(allTilesCoord.size()) # choose a random spawn point for the entrance
 	# there must always be a wormhole leading back where we came from
 	var depth_override = {"depth":current_depth - 1}
-	var spawn_point = allTilesCoord[i]
-	var levelDataObj = levelData["objects"]
-	var idx = 0
 	# make sure we don't take the spot of the sun or something else with a hardcoded position
-	while idx < levelDataObj.size():
-		var obj = levelDataObj[idx]
-		if obj.has("pos") and spawn_point[0] == obj.pos[0] and spawn_point[1] == obj.pos[1]:
-			i = (i+1) % allTilesCoord.size()
-			spawn_point = allTilesCoord[i]
-			idx = 0
-		else:
-			idx += 1
-	if "force_pos" in _current_level_data:
-		spawn_point = Vector2(_current_level_data["force_pos"][0], _current_level_data["force_pos"][1])
+	while i < allTilesCoord.size():
+		if not allTilesCoord[i] in blocked_tiles:
+			break # Ok spawn point, stop looking
+		i += 1
+	var spawn_point = allTilesCoord[i]
+	
+	# HACK: current_level doesn't appear in the list of level object 
+	# so I hardcoded it's margin based on my knowledge of the sprite wormhole
+	# (3x3)
+	for x in range(3):
+		for y in range(3):
+			var blocked = spawn_point + Vector2(x - 1, y - 1)
+			blocked_tiles[blocked] = true
+	
 	var n = CreateAndInitNode(_current_level_data, spawn_point, depth_override)
 	allTilesCoord.remove(i)
 	_current_level_data = levelData
@@ -207,37 +229,57 @@ func GenerateLevelFromTemplate(levelData):
 				tileCoord[1] - obj.tile_margin[1] < 0 or \
 				tileCoord[1] + obj.tile_margin[1] >= levelSize[1]):
 					continue
-			if obj.has("pos") and (obj.pos[0] != tileCoord[0] or obj.pos[1] != tileCoord[1]):
+			if obj.has("pos"): # already handled above
 				continue
+			if tileCoord in blocked_tiles:
+				continue
+			if "sprite_margin" in obj:
+				var is_blocked := false
+				for x in range((obj["sprite_margin"][0]*2)+1):
+					for y in range((obj["sprite_margin"][1]*2)+1):
+						var blocked = tileCoord + Vector2(x - obj["sprite_margin"][0], y - obj["sprite_margin"][1])
+						if blocked in blocked_tiles:
+							is_blocked = true
+				if is_blocked == true:
+					continue
 			if obj.has("min") && (!objCountByType.has(obj["name"]) || objCountByType[obj["name"]] < obj["min"]):
 				do_spawn = true
 			if !do_spawn && obj.has("spawn_rate"):
 				if MersenneTwister.rand_float() < obj["spawn_rate"]:
 					do_spawn = true
-	
+					
 			if do_spawn:
-				var data = null
-				if ".json" in obj["name"]:
-					data = LoadJSON(obj["name"])
-				else:
-					data = load(obj["name"])
-				if data != null:
-					if objCountByType.has(obj["name"]):
-						objCountByType[obj["name"]] += 1
-					else:
-						objCountByType[obj["name"]] = 1
-					var confirmed_coord = tileCoord
-					#if obj.has("pos"):
-					#	confirmed_coord = Vector2(obj["pos"][0], obj["pos"][1])
-						
-					if ".json" in obj["name"]:
-						n = CreateAndInitNode(data, confirmed_coord)
-					else:
-						var r = get_node("/root/Root/GameTiles")
-						n = data.instance()
-						n.position = Tile_to_World(confirmed_coord)
-						r.call_deferred("add_child", n)
-					break
+				_do_spawn(obj, tileCoord, blocked_tiles)
+				break
+					
+func _do_spawn(obj, tileCoord, blocked_tiles):
+	var data = null
+	var n = null
+	if ".json" in obj["name"]:
+		data = LoadJSON(obj["name"])
+	else:
+		data = load(obj["name"])
+	if data != null:
+		if objCountByType.has(obj["name"]):
+			objCountByType[obj["name"]] += 1
+		else:
+			objCountByType[obj["name"]] = 1
+		var confirmed_coord = tileCoord
+		
+		blocked_tiles[confirmed_coord] = true
+		if "sprite_margin" in obj:
+			for x in range((obj["sprite_margin"][0]*2)+1):
+				for y in range((obj["sprite_margin"][1]*2)+1):
+					var blocked = confirmed_coord + Vector2(x - obj["sprite_margin"][0], y - obj["sprite_margin"][1])
+					blocked_tiles[blocked] = true
+		
+		if ".json" in obj["name"]:
+			n = CreateAndInitNode(data, confirmed_coord)
+		else:
+			var r = get_node("/root/Root/GameTiles")
+			n = data.instance()
+			n.position = Tile_to_World(confirmed_coord)
+			r.call_deferred("add_child", n)
 
 func _GatherSaveData():
 	yield(get_tree(), "idle_frame")

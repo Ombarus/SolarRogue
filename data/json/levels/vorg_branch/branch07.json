@@ -16,10 +16,10 @@
 		{"name":"data/json/ships/vorg/scout_missile.json", "spawn_rate":0.1, "max":8},
 		{"name":"data/json/ships/vorg/bomber.json", "spawn_rate":0.1, "max":3},
 		{"name":"data/json/ships/vorg/battleship.json", "spawn_rate":0.000125, "max":2},
-		{"name":"data/json/stellar/planetlvl2.json", "spawn_rate":0.1, "max":5},
-		{"name":"data/json/stellar/planetlvl3.json", "spawn_rate":0.05, "max":1},
-		{"name":"data/json/stellar/planet_vorg_homeworld.json", "spawn_rate":0.1, "max":4},
-		{"name":"data/json/stellar/sun.json", "min":1, "max":1, "pos":[40,40]},
+		{"name":"data/json/stellar/planetlvl2.json", "spawn_rate":0.1, "max":5, "sprite_margin":[1,1]},
+		{"name":"data/json/stellar/planetlvl3.json", "spawn_rate":0.05, "max":1, "sprite_margin":[1,1]},
+		{"name":"data/json/stellar/planet_vorg_homeworld.json", "spawn_rate":0.1, "max":4, "sprite_margin":[1,1]},
+		{"name":"data/json/stellar/sun.json", "min":1, "max":1, "pos":[40,40], "sprite_margin":[1,1]},
 		
 		{"name":"data/json/stellar/anomalies/energy_syphon.json", "spawn_rate":0.00015625, "max":2},
 		{"name":"data/json/stellar/anomalies/blind_anomaly.json", "spawn_rate":0.00015625, "max":2},
@@ -71,7 +71,7 @@
 		{"name":"data/json/items/misc/diluted_cristals.json", "spawn_rate":0.00001302083333},
 		
 		
-		{"name":"data/json/levels/vorg_branch/branch08.json", "spawn_rate":1.0, "max":1}
+		{"name":"data/json/levels/vorg_branch/branch08.json", "spawn_rate":1.0, "max":1, "sprite_margin":[1,1]}
 	],
 	"description": {
 		"text":"Wormholes allow us to travel between solar systems. Blue wormhole bring us closer to home. Yellow wormhole send us deeper into the unknown."
