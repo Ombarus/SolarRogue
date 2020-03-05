@@ -37,9 +37,9 @@ func get_latest_save():
 	var save2 = {}
 	var save2_filename = "%s1%s" % [_basename, _basename_ext]
 	if File.new().file_exists(save1_filename):
-		save1 = Globals.LevelLoaderRef.LoadJSON(save1_filename)
+		save1 = LoadJSON_with_available_method(save1_filename)
 	if File.new().file_exists(save2_filename):
-		save2 = Globals.LevelLoaderRef.LoadJSON(save2_filename)
+		save2 = LoadJSON_with_available_method(save2_filename)
 		
 	var cur_save = save1
 	var use_save2 := false
@@ -59,6 +59,34 @@ func get_latest_save():
 		cur_save = {}
 		
 	return cur_save
+	
+func LoadJSON_with_available_method(filepath):
+	var result = null
+	# In MainMenu there is no LevelLoaderRef
+	if Globals.LevelLoaderRef == null:
+		var file = File.new()
+		if not "res://" in filepath and not "user://" in filepath:
+			filepath = "res://" + filepath
+		file.open(filepath, file.READ)
+		var text = file.get_as_text()
+		var result_json = JSON.parse(text)
+		file.close()
+		var data = null
+		if result_json.error == OK:  # If parse OK
+			data = result_json.result
+		else:  # If parse has errors
+			print("Error in ", filepath)
+			print("Error: ", result_json.error)
+			print("Error Line: ", result_json.error_line)
+			print("Error String: ", result_json.error_string)
+		
+		if data != null:
+			data["src"] = filepath
+		result = data
+	else:
+		result = Globals.LevelLoaderRef.LoadJSON(filepath)
+		
+	return result
 	
 func delete_save():
 	if _save_thread.is_active():

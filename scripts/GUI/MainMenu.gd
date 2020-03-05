@@ -14,7 +14,9 @@ func _ready():
 	#BehaviorEvents.connect("OnPushGUI", self, "OnPushGUI_Callback")
 	#BehaviorEvents.connect("OnPopGUI", self, "OnPopGUI_Callback")
 	
-	get_node("SafeArea/MenuRoot/MenuBtn/Continue").Disabled = not File.new().file_exists("user://savegame.save")
+	var cur_save = get_node("LocalSave").get_latest_save()
+	
+	get_node("SafeArea/MenuRoot/MenuBtn/Continue").Disabled = cur_save == null or cur_save.empty()
 	BehaviorEvents.emit_signal("OnPushGUI", "MenuRoot", {})
 	
 	if Globals.is_ios():
@@ -30,8 +32,7 @@ func _on_newgame_pressed():
 	
 
 func _on_choose_name_callback(name):
-	var save_game = Directory.new()
-	save_game.remove("user://savegame.save")
+	get_node("LocalSave").delete_save()
 	
 	PermSave.set_attrib("settings.default_name", name)
 	get_tree().change_scene("res://scenes/main.tscn")

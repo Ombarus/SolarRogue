@@ -333,6 +333,7 @@ func SaveStateAndQuit(level_data):
 	
 
 func SaveState(level_data):
+	yield(get_tree(), "idle_frame") # https://github.com/godotengine/godot/pull/34280
 	if _save_manager.is_saving() or objByType["player"][0].get_attrib("destroyable.destroyed", false) == true:
 		return
 	var data_to_save : Dictionary = yield(_GatherSaveData(), "completed")

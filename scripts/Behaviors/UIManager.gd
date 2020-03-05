@@ -28,7 +28,8 @@ func OnPlayerCreated_Callback(player):
 	BehaviorEvents.disconnect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
 	# push default UI (might be some main menu or splash screen one day)
 	BehaviorEvents.call_deferred("emit_signal", "OnPushGUI", "HUD", null)
-	if not File.new().file_exists("user://savegame.save"):
+	var cur_save = get_node("../LocalSave").get_latest_save()
+	if cur_save == null or cur_save.empty():
 		var player_name = player.get_attrib("player_name")
 		BehaviorEvents.call_deferred("emit_signal", "OnPushGUI", "WelcomeScreen", {"player_name":player_name})
 	else: # Middle of the game, tuto can start now. Start of game we wait till welcome screen is gone
