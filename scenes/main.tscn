@@ -257,7 +257,7 @@ limit_top = -10000
 limit_right = 1000000
 limit_bottom = 1000000
 script = ExtResource( 42 )
-follow_smooth = -10.0
+follow_smooth = 35.0
 levelLoaderNode = NodePath("../Behaviors/LevelLoader")
 
 [node name="Camera-GUI" type="CanvasLayer" parent="."]

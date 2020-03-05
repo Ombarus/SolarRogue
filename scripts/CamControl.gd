@@ -18,6 +18,7 @@ var _debug_cur_touch = 0
 var _zoomin : bool = false
 var _zoomout : bool = false
 var _enable_input : bool = false
+var _keep_centered : bool = true
 
 func _ready():
 	var p = Globals.get_first_player()
@@ -72,6 +73,7 @@ func _unhandled_input(event):
 		zoom_factor = 1.5 * zoom.x
 		
 	if zoom_factor != 0.0:
+		_keep_centered = false
 		var prev_zoom : Vector2 = zoom
 		_zoom_camera(zoom_factor)
 		var new_zoom : Vector2 = zoom
@@ -225,13 +227,16 @@ func _process(delta):
 		_zoom_camera(20.0 * delta * zoom.x)
 		
 	var target : Attributes = levelLoaderRef.objByType["player"][0]
-	if target.get_attrib("animation.in_movement") == true:
-		self.position = target.get_child(0).global_position
+	if target.get_attrib("animation.in_movement") == true or _keep_centered:
+		#self.position = target.get_child(0).global_position
+		_keep_centered = true
+		smooth_goto(target.get_child(0).global_position, delta)
 		_last_cam_pos = self.position
 		align() # otherwise the camera viewport is updated one frame behind the position of the player, creating jerkiness
 	#smooth_goto(target, delta)
 		
 	if _touches.size() > 0:
+		_keep_centered = false
 		update_vel(delta)
 	if _touches.size() == 0:
 		do_real_smoothing(delta)
@@ -261,11 +266,14 @@ func do_real_smoothing(delta : float):
 	_cur_vel = _cur_vel.normalized() * move_frame
 	self.position -= _cur_vel * delta
 	
-func smooth_goto(target : Attributes, delta : float):
-	var vec : Vector2 = target.position - self.position
+func smooth_goto(target : Vector2, delta : float):
+	var vec : Vector2 = target - self.position
 	var l = vec.length()
 	var move_frame = 10 * exp(follow_smooth * ((log(l/10) / follow_smooth)+delta))
-	self.position += vec.normalized() * move_frame * delta
+	var total_move = vec.normalized() * move_frame * delta
+	if total_move.length() > l:
+		total_move = vec
+	self.position += total_move
 	
 func _on_ZoomIn_down():
 	_zoomin = true

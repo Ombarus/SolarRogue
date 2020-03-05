@@ -7,14 +7,32 @@ RELEASE CHECKLIST :::
 - remove sample & debug nodes in main.tscn ?
 - test signing on fresh fresh install on windows 10 (laptop?)
 
+
+Beta 2 :::
+- Multi-tile
+	- prevent objects from spawning too close to each other (wormhole overlap planets, planets on top of sun, etc.)
+	- dummies on tile
+- Rune story
+	- Create characters (Science officer, Communication officer, Engineer, Pilot, etc.)
+	- Create backstory
+	- Implement "rescue" system
+- Unique boss for branches
+- low fps AI goto is jerky as fuck. Maybe smooth the camera movement ?
+- pressing shortcut "l" to look when hud is in "hidden" mode on PC makes "..." button appear
+- Solution for fast gun paired with slow gun ?
+	- keep track of left over shoot AP and sometime shoot twice ?
+	- don't care
+	- change mk3 missile to always fire twice and take 1 AP instead of 0.5
+
 TODO :::
+- camera smoothing :
+	- snap first frame of goto
+	- finish centering when stop
 - **CRASH** crashed while fighting a frigate with a bomber & ultimate scanner & missile launcher v2 & large shield in french
 	- Seems to have corrumpted the savefile ? (empty save file)
 	- maybe it was an error while saving ? (thread related ?)
 	- on android
 				-------- Need to make a flip-flop save and keep a backup
-- # recipes in converter description might be wrong
-- seems like I can move before animation is done with keyboard keysc
 Release prep :
 	- Title : Solar Rogue
 	- Short Desc : Can you save yourself? Can you save your crew?
@@ -56,8 +74,6 @@ Release prep :
 	
 	
 polish :::
-- low fps AI goto is jerky as fuck. Maybe smooth the camera movement ?
-- pressing shortcut "l" to look when hud is in "hidden" mode on PC makes "..." button appear
 - SOUNDS
 	- SFX :
 		- no sound when transfering cargo (but mount is ok)
@@ -109,10 +125,6 @@ SOUNDS:
 	- Dependency ? Castle can spawn between 25-29 but never before medusa
 - Don't potion if not needed !
 - going down wormhole should take ap and/or energy
-- Border around level is ugly
-	- give it a "danger" kind a texture ?
-	- remove it and warn the player : "cannot get out of sun's gravity well"
-	- ???
 - add icon in material list in crafting diag
 - categories in crafting material list (when more than 4-5 items)
 - a way to id player ship when scrolling the map around
@@ -120,7 +132,6 @@ SOUNDS:
 	- feedback when in 'goto' mode ?
 	- little arrow showing the player <-- The Ombarus
 - "grab" menu when multiple objects ?
-- crash trying to convert 10 missile to energy (CNR)
 - Interupt crafting if shot ?
 - don't let planet material spawn under the player
 - OPTIM : loading json cache
@@ -152,7 +163,6 @@ SOUNDS:
 	- Naked Singularity (constrict ship, prevent movement until ship can escape it's pull (damage per turn ?))
 	- Complete shutdown (unable to act for X turn)
 - ***BUG: if disabled is in the base_attributes we cannot override it in modified_attributes !***
-- New movement (always goto) prevent going on top of something if you can interact with it :/
 - Allow clicking outside of the map to move (it has weird behavior now with contextual clicks)
 - Spawned on top of sun. Wormhole looks weird
 - equilize sounds to similar db
@@ -170,8 +180,6 @@ SOUNDS:
 	- animate crafting ?
 - Multiple save slot for different runs ?
 - Improve, beautify and add stuff to settings
-	- language
-	- sound volumes
 	- resolution (PC only ?)
 	- vsync (PC only ?)
 	- key bindings (PC only ?)
@@ -203,6 +211,14 @@ IDEAS:::
 	
 	
 DONE :::
+	- language settings
+	- sound volumes settings
+- New movement (always goto) prevent going on top of something if you can interact with it :/
+- Border around level is ugly
+	- give it a "danger" kind a texture ?
+	- remove it and warn the player : "cannot get out of sun's gravity well"
+	- ???
+- seems like I can move before animation is done with keyboard keysc 
 - **CRASH** inventoryv2. Drag-drop selected item crashes
 - loading : make boardertile invisible
 - **CRASH** tried to change level twice by hitting the shortcut quickly... Shortcut can be activated during loading :/
