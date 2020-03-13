@@ -13,9 +13,28 @@ Beta 2 :::
 	- prevent objects from spawning too close to each other (wormhole overlap planets, planets on top of sun, etc.)
 	- dummies on tile
 - Rune story
+	- Design :
+		1-- 1 or more triggers :
+			- between turn x and y with linear and/or exponential increase in probability (y = 100%)
+			- location (ex : enter level with human branch wormhole)
+			- action (ex : shoot a specific "special" planet ?)
+		2-- évênement déclancheur :
+			- Simple message
+			- In-Game impact ? (ship speed slowed because we lost the engineer, radar range reduced by 1 because we lost the communication officer ?)
+		3-- Resolution trigger
+			- Specific sequence of action, timer or location trigger resolution
+		4-- Resolution
+			- Message
+			- In-Game impact removed ?
 	- Create characters (Science officer, Communication officer, Engineer, Pilot, etc.)
 	- Create backstory
-	- Implement "rescue" system
+		IDEAS :
+			- When entering level with human branch, officer decide to go live with human colony. Can get it back by going to 3rd level of human branch with converter of yendor as "proof" that he can go home
+			- Parasyte infects officer between turn 500-1000. Will die if antidote is not found within the next 500 turns. It will spawn from a ship and/or planet within the current system
+			- When transfering ship, 1 in 3 chance that there will be a "teleporter malfunction" and send officer somewhere else. Need to find him in a derelic ship close-by ?
+			- Queen Jerg infects one of officer, must defeat queen to "free" officer from mind-hive
+			- Random boss has a chance to spawn in any level below level 7. If you defeat him he will join you, maybe becomes the cook (wink wink). spawn chance should be calculated every time you travel so that it's possible to force spawn it by going back up-down-up-down a level repetedly (still need to find him)
+			- doppleganger ? free him from the boss in Vorg branch ?
 - Unique boss for branches
 - low fps AI goto is jerky as fuck. Maybe smooth the camera movement ?
 - pressing shortcut "l" to look when hud is in "hidden" mode on PC makes "..." button appear
