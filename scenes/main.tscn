@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -68,6 +68,7 @@
 [ext_resource path="res://scenes/GUI/Dialogs/DeathScreen.tscn" type="PackedScene" id=66]
 [ext_resource path="res://scenes/warp_trail_test.tscn" type="PackedScene" id=67]
 [ext_resource path="res://scripts/Behaviors/LocalSaveBehavior.gd" type="Script" id=68]
+[ext_resource path="res://scripts/Behaviors/Runes/Runaway.gd" type="Script" id=69]
 [ext_resource path="res://data/textures/space/space-bg_mine-p2.png" type="Texture" id=70]
 [ext_resource path="res://scenes/BorderGenerator.tscn" type="PackedScene" id=71]
 
@@ -207,6 +208,11 @@ script = ExtResource( 33 )
 
 [node name="LocalSave" type="Node" parent="Behaviors"]
 script = ExtResource( 68 )
+
+[node name="Runes" type="Node" parent="Behaviors"]
+
+[node name="Runaway" type="Node" parent="Behaviors/Runes"]
+script = ExtResource( 69 )
 
 [node name="BG" type="Sprite" parent="."]
 position = Vector2( 5120, 5120 )

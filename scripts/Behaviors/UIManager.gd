@@ -41,7 +41,7 @@ func OnGUILoaded_Callback(name, obj):
 	
 func OnPushGUI_Callback(name, init_param):
 	#TODO: make sure Layout is not already in stack
-	#print("Push " + name)
+	print("Push " + name)
 	if _animator != null and _animator.is_playing():
 		yield(_animator, "animation_finished")
 	if _animator != null and _gui_list[name].Transition != false:
@@ -57,7 +57,7 @@ func OnPushGUI_Callback(name, init_param):
 	BehaviorEvents.emit_signal("OnGUIChanged", _stack[-1])
 	
 func OnPopGUI_Callback():
-	#print("Pop " + _stack[-1])
+	print("Pop " + _stack[-1])
 	if _animator != null and _gui_list[_stack[-1]].Transition != false:
 		_animator.root_node = _gui_list[_stack[-1]].get_path()
 		_animator.play_backwards("popin")
