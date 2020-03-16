@@ -7,6 +7,7 @@ extends Node
 func _ready():
 	BehaviorEvents.connect("OnDealDamage", self, "OnDealDamage_Callback")
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
+	BehaviorEvents.connect("OnObjectDestroyed", self, "OnObjectDestroyed_Callback")
 	
 	
 func sort_by_chance(a, b):
@@ -245,8 +246,6 @@ func ProcessDamage(target, shooter, weapon_data):
 		target.set_attrib("destroyable.current_hull", target.get_attrib("destroyable.current_hull", max_hull) - hull_dam)
 		if target.get_attrib("destroyable.current_hull") <= 0:
 			target.set_attrib("destroyable.destroyed", true) # so other systems can check if their reference is valid or not
-			if target.get_attrib("drop_on_death") != null:
-				ProcessDeathSpawns(target)
 			if is_player:
 				if target.get_attrib("boardable") == true:
 					BehaviorEvents.emit_signal("OnLogLine", "[color=red]You destroyed one of YOUR ship ![/color]")
@@ -264,6 +263,9 @@ func ProcessDamage(target, shooter, weapon_data):
 		target.set_attrib("destroyable.damage_source", shooter.get_attrib("name_id"))
 		BehaviorEvents.emit_signal("OnDamageTaken", target, shooter)
 	
+func OnObjectDestroyed_Callback(target):
+	if target.get_attrib("drop_on_death") != null:
+		ProcessDeathSpawns(target)
 	
 func ProcessDeathSpawns(target):
 	for stuff in target.get_attrib("drop_on_death"):

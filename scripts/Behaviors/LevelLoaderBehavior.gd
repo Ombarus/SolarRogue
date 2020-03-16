@@ -421,6 +421,7 @@ func OnRequestLevelChange_Callback(wormhole):
 	# should be defferred !
 	current_depth = wormhole.modified_attributes["depth"]
 	yield(ExecuteLoadLevel(wormhole.base_attributes), "completed")
+	BehaviorEvents.call_deferred("emit_signal", "OnLevelReady")
 	set_loading(false)
 
 func OnRequestObjectUnload_Callback(obj):

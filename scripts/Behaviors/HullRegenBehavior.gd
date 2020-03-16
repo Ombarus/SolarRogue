@@ -52,6 +52,13 @@ func _process_healing(obj, data, item_data):
 		var cur_hull = obj.get_attrib("destroyable.current_hull", max_hull)
 		var new_hull = min(max_hull, cur_hull + heal)
 		obj.set_attrib("destroyable.current_hull", new_hull)
+		if new_hull <= 0:
+			obj.set_attrib("destroyable.damage_source", "Radiation")
+			obj.set_attrib("destroyable.destroyed", true) # so other systems can check if their reference is valid or not
+			if obj.get_attrib("type") == "player":
+				BehaviorEvents.emit_signal("OnPlayerDeath")
+			BehaviorEvents.emit_signal("OnObjectDestroyed", obj)
+			BehaviorEvents.emit_signal("OnRequestObjectUnload", obj)
 		
 	
 	data.last_turn_update = Globals.total_turn

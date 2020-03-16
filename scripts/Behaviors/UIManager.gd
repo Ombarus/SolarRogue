@@ -34,6 +34,8 @@ func OnPlayerCreated_Callback(player):
 		BehaviorEvents.call_deferred("emit_signal", "OnPushGUI", "WelcomeScreen", {"player_name":player_name})
 	else: # Middle of the game, tuto can start now. Start of game we wait till welcome screen is gone
 		Globals.TutorialRef.emit_signal("StartTuto")
+	
+	BehaviorEvents.call_deferred("emit_signal", "OnLevelReady")
 
 func OnGUILoaded_Callback(name, obj):
 	_gui_list[name] = obj

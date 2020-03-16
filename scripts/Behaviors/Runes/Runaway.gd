@@ -27,6 +27,9 @@ func TriggerEnd():
 	#TODO: Should have some animation/cutscene?
 	var has_converter := false
 	var player : Attributes = Globals.get_first_player()
+	if player.get_attrib("runes.%s.completed" % self.name, false) == true:
+		return
+		
 	var converter = player.get_attrib("mounts.converter")[0]
 	var converter_data = null
 	if converter != null and converter != "":
@@ -45,7 +48,7 @@ func TriggerEnd():
 			has_converter = true
 	
 	if has_converter == true:
-		BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "As you enter the system a small ship opens a communication channel, Eric's face shows up on screen : \"I'll be damned, is this what I think it is ? By god man, you've done it! I'm sorry I ever doubted you, please, let me come back aboard and let's go home, I'm so tired of this place! Can you believe these barabarians still use scalpels?\"", "title":"CMO Eric 'doc' Brown"})
+		BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "As you enter the system a small ship opens a communication channel, Eric's face shows up on screen : \"I'll be damned, is this what I think it is ? By god man, you've done it! I'm sorry I ever doubted you, please, let me come back aboard and let's go home, I'm so tired of this place! Can you believe these barabarians still use scalpels?\"", "title":"CMO Eric 'doc' Brown"})
 		BehaviorEvents.emit_signal("OnLogLine", "[color=lime]Eric 'doc' Brown has rejoined the ship's crew![/color]")
 		player.set_attrib("runes.%s.completed" % self.name, true)
 	else:
@@ -58,9 +61,9 @@ func TriggerBeginning():
 	if "intro_done" in data and data["intro_done"] == true:
 		return
 	
-	BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "As you enter the system, your Chief Medical Officer approach you :\"You know Cap'n, I don't like this wild goose chase of yours. Imma go find myself some accepting human colony. If you do find your crazy artifact you come'n get me ya hear ?\"", "title":"CMO Eric 'doc' Brown"})
+	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "As you enter the system, your Chief Medical Officer approach you :\"You know Cap'n, I don't like this wild goose chase of yours. Imma go find myself some accepting human colony. If you do find your crazy artifact you come'n get me ya hear ?\"", "title":"CMO Eric 'doc' Brown"})
 	yield(BehaviorEvents, "OnPopGUI")
-	BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "You try to reason him, try to make him stay, but before you know it, he boards one of the shuttles and head for the nearest human outpost...", "title":"CMO Eric 'doc' Brown", "callback_object":self, "callback_method":"Intro_Done_Callback"})
+	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "You try to reason him, try to make him stay, but before you know it, he boards one of the shuttles and head for the nearest human outpost...", "title":"CMO Eric 'doc' Brown", "callback_object":self, "callback_method":"Intro_Done_Callback"})
 	
 func Intro_Done_Callback():
 	var player : Attributes = Globals.get_first_player()

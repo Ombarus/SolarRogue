@@ -13,6 +13,7 @@ Beta 2 :::
 	- prevent objects from spawning too close to each other (wormhole overlap planets, planets on top of sun, etc.)
 	- dummies on tile
 - Rune story
+	- "crew" dialog showing a list of missing, dead, active, saved, etc. crew members
 	- Design :
 		1-- 1 or more triggers :
 			- between turn x and y with linear and/or exponential increase in probability (y = 100%)
