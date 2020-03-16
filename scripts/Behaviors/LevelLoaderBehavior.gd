@@ -28,6 +28,14 @@ var _global_spawns = {} # to keep track of items that should only appear once in
 
 const _TEST_MID_GAME = false
 
+func GetRandomEmptyTile():
+	#TODO: Check for blocking and multi-tile objects
+	for coord in shufflingArray:
+		if GetTile(coord).empty():
+			return coord
+	# should never happen, but just in case...
+	return shufflingArray[0]
+
 func GetCurrentLevelData():
 	return _current_level_data
 	

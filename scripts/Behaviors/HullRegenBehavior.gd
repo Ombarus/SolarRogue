@@ -59,6 +59,8 @@ func _process_healing(obj, data, item_data):
 				BehaviorEvents.emit_signal("OnPlayerDeath")
 			BehaviorEvents.emit_signal("OnObjectDestroyed", obj)
 			BehaviorEvents.emit_signal("OnRequestObjectUnload", obj)
+		elif heal < 0:
+			BehaviorEvents.emit_signal("OnDamageTaken", obj, null)
 		
 	
 	data.last_turn_update = Globals.total_turn

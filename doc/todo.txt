@@ -13,6 +13,11 @@ Beta 2 :::
 	- prevent objects from spawning too close to each other (wormhole overlap planets, planets on top of sun, etc.)
 	- dummies on tile
 - Rune story
+	- radiation :
+		- should only test new level
+		- remove shield fx when taking damage
+		- randomize planet position
+		- what if multiple runes trigger at the same time ?
 	- "crew" dialog showing a list of missing, dead, active, saved, etc. crew members
 	- Design :
 		1-- 1 or more triggers :

@@ -8,6 +8,6 @@
 	},
 	"hull_regen": {
 		"duration": -1,
-		"point_per_turn":-0.2
+		"point_per_turn":-0.05
 	}
 }
