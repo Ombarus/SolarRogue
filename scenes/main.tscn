@@ -543,6 +543,7 @@ margin_bottom = 92.0
 AP_behavior_path = NodePath("../../../Behaviors/AP")
 
 [node name="StoryPrompt" parent="Camera-GUI/SafeArea" instance=ExtResource( 72 )]
+visible = false
 
 [node name="TutoPrompt" parent="Camera-GUI/SafeArea" instance=ExtResource( 64 )]
 visible = false
