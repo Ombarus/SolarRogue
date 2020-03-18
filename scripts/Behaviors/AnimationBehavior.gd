@@ -26,6 +26,9 @@ func OnDamageTaken_Callback(target, shooter, damage_type):
 			hit_root.play_shield_hit()
 		elif damage_type == Globals.DAMAGE_TYPE.radiation:
 			hit_root.play_radiation_hit()
+		elif damage_type == Globals.DAMAGE_TYPE.healing:
+			#TODO: Add some healing sfx / animation ?
+			pass
 		else:
 			hit_root.play_hull_hit()
 	

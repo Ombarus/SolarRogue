@@ -27,6 +27,7 @@ func Init(init_param):
 	var title_fmt : Array = []
 	if "title_fmt" in init_param:
 		title_fmt = init_param.title_fmt
+		title_fmt = init_param.title_fmt
 	_title.title = Globals.mytr(init_param.title, title_fmt)
 	if "callback_object" in init_param:
 		_callback_obj = init_param.callback_object

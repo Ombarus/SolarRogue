@@ -8,7 +8,8 @@ var total_turn = 0
 enum DAMAGE_TYPE {
 	shield_hit,
 	hull_hit,
-	radiation
+	radiation,
+	healing
 }
 
 enum CRAFT_RESULT {

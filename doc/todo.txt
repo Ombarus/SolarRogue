@@ -15,8 +15,7 @@ Beta 2 :::
 	- dummies on tile
 - Rune story
 	- radiation :
-		- update status bar when healing ship
-		- improve radiation damage sfx
+		- improve radiation damage sfx (add a greenish/reddish visual pulse ?)
 	- "crew" dialog showing a list of missing, dead, active, saved, etc. crew members
 	- Design :
 		1-- 1 or more triggers :

@@ -128,8 +128,7 @@ func Fail_Done_Callback():
 	var max_hull : float = player.get_attrib("destroyable.hull")
 	player.set_attrib("destroyable.current_hull", max_hull)
 	BehaviorEvents.emit_signal("OnAnimationDone")
-	#TODO: Update Status bar (I don't have an event for that yet...)
-	#BehaviorEvents.emit_signal("OnDamageTaken", player, null, Globals.DAMAGE_TYPE.radiation)
+	BehaviorEvents.emit_signal("OnDamageTaken", player, null, Globals.DAMAGE_TYPE.healing)
 
 func _remove_radiation(player : Attributes, is_completed=true):
 	var regens = player.get_attrib("consumable.hull_regen", [])
