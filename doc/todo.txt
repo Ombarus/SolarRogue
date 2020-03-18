@@ -16,8 +16,7 @@ Beta 2 :::
 - Rune story
 	- radiation :
 		- update status bar when healing ship
-		- remove shield fx when taking damage
-		- what if multiple runes trigger at the same time ?
+		- improve radiation damage sfx
 	- "crew" dialog showing a list of missing, dead, active, saved, etc. crew members
 	- Design :
 		1-- 1 or more triggers :
@@ -238,6 +237,10 @@ IDEAS:::
 	
 DONE BETA2 :::
 
+		- remove shield fx when taking damage
+		- what if multiple runes trigger at the same time ?
+			- Tuto prompt + rune at beginning of level
+			- two rune at beginning of level
 		- should only test new level
 	- prevent objects from spawning too close to each other (wormhole overlap planets, planets on top of sun, etc.)
 	
