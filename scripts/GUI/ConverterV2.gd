@@ -50,7 +50,7 @@ func DescBtn_Callback():
 	BehaviorEvents.emit_signal("OnPushGUI", "Description", {"json":produce_data, "scanner_level":scanner_level})
 	
 	
-func OnDamageTaken_Callback(target, shooter):
+func OnDamageTaken_Callback(target, shooter, damage_type):
 	if _obj != null:
 		UpdateShipInfo()
 	

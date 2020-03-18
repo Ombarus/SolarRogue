@@ -24,8 +24,8 @@ func set_active(newval):
 		_ttl = ttl
 		
 func Start(t):
-	var x : float = (float(MersenneTwister.rand((rand_offset_x.y - rand_offset_x.x) * 1000)) / 1000.0) + rand_offset_x.x
-	var y : float = (float(MersenneTwister.rand((rand_offset_y.y - rand_offset_y.x) * 1000)) / 1000.0) + rand_offset_y.x
+	var x : float = (float(MersenneTwister.rand((rand_offset_x.y - rand_offset_x.x) * 1000, false)) / 1000.0) + rand_offset_x.x
+	var y : float = (float(MersenneTwister.rand((rand_offset_y.y - rand_offset_y.x) * 1000, false)) / 1000.0) + rand_offset_y.x
 	_random_offset = Vector2(x, y)
 	self.global_position += _random_offset
 	
@@ -36,7 +36,7 @@ func Start(t):
 	_delete_me = false
 	get_node("root").set_reset(true)
 	_ttl = ttl
-	var speed_offset : float = (float(MersenneTwister.rand((rand_speed.y - rand_speed.x) * 1000)) / 1000.0) + rand_speed.x
+	var speed_offset : float = (float(MersenneTwister.rand((rand_speed.y - rand_speed.x) * 1000, false)) / 1000.0) + rand_speed.x
 	_actual_speed = speed + speed_offset
 	if target != null:
 		var dir = target - _origin

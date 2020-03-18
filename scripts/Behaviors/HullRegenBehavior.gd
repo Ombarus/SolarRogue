@@ -60,7 +60,7 @@ func _process_healing(obj, data, item_data):
 			BehaviorEvents.emit_signal("OnObjectDestroyed", obj)
 			BehaviorEvents.emit_signal("OnRequestObjectUnload", obj)
 		elif heal < 0:
-			BehaviorEvents.emit_signal("OnDamageTaken", obj, null)
+			BehaviorEvents.emit_signal("OnDamageTaken", obj, null, Globals.DAMAGE_TYPE.radiation)
 		
 	
 	data.last_turn_update = Globals.total_turn

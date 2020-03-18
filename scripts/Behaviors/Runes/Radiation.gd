@@ -7,7 +7,7 @@ func _ready():
 	BehaviorEvents.connect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
 	BehaviorEvents.connect("OnDamageTaken", self, "OnDamageTaken_Callback")
 	
-func OnDamageTaken_Callback(target, shooter):
+func OnDamageTaken_Callback(target, shooter, damage_type):
 	var player : Attributes = Globals.get_first_player()
 	if target == player and target.get_attrib("runes.%s.completed" % self.name, null) == null:
 		var cur_hull : float = target.get_attrib("destroyable.current_hull")
@@ -38,16 +38,29 @@ func OnLevelReady_Callback():
 		_remove_radiation(player, false)
 	if player.get_attrib("runes.%s.step" % self.name, "") != "":
 		return
+		
+	var tested_levels : Array = player.get_attrib("runes.%s.tested_levels" % self.name, [])
+	if level_id in tested_levels:
+		return
+		
 	var first_depth : int = 3
 	var last_depth : int = 7
-	var first_depth_chance : float = 0.1
-	var last_depth_chance : float = 1.0
 	var current_depth : int = Globals.LevelLoaderRef.current_depth
 	
+	# no point in testing anything if chance is 0 anyway
+	if current_depth < first_depth or current_depth > last_depth:
+		return
+	
+	var first_depth_chance : float = 0.1
+	var last_depth_chance : float = 1.0
+	
 	var current_chance : float = 0.0
-	if current_depth >= first_depth and current_depth <= last_depth:
-		current_chance = range_lerp(current_depth, first_depth, last_depth, first_depth_chance, last_depth_chance)
+	
+	current_chance = range_lerp(current_depth, first_depth, last_depth, first_depth_chance, last_depth_chance)
 		
+	tested_levels.push_back(level_id)
+	player.set_attrib("runes.%s.tested_levels" % self.name, tested_levels)
+	
 	print("current_depth : %d, current_chance : %.3f" % [current_depth, current_chance])
 	if MersenneTwister.rand_float() <= current_chance:
 		TriggerBeginning(player)
@@ -89,7 +102,7 @@ func Fail_Done_Callback():
 	
 	var max_hull : float = player.get_attrib("destroyable.hull")
 	player.set_attrib("destroyable.current_hull", max_hull)
-	BehaviorEvents.emit_signal("OnDamageTaken", player, null)
+	#BehaviorEvents.emit_signal("OnDamageTaken", player, null, Globals.DAMAGE_TYPE.radiation)
 
 func _remove_radiation(player : Attributes, is_completed=true):
 	var regens = player.get_attrib("consumable.hull_regen", [])

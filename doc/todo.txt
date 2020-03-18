@@ -1,4 +1,6 @@
 RELEASE CHECKLIST :::
+- use right branch
+	- check if any bugs need to be ported to branch
 - Check player starting inventory
 - review description of all item to make sure they match the data
 - levelLoader.gd => test_mid_game is false
@@ -10,13 +12,11 @@ RELEASE CHECKLIST :::
 
 Beta 2 :::
 - Multi-tile
-	- prevent objects from spawning too close to each other (wormhole overlap planets, planets on top of sun, etc.)
 	- dummies on tile
 - Rune story
 	- radiation :
-		- should only test new level
+		- update status bar when healing ship
 		- remove shield fx when taking damage
-		- randomize planet position
 		- what if multiple runes trigger at the same time ?
 	- "crew" dialog showing a list of missing, dead, active, saved, etc. crew members
 	- Design :
@@ -99,6 +99,7 @@ Release prep :
 	
 	
 polish :::
+- better UX for hull with stuff inside
 - SOUNDS
 	- SFX :
 		- no sound when transfering cargo (but mount is ok)
@@ -234,6 +235,11 @@ SOUNDS:
 IDEAS:::
 - If you try to produce energy over the maximum of the ship capacity there is a chance you "choke" (engine goes critical and blow up)
 	
+	
+DONE BETA2 :::
+
+		- should only test new level
+	- prevent objects from spawning too close to each other (wormhole overlap planets, planets on top of sun, etc.)
 	
 DONE :::
 	- language settings

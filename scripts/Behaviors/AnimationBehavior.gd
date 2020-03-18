@@ -15,16 +15,17 @@ func OnWaitForAnimation_Callback():
 func OnAnimationDone_Callback():
 	_wait_for_anim = false
 	
-func OnDamageTaken_Callback(target, shooter):
+func OnDamageTaken_Callback(target, shooter, damage_type):
 	
 	if _wait_for_anim == true:
 		yield(BehaviorEvents, "OnAnimationDone")
 
 	var hit_root : Node = target.find_node("hit_fx", true, false)
 	if hit_root != null:
-		var shield_hp = target.get_attrib("shield.current_hp")
-		if shield_hp != null and shield_hp > 0:
+		if damage_type == Globals.DAMAGE_TYPE.shield_hit:
 			hit_root.play_shield_hit()
+		elif damage_type == Globals.DAMAGE_TYPE.radiation:
+			hit_root.play_radiation_hit()
 		else:
 			hit_root.play_hull_hit()
 	

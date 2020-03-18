@@ -22,11 +22,6 @@
 	"destroyable": {
 		"hull":13
 	},
-	"consumable": {
-		"hull_regen": [
-			{"data":"data/json/items/special/radiation_damage.json"}
-		]
-	},
 	"moving": {
 		"speed":1.0,
 		"can_use_wormhole":true,

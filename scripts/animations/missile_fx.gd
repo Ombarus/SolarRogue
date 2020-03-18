@@ -32,8 +32,8 @@ func Start(target):
 	_active = true
 	get_node("body_root/Sprite/AnimationPlayer").play("moving")
 	
-	var x : float = (float(MersenneTwister.rand((rand_offset_x.y - rand_offset_x.x) * 1000)) / 1000.0) + rand_offset_x.x
-	var y : float = (float(MersenneTwister.rand((rand_offset_y.y - rand_offset_y.x) * 1000)) / 1000.0) + rand_offset_y.x
+	var x : float = (float(MersenneTwister.rand((rand_offset_x.y - rand_offset_x.x) * 1000, false)) / 1000.0) + rand_offset_x.x
+	var y : float = (float(MersenneTwister.rand((rand_offset_y.y - rand_offset_y.x) * 1000, false)) / 1000.0) + rand_offset_y.x
 	_random_offset = Vector2(x, y)
 	
 	_target = target + _random_offset

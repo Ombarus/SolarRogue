@@ -43,7 +43,7 @@ func reset_to_state(newState):
 func get_current_state():
 	return GeneratorState.new(_generator, _index)
 	
-func rand(upper, is_critical=false):
+func rand(upper, is_critical=true):
 	if upper <= 1:
 		return 0
 	

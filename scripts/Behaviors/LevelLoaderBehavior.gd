@@ -30,10 +30,16 @@ const _TEST_MID_GAME = false
 
 func GetRandomEmptyTile():
 	#TODO: Check for blocking and multi-tile objects
-	for coord in shufflingArray:
+	var indexList = range(shufflingArray.size())
+	var index = 0
+	while indexList.size() > 0:
+		index = MersenneTwister.rand(indexList.size())
+		var coord = shufflingArray[indexList[index]]
 		if GetTile(coord).empty():
 			return coord
-	# should never happen, but just in case...
+		indexList.remove(index)
+	# should only happen if the whole level is filled with stuff. Unlikely, but just in case
+	print("WOW. I couldn't find a random empty tile so I'm picking up the upper-left corner by default!!!!")
 	return shufflingArray[0]
 
 func GetCurrentLevelData():

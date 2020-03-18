@@ -91,7 +91,7 @@ func OnCameraZoomed_Callback(current_zoom):
 			if not sfx_root.get_children()[playid].playing:
 				sfx_root.get_children()[playid].play()
 				
-func OnDamageTaken_Callback(target, shooter):
+func OnDamageTaken_Callback(target, shooter, damage_type):
 	var is_player = target.get_attrib("type") == "player"
 	if not is_player:
 		return

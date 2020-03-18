@@ -31,7 +31,7 @@ func OnEnergyChanged_Callback(obj):
 		return
 	UpdateStatusBar(obj)
 
-func OnDamageTaken_Callback(target, shooter):
+func OnDamageTaken_Callback(target, shooter, damage_type):
 	var is_player = target.get_attrib("type") == "player"
 	if not is_player:
 		return

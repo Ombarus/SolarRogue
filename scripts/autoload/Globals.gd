@@ -5,6 +5,12 @@ var TutorialRef = null
 var last_delta_turn = 0
 var total_turn = 0
 
+enum DAMAGE_TYPE {
+	shield_hit,
+	hull_hit,
+	radiation
+}
+
 enum CRAFT_RESULT {
 	success,
 	not_enough_resources,

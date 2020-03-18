@@ -28,6 +28,4 @@ region_enabled = true
 region_rect = Rect2( 512, 256, 128, 128 )
 
 [node name="hit_fx" parent="." instance=ExtResource( 5 )]
-editor/display_folded = true
 z_index = 2
-

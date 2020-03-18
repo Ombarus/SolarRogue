@@ -222,8 +222,8 @@ func ProcessHarvest(target, shooter, weapon_data):
 		target.set_attrib("harvestable.actual_inventory_size", inventory.size())
 		if is_player:
 			BehaviorEvents.emit_signal("OnLogLine", "Some useful materials float into orbit")
-			
-	BehaviorEvents.emit_signal("OnDamageTaken", target, shooter)
+
+	BehaviorEvents.emit_signal("OnDamageTaken", target, shooter, Globals.DAMAGE_TYPE.hull_hit)
 
 
 func ProcessDamage(target, shooter, weapon_data):
@@ -261,7 +261,12 @@ func ProcessDamage(target, shooter, weapon_data):
 			elif is_target_player:
 				BehaviorEvents.emit_signal("OnLogLine", "[color=red]You take %d damage[/color]", [dam])
 		target.set_attrib("destroyable.damage_source", shooter.get_attrib("name_id"))
-		BehaviorEvents.emit_signal("OnDamageTaken", target, shooter)
+		
+		var damage_type = Globals.DAMAGE_TYPE.shield_hit
+		if hull_dam > 0:
+			damage_type = Globals.DAMAGE_TYPE.hull_hit
+		
+		BehaviorEvents.emit_signal("OnDamageTaken", target, shooter, damage_type)
 	
 func OnObjectDestroyed_Callback(target):
 	if target.get_attrib("drop_on_death") != null:

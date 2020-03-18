@@ -24,7 +24,7 @@ signal OnObjTurn(obj)
 signal OnLogLine(text, fmt)
 signal OnDealDamage(targets, shooter, weapon_data, shot_tile) # fired before all other validations
 signal OnShotFired(shot_tile, shooter, weapon_data) # for VFX
-signal OnDamageTaken(target, shooter) # only fired if damage is > 0
+signal OnDamageTaken(target, shooter, damage_type) # only fired if damage is > 0
 signal OnPickup(picker, picked)
 signal OnObjectPicked(picker)
 signal OnDropCargo(dropper, item_id, count)

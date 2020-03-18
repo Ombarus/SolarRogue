@@ -113,7 +113,7 @@ func OnScannerUpdated_Callback(obj):
 	
 
 	
-func OnDamageTaken_Callback(target, shooter):
+func OnDamageTaken_Callback(target, shooter, damage_type):
 	if target.get_attrib("ai") == null:
 		return
 	
