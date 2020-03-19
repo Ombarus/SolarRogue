@@ -18,8 +18,11 @@ func OnPlayerCreated_Callback(player):
 	# Init
 	var data : Dictionary = player.get_attrib("runes.%s" % self.name, {})
 	if data.empty():
-		data["title"] = "Chief Medical Officer"
-		data["full_name"] = "Eric 'doc' Brown"
+		data["title"] = "CMO"
+		data["name"] = "Eric 'doc' Brown"
+		data["status"] = "Active"
+		data["log"] = "No Recommendation"
+		data["color"] = [0.1,0.1,0.1]
 		player.set_attrib("runes.%s" % self.name, data)
 	BehaviorEvents.disconnect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
 	
@@ -67,6 +70,11 @@ func TriggerEnd():
 func Outro_Done_Callback():
 	var player : Attributes = Globals.get_first_player()
 	BehaviorEvents.emit_signal("OnLogLine", "[color=lime]Eric 'doc' Brown has rejoined the ship's crew![/color]")
+	#data["status"] = "Active"
+	#data["log"] = "No Recommendation
+	player.set_attrib("runes.%s.status" % self.name, "Redacted")
+	player.set_attrib("runes.%s.log" % self.name, "Record expunged, everyone can go home")
+	player.set_attrib("runes.%s.color" % self.name, [0.0,0.4,0.0])
 	player.set_attrib("runes.%s.completed" % self.name, true)
 	BehaviorEvents.emit_signal("OnAnimationDone")
 
@@ -85,5 +93,8 @@ func TriggerBeginning():
 	
 func Intro_Done_Callback():
 	var player : Attributes = Globals.get_first_player()
+	player.set_attrib("runes.%s.status" % self.name, "MIA")
+	player.set_attrib("runes.%s.log" % self.name, "Deserter. Ran to the human colonies in Homeworld 3")
+	player.set_attrib("runes.%s.color" % self.name, [0.58,0.58,0.0])
 	player.set_attrib("runes.%s.intro_done" % self.name, true)
 	BehaviorEvents.emit_signal("OnAnimationDone")

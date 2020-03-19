@@ -33,8 +33,11 @@ func OnPlayerCreated_Callback(player):
 	# Init
 	var data : Dictionary = player.get_attrib("runes.%s" % self.name, {})
 	if data.empty():
-		data["title"] = "Chief Science Officer"
-		data["full_name"] = "Leonard Grayson"
+		data["title"] = "CSO"
+		data["name"] = "Leonard Grayson"
+		data["status"] = "Active"
+		data["log"] = "No Recommendation"
+		data["color"] = [0.1,0.1,0.1]
 		player.set_attrib("runes.%s" % self.name, data)
 	BehaviorEvents.disconnect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
 	
@@ -93,8 +96,12 @@ func TriggerBeginning(player : Attributes):
 	
 func Intro_Done_Callback():
 	var player : Attributes = Globals.get_first_player()
+	player.set_attrib("runes.%s.status" % self.name, "Active")
+	player.set_attrib("runes.%s.log" % self.name, "Situation Dire. We must find and destroy the radiation generator")
+	player.set_attrib("runes.%s.color" % self.name, [0.58,0.58,0.0])
 	player.set_attrib("runes.%s.step" % self.name, "intro_done")
 	BehaviorEvents.emit_signal("OnAnimationDone")
+	
 	
 func TriggerSuccess(player : Attributes):
 	_remove_radiation(player)
@@ -108,6 +115,9 @@ func TriggerSuccess(player : Attributes):
 func Outro_Done_Callback():
 	var player : Attributes = Globals.get_first_player()
 	BehaviorEvents.emit_signal("OnLogLine", "[color=lime]Leonard Grayson didn't have to make a difficult decision![/color]")
+	player.set_attrib("runes.%s.status" % self.name, "Veteran")
+	player.set_attrib("runes.%s.log" % self.name, "Pivotal role during the radiation incident in %s" % Globals.LevelLoaderRef.current_level_data.display_name)
+	player.set_attrib("runes.%s.color" % self.name, [0.0,0.4,0.0])
 	player.set_attrib("runes.%s.completed" % self.name, true)
 	BehaviorEvents.emit_signal("OnAnimationDone")
 
@@ -122,6 +132,9 @@ func TriggerFailure(player : Attributes):
 	
 func Fail_Done_Callback():
 	var player : Attributes = Globals.get_first_player()
+	player.set_attrib("runes.%s.status" % self.name, "KIA")
+	player.set_attrib("runes.%s.log" % self.name, "Recommendation: Posthumous Medal of Valor for bravery during radiation incident. You will be missed my friend")
+	player.set_attrib("runes.%s.color" % self.name, [0.4,0.0,0.0])
 	player.set_attrib("runes.%s.completed" % self.name, false)	
 	BehaviorEvents.emit_signal("OnLogLine", "[color=red]Leonard Grayson sacrificed his life to save the ship...[/color]")
 	

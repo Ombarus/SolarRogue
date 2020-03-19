@@ -32,19 +32,17 @@ mouse_filter = 2
 visible = false
 modulate = Color( 0.129412, 1, 0.129412, 0 )
 margin_left = 133.0
-margin_right = -13.0
-margin_bottom = 186.0
+margin_right = 153.0
+margin_bottom = 184.0
 border_style = "━"
 
 [node name="Board" parent="PopupSize/Popup" groups=[
 "more_btn",
 ] instance=ExtResource( 4 )]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -70.0
-margin_top = 230.0
-margin_right = 70.0
-margin_bottom = 320.0
+margin_left = 20.5
+margin_top = 233.0
+margin_right = 160.5
+margin_bottom = 323.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[b]oard"
 ShortcutKey = "b"
@@ -52,12 +50,10 @@ ShortcutKey = "b"
 [node name="Take" parent="PopupSize/Popup" groups=[
 "more_btn",
 ] instance=ExtResource( 4 )]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -70.0
-margin_top = 120.0
-margin_right = 70.0
-margin_bottom = 210.0
+margin_left = 20.5
+margin_top = 123.0
+margin_right = 160.5
+margin_bottom = 213.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[t]ransfer"
 ShortcutKey = "t"
@@ -65,12 +61,10 @@ ShortcutKey = "t"
 [node name="Look" parent="PopupSize/Popup" groups=[
 "more_btn",
 ] instance=ExtResource( 4 )]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -70.0
-margin_top = 10.0
-margin_right = 70.0
-margin_bottom = 100.0
+margin_left = 20.5
+margin_top = 13.0
+margin_right = 160.5
+margin_bottom = 103.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[l]ook"
 ShortcutKey = "l"
@@ -78,15 +72,26 @@ ShortcutKey = "l"
 [node name="Wait" parent="PopupSize/Popup" groups=[
 "more_btn",
 ] instance=ExtResource( 4 )]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -70.0
-margin_top = 340.0
-margin_right = 70.0
-margin_bottom = 430.0
+margin_left = 20.5
+margin_top = 343.0
+margin_right = 160.5
+margin_bottom = 433.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[5] wait"
 ShortcutKey = "5"
+
+[node name="Crew" parent="PopupSize/Popup" groups=[
+"more_btn",
+] instance=ExtResource( 4 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -163.5
+margin_top = 13.0
+margin_right = -23.5
+margin_bottom = 103.0
+rect_min_size = Vector2( 110, 90 )
+Text = "c[r]ew"
+ShortcutKey = "r"
 
 [node name="More" parent="." instance=ExtResource( 4 )]
 margin_right = 110.0
@@ -103,8 +108,8 @@ custom_styles/normal = ExtResource( 5 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../PopupSize/Popup")
 anims/popin = ExtResource( 6 )
-
 [connection signal="pressed" from="PopupSize/Popup/Board" to="." method="_on_Board_pressed"]
 [connection signal="pressed" from="PopupSize/Popup/Take" to="." method="_on_Take_pressed"]
 [connection signal="pressed" from="PopupSize/Popup/Look" to="." method="_on_Look_pressed"]
 [connection signal="pressed" from="PopupSize/Popup/Wait" to="." method="_on_Wait_pressed"]
+[connection signal="pressed" from="PopupSize/Popup/Crew" to="." method="_on_Crew_pressed"]

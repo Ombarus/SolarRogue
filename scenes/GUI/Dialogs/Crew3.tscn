@@ -1,0 +1,220 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=1]
+[ext_resource path="res://data/theme/default_ui_text.tres" type="Theme" id=2]
+[ext_resource path="res://data/textures/dialog_atlas.png" type="Texture" id=3]
+[ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/GUI/ItemList/CrewRow.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scripts/GUI/CrewDialog.gd" type="Script" id=6]
+[ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=7]
+[ext_resource path="res://scripts/GUI/InputConsumer.gd" type="Script" id=8]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 448, 3, 3, 87 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 208, 121, 150, 3 )
+
+[node name="Crew3" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = ExtResource( 7 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="base" parent="." instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -565.0
+margin_top = -304.5
+margin_right = 565.0
+margin_bottom = 304.5
+dialog_ok = true
+title = "Crew Roster"
+
+[node name="Content" type="VBoxContainer" parent="base"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 17.0
+margin_top = 50.0
+margin_right = -17.0
+margin_bottom = -36.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Header" type="Control" parent="base/Content"]
+margin_right = 1096.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="base/Content/Header"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="base/Content/Header/HBoxContainer"]
+margin_right = 80.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 80, 0 )
+size_flags_vertical = 7
+text = "Title"
+align = 1
+valign = 1
+
+[node name="TextureRect" type="TextureRect" parent="base/Content/Header/HBoxContainer"]
+margin_left = 84.0
+margin_right = 87.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 3, 0 )
+texture = SubResource( 1 )
+expand = true
+stretch_mode = 2
+
+[node name="Name" type="Label" parent="base/Content/Header/HBoxContainer"]
+margin_left = 91.0
+margin_right = 341.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 250, 0 )
+size_flags_vertical = 7
+text = "Name"
+align = 1
+valign = 1
+
+[node name="TextureRect2" type="TextureRect" parent="base/Content/Header/HBoxContainer"]
+margin_left = 345.0
+margin_right = 348.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 3, 0 )
+texture = SubResource( 1 )
+expand = true
+stretch_mode = 2
+
+[node name="Status" type="Label" parent="base/Content/Header/HBoxContainer"]
+margin_left = 352.0
+margin_right = 432.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 80, 0 )
+size_flags_vertical = 7
+text = "Status"
+align = 1
+valign = 1
+
+[node name="TextureRect3" type="TextureRect" parent="base/Content/Header/HBoxContainer"]
+margin_left = 436.0
+margin_right = 439.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 3, 0 )
+texture = SubResource( 1 )
+expand = true
+stretch_mode = 2
+
+[node name="Log" type="Label" parent="base/Content/Header/HBoxContainer"]
+margin_left = 443.0
+margin_right = 1096.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+text = "Captain's Log"
+align = 1
+valign = 1
+
+[node name="Separator" type="TextureRect" parent="base/Content"]
+margin_top = 44.0
+margin_right = 1096.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 0, 3 )
+size_flags_horizontal = 3
+texture = SubResource( 3 )
+expand = true
+stretch_mode = 2
+
+[node name="Control" type="Control" parent="base/Content"]
+margin_top = 51.0
+margin_right = 1096.0
+margin_bottom = 523.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MyItemList" parent="base/Content/Control" instance=ExtResource( 4 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+Row = ExtResource( 5 )
+CanDropOnList = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="base/Content/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleSpacer" type="Control" parent="base/Content/Control/HBoxContainer"]
+margin_right = 80.0
+margin_bottom = 472.0
+rect_min_size = Vector2( 80, 0 )
+
+[node name="TextureRect4" type="TextureRect" parent="base/Content/Control/HBoxContainer"]
+margin_left = 84.0
+margin_right = 87.0
+margin_bottom = 472.0
+rect_min_size = Vector2( 3, 0 )
+texture = SubResource( 1 )
+expand = true
+stretch_mode = 2
+
+[node name="NameSpacer" type="Control" parent="base/Content/Control/HBoxContainer"]
+margin_left = 91.0
+margin_right = 341.0
+margin_bottom = 472.0
+rect_min_size = Vector2( 250, 0 )
+
+[node name="TextureRect5" type="TextureRect" parent="base/Content/Control/HBoxContainer"]
+margin_left = 345.0
+margin_right = 348.0
+margin_bottom = 472.0
+rect_min_size = Vector2( 3, 0 )
+texture = SubResource( 1 )
+expand = true
+stretch_mode = 2
+
+[node name="StatusSpacer" type="Control" parent="base/Content/Control/HBoxContainer"]
+margin_left = 352.0
+margin_right = 432.0
+margin_bottom = 472.0
+rect_min_size = Vector2( 80, 0 )
+
+[node name="TextureRect6" type="TextureRect" parent="base/Content/Control/HBoxContainer"]
+margin_left = 436.0
+margin_right = 439.0
+margin_bottom = 472.0
+rect_min_size = Vector2( 3, 0 )
+texture = SubResource( 1 )
+expand = true
+stretch_mode = 2

@@ -69,6 +69,7 @@ func _ready():
 	action.connect("board_pressed", self, "Pressed_Board_Callback")
 	action.connect("take_pressed", self, "Pressed_Take_Callback")
 	action.connect("wait_pressed", self, "Pressed_Wait_Callback")
+	action.connect("crew_pressed", self, "Pressed_Crew_Callback")
 	action = get_node(InventoryDialog)
 	action.connect("drop_pressed", self, "OnDropIventory_Callback")
 	action.connect("use_pressed", self, "OnUseInventory_Callback")
@@ -142,6 +143,14 @@ func Pressed_Wait_Callback():
 		
 	BehaviorEvents.emit_signal("OnUseAP", playerNode, 1.0)
 	BehaviorEvents.emit_signal("OnLogLine", "Cooling reactor (wait)")
+	
+func Pressed_Crew_Callback():
+	if lock_input:
+		return
+	
+	var runes = playerNode.get_attrib("runes").values()
+
+	BehaviorEvents.emit_signal("OnPushGUI", "Crew", {"crew": runes})
 	
 func UpdateButtonVisibility():
 	var hide_hud = PermSave.get_attrib("settings.hide_hud")

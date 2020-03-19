@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/GUI/ItemList/CrewRow.gd" type="Script" id=1]
+[ext_resource path="res://data/theme/default_ui_text.tres" type="Theme" id=2]
+
+[node name="CrewRow" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -690.0
+rect_min_size = Vector2( 0, 60 )
+size_flags_horizontal = 3
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 4.0
+margin_bottom = -4.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_right = -12.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CrewTitle" type="Label" parent="HBoxContainer"]
+margin_right = 88.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 88, 0 )
+size_flags_vertical = 7
+text = "CFO"
+valign = 1
+
+[node name="CrewName" type="Label" parent="HBoxContainer"]
+margin_left = 92.0
+margin_right = 342.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 250, 0 )
+size_flags_vertical = 7
+text = "John Blackbeard"
+valign = 1
+
+[node name="CrewStatus" type="Label" parent="HBoxContainer"]
+margin_left = 346.0
+margin_right = 434.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 88, 0 )
+size_flags_vertical = 7
+text = "KIA"
+valign = 1
+
+[node name="CrewLog" type="Label" parent="HBoxContainer"]
+margin_left = 438.0
+margin_right = 1256.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+text = "This is suggestions on what to do "
+valign = 1
+autowrap = true

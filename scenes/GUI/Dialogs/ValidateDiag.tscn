@@ -48,4 +48,3 @@ bbcode_enabled = true
 bbcode_text = "[center]Are you sure ?[/center]"
 text = "Are you sure ?"
 scroll_active = false
-
