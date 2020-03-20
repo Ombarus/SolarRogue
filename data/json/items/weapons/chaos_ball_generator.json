@@ -1,0 +1,57 @@
+{
+	"name_id":"Chaos Ball Generator",
+	"type":"weapon",
+	"sprite": "chaos_generator",
+	"icon": {
+		"texture":"data/textures/space-sprite.png",
+		"region":[384,256,128,128]
+	},
+	"animation": {
+		"shoot": "scenes/tileset_source/LaserFX01.tscn"
+	},
+	"weapon_data": {
+		"base_dam":5.0,
+		"max_dam":30.0,
+		"fire_range":8.0,
+		"fire_pattern":"*",
+		"fire_energy_cost":850.0,
+		"fire_speed":1.5,
+		"shoot_empty":true
+	},
+	"equipment": {
+		"slot":"weapon",
+		"volume":60.0,
+		"equip_ap":3.0,
+		"unequip_ap":3.0
+	},
+	"recyclable": {
+		"energy": 1750
+	},
+	"disassembling": {
+		"produce":"data/json/items/misc/spare_parts.json",
+		"count":2,
+		"energy_cost":700
+	},
+	"description": {
+		"text":"Unstable Wormhole Generator. So chaotic that it's only mode of opperation is lovingly refered to as 'shoot and pray'",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
+				{"name":"Mount Point", "value":"Weapon"}
+			]
+		},
+		"Weapon Stats": {
+			"min_level":0,
+			"fields": [
+				{"name":"Damage", "value":"{weapon_data.base_dam}~{weapon_data.max_dam}", "translate_value":false},
+				{"name":"Range", "value":"{weapon_data.fire_range}", "translate_value":false},
+				{"name":"Energy Cost", "value":"{weapon_data.fire_energy_cost}", "translate_value":false},
+				{"name":"Speed", "value":"{weapon_data.fire_speed} turns"},
+				{"name":"Ammo", "value":"None"},
+				{"name":"Special", "value":"Can shoot outside of radar range"}
+			]
+		}
+	}
+}

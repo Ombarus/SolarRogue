@@ -68,6 +68,7 @@ func OnTargetClick_Callback(click_pos, target_type):
 	var tile = Globals.LevelLoaderRef.World_to_Tile(click_pos)
 	var tile_content = _gather_tile_contents(tile, _targetting_data)
 	var potential_targets = []
+	var player_tile = Globals.LevelLoaderRef.World_to_Tile(_player_node.position)
 	for obj in tile_content:
 		var obj_type = obj.get_attrib("type")
 		var is_ghost = obj.get_attrib("ghost_memory") != null
@@ -78,16 +79,20 @@ func OnTargetClick_Callback(click_pos, target_type):
 		elif not is_ghost and obj_type != "player" and target_type == Globals.VALID_TARGET.loot and Globals.is_(obj.get_attrib("cargo.transferable"), true):
 			potential_targets.push_back(obj)
 	if potential_targets.size() == 0:
-		BehaviorEvents.emit_signal("OnLogLine", "There's nothing there sir...")
-		_callback_obj.call(_callback_method, null, tile)
+		if Globals.get_data(_targetting_data, "weapon_data.shoot_empty", false) == false:
+			BehaviorEvents.emit_signal("OnLogLine", "There's nothing there sir...")
+			_callback_obj.call(_callback_method, null, null)
+		elif IsValidTile(player_tile, tile, _targetting_data.weapon_data):
+			_callback_obj.call(_callback_method, null, tile)
+		else:
+			BehaviorEvents.emit_signal("OnLogLine", "Target is outside of our range sir !")
+			_callback_obj.call(_callback_method, null, null)
 	else:
-		var player_tile = Globals.LevelLoaderRef.World_to_Tile(_player_node.position)
-		
 		var area_size : int = Globals.get_data(_targetting_data, "weapon_data.area_effect", 0)
 			
 		if not IsValidTile(player_tile, tile, _targetting_data.weapon_data):
 			BehaviorEvents.emit_signal("OnLogLine", "Target is outside of our range sir !")
-			_callback_obj.call(_callback_method, null, tile)
+			_callback_obj.call(_callback_method, null, null)
 		elif potential_targets.size() == 1:
 			#TODO: pass the right data for the weapon
 			_callback_obj.call(_callback_method, potential_targets[0], tile)
@@ -125,6 +130,13 @@ func IsValidTile(player_tile, target_tile, weapon_data):
 			return true
 	if weapon_data.fire_pattern == "+":
 		if target_tile_dist < fire_min_range or target_tile_dist > fire_radius or target_tile.x < 0 or target_tile.x > bounds.x or target_tile.y < 0 or target_tile.y > bounds.y or (player_tile.x != target_tile.x and player_tile.y != target_tile.y):
+			return false
+		else:
+			return true
+	if weapon_data.fire_pattern == "*":
+		var out_of_range : bool = target_tile_dist < fire_min_range or target_tile_dist > fire_radius or target_tile.x < 0 or target_tile.x > bounds.x or target_tile.y < 0 or target_tile.y > bounds.y
+		var not_in_line : bool = not (player_tile.x == target_tile.x or player_tile.y == target_tile.y or abs(player_tile.x - target_tile.x) == abs(player_tile.y - target_tile.y))
+		if out_of_range or not_in_line:
 			return false
 		else:
 			return true

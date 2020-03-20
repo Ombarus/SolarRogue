@@ -85,6 +85,11 @@ func OnDealDamage_Callback(targets, shooter, weapon_data, shot_tile):
 				ProcessHarvesting(target, shooter, weapon_data)
 			else:
 				ProcessDamage(target, shooter, weapon_data)
+	if targets.empty() and Globals.get_data(weapon_data, "weapon_data.shoot_empty", false) == true:
+		if validate_action(null, shooter, weapon_data) == true:
+			shot_fired = true
+			BehaviorEvents.emit_signal("OnLogLine", "Scans report no hit sir!")
+			BehaviorEvents.emit_signal("OnShotFired", shot_tile, shooter, weapon_data)
 	if shot_fired == true:
 		consume(shooter, weapon_data)
 	
@@ -110,13 +115,14 @@ func consume(shooter, weapon_data):
 	
 	
 func validate_action(target, shooter, weapon_data):
-	var defense_deployed = target.get_attrib("harvestable.defense_deployed")
-	if defense_deployed != null and defense_deployed == true:
-		BehaviorEvents.emit_signal("OnLogLine", "This planet has a colony, let's not push our luck")
-		return false
-		
-	if Globals.is_(target.get_attrib("destroyable.destroyed"), true):
-		return false
+	if target != null:
+		var defense_deployed = target.get_attrib("harvestable.defense_deployed")
+		if defense_deployed != null and defense_deployed == true:
+			BehaviorEvents.emit_signal("OnLogLine", "This planet has a colony, let's not push our luck")
+			return false
+			
+		if Globals.is_(target.get_attrib("destroyable.destroyed"), true):
+			return false
 		
 	var ammo = null
 	var is_player = shooter.get_attrib("type") == "player"

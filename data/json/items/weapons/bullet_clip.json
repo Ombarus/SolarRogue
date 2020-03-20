@@ -1,0 +1,28 @@
+{
+	"name_id":"Bullet Clip",
+	"type":"ammo",
+	"sprite_choice":[
+		"missile"
+	],
+	"icon": [{
+		"texture":"data/textures/space-sprite.png",
+		"region":[384,0,128,128]
+	}],
+	"equipment": {
+		"slot":"cargo",
+		"volume":1,
+		"stackable":true
+	},
+	"recyclable": {
+		"energy": 50
+	},
+	"description": {
+		"text":"Ammo for the Minigun. It looks like a pieces of scrap metal but throw enough at a ennemy ship and they'll get annoyed at you.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false}
+			]
+		}
+	}
+}

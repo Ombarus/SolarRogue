@@ -685,7 +685,9 @@ func ProcessAttackSelection(target, shot_tile):
 	
 	var all_canceled = true
 	for shot in _weapon_shots:
-		if "target" in shot and shot.target != null:
+		var shoot_empty = Globals.get_data(shot.weapon_data, "weapon_data.shoot_empty", false)
+		# shot_tile is null if we skipped the shot
+		if "target" in shot and shot.target != null or ("tile" in shot and shot.tile != null and shoot_empty):
 			all_canceled = false
 			break
 			
@@ -694,6 +696,7 @@ func ProcessAttackSelection(target, shot_tile):
 	
 	BehaviorEvents.emit_signal("OnBeginParallelAction", playerNode)
 	for shot in _weapon_shots:
+		var shoot_empty = Globals.get_data(shot.weapon_data, "weapon_data.shoot_empty", false)
 		if shot.target != null:
 			var valid_target := []
 			if typeof(shot.target) == TYPE_ARRAY:
@@ -704,6 +707,8 @@ func ProcessAttackSelection(target, shot_tile):
 			else:
 				valid_target.push_back(shot.target)	
 			BehaviorEvents.emit_signal("OnDealDamage", valid_target, playerNode, shot.weapon_data, shot.tile)
+		elif shot.target == null and shoot_empty and "tile" in shot and shot.tile != null:
+			BehaviorEvents.emit_signal("OnDealDamage", [], playerNode, shot.weapon_data, shot.tile)
 	BehaviorEvents.emit_signal("OnEndParallelAction", playerNode)
 	
 func ProcessBoardSelection(target, tile):

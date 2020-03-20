@@ -11,12 +11,21 @@ RELEASE CHECKLIST :::
 
 
 Beta 2 :::
+- Xileen Boss Fight :
+	- Chaos Ball Generator
+		- validate AI will run after player if shot from outside their radar range
+	- Minigun
+		- Bullet Clip art
+	- Add Generator, Minigun & Bullet Clip to crafting
+	- Add them to random drop in level and ships
+	- Add Xileen as boss
 - Multi-tile
 	- dummies on tile
 - Rune story
+	- Random Encounter
+		- Xileen Boss fight
 	- radiation :
 		- improve radiation damage sfx (add a greenish/reddish visual pulse ?)
-	- "crew" dialog showing a list of missing, dead, active, saved, etc. crew members
 	- Design :
 		1-- 1 or more triggers :
 			- between turn x and y with linear and/or exponential increase in probability (y = 100%)
@@ -236,6 +245,8 @@ IDEAS:::
 	
 DONE BETA2 :::
 
+		- implement shooting blind
+	- "crew" dialog showing a list of missing, dead, active, saved, etc. crew members
 		- remove shield fx when taking damage
 		- what if multiple runes trigger at the same time ?
 			- Tuto prompt + rune at beginning of level
