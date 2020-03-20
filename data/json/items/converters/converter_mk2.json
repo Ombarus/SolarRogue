@@ -45,6 +45,13 @@
 				"amount":1
 			},
 			{
+				"name": "Bullets",
+				"requirements":[{"type":"energy", "amount":200}], 
+				"produce":"data/json/items/weapons/bullet_clip.json",
+				"ap_cost":0.5,
+				"amount":1
+			},
+			{
 				"name": "Torpedo",
 				"requirements":[{"type":"energy", "amount":550}], 
 				"produce":"data/json/items/weapons/torpedo.json",
@@ -134,6 +141,13 @@
 				"name": "Missile Launcher MK2", 
 				"requirements":[{"type":"energy", "amount":1000}, {"type":"spare_parts", "amount":4}], 
 				"produce":"data/json/items/weapons/missile_launcher_mk2.json",
+				"ap_cost":5.0,
+				"amount":1
+			},
+			{
+				"name": "Minigun", 
+				"requirements":[{"type":"energy", "amount":1000}, {"type":"spare_parts", "amount":3}], 
+				"produce":"data/json/items/weapons/minigun.json",
 				"ap_cost":5.0,
 				"amount":1
 			},

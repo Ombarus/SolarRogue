@@ -135,6 +135,13 @@
 				"amount":1
 			},
 			{
+				"name": "Chaos Ball Generator", 
+				"requirements":[{"type":"energy", "amount":1800}, {"type":"spare_parts", "amount":8}], 
+				"produce":"data/json/items/weapons/chaos_ball_generator.json",
+				"ap_cost":6.0,
+				"amount":1
+			},
+			{
 				"name": "Short Range Scanner MK2", 
 				"requirements":[{"type":"energy", "amount":1000}, {"type":"spare_parts", "amount":4}], 
 				"produce":"data/json/items/scanners/scanner_mk2.json",
