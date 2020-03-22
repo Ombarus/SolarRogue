@@ -12,11 +12,10 @@ RELEASE CHECKLIST :::
 
 Beta 2 :::
 - Xileen Boss Fight :
+	- chaos ball VFX & SFX
+	- Minigun VFX & SFX
 	- Chaos Ball Generator
 		- validate AI will run after player if shot from outside their radar range
-	- Minigun
-		- Bullet Clip art
-	- Add Generator, Minigun & Bullet Clip to crafting
 	- Add them to random drop in level and ships
 	- Add Xileen as boss
 - Multi-tile
@@ -244,6 +243,9 @@ IDEAS:::
 	
 	
 DONE BETA2 :::
+	- Minigun
+		- Bullet Clip art
+	- Add Generator, Minigun & Bullet Clip to crafting
 
 		- implement shooting blind
 	- "crew" dialog showing a list of missing, dead, active, saved, etc. crew members

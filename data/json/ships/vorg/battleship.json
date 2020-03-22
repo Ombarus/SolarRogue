@@ -87,7 +87,10 @@
 		{"id":"data/json/items/utilities/power_amplifier_mk2.json", "chance":0.02},
 		{"id":"data/json/items/utilities/power_amplifier_mk3.json", "chance":0.02},
 		
-		
+		{"id":"data/json/items/weapons/minigun.json", "chance":0.025},
+		{"id":"data/json/items/weapons/bullet_clip.json", "chance":0.02},
+		{"id":"data/json/items/weapons/bullet_clip.json", "chance":0.02},
+		{"id":"data/json/items/weapons/bullet_clip.json", "chance":0.02},
 		
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}

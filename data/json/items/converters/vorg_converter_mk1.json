@@ -52,6 +52,13 @@
 				"amount":1
 			},
 			{
+				"name": "Bullets",
+				"requirements":[{"type":"energy", "amount":200}], 
+				"produce":"data/json/items/weapons/bullet_clip.json",
+				"ap_cost":0.5,
+				"amount":1
+			},
+			{
 				"name": "Vorg Scout", 
 				"requirements":[
 					{"type":"energy", "amount":1800},
@@ -109,6 +116,13 @@
 				"requirements":[{"type":"energy", "amount":1500}, {"type":"spare_parts", "amount":8}], 
 				"produce":"data/json/items/shields/shield_mk3.json",
 				"ap_cost":6.0,
+				"amount":1
+			},
+			{
+				"name": "Minigun", 
+				"requirements":[{"type":"energy", "amount":1000}, {"type":"spare_parts", "amount":3}], 
+				"produce":"data/json/items/weapons/minigun.json",
+				"ap_cost":5.0,
 				"amount":1
 			},
 			{

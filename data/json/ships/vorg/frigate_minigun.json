@@ -13,8 +13,7 @@
 	"action_point":0,
 	"mounts": {
 		"weapon": [
-			"data/json/items/weapons/missile_launcher_mk1.json", 
-			"data/json/items/weapons/missile_launcher_mk1.json"
+			"data/json/items/weapons/minigun.json"
 		],
 		"shield": ["data/json/items/shields/shield_mk1.json", "data/json/items/shields/shield_mk1.json"],
 		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
@@ -53,20 +52,18 @@
 		{"id":"data/json/items/utilities/gravitic_compactor.json", "chance":0.006666666667},
 		{"id":"data/json/items/utilities/solar_array.json", "chance":0.01666666667},
 		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.00},
-		{"id":"data/json/items/weapons/missile_launcher_mk1.json", "chance":0.08},
+		{"id":"data/json/items/weapons/missile_launcher_mk1.json", "chance":0.04},
 		{"id":"data/json/items/weapons/missile_launcher_mk1.json", "chance":0.01},
-		{"id":"data/json/items/weapons/missile.json", "chance":0.2},
-		{"id":"data/json/items/weapons/missile.json", "chance":0.15},
-		{"id":"data/json/items/weapons/missile.json", "chance":0.15},
+		{"id":"data/json/items/weapons/missile.json", "chance":0.1},
 		{"id":"data/json/items/consumables/repair_nanobots.json", "chance":0.01},
 		
 		{"id":"data/json/items/shields/shield_mk2.json", "chance":0.045},
 		{"id":"data/json/items/shields/shield_mk3.json", "chance":0.045},
 		
 		
-		{"id":"data/json/items/weapons/missile_launcher_mk2.json", "chance":0.018},
-		{"id":"data/json/items/weapons/missile_launcher_mk3.json", "chance":0.018},
-		{"id":"data/json/items/weapons/laser_turret_mk2.json", "chance":0.018},
+		{"id":"data/json/items/weapons/missile_launcher_mk2.json", "chance":0.01},
+		{"id":"data/json/items/weapons/missile_launcher_mk3.json", "chance":0.01},
+		{"id":"data/json/items/weapons/laser_turret_mk2.json", "chance":0.01},
 		{"id":"data/json/items/scanners/scanner_mk3.json", "chance":0.015},
 		{"id":"data/json/items/scanners/long_range_scanner_mk1.json", "chance":0.040},
 		{"id":"data/json/items/scanners/long_range_scanner_mk2.json", "chance":0.037},
@@ -82,8 +79,10 @@
 		{"id":"data/json/items/utilities/power_amplifier_mk2.json", "chance":0.025},
 		{"id":"data/json/items/utilities/power_amplifier_mk3.json", "chance":0.025},
 		
-		{"id":"data/json/items/weapons/minigun.json", "chance":0.02},
-		{"id":"data/json/items/weapons/bullet_clip.json", "chance":0.02},
+		{"id":"data/json/items/weapons/minigun.json", "chance":0.06},
+		{"id":"data/json/items/weapons/bullet_clip.json", "chance":0.045},
+		{"id":"data/json/items/weapons/bullet_clip.json", "chance":0.035},
+		{"id":"data/json/items/weapons/bullet_clip.json", "chance":0.035},
 
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.1},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
