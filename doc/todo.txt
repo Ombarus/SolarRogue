@@ -245,6 +245,8 @@ IDEAS:::
 DONE BETA2 :::
 	- Minigun
 		- Bullet Clip art
+			- Convert sprite animation into atlas
+			- SFX
 	- Add Generator, Minigun & Bullet Clip to crafting
 
 		- implement shooting blind
