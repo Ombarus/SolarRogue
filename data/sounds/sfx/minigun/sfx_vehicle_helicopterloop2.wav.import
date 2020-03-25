@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_vehicle_helicopterloop2.wav-e7f8ea29be863ae9c7f3cb46034105c3.sample"
+
+[deps]
+
+source_file="res://data/sounds/sfx/minigun/sfx_vehicle_helicopterloop2.wav"
+dest_files=[ "res://.import/sfx_vehicle_helicopterloop2.wav-e7f8ea29be863ae9c7f3cb46034105c3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
