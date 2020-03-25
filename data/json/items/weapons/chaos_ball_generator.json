@@ -7,7 +7,7 @@
 		"region":[384,256,128,128]
 	},
 	"animation": {
-		"shoot": "scenes/tileset_source/LaserFX01.tscn"
+		"shoot": "scenes/tileset_source/chaos_fx.tscn"
 	},
 	"weapon_data": {
 		"base_dam":5.0,
