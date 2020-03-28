@@ -1,6 +1,5 @@
 {
 	"name_id":"A Vorg Battleship",
-	"description":"The best attack vessel of the vorg fleet. Vorg battleship have only one mission, kill while not taking a single hit to their Hull",
 	"type":"ship",
 	"sprite":"vorg_battleship",
 	"icon": {

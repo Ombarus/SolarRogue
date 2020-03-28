@@ -1,6 +1,5 @@
 {
 	"name_id":"A Human Battleship",
-	"description":"The best attack vessel of the human fleet. Made to shoot down any opposition",
 	"type":"ship",
 	"sprite":"human_battleship",
 	"icon": {

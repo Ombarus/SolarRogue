@@ -72,7 +72,8 @@ func _ready():
 	
 	
 	if _TEST_MID_GAME == true:
-		startLevel = "data/json/levels/main/main02.json"
+		startLevel = "data/json/levels/main/main06.json"
+		current_depth = 6
 	Globals.LevelLoaderRef = self
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
 	BehaviorEvents.connect("OnRequestLevelChange", self, "OnRequestLevelChange_Callback")

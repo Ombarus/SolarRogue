@@ -19,6 +19,8 @@ Beta 2 :::
 		- validate AI will run after player if shot from outside their radar range
 	- Add them to random drop in level and ships
 	- Add Xileen as boss
+- Add runes to score, store in achievements and display in result ?
+- runes translation
 - Multi-tile
 	- dummies on tile
 - Rune story

@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -74,6 +74,7 @@
 [ext_resource path="res://scenes/GUI/Dialogs/StoryPrompt.tscn" type="PackedScene" id=72]
 [ext_resource path="res://scripts/Behaviors/Runes/Radiation.gd" type="Script" id=73]
 [ext_resource path="res://scenes/GUI/Dialogs/Crew3.tscn" type="PackedScene" id=74]
+[ext_resource path="res://scripts/Behaviors/Runes/NewFriend.gd" type="Script" id=75]
 
 [node name="Root" type="Node"]
 
@@ -219,6 +220,9 @@ script = ExtResource( 69 )
 
 [node name="Radiation" type="Node" parent="Behaviors/Runes"]
 script = ExtResource( 73 )
+
+[node name="NewFriend" type="Node" parent="Behaviors/Runes"]
+script = ExtResource( 75 )
 
 [node name="BG" type="Sprite" parent="."]
 position = Vector2( 5120, 5120 )

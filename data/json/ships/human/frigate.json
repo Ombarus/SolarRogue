@@ -1,6 +1,5 @@
 {
 	"name_id":"A Human Frigate",
-	"description":"A utility vessel. Can execute a wide range of functions while part of a fleet but lacks any serious firepower",
 	"type":"ship",
 	"sprite":"human_frigate",
 	"icon": {

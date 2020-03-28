@@ -1,6 +1,5 @@
 {
 	"name_id":"A Human Scout",
-	"description":"Fast but relatively weak ship",
 	"type":"ship",
 	"sprite":"human_scout",
 	"icon": {

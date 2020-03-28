@@ -1,6 +1,5 @@
 {
 	"name_id":"A Jerg Scout",
-	"description":"Fast but relatively weak ship, the workhorse of the Jerg fleet",
 	"type":"ship",
 	"sprite":"jerg_scout",
 	"icon": {

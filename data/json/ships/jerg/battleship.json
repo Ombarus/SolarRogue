@@ -1,6 +1,5 @@
 {
 	"name_id":"A Jerg Battleship",
-	"description":"The best attack vessel of the jerg fleet. Made to cripple any opposition",
 	"type":"ship",
 	"sprite":"jerg_battleship",
 	"icon": {
