@@ -11,6 +11,7 @@ RELEASE CHECKLIST :::
 
 
 Beta 2 :::
+- put fx in atlas (chaos & minigun)
 - Xileen Boss Fight :
 	- chaos ball VFX & SFX
 	- Minigun VFX & SFX
