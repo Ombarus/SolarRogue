@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/animations/chaos_fx.gd" type="Script" id=1]
-[ext_resource path="res://data/textures/temp_ball.png" type="Texture" id=2]
+[ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=2]
 [ext_resource path="res://data/textures/bullet_bw.png" type="Texture" id=3]
 [ext_resource path="res://data/sounds/sfx/chaos/sfx_sounds_negative1.wav" type="AudioStream" id=4]
 
@@ -51,6 +51,8 @@ ttl = 0.18
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
 texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 1280, 898, 128, 124 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 material = SubResource( 2 )

@@ -11,22 +11,14 @@ RELEASE CHECKLIST :::
 
 
 Beta 2 :::
-- put fx in atlas (chaos & minigun)
-- Xileen Boss Fight :
-	- chaos ball VFX & SFX
-	- Minigun VFX & SFX
-	- Chaos Ball Generator
-		- validate AI will run after player if shot from outside their radar range
-	- Add them to random drop in level and ships
-	- Add Xileen as boss
-- Add runes to score, store in achievements and display in result ?
+- add runes status to highscore so we can display them one day
 - runes translation
 - Multi-tile
 	- dummies on tile
 - Rune story
-	- Random Encounter
+	- X Random Encounter
 		- Xileen Boss fight
-	- radiation :
+	- X radiation :
 		- improve radiation damage sfx (add a greenish/reddish visual pulse ?)
 	- Design :
 		1-- 1 or more triggers :
@@ -246,6 +238,16 @@ IDEAS:::
 	
 	
 DONE BETA2 :::
+- Add runes to score, store in achievements and display in result ?
+- Xileen Boss Fight :
+	- chaos ball VFX & SFX
+	- Minigun VFX & SFX
+	- Chaos Ball Generator
+		- validate AI will run after player if shot from outside their radar range
+			- (for now I just gave AI with Chaos Ball Generator a bigger scanner)
+	- Add them to random drop in level and ships
+	- Add Xileen as boss
+- put fx in atlas (chaos & minigun)
 	- Minigun
 		- Bullet Clip art
 			- Convert sprite animation into atlas
