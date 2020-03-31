@@ -19,7 +19,8 @@ func OnPlayerDeath_Callback():
 	var result = null
 	if game_won != null and game_won == true:
 		message_success += Globals.mytr("SUCCESS_CONGRATS")
-		message_v2 += player_name
+		message_v2 += "[center]The crew of the \n" + player_name + ":\n"
+		message_v2 += _crew_message(player)
 		result = PermSave.END_GAME_STATE.won
 	elif player.get_attrib("destroyable.current_hull", 1) <= 0:
 		var killer_name = Globals.mytr(player.get_attrib("destroyable.damage_source"))
@@ -33,14 +34,16 @@ func OnPlayerDeath_Callback():
 		result = PermSave.END_GAME_STATE.suicide
 	if game_won == null or game_won == false:
 		message_v2 += "\n" + Globals.mytr("on the %dth wormhole", [cur_level+1])
-	message_v2 += "\n" + Globals.mytr("Saw %d solar systems", [Globals.LevelLoaderRef.num_generated_level])
+	message_v2 += "\n" + Globals.mytr("You visited:\n %d solar systems", [Globals.LevelLoaderRef.num_generated_level])
 	var lowest_diff = player.get_attrib("lowest_diff")
 	lowest_diff += 1
-	message_v2 += "\n" + Globals.mytr("Difficulty : %d", [lowest_diff])
+	message_v2 += "\n\n" + Globals.mytr("Difficulty: %d", [lowest_diff])
 		
 	var score = CalculateScore(player, game_won)
 	update_leaderboard(player, score, result)
-	message_v2 += "\n\n%d" % score
+	message_v2 += "\n\nFinal Score:\n%d" % score
+	if game_won != null and game_won == true:
+		message_v2 += "[/center]"
 	var death_screen_data = {
 		"player_name": player_name,
 		"epitaph": message_v2,
@@ -87,6 +90,12 @@ func CalculateScore(player, game_won):
 	var num_generated_level = Globals.LevelLoaderRef.num_generated_level
 	final_score += 1000 * num_generated_level
 	
+	var runes = player.get_attrib("runes", {})
+	for rune in runes:
+		var completed = player.get_attrib("runes.%s.completed" % rune, false)
+		if completed == true:
+			final_score += 2500
+	
 	var difficulty_boost = player.get_attrib("lowest_diff") + 1 #0 to 4, make it 1 to 5 as multiplier
 	
 	return final_score * difficulty_boost
@@ -118,7 +127,33 @@ func update_leaderboard(player, final_score, result):
 
 func ScoreDone_Callback():
 	get_tree().change_scene("res://scenes/MainMenu.tscn")
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+
+func _crew_message(player : Attributes) -> String:
+	var final_text = ""
+	var victory_crew := []
+	var failed_crew := []
+	
+	var runes = player.get_attrib("runes", {})
+	for rune in runes:
+		var completed = player.get_attrib("runes.%s.completed" % rune, null)
+		var name : String = player.get_attrib("runes.%s.name" % rune, "")
+		if name.empty():
+			# weirdo? shouldn't happen, if name is empty title MUST be something...
+			name = "a %s" % player.get_attrib("runes.%s.title" % rune, "weirdo?")
+		if completed == null: # urgh.... maybe this should be a enum state ?
+			victory_crew.push_back(name)
+		elif completed == true:
+			victory_crew.push_back("[color=lime]%s[/color]" % name)
+		else:
+			failed_crew.push_back(name)
+	
+	final_text += PoolStringArray(victory_crew).join(", ")
+	final_text += "\n\n"
+	if failed_crew.size() > 0:
+		final_text += "Sadly left behind:\n"
+		final_text += "[color=red]%s[/color]" % [PoolStringArray(failed_crew).join(", ")]
+	else:
+		final_text += "Did not leave anyone behind!"
+	final_text += "\n"
+	
+	return final_text

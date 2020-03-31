@@ -32,14 +32,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -360.0
-margin_top = -326.0
-margin_right = 360.0
-margin_bottom = 331.0
+margin_left = -403.0
+margin_top = -328.5
+margin_right = 403.0
+margin_bottom = 328.5
 dialog_ok = true
 title = "You are dead"
 
 [node name="tombstone" type="RichTextLabel" parent="base"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 95.0
@@ -98,7 +99,6 @@ text = "
       .-\\\\`=.......................=`//-\". "
 
 [node name="Earth" type="Control" parent="base"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -65.0
@@ -108,7 +108,6 @@ script = ExtResource( 8 )
 frame_rate = 0.25
 
 [node name="tombstone01" type="RichTextLabel" parent="base/Earth"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 100.0
@@ -1851,15 +1850,55 @@ autowrap = true
 [node name="Success" type="Label" parent="base"]
 margin_left = 8.0
 margin_top = 53.0
-margin_right = 708.0
+margin_right = 784.0
 margin_bottom = 200.0
-align = 1
-autowrap = true
+text = "The Converter of Yendor uses the energy of the wormhole itself to rip a hole through space. You spool up the engines and glide through it. On the other side HOME is waiting!
 
-[node name="Success2" type="Label" parent="base"]
-margin_left = 426.0
-margin_top = 233.0
-margin_right = 698.0
-margin_bottom = 635.0
+You made it!"
 align = 1
 autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Success2" type="RichTextLabel" parent="base"]
+margin_left = 419.0
+margin_top = 201.0
+margin_right = 787.0
+margin_bottom = 643.0
+bbcode_enabled = true
+bbcode_text = "[center]The crew of the 
+John Smith:
+Eric 'doc' Brown, [color=lime]Xileen[/color] 
+and Leonard Grayson
+
+Sadly left behind:
+[color=red]Spock, Reginald Dewbee 
+and 5 red shirts[/color]
+
+You visited:
+1 solar systems
+
+Difficulty : 3
+
+Final Score:
+3077886[/center]"
+text = "The crew of the 
+John Smith:
+Eric 'doc' Brown, Xileen 
+and Leonard Grayson
+
+Sadly left behind:
+Spock, Reginald Dewbee 
+and 5 red shirts
+
+You visited:
+1 solar systems
+
+Difficulty : 3
+
+Final Score:
+3077886"
+__meta__ = {
+"_edit_use_anchors_": false
+}

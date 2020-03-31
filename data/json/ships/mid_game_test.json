@@ -15,7 +15,7 @@
 		],
 		"shield": ["data/json/items/shields/shield_mk3.json"],
 		"scanner": ["data/json/items/scanners/ultimate_scanner.json"],
-		"converter": ["data/json/items/converters/converter_mk2.json"],
+		"converter": ["data/json/items/converters/converter_yendor.json"],
 		"utility":[
 			"data/json/items/utilities/solar_array.json",
 			""

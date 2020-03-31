@@ -22,7 +22,7 @@ func Init(init_param):
 	
 	get_node("base/Name").text = init_param["player_name"]
 	get_node("base/Epitaph").text = init_param["epitaph"]
-	get_node("base/Success2").text = init_param["epitaph"]
+	get_node("base/Success2").bbcode_text = init_param["epitaph"]
 	get_node("base/Success").text = init_param["message_success"]
 	
 	if success == true:

@@ -97,4 +97,6 @@ func Intro_Done_Callback():
 	player.set_attrib("runes.%s.log" % self.name, "Deserter. Ran to the human colonies in Homeworld 3")
 	player.set_attrib("runes.%s.color" % self.name, [0.58,0.58,0.0])
 	player.set_attrib("runes.%s.intro_done" % self.name, true)
+	# Set Completed to false so it's considered "failed" if we don't go back for him
+	player.set_attrib("runes.%s.completed" % self.name, false)
 	BehaviorEvents.emit_signal("OnAnimationDone")
