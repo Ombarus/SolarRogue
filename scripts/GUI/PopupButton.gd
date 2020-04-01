@@ -41,7 +41,9 @@ func Pressed_More_Callback():
 		
 	
 func Pressed_Close_Callback():
-	_more_btn.visible = true
+	if _more_btn.IsHUD == true and Engine.is_editor_hint() == false:
+		self.visible = not PermSave.get_attrib("settings.hide_hud")
+	#_more_btn.visible = true
 	_animator.play_backwards("popin")
 	_animator.connect("animation_finished", self, "animation_finished_Callback")
 	#_popup.visible = false

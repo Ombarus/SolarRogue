@@ -53,5 +53,8 @@ custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
 bbcode_text = "[color=red]Select Target...[/color]"
 text = "Select Target..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Skip" to="." method="_on_Skip_pressed"]
 [connection signal="pressed" from="Cancel" to="." method="_on_Cancel_pressed"]

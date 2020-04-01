@@ -111,7 +111,12 @@ func Pressed_Look_Callback():
 	if lock_input:
 		return
 	set_input_state(Globals.INPUT_STATE.look_around)
-	BehaviorEvents.emit_signal("OnLogLine", "Select area to scan...")
+	
+	BehaviorEvents.emit_signal("OnPopGUI") #HUD
+	var text = "[color=lime]%s[/color]" % [Globals.mytr("Select area to scan...")]
+	BehaviorEvents.emit_signal("OnPushGUI", "TargettingHUD", {"info_text":text, "show_skip":false})
+	
+	#BehaviorEvents.emit_signal("OnLogLine", "Select area to scan...")
 
 func Pressed_Board_Callback():
 	if lock_input:
@@ -445,6 +450,8 @@ func _input(event):
 	
 	click_start_pos = Vector2(0,0)
 	#print("player::_input set input to HUD")
+	BehaviorEvents.emit_signal("OnPopGUI")
+	BehaviorEvents.emit_signal("OnPushGUI", "HUD", null)
 	set_input_state(Globals.INPUT_STATE.hud)
 	
 	var click_pos = playerNode.get_global_mouse_position()
