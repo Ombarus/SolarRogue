@@ -137,7 +137,7 @@ script = ExtResource( 13 )
 
 [node name="AP" type="Node" parent="Behaviors"]
 script = ExtResource( 14 )
-LogWindow = NodePath("../../Camera-GUI/SafeArea/HUD/Log/LogWindow")
+LogWindow = NodePath("../../ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Log/LogWindow")
 
 [node name="SpriteLoader" type="Node" parent="Behaviors"]
 script = ExtResource( 15 )
@@ -153,16 +153,16 @@ script = ExtResource( 18 )
 [node name="Player" type="Node" parent="Behaviors"]
 script = ExtResource( 19 )
 levelLoaderNode = NodePath("../LevelLoader")
-WeaponAction = NodePath("../../Camera-GUI/SafeArea/HUD/Buttons/Weapon")
-GrabAction = NodePath("../../Camera-GUI/SafeArea/HUD/Buttons/Grab")
-InventoryAction = NodePath("../../Camera-GUI/SafeArea/HUD/Buttons/Inventory")
-InventoryDialog = NodePath("../../Camera-GUI/SafeArea/InventoryV2")
-CraftingAction = NodePath("../../Camera-GUI/SafeArea/HUD/Buttons/Converter")
-FTLAction = NodePath("../../Camera-GUI/SafeArea/HUD/Buttons/Wormhole")
-PopupButtons = NodePath("../../Camera-GUI/SafeArea/HUD/Buttons/PopupButton")
-TargettingHUD = NodePath("../../Camera-GUI/SafeArea/TargettingHUD")
-OptionBtn = NodePath("../../Camera-GUI/SafeArea/HUD/Buttons/Options")
-QuestionBtn = NodePath("../../Camera-GUI/SafeArea/HUD/Buttons/Question")
+WeaponAction = NodePath("../../ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons/Weapon")
+GrabAction = NodePath("../../ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons/Grab")
+InventoryAction = NodePath("../../ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons/Inventory")
+InventoryDialog = NodePath("../../ViewportContainer/Viewport/Camera-GUI/SafeArea/InventoryV2")
+CraftingAction = NodePath("../../ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons/Converter")
+FTLAction = NodePath("../../ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons/Wormhole")
+PopupButtons = NodePath("../../ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons/PopupButton")
+TargettingHUD = NodePath("../../ViewportContainer/Viewport/Camera-GUI/SafeArea/TargettingHUD")
+OptionBtn = NodePath("../../ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons/Options")
+QuestionBtn = NodePath("../../ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons/Question")
 
 [node name="AI" type="Node" parent="Behaviors"]
 script = ExtResource( 20 )
@@ -196,7 +196,7 @@ script = ExtResource( 28 )
 
 [node name="Targetting" type="Node" parent="Behaviors"]
 script = ExtResource( 29 )
-TargettingHUD = NodePath("../../Camera-GUI/SafeArea/TargettingHUD")
+TargettingHUD = NodePath("../../ViewportContainer/Viewport/Camera-GUI/SafeArea/TargettingHUD")
 
 [node name="Animation" type="Node" parent="Behaviors"]
 script = ExtResource( 30 )
@@ -225,6 +225,7 @@ script = ExtResource( 73 )
 script = ExtResource( 75 )
 
 [node name="BG" type="Sprite" parent="."]
+visible = false
 position = Vector2( 5120, 5120 )
 texture = ExtResource( 34 )
 region_enabled = true
@@ -247,9 +248,11 @@ position = Vector2( -128, -128 )
 scale = Vector2( 128, 128 )
 
 [node name="base_green" parent="." instance=ExtResource( 37 )]
+visible = false
 position = Vector2( 5120, 5120 )
 
 [node name="BorderTiles" parent="." instance=ExtResource( 71 )]
+visible = false
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="."]
 copy_mode = 2
@@ -262,6 +265,7 @@ script = ExtResource( 38 )
 [node name="targetting" parent="OverlayTiles/mouse_targetting" instance=ExtResource( 39 )]
 
 [node name="GameTiles" type="Node2D" parent="."]
+visible = false
 
 [node name="World-GUI" type="Node" parent="."]
 
@@ -276,9 +280,24 @@ script = ExtResource( 42 )
 follow_smooth = 35.0
 levelLoaderNode = NodePath("../Behaviors/LevelLoader")
 
-[node name="Camera-GUI" type="CanvasLayer" parent="."]
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="SafeArea" type="Control" parent="Camera-GUI"]
+[node name="Viewport" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 1280, 720 )
+handle_input_locally = false
+usage = 0
+debug_draw = 2
+render_target_update_mode = 3
+
+[node name="Camera-GUI" type="CanvasLayer" parent="ViewportContainer/Viewport"]
+
+[node name="SafeArea" type="Control" parent="ViewportContainer/Viewport/Camera-GUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -287,7 +306,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HUD" type="Control" parent="Camera-GUI/SafeArea"]
+[node name="HUD" type="Control" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1.0
@@ -299,7 +318,7 @@ __meta__ = {
 }
 Transition = false
 
-[node name="Log" type="Control" parent="Camera-GUI/SafeArea/HUD"]
+[node name="Log" type="Control" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 506.0
@@ -308,7 +327,7 @@ margin_bottom = 5.0
 mouse_filter = 2
 script = ExtResource( 43 )
 
-[node name="LogWindow" parent="Camera-GUI/SafeArea/HUD/Log" instance=ExtResource( 44 )]
+[node name="LogWindow" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Log" instance=ExtResource( 44 )]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -320,7 +339,7 @@ mouse_filter = 2
 title = "Log Stardate 0.0.0"
 border_style = "═"
 
-[node name="Buttons" type="Control" parent="Camera-GUI/SafeArea/HUD"]
+[node name="Buttons" type="Control" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -328,7 +347,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Weapon" parent="Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
+[node name="Weapon" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -341,7 +360,7 @@ Text = "[w]eapon"
 ShortcutKey = "w"
 IsHUD = true
 
-[node name="Grab" parent="Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
+[node name="Grab" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -355,7 +374,7 @@ Text = "[g]rab"
 ShortcutKey = "g"
 IsHUD = true
 
-[node name="Wormhole" parent="Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
+[node name="Wormhole" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -369,7 +388,7 @@ Text = "[<]FTL"
 ShortcutKey = "<"
 IsHUD = true
 
-[node name="Inventory" parent="Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
+[node name="Inventory" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -383,7 +402,7 @@ Text = "[i]nv"
 ShortcutKey = "i"
 IsHUD = true
 
-[node name="Converter" parent="Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
+[node name="Converter" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -395,7 +414,7 @@ Text = "[c]onv"
 ShortcutKey = "c"
 IsHUD = true
 
-[node name="PopupButton" parent="Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 46 )]
+[node name="PopupButton" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 46 )]
 anchor_top = 1.0
 anchor_right = 0.0
 margin_left = 10.0
@@ -403,7 +422,7 @@ margin_top = -529.0
 margin_right = 150.0
 margin_bottom = -113.0
 
-[node name="ZoomIn" parent="Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
+[node name="ZoomIn" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -415,7 +434,7 @@ margin_bottom = -135.0
 Text = "+"
 IsHUD = true
 
-[node name="ZoomOut" parent="Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
+[node name="ZoomOut" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -427,7 +446,7 @@ margin_bottom = -136.0
 Text = "-"
 IsHUD = true
 
-[node name="Options" parent="Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
+[node name="Options" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -439,14 +458,14 @@ margin_bottom = -59.0
 ShortcutEnum = 16777217
 AlwaysOnShortcut = false
 
-[node name="Sprite" type="Sprite" parent="Camera-GUI/SafeArea/HUD/Buttons/Options"]
+[node name="Sprite" type="Sprite" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons/Options"]
 position = Vector2( 32, 33 )
 scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 47 )
 region_enabled = true
 region_rect = Rect2( 1664, 0, 64, 64 )
 
-[node name="Question" parent="Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
+[node name="Question" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -459,7 +478,7 @@ Text = "?"
 ShortcutKey = "?"
 IsHUD = true
 
-[node name="StatusBar" type="Control" parent="Camera-GUI/SafeArea/HUD"]
+[node name="StatusBar" type="Control" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -1.0
@@ -469,7 +488,7 @@ script = ExtResource( 48 )
 warning_energy_level = 5001
 danger_energy_level = 1001
 
-[node name="StatusWindow" parent="Camera-GUI/SafeArea/HUD/StatusBar" instance=ExtResource( 44 )]
+[node name="StatusWindow" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/StatusBar" instance=ExtResource( 44 )]
 anchor_right = 1.0
 margin_left = 5.0
 margin_top = 6.0
@@ -480,7 +499,7 @@ bottom_title = "The Maveric"
 content = "Hull : [color=lime]==========[/color] Energy : [color=yellow]25000[/color] Shield : [color=aqua]===============[/color]"
 border_style = "═"
 
-[node name="levelinfo" type="Label" parent="Camera-GUI/SafeArea/HUD/StatusBar/StatusWindow"]
+[node name="levelinfo" type="Label" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/StatusBar/StatusWindow"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -493,53 +512,53 @@ text = "start"
 align = 2
 valign = 1
 
-[node name="base2" parent="Camera-GUI/SafeArea/HUD/StatusBar" instance=ExtResource( 50 )]
+[node name="base2" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/StatusBar" instance=ExtResource( 50 )]
 visible = false
 margin_top = 1.0
 margin_right = -1114.0
 margin_bottom = -601.0
 
-[node name="TargettingHUD" parent="Camera-GUI/SafeArea" instance=ExtResource( 51 )]
+[node name="TargettingHUD" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea" instance=ExtResource( 51 )]
 visible = false
 Transition = false
 
-[node name="SelectTarget" parent="Camera-GUI/SafeArea" instance=ExtResource( 52 )]
+[node name="SelectTarget" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea" instance=ExtResource( 52 )]
 visible = false
 
-[node name="Options" parent="Camera-GUI/SafeArea" instance=ExtResource( 53 )]
+[node name="Options" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea" instance=ExtResource( 53 )]
 visible = false
 
-[node name="ValidateDiag" parent="Camera-GUI/SafeArea" instance=ExtResource( 54 )]
+[node name="ValidateDiag" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea" instance=ExtResource( 54 )]
 visible = false
 
-[node name="Tutorial" parent="Camera-GUI/SafeArea" instance=ExtResource( 55 )]
+[node name="Tutorial" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea" instance=ExtResource( 55 )]
 visible = false
 DefaultLang = NodePath("../SafeArea/Tutorial/base/en")
 
-[node name="InventoryV2" parent="Camera-GUI/SafeArea" instance=ExtResource( 56 )]
+[node name="InventoryV2" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea" instance=ExtResource( 56 )]
 visible = false
 
-[node name="TransferInventoryV2" parent="Camera-GUI/SafeArea" instance=ExtResource( 57 )]
+[node name="TransferInventoryV2" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea" instance=ExtResource( 57 )]
 visible = false
 
-[node name="ConverterV2" parent="Camera-GUI/SafeArea" instance=ExtResource( 58 )]
+[node name="ConverterV2" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea" instance=ExtResource( 58 )]
 visible = false
 CraftingBehavior = NodePath("../../../Behaviors/Crafting")
 
-[node name="Settings" parent="Camera-GUI/SafeArea" instance=ExtResource( 59 )]
+[node name="Settings" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea" instance=ExtResource( 59 )]
 visible = false
 
-[node name="WelcomeScreen" parent="Camera-GUI/SafeArea" instance=ExtResource( 60 )]
+[node name="WelcomeScreen" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea" instance=ExtResource( 60 )]
 visible = false
 DefaultLang = NodePath("../SafeArea/WelcomeScreen/base/en")
 
-[node name="HowManyDiag" parent="Camera-GUI/SafeArea" instance=ExtResource( 61 )]
+[node name="HowManyDiag" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea" instance=ExtResource( 61 )]
 visible = false
 
-[node name="Description" parent="Camera-GUI/SafeArea" instance=ExtResource( 62 )]
+[node name="Description" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea" instance=ExtResource( 62 )]
 visible = false
 
-[node name="ApDebugWindow" parent="Camera-GUI/SafeArea" instance=ExtResource( 63 )]
+[node name="ApDebugWindow" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea" instance=ExtResource( 63 )]
 visible = false
 margin_left = 854.0
 margin_top = 132.0
@@ -547,13 +566,13 @@ margin_right = 814.0
 margin_bottom = 92.0
 AP_behavior_path = NodePath("../../../Behaviors/AP")
 
-[node name="StoryPrompt" parent="Camera-GUI/SafeArea" instance=ExtResource( 72 )]
+[node name="StoryPrompt" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea" instance=ExtResource( 72 )]
 visible = false
 
-[node name="TutoPrompt" parent="Camera-GUI/SafeArea" instance=ExtResource( 64 )]
+[node name="TutoPrompt" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea" instance=ExtResource( 64 )]
 visible = false
 
-[node name="FPSCounter" parent="Camera-GUI/SafeArea" instance=ExtResource( 65 )]
+[node name="FPSCounter" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea" instance=ExtResource( 65 )]
 anchor_left = 1.0
 anchor_top = 1.0
 margin_left = -136.0
@@ -561,17 +580,17 @@ margin_top = -51.0
 margin_right = -14.0
 margin_bottom = -10.0
 
-[node name="DeathScreen" parent="Camera-GUI/SafeArea" instance=ExtResource( 66 )]
+[node name="DeathScreen" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea" instance=ExtResource( 66 )]
 visible = false
 
-[node name="Crew" parent="Camera-GUI/SafeArea" instance=ExtResource( 74 )]
+[node name="Crew" parent="ViewportContainer/Viewport/Camera-GUI/SafeArea" instance=ExtResource( 74 )]
 visible = false
 
 [node name="Loading-FX" type="CanvasLayer" parent="."]
 
 [node name="Starfield" parent="Loading-FX" instance=ExtResource( 67 )]
 visible = false
-[connection signal="down" from="Camera-GUI/SafeArea/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_ZoomIn_down"]
-[connection signal="up" from="Camera-GUI/SafeArea/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_Zoom_up"]
-[connection signal="down" from="Camera-GUI/SafeArea/HUD/Buttons/ZoomOut" to="Camera2D" method="_on_ZoomOut_down"]
-[connection signal="up" from="Camera-GUI/SafeArea/HUD/Buttons/ZoomOut" to="Camera2D" method="_on_Zoom_up"]
+[connection signal="down" from="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_ZoomIn_down"]
+[connection signal="up" from="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_Zoom_up"]
+[connection signal="down" from="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons/ZoomOut" to="Camera2D" method="_on_ZoomOut_down"]
+[connection signal="up" from="ViewportContainer/Viewport/Camera-GUI/SafeArea/HUD/Buttons/ZoomOut" to="Camera2D" method="_on_Zoom_up"]
