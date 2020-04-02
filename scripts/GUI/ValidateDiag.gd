@@ -4,15 +4,16 @@ var _callback_obj = null
 var _callback_method = ""
 
 onready var _info : RichTextLabel = get_node("base/Info")
+onready var _base = get_node("base")
 var _default_text : String = "Are you sure ?"
 
 func _ready():
-	get_node("base").connect("OnOkPressed", self, "Ok_Callback")
-	get_node("base").connect("OnCancelPressed", self, "Cancel_Callback")
+	_base.connect("OnOkPressed", self, "Ok_Callback")
+	_base.connect("OnCancelPressed", self, "Cancel_Callback")
 
 func Ok_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
-	get_node("base").disabled = true
+	_base.disabled = true
 	
 	if _callback_obj == null:
 		return
@@ -21,10 +22,10 @@ func Ok_Callback():
 	
 func Cancel_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
-	get_node("base").disabled = true
+	_base.disabled = true
 	
 func Init(init_param):
-	get_node("base").disabled = false
+	_base.disabled = false
 	_callback_obj = init_param["callback_object"]
 	_callback_method = init_param["callback_method"]
 	

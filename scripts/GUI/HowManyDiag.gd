@@ -5,27 +5,28 @@ var _callback_method = ""
 
 onready var _selector = get_node("base/Selector")
 onready var _info = get_node("base/Info")
+onready var _base = get_node("base")
 
 func _ready():
-	get_node("base").connect("OnOkPressed", self, "Ok_Callback")
-	get_node("base").connect("OnCancelPressed", self, "Cancel_Callback")
+	_base.connect("OnOkPressed", self, "Ok_Callback")
+	_base.connect("OnCancelPressed", self, "Cancel_Callback")
 
 func Ok_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
-	get_node("base").disabled = true # prevent multi-click that would pop unwanted GUI
+	_base.disabled = true # prevent multi-click that would pop unwanted GUI
 	
 	if _callback_obj == null:
 		return
 		
-	var val = get_node("base/Selector").value
+	var val = _selector.value
 	_callback_obj.call(_callback_method, val)
 	
 func Cancel_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
-	get_node("base").disabled = true
+	_base.disabled = true
 	
 func Init(init_param):
-	get_node("base").disabled = false
+	_base.disabled = false
 	_callback_obj = init_param["callback_object"]
 	_callback_method = init_param["callback_method"]
 	

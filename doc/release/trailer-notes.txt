@@ -4,3 +4,16 @@ Action
 Explosion
 Music
 Ascii aesthetic
+
+
+mise en scene :
+- Start with the wormhole animation
+- zoom on ship, make UI appear like on a old screen to remind people this is an old school Roguelike
+	- text : "An oldschool roguelike"
+
+	- lost in space ?
+
+Scenes that must be shown :
+	- Shooting ship
+	- Shooting planet
+	- Crafting ship

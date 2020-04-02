@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://data/sounds/sfx/inventory/gb-jettison-test.wav" type="AudioStream" id=8]
 [ext_resource path="res://data/sounds/sfx/inventory/gb-pickup-test.wav" type="AudioStream" id=9]
 [ext_resource path="res://scripts/Behaviors/UIManager.gd" type="Script" id=10]
-[ext_resource path="res://data/animations/popin.tres" type="Animation" id=11]
 [ext_resource path="res://scripts/Behaviors/MemoryBehavior.gd" type="Script" id=12]
 [ext_resource path="res://scripts/Behaviors/ScannerBehavior.gd" type="Script" id=13]
 [ext_resource path="res://scripts/Behaviors/APBehavior.gd" type="Script" id=14]
@@ -188,9 +187,6 @@ bus = "Sfx"
 script = ExtResource( 10 )
 animator = NodePath("PopingAnimatorShader")
 
-[node name="PopingAnimator" type="AnimationPlayer" parent="Behaviors/UIManager"]
-anims/popin = ExtResource( 11 )
-
 [node name="PopingAnimatorShader" type="AnimationPlayer" parent="Behaviors/UIManager"]
 root_node = NodePath("../../../Camera-GUI/ViewportContainer")
 anims/popin = SubResource( 1 )
@@ -204,7 +200,7 @@ script = ExtResource( 13 )
 
 [node name="AP" type="Node" parent="Behaviors"]
 script = ExtResource( 14 )
-LogWindow = NodePath("../../Camera-GUI/SafeArea/HUD/Log/LogWindow")
+LogWindow = NodePath("../../Camera-GUI/SafeArea/HUD_root/HUD/Log/LogWindow")
 
 [node name="SpriteLoader" type="Node" parent="Behaviors"]
 script = ExtResource( 15 )
@@ -220,16 +216,16 @@ script = ExtResource( 18 )
 [node name="Player" type="Node" parent="Behaviors"]
 script = ExtResource( 19 )
 levelLoaderNode = NodePath("../LevelLoader")
-WeaponAction = NodePath("../../Camera-GUI/SafeArea/HUD/Buttons/Weapon")
-GrabAction = NodePath("../../Camera-GUI/SafeArea/HUD/Buttons/Grab")
-InventoryAction = NodePath("../../Camera-GUI/SafeArea/HUD/Buttons/Inventory")
-InventoryDialog = NodePath("../../Camera-GUI/SafeArea/InventoryV2")
-CraftingAction = NodePath("../../Camera-GUI/SafeArea/HUD/Buttons/Converter")
-FTLAction = NodePath("../../Camera-GUI/SafeArea/HUD/Buttons/Wormhole")
-PopupButtons = NodePath("../../Camera-GUI/SafeArea/HUD/Buttons/PopupButton")
-TargettingHUD = NodePath("../../Camera-GUI/SafeArea/TargettingHUD")
-OptionBtn = NodePath("../../Camera-GUI/SafeArea/HUD/Buttons/Options")
-QuestionBtn = NodePath("../../Camera-GUI/SafeArea/HUD/Buttons/Question")
+WeaponAction = NodePath("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Weapon")
+GrabAction = NodePath("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Grab")
+InventoryAction = NodePath("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Inventory")
+InventoryDialog = NodePath("../../Camera-GUI/SafeArea/InventoryRoot/InventoryV2")
+CraftingAction = NodePath("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Converter")
+FTLAction = NodePath("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Wormhole")
+PopupButtons = NodePath("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/PopupButton")
+TargettingHUD = NodePath("../../Camera-GUI/SafeArea/TargettingRoot/TargettingHUD")
+OptionBtn = NodePath("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Options")
+QuestionBtn = NodePath("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Question")
 
 [node name="AI" type="Node" parent="Behaviors"]
 script = ExtResource( 20 )
@@ -263,7 +259,7 @@ script = ExtResource( 28 )
 
 [node name="Targetting" type="Node" parent="Behaviors"]
 script = ExtResource( 29 )
-TargettingHUD = NodePath("../../Camera-GUI/SafeArea/TargettingHUD")
+TargettingHUD = NodePath("../../Camera-GUI/SafeArea/TargettingRoot/TargettingHUD")
 
 [node name="Animation" type="Node" parent="Behaviors"]
 script = ExtResource( 30 )
@@ -358,7 +354,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HUD" type="Control" parent="Camera-GUI/SafeArea"]
+[node name="HUD_root" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HUD" type="Control" parent="Camera-GUI/SafeArea/HUD_root"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1.0
@@ -369,7 +373,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Log" type="Control" parent="Camera-GUI/SafeArea/HUD"]
+[node name="Log" type="Control" parent="Camera-GUI/SafeArea/HUD_root/HUD"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 506.0
@@ -378,7 +382,7 @@ margin_bottom = 5.0
 mouse_filter = 2
 script = ExtResource( 43 )
 
-[node name="LogWindow" parent="Camera-GUI/SafeArea/HUD/Log" instance=ExtResource( 44 )]
+[node name="LogWindow" parent="Camera-GUI/SafeArea/HUD_root/HUD/Log" instance=ExtResource( 44 )]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -390,7 +394,7 @@ mouse_filter = 2
 title = "Log Stardate 0.0.0"
 border_style = "═"
 
-[node name="Buttons" type="Control" parent="Camera-GUI/SafeArea/HUD"]
+[node name="Buttons" type="Control" parent="Camera-GUI/SafeArea/HUD_root/HUD"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -398,7 +402,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Weapon" parent="Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
+[node name="Weapon" parent="Camera-GUI/SafeArea/HUD_root/HUD/Buttons" instance=ExtResource( 45 )]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -411,7 +415,7 @@ Text = "[w]eapon"
 ShortcutKey = "w"
 IsHUD = true
 
-[node name="Grab" parent="Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
+[node name="Grab" parent="Camera-GUI/SafeArea/HUD_root/HUD/Buttons" instance=ExtResource( 45 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -425,7 +429,7 @@ Text = "[g]rab"
 ShortcutKey = "g"
 IsHUD = true
 
-[node name="Wormhole" parent="Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
+[node name="Wormhole" parent="Camera-GUI/SafeArea/HUD_root/HUD/Buttons" instance=ExtResource( 45 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -439,7 +443,7 @@ Text = "[<]FTL"
 ShortcutKey = "<"
 IsHUD = true
 
-[node name="Inventory" parent="Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
+[node name="Inventory" parent="Camera-GUI/SafeArea/HUD_root/HUD/Buttons" instance=ExtResource( 45 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -453,7 +457,7 @@ Text = "[i]nv"
 ShortcutKey = "i"
 IsHUD = true
 
-[node name="Converter" parent="Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
+[node name="Converter" parent="Camera-GUI/SafeArea/HUD_root/HUD/Buttons" instance=ExtResource( 45 )]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -465,7 +469,7 @@ Text = "[c]onv"
 ShortcutKey = "c"
 IsHUD = true
 
-[node name="PopupButton" parent="Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 46 )]
+[node name="PopupButton" parent="Camera-GUI/SafeArea/HUD_root/HUD/Buttons" instance=ExtResource( 46 )]
 anchor_top = 1.0
 anchor_right = 0.0
 margin_left = 10.0
@@ -473,7 +477,7 @@ margin_top = -529.0
 margin_right = 150.0
 margin_bottom = -113.0
 
-[node name="ZoomIn" parent="Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
+[node name="ZoomIn" parent="Camera-GUI/SafeArea/HUD_root/HUD/Buttons" instance=ExtResource( 45 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -485,7 +489,7 @@ margin_bottom = -135.0
 Text = "+"
 IsHUD = true
 
-[node name="ZoomOut" parent="Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
+[node name="ZoomOut" parent="Camera-GUI/SafeArea/HUD_root/HUD/Buttons" instance=ExtResource( 45 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -497,7 +501,7 @@ margin_bottom = -136.0
 Text = "-"
 IsHUD = true
 
-[node name="Options" parent="Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
+[node name="Options" parent="Camera-GUI/SafeArea/HUD_root/HUD/Buttons" instance=ExtResource( 45 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -509,14 +513,14 @@ margin_bottom = -59.0
 ShortcutEnum = 16777217
 AlwaysOnShortcut = false
 
-[node name="Sprite" type="Sprite" parent="Camera-GUI/SafeArea/HUD/Buttons/Options"]
+[node name="Sprite" type="Sprite" parent="Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Options"]
 position = Vector2( 32, 33 )
 scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 47 )
 region_enabled = true
 region_rect = Rect2( 1664, 0, 64, 64 )
 
-[node name="Question" parent="Camera-GUI/SafeArea/HUD/Buttons" instance=ExtResource( 45 )]
+[node name="Question" parent="Camera-GUI/SafeArea/HUD_root/HUD/Buttons" instance=ExtResource( 45 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -529,7 +533,7 @@ Text = "?"
 ShortcutKey = "?"
 IsHUD = true
 
-[node name="StatusBar" type="Control" parent="Camera-GUI/SafeArea/HUD"]
+[node name="StatusBar" type="Control" parent="Camera-GUI/SafeArea/HUD_root/HUD"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -1.0
@@ -539,7 +543,7 @@ script = ExtResource( 48 )
 warning_energy_level = 5001
 danger_energy_level = 1001
 
-[node name="StatusWindow" parent="Camera-GUI/SafeArea/HUD/StatusBar" instance=ExtResource( 44 )]
+[node name="StatusWindow" parent="Camera-GUI/SafeArea/HUD_root/HUD/StatusBar" instance=ExtResource( 44 )]
 anchor_right = 1.0
 margin_left = 5.0
 margin_top = 6.0
@@ -550,7 +554,7 @@ bottom_title = "The Maveric"
 content = "Hull : [color=lime]==========[/color] Energy : [color=yellow]25000[/color] Shield : [color=aqua]===============[/color]"
 border_style = "═"
 
-[node name="levelinfo" type="Label" parent="Camera-GUI/SafeArea/HUD/StatusBar/StatusWindow"]
+[node name="levelinfo" type="Label" parent="Camera-GUI/SafeArea/HUD_root/HUD/StatusBar/StatusWindow"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -563,50 +567,144 @@ text = "start"
 align = 2
 valign = 1
 
-[node name="base2" parent="Camera-GUI/SafeArea/HUD/StatusBar" instance=ExtResource( 50 )]
+[node name="base2" parent="Camera-GUI/SafeArea/HUD_root/HUD/StatusBar" instance=ExtResource( 50 )]
 visible = false
 margin_top = 1.0
 margin_right = -1114.0
 margin_bottom = -601.0
 
-[node name="TargettingHUD" parent="Camera-GUI/SafeArea" instance=ExtResource( 51 )]
+[node name="TargettingRoot" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TargettingHUD" parent="Camera-GUI/SafeArea/TargettingRoot" instance=ExtResource( 51 )]
 visible = false
 Transition = false
 
-[node name="SelectTarget" parent="Camera-GUI/SafeArea" instance=ExtResource( 52 )]
+[node name="SelectTargetRoot" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SelectTarget" parent="Camera-GUI/SafeArea/SelectTargetRoot" instance=ExtResource( 52 )]
 visible = false
 
-[node name="Options" parent="Camera-GUI/SafeArea" instance=ExtResource( 53 )]
+[node name="OptionsRoot" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" parent="Camera-GUI/SafeArea/OptionsRoot" instance=ExtResource( 53 )]
 visible = false
 
-[node name="ValidateDiag" parent="Camera-GUI/SafeArea" instance=ExtResource( 54 )]
+[node name="ValidateDiagRoot" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ValidateDiag" parent="Camera-GUI/SafeArea/ValidateDiagRoot" instance=ExtResource( 54 )]
 visible = false
 
-[node name="Tutorial" parent="Camera-GUI/SafeArea" instance=ExtResource( 55 )]
-visible = false
-DefaultLang = NodePath("../SafeArea/Tutorial/base/en")
+[node name="TutorialRoot" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="InventoryV2" parent="Camera-GUI/SafeArea" instance=ExtResource( 56 )]
-visible = false
-
-[node name="TransferInventoryV2" parent="Camera-GUI/SafeArea" instance=ExtResource( 57 )]
-visible = false
-
-[node name="ConverterV2" parent="Camera-GUI/SafeArea" instance=ExtResource( 58 )]
-visible = false
-CraftingBehavior = NodePath("../../../Behaviors/Crafting")
-
-[node name="Settings" parent="Camera-GUI/SafeArea" instance=ExtResource( 59 )]
+[node name="Tutorial" parent="Camera-GUI/SafeArea/TutorialRoot" instance=ExtResource( 55 )]
 visible = false
 
-[node name="WelcomeScreen" parent="Camera-GUI/SafeArea" instance=ExtResource( 60 )]
-visible = false
-DefaultLang = NodePath("../SafeArea/WelcomeScreen/base/en")
+[node name="InventoryRoot" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="HowManyDiag" parent="Camera-GUI/SafeArea" instance=ExtResource( 61 )]
+[node name="InventoryV2" parent="Camera-GUI/SafeArea/InventoryRoot" instance=ExtResource( 56 )]
 visible = false
 
-[node name="Description" parent="Camera-GUI/SafeArea" instance=ExtResource( 62 )]
+[node name="TransferInventoryRoot" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TransferInventoryV2" parent="Camera-GUI/SafeArea/TransferInventoryRoot" instance=ExtResource( 57 )]
+visible = false
+
+[node name="ConverterRoot" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConverterV2" parent="Camera-GUI/SafeArea/ConverterRoot" instance=ExtResource( 58 )]
+visible = false
+CraftingBehavior = NodePath("../../../../Behaviors/Crafting")
+
+[node name="SettingsRoot" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Settings" parent="Camera-GUI/SafeArea/SettingsRoot" instance=ExtResource( 59 )]
+visible = false
+
+[node name="WelcomeScreenRoot" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WelcomeScreen" parent="Camera-GUI/SafeArea/WelcomeScreenRoot" instance=ExtResource( 60 )]
+visible = false
+
+[node name="HowManyDiagRoot" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HowManyDiag" parent="Camera-GUI/SafeArea/HowManyDiagRoot" instance=ExtResource( 61 )]
+visible = false
+
+[node name="DescriptionRoot" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Description" parent="Camera-GUI/SafeArea/DescriptionRoot" instance=ExtResource( 62 )]
 visible = false
 
 [node name="ApDebugWindow" parent="Camera-GUI/SafeArea" instance=ExtResource( 63 )]
@@ -617,24 +715,64 @@ margin_right = 814.0
 margin_bottom = 92.0
 AP_behavior_path = NodePath("../../../Behaviors/AP")
 
-[node name="StoryPrompt" parent="Camera-GUI/SafeArea" instance=ExtResource( 72 )]
+[node name="StoryPromptRoot" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StoryPrompt" parent="Camera-GUI/SafeArea/StoryPromptRoot" instance=ExtResource( 72 )]
 visible = false
 
-[node name="TutoPrompt" parent="Camera-GUI/SafeArea" instance=ExtResource( 64 )]
+[node name="TutoPromptRoot" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TutoPrompt" parent="Camera-GUI/SafeArea/TutoPromptRoot" instance=ExtResource( 64 )]
 visible = false
 
-[node name="FPSCounter" parent="Camera-GUI/SafeArea" instance=ExtResource( 65 )]
+[node name="FPSCounterRoot" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FPSCounter" parent="Camera-GUI/SafeArea/FPSCounterRoot" instance=ExtResource( 65 )]
 anchor_left = 1.0
 anchor_top = 1.0
 margin_left = -136.0
-margin_top = -51.0
+margin_top = -47.307
 margin_right = -14.0
-margin_bottom = -10.0
+margin_bottom = -6.30701
 
-[node name="DeathScreen" parent="Camera-GUI/SafeArea" instance=ExtResource( 66 )]
+[node name="DeathScreenRoot" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DeathScreen" parent="Camera-GUI/SafeArea/DeathScreenRoot" instance=ExtResource( 66 )]
 visible = false
 
-[node name="Crew" parent="Camera-GUI/SafeArea" instance=ExtResource( 74 )]
+[node name="CrewRoot" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Crew" parent="Camera-GUI/SafeArea/CrewRoot" instance=ExtResource( 74 )]
 visible = false
 
 [node name="ViewportContainer" type="ViewportContainer" parent="Camera-GUI"]
@@ -658,7 +796,7 @@ render_target_update_mode = 3
 
 [node name="Starfield" parent="Loading-FX" instance=ExtResource( 67 )]
 visible = false
-[connection signal="down" from="Camera-GUI/SafeArea/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_ZoomIn_down"]
-[connection signal="up" from="Camera-GUI/SafeArea/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_Zoom_up"]
-[connection signal="down" from="Camera-GUI/SafeArea/HUD/Buttons/ZoomOut" to="Camera2D" method="_on_ZoomOut_down"]
-[connection signal="up" from="Camera-GUI/SafeArea/HUD/Buttons/ZoomOut" to="Camera2D" method="_on_Zoom_up"]
+[connection signal="down" from="Camera-GUI/SafeArea/HUD_root/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_ZoomIn_down"]
+[connection signal="up" from="Camera-GUI/SafeArea/HUD_root/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_Zoom_up"]
+[connection signal="down" from="Camera-GUI/SafeArea/HUD_root/HUD/Buttons/ZoomOut" to="Camera2D" method="_on_ZoomOut_down"]
+[connection signal="up" from="Camera-GUI/SafeArea/HUD_root/HUD/Buttons/ZoomOut" to="Camera2D" method="_on_Zoom_up"]

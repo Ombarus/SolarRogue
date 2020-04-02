@@ -1,18 +1,20 @@
 extends "res://scripts/GUI/GUILayoutBase.gd"
 
+onready var _base = get_node("base")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	get_node("base").connect("OnOkPressed", self, "Ok_Callback")
-	get_node("base").connect("OnCancelPressed", self, "Ok_Callback")
+	_base.connect("OnOkPressed", self, "Ok_Callback")
+	_base.connect("OnCancelPressed", self, "Ok_Callback")
 	
 		
 func Init(init_param):
-	get_node("base").disabled = false
+	_base.disabled = false
 	
 
 func Ok_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")
-	get_node("base").disabled = true
+	_base.disabled = true
 
 func _on_Save_pressed():
 	Globals.LevelLoaderRef.SaveState(Globals.LevelLoaderRef.GetCurrentLevelData())
