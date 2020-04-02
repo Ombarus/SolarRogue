@@ -1,6 +1,14 @@
 extends Control
 
 export(bool) var Transition = true
+export(NodePath) var VFXRoot = "."
+
+onready var _vfx_root = get_node(VFXRoot)
+
+var VFXCopy : Node = null
+
+func GetVFXRoot():
+	return _vfx_root
 
 func _ready():
 	BehaviorEvents.emit_signal("OnGUILoaded", self.name, self)

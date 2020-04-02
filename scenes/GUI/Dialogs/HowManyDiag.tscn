@@ -12,6 +12,7 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+VFXRoot = NodePath("base")
 
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
@@ -62,5 +63,4 @@ bbcode_enabled = true
 bbcode_text = "[center]1 / 23[/center]"
 text = "1 / 23"
 scroll_active = false
-
 [connection signal="value_changed" from="base/Selector" to="." method="_on_Selector_value_changed"]
