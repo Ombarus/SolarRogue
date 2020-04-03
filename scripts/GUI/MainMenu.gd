@@ -17,7 +17,6 @@ func _ready():
 	var cur_save = get_node("LocalSave").get_latest_save()
 	
 	get_node("CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/MenuBtn/Continue").Disabled = cur_save == null or cur_save.empty()
-	yield(get_tree().create_timer(5.0), "timeout")
 	BehaviorEvents.call_deferred("emit_signal", "OnPushGUI", "MenuRoot", {})
 	#BehaviorEvents.emit_signal("OnPushGUI", "MenuRoot", {})
 	

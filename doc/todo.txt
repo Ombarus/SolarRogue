@@ -11,10 +11,7 @@ RELEASE CHECKLIST :::
 
 
 Beta 2 :::
-- New ui vfx issues :
-	- Main Menu not working
-	- Death Screen popout broken
-**** CRASH: when poping HUD too quickly (while switching to targettingHUD back-and-forth quickly)
+- Create a custom, slower transition for the HUD to appear after changing level or starting the game
 **** CRASH: hit 'c' in converter with no recipe selected
 - add runes status to highscore so we can display them one day
 - runes translation
@@ -236,6 +233,10 @@ IDEAS:::
 	
 	
 DONE BETA2 :::
+**** CRASH: when poping HUD too quickly (while switching to targettingHUD back-and-forth quickly)
+- New ui vfx issues :
+	- Main Menu not working
+	- Death Screen popout broken
 - pressing shortcut "l" to look when hud is in "hidden" mode on PC makes "..." button appear
 - Add runes to score, store in achievements and display in result ?
 - Xileen Boss Fight :

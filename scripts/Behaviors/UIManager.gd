@@ -79,7 +79,7 @@ func OnPushGUI_Callback(name, init_param):
 	
 func OnPopGUI_Callback():
 	if _animator != null and _animator.is_playing():
-		yield(_animator, "animation_finished")
+		animation_finished_Callback("abort", _gui_list[_stack[-1]], false)
 	print("Pop " + _stack[-1])
 	if _animator != null and _gui_list[_stack[-1]].Transition != false:
 		#_animator.root_node = _gui_list[_stack[-1]].get_path()

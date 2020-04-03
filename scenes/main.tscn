@@ -320,6 +320,7 @@ script = ExtResource( 40 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+Transition = false
 
 [node name="Log" type="Control" parent="Camera-GUI/SafeArea/HUD_root/HUD"]
 anchor_right = 1.0
