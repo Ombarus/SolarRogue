@@ -68,6 +68,9 @@ func OnUpdateLayout_Callback():
 	btn.rect_position = frame_offset
 
 func _on_btn_pressed():
+	# ShortcutManager can sometimes trigger the button even when it's disabled
+	if Disabled == true:
+		return
 	if get_node("btn").get("custom_styles/normal") == HighlightStyle:
 		BehaviorEvents.emit_signal("OnResetHighlight")
 	get_node("ClickSFX").play()
