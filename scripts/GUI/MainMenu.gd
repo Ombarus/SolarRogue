@@ -16,18 +16,20 @@ func _ready():
 	
 	var cur_save = get_node("LocalSave").get_latest_save()
 	
-	get_node("SafeArea/MenuRoot/MenuBtn/Continue").Disabled = cur_save == null or cur_save.empty()
-	BehaviorEvents.emit_signal("OnPushGUI", "MenuRoot", {})
+	get_node("CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/MenuBtn/Continue").Disabled = cur_save == null or cur_save.empty()
+	yield(get_tree().create_timer(5.0), "timeout")
+	BehaviorEvents.call_deferred("emit_signal", "OnPushGUI", "MenuRoot", {})
+	#BehaviorEvents.emit_signal("OnPushGUI", "MenuRoot", {})
 	
 	if Globals.is_ios():
-		get_node("SafeArea/MenuRoot/MenuBtn/Quit").visible = false
+		get_node("CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/MenuBtn/Quit").visible = false
 
 #func OnPopGUI_Callback():
 #	var name_diag = get_node("PlayerName")
 #	name_diag.visible = false
 
 func _on_newgame_pressed():
-	var name_diag = get_node("SafeArea/PlayerName")
+	var name_diag = get_node("CanvasLayer/SafeArea/PlayerNameRoot/PlayerName")
 	BehaviorEvents.emit_signal("OnPushGUI", "PlayerName", {"callback_object":self, "callback_method":"_on_choose_name_callback"})
 	
 

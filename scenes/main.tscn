@@ -10,6 +10,7 @@
 [ext_resource path="res://data/sounds/sfx/inventory/gb-jettison-test.wav" type="AudioStream" id=8]
 [ext_resource path="res://data/sounds/sfx/inventory/gb-pickup-test.wav" type="AudioStream" id=9]
 [ext_resource path="res://scripts/Behaviors/UIManager.gd" type="Script" id=10]
+[ext_resource path="res://data/animations/popin_shader.tres" type="Animation" id=11]
 [ext_resource path="res://scripts/Behaviors/MemoryBehavior.gd" type="Script" id=12]
 [ext_resource path="res://scripts/Behaviors/ScannerBehavior.gd" type="Script" id=13]
 [ext_resource path="res://scripts/Behaviors/APBehavior.gd" type="Script" id=14]
@@ -76,60 +77,7 @@
 [ext_resource path="res://scripts/Behaviors/Runes/NewFriend.gd" type="Script" id=75]
 [ext_resource path="res://data/shaders/ui_vfx.shader" type="Shader" id=76]
 
-[sub_resource type="Animation" id=1]
-resource_name = "popin"
-length = 0.5
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:material:shader_param/pixel")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 10.0, 1.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:material:shader_param/red_offset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( -0.005, -0.005 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:material:shader_param/blue_offset")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0.005, 0.005 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath(".:material:shader_param/alpha")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 1.0, 1.0 ]
-}
-
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 76 )
 shader_param/pixel = 10.0
 shader_param/red_offset = Vector2( -0.005, -0.005 )
@@ -189,7 +137,7 @@ animator = NodePath("PopingAnimatorShader")
 
 [node name="PopingAnimatorShader" type="AnimationPlayer" parent="Behaviors/UIManager"]
 root_node = NodePath("../../../Camera-GUI/ViewportContainer")
-anims/popin = SubResource( 1 )
+anims/popin = ExtResource( 11 )
 
 [node name="Memory" type="Node" parent="Behaviors"]
 script = ExtResource( 12 )
@@ -776,7 +724,7 @@ __meta__ = {
 visible = false
 
 [node name="ViewportContainer" type="ViewportContainer" parent="Camera-GUI"]
-material = SubResource( 2 )
+material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2

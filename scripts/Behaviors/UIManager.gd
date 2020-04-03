@@ -1,12 +1,15 @@
 extends Node
 
 export(NodePath) var animator = null
+export(NodePath) var fx_viewport = "../../Camera-GUI/ViewportContainer/Viewport"
+export(NodePath) var fx_viewport_container = "../../Camera-GUI/ViewportContainer"
 
 var _gui_list := {}
 var _stack := []
 var _animator : AnimationPlayer = null
 
-onready var _fx_viewport : Viewport = get_node("../../Camera-GUI/ViewportContainer/Viewport")
+onready var _fx_viewport : Viewport = get_node(fx_viewport)
+onready var _fx_viewport_container : ViewportContainer = get_node(fx_viewport_container)
 
 func _ready():
 	if animator != null:
@@ -25,6 +28,7 @@ func OnShowGUI_Callback(name, init_param):
 	
 func OnHideGUI_Callback(name):
 	_gui_list[name].visible = false
+	pass
 
 func OnPlayerCreated_Callback(player):
 	BehaviorEvents.disconnect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
@@ -107,7 +111,7 @@ func _update_shortcut(node):
 
 func animation_finished_Callback(anim_name, obj, vis):
 	obj.visible = vis
-	get_node("../../Camera-GUI/ViewportContainer").material.set_shader_param("alpha", 0.0);
+	_fx_viewport_container.material.set_shader_param("alpha", 0.0);
 	
 	var fx_root = obj.GetVFXRoot()
 	var old_parent = _fx_viewport.get_parent()

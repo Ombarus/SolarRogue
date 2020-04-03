@@ -11,6 +11,9 @@ RELEASE CHECKLIST :::
 
 
 Beta 2 :::
+- New ui vfx issues :
+	- Main Menu not working
+	- Death Screen popout broken
 **** CRASH: when poping HUD too quickly (while switching to targettingHUD back-and-forth quickly)
 **** CRASH: hit 'c' in converter with no recipe selected
 - add runes status to highscore so we can display them one day
