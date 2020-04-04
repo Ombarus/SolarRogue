@@ -89,6 +89,7 @@ script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+Transition = false
 
 [node name="MenuBtn" type="Control" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot"]
 anchor_bottom = 1.0

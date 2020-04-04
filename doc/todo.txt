@@ -11,8 +11,8 @@ RELEASE CHECKLIST :::
 
 
 Beta 2 :::
+- Resize viewport
 - Create a custom, slower transition for the HUD to appear after changing level or starting the game
-**** CRASH: hit 'c' in converter with no recipe selected
 - add runes status to highscore so we can display them one day
 - runes translation
 - Multi-tile
@@ -233,6 +233,7 @@ IDEAS:::
 	
 	
 DONE BETA2 :::
+**** CRASH: hit 'c' in converter with no recipe selected
 **** CRASH: when poping HUD too quickly (while switching to targettingHUD back-and-forth quickly)
 - New ui vfx issues :
 	- Main Menu not working

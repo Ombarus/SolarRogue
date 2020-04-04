@@ -79,12 +79,13 @@ func TriggerEnd(friend : Attributes):
 	
 	if _can_prompt == false:
 		yield(BehaviorEvents, "OnAnimationDone")
-		BehaviorEvents.emit_signal("OnWaitForAnimation")
-		BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "As the ship explode, a small escape pod launches from the ship and opens a communication channel", "title":"Xileen"})
-		yield(BehaviorEvents, "OnPopGUI")
-		BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "Xileen : \"Don't shoot! Wait, I'm sorry, I didn't know who you are. Look, I'll pay you back, let me live on board and I'll do anything you want! Even the dishes! Come on, you won't regret it, I know everything about this sector!\"", "title":"Xileen"})
-		yield(BehaviorEvents, "OnPopGUI")
-		BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "You accept his surrender and Xileen joins your crew!", "title":"Xileen", "callback_object":self, "callback_method":"Outro_Done_Callback"})
+		
+	BehaviorEvents.emit_signal("OnWaitForAnimation")
+	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "As the ship explode, a small escape pod launches from the ship and opens a communication channel", "title":"Xileen"})
+	yield(BehaviorEvents, "OnPopGUI")
+	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "Xileen : \"Don't shoot! Wait, I'm sorry, I didn't know who you are. Look, I'll pay you back, let me live on board and I'll do anything you want! Even the dishes! Come on, you won't regret it, I know everything about this sector!\"", "title":"Xileen"})
+	yield(BehaviorEvents, "OnPopGUI")
+	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "You accept his surrender and Xileen joins your crew!", "title":"Xileen", "callback_object":self, "callback_method":"Outro_Done_Callback"})
 	
 
 func Outro_Done_Callback():

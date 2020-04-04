@@ -85,7 +85,7 @@ func _ready():
 	BehaviorEvents.connect("OnPopGUI", self, "OnPopGUI_Callback")
 	BehaviorEvents.connect("OnEnableShortcut", self, "Enable")
 	
-func OnPushGUI_Callback(name, init_param):
+func OnPushGUI_Callback(name, init_param, transition_name=""):
 	_shortcut_stack.push_back(_current_shortcut_dict)
 	_current_shortcut_dict = {}
 	

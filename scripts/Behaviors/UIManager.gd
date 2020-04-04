@@ -22,13 +22,15 @@ func _ready():
 	BehaviorEvents.connect("OnHideGUI", self, "OnHideGUI_Callback")
 	
 
-func OnShowGUI_Callback(name, init_param):
+func OnShowGUI_Callback(name, init_param, transition=""):
 	_gui_list[name].visible = true
 	_gui_list[name].Init(init_param)
 	
+	_start_transition(_gui_list[name], transition)
+	
 func OnHideGUI_Callback(name):
-	_gui_list[name].visible = false
-	pass
+	if name in _gui_list:
+		_gui_list[name].visible = false
 
 func OnPlayerCreated_Callback(player):
 	BehaviorEvents.disconnect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
@@ -37,7 +39,7 @@ func OnPlayerCreated_Callback(player):
 	var cur_save = get_node("../LocalSave").get_latest_save()
 	if cur_save == null or cur_save.empty():
 		var player_name = player.get_attrib("player_name")
-		BehaviorEvents.call_deferred("emit_signal", "OnPushGUI", "WelcomeScreen", {"player_name":player_name})
+		BehaviorEvents.call_deferred("emit_signal", "OnPushGUI", "WelcomeScreen", {"player_name":player_name}, "slow_popin")
 	else: # Middle of the game, tuto can start now. Start of game we wait till welcome screen is gone
 		Globals.TutorialRef.emit_signal("StartTuto")
 	
@@ -51,14 +53,11 @@ func OnGUILoaded_Callback(name, obj):
 	_gui_list[name] = obj
 	obj.visible = false
 	
-func OnPushGUI_Callback(name, init_param):
-	#TODO: make sure Layout is not already in stack
-	print("Push " + name)
-	if _animator != null and _animator.is_playing():
-		yield(_animator, "animation_finished")
-	if _animator != null and _gui_list[name].Transition != false:
-		
-		var fx_root : Node = _gui_list[name].GetVFXRoot()
+func _start_transition(gui_obj, transition_name):
+	if _animator != null and not _animator.is_playing() and (gui_obj.Transition != false or not transition_name.empty()):
+		if transition_name.empty():
+			transition_name = "popin"
+		var fx_root : Node = gui_obj.GetVFXRoot()
 		var fx_parent : Node = fx_root.get_parent()
 		fx_parent.remove_child(fx_root)
 		if _fx_viewport.get_parent() != null:
@@ -66,10 +65,18 @@ func OnPushGUI_Callback(name, init_param):
 		fx_parent.add_child(_fx_viewport)
 		_fx_viewport.add_child(fx_root)
 		
-		_animator.play("popin")
-		_animator.connect("animation_finished", self, "animation_finished_Callback", [_gui_list[name], true])
+		print("play %s %s" % [transition_name, name])
+		_animator.play(transition_name)
+		_animator.connect("animation_finished", self, "animation_finished_Callback", [gui_obj, true])
+	
+func OnPushGUI_Callback(name, init_param, transition_name=""):
+	#TODO: make sure Layout is not already in stack
+	print("Push " + name)
+	var should_yield = false
+	if _animator != null and _animator.is_playing():
+		should_yield = true
+	_start_transition(_gui_list[name], transition_name)
 		
-	_gui_list[name].visible = true
 	_update_shortcut(_gui_list[name])
 	_gui_list[name].Init(init_param)
 	if _stack.size() > 0:
@@ -77,14 +84,26 @@ func OnPushGUI_Callback(name, init_param):
 	_stack.push_back(name)
 	BehaviorEvents.emit_signal("OnGUIChanged", _stack[-1])
 	
+	# wait until animations are done or we might end up doing show/hide in the wrong order
+	if should_yield == true:
+		print("yield for animation")
+		yield(_animator, "animation_finished")
+		
+	print("visible true " + name)
+	_gui_list[name].visible = true
+	
 func OnPopGUI_Callback():
-	if _animator != null and _animator.is_playing():
-		animation_finished_Callback("abort", _gui_list[_stack[-1]], false)
 	print("Pop " + _stack[-1])
-	if _animator != null and _gui_list[_stack[-1]].Transition != false:
+	var gui_name = _stack[-1]
+	_stack.pop_back()
+	if _stack.size() > 0:
+		BehaviorEvents.emit_signal("OnGUIChanged", _stack[-1])
+		_gui_list[_stack[-1]].call_deferred("OnFocusGained")
+	
+	if _animator != null and not _animator.is_playing() and _gui_list[gui_name].Transition != false:
 		#_animator.root_node = _gui_list[_stack[-1]].get_path()
 		
-		var fx_root : Node = _gui_list[_stack[-1]].GetVFXRoot()
+		var fx_root : Node = _gui_list[gui_name].GetVFXRoot()
 		var fx_parent : Node = fx_root.get_parent()
 		fx_parent.remove_child(fx_root)
 		if _fx_viewport.get_parent() != null:
@@ -92,15 +111,16 @@ func OnPopGUI_Callback():
 		fx_parent.add_child(_fx_viewport)
 		_fx_viewport.add_child(fx_root)
 		
-		
+		print ("play popin " + gui_name)
 		_animator.play_backwards("popin")
-		_animator.connect("animation_finished", self, "animation_finished_Callback", [_gui_list[_stack[-1]], false])
+		_animator.connect("animation_finished", self, "animation_finished_Callback", [_gui_list[gui_name], false])
 	else:
-		_gui_list[_stack[-1]].visible = false
-	_stack.pop_back()
-	if _stack.size() > 0:
-		BehaviorEvents.emit_signal("OnGUIChanged", _stack[-1])
-		_gui_list[_stack[-1]].call_deferred("OnFocusGained")
+		if _animator != null and _animator.is_playing():
+			print("yield for animation")
+			yield(_animator, "animation_finished")
+		print ("visible false " + gui_name)
+		_gui_list[gui_name].visible = false
+		
 		
 func _update_shortcut(node):
 	for child in node.get_children():
@@ -110,6 +130,7 @@ func _update_shortcut(node):
 			_update_shortcut(child)
 
 func animation_finished_Callback(anim_name, obj, vis):
+	print("animation finished " + obj.name)
 	obj.visible = vis
 	_fx_viewport_container.material.set_shader_param("alpha", 0.0);
 	
@@ -118,5 +139,6 @@ func animation_finished_Callback(anim_name, obj, vis):
 	old_parent.remove_child(_fx_viewport)
 	fx_root.get_parent().remove_child(fx_root)
 	old_parent.add_child(fx_root)
+	_fx_viewport_container.add_child(_fx_viewport)
 
 	_animator.disconnect("animation_finished", self, "animation_finished_Callback")

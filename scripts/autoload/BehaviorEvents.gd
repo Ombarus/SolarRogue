@@ -57,9 +57,9 @@ signal OnDifficultyChanged(newdiff)
 signal OnPlayerInputStateChanged(playerObj, inputState)
 
 signal OnGUILoaded(name, obj)
-signal OnPushGUI(name, init_param)
+signal OnPushGUI(name, init_param, transition_name)
 signal OnPopGUI()
-signal OnShowGUI(name, init_param) # will not add the menu on the stack
+signal OnShowGUI(name, init_param, transition) # will not add the menu on the stack
 signal OnHideGUI(name)
 signal OnAddShortcut(key, obj, method)
 signal OnRemoveShortcut(key, obj, method)

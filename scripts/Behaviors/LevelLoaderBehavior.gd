@@ -593,8 +593,10 @@ func UpdatePosition(obj, newPos):
 
 func set_loading(var is_loading : bool):
 	if is_loading == true:
+		BehaviorEvents.emit_signal("OnHideGUI", "HUD") # HUD
 		get_node("../AP").OnWaitForAnimation_Callback()
 	if is_loading == false:
+		BehaviorEvents.emit_signal("OnShowGUI", "HUD", null, "popin")
 		get_node("../AP").OnAnimationDone_Callback()
 	
 	if _loading == null:
@@ -602,7 +604,11 @@ func set_loading(var is_loading : bool):
 	get_node("../../BG").visible = !is_loading
 	get_node("../../GameTiles").visible = !is_loading
 	get_node("../../base_green").visible = !is_loading
-	#get_node("../../Camera-GUI/ViewportContainer/Viewport/SafeArea/HUD").visible = !is_loading
+	#get_node("../../Camera-GUI/SafeArea/HUD_root").visible = !is_loading
 	get_node("../../BorderTiles").visible = !is_loading
 	ShortcutManager.Enabled = !is_loading
-	_loading.visible = is_loading
+	
+	if is_loading == false:
+		_loading.get_node("AnimationPlayer").play("popout")
+	else:
+		_loading.visible = is_loading
