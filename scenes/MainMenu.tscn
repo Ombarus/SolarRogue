@@ -28,6 +28,7 @@ shader_param/red_offset = Vector2( -0.005, -0.005 )
 shader_param/green_offset = Vector2( 0, 0 )
 shader_param/blue_offset = Vector2( 0.005, 0.005 )
 shader_param/alpha = 0.0
+shader_param/rand_strength = 1.0
 shader_param/affected = Plane( 0, 0, 1, 1 )
 
 [node name="MainMenu" type="Node"]

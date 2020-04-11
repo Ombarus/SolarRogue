@@ -129,14 +129,27 @@ tracks/3/keys = {
 "update": 0,
 "values": [ 0.0, 1.0, 1.0 ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:material:shader_param/rand_strength")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.35, 0.75, 1.05, 1.45, 1.7, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.4, 0.6, 0.9, 1.0, 1.0 ]
+}
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 76 )
-shader_param/pixel = 10.0
-shader_param/red_offset = Vector2( -0.1, -0.001 )
+shader_param/pixel = 1.0
+shader_param/red_offset = Vector2( 0, 0 )
 shader_param/green_offset = Vector2( 0, 0 )
-shader_param/blue_offset = Vector2( 0.1, 0.001 )
-shader_param/alpha = 0.0
+shader_param/blue_offset = Vector2( 0, 0 )
+shader_param/alpha = 1.0
+shader_param/rand_strength = 1.0
 shader_param/affected = Plane( 0, 0, 1, 1 )
 
 [sub_resource type="Animation" id=3]
@@ -318,7 +331,6 @@ script = ExtResource( 73 )
 script = ExtResource( 75 )
 
 [node name="BG" type="Sprite" parent="."]
-visible = false
 position = Vector2( 5120, 5120 )
 texture = ExtResource( 34 )
 region_enabled = true
@@ -341,11 +353,9 @@ position = Vector2( -128, -128 )
 scale = Vector2( 128, 128 )
 
 [node name="base_green" parent="." instance=ExtResource( 37 )]
-visible = false
 position = Vector2( 5120, 5120 )
 
 [node name="BorderTiles" parent="." instance=ExtResource( 71 )]
-visible = false
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="."]
 copy_mode = 2
@@ -358,7 +368,6 @@ script = ExtResource( 38 )
 [node name="targetting" parent="OverlayTiles/mouse_targetting" instance=ExtResource( 39 )]
 
 [node name="GameTiles" type="Node2D" parent="."]
-visible = false
 
 [node name="World-GUI" type="Node" parent="."]
 

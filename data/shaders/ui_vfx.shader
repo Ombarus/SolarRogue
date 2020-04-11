@@ -5,8 +5,16 @@ uniform vec2 red_offset = vec2(0.0, 0.0);
 uniform vec2 green_offset = vec2(0.0, 0.0);
 uniform vec2 blue_offset = vec2(0.0, 0.0);
 uniform float alpha = 1.0;
+uniform float rand_strength = 1.0;
 
 uniform vec4 affected = vec4(0.0, 0.0, 1.0, 1.0);
+
+float Hash21(vec2 p) {
+	p = fract(p*vec2(123.34, 456.21));
+	p += dot(p, p+45.32);
+	
+	return fract(p.x*p.y);
+}
 
 vec2 pixelize(vec2 uv) {
 	float mult = 5000.0 / (pixel * pixel);
@@ -26,7 +34,6 @@ vec4 chroma(vec2 uv, sampler2D tex) {
 	if (abs(blue_offset.x) + abs(blue_offset.y) > 0.001) {
 		col.b = texture(tex, vec2(uv.x + blue_offset.x, uv.y + blue_offset.y)).b;
 	}
-	//col.a = texture(tex, uv).a;
 	
 	return col;
 }
@@ -41,6 +48,9 @@ void fragment() {
 		vec2 uv = pixelize(SCREEN_UV);
 		vec4 col = chroma(uv, TEXTURE);
 		col.a = col.a * alpha;
+		vec2 id = floor(uv * 10.0);
+		float alpha_rand = Hash21(id + floor(TIME*10.0));
+		col = col * ( alpha_rand + (rand_strength * (1.0-alpha_rand)) );
 		COLOR = col;
 	}
 }

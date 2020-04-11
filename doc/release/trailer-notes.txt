@@ -1,19 +1,42 @@
 Keywords
-
+- SHIP NAME ? (The Promise?)
 Action
 Explosion
 Music
 Ascii aesthetic
+iOS, Android, PC
 
+"Stranded..."
+
+"Trying to survive..." (harvesting planet, going after probes, using positionning to shoot down ennemies)
+
+"Travel deep into the unkown"
+"Find powerful artefacts" (Ultimate scanner, Converter of Yendor, ?)
+"Upgrade, craft, conquer"
+"And find you way, back HOME..." (ASCII planet earth ?)
+"Or die trying" (tombstone)
 
 mise en scene :
-- Start with the wormhole animation
+- Start with Logo / Ombarus Dev logo, powered by Godot ?
+- then with the wormhole animation
 - zoom on ship, make UI appear like on a old screen to remind people this is an old school Roguelike
+	- text : "Stranded..."
+- Ship shooting planet with dropping materials
+	- text : "Trying to survive..."
+- Scout shootout, 
+
+
 	- text : "An oldschool roguelike"
 
 	- lost in space ?
+
+- Finish with the game title fade very slowly
 
 Scenes that must be shown :
 	- Shooting ship
 	- Shooting planet
 	- Crafting ship
+
+---- inspiration ---
+Music, text, ramp-up
+

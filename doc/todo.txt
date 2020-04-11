@@ -11,7 +11,9 @@ RELEASE CHECKLIST :::
 
 
 Beta 2 :::
+- new game always gives me the same layout ?
 - Resize viewport
+- going full screen break my UI transition
 - Create a custom, slower transition for the HUD to appear after changing level or starting the game
 - add runes status to highscore so we can display them one day
 - runes translation

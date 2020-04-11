@@ -23,7 +23,7 @@ spread = 180.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 5.0
 initial_velocity_random = 0.2
-angular_velocity = 1.86397e+009
+angular_velocity = 1.86397e+09
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = 27.14
@@ -41,4 +41,3 @@ preprocess = 5.0
 speed_scale = 3.0
 process_material = SubResource( 5 )
 texture = ExtResource( 1 )
-
