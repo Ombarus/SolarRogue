@@ -20,24 +20,24 @@ func Init(init_param):
 	
 	var success : bool = init_param["is_success"]
 	
-	get_node("base/Name").text = init_param["player_name"]
-	get_node("base/Epitaph").text = init_param["epitaph"]
+	get_node("tombstone/Name").text = init_param["player_name"]
+	get_node("tombstone/Epitaph").text = init_param["epitaph"]
 	get_node("base/Success2").bbcode_text = init_param["epitaph"]
 	get_node("base/Success").text = init_param["message_success"]
 	
 	if success == true:
-		get_node("base/tombstone").visible = false
+		get_node("tombstone").visible = false
 		get_node("base/Earth").visible = true
-		get_node("base/Name").visible = false
-		get_node("base/Epitaph").visible = false
+		get_node("tombstone/Name").visible = false
+		get_node("tombstone/Epitaph").visible = false
 		get_node("base/Success").visible = true
 		get_node("base/Success2").visible = true
 		get_node("base").title = "You WON!"
 	else:
-		get_node("base/tombstone").visible = true
+		get_node("tombstone").visible = true
 		get_node("base/Earth").visible = false
-		get_node("base/Name").visible = true
-		get_node("base/Epitaph").visible = true
+		get_node("tombstone/Name").visible = true
+		get_node("tombstone/Epitaph").visible = true
 		get_node("base/Success").visible = false
 		get_node("base/Success2").visible = false
 		get_node("base").title = "You are dead"

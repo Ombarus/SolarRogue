@@ -11,6 +11,7 @@ RELEASE CHECKLIST :::
 
 
 Beta 2 :::
+- ship killed by shooting in the radiation level fucked up UI ?
 - new game always gives me the same layout ?
 - Resize viewport
 - going full screen break my UI transition

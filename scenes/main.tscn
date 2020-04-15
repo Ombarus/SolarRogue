@@ -793,17 +793,6 @@ margin_top = -47.307
 margin_right = -14.0
 margin_bottom = -6.30701
 
-[node name="DeathScreenRoot" type="Control" parent="Camera-GUI/SafeArea"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="DeathScreen" parent="Camera-GUI/SafeArea/DeathScreenRoot" instance=ExtResource( 66 )]
-visible = false
-
 [node name="CrewRoot" type="Control" parent="Camera-GUI/SafeArea"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -813,6 +802,17 @@ __meta__ = {
 }
 
 [node name="Crew" parent="Camera-GUI/SafeArea/CrewRoot" instance=ExtResource( 74 )]
+visible = false
+
+[node name="DeathScreenRoot" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DeathScreen" parent="Camera-GUI/SafeArea/DeathScreenRoot" instance=ExtResource( 66 )]
 visible = false
 
 [node name="ViewportContainer" type="ViewportContainer" parent="Camera-GUI"]

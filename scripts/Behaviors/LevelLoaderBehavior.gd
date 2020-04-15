@@ -72,8 +72,8 @@ func _ready():
 	
 	
 	if _TEST_MID_GAME == true:
-		startLevel = "data/json/levels/main/main01.json"
-		current_depth = 1
+		startLevel = "data/json/levels/main/main08.json"
+		current_depth = 8
 	Globals.LevelLoaderRef = self
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
 	BehaviorEvents.connect("OnRequestLevelChange", self, "OnRequestLevelChange_Callback")
@@ -210,6 +210,7 @@ func GenerateLevelFromTemplate(levelData):
 			break # Ok spawn point, stop looking
 		i += 1
 	var spawn_point = allTilesCoord[i]
+	#print("Spawn Point " + str(spawn_point))
 	
 	# HACK: current_level doesn't appear in the list of level object 
 	# so I hardcoded it's margin based on my knowledge of the sprite wormhole
@@ -507,6 +508,7 @@ func ShuffleArray(ar):
 		var x = MersenneTwister.rand(indexList.size())
 		shuffledList.append(ar[indexList[x]])
 		indexList.remove(x)
+	#print("ShuffleArray : " + str(shuffledList))
 	return shuffledList
 
 func GetTileData(xy):

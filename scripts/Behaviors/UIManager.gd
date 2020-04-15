@@ -1,5 +1,7 @@
 extends Node
 
+export(String, "", "HUD", "WelcomeScreen", "ConverterV2") var debug_menu = "" setget set_debug_menu, get_debug_menu
+
 export(NodePath) var animator = null
 export(NodePath) var fx_viewport = "../../Camera-GUI/ViewportContainer/Viewport"
 export(NodePath) var fx_viewport_container = "../../Camera-GUI/ViewportContainer"
@@ -10,6 +12,34 @@ var _animator : AnimationPlayer = null
 
 onready var _fx_viewport : Viewport = get_node(fx_viewport)
 onready var _fx_viewport_container : ViewportContainer = get_node(fx_viewport_container)
+
+func set_debug_menu(newval):
+	if OS.is_debug_build():
+		return
+	if not newval in _gui_list:
+		return
+	var gui_obj = _gui_list[newval]
+	if not debug_menu.empty():
+		var fx_root = _gui_list[debug_menu].GetVFXRoot()
+		var old_parent = _fx_viewport.get_parent()
+		old_parent.remove_child(_fx_viewport)
+		fx_root.get_parent().remove_child(fx_root)
+		old_parent.add_child(fx_root)
+		_fx_viewport_container.add_child(_fx_viewport)
+	
+	if not newval.empty():
+		var fx_root : Node = gui_obj.GetVFXRoot()
+		var fx_parent : Node = fx_root.get_parent()
+		fx_parent.remove_child(fx_root)
+		if _fx_viewport.get_parent() != null:
+			_fx_viewport.get_parent().remove_child(_fx_viewport)
+		fx_parent.add_child(_fx_viewport)
+		_fx_viewport.add_child(fx_root)
+		
+	debug_menu = newval
+	
+func get_debug_menu():
+	return debug_menu
 
 func _ready():
 	if animator != null:
@@ -65,13 +95,13 @@ func _start_transition(gui_obj, transition_name):
 		fx_parent.add_child(_fx_viewport)
 		_fx_viewport.add_child(fx_root)
 		
-		print("play %s %s" % [transition_name, name])
+		#print("play %s %s" % [transition_name, name])
 		_animator.play(transition_name)
 		_animator.connect("animation_finished", self, "animation_finished_Callback", [gui_obj, true])
 	
 func OnPushGUI_Callback(name, init_param, transition_name=""):
 	#TODO: make sure Layout is not already in stack
-	print("Push " + name)
+	#print("Push " + name)
 	var should_yield = false
 	if _animator != null and _animator.is_playing():
 		should_yield = true
@@ -86,14 +116,14 @@ func OnPushGUI_Callback(name, init_param, transition_name=""):
 	
 	# wait until animations are done or we might end up doing show/hide in the wrong order
 	if should_yield == true:
-		print("yield for animation")
+		#print("yield for animation")
 		yield(_animator, "animation_finished")
 		
-	print("visible true " + name)
+	#print("visible true " + name)
 	_gui_list[name].visible = true
 	
 func OnPopGUI_Callback():
-	print("Pop " + _stack[-1])
+	#print("Pop " + _stack[-1])
 	var gui_name = _stack[-1]
 	_stack.pop_back()
 	if _stack.size() > 0:
@@ -130,7 +160,7 @@ func _update_shortcut(node):
 			_update_shortcut(child)
 
 func animation_finished_Callback(anim_name, obj, vis):
-	print("animation finished " + obj.name)
+	#print("animation finished " + obj.name)
 	obj.visible = vis
 	_fx_viewport_container.material.set_shader_param("alpha", 0.0);
 	

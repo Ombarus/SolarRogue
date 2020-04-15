@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/GUI/DeathScreen.gd" type="Script" id=1]
 [ext_resource path="res://scripts/GUI/InputConsumer.gd" type="Script" id=2]
@@ -9,9 +9,14 @@
 [ext_resource path="res://data/fonts/DejaVuSansMonoBold_text.tres" type="DynamicFont" id=7]
 [ext_resource path="res://scripts/tests/EarthAsciiAnim.gd" type="Script" id=8]
 [ext_resource path="res://data/fonts/DejaVuSansMono.tres" type="DynamicFont" id=9]
+[ext_resource path="res://data/fonts/DejaVuSansMono.ttf" type="DynamicFontData" id=10]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 18
+font_data = ExtResource( 10 )
 
 [node name="DeathScreen" type="Control"]
 anchor_right = 1.0
@@ -39,66 +44,8 @@ margin_bottom = 328.5
 dialog_ok = true
 title = "You are dead"
 
-[node name="tombstone" type="RichTextLabel" parent="base"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 95.0
-margin_top = 76.0
-margin_right = -26.0
-margin_bottom = -55.0
-custom_fonts/mono_font = ExtResource( 4 )
-custom_fonts/bold_italics_font = ExtResource( 5 )
-custom_fonts/italics_font = ExtResource( 6 )
-custom_fonts/bold_font = ExtResource( 7 )
-custom_fonts/normal_font = ExtResource( 4 )
-bbcode_enabled = true
-bbcode_text = "      
-                      _|_
-                     `-|-`
-                       |
-                 __.-'~^~`-.__
-            .--\"\"             \"\"--.
-           /        _     _        '.
-          |        |_) | |_)        |
-          |        | \\ | |          |
-          |                         |
-          |                         |
-          |                         |
-          |                         |
-          |                         |
-          |                         |
-          |                         |
-          |                         |
-          |                         |
-          |                         |
-          |                         |
-       /\\-|                         |/\\.
-      .-\\\\`=.......................=`//-\". "
-text = "      
-                      _|_
-                     `-|-`
-                       |
-                 __.-'~^~`-.__
-            .--\"\"             \"\"--.
-           /        _     _        '.
-          |        |_) | |_)        |
-          |        | \\ | |          |
-          |                         |
-          |                         |
-          |                         |
-          |                         |
-          |                         |
-          |                         |
-          |                         |
-          |                         |
-          |                         |
-          |                         |
-          |                         |
-       /\\-|                         |/\\.
-      .-\\\\`=.......................=`//-\". "
-
 [node name="Earth" type="Control" parent="base"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -65.0
@@ -1830,24 +1777,8 @@ text = "            _..-:b&::&?&&##bo_
           ` .                    .-
               ' -==pHMMH##HH#\"\"\""
 
-[node name="Name" type="Label" parent="base"]
-margin_left = 211.0
-margin_top = 298.62
-margin_right = 496.0
-margin_bottom = 336.62
-align = 1
-valign = 1
-
-[node name="Epitaph" type="Label" parent="base"]
-margin_left = 218.0
-margin_top = 353.0
-margin_right = 489.0
-margin_bottom = 557.0
-align = 1
-valign = 1
-autowrap = true
-
 [node name="Success" type="Label" parent="base"]
+visible = false
 margin_left = 8.0
 margin_top = 53.0
 margin_right = 784.0
@@ -1862,6 +1793,7 @@ __meta__ = {
 }
 
 [node name="Success2" type="RichTextLabel" parent="base"]
+visible = false
 margin_left = 419.0
 margin_top = 201.0
 margin_right = 787.0
@@ -1899,6 +1831,62 @@ Difficulty : 3
 
 Final Score:
 3077886"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="tombstone" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 2 )
+text = "      
+|_
+`-|-`
+|
+__.-'~^~`-.__
+.--\"\"             \"\"--.
+/        _     _        '.
+|        |_) | |_)        |
+|        | \\ | |          |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+/\\-|                         |/\\.
+.-\\\\`=.......................=`//-\". "
+align = 1
+valign = 1
+
+[node name="Epitaph" type="Label" parent="tombstone"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 505.0
+margin_top = 358.0
+margin_right = -507.0
+margin_bottom = -110.0
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="tombstone"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 498.0
+margin_top = 317.0
+margin_right = -501.0
+margin_bottom = -345.0
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

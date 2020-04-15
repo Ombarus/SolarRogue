@@ -427,7 +427,12 @@ func OnLevelLoaded_Callback():
 		# always default to saved position
 		_current_origin = PLAYER_ORIGIN.saved
 	
-func _input(event):		
+func _input(event):
+	if playerNode != null and event.is_action_released("touch") && _input_state != Globals.INPUT_STATE.camera_dragged :
+		var click_pos = playerNode.get_global_mouse_position()
+		if _input_state == Globals.INPUT_STATE.test:
+			DO_TEST(click_pos)
+	
 	if (event is InputEventMouseButton or event is InputEventKey) and playerNode != null and playerNode.get_attrib("ai") != null and playerNode.get_attrib("ai.disable_on_interest", false) == true and playerNode.get_attrib("ai.skip_check") <= 0:
 		playerNode.set_attrib("ai.disabled", true)
 	
@@ -585,6 +590,11 @@ func _unhandled_input(event):
 			dir = Vector2(0,-1)
 		if event.scancode == KEY_KP_9:
 			dir = Vector2(1,-1)
+		if event.scancode == KEY_Q and OS.is_debug_build():
+			if _input_state == Globals.INPUT_STATE.test:
+				set_input_state(Globals.INPUT_STATE.hud)
+			else:
+				set_input_state(Globals.INPUT_STATE.test)
 				
 	if event is InputEventKey && event.pressed == false:
 		if _input_state == Globals.INPUT_STATE.weapon_targetting or _input_state == Globals.INPUT_STATE.board_targetting or _input_state == Globals.INPUT_STATE.loot_targetting:
@@ -778,7 +788,8 @@ func OnTransferPlayer_Callback(old_player, new_player):
 	new_player.set_attrib("lowest_diff", old_player.get_attrib("lowest_diff"))
 	
 func DO_TEST(click_pos):
-	pass
+	BehaviorEvents.emit_signal("OnHideGUI", "Options")
+	BehaviorEvents.emit_signal("OnShowGUI", "Options", null, "slow_popin")
 
 
 func Pressed_Question_Callback():
