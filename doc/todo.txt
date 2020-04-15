@@ -11,8 +11,6 @@ RELEASE CHECKLIST :::
 
 
 Beta 2 :::
-- ship killed by shooting in the radiation level fucked up UI ?
-- new game always gives me the same layout ?
 - Resize viewport
 - going full screen break my UI transition
 - Create a custom, slower transition for the HUD to appear after changing level or starting the game
@@ -236,6 +234,9 @@ IDEAS:::
 	
 	
 DONE BETA2 :::
+- ship killed by shooting in the radiation level fucked up UI ?
+	- UI transition break dialog chain (see radiation chain dialog)
+- new game always gives me the same layout ?
 **** CRASH: hit 'c' in converter with no recipe selected
 **** CRASH: when poping HUD too quickly (while switching to targettingHUD back-and-forth quickly)
 - New ui vfx issues :

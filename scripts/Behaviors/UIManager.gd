@@ -141,14 +141,14 @@ func OnPopGUI_Callback():
 		fx_parent.add_child(_fx_viewport)
 		_fx_viewport.add_child(fx_root)
 		
-		print ("play popin " + gui_name)
+		#print ("play popout " + gui_name)
 		_animator.play_backwards("popin")
 		_animator.connect("animation_finished", self, "animation_finished_Callback", [_gui_list[gui_name], false])
 	else:
 		if _animator != null and _animator.is_playing():
-			print("yield for animation")
+			#print("yield for animation")
 			yield(_animator, "animation_finished")
-		print ("visible false " + gui_name)
+		#print ("visible false " + gui_name)
 		_gui_list[gui_name].visible = false
 		
 		

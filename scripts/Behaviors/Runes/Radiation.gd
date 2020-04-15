@@ -116,7 +116,7 @@ func Outro_Done_Callback():
 	var player : Attributes = Globals.get_first_player()
 	BehaviorEvents.emit_signal("OnLogLine", "[color=lime]Leonard Grayson didn't have to make a difficult decision![/color]")
 	player.set_attrib("runes.%s.status" % self.name, "Veteran")
-	player.set_attrib("runes.%s.log" % self.name, "Pivotal role during the radiation incident in %s" % Globals.LevelLoaderRef.current_level_data.display_name)
+	player.set_attrib("runes.%s.log" % self.name, "Pivotal role during the radiation incident in %s" % Globals.LevelLoaderRef.GetCurrentLevelData().display_name)
 	player.set_attrib("runes.%s.color" % self.name, [0.0,0.4,0.0])
 	player.set_attrib("runes.%s.completed" % self.name, true)
 	BehaviorEvents.emit_signal("OnAnimationDone")

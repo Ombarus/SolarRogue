@@ -11,10 +11,10 @@ func _ready():
 	
 	
 func Ok_Callback():
+	get_node("base").disabled = true
 	BehaviorEvents.emit_signal("OnPopGUI")
 	if _callback_obj != null:
 		_callback_obj.call(_callback_method)
-	get_node("base").disabled = true
 		
 	
 func Init(init_param):
