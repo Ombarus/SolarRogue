@@ -97,7 +97,7 @@ func _start_transition(gui_obj, transition_name):
 		fx_parent.add_child(_fx_viewport)
 		_fx_viewport.add_child(fx_root)
 		
-		print("play %s %s" % [transition_name, name])
+		#print("play %s %s" % [transition_name, name])
 		_animated_gui = gui_obj
 		_is_animated_push = true
 		_animator.play(transition_name)
@@ -110,7 +110,7 @@ func _cancel_animation():
 	
 func OnPushGUI_Callback(name, init_param, transition_name=""):
 	#TODO: make sure Layout is not already in stack
-	print("Push " + name)
+	#print("Push " + name)
 	_cancel_animation()
 		
 	_start_transition(_gui_list[name], transition_name)
@@ -122,11 +122,11 @@ func OnPushGUI_Callback(name, init_param, transition_name=""):
 	_stack.push_back(name)
 	BehaviorEvents.emit_signal("OnGUIChanged", _stack[-1])
 		
-	print("visible true " + name)
+	#print("visible true " + name)
 	_gui_list[name].visible = true
 	
 func OnPopGUI_Callback():
-	print("Pop " + _stack[-1])
+	#print("Pop " + _stack[-1])
 	var gui_name = _stack[-1]
 	_stack.pop_back()
 	if _stack.size() > 0:
@@ -143,13 +143,13 @@ func OnPopGUI_Callback():
 		fx_parent.add_child(_fx_viewport)
 		_fx_viewport.add_child(fx_root)
 		
-		print ("play popout " + gui_name)
+		#print ("play popout " + gui_name)
 		_animated_gui = _gui_list[gui_name]
 		_is_animated_push = false
 		_animator.play_backwards("popin")
 		_animator.connect("animation_finished", self, "animation_finished_Callback", [_gui_list[gui_name], false])
 	else:
-		print ("visible false " + gui_name)
+		#print ("visible false " + gui_name)
 		_gui_list[gui_name].visible = false
 		
 		
@@ -161,7 +161,7 @@ func _update_shortcut(node):
 			_update_shortcut(child)
 
 func animation_finished_Callback(anim_name, obj, vis):
-	print("animation finished " + obj.name)
+	#print("animation finished " + obj.name)
 	obj.visible = vis
 	_fx_viewport_container.material.set_shader_param("alpha", 0.0);
 	

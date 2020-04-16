@@ -11,47 +11,15 @@ RELEASE CHECKLIST :::
 
 
 Beta 2 :::
-- slow popin is working now but the end takes a bit too long and you cannot click during that time
-- radiation challenge :
-	- got the sacrifice even when I wasn't on the challenge level ?
-	- got shot while using item and all the UIs went crazy
-		- DO NOT YIELD IN THE UIMANAGER... find another way..
-- tapping on the screen while on autopilot should interrupt autopilot... not change direction
-- english tuto : Hostiles : It's headed for __our us__
-- Create a custom, slower transition for the HUD to appear after changing level or starting the game
 - add runes status to highscore so we can display them one day
 - runes translation
 - Multi-tile
 	- dummies on tile
 - Rune story
-	- X Random Encounter
-		- Xileen Boss fight
-	- X radiation :
-		- improve radiation damage sfx (add a greenish/reddish visual pulse ?)
-	- Design :
-		1-- 1 or more triggers :
-			- between turn x and y with linear and/or exponential increase in probability (y = 100%)
-			- location (ex : enter level with human branch wormhole)
-			- action (ex : shoot a specific "special" planet ?)
-		2-- évênement déclancheur :
-			- Simple message
-			- In-Game impact ? (ship speed slowed because we lost the engineer, radar range reduced by 1 because we lost the communication officer ?)
-		3-- Resolution trigger
-			- Specific sequence of action, timer or location trigger resolution
-		4-- Resolution
-			- Message
-			- In-Game impact removed ?
-	- Create characters (Science officer, Communication officer, Engineer, Pilot, etc.)
-	- Create backstory
-		IDEAS :
-			- When entering level with human branch, officer decide to go live with human colony. Can get it back by going to 3rd level of human branch with converter of yendor as "proof" that he can go home
-			- Parasyte infects officer between turn 500-1000. Will die if antidote is not found within the next 500 turns. It will spawn from a ship and/or planet within the current system
-			- When transfering ship, 1 in 3 chance that there will be a "teleporter malfunction" and send officer somewhere else. Need to find him in a derelic ship close-by ?
-			- Queen Jerg infects one of officer, must defeat queen to "free" officer from mind-hive
-			- Random boss has a chance to spawn in any level below level 7. If you defeat him he will join you, maybe becomes the cook (wink wink). spawn chance should be calculated every time you travel so that it's possible to force spawn it by going back up-down-up-down a level repetedly (still need to find him)
-			- doppleganger ? free him from the boss in Vorg branch ?
+	- add more runes
+		- prio should probably be boss fight in Zerg and Vorg branches
 - Unique boss for branches
-- low fps AI goto is jerky as fuck. Maybe smooth the camera movement ?
+- camera smoothing is not working... ship goes out of screen
 - Solution for fast gun paired with slow gun ?
 	- keep track of left over shoot AP and sometime shoot twice ?
 	- don't care
@@ -239,6 +207,19 @@ IDEAS:::
 	
 	
 DONE BETA2 :::
+- review all player modified_data... don't forget we need to copy it when changing ship!
+- Sometimes rune data become corrupted : (don't forget modified_data is not shared between ship !)
+	- Runaway & Radiation triggered then radiation doesn't have "title" in the rune data. Can't repro 100%
+	- when Runaway & Radiation trigger together, Radiation's first dialog is lost ?
+	- runaway triggered every time I entered the system with human wormhole
+- tapping on the screen while on autopilot should interrupt autopilot... not change direction
+- Create a custom, slower transition for the HUD to appear after changing level or starting the game
+- slow popin is working now but the end takes a bit too long and you cannot click during that time
+- english tuto : Hostiles : It's headed for __our us__
+- radiation challenge :
+	- got the sacrifice even when I wasn't on the challenge level ?
+	- got shot while using item and all the UIs went crazy
+		- DO NOT YIELD IN THE UIMANAGER... find another way..
 - Resize viewport
 - going full screen break my UI transition
 	- Strangely, only from the main scene (from the main menu everything works fine)

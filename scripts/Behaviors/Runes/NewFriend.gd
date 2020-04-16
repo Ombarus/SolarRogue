@@ -8,6 +8,10 @@ func _ready():
 	BehaviorEvents.connect("OnLevelReady", self, "OnLevelReady_Callback")
 	BehaviorEvents.connect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
 	BehaviorEvents.connect("OnDamageTaken", self, "OnDamageTaken_Callback")
+	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_Callback")
+	
+func OnTransferPlayer_Callback(old_player, new_player):
+	new_player.set_attrib("runes.%s" % self.name, old_player.get_attrib("runes.%s" % self.name, {}))
 	
 func OnWaitForAnimation_Callback():
 	_can_prompt = false
@@ -38,6 +42,7 @@ func OnLevelReady_Callback():
 		return
 		
 	var first_depth : int = 6
+	#var first_depth : int = 1
 	var last_depth : int = 10
 	var current_depth : int = Globals.LevelLoaderRef.current_depth
 	
@@ -85,7 +90,9 @@ func TriggerEnd(friend : Attributes):
 	yield(BehaviorEvents, "OnPopGUI")
 	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "Xileen : \"Don't shoot! Wait, I'm sorry, I didn't know who you are. Look, I'll pay you back, let me live on board and I'll do anything you want! Even the dishes! Come on, you won't regret it, I know everything about this sector!\"", "title":"Xileen"})
 	yield(BehaviorEvents, "OnPopGUI")
-	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "You accept his surrender and Xileen joins your crew!", "title":"Xileen", "callback_object":self, "callback_method":"Outro_Done_Callback"})
+	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "You accept his surrender and Xileen joins your crew!", "title":"Xileen"})
+	yield(BehaviorEvents, "OnPopGUI")
+	Outro_Done_Callback()
 	
 
 func Outro_Done_Callback():

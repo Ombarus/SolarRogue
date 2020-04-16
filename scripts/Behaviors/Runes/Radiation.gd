@@ -10,6 +10,17 @@ func _ready():
 	BehaviorEvents.connect("OnDamageTaken", self, "OnDamageTaken_Callback")
 	BehaviorEvents.connect("OnWaitForAnimation", self, "OnWaitForAnimation_Callback")
 	BehaviorEvents.connect("OnAnimationDone", self, "OnAnimationDone_Callback")
+	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_Callback")
+	
+func OnTransferPlayer_Callback(old_player, new_player):
+	new_player.set_attrib("runes.%s" % self.name, old_player.get_attrib("runes.%s" % self.name, {}))
+	
+	var level_id : String = Globals.LevelLoaderRef.GetLevelID()
+	#TODO: Test that we still get radiation damage when we change ship in a radiation level
+	if old_player.get_attrib("runes.%s.radiation_level" % self.name, "") == level_id:
+		_add_radiation(new_player)
+		BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Intense Radiations are Damaging the Hull![/color]")
+		_remove_radiation(old_player, false)
 	
 func OnWaitForAnimation_Callback():
 	_can_prompt = false
@@ -59,6 +70,7 @@ func OnLevelReady_Callback():
 		return
 		
 	var first_depth : int = 3
+	#var first_depth : int = 1
 	var last_depth : int = 7
 	var current_depth : int = Globals.LevelLoaderRef.current_depth
 	
@@ -67,6 +79,7 @@ func OnLevelReady_Callback():
 		return
 	
 	var first_depth_chance : float = 0.1
+	#var first_depth_chance : float = 1.0
 	var last_depth_chance : float = 1.0
 	
 	var current_chance : float = 0.0
@@ -94,7 +107,9 @@ func TriggerBeginning(player : Attributes):
 	BehaviorEvents.emit_signal("OnWaitForAnimation")
 	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "As you enter the system heavy waves of radiation start tearing appart the hull. Your chief science officer Grayson explains.", "title":"CSO Leonard Grayson"})
 	yield(BehaviorEvents, "OnPopGUI")
-	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "Grayson: \"Captain, these radiations are specifically designed to penetrate our shields. They must emanate from a nearby planet as a defense system left over by an ancient race. I will try to remodulate our shield to protect us. In the mean time, I suggest you find and destroy whatever is creating the radiation matrix.\"", "title":"CSO Leonard Grayson", "callback_object":self, "callback_method":"Intro_Done_Callback"})
+	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "Grayson: \"Captain, these radiations are specifically designed to penetrate our shields. They must emanate from a nearby planet as a defense system left over by an ancient race. I will try to remodulate our shield to protect us. In the mean time, I suggest you find and destroy whatever is creating the radiation matrix.\"", "title":"CSO Leonard Grayson"})
+	yield(BehaviorEvents, "OnPopGUI")
+	Intro_Done_Callback()
 	
 func Intro_Done_Callback():
 	var player : Attributes = Globals.get_first_player()
@@ -112,7 +127,9 @@ func TriggerSuccess(player : Attributes):
 	BehaviorEvents.emit_signal("OnWaitForAnimation")
 	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "With a satisfying explosion, the radiation generator is destroyed taking with it, half the planet.", "title":"CSO Leonard Grayson"})
 	yield(BehaviorEvents, "OnPopGUI")
-	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "Grayson: \"Good job captain.\"", "title":"CSO Leonard Grayson", "callback_object":self, "callback_method":"Outro_Done_Callback"})
+	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "Grayson: \"Good job captain.\"", "title":"CSO Leonard Grayson"})
+	yield(BehaviorEvents, "OnPopGUI")
+	Outro_Done_Callback()
 
 func Outro_Done_Callback():
 	var player : Attributes = Globals.get_first_player()
@@ -130,7 +147,9 @@ func TriggerFailure(player : Attributes):
 	BehaviorEvents.emit_signal("OnWaitForAnimation")
 	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "Grayson: \"Captain, I believe I have found a way to tune the ship's harmonics to the radiation field. However someone must do it from inside the generator which is exposed to the radiations.\"", "title":"CSO Leonard Grayson"})
 	yield(BehaviorEvents, "OnPopGUI")
-	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "You:\"Leonard, No...\"\n\nGrayson: \"Do not grieve captain, the needs of the many outweight the needs of the few... or the one.\"", "title":"CSO Leonard Grayson", "callback_object":self, "callback_method":"Fail_Done_Callback"})
+	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "You:\"Leonard, No...\"\n\nGrayson: \"Do not grieve captain, the needs of the many outweight the needs of the few... or the one.\"", "title":"CSO Leonard Grayson"})
+	yield(BehaviorEvents, "OnPopGUI")
+	Fail_Done_Callback()
 	
 func Fail_Done_Callback():
 	var player : Attributes = Globals.get_first_player()

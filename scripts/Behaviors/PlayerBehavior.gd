@@ -433,8 +433,12 @@ func _input(event):
 		if _input_state == Globals.INPUT_STATE.test:
 			DO_TEST(click_pos)
 	
+	# if player is moving using pathfinding AI and we click anywhere we stop the ship. it must be on button "released"
+	# because otherwise _unhandled_input will trigger and send the ship somewhere else
 	if (event is InputEventMouseButton or event is InputEventKey) and playerNode != null and playerNode.get_attrib("ai") != null and playerNode.get_attrib("ai.disable_on_interest", false) == true and playerNode.get_attrib("ai.skip_check") <= 0:
-		playerNode.set_attrib("ai.disabled", true)
+		if event.is_pressed() == false:
+			playerNode.set_attrib("ai.disabled", true)
+		get_tree().set_input_as_handled() # don't do anything else this turn
 	
 	if _input_state != Globals.INPUT_STATE.look_around or not event is InputEventMouseButton:
 		return
@@ -527,7 +531,6 @@ func _unhandled_input(event):
 			elif _input_state == Globals.INPUT_STATE.loot_targetting:
 				set_input_state(Globals.INPUT_STATE.hud)
 				BehaviorEvents.emit_signal("OnTargetClick", click_pos, Globals.VALID_TARGET.loot)
-
 			else:
 				var player_pos = playerNode.position
 				var clicked_tile = Globals.LevelLoaderRef.World_to_Tile(click_pos)

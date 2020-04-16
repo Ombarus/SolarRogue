@@ -28,4 +28,4 @@ func Cancel_Callback():
 func Init(init_param):
 	get_node("base").disabled = false
 	
-	get_node("base/Content/Control/MyItemList").Content = init_param["crew"]
+	get_node("base/Content/Control/MyItemList").Content = str2var(var2str(init_param["crew"]))

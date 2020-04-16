@@ -10,6 +10,7 @@
 [node name="StringContentDialog" type="Control"]
 margin_right = 481.0
 margin_bottom = 227.0
+mouse_filter = 2
 script = ExtResource( 1 )
 editor_trigger_signal = false
 
@@ -25,6 +26,7 @@ margin_left = 10.0
 margin_top = 13.0
 margin_right = -10.0
 margin_bottom = -10.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/mono_font = ExtResource( 3 )
@@ -34,4 +36,3 @@ custom_fonts/bold_font = ExtResource( 6 )
 custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
 scroll_following = true
-
