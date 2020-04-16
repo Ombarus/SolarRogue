@@ -12,9 +12,9 @@ func _ready():
 	
 func Ok_Callback():
 	get_node("base").disabled = true
-	BehaviorEvents.emit_signal("OnPopGUI")
 	if _callback_obj != null:
 		_callback_obj.call(_callback_method)
+	BehaviorEvents.emit_signal("OnPopGUI")
 		
 	
 func Init(init_param):
@@ -32,6 +32,9 @@ func Init(init_param):
 	if "callback_object" in init_param:
 		_callback_obj = init_param.callback_object
 		_callback_method = init_param.callback_method
+	else:
+		_callback_obj = null
+		_callback_method = ""
 		
 	var desired_width : int = _text.bbcode_text.length() * 0.72258 + 194.0# arbitrary relation
 	desired_width = clamp(desired_width, 200, 500)

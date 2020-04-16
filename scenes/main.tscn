@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -76,6 +76,7 @@
 [ext_resource path="res://scenes/GUI/Dialogs/Crew3.tscn" type="PackedScene" id=74]
 [ext_resource path="res://scripts/Behaviors/Runes/NewFriend.gd" type="Script" id=75]
 [ext_resource path="res://data/shaders/ui_vfx.shader" type="Shader" id=76]
+[ext_resource path="res://scripts/GUI/TransitionContainer.gd" type="Script" id=77]
 
 [sub_resource type="Animation" id=1]
 resource_name = "slow_popin"
@@ -152,8 +153,10 @@ shader_param/alpha = 1.0
 shader_param/rand_strength = 1.0
 shader_param/affected = Plane( 0, 0, 1, 1 )
 
-[sub_resource type="Animation" id=3]
-resource_name = "popout"
+[sub_resource type="ViewportTexture" id=3]
+viewport_path = NodePath("Camera-GUI/ViewportContainer/Viewport")
+
+[sub_resource type="Animation" id=4]
 length = 1.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -821,6 +824,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 stretch = true
+script = ExtResource( 77 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -832,13 +836,18 @@ handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
 
+[node name="Sprite" type="Sprite" parent="Camera-GUI"]
+visible = false
+position = Vector2( 578.5, 313 )
+texture = SubResource( 3 )
+
 [node name="Loading-FX" type="CanvasLayer" parent="."]
 
 [node name="Starfield" parent="Loading-FX" instance=ExtResource( 67 )]
 visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Loading-FX/Starfield"]
-anims/popout = SubResource( 3 )
+anims/popout = SubResource( 4 )
 [connection signal="down" from="Camera-GUI/SafeArea/HUD_root/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_ZoomIn_down"]
 [connection signal="up" from="Camera-GUI/SafeArea/HUD_root/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_Zoom_up"]
 [connection signal="down" from="Camera-GUI/SafeArea/HUD_root/HUD/Buttons/ZoomOut" to="Camera2D" method="_on_ZoomOut_down"]

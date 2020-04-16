@@ -527,8 +527,7 @@ func _unhandled_input(event):
 			elif _input_state == Globals.INPUT_STATE.loot_targetting:
 				set_input_state(Globals.INPUT_STATE.hud)
 				BehaviorEvents.emit_signal("OnTargetClick", click_pos, Globals.VALID_TARGET.loot)
-			elif _input_state == Globals.INPUT_STATE.test:
-				DO_TEST(click_pos)
+
 			else:
 				var player_pos = playerNode.position
 				var clicked_tile = Globals.LevelLoaderRef.World_to_Tile(click_pos)
@@ -788,8 +787,11 @@ func OnTransferPlayer_Callback(old_player, new_player):
 	new_player.set_attrib("lowest_diff", old_player.get_attrib("lowest_diff"))
 	
 func DO_TEST(click_pos):
-	BehaviorEvents.emit_signal("OnHideGUI", "Options")
-	BehaviorEvents.emit_signal("OnShowGUI", "Options", null, "slow_popin")
+	playerNode.set_attrib("destroyable.current_hull", 1)
+	BehaviorEvents.emit_signal("OnDamageTaken", playerNode, null, Globals.DAMAGE_TYPE.radiation)
+			
+	#BehaviorEvents.emit_signal("OnHideGUI", "Options")
+	#BehaviorEvents.emit_signal("OnShowGUI", "Options", null, "slow_popin")
 
 
 func Pressed_Question_Callback():

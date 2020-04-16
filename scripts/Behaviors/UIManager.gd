@@ -12,6 +12,8 @@ var _animator : AnimationPlayer = null
 
 onready var _fx_viewport : Viewport = get_node(fx_viewport)
 onready var _fx_viewport_container : ViewportContainer = get_node(fx_viewport_container)
+var _animated_gui = null
+var _is_animated_push := true
 
 func set_debug_menu(newval):
 	if OS.is_debug_build():
@@ -95,16 +97,22 @@ func _start_transition(gui_obj, transition_name):
 		fx_parent.add_child(_fx_viewport)
 		_fx_viewport.add_child(fx_root)
 		
-		#print("play %s %s" % [transition_name, name])
+		print("play %s %s" % [transition_name, name])
+		_animated_gui = gui_obj
+		_is_animated_push = true
 		_animator.play(transition_name)
 		_animator.connect("animation_finished", self, "animation_finished_Callback", [gui_obj, true])
 	
+func _cancel_animation():
+	if _animator != null and _animator.is_playing():
+		_animator.stop()
+		animation_finished_Callback("", _animated_gui, _is_animated_push)
+	
 func OnPushGUI_Callback(name, init_param, transition_name=""):
 	#TODO: make sure Layout is not already in stack
-	#print("Push " + name)
-	var should_yield = false
-	if _animator != null and _animator.is_playing():
-		should_yield = true
+	print("Push " + name)
+	_cancel_animation()
+		
 	_start_transition(_gui_list[name], transition_name)
 		
 	_update_shortcut(_gui_list[name])
@@ -113,26 +121,20 @@ func OnPushGUI_Callback(name, init_param, transition_name=""):
 		_gui_list[_stack[-1]].call_deferred("OnFocusLost")
 	_stack.push_back(name)
 	BehaviorEvents.emit_signal("OnGUIChanged", _stack[-1])
-	
-	# wait until animations are done or we might end up doing show/hide in the wrong order
-	if should_yield == true:
-		#print("yield for animation")
-		yield(_animator, "animation_finished")
 		
-	#print("visible true " + name)
+	print("visible true " + name)
 	_gui_list[name].visible = true
 	
 func OnPopGUI_Callback():
-	#print("Pop " + _stack[-1])
+	print("Pop " + _stack[-1])
 	var gui_name = _stack[-1]
 	_stack.pop_back()
 	if _stack.size() > 0:
 		BehaviorEvents.emit_signal("OnGUIChanged", _stack[-1])
 		_gui_list[_stack[-1]].call_deferred("OnFocusGained")
 	
+	_cancel_animation()
 	if _animator != null and not _animator.is_playing() and _gui_list[gui_name].Transition != false:
-		#_animator.root_node = _gui_list[_stack[-1]].get_path()
-		
 		var fx_root : Node = _gui_list[gui_name].GetVFXRoot()
 		var fx_parent : Node = fx_root.get_parent()
 		fx_parent.remove_child(fx_root)
@@ -141,14 +143,13 @@ func OnPopGUI_Callback():
 		fx_parent.add_child(_fx_viewport)
 		_fx_viewport.add_child(fx_root)
 		
-		#print ("play popout " + gui_name)
+		print ("play popout " + gui_name)
+		_animated_gui = _gui_list[gui_name]
+		_is_animated_push = false
 		_animator.play_backwards("popin")
 		_animator.connect("animation_finished", self, "animation_finished_Callback", [_gui_list[gui_name], false])
 	else:
-		if _animator != null and _animator.is_playing():
-			#print("yield for animation")
-			yield(_animator, "animation_finished")
-		#print ("visible false " + gui_name)
+		print ("visible false " + gui_name)
 		_gui_list[gui_name].visible = false
 		
 		
@@ -160,7 +161,7 @@ func _update_shortcut(node):
 			_update_shortcut(child)
 
 func animation_finished_Callback(anim_name, obj, vis):
-	#print("animation finished " + obj.name)
+	print("animation finished " + obj.name)
 	obj.visible = vis
 	_fx_viewport_container.material.set_shader_param("alpha", 0.0);
 	

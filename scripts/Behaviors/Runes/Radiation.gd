@@ -20,11 +20,13 @@ func OnAnimationDone_Callback():
 func OnDamageTaken_Callback(target, shooter, damage_type):
 	var player : Attributes = Globals.get_first_player()
 	if target == player and target.get_attrib("runes.%s.completed" % self.name, null) == null:
-		var cur_hull : float = target.get_attrib("destroyable.current_hull")
-		var max_hull : float = target.get_attrib("destroyable.hull")
-		var hull_percent : float = cur_hull / max_hull
-		if hull_percent < 0.1:
-			TriggerFailure(player)
+		var level_id : String = Globals.LevelLoaderRef.GetLevelID()
+		if player.get_attrib("runes.%s.radiation_level" % self.name, "") == level_id:
+			var cur_hull : float = target.get_attrib("destroyable.current_hull")
+			var max_hull : float = target.get_attrib("destroyable.hull")
+			var hull_percent : float = cur_hull / max_hull
+			if hull_percent < 0.1:
+				TriggerFailure(player)
 	if target.get_attrib("radiation_emitter", false) == true and player.get_attrib("runes.%s.completed" % self.name, null) == null:
 		TriggerSuccess(player)
 				
@@ -145,12 +147,14 @@ func Fail_Done_Callback():
 
 func _remove_radiation(player : Attributes, is_completed=true):
 	var regens = player.get_attrib("consumable.hull_regen", [])
-	var index := 0
-	for index in range(regens.size()):
-		if regens[index].data == damage_json:
+	var index := -1
+	for i in range(regens.size()):
+		if Globals.clean_path(regens[i].data) == Globals.clean_path(damage_json):
+			index = i
 			break
 			
-	regens.remove(index)
+	if index >= 0:
+		regens.remove(index)
 	player.set_attrib("consumable.hull_regen", regens)
 	if is_completed == true:
 		player.set_attrib("runes.%s.radiation_level" % self.name, "")
