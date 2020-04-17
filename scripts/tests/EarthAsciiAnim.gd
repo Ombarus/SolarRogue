@@ -1,23 +1,20 @@
 extends Control
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 var frame_id := 1
 var cur_time := 0.0
 export(float) var frame_rate := 0.1
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	visible = false # make sure to avoid perf hit
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	# on PC this is the most expensive update!
+	if visible == false:
+		return
 	cur_time += delta
 	if cur_time >= frame_rate:
 		cur_time -= frame_rate
 		move_to_next_frame()
-#	pass
 
 func move_to_next_frame():
 	frame_id += 1

@@ -546,7 +546,6 @@ func _unhandled_input(event):
 				if click_start_time == null or click_start_time + (1.2 * 1000) > OS.get_ticks_msec():
 					var did_other_action : bool = do_contextual_actions(clicked_tile, player_tile)
 					if did_other_action == true:
-						BehaviorEvents.emit_signal("OnResetHighlight")
 						return
 				click_start_time = null
 					
@@ -663,7 +662,12 @@ func do_contextual_actions(tile, player_tile):
 		#TODO: If more  than one possible contextual action maybe pop a menu ?
 		#elif o.get_attrib("boardable") == true:
 		#	return true
+		
 	if method_to_call != "":
+		# Reset must be called before the contextual action
+		# to reset the current highlight and not the one that will be triggered by the method call
+		# (like picking up something with contextual action triggering the open inventory tuto)
+		BehaviorEvents.emit_signal("OnResetHighlight")
 		self.call(method_to_call)
 		return true
 			

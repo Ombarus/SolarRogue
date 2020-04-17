@@ -53,6 +53,7 @@ func ResetHightlight_Callback():
 	get_node("AnimationPlayer").stop(true)
 	if _prev_style != null:
 		get_node("btn").set('custom_styles/normal', _prev_style)
+		_prev_style = null
 
 func Hightlight_Callback(id):
 	if name == id:

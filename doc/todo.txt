@@ -11,6 +11,7 @@ RELEASE CHECKLIST :::
 
 
 Beta 2 :::
+- cleanup data folder to reduce package size
 - add runes status to highscore so we can display them one day
 - runes translation
 - Multi-tile

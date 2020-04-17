@@ -97,7 +97,7 @@ func OnGUIChanged_Callback(current_menu):
 					if available_slot == true:
 						var tr_slot = Globals.mytr(slot)
 						BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "TUTO equip our new", "text_fmt":[tr_slot, tr_slot], "title":"Tutorial: Inventory"})
-						BehaviorEvents.emit_signal("OnHighlightUIElement", "Craft")
+						BehaviorEvents.emit_signal("OnHighlightUIElement", "Swap")
 						steps.push_back("equip_inv")
 						PermSave.set_attrib("tutorial.completed_steps", steps)
 						break

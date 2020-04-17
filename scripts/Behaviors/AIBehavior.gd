@@ -91,7 +91,7 @@ func OnScannerUpdated_Callback(obj):
 			
 	if obj.get_attrib("ai") == null or obj.get_attrib("ai.aggressive") == false:
 		return
-		
+	
 	var level_id = Globals.LevelLoaderRef.GetLevelID()
 	var new_objs = obj.get_attrib("scanner_result.new_in_range." + level_id, [])
 	#var new_out_objs = obj.get_attrib("scanner_result.new_out_of_range." + level_id)
@@ -178,16 +178,26 @@ func FindRandomTile():
 
 func DoFollowGroupLeader(obj):
 	if obj.get_attrib("ai.target") == null:
-		var level_id = Globals.LevelLoaderRef.GetLevelID()
-		var nearby_objs = obj.get_attrib("scanner_result.cur_in_range." + level_id, [])
-		for id in nearby_objs:
-			var o = Globals.LevelLoaderRef.GetObjectById(id)
-			if o != null and o.get_attrib("ai.pathfinding") == "group_leader":
-				var leader_tile = Globals.LevelLoaderRef.World_to_Tile(o.position)
-				var my_tile = Globals.LevelLoaderRef.World_to_Tile(obj.position)
-				var offset = my_tile - leader_tile
-				obj.set_attrib("ai.target", id)
-				obj.set_attrib("ai.target_offset", offset)
+		
+		var ships = []
+		if "ship" in Globals.LevelLoaderRef.objByType:
+			ships = Globals.LevelLoaderRef.objByType["ship"]
+		var nearest = null
+		var nearest_dist = 0
+		for ship in ships:
+			if ship != null and ship.get_attrib("ai.pathfinding") == "group_leader":
+				var dist = (ship.position - obj.position).length()
+				if nearest == null or nearest_dist > dist:
+					nearest_dist = dist
+					nearest = ship
+		
+		if nearest != null:
+			var id = nearest.get_attrib("unique_id")
+			var leader_tile = Globals.LevelLoaderRef.World_to_Tile(nearest.position)
+			var my_tile = Globals.LevelLoaderRef.World_to_Tile(obj.position)
+			var offset = my_tile - leader_tile
+			obj.set_attrib("ai.target", id)
+			obj.set_attrib("ai.target_offset", offset)
 				
 	var target_id = obj.get_attrib("ai.target")
 	# lost the leader, go back to regular pathfinding

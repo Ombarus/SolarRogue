@@ -173,14 +173,40 @@ func _update_scanned_obj(obj, scanner_data):
 	if Globals.is_(Globals.get_data(scanner_data, "scanning.fully_mapped"), true):
 		return
 		
+		
 	var scan_radius = scanner_data.scanning.radius
 	var scan_bonus = obj.get_attrib("scanner_result.range_bonus", 0)
 	scan_radius += scan_bonus
+	var obj_tile = Globals.LevelLoaderRef.World_to_Tile(obj.position)
+	var bounds = Globals.LevelLoaderRef.levelSize
+	var level_id = Globals.LevelLoaderRef.GetLevelID()
+	
+	# Perf Hack: AIs for now don't really need scanner, they just need to check if the player is in their "vision" range
+	if obj.get_attrib("type") != "player":
+		var player_new_range = []
+		var player_cur_range = []
+		var all_players = []
+		var old_range = obj.get_attrib("scanner_result.cur_in_range." + level_id, [])
+		if "player" in Globals.LevelLoaderRef.objByType and Globals.LevelLoaderRef.objByType["player"].size() > 0:
+			all_players = Globals.LevelLoaderRef.objByType["player"]
+		for p in all_players:
+			var p_tile = Globals.LevelLoaderRef.World_to_Tile(p.position)
+			if _is_in_range(obj_tile, p_tile, scan_radius, bounds):
+				var id = p.get_attrib("unique_id")
+				if id in old_range:
+					player_cur_range.push_back(id)
+				else:
+					player_new_range.push_back(id)
+					player_cur_range.push_back(id)
+					
+		obj.set_attrib("scanner_result.cur_in_range." + level_id, player_cur_range)
+		obj.set_attrib("scanner_result.new_in_range." + level_id, player_new_range)
+		BehaviorEvents.emit_signal("OnScannerUpdated", obj)
+		return
+	
 	var cur_in_range = []
 	var offset = Vector2(0,0)
-	var obj_tile = Globals.LevelLoaderRef.World_to_Tile(obj.position)
 	var scanned_tiles = []
-	var bounds = Globals.LevelLoaderRef.levelSize
 	
 	while round(offset.length()) <= (scan_radius+1):
 		while round(offset.length()) <= (scan_radius+1):
@@ -260,7 +286,6 @@ func _update_scanned_obj(obj, scanner_data):
 	#				cur_in_range.push_back(uniq_id)
 
 
-	var level_id = Globals.LevelLoaderRef.GetLevelID()
 	var old_range = obj.get_attrib("scanner_result.cur_in_range." + level_id)
 	var new_in_range = []
 	var new_out_of_range = []
@@ -294,3 +319,9 @@ func _update_scanned_obj(obj, scanner_data):
 	obj.set_attrib("scanner_result.scanned_tiles." + level_id, scanned_tiles)
 	BehaviorEvents.emit_signal("OnScannerUpdated", obj)
 	
+
+func _is_in_range(obj_tile, tile, scan_radius, bounds):
+	if round((tile - obj_tile).length()) > scan_radius or tile.x < 0 or tile.x > bounds.x or tile.y < 0 or tile.y > bounds.y:
+		return false
+	else:
+		return true
