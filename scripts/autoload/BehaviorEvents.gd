@@ -55,6 +55,7 @@ signal OnCrafting(crafter, result)
 signal OnStatusChanged(obj)
 signal OnDifficultyChanged(newdiff)
 signal OnPlayerInputStateChanged(playerObj, inputState)
+signal OnAddToAnimationQueue(callback_obj, callback_name, args, priority)
 
 signal OnGUILoaded(name, obj)
 signal OnPushGUI(name, init_param, transition_name)

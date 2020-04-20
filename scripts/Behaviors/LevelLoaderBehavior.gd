@@ -26,7 +26,7 @@ var _current_level_data = null
 var _wait_for_anim = false
 var _global_spawns = {} # to keep track of items that should only appear once in a single game
 
-const _TEST_MID_GAME = false
+const _TEST_MID_GAME = true
 
 func GetRandomEmptyTile():
 	#TODO: Check for blocking and multi-tile objects
@@ -454,8 +454,15 @@ func OnRequestObjectUnload_Callback(obj):
 	#TODO: Should I clean ObjById ? I might iterate through it to delete objects so removing them while I iterate is dangerous
 	objById[obj.get_attrib("unique_id")] = null
 	objByType[obj.get_attrib("type")].erase(obj)
-	if _wait_for_anim == true:
-		yield(BehaviorEvents, "OnAnimationDone")
+	
+	# will be executed immediately if there's no animation, or will wait till all animations are done
+	BehaviorEvents.emit_signal("OnAddToAnimationQueue", self, "_do_remove", [obj], 550)
+	#if _wait_for_anim == true:
+	#	yield(BehaviorEvents, "OnAnimationDone")
+	#obj.get_parent().remove_child(obj)
+	#obj.queue_free()
+	
+func _do_remove(obj):
 	obj.get_parent().remove_child(obj)
 	obj.queue_free()
 	

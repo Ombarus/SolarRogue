@@ -91,7 +91,7 @@ scale = 2.0
 scale_curve = SubResource( 12 )
 color_ramp = SubResource( 11 )
 
-[node name="Node2D" type="Node2D"]
+[node name="explosion_fx" type="Node2D"]
 scale = Vector2( 3, 3 )
 z_index = 1000
 script = ExtResource( 1 )
@@ -117,4 +117,3 @@ process_material = SubResource( 13 )
 stream = ExtResource( 2 )
 autoplay = true
 bus = "Sfx"
-

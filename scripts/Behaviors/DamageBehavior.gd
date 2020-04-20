@@ -1,14 +1,21 @@
 extends Node
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+var _waiting_for_anim = false
 
 func _ready():
 	BehaviorEvents.connect("OnDealDamage", self, "OnDealDamage_Callback")
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 	BehaviorEvents.connect("OnObjectDestroyed", self, "OnObjectDestroyed_Callback")
 	
+	BehaviorEvents.connect("OnWaitForAnimation", self, "OnWaitForAnimation_Callback")
+	BehaviorEvents.connect("OnAnimationDone", self, "OnAnimationDone_Callback")
+	
+	
+func OnWaitForAnimation_Callback():
+	_waiting_for_anim = true
+	
+func OnAnimationDone_Callback():
+	_waiting_for_anim = false
 	
 func sort_by_chance(a, b):
 	if a.chance > b.chance:
@@ -193,9 +200,12 @@ func ProcessDefense(target, shooter, weapon_data):
 		y = clamp(tile.y + y, 0, bounds.y-1)
 		var offset = Vector2(x,y)
 		var modified_attrib : Dictionary = {"action_point":1}
-		Globals.LevelLoaderRef.RequestObject(json, offset, modified_attrib)
 		
-	BehaviorEvents.emit_signal("OnLogLine", "[color=red]This planet had a colony and they are NOT happy. They've deployed defenses.[/color]")
+		BehaviorEvents.emit_signal("OnAddToAnimationQueue", Globals.LevelLoaderRef, "RequestObject", [json, offset, modified_attrib], 500)
+		#Globals.LevelLoaderRef.RequestObject(json, offset, modified_attrib)
+	
+	BehaviorEvents.emit_signal("OnAddToAnimationQueue", BehaviorEvents, "emit_signal", ["OnLogLine", "[color=red]This planet had a colony and they are NOT happy. They've deployed defenses.[/color]"], 500)
+	#BehaviorEvents.emit_signal("OnLogLine", "[color=red]This planet had a colony and they are NOT happy. They've deployed defenses.[/color]")
 	target.set_attrib("harvestable.defense_deployed", true)
 	
 	
@@ -222,12 +232,14 @@ func ProcessHarvest(target, shooter, weapon_data):
 			x = clamp(tile.x + x, 0, bounds.x-1)
 			y = clamp(tile.y + y, 0, bounds.y-1)
 			var offset = Vector2(x,y)
-			Globals.LevelLoaderRef.RequestObject(inventory[inv_index], offset)
+			BehaviorEvents.emit_signal("OnAddToAnimationQueue", Globals.LevelLoaderRef, "RequestObject", [inventory[inv_index], offset], 500)
+			#Globals.LevelLoaderRef.RequestObject(inventory[inv_index], offset)
 			# safe because we're going from last to first so the next index shouldn't change
 			inventory.remove(inv_index)
 		target.set_attrib("harvestable.actual_inventory_size", inventory.size())
 		if is_player:
-			BehaviorEvents.emit_signal("OnLogLine", "Some useful materials float into orbit")
+			BehaviorEvents.emit_signal("OnAddToAnimationQueue", BehaviorEvents, "emit_signal", ["OnLogLine", "Some useful materials float into orbit"], 500)
+			#BehaviorEvents.emit_signal("OnLogLine", "Some useful materials float into orbit")
 
 	BehaviorEvents.emit_signal("OnDamageTaken", target, shooter, Globals.DAMAGE_TYPE.hull_hit)
 
@@ -276,7 +288,8 @@ func ProcessDamage(target, shooter, weapon_data):
 	
 func OnObjectDestroyed_Callback(target):
 	if target.get_attrib("drop_on_death") != null:
-		ProcessDeathSpawns(target)
+		BehaviorEvents.emit_signal("OnAddToAnimationQueue", self, "ProcessDeathSpawns", [target], 500)
+		#ProcessDeathSpawns(target)
 	
 func ProcessDeathSpawns(target):
 	for stuff in target.get_attrib("drop_on_death"):

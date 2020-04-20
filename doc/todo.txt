@@ -9,8 +9,35 @@ RELEASE CHECKLIST :::
 - remove sample & debug nodes in main.tscn ?
 - test signing on fresh fresh install on windows 10 (laptop?)
 
+trailer - d
+	- trop de combat
+	- good music
+	- good HUD fx
+	- hyperspace, good start
+	- A Roguelike Tactical Space Adventure ?
+	- L'ascii je le sens pas...
+trailer - s
+	- ombarus.dev sonne comme un site web
+	- drops trop tot ca fait amateur
+	- leaderboard avec des noms plus varier
+	- good transitions
+	- repetition (trop de combat?), pas de mouvement de cam, Plus de contenu ou meilleur contenant
+	- bouton "FTL" pourrait être vu comme du plagia ?
+	- l'experience n'est pas clair ?
+
 
 Beta 2 :::
+- enemies take damage should aim for player ship even if outside scanner range
+- SOUNDS
+- trailer improvements: More actions
+	- Could show more progression.
+		- There's the clip of me shooting 3 times a ship before it goes down.... I could show something like taking down 3 battleship in 1 round later
+		- Show the view expending with each scanner upgrade ?
+		
+- consider waiting for animation check before letting player quit
+- make items drop after animation
+	- queueanimation seems to work but in DamageBehavior I might be doing it too early... probably should have the damage calculated to know if we can keep shooting.
+		- shooting multiple weapons crash the game
 - cleanup data folder to reduce package size
 - add runes status to highscore so we can display them one day
 - runes translation
