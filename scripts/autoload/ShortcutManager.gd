@@ -45,7 +45,7 @@ func _unhandled_input(event):
 			_last_unicode = PoolByteArray([event.unicode]).get_string_from_utf8()
 		else:
 			_last_unicode = ""
-	
+
 	if event is InputEventKey && event.pressed == true:
 		if _last_unicode in _current_shortcut_dict:
 			for shortcut in _current_shortcut_dict[_last_unicode]:
@@ -76,6 +76,8 @@ func _unhandled_input(event):
 					var obj : Node = shortcut.obj
 					var method : String = shortcut.method
 					obj.call(method)
+		# when modifiers are pressed, there will be more than one release so make sure we only catch the first one
+		_last_unicode = ""
 			
 
 func _ready():

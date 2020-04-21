@@ -69,7 +69,7 @@ func TriggerEnd():
 		if _can_prompt == false:
 			yield(BehaviorEvents, "OnAnimationDone")
 		BehaviorEvents.emit_signal("OnWaitForAnimation")
-		BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "As you enter the system a small ship opens a communication channel, Eric's face shows up on screen : \"I'll be damned, is this what I think it is ? By god man, you've done it! I'm sorry I ever doubted you, please, let me come back aboard and let's go home, I'm so tired of this place! Can you believe these barabarians still use scalpels?\"", "title":"CMO Eric 'doc' Brown"})
+		BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "RUNE_RUNAWAY_SUCCESS", "title":"CMO Eric 'doc' Brown"})
 		yield(BehaviorEvents, "OnPopGUI")
 		Outro_Done_Callback()
 	else:
@@ -81,7 +81,7 @@ func Outro_Done_Callback():
 	#data["status"] = "Active"
 	#data["log"] = "No Recommendation
 	player.set_attrib("runes.%s.status" % self.name, "Redacted")
-	player.set_attrib("runes.%s.log" % self.name, "Record expunged, everyone can go home")
+	player.set_attrib("runes.%s.log" % self.name, "Record expunged")
 	player.set_attrib("runes.%s.color" % self.name, [0.0,0.4,0.0])
 	player.set_attrib("runes.%s.completed" % self.name, true)
 	BehaviorEvents.emit_signal("OnAnimationDone")
@@ -96,9 +96,9 @@ func TriggerBeginning():
 		yield(BehaviorEvents, "OnAnimationDone")
 		
 	BehaviorEvents.emit_signal("OnWaitForAnimation")
-	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "As you enter the system, your Chief Medical Officer approach you :\"You know Cap'n, I don't like this wild goose chase of yours. Imma go find myself some accepting human colony. If you do find your crazy artifact you come'n get me ya hear ?\"", "title":"CMO Eric 'doc' Brown"})
+	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "RUNE_RUNAWAY_INTRO_1", "title":"CMO Eric 'doc' Brown"})
 	yield(BehaviorEvents, "OnPopGUI")
-	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "You try to reason him, try to make him stay, but before you know it, he boards one of the shuttles and head for the nearest human outpost...", "title":"CMO Eric 'doc' Brown"})
+	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "RUNE_RUNAWAY_INTRO_2", "title":"CMO Eric 'doc' Brown"})
 	yield(BehaviorEvents, "OnPopGUI")
 	Intro_Done_Callback()
 	

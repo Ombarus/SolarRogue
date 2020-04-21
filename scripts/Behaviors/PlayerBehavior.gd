@@ -7,6 +7,7 @@ export(NodePath) var InventoryAction
 export(NodePath) var InventoryDialog
 export(NodePath) var CraftingAction
 export(NodePath) var FTLAction
+export(NodePath) var FTLAction2
 export(NodePath) var PopupButtons
 export(NodePath) var TargettingHUD
 export(NodePath) var OptionBtn
@@ -61,6 +62,8 @@ func _ready():
 	action = get_node(InventoryAction)
 	action.connect("pressed", self, "Pressed_Inventory_Callback")
 	action = get_node(FTLAction)
+	action.connect("pressed", self, "Pressed_FTL_Callback")
+	action = get_node(FTLAction2)
 	action.connect("pressed", self, "Pressed_FTL_Callback")
 	action = get_node(CraftingAction)
 	action.connect("pressed", self, "Pressed_Crafting_Callback")

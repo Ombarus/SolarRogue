@@ -13,10 +13,14 @@ func set_row_data(data):
 	if _name == null:
 		return
 
-	_title.text = data["title"]
-	_name.text = data["name"]
-	_status.text = data["status"]
-	_log.text = data["log"]
+	_title.text = Globals.mytr(data["title"])
+	_name.text = Globals.mytr(data["name"])
+	_status.text = Globals.mytr(data["status"])
+	var log_text = Globals.mytr(data["log"])
+	var log_fmt = []
+	if data.has("log_fmt"):
+		log_fmt = data["log_fmt"]
+	_log.text = Globals.mytr(log_text, log_fmt)
 	
 	var style := StyleBoxFlat.new()
 	style.bg_color = Color(data["color"][0],data["color"][1],data["color"][2])

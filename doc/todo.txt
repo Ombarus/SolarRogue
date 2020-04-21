@@ -8,6 +8,11 @@ RELEASE CHECKLIST :::
 - save after each turn, save when quit
 - remove sample & debug nodes in main.tscn ?
 - test signing on fresh fresh install on windows 10 (laptop?)
+- update translation
+	- runes
+		- Crew window
+	- minigun, bullet clip
+	- chaos gen
 
 
 Beta 2 :::
@@ -212,6 +217,7 @@ IDEAS:::
 	
 	
 DONE BETA2 :::
+- shift+ '<' trigger a second time when I release shift ?
 - make items drop after animation
 	- queueanimation seems to work but in DamageBehavior I might be doing it too early... probably should have the damage calculated to know if we can keep shooting.
 		- shooting multiple weapons crash the game

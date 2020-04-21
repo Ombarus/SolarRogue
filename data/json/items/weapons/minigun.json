@@ -33,7 +33,7 @@
 		"energy_cost":700
 	},
 	"description": {
-		"text":"A old machine gun with many rotating barrels capable of firing several thousand rounds per seconds. It's a relic from the past, but the ability to produce the bullets from scrap metal makes it a very cheap alternative to more advanced weaponery.",
+		"text":"A old machine gun with many rotating barrels capable of firing several thousand rounds per seconds. It's a relic from the past but the ability to produce the bullets from scrap metal makes it a very cheap alternative to more advanced weaponery.",
 		"Overview": {
 			"min_level":0,
 			"fields":[

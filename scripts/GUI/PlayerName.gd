@@ -64,6 +64,7 @@ func Init(init_param):
 	var diff_options : OptionButton = get_node("base/Control/Difficulty")
 	var default_diff : int = PermSave.get_attrib("settings.difficulty")
 	diff_options.select(default_diff)
+
 	
 func _on_Randomize_pressed():
 	var name : String = random_names[_random_index]

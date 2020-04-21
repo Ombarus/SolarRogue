@@ -50,7 +50,11 @@ func OnLevelReady_Callback():
 	if current_depth < first_depth or current_depth > last_depth:
 		return
 	
+	
 	var first_depth_chance : float = 0.05
+	if Globals.LevelLoaderRef._TEST_MID_GAME == true:
+		first_depth_chance = 1.0
+		
 	var last_depth_chance : float = 1.0
 	
 	var current_chance : float = 0.0
@@ -86,11 +90,11 @@ func TriggerEnd(friend : Attributes):
 		yield(BehaviorEvents, "OnAnimationDone")
 		
 	BehaviorEvents.emit_signal("OnWaitForAnimation")
-	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "As the ship explode, a small escape pod launches from the ship and opens a communication channel", "title":"Xileen"})
+	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "RUNE_FRIEND_OUTRO_1", "title":"Xileen"})
 	yield(BehaviorEvents, "OnPopGUI")
-	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "Xileen : \"Don't shoot! Wait, I'm sorry, I didn't know who you are. Look, I'll pay you back, let me live on board and I'll do anything you want! Even the dishes! Come on, you won't regret it, I know everything about this sector!\"", "title":"Xileen"})
+	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "RUNE_FRIEND_OUTRO_2", "title":"Xileen"})
 	yield(BehaviorEvents, "OnPopGUI")
-	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "You accept his surrender and Xileen joins your crew!", "title":"Xileen"})
+	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "RUNE_FRIEND_OUTRO_3", "title":"Xileen"})
 	yield(BehaviorEvents, "OnPopGUI")
 	Outro_Done_Callback()
 	

@@ -268,6 +268,7 @@ InventoryAction = NodePath("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Inven
 InventoryDialog = NodePath("../../Camera-GUI/SafeArea/InventoryRoot/InventoryV2")
 CraftingAction = NodePath("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Converter")
 FTLAction = NodePath("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Wormhole")
+FTLAction2 = NodePath("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Wormhole2")
 PopupButtons = NodePath("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/PopupButton")
 TargettingHUD = NodePath("../../Camera-GUI/SafeArea/TargettingRoot/TargettingHUD")
 OptionBtn = NodePath("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Options")
@@ -483,6 +484,21 @@ margin_bottom = -219.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[<]FTL"
 ShortcutKey = "<"
+IsHUD = true
+
+[node name="Wormhole2" parent="Camera-GUI/SafeArea/HUD_root/HUD/Buttons" instance=ExtResource( 45 )]
+visible = false
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -119.0
+margin_top = -309.0
+margin_right = -9.0
+margin_bottom = -219.0
+rect_min_size = Vector2( 110, 90 )
+Text = "[<]FTL"
+ShortcutKey = ">"
 IsHUD = true
 
 [node name="Inventory" parent="Camera-GUI/SafeArea/HUD_root/HUD/Buttons" instance=ExtResource( 45 )]

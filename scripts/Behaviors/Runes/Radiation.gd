@@ -79,7 +79,9 @@ func OnLevelReady_Callback():
 		return
 	
 	var first_depth_chance : float = 0.1
-	#var first_depth_chance : float = 1.0
+	if Globals.LevelLoaderRef._TEST_MID_GAME == true:
+		first_depth_chance = 1.0
+		
 	var last_depth_chance : float = 1.0
 	
 	var current_chance : float = 0.0
@@ -105,9 +107,9 @@ func TriggerBeginning(player : Attributes):
 	if _can_prompt == false:
 		yield(BehaviorEvents, "OnAnimationDone")
 	BehaviorEvents.emit_signal("OnWaitForAnimation")
-	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "As you enter the system heavy waves of radiation start tearing appart the hull. Your chief science officer Grayson explains.", "title":"CSO Leonard Grayson"})
+	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "RUNE_RADIATION_INTRO_1", "title":"CSO Leonard Grayson"})
 	yield(BehaviorEvents, "OnPopGUI")
-	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "Grayson: \"Captain, these radiations are specifically designed to penetrate our shields. They must emanate from a nearby planet as a defense system left over by an ancient race. I will try to remodulate our shield to protect us. In the mean time, I suggest you find and destroy whatever is creating the radiation matrix.\"", "title":"CSO Leonard Grayson"})
+	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text":"RUNE_RADIATION_INTRO_2", "title":"CSO Leonard Grayson"})
 	yield(BehaviorEvents, "OnPopGUI")
 	Intro_Done_Callback()
 	
@@ -125,9 +127,9 @@ func TriggerSuccess(player : Attributes):
 	if _can_prompt == false:
 		yield(BehaviorEvents, "OnAnimationDone")
 	BehaviorEvents.emit_signal("OnWaitForAnimation")
-	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "With a satisfying explosion, the radiation generator is destroyed taking with it, half the planet.", "title":"CSO Leonard Grayson"})
+	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "RUNE_RADIATION_SUCCESS_1", "title":"CSO Leonard Grayson"})
 	yield(BehaviorEvents, "OnPopGUI")
-	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "Grayson: \"Good job captain.\"", "title":"CSO Leonard Grayson"})
+	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "RUNE_RADIATION_SUCCESS_2", "title":"CSO Leonard Grayson"})
 	yield(BehaviorEvents, "OnPopGUI")
 	Outro_Done_Callback()
 
@@ -135,7 +137,8 @@ func Outro_Done_Callback():
 	var player : Attributes = Globals.get_first_player()
 	BehaviorEvents.emit_signal("OnLogLine", "[color=lime]Leonard Grayson didn't have to make a difficult decision![/color]")
 	player.set_attrib("runes.%s.status" % self.name, "Veteran")
-	player.set_attrib("runes.%s.log" % self.name, "Pivotal role during the radiation incident in %s" % Globals.LevelLoaderRef.GetCurrentLevelData().display_name)
+	player.set_attrib("runes.%s.log" % self.name, "Pivotal role during the radiation incident in %s")
+	player.set_attrib("runes.%s.log_fmt" % self.name, [Globals.LevelLoaderRef.GetCurrentLevelData().display_name])
 	player.set_attrib("runes.%s.color" % self.name, [0.0,0.4,0.0])
 	player.set_attrib("runes.%s.completed" % self.name, true)
 	BehaviorEvents.emit_signal("OnAnimationDone")
@@ -145,9 +148,9 @@ func TriggerFailure(player : Attributes):
 	if _can_prompt == false:
 		yield(BehaviorEvents, "OnAnimationDone")
 	BehaviorEvents.emit_signal("OnWaitForAnimation")
-	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "Grayson: \"Captain, I believe I have found a way to tune the ship's harmonics to the radiation field. However someone must do it from inside the generator which is exposed to the radiations.\"", "title":"CSO Leonard Grayson"})
+	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "RUNE_RADIATION_FAIL_1", "title":"CSO Leonard Grayson"})
 	yield(BehaviorEvents, "OnPopGUI")
-	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "You:\"Leonard, No...\"\n\nGrayson: \"Do not grieve captain, the needs of the many outweight the needs of the few... or the one.\"", "title":"CSO Leonard Grayson"})
+	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "RUNE_RADIATION_FAIL_2", "title":"CSO Leonard Grayson"})
 	yield(BehaviorEvents, "OnPopGUI")
 	Fail_Done_Callback()
 	

@@ -1,12 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/GUI/PlayerName.gd" type="Script" id=1]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
-[ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=4]
-[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold_text.tres" type="DynamicFont" id=5]
-[ext_resource path="res://data/fonts/DejaVuSansMonoItal_text.tres" type="DynamicFont" id=6]
-[ext_resource path="res://data/fonts/DejaVuSansMonoBold_text.tres" type="DynamicFont" id=7]
 [ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -67,18 +63,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Info" type="RichTextLabel" parent="base/Control"]
+[node name="Info" type="Label" parent="base/Control"]
 anchor_right = 1.0
 margin_bottom = 35.0
-custom_fonts/mono_font = ExtResource( 4 )
-custom_fonts/bold_italics_font = ExtResource( 5 )
-custom_fonts/italics_font = ExtResource( 6 )
-custom_fonts/bold_font = ExtResource( 7 )
-custom_fonts/normal_font = ExtResource( 4 )
-bbcode_enabled = true
-bbcode_text = "What will you be called ?"
 text = "What will you be called ?"
-scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Randomize" type="Button" parent="base/Control"]
 anchor_left = 1.0
@@ -90,21 +81,13 @@ margin_bottom = 86.1053
 icon = SubResource( 2 )
 flat = true
 
-[node name="Info2" type="RichTextLabel" parent="base/Control"]
+[node name="Info2" type="Label" parent="base/Control"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -109.238
 margin_bottom = -74.2383
-custom_fonts/mono_font = ExtResource( 4 )
-custom_fonts/bold_italics_font = ExtResource( 5 )
-custom_fonts/italics_font = ExtResource( 6 )
-custom_fonts/bold_font = ExtResource( 7 )
-custom_fonts/normal_font = ExtResource( 4 )
-bbcode_enabled = true
-bbcode_text = "Difficulty ?"
 text = "Difficulty ?"
-scroll_active = false
 
 [node name="Difficulty" type="OptionButton" parent="base/Control"]
 anchor_top = 1.0
