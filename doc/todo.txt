@@ -9,13 +9,10 @@ RELEASE CHECKLIST :::
 - remove sample & debug nodes in main.tscn ?
 - test signing on fresh fresh install on windows 10 (laptop?)
 - update translation
-	- runes
-		- Crew window
-	- minigun, bullet clip
-	- chaos gen
 
 
 Beta 2 :::
+- move all art to private git repo
 - enemies take damage should aim for player ship even if outside scanner range
 - SOUNDS
 		
