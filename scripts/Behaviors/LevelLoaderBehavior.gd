@@ -228,7 +228,7 @@ func GenerateLevelFromTemplate(levelData):
 	for tileCoord in allTilesCoord:
 		cur_tile_index += 1
 		cur_time = OS.get_ticks_msec()
-		if cur_time - start_time > 33:
+		if cur_time - start_time > 200:
 			#BehaviorEvents.emit_signal("OnLogLine", "Loading : " + str(cur_tile_index) + " / " + str(allTilesCoord.size()))
 			yield(get_tree(), "idle_frame")
 			start_time = cur_time

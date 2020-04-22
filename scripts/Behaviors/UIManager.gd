@@ -63,6 +63,11 @@ func OnShowGUI_Callback(name, init_param, transition=""):
 func OnHideGUI_Callback(name):
 	if name in _gui_list:
 		_gui_list[name].visible = false
+		
+func _input(event):
+	if _animator != null and _animator.is_playing():
+		# prevent player from spamming buttons while doing transitions
+		get_tree().set_input_as_handled()
 
 func OnPlayerCreated_Callback(player):
 	BehaviorEvents.disconnect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
