@@ -431,6 +431,13 @@ func OnLevelLoaded_Callback():
 		_current_origin = PLAYER_ORIGIN.saved
 	
 func _input(event):
+	if event.is_action_released("screenshot"):
+		var cur_datetime : Dictionary = OS.get_datetime()
+		var save_file_path = "user://screenshot-%s%s%s-%s%s%s.png" % [cur_datetime["year"], cur_datetime["month"], cur_datetime["day"], cur_datetime["hour"], cur_datetime["minute"], cur_datetime["second"]]
+		var image = get_viewport().get_texture().get_data()
+		image.flip_y()
+		image.save_png(save_file_path)
+	
 	if playerNode != null and event.is_action_released("touch") && _input_state != Globals.INPUT_STATE.camera_dragged :
 		var click_pos = playerNode.get_global_mouse_position()
 		if _input_state == Globals.INPUT_STATE.test:
