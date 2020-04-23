@@ -91,7 +91,7 @@ void fragment() {
 	vec2 coord_tex = swirl3(UV, vec2(0.96875, 0.09375), 0.06, 4);
 	vec4 c_tex = texture(TEXTURE, coord_tex).rgba;
 	coords = swirl3(coords, center, swirl_radius, swirl_amount);
-	c = textureLod(SCREEN_TEXTURE, coords, 0.0).rgba;
+	c = texture(SCREEN_TEXTURE, coords).rgba;
 		
 	if (coords.x < 0.0) {
 		c = center_color;

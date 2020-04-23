@@ -12,8 +12,9 @@ RELEASE CHECKLIST :::
 
 
 Beta 2 :::
+- when xileen get hit theres a battleship visible ?
 - one of my fix made it that if I try to use a shortcut while dragging the screen everything breaks ?
-- ask su if game runs on ipad2 (use testflight ?)
+- ask Su if game runs on ipad2 (use testflight ?)
 - game did not start full screen on first launch (laptop)
 - Do I have to manually create a metacritic page ? would it be useful ?
 - solar rogue facebook page ?

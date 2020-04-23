@@ -1,95 +1,26 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/animations/explosion_fx.gd" type="Script" id=1]
 [ext_resource path="res://data/sounds/sfx/explosion/sfx_exp_odd7.wav" type="AudioStream" id=2]
 
-[sub_resource type="Gradient" id=1]
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.446417, 0.628906 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.113281 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.805825, 1 )
 colors = PoolColorArray( 0.0703125, 0.0703125, 0.0703125, 1, 0.195313, 0.195313, 0.195313, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
-
-[sub_resource type="Curve" id=3]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.446417, 0.628906 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.113281 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=4]
-curve = SubResource( 3 )
-
-[sub_resource type="ParticlesMaterial" id=5]
-flag_disable_z = true
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 75.0
-initial_velocity_random = 0.3
-angular_velocity = 50.0
-angular_velocity_random = 1.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-linear_accel_random = 1.0
-radial_accel = 70.0
-radial_accel_random = 1.0
-damping = 100.0
-scale = 8.0
-scale_curve = SubResource( 4 )
-color_ramp = SubResource( 2 )
-
-[sub_resource type="CanvasItemMaterial" id=6]
+[sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 1
 light_mode = 1
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0, 0.805825, 1 )
 colors = PoolColorArray( 1, 0, 0, 1, 0.889923, 0.941406, 0, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=8]
-gradient = SubResource( 7 )
-
-[sub_resource type="ParticlesMaterial" id=9]
-flag_disable_z = true
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 75.0
-initial_velocity_random = 0.3
-angular_velocity = 50.0
-angular_velocity_random = 1.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-linear_accel_random = 1.0
-radial_accel = 100.0
-radial_accel_random = 1.0
-damping = 100.0
-scale = 4.0
-scale_curve = SubResource( 4 )
-color_ramp = SubResource( 8 )
-
-[sub_resource type="Gradient" id=10]
+[sub_resource type="Gradient" id=5]
 offsets = PoolRealArray( 0, 0.805825, 1 )
 colors = PoolColorArray( 0, 0.320313, 1, 1, 0.0246429, 0.209556, 0.332031, 1, 1, 1, 1, 0 )
-
-[sub_resource type="GradientTexture" id=11]
-gradient = SubResource( 10 )
-
-[sub_resource type="CurveTexture" id=12]
-curve = SubResource( 3 )
-
-[sub_resource type="ParticlesMaterial" id=13]
-flag_disable_z = true
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 20.0
-initial_velocity_random = 0.3
-angular_velocity = 50.0
-angular_velocity_random = 1.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-linear_accel_random = 1.0
-radial_accel = 100.0
-radial_accel_random = 1.0
-damping = 100.0
-scale = 2.0
-scale_curve = SubResource( 12 )
-color_ramp = SubResource( 11 )
 
 [node name="explosion_fx" type="Node2D"]
 scale = Vector2( 3, 3 )
@@ -97,21 +28,57 @@ z_index = 1000
 script = ExtResource( 1 )
 ttl = 0.8
 
-[node name="smoke" type="Particles2D" parent="."]
+[node name="smoke" type="CPUParticles2D" parent="."]
 amount = 25
 explosiveness = 1.0
-process_material = SubResource( 5 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 75.0
+initial_velocity_random = 0.3
+angular_velocity = 50.0
+angular_velocity_random = 1.0
+linear_accel_random = 1.0
+radial_accel = 70.0
+radial_accel_random = 1.0
+damping = 100.0
+scale_amount = 8.0
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 2 )
 
-[node name="Particles2D" type="Particles2D" parent="."]
-material = SubResource( 6 )
+[node name="Particles2D" type="CPUParticles2D" parent="."]
+material = SubResource( 3 )
 amount = 200
 explosiveness = 1.0
-process_material = SubResource( 9 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 75.0
+initial_velocity_random = 0.3
+angular_velocity = 50.0
+angular_velocity_random = 1.0
+linear_accel_random = 1.0
+radial_accel = 100.0
+radial_accel_random = 1.0
+damping = 100.0
+scale_amount = 4.0
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 4 )
 
-[node name="pieces" type="Particles2D" parent="."]
+[node name="pieces" type="CPUParticles2D" parent="."]
 amount = 50
 explosiveness = 1.0
-process_material = SubResource( 13 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 20.0
+initial_velocity_random = 0.3
+angular_velocity = 50.0
+angular_velocity_random = 1.0
+linear_accel_random = 1.0
+radial_accel = 100.0
+radial_accel_random = 1.0
+damping = 100.0
+scale_amount = 2.0
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 5 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )

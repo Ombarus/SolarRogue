@@ -124,10 +124,12 @@ common/physics_fps=5
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
 quality/2d/use_pixel_snap=true
 threads/thread_model=2
+vram_compression/import_etc=true
 quality/directional_shadow/size=512
 quality/directional_shadow/size.mobile=256
 quality/shadow_atlas/size=512

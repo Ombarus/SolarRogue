@@ -3,9 +3,7 @@ extends Node
 func _ready():
 	OS.set_window_fullscreen(PermSave.get_attrib("settings.full_screen", false))
 	OS.set_use_vsync(PermSave.get_attrib("settings.vsync", true))
-	#OS.set_window_size(Vector2(2732, 2048))
-	#get_viewport().set_size_override(true, Vector2(2688,1242))
-	#get_viewport().set_size_override_stretch(false)
+	#OS.set_window_size(Vector2(2208, 1242))
 	var lang = PermSave.get_attrib("settings.lang")
 	if lang != null:
 		TranslationServer.set_locale(lang)

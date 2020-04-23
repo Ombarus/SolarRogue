@@ -1,41 +1,28 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/animations/hull_hit_fx.gd" type="Script" id=1]
 
-[sub_resource type="Gradient" id=1]
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
-
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
-
-[sub_resource type="Curve" id=3]
+[sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0.7464 ), 0.0, 0.0, 0, 0, Vector2( 0.456953, 0.9224 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5088 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=4]
-curve = SubResource( 3 )
-
-[sub_resource type="ParticlesMaterial" id=5]
-flag_disable_z = true
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 123.08
-initial_velocity_random = 0.11
-angular_velocity = 110.77
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-damping = 25.39
-scale = 6.0
-scale_curve = SubResource( 4 )
-color_ramp = SubResource( 2 )
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [node name="hull_hit_fx" type="Node2D"]
 script = ExtResource( 1 )
 ttl = 1.0
 
-[node name="Particles2D" type="Particles2D" parent="."]
+[node name="Particles2D" type="CPUParticles2D" parent="."]
 emitting = false
 amount = 20
 one_shot = true
 explosiveness = 0.86
-process_material = SubResource( 5 )
-
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 123.08
+initial_velocity_random = 0.11
+angular_velocity = 110.77
+damping = 25.39
+scale_amount = 6.0
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 2 )
