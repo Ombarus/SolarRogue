@@ -12,6 +12,15 @@ RELEASE CHECKLIST :::
 
 
 Beta 2 :::
+	- Update trailer desc with link to download/buy
+	- Link trailer to website & my webpage
+- release :
+	- play store (ready)
+	- iOS (upload 0.2.0 + trailer)
+	- itch.io (ready?)
+	- steam
+- scanner resolution becomes worst and worst on gles2 (shader precision?)
+	- android only
 - when xileen get hit theres a battleship visible ?
 - one of my fix made it that if I try to use a shortcut while dragging the screen everything breaks ?
 - ask Su if game runs on ipad2 (use testflight ?)
