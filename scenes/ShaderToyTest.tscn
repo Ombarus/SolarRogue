@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://data/textures/tests/cross.png" type="Texture" id=1]
-[ext_resource path="res://data/textures/space/space-bg_mine.png" type="Texture" id=2]
-[ext_resource path="res://data/textures/title.png" type="Texture" id=3]
-[ext_resource path="res://data/textures/tests/plus2048.png" type="Texture" id=4]
+[ext_resource path="res://data/private/textures/tests/cross.png" type="Texture" id=1]
+[ext_resource path="res://data/private/textures/space/space-bg_mine.png" type="Texture" id=2]
+[ext_resource path="res://data/private/textures/title.png" type="Texture" id=3]
+[ext_resource path="res://data/private/textures/tests/plus2048.png" type="Texture" id=4]
 [ext_resource path="res://scenes/tileset_source/wormhole.tscn" type="PackedScene" id=5]
 
 [node name="ShaderToy" type="Node2D"]

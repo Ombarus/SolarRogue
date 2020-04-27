@@ -3,7 +3,7 @@
 	"type":"spare_parts",
 	"sprite":"spare_parts",
 	"icon": {
-		"texture":"data/textures/space-sprite.png",
+		"texture":"data/private/textures/space-sprite.png",
 		"region":[1536,128,128,128]
 	},
 	"equipment": {

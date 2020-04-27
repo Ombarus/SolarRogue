@@ -3,7 +3,7 @@
 	"type":"utility",
 	"sprite":"gravitic_compactor",
 	"icon": {
-		"texture":"data/textures/space-sprite.png",
+		"texture":"data/private/textures/space-sprite.png",
 		"region":[128,0,128,128]
 	},
 	"equipment": {

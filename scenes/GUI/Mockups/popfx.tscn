@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/GUI/Mockups/popfx.gd" type="Script" id=1]
-[ext_resource path="res://data/textures/dialog_atlas.png" type="Texture" id=2]
+[ext_resource path="res://data/private/textures/dialog_atlas.png" type="Texture" id=2]
 [ext_resource path="res://scenes/GUI/Mockups/popfx.tres" type="Material" id=3]
-[ext_resource path="res://data/textures/sphere_norm.png" type="Texture" id=4]
+[ext_resource path="res://data/private/textures/sphere_norm.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "popin"

@@ -3,7 +3,7 @@
 [ext_resource path="res://data/theme/default_ui_text.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/GUI/ItemList/RecipeRow.gd" type="Script" id=2]
 [ext_resource path="res://scripts/GUI/Audio/ToggleBtnAudio.gd" type="Script" id=3]
-[ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=4]
+[ext_resource path="res://data/private/textures/space-sprite.png" type="Texture" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 2

@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/animations/missile_fx.gd" type="Script" id=1]
-[ext_resource path="res://data/textures/visualfx/missile_test.png" type="Texture" id=2]
-[ext_resource path="res://data/textures/visualfx/smoke_particle_test.png" type="Texture" id=3]
-[ext_resource path="res://data/sounds/sfx/missile/sfx_wpn_missilelaunch.wav" type="AudioStream" id=4]
+[ext_resource path="res://data/private/textures/visualfx/missile_test.png" type="Texture" id=2]
+[ext_resource path="res://data/private/textures/visualfx/smoke_particle_test.png" type="Texture" id=3]
+[ext_resource path="res://data/private/sounds/sfx/missile/sfx_wpn_missilelaunch.wav" type="AudioStream" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "moving"

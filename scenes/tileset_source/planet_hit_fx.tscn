@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/animations/planet_hit_fx.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Animations/planet_hit_inst.tscn" type="PackedScene" id=2]
-[ext_resource path="res://data/sounds/sfx/explosion/sfx_exp_planet_gb02.wav" type="AudioStream" id=3]
+[ext_resource path="res://data/private/sounds/sfx/explosion/sfx_exp_planet_gb02.wav" type="AudioStream" id=3]
 
 [node name="planet_hit_fx" type="Node2D"]
 script = ExtResource( 1 )

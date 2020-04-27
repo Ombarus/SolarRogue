@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://data/textures/visualfx/explosion_test_gb.png" type="Texture" id=1]
+[ext_resource path="res://data/private/textures/visualfx/explosion_test_gb.png" type="Texture" id=1]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;

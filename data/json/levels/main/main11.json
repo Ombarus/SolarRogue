@@ -8,7 +8,7 @@
 	"no_ghost":true,
 	"tuto_trigger":{"id":"last_level", "text":"That's it! the converter is inside the broken battleship hull somewhere in the middle of the system. There's a huge war going on and you're going to have to go right through it! They're not going to make it easy for you!", "title":"Tutorial: Final Stretch"},
 	"icon": {
-		"texture":"data/textures/space-sprite.png",
+		"texture":"data/private/textures/space-sprite.png",
 		"region":[1536,0,128,128]
 	},
 	"objects": [

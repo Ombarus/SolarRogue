@@ -3,7 +3,7 @@
 	"type":"battleship_hull",
 	"sprite":"battleship_body",
 	"icon": {
-		"texture":"data/textures/space-sprite.png",
+		"texture":"data/private/textures/space-sprite.png",
 		"region":[1280,384,128,128]
 	},
 	"equipment": {

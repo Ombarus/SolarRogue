@@ -3,7 +3,7 @@
 	"type":"ship",
 	"sprite":"human_scout",
 	"icon": {
-		"texture":"data/textures/space-sprite.png",
+		"texture":"data/private/textures/space-sprite.png",
 		"region":[512,256,128,128]
 	},
 	"animation": {

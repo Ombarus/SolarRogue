@@ -5,7 +5,7 @@
 [ext_resource path="res://data/fonts/DejaVuSansMonoItalBold_text.tres" type="DynamicFont" id=3]
 [ext_resource path="res://data/fonts/DejaVuSansMonoItal_text.tres" type="DynamicFont" id=4]
 [ext_resource path="res://data/fonts/DejaVuSansMonoBold_text.tres" type="DynamicFont" id=5]
-[ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=6]
+[ext_resource path="res://data/private/textures/space-sprite.png" type="Texture" id=6]
 [ext_resource path="res://scenes/GUI/ItemList/InventoryRowV2.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=8]
 

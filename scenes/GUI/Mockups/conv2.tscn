@@ -3,7 +3,7 @@
 [ext_resource path="res://data/theme/default_ui_text.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/GUI/ItemList/RecipeRow.tscn" type="PackedScene" id=3]
-[ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=4]
+[ext_resource path="res://data/private/textures/space-sprite.png" type="Texture" id=4]
 [ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/GUI/ItemList/CraftingMaterialRow.tscn" type="PackedScene" id=6]
 

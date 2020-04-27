@@ -5,7 +5,7 @@
 		"bullet_clip"
 	],
 	"icon": [{
-		"texture":"data/textures/space-sprite.png",
+		"texture":"data/private/textures/space-sprite.png",
 		"region":[640,384,128,128]
 	}],
 	"equipment": {

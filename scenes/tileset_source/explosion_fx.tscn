@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/animations/explosion_fx.gd" type="Script" id=1]
-[ext_resource path="res://data/sounds/sfx/explosion/sfx_exp_odd7.wav" type="AudioStream" id=2]
+[ext_resource path="res://data/private/sounds/sfx/explosion/sfx_exp_odd7.wav" type="AudioStream" id=2]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.446417, 0.628906 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.113281 ), 0.0, 0.0, 0, 0 ]

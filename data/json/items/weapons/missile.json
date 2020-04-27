@@ -5,7 +5,7 @@
 		"missile"
 	],
 	"icon": [{
-		"texture":"data/textures/space-sprite.png",
+		"texture":"data/private/textures/space-sprite.png",
 		"region":[384,0,128,128]
 	}],
 	"equipment": {

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://data/textures/tests/ray.png" type="Texture" id=1]
+[ext_resource path="res://data/private/textures/tests/ray.png" type="Texture" id=1]
 
 [sub_resource type="Curve" id=1]
 min_value = -200.0

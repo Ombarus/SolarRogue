@@ -3,7 +3,7 @@
 	"type":"consumable",
 	"sprite": "repair_nanobots",
 	"icon": {
-		"texture":"data/textures/space-sprite.png",
+		"texture":"data/private/textures/space-sprite.png",
 		"region":[768,128,128,128]
 	},
 	"consumable": {

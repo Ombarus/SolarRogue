@@ -2,7 +2,7 @@
 	"name_id":"A Simple Probe",
 	"sprite":"probe",
 	"icon": {
-		"texture":"data/textures/space-sprite.png",
+		"texture":"data/private/textures/space-sprite.png",
 		"region":[1664,256,128,128]
 	},
 	"type":"ship",

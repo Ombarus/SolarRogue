@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://data/shaders/Sprite-desaturate.tres" type="Material" id=1]
-[ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=2]
+[ext_resource path="res://data/private/textures/space-sprite.png" type="Texture" id=2]
 
 [node name="Node" type="Node" index="0"]
 

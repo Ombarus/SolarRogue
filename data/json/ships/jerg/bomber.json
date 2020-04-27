@@ -3,7 +3,7 @@
 	"type":"ship",
 	"sprite":"jerg_bomber",
 	"icon": {
-		"texture":"data/textures/space-sprite.png",
+		"texture":"data/private/textures/space-sprite.png",
 		"region":[128,1024,128,128]
 	},
 	"action_point":0,

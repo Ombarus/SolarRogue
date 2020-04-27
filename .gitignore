@@ -2,6 +2,7 @@
 *tmp*
 /logs.txt
 /secret
+/data/private
 *.png~
 *~
 SolarRogue*.exe

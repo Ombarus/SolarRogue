@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://data/textures/green_square.png" type="Texture" id=1]
+[ext_resource path="res://data/private/textures/green_square.png" type="Texture" id=1]
 
 [sub_resource type="VisualShaderNodeScalarOp" id=1]
 default_input_values = [ 0, 0.0, 1, 1.0 ]

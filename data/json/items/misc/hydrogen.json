@@ -3,7 +3,7 @@
 	"type":"food",
 	"sprite":"hydrogen",
 	"icon": {
-		"texture":"data/textures/space-sprite.png",
+		"texture":"data/private/textures/space-sprite.png",
 		"region":[256,0,128,128]
 	},
 	"equipment": {

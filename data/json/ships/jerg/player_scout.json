@@ -3,7 +3,7 @@
 	"type":"ship",
 	"sprite":"jerg_scout",
 	"icon": {
-		"texture":"data/textures/space-sprite.png",
+		"texture":"data/private/textures/space-sprite.png",
 		"region":[640,256,128,128]
 	},
 	"animation": {

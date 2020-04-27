@@ -4,7 +4,7 @@
 [ext_resource path="res://scripts/GUI/ItemList/InventoryRowV2.gd" type="Script" id=2]
 [ext_resource path="res://data/styles/btn_list_pressed.tres" type="StyleBox" id=3]
 [ext_resource path="res://scripts/GUI/DragDropCatcher.gd" type="Script" id=4]
-[ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=5]
+[ext_resource path="res://data/private/textures/space-sprite.png" type="Texture" id=5]
 [ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=6]
 
 [sub_resource type="AtlasTexture" id=1]

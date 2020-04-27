@@ -1,9 +1,9 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://data/textures/visualfx/bullet_test.png" type="Texture" id=1]
-[ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=2]
+[ext_resource path="res://data/private/textures/visualfx/bullet_test.png" type="Texture" id=1]
+[ext_resource path="res://data/private/textures/space-sprite.png" type="Texture" id=2]
 [ext_resource path="res://scripts/animations/minigun_fx.gd" type="Script" id=9]
-[ext_resource path="res://data/sounds/sfx/minigun/sfx_vehicle_helicopterloop2.wav" type="AudioStream" id=10]
+[ext_resource path="res://data/private/sounds/sfx/minigun/sfx_vehicle_helicopterloop2.wav" type="AudioStream" id=10]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0.373864 ), 0.0, 2.22854, 0, 0, Vector2( 0.130312, 0.992045 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]

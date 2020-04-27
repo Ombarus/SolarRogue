@@ -3,7 +3,7 @@
 	"type":"weapon",
 	"sprite": "chaos_generator",
 	"icon": {
-		"texture":"data/textures/space-sprite.png",
+		"texture":"data/private/textures/space-sprite.png",
 		"region":[384,256,128,128]
 	},
 	"animation": {

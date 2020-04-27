@@ -4,7 +4,7 @@
 	"type":"ship",
 	"sprite":"vorg_frigate",
 	"icon": {
-		"texture":"data/textures/space-sprite.png",
+		"texture":"data/private/textures/space-sprite.png",
 		"region":[1152,256,128,128]
 	},
 	"animation": {

@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/sfx/Human_Ship_BG.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/sfx/Human_MoveSFX.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Animations/ShipAnimations2.tscn" type="PackedScene" id=3]
-[ext_resource path="res://data/textures/space-sprite.png" type="Texture" id=4]
+[ext_resource path="res://data/private/textures/space-sprite.png" type="Texture" id=4]
 [ext_resource path="res://scenes/Animations/ship_base_hit_fx.tscn" type="PackedScene" id=5]
 
 [node name="scout_root" type="Node2D"]

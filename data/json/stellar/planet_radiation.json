@@ -3,7 +3,7 @@
 	"type":"planet",
 	"sprite": "planet_a",
 	"icon": {
-		"texture":"data/textures/space-sprite.png", 
+		"texture":"data/private/textures/space-sprite.png", 
 		"region":[512,0,128,128]
 	},
 	"radiation_emitter":true,
