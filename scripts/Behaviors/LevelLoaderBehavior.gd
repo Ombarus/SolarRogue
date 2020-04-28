@@ -26,7 +26,7 @@ var _current_level_data = null
 var _wait_for_anim = false
 var _global_spawns = {} # to keep track of items that should only appear once in a single game
 
-const _TEST_MID_GAME = false
+const _TEST_MID_GAME = true
 
 func GetRandomEmptyTile():
 	#TODO: Check for blocking and multi-tile objects

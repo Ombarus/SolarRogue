@@ -123,6 +123,13 @@ func OnDamageTaken_Callback(target, shooter, damage_type):
 		target.set_attrib("ai.run_from", shooter.modified_attributes.unique_id)
 		target.set_attrib("ai.unseen_for", 0)
 		target.set_attrib("wandering", false)
+		
+	# handle the case where the player has better weapon and shoot a ship that hasn't seen it yet
+	if target.get_attrib("ai.aggressive", false) == true:
+		target.set_attrib("ai.pathfinding", "attack")
+		target.set_attrib("ai.target", shooter.get_attrib("unique_id"))
+		target.set_attrib("wandering", false)
+		BehaviorEvents.emit_signal("OnStatusChanged", target)
 	
 func OnObjTurn_Callback(obj):
 	if obj.get_attrib("ai") == null:

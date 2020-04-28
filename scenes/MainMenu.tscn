@@ -208,6 +208,15 @@ margin_bottom = 0.0
 mouse_filter = 1
 Row = ExtResource( 13 )
 
+[node name="Label" type="Label" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 36.3677
+margin_top = -39.5347
+margin_right = 76.3677
+margin_bottom = -25.5347
+text = "Version 0.2.1"
+
 [node name="PlayerNameRoot" type="Control" parent="CanvasLayer/SafeArea"]
 anchor_right = 1.0
 anchor_bottom = 1.0
