@@ -427,6 +427,26 @@ func OnLevelLoaded_Callback():
 		
 		UpdateButtonVisibility()
 		
+		
+		var tile_pos = Globals.LevelLoaderRef.World_to_Tile(playerNode.position)
+		var content = Globals.LevelLoaderRef.levelTiles[tile_pos.x][tile_pos.y]
+		var filtered = []
+		var wormhole = null
+		for c in content:
+			if c != playerNode and c.get_attrib("type") in ["wormhole"]:
+				wormhole = c		
+		var btn = get_node(FTLAction)
+		if wormhole != null:
+			btn.visible = true
+			var cur_depth : int = Globals.LevelLoaderRef.current_depth
+			var worm_depth : int = wormhole.get_attrib("depth")
+			if worm_depth <= cur_depth:
+				btn.Text = "[<]FTL"
+			else:
+				btn.Text = "[>]FTL"
+		else:
+			btn.visible = false
+		
 		# always default to saved position
 		_current_origin = PLAYER_ORIGIN.saved
 	

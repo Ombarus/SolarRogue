@@ -12,6 +12,9 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ModalBG" type="Panel" parent="."]
 anchor_right = 1.0
@@ -71,6 +74,9 @@ https://creativecommons.org/licenses/by/4.0/
 [b]Made with[/b]
 Godot Engine, Krita, SunVox, Bfxr, Audacity
 
+[b]Special Thanks[/b]
+Sam - iOS tester
+
 [/center]"
 text = "
 Game Design, Concept, Programming and cie
@@ -100,5 +106,7 @@ https://creativecommons.org/licenses/by/4.0/
 Made with
 Godot Engine, Krita, SunVox, Bfxr, Audacity
 
-"
+Special Thanks
+Sam - iOS tester
 
+"
