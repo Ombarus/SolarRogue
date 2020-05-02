@@ -49,6 +49,8 @@ func HowManyDiag_Callback(num):
 	BehaviorEvents.emit_signal("OnRemoveItem", _transfered_ship, _transfered_cargo.src, _transfered_cargo.count)
 	for i in range(_transfered_cargo.count):
 		BehaviorEvents.emit_signal("OnAddItem", _transfered_to, _transfered_cargo.src)
+	
+	BehaviorEvents.emit_signal("OnMoveCargo", _transfered_ship, _transfered_to)
 	# Update inventory lists
 	ReInit()
 
@@ -178,6 +180,7 @@ func Transfer_Callback():
 				"min_value":1, 
 				"max_value":selected_item.count})
 	else:
+		BehaviorEvents.emit_signal("OnMoveCargo", selected_ship, to_ship)
 		BehaviorEvents.emit_signal("OnRemoveItem", selected_ship, selected_item.src)
 		BehaviorEvents.emit_signal("OnAddItem", to_ship, selected_item.src)
 		ReInit()
@@ -198,6 +201,8 @@ func TransferAll(from, to, from_list, to_list):
 	BehaviorEvents.emit_signal("OnBeginParallelAction", from)
 	BehaviorEvents.emit_signal("OnBeginParallelAction", to)
 	
+	var no_mount := true
+	
 	for item in from_content:
 		if item.header == true or item.src == "":
 			continue
@@ -210,6 +215,7 @@ func TransferAll(from, to, from_list, to_list):
 					BehaviorEvents.emit_signal("OnEquipMount", to, to_item.key, to_item.idx, item.src)
 					to_item.src = item.src # to signal the rest of the loop that this slot is now occupied before the actual refresh in reinit()
 					added = true
+					no_mount = false
 					break
 				index += 1
 		var num = 1
@@ -220,7 +226,8 @@ func TransferAll(from, to, from_list, to_list):
 			for i in range(num):
 				BehaviorEvents.emit_signal("OnAddItem", to, item.src)
 		
-			
+	if no_mount: # just for sound
+		BehaviorEvents.emit_signal("OnMoveCargo", from, to)
 	BehaviorEvents.emit_signal("OnEndParallelAction", from)
 	BehaviorEvents.emit_signal("OnEndParallelAction", to)
 	
@@ -376,6 +383,7 @@ func DoMounting():
 					BehaviorEvents.emit_signal("OnAddItem", from_ship, to_item.src)
 			BehaviorEvents.emit_signal("OnEquipMount", to_ship, to_item.key, to_item.idx, from_item.src)
 		else:
+			BehaviorEvents.emit_signal("OnMoveCargo", from_item, to_ship)
 			BehaviorEvents.emit_signal("OnAddItem", to_ship, from_item.src)
 			
 	ReInit()
@@ -447,6 +455,7 @@ func OnDragDropCompleted_Callback(origin_data, destination_data):
 					"min_value":1, 
 					"max_value":origin_data.count})
 		else:
+			BehaviorEvents.emit_signal("OnMoveCargo", origin_ship, dest_ship)
 			BehaviorEvents.emit_signal("OnRemoveItem", origin_ship, origin_data.src)
 			BehaviorEvents.emit_signal("OnAddItem", dest_ship, origin_data.src)
 	# Cargo to Mount

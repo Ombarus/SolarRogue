@@ -9,4 +9,3 @@ stream = ExtResource( 1 )
 max_distance = 500.0
 attenuation = 1.62451
 bus = "Sfx"
-

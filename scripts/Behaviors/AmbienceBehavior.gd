@@ -14,8 +14,10 @@ func _ready():
 	BehaviorEvents.connect("OnCrafting", self, "OnCrafting_Callback")
 	BehaviorEvents.connect("OnMountRemoved", self, "OnMountChanged_Callback")
 	BehaviorEvents.connect("OnMountAdded", self, "OnMountChanged_Callback")
+	BehaviorEvents.connect("OnConsumeItem", self, "OnConsumeItem_Callback")
 	#BehaviorEvents.connect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
 	BehaviorEvents.connect("OnRequestLevelChange", self, "OnPlayerCreated_Callback")
+	BehaviorEvents.connect("OnMoveCargo", self, "OnMoveCargo_Callback")
 	
 	BehaviorEvents.connect("OnDropCargo", self, "OnDrop_Callback")
 	BehaviorEvents.connect("OnDropMount", self, "OnDrop_Callback")
@@ -47,6 +49,14 @@ func OnDrop_Callback(dropper, item_id, countorindex):
 		
 	get_node("Drop").play()
 	
+func OnMoveCargo_Callback(selected_ship, selected_item):
+	var sfx : AudioStreamPlayer = get_node("MoveCargo")
+	var mnt_sfx : AudioStreamPlayer = get_node("Mount")
+	if sfx.playing == true or mnt_sfx.playing == true:
+		return
+		
+	sfx.play()
+	
 func OnPickup_Callback(picker):
 	var is_player = picker.get_attrib("type") == "player"
 	if not is_player:
@@ -58,6 +68,14 @@ func OnPlayerCreated_Callback(player):
 	var sfx : AudioStreamPlayer = get_node("Warp")
 	if sfx.playing == true:
 		return
+	sfx.play()
+	
+func OnConsumeItem_Callback(obj, data):
+	var sfx : AudioStreamPlayer = get_node("UseItem")
+	if obj.get_attrib("type") != "player" or sfx.playing == true:
+		return
+		
+	print("play UseItem")
 	sfx.play()
 	
 func OnMountChanged_Callback(obj, slot, src):

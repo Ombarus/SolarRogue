@@ -8,16 +8,12 @@
 
 [node name="choice1" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 1 )
-volume_db = 5.0
 bus = "Sfx"
 
 [node name="choice2" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
-volume_db = 5.0
 bus = "Sfx"
 
 [node name="choice3" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
-volume_db = 5.0
 bus = "Sfx"
-

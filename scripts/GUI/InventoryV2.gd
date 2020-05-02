@@ -171,6 +171,7 @@ func Use_Callback():
 				selected_cargo.push_back(item.src)
 	
 	if selected_cargo.size() > 0:
+		
 		emit_signal("use_pressed", selected_cargo[0])
 		Init({"object":_obj}) # refresh list
 	else:

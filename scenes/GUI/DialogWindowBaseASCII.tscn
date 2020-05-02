@@ -16,6 +16,9 @@ rect_pivot_offset = Vector2( 692, -89 )
 mouse_filter = 2
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
@@ -254,7 +257,6 @@ text = "[esc]Cancel"
 
 [node name="HoverSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
-volume_db = -20.0
 bus = "Sfx"
 
 [node name="ClickSFX" type="AudioStreamPlayer" parent="."]

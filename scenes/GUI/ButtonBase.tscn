@@ -31,6 +31,9 @@ tracks/0/keys = {
 margin_right = 226.0
 margin_bottom = 144.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 HighlightStyle = ExtResource( 2 )
 
 [node name="base" parent="." instance=ExtResource( 3 )]
@@ -52,7 +55,6 @@ custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 
 [node name="HoverSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
-volume_db = -20.0
 bus = "Sfx"
 
 [node name="ClickSFX" type="AudioStreamPlayer" parent="."]

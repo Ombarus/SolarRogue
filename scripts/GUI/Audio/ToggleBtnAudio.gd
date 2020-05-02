@@ -7,7 +7,7 @@ func _ready():
 	self.connect("mouse_entered", self, "mouse_entered_Callback")
 	self.connect("pressed", self, "pressed_Callback")
 	_hover.stream = preload("res://data/private/sounds/sfx/btn/hover2.wav")
-	_hover.volume_db = -20.0
+	#_hover.volume_db = -20.0
 	_hover.bus = "Sfx"
 	self.call_deferred("add_child", _hover)
 	
