@@ -131,6 +131,13 @@
 				"amount":1
 			},
 			{
+				"name": "Mining Laser", 
+				"requirements":[{"type":"energy", "amount":600}, {"type":"spare_parts", "amount":2}], 
+				"produce":"data/json/items/weapons/mining_laser.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
 				"name": "Laser Turret MK1", 
 				"requirements":[{"type":"energy", "amount":600}, {"type":"spare_parts", "amount":2}], 
 				"produce":"data/json/items/weapons/laser_turret_mk1.json",

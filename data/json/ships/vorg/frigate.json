@@ -51,6 +51,7 @@
 		{"id":"data/json/items/shields/shield_mk1.json", "chance":0.05},
 		{"id":"data/json/items/utilities/gravitic_compactor.json", "chance":0.006666666667},
 		{"id":"data/json/items/utilities/solar_array.json", "chance":0.01666666667},
+		{"id":"data/json/items/weapons/mining_laser.json", "chance":0.01},
 		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.00},
 		{"id":"data/json/items/weapons/missile_launcher_mk1.json", "chance":0.08},
 		{"id":"data/json/items/weapons/missile_launcher_mk1.json", "chance":0.01},

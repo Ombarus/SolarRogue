@@ -212,6 +212,8 @@ func ProcessDefense(target, shooter, weapon_data):
 func ProcessHarvest(target, shooter, weapon_data):
 	#TODO modulate chance based on weapon data
 	var chance = target.get_attrib("harvestable.actual_rate")
+	var bonus_chance = Globals.get_data(weapon_data, "weapon_data.planet_bonus", 0.0)
+	chance = chance + bonus_chance
 	var drop_index_list = []
 	var inventory = target.get_attrib("harvestable.inventory")
 	for i in range(inventory.size()):

@@ -1,7 +1,7 @@
 {
 	"name_id":"A Human Frigate",
 	"type":"player",
-	"sprite":"vorg_frigate",
+	"sprite":"human_frigate",
 	"action_point":0,
 	"boardable":true,
 	"icon": {
@@ -12,7 +12,7 @@
 		"weapon": [
 			"data/json/items/weapons/chaos_ball_generator.json",
 			"data/json/items/weapons/minigun.json",
-			"",
+			"data/json/items/weapons/mining_laser.json",
 			""
 		],
 		"shield": ["data/json/items/shields/shield_mk3.json"],
