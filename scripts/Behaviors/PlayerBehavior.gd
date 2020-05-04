@@ -73,6 +73,7 @@ func _ready():
 	action.connect("take_pressed", self, "Pressed_Take_Callback")
 	action.connect("wait_pressed", self, "Pressed_Wait_Callback")
 	action.connect("crew_pressed", self, "Pressed_Crew_Callback")
+	action.connect("comm_pressed", self, "Pressed_Comm_Callback")
 	action = get_node(InventoryDialog)
 	action.connect("drop_pressed", self, "OnDropIventory_Callback")
 	action.connect("use_pressed", self, "OnUseInventory_Callback")
@@ -159,6 +160,13 @@ func Pressed_Crew_Callback():
 	var runes = playerNode.get_attrib("runes").values()
 
 	BehaviorEvents.emit_signal("OnPushGUI", "Crew", {"crew": runes})
+	
+func Pressed_Comm_Callback():
+	if lock_input:
+		return
+	
+	var target = playerNode
+	BehaviorEvents.emit_signal("OnPushGUI", "Trading", {"object1":playerNode, "object2":target, "callback_object":self, "callback_method":"OnTransferItemCompleted_Callback"})
 	
 func UpdateButtonVisibility():
 	var hide_hud = PermSave.get_attrib("settings.hide_hud")

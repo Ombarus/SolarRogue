@@ -70,11 +70,17 @@ margin_left = 32.0
 margin_top = 7.0
 margin_right = -25.0
 margin_bottom = -104.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="IconContainer" type="Control" parent="HBoxContainer/Control/VBoxContainer"]
 anchor_right = 1.0
 rect_min_size = Vector2( 128, 128 )
 size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Icon" type="TextureRect" parent="HBoxContainer/Control/VBoxContainer/IconContainer"]
 anchor_left = 0.5

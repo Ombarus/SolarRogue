@@ -1,8 +1,5 @@
 extends "res://scripts/GUI/GUILayoutBase.gd"
 
-signal drop_pressed(dropped_mounts, dropped_cargo)
-signal use_pressed(key)
-
 onready var _my_ship_list : MyItemList = get_node("HBoxContainer/MyShip/MyItemList")
 onready var _other_ship_list : MyItemList = get_node("HBoxContainer/OtherShip/MyItemList")
 var _obj : Attributes = null

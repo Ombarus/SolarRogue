@@ -96,6 +96,19 @@ rect_min_size = Vector2( 110, 90 )
 Text = "c[r]ew"
 ShortcutKey = "r"
 
+[node name="Comm" parent="PopupSize/Popup" groups=[
+"more_btn",
+] instance=ExtResource( 4 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -163.5
+margin_top = 123.0
+margin_right = -23.5
+margin_bottom = 103.0
+rect_min_size = Vector2( 110, 90 )
+Text = "co[m]m"
+ShortcutKey = "m"
+
 [node name="More" parent="." instance=ExtResource( 4 )]
 margin_right = 110.0
 margin_bottom = 90.0
@@ -116,3 +129,4 @@ anims/popin = ExtResource( 6 )
 [connection signal="pressed" from="PopupSize/Popup/Look" to="." method="_on_Look_pressed"]
 [connection signal="pressed" from="PopupSize/Popup/Wait" to="." method="_on_Wait_pressed"]
 [connection signal="pressed" from="PopupSize/Popup/Crew" to="." method="_on_Crew_pressed"]
+[connection signal="pressed" from="PopupSize/Popup/Comm" to="." method="_on_Comm_pressed"]
