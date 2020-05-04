@@ -1,0 +1,6 @@
+{
+	"name_id":"Trade Port",
+	"type":"trade_port",
+	"sprite":"trade_icon",
+	"no_ghost":false
+}

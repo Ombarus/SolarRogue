@@ -12,6 +12,10 @@ onready var _close_btn = get_node("Close")
 onready var _block = get_node("ScreenBlock")
 onready var _popup = get_node("PopupSize/Popup")
 onready var _animator = get_node("AnimationPlayer")
+onready var _comm_btn = get_node("PopupSize/Popup/Comm")
+
+func EnableComm(is_enabled : bool):
+	_comm_btn.Disabled = not is_enabled
 
 func _ready():
 	_more_btn.connect("pressed", self, "Pressed_More_Callback")

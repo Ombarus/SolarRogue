@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=2]
+[gd_scene load_steps=85 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/private/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -80,6 +80,7 @@
 [ext_resource path="res://data/private/sounds/sfx/use-nanobots-gb.wav" type="AudioStream" id=78]
 [ext_resource path="res://data/private/sounds/sfx/inventory/gb-cargo-2.wav" type="AudioStream" id=79]
 [ext_resource path="res://scenes/GUI/Dialogs/Trading.tscn" type="PackedScene" id=80]
+[ext_resource path="res://scripts/Behaviors/MerchantBehavior.gd" type="Script" id=81]
 
 [sub_resource type="Animation" id=1]
 resource_name = "slow_popin"
@@ -254,6 +255,9 @@ LogWindow = NodePath("../../Camera-GUI/SafeArea/HUD_root/HUD/Log/LogWindow")
 script = ExtResource( 15 )
 levelLoaderNode = NodePath("../LevelLoader")
 ghost_material = ExtResource( 16 )
+
+[node name="Merchant" type="Node" parent="Behaviors"]
+script = ExtResource( 81 )
 
 [node name="Outlines" type="Node" parent="Behaviors"]
 script = ExtResource( 17 )

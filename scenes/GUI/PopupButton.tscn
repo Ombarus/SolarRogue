@@ -108,6 +108,7 @@ margin_bottom = 103.0
 rect_min_size = Vector2( 110, 90 )
 Text = "co[m]m"
 ShortcutKey = "m"
+Disabled = true
 
 [node name="More" parent="." instance=ExtResource( 4 )]
 margin_right = 110.0
