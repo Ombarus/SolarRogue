@@ -14,6 +14,9 @@ func _ready():
 	BehaviorEvents.connect("OnObjectPicked", self, "OnPickup_Callback")
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	
+func _exit_tree():
+	Globals.TutorialRef = null
+	
 func StartTuto_Callback():
 	Active = true
 		

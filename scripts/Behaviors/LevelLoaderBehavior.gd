@@ -26,7 +26,7 @@ var _current_level_data = null
 var _wait_for_anim = false
 var _global_spawns = {} # to keep track of items that should only appear once in a single game
 
-const _TEST_MID_GAME = true
+const _TEST_MID_GAME = false
 
 func GetRandomEmptyTile():
 	#TODO: Check for blocking and multi-tile objects
@@ -69,8 +69,6 @@ func GetLevelID():
 #		SaveState(_current_level_data)
 
 func _ready():
-	
-	
 	if _TEST_MID_GAME == true:
 		startLevel = "data/json/levels/main/main09.json"
 		current_depth = 9
@@ -122,6 +120,8 @@ func _ready():
 		yield(ExecuteLoadLevel(data), "completed")
 		set_loading(false)
 		
+func _exit_tree():
+	Globals.LevelLoaderRef = null
 	
 func ExecuteLoadLevel(levelData):
 	yield(_UnloadLevel(), "completed")
