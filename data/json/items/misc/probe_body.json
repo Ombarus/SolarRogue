@@ -12,7 +12,9 @@
 		"stackable":false
 	},
 	"recyclable": {
-		"energy": 200
+		"energy": 200,
+		"player_sale_range": [500,800],
+		"player_buy_range": [900,1200]
 	},
 	"description": {
 		"text":"The remains of this probe hull are still in suprisingly good shape. They could be used as a scaffold for a new Probe, but why ?",

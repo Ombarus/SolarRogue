@@ -12,8 +12,7 @@
 		"region":[1536,0,128,128]
 	},
 	"objects": [
-		{"name":"data/json/ships/human/scout_laser.json", "spawn_rate":0.1, "max":10},
-		{"name":"data/json/ships/human/bomber.json", "spawn_rate":0.05, "max":5},
+		{"name":"data/json/ships/human/merchants/generic.json", "spawn_rate":0.1, "max":10},
 		{"name":"data/json/ships/human/probe.json", "spawn_rate":0.1, "max":12},
 		{"name":"data/json/stellar/planetlvl2.json", "spawn_rate":0.1, "max":4, "sprite_margin":[1,1]},
 		{"name":"data/json/stellar/planet_human_homeworld.json", "spawn_rate":0.1, "max":4, "sprite_margin":[1,1]},

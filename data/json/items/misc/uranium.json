@@ -12,7 +12,9 @@
 		"stackable":true
 	},
 	"recyclable": {
-		"energy": 2500
+		"energy": 2500,
+		"player_sale_range": [2500,2500],
+		"player_buy_range": [2500,2500]
 	},
 	"description": {
 		"text":"Uranium is a fissile isotope, which makes it widely used in nuclear power plants and nuclear weapons. In sufficient concentration, we can maintain a sustained nuclear chain reaction.",

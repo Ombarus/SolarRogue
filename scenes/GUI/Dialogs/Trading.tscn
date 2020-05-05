@@ -35,6 +35,9 @@ margin_left = 12.0
 margin_top = 37.0
 margin_right = -20.0
 margin_bottom = -27.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="MyShip" parent="HBoxContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
@@ -73,27 +76,31 @@ margin_bottom = 656.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 32.0
-margin_right = -25.0
-margin_bottom = -165.0
-custom_constants/separation = 20
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="base" parent="HBoxContainer/Control" instance=ExtResource( 5 )]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+margin_left = -177.5
+margin_right = 178.5
+margin_bottom = 444.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+title = "[center]Buy[/center]"
+border_style = "─"
 
-[node name="IconContainer" type="Control" parent="HBoxContainer/Control/VBoxContainer"]
-margin_right = 356.0
-margin_bottom = 128.0
+[node name="IconContainer" type="Control" parent="HBoxContainer/Control/base"]
+anchor_right = 1.0
+margin_left = 25.0
+margin_top = 62.0
+margin_right = -25.0
+margin_bottom = 198.0
 rect_min_size = Vector2( 0, 128 )
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" type="TextureRect" parent="HBoxContainer/Control/VBoxContainer/IconContainer"]
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Control/base/IconContainer"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -64.0
@@ -104,7 +111,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Desc" parent="HBoxContainer/Control/VBoxContainer/IconContainer" instance=ExtResource( 9 )]
+[node name="Desc" parent="HBoxContainer/Control/base/IconContainer" instance=ExtResource( 9 )]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -65.0
@@ -114,59 +121,58 @@ Text = "?"
 ShortcutKey = "?"
 AlwaysOnShortcut = false
 
-[node name="base" parent="HBoxContainer/Control/VBoxContainer" instance=ExtResource( 5 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 148.0
-margin_right = 356.0
-margin_bottom = 491.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-title = "[center]Buy[/center]"
-border_style = "─"
-
-[node name="Info" type="VBoxContainer" parent="HBoxContainer/Control/VBoxContainer/base"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -178.0
-margin_top = -104.5
-margin_right = 178.0
-margin_bottom = 142.5
+[node name="Info" type="VBoxContainer" parent="HBoxContainer/Control/base"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -232.0
+margin_bottom = -16.0
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ItemName" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/base/Info"]
+[node name="ItemName" type="RichTextLabel" parent="HBoxContainer/Control/base/Info"]
 margin_right = 356.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 0, 40 )
+margin_bottom = 25.0
+rect_min_size = Vector2( 0, 25 )
 size_flags_horizontal = 3
 bbcode_enabled = true
 bbcode_text = "[center][color=lime]Jerg Battleship[/color][/center]"
 text = "Jerg Battleship"
 
-[node name="Price" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/base/Info"]
-margin_top = 44.0
+[node name="Price" type="RichTextLabel" parent="HBoxContainer/Control/base/Info"]
+margin_top = 29.0
 margin_right = 356.0
-margin_bottom = 84.0
+margin_bottom = 69.0
 rect_min_size = Vector2( 0, 40 )
 size_flags_horizontal = 3
 bbcode_enabled = true
 bbcode_text = "[center][color=red]5000 energy[/color][/center]"
 text = "5000 energy"
 
-[node name="Control" type="Control" parent="HBoxContainer/Control/VBoxContainer/base/Info"]
-margin_top = 88.0
+[node name="EnergyStatus" type="RichTextLabel" parent="HBoxContainer/Control/base/Info"]
+margin_top = 73.0
 margin_right = 356.0
-margin_bottom = 247.0
+margin_bottom = 113.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 3
+bbcode_enabled = true
+bbcode_text = "[center][color=lime]Available Energy.. 5000[/color][/center]"
+text = "Available Energy.. 5000"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="HBoxContainer/Control/base/Info"]
+margin_top = 117.0
+margin_right = 356.0
+margin_bottom = 216.0
 rect_min_size = Vector2( 0, 90 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Buy" parent="HBoxContainer/Control/VBoxContainer/base/Info/Control" instance=ExtResource( 9 )]
+[node name="Buy" parent="HBoxContainer/Control/base/Info/Control" instance=ExtResource( 9 )]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -179,7 +185,7 @@ rect_min_size = Vector2( 142, 90 )
 Text = "< Buy"
 ShortcutKey = "<"
 
-[node name="Sell" parent="HBoxContainer/Control/VBoxContainer/base/Info/Control" instance=ExtResource( 9 )]
+[node name="Sell" parent="HBoxContainer/Control/base/Info/Control" instance=ExtResource( 9 )]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -209,7 +215,6 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -152.0
-margin_top = -1.0
 margin_right = 152.0
 margin_bottom = 89.0002
 rect_min_size = Vector2( 142, 90 )

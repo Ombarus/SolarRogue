@@ -87,8 +87,6 @@ func Desc_Callback():
 			to_ship = _robj
 			from_list = _my_ship_list
 			to_list = _other_ship_list
-			get_node("HBoxContainer/OtherShip").title = "Transfer Where ?"
-			#get_node("HBoxContainer/MyShip").title = _lobj.get_attrib("name_id")
 			break
 	
 	if selected_item == null:
@@ -99,7 +97,6 @@ func Desc_Callback():
 				to_ship = _lobj
 				from_list = _other_ship_list
 				to_list = _my_ship_list
-				get_node("HBoxContainer/MyShip").title = "Transfer Where ?"
 				break
 	
 	if selected_item == null:

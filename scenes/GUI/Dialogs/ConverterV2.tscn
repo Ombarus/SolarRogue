@@ -200,6 +200,9 @@ margin_right = 369.0
 margin_bottom = 444.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ShipTitle" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/ShipInfoContainer"]
 margin_right = 369.0

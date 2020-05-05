@@ -14,7 +14,9 @@
 		"stackable":true
 	},
 	"recyclable": {
-		"energy": 50
+		"energy": 50,
+		"player_sale_range": [75,150],
+		"player_buy_range": [175,225]
 	},
 	"description": {
 		"text":"Ammo for the Minigun. It looks like pieces of scrap metal but throw enough at a ennemy ship and they'll get annoyed at you.",

@@ -157,7 +157,7 @@ shader_param/alpha = 1.0
 shader_param/rand_strength = 1.0
 shader_param/affected = Plane( 0, 0, 1, 1 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 length = 1.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -877,7 +877,7 @@ render_target_update_mode = 3
 visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Loading-FX/Starfield"]
-anims/popout = SubResource( 4 )
+anims/popout = SubResource( 3 )
 [connection signal="down" from="Camera-GUI/SafeArea/HUD_root/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_ZoomIn_down"]
 [connection signal="up" from="Camera-GUI/SafeArea/HUD_root/HUD/Buttons/ZoomIn" to="Camera2D" method="_on_Zoom_up"]
 [connection signal="down" from="Camera-GUI/SafeArea/HUD_root/HUD/Buttons/ZoomOut" to="Camera2D" method="_on_ZoomOut_down"]

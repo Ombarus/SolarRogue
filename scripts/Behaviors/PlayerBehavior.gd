@@ -165,8 +165,19 @@ func Pressed_Comm_Callback():
 	if lock_input:
 		return
 	
-	var target = playerNode
-	BehaviorEvents.emit_signal("OnPushGUI", "Trading", {"object1":playerNode, "object2":target, "callback_object":self, "callback_method":"OnTransferItemCompleted_Callback"})
+	var tile_pos = Globals.LevelLoaderRef.World_to_Tile(playerNode.position)
+	var content = Globals.LevelLoaderRef.levelTiles[tile_pos.x][tile_pos.y]
+	var filtered = []
+	var trade_port = null
+	for c in content:
+		if c != playerNode and c.get_attrib("type") in ["trade_port"]:
+			trade_port = c
+			break
+	
+	if trade_port != null:
+		var id = trade_port.get_attrib("host")
+		var target = Globals.LevelLoaderRef.GetObjectById(id)
+		BehaviorEvents.emit_signal("OnPushGUI", "Trading", {"object1":playerNode, "object2":target})
 	
 func UpdateButtonVisibility():
 	var hide_hud = PermSave.get_attrib("settings.hide_hud")
@@ -765,6 +776,9 @@ func ProcessTakeSelection(target, tile):
 		
 	#BehaviorEvents.emit_signal("OnPushGUI", "TransferInventory", {"object1":playerNode, "object2":target, "callback_object":self, "callback_method":"OnTransferItemCompleted_Callback"})
 	BehaviorEvents.emit_signal("OnPushGUI", "TransferInventoryV2", {"object1":playerNode, "object2":target, "callback_object":self, "callback_method":"OnTransferItemCompleted_Callback"})
+	
+func OnTradingCompleted_Callback():
+	pass
 	
 func OnTransferItemCompleted_Callback(lobj, l_mounts, l_cargo, robj, r_mounts, r_cargo):
 	lobj.init_mounts()

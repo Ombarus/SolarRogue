@@ -79,8 +79,8 @@
 	},
 	"cargo": {
 		"capacity":5000,
-		"pickup_ap":1.0,
-		"drop_ap":1.0,
+		"pickup_ap":0.0,
+		"drop_ap":0.0,
 		"transferable":false,
 		"content":[]
 	},

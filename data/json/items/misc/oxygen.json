@@ -12,7 +12,9 @@
 		"stackable":true
 	},
 	"recyclable": {
-		"energy": 600
+		"energy": 600,
+		"player_sale_range": [600,600],
+		"player_buy_range": [600,600]
 	},
 	"description": {
 		"text":"Oxygen is a highly reactive nonmetal, and an oxidizing agent that readily forms oxides. It is a colorless and odorless diatomic gas.",

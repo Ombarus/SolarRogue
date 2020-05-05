@@ -25,7 +25,9 @@
 		"unequip_ap":3.0
 	},
 	"recyclable": {
-		"energy": 1750
+		"energy": 1750,
+		"player_sale_range": [2000,2800],
+		"player_buy_range": [3100,4000]
 	},
 	"disassembling": {
 		"produce":"data/json/items/misc/spare_parts.json",

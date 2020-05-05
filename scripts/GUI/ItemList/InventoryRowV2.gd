@@ -76,6 +76,7 @@ func get_drag_data(position):
 
 func get_row_data():
 	_metadata["selected"] = get_node("BtnWrap/Toggle").pressed
+	_metadata["texture_cache"] = get_node("BtnWrap/HBoxContainer/Icon").texture
 	return _metadata
 	
 func can_drop_data(position, data):

@@ -12,7 +12,9 @@
 		"stackable":false
 	},
 	"recyclable": {
-		"energy": 600
+		"energy": 600,
+		"player_sale_range": [700,1300],
+		"player_buy_range": [1500,1800]
 	},
 	"description": {
 		"text":"The remains of this frigate hull are still in suprisingly good shape. They could be used as a scaffold for a new Frigate.",

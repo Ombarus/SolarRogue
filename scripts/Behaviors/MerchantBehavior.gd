@@ -3,6 +3,14 @@ extends Node
 
 func _ready():
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
+	BehaviorEvents.connect("OnObjectDestroyed", self, "OnObjectDestroyed_Callback")
+
+func OnObjectDestroyed_Callback(target):
+	var ports : Array = target.get_attrib("merchant.port_ref", [])
+	for port in ports:
+		var obj : Attributes = Globals.LevelLoaderRef.GetObjectById(port)
+		BehaviorEvents.emit_signal("OnRequestObjectUnload", obj)
+	
 
 func OnObjectLoaded_Callback(obj):
 	var merchant_data : Dictionary = obj.get_attrib("merchant", {})

@@ -123,7 +123,9 @@
 		]
 	},
 	"recyclable": {
-		"energy": 1000
+		"energy": 1000,
+		"player_sale_range": [1200,2000],
+		"player_buy_range": [2000,2500]
 	},
 	"disassembling": {
 		"produce":"data/json/items/misc/spare_parts.json",

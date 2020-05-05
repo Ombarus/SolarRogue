@@ -12,7 +12,9 @@
 		"stackable":true
 	},
 	"recyclable": {
-		"energy": 12000
+		"energy": 12000,
+		"player_sale_range": [12000,12000],
+		"player_buy_range": [12000,12000]
 	},
 	"description": {
 		"text":"An extremely hard crystalline mineral used as a power source. It is believed that this material exists in more than three dimensions at the same time and this is somehow related to its properties.",

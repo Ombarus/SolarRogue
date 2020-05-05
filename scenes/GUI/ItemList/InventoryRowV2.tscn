@@ -17,6 +17,9 @@ margin_right = 849.0
 margin_bottom = 50.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BtnWrap" type="Control" parent="."]
 margin_right = 849.0

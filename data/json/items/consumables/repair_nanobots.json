@@ -20,7 +20,9 @@
 		"stackable":true
 	},
 	"recyclable": {
-		"energy": 500
+		"energy": 500,
+		"player_sale_range": [600,1000],
+		"player_buy_range": [1400,2500]
 	},
 	"description": {
 		"text":"Tiny nanobots go out and fuse with the hull to repair it over time.",
