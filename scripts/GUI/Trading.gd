@@ -30,7 +30,7 @@ func _ready():
 	_icon = get_node("HBoxContainer/Control/base/IconContainer/Icon")
 	_item_name = get_node("HBoxContainer/Control/base/Info/ItemName")
 	_item_price = get_node("HBoxContainer/Control/base/Info/Price")
-	_energy_status = get_node("HBoxContainer/Control/base/Info/EnergyStatus")
+	_energy_status = get_node("HBoxContainer/Control/Control/EnergyStatus")
 	
 	_sale_btn.connect("pressed", self, "Sale_Callback")
 	_buy_btn.connect("pressed", self, "Buy_Callback")
@@ -77,6 +77,16 @@ func Sale_Callback():
 	selected_item = cur_sel[0]
 	selected_ship = cur_sel[1]
 	
+	var price : int = GetPrice(selected_item, true)
+	if "key" in selected_item and "idx" in selected_item:
+		BehaviorEvents.emit_signal("OnRemoveMount", _lobj, selected_item.key, selected_item.idx)
+	BehaviorEvents.emit_signal("OnRemoveItem", _lobj, selected_item.src)
+	BehaviorEvents.emit_signal("OnAddItem", _robj, selected_item.src)
+	BehaviorEvents.emit_signal("OnUseEnergy", _lobj, -price)
+	BehaviorEvents.emit_signal("OnLogLine", "Sold %s for %d energy", [Globals.mytr(selected_item["name_id"]), price])
+	
+	ReInit()
+	
 func Buy_Callback():
 	var selected_item = null
 	var selected_ship = null
@@ -84,6 +94,16 @@ func Buy_Callback():
 	var cur_sel = _get_selected_item()
 	selected_item = cur_sel[0]
 	selected_ship = cur_sel[1]
+	
+	var price : int = GetPrice(selected_item, false)
+	#if "key" in selected_item and "idx" in selected_item:
+	#	BehaviorEvents.emit_signal("OnRemoveMount", _lobj, selected_item.key, selected_item.idx)
+	BehaviorEvents.emit_signal("OnRemoveItem", _robj, selected_item.src)
+	BehaviorEvents.emit_signal("OnAddItem", _lobj, selected_item.src)
+	BehaviorEvents.emit_signal("OnUseEnergy", _lobj, price)
+	BehaviorEvents.emit_signal("OnLogLine", "Bought %s for %d energy", [Globals.mytr(selected_item["name_id"]), price])
+	
+	ReInit()
 	
 func Desc_Callback():
 	var selected_item = null

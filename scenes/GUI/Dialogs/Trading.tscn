@@ -151,21 +151,8 @@ bbcode_enabled = true
 bbcode_text = "[center][color=red]5000 energy[/color][/center]"
 text = "5000 energy"
 
-[node name="EnergyStatus" type="RichTextLabel" parent="HBoxContainer/Control/base/Info"]
-margin_top = 73.0
-margin_right = 356.0
-margin_bottom = 113.0
-rect_min_size = Vector2( 0, 40 )
-size_flags_horizontal = 3
-bbcode_enabled = true
-bbcode_text = "[center][color=lime]Available Energy.. 5000[/color][/center]"
-text = "Available Energy.. 5000"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Control" type="Control" parent="HBoxContainer/Control/base/Info"]
-margin_top = 117.0
+margin_top = 73.0
 margin_right = 356.0
 margin_bottom = 216.0
 rect_min_size = Vector2( 0, 90 )
@@ -205,6 +192,20 @@ margin_left = 21.0
 margin_right = -22.0
 margin_bottom = -134.0
 mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnergyStatus" type="RichTextLabel" parent="HBoxContainer/Control/Control"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -38.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 3
+bbcode_enabled = true
+bbcode_text = "[center][color=lime]Available Energy.. 5000[/color][/center]"
+text = "Available Energy.. 5000"
 __meta__ = {
 "_edit_use_anchors_": false
 }
