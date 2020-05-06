@@ -1,0 +1,159 @@
+{
+	"name_id":"A Human Merchant",
+	"type":"ship",
+	"sprite":"human_battleship",
+	"icon": {
+		"texture":"data/private/textures/space-sprite.png",
+		"region":[1280,256,128,128]
+	},
+	"animation": {
+		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
+	},
+	"action_point":0,
+	"mounts": {
+		"weapon": [
+			"data/json/items/weapons/missile_launcher_mk3.json", 
+			"data/json/items/weapons/missile_launcher_mk3.json",
+			"data/json/items/weapons/missile_launcher_mk3.json"
+		],
+		"shield": ["data/json/items/shields/shield_mk2.json", "data/json/items/shields/shield_mk2.json"],
+		"scanner": ["data/json/items/scanners/long_range_scanner_mk1.json"],
+		"converter": ["data/json/items/converters/converter_mk1.json"],
+		"utility":[
+			"data/json/items/utilities/power_amplifier_mk2.json"
+		]
+	},
+	"destroyable": {
+		"hull":50
+	},
+	"moving": {
+		"speed":1.2,
+		"can_use_wormhole":true,
+		"wander_speed":2.5
+	},
+	"ai": {
+		"aggressive":false,
+		"pathfinding":"merchant",
+		"run_if_attacked":false,
+		"hit_chance":0.9
+	},
+	"merchant": {
+		"trade_ports":[[-1,0]],
+		"inventory_size":[5,12],
+		"pondered_inventory_content": [
+			{"src":"data/json/items/converters/converter_mk2.json", "chance":10},
+			{"src":"data/json/items/converters/converter_mk3.json", "chance":1},
+			{"src":"data/json/items/converters/jerg_converter_mk1.json", "chance":0},
+			{"src":"data/json/items/converters/vorg_converter_mk1.json", "chance":0},
+			{"src":"data/json/items/misc/battleship_body.json", "chance":2},
+			{"src":"data/json/items/misc/frigate_body.json", "chance":2},
+			{"src":"data/json/items/misc/probe_body.json", "chance":0},
+			{"src":"data/json/items/misc/scout_body.json", "chance":2},
+			{"src":"data/json/items/scanners/scanner_mk1.json", "chance":10},
+			{"src":"data/json/items/scanners/scanner_mk2.json", "chance":10},
+			{"src":"data/json/items/shields/shield_mk1.json", "chance":10},
+			{"src":"data/json/items/utilities/gravitic_compactor.json", "chance":10},
+			{"src":"data/json/items/utilities/solar_array.json", "chance":10},
+			{"src":"data/json/items/weapons/missile_launcher_mk1.json", "chance":10},
+			{"src":"data/json/items/weapons/mining_laser.json", "chance":15},
+			{"src":"data/json/items/weapons/laser_turret_mk1.json", "chance":10},
+			{"src":"data/json/items/weapons/missile.json", "chance":30, "count":[10,20]},
+			{"src":"data/json/items/consumables/repair_nanobots.json", "chance":10},
+			{"src":"data/json/items/shields/shield_mk2.json", "chance":10},
+			{"src":"data/json/items/shields/shield_mk3.json", "chance":1},
+			{"src":"data/json/items/weapons/missile_launcher_mk2.json", "chance":10},
+			{"src":"data/json/items/weapons/missile_launcher_mk3.json", "chance":1},
+			{"src":"data/json/items/weapons/laser_turret_mk2.json", "chance":5},
+			{"src":"data/json/items/scanners/scanner_mk3.json", "chance":1},
+			{"src":"data/json/items/scanners/long_range_scanner_mk1.json", "chance":10},
+			{"src":"data/json/items/scanners/long_range_scanner_mk2.json", "chance":10},
+			{"src":"data/json/items/scanners/long_range_scanner_mk3.json", "chance":1},
+			{"src":"data/json/items/weapons/torpedo_launcher_mk1.json", "chance":10},
+			{"src":"data/json/items/weapons/torpedo.json", "chance":10, "count":[10,20]},
+			{"src":"data/json/items/utilities/power_amplifier.json", "chance":10},
+			{"src":"data/json/items/utilities/power_amplifier_mk2.json", "chance":10},
+			{"src":"data/json/items/utilities/power_amplifier_mk3.json", "chance":1},
+			{"src":"data/json/items/weapons/minigun.json", "chance":5},
+			{"src":"data/json/items/weapons/bullet_clip.json", "chance":5, "count":[50,80]}
+		]
+	},
+	"cargo": {
+		"capacity":5000,
+		"pickup_ap":0.0,
+		"drop_ap":0.0,
+		"transferable":false,
+		"content":[]
+	},
+	"drop_on_death": [
+		{"id":"data/json/items/converters/converter_mk2.json", "chance":0.06666666667},
+		{"id":"data/json/items/converters/converter_mk3.json", "chance":0.04666666667},
+		{"id":"data/json/items/converters/jerg_converter_mk1.json", "chance":0.001},
+		{"id":"data/json/items/converters/vorg_converter_mk1.json", "chance":0.001},
+		{"id":"data/json/items/misc/battleship_body.json", "chance":0.1},
+		{"id":"data/json/items/misc/frigate_body.json", "chance":0.0},
+		{"id":"data/json/items/misc/probe_body.json", "chance":0.0},
+		{"id":"data/json/items/misc/scout_body.json", "chance":0.0},
+		{"id":"data/json/items/scanners/scanner_mk1.json", "chance":0.05},
+		{"id":"data/json/items/scanners/scanner_mk2.json", "chance":0.05},
+		{"id":"data/json/items/shields/shield_mk1.json", "chance":0.05},
+		{"id":"data/json/items/utilities/gravitic_compactor.json", "chance":0.02},
+		{"id":"data/json/items/utilities/solar_array.json", "chance":0.02},
+		{"id":"data/json/items/weapons/missile_launcher_mk1.json", "chance":0.04},
+		{"id":"data/json/items/weapons/mining_laser.json", "chance":0.001},
+		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.08},
+		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.01},
+		{"id":"data/json/items/weapons/missile.json", "chance":0.15},
+		{"id":"data/json/items/weapons/missile.json", "chance":0.15},
+		{"id":"data/json/items/weapons/missile.json", "chance":0.15},
+		{"id":"data/json/items/weapons/missile.json", "chance":0.15},
+		{"id":"data/json/items/consumables/repair_nanobots.json", "chance":0.01},
+		
+		{"id":"data/json/items/shields/shield_mk2.json", "chance":0.045},
+		{"id":"data/json/items/shields/shield_mk3.json", "chance":0.045},
+		
+		{"id":"data/json/items/weapons/missile_launcher_mk2.json", "chance":0.022},
+		{"id":"data/json/items/weapons/missile_launcher_mk3.json", "chance":0.022},
+		{"id":"data/json/items/weapons/laser_turret_mk2.json", "chance":0.022},
+		{"id":"data/json/items/scanners/scanner_mk3.json", "chance":0.01},
+		{"id":"data/json/items/scanners/long_range_scanner_mk1.json", "chance":0.035},
+		{"id":"data/json/items/scanners/long_range_scanner_mk2.json", "chance":0.027},
+		{"id":"data/json/items/scanners/long_range_scanner_mk3.json", "chance":0.007},
+		{"id":"data/json/items/scanners/ultimate_scanner.json", "chance":0.01, "global_max":1},
+		{"id":"data/json/items/misc/oxygen.json", "chance":0.0},
+		{"id":"data/json/items/misc/uranium.json", "chance":0.6},
+		{"id":"data/json/items/misc/uranium.json", "chance":0.5},
+		{"id":"data/json/items/misc/diluted_cristals.json", "chance":0.2},
+		
+		{"id":"data/json/items/weapons/torpedo_launcher_mk1.json", "chance":0.015},
+		{"id":"data/json/items/weapons/torpedo.json", "chance":0.015},
+		{"id":"data/json/items/utilities/power_amplifier.json", "chance":0.02},
+		{"id":"data/json/items/utilities/power_amplifier_mk2.json", "chance":0.02},
+		{"id":"data/json/items/utilities/power_amplifier_mk3.json", "chance":0.02},
+		
+		{"id":"data/json/items/weapons/minigun.json", "chance":0.012},
+		{"id":"data/json/items/weapons/bullet_clip.json", "chance":0.02},
+		
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
+	],
+	"description": {
+		"text":"A battleship part of the human trader guild.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Max hull", "value":"{destroyable.hull}", "translate_value":false},
+				{"name":"Speed", "value":"{moving.speed}", "translate_value":false},
+				{"name":"Weapon mounts", "value":"3", "translate_value":false},
+				{"name":"Shield mounts", "value":"2", "translate_value":false},
+				{"name":"Utility mounts", "value":"1", "translate_value":false}
+			]
+		},
+		"Status": {
+			"min_level":1,
+			"fields": [
+				{"name":"Current hull", "value":"{destroyable.current_hull}", "default":"{destroyable.hull}", "translate_value":false},
+				{"name":"Current shield", "value":"{shield.current_hp}", "translate_value":false}
+			]
+		}
+	}
+}

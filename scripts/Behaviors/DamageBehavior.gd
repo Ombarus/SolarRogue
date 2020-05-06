@@ -207,6 +207,7 @@ func ProcessDefense(target, shooter, weapon_data):
 	BehaviorEvents.emit_signal("OnAddToAnimationQueue", BehaviorEvents, "emit_signal", ["OnLogLine", "[color=red]This planet had a colony and they are NOT happy. They've deployed defenses.[/color]"], 500)
 	#BehaviorEvents.emit_signal("OnLogLine", "[color=red]This planet had a colony and they are NOT happy. They've deployed defenses.[/color]")
 	target.set_attrib("harvestable.defense_deployed", true)
+	BehaviorEvents.emit_signal("OnDamageTaken", target, shooter, Globals.DAMAGE_TYPE.hull_hit)
 	
 	
 func ProcessHarvest(target, shooter, weapon_data):

@@ -381,6 +381,7 @@ func Pressed_Weapon_Callback():
 	
 func OnLevelLoaded_Callback():
 	lock_input = false
+	
 	if playerNode == null:
 		
 		var save = Globals.LevelLoaderRef.cur_save
@@ -435,12 +436,19 @@ func OnLevelLoaded_Callback():
 		BehaviorEvents.emit_signal("OnPlayerCreated", playerNode)
 		
 		UpdateButtonVisibility()
-		
-		
 		UpdateMovementBasedButton()
 		
 		# always default to saved position
 		_current_origin = PLAYER_ORIGIN.saved
+	
+	var level_data = Globals.LevelLoaderRef.GetCurrentLevelData()
+	if "level_message" in level_data:
+		var message_to_play = level_data["level_message"]
+		var played_messages = playerNode.get_attrib("played_messages", [])
+		if not message_to_play in played_messages:
+			BehaviorEvents.emit_signal("OnLogLine", message_to_play)
+			played_messages.push_back(message_to_play)
+			playerNode.set_attrib("played_messages", played_messages)
 	
 func _input(event):
 	if event.is_action_released("screenshot"):

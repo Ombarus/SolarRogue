@@ -1,0 +1,90 @@
+{
+	"name_id":"Junkyard",
+	"type":"planet",
+	"sprite_choice": [
+		"planet_a", "planet_b", "planet_c", "planet_d", "planet_e", "planet_f", "planet_g", "planet_h"
+	],
+	"icon": [
+		{"texture":"data/private/textures/space-sprite.png", "region":[512,0,128,128]},
+		{"texture":"data/private/textures/space-sprite.png", "region":[640,0,128,128]},
+		{"texture":"data/private/textures/space-sprite.png", "region":[768,0,128,128]},
+		{"texture":"data/private/textures/space-sprite.png", "region":[896,0,128,128]},
+		{"texture":"data/private/textures/space-sprite.png", "region":[1024,0,128,128]},
+		{"texture":"data/private/textures/space-sprite.png", "region":[440,568,144,144]},
+		{"texture":"data/private/textures/space-sprite.png", "region":[696,568,144,144]},
+		{"texture":"data/private/textures/space-sprite.png", "region":[112,752,160,160]}
+	],
+	"ai": {
+		"comment1":"This ai component is so police react if you shoot the planet",
+		"aggressive":false,
+		"pathfinding":"none",
+		"run_if_attacked":false
+	},
+	"harvestable": {
+		"comment1":"planets will be spawned with a certain inventory size between values in 'inventory_size'",
+		"comment2":"the content of each inventory slot will be choosen randomly from the pondered list",
+		"comment3":"the planet will choose a 'harvestable rate' between min and max base rate.",
+		"comment4":"this is the chance that a certain inventory item will be released when the planet is shot with a weapon",
+		"comment5":"defense_chance is the chance that the planet will spawn enemies when shot",
+		"comment6":"if defense is found to be true, when the planet is shot it will spawn a random defense between values in 'defense_size'",
+		"comment7":"the enemies will be choosen from the pondered list",
+		
+		
+		"inventory_size":[3,20],
+		"pondered_inventory_content": [
+			{"src": "data/json/items/misc/hydrogen.json", "chance":49},
+			{"src": "data/json/items/misc/oxygen.json", "chance":29},
+			{"src": "data/json/items/misc/uranium.json", "chance":19},
+			{"src": "data/json/items/misc/diluted_cristals.json", "chance":3}
+		],
+		"base_rate":[0.05, 0.4],
+		"defense_chance":1.0,
+		"defense_size":[3,5],
+		"pondered_defense_list": [
+			{"src": "data/json/ships/human/scout_missile.json", "chance":25},
+			{"src": "data/json/ships/human/scout_laser.json", "chance":25},
+			{"src": "data/json/ships/human/frigate.json", "chance":25},
+			{"src": "data/json/ships/human/battleship.json", "chance":15}
+		]
+	},
+	"description": {
+		"text":"This planet is surrounded by left over junk, debris and dead satellites. Moon-sized signs announces : 'your junk is our treasure'",
+		"Life Scan": {
+			"min_level":3,
+			"fields": [
+				{"name":"Is Colonized", "value":"duh"}
+			]
+		}
+	},
+	"merchant": {
+		"trade_ports":[[0,1], [0,-1]],
+		"inventory_size":[5,12],
+		"pondered_inventory_content": [
+			{"src":"data/json/items/misc/battleship_body.json", "chance":100},
+			{"src":"data/json/items/misc/battleship_body.json", "chance":10},
+			{"src":"data/json/items/misc/frigate_body.json", "chance":100},
+			{"src":"data/json/items/misc/frigate_body.json", "chance":20},
+			{"src":"data/json/items/misc/frigate_body.json", "chance":20},
+			{"src":"data/json/items/misc/probe_body.json", "chance":100},
+			{"src":"data/json/items/misc/probe_body.json", "chance":50},
+			{"src":"data/json/items/misc/probe_body.json", "chance":20},
+			{"src":"data/json/items/misc/probe_body.json", "chance":20},
+			{"src":"data/json/items/misc/probe_body.json", "chance":5},
+			{"src":"data/json/items/misc/scout_body.json", "chance":100},
+			{"src":"data/json/items/misc/scout_body.json", "chance":50},
+			{"src":"data/json/items/misc/scout_body.json", "chance":5},
+			{"src":"data/json/items/misc/scout_body.json", "chance":5},
+			{"src":"data/json/items/weapons/mining_laser.json", "chance":10},
+			{"src":"data/json/items/weapons/missile.json", "chance":5, "count":[10,20]},
+			{"src":"data/json/items/consumables/repair_nanobots.json", "chance":5},
+			{"src":"data/json/items/weapons/bullet_clip.json", "chance":20, "count":[50,80]}
+		]
+	},
+	"cargo": {
+		"capacity":50000,
+		"pickup_ap":0.0,
+		"drop_ap":0.0,
+		"transferable":false,
+		"content":[]
+	}
+}

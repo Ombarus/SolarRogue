@@ -130,6 +130,16 @@ func OnDamageTaken_Callback(target, shooter, damage_type):
 		target.set_attrib("ai.target", shooter.get_attrib("unique_id"))
 		target.set_attrib("wandering", false)
 		BehaviorEvents.emit_signal("OnStatusChanged", target)
+		
+	# summon police
+	if target.get_attrib("ai.agressive", false) == false:
+		for ship in Globals.LevelLoaderRef.objByType["ship"]:
+			if ship.get_attrib("ai.police_awareness", false) == true:
+				ship.set_attrib("ai.aggressive", true)
+				ship.set_attrib("ai.pathfinding", "attack")
+				ship.set_attrib("ai.target", shooter.get_attrib("unique_id"))
+				ship.set_attrib("wandering", false)
+				BehaviorEvents.emit_signal("OnStatusChanged", ship)
 	
 func OnObjTurn_Callback(obj):
 	if obj.get_attrib("ai") == null:
@@ -217,6 +227,12 @@ func DoFollowGroupLeader(obj):
 	if target_obj == null:
 		obj.set_attrib("ai.pathfinding", "simple")
 		return
+	
+	# Police start non-aggressive, but if the leader become aggressive, the rest of the group will follow
+	# I'm doing this like that because I have in mind that only the group leader knows the location of the
+	# player and the other ships will only attack once they get in range of the player instead of
+	# breaking formation and heading as quickly as possible to the player individually
+	obj.set_attrib("ai.aggressive", target_obj.get_attrib("ai.aggressive", true))
 		
 	var target_offset = obj.get_attrib("ai.target_offset")
 	target_offset = target_offset.rotated(target_obj.rotation)

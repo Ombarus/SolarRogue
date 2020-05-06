@@ -3,6 +3,7 @@ extends Node
 export(NodePath) var Occluder
 
 var _playerNode = null
+var default_occluder_color : Vector3
 onready var _occluder_ref = get_node(Occluder)
 
 func _ready():
@@ -11,6 +12,9 @@ func _ready():
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_Callback")
 	BehaviorEvents.connect("OnMountAdded", self, "OnMountAdded_Callback")
+	
+	if _occluder_ref != null:
+		default_occluder_color = _occluder_ref.material.get_shader_param("gray_color")
 
 
 func OnMountAdded_Callback(obj, slot, src):
@@ -20,6 +24,13 @@ func OnMountAdded_Callback(obj, slot, src):
 	ExecuteFullSweep()
 
 func OnLevelLoaded_Callback():
+	var level_data = Globals.LevelLoaderRef.GetCurrentLevelData()
+	var updated_fog_color : Vector3 = default_occluder_color
+	if level_data.has("fog_color_override") == true:
+		var col_array = level_data["fog_color_override"]
+		updated_fog_color = Vector3(col_array[0], col_array[1], col_array[2])
+	_occluder_ref.material.set_shader_param("gray_color", updated_fog_color)
+	
 	# Give two frames for scanner to update
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
@@ -100,6 +111,7 @@ func _update_occlusion_texture():
 	imageTexture.create_from_image(dynImage)
 	_occluder_ref.texture = imageTexture
 	imageTexture.resource_name = "The created texture!"
+	
 
 func _tag_tile(tile):
 	if tile.x >= Globals.LevelLoaderRef.levelSize.x or tile.y >= Globals.LevelLoaderRef.levelSize.y or tile.x < 0 or tile.y < 0:
