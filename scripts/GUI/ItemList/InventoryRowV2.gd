@@ -50,7 +50,7 @@ func set_row_data(data):
 
 func UpdateSelection():
 	if get_node("BtnWrap/Toggle").pressed == false and (not "header" in _metadata or not _metadata.header == true):
-		get_node("BtnWrap/HBoxContainer/Wrap/Name").add_color_override("default_color", Color(1,1,1))
+		get_node("BtnWrap/HBoxContainer/Wrap/Name").add_color_override("font_color", Color(1,1,1))
 
 func _on_Toggle_toggled(button_pressed):
 	# drag and dropping a selected node would crash because we duplicate the node for creating
@@ -58,7 +58,7 @@ func _on_Toggle_toggled(button_pressed):
 	# only way I could think of stopping it is to check if _metadata is null
 	if _metadata == null:
 		return
-	get_node("BtnWrap/HBoxContainer/Wrap/Name").add_color_override("default_color", Color(0,0,0))
+	get_node("BtnWrap/HBoxContainer/Wrap/Name").add_color_override("font_color", Color(0,0,0))
 	var group : ButtonGroup = get_node("BtnWrap/Toggle").group
 	if group != null:
 		for btn in group.get_buttons():

@@ -286,7 +286,7 @@ func DoMountingBuy():
 			BehaviorEvents.emit_signal("OnAddItem", _lobj, to_mount.src)
 		BehaviorEvents.emit_signal("OnRemoveItem", _robj, to_mount.src)
 		BehaviorEvents.emit_signal("OnUseEnergy", _lobj, price)
-		BehaviorEvents.emit_signal("OnLogLine", "Bought %d %s for %d energy", [selected_item["count"], Globals.mytr(selected_item["name_id"]), price])
+		BehaviorEvents.emit_signal("OnLogLine", "Bought %d %s for %d energy", [selected_item["count"], Globals.mytr(to_mount["name_id"]), price])
 	
 	ReInit()
 
@@ -308,7 +308,7 @@ func UpdateVisibility():
 	var energy_str : String = "[center]Available Energy.. [color=%s]%.f[/color][/center]" % [energy_color, cur_energy]
 	_energy_status.bbcode_text = energy_str
 	
-	if selected_item == null or selected_item.src.empty() == true:
+	if selected_item == null or selected_item.src.empty() == true or selected_item["count"] <= 0:
 		_info_card.visible = false
 		return
 	

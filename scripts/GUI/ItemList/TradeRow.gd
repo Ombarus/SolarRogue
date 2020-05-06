@@ -57,11 +57,11 @@ func set_row_data(data):
 
 func UpdateSelection():
 	if _toggle.pressed == false and (not "header" in _metadata or not _metadata.header == true):
-		get_node("BtnWrap/HBoxContainer/Wrap/Name").add_color_override("default_color", Color(1,1,1))
+		get_node("BtnWrap/HBoxContainer/Wrap/Name").add_color_override("font_color", Color(1,1,1))
 
 func _on_Toggle_toggled(button_pressed):
-	#if _locked == true:
-	#	return
+	if _locked == true:
+		return
 	# drag and dropping a selected node would crash because we duplicate the node for creating
 	# the drag preview and it'll trigger a bunch of selection refresh on fake data
 	# only way I could think of stopping it is to check if _metadata is null
@@ -74,12 +74,14 @@ func _on_Toggle_toggled(button_pressed):
 	elif _metadata.max == 1:
 		select(1)
 	else:
-		#_toggle.pressed = false
+		_locked = true
+		_toggle.pressed = false
 		BehaviorEvents.emit_signal("OnPushGUI", "HowManyDiag", {
 			"callback_object":self, 
 			"callback_method":"select", 
 			"min_value":1, 
 			"max_value":_metadata.max})
+		_locked = false
 
 func select(num, skip_event=false):
 	_locked = true
@@ -101,7 +103,7 @@ func select(num, skip_event=false):
 		var counting_str = ""
 		if _metadata.max > 1:
 			counting_str = "✓ "
-		#_toggle.pressed = true
+		_toggle.pressed = true
 		if "display_name_id" in _metadata:
 			get_node("BtnWrap/HBoxContainer/Wrap/Name").text = counting_str + _metadata.display_name_id
 		else:
@@ -109,7 +111,7 @@ func select(num, skip_event=false):
 		self.theme = full_selection
 		_metadata["count"] = _metadata.max
 	else:
-		#_toggle.pressed = true
+		_toggle.pressed = true
 		var counting_str = str(num) + "/" + str(_metadata.max) + " "
 		if "display_name_id" in _metadata:
 			get_node("BtnWrap/HBoxContainer/Wrap/Name").text = counting_str + _metadata.display_name_id
