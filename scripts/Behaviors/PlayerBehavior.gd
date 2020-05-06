@@ -858,3 +858,5 @@ func UpdateMovementBasedButton():
 		
 	btn = get_node(PopupButtons)
 	btn.EnableComm(trade_port != null)
+	if trade_port != null:
+		BehaviorEvents.emit_signal("OnLogLine", "Select 'Comm' to open a trading console")

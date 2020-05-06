@@ -32,9 +32,9 @@ func Clear():
 		row.queue_free()
 		
 func select(index):
-	var r = _rows_node.get_children()[index].RowData
+	var r = _rows_node.get_children()[index].get_row_data()
 	r["selected"] = true
-	_rows_node.get_children()[index].RowData = r
+	_rows_node.get_children()[index].set_row_data(r)
 
 func set_content(val):
 	Clear()
@@ -47,14 +47,14 @@ func set_content(val):
 		row["index"] = count
 		row["dragdrop_id"] = DragDropID
 		count += 1
-		n.RowData = row
+		n.set_row_data(row)
 	#self.minimum_size_changed()
 	#self.call_deferred("update")
 	
 func get_content():
 	var content = []
 	for row in _rows_node.get_children():
-		content.push_back(row.RowData)
+		content.push_back(row.get_row_data())
 	return content
 	
 func UpdateContent(val):

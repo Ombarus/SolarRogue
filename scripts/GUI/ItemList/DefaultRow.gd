@@ -1,6 +1,6 @@
 extends Control
 
-var RowData setget set_row_data, get_row_data
+#var RowData setget set_row_data, get_row_data
 
 var _metadata = null
 
@@ -11,6 +11,7 @@ func set_row_data(data):
 
 func get_row_data():
 	return _metadata
+	
 
 func UpdateContent(data):
 	pass

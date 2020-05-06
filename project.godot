@@ -70,7 +70,7 @@ ShortcutManager="*res://scripts/autoload/ShortcutManager.gd"
 window/size/width=1280
 window/size/height=720
 window/dpi/allow_hidpi=true
-mouse_cursor/custom_image="res://data/textures/pointer.png"
+mouse_cursor/custom_image="res://data/private/textures/pointer.png"
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 

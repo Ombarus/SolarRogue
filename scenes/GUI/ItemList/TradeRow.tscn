@@ -1,0 +1,88 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://data/theme/default_ui_text.tres" type="Theme" id=1]
+[ext_resource path="res://scripts/GUI/ItemList/TradeRow.gd" type="Script" id=2]
+[ext_resource path="res://scripts/GUI/DragDropCatcher.gd" type="Script" id=4]
+[ext_resource path="res://data/private/textures/space-sprite.png" type="Texture" id=5]
+[ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=6]
+[ext_resource path="res://data/theme/crafting/all_selection.tres" type="Theme" id=7]
+[ext_resource path="res://data/theme/crafting/partial_selection.tres" type="Theme" id=8]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 2
+atlas = ExtResource( 5 )
+region = Rect2( 256, 0, 128, 128 )
+
+[node name="TradeRow" type="VBoxContainer"]
+margin_right = 849.0
+margin_bottom = 50.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+full_selection = ExtResource( 7 )
+partial_selection = ExtResource( 8 )
+
+[node name="BtnWrap" type="Control" parent="."]
+margin_right = 849.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+mouse_filter = 1
+
+[node name="Toggle" type="Button" parent="BtnWrap"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+toggle_mode = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+forward_to = NodePath("../../../TradeRow")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BtnWrap"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="BtnWrap/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+mouse_filter = 2
+texture = SubResource( 1 )
+expand = true
+
+[node name="Wrap" type="Control" parent="BtnWrap/HBoxContainer"]
+margin_left = 54.0
+margin_right = 849.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BG" type="RichTextLabel" parent="BtnWrap/HBoxContainer/Wrap"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 12.0
+margin_bottom = -11.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/normal_font = ExtResource( 6 )
+scroll_active = false
+
+[node name="Name" type="Label" parent="BtnWrap/HBoxContainer/Wrap"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+text = "Laser Turret MK1"
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="toggled" from="BtnWrap/Toggle" to="." method="_on_Toggle_toggled"]

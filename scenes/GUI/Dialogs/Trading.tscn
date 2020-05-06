@@ -6,7 +6,7 @@
 [ext_resource path="res://scripts/GUI/InputConsumer.gd" type="Script" id=4]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/GUI/ItemList/MyItemList.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/GUI/ItemList/InventoryRowV2.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/GUI/ItemList/TradeRow.tscn" type="PackedScene" id=7]
 [ext_resource path="res://data/InventoryV2_btn_group.tres" type="ButtonGroup" id=8]
 [ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=9]
 
@@ -125,35 +125,67 @@ AlwaysOnShortcut = false
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 11.0
 margin_top = -232.0
+margin_right = -14.0
 margin_bottom = -16.0
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ItemName" type="RichTextLabel" parent="HBoxContainer/Control/base/Info"]
-margin_right = 356.0
-margin_bottom = 25.0
-rect_min_size = Vector2( 0, 25 )
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Control/base/Info"]
+margin_right = 331.0
+margin_bottom = 50.0
+
+[node name="Count" type="Label" parent="HBoxContainer/Control/base/Info/HBoxContainer"]
+margin_top = -1.0
+margin_right = 60.0
+margin_bottom = 49.0
+rect_min_size = Vector2( 60, 50 )
+text = "5x"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemName" type="RichTextLabel" parent="HBoxContainer/Control/base/Info/HBoxContainer"]
+margin_left = 64.0
+margin_right = 331.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 bbcode_enabled = true
-bbcode_text = "[center][color=lime]Jerg Battleship[/color][/center]"
+bbcode_text = "[color=lime]Jerg Battleship[/color]"
 text = "Jerg Battleship"
 
-[node name="Price" type="RichTextLabel" parent="HBoxContainer/Control/base/Info"]
-margin_top = 29.0
-margin_right = 356.0
-margin_bottom = 69.0
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/Control/base/Info"]
+margin_top = 54.0
+margin_right = 331.0
+margin_bottom = 104.0
+
+[node name="Count" type="Label" parent="HBoxContainer/Control/base/Info/HBoxContainer2"]
+margin_top = -1.0
+margin_right = 60.0
+margin_bottom = 49.0
+rect_min_size = Vector2( 60, 50 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Price" type="RichTextLabel" parent="HBoxContainer/Control/base/Info/HBoxContainer2"]
+margin_left = 64.0
+margin_right = 331.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 0, 40 )
 size_flags_horizontal = 3
 bbcode_enabled = true
-bbcode_text = "[center][color=red]5000 energy[/color][/center]"
+bbcode_text = "[color=red]5000 energy[/color]"
 text = "5000 energy"
 
 [node name="Control" type="Control" parent="HBoxContainer/Control/base/Info"]
-margin_top = 73.0
-margin_right = 356.0
+margin_top = 108.0
+margin_right = 331.0
 margin_bottom = 216.0
 rect_min_size = Vector2( 0, 90 )
 size_flags_horizontal = 3
@@ -164,9 +196,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -152.0
+margin_left = -153.5
 margin_top = -90.0
-margin_right = 152.0
+margin_right = 154.5
 margin_bottom = 0.0
 rect_min_size = Vector2( 142, 90 )
 Text = "< Buy"
@@ -177,9 +209,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -152.0
+margin_left = -153.5
 margin_top = -90.0
-margin_right = 152.0
+margin_right = 154.5
 margin_bottom = 0.0
 rect_min_size = Vector2( 142, 90 )
 Text = "Sell >"

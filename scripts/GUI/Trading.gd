@@ -11,6 +11,7 @@ var _close_btn : ButtonBase = null
 var _cancel_btn : ButtonBase = null
 var _info_card : Control = null
 var _icon : TextureRect = null
+var _item_count : Label = null
 var _item_name : RichTextLabel = null
 var _item_price : RichTextLabel = null
 var _energy_status : RichTextLabel = null
@@ -28,8 +29,9 @@ func _ready():
 	_desc_btn = get_node("HBoxContainer/Control/base/IconContainer/Desc")
 	_info_card = get_node("HBoxContainer/Control/base")
 	_icon = get_node("HBoxContainer/Control/base/IconContainer/Icon")
-	_item_name = get_node("HBoxContainer/Control/base/Info/ItemName")
-	_item_price = get_node("HBoxContainer/Control/base/Info/Price")
+	_item_count = get_node("HBoxContainer/Control/base/Info/HBoxContainer/Count")
+	_item_name = get_node("HBoxContainer/Control/base/Info/HBoxContainer/ItemName")
+	_item_price = get_node("HBoxContainer/Control/base/Info/HBoxContainer2/Price")
 	_energy_status = get_node("HBoxContainer/Control/Control/EnergyStatus")
 	
 	_sale_btn.connect("pressed", self, "Sale_Callback")
@@ -78,12 +80,15 @@ func Sale_Callback():
 	selected_ship = cur_sel[1]
 	
 	var price : int = GetPrice(selected_item, true)
-	if "key" in selected_item and "idx" in selected_item:
-		BehaviorEvents.emit_signal("OnRemoveMount", _lobj, selected_item.key, selected_item.idx)
-	BehaviorEvents.emit_signal("OnRemoveItem", _lobj, selected_item.src)
-	BehaviorEvents.emit_signal("OnAddItem", _robj, selected_item.src)
-	BehaviorEvents.emit_signal("OnUseEnergy", _lobj, -price)
-	BehaviorEvents.emit_signal("OnLogLine", "Sold %s for %d energy", [Globals.mytr(selected_item["name_id"]), price])
+	var total = 0
+	for c in range(selected_item["count"]):
+		if "key" in selected_item and "idx" in selected_item:
+			BehaviorEvents.emit_signal("OnRemoveMount", _lobj, selected_item.key, selected_item.idx)
+		BehaviorEvents.emit_signal("OnRemoveItem", _lobj, selected_item.src)
+		BehaviorEvents.emit_signal("OnAddItem", _robj, selected_item.src)
+		BehaviorEvents.emit_signal("OnUseEnergy", _lobj, -price)
+		total += price
+	BehaviorEvents.emit_signal("OnLogLine", "Sold %d %s for %d energy", [selected_item["count"], Globals.mytr(selected_item["name_id"]), total])
 	
 	ReInit()
 	
@@ -95,13 +100,39 @@ func Buy_Callback():
 	selected_item = cur_sel[0]
 	selected_ship = cur_sel[1]
 	
+	# if only 1 item
+	# item can be mounted
+	# we have a free mount of the correct type
+	# ask
+	var data = Globals.LevelLoaderRef.LoadJSON(selected_item.src)
+	var slot = Globals.get_data(data, "equipment.slot")
+	if selected_item["count"] == 1 and slot != null and slot != "":
+		var question_content : Array = []
+		question_content.push_back({"src":"", "name_id":slot, "equipped":false, "header":true})
+		for item in _my_ship_list.Content:
+			if "key" in item and item.key == slot and "src" in item and (item.src == null or item.src.empty()):
+				question_content.push_back(item)
+		if question_content.size() > 1:
+			question_content.push_back({"src":"", "name_id":"Cargo Contents", "equipped":false, "header":true})
+			question_content.push_back({"src":"", "name_id":"Empty", "equipped":false, "header":false})
+			var other_content = [selected_item]
+			_other_ship_list.Content = other_content
+			_my_ship_list.Content = question_content
+			_cancel_btn.visible = true
+			_close_btn.visible = false
+			get_node("HBoxContainer/MyShip").title = Globals.mytr("Transfer Where ?")
+			_buy_btn.visible = false
+			_sale_btn.visible = false
+			return # ABORT !
+	
 	var price : int = GetPrice(selected_item, false)
-	#if "key" in selected_item and "idx" in selected_item:
-	#	BehaviorEvents.emit_signal("OnRemoveMount", _lobj, selected_item.key, selected_item.idx)
-	BehaviorEvents.emit_signal("OnRemoveItem", _robj, selected_item.src)
-	BehaviorEvents.emit_signal("OnAddItem", _lobj, selected_item.src)
-	BehaviorEvents.emit_signal("OnUseEnergy", _lobj, price)
-	BehaviorEvents.emit_signal("OnLogLine", "Bought %s for %d energy", [Globals.mytr(selected_item["name_id"]), price])
+	var total = 0
+	for c in range(selected_item["count"]):
+		BehaviorEvents.emit_signal("OnRemoveItem", _robj, selected_item.src)
+		BehaviorEvents.emit_signal("OnAddItem", _lobj, selected_item.src)
+		BehaviorEvents.emit_signal("OnUseEnergy", _lobj, price)
+		total += price
+	BehaviorEvents.emit_signal("OnLogLine", "Bought %d %s for %d energy", [selected_item["count"], Globals.mytr(selected_item["name_id"]), total])
 	
 	ReInit()
 	
@@ -130,7 +161,6 @@ func Desc_Callback():
 			to_list = _other_ship_list
 			break
 	
-	#TODO: That looks weird in this method?
 	if selected_item == null:
 		for item in right:
 			if item.selected == true and "src" in item and item.src != "":
@@ -161,6 +191,8 @@ func Init(init_param):
 	ReInit()
 	
 func ReInit():
+	_cancel_btn.visible = false
+	_close_btn.visible = true
 	_close_btn.Disabled = false
 	_lobj.init_cargo()
 	_lobj.init_mounts()
@@ -193,18 +225,6 @@ func ReInit():
 		
 	get_node("HBoxContainer/MyShip/CargoLabel").bbcode_text = "[right]([color=%s]%.f / %.f[/color])[/right]" % [cargo_color, current_load, cargo_space]
 	
-	#current_load = _robj.get_attrib("cargo.volume_used")
-	#cargo_space = _robj.get_attrib("cargo.capacity")
-	
-	#cargo_color = "lime"
-	#cargo_str = ""
-	#if current_load > cargo_space:
-	#	cargo_color="red"
-	#elif current_load > cargo_space * 0.9:
-	#	cargo_color="yellow"
-		
-	#get_node("HBoxContainer/OtherShip/CargoLabel").bbcode_text = "[right]([color=%s]%.f / %.f[/color])[/right]" % [cargo_color, current_load, cargo_space]
-	
 	# Init all the buttons to Enable/Disabled state
 	OnSelectionChanged_Callback()
 	
@@ -232,21 +252,43 @@ func GenerateContent(list_node, mounts, cargo, skip_mount : bool):
 		mount_content.push_back({"src":"", "name_id":"For sale, good deals!", "equipped":false, "header":true})
 	for row in cargo:
 		var data = Globals.LevelLoaderRef.LoadJSON(row.src)
-		var counting = ""
-		if row.count > 1:
-			counting = str(row.count) + "x "
+		#var counting = ""
+		#if row.count > 1:
+		#	counting = str(row.count) + "x "
 		if typeof(data.icon) == TYPE_ARRAY:
 			data.icon = data.icon[0]
-		mount_content.push_back({"src":row.src, "count":row.count, "display_name_id": counting + Globals.mytr(data.name_id), "name_id": counting + Globals.mytr(data.name_id), "equipped":false, "header":false, "icon":data.icon})
+		mount_content.push_back({"src":row.src, "max":row.count, "name_id": data.name_id, "equipped":false, "header":false, "icon":data.icon})
 
 	list_node.Content = mount_content
 
 func OnSelectionChanged_Callback():
-	UpdateVisibility()
-	#if _normal_btns.visible == true:
-	#	UpdateNormalVisibility()
-	#else:
-	#	DoMounting()
+	if _cancel_btn.visible == true:
+		DoMountingBuy()
+	else:
+		UpdateVisibility()
+
+
+func DoMountingBuy():
+	var selected_item = null
+	var selected_ship = null
+	
+	var cur_sel = _get_selected_item()
+	selected_item = cur_sel[0]
+	selected_ship = cur_sel[1]
+	
+	var to_mount = _other_ship_list.Content[0]
+	
+	if selected_item != null and selected_item.src.empty() == true:
+		var price : int = GetPrice(to_mount, false)
+		if "key" in selected_item and "idx" in selected_item:
+			BehaviorEvents.emit_signal("OnEquipMount", _lobj, selected_item.key, selected_item.idx, to_mount.src)
+		else:
+			BehaviorEvents.emit_signal("OnAddItem", _lobj, to_mount.src)
+		BehaviorEvents.emit_signal("OnRemoveItem", _robj, to_mount.src)
+		BehaviorEvents.emit_signal("OnUseEnergy", _lobj, price)
+		BehaviorEvents.emit_signal("OnLogLine", "Bought %d %s for %d energy", [selected_item["count"], Globals.mytr(selected_item["name_id"]), price])
+	
+	ReInit()
 
 func UpdateVisibility():
 	var selected_item = null
@@ -255,6 +297,16 @@ func UpdateVisibility():
 	var cur_sel = _get_selected_item()
 	selected_item = cur_sel[0]
 	selected_ship = cur_sel[1]
+	
+	var cur_energy = _lobj.get_attrib("converter.stored_energy")
+	var energy_color = "lime"
+	if cur_energy < 5001:
+		energy_color = "yellow"
+	if cur_energy < 1001:
+		energy_color = "red"
+		
+	var energy_str : String = "[center]Available Energy.. [color=%s]%.f[/color][/center]" % [energy_color, cur_energy]
+	_energy_status.bbcode_text = energy_str
 	
 	if selected_item == null or selected_item.src.empty() == true:
 		_info_card.visible = false
@@ -275,23 +327,18 @@ func UpdateVisibility():
 			_icon.texture = selected_item.texture_cache
 			
 		var unit_price : int = GetPrice(data, selling)
+		var total_price = selected_item["count"] * unit_price
 		if selling == true:
 			_info_card.title = "Selling"
-			_item_price.bbcode_text = "[center][color=lime]%d Energy[/color][/center]" % unit_price
+			_item_price.bbcode_text = "[color=lime]+%d Energy[/color]" % total_price
+			_sale_btn.Disabled = unit_price <= 0 # some items cannot be sold (like the converter of yendor)
 		else:
 			_info_card.title = "Buying"
-			_item_price.bbcode_text = "[center][color=red]%d Energy[/color][/center]" % unit_price
-		_item_name.bbcode_text = "[center]%s[/center]" % Globals.mytr(selected_item["name_id"])
-		
-		var cur_energy = _lobj.get_attrib("converter.stored_energy")
-		var energy_color = "lime"
-		if cur_energy < 5001:
-			energy_color = "yellow"
-		if cur_energy < 1001:
-			energy_color = "red"
-			
-		var energy_str : String = "[center]Available Energy.. [color=%s]%.f[/color][/center]" % [energy_color, cur_energy]
-		_energy_status.bbcode_text = energy_str
+			_item_price.bbcode_text = "[color=red]-%d Energy[/color]" % total_price
+			_buy_btn.Disabled = cur_energy <= total_price
+		_item_count.text = "%dx " % selected_item["count"]
+		_item_name.bbcode_text = "%s" % [Globals.mytr(selected_item["name_id"])]
+
 		
 func GetPrice(data : Dictionary, selling : bool) -> int:
 	var clean_name : String = Globals.clean_path(data.src)
