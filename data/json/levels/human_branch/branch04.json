@@ -62,6 +62,8 @@
 		{"name":"data/json/items/utilities/power_amplifier.json", "spawn_rate":0.00001302083333},
 		{"name":"data/json/items/utilities/power_amplifier_mk2.json", "spawn_rate":0.00001302083333},
 		{"name":"data/json/items/utilities/power_amplifier_mk3.json", "spawn_rate":0.00001302083333},
+		{"name":"data/json/items/utilities/speed_boost.json", "spawn_rate":0.00001302083333},
+		{"name":"data/json/items/utilities/speed_boost_mk2.json", "spawn_rate":0.00001302083333},
 		
 		{"name":"data/json/items/weapons/chaos_ball_generator.json", "spawn_rate":0.0000052},
 		{"name":"data/json/items/weapons/minigun.json", "spawn_rate":0.00001302083333},

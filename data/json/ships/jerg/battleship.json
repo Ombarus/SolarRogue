@@ -26,7 +26,7 @@
 		"hull":75
 	},
 	"moving": {
-		"speed":1.3,
+		"speed":1.6,
 		"can_use_wormhole":true,
 		"wander_speed":2.5
 	},
@@ -70,6 +70,8 @@
 		{"id":"data/json/items/utilities/power_amplifier.json", "chance":0.02},
 		{"id":"data/json/items/utilities/power_amplifier_mk2.json", "chance":0.02},
 		{"id":"data/json/items/utilities/power_amplifier_mk3.json", "chance":0.02},
+		{"id":"data/json/items/utilities/speed_boost.json", "chance":0.02},
+		{"id":"data/json/items/utilities/speed_boost_mk2.json", "chance":0.02},
 		
 		
 		{"id":"data/json/items/weapons/missile_launcher_mk2.json", "chance":0.012},

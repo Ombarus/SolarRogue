@@ -61,16 +61,18 @@
 		{"id":"data/json/items/utilities/power_amplifier.json", "chance":0.002},
 		{"id":"data/json/items/utilities/power_amplifier_mk2.json", "chance":0.002},
 		{"id":"data/json/items/utilities/power_amplifier_mk3.json", "chance":0.002},
+		{"id":"data/json/items/utilities/speed_boost.json", "chance":0.002},
+		{"id":"data/json/items/utilities/speed_boost_mk2.json", "chance":0.002},
 	
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.1},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
 	],
 	"destroyable": {
-		"hull":10
+		"hull":15
 	},
 	"moving": {
-		"speed":0.9,
+		"speed":1.25,
 		"wander_speed":2.5,
 		"can_use_wormhole":false
 	},

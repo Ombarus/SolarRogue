@@ -11,16 +11,16 @@
 	},
 	"boardable":true,
 	"mounts": {
-		"weapon": [""],
+		"weapon": ["",""],
 		"shield": [""],
 		"scanner": [""],
 		"converter": [""]
 	},
 	"destroyable": {
-		"hull":10
+		"hull":15
 	},
 	"moving": {
-		"speed":0.9,
+		"speed":1.25,
 		"can_use_wormhole":true,
 		"energy_cost":5
 	},

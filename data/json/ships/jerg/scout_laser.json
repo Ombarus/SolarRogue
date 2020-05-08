@@ -65,6 +65,8 @@
 		{"id":"data/json/items/utilities/power_amplifier.json", "chance":0.002},
 		{"id":"data/json/items/utilities/power_amplifier_mk2.json", "chance":0.002},
 		{"id":"data/json/items/utilities/power_amplifier_mk3.json", "chance":0.002},
+		{"id":"data/json/items/utilities/speed_boost.json", "chance":0.002},
+		{"id":"data/json/items/utilities/speed_boost_mk2.json", "chance":0.002},
 		
 		
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.1},

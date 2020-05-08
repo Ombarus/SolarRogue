@@ -56,7 +56,8 @@
 			{"src":"data/json/items/utilities/power_amplifier_mk2.json", "chance":30},
 			{"src":"data/json/items/utilities/power_amplifier_mk3.json", "chance":10},
 			{"src":"data/json/items/weapons/minigun.json", "chance":20},
-			{"src":"data/json/items/weapons/bullet_clip.json", "chance":20, "count":[50,80]}
+			{"src":"data/json/items/weapons/bullet_clip.json", "chance":20, "count":[50,80]},
+			{"src":"data/json/items/utilities/speed_boost_mk2.json", "chance":10}
 		]
 	},
 	"cargo": {

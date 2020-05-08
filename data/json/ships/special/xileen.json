@@ -64,6 +64,8 @@
 		{"id":"data/json/items/utilities/power_amplifier.json", "chance":0.02},
 		{"id":"data/json/items/utilities/power_amplifier_mk2.json", "chance":0.02},
 		{"id":"data/json/items/utilities/power_amplifier_mk3.json", "chance":0.02},
+		{"id":"data/json/items/utilities/speed_boost.json", "chance":0.02},
+		{"id":"data/json/items/utilities/speed_boost_mk2.json", "chance":0.02},
 		
 		{"id":"data/json/items/weapons/chaos_ball_generator.json", "chance":0.2},
 		{"id":"data/json/items/weapons/minigun.json", "chance":0.5},

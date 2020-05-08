@@ -21,7 +21,7 @@
 		"hull":15
 	},
 	"moving": {
-		"speed":1.1,
+		"speed":1.25,
 		"can_use_wormhole":true,
 		"energy_cost":5
 	},

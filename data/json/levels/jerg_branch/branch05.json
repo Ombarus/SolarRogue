@@ -56,6 +56,8 @@
 		{"name":"data/json/items/utilities/power_amplifier.json", "spawn_rate":0.000015625},
 		{"name":"data/json/items/utilities/power_amplifier_mk2.json", "spawn_rate":0.000015625},
 		{"name":"data/json/items/utilities/power_amplifier_mk3.json", "spawn_rate":0.000015625},
+		{"name":"data/json/items/utilities/speed_boost.json", "spawn_rate":0.000015625},
+		{"name":"data/json/items/utilities/speed_boost_mk2.json", "spawn_rate":0.000015625},
 		
 		{"name":"data/json/items/weapons/missile_launcher_mk2.json", "spawn_rate":0.000001302083333},
 		{"name":"data/json/items/weapons/missile_launcher_mk3.json", "spawn_rate":0.000001302083333},

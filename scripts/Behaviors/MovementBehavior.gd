@@ -40,6 +40,8 @@ func OnMovement_callback(obj, dir):
 	var special_multiplier = obj.get_attrib("moving.special_multiplier")
 	if special_multiplier == null:
 		special_multiplier = 1.0
+	move_speed *= _get_power_amplifier_stack(obj, "speed_percent")
+	energy_cost *= _get_power_amplifier_stack(obj, "energy_percent")
 	BehaviorEvents.emit_signal("OnUseAP", obj, move_speed * special_multiplier)
 	BehaviorEvents.emit_signal("OnUseEnergy", obj, energy_cost)
 	
@@ -54,6 +56,30 @@ func OnMovement_callback(obj, dir):
 		obj.rotation = angle
 	
 	obj.set_attrib("moving.moved", true)
+	
+	
+func _get_power_amplifier_stack(shooter, type):
+	var utilities : Array = shooter.get_attrib("mounts.utility", [])
+	var utilities_data : Array = Globals.LevelLoaderRef.LoadJSONArray(utilities)
+	
+	var power_amp := []
+	for data in utilities_data:
+		var boost = Globals.get_data(data, "speed_boost." + type)
+		if boost != null:
+			power_amp.push_back(boost / 100.0) # displayed as percentage, we want a fraction
+			
+	if power_amp.size() <= 0:
+		return 1.0
+	
+	power_amp.sort()
+	power_amp.invert()
+	var max_boost := 0.0
+	var count := 0
+	for val in power_amp:
+		max_boost += val / pow(2, count) # 1, 0.5, 0.25, 0.125, etc.
+		count += 1
+		
+	return max_boost
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

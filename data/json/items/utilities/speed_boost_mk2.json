@@ -1,32 +1,33 @@
 {
-	"name_id":"Gravitic Compactor",
+	"name_id":"Twin Bolt-on Engine",
 	"type":"utility",
-	"sprite":"gravitic_compactor",
+	"sprite": "speed_boost",
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
-		"region":[128,0,128,128]
+		"region":[768,384,128,128]
 	},
 	"equipment": {
 		"slot":"utility",
-		"volume":40.0,
+		"volume":45.0,
 		"equip_ap":3.0,
 		"unequip_ap":3.0
 	},
-	"cargo_optimizer": {
-		"per_cargo_space":2.0
+	"speed_boost": {
+		"speed_percent":70.0,
+		"energy_percent":150.0
 	},
 	"recyclable": {
-		"energy": 600,
-		"player_sale_range": [800,1100],
-		"player_buy_range": [1200,1800]
+		"energy": 1000,
+		"player_sale_range": [1100,1300],
+		"player_buy_range": [1400,1800]
 	},
 	"disassembling": {
 		"produce":"data/json/items/misc/spare_parts.json",
-		"count":1,
-		"energy_cost":500
+		"count":2,
+		"energy_cost":700
 	},
 	"description": {
-		"text":"Through gravity manipulation this assembly creates a localized warp field inside the cargo bay, effectively reducing cargo size by a significant factor. Stacked compactor provide diminishing returns.",
+		"text":"Don't bother fighting. You'll just die young. Run away at the cost of energy."",
 		"Overview": {
 			"min_level":0,
 			"fields":[
@@ -38,7 +39,8 @@
 		"Effect": {
 			"min_level":0,
 			"fields": [
-				{"name":"Cargo Space", "value":"{cargo_optimizer.per_cargo_space} times"}
+				{"name":"Turn Mult", "value":"{speed_boost.speed_percent}%", "translate_value":false},
+				{"name":"Move Energy Cost", "value":"{speed_boost.energy_percent}%", "translate_value":false}
 			]
 		}
 	}
