@@ -1,5 +1,5 @@
 {
-	"name_id":"Junkyard",
+	"name_id":"A Junkyard",
 	"type":"planet",
 	"sprite_choice": [
 		"planet_a", "planet_b", "planet_c", "planet_d", "planet_e", "planet_f", "planet_g", "planet_h"
@@ -57,7 +57,7 @@
 		}
 	},
 	"merchant": {
-		"trade_ports":[[0,1], [0,-1]],
+		"trade_ports":[[0,1]],
 		"inventory_size":[5,12],
 		"pondered_inventory_content": [
 			{"src":"data/json/items/misc/battleship_body.json", "chance":100},

@@ -7,13 +7,20 @@
 	"fully_mapped":false,
 	"no_ghost":true,
 	"runaway_hideout":true,
+	"fog_color_override":[0.004,0.514,0.278],
+	"level_message":"[color=lime]\"Welcome to the human trading coalition! Keep it in your pants...\"[/color]",
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
 		"region":[1536,0,128,128]
 	},
 	"objects": [
-		{"name":"data/json/ships/human/merchants/generic.json", "spawn_rate":0.1, "max":10},
-		{"name":"data/json/ships/human/probe.json", "spawn_rate":0.1, "max":12},
+		{"name":"data/json/ships/human/merchants/weapon_trader.json", "spawn_rate":0.1, "max":1, "tile_margin":[2,2], "sprite_margin":[2,2]},
+		{"name":"data/json/ships/human/merchants/junkyard_trader.json", "spawn_rate":0.1, "max":1, "tile_margin":[2,2], "sprite_margin":[2,2]},
+		{"name":"data/json/ships/human/merchants/tools_trader.json", "spawn_rate":0.1, "max":1, "tile_margin":[2,2], "sprite_margin":[2,2]},
+		{"name":"data/json/ships/human/merchants/trader_joe.json", "spawn_rate":0.1, "max":1, "tile_margin":[2,2], "sprite_margin":[2,2]},
+		{"name":"scenes/level_prefab/human/battleship_scouts_police.tscn", "spawn_rate":0.1, "max":3},
+		{"name":"scenes/level_prefab/human/frigate_scouts_police.tscn", "spawn_rate":0.1, "max":3},
+		{"name":"data/json/ships/human/probe.json", "spawn_rate":0.1, "max":20},
 		{"name":"data/json/stellar/planetlvl2.json", "spawn_rate":0.1, "max":4, "sprite_margin":[1,1]},
 		{"name":"data/json/stellar/planet_human_homeworld.json", "spawn_rate":0.1, "max":4, "sprite_margin":[1,1]},
 		{"name":"data/json/stellar/sun.json", "min":1, "max":1, "pos":[40,40], "sprite_margin":[1,1]},		

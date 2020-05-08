@@ -114,7 +114,7 @@ func OnScannerUpdated_Callback(obj):
 
 	
 func OnDamageTaken_Callback(target, shooter, damage_type):
-	if target.get_attrib("ai") == null:
+	if target.get_attrib("ai") == null or shooter == null:
 		return
 	
 	var run_if_attacked = target.get_attrib("ai.run_if_attacked")
@@ -127,6 +127,13 @@ func OnDamageTaken_Callback(target, shooter, damage_type):
 	# handle the case where the player has better weapon and shoot a ship that hasn't seen it yet
 	if target.get_attrib("ai.aggressive", false) == true:
 		target.set_attrib("ai.pathfinding", "attack")
+		target.set_attrib("ai.target", shooter.get_attrib("unique_id"))
+		target.set_attrib("wandering", false)
+		BehaviorEvents.emit_signal("OnStatusChanged", target)
+		
+	if target.get_attrib("ai.aggressive_if_attacked", false) == true:
+		target.set_attrib("ai.pathfinding", "attack")
+		target.set_attrib("ai.aggressive", true)
 		target.set_attrib("ai.target", shooter.get_attrib("unique_id"))
 		target.set_attrib("wandering", false)
 		BehaviorEvents.emit_signal("OnStatusChanged", target)
