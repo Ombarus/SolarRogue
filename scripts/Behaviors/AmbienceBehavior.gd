@@ -22,6 +22,7 @@ func _ready():
 	BehaviorEvents.connect("OnDropCargo", self, "OnDrop_Callback")
 	BehaviorEvents.connect("OnDropMount", self, "OnDrop_Callback")
 	BehaviorEvents.connect("OnObjectPicked", self, "OnPickup_Callback")
+	BehaviorEvents.connect("OnTradingDone", self, "OnTradingDone_Callback")
 	
 	var vol : float = PermSave.get_attrib("settings.master_volume", 8.0)
 	_set_bus_volume("Master", vol)
@@ -41,6 +42,12 @@ func _set_bus_volume(bus_name, vol):
 		AudioServer.set_bus_mute(bus, true)
 	else:
 		AudioServer.set_bus_mute(bus, false)
+	
+func OnTradingDone_Callback(shipa, shipb):
+	if shipa.get_attrib("type") != "player" and shipb.get_attrib("type") != "player":
+		return
+	
+	get_node("Trade").play()
 	
 func OnDrop_Callback(dropper, item_id, countorindex):
 	var is_player = dropper.get_attrib("type") == "player"

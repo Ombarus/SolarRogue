@@ -48,16 +48,6 @@ func _ready():
 	_other_ship_list.connect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
 	_other_ship_list.connect("OnDragDropCompleted", self, "OnDragDropCompleted_Callback")
 
-func HowManyDiag_Callback(num):
-	_transfered_cargo.count = num
-	BehaviorEvents.emit_signal("OnRemoveItem", _transfered_ship, _transfered_cargo.src, _transfered_cargo.count)
-	for i in range(_transfered_cargo.count):
-		BehaviorEvents.emit_signal("OnAddItem", _transfered_to, _transfered_cargo.src)
-	
-	BehaviorEvents.emit_signal("OnMoveCargo", _transfered_ship, _transfered_to)
-	# Update inventory lists
-	ReInit()
-
 
 func Cancel_Callback():
 	ReInit()
@@ -88,6 +78,7 @@ func Sale_Callback():
 		BehaviorEvents.emit_signal("OnAddItem", _robj, selected_item.src)
 		BehaviorEvents.emit_signal("OnUseEnergy", _lobj, -price)
 		total += price
+	BehaviorEvents.emit_signal("OnTradingDone", _lobj, _robj)
 	BehaviorEvents.emit_signal("OnLogLine", "Sold %d %s for %d energy", [selected_item["count"], Globals.mytr(selected_item["name_id"]), total])
 	
 	ReInit()
@@ -132,6 +123,7 @@ func Buy_Callback():
 		BehaviorEvents.emit_signal("OnAddItem", _lobj, selected_item.src)
 		BehaviorEvents.emit_signal("OnUseEnergy", _lobj, price)
 		total += price
+	BehaviorEvents.emit_signal("OnTradingDone", _lobj, _robj)
 	BehaviorEvents.emit_signal("OnLogLine", "Bought %d %s for %d energy", [selected_item["count"], Globals.mytr(selected_item["name_id"]), total])
 	
 	ReInit()
@@ -286,6 +278,7 @@ func DoMountingBuy():
 			BehaviorEvents.emit_signal("OnAddItem", _lobj, to_mount.src)
 		BehaviorEvents.emit_signal("OnRemoveItem", _robj, to_mount.src)
 		BehaviorEvents.emit_signal("OnUseEnergy", _lobj, price)
+		BehaviorEvents.emit_signal("OnTradingDone", _lobj, _robj)
 		BehaviorEvents.emit_signal("OnLogLine", "Bought %d %s for %d energy", [selected_item["count"], Globals.mytr(to_mount["name_id"]), price])
 	
 	ReInit()

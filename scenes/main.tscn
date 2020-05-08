@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=2]
+[gd_scene load_steps=86 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/private/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -81,6 +81,7 @@
 [ext_resource path="res://data/private/sounds/sfx/inventory/gb-cargo-2.wav" type="AudioStream" id=79]
 [ext_resource path="res://scenes/GUI/Dialogs/Trading.tscn" type="PackedScene" id=80]
 [ext_resource path="res://scripts/Behaviors/MerchantBehavior.gd" type="Script" id=81]
+[ext_resource path="res://data/private/sounds/sfx/inventory/trading-gb.wav" type="AudioStream" id=82]
 
 [sub_resource type="Animation" id=1]
 resource_name = "slow_popin"
@@ -213,6 +214,10 @@ bus = "Sfx"
 
 [node name="MoveCargo" type="AudioStreamPlayer" parent="Behaviors/Ambience"]
 stream = ExtResource( 79 )
+bus = "Sfx"
+
+[node name="Trade" type="AudioStreamPlayer" parent="Behaviors/Ambience"]
+stream = ExtResource( 82 )
 bus = "Sfx"
 
 [node name="UseItem" type="AudioStreamPlayer" parent="Behaviors/Ambience"]

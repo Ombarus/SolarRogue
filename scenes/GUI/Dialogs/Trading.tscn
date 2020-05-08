@@ -139,9 +139,8 @@ margin_right = 331.0
 margin_bottom = 50.0
 
 [node name="Count" type="Label" parent="HBoxContainer/Control/base/Info/HBoxContainer"]
-margin_top = -1.0
 margin_right = 60.0
-margin_bottom = 49.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 60, 50 )
 text = "5x"
 align = 1
@@ -165,9 +164,8 @@ margin_right = 331.0
 margin_bottom = 104.0
 
 [node name="Count" type="Label" parent="HBoxContainer/Control/base/Info/HBoxContainer2"]
-margin_top = -1.0
 margin_right = 60.0
-margin_bottom = 49.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 60, 50 )
 __meta__ = {
 "_edit_use_anchors_": false

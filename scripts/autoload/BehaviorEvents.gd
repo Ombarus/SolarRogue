@@ -34,6 +34,7 @@ signal OnEquipMount(equipper, slot_name, index, item_id)
 signal OnAddItem(picker, item_id)
 signal OnRemoveItem(holder, item_id, amount)
 signal OnMoveCargo(from, to)
+signal OnTradingDone(shipa, shipb)
 signal OnScannerUpdated(obj)
 signal OnPlayerDeath()
 signal OnObjectDestroyed(obj) # for vfx
