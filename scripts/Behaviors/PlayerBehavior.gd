@@ -663,6 +663,24 @@ func do_contextual_actions(tile, player_tile):
 				method_to_call = ""
 				priority = 70
 			
+		if o.get_attrib("type") == "trade_port" and tile == player_tile and priority < 85:
+			method_to_call = "Pressed_Comm_Callback"
+			priority = 85
+			continue
+			
+		if o.get_attrib("merchant") != null:
+			var player_content : Array = Globals.LevelLoaderRef.GetTile(player_tile)
+			var done := false
+			for c in player_content:
+				if c.get_attrib("type") == "trade_port" and priority < 85:
+					method_to_call = "Pressed_Comm_Callback"
+					priority = 85
+					done = true
+					break
+			if done == true:
+				continue
+					
+			
 		if o.get_attrib("type") == "wormhole" and tile == player_tile and priority < 80:
 			method_to_call = "Pressed_FTL_Callback"
 			priority = 80
