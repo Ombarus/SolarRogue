@@ -105,6 +105,13 @@
 				"amount":1
 			},
 			{
+				"name": "Bolt-On Engine", 
+				"requirements":[{"type":"energy", "amount":600}, {"type":"spare_parts", "amount":2}], 
+				"produce":"data/json/items/utilities/speed_boost.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
 				"name": "Large Power Amplifier", 
 				"requirements":[{"type":"energy", "amount":1500}, {"type":"spare_parts", "amount":8}], 
 				"produce":"data/json/items/utilities/power_amplifier_mk3.json",

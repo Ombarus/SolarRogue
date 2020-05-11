@@ -107,6 +107,13 @@
 				"amount":1
 			},
 			{
+				"name": "Twin Bolt-On Engine", 
+				"requirements":[{"type":"energy", "amount":1000}, {"type":"spare_parts", "amount":4}], 
+				"produce":"data/json/items/utilities/speed_boost_mk2.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
 				"name": "Medium Power Amplifier", 
 				"requirements":[{"type":"energy", "amount":1000}, {"type":"spare_parts", "amount":4}], 
 				"produce":"data/json/items/utilities/power_amplifier_mk2.json",

@@ -14,7 +14,7 @@
 	},
 	"speed_boost": {
 		"speed_percent":80.0,
-		"energy_percent":125.0
+		"energy_percent":150.0
 	},
 	"recyclable": {
 		"energy": 500,
@@ -27,7 +27,7 @@
 		"energy_cost":500
 	},
 	"description": {
-		"text":"Don't bother fighting. You'll just die young. Run away at the cost of energy."",
+		"text":"Don't bother fighting. You'll just die young. Run away at the cost of energy.",
 		"Overview": {
 			"min_level":0,
 			"fields":[

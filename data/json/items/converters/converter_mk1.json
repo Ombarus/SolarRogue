@@ -107,6 +107,20 @@
 				"amount":1
 			},
 			{
+				"name": "Gravitic Compactor", 
+				"requirements":[{"type":"energy", "amount":600}, {"type":"spare_parts", "amount":2}], 
+				"produce":"data/json/items/utilities/gravitic_compactor.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
+				"name": "Bolt-On Engine", 
+				"requirements":[{"type":"energy", "amount":600}, {"type":"spare_parts", "amount":2}], 
+				"produce":"data/json/items/utilities/speed_boost.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
 				"name": "Short Range Scanner", 
 				"requirements":[{"type":"energy", "amount":600}, {"type":"spare_parts", "amount":2}], 
 				"produce":"data/json/items/scanners/scanner_mk1.json",
