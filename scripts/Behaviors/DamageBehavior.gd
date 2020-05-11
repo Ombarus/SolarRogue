@@ -261,7 +261,7 @@ func ProcessDamage(target, shooter, weapon_data):
 		elif is_target_player:
 			BehaviorEvents.emit_signal("OnLogLine", "The enemy missed")
 	else:
-		var dam_absorbed_by_shield = _hit_shield(target, dam)
+		var dam_absorbed_by_shield = _hit_shield(target, dam, weapon_data)
 		var hull_dam = dam - dam_absorbed_by_shield
 		var max_hull = target.get_attrib("destroyable.hull")
 		target.set_attrib("destroyable.current_hull", target.get_attrib("destroyable.current_hull", max_hull) - hull_dam)
@@ -324,10 +324,13 @@ func _get_power_amplifier_stack(shooter, type):
 		
 	return max_boost
 
-func _hit_shield(target, dam):
+func _hit_shield(target, dam, weapon_data):
 	var cur_hp = target.get_attrib("shield.current_hp")
 	if cur_hp == null or cur_hp <= 0:
 		return 0
+		
+	var shield_penetration : float = Globals.get_data(weapon_data, "weapon_data.shield_penetration", 0.0) / 100.0
+	dam = dam - (dam * shield_penetration)
 	
 	var new_hp = max(0, cur_hp - dam)
 	var absorbed = dam

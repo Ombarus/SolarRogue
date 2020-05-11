@@ -86,7 +86,9 @@
 		{"id":"data/json/items/misc/oxygen.json", "chance":0.05},
 		{"id":"data/json/items/misc/uranium.json", "chance":0.02},
 		
-		
+		{"id":"data/json/items/weapons/rail_gun_mk1.json", "chance":0.012},
+		{"id":"data/json/items/weapons/rail_gun_mk2.json", "chance":0.010},
+		{"id":"data/json/items/weapons/depleted_uranium.json", "chance":0.02},
 		
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}

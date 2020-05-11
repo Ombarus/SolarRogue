@@ -55,6 +55,10 @@
 		{"name":"data/json/items/weapons/minigun.json", "spawn_rate":0.00001302083333},
 		{"name":"data/json/items/weapons/bullet_clip.json", "spawn_rate":0.00003125},
 		
+		{"name":"data/json/items/weapons/rail_gun_mk1.json", "spawn_rate":0.00001302083333},
+		{"name":"data/json/items/weapons/rail_gun_mk2.json", "spawn_rate":0.0000052},
+		{"name":"data/json/items/weapons/depleted_uranium.json", "spawn_rate":0.00001302083333},
+		
 		{"name":"data/json/items/weapons/missile_launcher_mk2.json", "spawn_rate":0.00001302083333},
 		{"name":"data/json/items/weapons/missile_launcher_mk3.json", "spawn_rate":0.00001302083333},
 		{"name":"data/json/items/weapons/laser_turret_mk2.json", "spawn_rate":0.00001302083333},

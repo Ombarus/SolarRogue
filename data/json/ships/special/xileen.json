@@ -67,6 +67,10 @@
 		{"id":"data/json/items/utilities/speed_boost.json", "chance":0.02},
 		{"id":"data/json/items/utilities/speed_boost_mk2.json", "chance":0.02},
 		
+		{"id":"data/json/items/weapons/rail_gun_mk1.json", "chance":0.002},
+		{"id":"data/json/items/weapons/rail_gun_mk2.json", "chance":0.002},
+		{"id":"data/json/items/weapons/depleted_uranium.json", "chance":0.002},
+		
 		{"id":"data/json/items/weapons/chaos_ball_generator.json", "chance":0.2},
 		{"id":"data/json/items/weapons/minigun.json", "chance":0.5},
 		{"id":"data/json/items/weapons/bullet_clip.json", "chance":0.25},

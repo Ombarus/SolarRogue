@@ -59,6 +59,13 @@
 				"amount":1
 			},
 			{
+				"name": "Depleted Uranium",
+				"requirements":[{"src":"data/json/items/misc/uranium.json", "amount":1}], 
+				"produce":"data/json/items/weapons/depleted_uranium.json",
+				"ap_cost":2.0,
+				"amount":5
+			},
+			{
 				"name": "Probe Ship",
 				"requirements":[{"type":"energy", "amount":1500}, {"type":"probe_hull", "amount":1}], 
 				"produce":"data/json/ships/human/player_probe.json",
@@ -177,6 +184,13 @@
 				"requirements":[{"type":"energy", "amount":1800}, {"type":"spare_parts", "amount":8}], 
 				"produce":"data/json/items/weapons/chaos_ball_generator.json",
 				"ap_cost":6.0,
+				"amount":1
+			},
+			{
+				"name": "Railgun MK2", 
+				"requirements":[{"type":"energy", "amount":1800}, {"type":"spare_parts", "amount":5}], 
+				"produce":"data/json/items/weapons/rail_gun_mk2.json",
+				"ap_cost":5.0,
 				"amount":1
 			},
 			{

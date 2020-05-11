@@ -1,6 +1,6 @@
 {
 	"name_id":"Uranium",
-	"type":"food",
+	"type":"uranium",
 	"sprite":"uranium",
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",

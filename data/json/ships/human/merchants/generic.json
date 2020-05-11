@@ -75,9 +75,12 @@
 			{"src":"data/json/items/utilities/power_amplifier_mk2.json", "chance":10},
 			{"src":"data/json/items/utilities/power_amplifier_mk3.json", "chance":1},
 			{"src":"data/json/items/weapons/minigun.json", "chance":5},
-			{"src":"data/json/items/weapons/bullet_clip.json", "chance":5, "count":[50,80],
+			{"src":"data/json/items/weapons/bullet_clip.json", "chance":5, "count":[50,80]},
 			{"src":"data/json/items/utilities/speed_boost.json", "chance":10},
-			{"src":"data/json/items/utilities/speed_boost_mk2.json", "chance":5}}
+			{"src":"data/json/items/utilities/speed_boost_mk2.json", "chance":5},
+			{"src":"data/json/items/weapons/rail_gun_mk1.json", "chance":10},
+			{"src":"data/json/items/weapons/rail_gun_mk2.json", "chance":10},
+			{"src":"data/json/items/weapons/depleted_uranium.json", "chance":20, "count":[5,20]}
 		]
 	},
 	"cargo": {

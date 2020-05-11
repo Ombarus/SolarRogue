@@ -1,0 +1,30 @@
+{
+	"name_id":"Depleted Uranium",
+	"type":"ammo",
+	"sprite_choice":[
+		"depleted_uranium"
+	],
+	"icon": [{
+		"texture":"data/private/textures/space-sprite.png",
+		"region":[1408,384,128,128]
+	}],
+	"equipment": {
+		"slot":"cargo",
+		"volume":2,
+		"stackable":true
+	},
+	"recyclable": {
+		"energy": 50,
+		"player_sale_range": [225,275],
+		"player_buy_range": [300,400]
+	},
+	"description": {
+		"text":"Ammo for the Railgun. 68.4% denser then lead and accelerated at a fraction of the speed of light it can penetrate anything.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false}
+			]
+		}
+	}
+}

@@ -49,6 +49,15 @@
 			{"src":"data/json/items/shields/shield_mk2.json", "chance":20, "max":2},
 			{"src":"data/json/items/utilities/power_amplifier_mk2.json", "chance":10},
 			
+			{"src":"data/json/items/weapons/rail_gun_mk1.json", "chance":20, "max":1},
+			{"src":"data/json/items/weapons/rail_gun_mk2.json", "chance":20, "max":1},
+			{"src":"data/json/items/weapons/depleted_uranium.json", "chance":50},
+			
+			{"src":"data/json/items/utilities/speed_boost.json", "chance":30},
+			{"src":"data/json/items/utilities/speed_boost_mk2.json", "chance":20},
+			{"src":"data/json/items/weapons/minigun.json", "chance":20},
+			{"src":"data/json/items/weapons/bullet_clip.json", "chance":50},
+			
 			{"src":"data/json/items/scanners/scanner_mk3.json", "chance":10},
 			{"src":"data/json/items/scanners/long_range_scanner_mk3.json", "chance":10},
 			{"src":"data/json/items/shields/shield_mk3.json", "chance":10, "max":2},

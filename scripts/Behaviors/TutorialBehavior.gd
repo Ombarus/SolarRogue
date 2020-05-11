@@ -79,7 +79,7 @@ func OnGUIChanged_Callback(current_menu):
 				var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 				var type = Globals.get_data(data, "type")
 				var name : String = Globals.mytr(Globals.get_data(data, "name_id"))
-				if type == "food":
+				if type == "food" or type == "uranium":
 					BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "TUTO refill our energy", "text_fmt":[name, name], "title":"Tutorial: Converter"})
 					BehaviorEvents.emit_signal("OnHighlightUIElement", "Swap")
 					steps.push_back("conv_inv")
@@ -177,7 +177,7 @@ func OnScannerUpdated_Callback(obj):
 	if not "food_scan" in steps:
 		for id in new_objs:
 			var o = Globals.LevelLoaderRef.GetObjectById(id)
-			if o != null and o.get_attrib("type") == "food" and not "food_scan" in steps:
+			if o != null and o.get_attrib("type") in ["food","uranium"] and not "food_scan" in steps:
 				BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "TUTO base elements", "title":"Tutorial: Energy", "callback_object":self, "callback_method":"Food_Scan_Done_Callback"})
 				BehaviorEvents.emit_signal("OnHighlightUIElement", "Grab")
 				break
@@ -196,7 +196,7 @@ func OnPickup_Callback(picker : Attributes):
 		for item in cargo:
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			var type = Globals.get_data(data, "type")
-			if type == "food":
+			if type == "food" or type == "uranium":
 				BehaviorEvents.emit_signal("OnPushGUI", "TutoPrompt", {"text": "TUTO the [c]onv button", "title":"Tutorial: Converter", "callback_object":self, "callback_method":"Pre_Conv_Inv_Callback"})
 				BehaviorEvents.emit_signal("OnHighlightUIElement", "Converter")
 				done = true
