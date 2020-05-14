@@ -195,6 +195,13 @@
 				"amount":1
 			},
 			{
+				"name": "Emergency Warp", 
+				"requirements":[{"type":"energy", "amount":1350}],
+				"produce":"data/json/items/consumables/emergency_warp.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
 				"name": "Gravitic Compactor", 
 				"requirements":[{"type":"energy", "amount":600}, {"type":"spare_parts", "amount":2}], 
 				"produce":"data/json/items/utilities/gravitic_compactor.json",

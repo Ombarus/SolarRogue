@@ -112,6 +112,13 @@
 				"amount":1
 			},
 			{
+				"name": "Emergency Warp", 
+				"requirements":[{"type":"energy", "amount":1350}],
+				"produce":"data/json/items/consumables/emergency_warp.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
 				"name": "Bolt-On Engine", 
 				"requirements":[{"type":"energy", "amount":600}, {"type":"spare_parts", "amount":2}], 
 				"produce":"data/json/items/utilities/speed_boost.json",
