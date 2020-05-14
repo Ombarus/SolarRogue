@@ -36,7 +36,7 @@
 		"transferable":true,
 		"content":[
 			{"src":"data/json/items/consumables/repair_nanobots.json", "count":1},
-			{"src":"data/json/items/shields/shield_mk1.json", "count":1},
+			{"src":"data/json/items/consumables/emergency_warp.json", "count":10},
 			{"src":"data/json/items/misc/diluted_cristals.json", "count":6},
 			{"src":"data/json/items/misc/uranium.json", "count":3},
 			{"src":"data/json/items/weapons/depleted_uranium.json", "count":30},

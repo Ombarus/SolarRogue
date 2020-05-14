@@ -48,6 +48,7 @@
 		{"id":"data/json/items/utilities/gravitic_compactor.json", "chance":0.008},
 		{"id":"data/json/items/utilities/solar_array.json", "chance":0.01428571429},
 		{"id":"data/json/items/consumables/repair_nanobots.json", "chance":0.01},
+		{"id":"data/json/items/consumables/emergency_warp.json", "chance":0.01},
 		
 		{"id":"data/json/items/shields/shield_mk2.json", "chance":0.045},
 		{"id":"data/json/items/shields/shield_mk3.json", "chance":0.045},

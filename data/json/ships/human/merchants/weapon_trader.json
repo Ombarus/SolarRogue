@@ -48,6 +48,7 @@
 			{"src":"data/json/items/weapons/laser_turret_mk1.json", "chance":10},
 			{"src":"data/json/items/weapons/missile.json", "chance":20, "count":[10,20]},
 			{"src":"data/json/items/consumables/repair_nanobots.json", "chance":10},
+			{"src":"data/json/items/consumables/emergency_warp.json", "chance":8},
 			{"src":"data/json/items/shields/shield_mk2.json", "chance":10},
 			{"src":"data/json/items/shields/shield_mk3.json", "chance":2},
 			{"src":"data/json/items/weapons/missile_launcher_mk2.json", "chance":10},
