@@ -7,7 +7,7 @@
 		"region":[1152,384,128,128]
 	},
 	"animation": {
-		"shoot": "scenes/tileset_source/LaserFX01.tscn"
+		"shoot": "scenes/tileset_source/railgun_fx.tscn"
 	},
 	"weapon_data": {
 		"base_dam":10.0,
