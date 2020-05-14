@@ -1,9 +1,28 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://data/private/textures/space-sprite.png" type="Texture" id=1]
+[ext_resource path="res://data/private/textures/sun_palette/purple2.png" type="Texture" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform sampler2D palette;
+
+void fragment() {
+	vec4 rgba = texture(TEXTURE, UV);
+	vec4 final_color = texture(palette, vec2(rgba.r, rgba.g));
+	final_color.a = rgba.a;
+
+	//COLOR = urgba;
+	COLOR = final_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/palette = ExtResource( 2 )
 
 [node name="sun" type="Sprite"]
+material = SubResource( 2 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 256, 384, 384 )
-

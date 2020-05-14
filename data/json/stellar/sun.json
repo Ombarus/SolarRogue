@@ -1,5 +1,16 @@
 {
 	"name_id":"A Bright Sun",
 	"type":"sun",
-	"sprite":"sun"
+	"sprite":"sun",
+	"palettes":[
+		{"path":"data/private/textures/sun_palette/blue-light.png", "chance":6},
+		{"path":"data/private/textures/sun_palette/blue-navy.png", "chance":3},
+		{"path":"data/private/textures/sun_palette/blue-rich.png", "chance":3},
+		{"path":"data/private/textures/sun_palette/blue-white.png", "chance":9},
+		{"path":"data/private/textures/sun_palette/green-alien.png", "chance":1},
+		{"path":"data/private/textures/sun_palette/orig.png", "chance":70},
+		{"path":"data/private/textures/sun_palette/purple.png", "chance":1},
+		{"path":"data/private/textures/sun_palette/purple2.png", "chance":1},
+		{"path":"data/private/textures/sun_palette/red-dark.png", "chance":6}
+	]
 }

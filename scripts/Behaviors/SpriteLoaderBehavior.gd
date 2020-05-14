@@ -50,7 +50,42 @@ func add_child_and_set_material(obj, child):
 				subchild.material = ghost_material
 	else:
 		BehaviorEvents.emit_signal("OnStatusChanged", obj)
+		var palette_path : String = obj.get_attrib("palette", "")
+		if palette_path.empty() == true:
+			palette_path = SelectRandomPalette(obj)
+		if palette_path.empty() == false:
+			obj.set_attrib("palette", palette_path)
+			var palette_tex = load(Globals.clean_path(palette_path))
+			if child is Sprite:
+				#TODO: right now only sun has a palette and sun only has a single sprite.
+				# If needed, do like ghost material and set children too
+				child.material.set_shader_param("palette", palette_tex)
 	
+	
+func sort_by_chance(a, b):
+	if a.chance > b.chance:
+		return true
+	return false
+	
+func SelectRandomPalette(obj : Attributes) -> String:
+	var palettes : Array = obj.get_attrib("palettes", [])
+	if palettes.size() <= 0:
+		return ""
+	
+	palettes.sort_custom(self, "sort_by_chance")
+	
+	var max_pond = 0
+	for palette in palettes:
+		max_pond += palette.chance
+	
+	var target = MersenneTwister.rand(max_pond)
+	var selected_item = null
+	var sum = 0
+	for palette in palettes:
+		if sum + palette.chance > target:
+			return palette["path"]
+			
+	return ""
 
 func CanDrawSprite(sprite_data, pos):
 	var current_obj_at_pos = levelLoaderRef.GetTileData(pos)
