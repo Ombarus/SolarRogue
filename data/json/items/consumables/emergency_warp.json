@@ -1,0 +1,40 @@
+{
+	"name_id":"Emergency Warp",
+	"type":"consumable",
+	"sprite": "emergency_warp",
+	"icon": {
+		"texture":"data/private/textures/space-sprite.png",
+		"region":[1536,384,128,128]
+	},
+	"consumable": {
+		"ap": 1.0,
+		"energy":3000
+	},
+	"teleport": {
+		"_comment1":"teleport randomly but never within the margin[] around the ship",
+		"_comment2":"duration could be used to give teleportitis?",
+		"duration": 0,
+		"margin":[5,5]
+	},
+	"equipment": {
+		"slot":"cargo",
+		"volume":10.0,
+		"stackable":true
+	},
+	"recyclable": {
+		"energy": 1200,
+		"player_sale_range": [1300,1800],
+		"player_buy_range": [1900,2500]
+	},
+	"description": {
+		"text":"A tiny black hole held in a portable container. Upon release the user will become lost in space.",
+		"Overview": {
+			"min_level":0, 
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false},
+				{"name":"Turn used", "value":"{consumable.ap}", "translate_value":false},
+				{"name":"Energy used", "value":"{consumable.energy}", "translate_value":false}
+			]
+		}
+	}
+}

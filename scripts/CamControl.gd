@@ -20,16 +20,28 @@ var _zoomout : bool = false
 var _enable_input : bool = false
 var _keep_centered : bool = true
 
+var _wait_for_anim = false
+
 func _ready():
 	var p = Globals.get_first_player()
 	levelLoaderRef = get_node(levelLoaderNode)
 	BehaviorEvents.connect("OnPlayerCreated", self, "OnPlayerCreated_callback")
 	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_callback")
 	BehaviorEvents.connect("OnPlayerInputStateChanged", self, "OnPlayerInputStateChanged_callback")
+	BehaviorEvents.connect("OnTeleport", self, "OnTeleport_callback")
+	
+	BehaviorEvents.connect("OnWaitForAnimation", self, "OnWaitForAnimation_Callback")
+	BehaviorEvents.connect("OnAnimationDone", self, "OnAnimationDone_Callback")
 	
 	if p != null:
 		self.position = p.position
 		_last_cam_pos = self.position
+		
+func OnWaitForAnimation_Callback():
+	_wait_for_anim = true
+	
+func OnAnimationDone_Callback():
+	_wait_for_anim = false
 		
 # Very ugly hack so that when we're in "look around" mode everything else is locked but the camera still handle inputs
 func OnPlayerInputStateChanged_callback(playerObj, inputState):
@@ -95,7 +107,12 @@ func _zoom_camera(dir):
 	BehaviorEvents.emit_signal("OnCameraZoomed", zoom)
 	
 func CenterCam(obj):
-	self.position = obj.position
+	var pos
+	if obj is Node2D:
+		pos = obj.position
+	elif obj is Vector2:
+		pos = obj
+	self.position = pos
 	_last_cam_pos = self.position
 	reset_smooth()
 		
@@ -104,6 +121,20 @@ func OnPlayerCreated_callback(var player):
 	
 func OnTransferPlayer_callback(old_player, new_player):
 	CenterCam(new_player)
+	
+func OnTeleport_callback(obj, prev_tile, new_tile):
+	if obj.get_attrib("type") == "player":
+		_keep_centered = false # stop the camera smoothing toward the ship, we want to watch the teleport anim
+		var old_pos : Vector2 = Globals.LevelLoaderRef.Tile_to_World(prev_tile)
+		var prev_zoom : Vector2 = zoom
+		CenterCam(old_pos)
+		#zoom.x = 1.0
+		#zoom.y = 1.0
+		if _wait_for_anim == true:
+			yield(BehaviorEvents, "OnAnimationDone")
+		#CenterCam(obj)
+		_keep_centered = true
+		#zoom = prev_zoom
 
 #func _on_ZoomIn_pressed():
 #		_zoom_camera(-1)

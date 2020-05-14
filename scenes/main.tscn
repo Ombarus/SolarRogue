@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=2]
+[gd_scene load_steps=87 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/private/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -82,6 +82,7 @@
 [ext_resource path="res://scenes/GUI/Dialogs/Trading.tscn" type="PackedScene" id=80]
 [ext_resource path="res://scripts/Behaviors/MerchantBehavior.gd" type="Script" id=81]
 [ext_resource path="res://data/private/sounds/sfx/inventory/trading-gb.wav" type="AudioStream" id=82]
+[ext_resource path="res://scripts/Behaviors/TeleportBehavior.gd" type="Script" id=83]
 
 [sub_resource type="Animation" id=1]
 resource_name = "slow_popin"
@@ -305,6 +306,9 @@ script = ExtResource( 24 )
 script = ExtResource( 25 )
 LoadingNode = NodePath("../../Loading-FX/Starfield")
 
+[node name="Animation" type="Node" parent="Behaviors"]
+script = ExtResource( 30 )
+
 [node name="Movement" type="Node" parent="Behaviors"]
 script = ExtResource( 26 )
 levelLoaderNode = NodePath("../LevelLoader")
@@ -319,8 +323,8 @@ script = ExtResource( 28 )
 script = ExtResource( 29 )
 TargettingHUD = NodePath("../../Camera-GUI/SafeArea/TargettingRoot/TargettingHUD")
 
-[node name="Animation" type="Node" parent="Behaviors"]
-script = ExtResource( 30 )
+[node name="Teleport" type="Node" parent="Behaviors"]
+script = ExtResource( 83 )
 
 [node name="EnergyRegen" type="Node" parent="Behaviors"]
 script = ExtResource( 31 )
@@ -879,7 +883,6 @@ render_target_update_mode = 3
 [node name="Loading-FX" type="CanvasLayer" parent="."]
 
 [node name="Starfield" parent="Loading-FX" instance=ExtResource( 67 )]
-visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Loading-FX/Starfield"]
 anims/popout = SubResource( 3 )

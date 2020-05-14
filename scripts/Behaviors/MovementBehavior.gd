@@ -6,6 +6,11 @@ var levelLoaderRef
 func _ready():
 	levelLoaderRef = get_node(levelLoaderNode)
 	BehaviorEvents.connect("OnMovement", self, "OnMovement_callback")
+	BehaviorEvents.connect("OnTeleport", self, "OnTeleport_callback")
+	
+func OnTeleport_callback(obj, prev_tile, new_tile):
+	var newPos = levelLoaderRef.Tile_to_World(new_tile)
+	levelLoaderRef.UpdatePosition(obj, newPos, true)
 	
 func OnMovement_callback(obj, dir):
 	if obj.get_attrib("moving") == null:

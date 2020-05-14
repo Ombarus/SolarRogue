@@ -12,6 +12,22 @@ func _ready():
 	BehaviorEvents.connect("OnAddToAnimationQueue", self, "OnAddToAnimationQueue_Callback")
 	BehaviorEvents.connect("OnAnimationDone", self, "OnAnimationDone_Callback")
 	BehaviorEvents.connect("OnDamageTaken", self, "OnDamageTaken_Callback")
+	BehaviorEvents.connect("OnTeleport", self, "OnTeleport_Callback")
+	
+func OnTeleport_Callback(obj, prev_tile, new_tile):
+	if _wait_for_anim == true:
+		BehaviorEvents.emit_signal("OnAddToAnimationQueue", self, "OnTeleport_Callback", [obj, prev_tile], 250)
+		return
+	
+	BehaviorEvents.emit_signal("OnWaitForAnimation")
+	var teleport_scene = "res://scenes/Animations/warp_trail_tile.tscn"
+	
+	var scene = load(teleport_scene)
+	var n = scene.instance()
+	var pos = obj.position
+	n.position = pos
+	var r = get_node("/root/Root/GameTiles")
+	call_deferred("safe_start", n, r, pos)
 	
 func OnWaitForAnimation_Callback():
 	_wait_for_anim = true

@@ -173,7 +173,9 @@ func Use_Callback():
 	if selected_cargo.size() > 0:
 		
 		emit_signal("use_pressed", selected_cargo[0])
-		Init({"object":_obj}) # refresh list
+		Close_Callback()
+		#TODO: Might want to close only on some consumable but not all ?
+		#Init({"object":_obj}) # refresh list
 	else:
 		BehaviorEvents.emit_signal("OnLogLine", "No selected item can be used like that")
 	

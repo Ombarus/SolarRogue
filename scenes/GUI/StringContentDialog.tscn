@@ -36,3 +36,6 @@ custom_fonts/bold_font = ExtResource( 6 )
 custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
 scroll_following = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
