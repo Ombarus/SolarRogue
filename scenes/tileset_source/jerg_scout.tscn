@@ -19,15 +19,14 @@ z_index = 900
 modulate = Color( 1, 1, 1, 0 )
 texture = ExtResource( 4 )
 region_enabled = true
-region_rect = Rect2( 640, 768, 128, 128 )
+region_rect = Rect2( 128, 1152, 128, 128 )
 
 [node name="scout" type="Sprite" parent="."]
 z_index = 1
 texture = ExtResource( 4 )
 region_enabled = true
-region_rect = Rect2( 640, 256, 128, 128 )
+region_rect = Rect2( 128, 1024, 128, 128 )
 
 [node name="hit_fx" parent="." instance=ExtResource( 5 )]
 z_index = 2
-region_override = Rect2( 640, 256, 128, 128 )
-
+region_override = Rect2( 128, 1024, 128, 128 )
