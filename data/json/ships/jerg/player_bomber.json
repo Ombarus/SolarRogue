@@ -1,10 +1,10 @@
 {
 	"name_id":"A Jerg Bomber",
 	"type":"ship",
-	"sprite":"jerg_scout",
+	"sprite":"jerg_bomber",
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
-		"region":[128,1024,128,128]
+		"region":[640,256,128,128]
 	},
 	"animation": {
 		"destroyed": "scenes/tileset_source/explosion_fx.tscn"

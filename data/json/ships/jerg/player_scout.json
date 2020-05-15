@@ -4,7 +4,7 @@
 	"sprite":"jerg_scout",
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
-		"region":[640,256,128,128]
+		"region":[128,1024,128,128]
 	},
 	"animation": {
 		"destroyed": "scenes/tileset_source/explosion_fx.tscn"

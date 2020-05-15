@@ -4,7 +4,7 @@
 	"sprite":"jerg_bomber",
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
-		"region":[128,1024,128,128]
+		"region":[640,256,128,128]
 	},
 	"action_point":0,
 	"mounts": {

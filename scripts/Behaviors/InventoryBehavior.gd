@@ -154,9 +154,12 @@ func OnDropCargo_Callback(dropper, item_id, count):
 	var cargo = dropper.get_attrib("cargo.content")
 	var index_to_delete = []
 	var i = 0
-	var drop_speed = dropper.get_attrib("cargo.drop_ap")
-	if drop_speed == null:
-		drop_speed = 0
+	var drop_speed = dropper.get_attrib("cargo.drop_ap", 0)
+	var is_player = dropper.get_attrib("type") == "player"
+	var modif_data = null
+	if is_player:
+		# hack to make sure when player does godot he doesn't get interrupted by his own drops
+		modif_data = {"memory": {"was_seen_by":true}}
 	var total_ap_cost = 0
 	for item in cargo:
 		if Globals.clean_path(item_id) == Globals.clean_path(item.src):
@@ -171,7 +174,7 @@ func OnDropCargo_Callback(dropper, item_id, count):
 			dropper.set_attrib("cargo.volume_used", dropper.get_attrib("cargo.volume_used") - (data.equipment.volume*amount_dropped))
 			total_ap_cost += drop_speed * amount_dropped
 			for i in range(amount_dropped):
-				Globals.LevelLoaderRef.RequestObject(item.src, Globals.LevelLoaderRef.World_to_Tile(dropper.position))
+				Globals.LevelLoaderRef.RequestObject(item.src, Globals.LevelLoaderRef.World_to_Tile(dropper.position), modif_data)
 			# found item, we can quit the loop
 			break
 		i += 1

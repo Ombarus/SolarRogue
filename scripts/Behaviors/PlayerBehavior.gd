@@ -351,10 +351,39 @@ func OnObjTurn_Callback(obj):
 				BehaviorEvents.emit_signal("OnLogLine", "Ship in range of %s", [Globals.mytr(filtered[0].get_attrib("name_id"))])
 			elif filtered.size() > 1:
 				BehaviorEvents.emit_signal("OnLogLine", "Multiple Objects Detected")
+				
+			# Same as AI
+			ConsiderInterests(obj)
 			
 			UpdateMovementBasedButton()
 	else:
 		lock_input = true
+		
+		
+func ConsiderInterests(obj):
+	# Similar method called in AIBehavior if player is on Autopilot. If not, we process new object entering scanner here.
+	# Assume this is called after we already validated obj is player and not on autopilot
+	var level_id : String = Globals.LevelLoaderRef.GetLevelID()
+	var new_objs : Array = obj.get_attrib("scanner_result.new_in_range." + level_id, [])
+		
+	# Disable if enemy came in range or never seen item shows up
+	var filtered : Array = []
+	var known_anomalies = obj.get_attrib("scanner_result.known_anomalies", {})
+	for id in new_objs:
+		var o : Node2D = Globals.LevelLoaderRef.GetObjectById(id)
+		if o == null:
+			continue
+		if Globals.is_(o.get_attrib("ai.aggressive"), true):
+			BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Enemy ship entered scanner range ![/color]")
+			break
+		var detected : bool = o.get_attrib("type") != "anomaly"
+		if id in known_anomalies:
+			detected = known_anomalies[id]
+		if o.get_attrib("memory.was_seen_by", false) == false and detected == true:
+			o.set_attrib("memory.was_seen_by", true)
+			BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Scanners have picked up a new %s[/color]", [Globals.mytr(o.get_attrib("type"))])
+			break
+
 	
 func Pressed_Weapon_Callback():
 	if lock_input:
