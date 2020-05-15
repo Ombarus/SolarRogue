@@ -109,7 +109,11 @@ func TriggerBeginning(player : Attributes):
 	BehaviorEvents.emit_signal("OnWaitForAnimation")
 	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "RUNE_RADIATION_INTRO_1", "title":"CSO Leonard Grayson"})
 	yield(BehaviorEvents, "OnPopGUI")
-	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text":"RUNE_RADIATION_INTRO_2", "title":"CSO Leonard Grayson"})
+	var has_shield = player.get_attrib("mounts.shield", []).size() > 0
+	if has_shield:
+		BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text":"RUNE_RADIATION_INTRO_2", "title":"CSO Leonard Grayson"})
+	else:
+		BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text":"RUNE_RADIATION_INTRO_2_JERG", "title":"CSO Leonard Grayson"})
 	yield(BehaviorEvents, "OnPopGUI")
 	Intro_Done_Callback()
 	
