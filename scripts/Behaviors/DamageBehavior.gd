@@ -228,6 +228,12 @@ func ProcessHarvest(target, shooter, weapon_data):
 		BehaviorEvents.emit_signal("OnLogLine", "Your shots did not produce anything useful")
 	else:
 		var bounds = Globals.LevelLoaderRef.levelSize
+		
+		var modif_data = null
+		# Mark as seen so that goto doesn't interrupt for items we're sure to have seen before
+		if is_player:
+			modif_data = {"memory": {"was_seen_by":true}}
+			
 		for inv_index in drop_index_list:
 			var x = MersenneTwister.rand(3) - 1
 			var y = MersenneTwister.rand(3) - 1
@@ -235,7 +241,7 @@ func ProcessHarvest(target, shooter, weapon_data):
 			x = clamp(tile.x + x, 0, bounds.x-1)
 			y = clamp(tile.y + y, 0, bounds.y-1)
 			var offset = Vector2(x,y)
-			BehaviorEvents.emit_signal("OnAddToAnimationQueue", Globals.LevelLoaderRef, "RequestObject", [inventory[inv_index], offset], 500)
+			BehaviorEvents.emit_signal("OnAddToAnimationQueue", Globals.LevelLoaderRef, "RequestObject", [inventory[inv_index], offset, modif_data], 500)
 			#Globals.LevelLoaderRef.RequestObject(inventory[inv_index], offset)
 			# safe because we're going from last to first so the next index shouldn't change
 			inventory.remove(inv_index)
@@ -274,6 +280,8 @@ func ProcessDamage(target, shooter, weapon_data):
 					BehaviorEvents.emit_signal("OnLogLine", "[color=red]You destroy the enemy ![/color]")
 			if is_target_player:
 				BehaviorEvents.emit_signal("OnPlayerDeath")
+			if shooter is Attributes:
+				target.set_attrib("destroyable.destroyer", shooter.get_attrib("unique_id"))
 			BehaviorEvents.emit_signal("OnObjectDestroyed", target)
 			BehaviorEvents.emit_signal("OnRequestObjectUnload", target)
 		else:
@@ -295,11 +303,16 @@ func OnObjectDestroyed_Callback(target):
 		#ProcessDeathSpawns(target)
 	
 func ProcessDeathSpawns(target):
+	var destroyer = Globals.LevelLoaderRef.GetObjectById(target.get_attrib("destroyable.destroyer"))
+	var modif_data = null
+	# Mark as seen so that goto doesn't interrupt for items we're sure to have seen before
+	if destroyer != null and destroyer.get_attrib("type") == "player":
+		modif_data = {"memory": {"was_seen_by":true}}
 	for stuff in target.get_attrib("drop_on_death"):
 		var spawned = Globals.LevelLoaderRef.GetGlobalSpawn(stuff.id)
 		var can_spawn = not "global_max" in stuff or stuff["global_max"] < spawned
 		if can_spawn and MersenneTwister.rand_float() < stuff.chance:
-			Globals.LevelLoaderRef.RequestObject(stuff.id, Globals.LevelLoaderRef.World_to_Tile(target.position))
+			Globals.LevelLoaderRef.RequestObject(stuff.id, Globals.LevelLoaderRef.World_to_Tile(target.position), modif_data)
 
 func _get_power_amplifier_stack(shooter, type):
 	var utilities : Array = shooter.get_attrib("mounts.utility", [])

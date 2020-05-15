@@ -26,7 +26,7 @@ var _current_level_data = null
 var _wait_for_anim = false
 var _global_spawns = {} # to keep track of items that should only appear once in a single game
 
-const _TEST_MID_GAME = true
+const _TEST_MID_GAME = false
 
 func GetRandomEmptyTile():
 	#TODO: Check for blocking and multi-tile objects
@@ -558,7 +558,10 @@ func CreateAndInitNode(data, pos, modified_data = null):
 	n.base_attributes = data
 	n.modified_attributes = {}
 	if modified_data != null:
-		n.modified_attributes = modified_data
+		# If I init objects with modified data in a loop and pass the same dictionnary
+		# it'll be shared between multiple objects. To avoid this, make sure I save a copy
+		# (see dropping food in ProcessHarvest())
+		n.modified_attributes = str2var(var2str(modified_data))
 	r.call_deferred("add_child", n)
 	levelTiles[ pos.x ][ pos.y ].push_back(n)
 	var obj_type = n.get_attrib("type")
