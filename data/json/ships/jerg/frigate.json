@@ -25,7 +25,7 @@
 		]
 	},
 	"destroyable": {
-		"hull":35
+		"hull":50
 	},
 	"moving": {
 		"speed":1.2,

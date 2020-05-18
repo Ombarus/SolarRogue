@@ -10,8 +10,8 @@
 		"shoot": "scenes/tileset_source/LaserFX01.tscn"
 	},
 	"weapon_data": {
-		"base_dam":10.0,
-		"max_dam":15.0,
+		"base_dam":8.0,
+		"max_dam":12.0,
 		"fire_range":3.0,
 		"fire_pattern":"+",
 		"fire_energy_cost":750.0,

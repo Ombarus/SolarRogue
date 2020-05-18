@@ -33,6 +33,29 @@ dialog_cancel = true
 title = "How Many ?"
 border_style = "─"
 
+[node name="Info" type="RichTextLabel" parent="base"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -158.0
+margin_top = -40.6865
+margin_right = 158.0
+margin_bottom = -20.6865
+rect_min_size = Vector2( 0, 20 )
+custom_fonts/mono_font = ExtResource( 4 )
+custom_fonts/bold_italics_font = ExtResource( 5 )
+custom_fonts/italics_font = ExtResource( 6 )
+custom_fonts/bold_font = ExtResource( 7 )
+custom_fonts/normal_font = ExtResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[center]1 / 23[/center]"
+text = "1 / 23"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Selector" type="HSlider" parent="base"]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -44,23 +67,7 @@ margin_right = 171.5
 margin_bottom = 17.0
 rect_scale = Vector2( 1, 2 )
 ticks_on_borders = true
-
-[node name="Info" type="RichTextLabel" parent="base"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -158.0
-margin_top = -40.6865
-margin_right = 158.0
-margin_bottom = -23.6865
-custom_fonts/mono_font = ExtResource( 4 )
-custom_fonts/bold_italics_font = ExtResource( 5 )
-custom_fonts/italics_font = ExtResource( 6 )
-custom_fonts/bold_font = ExtResource( 7 )
-custom_fonts/normal_font = ExtResource( 4 )
-bbcode_enabled = true
-bbcode_text = "[center]1 / 23[/center]"
-text = "1 / 23"
-scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="value_changed" from="base/Selector" to="." method="_on_Selector_value_changed"]

@@ -15,15 +15,15 @@
 		"weapon": [
 			"data/json/items/weapons/minigun.json"
 		],
-		"shield": ["data/json/items/shields/shield_mk1.json", "data/json/items/shields/shield_mk1.json"],
+		"shield": ["data/json/items/shields/shield_mk2.json", "data/json/items/shields/shield_mk1.json"],
 		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
 		"converter": ["data/json/items/converters/converter_mk1.json"],
 		"utility":[
-			""
+			"data/json/items/utilities/power_amplifier_mk2.json"
 		]
 	},
 	"destroyable": {
-		"hull":15
+		"hull":23
 	},
 	"moving": {
 		"speed":1.8,

@@ -8,8 +8,8 @@
 	},
 	"action_point":0,
 	"mounts": {
-		"weapon": ["data/json/items/weapons/missile_launcher_mk1.json"],
-		"shield": ["data/json/items/shields/shield_mk1.json"],
+		"weapon": ["data/json/items/weapons/missile_launcher_mk2.json"],
+		"shield": ["data/json/items/shields/shield_mk2.json"],
 		"scanner": ["data/json/items/scanners/scanner_mk1.json"]
 	},
 	"animation": {

@@ -79,7 +79,7 @@
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
 	],
 	"destroyable": {
-		"hull":10
+		"hull":17
 	},
 	"moving": {
 		"speed":1.5,

@@ -17,7 +17,7 @@
 		"converter": [""]
 	},
 	"destroyable": {
-		"hull":15
+		"hull":17
 	},
 	"moving": {
 		"speed":1.5,

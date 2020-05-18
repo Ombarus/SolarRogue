@@ -17,7 +17,7 @@
 		"utility": [""]
 	},
 	"destroyable": {
-		"hull":20
+		"hull":25
 	},
 	"moving": {
 		"speed":0.8,

@@ -18,14 +18,14 @@
 			"data/json/items/weapons/missile_launcher_mk1.json"
 		],
 		"shield": [
-			"data/json/items/shields/shield_mk1.json", 
-			"data/json/items/shields/shield_mk1.json", 
-			"data/json/items/shields/shield_mk1.json"],
+			"data/json/items/shields/shield_mk3.json", 
+			"data/json/items/shields/shield_mk2.json", 
+			""],
 		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
 		"converter": ["data/json/items/converters/converter_mk1.json"]
 	},
 	"destroyable": {
-		"hull":35
+		"hull":40
 	},
 	"moving": {
 		"speed":2.5,

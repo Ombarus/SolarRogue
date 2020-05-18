@@ -10,8 +10,8 @@
 		"shoot": "scenes/tileset_source/railgun_fx.tscn"
 	},
 	"weapon_data": {
-		"base_dam":5.0,
-		"max_dam":8.0,
+		"base_dam":7.0,
+		"max_dam":11.0,
 		"fire_range":3.0,
 		"fire_pattern":"+",
 		"fire_energy_cost":750.0,
