@@ -25,14 +25,14 @@
 		"unequip_ap":3.0
 	},
 	"recyclable": {
-		"energy": 1600,
-		"player_sale_range": [1800,2200],
-		"player_buy_range": [2800,3500]
+		"energy": 1700,
+		"player_sale_range": [2300,3000],
+		"player_buy_range": [3300,5500]
 	},
 	"disassembling": {
 		"produce":"data/json/items/misc/spare_parts.json",
-		"count":2,
-		"energy_cost":700
+		"count":4,
+		"energy_cost":1000
 	},
 	"description": {
 		"text":"A old machine gun with many rotating barrels capable of firing several thousand rounds per seconds. It's a relic from the past but the ability to produce the bullets from scrap metal makes it a very cheap alternative to more advanced weaponery.",

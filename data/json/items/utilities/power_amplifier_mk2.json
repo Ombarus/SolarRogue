@@ -17,9 +17,9 @@
 		"energy_percent":150.0
 	},
 	"recyclable": {
-		"energy": 1000,
-		"player_sale_range": [1100,1300],
-		"player_buy_range": [1400,1800]
+		"energy": 700,
+		"player_sale_range": [1000,1400],
+		"player_buy_range": [1650,2900]
 	},
 	"disassembling": {
 		"produce":"data/json/items/misc/spare_parts.json",

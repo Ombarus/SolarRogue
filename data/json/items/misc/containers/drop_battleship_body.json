@@ -69,7 +69,9 @@
 		]
 	},
 	"recyclable": {
-		"energy": 750
+		"energy": 750,
+		"player_sale_range": [800,1600],
+		"player_buy_range": [1700,2000]
 	},
 	"description": {
 		"text":"The remains of this battleship hull are still in suprisingly good shape. They could be used as a scaffold for a new Battleship.",

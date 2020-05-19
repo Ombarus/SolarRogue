@@ -16,9 +16,9 @@
 		"per_cargo_space":2.0
 	},
 	"recyclable": {
-		"energy": 600,
-		"player_sale_range": [800,1100],
-		"player_buy_range": [1200,1800]
+		"energy": 500,
+		"player_sale_range": [700,1100],
+		"player_buy_range": [1300,1700]
 	},
 	"disassembling": {
 		"produce":"data/json/items/misc/spare_parts.json",

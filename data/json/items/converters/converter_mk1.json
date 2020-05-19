@@ -101,21 +101,28 @@
 			},
 			{
 				"name": "Missile Launcher MK1", 
-				"requirements":[{"type":"energy", "amount":600}, {"type":"spare_parts", "amount":2}], 
+				"requirements":[{"type":"energy", "amount":750}, {"type":"spare_parts", "amount":2}], 
 				"produce":"data/json/items/weapons/missile_launcher_mk1.json",
 				"ap_cost":4.0,
 				"amount":1
 			},
 			{
+				"name": "Laser Turret MK1", 
+				"requirements":[{"type":"energy", "amount":750}, {"type":"spare_parts", "amount":2}], 
+				"produce":"data/json/items/weapons/laser_turret_mk1.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
 				"name": "Gravitic Compactor", 
-				"requirements":[{"type":"energy", "amount":600}, {"type":"spare_parts", "amount":2}], 
+				"requirements":[{"type":"energy", "amount":750}, {"type":"spare_parts", "amount":2}], 
 				"produce":"data/json/items/utilities/gravitic_compactor.json",
 				"ap_cost":4.0,
 				"amount":1
 			},
 			{
 				"name": "Bolt-On Engine", 
-				"requirements":[{"type":"energy", "amount":600}, {"type":"spare_parts", "amount":2}], 
+				"requirements":[{"type":"energy", "amount":750}, {"type":"spare_parts", "amount":2}], 
 				"produce":"data/json/items/utilities/speed_boost.json",
 				"ap_cost":4.0,
 				"amount":1
@@ -129,7 +136,7 @@
 			},
 			{
 				"name": "Long Range Scanner", 
-				"requirements":[{"type":"energy", "amount":800}, {"type":"spare_parts", "amount":3}], 
+				"requirements":[{"type":"energy", "amount":750}, {"type":"spare_parts", "amount":3}], 
 				"produce":"data/json/items/scanners/long_range_scanner_mk1.json",
 				"ap_cost":4.0,
 				"amount":1
@@ -137,9 +144,9 @@
 		]
 	},
 	"recyclable": {
-		"energy": 1000,
-		"player_sale_range": [1200,2000],
-		"player_buy_range": [2000,2500]
+		"energy": 500,
+		"player_sale_range": [700,1100],
+		"player_buy_range": [1300,1700]
 	},
 	"disassembling": {
 		"produce":"data/json/items/misc/spare_parts.json",

@@ -92,7 +92,7 @@
 		{"id":"data/json/items/weapons/depleted_uranium.json", "chance":0.02},
 
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.1},
-		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
 	],
 	"description": {
 		"text":"A warship with mixed armaments generally used for convoy escort and support work. It's full of utility.",

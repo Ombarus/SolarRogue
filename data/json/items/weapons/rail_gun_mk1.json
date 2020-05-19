@@ -26,14 +26,14 @@
 		"unequip_ap":3.0
 	},
 	"recyclable": {
-		"energy": 1250,
-		"player_sale_range": [1400,1800],
-		"player_buy_range": [2200,2700]
+		"energy": 700,
+		"player_sale_range": [925,1300],
+		"player_buy_range": [1550,2600]
 	},
 	"disassembling": {
 		"produce":"data/json/items/misc/spare_parts.json",
-		"count":1,
-		"energy_cost":500
+		"count":2,
+		"energy_cost":700
 	},
 	"description": {
 		"text":"Try Not To Die When Firing This Beast.",

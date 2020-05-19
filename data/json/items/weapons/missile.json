@@ -16,7 +16,7 @@
 	"recyclable": {
 		"energy": 200,
 		"player_sale_range": [225,275],
-		"player_buy_range": [300,400]
+		"player_buy_range": [300,600]
 	},
 	"description": {
 		"text":"Ammo for the Missile Launcher. Missiles have four system components: targeting, flight system, engine, and warhead",

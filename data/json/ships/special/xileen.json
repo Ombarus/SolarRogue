@@ -78,7 +78,7 @@
 		{"id":"data/json/items/weapons/bullet_clip.json", "chance":0.25},
 		{"id":"data/json/items/weapons/bullet_clip.json", "chance":0.25},
 		{"id":"data/json/items/weapons/bullet_clip.json", "chance":0.05},
-		{"id":"data/json/items/weapons/bullet_clip.json", "chance":0.05},
+		{"id":"data/json/items/weapons/bullet_clip.json", "chance":0.05}
 	],
 	"description": {
 		"text":"This ship seem to have been assembled by hand from a wide range of scrap. Whoever did this must have been crazy...",

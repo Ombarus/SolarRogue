@@ -25,14 +25,14 @@
 		"unequip_ap":3.0
 	},
 	"recyclable": {
-		"energy": 1750,
-		"player_sale_range": [2000,2800],
-		"player_buy_range": [3100,4000]
+		"energy": 2000,
+		"player_sale_range": [3000,3700],
+		"player_buy_range": [4000,6500]
 	},
 	"disassembling": {
 		"produce":"data/json/items/misc/spare_parts.json",
-		"count":2,
-		"energy_cost":700
+		"count":5,
+		"energy_cost":1000
 	},
 	"description": {
 		"text":"Unstable Wormhole Generator. So chaotic that it's only mode of opperation is lovingly refered to as 'shoot and pray'",

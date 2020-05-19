@@ -18,9 +18,9 @@
 		"energy_cost_per_hp":22.0
 	},
 	"recyclable": {
-		"energy": 500,
-		"player_sale_range": [700,900],
-		"player_buy_range": [1000,1200]
+		"energy": 400,
+		"player_sale_range": [800,1200],
+		"player_buy_range": [1400,1800]
 	},
 	"disassembling": {
 		"produce":"data/json/items/misc/spare_parts.json",

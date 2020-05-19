@@ -69,9 +69,10 @@
 		]
 	},
 	"recyclable": {
-		"energy": 400
-	}
-},
+		"energy": 400,
+		"player_sale_range": [600,1100],
+		"player_buy_range": [1200,1600]
+	},
 	"description": {
 		"text":"The remains of this Scout hull are still in suprisingly good shape. They could be used as a scaffold for a new Scout.",
 		"Overview": {
@@ -81,3 +82,4 @@
 			]
 		}
 	}
+}

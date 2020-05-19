@@ -20,9 +20,9 @@
 		"detection_bonus":0.06
 	},
 	"recyclable": {
-		"energy": 2500,
-		"player_sale_range": [3000,3200],
-		"player_buy_range": [3500,4000]
+		"energy": 1350,
+		"player_sale_range": [1600,2300],
+		"player_buy_range": [2550,4000]
 	},
 	"disassembling": {
 		"produce":"data/json/items/misc/spare_parts.json",

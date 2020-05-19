@@ -22,9 +22,9 @@
 		"stackable":true
 	},
 	"recyclable": {
-		"energy": 1200,
-		"player_sale_range": [1300,1800],
-		"player_buy_range": [1900,2500]
+		"energy": 500,
+		"player_sale_range": [700,1100],
+		"player_buy_range": [1300,1700]
 	},
 	"description": {
 		"text":"A tiny black hole held in a portable container. Upon release the user will become lost in space.",

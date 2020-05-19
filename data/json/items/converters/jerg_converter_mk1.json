@@ -108,28 +108,28 @@
 			},
 			{
 				"name": "Gravitic Compactor", 
-				"requirements":[{"type":"energy", "amount":600}, {"type":"spare_parts", "amount":2}], 
+				"requirements":[{"type":"energy", "amount":750}, {"type":"spare_parts", "amount":2}], 
 				"produce":"data/json/items/utilities/gravitic_compactor.json",
 				"ap_cost":4.0,
 				"amount":1
 			},
 			{
 				"name": "Twin Bolt-On Engine", 
-				"requirements":[{"type":"energy", "amount":1000}, {"type":"spare_parts", "amount":4}], 
+				"requirements":[{"type":"energy", "amount":900}, {"type":"spare_parts", "amount":4}], 
 				"produce":"data/json/items/utilities/speed_boost_mk2.json",
-				"ap_cost":4.0,
+				"ap_cost":5.0,
 				"amount":1
 			},
 			{
 				"name": "Medium Power Amplifier", 
-				"requirements":[{"type":"energy", "amount":1000}, {"type":"spare_parts", "amount":4}], 
+				"requirements":[{"type":"energy", "amount":900}, {"type":"spare_parts", "amount":4}], 
 				"produce":"data/json/items/utilities/power_amplifier_mk2.json",
 				"ap_cost":5.0,
 				"amount":1
 			},
 			{
 				"name": "Solar Array", 
-				"requirements":[{"type":"energy", "amount":800}, {"type":"spare_parts", "amount":3}], 
+				"requirements":[{"type":"energy", "amount":875}, {"type":"spare_parts", "amount":3}], 
 				"produce":"data/json/items/utilities/solar_array.json",
 				"ap_cost":4.0,
 				"amount":1
@@ -143,30 +143,23 @@
 			},
 			{
 				"name": "Laser Turret MK2", 
-				"requirements":[{"type":"energy", "amount":1000}, {"type":"spare_parts", "amount":4}], 
+				"requirements":[{"type":"energy", "amount":1150}, {"type":"spare_parts", "amount":4}], 
 				"produce":"data/json/items/weapons/laser_turret_mk2.json",
 				"ap_cost":5.0,
 				"amount":1
 			},
 			{
 				"name": "Torpedo Launcher", 
-				"requirements":[{"type":"energy", "amount":800}, {"type":"spare_parts", "amount":3}], 
+				"requirements":[{"type":"energy", "amount":1150}, {"type":"spare_parts", "amount":4}], 
 				"produce":"data/json/items/weapons/torpedo_launcher_mk1.json",
-				"ap_cost":4.0,
-				"amount":1
-			},
-			{
-				"name": "Chaos Ball Generator", 
-				"requirements":[{"type":"energy", "amount":1800}, {"type":"spare_parts", "amount":8}], 
-				"produce":"data/json/items/weapons/chaos_ball_generator.json",
-				"ap_cost":6.0,
+				"ap_cost":5.0,
 				"amount":1
 			},
 			{
 				"name": "Railgun MK2", 
-				"requirements":[{"type":"energy", "amount":1800}, {"type":"spare_parts", "amount":5}], 
+				"requirements":[{"type":"energy", "amount":2500}, {"type":"spare_parts", "amount":10}], 
 				"produce":"data/json/items/weapons/rail_gun_mk2.json",
-				"ap_cost":5.0,
+				"ap_cost":7.0,
 				"amount":1
 			},
 			{
@@ -186,7 +179,7 @@
 		]
 	},
 	"recyclable": {
-		"energy": 2500,
+		"energy": 950,
 		"player_sale_range": [3000,3500],
 		"player_buy_range": [4000,6000]
 	},

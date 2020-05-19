@@ -14,7 +14,7 @@
 	"recyclable": {
 		"energy": 350,
 		"player_sale_range": [375,450],
-		"player_buy_range": [500,700]
+		"player_buy_range": [400,700]
 	},
 	"description": {
 		"text":"Ammo for the Torpedo Launcher. It's massive but it makes even bigger holes !",
