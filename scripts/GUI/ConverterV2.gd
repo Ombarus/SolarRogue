@@ -482,6 +482,10 @@ func _get_idle_turn_energy_cost(num_turn):
 		return 0
 
 func UpdateCraftButton():
+	# We died while crafting and crashed because _obj had been destroyed
+	if not is_instance_valid(_obj) or _obj.get_attrib("destroyable.destroyed", false) == true:
+		return
+	
 	if _current_data["count"] > 0 and (_current_crafting_selected.produce == "energy" or _obj.get_attrib("converter.stored_energy") > _current_data["energy"]):
 		_craft_button.Disabled = false
 	else:
