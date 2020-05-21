@@ -10,8 +10,8 @@
 		"shoot": "scenes/tileset_source/missile_fx.tscn"
 	},
 	"weapon_data": {
-		"base_dam":5.0,
-		"max_dam":8.0,
+		"base_dam":4.0,
+		"max_dam":9.0,
 		"ammo":"data/json/items/weapons/missile.json",
 		"fire_range":1.0,
 		"fire_pattern":"o",

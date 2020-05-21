@@ -11,7 +11,7 @@
 	},
 	"weapon_data": {
 		"base_dam":5.0,
-		"max_dam":30.0,
+		"max_dam":35.0,
 		"fire_range":8.0,
 		"fire_pattern":"*",
 		"fire_energy_cost":850.0,

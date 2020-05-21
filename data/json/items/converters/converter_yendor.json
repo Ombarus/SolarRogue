@@ -84,6 +84,16 @@
 				"amount":1
 			},
 			{
+				"name": "Human Bomber",
+				"requirements":[
+					{"type":"energy", "amount":2000},
+					{"type":"scout_hull", "amount":2}
+				],
+				"produce":"data/json/ships/human/player_bomber.json",
+				"ap_cost":6.0,
+				"amount":1
+			},
+			{
 				"name": "Human Frigate",
 				"requirements":[{"type":"energy", "amount":2500}, {"type":"frigate_hull", "amount":1}], 
 				"produce":"data/json/ships/human/player_frigate.json",

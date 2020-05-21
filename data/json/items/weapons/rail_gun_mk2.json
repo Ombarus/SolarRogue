@@ -10,11 +10,11 @@
 		"shoot": "scenes/tileset_source/railgun_fx.tscn"
 	},
 	"weapon_data": {
-		"base_dam":10.0,
+		"base_dam":11.0,
 		"max_dam":15.0,
 		"fire_range":3.0,
 		"fire_pattern":"+",
-		"fire_energy_cost":900.0,
+		"fire_energy_cost":850.0,
 		"fire_speed":1.0,
 		"shield_penetration":50.0,
 		"ammo":"data/json/items/weapons/depleted_uranium.json"

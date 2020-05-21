@@ -152,6 +152,13 @@
 				"amount":1
 			},
 			{
+				"name": "Railgun MK1", 
+				"requirements":[{"type":"energy", "amount":900}, {"type":"spare_parts", "amount":3}], 
+				"produce":"data/json/items/weapons/rail_gun_mk1.json",
+				"ap_cost":5.0,
+				"amount":1
+			},
+			{
 				"name": "Laser Turret MK2", 
 				"requirements":[{"type":"energy", "amount":1150}, {"type":"spare_parts", "amount":4}], 
 				"produce":"data/json/items/weapons/laser_turret_mk2.json",

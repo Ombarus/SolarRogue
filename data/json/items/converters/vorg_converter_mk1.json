@@ -59,13 +59,6 @@
 				"amount":1
 			},
 			{
-				"name": "Depleted Uranium",
-				"requirements":[{"src":"data/json/items/misc/uranium.json", "amount":1}], 
-				"produce":"data/json/items/weapons/depleted_uranium.json",
-				"ap_cost":2.0,
-				"amount":5
-			},
-			{
 				"name": "Vorg Scout", 
 				"requirements":[
 					{"type":"energy", "amount":1800},

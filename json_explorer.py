@@ -148,18 +148,130 @@ def crafting_report(params):
 	print_as_csv(result)
 	
 	
+def weapon_energy_report(params):
+	#"weapon_data": {
+	#	"base_dam":8.0,
+	#	"max_dam":12.0,
+	#	"fire_range":3.0,
+	#	"fire_pattern":"+",
+	#	"fire_energy_cost":750.0,
+	#	"fire_speed":1.0
+	#},
+	
+	
+	# for each weapon
+		#1. how much energy to fire
+		#2. if ammo, how much energy to produce ammo
+		#3. ap_shot
+		#4. min_dam, max_dam
+	result = [["name_id", "fire_cost", "ammo_cost", "ap", "min_dam", "max_dam", "range"]]
+	for object in params["data"]:
+		name_id = object["name_id"]
+		myprint("processing " + name_id)
+		
+		fire_cost = 0
+		ammo_cost = 0
+		ap_cost = 0
+		min_dam = 0
+		max_dam = 0
+		range = 0
+		has_some_data = False
+		
+		if "weapon_data" in object:
+			weapon_data = object["weapon_data"]
+			has_some_data = True
+			min_dam = weapon_data["base_dam"]
+			max_dam = weapon_data["max_dam"]
+			range = weapon_data["fire_range"]
+			ap_cost = weapon_data["fire_speed"]
+			fire_cost = weapon_data["fire_energy_cost"]
+			if "ammo" in weapon_data:
+				for converter in params["data"]:
+					if "converter" in converter and "recipes" in converter["converter"]:
+						recipes = converter["converter"]["recipes"]
+						for recipe in recipes:
+							produce = clean_path(recipe["produce"])
+							if produce in weapon_data["ammo"]:
+								for req in recipe["requirements"]:
+									if "type" in req and req["type"] == "energy":
+										if ammo_cost > 0 and ammo_cost != req["amount"]:
+											myprint("************ERROR in {}, ammo_cost seen twice ({},{})".format(name_id, str(ammo_cost), str(req["amount"])), 10)
+										ammo_cost = req["amount"]
+				
+		if has_some_data:
+			result.append([
+				name_id, 
+				str(fire_cost), 
+				str(ammo_cost),
+				str(ap_cost),
+				str(min_dam),
+				str(max_dam),
+				str(range)
+			])
+		
+	print_as_csv(result)
+		
+		
+def converter_recipe_report(params):
+	# for each json objects
+		# collect converter & recipes
+		# add column header
+	# for each json objects
+		# check if it is in any converter
+			# if not print warning
+			# if it is, add a row
+	
+	converter_list = []
+	header = ["name_id"]
+	for converter in params["data"]:
+		name_id = converter["name_id"]
+		if "converter" in converter and "recipes" in converter["converter"]:
+			converter_list.append(converter)
+			header.append(name_id)
+			
+	result = [header]
+	for object in params["data"]:
+		name_id = object["name_id"]
+		print("processing " + object["src"])
+		in_any_converter = False
+		row_data = [name_id]
+		for converter in converter_list:
+			recipes = converter["converter"]["recipes"]
+			in_this_converter = False
+			for recipe in recipes:
+				produce = clean_path(recipe["produce"])
+				if produce in object["src"]:
+					print("converter {} : produce {} matches {}".format(converter["name_id"], produce, object["src"]))
+					in_any_converter = True
+					in_this_converter = True
+					row_data.append("O")
+			if not in_this_converter:
+				row_data.append("X")
+		if in_any_converter:
+			result.append(row_data)
+		else:
+			myprint("WARNING: {} not in any converter".format(name_id), 5)
+			
+	print_as_csv(result)		
+	
 		
 def do_actions(actions, params):
 	if "glob_json" in actions:
 		glob_json(params)
 	if "crafting_report" in actions:
 		crafting_report(params)
+	if "weapon_energy_report" in actions:
+		weapon_energy_report(params)
+	if "converter_recipe_report" in actions:
+		converter_recipe_report(params)
 		
 		
 if __name__ == '__main__':
 	actions = [
 		"glob_json",
-		"crafting_report",
+		#"crafting_report",
+		#"weapon_energy_report",
+		"converter_recipe_report",
 		"nothing" # just so I don't need to play with the last ,
 	]
 	params = {

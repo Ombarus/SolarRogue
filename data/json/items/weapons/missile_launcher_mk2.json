@@ -15,7 +15,7 @@
 		"ammo":"data/json/items/weapons/missile.json",
 		"fire_range":2.0,
 		"fire_pattern":"o",
-		"fire_energy_cost":120.0,
+		"fire_energy_cost":200.0,
 		"fire_speed":1.0
 	},
 	"equipment": {
