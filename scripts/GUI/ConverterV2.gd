@@ -409,10 +409,10 @@ func OnMaterialChanged_Callback():
 	
 	var list_data = _material_list.Content
 	var index := 0
-	for list_data in list_data:
-		if missing.size() > index and missing[index].type == "energy":
+	for l_data in list_data:
+		if missing.size() > index and missing[index].has("type") and missing[index].type == "energy":
 			index += 1
-		if "disabled" in list_data and list_data.disabled == true:
+		if "disabled" in l_data and l_data.disabled == true:
 			var name_id := ""
 			var display_name_id := ""
 			if missing.size() > index:
@@ -429,8 +429,8 @@ func OnMaterialChanged_Callback():
 					var d = Globals.LevelLoaderRef.LoadJSON(missing_data.src)
 					name_id = Globals.mytr("Missing%s %s", [missing_count, Globals.mytr(d.name_id)])
 					display_name_id = Globals.mytr("Missing%s %s", [missing_count, Globals.mytr(d.name_id)])
-			list_data.name_id = name_id
-			list_data.display_name_id = display_name_id
+			l_data.name_id = name_id
+			l_data.display_name_id = display_name_id
 			index += 1
 	_material_list.UpdateContent(list_data)
 	

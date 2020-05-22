@@ -19,7 +19,7 @@
 		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
 		"converter": ["data/json/items/converters/converter_mk1.json"],
 		"utility":[
-			"data/json/items/utilities/power_amplifier_mk1.json"
+			"data/json/items/utilities/power_amplifier.json"
 		]
 	},
 	"destroyable": {
