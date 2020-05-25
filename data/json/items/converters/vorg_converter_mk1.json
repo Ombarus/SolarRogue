@@ -148,7 +148,7 @@
 			},
 			{
 				"name": "Missile Launcher MK3", 
-				"requirements":[{"type":"energy", "amount":1500}, {"type":"spare_parts", "amount":6}], 
+				"requirements":[{"type":"energy", "amount":1500}, {"type":"spare_parts", "amount":10}], 
 				"produce":"data/json/items/weapons/missile_launcher_mk3.json",
 				"ap_cost":6.0,
 				"amount":1

@@ -60,4 +60,3 @@ modified_attributes = {
 }
 
 [node name="shuttle3" parent="scout2" instance=ExtResource( 3 )]
-
