@@ -615,6 +615,7 @@ func _unhandled_input(event):
 					return
 					
 				# goto click pos
+				
 				var ai_data = {
 					"aggressive":false,
 					"pathfinding":"simple",
