@@ -1,5 +1,6 @@
 extends Node
 
+
 func _ready():
 	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
 	BehaviorEvents.connect("OnConsumeItem", self, "OnConsumeItem_Callback")

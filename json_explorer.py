@@ -85,6 +85,7 @@ def crafting_report(params):
 	#},
 	
 	result = [["name_id", "recyclable_energy", "sale_range", "buy_range", "disassemble_parts", "disassemble_cost", "ap_cost", "energy_cost", "spare_parts_cost"]]
+	
 	for object in params["data"]:
 		name_id = object["name_id"]
 		has_some_data = False
@@ -160,10 +161,11 @@ def weapon_energy_report(params):
 	
 	
 	# for each weapon
-		#1. how much energy to fire
-		#2. if ammo, how much energy to produce ammo
-		#3. ap_shot
-		#4. min_dam, max_dam
+	#1. how much energy to fire
+	#2. if ammo, how much energy to produce ammo
+	#3. ap_shot
+	#4. min_dam, max_dam
+	
 	result = [["name_id", "fire_cost", "ammo_cost", "ap", "min_dam", "max_dam", "range"]]
 	for object in params["data"]:
 		name_id = object["name_id"]
@@ -270,8 +272,8 @@ if __name__ == '__main__':
 	actions = [
 		"glob_json",
 		#"crafting_report",
-		#"weapon_energy_report",
-		"converter_recipe_report",
+		"weapon_energy_report",
+		#"converter_recipe_report",
 		"nothing" # just so I don't need to play with the last ,
 	]
 	params = {

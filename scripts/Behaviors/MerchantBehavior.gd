@@ -4,12 +4,24 @@ extends Node
 func _ready():
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 	BehaviorEvents.connect("OnObjectDestroyed", self, "OnObjectDestroyed_Callback")
+	BehaviorEvents.connect("OnStatusChanged", self, "OnStatusChanged_Callback")
+
+func OnStatusChanged_Callback(obj):
+	if obj.get_attrib("ai.aggressive", false) == false:
+		return
+		
+	var ports : Array = obj.get_attrib("merchant.port_ref", [])
+	for port in ports:
+		var port_obj : Attributes = Globals.LevelLoaderRef.GetObjectById(port)
+		BehaviorEvents.emit_signal("OnRequestObjectUnload", port_obj)
+	obj.set_attrib("merchant.port_ref", [])
 
 func OnObjectDestroyed_Callback(target):
 	var ports : Array = target.get_attrib("merchant.port_ref", [])
 	for port in ports:
 		var obj : Attributes = Globals.LevelLoaderRef.GetObjectById(port)
 		BehaviorEvents.emit_signal("OnRequestObjectUnload", obj)
+	target.set_attrib("merchant.port_ref", [])
 	
 
 func OnObjectLoaded_Callback(obj):

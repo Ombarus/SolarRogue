@@ -10,7 +10,7 @@
 	"mounts": {
 		"weapon": ["data/json/items/weapons/laser_turret_mk2.json"],
 		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
-		"utility": ["data/json/items/utilities/power_amplifier_mk3.json"]
+		"utility": ["data/json/items/utilities/speed_boost_mk2.json"]
 	},
 	"animation": {
 		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
@@ -27,7 +27,8 @@
 		"aggressive":false,
 		"pathfinding":"merchant",
 		"run_if_attacked":true,
-		"hit_chance":0.9
+		"hit_chance":0.9,
+		"stop_running_after":17
 	},
 	"merchant": {
 		"trade_ports":[[-1,0]],

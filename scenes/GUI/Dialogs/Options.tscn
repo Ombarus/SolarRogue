@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/GUI/Options.gd" type="Script" id=1]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/GUI/InputConsumer.gd" type="Script" id=5]
 
 [node name="Options" type="Control"]
 anchor_right = 1.0
@@ -17,6 +18,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 2 )
+script = ExtResource( 5 )
 
 [node name="base" parent="." instance=ExtResource( 3 )]
 anchor_left = 0.5

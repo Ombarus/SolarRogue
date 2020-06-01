@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/GUI/Settings.gd" type="Script" id=1]
 [ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://data/theme/header_ui_text.tres" type="Theme" id=4]
 [ext_resource path="res://data/styles/settings_bg_light.tres" type="StyleBox" id=5]
 [ext_resource path="res://data/styles/settings_bg_dark.tres" type="StyleBox" id=6]
+[ext_resource path="res://scripts/GUI/InputConsumer.gd" type="Script" id=7]
 
 [node name="Settings" type="Control"]
 anchor_right = 1.0
@@ -20,6 +21,7 @@ margin_top = -2.13022
 margin_right = -2.45557
 margin_bottom = -2.13019
 custom_styles/panel = ExtResource( 2 )
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
