@@ -431,3 +431,36 @@ Status,Status,Status,状況
 Crew Roster,Crew Roster,Équipage,クルー
 Captain's Log,Captain's Log,Journal de bord,Captain's Log
 c[r]ew,c[r]ew,[r]équipage,[r]クルー
+Depleted Uranium,Depleted Uranium,Uranium Appauvri,劣化ウラン
+Ammo for the Railgun. 68.4% denser then lead and accelerated at a fraction of the speed of light it can penetrate anything.,Ammo for the Railgun. 68.4% denser then lead and accelerated at a fraction of the speed of light it can penetrate anything.,Munition pour le Railgun. 68.4% plus dense que le plomb et accéléré à une fraction importante de la vitesse de la lumière cet obus perce les boucliers sans problème.,Ammo for the Railgun. 68.4% denser then lead and accelerated at a fraction of the speed of light it can penetrate anything.
+Mining Laser,Mining Laser,Laser Minier,Mining Laser
+A laser combined with a tractor beam that can drastically increase the chance of getting useful material from planets.,A laser combined with a tractor beam that can drastically increase the chance of getting useful material from planets.,Un laser combiné à un rayon tracteur. Augmente sensiblement les chances d’obtenir des matériaux utiles lors de bombardement planétaire.,A laser combined with a tractor beam that can drastically increase the chance of getting useful material from planets.
+Drop Bonus {weapon_data.planet_bonus},Drop Bonus {weapon_data.planet_bonus},Bonus {weapon_data.planet_bonus},ボーナス {weapon_data.planet_bonus}
+Railgun MK1,Railgun MK1,Railgun v1,Railgun MK1
+Try Not To Die When Firing This Beast.,Try Not To Die When Firing This Beast.,Try Not To Die When Firing This Beast.,Try Not To Die When Firing This Beast.
+Shield Penetration {weapon_data.shield_penetration}%,Shield Penetration {weapon_data.shield_penetration}%,Pénétration Bouclier {weapon_data.shield_penetration}%,Shield Penetration {weapon_data.shield_penetration}%
+Railgun MK2,Railgun MK2,Railgun v2,Railgun MK2
+Try Not To Die When Firing This Even Bigger Beast.,Try Not To Die When Firing This Even Bigger Beast.,Try Not To Die When Firing This Even Bigger Beast.,Try Not To Die When Firing This Even Bigger Beast.
+[center]Buy[/center],[center]Buy[/center],[center]Acheter[/center],[center]購入[/center]
+< Buy,< Buy,< Acheter,< 購入
+Sell >,Sell >,Vendre >,売る >
+Select 'Comm' to open a trading console,Select 'Comm' to open a trading console,Clicker 'Comm' pour ouvrir le magasin,Select 'Comm' to open a trading console
+co[m]m,co[m]m,co[m]m,co[m]m
+Selling,Selling,Vendre,Selling
+Buying,Buying,Acheter,Buying
+Bolt-on Engine,Bolt-on Engine,Réacteur en Kit,Bolt-on Engine
+Don't bother fighting. You'll just die young. Run away at the cost of energy.,Don't bother fighting. You'll just die young. Run away at the cost of energy.,Pourquoi combattre et mourir quand vous pouvez dépenser un peu d’énergie pour vous sauver plus vite?,Don't bother fighting. You'll just die young. Run away at the cost of energy.
+Move Energy Cost,Move Energy Cost,Coût en Énergie,Move Energy Cost
+Twin Bolt-on Engine,Twin Bolt-on Engine,Double Réacteur en Kit,Twin Bolt-on Engine
+Emergency Warp,Emergency Warp,Saut d’urgence,Emergency Warp
+A tiny black hole held in a portable container. Upon release the user will become lost in space.,A tiny black hole held in a portable container. Upon release the user will become lost in space.,Un mini trou noir suspendu dans une boîte portative. Sortez le de sa boîte en cas d’urgence pour rapidement devenir perdu dans l’espace.,A tiny black hole held in a portable container. Upon release the user will become lost in space.
+A Human Merchant,A Human Merchant,Un Marchand Humain,A Human Merchant
+A battleship part of the human trader guild.,A battleship part of the human trader guild.,Un Cuirassé faisant parti de la marine marchande.,A battleship part of the human trader guild.
+A Junkyard,A Junkyard,Un ferrailleur,A Junkyard
+"This planet is surrounded by left over junk, debris and dead satellites. Moon-sized signs announces : 'your junk is our treasure'","This planet is surrounded by left over junk, debris and dead satellites. Moon-sized signs announces : 'your junk is our treasure'",Cette planète est entouré de débris en toute sorte. Des signes de la taille démentiels annoncent ‘Vos déchets sont notre trésors’.,"This planet is surrounded by left over junk, debris and dead satellites. Moon-sized signs announces : 'your junk is our treasure'"
+duh,duh,À ton avis?,duh
+The Galaxy Outfitter,The Galaxy Outfitter,La Pourvoirie Galactique,The Galaxy Outfitter
+This frigate advertises itself as the 'Galaxy Outfitter'.,This frigate advertises itself as the 'Galaxy Outfitter'.,Cette frégate s’annonce comme étant ‘La Pourvoirie Galactique’.,This frigate advertises itself as the 'Galaxy Outfitter'.
+Trader Joe,Trader Bob,Le marchand louche,Trader Bob
+This shady looking ship promises the 'best deals',This shady looking ship promises the 'best deals',Un vaisseau douteux qui vous promet ‘les meilleures aubaines’,This shady looking ship promises the 'best deals'
+A Weapons Dealer,A Weapons Dealer,Marchand D’armes,A Weapons Dealer

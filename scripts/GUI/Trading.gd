@@ -298,7 +298,7 @@ func UpdateVisibility():
 	if cur_energy < 1001:
 		energy_color = "red"
 		
-	var energy_str : String = "[center]Available Energy.. [color=%s]%.f[/color][/center]" % [energy_color, cur_energy]
+	var energy_str : String = "[center]%s [color=%s]%.f[/color][/center]" % [Globals.mytr("Available Energy.."), energy_color, cur_energy]
 	_energy_status.bbcode_text = energy_str
 	
 	if selected_item == null or selected_item.src.empty() == true or selected_item["count"] <= 0:
@@ -323,11 +323,11 @@ func UpdateVisibility():
 		var total_price = selected_item["count"] * unit_price
 		if selling == true:
 			_info_card.title = "Selling"
-			_item_price.bbcode_text = "[color=lime]+%d Energy[/color]" % total_price
+			_item_price.bbcode_text = "[color=lime]+%d %s[/color]" % [total_price, Globals.mytr("Energy")]
 			_sale_btn.Disabled = unit_price <= 0 # some items cannot be sold (like the converter of yendor)
 		else:
 			_info_card.title = "Buying"
-			_item_price.bbcode_text = "[color=red]-%d Energy[/color]" % total_price
+			_item_price.bbcode_text = "[color=red]-%d %s[/color]" % [total_price, Globals.mytr("Energy")]
 			_buy_btn.Disabled = cur_energy <= total_price
 		_item_count.text = "%dx " % selected_item["count"]
 		_item_name.bbcode_text = "%s" % [Globals.mytr(selected_item["name_id"])]
