@@ -4,32 +4,6 @@ func _ready():
 	#BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
 	BehaviorEvents.connect("OnConsumeItem", self, "OnConsumeItem_Callback")
 	
-	
-#func OnObjTurn_Callback(obj):
-#	var teleport_data = obj.get_attrib("consumable.teleport")
-#	if teleport_data == null:
-#		return
-#
-#	var finished = []
-#	var index = 0
-#	for active_item in teleport_data:
-#		var item_data = Globals.LevelLoaderRef.LoadJSON(active_item.data)
-#		active_item = _process_healing(obj, active_item, item_data)
-#		var turn_since_beginning = active_item.last_turn_update - active_item.first_turn
-#		if item_data.hull_regen.duration >= 0 and turn_since_beginning >= item_data.hull_regen.duration:
-#			finished.push_back(index)
-#		index += 1
-#
-#	if finished.size() == regen_data.size():
-#		obj.modified_attributes.consumable.erase("hull_regen")
-#	else:
-#		for index in finished:
-#			regen_data.remove(index)
-#		# probably not needed if array is passed as ref... just in case
-#		obj.set_attrib("consumable.hull_regen", regen_data)
-	
-	#TODO: do the same thing in consume event in case consumable last only 1 turn
-		
 
 func _process_teleport(obj, data, item_data):
 	if not "last_turn_update" in data:

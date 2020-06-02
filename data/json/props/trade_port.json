@@ -2,5 +2,8 @@
 	"name_id":"Trade Port",
 	"type":"trade_port",
 	"sprite":"trade_icon",
-	"no_ghost":false
+	"no_ghost":false,
+	"description": {
+		"text":"A docking port for trading goods. Bring your ship over and open a communication channel."
+	}
 }

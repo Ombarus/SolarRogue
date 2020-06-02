@@ -241,7 +241,7 @@ func GenerateContent(list_node, mounts, cargo, skip_mount : bool):
 				index += 1
 		mount_content.push_back({"src":"", "name_id":"Cargo Contents", "equipped":false, "header":true})
 	else:
-		mount_content.push_back({"src":"", "name_id":"For sale, good deals!", "equipped":false, "header":true})
+		mount_content.push_back({"src":"", "name_id":"SALE_PITCH", "equipped":false, "header":true})
 	for row in cargo:
 		var data = Globals.LevelLoaderRef.LoadJSON(row.src)
 		#var counting = ""

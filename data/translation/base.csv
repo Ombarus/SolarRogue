@@ -137,6 +137,7 @@ Matter-to-Energy Converter MK2,Matter-to-Energy Converter MK2,Convertisseur d’
 Converter of Yendor,Converter of Yendor,Convertisseur de Yendor,Convertisseur de Yendor
 A Jerg Matter-to-Energy Converter,A Jerg Matter-to-Energy Converter,Convertisseur Jerg,Convertisseur Jerg
 A Vorg Matter-to-Energy Converter,A Vorg Matter-to-Energy Converter,Convertisseur Vorg,Convertisseur Vorg
+Military Grade Converter,Military Grade Converter,Convertisseur Militaire,Military Grade Converter
 A Battleship Hull Relic,A Battleship Hull Relic,Coque de Cuirassé,Coque de Cuirassé
 A Frigate Hull Relic,A Frigate Hull Relic,Coque de Frégate,Coque de Frégate
 Probe Hull Relic,Probe Hull Relic,Coque de Sonde,Coque de Sonde
@@ -168,6 +169,7 @@ Missile Launcher MK2,Missile Launcher MK2,Lance-Missile v2,Missile Launcher MK2
 Missile Launcher MK3,Missile Launcher MK3,Lance-Missile v3,Missile Launcher MK3
 Torpedo,Torpedo,Torpille,魚雷
 Torpedo Launcher MK1,Torpedo Launcher MK1,Lance-Torpilles v1,Torpedo Launcher MK1
+Torpedo Launcher,Torpedo Launcher,Lance-Torpilles,Torpedo Launcher
 Wormhole,Wormhole,Trou Noir,ブラックホール
 Unknown Object,Unknown Object,Object Inconnu,知らない物
 A Human Battleship,A Human Battleship,Un Cuirassé Humain,A Human Battleship
@@ -464,3 +466,7 @@ This frigate advertises itself as the 'Galaxy Outfitter'.,This frigate advertise
 Trader Joe,Trader Bob,Le marchand louche,Trader Bob
 This shady looking ship promises the 'best deals',This shady looking ship promises the 'best deals',Un vaisseau douteux qui vous promet ‘les meilleures aubaines’,This shady looking ship promises the 'best deals'
 A Weapons Dealer,A Weapons Dealer,Marchand D’armes,A Weapons Dealer
+[color=yellow]You are transported somewhere![/color],[color=yellow]You are transported somewhere![/color],[color=yellow]Vous êtes transporté quelque part![/color],[color=yellow]You are transported somewhere![/color]
+Trade Port,Trade Port,Amarre Marchande,Trade Port
+A docking port for trading goods. Bring your ship over and open a communication channel.,A docking port for trading goods. Bring your ship over and open a communication channel.,Une amarre pour le troque. Accostez le vaisseau à l’amarre et ouvrez une ligne de communication.,A docking port for trading goods. Bring your ship over and open a communication channel.
+SALE_PITCH,"For sale, good deals!","À vendre, Aubaines!","For sale, good deals!"
