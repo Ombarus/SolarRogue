@@ -219,7 +219,7 @@
 				"amount":1
 			},
 			{
-				"name": "Twin Bolt-On Engine", 
+				"name": "Twin Bolt-on Engine", 
 				"requirements":[{"type":"energy", "amount":900}, {"type":"spare_parts", "amount":4}], 
 				"produce":"data/json/items/utilities/speed_boost_mk2.json",
 				"ap_cost":5.0,

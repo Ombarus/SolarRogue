@@ -192,15 +192,20 @@ Transfer Where ?,Transfer Where ?,Transférer où ?,どこ？
 No information available,No information available,Information Manquante,空
 consumable,consumable,consommation,消耗品 
 converter,converter,convertisseur,converter
+Converter,Converter,Convertisseur,Converter
 battleship_hull,battleship hull,coque de cuirassé,battleship hull
 frigate_hull,frigate hull,coque de frégate,frigate hull
 probe_hull,probe hull,coque de sonde,probe hull
 scout_hull,scout hull,coque d’éclaireur,scout hull
 food,energy source,source d’énergie,エネルギー用
 scanner,scanner,radar,スキャナー
-shield,shield,bouclier,盾 
+Scanner,Scanner,Radar,スキャナー
+shield,shield,bouclier,盾
+Shield,Shield,Bouclier,盾
 utility,utility,accessoire,付き物
+Utility,Utility,Accessoire,付き物
 weapon,weapon,armement,武器
+Weapon,Weapon,Armement,武器
 ammo,ammo,munition,弾薬 
 wormhole,wormhole,trou noir,ワームホール
 prop,prop,prop,prop
@@ -470,3 +475,11 @@ A Weapons Dealer,A Weapons Dealer,Marchand D’armes,A Weapons Dealer
 Trade Port,Trade Port,Amarre Marchande,Trade Port
 A docking port for trading goods. Bring your ship over and open a communication channel.,A docking port for trading goods. Bring your ship over and open a communication channel.,Une amarre pour le troque. Accostez le vaisseau à l’amarre et ouvrez une ligne de communication.,A docking port for trading goods. Bring your ship over and open a communication channel.
 SALE_PITCH,"For sale, good deals!","À vendre, Aubaines!","For sale, good deals!"
+A strong energy signature emanate from the planet surface. There seems to be a ancient structure there generating imense pulses of radiations into the solar system.,A strong energy signature emanate from the planet surface. There seems to be a ancient structure there generating imense pulses of radiations into the solar system.,Cette planète émet des signaux énergétiques puissant. Les vagues de radiations qui couvre le système semblent émaner d’une ancienne structure sur la surface.,A strong energy signature emanate from the planet surface. There seems to be a ancient structure there generating imense pulses of radiations into the solar system.
+spare_parts,Spare Parts,Pièces Détachées,Spare Parts
+EPITAPH_VISITED,You visited:\n %d solar systems,Tu as visité:\n %d systèmes,You visited:\n %d solar systems
+Difficulty: %d,Difficulty: %d,Difficulté: %d,難易: %d
+EPITAPH_SCORE,Final Score:,Pointage Final:,Final Score:
+The crew of the,The crew of the,L'équipage du,The crew of the
+Sadly left behind:,Sadly left behind:,Ont abandonné:,Sadly left behind:
+Did not leave anyone behind!,Did not leave anyone behind!,N'a abandonné personne!,Did not leave anyone behind!

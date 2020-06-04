@@ -19,7 +19,7 @@ func OnPlayerDeath_Callback():
 	var result = null
 	if game_won != null and game_won == true:
 		message_success += Globals.mytr("SUCCESS_CONGRATS")
-		message_v2 += "[center]The crew of the \n" + player_name + ":\n"
+		message_v2 += "[center]%s \n%s:\n" % [Globals.mytr("The crew of the"), player_name]
 		message_v2 += _crew_message(player)
 		result = PermSave.END_GAME_STATE.won
 	elif player.get_attrib("destroyable.current_hull", 1) <= 0:
@@ -34,14 +34,14 @@ func OnPlayerDeath_Callback():
 		result = PermSave.END_GAME_STATE.suicide
 	if game_won == null or game_won == false:
 		message_v2 += "\n" + Globals.mytr("on the %dth wormhole", [cur_level+1])
-	message_v2 += "\n" + Globals.mytr("You visited:\n %d solar systems", [Globals.LevelLoaderRef.num_generated_level])
+	message_v2 += "\n" + Globals.mytr("EPITAPH_VISITED", [Globals.LevelLoaderRef.num_generated_level])
 	var lowest_diff = player.get_attrib("lowest_diff")
 	lowest_diff += 1
 	message_v2 += "\n\n" + Globals.mytr("Difficulty: %d", [lowest_diff])
 		
 	var score = CalculateScore(player, game_won)
 	update_leaderboard(player, score, result)
-	message_v2 += "\n\nFinal Score:\n%d" % score
+	message_v2 += "\n\n%s\n%d" % [Globals.mytr("EPITAPH_SCORE"), score]
 	if game_won != null and game_won == true:
 		message_v2 += "[/center]"
 	var death_screen_data = {
@@ -150,10 +150,10 @@ func _crew_message(player : Attributes) -> String:
 	final_text += PoolStringArray(victory_crew).join(", ")
 	final_text += "\n\n"
 	if failed_crew.size() > 0:
-		final_text += "Sadly left behind:\n"
-		final_text += "[color=red]%s[/color]" % [PoolStringArray(failed_crew).join(", ")]
+		final_text += Globals.mytr("Sadly left behind:")
+		final_text += "\n[color=red]%s[/color]" % [PoolStringArray(failed_crew).join(", ")]
 	else:
-		final_text += "Did not leave anyone behind!"
+		final_text += Globals.mytr("Did not leave anyone behind!")
 	final_text += "\n"
 	
 	return final_text

@@ -117,7 +117,7 @@
 				"amount":1
 			},
 			{
-				"name": "Bolt-On Engine", 
+				"name": "Bolt-on Engine", 
 				"requirements":[{"type":"energy", "amount":750}, {"type":"spare_parts", "amount":2}], 
 				"produce":"data/json/items/utilities/speed_boost.json",
 				"ap_cost":4.0,

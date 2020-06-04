@@ -207,7 +207,7 @@ func UpdateMaterialsList(recipe_data):
 			list_data.push_front({"display_name_id":Globals.mytr("Missing%s %s", [missing_count, Globals.mytr(require.type)]), "name_id": Globals.mytr("Missing%s %s", [missing_count, Globals.mytr(require.type)]), "disabled":true, "max":require.amount})
 		elif "src" in require:
 			var d = Globals.LevelLoaderRef.LoadJSON(require.src)
-			list_data.push_back({"display_name_id":Globals.mytr("Missing%s %s", [missing_count, Globals.mytr(d.name_id)]), "name_id":Globals.mytr("Missing%s %s", [missing_count, Globals.mytr(d.name_id)]), "disabled":true, "max":require.amount})
+			list_data.push_front({"display_name_id":Globals.mytr("Missing%s %s", [missing_count, Globals.mytr(d.name_id)]), "name_id":Globals.mytr("Missing%s %s", [missing_count, Globals.mytr(d.name_id)]), "disabled":true, "max":require.amount})
 	
 	_material_list.Content = list_data
 	
