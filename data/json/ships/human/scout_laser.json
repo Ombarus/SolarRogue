@@ -22,7 +22,7 @@
 	},
 	"drop_on_death": [
 	
-		{"id":"data/json/items/converters/converter_mk2.json", "chance":0.006666666667},
+		{"id":"data/json/items/converters/converter_mk2.json", "chance":0.05},
 		{"id":"data/json/items/converters/converter_mk3.json", "chance":0.01},
 		{"id":"data/json/items/converters/jerg_converter_mk1.json", "chance":0.0005},
 		{"id":"data/json/items/converters/vorg_converter_mk1.json", "chance":0.0005},

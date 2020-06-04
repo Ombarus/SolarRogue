@@ -23,7 +23,7 @@
 	"drop_on_death": [
 	
 	
-		{"id":"data/json/items/converters/converter_mk2.json", "chance":0.006666666667},
+		{"id":"data/json/items/converters/converter_mk2.json", "chance":0.015},
 		{"id":"data/json/items/converters/jerg_converter_mk1.json", "chance":0.0005},
 		{"id":"data/json/items/converters/vorg_converter_mk1.json", "chance":0.0005},
 		{"id":"data/json/items/misc/battleship_body.json", "chance":0.0},
@@ -38,7 +38,11 @@
 		{"id":"data/json/items/weapons/missile_launcher_mk1.json", "chance":0.03846153846},
 		{"id":"data/json/items/weapons/mining_laser.json", "chance":0.0},
 		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.0},
+		{"id":"data/json/items/weapons/missile.json", "chance":0.4},
 		{"id":"data/json/items/weapons/missile.json", "chance":0.2},
+		{"id":"data/json/items/weapons/missile.json", "chance":0.2},
+		{"id":"data/json/items/weapons/missile.json", "chance":0.1},
+		{"id":"data/json/items/weapons/missile.json", "chance":0.02},
 		{"id":"data/json/items/consumables/repair_nanobots.json", "chance":0.01},
 		{"id":"data/json/items/consumables/emergency_warp.json", "chance":0.01},
 		

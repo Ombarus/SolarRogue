@@ -25,8 +25,8 @@
 		
 		{"name":"data/json/items/misc/containers/drop_probe_body.json", "spawn_rate":0.0000625, "max":2},
 		{"name":"data/json/items/misc/containers/drop_scout_body.json", "spawn_rate":0.0000625, "max":2},
-		{"name":"data/json/items/misc/containers/drop_frigate_body.json", "spawn_rate":0.0000625, "max":2},
-		{"name":"data/json/items/misc/containers/drop_battleship_body.json", "spawn_rate":0.0000625, "max":1},
+		{"name":"data/json/items/misc/containers/drop_frigate_body.json", "spawn_rate":0.0000390625, "max":2},
+		{"name":"data/json/items/misc/containers/drop_battleship_body.json", "spawn_rate":0.000015625, "max":1},
 		
 		{"name":"data/json/items/converters/converter_mk2.json", "spawn_rate":0.00003125},
 		{"name":"data/json/items/converters/converter_mk3.json", "spawn_rate":0.00001125},
