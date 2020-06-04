@@ -242,9 +242,10 @@ func Init(init_param):
 		var counting = ""
 		if row.count > 1:
 			counting = str(row.count) + "x "
+		var icon_data = data.icon
 		if typeof(data.icon) == TYPE_ARRAY:
-			data.icon = data.icon[0]
-		cargo_item_by_category[cat].push_back({"src":row.src, "count":row.count, "display_name_id": counting + Globals.mytr(data.name_id), "name_id": counting + Globals.mytr(data.name_id), "equipped":false, "header":false, "icon":data.icon})
+			icon_data = data.icon[0]
+		cargo_item_by_category[cat].push_back({"src":row.src, "count":row.count, "display_name_id": counting + Globals.mytr(data.name_id), "name_id": counting + Globals.mytr(data.name_id), "equipped":false, "header":false, "icon":icon_data})
 		
 	keys = cargo_item_by_category.keys()
 	keys.sort_custom(self, "sort_categories")

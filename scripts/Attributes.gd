@@ -105,7 +105,7 @@ func init_cargo():
 		return
 	
 	modified_attributes["cargo"] = {}
-	modified_attributes.cargo["content"] = base_attributes.cargo.content
+	modified_attributes.cargo["content"] = str2var(var2str(base_attributes.cargo.content))
 	modified_attributes.cargo["volume_used"] = 0
 	for item in modified_attributes.cargo.content:
 		var item_data = Globals.LevelLoaderRef.LoadJSON(item.src)
@@ -117,7 +117,7 @@ func init_mounts():
 		return
 		
 	#TODO: this is just going to create a reference isn't ? Might cause issues if I start caching baseattributes
-	modified_attributes["mounts"] = base_attributes.mounts
+	modified_attributes["mounts"] = str2var(var2str(base_attributes.mounts))
 
 func _ready():
 	if PreloadData == null or PreloadData.empty():

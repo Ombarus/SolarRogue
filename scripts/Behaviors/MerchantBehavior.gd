@@ -11,6 +11,9 @@ func OnStatusChanged_Callback(obj):
 		return
 		
 	var ports : Array = obj.get_attrib("merchant.port_ref", [])
+	if ports.empty() == true:
+		return
+		
 	for port in ports:
 		var port_obj : Attributes = Globals.LevelLoaderRef.GetObjectById(port)
 		BehaviorEvents.emit_signal("OnRequestObjectUnload", port_obj)
@@ -18,6 +21,9 @@ func OnStatusChanged_Callback(obj):
 
 func OnObjectDestroyed_Callback(target):
 	var ports : Array = target.get_attrib("merchant.port_ref", [])
+	if ports.empty() == true:
+		return
+		
 	for port in ports:
 		var obj : Attributes = Globals.LevelLoaderRef.GetObjectById(port)
 		BehaviorEvents.emit_signal("OnRequestObjectUnload", obj)
@@ -26,7 +32,7 @@ func OnObjectDestroyed_Callback(target):
 
 func OnObjectLoaded_Callback(obj):
 	var merchant_data : Dictionary = obj.get_attrib("merchant", {})
-	if merchant_data.empty() == true:
+	if merchant_data.empty() == true or not "trade_ports" in merchant_data:
 		return
 		
 	# loading a save, the objects will be loaded from the save

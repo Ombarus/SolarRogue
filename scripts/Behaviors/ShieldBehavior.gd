@@ -71,7 +71,7 @@ func OnMountAdded_Callback(obj, slot, src):
 		return
 	
 	#TODO: be careful here. What if we had more than one shield and it hasn't been updated ?
-	var data = Globals.LevelLoaderRef.LoadJSON(src)
+	#var data = Globals.LevelLoaderRef.LoadJSON(src)
 	obj.set_attrib("shield.last_turn_update", Globals.total_turn)
 	
 func OnMountRemoved_Callback(obj, slot, src):

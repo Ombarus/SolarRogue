@@ -209,11 +209,11 @@ func OnScannerUpdated_Callback(obj):
 			o.set_attrib("is_fake_ghost_memory", true)
 	
 	if unkown_objs != null:
-		var all_visible = _playerNode.get_attrib("scanner_result.cur_in_range." + level_id, [])
+		#var all_visible = _playerNode.get_attrib("scanner_result.cur_in_range." + level_id, [])
 		for id in unkown_objs:
 			var o = Globals.LevelLoaderRef.GetObjectById(id)
 			
-			if o != null and not id in all_visible and o.get_attrib("ghost_memory") == null:
+			if o != null and o.visible == false and o.get_attrib("ghost_memory") == null:
 				if o.get_attrib("has_ghost_memory") != null:
 					var ghost_id = o.get_attrib("has_ghost_memory.reference_id")
 					var ghost = Globals.LevelLoaderRef.GetObjectById(ghost_id)
@@ -229,11 +229,11 @@ func OnScannerUpdated_Callback(obj):
 					o.set_attrib("has_ghost_memory.reference_id", n.get_attrib("unique_id"))
 	
 	if unkown_objs2 != null:
-		var all_visible = _playerNode.get_attrib("scanner_result.cur_in_range." + level_id, [])
+		#var all_visible = _playerNode.get_attrib("scanner_result.cur_in_range." + level_id, [])
 		for id in unkown_objs2:
 			var o = Globals.LevelLoaderRef.GetObjectById(id)
 			
-			if o != null and not id in all_visible and o.get_attrib("ghost_memory") == null:
+			if o != null and o.visible == false and o.get_attrib("ghost_memory") == null:
 				if o.get_attrib("has_ghost_memory") != null:
 					var ghost_id = o.get_attrib("has_ghost_memory.reference_id")
 					var ghost = Globals.LevelLoaderRef.GetObjectById(ghost_id)

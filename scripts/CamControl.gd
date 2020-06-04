@@ -66,6 +66,9 @@ func _unhandled_input(event):
 	if event is InputEventScreenTouch and event.pressed == false:
 		_touches.erase(event.index)
 	if event is InputEventScreenDrag:
+		# if drag started on a button and the player dragged outside the button we won't get a ScreenTouch
+		if not event.index in _touches:
+			_touches[event.index] = {"start":event, "current":event}
 		_touches[event.index]["current"] = event
 		#update_pinch_gesture()
 

@@ -70,8 +70,8 @@ func GetLevelID():
 
 func _ready():
 	if _TEST_MID_GAME == true:
-		startLevel = "data/json/levels/main/main03.json"
-		current_depth = 3
+		startLevel = "data/json/levels/human_branch/branch04.json"
+		current_depth = 4
 	Globals.LevelLoaderRef = self
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
 	BehaviorEvents.connect("OnRequestLevelChange", self, "OnRequestLevelChange_Callback")
@@ -480,6 +480,10 @@ func LoadJSON(filepath):
 	var file = File.new()
 	if not "res://" in filepath and not "user://" in filepath:
 		filepath = "res://" + filepath
+	
+	if filepath in Preloader.JsonCache:
+		return Preloader.JsonCache[filepath]
+	
 	file.open(filepath, file.READ)
 	var text = file.get_as_text()
 	var result_json = JSON.parse(text)
@@ -496,6 +500,7 @@ func LoadJSON(filepath):
 	
 	if data != null:
 		data["src"] = filepath
+		Preloader.JsonCache[filepath] = data
 	return data
 	
 func LoadJSONArray(filepaths):

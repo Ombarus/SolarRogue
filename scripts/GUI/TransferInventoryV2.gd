@@ -312,9 +312,10 @@ func GenerateContent(list_node, mounts, cargo):
 		var counting = ""
 		if row.count > 1:
 			counting = str(row.count) + "x "
+		var icon_data = data.icon
 		if typeof(data.icon) == TYPE_ARRAY:
-			data.icon = data.icon[0]
-		mount_content.push_back({"src":row.src, "count":row.count, "display_name_id": counting + Globals.mytr(data.name_id), "name_id": counting + Globals.mytr(data.name_id), "equipped":false, "header":false, "icon":data.icon})
+			icon_data = data.icon[0]
+		mount_content.push_back({"src":row.src, "count":row.count, "display_name_id": counting + Globals.mytr(data.name_id), "name_id": counting + Globals.mytr(data.name_id), "equipped":false, "header":false, "icon":icon_data})
 
 	list_node.Content = mount_content
 
