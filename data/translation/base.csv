@@ -153,9 +153,9 @@ Short Range Scanner,Short Range Scanner,Radar,Short Range Scanner
 Short Range Scanner MK2,Short Range Scanner MK2,Radar v2,Short Range Scanner MK2
 Short Range Scanner MK3,Short Range Scanner MK3,Radar v3,Short Range Scanner MK3
 Ultimate Scanner,Ultimate Scanner,Le Radar Ultime,Ultimate Scanner
-Shield,Shield,Bouclier,盾 
-Medium Shield,Medium Shield,Bouclier Grande Capacité,中盾 
-Large Shield,Large Shield,Bouclier Extra Grande Capacité,大盾 
+Shield,Shield,Bouclier,盾
+Medium Shield,Medium Shield,Bouclier Grande Capacité,中盾
+Large Shield,Large Shield,Bouclier Extra Grande Capacité,大盾
 Gravitic Compactor,Gravitic Compactor,Compresseur Gravitationnel,Gravitic Compactor
 Small Power Amplifier,Small Power Amplifier,Petit Amplificateur de Puissance,Small Power Amplifier
 Medium Power Amplifier,Medium Power Amplifier,Amplificateur de Puissance Amélioré,Medium Power Amplifier
@@ -190,7 +190,7 @@ A Planet,A Planet,Une Planète,A Planet
 A Bright Sun,A Bright Sun,Un Soleil Radieux,A Bright Sun
 Transfer Where ?,Transfer Where ?,Transférer où ?,どこ？
 No information available,No information available,Information Manquante,空
-consumable,consumable,consommation,消耗品 
+consumable,consumable,consommation,消耗品
 converter,converter,convertisseur,converter
 Converter,Converter,Convertisseur,Converter
 battleship_hull,battleship hull,coque de cuirassé,battleship hull
@@ -206,13 +206,13 @@ utility,utility,accessoire,付き物
 Utility,Utility,Accessoire,付き物
 weapon,weapon,armement,武器
 Weapon,Weapon,Armement,武器
-ammo,ammo,munition,弾薬 
+ammo,ammo,munition,弾薬
 wormhole,wormhole,trou noir,ワームホール
 prop,prop,prop,prop
 ship,ship,vaisseau,戦艦
 player,player,joueur,プレーヤー
-anomaly,anomaly,anomalie,異常 
-planet,planet,planète,惑星 
+anomaly,anomaly,anomalie,異常
+planet,planet,planète,惑星
 sun,sun,soleil,太陽
 others,others,autres,その他
 Language,Language,Langue,言語
