@@ -4,7 +4,7 @@ Cooling reactor (wait),Cooling reactor (wait),Réacteur stabilisé (Attendre 1 t
 [color=yellow]You do %d damage[/color],[color=yellow]You do %d damage[/color],[color=yellow]Le tir fait %d de dommage[/color],[color=yellow]%d ダメージに打つった[/color]
 [color=red]You take %d damage[/color],[color=red]You take %d damage[/color],[color=red]Nous avons reçu %d de dommage[/color],[color=red]%d ダメージが貰った[/color]
 [color=red]You destroy the enemy ![/color],[color=red]You destroy the enemy ![/color],[color=red]Vous avez détruit l'ennemi ![/color],[color=red]敵が倒れた！[/color]
-Ship in range of %s,Ship in range of %s,Nous survolons un %s,%sが近くに通る
+Ship in range of %s,Ship in range of %s,Nous survolons %s,%sが近くに通る
 Multiple Objects Detected,Multiple Objects Detected,Plusieurs Objects,色々な物
 There's nothing there sir...,There's nothing there sir...,Il n'y a rien ici...,ここは何も無い...
 Target is outside of our range sir !,Target is outside of our range sir !,La cible est hors de porté Commandant !,届かない船長！
