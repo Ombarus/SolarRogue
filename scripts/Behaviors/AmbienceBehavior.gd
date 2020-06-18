@@ -7,6 +7,7 @@ extends Node
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
+	BehaviorEvents.connect("OnPlayerDeath", self, "OnPlayerDeath_Callback")
 	BehaviorEvents.connect("OnMovementValidated", self, "OnPositionUpdated_Callback")
 	BehaviorEvents.connect("OnCameraZoomed", self, "OnCameraZoomed_Callback")
 	BehaviorEvents.connect("OnDamageTaken", self, "OnDamageTaken_Callback")
@@ -95,6 +96,18 @@ func OnMountChanged_Callback(obj, slot, src):
 func OnLevelLoaded_Callback():
 	if has_node("BG") == true:
 		get_node("BG").play()
+		
+func OnPlayerDeath_Callback():
+	var player = Globals.LevelLoaderRef.objByType["player"][0]
+	var game_won = player.get_attrib("game_won")
+	if has_node("BG") == true:
+		get_node("BG").stop()
+	if game_won == true and has_node("Victory"):
+		get_node("Victory").play()
+	else:
+		# play defeat theme
+		pass
+		
 	
 func OnPositionUpdated_Callback(obj, dir):
 	if obj.get_attrib("type") == "player":
