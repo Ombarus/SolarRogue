@@ -365,7 +365,7 @@ Is Colonized,Is Colonized,Est colonisée,Is Colonized
 False,False,Non,False
 True,True,Oui,True
 Monstrous,Monstrous,Monstrueux,Monstrous
-SUCCESS_CONGRATS,The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! \n\nYou made it !,"Le Convertisseur de Yendor absorbe l'énergie du trou noir lui-même pour ouvrir une brêche dans l'espace. Doucement, vous engagé les moteurs et de l'autre côté se trouve un territoire bien connu. \n\nVous avez réussi !",The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! \n\nYou made it !
+SUCCESS_CONGRATS,The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! \n\nYou made it !,"Le Convertisseur de Yendor absorbe l'énergie du trou noir lui-même pour ouvrir une brêche dans l'espace. Doucement, vous engagez les moteurs et de l'autre côté se trouve un territoire bien connu. \n\nVous avez réussi !",The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! \n\nYou made it !
 Killed by %s,Killed by %s,Tué par %s,%sを殺された
 Stranded,Stranded,Sans Énergie,Stranded
 self destructed,self destructed,suicidé,自殺
@@ -483,3 +483,4 @@ EPITAPH_SCORE,Final Score:,Pointage Final:,Final Score:
 The crew of the,The crew of the,L'équipage du,The crew of the
 Sadly left behind:,Sadly left behind:,Ont abandonné:,Sadly left behind:
 Did not leave anyone behind!,Did not leave anyone behind!,N'a abandonné personne!,Did not leave anyone behind!
+HUMAN_LEVEL_MESSAGE,"[color=lime]'Welcome to the human trading coalition! Keep it in your pants...'[/color]","[color=lime]'Bienvenue à la nouvelle république humaine! Soyez sage...'[/color]","[color=lime]'Welcome to the human trading coalition! Keep it in your pants...'[/color]"

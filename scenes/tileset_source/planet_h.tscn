@@ -7,7 +7,6 @@
 z_index = 5
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 0, 640, 384, 384 )
+region_rect = Rect2( 0, 704, 384, 256 )
 
 [node name="hit_fx" parent="." instance=ExtResource( 2 )]
-

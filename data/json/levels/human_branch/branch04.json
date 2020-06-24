@@ -8,7 +8,7 @@
 	"no_ghost":true,
 	"runaway_hideout":true,
 	"fog_color_override":[0.004,0.514,0.278],
-	"level_message":"[color=lime]\"Welcome to the human trading coalition! Keep it in your pants...\"[/color]",
+	"level_message":"HUMAN_LEVEL_MESSAGE",
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
 		"region":[1536,0,128,128]
