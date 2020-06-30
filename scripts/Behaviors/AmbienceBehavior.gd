@@ -83,7 +83,7 @@ func OnConsumeItem_Callback(obj, data):
 	if obj.get_attrib("type") != "player" or sfx.playing == true:
 		return
 		
-	print("play UseItem")
+	#print("play UseItem")
 	sfx.play()
 	
 func OnMountChanged_Callback(obj, slot, src):

@@ -64,7 +64,7 @@ func OnLevelReady_Callback():
 	tested_levels.push_back(level_id)
 	player.set_attrib("runes.%s.tested_levels" % self.name, tested_levels)
 	
-	print("new friend : current_depth : %d, current_chance : %.3f" % [current_depth, current_chance])
+	#print("new friend : current_depth : %d, current_chance : %.3f" % [current_depth, current_chance])
 	if MersenneTwister.rand_float() <= current_chance:
 		TriggerBeginning(player)
 

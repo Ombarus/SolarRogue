@@ -30,7 +30,7 @@ func OnLevelLoaded_Callback():
 		n.random_seed = int(tile.x) & ~int(tile.y)
 		n.Refresh()
 		yield(get_tree(), "idle_frame")
-		print("add_child (", i, "/", stream_tile_radius * stream_tile_radius, ") :", n)
+		#print("add_child (", i, "/", stream_tile_radius * stream_tile_radius, ") :", n)
 		self.add_child(n)
 		n.position = pos
 		if cur_x == cur_y or (cur_x < 0 and cur_x == -cur_y) or (cur_x > 0 and cur_x == 1-cur_y):
