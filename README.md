@@ -51,6 +51,9 @@ Music
   - Music promoted by [https://www.free-stock-music.com](https://www.free-stock-music.com)
   - Attribution 4.0 International (CC BY 4.0)
   - [https://creativecommons.org/licenses/by/4.0/](https://creativecommons.org/licenses/by/4.0/)
+  
+* Tracks Victory and Defeat Themes 
+  - Composed by Marek J. Smagala, All rights reserved
 
 Made with
 * [Godot Engine](https://godotengine.org/),
@@ -58,6 +61,10 @@ Made with
   [SunVox](https://www.warmplace.ru/soft/sunvox/),
   [Bfxr](https://www.bfxr.net/), 
   [Audacity](https://www.audacityteam.org/)
+  
+Special Thanks
+* Sam - iOS tester
+* NicDex - Linux tester
 
 
 ## License
