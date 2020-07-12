@@ -105,8 +105,7 @@ func OnPlayerDeath_Callback():
 	if game_won == true and has_node("Victory"):
 		get_node("Victory").play()
 	else:
-		# play defeat theme
-		pass
+		get_node("Defeat").play()
 		
 	
 func OnPositionUpdated_Callback(obj, dir):

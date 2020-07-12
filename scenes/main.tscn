@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=2]
+[gd_scene load_steps=89 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/private/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -84,6 +84,7 @@
 [ext_resource path="res://data/private/sounds/sfx/inventory/trading-gb.wav" type="AudioStream" id=82]
 [ext_resource path="res://scripts/Behaviors/TeleportBehavior.gd" type="Script" id=83]
 [ext_resource path="res://data/private/sounds/music/sr-victory-theme.ogg" type="AudioStream" id=84]
+[ext_resource path="res://data/private/sounds/music/sr-defeat-theme.ogg" type="AudioStream" id=85]
 
 [sub_resource type="Animation" id=1]
 resource_name = "slow_popin"
@@ -200,6 +201,11 @@ bus = "Music"
 
 [node name="Victory" type="AudioStreamPlayer" parent="Behaviors/Ambience"]
 stream = ExtResource( 84 )
+bus = "Music"
+
+[node name="Defeat" type="AudioStreamPlayer" parent="Behaviors/Ambience"]
+stream = ExtResource( 85 )
+volume_db = 10.306
 bus = "Music"
 
 [node name="LowHullAlert" type="AudioStreamPlayer" parent="Behaviors/Ambience"]
