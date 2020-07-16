@@ -80,7 +80,13 @@ func OnTargetClick_Callback(click_pos, target_type):
 			potential_targets.push_back(obj)
 	if potential_targets.size() == 0:
 		if Globals.get_data(_targetting_data, "weapon_data.shoot_empty", false) == false:
-			BehaviorEvents.emit_signal("OnLogLine", "There's nothing there sir...")
+			var log_choices = {
+				"There's nothing there sir...":50,
+				"Unable to resolve target...":50,
+				"Target lock failed...":50,
+				"You didn't touch the right square...":5
+			}
+			BehaviorEvents.emit_signal("OnLogLine", log_choices)
 			_callback_obj.call(_callback_method, null, null)
 		elif IsValidTile(player_tile, tile, _targetting_data.weapon_data):
 			_callback_obj.call(_callback_method, null, tile)

@@ -1,0 +1,239 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://data/private/textures/space-sprite.png" type="Texture" id=1]
+[ext_resource path="res://scripts/GUI/GUILayoutBase.gd" type="Script" id=4]
+[ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=6]
+[ext_resource path="res://scripts/GUI/LogSystem.gd" type="Script" id=8]
+[ext_resource path="res://scripts/GUI/StatusBarSystem.gd" type="Script" id=11]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/GUI/PopupButton.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/GUI/StringContentDialog.tscn" type="PackedScene" id=15]
+
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1.0
+margin_bottom = -1.0
+mouse_filter = 2
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+Transition = false
+
+[node name="Log" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 506.0
+margin_right = -145.0
+margin_bottom = 5.0
+mouse_filter = 2
+script = ExtResource( 8 )
+
+[node name="LogWindow" parent="Log" instance=ExtResource( 15 )]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -205.0
+margin_right = -14.0
+margin_bottom = -15.0
+title = "Log Stardate 0.0.0"
+border_style = "═"
+
+[node name="Buttons" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Weapon" parent="Buttons" instance=ExtResource( 12 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -309.0
+margin_right = 120.0
+margin_bottom = -219.0
+rect_min_size = Vector2( 110, 90 )
+mouse_filter = 2
+Text = "[w]eapon"
+ShortcutKey = "w"
+IsHUD = true
+
+[node name="Grab" parent="Buttons" instance=ExtResource( 12 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -119.0
+margin_top = -529.0
+margin_right = -9.0
+margin_bottom = -439.0
+rect_min_size = Vector2( 110, 90 )
+Text = "[g]rab"
+ShortcutKey = "g"
+IsHUD = true
+
+[node name="Wormhole" parent="Buttons" instance=ExtResource( 12 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -119.0
+margin_top = -309.0
+margin_right = -9.0
+margin_bottom = -219.0
+rect_min_size = Vector2( 110, 90 )
+Text = "[<]FTL"
+ShortcutKey = "<"
+IsHUD = true
+
+[node name="Control" type="Control" parent="Buttons"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Wormhole2" parent="Buttons/Control" instance=ExtResource( 12 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1120.0
+margin_top = 370.0
+margin_right = 1230.0
+margin_bottom = 460.0
+rect_min_size = Vector2( 110, 90 )
+Text = "[<]FTL"
+ShortcutKey = ">"
+IsHUD = true
+
+[node name="Inventory" parent="Buttons" instance=ExtResource( 12 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -119.0
+margin_top = -419.0
+margin_right = -9.0
+margin_bottom = -329.0
+rect_min_size = Vector2( 110, 90 )
+Text = "[i]nv"
+ShortcutKey = "i"
+IsHUD = true
+
+[node name="Converter" parent="Buttons" instance=ExtResource( 12 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -419.0
+margin_right = 120.0
+margin_bottom = -329.0
+rect_min_size = Vector2( 110, 90 )
+Text = "[c]onv"
+ShortcutKey = "c"
+IsHUD = true
+
+[node name="PopupButton" parent="Buttons" instance=ExtResource( 14 )]
+anchor_top = 1.0
+margin_left = 10.0
+margin_top = -529.0
+margin_right = 150.0
+margin_bottom = -113.0
+
+[node name="ZoomIn" parent="Buttons" instance=ExtResource( 12 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -149.0
+margin_top = -200.0
+margin_right = -84.0
+margin_bottom = -135.0
+Text = "+"
+IsHUD = true
+
+[node name="ZoomOut" parent="Buttons" instance=ExtResource( 12 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -74.0
+margin_top = -201.0
+margin_right = -9.0
+margin_bottom = -136.0
+Text = "-"
+IsHUD = true
+
+[node name="Options" parent="Buttons" instance=ExtResource( 12 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -74.0
+margin_top = -124.0
+margin_right = -9.0
+margin_bottom = -59.0
+ShortcutEnum = 16777217
+AlwaysOnShortcut = false
+
+[node name="Sprite" type="Sprite" parent="Buttons/Options"]
+position = Vector2( 32, 33 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 1664, 0, 64, 64 )
+
+[node name="Question" parent="Buttons" instance=ExtResource( 12 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -149.0
+margin_top = -124.0
+margin_right = -84.0
+margin_bottom = -59.0
+Text = "?"
+ShortcutKey = "?"
+IsHUD = true
+
+[node name="StatusBar" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -1.0
+margin_bottom = -623.0
+mouse_filter = 2
+script = ExtResource( 11 )
+warning_energy_level = 5001
+danger_energy_level = 1001
+
+[node name="StatusWindow" parent="StatusBar" instance=ExtResource( 15 )]
+anchor_right = 1.0
+margin_left = 5.0
+margin_top = 6.0
+margin_right = -3.0
+margin_bottom = 91.0
+bottom_title = "The Maveric"
+content = "Hull : [color=lime]==========[/color] Energy : [color=yellow]25000[/color] Shield : [color=aqua]===============[/color]"
+border_style = "═"
+
+[node name="levelinfo" type="Label" parent="StatusBar/StatusWindow"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -18.0
+margin_top = -42.5
+margin_right = -18.0
+margin_bottom = 6.5
+custom_fonts/font = ExtResource( 6 )
+text = "start"
+align = 2
+valign = 1
+
+[node name="base2" parent="StatusBar" instance=ExtResource( 13 )]
+visible = false
+margin_top = 1.0
+margin_right = -1114.0
+margin_bottom = -601.0

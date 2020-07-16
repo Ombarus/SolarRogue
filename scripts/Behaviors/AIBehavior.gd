@@ -43,7 +43,15 @@ func ConsiderInterests(obj):
 				continue
 			if Globals.is_(o.get_attrib("ai.aggressive"), true):
 				if is_player == true:
-					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Enemy ship entered scanner range ![/color]")
+					var log_choices = {
+						"[color=yellow]Enemy ship entered scanner range![/color]":50,
+						"[color=yellow]Enemy power signature detected![/color]":50,
+						"[color=yellow]We're pickup an enemy signal on the wideband frequency![/color]":30,
+						"[color=yellow]Enemy ship approaching![/color]":50,
+						"[color=yellow]Shield up! Enemy in range![/color]":20,
+						"[color=yellow]We've got incoming![/color]":10
+					}
+					BehaviorEvents.emit_signal("OnLogLine", log_choices)
 				filtered.push_back(id)
 				break
 			var detected : bool = o.get_attrib("type") != "anomaly"
@@ -52,7 +60,13 @@ func ConsiderInterests(obj):
 			if o.get_attrib("memory.was_seen_by", false) == false and detected == true:
 				if is_player == true:
 					o.set_attrib("memory.was_seen_by", true)
-					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Scanners have picked up a new %s[/color]", [Globals.mytr(o.get_attrib("type"))])
+					var log_choices = {
+						"[color=yellow]Scanners have picked up a new %s[/color]":50,
+						"[color=yellow]%s detected[/color]":30,
+						"[color=yellow]%s within scanner range[/color]":30,
+						"[color=yellow]would %s be useful right now captain?[/color]":5,
+					}
+					BehaviorEvents.emit_signal("OnLogLine", log_choices, [Globals.mytr(o.get_attrib("type"))])
 				filtered.push_back(id)
 				break
 		
@@ -67,7 +81,12 @@ func ConsiderInterests(obj):
 			if (e_tile - p_tile).length() < 7.0:
 				# Print stop message ?
 				if is_player == true:
-					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Autopilot canceled, enemy too close ![/color]")
+					var log_choices = {
+						"[color=yellow]Autopilot canceled, enemy too close ![/color]":50,
+						"[color=yellow]Enemy nearby, let's take it slow![/color]":50,
+						"[color=yellow]Enemy contact! Autopilot disabled![/color]":10
+					}
+					BehaviorEvents.emit_signal("OnLogLine", log_choices)
 				filtered.push_back(id)
 		if o != null:
 			var detected : bool = o.get_attrib("type") != "anomaly"
@@ -291,7 +310,27 @@ func DoAttackPathFinding(obj):
 			if chance == null or MersenneTwister.rand_float() < chance:
 				BehaviorEvents.emit_signal("OnDealDamage", [player], obj, data, player_tile)
 			else:
-				BehaviorEvents.emit_signal("OnLogLine", "The enemy missed")
+				var log_choices = {
+					"The enemy missed":50,
+					"Enemy shot wide!":50,
+					"The enemy can't shoot a fish in a barrel!":5,
+					"Evasive maneuver beta two successful!":30,
+					"Evasive maneuver beta nine successful!":30,
+					"Evasive pattern gamma six successful!":30,
+					"Evasive pattern delta successful!":30,
+					"Evasive pattern lambda ten successful!":30,
+					"Evasive maneuver omega three successful!":30,
+					"Evasive sequence 010 successful!":10,
+					"Evasive sequence beta four successful!":10,
+					"That was a close one!":5,
+					"Evasive maneuver gamma one successful!":30,
+					"Evasive pattern sigma ten successful!":30,
+					"Evasive sequence delta detla successful!":10,
+					"Evasive maneuver pi alpha two successful!":5,
+					"Evasive pattern Riker successful!":1,
+					"Evasive pattern Kirk Epsilon successful!":1
+				}
+				BehaviorEvents.emit_signal("OnLogLine", log_choices)
 				 # play the animation but no damage
 				BehaviorEvents.emit_signal("OnShotFired", player_tile, obj, data)
 				BehaviorEvents.emit_signal("OnUseAP", obj, Globals.get_data(data, "weapon_data.fire_speed"))

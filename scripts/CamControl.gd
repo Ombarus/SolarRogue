@@ -33,6 +33,15 @@ func _ready():
 	BehaviorEvents.connect("OnWaitForAnimation", self, "OnWaitForAnimation_Callback")
 	BehaviorEvents.connect("OnAnimationDone", self, "OnAnimationDone_Callback")
 	
+	var zoom_in_btn = get_node("../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/ZoomIn")
+	var zoom_out_btn = get_node("../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/ZoomOut")
+	zoom_in_btn.connect("down", self, "_on_ZoomIn_down")
+	zoom_out_btn.connect("down", self, "_on_ZoomOut_down")
+	
+	zoom_in_btn.connect("up", self, "_on_Zoom_up")
+	zoom_out_btn.connect("up", self, "_on_Zoom_up")
+	
+	
 	if p != null:
 		self.position = p.position
 		_last_cam_pos = self.position

@@ -106,7 +106,13 @@ func OnPickup_Callback(picker, picked):
 			BehaviorEvents.emit_signal("OnLogLine", "We should transfer any remaining items from %s before", [Globals.mytr(obj.get_attrib("name_id"))])
 			
 	if filtered_obj.size() <= 0 && is_player:
-		BehaviorEvents.emit_signal("OnLogLine", "The tractor beam failed to lock on")
+		var log_choices = {
+			"The tractor beam failed to lock on":50,
+			"We've picked-up empty space":50,
+			"There's Nothing here":50,
+			"Failed to lock on any signal":50
+		}
+		BehaviorEvents.emit_signal("OnLogLine", log_choices)
 		return
 		
 	if not picker.modified_attributes.has("cargo"):

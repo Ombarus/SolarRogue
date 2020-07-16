@@ -79,7 +79,14 @@ func Sale_Callback():
 		BehaviorEvents.emit_signal("OnUseEnergy", _lobj, -price)
 		total += price
 	BehaviorEvents.emit_signal("OnTradingDone", _lobj, _robj)
-	BehaviorEvents.emit_signal("OnLogLine", "Sold %d %s for %d energy", [selected_item["count"], Globals.mytr(selected_item["name_id"]), total])
+	var log_choices = {
+		"Sold %d %s for %d energy":100,
+		"The deal went down %d %s for %d energy":100,
+		"You pull the deal of the century and sold your %d %s for %d energy":5,
+		"With your amazing negociation tactics you sold your %d %s for %d energy":30,
+		"Your generous donation of %d %s got you %d energy":30
+	}
+	BehaviorEvents.emit_signal("OnLogLine", log_choices, [selected_item["count"], Globals.mytr(selected_item["name_id"]), total])
 	
 	ReInit()
 	
@@ -124,7 +131,13 @@ func Buy_Callback():
 		BehaviorEvents.emit_signal("OnUseEnergy", _lobj, price)
 		total += price
 	BehaviorEvents.emit_signal("OnTradingDone", _lobj, _robj)
-	BehaviorEvents.emit_signal("OnLogLine", "Bought %d %s for %d energy", [selected_item["count"], Globals.mytr(selected_item["name_id"]), total])
+	var log_choices = {
+		"Bought %d %s for %d energy":150,
+		"The Nerengi drives a hard business but you manage to get %d %s for %d energy":5,
+		"You feel you got a good deal for these %d %s for %d energy":100,
+		"Where did you find %d %s for %d energy?":50
+	}
+	BehaviorEvents.emit_signal("OnLogLine", log_choices, [selected_item["count"], Globals.mytr(selected_item["name_id"]), total])
 	
 	ReInit()
 	
@@ -278,7 +291,13 @@ func DoMountingBuy():
 		BehaviorEvents.emit_signal("OnRemoveItem", _robj, to_mount.src)
 		BehaviorEvents.emit_signal("OnUseEnergy", _lobj, price)
 		BehaviorEvents.emit_signal("OnTradingDone", _lobj, _robj)
-		BehaviorEvents.emit_signal("OnLogLine", "Bought %d %s for %d energy", [selected_item["count"], Globals.mytr(to_mount["name_id"]), price])
+		var log_choices = {
+			"Bought %d %s for %d energy":150,
+			"The Nerengi drives a hard business but you manage to get %d %s for %d energy":5,
+			"You feel you got a good deal for these %d %s for %d energy":100,
+			"Where did you find %d %s for %d energy?":50
+		}
+		BehaviorEvents.emit_signal("OnLogLine", log_choices, [selected_item["count"], Globals.mytr(to_mount["name_id"]), price])
 	
 	ReInit()
 

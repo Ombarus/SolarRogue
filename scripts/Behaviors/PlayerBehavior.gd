@@ -1,17 +1,27 @@
 extends Node
 
 export(NodePath) var levelLoaderNode
-export(NodePath) var WeaponAction
-export(NodePath) var GrabAction
-export(NodePath) var InventoryAction
+#export(NodePath) var WeaponAction
+#export(NodePath) var GrabAction
+#export(NodePath) var InventoryAction
 export(NodePath) var InventoryDialog
-export(NodePath) var CraftingAction
-export(NodePath) var FTLAction
-export(NodePath) var FTLAction2
-export(NodePath) var PopupButtons
+#export(NodePath) var CraftingAction
+#export(NodePath) var FTLAction
+#export(NodePath) var FTLAction2
+#export(NodePath) var PopupButtons
 export(NodePath) var TargettingHUD
-export(NodePath) var OptionBtn
-export(NodePath) var QuestionBtn
+#export(NodePath) var OptionBtn
+#export(NodePath) var QuestionBtn
+
+onready var WeaponAction : Control = get_node("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Weapon")
+onready var GrabAction : Control = get_node("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Grab")
+onready var InventoryAction : Control = get_node("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Inventory")
+onready var CraftingAction : Control = get_node("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Converter")
+onready var FTLAction : Control = get_node("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Wormhole")
+onready var FTLAction2 : Control = get_node("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Control/Wormhole2")
+onready var PopupButtons : Control = get_node("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/PopupButton")
+onready var OptionBtn : Control = get_node("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Options")
+onready var QuestionBtn : Control = get_node("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Question")
 
 var playerNode : Node2D = null
 var levelLoaderRef : Node
@@ -55,32 +65,32 @@ func _ready():
 	# Initialization here
 	levelLoaderRef = get_node(levelLoaderNode)
 	
-	var action = get_node(WeaponAction)
-	action.connect("pressed", self, "Pressed_Weapon_Callback")
-	action = get_node(GrabAction)
-	action.connect("pressed", self, "Pressed_Grab_Callback")
-	action = get_node(InventoryAction)
-	action.connect("pressed", self, "Pressed_Inventory_Callback")
-	action = get_node(FTLAction)
-	action.connect("pressed", self, "Pressed_FTL_Callback")
-	action = get_node(FTLAction2)
-	action.connect("pressed", self, "Pressed_FTL_Callback")
-	action = get_node(CraftingAction)
-	action.connect("pressed", self, "Pressed_Crafting_Callback")
-	action = get_node(PopupButtons)
-	action.connect("look_pressed", self, "Pressed_Look_Callback")
-	action.connect("board_pressed", self, "Pressed_Board_Callback")
-	action.connect("take_pressed", self, "Pressed_Take_Callback")
-	action.connect("wait_pressed", self, "Pressed_Wait_Callback")
-	action.connect("crew_pressed", self, "Pressed_Crew_Callback")
-	action.connect("comm_pressed", self, "Pressed_Comm_Callback")
-	action = get_node(InventoryDialog)
+	#var action = get_node(WeaponAction)
+	WeaponAction.connect("pressed", self, "Pressed_Weapon_Callback")
+	#action = get_node(GrabAction)
+	GrabAction.connect("pressed", self, "Pressed_Grab_Callback")
+	#action = get_node(InventoryAction)
+	InventoryAction.connect("pressed", self, "Pressed_Inventory_Callback")
+	#action = get_node(FTLAction)
+	FTLAction.connect("pressed", self, "Pressed_FTL_Callback")
+	#action = get_node(FTLAction2)
+	FTLAction2.connect("pressed", self, "Pressed_FTL_Callback")
+	#action = get_node(CraftingAction)
+	CraftingAction.connect("pressed", self, "Pressed_Crafting_Callback")
+	#action = get_node(PopupButtons)
+	PopupButtons.connect("look_pressed", self, "Pressed_Look_Callback")
+	PopupButtons.connect("board_pressed", self, "Pressed_Board_Callback")
+	PopupButtons.connect("take_pressed", self, "Pressed_Take_Callback")
+	PopupButtons.connect("wait_pressed", self, "Pressed_Wait_Callback")
+	PopupButtons.connect("crew_pressed", self, "Pressed_Crew_Callback")
+	PopupButtons.connect("comm_pressed", self, "Pressed_Comm_Callback")
+	var action = get_node(InventoryDialog)
 	action.connect("drop_pressed", self, "OnDropIventory_Callback")
 	action.connect("use_pressed", self, "OnUseInventory_Callback")
-	action = get_node(OptionBtn)
-	action.connect("pressed", self, "Pressed_Option_Callback")
-	action = get_node(QuestionBtn)
-	action.connect("pressed", self, "Pressed_Question_Callback")
+	#action = get_node(OptionBtn)
+	OptionBtn.connect("pressed", self, "Pressed_Option_Callback")
+	#action = get_node(QuestionBtn)
+	QuestionBtn.connect("pressed", self, "Pressed_Question_Callback")
 	
 	get_node(TargettingHUD).connect("cancel_pressed", self, "cancel_targetting_pressed_Callback")
 	
@@ -150,8 +160,21 @@ func Pressed_Wait_Callback():
 	if lock_input:
 		return
 		
+	wait_one_turn(playerNode)
+	
+func wait_one_turn(player):
 	BehaviorEvents.emit_signal("OnUseAP", playerNode, 1.0)
-	BehaviorEvents.emit_signal("OnLogLine", "Cooling reactor (wait)")
+	var wait_lines = {
+		"Cooling reactor (wait)":50,
+		"Wasted fuel (wait)":20,
+		"Some R&R increased the crew's morale (wait)":5,
+		"All system green (wait)":50,
+		"System reboot complete (wait)":30,
+		"Powering down (wait)":50,
+		"Awaiting next order (wait)":50,
+		"Network purged (wait)":50
+	}
+	BehaviorEvents.emit_signal("OnLogLine", wait_lines)
 	
 func Pressed_Crew_Callback():
 	if lock_input:
@@ -182,7 +205,7 @@ func Pressed_Comm_Callback():
 func UpdateButtonVisibility():
 	var hide_hud = PermSave.get_attrib("settings.hide_hud")
 	var weapons = playerNode.get_attrib("mounts.weapon")
-	var weapon_btn = get_node(WeaponAction)
+	var weapon_btn = WeaponAction
 	var valid = false
 	for weapon in weapons:
 		if weapon != null and weapon != "":
@@ -192,7 +215,7 @@ func UpdateButtonVisibility():
 	weapon_btn.visible = valid
 		
 	var converters = playerNode.get_attrib("mounts.converter")
-	var converter_btn = get_node(CraftingAction)
+	var converter_btn = CraftingAction
 	valid = false
 	for c in converters:
 		if c != null and c != "":
@@ -374,14 +397,32 @@ func ConsiderInterests(obj):
 		if o == null:
 			continue
 		if Globals.is_(o.get_attrib("ai.aggressive"), true):
-			BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Enemy ship entered scanner range ![/color]")
+			var log_choices = {
+				"[color=yellow]Enemy ship entered scanner range![/color]":50,
+				"[color=yellow]Enemy power signature detected![/color]":50,
+				"[color=yellow]We're pickup an enemy signal on the wideband frequency![/color]":30,
+				"[color=yellow]Enemy ship approaching![/color]":50,
+				"[color=yellow]Shield up! Enemy in range![/color]":20,
+				"[color=yellow]We've got incoming![/color]":10,
+				"[color=yellow]Enemy in sight, shield at maximum![/color]":50,
+				"[color=yellow]Defense protocol activated![/color]":10,
+				"[color=yellow]Engaging combat pattern delta three![/color]":2,
+				"[color=yellow]Enemy spotted! Evasive maneuver![/color]":20
+			}
+			BehaviorEvents.emit_signal("OnLogLine", log_choices)
 			break
 		var detected : bool = o.get_attrib("type") != "anomaly"
 		if id in known_anomalies:
 			detected = known_anomalies[id]
 		if o.get_attrib("memory.was_seen_by", false) == false and detected == true:
 			o.set_attrib("memory.was_seen_by", true)
-			BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Scanners have picked up a new %s[/color]", [Globals.mytr(o.get_attrib("type"))])
+			var log_choices = {
+				"[color=yellow]Scanners have picked up a new %s[/color]":50,
+				"[color=yellow]%s detected[/color]":30,
+				"[color=yellow]%s within scanner range[/color]":30,
+				"[color=yellow]would %s be useful right now captain?[/color]":5,
+			}
+			BehaviorEvents.emit_signal("OnLogLine", log_choices, [Globals.mytr(o.get_attrib("type"))])
 			break
 
 	
@@ -550,6 +591,14 @@ func _input(event):
 	elif filtered_content.size() > 1:
 		BehaviorEvents.emit_signal("OnPushGUI", "SelectTarget", {"targets":filtered_content, "callback_object":self, "callback_method":"LookTarget_Callback"})
 	else:
+		var log_choices = {
+			"Nothing but empty space":150,
+			"When you look in the void, the void looks back":1,
+			"When you look in the void, the void didn't look back":10,
+			"There's billions of stars in this tiny space but nothing else":50,
+			"Analysis completed, nothing found":150,
+			"Gravity well nominal":20
+		}
 		BehaviorEvents.emit_signal("OnLogLine", "Nothing but empty space")
 
 	
@@ -610,8 +659,7 @@ func _unhandled_input(event):
 					
 				# dead zone (click on sprite)
 				if abs(click_dir.x) < levelLoaderRef.tileSize / 2 && abs(click_dir.y) < levelLoaderRef.tileSize / 2:
-					BehaviorEvents.emit_signal("OnUseAP", playerNode, 1.0)
-					BehaviorEvents.emit_signal("OnLogLine", "Cooling reactor (wait)")
+					wait_one_turn(playerNode)
 					return
 					
 				# goto click pos
@@ -667,8 +715,7 @@ func _unhandled_input(event):
 			#get_node(TargettingHUD).emit_signal("cancel_pressed")
 		
 		if event.scancode == KEY_KP_5:
-			BehaviorEvents.emit_signal("OnUseAP", playerNode, 1.0)
-			BehaviorEvents.emit_signal("OnLogLine", "Cooling reactor (wait)")
+			wait_one_turn(playerNode)
 	if dir != null:
 		#next_touch_is_a_goto = true
 		BehaviorEvents.emit_signal("OnMovement", playerNode, dir)
@@ -862,6 +909,13 @@ func OnTransferItemCompleted_Callback(lobj, l_mounts, l_cargo, robj, r_mounts, r
 	
 func OnTransferPlayer_Callback(old_player, new_player):
 	playerNode = new_player
+	var log_choices = {
+		"All controls transfered, the ship is ours captain !":50,
+		"Boarding completed":50,
+		"System online, transfer completed":50,
+		"Affirmative Dave, I read you":1,
+		"Boot sequence completed successfully":20
+	}
 	BehaviorEvents.emit_signal("OnLogLine", "All controls transfered, the ship is ours captain !")
 	BehaviorEvents.emit_signal("OnUseAP", new_player, 1.0)
 
@@ -900,7 +954,7 @@ func UpdateMovementBasedButton():
 		if c != playerNode and c.get_attrib("type") in ["trade_port"]:
 			trade_port = c
 			
-	var btn = get_node(FTLAction)
+	var btn = FTLAction
 	if wormhole != null:
 		btn.visible = true
 		var cur_depth : int = Globals.LevelLoaderRef.current_depth
@@ -912,7 +966,7 @@ func UpdateMovementBasedButton():
 	else:
 		btn.visible = false
 		
-	btn = get_node(PopupButtons)
+	btn = PopupButtons
 	btn.EnableComm(trade_port != null)
 	if trade_port != null:
 		BehaviorEvents.emit_signal("OnLogLine", "Select 'Comm' to open a trading console")

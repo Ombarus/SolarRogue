@@ -95,7 +95,14 @@ func OnDealDamage_Callback(targets, shooter, weapon_data, shot_tile):
 	if targets.empty() and Globals.get_data(weapon_data, "weapon_data.shoot_empty", false) == true:
 		if validate_action(null, shooter, weapon_data) == true:
 			shot_fired = true
-			BehaviorEvents.emit_signal("OnLogLine", "Scans report no hit sir!")
+			var log_choices = {
+				"Scans report no hit sir!":80,
+				"Critical Miss sir!":1,
+				"We're not even shooting at air sir!":50,
+				"Energy wasted for nothing!":10,
+				"Too bad, better luck next time captain!":5
+			}
+			BehaviorEvents.emit_signal("OnLogLine", log_choices)
 			BehaviorEvents.emit_signal("OnShotFired", shot_tile, shooter, weapon_data)
 	if shot_fired == true:
 		consume(shooter, weapon_data)
@@ -125,7 +132,15 @@ func validate_action(target, shooter, weapon_data):
 	if target != null:
 		var defense_deployed = target.get_attrib("harvestable.defense_deployed")
 		if defense_deployed != null and defense_deployed == true:
-			BehaviorEvents.emit_signal("OnLogLine", "This planet has a colony, let's not push our luck")
+			var log_choices = {
+				"This planet has a colony, let's not push our luck":150,
+				"Shooting a colonized world is a bit mean, even for us captain!":50,
+				"I respectfully disagree captain!":50,
+				"Shooting a colonized world is against regulation":150,
+				"We've done enough damaged for now":50,
+				"You... monster!":1
+			}
+			BehaviorEvents.emit_signal("OnLogLine", log_choices)
 			return false
 			
 		if Globals.is_(target.get_attrib("destroyable.destroyed"), true):
@@ -150,7 +165,14 @@ func validate_action(target, shooter, weapon_data):
 				ammo_ok = true
 	
 	if not ammo_ok && is_player:
-		BehaviorEvents.emit_signal("OnLogLine", "No more %s to shoot", [Globals.mytr(ammo_data.name_id)])
+		var log_choices = {
+			"No more %s to shoot":50,
+			"Our Holds don't hold any %s":10,
+			"We need %s":50,
+			"Sir! we should craft more %s":50,
+			"Will do sir! as soon as the converter makes more %s!":20
+		}
+		BehaviorEvents.emit_signal("OnLogLine", log_choices, [Globals.mytr(ammo_data.name_id)])
 		return false
 	
 	#if "fire_energy_cost" in weapon_data.weapon_data:
@@ -204,7 +226,13 @@ func ProcessDefense(target, shooter, weapon_data):
 		BehaviorEvents.emit_signal("OnAddToAnimationQueue", Globals.LevelLoaderRef, "RequestObject", [json, offset, modified_attrib], 500)
 		#Globals.LevelLoaderRef.RequestObject(json, offset, modified_attrib)
 	
-	BehaviorEvents.emit_signal("OnAddToAnimationQueue", BehaviorEvents, "emit_signal", ["OnLogLine", "[color=red]This planet had a colony and they are NOT happy. They've deployed defenses.[/color]"], 500)
+	var log_choices = {
+		"[color=red]This planet had a colony and they are NOT happy. They've deployed defenses.[/color]":100,
+		"[color=red]Oops! I guess someone was living here. They've deployed planetary defenses![/color]":20,
+		"[color=red]Ships inbound! This planet is defended![/color]":100,
+		"[color=red]We really should look at the planet's description before shooting...":1
+	}
+	BehaviorEvents.emit_signal("OnAddToAnimationQueue", BehaviorEvents, "emit_signal", ["OnLogLine", log_choices], 500)
 	#BehaviorEvents.emit_signal("OnLogLine", "[color=red]This planet had a colony and they are NOT happy. They've deployed defenses.[/color]")
 	target.set_attrib("harvestable.defense_deployed", true)
 	BehaviorEvents.emit_signal("OnDamageTaken", target, shooter, Globals.DAMAGE_TYPE.hull_hit)
@@ -265,7 +293,27 @@ func ProcessDamage(target, shooter, weapon_data):
 		if is_player:
 			BehaviorEvents.emit_signal("OnLogLine", "Shot missed")
 		elif is_target_player:
-			BehaviorEvents.emit_signal("OnLogLine", "The enemy missed")
+			var log_choices = {
+					"The enemy missed":50,
+					"Enemy shot wide!":50,
+					"The enemy can't shoot a fish in a barrel!":5,
+					"Evasive maneuver beta two successful!":30,
+					"Evasive maneuver beta nine successful!":30,
+					"Evasive pattern gamma six successful!":30,
+					"Evasive pattern delta successful!":30,
+					"Evasive pattern lambda ten successful!":30,
+					"Evasive maneuver omega three successful!":30,
+					"Evasive sequence 010 successful!":10,
+					"Evasive sequence beta four successful!":10,
+					"That was a close one!":5,
+					"Evasive maneuver gamma one successful!":30,
+					"Evasive pattern sigma ten successful!":30,
+					"Evasive sequence delta detla successful!":10,
+					"Evasive maneuver pi alpha two successful!":5,
+					"Evasive pattern Riker successful!":1,
+					"Evasive pattern Kirk Epsilon successful!":1
+				}
+			BehaviorEvents.emit_signal("OnLogLine", log_choices)
 	else:
 		var dam_absorbed_by_shield = _hit_shield(target, dam, weapon_data)
 		var hull_dam = dam - dam_absorbed_by_shield
@@ -277,7 +325,24 @@ func ProcessDamage(target, shooter, weapon_data):
 				if target.get_attrib("boardable") == true:
 					BehaviorEvents.emit_signal("OnLogLine", "[color=red]You destroyed one of YOUR ship ![/color]")
 				else:
-					BehaviorEvents.emit_signal("OnLogLine", "[color=red]You destroy the enemy ![/color]")
+					var log_choices = {
+						"[color=red]You destroy the enemy ![/color]":50,
+						"[color=red]Boum![/color]":10,
+						"[color=red]The shot pierce the Hull and ignite the warp core creating a very pretty explosion![/color]":50,
+						"[color=red]A direct hit to the main deck creates a chain reaction in the onboard computer and ends in a firework![/color]":20,
+						"[color=red]Their life support is down, enemy destroyed![/color]":50,
+						"[color=red]Your shot cuts the enemy in half![/color]":50,
+						"[color=red]A few escape pod manage to launch from the enemy ship before it loses it's remaining integrity![/color]":50,
+						"[color=red]The enemy ship proceed to execute a rapid unscheduled disassembly![/color]":5,
+						"[color=red]Hull breach detected in level 1 to 100. All system shutdown. Terminated![/color]":20,
+						"[color=red]Ixnay on the starship![/color]":15,
+						"[color=red]Fire are spreading throught the ship, explosion imminent![/color]":50,
+						"[color=red]Victory is ours captain![/color]":50,
+						"[color=red]We've hit the exhaust port and created a chain reaction that reached the reactor core![/color]":2,
+						"[color=red]Reactor core critical, enemy destroyed![/color]":50,
+						"[color=red]The enemy ship self-destructed![/color]":20,
+					}
+					BehaviorEvents.emit_signal("OnLogLine", log_choices)
 			if is_target_player:
 				BehaviorEvents.emit_signal("OnPlayerDeath")
 			if shooter is Attributes:
@@ -288,7 +353,57 @@ func ProcessDamage(target, shooter, weapon_data):
 			if is_player:
 				BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]You do %d damage[/color]", [dam])
 			elif is_target_player:
-				BehaviorEvents.emit_signal("OnLogLine", "[color=red]You take %d damage[/color]", [dam])
+				var param = [dam]
+				var log_choices = {
+					"[color=red]You take %d damage[/color]":100
+				}
+				if hull_dam > 0:
+					log_choices = {
+						"[color=red]You take %d damage[/color]":50,
+						"[color=red]Deck 3 to 4 report %s hull damage![/color]":50,
+						"[color=red]Deck 9 and 10 report %s hull damage![/color]":50,
+						"[color=red]Deck 1 to 5 report %s hull damage![/color]":50,
+						"[color=red]Hull integrity down by %s points![/color]":50,
+						"[color=red]Engineering bay hit for %s damage![/color]":50,
+						"[color=red]Medbay hit for %s damage![/color]":50,
+						"[color=red]Concourse C hit for %s damage![/color]":50,
+						"[color=red]Concourse A hit for %s damage![/color]":50,
+						"[color=red]%s damage, we've lost the external nacelle 1! Good thing it's useless.[/color]":10,
+						"[color=red]%s damage, we've lost the external nacelle 2! Good thing it's useless.[/color]":10,
+						"[color=red]%s damage, we've lost the external nacelle 3! Good thing it's useless.[/color]":10,
+						"[color=red]%s damage, we've lost the external nacelle 4! Good thing it's useless.[/color]":10,
+						"[color=red]%s damage, we've lost the external nacelle 5! Good thing it's useless.[/color]":10,
+						"[color=red]%s damage, we've lost the external nacelle 6! Good thing it's useless.[/color]":10,
+						"[color=red]%s damage, we've lost the external nacelle 7! Good thing it's useless.[/color]":10,
+						"[color=red]%s damage, we've lost the external nacelle 8! Good thing it's useless.[/color]":10,
+						"[color=red]%s damage, we've lost the external nacelle 9! Good thing it's useless.[/color]":10,
+						"[color=red]%s damage, we've lost the external nacelle 10! Good thing it's useless.[/color]":10,
+						"[color=red]%s damage, we've lost the external nacelle 11! Good thing it's useless.[/color]":10,
+						"[color=red]%s damage, we've lost the external nacelle 12! Good thing it's useless.[/color]":10,
+						"[color=red]%s damage, we've lost the external nacelle 13! Good thing it's useless.[/color]":10,
+						"[color=red]%s damage, we've lost the external nacelle 14! Good thing it's useless.[/color]":10,
+						"[color=red]%s damage, we've lost the external nacelle 15! Good thing it's useless.[/color]":10,
+						"[color=red]%s damage, we've lost the external nacelle 16! Good thing it's useless.[/color]":10,
+						"[color=red]%s damage, we've lost the external nacelle 42! Good thing it's useless.[/color]":1,
+						"[color=red]Hull integrity down %s. Repair team dispatched to deck 10[/color]":30,
+						"[color=red]Hull integrity down %s. Repair team dispatched to deck 12[/color]":30,
+						"[color=red]Hull integrity down %s. Repair team dispatched to deck 4[/color]":30,
+						"[color=red]System integrity down %s points, redirecting power to auxilary conduit![/color]":50,
+						"[color=red]Primary system down, switching to auxilary power![/color]":1
+					}
+				else:
+					var cur_shield = target.get_attrib("shield.current_hp")
+					var max_shield = target.get_max_shield()
+					var shield_per = stepify(cur_shield / max_shield * 100.0, 0.1)
+					param = [shield_per]
+					log_choices = {
+						"[color=red]Shield holding at %s%%![/color]":50,
+						"[color=red]Main deflector shield at %s%%![/color]":50,
+						"[color=red]We've been hit! Shield at %s%%![/color]":50,
+						"[color=red]Our shield won't hold forever! Shield at %s%%![/color]":10,
+						"[color=red]No damage! Shield at %s%%![/color]":30
+					}
+				BehaviorEvents.emit_signal("OnLogLine", log_choices, param)
 		target.set_attrib("destroyable.damage_source", shooter.get_attrib("name_id"))
 		
 		var damage_type = Globals.DAMAGE_TYPE.shield_hit

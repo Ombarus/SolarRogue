@@ -1,0 +1,239 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://data/private/textures/space-sprite.png" type="Texture" id=1]
+[ext_resource path="res://scripts/GUI/GUILayoutBase.gd" type="Script" id=4]
+[ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=6]
+[ext_resource path="res://scripts/GUI/LogSystem.gd" type="Script" id=8]
+[ext_resource path="res://scripts/GUI/StatusBarSystem.gd" type="Script" id=11]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/GUI/PopupButton.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/GUI/StringContentDialog.tscn" type="PackedScene" id=15]
+
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1.0
+margin_bottom = -1.0
+mouse_filter = 2
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+Transition = false
+
+[node name="Log" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 506.0
+margin_right = -145.0
+margin_bottom = 5.0
+mouse_filter = 2
+script = ExtResource( 8 )
+
+[node name="LogWindow" parent="Log" instance=ExtResource( 15 )]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 342.0
+margin_top = -205.0
+margin_right = -167.0
+margin_bottom = -15.0
+title = "Log Stardate 0.0.0"
+border_style = "═"
+
+[node name="Buttons" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Weapon" parent="Buttons" instance=ExtResource( 12 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 217.453
+margin_top = -101.547
+margin_right = 327.453
+margin_bottom = -11.5471
+rect_min_size = Vector2( 110, 90 )
+mouse_filter = 2
+Text = "[w]eapon"
+ShortcutKey = "w"
+IsHUD = true
+
+[node name="Grab" parent="Buttons" instance=ExtResource( 12 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -300.082
+margin_top = -201.998
+margin_right = -190.082
+margin_bottom = -111.998
+rect_min_size = Vector2( 110, 90 )
+Text = "[g]rab"
+ShortcutKey = "g"
+IsHUD = true
+
+[node name="Wormhole" parent="Buttons" instance=ExtResource( 12 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1271.73
+margin_top = -513.771
+margin_right = -1161.73
+margin_bottom = -423.771
+rect_min_size = Vector2( 110, 90 )
+Text = "[<]FTL"
+ShortcutKey = "<"
+IsHUD = true
+
+[node name="Control" type="Control" parent="Buttons"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Wormhole2" parent="Buttons/Control" instance=ExtResource( 12 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -31.2983
+margin_top = 165.229
+margin_right = 78.7017
+margin_bottom = 255.229
+rect_min_size = Vector2( 110, 90 )
+Text = "[<]FTL"
+ShortcutKey = ">"
+IsHUD = true
+
+[node name="Inventory" parent="Buttons" instance=ExtResource( 12 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -298.324
+margin_top = -99.0304
+margin_right = -188.324
+margin_bottom = -9.0304
+rect_min_size = Vector2( 110, 90 )
+Text = "[i]nv"
+ShortcutKey = "i"
+IsHUD = true
+
+[node name="Converter" parent="Buttons" instance=ExtResource( 12 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 219.211
+margin_top = -204.515
+margin_right = 329.211
+margin_bottom = -114.515
+rect_min_size = Vector2( 110, 90 )
+Text = "[c]onv"
+ShortcutKey = "c"
+IsHUD = true
+
+[node name="PopupButton" parent="Buttons" instance=ExtResource( 14 )]
+anchor_top = 1.0
+margin_left = 5.9532
+margin_top = -618.662
+margin_right = 145.953
+margin_bottom = -202.662
+
+[node name="ZoomIn" parent="Buttons" instance=ExtResource( 12 )]
+visible = false
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -149.0
+margin_top = -200.0
+margin_right = -84.0
+margin_bottom = -135.0
+Text = "+"
+
+[node name="ZoomOut" parent="Buttons" instance=ExtResource( 12 )]
+visible = false
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -74.0
+margin_top = -201.0
+margin_right = -9.0
+margin_bottom = -136.0
+Text = "-"
+
+[node name="Options" parent="Buttons" instance=ExtResource( 12 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -54.0
+margin_top = -660.0
+margin_right = -13.0
+margin_bottom = -618.0
+ShortcutEnum = 16777217
+AlwaysOnShortcut = false
+
+[node name="Sprite" type="Sprite" parent="Buttons/Options"]
+position = Vector2( 20.3933, 21.3934 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 1664, 0, 64, 64 )
+
+[node name="Question" parent="Buttons" instance=ExtResource( 12 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -356.218
+margin_top = -190.863
+margin_right = -323.218
+margin_bottom = -160.863
+Text = "?"
+ShortcutKey = "?"
+IsHUD = true
+
+[node name="StatusBar" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -1.0
+margin_bottom = -623.0
+mouse_filter = 2
+script = ExtResource( 11 )
+warning_energy_level = 5001
+danger_energy_level = 1001
+
+[node name="StatusWindow" parent="StatusBar" instance=ExtResource( 15 )]
+anchor_right = 1.0
+margin_left = 5.0
+margin_top = 6.0
+margin_right = -3.0
+margin_bottom = 91.0
+bottom_title = "The Maveric"
+content = "Hull : [color=lime]==========[/color] Energy : [color=yellow]25000[/color] Shield : [color=aqua]===============[/color]"
+border_style = "═"
+
+[node name="levelinfo" type="Label" parent="StatusBar/StatusWindow"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -18.0
+margin_top = -42.5
+margin_right = -18.0
+margin_bottom = 6.5
+custom_fonts/font = ExtResource( 6 )
+text = "start"
+align = 2
+valign = 1
+
+[node name="base2" parent="StatusBar" instance=ExtResource( 13 )]
+visible = false
+margin_top = 1.0
+margin_right = -1114.0
+margin_bottom = -601.0
