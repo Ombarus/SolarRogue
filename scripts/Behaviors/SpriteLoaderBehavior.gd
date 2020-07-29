@@ -72,20 +72,8 @@ func SelectRandomPalette(obj : Attributes) -> String:
 	if palettes.size() <= 0:
 		return ""
 	
-	palettes.sort_custom(self, "sort_by_chance")
+	return MersenneTwister.rand_weight(palettes, "path", "chance", "")
 	
-	var max_pond = 0
-	for palette in palettes:
-		max_pond += palette.chance
-	
-	var target = MersenneTwister.rand(max_pond)
-	var selected_item = null
-	var sum = 0
-	for palette in palettes:
-		if sum + palette.chance > target:
-			return palette["path"]
-			
-	return ""
 
 func CanDrawSprite(sprite_data, pos):
 	var current_obj_at_pos = levelLoaderRef.GetTileData(pos)

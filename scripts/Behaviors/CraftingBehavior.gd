@@ -127,7 +127,7 @@ func Craft(recipe_data, input_list, crafter):
 					if info.type == "energy":
 						continue
 					if info["amount"] > 0:
-						BehaviorEvents.emit_signal("OnRemoveItem", crafter, info["src"])
+						BehaviorEvents.emit_signal("OnRemoveItem", crafter, info["src"], info.get("modified_attributes", {}))
 						consumed_data.push_back({"data":info.data, "amount":require["amount"]})
 						info.amount -= require["amount"] # this works if "amount" is 1... but might cause issues if more
 			elif recipe_data.produce == "spare_parts":
@@ -135,7 +135,7 @@ func Craft(recipe_data, input_list, crafter):
 					if info.type == "energy":
 						continue
 					if info["amount"] > 0:
-						BehaviorEvents.emit_signal("OnRemoveItem", crafter, info["src"])
+						BehaviorEvents.emit_signal("OnRemoveItem", crafter, info["src"], info.get("modified_attributes", {}))
 						consumed_data.push_back({"data":info.data, "amount":require["amount"]})
 						info.amount -= require["amount"] # this works if "amount" is 1... but might cause issues if more
 			elif "type" in require:
@@ -146,7 +146,7 @@ func Craft(recipe_data, input_list, crafter):
 						break
 					elif info["type"] == require["type"] and info["amount"] > 0:
 						for i in range(min(require["amount"], info["amount"])):
-							BehaviorEvents.emit_signal("OnRemoveItem", crafter, info["src"])
+							BehaviorEvents.emit_signal("OnRemoveItem", crafter, info["src"], info.get("modified_attributes", {}))
 							consumed += 1
 							info.amount -= 1
 						if consumed >= require["amount"]:
@@ -156,7 +156,7 @@ func Craft(recipe_data, input_list, crafter):
 				for info in loaded_input_data:
 					if Globals.clean_path(info["src"]) == Globals.clean_path(require["src"]) and info["amount"] > 0:
 						for i in range(min(require["amount"], info["amount"])):
-							BehaviorEvents.emit_signal("OnRemoveItem", crafter, info["src"])
+							BehaviorEvents.emit_signal("OnRemoveItem", crafter, info["src"], info.get("modified_attributes", {}))
 							consumed += 1
 							info.amount -= 1
 						if consumed >= require["amount"]:
@@ -167,7 +167,7 @@ func Craft(recipe_data, input_list, crafter):
 			for d in consumed_data:
 				net_energy_change -= d.data.disassembling.energy_cost * d.amount
 				for i in range(d.data.disassembling.count):
-					BehaviorEvents.emit_signal("OnAddItem", crafter, d.data.disassembling.produce)
+					BehaviorEvents.emit_signal("OnAddItem", crafter, d.data.disassembling.produce, {})
 		elif recipe_data.produce == "energy":
 			for d in consumed_data:
 				net_energy_change += d.data.recyclable.energy * d.amount
@@ -177,7 +177,7 @@ func Craft(recipe_data, input_list, crafter):
 				if not "equipment" in product_data:
 					Globals.LevelLoaderRef.RequestObject(recipe_data.produce, Globals.LevelLoaderRef.World_to_Tile(crafter.position))
 				else:
-					BehaviorEvents.emit_signal("OnAddItem", crafter, recipe_data.produce)
+					BehaviorEvents.emit_signal("OnAddItem", crafter, recipe_data.produce, {})
 		
 		
 		num_produced += 1

@@ -1,7 +1,7 @@
 extends "res://scripts/GUI/GUILayoutBase.gd"
 
 signal drop_pressed(dropped_mounts, dropped_cargo)
-signal use_pressed(key)
+signal use_pressed(key, attrib)
 
 onready var _mounts_list : MyItemList = get_node("HBoxContainer/Mounts/MyItemList")
 onready var _cargo_list : MyItemList = get_node("HBoxContainer/Cargo/MyItemList")
@@ -120,7 +120,7 @@ func Swap_Callback():
 		_normal_btns.visible = false
 		_mounting_btns.visible = true
 	else:
-		BehaviorEvents.emit_signal("OnEquipMount", _obj, last_mount.key, last_mount.idx, selected_cargo.src)
+		BehaviorEvents.emit_signal("OnEquipMount", _obj, last_mount.key, last_mount.idx, selected_cargo.src, selected_cargo.get("modified_attributes", null))
 		Init({"object":_obj}) # refresh list
 		pass
 	
@@ -164,15 +164,17 @@ func Use_Callback():
 	#	if data.checked == true:
 	#		dropped_mounts.push_back({"key":data.key, "index":data.index})
 	var selected_cargo = []
+	var selected_attrib = []
 	for item in _cargo_list.Content:
 		if item.selected == true:
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			if "consumable" in data:
 				selected_cargo.push_back(item.src)
+				selected_attrib.push_back(item.get("modified_attributes", {}))
 	
 	if selected_cargo.size() > 0:
 		
-		emit_signal("use_pressed", selected_cargo[0])
+		emit_signal("use_pressed", selected_cargo[0], selected_attrib[0])
 		Close_Callback()
 		#TODO: Might want to close only on some consumable but not all ?
 		#Init({"object":_obj}) # refresh list
@@ -211,6 +213,7 @@ func Init(init_param):
 	
 	var cargo : Array = _obj.modified_attributes.cargo.content
 	var mounts : Dictionary = _obj.modified_attributes.mounts
+	var mount_variations : Dictionary = _obj.modified_attributes.mount_attributes
 	
 	var mount_content := []
 	var keys : Array = mounts.keys()
@@ -222,7 +225,13 @@ func Init(init_param):
 		for src in items:
 			if src != null and src != "":
 				var item = Globals.LevelLoaderRef.LoadJSON(src)
-				mount_content.push_back({"src":mounts[key][index], "key":key, "idx":index, "name_id":item.name_id, "equipped":false, "header":false, "icon":item.icon})
+				var variation = mount_variations[key][index]
+				var display_name = item.name_id
+				if not variation.empty() and variation.has("selected_variation"):
+					var variation_data = Globals.LevelLoaderRef.LoadJSON(variation["selected_variation"])
+					if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
+						display_name = variation_data["prefix"] + " " + display_name
+				mount_content.push_back({"src":mounts[key][index], "key":key, "idx":index, "modified_attributes":variation, "display_name_id":display_name, "name_id":item.name_id, "equipped":false, "header":false, "icon":item.icon})
 			else:
 				mount_content.push_back({"src":"", "key":key, "idx":index, "name_id":"Empty", "equipped":false, "header":false})
 			index += 1
@@ -245,7 +254,17 @@ func Init(init_param):
 		var icon_data = data.icon
 		if typeof(data.icon) == TYPE_ARRAY:
 			icon_data = data.icon[0]
-		cargo_item_by_category[cat].push_back({"src":row.src, "count":row.count, "display_name_id": counting + Globals.mytr(data.name_id), "name_id": counting + Globals.mytr(data.name_id), "equipped":false, "header":false, "icon":icon_data})
+			
+		var variation_src : String = Globals.get_data(row, "modified_attributes.selected_variation", "")
+		var prefix := ""
+		if not variation_src.empty():
+			var variation_data = Globals.LevelLoaderRef.LoadJSON(variation_src)
+			if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
+				prefix = Globals.mytr(variation_data["prefix"]) + " "
+		var display_name = counting
+		display_name += prefix
+		display_name += Globals.mytr(data.name_id)
+		cargo_item_by_category[cat].push_back({"src":row.src, "modified_attributes":row.get("modified_attributes", null), "count":row.count, "display_name_id": display_name, "name_id": display_name, "equipped":false, "header":false, "icon":icon_data})
 		
 	keys = cargo_item_by_category.keys()
 	keys.sort_custom(self, "sort_categories")
@@ -296,7 +315,7 @@ func DoMounting():
 		Init({"object":_obj}) # refresh list
 		return
 		
-	BehaviorEvents.emit_signal("OnEquipMount", _obj, selected_mount.key, selected_mount.idx, selected_cargo.src)
+	BehaviorEvents.emit_signal("OnEquipMount", _obj, selected_mount.key, selected_mount.idx, selected_cargo.src, selected_cargo.get("modified_attributes", null))
 	Init({"object":_obj}) # refresh list
 
 func UpdateNormalVisibility():
@@ -391,7 +410,7 @@ func OnDragDropCompleted_Callback(origin_data, destination_data):
 			Init({"object":_obj})
 	# Drop item on Mount point
 	else:
-		BehaviorEvents.emit_signal("OnEquipMount", _obj, destination_data.key, destination_data.idx, origin_data.src)
+		BehaviorEvents.emit_signal("OnEquipMount", _obj, destination_data.key, destination_data.idx, origin_data.src, origin_data.get("modified_attributes", null))
 		Init({"object":_obj})
 	
 func _disable_button(btn : ButtonBase, is_disabled : bool):

@@ -1,0 +1,11 @@
+{
+	"name_id":"Light Shield",
+	"type":"effect",
+	"prefix":"Light",
+	"attributes": {
+			"must_equip":true,
+			"move_multiplier":0.90, 
+			"shield_multiplier":-0.20
+		}
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"name_id":"Fast Shield",
+	"type":"effect",
+	"prefix":"Fast",
+	"attributes": {
+			"must_equip":true,
+			"shield_multiplier":-0.20,
+			"hp_regen_per_ap_multiplier":1.20,
+			"energy_cost_per_hp_multiplier":1.5
+		}
+	}
+}

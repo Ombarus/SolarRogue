@@ -22,30 +22,14 @@ func OnLogLine_CallBack(text, fmt=[]):
 	_log_lines.push_back(Globals.mytr(l, fmt))
 	update_log(true)
 	
-func sort_by_chance(a, b):
-	if a.weight > b.weight:
-		return true
-	return false
 	
 func choose_random_line(text : Dictionary) -> String:
 	var pondered = []
 	for l in text:
 		pondered.push_back({"text":l, "weight":text[l]})
 	
-	pondered.sort_custom(self, "sort_by_chance")
+	return MersenneTwister.rand_weight(pondered, "text", "weight", "Error loading random line")
 	
-	var max_pond = 0
-	for l in pondered:
-		max_pond += l.weight
-	
-	var target = MersenneTwister.rand(max_pond)
-	var sum = 0
-	for l in pondered:
-		if sum + l.weight > target:
-			return l.text
-		sum += l.weight
-		
-	return "Error loading random line"
 
 func update_log(animate=false):
 	var old_lines = _log_lines.slice(0,-2)

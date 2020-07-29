@@ -75,7 +75,7 @@ func Sale_Callback():
 		if "key" in selected_item and "idx" in selected_item:
 			BehaviorEvents.emit_signal("OnRemoveMount", _lobj, selected_item.key, selected_item.idx)
 		BehaviorEvents.emit_signal("OnRemoveItem", _lobj, selected_item.src)
-		BehaviorEvents.emit_signal("OnAddItem", _robj, selected_item.src)
+		BehaviorEvents.emit_signal("OnAddItem", _robj, selected_item.src, selected_item.get("modified_attributes", {}))
 		BehaviorEvents.emit_signal("OnUseEnergy", _lobj, -price)
 		total += price
 	BehaviorEvents.emit_signal("OnTradingDone", _lobj, _robj)
@@ -127,7 +127,7 @@ func Buy_Callback():
 	var total = 0
 	for c in range(selected_item["count"]):
 		BehaviorEvents.emit_signal("OnRemoveItem", _robj, selected_item.src)
-		BehaviorEvents.emit_signal("OnAddItem", _lobj, selected_item.src)
+		BehaviorEvents.emit_signal("OnAddItem", _lobj, selected_item.src, selected_item.get("modified_attributes", {}))
 		BehaviorEvents.emit_signal("OnUseEnergy", _lobj, price)
 		total += price
 	BehaviorEvents.emit_signal("OnTradingDone", _lobj, _robj)
@@ -285,9 +285,9 @@ func DoMountingBuy():
 	if selected_item != null and selected_item.src.empty() == true:
 		var price : int = GetPrice(to_mount, false)
 		if "key" in selected_item and "idx" in selected_item:
-			BehaviorEvents.emit_signal("OnEquipMount", _lobj, selected_item.key, selected_item.idx, to_mount.src)
+			BehaviorEvents.emit_signal("OnEquipMount", _lobj, selected_item.key, selected_item.idx, to_mount.src, to_mount.get("modified_attributes", null))
 		else:
-			BehaviorEvents.emit_signal("OnAddItem", _lobj, to_mount.src)
+			BehaviorEvents.emit_signal("OnAddItem", _lobj, to_mount.src, to_mount.get("modified_attributes", {}))
 		BehaviorEvents.emit_signal("OnRemoveItem", _robj, to_mount.src)
 		BehaviorEvents.emit_signal("OnUseEnergy", _lobj, price)
 		BehaviorEvents.emit_signal("OnTradingDone", _lobj, _robj)

@@ -133,18 +133,19 @@ func OnPickup_Callback(picker, picked):
 		#	continue
 		picker.set_attrib("cargo.volume_used", picker.get_attrib("cargo.volume_used") + obj.get_attrib("equipment.volume"))
 		inventory_space -= obj.get_attrib("equipment.volume")
+		var variation_src = obj.get_attrib("selected_variation", "")
 		if is_player:
 				BehaviorEvents.emit_signal("OnLogLine", "Tractor beam has brought %s abord", [Globals.mytr(obj.get_attrib("name_id"))])
 		if obj.get_attrib("equipment.stackable"):
 			var found = false
 			for item in picker.get_attrib("cargo.content"):
-				if Globals.clean_path(item.src) == Globals.clean_path(obj.get_attrib("src")):
+				if Globals.clean_path(item.src) == Globals.clean_path(obj.get_attrib("src")) and Globals.clean_path(variation_src) == Globals.clean_path(Globals.get_data(item, "variation", "")):
 					found = true
 					item.count += 1
 			if not found:
-				picker.get_attrib("cargo.content").push_back({"src": obj.base_attributes.src, "count":1})
+				picker.get_attrib("cargo.content").push_back({"src": obj.base_attributes.src, "count":1, "modified_attributes":{"selected_variation":variation_src}})
 		else:
-			picker.get_attrib("cargo.content").push_back({"src": obj.base_attributes.src, "count":1})
+			picker.get_attrib("cargo.content").push_back({"src": obj.base_attributes.src, "count":1, "modified_attributes":{"selected_variation":variation_src}})
 		total_pickup_ap += pickup_speed
 		BehaviorEvents.emit_signal("OnRequestObjectUnload", obj)
 		obj = null
@@ -154,7 +155,7 @@ func OnPickup_Callback(picker, picked):
 	filtered_obj.clear() # the objects have been destroyed, just want to make sure I don't forget about it
 	
 
-func OnDropCargo_Callback(dropper, item_id, count):
+func OnDropCargo_Callback(dropper, item_id, modified_attributes, count):
 	if not dropper.modified_attributes.has("cargo"):
 		dropper.init_cargo()
 	var cargo = dropper.get_attrib("cargo.content")
@@ -163,12 +164,17 @@ func OnDropCargo_Callback(dropper, item_id, count):
 	var drop_speed = dropper.get_attrib("cargo.drop_ap", 0)
 	var is_player = dropper.get_attrib("type") == "player"
 	var modif_data = null
+	if modified_attributes != null and not modified_attributes.empty():
+		modif_data = modified_attributes
 	if is_player:
-		# hack to make sure when player does godot he doesn't get interrupted by his own drops
-		modif_data = {"memory": {"was_seen_by":true}}
+		# hack to make sure when player does goto he doesn't get interrupted by his own drops
+		if modif_data == null:
+			modif_data = {}
+		modif_data["memory"] ={"was_seen_by":true}
 	var total_ap_cost = 0
 	for item in cargo:
-		if Globals.clean_path(item_id) == Globals.clean_path(item.src):
+		if Globals.clean_path(item_id) == Globals.clean_path(item.src) and \
+			Globals.clean_path(Globals.get_data(item, "selected_variation", "")) == Globals.clean_path(Globals.get_data(modified_attributes, "selected_variation", "")):
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			var amount_dropped = 0
 			if item.count > count:
@@ -207,7 +213,7 @@ func OnDropMount_Callback(dropper, slot_name, index):
 	dropper.set_attrib("mounts." + slot_name, items)
 	BehaviorEvents.emit_signal("OnMountRemoved", dropper, slot_name, item_id)
 	
-func OnRemoveMount_Callback(dropper, slot_name, index):
+func OnRemoveMount_Callback(dropper, slot_name, index, mount_attributes):
 	var items = dropper.get_attrib("mounts." + slot_name)
 	var item_id = items[index]
 	var data = Globals.LevelLoaderRef.LoadJSON(item_id)
@@ -215,24 +221,28 @@ func OnRemoveMount_Callback(dropper, slot_name, index):
 	if "equipment" in data and "unequip_ap" in data.equipment and data.equipment.unequip_ap > 0:
 		BehaviorEvents.emit_signal("OnUseAP", dropper, data.equipment.unequip_ap)
 	#Globals.LevelLoaderRef.RequestObject(item_id, Globals.LevelLoaderRef.World_to_Tile(dropper.position))
-	BehaviorEvents.emit_signal("OnAddItem", dropper, items[index])
+	BehaviorEvents.emit_signal("OnAddItem", dropper, items[index], mount_attributes)
 	items[index] = ""
 	dropper.set_attrib("mounts." + slot_name, items)
 	BehaviorEvents.emit_signal("OnMountRemoved", dropper, slot_name, item_id)
 	
-func OnEquipMount_Callback(equipper, slot_name, index, item_id):
+func OnEquipMount_Callback(equipper, slot_name, index, item_id, modified_attributes):
 	# Check if slot already has something equipped
 	# Add old item to cargo
 	# Remove current equipment (takes AP)
 	# Remove item from cargo
 	# Add item_id to mount point
+	if modified_attributes == null:
+		modified_attributes = {}
 	var new_data = null
 	if item_id != null and item_id != "":
 		new_data = Globals.LevelLoaderRef.LoadJSON(item_id)
 	var attrib_getter = "mounts." + slot_name
+	var var_getter = "mount_attributes." + slot_name
 	var items = equipper.get_attrib(attrib_getter)
+	var variations = equipper.get_attrib(var_getter)
 	if items != null and items[index] != "":
-		BehaviorEvents.emit_signal("OnAddItem", equipper, items[index])
+		BehaviorEvents.emit_signal("OnAddItem", equipper, items[index], modified_attributes)
 		var old_id = items[index]
 		var old_data : Dictionary = Globals.LevelLoaderRef.LoadJSON(items[index])
 		var unequip_ap : int = Globals.get_data(old_data, "equipment.equip_ap", 0)
@@ -245,16 +255,19 @@ func OnEquipMount_Callback(equipper, slot_name, index, item_id):
 	elif equipper.get_attrib("type") == "player" and new_data != null:
 		BehaviorEvents.emit_signal("OnLogLine", "Installed %s", [Globals.mytr(new_data.name_id)])
 		
-	BehaviorEvents.emit_signal("OnRemoveItem", equipper, item_id)
+	BehaviorEvents.emit_signal("OnRemoveItem", equipper, item_id, modified_attributes)
 	items[index] = item_id
+	variations[index] = modified_attributes
+	print("OnEquipMount " + str(variations))
 	equipper.set_attrib(attrib_getter, items)
+	equipper.set_attrib(var_getter, variations)
 	var equip_ap : int = Globals.get_data(new_data, "equipment.equip_ap", 0)
 	if equip_ap > 0:
 		BehaviorEvents.emit_signal("OnUseAP", equipper, equip_ap)
 	BehaviorEvents.emit_signal("OnMountAdded", equipper, slot_name, item_id)
 
 #TODO: Fix logic flaws (make sure we're not changing cargo in base_attributes), (check we won't exceed volume before adding)
-func OnAddItem_Callback(picker, item_id):
+func OnAddItem_Callback(picker, item_id, modified_attributes):
 	if not picker.modified_attributes.has("cargo"):
 		picker.init_cargo()
 	var cargo = picker.get_attrib("cargo.content")
@@ -267,7 +280,7 @@ func OnAddItem_Callback(picker, item_id):
 				found = true
 				item.count += 1
 	if found == false:
-		cargo.push_back({"src": item_id, "count":1})
+		cargo.push_back({"src": item_id, "count":1, "modified_attributes":modified_attributes})
 		
 	picker.set_attrib("cargo.volume_used", picker.get_attrib("cargo.volume_used") + volume)
 	
@@ -276,14 +289,16 @@ func OnAddItem_Callback(picker, item_id):
 		var should_enable : bool = cargo.size() > 0
 		picker.set_attrib("equipment.disabled", should_enable)
 	
-func OnRemoveItem_Callback(holder, item_id, num_remove=1): #-1 to remove everything
+func OnRemoveItem_Callback(holder, item_id, modified_attributes, num_remove=1): #-1 to remove everything
 	if not holder.modified_attributes.has("cargo"):
 		holder.init_cargo()
 	var cargo = holder.get_attrib("cargo.content")
 	var index_to_delete = []
 	var i = 0
+	var item_variation = Globals.clean_path(modified_attributes.get("selected_variation", ""))
 	for item in cargo:
-		if Globals.clean_path(item_id) == Globals.clean_path(item.src):
+		var cargo_variation = Globals.clean_path(Globals.get_data("modified_attributes.selected_variation", ""))
+		if Globals.clean_path(item_id) == Globals.clean_path(item.src) and cargo_variation == item_variation:
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			if num_remove < 0:
 				num_remove = item.count
@@ -310,22 +325,26 @@ func OnReplaceCargo_Callback(obj, new_cargo):
 	pass
 
 # new_mounts [{mount_key, item.mount_index, item.src_key},...]
-func OnReplaceMounts_Callback(obj, new_mounts):
+func OnReplaceMounts_Callback(obj, new_mounts, new_variations):
 	if not obj.modified_attributes.has("mounts"):
 		obj.init_mounts()
 	var mounts = obj.get_attrib("mounts")
 	for key in mounts:
 		var items = mounts[key]
+		var variations = obj.get_attrib("mounts." + key, [])
 		for i in range(items.size()):
 			var item_id = items[i]
+			var variation_src = ""
+			if variations.size() < i:
+				variation_src = variations[i]
 			var new_mounts_val = null
 			for n in new_mounts:
-				if n.mount_key == key and n.mount_index == i and Globals.clean_path(n.src_key) == Globals.clean_path(item_id):
+				if n.mount_key == key and n.mount_index == i and Globals.clean_path(n.src_key) == Globals.clean_path(item_id) and Globals.clean_path(n.src_variation) == Globals.clean_path(variation_src):
 					break
 				elif n.mount_key == key and n.mount_index == i:
 					items[i] = ""
 					BehaviorEvents.emit_signal("OnMountRemoved", obj, key, item_id)
-					OnEquipMount_Callback(obj, key, i, n.src_key)
+					OnEquipMount_Callback(obj, key, i, n.src_key, n.src_variation)
 					break
 			
 		
@@ -346,7 +365,7 @@ func OnClearCargo_Callback(holder):
 	# Need to be a copy since we'll be removing item as we iterate on it
 	var cargo = holder.get_attrib("cargo.content").duplicate()
 	for item in cargo:
-		OnRemoveItem_Callback(holder, item.src, -1)
+		OnRemoveItem_Callback(holder, item.src, item.get("modified_attributes", {}), -1)
 		
 #objects = [{"src":"bleh.json", "count":3}]
 func GetTotalVolume(objects):

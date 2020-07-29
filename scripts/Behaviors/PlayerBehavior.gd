@@ -314,7 +314,7 @@ func ProcessGoingHome():
 			BehaviorEvents.emit_signal("OnPushGUI", "WelcomeScreen", {"player_name":playerNode.get_attrib("player_name")})
 			BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]This wormhole emits a strange energy signature that prevents you from jumping back home![/color]")
 
-func OnUseInventory_Callback(key):
+func OnUseInventory_Callback(key, attrib):
 	var data = Globals.LevelLoaderRef.LoadJSON(key)
 	var energy_used = Globals.get_data(data, "consumable.energy")
 	var ap_used = Globals.get_data(data, "consumable.ap")
@@ -323,7 +323,7 @@ func OnUseInventory_Callback(key):
 		BehaviorEvents.emit_signal("OnUseAP", playerNode, ap_used)
 	if energy_used != null and energy_used > 0:
 		BehaviorEvents.emit_signal("OnUseEnergy", playerNode, energy_used)
-	BehaviorEvents.emit_signal("OnRemoveItem", playerNode, key)
+	BehaviorEvents.emit_signal("OnRemoveItem", playerNode, key, attrib)
 	
 
 func OnDropIventory_Callback(dropped_mounts, dropped_cargo):
@@ -334,7 +334,7 @@ func OnDropIventory_Callback(dropped_mounts, dropped_cargo):
 	UpdateButtonVisibility()
 		
 	for drop_data in dropped_cargo:
-		BehaviorEvents.emit_signal("OnDropCargo", playerNode, drop_data.src, drop_data.count)
+		BehaviorEvents.emit_signal("OnDropCargo", playerNode, drop_data.src, drop_data.modified_attributes, drop_data.count)
 	
 func OnRequestObjectUnload_Callback(obj):
 	if obj.get_attrib("type") == "player" and obj.get_attrib("ghost_memory") == null:
@@ -883,25 +883,33 @@ func ProcessTakeSelection(target, tile):
 func OnTradingCompleted_Callback():
 	pass
 	
-func OnTransferItemCompleted_Callback(lobj, l_mounts, l_cargo, robj, r_mounts, r_cargo):
+func OnTransferItemCompleted_Callback(lobj, l_mounts, l_variations, l_cargo, robj, r_mounts, r_variations, r_cargo):
 	lobj.init_mounts()
 	lobj.init_cargo()
 	robj.init_mounts()
 	robj.init_cargo()
 	
-	BehaviorEvents.emit_signal("OnReplaceMounts", lobj, l_mounts)
-	BehaviorEvents.emit_signal("OnReplaceMounts", robj, r_mounts)
+	BehaviorEvents.emit_signal("OnReplaceMounts", lobj, l_mounts, l_variations)
+	BehaviorEvents.emit_signal("OnReplaceMounts", robj, r_mounts, r_variations)
 	
 	BehaviorEvents.emit_signal("OnClearCargo", lobj)
 	BehaviorEvents.emit_signal("OnClearCargo", robj)
-	for item in l_cargo:
+	for k in range(l_cargo.size()):
 		#TODO: optimize, allow passing how many
+		var item = l_cargo[k]
+		var attrib = null
+		if l_variations != null and k < l_variations.size():
+			attrib = l_variations[k]
 		for i in range(item.amount):
-			BehaviorEvents.emit_signal("OnAddItem", lobj, item.src_key)
+			BehaviorEvents.emit_signal("OnAddItem", lobj, item.src_key, attrib)
 	
-	for item in r_cargo:
+	for k in range(r_cargo.size()):
+		var item = r_cargo[k]
+		var attrib = null
+		if r_variations != null and k < r_variations.size():
+			attrib = r_variations[k]
 		for i in range(item.amount):
-			BehaviorEvents.emit_signal("OnAddItem", robj, item.src_key)
+			BehaviorEvents.emit_signal("OnAddItem", robj, item.src_key, attrib)
 	
 	#TODO: Should the AP use sum the total # of item moved and equip/unequip ap ? (probably ?)
 	if lobj.get_attrib("cargo.pickup_ap") != null:

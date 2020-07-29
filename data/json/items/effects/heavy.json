@@ -1,0 +1,11 @@
+{
+	"name_id":"Heavy Shield",
+	"type":"effect",
+	"prefix":"Heavy",
+	"attributes": {
+			"must_equip":true,
+			"move_multiplier":1.1, 
+			"shield_multiplier":0.20
+		}
+	}
+}

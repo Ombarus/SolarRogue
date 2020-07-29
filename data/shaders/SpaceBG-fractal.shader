@@ -12,15 +12,17 @@ uniform float darkmatter = 0.300;
 uniform float distfading = 0.730;
 uniform float saturation = 0.850;
 
+uniform vec2 camera_offset;
+
 void fragment() {
 	vec2 uv = UV / 1000.0;
 	uv = uv / SCREEN_PIXEL_SIZE * 2.0;
 	uv.y *= SCREEN_PIXEL_SIZE.y / SCREEN_PIXEL_SIZE.x;
 	vec3 dir = vec3(uv*zoom, 1.);
-	float time = 1.0 * speed + 0.25;
+	vec2 time = camera_offset * speed / 10240.0;
 	
 	vec3 from = vec3(1., 0.5, 0.5);
-	from += vec3(time*2., time, -2.);
+	from += vec3(time.x, time.y, -2.);
 	
 	float s = 0.1;
 	float fade = 1.0;

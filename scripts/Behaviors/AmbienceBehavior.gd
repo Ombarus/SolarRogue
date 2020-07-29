@@ -21,7 +21,7 @@ func _ready():
 	BehaviorEvents.connect("OnMoveCargo", self, "OnMoveCargo_Callback")
 	
 	BehaviorEvents.connect("OnDropCargo", self, "OnDrop_Callback")
-	BehaviorEvents.connect("OnDropMount", self, "OnDrop_Callback")
+	BehaviorEvents.connect("OnDropMount", self, "OnDropMount_Callback")
 	BehaviorEvents.connect("OnObjectPicked", self, "OnPickup_Callback")
 	BehaviorEvents.connect("OnTradingDone", self, "OnTradingDone_Callback")
 	
@@ -50,7 +50,13 @@ func OnTradingDone_Callback(shipa, shipb):
 	
 	get_node("Trade").play()
 	
-func OnDrop_Callback(dropper, item_id, countorindex):
+func OnDropMount_Callback(dropper, item_id, index):
+	drop_sound(dropper)
+	
+func OnDrop_Callback(dropper, item_id, variation_src, count):
+	drop_sound(dropper)
+	
+func drop_sound(dropper):
 	var is_player = dropper.get_attrib("type") == "player"
 	if not is_player:
 		return

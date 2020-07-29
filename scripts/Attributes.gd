@@ -113,6 +113,17 @@ func init_cargo():
 		modified_attributes.cargo["volume_used"] += vol * item.count
 
 func init_mounts():
+	if base_attributes.has("mounts") and not modified_attributes.has("mount_attributes"):
+		var mounts = get_attrib("mounts")
+		var mount_variations = {}
+		for key in mounts:
+			for item in mounts[key]:
+				if not mount_variations.has(key):
+					mount_variations[key] = []
+				mount_variations[key].push_back({})
+				
+		set_attrib("mount_attributes", mount_variations)
+		
 	if modified_attributes.has("mounts") or not base_attributes.has("mounts"):
 		return
 		

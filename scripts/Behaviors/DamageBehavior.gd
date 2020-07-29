@@ -124,7 +124,7 @@ func consume(shooter, weapon_data):
 		shooter.init_cargo()
 		for item in shooter.get_attrib("cargo.content"):
 			if ammo in item.src && item.count > 0:
-				BehaviorEvents.emit_signal("OnRemoveItem", shooter, item.src)
+				BehaviorEvents.emit_signal("OnRemoveItem", shooter, item.src, item.get("modified_attributes", {}))
 				
 	
 	

@@ -12,7 +12,7 @@ func _ready():
 	BehaviorEvents.connect("OnLogLine", self, "OnLogLine_Callback")
 	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
 
-func OnLogLine_Callback(msg, fmt):
+func OnLogLine_Callback(msg, fmt=[]):
 	_cur_chance = base_chance
 	_log_last_turn = true
 	

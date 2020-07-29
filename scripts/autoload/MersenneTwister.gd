@@ -102,3 +102,38 @@ func _generate_numbers():
 	
 func _cap(v : int) -> int:
 	return v & RNG_MAX
+
+
+class Sorter:
+	var sort_key
+	func _init(k):
+		sort_key = k
+		
+	func sort_function(a, b):
+		if a[sort_key] > b[sort_key]:
+			return true
+		return false
+		
+# d should be an array of dictionary with two keys, one for the value and one for the weight
+func rand_weight(d : Array, val_name : String, weight_name : String, default=null):
+	var sorter := Sorter.new(weight_name)
+	d.sort_custom(sorter, "sort_function")
+	var max_pond = 0
+	for item in d:
+		max_pond += item[weight_name]
+	
+	var target = MersenneTwister.rand(max_pond)
+	var sum = 0
+	for item in d:
+		if sum + item[weight_name] >= target:
+			return item[val_name]
+		sum += item[weight_name]
+			
+	return default
+
+
+func sort_by_chance(a, b):
+	if a.chance > b.chance:
+		return true
+	return false
+	

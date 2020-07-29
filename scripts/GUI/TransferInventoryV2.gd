@@ -43,9 +43,9 @@ func _ready():
 
 func HowManyDiag_Callback(num):
 	_transfered_cargo.count = num
-	BehaviorEvents.emit_signal("OnRemoveItem", _transfered_ship, _transfered_cargo.src, _transfered_cargo.count)
+	BehaviorEvents.emit_signal("OnRemoveItem", _transfered_ship, _transfered_cargo.src, _transfered_cargo.get("modified_attributes", {}), _transfered_cargo.count)
 	for i in range(_transfered_cargo.count):
-		BehaviorEvents.emit_signal("OnAddItem", _transfered_to, _transfered_cargo.src)
+		BehaviorEvents.emit_signal("OnAddItem", _transfered_to, _transfered_cargo.src, _transfered_cargo.get("modified_attributes", {}))
 	
 	BehaviorEvents.emit_signal("OnMoveCargo", _transfered_ship, _transfered_to)
 	# Update inventory lists
@@ -175,8 +175,8 @@ func Transfer_Callback():
 				"max_value":selected_item.count})
 	else:
 		BehaviorEvents.emit_signal("OnMoveCargo", selected_ship, to_ship)
-		BehaviorEvents.emit_signal("OnRemoveItem", selected_ship, selected_item.src)
-		BehaviorEvents.emit_signal("OnAddItem", to_ship, selected_item.src)
+		BehaviorEvents.emit_signal("OnRemoveItem", selected_ship, selected_item.src, selected_item.get("modified_attributes", {}))
+		BehaviorEvents.emit_signal("OnAddItem", to_ship, selected_item.src, selected_item.get("modified_attributes", {}))
 		ReInit()
 	
 
@@ -206,7 +206,7 @@ func TransferAll(from, to, from_list, to_list):
 			var index = 0
 			for to_item in to_content:
 				if "src" in to_item and "key" in to_item and (to_item.src == null or to_item.src == "") and to_item.key == item.key:
-					BehaviorEvents.emit_signal("OnEquipMount", to, to_item.key, to_item.idx, item.src)
+					BehaviorEvents.emit_signal("OnEquipMount", to, to_item.key, to_item.idx, item.src, item.get("modified_attributes", null))
 					to_item.src = item.src # to signal the rest of the loop that this slot is now occupied before the actual refresh in reinit()
 					added = true
 					no_mount = false
@@ -215,10 +215,10 @@ func TransferAll(from, to, from_list, to_list):
 		var num = 1
 		if "count" in item:
 			num = item.count
-		BehaviorEvents.emit_signal("OnRemoveItem", from, item.src, num)
+		BehaviorEvents.emit_signal("OnRemoveItem", from, item.src, item.get("modified_attributes", {}), num)
 		if added == false:
 			for i in range(num):
-				BehaviorEvents.emit_signal("OnAddItem", to, item.src)
+				BehaviorEvents.emit_signal("OnAddItem", to, item.src, item.get("modified_attributes", {}))
 		
 	if no_mount: # just for sound
 		BehaviorEvents.emit_signal("OnMoveCargo", from, to)
@@ -295,6 +295,12 @@ func GenerateContent(list_node, mounts, cargo):
 	var keys = mounts.keys()
 	keys.sort_custom(self, "sort_categories")
 	for key in keys:
+#		var variation = mount_variations[key][index]
+#				var display_name = item.name_id
+#				if not variation.empty() and variation.has("selected_variation"):
+#					var variation_data = Globals.LevelLoaderRef.LoadJSON(variation["selected_variation"])
+#					if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
+#						display_name = variation_data["prefix"] + " " + display_name
 		mount_content.push_back({"key":key, "name_id":key, "equipped":false, "header":true})
 		var items : Array = mounts[key]
 		var index = 0
@@ -308,6 +314,16 @@ func GenerateContent(list_node, mounts, cargo):
 		
 	mount_content.push_back({"src":"", "name_id":"Cargo Contents", "equipped":false, "header":true})	
 	for row in cargo:
+#		var variation_src : String = Globals.get_data(row, "modified_attributes.selected_variation", "")
+#		var prefix := ""
+#		if not variation_src.empty():
+#			var variation_data = Globals.LevelLoaderRef.LoadJSON(variation_src)
+#			if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
+#				prefix = Globals.mytr(variation_data["prefix"]) + " "
+#		var display_name = counting
+#		display_name += prefix
+#		display_name += Globals.mytr(data.name_id)
+		
 		var data = Globals.LevelLoaderRef.LoadJSON(row.src)
 		var counting = ""
 		if row.count > 1:
@@ -365,21 +381,21 @@ func DoMounting():
 		var added = false
 		if "key" in from_item and "idx" in from_item:
 			if "key" in to_item and to_item.src != "":
-				BehaviorEvents.emit_signal("OnEquipMount", from_ship, to_item.key, to_item.idx, to_item.src)
+				BehaviorEvents.emit_signal("OnEquipMount", from_ship, to_item.key, to_item.idx, to_item.src, to_item.get("modified_attributes", null))
 				added = true
 			else:
 				BehaviorEvents.emit_signal("OnRemoveMount", from_ship, from_item.key, from_item.idx)
-		BehaviorEvents.emit_signal("OnRemoveItem", from_ship, from_item.src)
+		BehaviorEvents.emit_signal("OnRemoveItem", from_ship, from_item.src, from_item.get("modified_attributes", {}))
 		if "key" in to_item:
 			if to_item.src != "":
 				BehaviorEvents.emit_signal("OnRemoveMount", to_ship, to_item.key, to_item.idx)
-				BehaviorEvents.emit_signal("OnRemoveItem", to_ship, to_item.src)
+				BehaviorEvents.emit_signal("OnRemoveItem", to_ship, to_item.src, to_item.get("modified_attributes", {}))
 				if added == false:
-					BehaviorEvents.emit_signal("OnAddItem", from_ship, to_item.src)
-			BehaviorEvents.emit_signal("OnEquipMount", to_ship, to_item.key, to_item.idx, from_item.src)
+					BehaviorEvents.emit_signal("OnAddItem", from_ship, to_item.src, to_item.get("modified_attributes", {}))
+			BehaviorEvents.emit_signal("OnEquipMount", to_ship, to_item.key, to_item.idx, from_item.src, from_item.get("modified_attributes", null))
 		else:
 			BehaviorEvents.emit_signal("OnMoveCargo", from_item, to_ship)
-			BehaviorEvents.emit_signal("OnAddItem", to_ship, from_item.src)
+			BehaviorEvents.emit_signal("OnAddItem", to_ship, from_item.src, from_item.get("modified_attributes", {}))
 			
 	ReInit()
 	BehaviorEvents.emit_signal("OnEndParallelAction", from_ship)
@@ -451,22 +467,22 @@ func OnDragDropCompleted_Callback(origin_data, destination_data):
 					"max_value":origin_data.count})
 		else:
 			BehaviorEvents.emit_signal("OnMoveCargo", origin_ship, dest_ship)
-			BehaviorEvents.emit_signal("OnRemoveItem", origin_ship, origin_data.src)
-			BehaviorEvents.emit_signal("OnAddItem", dest_ship, origin_data.src)
+			BehaviorEvents.emit_signal("OnRemoveItem", origin_ship, origin_data.src, origin_data.get("modified_attributes", {}))
+			BehaviorEvents.emit_signal("OnAddItem", dest_ship, origin_data.src, origin_data.get("modified_attributes", {}))
 	# Cargo to Mount
 	elif dest_is_mount == true and origin_is_mount == false:
 		BehaviorEvents.emit_signal("OnRemoveItem", origin_ship, origin_data.src)
 		if destination_data.src != "": # Swap
 			BehaviorEvents.emit_signal("OnRemoveMount", dest_ship, destination_data.key, destination_data.idx)
 			BehaviorEvents.emit_signal("OnRemoveItem", dest_ship, destination_data.src)
-			BehaviorEvents.emit_signal("OnAddItem", origin_ship, destination_data.src)
-		BehaviorEvents.emit_signal("OnAddItem", dest_ship, origin_data.src)
-		BehaviorEvents.emit_signal("OnEquipMount", dest_ship, destination_data.key, destination_data.idx, origin_data.src)
+			BehaviorEvents.emit_signal("OnAddItem", origin_ship, destination_data.src, destination_data.get("modified_attributes", {}))
+		BehaviorEvents.emit_signal("OnAddItem", dest_ship, origin_data.src, origin_data.get("modified_attributes", {}))
+		BehaviorEvents.emit_signal("OnEquipMount", dest_ship, destination_data.key, destination_data.idx, origin_data.src, origin_data.get("modified_attributes", null))
 	# Mount to Cargo
 	elif dest_is_mount == false and origin_is_mount == true:
 		BehaviorEvents.emit_signal("OnRemoveMount", origin_ship, origin_data.key, origin_data.idx)
 		BehaviorEvents.emit_signal("OnRemoveItem", origin_ship, origin_data.src)
-		BehaviorEvents.emit_signal("OnAddItem", dest_ship, origin_data.src)
+		BehaviorEvents.emit_signal("OnAddItem", dest_ship, origin_data.src, origin_data.get("modified_attributes", {}))
 	# Mount to Mount
 	elif dest_is_mount == true and origin_is_mount == true:
 		if destination_data.src != "":
@@ -476,11 +492,11 @@ func OnDragDropCompleted_Callback(origin_data, destination_data):
 			BehaviorEvents.emit_signal("OnRemoveMount", origin_ship, origin_data.key, origin_data.idx)
 			BehaviorEvents.emit_signal("OnRemoveItem", origin_ship, origin_data.src)
 		if destination_data.src != "":
-			BehaviorEvents.emit_signal("OnAddItem", origin_ship, destination_data.src)
-			BehaviorEvents.emit_signal("OnEquipMount", origin_ship, origin_data.key, origin_data.idx, destination_data.src)
+			BehaviorEvents.emit_signal("OnAddItem", origin_ship, destination_data.src, destination_data.get("modified_attributes", {}))
+			BehaviorEvents.emit_signal("OnEquipMount", origin_ship, origin_data.key, origin_data.idx, destination_data.src, destination_data.get("modified_attributes", null))
 		if origin_data.src != "":
-			BehaviorEvents.emit_signal("OnAddItem", dest_ship, origin_data.src)
-			BehaviorEvents.emit_signal("OnEquipMount", dest_ship, destination_data.key, destination_data.idx, origin_data.src)
+			BehaviorEvents.emit_signal("OnAddItem", dest_ship, origin_data.src, origin_data.get("modified_attributes", {}))
+			BehaviorEvents.emit_signal("OnEquipMount", dest_ship, destination_data.key, destination_data.idx, origin_data.src, origin_data.get("modified_attributes", null))
 	
 	ReInit()
 
