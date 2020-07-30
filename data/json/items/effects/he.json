@@ -1,0 +1,10 @@
+{
+	"name_id":"HE Shield",
+	"type":"effect",
+	"prefix":"HE",
+	"attributes": {
+			"self_base_dam_shield_multiplier":0.5,
+			"self_max_dam_hull_multiplier":1.5,
+		}
+	}
+}

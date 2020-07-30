@@ -34,6 +34,16 @@
 		"count":2,
 		"energy_cost":700
 	},
+	"variations": [
+		{"src":"data/json/items/effects/normal.json", "chance": 50},
+		{"src":"data/json/items/effects/fast.json", "chance":20},
+		{"src":"data/json/items/effects/compact.json", "chance":20},
+		{"src":"data/json/items/effects/linked.json", "chance":10},
+		{"src":"data/json/items/effects/he.json", "chance":10},
+		{"src":"data/json/items/effects/em.json", "chance":10},
+		{"src":"data/json/items/effects/salvage.json", "chance":10},
+		{"src":"data/json/items/effects/swarm.json", "chance":10}
+	],
 	"description": {
 		"text":"Launches a flurry of guided-missile to any target in the viscinity. Improved launch sequence allow for slightly bigger range.",
 		"Overview": {

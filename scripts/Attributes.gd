@@ -140,6 +140,14 @@ func _ready():
 	self.visible = false
 	
 
+func _sort_by_hp_regen(a, b):
+	var rate_a = a.shield.shielding.hp_regen_per_ap * Globals.EffectRef.GetMultiplierValue(self, a.shield.src, a.attribute, "hp_regen_per_ap_multiplier")
+	var rate_b = b.shield.shielding.hp_regen_per_ap * Globals.EffectRef.GetMultiplierValue(self, b.shield.src, b.attribute, "hp_regen_per_ap_multiplier")
+	# reversed sort
+	if rate_a > rate_b:
+		return true
+	return false
+
 func _sort_by_shield_size(a, b):
 	var rate_a = a.shield.shielding.max_hp * Globals.EffectRef.GetMultiplierValue(self, a.shield.src, a.attribute, "shield_multiplier")
 	var rate_b = b.shield.shielding.max_hp * Globals.EffectRef.GetMultiplierValue(self, b.shield.src, b.attribute, "shield_multiplier")

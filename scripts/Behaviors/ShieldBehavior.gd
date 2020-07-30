@@ -35,13 +35,23 @@ func OnObjTurn_Callback(obj):
 		
 		
 func _process_healing(obj, max_hp, cur_hp, shields_data):
+	var attributes = obj.get_attrib("mount_attributes.shield")
 	var last_update = obj.get_attrib("shield.last_turn_update", Globals.total_turn)
 	var heal = 0
 	var energy = 0
 	var count = 0
-	for data in shields_data:
-		heal += data.shielding.hp_regen_per_ap / pow(2, count) # 1, 0.5, 0.25, 0.125, etc.
-		energy += data.shielding.energy_cost_per_hp
+	
+	var packaged_shield = []
+	for i in range(shields_data.size()):
+		var data = shields_data[i]
+		var attribute = attributes[i]
+		packaged_shield.push_back({"shield":data, "attribute":attribute})
+	packaged_shield.sort_custom(obj, "_sort_by_hp_regen")
+	
+	for data in packaged_shield:
+		# 1, 0.5, 0.25, 0.125, etc.
+		heal += data.shield.shielding.hp_regen_per_ap / pow(2, count) * Globals.EffectRef.GetMultiplierValue(obj, data.shield.src, data.attribute, "hp_regen_per_ap_multiplier")
+		energy += data.shield.shielding.energy_cost_per_hp * Globals.EffectRef.GetMultiplierValue(obj, data.shield.src, data.attribute, "energy_cost_per_hp_multiplier")
 		count += 1
 	heal *= Globals.total_turn - last_update
 	energy *= Globals.total_turn - last_update

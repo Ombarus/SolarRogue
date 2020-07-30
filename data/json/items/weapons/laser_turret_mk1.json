@@ -33,6 +33,15 @@
 		"count":1,
 		"energy_cost":500
 	},
+	"variations": [
+		{"src":"data/json/items/effects/normal.json", "chance": 50},
+		{"src":"data/json/items/effects/fast.json", "chance":20},
+		{"src":"data/json/items/effects/compact.json", "chance":20},
+		{"src":"data/json/items/effects/linked.json", "chance":10},
+		{"src":"data/json/items/effects/em.json", "chance":10},
+		{"src":"data/json/items/effects/salvage.json", "chance":10},
+		{"src":"data/json/items/effects/widebeam.json", "chance":10}
+	],
 	"description": {
 		"text":"Highly cohesive beam of high-energy photons allows long range targetting in a straight line.",
 		"Overview": {

@@ -1,9 +1,11 @@
 {
-	"name_id":"Linked Shield",
+	"name_id":"Linked Shield/Weapon",
 	"type":"effect",
 	"prefix":"Linked",
 	"attributes": {
-			"linked_shield_multiplier":1.10
+			"linked_shield_multiplier":1.10,
+			"linked_base_dam_multiplier":1.10,
+			"linked_max_dam_multiplier":1.10
 		}
 	}
 }

@@ -34,6 +34,10 @@
 		"count":1,
 		"energy_cost":500
 	},
+	"variations": [
+		{"src":"data/json/items/effects/normal.json", "chance": 50},
+		{"src":"data/json/items/effects/compact.json", "chance":20}
+	],
 	"description": {
 		"text":"A laser combined with a tractor beam that can drastically increase the chance of getting useful material from planets.",
 		"Overview": {

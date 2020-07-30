@@ -27,6 +27,14 @@
 		"count":4,
 		"energy_cost":1000
 	},
+	"variations": [
+		{"src":"data/json/items/effects/normal.json", "chance": 50},
+		{"src":"data/json/items/effects/light.json", "chance":10},
+		{"src":"data/json/items/effects/heavy.json", "chance":10},
+		{"src":"data/json/items/effects/linked.json", "chance":10},
+		{"src":"data/json/items/effects/fast.json", "chance":20},
+		{"src":"data/json/items/effects/compact.json", "chance":20}
+	],
 	"description": {
 		"text":"A military grade force field that surrounds the ship protecting it against all form of energy and projectile weaponry. Consumes large amount of energy and recharges slowly over time. Stacked shields offer diminishing returns.",
 		"Overview": {

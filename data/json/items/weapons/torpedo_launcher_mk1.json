@@ -37,6 +37,15 @@
 		"count":2,
 		"energy_cost":700
 	},
+	"variations": [
+		{"src":"data/json/items/effects/normal.json", "chance": 50},
+		{"src":"data/json/items/effects/fast.json", "chance":20},
+		{"src":"data/json/items/effects/compact.json", "chance":20},
+		{"src":"data/json/items/effects/linked.json", "chance":10},
+		{"src":"data/json/items/effects/he.json", "chance":10},
+		{"src":"data/json/items/effects/salvage.json", "chance":10},
+		{"src":"data/json/items/effects/swarm.json", "chance":10}
+	],
 	"description": {
 		"text":"Can hit multiple enemies in a area. A short fuse prevents nearby detonation. Sadly it's not long enough to hit far away targets.",
 		"Overview": {

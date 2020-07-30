@@ -34,6 +34,16 @@
 		"count":4,
 		"energy_cost":1000
 	},
+	"variations": [
+		{"src":"data/json/items/effects/normal.json", "chance": 50},
+		{"src":"data/json/items/effects/fast.json", "chance":20},
+		{"src":"data/json/items/effects/compact.json", "chance":20},
+		{"src":"data/json/items/effects/linked.json", "chance":10},
+		{"src":"data/json/items/effects/em.json", "chance":10},
+		{"src":"data/json/items/effects/he.json", "chance":10},
+		{"src":"data/json/items/effects/salvage.json", "chance":10},
+		{"src":"data/json/items/effects/swarm.json", "chance":10}
+	],
 	"description": {
 		"text":"A old machine gun with many rotating barrels capable of firing several thousand rounds per seconds. It's a relic from the past but the ability to produce the bullets from scrap metal makes it a very cheap alternative to more advanced weaponery.",
 		"Overview": {
