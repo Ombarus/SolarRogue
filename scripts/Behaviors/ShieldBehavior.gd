@@ -10,22 +10,6 @@ func _ready():
 	BehaviorEvents.connect("OnMountRemoved", self, "OnMountRemoved_Callback")
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 	
-func _sort_by_shield_size(a, b):
-	var rate_a = a.shielding.max_hp
-	var rate_b = b.shielding.max_hp
-	# reversed sort
-	if rate_a > rate_b:
-		return true
-	return false
-	
-func _sort_by_shield_regen(a, b):
-	var rate_a = a.shielding.hp_regen_per_ap
-	var rate_b = b.shielding.hp_regen_per_ap
-	# reversed sort
-	if rate_a > rate_b:
-		return true
-	return false
-
 	
 func OnObjectLoaded_Callback(obj):
 	var cur_shield = obj.get_attrib("shield.current_hp")
@@ -66,7 +50,7 @@ func _process_healing(obj, max_hp, cur_hp, shields_data):
 	obj.set_attrib("shield.current_hp", new_hp)
 	BehaviorEvents.emit_signal("OnUseEnergy", obj, energy)
 	
-func OnMountAdded_Callback(obj, slot, src):
+func OnMountAdded_Callback(obj, slot, src, modified_attributes):
 	if slot != "shield" or src == null or src.empty():
 		return
 	
@@ -74,7 +58,7 @@ func OnMountAdded_Callback(obj, slot, src):
 	#var data = Globals.LevelLoaderRef.LoadJSON(src)
 	obj.set_attrib("shield.last_turn_update", Globals.total_turn)
 	
-func OnMountRemoved_Callback(obj, slot, src):
+func OnMountRemoved_Callback(obj, slot, src, modified_attributes):
 	if slot != "shield" or src == null or src.empty():
 		return
 		

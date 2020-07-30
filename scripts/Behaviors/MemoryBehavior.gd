@@ -17,7 +17,7 @@ func _ready():
 		default_occluder_color = _occluder_ref.material.get_shader_param("gray_color")
 
 
-func OnMountAdded_Callback(obj, slot, src):
+func OnMountAdded_Callback(obj, slot, src, modified_attributes):
 	if not "scanner" in slot:
 		return
 		

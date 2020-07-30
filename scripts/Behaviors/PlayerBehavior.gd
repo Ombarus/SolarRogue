@@ -224,12 +224,12 @@ func UpdateButtonVisibility():
 	valid = valid and not hide_hud	
 	converter_btn.visible = valid
 	
-func OnMountAdded_Callback(obj, mount, src):
+func OnMountAdded_Callback(obj, mount, src, modified_attributes):
 	if obj != playerNode:
 		return
 	UpdateButtonVisibility()
 
-func OnMountRemoved_Callback(obj, mount, src):
+func OnMountRemoved_Callback(obj, mount, src, modified_attributes):
 	if obj != playerNode:
 		return
 	UpdateButtonVisibility()
@@ -877,43 +877,10 @@ func ProcessTakeSelection(target, tile):
 		BehaviorEvents.emit_signal("OnLogLine", "Item transfer canceled")
 		return
 		
-	#BehaviorEvents.emit_signal("OnPushGUI", "TransferInventory", {"object1":playerNode, "object2":target, "callback_object":self, "callback_method":"OnTransferItemCompleted_Callback"})
-	BehaviorEvents.emit_signal("OnPushGUI", "TransferInventoryV2", {"object1":playerNode, "object2":target, "callback_object":self, "callback_method":"OnTransferItemCompleted_Callback"})
+	BehaviorEvents.emit_signal("OnPushGUI", "TransferInventoryV2", {"object1":playerNode, "object2":target})
 	
 func OnTradingCompleted_Callback():
 	pass
-	
-func OnTransferItemCompleted_Callback(lobj, l_mounts, l_variations, l_cargo, robj, r_mounts, r_variations, r_cargo):
-	lobj.init_mounts()
-	lobj.init_cargo()
-	robj.init_mounts()
-	robj.init_cargo()
-	
-	BehaviorEvents.emit_signal("OnReplaceMounts", lobj, l_mounts, l_variations)
-	BehaviorEvents.emit_signal("OnReplaceMounts", robj, r_mounts, r_variations)
-	
-	BehaviorEvents.emit_signal("OnClearCargo", lobj)
-	BehaviorEvents.emit_signal("OnClearCargo", robj)
-	for k in range(l_cargo.size()):
-		#TODO: optimize, allow passing how many
-		var item = l_cargo[k]
-		var attrib = null
-		if l_variations != null and k < l_variations.size():
-			attrib = l_variations[k]
-		for i in range(item.amount):
-			BehaviorEvents.emit_signal("OnAddItem", lobj, item.src_key, attrib)
-	
-	for k in range(r_cargo.size()):
-		var item = r_cargo[k]
-		var attrib = null
-		if r_variations != null and k < r_variations.size():
-			attrib = r_variations[k]
-		for i in range(item.amount):
-			BehaviorEvents.emit_signal("OnAddItem", robj, item.src_key, attrib)
-	
-	#TODO: Should the AP use sum the total # of item moved and equip/unequip ap ? (probably ?)
-	if lobj.get_attrib("cargo.pickup_ap") != null:
-		BehaviorEvents.emit_signal("OnUseAP", lobj, lobj.get_attrib("cargo.pickup_ap"))
 	
 func OnTransferPlayer_Callback(old_player, new_player):
 	playerNode = new_player

@@ -16,7 +16,6 @@ func _ready():
 	BehaviorEvents.connect("OnClearMounts", self, "OnClearMounts_Callback")
 	BehaviorEvents.connect("OnClearCargo", self, "OnClearCargo_Callback")
 	BehaviorEvents.connect("OnReplaceCargo", self, "OnReplaceCargo_Callback")
-	BehaviorEvents.connect("OnReplaceMounts", self, "OnReplaceMounts_Callback")
 	BehaviorEvents.connect("OnUpdateCargoVolume", self, "OnUpdateCargoVolume_Callback")
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 	
@@ -133,19 +132,21 @@ func OnPickup_Callback(picker, picked):
 		#	continue
 		picker.set_attrib("cargo.volume_used", picker.get_attrib("cargo.volume_used") + obj.get_attrib("equipment.volume"))
 		inventory_space -= obj.get_attrib("equipment.volume")
-		var variation_src = obj.get_attrib("selected_variation", "")
+		var modified_attrib = obj.modified_attributes
+		var variation_src = Globals.clean_path(obj.get_attrib("selected_variation", ""))
 		if is_player:
 				BehaviorEvents.emit_signal("OnLogLine", "Tractor beam has brought %s abord", [Globals.mytr(obj.get_attrib("name_id"))])
 		if obj.get_attrib("equipment.stackable"):
 			var found = false
 			for item in picker.get_attrib("cargo.content"):
-				if Globals.clean_path(item.src) == Globals.clean_path(obj.get_attrib("src")) and Globals.clean_path(variation_src) == Globals.clean_path(Globals.get_data(item, "variation", "")):
+				var item_variation = Globals.clean_path(Globals.get_data(item, "modified_attributes.selected_variation", ""))
+				if Globals.clean_path(item.src) == Globals.clean_path(obj.get_attrib("src")) and variation_src == item_variation:
 					found = true
 					item.count += 1
 			if not found:
-				picker.get_attrib("cargo.content").push_back({"src": obj.base_attributes.src, "count":1, "modified_attributes":{"selected_variation":variation_src}})
+				picker.get_attrib("cargo.content").push_back({"src": obj.base_attributes.src, "count":1, "modified_attributes":modified_attrib})
 		else:
-			picker.get_attrib("cargo.content").push_back({"src": obj.base_attributes.src, "count":1, "modified_attributes":{"selected_variation":variation_src}})
+			picker.get_attrib("cargo.content").push_back({"src": obj.base_attributes.src, "count":1, "modified_attributes":modified_attrib})
 		total_pickup_ap += pickup_speed
 		BehaviorEvents.emit_signal("OnRequestObjectUnload", obj)
 		obj = null
@@ -174,7 +175,7 @@ func OnDropCargo_Callback(dropper, item_id, modified_attributes, count):
 	var total_ap_cost = 0
 	for item in cargo:
 		if Globals.clean_path(item_id) == Globals.clean_path(item.src) and \
-			Globals.clean_path(Globals.get_data(item, "selected_variation", "")) == Globals.clean_path(Globals.get_data(modified_attributes, "selected_variation", "")):
+			Globals.clean_path(Globals.get_data(item, "modified_attributes.selected_variation", "")) == Globals.clean_path(Globals.get_data(modified_attributes, "selected_variation", "")):
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			var amount_dropped = 0
 			if item.count > count:
@@ -203,17 +204,28 @@ func OnDropCargo_Callback(dropper, item_id, modified_attributes, count):
 	
 func OnDropMount_Callback(dropper, slot_name, index):
 	var items = dropper.get_attrib("mounts." + slot_name)
+	var item_attributes = dropper.get_attrib("mount_attributes." + slot_name)
 	var item_id = items[index]
+	var item_attribute = item_attributes[index]
+	
+	# I want to keep the modified_attributes param null if there's nothing important
+	# because I skip some steps in RequestObject if there's a non-null param
+	var modif_data = null
+	if item_attribute != null and not item_attribute.empty():
+		modif_data = item_attribute
+		
 	var data = Globals.LevelLoaderRef.LoadJSON(item_id)
 	var drop_ap = 0
 	if "equipment" in data and "unequip_ap" in data.equipment and data.equipment.unequip_ap > 0:
 		BehaviorEvents.emit_signal("OnUseAP", dropper, data.equipment.unequip_ap)
-	Globals.LevelLoaderRef.RequestObject(item_id, Globals.LevelLoaderRef.World_to_Tile(dropper.position))
+	Globals.LevelLoaderRef.RequestObject(item_id, Globals.LevelLoaderRef.World_to_Tile(dropper.position), modif_data)
 	items[index] = ""
+	item_attributes[index] = ""
 	dropper.set_attrib("mounts." + slot_name, items)
-	BehaviorEvents.emit_signal("OnMountRemoved", dropper, slot_name, item_id)
+	dropper.set_attrib("mount_attributes." + slot_name, item_attributes)
+	BehaviorEvents.emit_signal("OnMountRemoved", dropper, slot_name, item_id, item_attribute)
 	
-func OnRemoveMount_Callback(dropper, slot_name, index, mount_attributes):
+func OnRemoveMount_Callback(dropper, slot_name, index):
 	var items = dropper.get_attrib("mounts." + slot_name)
 	var item_id = items[index]
 	var data = Globals.LevelLoaderRef.LoadJSON(item_id)
@@ -221,10 +233,12 @@ func OnRemoveMount_Callback(dropper, slot_name, index, mount_attributes):
 	if "equipment" in data and "unequip_ap" in data.equipment and data.equipment.unequip_ap > 0:
 		BehaviorEvents.emit_signal("OnUseAP", dropper, data.equipment.unequip_ap)
 	#Globals.LevelLoaderRef.RequestObject(item_id, Globals.LevelLoaderRef.World_to_Tile(dropper.position))
-	BehaviorEvents.emit_signal("OnAddItem", dropper, items[index], mount_attributes)
+	var mount_attrib = dropper.get_attrib("mount_attributes." + slot_name)
+	mount_attrib = mount_attrib[index]
+	BehaviorEvents.emit_signal("OnAddItem", dropper, items[index], mount_attrib)
 	items[index] = ""
 	dropper.set_attrib("mounts." + slot_name, items)
-	BehaviorEvents.emit_signal("OnMountRemoved", dropper, slot_name, item_id)
+	BehaviorEvents.emit_signal("OnMountRemoved", dropper, slot_name, item_id, mount_attrib)
 	
 func OnEquipMount_Callback(equipper, slot_name, index, item_id, modified_attributes):
 	# Check if slot already has something equipped
@@ -242,7 +256,7 @@ func OnEquipMount_Callback(equipper, slot_name, index, item_id, modified_attribu
 	var items = equipper.get_attrib(attrib_getter)
 	var variations = equipper.get_attrib(var_getter)
 	if items != null and items[index] != "":
-		BehaviorEvents.emit_signal("OnAddItem", equipper, items[index], modified_attributes)
+		BehaviorEvents.emit_signal("OnAddItem", equipper, items[index], variations[index])
 		var old_id = items[index]
 		var old_data : Dictionary = Globals.LevelLoaderRef.LoadJSON(items[index])
 		var unequip_ap : int = Globals.get_data(old_data, "equipment.equip_ap", 0)
@@ -251,20 +265,19 @@ func OnEquipMount_Callback(equipper, slot_name, index, item_id, modified_attribu
 		if equipper.get_attrib("type") == "player" and old_data != null and new_data != null:
 			BehaviorEvents.emit_signal("OnLogLine", "Replaced %s by %s", [Globals.mytr(old_data.name_id), Globals.mytr(new_data.name_id)])
 		items[index] = ""
-		BehaviorEvents.emit_signal("OnMountRemoved", equipper, slot_name, old_id)
+		BehaviorEvents.emit_signal("OnMountRemoved", equipper, slot_name, old_id, variations[index])
 	elif equipper.get_attrib("type") == "player" and new_data != null:
 		BehaviorEvents.emit_signal("OnLogLine", "Installed %s", [Globals.mytr(new_data.name_id)])
 		
 	BehaviorEvents.emit_signal("OnRemoveItem", equipper, item_id, modified_attributes)
 	items[index] = item_id
 	variations[index] = modified_attributes
-	print("OnEquipMount " + str(variations))
 	equipper.set_attrib(attrib_getter, items)
 	equipper.set_attrib(var_getter, variations)
 	var equip_ap : int = Globals.get_data(new_data, "equipment.equip_ap", 0)
 	if equip_ap > 0:
 		BehaviorEvents.emit_signal("OnUseAP", equipper, equip_ap)
-	BehaviorEvents.emit_signal("OnMountAdded", equipper, slot_name, item_id)
+	BehaviorEvents.emit_signal("OnMountAdded", equipper, slot_name, item_id, modified_attributes)
 
 #TODO: Fix logic flaws (make sure we're not changing cargo in base_attributes), (check we won't exceed volume before adding)
 func OnAddItem_Callback(picker, item_id, modified_attributes):
@@ -297,7 +310,7 @@ func OnRemoveItem_Callback(holder, item_id, modified_attributes, num_remove=1): 
 	var i = 0
 	var item_variation = Globals.clean_path(modified_attributes.get("selected_variation", ""))
 	for item in cargo:
-		var cargo_variation = Globals.clean_path(Globals.get_data("modified_attributes.selected_variation", ""))
+		var cargo_variation = Globals.clean_path(Globals.get_data(item, "modified_attributes.selected_variation", ""))
 		if Globals.clean_path(item_id) == Globals.clean_path(item.src) and cargo_variation == item_variation:
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			if num_remove < 0:
@@ -323,30 +336,6 @@ func OnRemoveItem_Callback(holder, item_id, modified_attributes, num_remove=1): 
 #TODO: Implement this and replace bad code in player's OnTransferItemCompleted_Callback()	
 func OnReplaceCargo_Callback(obj, new_cargo):
 	pass
-
-# new_mounts [{mount_key, item.mount_index, item.src_key},...]
-func OnReplaceMounts_Callback(obj, new_mounts, new_variations):
-	if not obj.modified_attributes.has("mounts"):
-		obj.init_mounts()
-	var mounts = obj.get_attrib("mounts")
-	for key in mounts:
-		var items = mounts[key]
-		var variations = obj.get_attrib("mounts." + key, [])
-		for i in range(items.size()):
-			var item_id = items[i]
-			var variation_src = ""
-			if variations.size() < i:
-				variation_src = variations[i]
-			var new_mounts_val = null
-			for n in new_mounts:
-				if n.mount_key == key and n.mount_index == i and Globals.clean_path(n.src_key) == Globals.clean_path(item_id) and Globals.clean_path(n.src_variation) == Globals.clean_path(variation_src):
-					break
-				elif n.mount_key == key and n.mount_index == i:
-					items[i] = ""
-					BehaviorEvents.emit_signal("OnMountRemoved", obj, key, item_id)
-					OnEquipMount_Callback(obj, key, i, n.src_key, n.src_variation)
-					break
-			
 		
 func OnClearMounts_Callback(holder):
 	if not holder.modified_attributes.has("mounts"):
@@ -354,10 +343,11 @@ func OnClearMounts_Callback(holder):
 	var mounts = holder.get_attrib("mounts")
 	for key in mounts:
 		var items = mounts[key]
+		var attributes = holder.get_attrib("mount_attributes." + key)
 		for i in range(items.size()):
 			var item_id = items[i]
 			items[i] = ""
-			BehaviorEvents.emit_signal("OnMountRemoved", holder, key, item_id)
+			BehaviorEvents.emit_signal("OnMountRemoved", holder, key, item_id, attributes[i])
 	
 func OnClearCargo_Callback(holder):
 	if not holder.modified_attributes.has("cargo"):

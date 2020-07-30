@@ -13,8 +13,8 @@ func _ready():
 	BehaviorEvents.connect("OnDamageTaken", self, "OnDamageTaken_Callback")
 	BehaviorEvents.connect("OnEnergyChanged", self, "OnEnergyChanged_Callback")
 	BehaviorEvents.connect("OnCrafting", self, "OnCrafting_Callback")
-	BehaviorEvents.connect("OnMountRemoved", self, "OnMountChanged_Callback")
-	BehaviorEvents.connect("OnMountAdded", self, "OnMountChanged_Callback")
+	BehaviorEvents.connect("OnMountRemoved", self, "OnMountRemoved_Callback")
+	BehaviorEvents.connect("OnMountAdded", self, "OnMountAdded_Callback")
 	BehaviorEvents.connect("OnConsumeItem", self, "OnConsumeItem_Callback")
 	#BehaviorEvents.connect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
 	BehaviorEvents.connect("OnRequestLevelChange", self, "OnPlayerCreated_Callback")
@@ -91,8 +91,14 @@ func OnConsumeItem_Callback(obj, data):
 		
 	#print("play UseItem")
 	sfx.play()
+
+func OnMountRemoved_Callback(obj, slot, src, modified_attributes):
+	play_mount_sound(obj)
 	
-func OnMountChanged_Callback(obj, slot, src):
+func OnMountAdded_Callback(obj, slot, src, modified_attributes):
+	play_mount_sound(obj)
+	
+func play_mount_sound(obj):
 	var sfx : AudioStreamPlayer = get_node("Mount")
 	if obj.get_attrib("type") != "player" or sfx.playing == true:
 		return

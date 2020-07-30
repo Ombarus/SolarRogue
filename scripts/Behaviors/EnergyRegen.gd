@@ -60,7 +60,7 @@ func _process_healing(obj, max_energ, cur_energ, filtered_regen):
 	#obj.set_attrib("converter.stored_energy", new_energ)
 	
 	
-func OnMountAdded_Callback(obj, slot, src):
+func OnMountAdded_Callback(obj, slot, src, modified_attributes):
 	if slot != "utility" or src == null or src.empty():
 		return
 		

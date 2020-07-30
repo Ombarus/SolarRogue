@@ -16,9 +16,6 @@ var _transfered_cargo : Dictionary = {}
 var _transfered_ship : Attributes = null
 var _transfered_to : Attributes = null
 
-var _callback_obj : Node = null
-var _callback_method : String = ""
-
 var _lobj : Attributes = null
 var _robj : Attributes = null
 
@@ -231,9 +228,6 @@ func Init(init_param):
 	var obj1 = init_param["object1"]
 	var obj2 = init_param["object2"]
 	
-	_callback_obj = init_param["callback_object"]
-	_callback_method = init_param["callback_method"]
-	
 	_lobj = obj1
 	_robj = obj2
 	
@@ -251,14 +245,16 @@ func ReInit():
 	
 	var cargo1 = _lobj.get_attrib("cargo.content")
 	var mounts1 = _lobj.get_attrib("mounts")
+	var mounts1_attrib = _lobj.get_attrib("mount_attributes")
 	var cargo2 = _robj.get_attrib("cargo.content")
 	var mounts2 = _robj.get_attrib("mounts")
+	var mounts2_attrib = _robj.get_attrib("mount_attributes")
 	
 	_normal_btns.visible = true
 	_question_btns.visible = false
 	
-	GenerateContent(_my_ship_list, mounts1, cargo1)
-	GenerateContent(_other_ship_list, mounts2, cargo2)
+	GenerateContent(_my_ship_list, mounts1, mounts1_attrib, cargo1)
+	GenerateContent(_other_ship_list, mounts2, mounts2_attrib, cargo2)
 	
 	var current_load = _lobj.get_attrib("cargo.volume_used")
 	var cargo_space = _lobj.get_attrib("cargo.capacity")
@@ -290,39 +286,36 @@ func ReInit():
 func sort_categories(var a, var b):
 	return a > b
 	
-func GenerateContent(list_node, mounts, cargo):
+func GenerateContent(list_node, mounts, mount_attributes, cargo):
 	var mount_content := []
 	var keys = mounts.keys()
 	keys.sort_custom(self, "sort_categories")
 	for key in keys:
-#		var variation = mount_variations[key][index]
-#				var display_name = item.name_id
-#				if not variation.empty() and variation.has("selected_variation"):
-#					var variation_data = Globals.LevelLoaderRef.LoadJSON(variation["selected_variation"])
-#					if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
-#						display_name = variation_data["prefix"] + " " + display_name
 		mount_content.push_back({"key":key, "name_id":key, "equipped":false, "header":true})
 		var items : Array = mounts[key]
 		var index = 0
 		for src in items:
 			if src != null and src != "":
 				var item = Globals.LevelLoaderRef.LoadJSON(src)
-				mount_content.push_back({"src":mounts[key][index], "key":key, "idx":index, "name_id":item.name_id, "equipped":false, "header":false, "icon":item.icon})
+				var variation = mount_attributes[key][index]
+				var display_name = item.name_id
+				if not variation.empty() and variation.has("selected_variation"):
+					var variation_data = Globals.LevelLoaderRef.LoadJSON(variation["selected_variation"])
+					if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
+						display_name = variation_data["prefix"] + " " + display_name
+				mount_content.push_back({"src":mounts[key][index], "key":key, "idx":index, "display_name_id":display_name, "name_id":item.name_id, "modified_attributes":variation, "equipped":false, "header":false, "icon":item.icon})
 			else:
 				mount_content.push_back({"src":"", "key":key, "idx":index, "name_id":"Empty", "equipped":false, "header":false})
 			index += 1
 		
 	mount_content.push_back({"src":"", "name_id":"Cargo Contents", "equipped":false, "header":true})	
 	for row in cargo:
-#		var variation_src : String = Globals.get_data(row, "modified_attributes.selected_variation", "")
-#		var prefix := ""
-#		if not variation_src.empty():
-#			var variation_data = Globals.LevelLoaderRef.LoadJSON(variation_src)
-#			if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
-#				prefix = Globals.mytr(variation_data["prefix"]) + " "
-#		var display_name = counting
-#		display_name += prefix
-#		display_name += Globals.mytr(data.name_id)
+		var variation_src : String = Globals.get_data(row, "modified_attributes.selected_variation", "")
+		var prefix := ""
+		if not variation_src.empty():
+			var variation_data = Globals.LevelLoaderRef.LoadJSON(variation_src)
+			if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
+				prefix = Globals.mytr(variation_data["prefix"]) + " "
 		
 		var data = Globals.LevelLoaderRef.LoadJSON(row.src)
 		var counting = ""
@@ -331,7 +324,11 @@ func GenerateContent(list_node, mounts, cargo):
 		var icon_data = data.icon
 		if typeof(data.icon) == TYPE_ARRAY:
 			icon_data = data.icon[0]
-		mount_content.push_back({"src":row.src, "count":row.count, "display_name_id": counting + Globals.mytr(data.name_id), "name_id": counting + Globals.mytr(data.name_id), "equipped":false, "header":false, "icon":icon_data})
+			
+		var display_name = counting
+		display_name += prefix
+		display_name += Globals.mytr(data.name_id)
+		mount_content.push_back({"src":row.src, "count":row.count, "modified_attributes":row.get("modified_attributes", null), "display_name_id": display_name, "name_id": counting + Globals.mytr(data.name_id), "equipped":false, "header":false, "icon":icon_data})
 
 	list_node.Content = mount_content
 
@@ -471,26 +468,26 @@ func OnDragDropCompleted_Callback(origin_data, destination_data):
 			BehaviorEvents.emit_signal("OnAddItem", dest_ship, origin_data.src, origin_data.get("modified_attributes", {}))
 	# Cargo to Mount
 	elif dest_is_mount == true and origin_is_mount == false:
-		BehaviorEvents.emit_signal("OnRemoveItem", origin_ship, origin_data.src)
+		BehaviorEvents.emit_signal("OnRemoveItem", origin_ship, origin_data.src, origin_data.get("modified_attributes", {}))
 		if destination_data.src != "": # Swap
 			BehaviorEvents.emit_signal("OnRemoveMount", dest_ship, destination_data.key, destination_data.idx)
-			BehaviorEvents.emit_signal("OnRemoveItem", dest_ship, destination_data.src)
+			BehaviorEvents.emit_signal("OnRemoveItem", dest_ship, destination_data.src, destination_data.get("modified_attributes", {}))
 			BehaviorEvents.emit_signal("OnAddItem", origin_ship, destination_data.src, destination_data.get("modified_attributes", {}))
 		BehaviorEvents.emit_signal("OnAddItem", dest_ship, origin_data.src, origin_data.get("modified_attributes", {}))
 		BehaviorEvents.emit_signal("OnEquipMount", dest_ship, destination_data.key, destination_data.idx, origin_data.src, origin_data.get("modified_attributes", null))
 	# Mount to Cargo
 	elif dest_is_mount == false and origin_is_mount == true:
 		BehaviorEvents.emit_signal("OnRemoveMount", origin_ship, origin_data.key, origin_data.idx)
-		BehaviorEvents.emit_signal("OnRemoveItem", origin_ship, origin_data.src)
+		BehaviorEvents.emit_signal("OnRemoveItem", origin_ship, origin_data.src, origin_data.get("modified_attributes", {}))
 		BehaviorEvents.emit_signal("OnAddItem", dest_ship, origin_data.src, origin_data.get("modified_attributes", {}))
 	# Mount to Mount
 	elif dest_is_mount == true and origin_is_mount == true:
 		if destination_data.src != "":
 			BehaviorEvents.emit_signal("OnRemoveMount", dest_ship, destination_data.key, destination_data.idx)
-			BehaviorEvents.emit_signal("OnRemoveItem", dest_ship, destination_data.src)
+			BehaviorEvents.emit_signal("OnRemoveItem", dest_ship, destination_data.src, destination_data.get("modified_attributes", {}))
 		if origin_data.src != "":
 			BehaviorEvents.emit_signal("OnRemoveMount", origin_ship, origin_data.key, origin_data.idx)
-			BehaviorEvents.emit_signal("OnRemoveItem", origin_ship, origin_data.src)
+			BehaviorEvents.emit_signal("OnRemoveItem", origin_ship, origin_data.src, destination_data.get("modified_attributes", {}))
 		if destination_data.src != "":
 			BehaviorEvents.emit_signal("OnAddItem", origin_ship, destination_data.src, destination_data.get("modified_attributes", {}))
 			BehaviorEvents.emit_signal("OnEquipMount", origin_ship, origin_data.key, origin_data.idx, destination_data.src, destination_data.get("modified_attributes", null))

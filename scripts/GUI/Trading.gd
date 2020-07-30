@@ -74,7 +74,7 @@ func Sale_Callback():
 	for c in range(selected_item["count"]):
 		if "key" in selected_item and "idx" in selected_item:
 			BehaviorEvents.emit_signal("OnRemoveMount", _lobj, selected_item.key, selected_item.idx)
-		BehaviorEvents.emit_signal("OnRemoveItem", _lobj, selected_item.src)
+		BehaviorEvents.emit_signal("OnRemoveItem", _lobj, selected_item.src, selected_item.get("modified_attributes", {}))
 		BehaviorEvents.emit_signal("OnAddItem", _robj, selected_item.src, selected_item.get("modified_attributes", {}))
 		BehaviorEvents.emit_signal("OnUseEnergy", _lobj, -price)
 		total += price
@@ -126,7 +126,7 @@ func Buy_Callback():
 	var price : int = GetPrice(selected_item, false)
 	var total = 0
 	for c in range(selected_item["count"]):
-		BehaviorEvents.emit_signal("OnRemoveItem", _robj, selected_item.src)
+		BehaviorEvents.emit_signal("OnRemoveItem", _robj, selected_item.src, selected_item.get("modified_attributes", {}))
 		BehaviorEvents.emit_signal("OnAddItem", _lobj, selected_item.src, selected_item.get("modified_attributes", {}))
 		BehaviorEvents.emit_signal("OnUseEnergy", _lobj, price)
 		total += price
@@ -209,14 +209,16 @@ func ReInit():
 	
 	var cargo1 = _lobj.get_attrib("cargo.content")
 	var mounts1 = _lobj.get_attrib("mounts")
+	var mounts1_attrib = _lobj.get_attrib("mount_attributes")
 	var cargo2 = _robj.get_attrib("cargo.content")
 	var mounts2 = _robj.get_attrib("mounts")
+	var mounts2_attrib = _robj.get_attrib("mount_attributes")
 	
 	#_normal_btns.visible = true
 	#_question_btns.visible = false
 	
-	GenerateContent(_my_ship_list, mounts1, cargo1, false)
-	GenerateContent(_other_ship_list, mounts2, cargo2, true)
+	GenerateContent(_my_ship_list, mounts1, mounts1_attrib, cargo1, false)
+	GenerateContent(_other_ship_list, mounts2, mounts2_attrib, cargo2, true)
 	
 	var current_load = _lobj.get_attrib("cargo.volume_used")
 	var cargo_space = _lobj.get_attrib("cargo.capacity")
@@ -236,7 +238,7 @@ func ReInit():
 func sort_categories(var a, var b):
 	return a > b
 	
-func GenerateContent(list_node, mounts, cargo, skip_mount : bool):
+func GenerateContent(list_node, mounts, mount_attributes, cargo, skip_mount : bool):
 	var mount_content := []
 	if skip_mount == false:
 		var keys = mounts.keys()
@@ -248,20 +250,37 @@ func GenerateContent(list_node, mounts, cargo, skip_mount : bool):
 			for src in items:
 				if src != null and src != "":
 					var item = Globals.LevelLoaderRef.LoadJSON(src)
-					mount_content.push_back({"src":mounts[key][index], "key":key, "idx":index, "name_id":item.name_id, "equipped":false, "header":false, "icon":item.icon})
+					var variation = mount_attributes[key][index]
+					var display_name = item.name_id
+					if not variation.empty() and variation.has("selected_variation"):
+						var variation_data = Globals.LevelLoaderRef.LoadJSON(variation["selected_variation"])
+						if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
+							display_name = variation_data["prefix"] + " " + display_name
+					mount_content.push_back({"src":mounts[key][index], "key":key, "idx":index, "display_name_id":display_name, "name_id":item.name_id, "modified_attributes":variation, "equipped":false, "header":false, "icon":item.icon})
 				else:
 					mount_content.push_back({"src":"", "key":key, "idx":index, "name_id":"Empty", "equipped":false, "header":false})
 				index += 1
 		mount_content.push_back({"src":"", "name_id":"Cargo Contents", "equipped":false, "header":true})
 	else:
 		mount_content.push_back({"src":"", "name_id":"SALE_PITCH", "equipped":false, "header":true})
+		
+		
 	for row in cargo:
 		var data = Globals.LevelLoaderRef.LoadJSON(row.src)
 
 		var icon_data = data.icon
 		if typeof(data.icon) == TYPE_ARRAY:
 			icon_data = data.icon[0]
-		mount_content.push_back({"src":row.src, "max":row.count, "name_id": data.name_id, "equipped":false, "header":false, "icon":icon_data})
+			
+		var variation_src : String = Globals.get_data(row, "modified_attributes.selected_variation", "")
+		var prefix := ""
+		if not variation_src.empty():
+			var variation_data = Globals.LevelLoaderRef.LoadJSON(variation_src)
+			if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
+				prefix = Globals.mytr(variation_data["prefix"]) + " "
+		var display_name = prefix
+		display_name += Globals.mytr(data.name_id)
+		mount_content.push_back({"src":row.src, "max":row.count, "modified_attributes":row.get("modified_attributes", null), "display_name_id":display_name, "name_id": data.name_id, "equipped":false, "header":false, "icon":icon_data})
 
 	list_node.Content = mount_content
 
@@ -288,7 +307,7 @@ func DoMountingBuy():
 			BehaviorEvents.emit_signal("OnEquipMount", _lobj, selected_item.key, selected_item.idx, to_mount.src, to_mount.get("modified_attributes", null))
 		else:
 			BehaviorEvents.emit_signal("OnAddItem", _lobj, to_mount.src, to_mount.get("modified_attributes", {}))
-		BehaviorEvents.emit_signal("OnRemoveItem", _robj, to_mount.src)
+		BehaviorEvents.emit_signal("OnRemoveItem", _robj, to_mount.src, to_mount.get("modified_attributes", {}))
 		BehaviorEvents.emit_signal("OnUseEnergy", _lobj, price)
 		BehaviorEvents.emit_signal("OnTradingDone", _lobj, _robj)
 		var log_choices = {

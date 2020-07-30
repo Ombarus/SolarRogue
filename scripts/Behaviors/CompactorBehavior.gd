@@ -65,7 +65,7 @@ func _reset_cargo(obj, utils):
 	obj.set_attrib("cargo.capacity", cargo_capacity / per_cargo)
 	obj.set_attrib("cargo.applied_bonus", false)
 
-func OnMountAdded_Callback(obj, slot, src):
+func OnMountAdded_Callback(obj, slot, src, modified_attributes):
 	if slot != "utility" or src == null or src.empty():
 		return
 		
@@ -78,7 +78,7 @@ func OnMountAdded_Callback(obj, slot, src):
 		OnObjectLoaded_Callback(obj)
 	
 	
-func OnMountRemoved_Callback(obj, slot, src):
+func OnMountRemoved_Callback(obj, slot, src, modified_attributes):
 	if slot != "utility" or src == null or src.empty():
 		return
 		

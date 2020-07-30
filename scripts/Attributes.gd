@@ -139,20 +139,37 @@ func _ready():
 	Globals.LevelLoaderRef.RequestObject(PreloadData, Globals.LevelLoaderRef.World_to_Tile(self.global_position), modified_attributes)
 	self.visible = false
 	
+
+func _sort_by_shield_size(a, b):
+	var rate_a = a.shield.shielding.max_hp * Globals.EffectRef.GetMultiplierValue(self, a.shield.src, a.attribute, "shield_multiplier")
+	var rate_b = b.shield.shielding.max_hp * Globals.EffectRef.GetMultiplierValue(self, b.shield.src, b.attribute, "shield_multiplier")
+	# reversed sort
+	if rate_a > rate_b:
+		return true
+	return false
+	
 # Can't find a better place to put this. I'm now using it in 3 different places so I have to put it somewhere
 # Systems shouldn't return values and communicate through events so how do I do this ?
 func get_max_shield():
 	var shields = get_attrib("mounts.shield")
+	var attributes = get_attrib("mount_attributes.shield")
 	var shields_data = Globals.LevelLoaderRef.LoadJSONArray(shields)
 	
 	if shields_data.size() <= 0:
 		return 0
 	
-	shields_data.sort_custom(self, "_sort_by_shield_size")
+	var packaged_shield = []
+	for i in range(shields_data.size()):
+		var data = shields_data[i]
+		var attribute = attributes[i]
+		packaged_shield.push_back({"shield":data, "attribute":attribute})
+		
+	packaged_shield.sort_custom(self, "_sort_by_shield_size")
 	var max_shield = 0
 	var count = 0
-	for data in shields_data:
-		max_shield += (data.shielding.max_hp) / pow(2, count) # 1, 0.5, 0.25, 0.125, etc.
+	for data in packaged_shield:
+		# 1, 0.5, 0.25, 0.125, etc.
+		max_shield += (data.shield.shielding.max_hp) / pow(2, count) * Globals.EffectRef.GetMultiplierValue(self, data.shield.src, data.attribute, "shield_multiplier")
 		count += 1
 		
 	return max_shield

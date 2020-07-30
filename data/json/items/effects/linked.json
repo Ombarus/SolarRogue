@@ -3,9 +3,7 @@
 	"type":"effect",
 	"prefix":"Linked",
 	"attributes": {
-			"must_equip":true,
-			"must_link":true, 
-			"shield_multiplier":0.10
+			"linked_shield_multiplier":1.10
 		}
 	}
 }

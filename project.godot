@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/GUI/ButtonBase.gd"
 }, {
+"base": "Node",
+"class": "EffectBehavior",
+"language": "GDScript",
+"path": "res://scripts/Behaviors/EffectsBehavior.gd"
+}, {
 "base": "Control",
 "class": "MyItemList",
 "language": "GDScript",
@@ -44,6 +49,7 @@ _global_script_class_icons={
 "Attributes": "",
 "BorderData": "",
 "ButtonBase": "",
+"EffectBehavior": "",
 "MyItemList": "",
 "MyWindow": ""
 }

@@ -52,7 +52,7 @@ func OnTriggerAnomaly_Callback(obj, anomaly):
 	if anomaly.get_attrib("anomaly.scanner") != null:
 		_up_to_date = false
 	
-func OnMountAdded_Callback(obj, slot, src):
+func OnMountAdded_Callback(obj, slot, src, modified_attributes):
 	if not "scanner" in slot:
 		return
 		
@@ -64,7 +64,7 @@ func OnMountAdded_Callback(obj, slot, src):
 	
 	special_update_ultimate(obj, scanner_data)
 	
-func OnMountRemoved_Callback(obj, slot, src):
+func OnMountRemoved_Callback(obj, slot, src, modified_attributes):
 	if not "scanner" in slot:
 		return
 		
