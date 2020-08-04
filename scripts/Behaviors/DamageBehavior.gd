@@ -79,7 +79,7 @@ func OnObjectLoaded_Callback(obj):
 	#obj.set_attrib("harvestable.chance", (MersenneTwister.rand_float() * (max_rate-min_rate)) + min_rate)
 	
 	
-func OnDealDamage_Callback(targets, shooter, weapon_data, shot_tile):
+func OnDealDamage_Callback(targets, shooter, weapon_data, modified_attributes, shot_tile):
 	var shot_fired := false
 	for target in targets:
 		if validate_action(target, shooter, weapon_data) == true:
@@ -91,7 +91,7 @@ func OnDealDamage_Callback(targets, shooter, weapon_data, shot_tile):
 			if target.get_attrib("harvestable") != null:
 				ProcessHarvesting(target, shooter, weapon_data)
 			else:
-				ProcessDamage(target, shooter, weapon_data)
+				ProcessDamage(target, shooter, weapon_data, modified_attributes)
 	if targets.empty() and Globals.get_data(weapon_data, "weapon_data.shoot_empty", false) == true:
 		if validate_action(null, shooter, weapon_data) == true:
 			shot_fired = true
@@ -105,14 +105,16 @@ func OnDealDamage_Callback(targets, shooter, weapon_data, shot_tile):
 			BehaviorEvents.emit_signal("OnLogLine", log_choices)
 			BehaviorEvents.emit_signal("OnShotFired", shot_tile, shooter, weapon_data)
 	if shot_fired == true:
-		consume(shooter, weapon_data)
+		consume(shooter, weapon_data, modified_attributes)
 	
-func consume(shooter, weapon_data):
+func consume(shooter, weapon_data, modified_attributes):
 	if "fire_energy_cost" in weapon_data.weapon_data:
+		var energy_mult = Globals.EffectRef.GetMultiplierValue(shooter, weapon_data.src, modified_attributes, "fire_energy_cost_multiplier")
 		var cost : float = weapon_data.weapon_data.fire_energy_cost * _get_power_amplifier_stack(shooter, "energy_percent")
-		BehaviorEvents.emit_signal("OnUseEnergy", shooter, cost)
+		BehaviorEvents.emit_signal("OnUseEnergy", shooter, cost * energy_mult)
 	if "fire_speed" in weapon_data.weapon_data:
-		BehaviorEvents.emit_signal("OnUseAP", shooter, weapon_data.weapon_data.fire_speed)
+		var speed_mult = Globals.EffectRef.GetMultiplierValue(shooter, weapon_data.src, modified_attributes, "fire_speed_multiplier")
+		BehaviorEvents.emit_signal("OnUseAP", shooter, weapon_data.weapon_data.fire_speed * speed_mult)
 	
 	var ammo = null
 	if weapon_data.weapon_data.has("ammo"):
@@ -281,11 +283,13 @@ func ProcessHarvest(target, shooter, weapon_data):
 	BehaviorEvents.emit_signal("OnDamageTaken", target, shooter, Globals.DAMAGE_TYPE.hull_hit)
 
 
-func ProcessDamage(target, shooter, weapon_data):
+func ProcessDamage(target, shooter, weapon_data, modified_attributes):
 	var is_player = shooter.get_attrib("type") == "player"
 	var is_target_player = target.get_attrib("type") == "player"
-	var min_dam = weapon_data.weapon_data.base_dam
-	var max_dam = weapon_data.weapon_data.max_dam
+	var min_dam_mult = Globals.EffectRef.GetMultiplierValue(shooter, weapon_data.src, modified_attributes, "base_dam_multiplier")
+	var max_dam_mult = Globals.EffectRef.GetMultiplierValue(shooter, weapon_data.src, modified_attributes, "max_dam_multiplier")
+	var min_dam = weapon_data.weapon_data.base_dam * min_dam_mult
+	var max_dam = weapon_data.weapon_data.max_dam * max_dam_mult
 	
 	var dam = MersenneTwister.rand(max_dam-min_dam) + min_dam
 	dam = dam * _get_power_amplifier_stack(shooter, "damage_percent")
@@ -315,8 +319,10 @@ func ProcessDamage(target, shooter, weapon_data):
 				}
 			BehaviorEvents.emit_signal("OnLogLine", log_choices)
 	else:
-		var dam_absorbed_by_shield = _hit_shield(target, dam, weapon_data)
+		var dam_absorbed_by_shield = _hit_shield(target, dam, shooter, weapon_data, modified_attributes)
+		var hull_dam_mult : float = Globals.EffectRef.GetMultiplierValue(shooter, weapon_data.src, modified_attributes, "dam_hull_multiplier")
 		var hull_dam = dam - dam_absorbed_by_shield
+		hull_dam *= hull_dam_mult
 		var max_hull = target.get_attrib("destroyable.hull")
 		target.set_attrib("destroyable.current_hull", target.get_attrib("destroyable.current_hull", max_hull) - hull_dam)
 		if target.get_attrib("destroyable.current_hull") <= 0:
@@ -423,10 +429,11 @@ func ProcessDeathSpawns(target):
 	# Mark as seen so that goto doesn't interrupt for items we're sure to have seen before
 	if destroyer != null and destroyer.get_attrib("type") == "player":
 		modif_data = {"memory": {"was_seen_by":true}}
+	var global_chance_mult = Globals.EffectRef.GetMultiplierValue(destroyer, destroyer.get_attrib("name_id"), {}, "drop_chance_multiplier")
 	for stuff in target.get_attrib("drop_on_death"):
 		var spawned = Globals.LevelLoaderRef.GetGlobalSpawn(stuff.id)
 		var can_spawn = not "global_max" in stuff or stuff["global_max"] < spawned
-		if can_spawn and MersenneTwister.rand_float() < stuff.chance:
+		if can_spawn and MersenneTwister.rand_float() < (stuff.chance * global_chance_mult):
 			Globals.LevelLoaderRef.RequestObject(stuff.id, Globals.LevelLoaderRef.World_to_Tile(target.position), modif_data)
 
 func _get_power_amplifier_stack(shooter, type):
@@ -452,13 +459,15 @@ func _get_power_amplifier_stack(shooter, type):
 		
 	return max_boost
 
-func _hit_shield(target, dam, weapon_data):
+func _hit_shield(target, dam, shooter, weapon_data, modified_attributes):
 	var cur_hp = target.get_attrib("shield.current_hp")
 	if cur_hp == null or cur_hp <= 0:
 		return 0
 		
 	var shield_penetration : float = Globals.get_data(weapon_data, "weapon_data.shield_penetration", 0.0) / 100.0
+	var shield_dam_mult : float = Globals.EffectRef.GetMultiplierValue(shooter, weapon_data.src, modified_attributes, "dam_shield_multiplier")
 	dam = dam - (dam * shield_penetration)
+	dam *= shield_dam_mult
 	
 	var new_hp = max(0, cur_hp - dam)
 	var absorbed = dam
@@ -466,7 +475,8 @@ func _hit_shield(target, dam, weapon_data):
 		absorbed = cur_hp
 	
 	target.set_attrib("shield.current_hp", new_hp)
-	return absorbed
+	# remove the bonus from EM damage since the result will be used to calculate hull damage.
+	return absorbed / shield_dam_mult
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

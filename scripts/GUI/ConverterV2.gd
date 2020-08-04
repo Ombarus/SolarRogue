@@ -47,7 +47,8 @@ func DescBtn_Callback():
 		scanner_level = Globals.get_data(scanner_data[0], "scanning.level")
 		
 	var produce_data = Globals.LevelLoaderRef.LoadJSON(_current_crafting_selected.produce)
-	BehaviorEvents.emit_signal("OnPushGUI", "Description", {"json":produce_data, "scanner_level":scanner_level})
+	# TODO: Handle effects in converter
+	BehaviorEvents.emit_signal("OnPushGUI", "Description", {"json":produce_data, "owner":_obj, "modified_attributes": {}, "scanner_level":scanner_level})
 	
 	
 func OnDamageTaken_Callback(target, shooter, damage_type):

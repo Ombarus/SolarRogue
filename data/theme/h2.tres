@@ -1,0 +1,27 @@
+[gd_resource type="Theme" load_steps=7 format=2]
+
+[ext_resource path="res://data/fonts/DejaVuSansMonoBold_text.tres" type="DynamicFont" id=1]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItalBold_text.tres" type="DynamicFont" id=2]
+[ext_resource path="res://data/fonts/DejaVuSansMonoItal_text.tres" type="DynamicFont" id=3]
+[ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=4]
+
+[sub_resource type="StyleBoxFlat" id=3]
+content_margin_left = 10.0
+bg_color = Color( 0.486275, 0.486275, 0.486275, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+content_margin_left = 7.0
+content_margin_top = 2.0
+bg_color = Color( 0.882353, 0.882353, 0.882353, 1 )
+
+[resource]
+default_font = ExtResource( 4 )
+Label/colors/font_color = Color( 0, 0, 0, 1 )
+Label/styles/normal = SubResource( 3 )
+RichTextLabel/colors/default_color = Color( 0, 0, 0, 1 )
+RichTextLabel/fonts/bold_font = ExtResource( 1 )
+RichTextLabel/fonts/bold_italics_font = ExtResource( 2 )
+RichTextLabel/fonts/italics_font = ExtResource( 3 )
+RichTextLabel/fonts/mono_font = ExtResource( 4 )
+RichTextLabel/fonts/normal_font = ExtResource( 4 )
+RichTextLabel/styles/normal = SubResource( 2 )

@@ -9,6 +9,9 @@ margin_bottom = 200.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Spacer" type="Control" parent="."]
 margin_right = 396.0
@@ -45,11 +48,12 @@ size_flags_vertical = 3
 text = ":"
 valign = 1
 
-[node name="Value" type="Label" parent="HBoxContainer"]
+[node name="Value" type="RichTextLabel" parent="HBoxContainer"]
 margin_left = 229.0
 margin_right = 396.0
 margin_bottom = 31.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+bbcode_enabled = true
+bbcode_text = "1"
 text = "1"
-valign = 1

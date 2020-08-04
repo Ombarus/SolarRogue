@@ -130,9 +130,12 @@ func OnPickup_Callback(picker, picked):
 		#	if is_player:
 		#		BehaviorEvents.emit_signal("OnLogLine", "Cannot pick up " + obj.get_attrib("name_id") + " Cargo holds are full")
 		#	continue
-		picker.set_attrib("cargo.volume_used", picker.get_attrib("cargo.volume_used") + obj.get_attrib("equipment.volume"))
-		inventory_space -= obj.get_attrib("equipment.volume")
+		BehaviorEvents.emit_signal("OnPickObject", picker, obj) # warning, obj will be invalid after this call
 		var modified_attrib = obj.modified_attributes
+		var volume_mult = Globals.EffectRef.GetMultiplierValue(picker, obj.get_attrib("src"), modified_attrib, "volume_multiplier")
+		var item_volume = obj.get_attrib("equipment.volume") * volume_mult
+		picker.set_attrib("cargo.volume_used", picker.get_attrib("cargo.volume_used") + item_volume)
+		inventory_space -= item_volume
 		var variation_src = Globals.clean_path(obj.get_attrib("selected_variation", ""))
 		if is_player:
 				BehaviorEvents.emit_signal("OnLogLine", "Tractor beam has brought %s abord", [Globals.mytr(obj.get_attrib("name_id"))])
@@ -151,7 +154,7 @@ func OnPickup_Callback(picker, picked):
 		BehaviorEvents.emit_signal("OnRequestObjectUnload", obj)
 		obj = null
 	if total_pickup_ap > 0:
-		BehaviorEvents.emit_signal("OnObjectPicked", picker)
+		BehaviorEvents.emit_signal("OnObjectsPicked", picker)
 		BehaviorEvents.emit_signal("OnUseAP", picker, total_pickup_ap)
 	filtered_obj.clear() # the objects have been destroyed, just want to make sure I don't forget about it
 	
@@ -184,9 +187,14 @@ func OnDropCargo_Callback(dropper, item_id, modified_attributes, count):
 			else:
 				amount_dropped = item.count
 				index_to_delete.push_back(i)
-			dropper.set_attrib("cargo.volume_used", dropper.get_attrib("cargo.volume_used") - (data.equipment.volume*amount_dropped))
+			
+			var modified_attrib = item.get("modified_attributes", {})
+			var volume_mult = Globals.EffectRef.GetMultiplierValue(dropper, item.src, modified_attrib, "volume_multiplier")
+			var item_volume = data.equipment.volume * volume_mult
+			dropper.set_attrib("cargo.volume_used", dropper.get_attrib("cargo.volume_used") - (item_volume*amount_dropped))
 			total_ap_cost += drop_speed * amount_dropped
 			for i in range(amount_dropped):
+				BehaviorEvents.emit_signal("OnItemDropped", dropper, item_id, modified_attributes)
 				Globals.LevelLoaderRef.RequestObject(item.src, Globals.LevelLoaderRef.World_to_Tile(dropper.position), modif_data)
 			# found item, we can quit the loop
 			break
@@ -285,7 +293,10 @@ func OnAddItem_Callback(picker, item_id, modified_attributes):
 		picker.init_cargo()
 	var cargo = picker.get_attrib("cargo.content")
 	var data = Globals.LevelLoaderRef.LoadJSON(item_id)
-	var volume = data.equipment.volume
+	
+	var volume_mult = Globals.EffectRef.GetMultiplierValue(picker, item_id, modified_attributes, "volume_multiplier")
+	
+	var volume = data.equipment.volume * volume_mult
 	var found = false
 	if "stackable" in data.equipment and data.equipment.stackable == true:
 		for item in cargo:
@@ -313,9 +324,10 @@ func OnRemoveItem_Callback(holder, item_id, modified_attributes, num_remove=1): 
 		var cargo_variation = Globals.clean_path(Globals.get_data(item, "modified_attributes.selected_variation", ""))
 		if Globals.clean_path(item_id) == Globals.clean_path(item.src) and cargo_variation == item_variation:
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
+			var volume_mult = Globals.EffectRef.GetMultiplierValue(holder, item_id, modified_attributes, "volume_multiplier")
 			if num_remove < 0:
 				num_remove = item.count
-			holder.set_attrib("cargo.volume_used", holder.get_attrib("cargo.volume_used") - (data.equipment.volume*num_remove))
+			holder.set_attrib("cargo.volume_used", holder.get_attrib("cargo.volume_used") - (data.equipment.volume * volume_mult * num_remove))
 			if item.count > num_remove:
 				item.count -= num_remove
 			else:
@@ -358,13 +370,14 @@ func OnClearCargo_Callback(holder):
 		OnRemoveItem_Callback(holder, item.src, item.get("modified_attributes", {}), -1)
 		
 #objects = [{"src":"bleh.json", "count":3}]
-func GetTotalVolume(objects):
+func GetTotalVolume(objects, src_entity):
 	var total_volume = 0
 	for item in objects:
 		var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 		var volume = Globals.get_data(data, "equipment.volume")
 		if volume != null:
-			total_volume += data.equipment.volume * item["count"]
+			var volume_mult = Globals.EffectRef.GetMultiplierValue(src_entity, item.src, item.get("modified_attributes", {}), "volume_multiplier")
+			total_volume += data.equipment.volume * volume_mult * item["count"]
 		
 	return total_volume
 	
@@ -372,5 +385,5 @@ func GetTotalVolume(objects):
 func OnUpdateCargoVolume_Callback(obj):
 	obj.init_cargo()
 	var cargo = obj.get_attrib("cargo.content")
-	var total_volume = GetTotalVolume(cargo)
+	var total_volume = GetTotalVolume(cargo, obj)
 	obj.set_attrib("cargo.volume_used", total_volume)

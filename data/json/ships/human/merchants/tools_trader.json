@@ -23,6 +23,16 @@
 			"data/json/items/utilities/power_amplifier.json"
 		]
 	},
+	"mount_attributes": {
+		"weapon": [
+			{}, 
+			{}
+		],
+		"shield": [{}],
+		"scanner": [{}],
+		"converter": [{}],
+		"utility":[{}, {}]
+	},
 	"destroyable": {
 		"hull":25
 	},

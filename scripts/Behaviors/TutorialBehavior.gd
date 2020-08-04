@@ -11,7 +11,7 @@ func _ready():
 	connect("ResetTuto", self, "ResetTuto_Callback")
 	BehaviorEvents.connect("OnGUIChanged", self, "OnGUIChanged_Callback")
 	BehaviorEvents.connect("OnScannerUpdated", self, "OnScannerUpdated_Callback")
-	BehaviorEvents.connect("OnObjectPicked", self, "OnPickup_Callback")
+	BehaviorEvents.connect("OnObjectsPicked", self, "OnPickup_Callback")
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	
 func _exit_tree():

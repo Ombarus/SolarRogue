@@ -22,7 +22,7 @@ func _ready():
 	
 	BehaviorEvents.connect("OnDropCargo", self, "OnDrop_Callback")
 	BehaviorEvents.connect("OnDropMount", self, "OnDropMount_Callback")
-	BehaviorEvents.connect("OnObjectPicked", self, "OnPickup_Callback")
+	BehaviorEvents.connect("OnObjectsPicked", self, "OnPickup_Callback")
 	BehaviorEvents.connect("OnTradingDone", self, "OnTradingDone_Callback")
 	
 	var vol : float = PermSave.get_attrib("settings.master_volume", 8.0)

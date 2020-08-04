@@ -23,12 +23,14 @@ signal OnUseEnergy(obj, amount)
 signal OnEnergyChanged(obj)
 signal OnObjTurn(obj)
 signal OnLogLine(text, fmt)
-signal OnDealDamage(targets, shooter, weapon_data, shot_tile) # fired before all other validations
+signal OnDealDamage(targets, shooter, weapon_data, modified_attributes, shot_tile) # fired before all other validations
 signal OnShotFired(shot_tile, shooter, weapon_data) # for VFX
 signal OnDamageTaken(target, shooter, damage_type) # only fired if damage is > 0
 signal OnPickup(picker, picked)
-signal OnObjectPicked(picker)
+signal OnObjectsPicked(picker)
+signal OnPickObject(picker, obj)
 signal OnDropCargo(dropper, item_id, variation_src, count)
+signal OnItemDropped(dropper, item_id, modified_attributes)
 signal OnDropMount(dropper, item_id, index)
 signal OnRemoveMount(dropper, item_id, index)
 signal OnEquipMount(equipper, slot_name, index, item_id, variation_src)

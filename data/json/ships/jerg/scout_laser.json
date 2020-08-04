@@ -12,6 +12,11 @@
 		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
 		"utility": [""]
 	},
+	"mount_attributes": {
+		"weapon": [{}],
+		"scanner": [{}],
+		"utility":[{}]
+	},
 	"animation": {
 		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
 	},

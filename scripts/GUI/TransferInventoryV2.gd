@@ -103,7 +103,7 @@ func Desc_Callback():
 	if "src" in selected_item and selected_item.src != null and selected_item.src != "":
 		data = Globals.LevelLoaderRef.LoadJSON(selected_item.src)
 	
-	BehaviorEvents.emit_signal("OnPushGUI", "Description", {"json":data, "scanner_level":scanner_level})
+	BehaviorEvents.emit_signal("OnPushGUI", "Description", {"json":data, "owner":selected_ship, "modified_attributes":selected_item.get("modified_attributes", {}), "scanner_level":scanner_level})
 	
 func Transfer_Callback():
 	var selected_item = null

@@ -24,6 +24,12 @@
 		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
 		"converter": ["data/json/items/converters/converter_mk1.json"]
 	},
+	"mount_attributes": {
+		"weapon": [{},{},{},{}],
+		"shield": [{},{}],
+		"scanner": [{}],
+		"converter": [{}]
+	},
 	"destroyable": {
 		"hull":40
 	},

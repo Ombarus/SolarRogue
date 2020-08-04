@@ -3,8 +3,8 @@
 	"type":"effect",
 	"prefix":"EM",
 	"attributes": {
-			"self_base_dam_shield_multiplier":1.5,
-			"self_max_dam_hull_multiplier":0.5,
+			"self_dam_shield_multiplier":1.5,
+			"self_dam_hull_multiplier":0.5,
 		}
 	}
 }

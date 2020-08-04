@@ -70,7 +70,7 @@ func Desc_Callback():
 	if selected != null and "src" in selected and selected.src != null and selected.src != "":
 		data = Globals.LevelLoaderRef.LoadJSON(selected.src)
 	
-	BehaviorEvents.emit_signal("OnPushGUI", "Description", {"json":data, "scanner_level":scanner_level})
+	BehaviorEvents.emit_signal("OnPushGUI", "Description", {"json":data, "owner":_obj, "modified_attributes":selected.get("modified_attributes", {}), "scanner_level":scanner_level})
 
 func Remove_Callback():
 	var selected_mount = null

@@ -109,7 +109,8 @@ func init_cargo():
 	modified_attributes.cargo["volume_used"] = 0
 	for item in modified_attributes.cargo.content:
 		var item_data = Globals.LevelLoaderRef.LoadJSON(item.src)
-		var vol = item_data.equipment.volume
+		var volume_mult = Globals.EffectRef.GetMultiplierValue(self, item.src, item.get("modified_attributes", {}), "volume_multiplier")
+		var vol = item_data.equipment.volume * volume_mult
 		modified_attributes.cargo["volume_used"] += vol * item.count
 
 func init_mounts():

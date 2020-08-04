@@ -12,6 +12,11 @@
 		"shield": ["data/json/items/shields/shield_mk1.json"],
 		"scanner": ["data/json/items/scanners/scanner_mk1.json"]
 	},
+	"mount_attributes": {
+		"weapon": [{}],
+		"shield": [{}],
+		"scanner": [{}]
+	},
 	"animation": {
 		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
 	},

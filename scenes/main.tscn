@@ -589,10 +589,10 @@ visible = false
 
 [node name="ApDebugWindow" parent="Camera-GUI/SafeArea" instance=ExtResource( 63 )]
 visible = false
-margin_left = 854.0
-margin_top = 132.0
-margin_right = 814.0
-margin_bottom = 92.0
+margin_left = 421.113
+margin_top = 100.909
+margin_right = -394.887
+margin_bottom = 60.9087
 AP_behavior_path = NodePath("../../../Behaviors/AP")
 
 [node name="StoryPromptRoot" type="Control" parent="Camera-GUI/SafeArea"]

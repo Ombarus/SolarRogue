@@ -11,6 +11,10 @@
 		"weapon": ["data/json/items/weapons/laser_turret_mk1.json"],
 		"scanner": ["data/json/items/scanners/scanner_mk1.json"]
 	},
+	"mount_attributes": {
+		"weapon": [{}],
+		"scanner": [{}]
+	},
 	"animation": {
 		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
 	},

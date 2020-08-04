@@ -1,0 +1,254 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://data/theme/default_ui_text.tres" type="Theme" id=1]
+[ext_resource path="res://scripts/GUI/Description.gd" type="Script" id=2]
+[ext_resource path="res://data/styles/GUI_bg.tres" type="StyleBox" id=3]
+[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=4]
+[ext_resource path="res://data/theme/header_ui_text.tres" type="Theme" id=5]
+[ext_resource path="res://data/theme/h2.tres" type="Theme" id=6]
+[ext_resource path="res://scripts/GUI/InputConsumer.gd" type="Script" id=8]
+
+[node name="Description" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ModalBG" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = ExtResource( 3 )
+script = ExtResource( 8 )
+
+[node name="base" parent="." instance=ExtResource( 4 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -266.0
+margin_top = -265.0
+margin_right = 266.0
+margin_bottom = 265.0
+dialog_cancel = true
+title = "A Spaceship"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="base"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 57.0
+margin_right = -20.0
+margin_bottom = -48.0
+
+[node name="MainCat" type="Label" parent="base/VBoxContainer"]
+margin_right = 492.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 0, 25 )
+theme = ExtResource( 5 )
+text = "Description"
+valign = 1
+
+[node name="BaseDesc" type="Label" parent="base/VBoxContainer"]
+margin_top = 29.0
+margin_right = 492.0
+margin_bottom = 76.0
+text = "This is a basic description
+"
+autowrap = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="base/VBoxContainer"]
+margin_top = 80.0
+margin_right = 492.0
+margin_bottom = 425.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="base/VBoxContainer/ScrollContainer"]
+margin_right = 480.0
+margin_bottom = 708.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MainCat2" type="Label" parent="base/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_right = 480.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 0, 25 )
+theme = ExtResource( 5 )
+text = "Specs"
+valign = 1
+
+[node name="BaseDesc2" type="Label" parent="base/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 29.0
+margin_right = 480.0
+margin_bottom = 176.0
+text = "Weapon Mounts : 5
+Shields Mounts : 3
+Utility Mounts : 2
+Scanner Level : 1
+Converter : Military
+"
+autowrap = true
+
+[node name="MainCat3" type="Label" parent="base/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 180.0
+margin_right = 480.0
+margin_bottom = 205.0
+rect_min_size = Vector2( 0, 25 )
+theme = ExtResource( 5 )
+text = "Armament"
+valign = 1
+
+[node name="Control" type="Control" parent="base/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 209.0
+margin_right = 480.0
+margin_bottom = 234.0
+rect_min_size = Vector2( 0, 25 )
+size_flags_horizontal = 3
+
+[node name="MainCat4" type="Label" parent="base/VBoxContainer/ScrollContainer/VBoxContainer/Control"]
+margin_left = 38.0
+margin_top = 4.0
+margin_right = 480.0
+margin_bottom = 29.0
+rect_min_size = Vector2( 0, 25 )
+theme = ExtResource( 6 )
+text = "Heavy Laser"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control2" type="Control" parent="base/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 238.0
+margin_right = 480.0
+margin_bottom = 363.0
+rect_min_size = Vector2( 0, 125 )
+size_flags_horizontal = 3
+
+[node name="BaseDesc3" type="RichTextLabel" parent="base/VBoxContainer/ScrollContainer/VBoxContainer/Control2"]
+margin_left = 65.0
+margin_top = 7.0
+margin_right = 480.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 0, 125 )
+bbcode_enabled = true
+bbcode_text = "Damage : 5-10 [color=lime](+2/+2)[/color]
+Speed : 0.8
+Hit Chance : 70% [color=lime](+5%)[/color]
+Energy : 500 [color=red](+150)[/color]
+Volume : 50 m3"
+text = "Damage : 5-10 (+2/+2)
+Speed : 0.8
+Hit Chance : 70% (+5%)
+Energy : 500 (+150)
+Volume : 50 m3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control3" type="Control" parent="base/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 367.0
+margin_right = 480.0
+margin_bottom = 392.0
+rect_min_size = Vector2( 0, 25 )
+size_flags_horizontal = 3
+
+[node name="MainCat4" type="Label" parent="base/VBoxContainer/ScrollContainer/VBoxContainer/Control3"]
+margin_left = 38.0
+margin_top = 4.0
+margin_right = 480.0
+margin_bottom = 29.0
+rect_min_size = Vector2( 0, 25 )
+theme = ExtResource( 6 )
+text = "Heavy Laser"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control4" type="Control" parent="base/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 396.0
+margin_right = 480.0
+margin_bottom = 521.0
+rect_min_size = Vector2( 0, 125 )
+size_flags_horizontal = 3
+
+[node name="BaseDesc3" type="RichTextLabel" parent="base/VBoxContainer/ScrollContainer/VBoxContainer/Control4"]
+margin_left = 65.0
+margin_top = 7.0
+margin_right = 480.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 0, 125 )
+bbcode_enabled = true
+bbcode_text = "Damage : 5-10 [color=lime](+2/+2)[/color]
+Speed : 0.8
+Hit Chance : 70% [color=lime](+5%)[/color]
+Energy : 500 [color=red](+150)[/color]
+Volume : 50 m3"
+text = "Damage : 5-10 (+2/+2)
+Speed : 0.8
+Hit Chance : 70% (+5%)
+Energy : 500 (+150)
+Volume : 50 m3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainCat4" type="Label" parent="base/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 525.0
+margin_right = 480.0
+margin_bottom = 550.0
+rect_min_size = Vector2( 0, 25 )
+theme = ExtResource( 5 )
+text = "Defense"
+valign = 1
+
+[node name="Control5" type="Control" parent="base/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 554.0
+margin_right = 480.0
+margin_bottom = 579.0
+rect_min_size = Vector2( 0, 25 )
+size_flags_horizontal = 3
+
+[node name="MainCat4" type="Label" parent="base/VBoxContainer/ScrollContainer/VBoxContainer/Control5"]
+margin_left = 38.0
+margin_top = 4.0
+margin_right = 480.0
+margin_bottom = 29.0
+rect_min_size = Vector2( 0, 25 )
+theme = ExtResource( 6 )
+text = "Heavy Laser"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control6" type="Control" parent="base/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 583.0
+margin_right = 480.0
+margin_bottom = 708.0
+rect_min_size = Vector2( 0, 125 )
+size_flags_horizontal = 3
+
+[node name="BaseDesc3" type="RichTextLabel" parent="base/VBoxContainer/ScrollContainer/VBoxContainer/Control6"]
+margin_left = 65.0
+margin_top = 7.0
+margin_right = 480.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 0, 125 )
+bbcode_enabled = true
+bbcode_text = "Damage : 5-10 [color=lime](+2/+2)[/color]
+Speed : 0.8
+Hit Chance : 70% [color=lime](+5%)[/color]
+Energy : 500 [color=red](+150)[/color]
+Volume : 50 m3"
+text = "Damage : 5-10 (+2/+2)
+Speed : 0.8
+Hit Chance : 70% (+5%)
+Energy : 500 (+150)
+Volume : 50 m3"
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -2,7 +2,8 @@ extends "res://scripts/GUI/GUILayoutBase.gd"
 
 var _obj : Attributes = null
 var _json : Dictionary = {}
-
+var _modified_attributes : Dictionary = {} # only for json
+var _owner : Attributes = null
 
 func _ready():
 	get_node("base").connect("OnOkPressed", self, "Ok_Callback")
@@ -17,13 +18,17 @@ func Ok_Callback():
 func Init(init_param):
 	get_node("base").disabled = false
 	var scanner_level : int = init_param["scanner_level"]
+	_owner = init_param["owner"] # this is the object that's holding the _json in his inventory
 	
-	_obj = null
+	_obj = null # this is the object floating in space
 	_json = {}
+	_modified_attributes = {}
 	if "obj" in init_param and init_param.obj != null:
 		_obj = init_param["obj"]
 	if "json" in init_param and init_param.json != null:
 		_json = init_param["json"]
+	if "modified_attributes" in init_param and init_param.modified_attributes != null:
+		_modified_attributes = init_param["modified_attributes"]
 	
 	get_node("base").title = Globals.mytr(get_custom("name_id", ""))
 	
@@ -56,11 +61,22 @@ func Init(init_param):
 			var formatdict := {}
 			var is_valid := true
 			for i in range(names.size()):
-				var val = get_custom(names[i])
+				var path_effect : Dictionary = split_effect(names[i])
+				var mult := 1.0
+				for effect in path_effect["effects"]:
+					mult *= Globals.EffectRef.GetMultiplierValue(_owner, get_name_id(), _modified_attributes, effect)
+				var val = get_custom(path_effect["path"])
 				if val == null and defaults.size() > 0:
 					val = get_custom(defaults[min(i, defaults.size())])
 				if val == null:
 					is_valid = false
+				if abs(mult - 1.0) > 0.0001:
+					val *= mult
+					var positive_good = row.get("positive_good", true)
+					if (mult > 1.0 and positive_good == true) or (mult < 1.0 and positive_good == false):
+						val = "[color=lime]" + str(val) + "[/color]"
+					else:
+						val = "[color=red]" + str(val) + "[/color]"
 				formatdict[names[i]] = val
 			
 			if formatdict.size() > 0:
@@ -97,8 +113,24 @@ func get_names(txt) -> Array:
 		
 	return res
 	
+func split_effect(txt : String) -> Dictionary:
+	if not "*" in txt:
+		return {"path": txt, "effects":[]}
+	
+	var res : Array = txt.split('*')
+	if res.size() <= 1:
+		return {"path": txt, "effects":[]}
+	else:
+		return {"path": res[0], "effects":res.slice(1, -1)}
+	
 func get_custom(path, default=null):
 	if _obj != null:
 		return _obj.get_attrib(path, default)
 	else:
 		return Globals.get_data(_json, path, default)
+		
+func get_name_id():
+	if _obj != null:
+		return _obj.get_attrib("name_id")
+	else:
+		return Globals.get_data(_json, "name_id", "")

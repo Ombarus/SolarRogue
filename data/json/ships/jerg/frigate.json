@@ -24,6 +24,12 @@
 			""
 		]
 	},
+	"mount_attributes": {
+		"weapon": [{},{}],
+		"scanner": [{}],
+		"converter": [{}],
+		"utility":[{},{},{},{}]
+	},
 	"destroyable": {
 		"hull":50
 	},

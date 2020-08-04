@@ -291,6 +291,7 @@ func DoAttackPathFinding(obj):
 	var player_tile = Globals.LevelLoaderRef.World_to_Tile(player.position)
 	var obj_tile = Globals.LevelLoaderRef.World_to_Tile(obj.position)
 	var weapons = obj.get_attrib("mounts.weapon")
+	var modified_attributes = obj.get_attrib("mount_attributes.weapon")
 	var weapons_data = Globals.LevelLoaderRef.LoadJSONArray(weapons)
 	#if weapons_data != null and weapons_data.size() > 0
 	
@@ -301,14 +302,16 @@ func DoAttackPathFinding(obj):
 	var minimal_move = null
 	var shot = false
 	BehaviorEvents.emit_signal("OnBeginParallelAction", obj)
-	for data in weapons_data:
+	for index in range(weapons_data.size()):
+		var data = weapons_data[index]
+		var attrib_data = modified_attributes[index]
 		var best_move = _targetting.ClosestFiringSolution(obj_tile, player_tile, data)
 		var is_destroyed = player.get_attrib("destroyable.destroyed")
 		if best_move.length() == 0 and (is_destroyed == null or is_destroyed == false):
 			var chance = obj.get_attrib("ai.hit_chance")
 			chance = 1.0 - (diff_chance_mult * (1.0 - chance))
 			if chance == null or MersenneTwister.rand_float() < chance:
-				BehaviorEvents.emit_signal("OnDealDamage", [player], obj, data, player_tile)
+				BehaviorEvents.emit_signal("OnDealDamage", [player], obj, data, attrib_data, player_tile)
 			else:
 				var log_choices = {
 					"The enemy missed":50,
@@ -333,7 +336,9 @@ func DoAttackPathFinding(obj):
 				BehaviorEvents.emit_signal("OnLogLine", log_choices)
 				 # play the animation but no damage
 				BehaviorEvents.emit_signal("OnShotFired", player_tile, obj, data)
-				BehaviorEvents.emit_signal("OnUseAP", obj, Globals.get_data(data, "weapon_data.fire_speed"))
+				var fire_speed = Globals.get_data(data, "weapon_data.fire_speed")
+				var speed_mult = Globals.EffectRef.GetMultiplierValue(obj, data.src, attrib_data, "fire_speed_multiplier")
+				BehaviorEvents.emit_signal("OnUseAP", obj, fire_speed * speed_mult)
 			shot = true
 		if minimal_move == null or minimal_move.length() > best_move.length():
 			minimal_move = best_move

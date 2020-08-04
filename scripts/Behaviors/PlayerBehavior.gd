@@ -436,9 +436,14 @@ func Pressed_Weapon_Callback():
 		BehaviorEvents.emit_signal("OnLogLine", "Mount some weapon first")
 		return
 		
+	var weapon_attributes = playerNode.get_attrib("mount_attributes.weapon")
+		
 	_weapon_shots = []
-	for data in weapons_data:
-		_weapon_shots.push_back({"state":SHOOTING_STATE.init, "weapon_data":data})
+	var index = 0
+	for index in range(weapons_data.size()):
+		var data = weapons_data[index]
+		var attrib_data = weapon_attributes[index]
+		_weapon_shots.push_back({"state":SHOOTING_STATE.init, "weapon_data":data, "modified_attributes":attrib_data})
 		
 	var cur_weapon = _weapon_shots[0]
 	cur_weapon.state = SHOOTING_STATE.wait_targetting
@@ -587,7 +592,7 @@ func _input(event):
 		scanner_level = Globals.get_data(scanner_data[0], "scanning.level")
 		
 	if filtered_content.size() == 1:
-		BehaviorEvents.emit_signal("OnPushGUI", "Description", {"obj":filtered_content[0], "scanner_level":scanner_level})
+		BehaviorEvents.emit_signal("OnPushGUI", "Description", {"obj":filtered_content[0], "owner":filtered_content[0], "modified_attributes":filtered_content[0].modified_attributes, "scanner_level":scanner_level})
 	elif filtered_content.size() > 1:
 		BehaviorEvents.emit_signal("OnPushGUI", "SelectTarget", {"targets":filtered_content, "callback_object":self, "callback_method":"LookTarget_Callback"})
 	else:
@@ -609,7 +614,7 @@ func LookTarget_Callback(selected_targets):
 		scanner_level = Globals.get_data(scanner_data[0], "scanning.level")
 		
 	if selected_targets.size() > 0:
-		BehaviorEvents.emit_signal("OnPushGUI", "Description", {"obj":selected_targets[0], "scanner_level":scanner_level})
+		BehaviorEvents.emit_signal("OnPushGUI", "Description", {"obj":selected_targets[0], "owner":selected_targets[0], "modified_attributes":selected_targets[0].modified_attributes, "scanner_level":scanner_level})
 
 func OnCameraDragged_Callback():
 	if _input_state != Globals.INPUT_STATE.camera_dragged:
@@ -854,9 +859,9 @@ func ProcessAttackSelection(target, shot_tile):
 						valid_target.push_back(t)
 			else:
 				valid_target.push_back(shot.target)	
-			BehaviorEvents.emit_signal("OnDealDamage", valid_target, playerNode, shot.weapon_data, shot.tile)
+			BehaviorEvents.emit_signal("OnDealDamage", valid_target, playerNode, shot.weapon_data, shot.modified_attributes, shot.tile)
 		elif shot.target == null and shoot_empty and "tile" in shot and shot.tile != null:
-			BehaviorEvents.emit_signal("OnDealDamage", [], playerNode, shot.weapon_data, shot.tile)
+			BehaviorEvents.emit_signal("OnDealDamage", [], playerNode, shot.weapon_data, shot.modified_attributes, shot.tile)
 	BehaviorEvents.emit_signal("OnEndParallelAction", playerNode)
 	
 func ProcessBoardSelection(target, tile):
