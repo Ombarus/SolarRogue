@@ -18,9 +18,9 @@ func Ok_Callback():
 func Init(init_param):
 	get_node("base").disabled = false
 	var scanner_level : int = init_param["scanner_level"]
-	_owner = init_param["owner"] # this is the object that's holding the _json in his inventory
 	
 	_obj = null # this is the object floating in space
+	_owner = null # this is the object that's holding the _json in his inventory
 	_json = {}
 	_modified_attributes = {}
 	if "obj" in init_param and init_param.obj != null:
@@ -29,8 +29,10 @@ func Init(init_param):
 		_json = init_param["json"]
 	if "modified_attributes" in init_param and init_param.modified_attributes != null:
 		_modified_attributes = init_param["modified_attributes"]
+	if "owner" in init_param and init_param.owner != null:
+		_owner = init_param["owner"]
 	
-	get_node("base").title = Globals.mytr(get_custom("name_id", ""))
+	get_node("base").title = get_display_name_id()
 	
 	var base_desc : String = get_custom("description.text", "")
 	if base_desc != "":
@@ -42,6 +44,15 @@ func Init(init_param):
 		
 	# need to make a copy or we end up overwriting the base attributes
 	var cat_dict : Dictionary = str2var(var2str(get_custom("description", {})))
+	
+	var variation_src = _modified_attributes.get("selected_variation")
+	if variation_src != null:
+		var variation_data : Dictionary = Globals.LevelLoaderRef.LoadJSON(variation_src)
+		var extra_desc = str2var(var2str(variation_data.get("description", {})))
+		for key in extra_desc.keys():
+			cat_dict[key] = extra_desc[key]
+		
+	
 	var final_list := []
 	for key in cat_dict:
 		if key == "text" or scanner_level < cat_dict[key].min_level:
@@ -134,3 +145,9 @@ func get_name_id():
 		return _obj.get_attrib("name_id")
 	else:
 		return Globals.get_data(_json, "name_id", "")
+		
+func get_display_name_id():
+	if _obj != null:
+		return Globals.EffectRef.get_object_display_name(_obj)
+	else:
+		return Globals.EffectRef.get_display_name(_json, _modified_attributes)

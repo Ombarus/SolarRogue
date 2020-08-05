@@ -3,10 +3,9 @@
 	"type":"effect",
 	"prefix":"Compact",
 	"attributes": {
-			"self_shield_multiplier":0.8,
-			"self_base_dam_multiplier":0.8,
-			"self_max_dam_multiplier":0.8,
-			"inv_self_volume_multiplier":0.5
-		}
+		"self_shield_multiplier":0.8,
+		"self_base_dam_multiplier":0.8,
+		"self_max_dam_multiplier":0.8,
+		"inv_self_volume_multiplier":0.5
 	}
 }

@@ -27,6 +27,30 @@ func _ready():
 func _exit_tree():
 	Globals.EffectRef = null
 	
+func get_object_display_name(obj) -> String:
+	var variation_src : String = obj.get_attrib("selected_variation", "")
+	var name_id : String = obj.get_attrib("name_id")
+	if variation_src.empty():
+		return Globals.mytr(name_id)
+	
+	var variation_data = Globals.LevelLoaderRef.LoadJSON(variation_src)
+	if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
+		return Globals.mytr(variation_data["prefix"]) + " " + Globals.mytr(name_id)
+	else:
+		return Globals.mytr(name_id)
+	
+func get_display_name(data, modified_attributes=null):
+	if modified_attributes == null:
+		modified_attributes = {}
+		
+	var display_name = data.name_id
+	if not modified_attributes.empty() and modified_attributes.has("selected_variation"):
+		var variation_data = Globals.LevelLoaderRef.LoadJSON(modified_attributes["selected_variation"])
+		if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
+			display_name = Globals.mytr(variation_data["prefix"]) + " " + Globals.mytr(display_name)
+			
+	return display_name
+	
 	
 func OnItemDropped_Callback(dropper, item_id, modified_attributes):
 	if modified_attributes == null or not modified_attributes.has("selected_variation"):
@@ -165,7 +189,16 @@ func GetMultiplierValue(obj, item_src, item_attributes, attrib_base_name) -> flo
 	if item_attributes == null:
 		item_attributes = {}
 	var result : float = 1.0
-	var effects = obj.get_attrib("applied_effects", [])
+	var effects = []
+	if obj == null:
+		var variation_src = item_attributes.get("selected_variation")
+		if variation_src != null:
+			var variation_data : Dictionary = Globals.LevelLoaderRef.LoadJSON(variation_src)
+			var attrib = str2var(var2str(variation_data["attributes"]))
+			attrib["src"] = variation_src
+			effects = [attrib]
+	else:
+		effects = obj.get_attrib("applied_effects", [])
 	var applied_effects = []
 	var debug_applied = []
 	for effect in effects:
@@ -199,13 +232,13 @@ func GetMultiplierValue(obj, item_src, item_attributes, attrib_base_name) -> flo
 				continue
 	
 	#obj, item_src, item_attributes, attrib_base_name
-	if debug_applied.size() > 0:
-		var obj_id = obj.get_attrib("unique_id")
-		var obj_name = obj.get_attrib("name_id")
-		var debug_msg = "Applied Effect " + attrib_base_name + " : " + str(result) + " ("
-		for t in debug_applied:
-			debug_msg += t + ","
-		debug_msg += ")"
-		print(debug_msg)
+#	if debug_applied.size() > 0:
+#		var obj_id = obj.get_attrib("unique_id")
+#		var obj_name = obj.get_attrib("name_id")
+#		var debug_msg = "Applied Effect " + attrib_base_name + " : " + str(result) + " ("
+#		for t in debug_applied:
+#			debug_msg += t + ","
+#		debug_msg += ")"
+#		print(debug_msg)
 	
 	return result

@@ -174,7 +174,8 @@ func validate_action(target, shooter, weapon_data):
 			"Sir! we should craft more %s":50,
 			"Will do sir! as soon as the converter makes more %s!":20
 		}
-		BehaviorEvents.emit_signal("OnLogLine", log_choices, [Globals.mytr(ammo_data.name_id)])
+		#TODO: will ammo have variations/effect? if so, need to pass modified_attrib here
+		BehaviorEvents.emit_signal("OnLogLine", log_choices, [Globals.EffectRef.get_display_name(ammo_data, {})])
 		return false
 	
 	#if "fire_energy_cost" in weapon_data.weapon_data:

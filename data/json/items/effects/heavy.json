@@ -3,8 +3,15 @@
 	"type":"effect",
 	"prefix":"Heavy",
 	"attributes": {
-			"global_move_multiplier":1.1, 
-			"self_shield_multiplier":1.20
+		"global_move_multiplier":1.5, 
+		"self_shield_multiplier":1.20
+	},
+	"description": {
+		"Extra": {
+			"min_level":0,
+			"fields": [
+				{"name":"Ship Movement", "value":"10% slower"}
+			]
 		}
 	}
 }

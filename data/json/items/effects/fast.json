@@ -3,13 +3,12 @@
 	"type":"effect",
 	"prefix":"Fast",
 	"attributes": {
-			"self_shield_multiplier":0.8,
-			"self_hp_regen_per_ap_multiplier":1.20,
-			"self_energy_cost_per_hp_multiplier":1.5,
-			"self_base_dam_multiplier":0.9,
-			"self_max_dam_multiplier":0.9,
-			"self_fire_energy_cost_multiplier":1.2,
-			"self_fire_speed_multiplier":0.7
-		}
+		"self_shield_multiplier":0.8,
+		"self_hp_regen_per_ap_multiplier":1.20,
+		"self_energy_cost_per_hp_multiplier":1.5,
+		"self_base_dam_multiplier":0.9,
+		"self_max_dam_multiplier":0.9,
+		"self_fire_energy_cost_multiplier":1.2,
+		"self_fire_speed_multiplier":0.7
 	}
 }

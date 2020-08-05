@@ -2,7 +2,5 @@
 	"name_id":"Normal",
 	"type":"effect",
 	"prefix":"",
-	"attributes": {
-		}
-	}
+	"attributes": {}
 }

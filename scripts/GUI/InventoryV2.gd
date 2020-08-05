@@ -69,8 +69,14 @@ func Desc_Callback():
 	var data = null
 	if selected != null and "src" in selected and selected.src != null and selected.src != "":
 		data = Globals.LevelLoaderRef.LoadJSON(selected.src)
+		
+	var owner = null
+	# Only show ship-wide effects if item is equipped, otherwise show only effect of selected item
+	if "key" in selected and "idx" in selected:
+		print("showing global effect for selected mounted item")
+		owner = _obj
 	
-	BehaviorEvents.emit_signal("OnPushGUI", "Description", {"json":data, "owner":_obj, "modified_attributes":selected.get("modified_attributes", {}), "scanner_level":scanner_level})
+	BehaviorEvents.emit_signal("OnPushGUI", "Description", {"json":data, "owner":owner, "modified_attributes":selected.get("modified_attributes", {}), "scanner_level":scanner_level})
 
 func Remove_Callback():
 	var selected_mount = null
@@ -226,11 +232,7 @@ func Init(init_param):
 			if src != null and src != "":
 				var item = Globals.LevelLoaderRef.LoadJSON(src)
 				var variation = mount_variations[key][index]
-				var display_name = item.name_id
-				if not variation.empty() and variation.has("selected_variation"):
-					var variation_data = Globals.LevelLoaderRef.LoadJSON(variation["selected_variation"])
-					if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
-						display_name = variation_data["prefix"] + " " + display_name
+				var display_name = Globals.EffectRef.get_display_name(item, variation)
 				mount_content.push_back({"src":mounts[key][index], "key":key, "idx":index, "modified_attributes":variation, "display_name_id":display_name, "name_id":item.name_id, "equipped":false, "header":false, "icon":item.icon})
 			else:
 				mount_content.push_back({"src":"", "key":key, "idx":index, "name_id":"Empty", "equipped":false, "header":false})
@@ -255,15 +257,8 @@ func Init(init_param):
 		if typeof(data.icon) == TYPE_ARRAY:
 			icon_data = data.icon[0]
 			
-		var variation_src : String = Globals.get_data(row, "modified_attributes.selected_variation", "")
-		var prefix := ""
-		if not variation_src.empty():
-			var variation_data = Globals.LevelLoaderRef.LoadJSON(variation_src)
-			if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
-				prefix = Globals.mytr(variation_data["prefix"]) + " "
 		var display_name = counting
-		display_name += prefix
-		display_name += Globals.mytr(data.name_id)
+		display_name += Globals.EffectRef.get_display_name(data, row.get("modified_attributes", {}))
 		cargo_item_by_category[cat].push_back({"src":row.src, "modified_attributes":row.get("modified_attributes", null), "count":row.count, "display_name_id": display_name, "name_id": display_name, "equipped":false, "header":false, "icon":icon_data})
 		
 	keys = cargo_item_by_category.keys()

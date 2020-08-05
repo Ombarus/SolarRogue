@@ -102,8 +102,13 @@ func Desc_Callback():
 	var data = null
 	if "src" in selected_item and selected_item.src != null and selected_item.src != "":
 		data = Globals.LevelLoaderRef.LoadJSON(selected_item.src)
+		
+	var owner = null
+	# Only show ship-wide effects if item is equipped, otherwise show only effect of selected item
+	if selected_ship == _lobj and "key" in selected_item and "idx" in selected_item:
+		owner = selected_ship
 	
-	BehaviorEvents.emit_signal("OnPushGUI", "Description", {"json":data, "owner":selected_ship, "modified_attributes":selected_item.get("modified_attributes", {}), "scanner_level":scanner_level})
+	BehaviorEvents.emit_signal("OnPushGUI", "Description", {"json":data, "owner":owner, "modified_attributes":selected_item.get("modified_attributes", {}), "scanner_level":scanner_level})
 	
 func Transfer_Callback():
 	var selected_item = null
@@ -298,11 +303,7 @@ func GenerateContent(list_node, mounts, mount_attributes, cargo):
 			if src != null and src != "":
 				var item = Globals.LevelLoaderRef.LoadJSON(src)
 				var variation = mount_attributes[key][index]
-				var display_name = item.name_id
-				if not variation.empty() and variation.has("selected_variation"):
-					var variation_data = Globals.LevelLoaderRef.LoadJSON(variation["selected_variation"])
-					if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
-						display_name = variation_data["prefix"] + " " + display_name
+				var display_name = Globals.EffectRef.get_display_name(item, variation)
 				mount_content.push_back({"src":mounts[key][index], "key":key, "idx":index, "display_name_id":display_name, "name_id":item.name_id, "modified_attributes":variation, "equipped":false, "header":false, "icon":item.icon})
 			else:
 				mount_content.push_back({"src":"", "key":key, "idx":index, "name_id":"Empty", "equipped":false, "header":false})
@@ -311,12 +312,6 @@ func GenerateContent(list_node, mounts, mount_attributes, cargo):
 	mount_content.push_back({"src":"", "name_id":"Cargo Contents", "equipped":false, "header":true})	
 	for row in cargo:
 		var variation_src : String = Globals.get_data(row, "modified_attributes.selected_variation", "")
-		var prefix := ""
-		if not variation_src.empty():
-			var variation_data = Globals.LevelLoaderRef.LoadJSON(variation_src)
-			if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
-				prefix = Globals.mytr(variation_data["prefix"]) + " "
-		
 		var data = Globals.LevelLoaderRef.LoadJSON(row.src)
 		var counting = ""
 		if row.count > 1:
@@ -326,8 +321,7 @@ func GenerateContent(list_node, mounts, mount_attributes, cargo):
 			icon_data = data.icon[0]
 			
 		var display_name = counting
-		display_name += prefix
-		display_name += Globals.mytr(data.name_id)
+		display_name += Globals.EffectRef.get_display_name(data, row.get("modified_attributes", {}))
 		mount_content.push_back({"src":row.src, "count":row.count, "modified_attributes":row.get("modified_attributes", null), "display_name_id": display_name, "name_id": counting + Globals.mytr(data.name_id), "equipped":false, "header":false, "icon":icon_data})
 
 	list_node.Content = mount_content

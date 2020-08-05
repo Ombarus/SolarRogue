@@ -3,8 +3,15 @@
 	"type":"effect",
 	"prefix":"Light",
 	"attributes": {
-			"global_move_multiplier":0.90, 
-			"self_shield_multiplier":0.8
+		"global_move_multiplier":0.90, 
+		"self_shield_multiplier":0.8
+	},
+	"description": {
+		"Extra": {
+			"min_level":0,
+			"fields": [
+				{"name":"Ship Movement", "value":"10% faster"}
+			]
 		}
 	}
 }

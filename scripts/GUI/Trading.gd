@@ -86,7 +86,7 @@ func Sale_Callback():
 		"With your amazing negociation tactics you sold your %d %s for %d energy":30,
 		"Your generous donation of %d %s got you %d energy":30
 	}
-	BehaviorEvents.emit_signal("OnLogLine", log_choices, [selected_item["count"], Globals.mytr(selected_item["name_id"]), total])
+	BehaviorEvents.emit_signal("OnLogLine", log_choices, [selected_item["count"], Globals.EffectRef.get_display_name(selected_item, selected_item.get("modified_attributes", {})), total])
 	
 	ReInit()
 	
@@ -137,7 +137,7 @@ func Buy_Callback():
 		"You feel you got a good deal for these %d %s for %d energy":100,
 		"Where did you find %d %s for %d energy?":50
 	}
-	BehaviorEvents.emit_signal("OnLogLine", log_choices, [selected_item["count"], Globals.mytr(selected_item["name_id"]), total])
+	BehaviorEvents.emit_signal("OnLogLine", log_choices, [selected_item["count"], Globals.EffectRef.get_display_name(selected_item, selected_item.get("modified_attributes", {})), total])
 	
 	ReInit()
 	
@@ -182,8 +182,13 @@ func Desc_Callback():
 	var data = null
 	if "src" in selected_item and selected_item.src != null and selected_item.src != "":
 		data = Globals.LevelLoaderRef.LoadJSON(selected_item.src)
+		
+	var owner = null
+	# Only show ship-wide effects if item is equipped, otherwise show only effect of selected item
+	if selected_ship == _lobj and "key" in selected_item and "idx" in selected_item:
+		owner = selected_ship
 	
-	BehaviorEvents.emit_signal("OnPushGUI", "Description", {"json":data, "owner":selected_ship, "modified_attributes":selected_item.get("modified_attributes", {}), "scanner_level":scanner_level})
+	BehaviorEvents.emit_signal("OnPushGUI", "Description", {"json":data, "owner":owner, "modified_attributes":selected_item.get("modified_attributes", {}), "scanner_level":scanner_level})
 	
 
 func Init(init_param):
@@ -251,11 +256,7 @@ func GenerateContent(list_node, mounts, mount_attributes, cargo, skip_mount : bo
 				if src != null and src != "":
 					var item = Globals.LevelLoaderRef.LoadJSON(src)
 					var variation = mount_attributes[key][index]
-					var display_name = item.name_id
-					if not variation.empty() and variation.has("selected_variation"):
-						var variation_data = Globals.LevelLoaderRef.LoadJSON(variation["selected_variation"])
-						if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
-							display_name = variation_data["prefix"] + " " + display_name
+					var display_name = Globals.EffectRef.get_display_name(item, variation)
 					mount_content.push_back({"src":mounts[key][index], "key":key, "idx":index, "display_name_id":display_name, "name_id":item.name_id, "modified_attributes":variation, "equipped":false, "header":false, "icon":item.icon})
 				else:
 					mount_content.push_back({"src":"", "key":key, "idx":index, "name_id":"Empty", "equipped":false, "header":false})
@@ -272,14 +273,7 @@ func GenerateContent(list_node, mounts, mount_attributes, cargo, skip_mount : bo
 		if typeof(data.icon) == TYPE_ARRAY:
 			icon_data = data.icon[0]
 			
-		var variation_src : String = Globals.get_data(row, "modified_attributes.selected_variation", "")
-		var prefix := ""
-		if not variation_src.empty():
-			var variation_data = Globals.LevelLoaderRef.LoadJSON(variation_src)
-			if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
-				prefix = Globals.mytr(variation_data["prefix"]) + " "
-		var display_name = prefix
-		display_name += Globals.mytr(data.name_id)
+		var display_name = Globals.EffectRef.get_display_name(data, row.get("modified_attributes", {}))
 		mount_content.push_back({"src":row.src, "max":row.count, "modified_attributes":row.get("modified_attributes", null), "display_name_id":display_name, "name_id": data.name_id, "equipped":false, "header":false, "icon":icon_data})
 
 	list_node.Content = mount_content
@@ -316,7 +310,7 @@ func DoMountingBuy():
 			"You feel you got a good deal for these %d %s for %d energy":100,
 			"Where did you find %d %s for %d energy?":50
 		}
-		BehaviorEvents.emit_signal("OnLogLine", log_choices, [selected_item["count"], Globals.mytr(to_mount["name_id"]), price])
+		BehaviorEvents.emit_signal("OnLogLine", log_choices, [selected_item["count"], Globals.EffectRef.get_display_name(to_mount, to_mount.get("modified_attributes", {})), price])
 	
 	ReInit()
 
@@ -367,7 +361,7 @@ func UpdateVisibility():
 			_item_price.bbcode_text = "[color=red]-%d %s[/color]" % [total_price, Globals.mytr("Energy")]
 			_buy_btn.Disabled = cur_energy <= total_price
 		_item_count.text = "%dx " % selected_item["count"]
-		_item_name.bbcode_text = "%s" % [Globals.mytr(selected_item["name_id"])]
+		_item_name.bbcode_text = "%s" % [Globals.EffectRef.get_display_name(selected_item, selected_item.get("modified_attributes", {}))]
 
 		
 func GetPrice(data : Dictionary, selling : bool) -> int:

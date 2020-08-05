@@ -50,7 +50,7 @@
 		"Overview": {
 			"min_level":0,
 			"fields":[
-				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false},
+				{"name":"Cargo Volume", "value":"{equipment.volume*volume_multiplier}", "translate_value":false},
 				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
 				{"name":"Mount Point", "value":"Weapon"}
 			]
@@ -58,10 +58,10 @@
 		"Weapon Stats": {
 			"min_level":0,
 			"fields": [
-				{"name":"Damage", "value":"{weapon_data.base_dam}~{weapon_data.max_dam}", "translate_value":false},
+				{"name":"Damage", "value":"{weapon_data.base_dam*base_dam_multiplier}~{weapon_data.max_dam*max_dam_multiplier}", "translate_value":false},
 				{"name":"Range", "value":"{weapon_data.fire_range}", "translate_value":false},
-				{"name":"Energy Cost", "value":"{weapon_data.fire_energy_cost}", "translate_value":false},
-				{"name":"Speed", "value":"{weapon_data.fire_speed} turns"},
+				{"name":"Energy Cost", "value":"{weapon_data.fire_energy_cost*fire_energy_cost_multiplier}", "translate_value":false},
+				{"name":"Speed", "value":"{weapon_data.fire_speed*fire_speed_multiplier} turns"},
 				{"name":"Ammo", "value":"Depleted Uranium"},
 				{"name":"Special", "value":"Shield Penetration {weapon_data.shield_penetration}%"}
 			]

@@ -3,8 +3,16 @@
 	"type":"effect",
 	"prefix":"HE",
 	"attributes": {
-			"self_dam_shield_multiplier":0.5,
-			"self_dam_hull_multiplier":1.5,
+		"self_dam_shield_multiplier":0.5,
+		"self_dam_hull_multiplier":1.5,
+	},
+	"description": {
+		"Extra": {
+			"min_level":0,
+			"fields": [
+				{"name":"Hull Damage", "value":"+50%"},
+				{"name":"Shield Damage", "value":"-50%"}
+			]
 		}
 	}
 }
