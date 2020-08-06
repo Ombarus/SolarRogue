@@ -22,6 +22,7 @@ onready var _desc_btn : BaseButton = get_node("HBoxContainer/Control/VBoxContain
 onready var _behavior = get_node(CraftingBehavior)
 
 var _converter_data = null
+var _converter_attributes = null
 var _current_crafting_selected = null
 
 var _orig_data = null
@@ -47,8 +48,7 @@ func DescBtn_Callback():
 		scanner_level = Globals.get_data(scanner_data[0], "scanning.level")
 		
 	var produce_data = Globals.LevelLoaderRef.LoadJSON(_current_crafting_selected.produce)
-	# TODO: Handle effects in converter
-	BehaviorEvents.emit_signal("OnPushGUI", "Description", {"json":produce_data, "owner":_obj, "modified_attributes": {}, "scanner_level":scanner_level})
+	BehaviorEvents.emit_signal("OnPushGUI", "Description", {"json":produce_data, "owner":null, "modified_attributes": {"selected_variation":_current_crafting_selected.get("selected_variation", "")}, "scanner_level":scanner_level})
 	
 	
 func OnDamageTaken_Callback(target, shooter, damage_type):
@@ -100,6 +100,7 @@ func Init(init_param):
 	_callback_method = init_param["callback_method"]
 	
 	var converter_file = _obj.get_attrib("mounts.converter")[0]
+	_converter_attributes = _obj.get_attrib("mount_attributes.converter")[0]
 	_converter_data = Globals.LevelLoaderRef.LoadJSON(converter_file)
 	
 	get_node("HBoxContainer/Recipes").title = _converter_data.name_id
@@ -112,8 +113,15 @@ func ReInit():
 	_current_crafting_selected = null
 	
 	var recipe_content = []
-	for recipe_data in _converter_data.converter.recipes:
+	var recipes = _converter_data.converter.recipes
+	var variations = Globals.get_data(_converter_attributes, "converter.selected_variations", [])
+	for index in range(recipes.size()):
+		var recipe_data = recipes[index]
+		var variation_src = ""
+		if variations.size() > index:
+			variation_src = variations[index]
 		var d = str2var(var2str(recipe_data)) # make a copy because we're changing stuff
+		d["selected_variation"] = variation_src
 		if not "icon" in d and ".json" in recipe_data.produce:
 			var produce_data = Globals.LevelLoaderRef.LoadJSON(recipe_data.produce)
 			if "icon" in produce_data:

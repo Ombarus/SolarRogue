@@ -10,7 +10,7 @@
 	},
 	"mounts": {
 		"weapon": ["data/json/items/weapons/laser_turret_mk2.json"],
-		"shield": ["data/json/items/shields/shield_mk2.json"],
+		"shield": ["data/json/items/shields/shield_mk2.json", "", ""],
 		"scanner": ["data/json/items/scanners/long_range_scanner_mk2.json"],
 		"converter": ["data/json/items/converters/converter_mk1.json"],
 		"utility": ["data/json/items/utilities/speed_boost.json"]
@@ -31,11 +31,44 @@
 		"content":[
 			{"src":"data/json/items/consumables/repair_nanobots.json", "count":1},
 			{"src":"data/json/items/misc/uranium.json", "count":3},
-			{"src":"data/json/items/misc/spare_parts.json", "count":3}
+			{"src":"data/json/items/misc/spare_parts.json", "count":3},
+			{"src":"data/json/items/shields/shield_mk1.json", "count":1, 
+				"modified_attributes": {
+					"selected_variation":"data/json/items/effects/compact.json"
+			}},
+			{"src":"data/json/items/shields/shield_mk1.json", "count":1},
+			{"src":"data/json/items/shields/shield_mk1.json", "count":1},
+			{"src":"data/json/items/shields/shield_mk1.json", "count":1},
+			{"src":"data/json/items/shields/shield_mk1.json", "count":1},
+			{"src":"data/json/items/shields/shield_mk1.json", "count":1},
+			{"src":"data/json/items/shields/shield_mk1.json", "count":1},
+			{"src":"data/json/items/shields/shield_mk1.json", "count":1}
 		]
 	},
 	"converter": {
 		"stored_energy": 15000,
 		"base_ap_energy_cost":10
+	},
+	"description": {
+		"text":"A small, fast ship for forward exploration.",
+		"Overview": {
+			"min_level":0, 
+			"fields":[
+				{"name":"Max hull", "value":"{destroyable.hull}", "translate_value":false},
+				{"name":"Max shield", "value":"{shield.tmp_max_shield}", "translate_value":false},
+				{"name":"Speed", "value":"{moving.speed*move_multiplier}", "translate_value":false, "positive_good":false},
+				{"name":"Cargo", "value":"{cargo.capacity}", "translate_value":false},
+				{"name":"Weapon mounts", "value":"1", "translate_value":false},
+				{"name":"Shield mounts", "value":"1", "translate_value":false},
+				{"name":"Utility mounts", "value":"0", "translate_value":false}
+			]
+		},
+		"Status": {
+			"min_level":0,
+			"fields": [
+				{"name":"Current hull", "value":"{destroyable.current_hull}", "default":"{destroyable.hull}", "translate_value":false},
+				{"name":"Current shield", "value":"{shield.current_hp}", "translate_value":false}
+			]
+		}
 	}
 }

@@ -67,7 +67,16 @@ func OnObjectLoaded_Callback(obj):
 						added = true
 						item.count += 1
 			if added == false:
-				actual_content.push_back({"src":selected_item, "count":1})
+				var modified_attributes = {}
+				var item_data = Globals.LevelLoaderRef.LoadJSON(selected_item)
+				var variations = Globals.get_data(item_data, "variations", [])
+				if variations.size() > 0:
+					modified_attributes = {"selected_variation":MersenneTwister.rand_weight(variations, "src", "chance")}
+				
+				var c = {"src":selected_item, "count":1}
+				if modified_attributes != null and not modified_attributes.empty():
+					c["modified_attributes"] = modified_attributes
+				actual_content.push_back(c)
 		
 	obj.set_attrib("cargo.content", actual_content)
 	
@@ -292,6 +301,8 @@ func OnEquipMount_Callback(equipper, slot_name, index, item_id, modified_attribu
 func OnAddItem_Callback(picker, item_id, modified_attributes):
 	if not picker.modified_attributes.has("cargo"):
 		picker.init_cargo()
+	if modified_attributes == null:
+		modified_attributes = {}
 	var cargo = picker.get_attrib("cargo.content")
 	var data = Globals.LevelLoaderRef.LoadJSON(item_id)
 	
@@ -305,7 +316,10 @@ func OnAddItem_Callback(picker, item_id, modified_attributes):
 				found = true
 				item.count += 1
 	if found == false:
-		cargo.push_back({"src": item_id, "count":1, "modified_attributes":modified_attributes})
+		var d : Dictionary = {"src": item_id, "count":1}
+		if modified_attributes != null and not modified_attributes.empty():
+			d["modified_attributes"] = modified_attributes
+		cargo.push_back(d)
 		
 	picker.set_attrib("cargo.volume_used", picker.get_attrib("cargo.volume_used") + volume)
 	
@@ -317,6 +331,8 @@ func OnAddItem_Callback(picker, item_id, modified_attributes):
 func OnRemoveItem_Callback(holder, item_id, modified_attributes, num_remove=1): #-1 to remove everything
 	if not holder.modified_attributes.has("cargo"):
 		holder.init_cargo()
+	if modified_attributes == null:
+		modified_attributes = {}
 	var cargo = holder.get_attrib("cargo.content")
 	var index_to_delete = []
 	var i = 0

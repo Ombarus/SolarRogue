@@ -292,125 +292,46 @@ func ProcessDamage(target, shooter, weapon_data, modified_attributes):
 	var min_dam = weapon_data.weapon_data.base_dam * min_dam_mult
 	var max_dam = weapon_data.weapon_data.max_dam * max_dam_mult
 	
-	var dam = MersenneTwister.rand(max_dam-min_dam) + min_dam
-	dam = dam * _get_power_amplifier_stack(shooter, "damage_percent")
-	if dam == 0:
-		if is_player:
-			BehaviorEvents.emit_signal("OnLogLine", "Shot missed")
-		elif is_target_player:
-			var log_choices = {
-					"The enemy missed":50,
-					"Enemy shot wide!":50,
-					"The enemy can't shoot a fish in a barrel!":5,
-					"Evasive maneuver beta two successful!":30,
-					"Evasive maneuver beta nine successful!":30,
-					"Evasive pattern gamma six successful!":30,
-					"Evasive pattern delta successful!":30,
-					"Evasive pattern lambda ten successful!":30,
-					"Evasive maneuver omega three successful!":30,
-					"Evasive sequence 010 successful!":10,
-					"Evasive sequence beta four successful!":10,
-					"That was a close one!":5,
-					"Evasive maneuver gamma one successful!":30,
-					"Evasive pattern sigma ten successful!":30,
-					"Evasive sequence delta detla successful!":10,
-					"Evasive maneuver pi alpha two successful!":5,
-					"Evasive pattern Riker successful!":1,
-					"Evasive pattern Kirk Epsilon successful!":1
-				}
-			BehaviorEvents.emit_signal("OnLogLine", log_choices)
-	else:
+	var cur_difficulty : int = PermSave.get_attrib("settings.difficulty")
+	var diff_chance_mult : float = 1.0
+	diff_chance_mult = -1.0 / 4.0 * cur_difficulty + 1.5
+	
+	var ai_malus : float = shooter.get_attrib("ai.hit_chance_malus", 0.0) * diff_chance_mult
+	var chance : float = Globals.get_data(weapon_data, "weapon_data.base_hit_chance", 1.0)
+	var effect_bonus : float = Globals.EffectRef.GetBonusValue(shooter, weapon_data.src, modified_attributes, "hit_chance_bonus")
+	chance = chance - ai_malus + effect_bonus
+	chance = clamp(chance, 0.1, 1.0) # minimum 10% chance always because I say so!
+	var dam := 0.0
+	if chance == null or MersenneTwister.rand_float() < chance:
+		dam = MersenneTwister.rand(max_dam-min_dam) + min_dam
+		dam = dam * _get_power_amplifier_stack(shooter, "damage_percent")
+		
+	var is_critical := false
+	var hull_dam = 0.0
+	var shield_per = 100.0
+	
+	if dam > 0:
+		if MersenneTwister.rand_float() < Globals.get_data(weapon_data, "weapon_data.crit_chance", 0.0):
+			dam = dam * Globals.get_data(weapon_data, "weapon_data.crit_multiplier", 1.0)
+			is_critical = true
 		var dam_absorbed_by_shield = _hit_shield(target, dam, shooter, weapon_data, modified_attributes)
 		var hull_dam_mult : float = Globals.EffectRef.GetMultiplierValue(shooter, weapon_data.src, modified_attributes, "dam_hull_multiplier")
-		var hull_dam = dam - dam_absorbed_by_shield
+		hull_dam = dam - dam_absorbed_by_shield
 		hull_dam *= hull_dam_mult
 		var max_hull = target.get_attrib("destroyable.hull")
 		target.set_attrib("destroyable.current_hull", target.get_attrib("destroyable.current_hull", max_hull) - hull_dam)
 		if target.get_attrib("destroyable.current_hull") <= 0:
 			target.set_attrib("destroyable.destroyed", true) # so other systems can check if their reference is valid or not
-			if is_player:
-				if target.get_attrib("boardable") == true:
-					BehaviorEvents.emit_signal("OnLogLine", "[color=red]You destroyed one of YOUR ship ![/color]")
-				else:
-					var log_choices = {
-						"[color=red]You destroy the enemy ![/color]":50,
-						"[color=red]Boum![/color]":10,
-						"[color=red]The shot pierce the Hull and ignite the warp core creating a very pretty explosion![/color]":50,
-						"[color=red]A direct hit to the main deck creates a chain reaction in the onboard computer and ends in a firework![/color]":20,
-						"[color=red]Their life support is down, enemy destroyed![/color]":50,
-						"[color=red]Your shot cuts the enemy in half![/color]":50,
-						"[color=red]A few escape pod manage to launch from the enemy ship before it loses it's remaining integrity![/color]":50,
-						"[color=red]The enemy ship proceed to execute a rapid unscheduled disassembly![/color]":5,
-						"[color=red]Hull breach detected in level 1 to 100. All system shutdown. Terminated![/color]":20,
-						"[color=red]Ixnay on the starship![/color]":15,
-						"[color=red]Fire are spreading throught the ship, explosion imminent![/color]":50,
-						"[color=red]Victory is ours captain![/color]":50,
-						"[color=red]We've hit the exhaust port and created a chain reaction that reached the reactor core![/color]":2,
-						"[color=red]Reactor core critical, enemy destroyed![/color]":50,
-						"[color=red]The enemy ship self-destructed![/color]":20,
-					}
-					BehaviorEvents.emit_signal("OnLogLine", log_choices)
 			if is_target_player:
 				BehaviorEvents.emit_signal("OnPlayerDeath")
 			if shooter is Attributes:
 				target.set_attrib("destroyable.destroyer", shooter.get_attrib("unique_id"))
 			BehaviorEvents.emit_signal("OnObjectDestroyed", target)
 			BehaviorEvents.emit_signal("OnRequestObjectUnload", target)
-		else:
-			if is_player:
-				BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]You do %d damage[/color]", [dam])
-			elif is_target_player:
-				var param = [dam]
-				var log_choices = {
-					"[color=red]You take %d damage[/color]":100
-				}
-				if hull_dam > 0:
-					log_choices = {
-						"[color=red]You take %d damage[/color]":50,
-						"[color=red]Deck 3 to 4 report %s hull damage![/color]":50,
-						"[color=red]Deck 9 and 10 report %s hull damage![/color]":50,
-						"[color=red]Deck 1 to 5 report %s hull damage![/color]":50,
-						"[color=red]Hull integrity down by %s points![/color]":50,
-						"[color=red]Engineering bay hit for %s damage![/color]":50,
-						"[color=red]Medbay hit for %s damage![/color]":50,
-						"[color=red]Concourse C hit for %s damage![/color]":50,
-						"[color=red]Concourse A hit for %s damage![/color]":50,
-						"[color=red]%s damage, we've lost the external nacelle 1! Good thing it's useless.[/color]":10,
-						"[color=red]%s damage, we've lost the external nacelle 2! Good thing it's useless.[/color]":10,
-						"[color=red]%s damage, we've lost the external nacelle 3! Good thing it's useless.[/color]":10,
-						"[color=red]%s damage, we've lost the external nacelle 4! Good thing it's useless.[/color]":10,
-						"[color=red]%s damage, we've lost the external nacelle 5! Good thing it's useless.[/color]":10,
-						"[color=red]%s damage, we've lost the external nacelle 6! Good thing it's useless.[/color]":10,
-						"[color=red]%s damage, we've lost the external nacelle 7! Good thing it's useless.[/color]":10,
-						"[color=red]%s damage, we've lost the external nacelle 8! Good thing it's useless.[/color]":10,
-						"[color=red]%s damage, we've lost the external nacelle 9! Good thing it's useless.[/color]":10,
-						"[color=red]%s damage, we've lost the external nacelle 10! Good thing it's useless.[/color]":10,
-						"[color=red]%s damage, we've lost the external nacelle 11! Good thing it's useless.[/color]":10,
-						"[color=red]%s damage, we've lost the external nacelle 12! Good thing it's useless.[/color]":10,
-						"[color=red]%s damage, we've lost the external nacelle 13! Good thing it's useless.[/color]":10,
-						"[color=red]%s damage, we've lost the external nacelle 14! Good thing it's useless.[/color]":10,
-						"[color=red]%s damage, we've lost the external nacelle 15! Good thing it's useless.[/color]":10,
-						"[color=red]%s damage, we've lost the external nacelle 16! Good thing it's useless.[/color]":10,
-						"[color=red]%s damage, we've lost the external nacelle 42! Good thing it's useless.[/color]":1,
-						"[color=red]Hull integrity down %s. Repair team dispatched to deck 10[/color]":30,
-						"[color=red]Hull integrity down %s. Repair team dispatched to deck 12[/color]":30,
-						"[color=red]Hull integrity down %s. Repair team dispatched to deck 4[/color]":30,
-						"[color=red]System integrity down %s points, redirecting power to auxilary conduit![/color]":50,
-						"[color=red]Primary system down, switching to auxilary power![/color]":1
-					}
-				else:
-					var cur_shield = target.get_attrib("shield.current_hp")
-					var max_shield = target.get_max_shield()
-					var shield_per = stepify(cur_shield / max_shield * 100.0, 0.1)
-					param = [shield_per]
-					log_choices = {
-						"[color=red]Shield holding at %s%%![/color]":50,
-						"[color=red]Main deflector shield at %s%%![/color]":50,
-						"[color=red]We've been hit! Shield at %s%%![/color]":50,
-						"[color=red]Our shield won't hold forever! Shield at %s%%![/color]":10,
-						"[color=red]No damage! Shield at %s%%![/color]":30
-					}
-				BehaviorEvents.emit_signal("OnLogLine", log_choices, param)
+		elif is_target_player and hull_dam <= 0.0:
+			var cur_shield = target.get_attrib("shield.current_hp")
+			var max_shield = target.get_max_shield()
+			shield_per = stepify(cur_shield / max_shield * 100.0, 0.1)
 		target.set_attrib("destroyable.damage_source", shooter.get_attrib("name_id"))
 		
 		var damage_type = Globals.DAMAGE_TYPE.shield_hit
@@ -418,6 +339,8 @@ func ProcessDamage(target, shooter, weapon_data, modified_attributes):
 			damage_type = Globals.DAMAGE_TYPE.hull_hit
 		
 		BehaviorEvents.emit_signal("OnDamageTaken", target, shooter, damage_type)
+	
+	display_damage_log(is_player, is_target_player, dam, hull_dam, shield_per, target.get_attrib("destroyable.current_hull", target.get_attrib("destroyable.hull")) <= 0, is_critical, target.get_attrib("boardable", false))
 	
 func OnObjectDestroyed_Callback(target):
 	if target.get_attrib("drop_on_death") != null:
@@ -479,7 +402,157 @@ func _hit_shield(target, dam, shooter, weapon_data, modified_attributes):
 	# remove the bonus from EM damage since the result will be used to calculate hull damage.
 	return absorbed / shield_dam_mult
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func display_damage_log(player_shooter : bool, 
+	player_target : bool, 
+	dam : float,
+	hull_dam : float,
+	shield_per : float,
+	is_destroyed : bool, 
+	is_critical : bool, 
+	boardable : bool):
+		
+	var txt
+	var fmt : Array = []
+	
+	var player_crit_choices := {
+		"[color=aqua]C[/color][color=blue]R[/color][color=fuchsia]I[/color][color=gray]T[/color][color=green]I[/color][color=lime]C[/color][color=maroon]A[/color][color=navy]L[/color] [color=purple]H[/color][color=silver]I[/color][color=teal]T[/color][color=red]![/color]":150,
+		"[color=red]BOUMSHAKALAKA![/color]":5,
+		"[color=red]FINISH HIM![/color]":5,
+		"[color=red]OUCH! RIGHT IN THE KESTREL[/color]":1,
+		"[color=red]FATALITY!!![/color]":5,
+		"[color=red]That was one in a million kid![/color]":1,
+		"[color=red]That exhaust port was a bad design![/color]":1
+	}
+	var enemy_crit_choices := {
+		"[color=red]They found our weak point![/color]":50,
+		"[color=aqua]C[/color][color=blue]R[/color][color=fuchsia]I[/color][color=gray]T[/color][color=green]I[/color][color=lime]C[/color][color=maroon]A[/color][color=navy]L[/color] [color=purple]H[/color][color=silver]I[/color][color=teal]T[/color][color=red]![/color]":50,
+		"[color=red]They're attack was very effective![/color]":1,
+		"[color=red]They got a lucky shot![/color]":5
+	}
+		
+	var player_miss_choices := {
+		"Shot missed":50,
+		"Shot went wide":50,
+		"Enemy evaded our shot":50,
+		"Lucky miss":5,
+		"Grazing hit, no damage":15
+	}
+	
+	var enemy_miss_choices := {
+		"The enemy missed":50,
+		"Enemy shot wide!":50,
+		"The enemy can't shoot a fish in a barrel!":5,
+		"Evasive maneuver beta two successful!":30,
+		"Evasive maneuver beta nine successful!":30,
+		"Evasive pattern gamma six successful!":30,
+		"Evasive pattern delta successful!":30,
+		"Evasive pattern lambda ten successful!":30,
+		"Evasive maneuver omega three successful!":30,
+		"Evasive sequence 010 successful!":10,
+		"Evasive sequence beta four successful!":10,
+		"That was a close one!":5,
+		"Evasive maneuver gamma one successful!":30,
+		"Evasive pattern sigma ten successful!":30,
+		"Evasive sequence delta detla successful!":10,
+		"Evasive maneuver pi alpha two successful!":5,
+		"Evasive pattern Riker successful!":1,
+		"Evasive pattern Kirk Epsilon successful!":1
+	}
+	
+	var enemy_destroyed_choices := {
+		"[color=red]You destroy the enemy ![/color]":50,
+		"[color=red]Boum![/color]":10,
+		"[color=red]The shot pierce the Hull and ignite the warp core creating a very pretty explosion![/color]":50,
+		"[color=red]A direct hit to the main deck creates a chain reaction in the onboard computer and ends in a firework![/color]":20,
+		"[color=red]Their life support is down, enemy destroyed![/color]":50,
+		"[color=red]Your shot cuts the enemy in half![/color]":50,
+		"[color=red]A few escape pod manage to launch from the enemy ship before it loses it's remaining integrity![/color]":50,
+		"[color=red]The enemy ship proceed to execute a rapid unscheduled disassembly![/color]":5,
+		"[color=red]Hull breach detected in level 1 to 100. All system shutdown. Terminated![/color]":20,
+		"[color=red]Ixnay on the starship![/color]":15,
+		"[color=red]Fire are spreading throught the ship, explosion imminent![/color]":50,
+		"[color=red]Victory is ours captain![/color]":50,
+		"[color=red]We've hit the exhaust port and created a chain reaction that reached the reactor core![/color]":2,
+		"[color=red]Reactor core critical, enemy destroyed![/color]":50,
+		"[color=red]The enemy ship self-destructed![/color]":20,
+	}
+	
+	var boardable_destroyed := "[color=red]You destroyed one of YOUR ship ![/color]"
+
+	var player_hull_dam_choices := {
+		"[color=red]You take %d damage[/color]":50,
+		"[color=red]Deck 3 to 4 report %s hull damage![/color]":50,
+		"[color=red]Deck 9 and 10 report %s hull damage![/color]":50,
+		"[color=red]Deck 1 to 5 report %s hull damage![/color]":50,
+		"[color=red]Hull integrity down by %s points![/color]":50,
+		"[color=red]Engineering bay hit for %s damage![/color]":50,
+		"[color=red]Medbay hit for %s damage![/color]":50,
+		"[color=red]Concourse C hit for %s damage![/color]":50,
+		"[color=red]Concourse A hit for %s damage![/color]":50,
+		"[color=red]%s damage, we've lost the external nacelle 1! Good thing it's useless.[/color]":10,
+		"[color=red]%s damage, we've lost the external nacelle 2! Good thing it's useless.[/color]":10,
+		"[color=red]%s damage, we've lost the external nacelle 3! Good thing it's useless.[/color]":10,
+		"[color=red]%s damage, we've lost the external nacelle 4! Good thing it's useless.[/color]":10,
+		"[color=red]%s damage, we've lost the external nacelle 5! Good thing it's useless.[/color]":10,
+		"[color=red]%s damage, we've lost the external nacelle 6! Good thing it's useless.[/color]":10,
+		"[color=red]%s damage, we've lost the external nacelle 7! Good thing it's useless.[/color]":10,
+		"[color=red]%s damage, we've lost the external nacelle 8! Good thing it's useless.[/color]":10,
+		"[color=red]%s damage, we've lost the external nacelle 9! Good thing it's useless.[/color]":10,
+		"[color=red]%s damage, we've lost the external nacelle 10! Good thing it's useless.[/color]":10,
+		"[color=red]%s damage, we've lost the external nacelle 11! Good thing it's useless.[/color]":10,
+		"[color=red]%s damage, we've lost the external nacelle 12! Good thing it's useless.[/color]":10,
+		"[color=red]%s damage, we've lost the external nacelle 13! Good thing it's useless.[/color]":10,
+		"[color=red]%s damage, we've lost the external nacelle 14! Good thing it's useless.[/color]":10,
+		"[color=red]%s damage, we've lost the external nacelle 15! Good thing it's useless.[/color]":10,
+		"[color=red]%s damage, we've lost the external nacelle 16! Good thing it's useless.[/color]":10,
+		"[color=red]%s damage, we've lost the external nacelle 42! Good thing it's useless.[/color]":1,
+		"[color=red]Hull integrity down %s. Repair team dispatched to deck 10[/color]":30,
+		"[color=red]Hull integrity down %s. Repair team dispatched to deck 12[/color]":30,
+		"[color=red]Hull integrity down %s. Repair team dispatched to deck 4[/color]":30,
+		"[color=red]System integrity down %s points, redirecting power to auxilary conduit![/color]":50,
+		"[color=red]Primary system down, switching to auxilary power![/color]":1
+	}
+	
+	var player_shield_dam_choices = {
+		"[color=red]Shield holding at %s%%![/color]":50,
+		"[color=red]Main deflector shield at %s%%![/color]":50,
+		"[color=red]We've been hit! Shield at %s%%![/color]":50,
+		"[color=red]Our shield won't hold forever! Shield at %s%%![/color]":10,
+		"[color=red]No damage! Shield at %s%%![/color]":30
+	}
+	
+	var player_hit_enemy = "[color=yellow]You do %d damage[/color]"
+	
+	if is_critical:
+		if player_shooter:
+			txt = player_crit_choices
+		if player_target:
+			txt = enemy_crit_choices
+		
+		BehaviorEvents.emit_signal("OnLogLine", txt, fmt)
+	
+	fmt = []
+	if player_shooter and dam == 0:
+		txt = player_miss_choices
+	if player_target and dam == 0:
+		txt = enemy_miss_choices
+	if player_target and hull_dam > 0.0:
+		txt = player_hull_dam_choices
+		fmt = [dam]
+	if player_target and hull_dam <= 0.0 and dam > 0.0:
+		txt = player_shield_dam_choices
+		fmt = [shield_per]
+	if player_shooter and dam > 0:
+		txt = player_hit_enemy
+		fmt = [dam]
+
+	BehaviorEvents.emit_signal("OnLogLine", txt, fmt)
+	
+	fmt = []
+	if is_destroyed:
+		if player_shooter and is_destroyed and not boardable:
+			txt = enemy_destroyed_choices
+		if player_shooter and boardable:
+			txt = boardable_destroyed
+			
+		BehaviorEvents.emit_signal("OnLogLine", txt, fmt)

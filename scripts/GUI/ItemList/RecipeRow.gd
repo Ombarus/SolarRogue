@@ -13,7 +13,13 @@ func set_row_data(data):
 	if _metadata.group != null:
 		_toggle.group = _metadata.group
 		
-	get_node("HBoxContainer/Name").text = Globals.mytr(data.name)
+	var display_name = Globals.mytr(data.name)
+	if "selected_variation" in data and not data.selected_variation.empty():
+		var variation_data = Globals.LevelLoaderRef.LoadJSON(data.selected_variation)
+		if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
+			display_name = Globals.mytr(variation_data["prefix"]) + " " + display_name
+		
+	get_node("HBoxContainer/Name").text = display_name
 		
 	var icon_path : String = Globals.get_data(data, "icon.texture", "")
 	if icon_path != "":

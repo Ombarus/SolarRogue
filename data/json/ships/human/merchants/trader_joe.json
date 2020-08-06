@@ -32,7 +32,7 @@
 		"aggressive":false,
 		"pathfinding":"merchant",
 		"run_if_attacked":true,
-		"hit_chance":0.9,
+		"hit_chance_malus":0.1,
 		"stop_running_after":17
 	},
 	"merchant": {

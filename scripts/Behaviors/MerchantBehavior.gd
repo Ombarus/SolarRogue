@@ -82,7 +82,14 @@ func CreateInventory(obj):
 					var min_count : int = item["count"][0]
 					var max_count : int = item["count"][1]
 					actual_count = MersenneTwister.rand(max_count-min_count) + min_count
-				selected_item = {"src":item.src, "count":actual_count}
+					
+				var modified_attributes = {}
+				var item_data = Globals.LevelLoaderRef.LoadJSON(item.src)
+				var variations = Globals.get_data(item_data, "variations", [])
+				if variations.size() > 0:
+					modified_attributes = {"selected_variation":MersenneTwister.rand_weight(variations, "src", "chance")}
+				
+				selected_item = {"src":item.src, "count":actual_count, "modified_attributes":modified_attributes}
 				pondered_inv.erase(item)
 				max_pond_inv -= item.chance
 				break

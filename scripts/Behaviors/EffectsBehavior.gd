@@ -14,6 +14,13 @@ class_name EffectBehavior
 #		but that also means we need a way to differenciate other than the name of the variation
 #		so I'll add another id.
 
+
+enum COMPOUNDING_TYPE {
+	multiply,
+	add,
+	substract
+}
+
 func _ready():
 	Globals.EffectRef = self
 	BehaviorEvents.connect("OnMountAdded", self, "OnMountAdded_Callback")
@@ -172,6 +179,10 @@ func OnObjectLoaded_Callback(obj):
 	if selected_variation != null:
 		return
 		
+		
+	if obj.get_attrib("converter", null) != null:
+		process_recipes_attributes(obj)
+		
 	var variations = obj.get_attrib("variations", [])
 	if variations.size() <= 0:
 		return
@@ -181,14 +192,41 @@ func OnObjectLoaded_Callback(obj):
 	obj.set_attrib("selected_variation", selected_variation)
 	
 
+func process_recipes_attributes(obj):
+	var recipe_variations = obj.get_attrib("converter.selected_variations", null)
+	if recipe_variations != null:
+		return
+		
+	recipe_variations = []
+	var recipes = obj.get_attrib("converter.recipes", [])
+	for index in range(recipes.size()):
+		var recipe = recipes[index]
+		var variation_src = ""
+		if ".json" in recipe.produce:
+			var recipe_data = Globals.LevelLoaderRef.LoadJSON(recipe.produce)
+			var variations = Globals.get_data(recipe_data, "variations", [])
+			if variations.size() > 0:
+				variation_src = MersenneTwister.rand_weight(variations, "src", "chance")
+		recipe_variations.push_back(variation_src)
+		
+	obj.set_attrib("converter.selected_variations", recipe_variations)
+
 #TODO: might want to cache the results until an event request a refresh
 #		if all the params are the same, the result should be the same as long as
 #		no equipment changed
 func GetMultiplierValue(obj, item_src, item_attributes, attrib_base_name) -> float:
+	return _get_value(obj, item_src, item_attributes, attrib_base_name, COMPOUNDING_TYPE.multiply, 1.0)
+	
+	
+func GetBonusValue(obj, item_src, item_attributes, attrib_base_name) -> float:	
+	return _get_value(obj, item_src, item_attributes, attrib_base_name, COMPOUNDING_TYPE.add, 0.0)
+	
+
+func _get_value(obj, item_src, item_attributes, attrib_base_name, compound_type=COMPOUNDING_TYPE.multiply, initial_value=1.0) -> float:
 	# effects struct : {"src":"bleh.json", "self_shield_multiplier":1.5, "self_energy_cost":1.3}
 	if item_attributes == null:
 		item_attributes = {}
-	var result : float = 1.0
+	var result : float = initial_value
 	var effects = []
 	if obj == null:
 		var variation_src = item_attributes.get("selected_variation")
@@ -210,13 +248,23 @@ func GetMultiplierValue(obj, item_src, item_attributes, attrib_base_name) -> flo
 			
 			# Fastest check first. Global stuff is always applied if it matches the base name
 			if "global_" in key:
-				result = result * effect[key]
+				if compound_type == COMPOUNDING_TYPE.add:
+					result = result + effect[key]
+				elif compound_type == COMPOUNDING_TYPE.multiply:
+					result = result * effect[key]
+				else:
+					result = result - effect[key]
 				debug_applied.push_back(effect.src)
 				continue
 			
 			# Only apply first instance of a "self_" attribute, one item cannot possibly have multiple time the same variant
 			if "self_" in key and effect.src == item_attributes.get("selected_variation") and not effect.src in applied_effects:
-				result = result * effect[key]
+				if compound_type == COMPOUNDING_TYPE.add:
+					result = result + effect[key]
+				elif compound_type == COMPOUNDING_TYPE.multiply:
+					result = result * effect[key]
+				else:
+					result = result - effect[key]
 				applied_effects.push_back(effect.src)
 				debug_applied.push_back(effect.src)
 				continue
@@ -227,7 +275,12 @@ func GetMultiplierValue(obj, item_src, item_attributes, attrib_base_name) -> flo
 				continue
 				
 			if "linked_" in key and effect.src == item_attributes.get("selected_variation") and effect.src in applied_effects:
-				result = result * effect[key]
+				if compound_type == COMPOUNDING_TYPE.add:
+					result = result + effect[key]
+				elif compound_type == COMPOUNDING_TYPE.multiply:
+					result = result * effect[key]
+				else:
+					result = result - effect[key]
 				debug_applied.push_back(effect.src)
 				continue
 	

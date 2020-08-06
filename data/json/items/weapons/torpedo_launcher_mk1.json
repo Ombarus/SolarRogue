@@ -19,7 +19,10 @@
 		"fire_minimum_range":2.0,
 		"fire_pattern":"o",
 		"fire_energy_cost":200.0,
-		"fire_speed":1.2
+		"fire_speed":1.2,
+		"base_hit_chance":0.75,
+		"crit_chance":0.0,
+		"crit_multiplier":1.5
 	},
 	"equipment": {
 		"slot":"weapon",
@@ -51,7 +54,7 @@
 		"Overview": {
 			"min_level":0,
 			"fields":[
-				{"name":"Cargo Volume", "value":"{equipment.volume*volume_multiplier}", "translate_value":false},
+				{"name":"Cargo Volume", "value":"{equipment.volume*volume_multiplier}", "translate_value":false, "positive_good":false},
 				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
 				{"name":"Mount Point", "value":"Weapon"}
 			]
@@ -61,8 +64,8 @@
 			"fields": [
 				{"name":"Damage", "value":"{weapon_data.base_dam*base_dam_multiplier}~{weapon_data.max_dam*max_dam_multiplier}", "translate_value":false},
 				{"name":"Range", "value":"{weapon_data.fire_range}", "translate_value":false},
-				{"name":"Energy Cost", "value":"{weapon_data.fire_energy_cost*fire_energy_cost_multiplier}", "translate_value":false},
-				{"name":"Speed", "value":"{weapon_data.fire_speed*fire_speed_multiplier} turns"},
+				{"name":"Energy Cost", "value":"{weapon_data.fire_energy_cost*fire_energy_cost_multiplier}", "translate_value":false, "positive_good":false},
+				{"name":"Speed", "value":"{weapon_data.fire_speed*fire_speed_multiplier} turns", "positive_good":false},
 				{"name":"Ammo", "value":"Torpedo"},
 				{"name":"Area", "value":"{weapon_data.area} tiles"}
 			]

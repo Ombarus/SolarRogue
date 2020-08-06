@@ -295,9 +295,9 @@ func DoAttackPathFinding(obj):
 	var weapons_data = Globals.LevelLoaderRef.LoadJSONArray(weapons)
 	#if weapons_data != null and weapons_data.size() > 0
 	
-	var cur_difficulty : int = PermSave.get_attrib("settings.difficulty")
-	var diff_chance_mult : float = 1.0
-	diff_chance_mult = (4.0 - cur_difficulty) / 2.0
+	#var cur_difficulty : int = PermSave.get_attrib("settings.difficulty")
+	#var diff_chance_mult : float = 1.0
+	#diff_chance_mult = (4.0 - cur_difficulty) / 2.0
 	
 	var minimal_move = null
 	var shot = false
@@ -308,37 +308,37 @@ func DoAttackPathFinding(obj):
 		var best_move = _targetting.ClosestFiringSolution(obj_tile, player_tile, data)
 		var is_destroyed = player.get_attrib("destroyable.destroyed")
 		if best_move.length() == 0 and (is_destroyed == null or is_destroyed == false):
-			var chance = obj.get_attrib("ai.hit_chance")
-			chance = 1.0 - (diff_chance_mult * (1.0 - chance))
-			if chance == null or MersenneTwister.rand_float() < chance:
-				BehaviorEvents.emit_signal("OnDealDamage", [player], obj, data, attrib_data, player_tile)
-			else:
-				var log_choices = {
-					"The enemy missed":50,
-					"Enemy shot wide!":50,
-					"The enemy can't shoot a fish in a barrel!":5,
-					"Evasive maneuver beta two successful!":30,
-					"Evasive maneuver beta nine successful!":30,
-					"Evasive pattern gamma six successful!":30,
-					"Evasive pattern delta successful!":30,
-					"Evasive pattern lambda ten successful!":30,
-					"Evasive maneuver omega three successful!":30,
-					"Evasive sequence 010 successful!":10,
-					"Evasive sequence beta four successful!":10,
-					"That was a close one!":5,
-					"Evasive maneuver gamma one successful!":30,
-					"Evasive pattern sigma ten successful!":30,
-					"Evasive sequence delta detla successful!":10,
-					"Evasive maneuver pi alpha two successful!":5,
-					"Evasive pattern Riker successful!":1,
-					"Evasive pattern Kirk Epsilon successful!":1
-				}
-				BehaviorEvents.emit_signal("OnLogLine", log_choices)
-				 # play the animation but no damage
-				BehaviorEvents.emit_signal("OnShotFired", player_tile, obj, data)
-				var fire_speed = Globals.get_data(data, "weapon_data.fire_speed")
-				var speed_mult = Globals.EffectRef.GetMultiplierValue(obj, data.src, attrib_data, "fire_speed_multiplier")
-				BehaviorEvents.emit_signal("OnUseAP", obj, fire_speed * speed_mult)
+#			var chance = obj.get_attrib("ai.hit_chance")
+#			chance = 1.0 - (diff_chance_mult * (1.0 - chance))
+#			if chance == null or MersenneTwister.rand_float() < chance:
+			BehaviorEvents.emit_signal("OnDealDamage", [player], obj, data, attrib_data, player_tile)
+#			else:
+#				var log_choices = {
+#					"The enemy missed":50,
+#					"Enemy shot wide!":50,
+#					"The enemy can't shoot a fish in a barrel!":5,
+#					"Evasive maneuver beta two successful!":30,
+#					"Evasive maneuver beta nine successful!":30,
+#					"Evasive pattern gamma six successful!":30,
+#					"Evasive pattern delta successful!":30,
+#					"Evasive pattern lambda ten successful!":30,
+#					"Evasive maneuver omega three successful!":30,
+#					"Evasive sequence 010 successful!":10,
+#					"Evasive sequence beta four successful!":10,
+#					"That was a close one!":5,
+#					"Evasive maneuver gamma one successful!":30,
+#					"Evasive pattern sigma ten successful!":30,
+#					"Evasive sequence delta detla successful!":10,
+#					"Evasive maneuver pi alpha two successful!":5,
+#					"Evasive pattern Riker successful!":1,
+#					"Evasive pattern Kirk Epsilon successful!":1
+#				}
+#				BehaviorEvents.emit_signal("OnLogLine", log_choices)
+#				 # play the animation but no damage
+#				BehaviorEvents.emit_signal("OnShotFired", player_tile, obj, data)
+#				var fire_speed = Globals.get_data(data, "weapon_data.fire_speed")
+#				var speed_mult = Globals.EffectRef.GetMultiplierValue(obj, data.src, attrib_data, "fire_speed_multiplier")
+#				BehaviorEvents.emit_signal("OnUseAP", obj, fire_speed * speed_mult)
 			shot = true
 		if minimal_move == null or minimal_move.length() > best_move.length():
 			minimal_move = best_move

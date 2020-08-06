@@ -173,11 +173,15 @@ func Craft(recipe_data, input_list, crafter):
 				net_energy_change += d.data.recyclable.energy * d.amount
 		else:
 			var product_data = Globals.LevelLoaderRef.LoadJSON(recipe_data.produce)
+			var modified_attributes = null
+			if "selected_variation" in recipe_data and not recipe_data.selected_variation.empty():
+				modified_attributes = {"selected_variation":recipe_data.selected_variation}
+				
 			for i in range(recipe_data.amount):
 				if not "equipment" in product_data:
-					Globals.LevelLoaderRef.RequestObject(recipe_data.produce, Globals.LevelLoaderRef.World_to_Tile(crafter.position))
+					Globals.LevelLoaderRef.RequestObject(recipe_data.produce, Globals.LevelLoaderRef.World_to_Tile(crafter.position), modified_attributes)
 				else:
-					BehaviorEvents.emit_signal("OnAddItem", crafter, recipe_data.produce, {})
+					BehaviorEvents.emit_signal("OnAddItem", crafter, recipe_data.produce, modified_attributes)
 		
 		
 		num_produced += 1
