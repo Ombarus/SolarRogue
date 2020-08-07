@@ -182,3 +182,4 @@ func get_max_shield():
 		count += 1
 		
 	return max_shield
+	

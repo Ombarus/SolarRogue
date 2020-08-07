@@ -12,9 +12,9 @@
 		"equip_ap":3.0,
 		"unequip_ap":3.0
 	},
-	"speed_boost": {
-		"speed_percent":70.0,
-		"energy_percent":200.0
+	"attributes": {
+		"global_move_multiplier":0.7,
+		"global_move_energy_cost_multiplier":2.0
 	},
 	"recyclable": {
 		"energy": 700,
@@ -39,8 +39,8 @@
 		"Effect": {
 			"min_level":0,
 			"fields": [
-				{"name":"Turn Mult", "value":"{speed_boost.speed_percent}%", "translate_value":false},
-				{"name":"Move Energy Cost", "value":"{speed_boost.energy_percent}%", "translate_value":false}
+				{"name":"Turn Mult", "value":"{attributes.global_move_multiplier}%", "translate_value":false, "display_percent":true},
+				{"name":"Move Energy Cost", "value":"{attributes.global_move_energy_cost_multiplier}%", "translate_value":false, "display_percent":true}
 			]
 		}
 	}

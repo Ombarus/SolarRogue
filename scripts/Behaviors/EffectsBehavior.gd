@@ -135,6 +135,18 @@ func OnAddItem_Callback(picker, item_id, modified_attributes):
 		
 
 func OnMountAdded_Callback(obj, slot, src, modified_attributes):
+	var src_data = Globals.LevelLoaderRef.LoadJSON(src)
+	var obj_attributes = src_data.get("attributes", {})
+	if obj_attributes.size() > 0:
+		var filtered_effects = {}
+		for key in obj_attributes.keys():
+			if not "inv_" in key:
+				filtered_effects[key] = obj_attributes[key]
+		filtered_effects["src"] = src
+		var applied_effects : Array = obj.get_attrib("applied_effects", [])
+		applied_effects.push_back(filtered_effects)
+		obj.set_attrib("applied_effects", applied_effects)
+	
 	if modified_attributes == null or not modified_attributes.has("selected_variation"):
 		return
 		
@@ -160,11 +172,17 @@ func OnMountAdded_Callback(obj, slot, src, modified_attributes):
 	
 	
 func OnMountRemoved_Callback(obj, slot, src, modified_attributes):
+	var applied_effects : Array = obj.get_attrib("applied_effects", [])
+	for index in range(applied_effects.size()):
+		var effect = applied_effects[index]
+		if Globals.clean_path(effect.src) == Globals.clean_path(src) and effect.get("from_inventory", false) == false:
+			applied_effects.remove(index)
+			break
+	
 	if modified_attributes == null or not modified_attributes.has("selected_variation"):
 		return
 		
 	var variation_src : String = Globals.clean_path(modified_attributes.get("selected_variation"))
-	var applied_effects : Array = obj.get_attrib("applied_effects", [])
 	for index in range(applied_effects.size()):
 		var effect = applied_effects[index]
 		if Globals.clean_path(effect.src) == variation_src and effect.get("from_inventory", false) == false:
@@ -237,7 +255,8 @@ func _get_value(obj, item_src, item_attributes, attrib_base_name, compound_type=
 			effects = [attrib]
 	else:
 		effects = obj.get_attrib("applied_effects", [])
-	var applied_effects = []
+	var linked_effects = []
+	var self_effects = []
 	var debug_applied = []
 	for effect in effects:
 		var keys = effect.keys()
@@ -258,23 +277,23 @@ func _get_value(obj, item_src, item_attributes, attrib_base_name, compound_type=
 				continue
 			
 			# Only apply first instance of a "self_" attribute, one item cannot possibly have multiple time the same variant
-			if "self_" in key and effect.src == item_attributes.get("selected_variation") and not effect.src in applied_effects:
+			if "self_" in key and effect.src == item_attributes.get("selected_variation") and not effect.src in self_effects:
 				if compound_type == COMPOUNDING_TYPE.add:
 					result = result + effect[key]
 				elif compound_type == COMPOUNDING_TYPE.multiply:
 					result = result * effect[key]
 				else:
 					result = result - effect[key]
-				applied_effects.push_back(effect.src)
+				self_effects.push_back(effect.src)
 				debug_applied.push_back(effect.src)
 				continue
 				
 			# Linked is basically the opposite of self_. We skip it once assuming it's us. Then we apply the "others" bonus
-			if "linked_" in key and effect.src == item_attributes.get("selected_variation") and not effect.src in applied_effects:
-				applied_effects.push_back(effect.src)
+			if "linked_" in key and effect.src == item_attributes.get("selected_variation") and not effect.src in linked_effects:
+				linked_effects.push_back(effect.src)
 				continue
 				
-			if "linked_" in key and effect.src == item_attributes.get("selected_variation") and effect.src in applied_effects:
+			if "linked_" in key and effect.src == item_attributes.get("selected_variation") and effect.src in linked_effects:
 				if compound_type == COMPOUNDING_TYPE.add:
 					result = result + effect[key]
 				elif compound_type == COMPOUNDING_TYPE.multiply:

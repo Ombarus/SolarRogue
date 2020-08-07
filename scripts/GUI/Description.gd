@@ -74,20 +74,32 @@ func Init(init_param):
 			for i in range(names.size()):
 				var path_effect : Dictionary = split_effect(names[i])
 				var mult := 1.0
-				for effect in path_effect["effects"]:
+				var bonus := 0.0
+				for effect in path_effect["multipliers"]:
 					mult *= Globals.EffectRef.GetMultiplierValue(_owner, get_name_id(), _modified_attributes, effect)
+				for effect in path_effect["additions"]:
+					bonus += Globals.EffectRef.GetBonusValue(_owner, get_name_id(), _modified_attributes, effect)
 				var val = get_custom(path_effect["path"])
 				if val == null and defaults.size() > 0:
 					val = get_custom(defaults[min(i, defaults.size())])
 				if val == null:
 					is_valid = false
+				var base_val = val
 				if abs(mult - 1.0) > 0.0001:
 					val *= mult
-					var positive_good = row.get("positive_good", true)
-					if (mult > 1.0 and positive_good == true) or (mult < 1.0 and positive_good == false):
-						val = "[color=lime]" + str(val) + "[/color]"
-					else:
-						val = "[color=red]" + str(val) + "[/color]"
+				if abs(bonus) > 0.00001:
+					val += bonus
+					
+				var positive_good : bool = row.get("positive_good", true)
+				var per_mult = 1.0
+				if row.get("display_percent", false) == true:
+					per_mult = 100.0
+				if (base_val > val and positive_good == false) or (base_val < val and positive_good == true):
+					val = "[color=lime]" + str(val*per_mult) + "[/color]"
+				elif base_val != val:
+					val = "[color=red]" + str(val*per_mult) + "[/color]"
+				else:
+					val = str(val * per_mult)
 				formatdict[names[i]] = val
 			
 			if formatdict.size() > 0:
@@ -125,14 +137,34 @@ func get_names(txt) -> Array:
 	return res
 	
 func split_effect(txt : String) -> Dictionary:
-	if not "*" in txt:
-		return {"path": txt, "effects":[]}
+	var multipliers := []
+	var additions := []
+	var path := ""
 	
-	var res : Array = txt.split('*')
-	if res.size() <= 1:
-		return {"path": txt, "effects":[]}
-	else:
-		return {"path": res[0], "effects":res.slice(1, -1)}
+	var accum := ""
+	var cur_char := ""
+	for c in txt:
+		if c == '*' or c == '+':
+			if cur_char == '*' and accum.length() > 0:
+				multipliers.push_back(accum)
+			elif cur_char == '+' and accum.length() > 0:
+				additions.push_back(accum)
+			elif accum.length() > 0:
+				path = accum
+			accum = ""
+			cur_char = c
+		else:
+			accum += c
+			
+	if accum.length() > 0:
+		if cur_char == '*' and accum.length() > 0:
+			multipliers.push_back(accum)
+		elif cur_char == '+' and accum.length() > 0:
+			additions.push_back(accum)
+		elif accum.length() > 0:
+			path = accum
+			
+	return {"path":path, "multipliers":multipliers, "additions":additions}
 	
 func get_custom(path, default=null):
 	if _obj != null:

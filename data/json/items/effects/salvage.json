@@ -11,7 +11,7 @@
 		"Extra": {
 			"min_level":0,
 			"fields": [
-				{"name":"Drop chance", "value":"+30%"}
+				{"name":"Drop chance", "value":"[color=lime]+30%[/color]"}
 			]
 		}
 	}

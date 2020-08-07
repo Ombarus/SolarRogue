@@ -110,7 +110,7 @@ func OnDealDamage_Callback(targets, shooter, weapon_data, modified_attributes, s
 func consume(shooter, weapon_data, modified_attributes):
 	if "fire_energy_cost" in weapon_data.weapon_data:
 		var energy_mult = Globals.EffectRef.GetMultiplierValue(shooter, weapon_data.src, modified_attributes, "fire_energy_cost_multiplier")
-		var cost : float = weapon_data.weapon_data.fire_energy_cost * _get_power_amplifier_stack(shooter, "energy_percent")
+		var cost : float = weapon_data.weapon_data.fire_energy_cost #* _get_power_amplifier_stack(shooter, "energy_percent")
 		BehaviorEvents.emit_signal("OnUseEnergy", shooter, cost * energy_mult)
 	if "fire_speed" in weapon_data.weapon_data:
 		var speed_mult = Globals.EffectRef.GetMultiplierValue(shooter, weapon_data.src, modified_attributes, "fire_speed_multiplier")
@@ -304,14 +304,16 @@ func ProcessDamage(target, shooter, weapon_data, modified_attributes):
 	var dam := 0.0
 	if chance == null or MersenneTwister.rand_float() < chance:
 		dam = MersenneTwister.rand(max_dam-min_dam) + min_dam
-		dam = dam * _get_power_amplifier_stack(shooter, "damage_percent")
+		#dam = dam * _get_power_amplifier_stack(shooter, "damage_percent")
 		
 	var is_critical := false
 	var hull_dam = 0.0
 	var shield_per = 100.0
 	
 	if dam > 0:
-		if MersenneTwister.rand_float() < Globals.get_data(weapon_data, "weapon_data.crit_chance", 0.0):
+		var crit_chance = Globals.get_data(weapon_data, "weapon_data.crit_chance", 0.0)
+		var bonus_crit = Globals.EffectRef.GetBonusValue(shooter, weapon_data.src, modified_attributes, "crit_chance_bonus")
+		if MersenneTwister.rand_float() < crit_chance + bonus_crit:
 			dam = dam * Globals.get_data(weapon_data, "weapon_data.crit_multiplier", 1.0)
 			is_critical = true
 		var dam_absorbed_by_shield = _hit_shield(target, dam, shooter, weapon_data, modified_attributes)

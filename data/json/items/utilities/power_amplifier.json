@@ -12,9 +12,10 @@
 		"equip_ap":3.0,
 		"unequip_ap":3.0
 	},
-	"damage_boost": {
-		"damage_percent":125.0,
-		"energy_percent":125.0
+	"attributes": {
+		"global_base_dam_multiplier":1.25,
+		"global_max_dam_multiplier":1.25,
+		"global_fire_energy_cost_multiplier":1.25
 	},
 	"recyclable": {
 		"energy": 500,
@@ -39,8 +40,8 @@
 		"Effect": {
 			"min_level":0,
 			"fields": [
-				{"name":"Damage Boost", "value":"{damage_boost.damage_percent}%", "translate_value":false},
-				{"name":"Weapon Energy Cost", "value":"{damage_boost.energy_percent}%", "translate_value":false}
+				{"name":"Damage Boost", "value":"{attributes.global_base_dam_multiplier}%", "translate_value":false, "display_percent":true},
+				{"name":"Weapon Energy Cost", "value":"{attributes.global_fire_energy_cost_multiplier}%", "translate_value":false, "display_percent":true}
 			]
 		}
 	}

@@ -46,11 +46,12 @@ func OnMovement_callback(obj, dir):
 	var special_multiplier = obj.get_attrib("moving.special_multiplier")
 	if special_multiplier == null:
 		special_multiplier = 1.0
-	move_speed *= _get_power_amplifier_stack(obj, "speed_percent")
-	energy_cost *= _get_power_amplifier_stack(obj, "energy_percent")
+	#move_speed *= _get_power_amplifier_stack(obj, "speed_percent")
+	#energy_cost *= _get_power_amplifier_stack(obj, "energy_percent")
 	var bonus_effect = Globals.EffectRef.GetMultiplierValue(obj, obj.get_attrib("name_id"), {}, "move_multiplier")
+	var bonus_energy = Globals.EffectRef.GetMultiplierValue(obj, obj.get_attrib("name_id"), {}, "move_energy_cost_multiplier")
 	BehaviorEvents.emit_signal("OnUseAP", obj, move_speed * special_multiplier * bonus_effect)
-	BehaviorEvents.emit_signal("OnUseEnergy", obj, energy_cost)
+	BehaviorEvents.emit_signal("OnUseEnergy", obj, energy_cost * bonus_energy)
 	
 	var newPos = obj.position + levelLoaderRef.Tile_to_World(dir)
 	levelLoaderRef.UpdatePosition(obj, newPos)

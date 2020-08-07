@@ -1,0 +1,19 @@
+{
+	"name_id":"Precision",
+	"type":"effect",
+	"prefix":"Precision",
+	"attributes": {
+		"self_hit_chance_bonus":0.1,
+		"self_crit_chance_bonus":0.05,
+		"linked_crit_chance_bonus":0.05,
+		"self_fire_speed_multiplier":1.5
+	},
+	"description": {
+		"Extra": {
+			"min_level":0,
+			"fields": [
+				{"name":"Each identical item", "value":"[color=lime]+5% Critical[/color]"}
+			]
+		}
+	}
+}

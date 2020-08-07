@@ -10,7 +10,7 @@
 		"Extra": {
 			"min_level":0,
 			"fields": [
-				{"name":"Ship Movement", "value":"10% slower"}
+				{"name":"Ship Movement", "value":"[color=red]10% slower[/color]"}
 			]
 		}
 	}

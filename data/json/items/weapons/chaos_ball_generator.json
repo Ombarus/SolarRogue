@@ -43,7 +43,8 @@
 		{"src":"data/json/items/effects/compact.json", "chance":20},
 		{"src":"data/json/items/effects/linked.json", "chance":10},
 		{"src":"data/json/items/effects/em.json", "chance":10},
-		{"src":"data/json/items/effects/salvage.json", "chance":10}
+		{"src":"data/json/items/effects/salvage.json", "chance":10},
+		{"src":"data/json/items/effects/precision.json", "chance":10}
 	],
 	"description": {
 		"text":"Unstable Wormhole Generator. So chaotic that it's only mode of opperation is lovingly refered to as 'shoot and pray'",
@@ -62,6 +63,9 @@
 				{"name":"Range", "value":"{weapon_data.fire_range}", "translate_value":false},
 				{"name":"Energy Cost", "value":"{weapon_data.fire_energy_cost*fire_energy_cost_multiplier}", "translate_value":false, "positive_good":false},
 				{"name":"Speed", "value":"{weapon_data.fire_speed*fire_speed_multiplier} turns", "positive_good":false},
+				{"name":"Hit Chance", "value":"{weapon_data.base_hit_chance+hit_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Critical Chance", "value":"{weapon_data.crit_chance+crit_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Critical Multiplier", "value":"x{weapon_data.crit_multiplier}", "translate_value":false},
 				{"name":"Ammo", "value":"None"},
 				{"name":"Special", "value":"Can shoot outside of radar range"}
 			]
