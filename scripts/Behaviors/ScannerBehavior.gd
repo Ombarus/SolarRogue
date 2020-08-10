@@ -204,9 +204,18 @@ func _update_scanned_obj(obj, scanner_data):
 		BehaviorEvents.emit_signal("OnScannerUpdated", obj)
 		return
 	
+	var scanner_explored = get_node("../../ExploredBG")
+	var last_frame_tiles = obj.get_attrib("scanner_result.scanned_tiles." + level_id, [])
+	for t in last_frame_tiles:
+		if typeof(t) == TYPE_STRING:
+			t = str2var("Vector2" + t)
+		scanner_explored.set_cell(t.x, t.y, 0)
+	
 	var cur_in_range = []
 	var offset = Vector2(0,0)
 	var scanned_tiles = []
+	var scanner_border = get_node("../../ScannerBorder")
+	scanner_border.clear()
 	
 	while round(offset.length()) <= (scan_radius+1):
 		while round(offset.length()) <= (scan_radius+1):
@@ -223,6 +232,8 @@ func _update_scanned_obj(obj, scanner_data):
 				pass #obj.visible = false
 			else:
 				scanned_tiles.push_back(tile)
+				scanner_border.set_cell(tile.x, tile.y, 0)
+				scanner_explored.set_cell(tile.x, tile.y, -1)
 				obj_in_tile = Globals.LevelLoaderRef.GetTile(tile)
 				for o in obj_in_tile:
 					if o == obj:
@@ -235,6 +246,8 @@ func _update_scanned_obj(obj, scanner_data):
 					pass #obj.visible = false
 				else:
 					scanned_tiles.push_back(tile)
+					scanner_border.set_cell(tile.x, tile.y, 0)
+					scanner_explored.set_cell(tile.x, tile.y, -1)
 					obj_in_tile = Globals.LevelLoaderRef.GetTile(tile)
 					for o in obj_in_tile:
 						if o == obj:
@@ -247,6 +260,8 @@ func _update_scanned_obj(obj, scanner_data):
 					pass #obj.visible = false
 				else:
 					scanned_tiles.push_back(tile)
+					scanner_border.set_cell(tile.x, tile.y, 0)
+					scanner_explored.set_cell(tile.x, tile.y, -1)
 					obj_in_tile = Globals.LevelLoaderRef.GetTile(tile)
 					for o in obj_in_tile:
 						if o == obj:
@@ -259,6 +274,8 @@ func _update_scanned_obj(obj, scanner_data):
 					pass #obj.visible = false
 				else:
 					scanned_tiles.push_back(tile)
+					scanner_border.set_cell(tile.x, tile.y, 0)
+					scanner_explored.set_cell(tile.x, tile.y, -1)
 					obj_in_tile = Globals.LevelLoaderRef.GetTile(tile)
 					for o in obj_in_tile:
 						if o == obj:
@@ -269,6 +286,7 @@ func _update_scanned_obj(obj, scanner_data):
 		offset.y = 0
 		offset.x += 1
 
+	scanner_border.update_bitmask_region(Vector2(0,0), Vector2(80,80))
 
 	var unkown_objects2 = []
 	var partial_type2 = Globals.get_data(scanner_data, "scanning.full_reveal_type", [])
@@ -308,6 +326,7 @@ func _update_scanned_obj(obj, scanner_data):
 			for o in Globals.LevelLoaderRef.objByType[type]:
 				unkown_objects.push_back(o.get_attrib("unique_id"))
 				
+	
 			
 	#if new_in_range.size() != 0 or new_out_of_range.size() != 0:
 	#	# for now. Only send an event if the scanner result for the object has significant changes.
