@@ -6,11 +6,11 @@
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
-shader_param/iterations = 17
-shader_param/formuparam = 0.53
-shader_param/volsteps = 20
+shader_param/iterations = 18
+shader_param/formuparam = 0.806
+shader_param/volsteps = 9
 shader_param/stepsize = 0.1
-shader_param/zoom = 0.8
+shader_param/zoom = 2.36
 shader_param/tile = 0.85
 shader_param/speed = 0.01
 shader_param/brightness = 0.0015

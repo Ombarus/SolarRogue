@@ -33,7 +33,7 @@
 [ext_resource path="res://scripts/Behaviors/EnergyRegen.gd" type="Script" id=31]
 [ext_resource path="res://scripts/Behaviors/HullRegenBehavior.gd" type="Script" id=32]
 [ext_resource path="res://scripts/Behaviors/TutorialBehavior.gd" type="Script" id=33]
-[ext_resource path="res://data/private/textures/space/space-bg_mine-p1.png" type="Texture" id=34]
+[ext_resource path="res://data/private/textures/space/fractal_test.png" type="Texture" id=34]
 [ext_resource path="res://scripts/ParallaxBG.gd" type="Script" id=35]
 [ext_resource path="res://data/shaders/fow_mask.tres" type="Material" id=36]
 [ext_resource path="res://scenes/scanner_fx.tscn" type="PackedScene" id=37]
@@ -356,6 +356,7 @@ script = ExtResource( 44 )
 script = ExtResource( 45 )
 
 [node name="SpaceBG" parent="." instance=ExtResource( 86 )]
+visible = false
 position = Vector2( 5120, 5120 )
 cam_node = NodePath("../Camera2D")
 
@@ -364,6 +365,15 @@ position = Vector2( -64, -64 )
 z_index = 10
 tile_data = PoolIntArray( 262153, 0, 1, 262154, 0, 65536, 262155, 0, 65536, 262156, 0, 2, 327689, 0, 131073, 327690, 0, 196619, 327691, 0, 196619, 327692, 0, 131074, 393223, 0, 1, 393224, 0, 65536, 393225, 0, 65540, 393226, 0, 196619, 393227, 0, 196619, 393228, 0, 131074, 458759, 0, 131073, 458760, 0, 196619, 458761, 0, 196619, 458762, 0, 196619, 458763, 0, 3, 458764, 0, 65538, 524294, 0, 196608, 524295, 0, 65544, 524296, 0, 4, 524297, 0, 196619, 524298, 0, 3, 524299, 0, 65538, 589832, 0, 65537, 589833, 0, 196618, 589834, 0, 65538, 655369, 0, 131077, 4259907, 0, 5, 4325443, 0, 131077 )
 
+[node name="FractalBG" type="Sprite" parent="."]
+position = Vector2( 5120, 5120 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 34 )
+region_rect = Rect2( -10240, -10240, 20480, 20480 )
+__meta__ = {
+"_editor_description_": ""
+}
+
 [node name="BG" type="Sprite" parent="."]
 position = Vector2( 5120, 5120 )
 region_enabled = true
@@ -371,15 +381,6 @@ region_rect = Rect2( -10240, -10240, 20480, 20480 )
 script = ExtResource( 35 )
 parallax = 1500.0
 camera = NodePath("../Camera2D")
-
-[node name="BG3" type="Sprite" parent="BG"]
-visible = false
-texture = ExtResource( 34 )
-region_enabled = true
-region_rect = Rect2( -10240, -10240, 20480, 20480 )
-script = ExtResource( 35 )
-parallax = 600.0
-camera = NodePath("../../Camera2D")
 
 [node name="BG2" type="Sprite" parent="BG"]
 visible = false
