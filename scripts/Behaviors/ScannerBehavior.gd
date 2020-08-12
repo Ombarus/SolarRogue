@@ -68,10 +68,21 @@ func OnMountRemoved_Callback(obj, slot, src, modified_attributes):
 	if not "scanner" in slot:
 		return
 		
+	var scanner_data = _node_id_scanner[obj.get_attrib("unique_id")]
+	if scanner_data != null and Globals.is_(Globals.get_data(scanner_data, "scanning.fully_mapped"), true):
+		var scanner_explored = get_node("../../ExploredBG")
+		for x in range(Globals.LevelLoaderRef.levelSize.x):
+			for y in range(Globals.LevelLoaderRef.levelSize.y):
+				scanner_explored.set_cell(x,  y, 0)
+		
 	_node_id_scanner.erase(obj.get_attrib("unique_id"))
 	_up_to_date = false
 	
 func OnLevelLoaded_Callback():
+	var scanner_explored = get_node("../../ExploredBG")
+	for x in range(Globals.LevelLoaderRef.levelSize.x):
+		for y in range(Globals.LevelLoaderRef.levelSize.y):
+			scanner_explored.set_cell(x,  y, 0)
 	_up_to_date = false
 
 func OnPositionUpdated_Callback(obj):
@@ -139,6 +150,8 @@ func do_anomaly_detection(obj):
 
 func special_update_ultimate(obj, scanner_data):
 	if scanner_data != null and Globals.is_(Globals.get_data(scanner_data, "scanning.fully_mapped"), true):
+		var scanner_border = get_node("../../ScannerBorder")
+		scanner_border.clear()
 		var level_id : String = Globals.LevelLoaderRef.GetLevelID()
 		var old_range : Array = obj.get_attrib("scanner_result.cur_in_range." + level_id, [])
 		var cur_in_range := []

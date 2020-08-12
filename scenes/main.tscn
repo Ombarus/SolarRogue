@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=2]
+[gd_scene load_steps=86 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/private/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -66,7 +66,6 @@
 [ext_resource path="res://scenes/warp_trail_test.tscn" type="PackedScene" id=67]
 [ext_resource path="res://scripts/Behaviors/LocalSaveBehavior.gd" type="Script" id=68]
 [ext_resource path="res://scripts/Behaviors/Runes/Runaway.gd" type="Script" id=69]
-[ext_resource path="res://data/private/textures/space/space-bg_mine-p2.png" type="Texture" id=70]
 [ext_resource path="res://scenes/BorderGenerator.tscn" type="PackedScene" id=71]
 [ext_resource path="res://scenes/GUI/Dialogs/StoryPrompt.tscn" type="PackedScene" id=72]
 [ext_resource path="res://scripts/Behaviors/Runes/Radiation.gd" type="Script" id=73]
@@ -258,6 +257,7 @@ anims/slow_popin = SubResource( 1 )
 [node name="Memory" type="Node" parent="Behaviors"]
 script = ExtResource( 12 )
 Occluder = NodePath("../../BG/Occlusion")
+ExploredBG = NodePath("../../ExploredBG")
 
 [node name="Scanner" type="Node" parent="Behaviors"]
 script = ExtResource( 13 )
@@ -360,42 +360,35 @@ visible = false
 position = Vector2( 5120, 5120 )
 cam_node = NodePath("../Camera2D")
 
-[node name="ScannerBorder" parent="." instance=ExtResource( 46 )]
-position = Vector2( -64, -64 )
-z_index = 10
-tile_data = PoolIntArray( 262153, 0, 1, 262154, 0, 65536, 262155, 0, 65536, 262156, 0, 2, 327689, 0, 131073, 327690, 0, 196619, 327691, 0, 196619, 327692, 0, 131074, 393223, 0, 1, 393224, 0, 65536, 393225, 0, 65540, 393226, 0, 196619, 393227, 0, 196619, 393228, 0, 131074, 458759, 0, 131073, 458760, 0, 196619, 458761, 0, 196619, 458762, 0, 196619, 458763, 0, 3, 458764, 0, 65538, 524294, 0, 196608, 524295, 0, 65544, 524296, 0, 4, 524297, 0, 196619, 524298, 0, 3, 524299, 0, 65538, 589832, 0, 65537, 589833, 0, 196618, 589834, 0, 65538, 655369, 0, 131077, 4259907, 0, 5, 4325443, 0, 131077 )
-
-[node name="FractalBG" type="Sprite" parent="."]
-position = Vector2( 5120, 5120 )
-scale = Vector2( 5, 5 )
-texture = ExtResource( 34 )
-region_rect = Rect2( -10240, -10240, 20480, 20480 )
-__meta__ = {
-"_editor_description_": ""
-}
-
 [node name="BG" type="Sprite" parent="."]
 position = Vector2( 5120, 5120 )
 region_enabled = true
 region_rect = Rect2( -10240, -10240, 20480, 20480 )
-script = ExtResource( 35 )
-parallax = 1500.0
-camera = NodePath("../Camera2D")
 
-[node name="BG2" type="Sprite" parent="BG"]
-visible = false
-texture = ExtResource( 70 )
-region_enabled = true
+[node name="Node2D" type="Node2D" parent="BG"]
+position = Vector2( -5000, -5000 )
+
+[node name="Fractal_no" type="Sprite" parent="BG/Node2D"]
+position = Vector2( -1500, -1500 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 34 )
 region_rect = Rect2( -10240, -10240, 20480, 20480 )
 script = ExtResource( 35 )
-parallax = 600.0
-camera = NodePath("../../Camera2D")
+__meta__ = {
+"_editor_description_": ""
+}
+parallax = 3000.0
+camera = NodePath("../../../Camera2D")
 
 [node name="Occlusion" type="Sprite" parent="BG"]
 modulate = Color( 0.027451, 0.145098, 0.501961, 1 )
 material = ExtResource( 36 )
 position = Vector2( -128, -128 )
 scale = Vector2( 128, 128 )
+
+[node name="ScannerBorder" parent="." instance=ExtResource( 46 )]
+position = Vector2( -64, -64 )
+tile_data = PoolIntArray( 262153, 0, 1, 262154, 0, 65536, 262155, 0, 65536, 262156, 0, 2, 327689, 0, 131073, 327690, 0, 196619, 327691, 0, 196619, 327692, 0, 131074, 393223, 0, 1, 393224, 0, 65536, 393225, 0, 65540, 393226, 0, 196619, 393227, 0, 196619, 393228, 0, 131074, 458759, 0, 131073, 458760, 0, 196619, 458761, 0, 196619, 458762, 0, 196619, 458763, 0, 3, 458764, 0, 65538, 524294, 0, 196608, 524295, 0, 65544, 524296, 0, 4, 524297, 0, 196619, 524298, 0, 3, 524299, 0, 65538, 589832, 0, 65537, 589833, 0, 196618, 589834, 0, 65538, 655369, 0, 131077, 4259907, 0, 5, 4325443, 0, 131077 )
 
 [node name="ExploredBG" type="TileMap" parent="."]
 modulate = Color( 0, 0.00784314, 0.0745098, 0.352941 )

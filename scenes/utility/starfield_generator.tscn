@@ -2,13 +2,14 @@
 
 [ext_resource path="res://scripts/tool/starfield_generator.gd" type="Script" id=1]
 
-[sub_resource type="ViewportTexture" id=3]
-viewport_path = NodePath("Viewport")
+[sub_resource type="ViewportTexture" id=4]
+viewport_path = NodePath("render_vp")
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
 
 uniform int iterations = 17;
+uniform int discard_iterations = 6;
 uniform float formuparam = 0.53;
 uniform int volsteps = 20;
 uniform float stepsize = 0.1;
@@ -20,6 +21,7 @@ uniform float darkmatter = 0.300;
 uniform float distfading = 0.730;
 uniform float saturation = 0.850;
 
+
 uniform vec2 camera_offset;
 
 varying highp vec2 high_uv;
@@ -28,19 +30,9 @@ void vertex() {
 	high_uv = UV;
 }
 
-void fragment() {
-	highp vec2 uv = high_uv;// / 1000.0;
-	//uv = uv / SCREEN_PIXEL_SIZE * 2.0;
-	//uv.y *= SCREEN_PIXEL_SIZE.y / SCREEN_PIXEL_SIZE.x;
-	highp vec3 dir = vec3(uv*zoom, 1.);
-	highp vec2 time = camera_offset * speed / 10240.0;
-	
-	highp vec3 from = vec3(1., 0.5, 0.5);
-	from += vec3(time.x, time.y, -2.);
-	
+vec3 calc_v(vec3 from, vec3 dir, int iter) {
 	float s = 0.1;
 	float fade = 1.0;
-	
 	highp vec3 v = vec3(0.);
 	highp vec3 p;
 	highp float pa = 0.;
@@ -53,7 +45,7 @@ void fragment() {
 		pa = 0.;
 		a = 0.;
 		
-		for (int i=0; i < iterations; i++) {
+		for (int i=0; i < iter; i++) {
 			p = abs(p) / dot(p, p) - formuparam;
 			a += abs(length(p)-pa);
 			pa = length(p);
@@ -71,17 +63,42 @@ void fragment() {
 		s += stepsize;
 	}
 	
+	return v;
+}
+
+void fragment() {
+	highp vec2 uv = high_uv;// / 1000.0;
+	//uv = uv / SCREEN_PIXEL_SIZE * 2.0;
+	//uv.y *= SCREEN_PIXEL_SIZE.y / SCREEN_PIXEL_SIZE.x;
+	highp vec3 dir = vec3(uv*zoom, 1.);
+	//highp vec2 time = camera_offset * speed / 10240.0;
+	
+	highp vec3 from = vec3(1., 0.5, -1.5);
+	//from += vec3(time.x, time.y, -2.);
+	
+	vec3 v_no = calc_v(from, dir, discard_iterations);
+	vec3 v = calc_v(from, dir, iterations);
+	
+	v = v * 0.01;
+	v_no = v_no * 0.01;
+	v = clamp(v, 0.0, 1.0);
+	v_no = clamp(v_no, 0.0, 1.0);
+	v = v - v_no;
+	
 	v = mix(vec3(length(v)), v, saturation);
-	COLOR = vec4(v * 0.01, 1.);
+	float alp = 1.0;
+	//float alp = smoothstep(0.2, 1.0, length(v));
+	COLOR = vec4(v, alp);
 }"
 
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
 shader_param/iterations = 17
+shader_param/discard_iterations = 12
 shader_param/formuparam = 0.53
 shader_param/volsteps = 20
 shader_param/stepsize = 0.1
-shader_param/zoom = 2.992
+shader_param/zoom = 3.004
 shader_param/tile = 0.893
 shader_param/speed = 0.001
 shader_param/brightness = 0.0015
@@ -92,17 +109,19 @@ shader_param/camera_offset = null
 
 [node name="starfield_generator" type="Node2D"]
 script = ExtResource( 1 )
+viewport_path = NodePath("render_vp")
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = SubResource( 3 )
+texture = SubResource( 4 )
 
-[node name="Viewport" type="Viewport" parent="."]
+[node name="render_vp" type="Viewport" parent="."]
 size = Vector2( 2048, 2048 )
+transparent_bg = true
 disable_3d = true
 usage = 0
 
-[node name="ColorRect" type="ColorRect" parent="Viewport"]
-material = SubResource( 2 )
+[node name="ColorRect" type="ColorRect" parent="render_vp"]
+material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3

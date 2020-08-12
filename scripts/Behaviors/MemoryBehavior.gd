@@ -1,10 +1,12 @@
 extends Node
 
 export(NodePath) var Occluder
+export(NodePath) var ExploredBG
 
 var _playerNode = null
 var default_occluder_color : Vector3
 onready var _occluder_ref = get_node(Occluder)
+onready var _explored_ref : TileMap = get_node(ExploredBG)
 
 func _ready():
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
@@ -65,11 +67,14 @@ func ExecuteFullSweep():
 	var known_anomalies = _playerNode.get_attrib("scanner_result.known_anomalies." + level_id, {})
 	var is_ultimate : bool = false
 	var scanners = Globals.LevelLoaderRef.LoadJSONArray(_playerNode.get_attrib("mounts.scanner"))
+
 	for s_data in scanners:
 		if Globals.is_(Globals.get_data(s_data, "scanning.fully_mapped"), true):
 			is_ultimate = true
+			_explored_ref.clear()
 			break
-			
+		
+		
 	for key in Globals.LevelLoaderRef.objById:
 		var obj = Globals.LevelLoaderRef.objById[key]
 		# Removed objects just get set to null so we might have null obj in objById
@@ -89,6 +94,7 @@ func ExecuteFullSweep():
 		else:
 			obj.visible = false
 		if disable_fow:
+			_explored_ref.clear()
 			var tile_memory : Array = []
 			for x in range(Globals.LevelLoaderRef.levelSize.x + 2):
 				for y in range(Globals.LevelLoaderRef.levelSize.y + 2):
