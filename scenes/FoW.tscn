@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/FoW.gd" type="Script" id=1]
+[ext_resource path="res://data/private/textures/FoW_Autotile.png" type="Texture" id=2]
+
+[node name="FoW" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 7252.25, 2226.17 )
+current = true

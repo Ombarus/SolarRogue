@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=2]
+[gd_scene load_steps=87 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/private/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -47,6 +47,7 @@
 [ext_resource path="res://scripts/Behaviors/EffectsBehavior.gd" type="Script" id=45]
 [ext_resource path="res://scenes/Scanner_border.tscn" type="PackedScene" id=46]
 [ext_resource path="res://scenes/tileset_source/scanner_border/explored_tiles.tres" type="TileSet" id=47]
+[ext_resource path="res://scenes/FoW.tscn" type="PackedScene" id=48]
 [ext_resource path="res://scenes/GUI/TargettingHUD.tscn" type="PackedScene" id=51]
 [ext_resource path="res://scenes/GUI/Dialogs/SelectableTarget.tscn" type="PackedScene" id=52]
 [ext_resource path="res://scenes/GUI/Dialogs/Options.tscn" type="PackedScene" id=53]
@@ -148,7 +149,7 @@ tracks/4/keys = {
 "values": [ 0.0, 0.0, 0.4, 0.6, 0.9, 1.0, 1.0 ]
 }
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 76 )
 shader_param/pixel = 1.0
 shader_param/red_offset = Vector2( 0, 0 )
@@ -158,7 +159,7 @@ shader_param/alpha = 1.0
 shader_param/rand_strength = 1.0
 shader_param/affected = Plane( 0, 0, 1, 1 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 1.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -360,6 +361,8 @@ visible = false
 position = Vector2( 5120, 5120 )
 cam_node = NodePath("../Camera2D")
 
+[node name="FoW" parent="." instance=ExtResource( 48 )]
+
 [node name="BG" type="Sprite" parent="."]
 position = Vector2( 5120, 5120 )
 region_enabled = true
@@ -388,6 +391,7 @@ scale = Vector2( 128, 128 )
 
 [node name="ScannerBorder" parent="." instance=ExtResource( 46 )]
 position = Vector2( -64, -64 )
+cell_quadrant_size = 5
 tile_data = PoolIntArray( 262153, 0, 1, 262154, 0, 65536, 262155, 0, 65536, 262156, 0, 2, 327689, 0, 131073, 327690, 0, 196619, 327691, 0, 196619, 327692, 0, 131074, 393223, 0, 1, 393224, 0, 65536, 393225, 0, 65540, 393226, 0, 196619, 393227, 0, 196619, 393228, 0, 131074, 458759, 0, 131073, 458760, 0, 196619, 458761, 0, 196619, 458762, 0, 196619, 458763, 0, 3, 458764, 0, 65538, 524294, 0, 196608, 524295, 0, 65544, 524296, 0, 4, 524297, 0, 196619, 524298, 0, 3, 524299, 0, 65538, 589832, 0, 65537, 589833, 0, 196618, 589834, 0, 65538, 655369, 0, 131077, 4259907, 0, 5, 4325443, 0, 131077 )
 
 [node name="ExploredBG" type="TileMap" parent="."]
@@ -395,6 +399,7 @@ modulate = Color( 0, 0.00784314, 0.0745098, 0.352941 )
 position = Vector2( -64, -64 )
 tile_set = ExtResource( 47 )
 cell_size = Vector2( 128, 128 )
+cell_quadrant_size = 5
 cell_custom_transform = Transform2D( 128, 0, 0, 128, 0, 0 )
 format = 1
 tile_data = PoolIntArray( 262153, 1, 0, 262154, 1, 0, 262155, 1, 0, 262156, 1, 0, 327689, 1, 0, 327690, 1, 0, 327691, 1, 0, 327692, 1, 0, 393223, 1, 0, 393224, 1, 0, 393225, 1, 0, 393226, 1, 0, 393227, 1, 0, 393228, 1, 0, 458759, 1, 0, 458760, 1, 0, 458761, 1, 0, 458762, 1, 0, 458763, 1, 0, 458764, 1, 0, 524294, 1, 0, 524295, 1, 0, 524296, 1, 0, 524297, 1, 0, 524298, 1, 0, 524299, 1, 0, 589830, 0, 0, 589831, 0, 0, 589832, 1, 0, 589833, 1, 0, 589834, 1, 0, 655365, 0, 0, 655366, 0, 0, 655367, 0, 0, 655368, 0, 0, 655369, 1, 0, 720901, 0, 0, 720902, 0, 0, 720903, 0, 0, 720904, 0, 0, 786436, 0, 0, 786437, 0, 0, 786438, 0, 0, 786439, 0, 0, 851971, 0, 0, 851972, 0, 0, 851973, 0, 0, 851974, 0, 0, 851975, 0, 0, 917507, 0, 0, 917508, 0, 0, 917509, 0, 0, 917510, 0, 0, 983043, 0, 0, 983044, 0, 0 )
@@ -667,7 +672,7 @@ __meta__ = {
 visible = false
 
 [node name="ViewportContainer" type="ViewportContainer" parent="Camera-GUI"]
-material = SubResource( 2 )
+material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -690,4 +695,4 @@ render_target_update_mode = 3
 visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Loading-FX/Starfield"]
-anims/popout = SubResource( 3 )
+anims/popout = SubResource( 4 )
