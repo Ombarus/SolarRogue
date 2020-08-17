@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=2]
+[gd_scene load_steps=86 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/private/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -47,7 +47,6 @@
 [ext_resource path="res://scripts/Behaviors/EffectsBehavior.gd" type="Script" id=45]
 [ext_resource path="res://scenes/Scanner_border.tscn" type="PackedScene" id=46]
 [ext_resource path="res://scenes/tileset_source/scanner_border/explored_tiles.tres" type="TileSet" id=47]
-[ext_resource path="res://scenes/FoW.tscn" type="PackedScene" id=48]
 [ext_resource path="res://scenes/GUI/TargettingHUD.tscn" type="PackedScene" id=51]
 [ext_resource path="res://scenes/GUI/Dialogs/SelectableTarget.tscn" type="PackedScene" id=52]
 [ext_resource path="res://scenes/GUI/Dialogs/Options.tscn" type="PackedScene" id=53]
@@ -149,7 +148,7 @@ tracks/4/keys = {
 "values": [ 0.0, 0.0, 0.4, 0.6, 0.9, 1.0, 1.0 ]
 }
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 76 )
 shader_param/pixel = 1.0
 shader_param/red_offset = Vector2( 0, 0 )
@@ -159,7 +158,7 @@ shader_param/alpha = 1.0
 shader_param/rand_strength = 1.0
 shader_param/affected = Plane( 0, 0, 1, 1 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 length = 1.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -361,8 +360,6 @@ visible = false
 position = Vector2( 5120, 5120 )
 cam_node = NodePath("../Camera2D")
 
-[node name="FoW" parent="." instance=ExtResource( 48 )]
-
 [node name="BG" type="Sprite" parent="."]
 position = Vector2( 5120, 5120 )
 region_enabled = true
@@ -386,7 +383,7 @@ camera = NodePath("../../../Camera2D")
 [node name="Occlusion" type="Sprite" parent="BG"]
 modulate = Color( 0.027451, 0.145098, 0.501961, 1 )
 material = ExtResource( 36 )
-position = Vector2( -128, -128 )
+position = Vector2( -64, -64 )
 scale = Vector2( 128, 128 )
 
 [node name="ScannerBorder" parent="." instance=ExtResource( 46 )]
@@ -672,7 +669,7 @@ __meta__ = {
 visible = false
 
 [node name="ViewportContainer" type="ViewportContainer" parent="Camera-GUI"]
-material = SubResource( 3 )
+material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -695,4 +692,4 @@ render_target_update_mode = 3
 visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Loading-FX/Starfield"]
-anims/popout = SubResource( 4 )
+anims/popout = SubResource( 3 )

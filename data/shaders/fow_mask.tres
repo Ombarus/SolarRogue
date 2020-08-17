@@ -1,10 +1,28 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=2]
 
-[ext_resource path="res://data/shaders/fow_mask.shader" type="Shader" id=1]
 [ext_resource path="res://data/private/textures/gb_fog_tile.png" type="Texture" id=2]
 
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float sampler = 400.0;
+uniform vec3 gray_color = vec3(1.0, 1.0, 1.0);
+uniform sampler2D overlay;
+
+void fragment() {
+	vec2 uv = UV;
+	//uv.x = float(floor(uv.x * sampler)) / sampler;
+	//uv.y = float(floor(uv.y * sampler)) / sampler;
+	vec4 urgba = texture(TEXTURE, UV);
+	vec4 orgba = texture(overlay, uv*10.0);
+
+	//COLOR = urgba;
+	COLOR = vec4(orgba.r, orgba.g, orgba.b, urgba.r * orgba.a);
+	//COLOR = vec4(gray_color.r, gray_color.g, gray_color.b, urgba.r);
+}"
+
 [resource]
-shader = ExtResource( 1 )
+shader = SubResource( 1 )
 shader_param/sampler = 400.0
 shader_param/gray_color = Vector3( 0.14, 0.21, 0.54 )
 shader_param/overlay = ExtResource( 2 )

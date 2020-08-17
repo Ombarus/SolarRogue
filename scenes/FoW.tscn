@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/FoW.gd" type="Script" id=1]
-[ext_resource path="res://data/private/textures/FoW_Autotile.png" type="Texture" id=2]
+[ext_resource path="res://data/private/textures/autotile_scanner_edges_v4.png" type="Texture" id=2]
+[ext_resource path="res://data/fonts/DejaVuSansMono-Bold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://scenes/utility/FPS Counter.tscn" type="PackedScene" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+font_data = ExtResource( 3 )
 
 [node name="FoW" type="Node2D"]
 script = ExtResource( 1 )
@@ -10,5 +16,23 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 7252.25, 2226.17 )
+position = Vector2( 1137.42, 601.896 )
 current = true
+zoom = Vector2( 2, 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+margin_right = 1584.0
+margin_bottom = 141.0
+custom_fonts/font = SubResource( 1 )
+text = "FOW 1 : Generated Mesh"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FPS Counter" parent="CanvasLayer" instance=ExtResource( 4 )]
+margin_left = 3.51617
+margin_top = -295.357
+margin_right = 3.51611
+margin_bottom = -295.357
