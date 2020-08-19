@@ -216,13 +216,18 @@ func _update_scanned_obj(obj, scanner_data):
 		obj.set_attrib("scanner_result.new_in_range." + level_id, player_new_range)
 		BehaviorEvents.emit_signal("OnScannerUpdated", obj)
 		return
+		
+	var last_frame_tiles = obj.get_attrib("scanner_result.scanned_tiles." + level_id, [])
+	obj.set_attrib("scanner_result.previous_scanned_tiles." + level_id, last_frame_tiles)
 	
 	var scanner_explored = get_node("../../ExploredBG")
-	var last_frame_tiles = obj.get_attrib("scanner_result.scanned_tiles." + level_id, [])
+	var fow = get_node("../../FoW")
+	#var last_frame_tiles = obj.get_attrib("scanner_result.scanned_tiles." + level_id, [])
 	for t in last_frame_tiles:
 		if typeof(t) == TYPE_STRING:
 			t = str2var("Vector2" + t)
 		scanner_explored.set_cell(t.x, t.y, 0)
+		#fow.TagTile(t)
 	
 	var cur_in_range = []
 	var offset = Vector2(0,0)
@@ -247,6 +252,7 @@ func _update_scanned_obj(obj, scanner_data):
 				scanned_tiles.push_back(tile)
 				scanner_border.set_cell(tile.x, tile.y, 0)
 				scanner_explored.set_cell(tile.x, tile.y, -1)
+				#fow.TagTile(tile)
 				obj_in_tile = Globals.LevelLoaderRef.GetTile(tile)
 				for o in obj_in_tile:
 					if o == obj:
@@ -261,6 +267,7 @@ func _update_scanned_obj(obj, scanner_data):
 					scanned_tiles.push_back(tile)
 					scanner_border.set_cell(tile.x, tile.y, 0)
 					scanner_explored.set_cell(tile.x, tile.y, -1)
+					#fow.TagTile(tile)
 					obj_in_tile = Globals.LevelLoaderRef.GetTile(tile)
 					for o in obj_in_tile:
 						if o == obj:
@@ -275,6 +282,7 @@ func _update_scanned_obj(obj, scanner_data):
 					scanned_tiles.push_back(tile)
 					scanner_border.set_cell(tile.x, tile.y, 0)
 					scanner_explored.set_cell(tile.x, tile.y, -1)
+					#fow.TagTile(tile)
 					obj_in_tile = Globals.LevelLoaderRef.GetTile(tile)
 					for o in obj_in_tile:
 						if o == obj:
@@ -289,6 +297,7 @@ func _update_scanned_obj(obj, scanner_data):
 					scanned_tiles.push_back(tile)
 					scanner_border.set_cell(tile.x, tile.y, 0)
 					scanner_explored.set_cell(tile.x, tile.y, -1)
+					#fow.TagTile(tile)
 					obj_in_tile = Globals.LevelLoaderRef.GetTile(tile)
 					for o in obj_in_tile:
 						if o == obj:

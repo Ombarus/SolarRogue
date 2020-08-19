@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=2]
+[gd_scene load_steps=87 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/private/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -47,6 +47,7 @@
 [ext_resource path="res://scripts/Behaviors/EffectsBehavior.gd" type="Script" id=45]
 [ext_resource path="res://scenes/Scanner_border.tscn" type="PackedScene" id=46]
 [ext_resource path="res://scenes/tileset_source/scanner_border/explored_tiles.tres" type="TileSet" id=47]
+[ext_resource path="res://scenes/FoW.tscn" type="PackedScene" id=48]
 [ext_resource path="res://scenes/GUI/TargettingHUD.tscn" type="PackedScene" id=51]
 [ext_resource path="res://scenes/GUI/Dialogs/SelectableTarget.tscn" type="PackedScene" id=52]
 [ext_resource path="res://scenes/GUI/Dialogs/Options.tscn" type="PackedScene" id=53]
@@ -360,6 +361,9 @@ visible = false
 position = Vector2( 5120, 5120 )
 cam_node = NodePath("../Camera2D")
 
+[node name="FoW" parent="." instance=ExtResource( 48 )]
+position = Vector2( -64, -64 )
+
 [node name="BG" type="Sprite" parent="."]
 position = Vector2( 5120, 5120 )
 region_enabled = true
@@ -387,11 +391,13 @@ position = Vector2( -64, -64 )
 scale = Vector2( 128, 128 )
 
 [node name="ScannerBorder" parent="." instance=ExtResource( 46 )]
+visible = false
 position = Vector2( -64, -64 )
 cell_quadrant_size = 5
 tile_data = PoolIntArray( 262153, 0, 1, 262154, 0, 65536, 262155, 0, 65536, 262156, 0, 2, 327689, 0, 131073, 327690, 0, 196619, 327691, 0, 196619, 327692, 0, 131074, 393223, 0, 1, 393224, 0, 65536, 393225, 0, 65540, 393226, 0, 196619, 393227, 0, 196619, 393228, 0, 131074, 458759, 0, 131073, 458760, 0, 196619, 458761, 0, 196619, 458762, 0, 196619, 458763, 0, 3, 458764, 0, 65538, 524294, 0, 196608, 524295, 0, 65544, 524296, 0, 4, 524297, 0, 196619, 524298, 0, 3, 524299, 0, 65538, 589832, 0, 65537, 589833, 0, 196618, 589834, 0, 65538, 655369, 0, 131077, 4259907, 0, 5, 4325443, 0, 131077 )
 
 [node name="ExploredBG" type="TileMap" parent="."]
+visible = false
 modulate = Color( 0, 0.00784314, 0.0745098, 0.352941 )
 position = Vector2( -64, -64 )
 tile_set = ExtResource( 47 )

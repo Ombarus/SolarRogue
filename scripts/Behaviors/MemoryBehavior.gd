@@ -121,8 +121,13 @@ func _update_occlusion_texture():
 	_occluder_ref.texture = imageTexture
 	imageTexture.resource_name = "The created texture!"
 	
+	if tile_memory != null:
+		var fow = get_node("../../FoW")
+		fow.UpdateDirtyTiles(tile_memory)
+	
+	
 
-func _tag_tile(tile):
+func _tag_tile(tile, val = 0.0):
 	if tile.x >= Globals.LevelLoaderRef.levelSize.x or tile.y >= Globals.LevelLoaderRef.levelSize.y or tile.x < 0 or tile.y < 0:
 		return
 	
@@ -143,17 +148,25 @@ func _tag_tile(tile):
 					tile_memory.push_back(255.0)
 					tile_memory.push_back(255.0)
 				
-	tile_memory[(((tile.y+1) * (Globals.LevelLoaderRef.levelSize.x+2)) + (tile.x+1))*4+0] = 0.0
-	tile_memory[(((tile.y+1) * (Globals.LevelLoaderRef.levelSize.x+2)) + (tile.x+1))*4+1] = 0.0
-	tile_memory[(((tile.y+1) * (Globals.LevelLoaderRef.levelSize.x+2)) + (tile.x+1))*4+2] = 0.0
-	tile_memory[(((tile.y+1) * (Globals.LevelLoaderRef.levelSize.x+2)) + (tile.x+1))*4+3] = 0.0
+	tile_memory[(((tile.y+1) * (Globals.LevelLoaderRef.levelSize.x+2)) + (tile.x+1))*4+0] = val
+	tile_memory[(((tile.y+1) * (Globals.LevelLoaderRef.levelSize.x+2)) + (tile.x+1))*4+1] = val
+	tile_memory[(((tile.y+1) * (Globals.LevelLoaderRef.levelSize.x+2)) + (tile.x+1))*4+2] = val
+	tile_memory[(((tile.y+1) * (Globals.LevelLoaderRef.levelSize.x+2)) + (tile.x+1))*4+3] = val
 	_playerNode.set_attrib("memory." + level_id + ".tiles", tile_memory)
 
 func _update_occlusion(o):
 	var level_id = Globals.LevelLoaderRef.GetLevelID()
 	var scanned_tiles = o.get_attrib("scanner_result.scanned_tiles." + level_id, [])
+	var prev_scanned_tiles = o.get_attrib("scanner_result.previous_scanned_tiles." + level_id, [])
+	
+	for t in prev_scanned_tiles:
+		# Storage type bug in the savefile...
+		if typeof(t) == TYPE_STRING:
+			t = str2var("Vector2" + t)
+		_tag_tile(t, 120.0) # explored, grayed-out
 	for t in scanned_tiles:
-		_tag_tile(t)
+		_tag_tile(t) # "lit" tile
+		
 	_update_occlusion_texture()
 	
 	

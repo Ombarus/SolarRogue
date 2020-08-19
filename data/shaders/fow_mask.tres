@@ -15,6 +15,8 @@ void fragment() {
 	//uv.y = float(floor(uv.y * sampler)) / sampler;
 	vec4 urgba = texture(TEXTURE, UV);
 	vec4 orgba = texture(overlay, uv*10.0);
+	
+	urgba.r = smoothstep(0.5, 1.0, urgba.r);
 
 	//COLOR = urgba;
 	COLOR = vec4(orgba.r, orgba.g, orgba.b, urgba.r * orgba.a);
