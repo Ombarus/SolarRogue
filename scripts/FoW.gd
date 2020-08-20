@@ -4,6 +4,7 @@ extends Node2D
 export(bool) var show_in_editor = false setget reset_set, reset_get
 
 var _arrays := []
+var _uv_array := []
 var _dirty_block = []
 
 
@@ -60,17 +61,21 @@ func UpdateDirtyTiles(tile_memory : Array):
 		
 	var upper_left : Vector2 = _dirty_block[0]
 	var lower_right : Vector2 = _dirty_block[1]
+	#var uv_array = _arrays[Mesh.ARRAY_TEX_UV]
+	
+	#print("Updating dirty tiles in the range : %s to %s" % [str(upper_left), str(lower_right)])
 	
 	for y in range(upper_left.y - 1, lower_right.y + 2):
-		if y < 0 or y > levelSize.y:
+		if y < 0 or y >= levelSize.y:
 			continue
 		for x in range(upper_left.x - 1, lower_right.x + 2):
 			var cur_tile := Vector2(x, y)
-			if cur_tile.x < 0 or cur_tile.y < 0 or cur_tile.x > levelSize.x or cur_tile.y > levelSize.y:
+			if cur_tile.x < 0 or cur_tile.y < 0 or cur_tile.x >= levelSize.x or cur_tile.y >= levelSize.y:
 				continue
 			_update_tile(tile_memory, cur_tile)
 			
-		
+	_arrays[Mesh.ARRAY_TEX_UV] = PoolVector2Array(_uv_array)
+	
 	var _mesh := ArrayMesh.new()
 	_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, _arrays)
 	var mesh_instance = get_node("MeshInstance2D")
@@ -89,15 +94,15 @@ func _update_tile(tile_memory : Array, tile : Vector2):
 	#tile_memory[(((tile.y+1) * (Globals.LevelLoaderRef.levelSize.x+2)) + (tile.x+1))*4+3] = 0.0
 	
 	#TODO: deal with boundaries!
-	var lit : bool = _get_memory(tile_memory, tile.x, tile.y) == 0.0
-	var l_lit : bool = _get_memory(tile_memory, tile.x - 1, tile.y) == 0.0
-	var r_lit : bool = _get_memory(tile_memory, tile.x + 1, tile.y) == 0.0
-	var u_lit : bool = _get_memory(tile_memory, tile.x, tile.y - 1) == 0.0
-	var d_lit : bool = _get_memory(tile_memory, tile.x, tile.y + 1) == 0.0
-	var dl_lit : bool = _get_memory(tile_memory, tile.x - 1, tile.y + 1) == 0.0
-	var ul_lit : bool = _get_memory(tile_memory, tile.x - 1, tile.y - 1) == 0.0
-	var ur_lit : bool = _get_memory(tile_memory, tile.x + 1, tile.y - 1) == 0.0
-	var dr_lit : bool = _get_memory(tile_memory, tile.x + 1, tile.y + 1) == 0.0
+	var lit : bool = tile_memory[_get_memory(tile.x, tile.y)] == 0.0
+	var l_lit : bool = tile_memory[_get_memory(tile.x - 1, tile.y)] == 0.0
+	var r_lit : bool = tile_memory[_get_memory(tile.x + 1, tile.y)] == 0.0
+	var u_lit : bool = tile_memory[_get_memory(tile.x, tile.y - 1)] == 0.0
+	var d_lit : bool = tile_memory[_get_memory(tile.x, tile.y + 1)] == 0.0
+	var dl_lit : bool = tile_memory[_get_memory(tile.x - 1, tile.y + 1)] == 0.0
+	var ul_lit : bool = tile_memory[_get_memory(tile.x - 1, tile.y - 1)] == 0.0
+	var ur_lit : bool = tile_memory[_get_memory(tile.x + 1, tile.y - 1)] == 0.0
+	var dr_lit : bool = tile_memory[_get_memory(tile.x + 1, tile.y + 1)] == 0.0
 	
 	var is_lit : bool = lit
 	var is_plain : bool = not lit && not l_lit and not r_lit and not u_lit and not d_lit
@@ -115,108 +120,106 @@ func _update_tile(tile_memory : Array, tile : Vector2):
 	var is_corner_up_right : bool = not lit && ur_lit && not r_lit && not u_lit
 	
 	var index_base = _x_y_to_uv_index(tile)
-	var uv_array = _arrays[Mesh.ARRAY_TEX_UV]
+	#var uv_array = _arrays[Mesh.ARRAY_TEX_UV]
 	
 	if is_lit:
-		uv_array[index_base + 0] = Vector2(uv_lit[1].x, uv_lit[0].y) # upper_left
-		uv_array[index_base + 1] = uv_lit[0] # lower_left
-		uv_array[index_base + 2] = Vector2(uv_lit[0].x, uv_lit[1].y) # lower_right
-		uv_array[index_base + 3] = uv_lit[1] # upper_right
+		_uv_array[index_base + 0] = Vector2(uv_lit[1].x, uv_lit[0].y) # upper_left
+		_uv_array[index_base + 1] = uv_lit[0] # lower_left
+		_uv_array[index_base + 2] = Vector2(uv_lit[0].x, uv_lit[1].y) # lower_right
+		_uv_array[index_base + 3] = uv_lit[1] # upper_right
 	elif is_corner_down_left:
-		uv_array[index_base + 0] = Vector2(uv_corner_down_left[0].x, uv_corner_down_left[1].y) # lower_right
-		uv_array[index_base + 1] = uv_corner_down_left[0] # lower_left
-		uv_array[index_base + 2] = Vector2(uv_corner_down_left[1].x, uv_corner_down_left[0].y) # upper_left
-		uv_array[index_base + 3] = uv_corner_down_left[1] # upper_right
+		_uv_array[index_base + 0] = Vector2(uv_corner_down_left[0].x, uv_corner_down_left[1].y) # lower_right
+		_uv_array[index_base + 1] = uv_corner_down_left[0] # lower_left
+		_uv_array[index_base + 2] = Vector2(uv_corner_down_left[1].x, uv_corner_down_left[0].y) # upper_left
+		_uv_array[index_base + 3] = uv_corner_down_left[1] # upper_right
 	elif is_corner_up_left:
-		uv_array[index_base + 0] = Vector2(uv_corner_up_left[0].x, uv_corner_up_left[1].y) # lower_right
-		uv_array[index_base + 1] = uv_corner_up_left[0] # lower_left
-		uv_array[index_base + 2] = Vector2(uv_corner_up_left[1].x, uv_corner_up_left[0].y) # upper_left
-		uv_array[index_base + 3] = uv_corner_up_left[1] # upper_right
+		_uv_array[index_base + 0] = Vector2(uv_corner_up_left[0].x, uv_corner_up_left[1].y) # lower_right
+		_uv_array[index_base + 1] = uv_corner_up_left[0] # lower_left
+		_uv_array[index_base + 2] = Vector2(uv_corner_up_left[1].x, uv_corner_up_left[0].y) # upper_left
+		_uv_array[index_base + 3] = uv_corner_up_left[1] # upper_right
 	elif is_corner_down_right:
 		# FLIPPED
-		uv_array[index_base + 0] = uv_corner_down_left[1] # upper_right
-		uv_array[index_base + 1] = Vector2(uv_corner_down_left[1].x, uv_corner_down_left[0].y) # upper_left
-		uv_array[index_base + 2] = uv_corner_down_left[0] # lower_left
-		uv_array[index_base + 3] = Vector2(uv_corner_down_left[0].x, uv_corner_down_left[1].y) # lower_right
+		_uv_array[index_base + 0] = uv_corner_down_left[1] # upper_right
+		_uv_array[index_base + 1] = Vector2(uv_corner_down_left[1].x, uv_corner_down_left[0].y) # upper_left
+		_uv_array[index_base + 2] = uv_corner_down_left[0] # lower_left
+		_uv_array[index_base + 3] = Vector2(uv_corner_down_left[0].x, uv_corner_down_left[1].y) # lower_right
 	elif is_corner_up_right:
 		# FLIPPED
-		uv_array[index_base + 0] = uv_corner_up_left[1] # upper_right
-		uv_array[index_base + 1] = Vector2(uv_corner_up_left[1].x, uv_corner_up_left[0].y) # upper_left
-		uv_array[index_base + 2] = uv_corner_up_left[0] # lower_left
-		uv_array[index_base + 3] = Vector2(uv_corner_up_left[0].x, uv_corner_up_left[1].y) # lower_right
+		_uv_array[index_base + 0] = uv_corner_up_left[1] # upper_right
+		_uv_array[index_base + 1] = Vector2(uv_corner_up_left[1].x, uv_corner_up_left[0].y) # upper_left
+		_uv_array[index_base + 2] = uv_corner_up_left[0] # lower_left
+		_uv_array[index_base + 3] = Vector2(uv_corner_up_left[0].x, uv_corner_up_left[1].y) # lower_right
 	elif is_plain:
-		uv_array[index_base + 0] = Vector2(uv_explored_plain[0].x, uv_explored_plain[1].y) # upper_left
-		uv_array[index_base + 1] = uv_explored_plain[0] # lower_left
-		uv_array[index_base + 2] = Vector2(uv_explored_plain[1].x, uv_explored_plain[0].y) # lower_right
-		uv_array[index_base + 3] = uv_explored_plain[1] # upper_right
+		_uv_array[index_base + 0] = Vector2(uv_explored_plain[0].x, uv_explored_plain[1].y) # upper_left
+		_uv_array[index_base + 1] = uv_explored_plain[0] # lower_left
+		_uv_array[index_base + 2] = Vector2(uv_explored_plain[1].x, uv_explored_plain[0].y) # lower_right
+		_uv_array[index_base + 3] = uv_explored_plain[1] # upper_right
 	elif is_l_down_left:
-		uv_array[index_base + 0] = Vector2(uv_L_down_left[0].x, uv_L_down_left[1].y) # upper_left
-		uv_array[index_base + 1] = uv_L_down_left[0] # lower_left
-		uv_array[index_base + 2] = Vector2(uv_L_down_left[1].x, uv_L_down_left[0].y) # lower_right
-		uv_array[index_base + 3] = uv_L_down_left[1] # upper_right
+		_uv_array[index_base + 0] = Vector2(uv_L_down_left[0].x, uv_L_down_left[1].y) # upper_left
+		_uv_array[index_base + 1] = uv_L_down_left[0] # lower_left
+		_uv_array[index_base + 2] = Vector2(uv_L_down_left[1].x, uv_L_down_left[0].y) # lower_right
+		_uv_array[index_base + 3] = uv_L_down_left[1] # upper_right
 	elif is_l_down_right:
 		# Flipped X
-		uv_array[index_base + 0] = uv_L_down_left[1] # upper_right
-		uv_array[index_base + 1] = Vector2(uv_L_down_left[1].x, uv_L_down_left[0].y) # lower_right
-		uv_array[index_base + 2] = uv_L_down_left[0] # lower_left
-		uv_array[index_base + 3] = Vector2(uv_L_down_left[0].x, uv_L_down_left[1].y) # upper_left
+		_uv_array[index_base + 0] = uv_L_down_left[1] # upper_right
+		_uv_array[index_base + 1] = Vector2(uv_L_down_left[1].x, uv_L_down_left[0].y) # lower_right
+		_uv_array[index_base + 2] = uv_L_down_left[0] # lower_left
+		_uv_array[index_base + 3] = Vector2(uv_L_down_left[0].x, uv_L_down_left[1].y) # upper_left
 	elif is_l_up_left:
-		uv_array[index_base + 0] = Vector2(uv_L_up_left[0].x, uv_L_up_left[1].y) # upper_left
-		uv_array[index_base + 1] = uv_L_up_left[0] # lower_left
-		uv_array[index_base + 2] = Vector2(uv_L_up_left[1].x, uv_L_up_left[0].y) # lower_right
-		uv_array[index_base + 3] = uv_L_up_left[1] # upper_right
+		_uv_array[index_base + 0] = Vector2(uv_L_up_left[0].x, uv_L_up_left[1].y) # upper_left
+		_uv_array[index_base + 1] = uv_L_up_left[0] # lower_left
+		_uv_array[index_base + 2] = Vector2(uv_L_up_left[1].x, uv_L_up_left[0].y) # lower_right
+		_uv_array[index_base + 3] = uv_L_up_left[1] # upper_right
 	elif is_l_up_right:
 		# Flipped X
-		uv_array[index_base + 0] = uv_L_up_left[1] # upper_right
-		uv_array[index_base + 1] = Vector2(uv_L_up_left[1].x, uv_L_up_left[0].y) # lower_right
-		uv_array[index_base + 2] = uv_L_up_left[0] # lower_left
-		uv_array[index_base + 3] = Vector2(uv_L_up_left[0].x, uv_L_up_left[1].y) # upper_left
+		_uv_array[index_base + 0] = uv_L_up_left[1] # upper_right
+		_uv_array[index_base + 1] = Vector2(uv_L_up_left[1].x, uv_L_up_left[0].y) # lower_right
+		_uv_array[index_base + 2] = uv_L_up_left[0] # lower_left
+		_uv_array[index_base + 3] = Vector2(uv_L_up_left[0].x, uv_L_up_left[1].y) # upper_left
 	elif is_side_left:
-		uv_array[index_base + 0] = Vector2(uv_side_left[0].x, uv_side_left[1].y) # upper_left
-		uv_array[index_base + 1] = uv_side_left[0] # lower_left
-		uv_array[index_base + 2] = Vector2(uv_side_left[1].x, uv_side_left[0].y) # lower_right
-		uv_array[index_base + 3] = uv_side_left[1] # upper_right
+		_uv_array[index_base + 0] = Vector2(uv_side_left[0].x, uv_side_left[1].y) # upper_left
+		_uv_array[index_base + 1] = uv_side_left[0] # lower_left
+		_uv_array[index_base + 2] = Vector2(uv_side_left[1].x, uv_side_left[0].y) # lower_right
+		_uv_array[index_base + 3] = uv_side_left[1] # upper_right
 	elif is_side_right:
 		# Flipped X
-		uv_array[index_base + 0] = uv_side_left[1] # upper_right
-		uv_array[index_base + 1] = Vector2(uv_side_left[1].x, uv_side_left[0].y) # lower_right
-		uv_array[index_base + 2] = uv_side_left[0] # lower_left
-		uv_array[index_base + 3] = Vector2(uv_side_left[0].x, uv_side_left[1].y) # upper_left
+		_uv_array[index_base + 0] = uv_side_left[1] # upper_right
+		_uv_array[index_base + 1] = Vector2(uv_side_left[1].x, uv_side_left[0].y) # lower_right
+		_uv_array[index_base + 2] = uv_side_left[0] # lower_left
+		_uv_array[index_base + 3] = Vector2(uv_side_left[0].x, uv_side_left[1].y) # upper_left
 	elif is_side_up:
-		uv_array[index_base + 0] = Vector2(uv_up[0].x, uv_up[1].y) # upper_left
-		uv_array[index_base + 1] = uv_up[0] # lower_left
-		uv_array[index_base + 2] = Vector2(uv_up[1].x, uv_up[0].y) # lower_right
-		uv_array[index_base + 3] = uv_up[1] # upper_right
+		_uv_array[index_base + 0] = Vector2(uv_up[0].x, uv_up[1].y) # upper_left
+		_uv_array[index_base + 1] = uv_up[0] # lower_left
+		_uv_array[index_base + 2] = Vector2(uv_up[1].x, uv_up[0].y) # lower_right
+		_uv_array[index_base + 3] = uv_up[1] # upper_right
 	elif is_side_down:
-		uv_array[index_base + 0] = Vector2(uv_down[0].x, uv_down[1].y) # upper_left
-		uv_array[index_base + 1] = uv_down[0] # lower_left
-		uv_array[index_base + 2] = Vector2(uv_down[1].x, uv_down[0].y) # lower_right
-		uv_array[index_base + 3] = uv_down[1] # upper_right
+		_uv_array[index_base + 0] = Vector2(uv_down[0].x, uv_down[1].y) # upper_left
+		_uv_array[index_base + 1] = uv_down[0] # lower_left
+		_uv_array[index_base + 2] = Vector2(uv_down[1].x, uv_down[0].y) # lower_right
+		_uv_array[index_base + 3] = uv_down[1] # upper_right
 	else:
-		uv_array[index_base + 0] = Vector2(uv_missing[0].x, uv_missing[1].y) # upper_left
-		uv_array[index_base + 1] = uv_missing[0] # lower_left
-		uv_array[index_base + 2] = Vector2(uv_missing[1].x, uv_missing[0].y) # lower_right
-		uv_array[index_base + 3] = uv_missing[1] # upper_right
+		_uv_array[index_base + 0] = Vector2(uv_missing[0].x, uv_missing[1].y) # upper_left
+		_uv_array[index_base + 1] = uv_missing[0] # lower_left
+		_uv_array[index_base + 2] = Vector2(uv_missing[1].x, uv_missing[0].y) # lower_right
+		_uv_array[index_base + 3] = uv_missing[1] # upper_right
 		
-	_arrays[Mesh.ARRAY_TEX_UV] = uv_array
 
 func _clear():
 	get_node("MeshInstance2D").mesh = null
 
 func _x_y_to_memory_index(x, y):
-		
 	return (((y+1) * (levelSize.x+2)) + (x+1))*4+0
 	
-func _get_memory(tile_memory, x, y):
+func _get_memory(x, y):
 		
 	if x < 0 or y < 0 or x > levelSize.x or y > levelSize.y:
 		return 255.0
 		
-	var index_base = _x_y_to_memory_index(x, y)
-	if index_base < 0 or index_base > tile_memory.size():
-		return 255.0
+	#var index_base = 
+	#if index_base < 0 or index_base >= tile_memory.size():
+	#	return 255.0
 	
-	return tile_memory[index_base]
+	return ((((y+1) * (levelSize.x+2)) + (x+1))*4)
 	
 func _x_y_to_uv_index(tile):
 		
@@ -247,15 +250,17 @@ func _ready():
 	
 	_arrays.resize(Mesh.ARRAY_MAX)
 	var normal_array := PoolVector3Array()
-	var uv_array := PoolVector2Array()
+	#var uv_array := PoolVector2Array()
 	var vertex_array := PoolVector3Array()
 	var index_array := PoolIntArray()
+	_uv_array = []
 		
 	var num_vertices : int = levelSize.x * levelSize.y * 4
 	var num_indices : int = levelSize.x * levelSize.y * 6
 	
 	normal_array.resize(num_vertices)
-	uv_array.resize(num_vertices)
+	_uv_array.resize(num_vertices)
+	#uv_array.resize(num_vertices)
 	vertex_array.resize(num_vertices)
 	index_array.resize(num_indices)
 	
@@ -268,10 +273,10 @@ func _ready():
 			var index_base = ((r*levelSize.x) + c) * 4
 			var indice_index_base = ((r*levelSize.x) + c) * 6
 			
-			uv_array[index_base + 0] = Vector2(uv_explored_plain[0].x, uv_explored_plain[1].y) # upper_left
-			uv_array[index_base + 1] = uv_explored_plain[0] # lower_left
-			uv_array[index_base + 2] = Vector2(uv_explored_plain[1].x, uv_explored_plain[0].y) # lower_right
-			uv_array[index_base + 3] = uv_explored_plain[1] # upper_right
+			_uv_array[index_base + 0] = Vector2(uv_explored_plain[0].x, uv_explored_plain[1].y) # upper_left
+			_uv_array[index_base + 1] = uv_explored_plain[0] # lower_left
+			_uv_array[index_base + 2] = Vector2(uv_explored_plain[1].x, uv_explored_plain[0].y) # lower_right
+			_uv_array[index_base + 3] = uv_explored_plain[1] # upper_right
 			
 			normal_array[index_base + 0] = Vector3(0, 0, 1)
 			vertex_array[index_base + 0] = lower_left
@@ -292,9 +297,11 @@ func _ready():
 			index_array[indice_index_base + 4] = index_base + 3
 			index_array[indice_index_base + 5] = index_base + 0
 
+	# PoolXArray are copy-on-write, so if I'm planning to modify it in a loop I should do it with a Array reference
+	# and only set the PoolXArray of UVs once per frame!
 	_arrays[Mesh.ARRAY_VERTEX] = vertex_array
 	_arrays[Mesh.ARRAY_NORMAL] = normal_array
-	_arrays[Mesh.ARRAY_TEX_UV] = uv_array
+	_arrays[Mesh.ARRAY_TEX_UV] = PoolVector2Array(_uv_array)
 	_arrays[Mesh.ARRAY_INDEX] = index_array
 	
 	#yield(get_tree(), "idle_frame")

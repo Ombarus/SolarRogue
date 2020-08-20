@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/utility/FPS Counter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://data/fonts/DejaVuSansMono-Bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scripts/tests/FPS Counter.gd" type="Script" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=4]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+
+void fragment() {
+	//vec4 c = texture(TEXTURE, UV);
+	float idx = floor(UV.x * 80.0);
+	float idy = floor(UV.y * 80.0);
+	vec2 uv = vec2(idx / 80.0, idy / 80.0);
+	float a = texture(TEXTURE, uv).a;
+	
+	//COLOR = c;
+	COLOR = vec4(mod(idx, 2.0), mod(idy, 2.0), 0.0, floor(a)+0.1);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 50
+font_data = ExtResource( 2 )
+
+[node name="DEBUG" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 1137.42, 601.896 )
+zoom = Vector2( 2, 2 )
+
+[node name="memory_visual" type="Sprite" parent="."]
+material = SubResource( 2 )
+position = Vector2( 5120, 5120 )
+scale = Vector2( 128, 128 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+visible = false
+margin_right = 1584.0
+margin_bottom = 141.0
+custom_fonts/font = SubResource( 3 )
+text = "FOW 1 : Generated Mesh"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FPS Counter" type="Control" parent="CanvasLayer" instance=ExtResource( 1 )]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.51617
+margin_top = -295.357
+margin_right = 3.51611
+margin_bottom = -295.357
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="origin_marker" type="Sprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 4 )

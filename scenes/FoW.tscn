@@ -1,32 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scripts/FoW.gd" type="Script" id=1]
 [ext_resource path="res://data/private/textures/autotile_scanner_edges_v4.png" type="Texture" id=2]
-[ext_resource path="res://data/fonts/DejaVuSansMono-Bold.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://scenes/utility/FPS Counter.tscn" type="PackedScene" id=4]
-[ext_resource path="res://icon.png" type="Texture" id=5]
-
-[sub_resource type="Shader" id=2]
-code = "shader_type canvas_item;
-
-
-void fragment() {
-	//vec4 c = texture(TEXTURE, UV);
-	float idx = floor(UV.x * 80.0);
-	float idy = floor(UV.y * 80.0);
-	vec2 uv = vec2(idx / 80.0, idy / 80.0);
-	float a = texture(TEXTURE, uv).a;
-	
-	//COLOR = c;
-	COLOR = vec4(mod(idx, 2.0), mod(idy, 2.0), 0.0, floor(a)+0.1);
-}"
-
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
-
-[sub_resource type="DynamicFont" id=1]
-size = 50
-font_data = ExtResource( 3 )
 
 [node name="FoW" type="Node2D"]
 script = ExtResource( 1 )
@@ -34,38 +9,3 @@ script = ExtResource( 1 )
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 position = Vector2( 64, 64 )
 texture = ExtResource( 2 )
-
-[node name="DEBUG" type="Node2D" parent="."]
-
-[node name="Camera2D" type="Camera2D" parent="DEBUG"]
-position = Vector2( 1137.42, 601.896 )
-current = true
-zoom = Vector2( 2, 2 )
-
-[node name="memory_visual" type="Sprite" parent="DEBUG"]
-material = SubResource( 3 )
-position = Vector2( 5120, 5120 )
-scale = Vector2( 128, 128 )
-
-[node name="CanvasLayer" type="CanvasLayer" parent="DEBUG"]
-
-[node name="Label" type="Label" parent="DEBUG/CanvasLayer"]
-visible = false
-margin_right = 1584.0
-margin_bottom = 141.0
-custom_fonts/font = SubResource( 1 )
-text = "FOW 1 : Generated Mesh"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="FPS Counter" parent="DEBUG/CanvasLayer" instance=ExtResource( 4 )]
-visible = false
-margin_left = 3.51617
-margin_top = -295.357
-margin_right = 3.51611
-margin_bottom = -295.357
-
-[node name="origin_marker" type="Sprite" parent="DEBUG"]
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 5 )

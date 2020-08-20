@@ -67,22 +67,11 @@ func OnMountAdded_Callback(obj, slot, src, modified_attributes):
 func OnMountRemoved_Callback(obj, slot, src, modified_attributes):
 	if not "scanner" in slot:
 		return
-		
-	var scanner_data = _node_id_scanner[obj.get_attrib("unique_id")]
-	if scanner_data != null and Globals.is_(Globals.get_data(scanner_data, "scanning.fully_mapped"), true):
-		var scanner_explored = get_node("../../ExploredBG")
-		for x in range(Globals.LevelLoaderRef.levelSize.x):
-			for y in range(Globals.LevelLoaderRef.levelSize.y):
-				scanner_explored.set_cell(x,  y, 0)
-		
+
 	_node_id_scanner.erase(obj.get_attrib("unique_id"))
 	_up_to_date = false
 	
 func OnLevelLoaded_Callback():
-	var scanner_explored = get_node("../../ExploredBG")
-	for x in range(Globals.LevelLoaderRef.levelSize.x):
-		for y in range(Globals.LevelLoaderRef.levelSize.y):
-			scanner_explored.set_cell(x,  y, 0)
 	_up_to_date = false
 
 func OnPositionUpdated_Callback(obj):
@@ -150,8 +139,6 @@ func do_anomaly_detection(obj):
 
 func special_update_ultimate(obj, scanner_data):
 	if scanner_data != null and Globals.is_(Globals.get_data(scanner_data, "scanning.fully_mapped"), true):
-		var scanner_border = get_node("../../ScannerBorder")
-		scanner_border.clear()
 		var level_id : String = Globals.LevelLoaderRef.GetLevelID()
 		var old_range : Array = obj.get_attrib("scanner_result.cur_in_range." + level_id, [])
 		var cur_in_range := []
@@ -220,20 +207,9 @@ func _update_scanned_obj(obj, scanner_data):
 	var last_frame_tiles = obj.get_attrib("scanner_result.scanned_tiles." + level_id, [])
 	obj.set_attrib("scanner_result.previous_scanned_tiles." + level_id, last_frame_tiles)
 	
-	var scanner_explored = get_node("../../ExploredBG")
-	var fow = get_node("../../FoW")
-	#var last_frame_tiles = obj.get_attrib("scanner_result.scanned_tiles." + level_id, [])
-	for t in last_frame_tiles:
-		if typeof(t) == TYPE_STRING:
-			t = str2var("Vector2" + t)
-		scanner_explored.set_cell(t.x, t.y, 0)
-		#fow.TagTile(t)
-	
 	var cur_in_range = []
 	var offset = Vector2(0,0)
 	var scanned_tiles = []
-	var scanner_border = get_node("../../ScannerBorder")
-	scanner_border.clear()
 	
 	while round(offset.length()) <= (scan_radius+1):
 		while round(offset.length()) <= (scan_radius+1):
@@ -250,9 +226,6 @@ func _update_scanned_obj(obj, scanner_data):
 				pass #obj.visible = false
 			else:
 				scanned_tiles.push_back(tile)
-				scanner_border.set_cell(tile.x, tile.y, 0)
-				scanner_explored.set_cell(tile.x, tile.y, -1)
-				#fow.TagTile(tile)
 				obj_in_tile = Globals.LevelLoaderRef.GetTile(tile)
 				for o in obj_in_tile:
 					if o == obj:
@@ -265,9 +238,6 @@ func _update_scanned_obj(obj, scanner_data):
 					pass #obj.visible = false
 				else:
 					scanned_tiles.push_back(tile)
-					scanner_border.set_cell(tile.x, tile.y, 0)
-					scanner_explored.set_cell(tile.x, tile.y, -1)
-					#fow.TagTile(tile)
 					obj_in_tile = Globals.LevelLoaderRef.GetTile(tile)
 					for o in obj_in_tile:
 						if o == obj:
@@ -280,9 +250,6 @@ func _update_scanned_obj(obj, scanner_data):
 					pass #obj.visible = false
 				else:
 					scanned_tiles.push_back(tile)
-					scanner_border.set_cell(tile.x, tile.y, 0)
-					scanner_explored.set_cell(tile.x, tile.y, -1)
-					#fow.TagTile(tile)
 					obj_in_tile = Globals.LevelLoaderRef.GetTile(tile)
 					for o in obj_in_tile:
 						if o == obj:
@@ -295,9 +262,6 @@ func _update_scanned_obj(obj, scanner_data):
 					pass #obj.visible = false
 				else:
 					scanned_tiles.push_back(tile)
-					scanner_border.set_cell(tile.x, tile.y, 0)
-					scanner_explored.set_cell(tile.x, tile.y, -1)
-					#fow.TagTile(tile)
 					obj_in_tile = Globals.LevelLoaderRef.GetTile(tile)
 					for o in obj_in_tile:
 						if o == obj:
@@ -307,8 +271,6 @@ func _update_scanned_obj(obj, scanner_data):
 			offset.y += 1
 		offset.y = 0
 		offset.x += 1
-
-	scanner_border.update_bitmask_region(Vector2(0,0), Vector2(80,80))
 
 	var unkown_objects2 = []
 	var partial_type2 = Globals.get_data(scanner_data, "scanning.full_reveal_type", [])

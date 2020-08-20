@@ -4,9 +4,9 @@ export(NodePath) var Occluder
 export(NodePath) var ExploredBG
 
 var _playerNode = null
+var _dirty_occlusion := true
 var default_occluder_color : Vector3
 onready var _occluder_ref = get_node(Occluder)
-onready var _explored_ref : TileMap = get_node(ExploredBG)
 
 func _ready():
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
@@ -14,10 +14,14 @@ func _ready():
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_Callback")
 	BehaviorEvents.connect("OnMountAdded", self, "OnMountAdded_Callback")
+	BehaviorEvents.connect("OnPositionUpdated", self, "OnPositionUpdated_Callback")
 	
 	if _occluder_ref != null:
 		default_occluder_color = _occluder_ref.material.get_shader_param("gray_color")
 
+func OnPositionUpdated_Callback(obj):
+	if obj.get_attrib("type") == "player":
+		_dirty_occlusion = true
 
 func OnMountAdded_Callback(obj, slot, src, modified_attributes):
 	if not "scanner" in slot:
@@ -62,6 +66,7 @@ func OnRequestObjectUnload_Callback(obj):
 		BehaviorEvents.disconnect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
 
 func ExecuteFullSweep():
+	_dirty_occlusion = true
 	var level_id = Globals.LevelLoaderRef.GetLevelID()
 	var player_scan = _playerNode.get_attrib("scanner_result.cur_in_range." + level_id)
 	var known_anomalies = _playerNode.get_attrib("scanner_result.known_anomalies." + level_id, {})
@@ -71,9 +76,13 @@ func ExecuteFullSweep():
 	for s_data in scanners:
 		if Globals.is_(Globals.get_data(s_data, "scanning.fully_mapped"), true):
 			is_ultimate = true
-			_explored_ref.clear()
 			break
 		
+	var fow = get_node("../../BG/FoW")
+	if is_ultimate:
+		fow.visible = false
+	else:
+		fow.visible = true
 		
 	for key in Globals.LevelLoaderRef.objById:
 		var obj = Globals.LevelLoaderRef.objById[key]
@@ -94,14 +103,14 @@ func ExecuteFullSweep():
 		else:
 			obj.visible = false
 		if disable_fow:
-			_explored_ref.clear()
 			var tile_memory : Array = []
 			for x in range(Globals.LevelLoaderRef.levelSize.x + 2):
 				for y in range(Globals.LevelLoaderRef.levelSize.y + 2):
-					tile_memory.push_back(0.0)
-					tile_memory.push_back(0.0)
-					tile_memory.push_back(0.0)
-					tile_memory.push_back(0.0)
+					# tag as "explored" instead of "lit" for when we re-enable fow
+					tile_memory.push_back(120.0)
+					tile_memory.push_back(120.0)
+					tile_memory.push_back(120.0)
+					tile_memory.push_back(120.0)
 			_playerNode.set_attrib("memory." + level_id + ".tiles", tile_memory)
 			_update_occlusion_texture()
 
@@ -122,17 +131,32 @@ func _update_occlusion_texture():
 	imageTexture.resource_name = "The created texture!"
 	
 	if tile_memory != null:
-		var fow = get_node("../../FoW")
+		var fow = get_node("../../BG/FoW")
 		fow.UpdateDirtyTiles(tile_memory)
 	
 	
 
-func _tag_tile(tile, val = 0.0):
+func _tag_tile(tile, tile_memory, val = 0.0):
 	if tile.x >= Globals.LevelLoaderRef.levelSize.x or tile.y >= Globals.LevelLoaderRef.levelSize.y or tile.x < 0 or tile.y < 0:
 		return
 	
+	#var level_id = Globals.LevelLoaderRef.GetLevelID()
+	#var tile_memory = _playerNode.get_attrib("memory." + level_id + ".tiles")
+				
+	tile_memory[(((tile.y+1) * (Globals.LevelLoaderRef.levelSize.x+2)) + (tile.x+1))*4+0] = val
+	tile_memory[(((tile.y+1) * (Globals.LevelLoaderRef.levelSize.x+2)) + (tile.x+1))*4+1] = val
+	tile_memory[(((tile.y+1) * (Globals.LevelLoaderRef.levelSize.x+2)) + (tile.x+1))*4+2] = val
+	tile_memory[(((tile.y+1) * (Globals.LevelLoaderRef.levelSize.x+2)) + (tile.x+1))*4+3] = val
+	#_playerNode.set_attrib("memory." + level_id + ".tiles", tile_memory)
+
+func _update_occlusion(o):
 	var level_id = Globals.LevelLoaderRef.GetLevelID()
+	var scanned_tiles = o.get_attrib("scanner_result.scanned_tiles." + level_id, [])
+	var prev_scanned_tiles = o.get_attrib("scanner_result.previous_scanned_tiles." + level_id, [])
+	
+	var fow = get_node("../../BG/FoW")
 	var tile_memory = _playerNode.get_attrib("memory." + level_id + ".tiles")
+	
 	if tile_memory == null:
 		tile_memory = []
 		for x in range(Globals.LevelLoaderRef.levelSize.x + 2):
@@ -147,26 +171,22 @@ func _tag_tile(tile, val = 0.0):
 					tile_memory.push_back(255.0)
 					tile_memory.push_back(255.0)
 					tile_memory.push_back(255.0)
-				
-	tile_memory[(((tile.y+1) * (Globals.LevelLoaderRef.levelSize.x+2)) + (tile.x+1))*4+0] = val
-	tile_memory[(((tile.y+1) * (Globals.LevelLoaderRef.levelSize.x+2)) + (tile.x+1))*4+1] = val
-	tile_memory[(((tile.y+1) * (Globals.LevelLoaderRef.levelSize.x+2)) + (tile.x+1))*4+2] = val
-	tile_memory[(((tile.y+1) * (Globals.LevelLoaderRef.levelSize.x+2)) + (tile.x+1))*4+3] = val
-	_playerNode.set_attrib("memory." + level_id + ".tiles", tile_memory)
-
-func _update_occlusion(o):
-	var level_id = Globals.LevelLoaderRef.GetLevelID()
-	var scanned_tiles = o.get_attrib("scanner_result.scanned_tiles." + level_id, [])
-	var prev_scanned_tiles = o.get_attrib("scanner_result.previous_scanned_tiles." + level_id, [])
-	
+					
+	#print("Tagging previous tiles : " + str(prev_scanned_tiles))
 	for t in prev_scanned_tiles:
 		# Storage type bug in the savefile...
 		if typeof(t) == TYPE_STRING:
 			t = str2var("Vector2" + t)
-		_tag_tile(t, 120.0) # explored, grayed-out
+		if not t in scanned_tiles:
+			_tag_tile(t, tile_memory, 120.0) # explored, grayed-out
+			fow.TagTile(t)
+	
+	#print("Tagging current tiles : " + str(scanned_tiles))
 	for t in scanned_tiles:
-		_tag_tile(t) # "lit" tile
+		_tag_tile(t, tile_memory) # "lit" tile
+		fow.TagTile(t)
 		
+	_playerNode.set_attrib("memory." + level_id + ".tiles", tile_memory)
 	_update_occlusion_texture()
 	
 	
@@ -266,5 +286,7 @@ func OnScannerUpdated_Callback(obj):
 					modified["ghost_memory"] = {"reference_id":o.get_attrib("unique_id"), "is_unknown":true}
 					var n = Globals.LevelLoaderRef.RequestObject(unkown_tile_path, Globals.LevelLoaderRef.World_to_Tile(o.position), modified)
 					o.set_attrib("has_ghost_memory.reference_id", n.get_attrib("unique_id"))		
-			
-	_update_occlusion(obj)
+	
+	if _dirty_occlusion:
+		_update_occlusion(obj)
+		_dirty_occlusion = false
