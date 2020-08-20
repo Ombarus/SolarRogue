@@ -12,6 +12,9 @@ margin_right = 481.0
 margin_bottom = 227.0
 mouse_filter = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 editor_trigger_signal = false
 
 [node name="base" parent="." instance=ExtResource( 2 )]

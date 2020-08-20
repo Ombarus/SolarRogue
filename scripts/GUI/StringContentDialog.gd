@@ -46,24 +46,7 @@ func set_content(val):
 	content = val
 	if _base:
 		get_node("base/Content").bbcode_text = val
-		
-func blink_cursor():
-	var n = get_node("base/Content")
-	n.bbcode_text = content + "[color=gray]~$>[/color]"
-	yield(get_tree().create_timer(0.1), "timeout")
-	n.bbcode_text = content
-	yield(get_tree().create_timer(0.1), "timeout")
-	n.bbcode_text = content + "[color=gray]~$>[/color]"
-	yield(get_tree().create_timer(0.1), "timeout")
-	n.bbcode_text = content
-	yield(get_tree().create_timer(0.2), "timeout")
-	n.bbcode_text = content + "[color=gray]~$>[/color]"
-	yield(get_tree().create_timer(0.2), "timeout")
-	n.bbcode_text = content
-	yield(get_tree().create_timer(0.3), "timeout")
-	n.bbcode_text = content + "[color=gray]~$>[/color]"
 	
-		
 func set_style(val):
 	border_style = val
 	if _base:
