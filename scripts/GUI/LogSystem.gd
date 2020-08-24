@@ -32,45 +32,55 @@ func _process(delta):
 		
 	if _current_state == LOG_ANIMATION_STATE.text_animation:
 		var final_text := ""
-		for i in range(_log_lines.size() - 1):
+		for i in range(_log_lines.size() - _lines_to_animate.size()):
 			final_text += _log_lines[i] + "\n"
-			
-		if _log_lines.size() <= 0:
-			_log_lines.push_back("")
 			
 		final_text += _log_lines[-1]
 		
-		var bb_code := false
-		while _delta_acc >= sec_between_char:
-			var c = _lines_to_animate[0].left(1)
-			_lines_to_animate[0] = _lines_to_animate[0].substr(1, -1)
-			final_text += c
-			_log_lines[-1] += c
-			
-			if c == "[":
-				bb_code = true
-			elif c == "]":
-				bb_code = false
-			if bb_code == true:
-				continue
-				
-			_delta_acc -= sec_between_char
-			
-			if _lines_to_animate[0].length() <= 0:
-				_lines_to_animate.remove(0)
-				final_text += "\n"
-				_log_lines.push_back("")
-			if _lines_to_animate.size() <= 0:
-				_current_state = LOG_ANIMATION_STATE.cursor_blink
-				break
+		if _lines_to_animate.size() > 1:
+			print("==========")
+			print("animation : " + str(_lines_to_animate))
+			print("log : " + str(_log_lines))
 		
-		if _current_state == LOG_ANIMATION_STATE.text_animation:
-			_window.content = final_text + "[color=lime]█[/color]"
+		var num_char : int = floor(_delta_acc / sec_between_char)
+		_delta_acc -= sec_between_char * num_char
+		var all_anim_done : bool = true
+		for i in range(_lines_to_animate.size()):
+			var cur_log : String = _log_lines[-(_lines_to_animate.size() - i)]
+			var left_log : String = _lines_to_animate[i]
+			if left_log.empty():
+				final_text += cur_log + "\n"
+			else:
+				all_anim_done = false
+				var to_add : int = num_char
+				var bb_code := false
+				while to_add > 0:
+					var c = _lines_to_animate[i].left(1)
+					_lines_to_animate[i] = _lines_to_animate[i].substr(1, -1)
+					_log_lines[-(_lines_to_animate.size() - i)] += c
+					
+					if c == "[":
+						bb_code = true
+					elif c == "]":
+						bb_code = false
+					if bb_code == true:
+						continue
+					to_add -= 1
+					
+				final_text += _log_lines[-(_lines_to_animate.size() - i)] + "[color=lime]█[/color]\n"
+				
+		if all_anim_done:
+			_lines_to_animate = []
+			_current_state = LOG_ANIMATION_STATE.cursor_blink
+		else:
+			_window.content = final_text
+			
+		
 	
 	if _current_state == LOG_ANIMATION_STATE.cursor_blink:
 		
 		var final_text := ""
-		for i in range(_log_lines.size()-1):
+		for i in range(_log_lines.size()):
 			final_text += _log_lines[i] + "\n"
 			
 		if _delta_acc <= 0.1:
@@ -102,6 +112,7 @@ func OnLogLine_CallBack(text, fmt=[]):
 		l = choose_random_line(text)
 	
 	_lines_to_animate.push_back(Globals.mytr(l, fmt))
+	_log_lines.push_back("")
 	_current_state = LOG_ANIMATION_STATE.text_animation
 	#_log_lines.push_back(Globals.mytr(l, fmt))
 	#update_log()
