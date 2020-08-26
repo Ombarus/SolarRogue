@@ -1,0 +1,130 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/GUI/SlidePanel.gd" type="Script" id=2]
+[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
+
+[node name="SlidePanelRight" type="Control"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -180.0
+margin_top = -81.0
+margin_bottom = 81.0
+mouse_filter = 2
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+size_percent = 0.8
+slide_side = 1
+
+[node name="base" parent="." instance=ExtResource( 3 )]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = -180.0
+margin_top = -77.5
+margin_right = 0.0
+margin_bottom = 77.5
+mouse_filter = 0
+border_style = "─"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+custom_constants/separation = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Look" parent="VBoxContainer" instance=ExtResource( 1 )]
+margin_right = 140.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 130, 30 )
+Text = "[l]ook"
+
+[node name="Inventory" parent="VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 45.0
+margin_right = 140.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 130, 30 )
+Text = "[i]nv"
+
+[node name="Converter" parent="VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 90.0
+margin_right = 140.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 130, 30 )
+Text = "[c]onv"
+
+[node name="Board" parent="VBoxContainer" instance=ExtResource( 1 )]
+visible = false
+margin_top = 135.0
+margin_right = 140.0
+margin_bottom = 165.0
+rect_min_size = Vector2( 130, 30 )
+Text = "[b]oard"
+
+[node name="Transfer" parent="VBoxContainer" instance=ExtResource( 1 )]
+visible = false
+margin_top = 180.0
+margin_right = 140.0
+margin_bottom = 210.0
+rect_min_size = Vector2( 130, 30 )
+Text = "[t]ransfer"
+
+[node name="Crew" parent="VBoxContainer" instance=ExtResource( 1 )]
+visible = false
+margin_top = 225.0
+margin_right = 140.0
+margin_bottom = 255.0
+rect_min_size = Vector2( 130, 30 )
+Text = "c[r]ew"
+
+[node name="FTL" parent="VBoxContainer" instance=ExtResource( 1 )]
+visible = false
+margin_top = 270.0
+margin_right = 140.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 130, 30 )
+Text = "[<]FTL"
+
+[node name="Weapon" parent="VBoxContainer" instance=ExtResource( 1 )]
+visible = false
+margin_top = 315.0
+margin_right = 140.0
+margin_bottom = 345.0
+rect_min_size = Vector2( 130, 30 )
+Text = "[w]eapon"
+
+[node name="Wait" parent="VBoxContainer" instance=ExtResource( 1 )]
+visible = false
+margin_top = 360.0
+margin_right = 140.0
+margin_bottom = 390.0
+rect_min_size = Vector2( 130, 30 )
+Text = "[5]wait"
+
+[node name="Comm" parent="VBoxContainer" instance=ExtResource( 1 )]
+visible = false
+margin_top = 405.0
+margin_right = 140.0
+margin_bottom = 435.0
+rect_min_size = Vector2( 130, 30 )
+Text = "co[m]m"
+
+[node name="Grab" parent="VBoxContainer" instance=ExtResource( 1 )]
+visible = false
+margin_top = 450.0
+margin_right = 140.0
+margin_bottom = 480.0
+rect_min_size = Vector2( 130, 30 )
+Text = "[g]rab"
+[connection signal="mouse_entered" from="base" to="." method="_on_base_mouse_entered"]
+[connection signal="mouse_exited" from="base" to="." method="_on_base_mouse_exited"]

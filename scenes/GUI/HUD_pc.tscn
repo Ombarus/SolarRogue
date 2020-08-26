@@ -1,6 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://data/private/textures/space-sprite.png" type="Texture" id=1]
+[ext_resource path="res://scenes/GUI/SlidePanel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/GUI/SlidePanelRight.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/GUI/GUILayoutBase.gd" type="Script" id=4]
 [ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=6]
 [ext_resource path="res://scripts/GUI/LogSystem.gd" type="Script" id=8]
@@ -9,6 +11,9 @@
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/GUI/PopupButton.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/GUI/StringContentDialog.tscn" type="PackedScene" id=15]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 1 )
 
 [node name="HUD" type="Control"]
 anchor_right = 1.0
@@ -22,62 +27,123 @@ __meta__ = {
 }
 Transition = false
 
-[node name="Log" type="Control" parent="."]
-anchor_right = 1.0
+[node name="Control2" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-margin_top = 506.0
-margin_right = -145.0
-margin_bottom = 5.0
+margin_left = -346.487
+margin_top = -121.0
+margin_right = -306.487
+margin_bottom = -81.0
+mouse_filter = 2
+
+[node name="SlidePanelRight" parent="Control2" instance=ExtResource( 3 )]
+
+[node name="Control3" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 312.215
+margin_top = -121.0
+margin_right = 352.215
+margin_bottom = -81.0
+mouse_filter = 2
+
+[node name="SlidePanel" parent="Control3" instance=ExtResource( 2 )]
+size_percent = 0.8
+
+[node name="Log" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -564.545
+margin_top = -230.277
+margin_right = 569.455
+margin_bottom = -12.2773
 mouse_filter = 2
 script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Log"]
+margin_left = 255.0
+margin_top = 49.0
+margin_right = 878.0
+margin_bottom = 215.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LogWindow" parent="Log" instance=ExtResource( 15 )]
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = 342.0
-margin_top = -205.0
-margin_right = -167.0
-margin_bottom = -15.0
+margin_left = -312.0
+margin_top = -173.0
+margin_right = 313.0
+margin_bottom = 0.00012207
 title = "Log Stardate 0.0.0"
 border_style = "═"
 
 [node name="Buttons" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = -1.22772
+margin_bottom = -1.22772
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Question" parent="Buttons" instance=ExtResource( 12 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 269.892
+margin_top = -173.906
+margin_right = 302.892
+margin_bottom = -143.906
+Text = "?"
+ShortcutKey = "?"
+IsHUD = true
+
 [node name="Weapon" parent="Buttons" instance=ExtResource( 12 )]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 217.453
-margin_top = -101.547
-margin_right = 327.453
-margin_bottom = -11.5471
-rect_min_size = Vector2( 110, 90 )
+margin_left = 1397.71
+margin_top = -565.78
+margin_right = 1527.71
+margin_bottom = -540.78
+rect_min_size = Vector2( 130, 25 )
 mouse_filter = 2
-Text = "[w]eapon"
+Text = "[l]ook"
 ShortcutKey = "w"
 IsHUD = true
 
 [node name="Grab" parent="Buttons" instance=ExtResource( 12 )]
+visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -300.082
-margin_top = -201.998
-margin_right = -190.082
-margin_bottom = -111.998
+margin_left = 540.278
+margin_top = -369.015
+margin_right = 650.278
+margin_bottom = -279.015
 rect_min_size = Vector2( 110, 90 )
 Text = "[g]rab"
 ShortcutKey = "g"
 IsHUD = true
 
 [node name="Wormhole" parent="Buttons" instance=ExtResource( 12 )]
+visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -115,11 +181,11 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -298.324
-margin_top = -99.0304
-margin_right = -188.324
-margin_bottom = -9.0304
-rect_min_size = Vector2( 110, 90 )
+margin_left = 119.464
+margin_top = -530.338
+margin_right = 249.464
+margin_bottom = -505.337
+rect_min_size = Vector2( 130, 25 )
 Text = "[i]nv"
 ShortcutKey = "i"
 IsHUD = true
@@ -127,21 +193,21 @@ IsHUD = true
 [node name="Converter" parent="Buttons" instance=ExtResource( 12 )]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 219.211
-margin_top = -204.515
-margin_right = 329.211
-margin_bottom = -114.515
-rect_min_size = Vector2( 110, 90 )
+margin_left = 1398.44
+margin_top = -492.806
+margin_right = 1528.44
+margin_bottom = -467.806
+rect_min_size = Vector2( 130, 25 )
 Text = "[c]onv"
 ShortcutKey = "c"
 IsHUD = true
 
 [node name="PopupButton" parent="Buttons" instance=ExtResource( 14 )]
 anchor_top = 1.0
-margin_left = 5.9532
-margin_top = -618.662
-margin_right = 145.953
-margin_bottom = -202.662
+margin_left = 1399.36
+margin_top = -451.771
+margin_right = 1539.36
+margin_bottom = -35.7708
 
 [node name="ZoomIn" parent="Buttons" instance=ExtResource( 12 )]
 visible = false
@@ -185,19 +251,6 @@ scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 1664, 0, 64, 64 )
-
-[node name="Question" parent="Buttons" instance=ExtResource( 12 )]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -356.218
-margin_top = -190.863
-margin_right = -323.218
-margin_bottom = -160.863
-Text = "?"
-ShortcutKey = "?"
-IsHUD = true
 
 [node name="StatusBar" type="Control" parent="."]
 anchor_right = 1.0

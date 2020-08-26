@@ -32,8 +32,6 @@ margin_bottom = 266.0
 mouse_filter = 2
 
 [node name="Popup" parent="PopupSize" instance=ExtResource( 3 )]
-visible = false
-modulate = Color( 0.129412, 1, 0.129412, 0 )
 margin_left = 133.0
 margin_right = 153.0
 margin_bottom = 184.0
@@ -111,8 +109,8 @@ ShortcutKey = "m"
 Disabled = true
 
 [node name="More" parent="." instance=ExtResource( 4 )]
-margin_right = 110.0
-margin_bottom = 90.0
+margin_right = 130.0
+margin_bottom = 25.0
 Text = "..."
 IsHUD = true
 

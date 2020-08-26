@@ -93,6 +93,7 @@ func _on_Button_visibility_changed():
 
 func _on_btn_mouse_entered():
 	get_node("HoverSFX").play()
+	self.emit_signal("mouse_entered")
 
 
 func _on_btn_button_down():
@@ -101,3 +102,7 @@ func _on_btn_button_down():
 
 func _on_btn_button_up():
 	emit_signal("up")
+
+
+func _on_btn_mouse_exited():
+	self.emit_signal("mouse_exited")

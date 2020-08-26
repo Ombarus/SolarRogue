@@ -75,7 +75,6 @@ margin_bottom = -439.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[g]rab"
 ShortcutKey = "g"
-IsHUD = true
 
 [node name="Wormhole" parent="Buttons" instance=ExtResource( 12 )]
 anchor_left = 1.0
