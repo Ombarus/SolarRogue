@@ -34,13 +34,6 @@ func _process(delta):
 		var final_text := ""
 		for i in range(_log_lines.size() - _lines_to_animate.size()):
 			final_text += _log_lines[i] + "\n"
-			
-		final_text += _log_lines[-1]
-		
-		if _lines_to_animate.size() > 1:
-			print("==========")
-			print("animation : " + str(_lines_to_animate))
-			print("log : " + str(_log_lines))
 		
 		var num_char : int = floor(_delta_acc / sec_between_char)
 		_delta_acc -= sec_between_char * num_char
