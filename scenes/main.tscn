@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=2]
+[gd_scene load_steps=83 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/private/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -42,7 +42,6 @@
 [ext_resource path="res://scenes/GUI/HUD.tscn" type="PackedScene" id=40]
 [ext_resource path="res://scripts/GUI/SafeArea.gd" type="Script" id=41]
 [ext_resource path="res://scripts/CamControl.gd" type="Script" id=42]
-[ext_resource path="res://scenes/GUI/HUD_pc.tscn" type="PackedScene" id=43]
 [ext_resource path="res://scripts/Behaviors/RandomLogBehavior.gd" type="Script" id=44]
 [ext_resource path="res://scripts/Behaviors/EffectsBehavior.gd" type="Script" id=45]
 [ext_resource path="res://scenes/FoW.tscn" type="PackedScene" id=48]
@@ -261,7 +260,7 @@ script = ExtResource( 13 )
 
 [node name="AP" type="Node" parent="Behaviors"]
 script = ExtResource( 14 )
-LogWindow = NodePath("../../Camera-GUI/SafeArea/HUD_root/HUDm/Log/LogWindow")
+LogWindow = NodePath("../../Camera-GUI/SafeArea/HUD_root/HUD/Log/LogWindow")
 
 [node name="SpriteLoader" type="Node" parent="Behaviors"]
 script = ExtResource( 15 )
@@ -430,10 +429,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HUDm" parent="Camera-GUI/SafeArea/HUD_root" instance=ExtResource( 40 )]
-visible = false
-
-[node name="HUD" parent="Camera-GUI/SafeArea/HUD_root" instance=ExtResource( 43 )]
+[node name="HUD" parent="Camera-GUI/SafeArea/HUD_root" instance=ExtResource( 40 )]
 
 [node name="TargettingRoot" type="Control" parent="Camera-GUI/SafeArea"]
 anchor_right = 1.0

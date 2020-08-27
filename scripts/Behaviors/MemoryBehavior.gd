@@ -1,7 +1,6 @@
 extends Node
 
 export(NodePath) var Occluder
-export(NodePath) var ExploredBG
 
 var _playerNode = null
 var _dirty_occlusion := true

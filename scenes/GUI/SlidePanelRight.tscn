@@ -9,9 +9,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -180.0
-margin_top = -81.0
-margin_bottom = 81.0
+margin_left = -166.0
+margin_top = -70.0
+margin_bottom = 70.0
 mouse_filter = 2
 script = ExtResource( 2 )
 __meta__ = {
@@ -21,47 +21,41 @@ size_percent = 0.8
 slide_side = 1
 
 [node name="base" parent="." instance=ExtResource( 3 )]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = -180.0
-margin_top = -77.5
 margin_right = 0.0
-margin_bottom = 77.5
+margin_bottom = 0.0
 mouse_filter = 0
 border_style = "─"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
-margin_top = 20.0
-margin_right = -20.0
+margin_top = 10.0
+margin_right = 130.0
 margin_bottom = -20.0
 custom_constants/separation = 15
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Look" parent="VBoxContainer" instance=ExtResource( 1 )]
-margin_right = 140.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 130, 30 )
-Text = "[l]ook"
-
 [node name="Inventory" parent="VBoxContainer" instance=ExtResource( 1 )]
-margin_top = 45.0
-margin_right = 140.0
-margin_bottom = 75.0
+margin_right = 130.0
+margin_bottom = 30.0
 rect_min_size = Vector2( 130, 30 )
 Text = "[i]nv"
 
 [node name="Converter" parent="VBoxContainer" instance=ExtResource( 1 )]
-margin_top = 90.0
-margin_right = 140.0
-margin_bottom = 120.0
+margin_top = 45.0
+margin_right = 130.0
+margin_bottom = 75.0
 rect_min_size = Vector2( 130, 30 )
 Text = "[c]onv"
+
+[node name="Look" parent="VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 90.0
+margin_right = 130.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 130, 30 )
+Text = "[l]ook"
 
 [node name="Board" parent="VBoxContainer" instance=ExtResource( 1 )]
 visible = false
@@ -97,17 +91,17 @@ Text = "[<]FTL"
 
 [node name="Weapon" parent="VBoxContainer" instance=ExtResource( 1 )]
 visible = false
-margin_top = 315.0
-margin_right = 140.0
-margin_bottom = 345.0
+margin_top = 90.0
+margin_right = 130.0
+margin_bottom = 120.0
 rect_min_size = Vector2( 130, 30 )
 Text = "[w]eapon"
 
 [node name="Wait" parent="VBoxContainer" instance=ExtResource( 1 )]
 visible = false
-margin_top = 360.0
-margin_right = 140.0
-margin_bottom = 390.0
+margin_top = 90.0
+margin_right = 130.0
+margin_bottom = 120.0
 rect_min_size = Vector2( 130, 30 )
 Text = "[5]wait"
 
@@ -126,5 +120,7 @@ margin_right = 140.0
 margin_bottom = 480.0
 rect_min_size = Vector2( 130, 30 )
 Text = "[g]rab"
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="mouse_entered" from="base" to="." method="_on_base_mouse_entered"]
 [connection signal="mouse_exited" from="base" to="." method="_on_base_mouse_exited"]
