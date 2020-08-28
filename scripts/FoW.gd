@@ -94,15 +94,15 @@ func _update_tile(tile_memory : Array, tile : Vector2):
 	#tile_memory[(((tile.y+1) * (Globals.LevelLoaderRef.levelSize.x+2)) + (tile.x+1))*4+3] = 0.0
 	
 	#TODO: deal with boundaries!
-	var lit : bool = tile_memory[_get_memory(tile.x, tile.y)] == 0.0
-	var l_lit : bool = tile_memory[_get_memory(tile.x - 1, tile.y)] == 0.0
-	var r_lit : bool = tile_memory[_get_memory(tile.x + 1, tile.y)] == 0.0
-	var u_lit : bool = tile_memory[_get_memory(tile.x, tile.y - 1)] == 0.0
-	var d_lit : bool = tile_memory[_get_memory(tile.x, tile.y + 1)] == 0.0
-	var dl_lit : bool = tile_memory[_get_memory(tile.x - 1, tile.y + 1)] == 0.0
-	var ul_lit : bool = tile_memory[_get_memory(tile.x - 1, tile.y - 1)] == 0.0
-	var ur_lit : bool = tile_memory[_get_memory(tile.x + 1, tile.y - 1)] == 0.0
-	var dr_lit : bool = tile_memory[_get_memory(tile.x + 1, tile.y + 1)] == 0.0
+	var lit : bool = _get_memory(tile_memory, tile.x, tile.y) == 0.0
+	var l_lit : bool = _get_memory(tile_memory, tile.x - 1, tile.y) == 0.0
+	var r_lit : bool = _get_memory(tile_memory, tile.x + 1, tile.y) == 0.0
+	var u_lit : bool = _get_memory(tile_memory, tile.x, tile.y - 1) == 0.0
+	var d_lit : bool = _get_memory(tile_memory, tile.x, tile.y + 1) == 0.0
+	var dl_lit : bool = _get_memory(tile_memory, tile.x - 1, tile.y + 1) == 0.0
+	var ul_lit : bool = _get_memory(tile_memory, tile.x - 1, tile.y - 1) == 0.0
+	var ur_lit : bool = _get_memory(tile_memory, tile.x + 1, tile.y - 1) == 0.0
+	var dr_lit : bool = _get_memory(tile_memory, tile.x + 1, tile.y + 1) == 0.0
 	
 	var is_lit : bool = lit
 	var is_plain : bool = not lit && not l_lit and not r_lit and not u_lit and not d_lit
@@ -210,7 +210,7 @@ func _clear():
 func _x_y_to_memory_index(x, y):
 	return (((y+1) * (levelSize.x+2)) + (x+1))*4+0
 	
-func _get_memory(x, y):
+func _get_memory(tile_memory, x, y):
 		
 	if x < 0 or y < 0 or x > levelSize.x or y > levelSize.y:
 		return 255.0
@@ -219,7 +219,7 @@ func _get_memory(x, y):
 	#if index_base < 0 or index_base >= tile_memory.size():
 	#	return 255.0
 	
-	return ((((y+1) * (levelSize.x+2)) + (x+1))*4)
+	return tile_memory[((((y+1) * (levelSize.x+2)) + (x+1))*4)]
 	
 func _x_y_to_uv_index(tile):
 		

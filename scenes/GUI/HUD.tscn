@@ -25,18 +25,22 @@ Transition = false
 [node name="Log" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 506.0
-margin_right = -145.0
+margin_left = 256.0
+margin_top = 543.0
+margin_right = -255.0
 margin_bottom = 5.0
 mouse_filter = 2
 script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LogWindow" parent="Log" instance=ExtResource( 15 )]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
-margin_top = -205.0
+margin_top = -180.0
 margin_right = -14.0
 margin_bottom = -15.0
 title = "Log Stardate 0.0.0"
@@ -147,10 +151,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -149.0
-margin_top = -200.0
-margin_right = -84.0
-margin_bottom = -135.0
+margin_left = -73.9469
+margin_top = -165.0
+margin_right = -8.9469
+margin_bottom = -100.0
 Text = "+"
 IsHUD = true
 
@@ -160,21 +164,19 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -74.0
-margin_top = -201.0
+margin_top = -87.0
 margin_right = -9.0
-margin_bottom = -136.0
+margin_bottom = -22.0
 Text = "-"
 IsHUD = true
 
 [node name="Options" parent="Buttons" instance=ExtResource( 12 )]
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -74.0
-margin_top = -124.0
-margin_right = -9.0
-margin_bottom = -59.0
+margin_left = -73.0
+margin_top = 62.614
+margin_right = -8.0
+margin_bottom = 127.614
 ShortcutEnum = 16777217
 AlwaysOnShortcut = false
 
@@ -190,10 +192,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -149.0
-margin_top = -124.0
-margin_right = -84.0
-margin_bottom = -59.0
+margin_left = -334.0
+margin_top = -167.0
+margin_right = -278.0
+margin_bottom = -136.0
 Text = "?"
 ShortcutKey = "?"
 IsHUD = true

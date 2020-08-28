@@ -4,7 +4,7 @@ export(NodePath) var Occluder
 
 var _playerNode = null
 var _dirty_occlusion := true
-var default_occluder_color : Vector3
+var default_occluder_color : Color
 onready var _occluder_ref = get_node(Occluder)
 
 func _ready():
@@ -14,9 +14,10 @@ func _ready():
 	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_Callback")
 	BehaviorEvents.connect("OnMountAdded", self, "OnMountAdded_Callback")
 	BehaviorEvents.connect("OnPositionUpdated", self, "OnPositionUpdated_Callback")
+	BehaviorEvents.connect("OnMountRemoved", self, "OnMountRemoved_Callback")
 	
 	if _occluder_ref != null:
-		default_occluder_color = _occluder_ref.material.get_shader_param("gray_color")
+		default_occluder_color = _occluder_ref.modulate
 
 func OnPositionUpdated_Callback(obj):
 	if obj.get_attrib("type") == "player":
@@ -27,19 +28,29 @@ func OnMountAdded_Callback(obj, slot, src, modified_attributes):
 		return
 		
 	ExecuteFullSweep()
+	
+	
+func OnMountRemoved_Callback(obj, slot, src, modified_attributes):
+	if not "scanner" in slot or obj.get_attrib("type") != "player":
+		return
+
+	_dirty_occlusion = true
 
 func OnLevelLoaded_Callback():
 	var level_data = Globals.LevelLoaderRef.GetCurrentLevelData()
-	var updated_fog_color : Vector3 = default_occluder_color
+	var updated_fog_color : Color = default_occluder_color
 	if level_data.has("fog_color_override") == true:
 		var col_array = level_data["fog_color_override"]
-		updated_fog_color = Vector3(col_array[0], col_array[1], col_array[2])
-	_occluder_ref.material.set_shader_param("gray_color", updated_fog_color)
+		updated_fog_color = Color(col_array[0], col_array[1], col_array[2], col_array[3])
+	_occluder_ref.modulate = updated_fog_color
+	#_occluder_ref.material.set_shader_param("gray_color", updated_fog_color)
 	
 	# Give two frames for scanner to update
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	ExecuteFullSweep()
+	if _playerNode != null:
+		OnScannerUpdated_Callback(_playerNode)
 	
 func OnTransferPlayer_Callback(old_player, new_player):
 	_playerNode = new_player
@@ -48,8 +59,10 @@ func OnTransferPlayer_Callback(old_player, new_player):
 	new_player.visible = true # in case previous ship didn't have scanner and couldn't see the ship
 	if new_player.get_attrib("has_ghost_memory") != null:
 		_remove_ghost_from_real(new_player)
+	#_dirty_occlusion = true
 	_update_occlusion_texture()
 	ExecuteFullSweep()
+	#_update_occlusion(new_player)
 
 func OnObjectLoaded_Callback(obj):
 	if obj.get_attrib("type") == "player":
@@ -171,7 +184,6 @@ func _update_occlusion(o):
 					tile_memory.push_back(255.0)
 					tile_memory.push_back(255.0)
 					
-	#print("Tagging previous tiles : " + str(prev_scanned_tiles))
 	for t in prev_scanned_tiles:
 		# Storage type bug in the savefile...
 		if typeof(t) == TYPE_STRING:
@@ -180,7 +192,6 @@ func _update_occlusion(o):
 			_tag_tile(t, tile_memory, 120.0) # explored, grayed-out
 			fow.TagTile(t)
 	
-	#print("Tagging current tiles : " + str(scanned_tiles))
 	for t in scanned_tiles:
 		_tag_tile(t, tile_memory) # "lit" tile
 		fow.TagTile(t)

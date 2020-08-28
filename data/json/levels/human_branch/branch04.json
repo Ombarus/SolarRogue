@@ -7,7 +7,7 @@
 	"fully_mapped":false,
 	"no_ghost":true,
 	"runaway_hideout":true,
-	"fog_color_override":[0.004,0.514,0.278],
+	"fog_color_override":[0.231372,0.92549,0.607843, 0.9215686],
 	"level_message":"HUMAN_LEVEL_MESSAGE",
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",

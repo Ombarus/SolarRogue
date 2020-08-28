@@ -375,7 +375,7 @@ camera = NodePath("../../../Camera2D")
 position = Vector2( -5184, -5184 )
 
 [node name="Occlusion" type="Sprite" parent="BG"]
-modulate = Color( 0.027451, 0.145098, 0.501961, 1 )
+modulate = Color( 0.196078, 0.321569, 1, 0.921569 )
 material = ExtResource( 36 )
 position = Vector2( -64, -64 )
 scale = Vector2( 128, 128 )
@@ -617,10 +617,10 @@ __meta__ = {
 [node name="FPSCounter" parent="Camera-GUI/SafeArea/FPSCounterRoot" instance=ExtResource( 65 )]
 anchor_left = 1.0
 anchor_top = 1.0
-margin_left = -136.0
-margin_top = -47.307
-margin_right = -14.0
-margin_bottom = -6.30701
+margin_left = -201.0
+margin_top = -47.3069
+margin_right = -79.0
+margin_bottom = -6.30695
 
 [node name="CrewRoot" type="Control" parent="Camera-GUI/SafeArea"]
 anchor_right = 1.0

@@ -25,18 +25,39 @@ func OnTransferPlayer_Callback(old_player, new_player):
 	if scanner_name != null and scanner_name != "":
 		var scanner_data = Globals.LevelLoaderRef.LoadJSON(scanner_name)
 		_up_to_date = false
+		
+		var level_id : String = Globals.LevelLoaderRef.GetLevelID()
+		var last_frame_tiles = old_player.get_attrib("scanner_result.scanned_tiles." + level_id, [])
+		new_player.set_attrib("scanner_result.scanned_tiles." + level_id, last_frame_tiles)
+		
 		special_update_ultimate(new_player, scanner_data)
 	else:
 		update_no_scanner(old_player, new_player)
 		
 func update_no_scanner(old_player, new_player):
+	#process_empty_scanner(new_player)
 	var level_id : String = Globals.LevelLoaderRef.GetLevelID()
-	new_player.set_attrib("scanner_result.new_out_of_range." + level_id, old_player.get_attrib("scanner_result.cur_in_range." + level_id))
+	var cur_in_range = old_player.get_attrib("scanner_result.cur_in_range." + level_id)
+	var old_player_id = old_player.get_attrib("unique_id")
+	var new_player_id = new_player.get_attrib("unique_id")
+	if not old_player_id in cur_in_range:
+		cur_in_range.push_back(old_player.get_attrib("unique_id"))
+	if new_player_id in cur_in_range:
+		cur_in_range.erase(new_player_id)
+	new_player.set_attrib("scanner_result.new_out_of_range." + level_id, cur_in_range)
+	
+	var last_frame_tiles = old_player.get_attrib("scanner_result.scanned_tiles." + level_id, [])
+	new_player.set_attrib("scanner_result.scanned_tiles." + level_id, [])
+	new_player.set_attrib("scanner_result.previous_scanned_tiles." + level_id, last_frame_tiles)
+	
 	new_player.set_attrib("scanner_result.cur_in_range." + level_id, [])
 	new_player.set_attrib("scanner_result.new_in_range." + level_id, [])
 	new_player.set_attrib("scanner_result.unknown." + level_id, [])
 	new_player.set_attrib("scanner_result.unknown2." + level_id, [])
-	BehaviorEvents.emit_signal("OnScannerUpdated", new_player)
+	# Before creating the ghost of old_player, make sure it has become a "regular" ship
+	#yield(get_tree(), "idle_frame")
+	BehaviorEvents.call_deferred("emit_signal", "OnScannerUpdated", new_player)
+	#BehaviorEvents.emit_signal("OnScannerUpdated", new_player)
 
 func OnObjTurn_Callback(obj):
 	if obj.get_attrib("type") == "player":
@@ -105,6 +126,11 @@ func process_empty_scanner(obj):
 		if cur_in_range.size() > 0:
 			obj.set_attrib("scanner_result.new_out_of_range." + level_id, cur_in_range)
 			obj.set_attrib("scanner_result.cur_in_range." + level_id, [])
+			
+			var last_frame_tiles = obj.get_attrib("scanner_result.scanned_tiles." + level_id, [])
+			obj.set_attrib("scanner_result.scanned_tiles." + level_id, [])
+			obj.set_attrib("scanner_result.previous_scanned_tiles." + level_id, last_frame_tiles)
+			
 			BehaviorEvents.emit_signal("OnScannerUpdated", obj)
 	
 
@@ -140,13 +166,12 @@ func do_anomaly_detection(obj):
 func special_update_ultimate(obj, scanner_data):
 	if scanner_data != null and Globals.is_(Globals.get_data(scanner_data, "scanning.fully_mapped"), true):
 		var level_id : String = Globals.LevelLoaderRef.GetLevelID()
-		var old_range : Array = obj.get_attrib("scanner_result.cur_in_range." + level_id, [])
 		var cur_in_range := []
 		for key in Globals.LevelLoaderRef.objById:
 			var o : Node2D = Globals.LevelLoaderRef.objById[key]
 			# Removed objects just get set to null so we might have null obj in objById
 			if o != null and o != obj:
-				cur_in_range.push_back(o.get_attrib("unique_id"))
+				cur_in_range.push_back(key)
 			
 		obj.set_attrib("scanner_result.cur_in_range." + level_id, cur_in_range)
 		

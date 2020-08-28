@@ -41,6 +41,9 @@ func _ready():
 	zoom_in_btn.connect("up", self, "_on_Zoom_up")
 	zoom_out_btn.connect("up", self, "_on_Zoom_up")
 	
+	if not Globals.is_mobile():
+		zoom = Vector2(2.5, 2.5)
+	
 	
 	if p != null:
 		self.position = p.position
