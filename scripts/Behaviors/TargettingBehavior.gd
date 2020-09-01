@@ -44,7 +44,7 @@ func OnRequestTargettingOverlay_Callback(player, targetting_data, callback_obj, 
 	_DoAreaOverlay(_player_node, _targetting_data)
 	
 func _DoAreaOverlay(_player_node, targetting_data):
-	var area_size : int = Globals.get_data(targetting_data, "weapon_data.area_effect", 0)
+	var area_size : int = Globals.get_data(targetting_data.weapon_data, "weapon_data.area_effect", 0)
 	if area_size == 0:
 		return
 	
@@ -79,7 +79,7 @@ func OnTargetClick_Callback(click_pos, target_type):
 		elif not is_ghost and obj_type != "player" and target_type == Globals.VALID_TARGET.loot and Globals.is_(obj.get_attrib("cargo.transferable"), true):
 			potential_targets.push_back(obj)
 	if potential_targets.size() == 0:
-		if Globals.get_data(_targetting_data, "weapon_data.shoot_empty", false) == false:
+		if Globals.get_data(_targetting_data.weapon_data, "weapon_data.shoot_empty", false) == false:
 			var log_choices = {
 				"There's nothing there sir...":50,
 				"Unable to resolve target...":50,
@@ -88,15 +88,15 @@ func OnTargetClick_Callback(click_pos, target_type):
 			}
 			BehaviorEvents.emit_signal("OnLogLine", log_choices)
 			_callback_obj.call(_callback_method, null, null)
-		elif IsValidTile(player_tile, tile, _targetting_data.weapon_data):
+		elif IsValidTile(player_tile, tile, _targetting_data):
 			_callback_obj.call(_callback_method, null, tile)
 		else:
 			BehaviorEvents.emit_signal("OnLogLine", "Target is outside of our range sir !")
 			_callback_obj.call(_callback_method, null, null)
 	else:
-		var area_size : int = Globals.get_data(_targetting_data, "weapon_data.area_effect", 0)
+		var area_size : int = Globals.get_data(_targetting_data.weapon_data, "weapon_data.area_effect", 0)
 			
-		if not IsValidTile(player_tile, tile, _targetting_data.weapon_data):
+		if not IsValidTile(player_tile, tile, _targetting_data):
 			BehaviorEvents.emit_signal("OnLogLine", "Target is outside of our range sir !")
 			_callback_obj.call(_callback_method, null, null)
 		elif potential_targets.size() == 1:
@@ -109,7 +109,7 @@ func OnTargetClick_Callback(click_pos, target_type):
 			BehaviorEvents.emit_signal("OnPushGUI", "SelectTarget", {"targets":potential_targets, "callback_object":self, "callback_method":"SelectTarget_Callback"})
 	
 func _gather_tile_contents(tile, targetting_data):
-	var area_size : int = Globals.get_data(targetting_data, "weapon_data.area_effect", 0)
+	var area_size : int = Globals.get_data(targetting_data.weapon_data, "weapon_data.area_effect", 0)
 	var tile_content := []
 	for x in range(tile.x - area_size, tile.x + area_size+1):
 		for y in range(tile.y - area_size, tile.y + area_size+1):
@@ -122,13 +122,13 @@ func SelectTarget_Callback(selected_targets):
 	else:
 		_callback_obj.call(_callback_method, selected_targets[0], _last_clicked_tile)
 	
-func IsValidTile(player_tile, target_tile, weapon_data):
+func IsValidTile(player_tile, target_tile, targetting_data):
+	var weapon_data = targetting_data.weapon_data.weapon_data
+	var weapon_attributes = targetting_data.modified_attributes
 	var bounds = Globals.LevelLoaderRef.levelSize
-	var fire_radius = weapon_data.fire_range
-	var fire_min_range = Globals.get_data(weapon_data, "fire_minimum_range")
+	var fire_radius = weapon_data.fire_range + Globals.EffectRef.GetBonusValue(_player_node, "", weapon_attributes, "range_bonus")
+	var fire_min_range = Globals.get_data(weapon_data, "fire_minimum_range", 0)
 	var target_tile_dist = round((target_tile - player_tile).length())
-	if fire_min_range == null:
-		fire_min_range = 0
 	if weapon_data.fire_pattern == "o":
 		if target_tile_dist < fire_min_range or target_tile_dist > fire_radius or target_tile.x < 0 or target_tile.x > bounds.x or target_tile.y < 0 or target_tile.y > bounds.y:
 			return false
@@ -149,7 +149,7 @@ func IsValidTile(player_tile, target_tile, weapon_data):
 	
 func ClosestFiringSolution(shooter_tile, target_tile, weapon):
 	var shootable_tiles = []
-	var fire_radius = weapon.weapon_data.fire_range
+	var fire_radius = weapon.weapon_data.weapon_data.fire_range + Globals.EffectRef.GetBonusValue(_player_node, "", weapon.modified_attributes, "range_bonus")
 	var offset = Vector2(0,0)
 	var obj_tile = shooter_tile
 	var bounds = Globals.LevelLoaderRef.levelSize
@@ -157,22 +157,22 @@ func ClosestFiringSolution(shooter_tile, target_tile, weapon):
 	while round(offset.length()) <= (fire_radius+1):
 		while round(offset.length()) <= (fire_radius+1):
 			var tile = obj_tile + offset
-			if IsValidTile(obj_tile, tile, weapon.weapon_data):
+			if IsValidTile(obj_tile, tile, weapon):
 				shootable_tiles.append(tile)
 			if offset.x != 0:
 				offset.x *= -1
 				tile = obj_tile + offset
-				if IsValidTile(obj_tile, tile, weapon.weapon_data):
+				if IsValidTile(obj_tile, tile, weapon):
 					shootable_tiles.append(tile)
 			if offset.y != 0:
 				offset.y *= -1
 				tile = obj_tile + offset
-				if IsValidTile(obj_tile, tile, weapon.weapon_data):
+				if IsValidTile(obj_tile, tile, weapon):
 					shootable_tiles.append(tile)
 			if offset.x != 0:
 				offset.x *= -1
 				tile = obj_tile + offset
-				if IsValidTile(obj_tile, tile, weapon.weapon_data):
+				if IsValidTile(obj_tile, tile, weapon):
 					shootable_tiles.append(tile)
 			offset.y *= -1
 			offset.y += 1
@@ -196,7 +196,7 @@ func _DoTargetting(player, weapon):
 	var player_tile = Globals.LevelLoaderRef.World_to_Tile(player.position)
 	var r = get_node("/root/Root/OverlayTiles")
 	var n = null
-	var fire_radius = weapon.weapon_data.fire_range
+	var fire_radius = weapon.weapon_data.weapon_data.fire_range + Globals.EffectRef.GetBonusValue(player, "", weapon.modified_attributes, "range_bonus")
 	var offset = Vector2(0,0)
 	var obj_tile = player_tile
 	var bounds = Globals.LevelLoaderRef.levelSize
@@ -211,7 +211,7 @@ func _DoTargetting(player, weapon):
 			#           |
 			#           |
 			var tile = obj_tile + offset
-			if IsValidTile(obj_tile, tile, weapon.weapon_data):
+			if IsValidTile(obj_tile, tile, weapon):
 				n = scene.instance()
 				r.call_deferred("add_child", n)
 				n.position = Globals.LevelLoaderRef.Tile_to_World(tile)
@@ -219,7 +219,7 @@ func _DoTargetting(player, weapon):
 			if offset.x != 0:
 				offset.x *= -1
 				tile = obj_tile + offset
-				if IsValidTile(obj_tile, tile, weapon.weapon_data):
+				if IsValidTile(obj_tile, tile, weapon):
 					n = scene.instance()
 					r.call_deferred("add_child", n)
 					n.position = Globals.LevelLoaderRef.Tile_to_World(tile)
@@ -227,7 +227,7 @@ func _DoTargetting(player, weapon):
 			if offset.y != 0:
 				offset.y *= -1
 				tile = obj_tile + offset
-				if IsValidTile(obj_tile, tile, weapon.weapon_data):
+				if IsValidTile(obj_tile, tile, weapon):
 					n = scene.instance()
 					r.call_deferred("add_child", n)
 					n.position = Globals.LevelLoaderRef.Tile_to_World(tile)
@@ -235,7 +235,7 @@ func _DoTargetting(player, weapon):
 			if offset.x != 0:
 				offset.x *= -1
 				tile = obj_tile + offset
-				if offset.y != 0 and IsValidTile(obj_tile, tile, weapon.weapon_data):
+				if offset.y != 0 and IsValidTile(obj_tile, tile, weapon):
 					n = scene.instance()
 					r.call_deferred("add_child", n)
 					n.position = Globals.LevelLoaderRef.Tile_to_World(tile)

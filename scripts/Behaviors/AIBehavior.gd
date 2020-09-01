@@ -305,7 +305,7 @@ func DoAttackPathFinding(obj):
 	for index in range(weapons_data.size()):
 		var data = weapons_data[index]
 		var attrib_data = modified_attributes[index]
-		var best_move = _targetting.ClosestFiringSolution(obj_tile, player_tile, data)
+		var best_move = _targetting.ClosestFiringSolution(obj_tile, player_tile, {"weapon_data":data, "modified_attributes":attrib_data})
 		var is_destroyed = player.get_attrib("destroyable.destroyed")
 		if best_move.length() == 0 and (is_destroyed == null or is_destroyed == false):
 #			var chance = obj.get_attrib("ai.hit_chance")

@@ -1,0 +1,47 @@
+{
+	"name_id":"Targeting Computer",
+	"type":"utility",
+	"sprite": "targeting_computer",
+	"icon": {
+		"texture":"data/private/textures/space-sprite.png",
+		"region":[1536,512,128,128]
+	},
+	"equipment": {
+		"slot":"utility",
+		"volume":40.0,
+		"equip_ap":3.0,
+		"unequip_ap":3.0
+	},
+	"attributes": {
+		"global_hit_chance_bonus":0.05,
+		"global_crit_chance_bonus":0.1,
+	},
+	"recyclable": {
+		"energy": 700,
+		"player_sale_range": [1000,1400],
+		"player_buy_range": [1650,2900]
+	},
+	"disassembling": {
+		"produce":"data/json/items/misc/spare_parts.json",
+		"count":2,
+		"energy_cost":700
+	},
+	"description": {
+		"text":"A dedicated processor capable of performing surgical strikes on unsuspecting patients.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
+				{"name":"Mount Point", "value":"Utility"}
+			]
+		},
+		"Effect": {
+			"min_level":0,
+			"fields": [
+				{"name":"Hit Chance", "value":"{attributes.global_hit_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Crit Chance", "value":"{attributes.global_crit_chance_bonus}%", "translate_value":false, "display_percent":true}
+			]
+		}
+	}
+}

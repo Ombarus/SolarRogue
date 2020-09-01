@@ -138,7 +138,7 @@ func Pressed_Board_Callback():
 		
 	BehaviorEvents.emit_signal("OnLogLine", "Which ship should we transfer control ?")
 	set_input_state(Globals.INPUT_STATE.board_targetting)
-	var targetting_data = {"weapon_data":{"fire_range":1, "fire_pattern":"o"}}
+	var targetting_data = {"weapon_data":{"weapon_data":{"fire_range":1, "fire_pattern":"o"}}}
 	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, targetting_data, self, "ProcessBoardSelection")
 	BehaviorEvents.emit_signal("OnPopGUI") #HUD
 	var text = Globals.mytr("[color=red]Select a ship to board...[/color]")
@@ -150,7 +150,7 @@ func Pressed_Take_Callback():
 		
 	BehaviorEvents.emit_signal("OnLogLine", "Take from what ?")
 	set_input_state(Globals.INPUT_STATE.loot_targetting)
-	var targetting_data = {"weapon_data":{"fire_range":1, "fire_pattern":"o"}}
+	var targetting_data = {"weapon_data":{"weapon_data":{"fire_range":1, "fire_pattern":"o"}}}
 	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, targetting_data, self, "ProcessTakeSelection")
 	BehaviorEvents.emit_signal("OnPopGUI") #HUD
 	var text = Globals.mytr("[color=red]Select a ship to transfer content...[/color]")
@@ -421,7 +421,7 @@ func ConsiderInterests(obj):
 				"[color=yellow]Scanners have picked up a new %s[/color]":50,
 				"[color=yellow]%s detected[/color]":30,
 				"[color=yellow]%s within scanner range[/color]":30,
-				"[color=yellow]would %s be useful right now captain?[/color]":5,
+				"[color=yellow]Captain, I've just found a %s[/color]":5,
 			}
 			BehaviorEvents.emit_signal("OnLogLine", log_choices, [Globals.mytr(o.get_attrib("type"))])
 			break
@@ -449,10 +449,10 @@ func Pressed_Weapon_Callback():
 	var cur_weapon = _weapon_shots[0]
 	cur_weapon.state = SHOOTING_STATE.wait_targetting
 	#BehaviorEvents.emit_signal("OnLogLine", "Firing " + cur_weapon.weapon_data.name_id + ". Target ?")
-	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, cur_weapon.weapon_data, self, "ProcessAttackSelection")
+	BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, cur_weapon, self, "ProcessAttackSelection")
 	BehaviorEvents.emit_signal("OnPopGUI") #HUD
 	#var text = Globals.mytr("[color=red]Select target for %s...[/color]", [Globals.mytr(cur_weapon.weapon_data.name_id)])
-	var text = Globals.mytr("[color=red]Select target for %s...[/color]", [Globals.EffectRef.get_display_name(cur_weapon.weapon_data, weapon_attributes)])
+	var text = Globals.mytr("[color=red]Select target for %s...[/color]", [Globals.EffectRef.get_display_name(cur_weapon.weapon_data, cur_weapon.modified_attributes)])
 	BehaviorEvents.emit_signal("OnPushGUI", "TargettingHUD", {"info_text":text, "show_skip":_weapon_shots.size() > 1})
 	set_input_state(Globals.INPUT_STATE.weapon_targetting)
 	
@@ -839,7 +839,7 @@ func ProcessAttackSelection(target, shot_tile):
 	if cur_weapon != null:
 		cur_weapon.state = SHOOTING_STATE.wait_targetting
 		#BehaviorEvents.emit_signal("OnLogLine", "Acknowledged, should we also fire " + cur_weapon.weapon_data.name_id + ". Target ?")
-		BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, cur_weapon.weapon_data, self, "ProcessAttackSelection")
+		BehaviorEvents.emit_signal("OnRequestTargettingOverlay", playerNode, cur_weapon, self, "ProcessAttackSelection")
 		var text = Globals.mytr("[color=red]Select target for %s...[/color]", [Globals.EffectRef.get_display_name(cur_weapon.weapon_data, cur_weapon.modified_attributes)])
 		get_node(TargettingHUD).Init( {"info_text":text} )
 		set_input_state(Globals.INPUT_STATE.weapon_targetting)

@@ -13,6 +13,9 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ModalBG" type="Panel" parent="."]
 anchor_right = 1.0
@@ -67,6 +70,8 @@ bbcode_text = "[b]BASIC CONTROLS[/b][indent][Numpad 1 to 9] or [Mouse Clicks on 
 [ b] or [Board Button] ---- Transfer control to another [u]crafted[/u] ship
 [t] or [Transfer Button] -- Transfer Inventory from one ship to another
 [Wait Button] ------------- Wait one turn
+[r] or [Crew Button] ------ Display this Run's Achievements
+[m] or [Comm Button] ------ Open Trading when on top of a Trading Port
 [/indent]
 [b]HUD INFORMATION[/b]
 [b]Top[/b][indent][Hull] -------- Health of the ship. This does not regenerate. If this falls to 0, it's game over
@@ -106,6 +111,8 @@ Accessible from the \"...\" Button
 [ b] or [Board Button] ---- Transfer control to another crafted ship
 [t] or [Transfer Button] -- Transfer Inventory from one ship to another
 [Wait Button] ------------- Wait one turn
+[r] or [Crew Button] ------ Display this Run's Achievements
+[m] or [Comm Button] ------ Open Trading when on top of a Trading Port
 
 HUD INFORMATION
 Top	[Hull] -------- Health of the ship. This does not regenerate. If this falls to 0, it's game over
@@ -162,6 +169,8 @@ bbcode_text = "[b]CONTROLES DE BASE[/b][indent][Pavé 1 à 9] ou [Clicker dans l
 [ b] ou [Boutton Embar] ---- Transfer les controles vers un autre vaisseau [u]fabriqué[/u]
 [t] ou [Boutton Transfert] - Transfert de l'inventaire entre vaisseau
 [Boutton Attendre] --------- Attendre un tour
+[r] ou [Bouton Equipage] --- Les Trophés pour la Partie en Cours
+[m] ou [Bouton Comm] ------- Acheter ou Vendre sur une Amarre Marchande
 [/indent]
 [b]HUD[/b]
 [b]Haut[/b][indent][Intégrité] -------- Point de vie du vaisseau. Ne se régénère pas naturellement. La partie est finit si l'intégrité tombe à 0.
@@ -201,6 +210,8 @@ Appuyez sur le bouton \"...\"
 [ b] ou [Boutton Embar] ---- Transfer les controles vers un autre vaisseau fabriqué
 [t] ou [Boutton Transfert] - Transfert de l'inventaire entre vaisseau
 [Boutton Attendre] --------- Attendre un tour
+[r] ou [Bouton Equipage] --- Les Trophés pour la Partie en Cours
+[m] ou [Bouton Comm] ------- Acheter ou Vendre sur une Amarre Marchande
 
 HUD
 Haut	[Intégrité] -------- Point de vie du vaisseau. Ne se régénère pas naturellement. La partie est finit si l'intégrité tombe à 0.
@@ -257,6 +268,8 @@ bbcode_text = "[b]BASIC CONTROLS[/b][indent][Numpad 1 to 9] or [Mouse Clicks on 
 [ b] or [Board Button] ---- Transfer control to another [u]crafted[/u] ship
 [t] or [Transfer Button] -- Transfer Inventory from one ship to another
 [Wait Button] ------------- Wait one turn
+[r] or [Crew Button] ------ Display this Run's Achievements
+[m] or [Comm Button] ------ Open Trading when on top of a Trading Port
 [/indent]
 [b]HUD INFORMATION[/b]
 [b]Top[/b][indent][Hull] -------- Health of the ship. This does not regenerate. If this falls to 0, it's game over
@@ -296,6 +309,8 @@ Accessible from the \"...\" Button
 [ b] or [Board Button] ---- Transfer control to another crafted ship
 [t] or [Transfer Button] -- Transfer Inventory from one ship to another
 [Wait Button] ------------- Wait one turn
+[r] or [Crew Button] ------ Display this Run's Achievements
+[m] or [Comm Button] ------ Open Trading when on top of a Trading Port
 
 HUD INFORMATION
 Top	[Hull] -------- Health of the ship. This does not regenerate. If this falls to 0, it's game over

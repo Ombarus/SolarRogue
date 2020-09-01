@@ -299,7 +299,8 @@ func ProcessDamage(target, shooter, weapon_data, modified_attributes):
 	var ai_malus : float = shooter.get_attrib("ai.hit_chance_malus", 0.0) * diff_chance_mult
 	var chance : float = Globals.get_data(weapon_data, "weapon_data.base_hit_chance", 1.0)
 	var effect_bonus : float = Globals.EffectRef.GetBonusValue(shooter, weapon_data.src, modified_attributes, "hit_chance_bonus")
-	chance = chance - ai_malus + effect_bonus
+	var dodge_bonus : float = Globals.EffectRef.GetBonusValue(target, weapon_data.src, null, "dodge_chance_bonus")
+	chance = chance - ai_malus + effect_bonus - dodge_bonus
 	chance = clamp(chance, 0.1, 1.0) # minimum 10% chance always because I say so!
 	var dam := 0.0
 	if chance == null or MersenneTwister.rand_float() < chance:
