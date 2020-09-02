@@ -4,6 +4,9 @@
 	"prefix":"Widebeam",
 	"attributes": {
 		"self_base_dam_multiplier":0.5,
-		"self_max_dam_multiplier":1.7
+		"self_max_dam_multiplier":1.4,
+		"self_hit_chance_bonus":0.25,
+		"self_crit_chance_bonus":-0.10,
+		"self_range_bonus":-1
 	}
 }

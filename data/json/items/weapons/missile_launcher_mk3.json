@@ -39,13 +39,18 @@
 	},
 	"variations": [
 		{"src":"data/json/items/effects/normal.json", "chance": 50},
-		{"src":"data/json/items/effects/compact.json", "chance":20},
-		{"src":"data/json/items/effects/linked.json", "chance":10},
-		{"src":"data/json/items/effects/he.json", "chance":10},
-		{"src":"data/json/items/effects/em.json", "chance":10},
+		{"src":"data/json/items/effects/he.json", "chance":20},
 		{"src":"data/json/items/effects/salvage.json", "chance":10},
-		{"src":"data/json/items/effects/swarm.json", "chance":10},
-		{"src":"data/json/items/effects/precision.json", "chance":10}
+		{"src":"data/json/items/effects/leaden_weapon.json", "chance":20},
+		{"src":"data/json/items/effects/linked.json", "chance":20},
+		{"src":"data/json/items/effects/compact.json", "chance":20},
+		{"src":"data/json/items/effects/efficient.json", "chance":20},
+		{"src":"data/json/items/effects/long_range.json", "chance":25},
+		{"src":"data/json/items/effects/precision.json", "chance":10},
+		{"src":"data/json/items/effects/fast.json", "chance":15},
+		{"src":"data/json/items/effects/swarm.json", "chance":20},
+		{"src":"data/json/items/effects/focused.json", "chance":10},
+		{"src":"data/json/items/effects/overloaded.json", "chance":20}
 	],
 	"description": {
 		"text":"Launches a flurry of guided-missile to any target in the viscinity. Extra missile bays allow for stacked shooting and reloading, allowing near-continuous shooting.",
@@ -61,7 +66,7 @@
 			"min_level":0,
 			"fields": [
 				{"name":"Damage", "value":"{weapon_data.base_dam*base_dam_multiplier}~{weapon_data.max_dam*max_dam_multiplier}", "translate_value":false},
-				{"name":"Range", "value":"{weapon_data.fire_range}", "translate_value":false},
+				{"name":"Range", "value":"{weapon_data.fire_range+range_bonus}", "translate_value":false},
 				{"name":"Energy Cost", "value":"{weapon_data.fire_energy_cost*fire_energy_cost_multiplier}", "translate_value":false, "positive_good":false},
 				{"name":"Speed", "value":"{weapon_data.fire_speed*fire_speed_multiplier} turns", "positive_good":false},
 				{"name":"Hit Chance", "value":"{weapon_data.base_hit_chance+hit_chance_bonus}%", "translate_value":false, "display_percent":true},

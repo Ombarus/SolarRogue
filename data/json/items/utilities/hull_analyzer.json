@@ -1,20 +1,19 @@
 {
-	"name_id":"Targeting Computer",
+	"name_id":"Hull Analyzer",
 	"type":"utility",
-	"sprite": "targeting_computer",
+	"sprite": "hull_analyzer",
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
-		"region":[0,1280,128,128]
+		"region":[128,1408,128,128]
 	},
 	"equipment": {
 		"slot":"utility",
-		"volume":40.0,
+		"volume":45.0,
 		"equip_ap":3.0,
 		"unequip_ap":3.0
 	},
 	"attributes": {
-		"global_hit_chance_bonus":0.05,
-		"global_crit_chance_bonus":0.1,
+		"global_dam_hull_multiplier":1.2
 	},
 	"recyclable": {
 		"energy": 700,
@@ -27,7 +26,7 @@
 		"energy_cost":700
 	},
 	"description": {
-		"text":"A dedicated processor capable of performing surgical strikes on unsuspecting patients.",
+		"text":"A dedicated processor capable of finding microscopic cracks on a target's Hull and make them much much bigger.",
 		"Overview": {
 			"min_level":0,
 			"fields":[
@@ -39,8 +38,7 @@
 		"Effect": {
 			"min_level":0,
 			"fields": [
-				{"name":"Hit Chance", "value":"{attributes.global_hit_chance_bonus}%", "translate_value":false, "display_percent":true},
-				{"name":"Crit Chance", "value":"{attributes.global_crit_chance_bonus}%", "translate_value":false, "display_percent":true}
+				{"name":"Hull Damage Multiplier", "value":"{attributes.global_dam_hull_multiplier}x", "translate_value":false}
 			]
 		}
 	}

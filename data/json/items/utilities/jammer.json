@@ -1,20 +1,20 @@
 {
-	"name_id":"Targeting Computer",
+	"name_id":"Jammer",
 	"type":"utility",
-	"sprite": "targeting_computer",
+	"sprite": "jammer",
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
-		"region":[0,1280,128,128]
+		"region":[0,1408,128,128]
 	},
 	"equipment": {
 		"slot":"utility",
-		"volume":40.0,
+		"volume":45.0,
 		"equip_ap":3.0,
 		"unequip_ap":3.0
 	},
 	"attributes": {
-		"global_hit_chance_bonus":0.05,
-		"global_crit_chance_bonus":0.1,
+		"global_hit_chance_bonus":-0.1,
+		"global_dodge_chance_bonus":0.1
 	},
 	"recyclable": {
 		"energy": 700,
@@ -27,7 +27,7 @@
 		"energy_cost":700
 	},
 	"description": {
-		"text":"A dedicated processor capable of performing surgical strikes on unsuspecting patients.",
+		"text":"A Powerful Jamming Signal that disrupts all systems, including yours!",
 		"Overview": {
 			"min_level":0,
 			"fields":[
@@ -40,7 +40,7 @@
 			"min_level":0,
 			"fields": [
 				{"name":"Hit Chance", "value":"{attributes.global_hit_chance_bonus}%", "translate_value":false, "display_percent":true},
-				{"name":"Crit Chance", "value":"{attributes.global_crit_chance_bonus}%", "translate_value":false, "display_percent":true}
+				{"name":"Enemy's Hit Chance", "value":"-{attributes.global_dodge_chance_bonus}%", "translate_value":false, "display_percent":true}
 			]
 		}
 	}

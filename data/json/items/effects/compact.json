@@ -3,9 +3,18 @@
 	"type":"effect",
 	"prefix":"Compact",
 	"attributes": {
-		"self_shield_multiplier":0.8,
-		"self_base_dam_multiplier":0.8,
-		"self_max_dam_multiplier":0.8,
+		"global_move_multiplier":0.8,
+		"self_shield_multiplier":0.6,
+		"self_base_dam_multiplier":0.6,
+		"self_max_dam_multiplier":0.6,
 		"inv_self_volume_multiplier":0.5
+	},
+	"description": {
+		"Extra": {
+			"min_level":0,
+			"fields": [
+				{"name":"Ship Movement", "value":"[color=red]-20%[/color]"}
+			]
+		}
 	}
 }

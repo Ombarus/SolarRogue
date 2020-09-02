@@ -1,20 +1,22 @@
 {
-	"name_id":"Targeting Computer",
+	"name_id":"Shield Bypass",
 	"type":"utility",
-	"sprite": "targeting_computer",
+	"sprite": "shield_bypass",
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
-		"region":[0,1280,128,128]
+		"region":[128,1280,128,128]
 	},
 	"equipment": {
 		"slot":"utility",
-		"volume":40.0,
+		"volume":45.0,
 		"equip_ap":3.0,
 		"unequip_ap":3.0
 	},
 	"attributes": {
-		"global_hit_chance_bonus":0.05,
-		"global_crit_chance_bonus":0.1,
+		"global_shield_multiplier":0.75,
+		"global_hp_regen_per_ap_multiplier":0.75,
+		"global_base_dam_multiplier":1.2,
+		"global_max_dam_multiplier":1.2
 	},
 	"recyclable": {
 		"energy": 700,
@@ -27,7 +29,7 @@
 		"energy_cost":700
 	},
 	"description": {
-		"text":"A dedicated processor capable of performing surgical strikes on unsuspecting patients.",
+		"text":"Reroute power to Weapon!",
 		"Overview": {
 			"min_level":0,
 			"fields":[
@@ -39,8 +41,9 @@
 		"Effect": {
 			"min_level":0,
 			"fields": [
-				{"name":"Hit Chance", "value":"{attributes.global_hit_chance_bonus}%", "translate_value":false, "display_percent":true},
-				{"name":"Crit Chance", "value":"{attributes.global_crit_chance_bonus}%", "translate_value":false, "display_percent":true}
+				{"name":"Total Shield", "value":"-25%", "translate_value":false},
+				{"name":"Shield Regen", "value":"-25%", "translate_value":false},
+				{"name":"Weapon Damage", "value":"+20%", "translate_value":false}
 			]
 		}
 	}

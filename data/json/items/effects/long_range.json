@@ -1,9 +1,10 @@
 {
-	"name_id":"Widebeam Weapon",
+	"name_id":"Long Range Weapon",
 	"type":"effect",
-	"prefix":"Widebeam",
+	"prefix":"Long Range",
 	"attributes": {
-		"self_base_dam_multiplier":0.5,
-		"self_max_dam_multiplier":1.7
+		"self_fire_speed_multiplier":1.25,
+		"self_hit_chance_bonus":-0.1,
+		"self_range_bonus":1
 	}
 }

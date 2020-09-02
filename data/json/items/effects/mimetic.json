@@ -1,9 +1,18 @@
 {
-	"name_id":"Widebeam Weapon",
+	"name_id":"Mimetic Shield",
 	"type":"effect",
-	"prefix":"Widebeam",
+	"prefix":"Mimetic",
 	"attributes": {
-		"self_base_dam_multiplier":0.5,
-		"self_max_dam_multiplier":1.7
+		"self_shield_multiplier":0.7,
+		"global_dodge_chance_bonus":0.1,
+		"self_base_ap_cost_multiplier":1.5
+	},
+	"description": {
+		"Extra": {
+			"min_level":0,
+			"fields": [
+				{"name":"Dodge Chances", "value":"[color=lime]+10%[/color]"}
+			]
+		}
 	}
 }

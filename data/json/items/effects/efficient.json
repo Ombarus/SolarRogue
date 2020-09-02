@@ -1,17 +1,11 @@
 {
-	"name_id":"Light Shield",
+	"name_id":"Efficient",
 	"type":"effect",
-	"prefix":"Light",
+	"prefix":"Efficient",
 	"attributes": {
-		"global_move_multiplier":0.90, 
-		"self_shield_multiplier":0.8
-	},
-	"description": {
-		"Extra": {
-			"min_level":0,
-			"fields": [
-				{"name":"Ship Movement", "value":"[color=lime]10% faster[/color]"}
-			]
-		}
+		"self_hp_regen_per_ap_multiplier":0.5, 
+		"self_energy_cost_per_hp_multiplier":0.5,
+		"self_fire_speed_multiplier":1.5,
+		"self_fire_energy_cost_multiplier":0.5
 	}
 }

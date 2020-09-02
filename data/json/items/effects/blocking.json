@@ -1,9 +1,18 @@
 {
-	"name_id":"Widebeam Weapon",
+	"name_id":"Blocking Shield",
 	"type":"effect",
-	"prefix":"Widebeam",
+	"prefix":"Blocking",
 	"attributes": {
-		"self_base_dam_multiplier":0.5,
-		"self_max_dam_multiplier":1.7
+		"self_shield_multiplier":1.5,
+		"global_base_dam_multiplier":0.8,
+		"global_max_dam_multiplier":0.8
+	},
+	"description": {
+		"Extra": {
+			"min_level":0,
+			"fields": [
+				{"name":"Weapon Damage", "value":"[color=red]-20%[/color]"}
+			]
+		}
 	}
 }

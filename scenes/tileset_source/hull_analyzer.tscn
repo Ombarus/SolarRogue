@@ -2,8 +2,8 @@
 
 [ext_resource path="res://data/private/textures/space-sprite.png" type="Texture" id=1]
 
-[node name="targeting_computer" type="Sprite"]
+[node name="hull_analyzer" type="Sprite"]
 z_index = 25
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 0, 1280, 128, 128 )
+region_rect = Rect2( 128, 1408, 128, 128 )

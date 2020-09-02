@@ -1,0 +1,19 @@
+{
+	"name_id":"Leaden Shield",
+	"type":"effect",
+	"prefix":"Leaden",
+	"attributes": {
+		"global_move_multiplier":1.25,
+		"self_shield_multiplier":1.5,
+		"self_energy_cost_per_hp_multiplier":2.0,
+		"self_volume_multiplier":1.5
+	},
+	"description": {
+		"Extra": {
+			"min_level":0,
+			"fields": [
+				{"name":"Ship Movement", "value":"[color=red]-25%[/color]"}
+			]
+		}
+	}
+}

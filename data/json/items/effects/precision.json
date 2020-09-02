@@ -3,20 +3,8 @@
 	"type":"effect",
 	"prefix":"Precision",
 	"attributes": {
-		"self_hit_chance_bonus":0.1,
-		"self_crit_chance_bonus":0.05,
-		"linked_crit_chance_bonus":0.05,
-		"self_fire_speed_multiplier":1.5,
-		"self_range_bonus":1.0,
-		"global_dodge_chance_bonus":0.2,
-		"global_base_ap_cost_multiplier":100.0
-	},
-	"description": {
-		"Extra": {
-			"min_level":0,
-			"fields": [
-				{"name":"Each identical item", "value":"[color=lime]+5% Critical[/color]"}
-			]
-		}
+		"self_fire_speed_multiplier":1.25,
+		"self_hit_chance_bonus":0.05,
+		"self_crit_chance_bonus":0.05
 	}
 }
