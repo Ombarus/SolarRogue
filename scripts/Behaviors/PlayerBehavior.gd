@@ -789,10 +789,13 @@ func do_contextual_actions(tile, player_tile):
 			var targetting_behavior : Node = get_node("../Targetting")
 			
 			var weapons = playerNode.get_attrib("mounts.weapon")
+			var weapons_attributes = playerNode.get_attrib("mount_attributes.weapon")
 			var weapons_data = Globals.LevelLoaderRef.LoadJSONArray(weapons)
 			if weapons_data != null and weapons_data.size() > 0:
-				for w in weapons_data:
-					var best_move = targetting_behavior.ClosestFiringSolution(player_tile, tile, w)
+				for i in range(weapons_data.size()):
+					var w = weapons_data[i]
+					var attrib = weapons_attributes[i]
+					var best_move = targetting_behavior.ClosestFiringSolution(playerNode, player_tile, tile, {"weapon_data":w, "modified_attributes":attrib})
 					if best_move.length() == 0:
 						if o.get_attrib("destroyable") != null and priority < 200:
 							priority = 200 # enemy ships have very high priority

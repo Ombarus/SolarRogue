@@ -13,8 +13,14 @@
 	"mounts": {
 		"weapon": ["", "", ""],
 		"scanner": [""],
-		"converter": [""],
-		"utility":["", "", ""]
+		"utility":["", "", "", ""],
+		"converter": [""]
+	},
+	"mount_attributes": {
+		"weapon": [{}, {}, {}],
+		"scanner": [{}],
+		"utility": [{}, {}, {}, {}],
+		"converter": [{}]
 	},
 	"destroyable": {
 		"hull":75

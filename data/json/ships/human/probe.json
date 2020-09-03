@@ -30,6 +30,7 @@
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.55},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.3},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
+		{"id":"data/json/items/converters/converter_mk1.json", "chance":0.02},
 		{"id":"data/json/items/scanners/scanner_mk2.json", "chance":0.035},
 		{"id":"data/json/items/scanners/scanner_mk3.json", "chance":0.005},
 		{"id":"data/json/items/scanners/long_range_scanner_mk1.json", "chance":0.03},

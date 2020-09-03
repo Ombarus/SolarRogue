@@ -49,8 +49,8 @@
 		{"name":"data/json/items/consumables/repair_nanobots.json", "spawn_rate":0.000015625},
 		{"name":"data/json/items/consumables/emergency_warp.json", "spawn_rate":0.000015625},
 		
-		{"name":"data/json/items/shields/shield_mk2.json", "spawn_rate":0.000016625},
-		{"name":"data/json/items/shields/shield_mk3.json", "spawn_rate":0.000016625},
+		{"name":"data/json/items/shields/shield_mk2.json", "spawn_rate":0.00003325},
+		{"name":"data/json/items/shields/shield_mk3.json", "spawn_rate":0.00003325},
 		
 		{"name":"data/json/items/weapons/torpedo_launcher_mk1.json", "spawn_rate":0.000015625},
 		{"name":"data/json/items/weapons/torpedo.json", "spawn_rate":0.00001302083333},
@@ -61,18 +61,25 @@
 		{"name":"data/json/items/utilities/speed_boost_mk2.json", "spawn_rate":0.00001302083333},
 		
 		{"name":"data/json/items/weapons/chaos_ball_generator.json", "spawn_rate":0.0000052},
-		{"name":"data/json/items/weapons/minigun.json", "spawn_rate":0.00001302083333},
+		{"name":"data/json/items/weapons/minigun.json", "spawn_rate":0.00002604166667},
 		{"name":"data/json/items/weapons/bullet_clip.json", "spawn_rate":0.00003125},
 		
-		{"name":"data/json/items/weapons/missile_launcher_mk2.json", "spawn_rate":0.00001302083333},
-		{"name":"data/json/items/weapons/missile_launcher_mk3.json", "spawn_rate":0.00001302083333},
-		{"name":"data/json/items/weapons/laser_turret_mk2.json", "spawn_rate":0.000001302083333},
+		{"name":"data/json/items/weapons/missile_launcher_mk2.json", "spawn_rate":0.00002604166667},
+		{"name":"data/json/items/weapons/missile_launcher_mk3.json", "spawn_rate":0.00002604166667},
+		{"name":"data/json/items/weapons/laser_turret_mk2.json", "spawn_rate":0.00002604166667},
 		{"name":"data/json/items/scanners/scanner_mk3.json", "spawn_rate":0.00001302083333},
 		{"name":"data/json/items/scanners/long_range_scanner_mk1.json", "spawn_rate":0.00001302083333},
 		{"name":"data/json/items/scanners/long_range_scanner_mk2.json", "spawn_rate":0.00001302083333},
 		{"name":"data/json/items/scanners/long_range_scanner_mk3.json", "spawn_rate":0.00001302083333},
 		{"name":"data/json/items/scanners/ultimate_scanner.json", "spawn_rate":0.00001302083333, "global_max":1},
-		{"name":"data/json/items/misc/diluted_cristals.json", "spawn_rate":0.00001302083333}
+		{"name":"data/json/items/misc/diluted_cristals.json", "spawn_rate":0.00001302083333},
+		
+		{"name":"data/json/items/utilities/hull_analyzer.json", "spawn_rate":0.000015625},
+		{"name":"data/json/items/utilities/shield_analyzer.json", "spawn_rate":0.000015625},
+		{"name":"data/json/items/utilities/shield_bypass.json", "spawn_rate":0.000015625},
+		{"name":"data/json/items/utilities/weapon_bypass.json", "spawn_rate":0.000015625},
+		{"name":"data/json/items/utilities/targeting_computer.json", "spawn_rate":0.000015625},
+		{"name":"data/json/items/utilities/jammer.json", "spawn_rate":0.000015625}
 		
 	],
 	"description": {

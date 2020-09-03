@@ -32,7 +32,7 @@
 		]
 	},
 	"drop_on_death": [
-	
+		{"id":"data/json/items/converters/converter_mk1.json", "chance":0.001},
 		{"id":"data/json/items/converters/converter_mk2.json", "chance":0.001},
 		{"id":"data/json/items/converters/jerg_converter_mk1.json", "chance":0.06666666667},
 		{"id":"data/json/items/converters/vorg_converter_mk1.json", "chance":0.0005},
@@ -47,15 +47,15 @@
 		{"id":"data/json/items/utilities/solar_array.json", "chance":0.01},
 		{"id":"data/json/items/weapons/missile_launcher_mk1.json", "chance":0.0},
 		{"id":"data/json/items/weapons/mining_laser.json", "chance":0.03},
-		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.03846153846},
+		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.08846153846},
 		{"id":"data/json/items/weapons/missile.json", "chance":0.0},
 		{"id":"data/json/items/consumables/repair_nanobots.json", "chance":0.01},
 		{"id":"data/json/items/consumables/emergency_warp.json", "chance":0.01},
 		
-		{"id":"data/json/items/shields/shield_mk2.json", "chance":0.022},
-		{"id":"data/json/items/shields/shield_mk3.json", "chance":0.012},
+		{"id":"data/json/items/shields/shield_mk2.json", "chance":0.0022},
+		{"id":"data/json/items/shields/shield_mk3.json", "chance":0.0012},
 		
-		{"id":"data/json/items/weapons/laser_turret_mk2.json", "chance":0.012},
+		{"id":"data/json/items/weapons/laser_turret_mk2.json", "chance":0.024},
 		{"id":"data/json/items/scanners/scanner_mk3.json", "chance":0.005},
 		{"id":"data/json/items/scanners/long_range_scanner_mk1.json", "chance":0.01},
 		{"id":"data/json/items/scanners/long_range_scanner_mk2.json", "chance":0.01},
@@ -74,9 +74,16 @@
 		{"id":"data/json/items/utilities/speed_boost.json", "chance":0.002},
 		{"id":"data/json/items/utilities/speed_boost_mk2.json", "chance":0.002},
 		
-		{"id":"data/json/items/weapons/rail_gun_mk1.json", "chance":0.002},
-		{"id":"data/json/items/weapons/rail_gun_mk2.json", "chance":0.002},
+		{"id":"data/json/items/weapons/rail_gun_mk1.json", "chance":0.0035},
+		{"id":"data/json/items/weapons/rail_gun_mk2.json", "chance":0.0025},
 		{"id":"data/json/items/weapons/depleted_uranium.json", "chance":0.002},
+		
+		{"id":"data/json/items/utilities/hull_analyzer.json", "chance":0.009},
+		{"id":"data/json/items/utilities/shield_analyzer.json", "chance":0.009},
+		{"id":"data/json/items/utilities/shield_bypass.json", "chance":0.009},
+		{"id":"data/json/items/utilities/weapon_bypass.json", "chance":0.009},
+		{"id":"data/json/items/utilities/targeting_computer.json", "chance":0.009},
+		{"id":"data/json/items/utilities/jammer.json", "chance":0.009},
 		
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.1},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},

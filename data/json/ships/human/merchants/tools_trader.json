@@ -50,7 +50,7 @@
 	},
 	"merchant": {
 		"trade_ports":[[-1,0]],
-		"inventory_size":[5,12],
+		"inventory_size":[8,15],
 		"pondered_inventory_content": [
 			{"src":"data/json/items/converters/converter_mk2.json", "chance":50},
 			{"src":"data/json/items/converters/converter_mk3.json", "chance":20},
@@ -70,7 +70,13 @@
 			{"src":"data/json/items/utilities/power_amplifier.json", "chance":30},
 			{"src":"data/json/items/utilities/power_amplifier_mk2.json", "chance":30},
 			{"src":"data/json/items/utilities/speed_boost.json", "chance":50},
-			{"src":"data/json/items/utilities/speed_boost_mk2.json", "chance":20}
+			{"src":"data/json/items/utilities/speed_boost_mk2.json", "chance":20},
+			{"src":"data/json/items/utilities/hull_analyzer.json", "chance":50},
+			{"src":"data/json/items/utilities/shield_analyzer.json", "chance":50},
+			{"src":"data/json/items/utilities/shield_bypass.json", "chance":50},
+			{"src":"data/json/items/utilities/weapon_bypass.json", "chance":50},
+			{"src":"data/json/items/utilities/targeting_computer.json", "chance":50},
+			{"src":"data/json/items/utilities/jammer.json", "chance":50}
 		]
 	},
 	"cargo": {
@@ -125,6 +131,13 @@
 		
 		{"id":"data/json/items/weapons/minigun.json", "chance":0.012},
 		{"id":"data/json/items/weapons/bullet_clip.json", "chance":0.02},
+		
+		{"id":"data/json/items/utilities/hull_analyzer.json", "chance":0.02},
+		{"id":"data/json/items/utilities/shield_analyzer.json", "chance":0.02},
+		{"id":"data/json/items/utilities/shield_bypass.json", "chance":0.02},
+		{"id":"data/json/items/utilities/weapon_bypass.json", "chance":0.02},
+		{"id":"data/json/items/utilities/targeting_computer.json", "chance":0.02},
+		{"id":"data/json/items/utilities/jammer.json", "chance":0.02},
 
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.1},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}

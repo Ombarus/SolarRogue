@@ -17,7 +17,15 @@
 		],
 		"shield": ["data/json/items/shields/shield_mk1.json"],
 		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
+		"utility": [""],
 		"converter": ["data/json/items/converters/converter_mk1.json"]
+	},
+	"mount_attributes": {
+		"weapon": [{}],
+		"shield": [{}],
+		"scanner": [{}],
+		"utility": [{}],
+		"converter": [{}]
 	},
 	"destroyable": {
 		"hull":13

@@ -30,7 +30,7 @@
 			{"src":"data/json/items/weapons/laser_turret_mk1.json", "chance":80},
 			{"src":"data/json/items/scanners/scanner_mk1.json", "chance":80},
 			{"src":"data/json/items/scanners/long_range_scanner_mk1.json", "chance":70},
-			{"src":"data/json/items/converters/converter_mk1.json", "chance":0, "max":1},
+			{"src":"data/json/items/converters/converter_mk1.json", "chance":80, "max":1},
 			
 			{"src":"data/json/items/shields/shield_mk1.json", "chance":60},
 			{"src":"data/json/items/scanners/scanner_mk2.json", "chance":60},
@@ -65,7 +65,13 @@
 			{"src":"data/json/items/weapons/missile_launcher_mk3.json", "chance":6, "max":1},
 			{"src":"data/json/items/converters/jerg_converter_mk1.json", "chance":2, "max":1},
 			{"src":"data/json/items/converters/vorg_converter_mk1.json", "chance":2, "max":1},
-			{"src":"data/json/items/scanners/ultimate_scanner.json", "chance":1, "global_max":1, "max":1}
+			{"src":"data/json/items/scanners/ultimate_scanner.json", "chance":1, "global_max":1, "max":1},
+			{"src":"data/json/items/utilities/hull_analyzer.json", "chance":30},
+			{"src":"data/json/items/utilities/shield_analyzer.json", "chance":30},
+			{"src":"data/json/items/utilities/shield_bypass.json", "chance":30},
+			{"src":"data/json/items/utilities/weapon_bypass.json", "chance":30},
+			{"src":"data/json/items/utilities/targeting_computer.json", "chance":30},
+			{"src":"data/json/items/utilities/jammer.json", "chance":30}
 		]
 	},
 	"recyclable": {

@@ -11,6 +11,10 @@
 		"scanner": [""],
 		"converter": [""]
 	},
+	"mount_attributes": {
+		"scanner": [{}],
+		"converter": [{}]
+	},
 	"animation": {
 		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
 	},

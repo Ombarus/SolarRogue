@@ -42,21 +42,22 @@
 		"hit_chance_malus":0.3
 	},
 	"drop_on_death": [
+		{"id":"data/json/items/converters/converter_mk1.json", "chance":0.001},
 		{"id":"data/json/items/converters/converter_mk2.json", "chance":0.001},
 		{"id":"data/json/items/converters/converter_mk3.json", "chance":0.001},
 		{"id":"data/json/items/converters/jerg_converter_mk1.json", "chance":0.001},
 		{"id":"data/json/items/converters/vorg_converter_mk1.json", "chance":0.06666666667},
 		{"id":"data/json/items/scanners/scanner_mk1.json", "chance":0.05},
 		{"id":"data/json/items/scanners/scanner_mk2.json", "chance":0.05},
-		{"id":"data/json/items/shields/shield_mk1.json", "chance":0.05},
-		{"id":"data/json/items/shields/shield_mk1.json", "chance":0.05},
-		{"id":"data/json/items/shields/shield_mk1.json", "chance":0.05},
+		{"id":"data/json/items/shields/shield_mk1.json", "chance":0.08},
+		{"id":"data/json/items/shields/shield_mk1.json", "chance":0.08},
+		{"id":"data/json/items/shields/shield_mk1.json", "chance":0.08},
 		{"id":"data/json/items/utilities/gravitic_compactor.json", "chance":0.008},
 		{"id":"data/json/items/utilities/solar_array.json", "chance":0.01428571429},
 		{"id":"data/json/items/consumables/repair_nanobots.json", "chance":0.01},
 		{"id":"data/json/items/consumables/emergency_warp.json", "chance":0.01},
 		
-		{"id":"data/json/items/shields/shield_mk2.json", "chance":0.045},
+		{"id":"data/json/items/shields/shield_mk2.json", "chance":0.06},
 		{"id":"data/json/items/shields/shield_mk3.json", "chance":0.045},
 		
 		{"id":"data/json/items/scanners/scanner_mk3.json", "chance":0.015},
@@ -73,6 +74,13 @@
 		{"id":"data/json/items/utilities/power_amplifier_mk3.json", "chance":0.02},
 		{"id":"data/json/items/utilities/speed_boost.json", "chance":0.02},
 		{"id":"data/json/items/utilities/speed_boost_mk2.json", "chance":0.02},
+		
+		{"id":"data/json/items/utilities/hull_analyzer.json", "chance":0.02},
+		{"id":"data/json/items/utilities/shield_analyzer.json", "chance":0.02},
+		{"id":"data/json/items/utilities/shield_bypass.json", "chance":0.02},
+		{"id":"data/json/items/utilities/weapon_bypass.json", "chance":0.02},
+		{"id":"data/json/items/utilities/targeting_computer.json", "chance":0.02},
+		{"id":"data/json/items/utilities/jammer.json", "chance":0.02},
 		
 		{"id":"data/json/items/weapons/rail_gun_mk1.json", "chance":0.002},
 		{"id":"data/json/items/weapons/rail_gun_mk2.json", "chance":0.002},

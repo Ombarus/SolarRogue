@@ -14,8 +14,15 @@
 		"weapon": ["", "", ""],
 		"shield": ["", ""],
 		"scanner": [""],
-		"converter": [""],
-		"utility":[""]
+		"utility":["", "", ""],
+		"converter": [""]
+	},
+	"mount_attributes": {
+		"weapon": [{}, {}, {}],
+		"shield": [{}, {}],
+		"scanner": [{}],
+		"utility": [{}, {}, {}],
+		"converter": [{}]
 	},
 	"destroyable": {
 		"hull":50

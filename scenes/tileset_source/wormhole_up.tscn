@@ -77,9 +77,12 @@ void fragment() {
 	
 	final_color *= color_multiplier;
 	
+	final_color.a = 1.0;
+	
 	// Blend at the corner
 	vec4 normal_color = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0);
-	float mixer = clamp(dist_center*2.0, 0.0, 1.0);
+	float mixer = smoothstep(0.3, 0.5, dist_center);
+	//float mixer = clamp(dist_center*2.0, 0.0, 1.0);
 	final_color = mix(final_color, normal_color, mixer);
 	
 	COLOR.rgba = final_color;
@@ -158,4 +161,3 @@ region_rect = Rect2( 0, 0, 128, 128 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="fx"]
 autoplay = "rotating"
 anims/rotating = SubResource( 3 )
-
