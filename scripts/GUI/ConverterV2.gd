@@ -180,6 +180,7 @@ func UpdateMaterialsList(recipe_data):
 		var cargo_index = 0
 		for item in cargo:
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
+			var modified_attrib = item.get("modified_attributes", {})
 			var add_item = false
 			if recipe_data.produce == "energy" and "recyclable" in data:
 				add_item = true
@@ -192,9 +193,10 @@ func UpdateMaterialsList(recipe_data):
 			if add_item == true:
 				has_item_to_use = true
 				if not cargo_index in added_to_data:
+					var display_name = Globals.EffectRef.get_display_name(data, modified_attrib)
 					var d = Globals.LevelLoaderRef.LoadJSON(item.src)
-					list_data.push_back({"name_id":d.name_id, "max":item.count, "src":item.src})
-					input_data.push_back({"name_id":d.name_id, "max":item.count, "src":item.src, "selected":item.count})
+					list_data.push_back({"display_name_id":display_name, "name_id":d.name_id, "modified_attributes":modified_attrib, "max":item.count, "src":item.src})
+					input_data.push_back({"display_name_id":display_name, "name_id":d.name_id, "modified_attributes":modified_attrib, "max":item.count, "src":item.src, "selected":item.count})
 					added_to_data[cargo_index] = true
 			cargo_index += 1
 	var using_content = _material_list.Content	

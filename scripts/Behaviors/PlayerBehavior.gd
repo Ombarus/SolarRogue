@@ -238,6 +238,11 @@ func Pressed_Crafting_Callback():
 	if lock_input:
 		return
 	
+	var converter = playerNode.get_attrib("mounts.converter")
+	if converter == null or converter.size() <= 0 or converter[0].empty():
+		BehaviorEvents.emit_signal("OnLogLine", "The ship cannot function without a converter installed!")
+		return
+		
 	#BehaviorEvents.emit_signal("OnPushGUI", "Converter", {"object":playerNode, "callback_object":self, "callback_method":"OnCraft_Callback"})
 	BehaviorEvents.emit_signal("OnPushGUI", "ConverterV2", {"object":playerNode, "callback_object":self, "callback_method":"OnCraft_Callback"})
 	

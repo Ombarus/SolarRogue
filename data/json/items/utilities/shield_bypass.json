@@ -29,7 +29,7 @@
 		"energy_cost":700
 	},
 	"description": {
-		"text":"Reroute power to Weapon!",
+		"text":"Reroute power to Weapons!",
 		"Overview": {
 			"min_level":0,
 			"fields":[
