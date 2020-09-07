@@ -138,6 +138,13 @@
 				"amount":1
 			},
 			{
+				"name": "Targeting Computer", 
+				"requirements":[{"type":"energy", "amount":875}, {"type":"spare_parts", "amount":3}], 
+				"produce":"data/json/items/utilities/targeting_computer.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
 				"name": "Medium Shield", 
 				"requirements":[{"type":"energy", "amount":950}, {"type":"spare_parts", "amount":4}], 
 				"produce":"data/json/items/shields/shield_mk2.json",

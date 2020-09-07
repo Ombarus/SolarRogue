@@ -15,8 +15,8 @@
 	"attributes": {
 		"global_shield_multiplier":0.75,
 		"global_hp_regen_per_ap_multiplier":0.75,
-		"global_base_dam_multiplier":1.2,
-		"global_max_dam_multiplier":1.2
+		"global_base_dam_multiplier":1.25,
+		"global_max_dam_multiplier":1.25
 	},
 	"recyclable": {
 		"energy": 700,
@@ -43,7 +43,7 @@
 			"fields": [
 				{"name":"Total Shield", "value":"-25%", "translate_value":false},
 				{"name":"Shield Regen", "value":"-25%", "translate_value":false},
-				{"name":"Weapon Damage", "value":"+20%", "translate_value":false}
+				{"name":"Weapon Damage", "value":"+25%", "translate_value":false}
 			]
 		}
 	}

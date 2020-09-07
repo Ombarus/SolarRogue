@@ -96,11 +96,12 @@ func OnDealDamage_Callback(targets, shooter, weapon_data, modified_attributes, s
 		if validate_action(null, shooter, weapon_data) == true:
 			shot_fired = true
 			var log_choices = {
-				"Scans report no hit sir!":80,
-				"Critical Miss sir!":1,
+				"Scans report no hit sir!":150,
+				"Critical Miss sir!":10,
 				"We're not even shooting at air sir!":50,
-				"Energy wasted for nothing!":10,
-				"Too bad, better luck next time captain!":5
+				"Energy wasted for nothing!":20,
+				"Too bad, better luck next time captain!":10,
+				"Ensign Kim messed up the launch tubes again!":1
 			}
 			BehaviorEvents.emit_signal("OnLogLine", log_choices)
 			BehaviorEvents.emit_signal("OnShotFired", shot_tile, shooter, weapon_data)

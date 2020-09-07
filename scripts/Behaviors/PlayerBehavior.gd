@@ -701,6 +701,9 @@ func _unhandled_input(event):
 			set_input_state(_saved_input_state)
 				
 	if event is InputEventKey and event.pressed == true:
+		if _input_state == Globals.INPUT_STATE.weapon_targetting or _input_state == Globals.INPUT_STATE.board_targetting or _input_state == Globals.INPUT_STATE.loot_targetting:
+			return
+			
 		if event.unicode != 0:
 			_last_unicode = PoolByteArray([event.unicode]).get_string_from_utf8()
 		else:

@@ -70,7 +70,7 @@ func OnTargetClick_Callback(click_pos, target_type):
 	var potential_targets = []
 	var player_tile = Globals.LevelLoaderRef.World_to_Tile(_player_node.position)
 	var weapon_data = _targetting_data.weapon_data.weapon_data
-	var weapon_attributes = _targetting_data.modified_attributes
+	var weapon_attributes = _targetting_data.get("modified_attributes", {})
 	var fire_radius = weapon_data.fire_range + Globals.EffectRef.GetBonusValue(_player_node, "", weapon_attributes, "range_bonus")
 	for obj in tile_content:
 		var obj_type = obj.get_attrib("type")
@@ -199,7 +199,7 @@ func _DoTargetting(player, weapon):
 	var player_tile = Globals.LevelLoaderRef.World_to_Tile(player.position)
 	var r = get_node("/root/Root/OverlayTiles")
 	var n = null
-	var fire_radius = weapon.weapon_data.weapon_data.fire_range + Globals.EffectRef.GetBonusValue(player, "", weapon.modified_attributes, "range_bonus")
+	var fire_radius = weapon.weapon_data.weapon_data.fire_range + Globals.EffectRef.GetBonusValue(player, "", weapon.get("modified_attributes", {}), "range_bonus")
 	var offset = Vector2(0,0)
 	var obj_tile = player_tile
 	var bounds = Globals.LevelLoaderRef.levelSize

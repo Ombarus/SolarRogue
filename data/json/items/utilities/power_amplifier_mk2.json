@@ -40,8 +40,8 @@
 		"Effect": {
 			"min_level":0,
 			"fields": [
-				{"name":"Damage Boost", "value":"{attributes.global_base_dam_multiplier}%", "translate_value":false, "display_percent":true},
-				{"name":"Weapon Energy Cost", "value":"{attributes.global_fire_energy_cost_multiplier}%", "translate_value":false, "display_percent":true}
+				{"name":"Damage Boost", "value":"[color=lime]+50%[/color]", "translate_value":false},
+				{"name":"Weapon Energy Cost", "value":"[color=red]+50%[/color]", "translate_value":false}
 			]
 		}
 	}

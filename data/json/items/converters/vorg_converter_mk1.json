@@ -126,6 +126,27 @@
 				"amount":1
 			},
 			{
+				"name": "Hull Analyzer", 
+				"requirements":[{"type":"energy", "amount":875}, {"type":"spare_parts", "amount":3}], 
+				"produce":"data/json/items/utilities/hull_analyzer.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
+				"name": "Shield Bypass", 
+				"requirements":[{"type":"energy", "amount":875}, {"type":"spare_parts", "amount":3}], 
+				"produce":"data/json/items/utilities/shield_bypass.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
+				"name": "Weapon Bypass", 
+				"requirements":[{"type":"energy", "amount":875}, {"type":"spare_parts", "amount":3}], 
+				"produce":"data/json/items/utilities/weapon_bypass.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
 				"name": "Large Shield", 
 				"requirements":[{"type":"energy", "amount":1600}, {"type":"spare_parts", "amount":8}], 
 				"produce":"data/json/items/shields/shield_mk3.json",

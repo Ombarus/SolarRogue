@@ -64,7 +64,7 @@ func ConsiderInterests(obj):
 						"[color=yellow]Scanners have picked up a new %s[/color]":50,
 						"[color=yellow]%s detected[/color]":30,
 						"[color=yellow]%s within scanner range[/color]":30,
-						"[color=yellow]would %s be useful right now captain?[/color]":5,
+						"[color=yellow]Captain, I've just found a %s[/color]":5,
 					}
 					BehaviorEvents.emit_signal("OnLogLine", log_choices, [Globals.mytr(o.get_attrib("type"))])
 				filtered.push_back(id)

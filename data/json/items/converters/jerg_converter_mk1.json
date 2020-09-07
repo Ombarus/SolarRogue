@@ -135,6 +135,27 @@
 				"amount":1
 			},
 			{
+				"name": "Shield Analyzer", 
+				"requirements":[{"type":"energy", "amount":875}, {"type":"spare_parts", "amount":3}], 
+				"produce":"data/json/items/utilities/shield_analyzer.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
+				"name": "Targeting Computer", 
+				"requirements":[{"type":"energy", "amount":875}, {"type":"spare_parts", "amount":3}], 
+				"produce":"data/json/items/utilities/targeting_computer.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
+				"name": "Jammer", 
+				"requirements":[{"type":"energy", "amount":875}, {"type":"spare_parts", "amount":3}], 
+				"produce":"data/json/items/utilities/jammer.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
 				"name": "Mining Laser", 
 				"requirements":[{"type":"energy", "amount":600}, {"type":"spare_parts", "amount":2}], 
 				"produce":"data/json/items/weapons/mining_laser.json",
