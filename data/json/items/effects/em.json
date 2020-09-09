@@ -1,7 +1,7 @@
 {
 	"name_id":"EM Weapon",
 	"type":"effect",
-	"prefix":"EM",
+	"prefix":"EM %s",
 	"attributes": {
 		"self_dam_shield_multiplier":1.5,
 		"self_dam_hull_multiplier":0.5,

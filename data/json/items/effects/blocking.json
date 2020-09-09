@@ -1,7 +1,7 @@
 {
 	"name_id":"Blocking Shield",
 	"type":"effect",
-	"prefix":"Blocking",
+	"prefix":"Blocking %s",
 	"attributes": {
 		"self_shield_multiplier":1.5,
 		"global_base_dam_multiplier":0.8,

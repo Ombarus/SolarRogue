@@ -61,6 +61,7 @@
 			{"src":"data/json/items/utilities/gravitic_compactor.json", "chance":50},
 			{"src":"data/json/items/utilities/solar_array.json", "chance":50},
 			{"src":"data/json/items/weapons/mining_laser.json", "chance":50},
+			{"src":"data/json/items/weapons/mining_laser_mk2.json", "chance":5},
 			{"src":"data/json/items/consumables/repair_nanobots.json", "chance":50, "count":[1,4]},
 			{"src":"data/json/items/consumables/emergency_warp.json", "chance":20, "count":[1,3]},
 			{"src":"data/json/items/scanners/scanner_mk3.json", "chance":20},

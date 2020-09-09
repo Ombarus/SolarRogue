@@ -62,6 +62,7 @@
 		{"id":"data/json/items/utilities/solar_array.json", "chance":0.05},
 		{"id":"data/json/items/weapons/missile_launcher_mk1.json", "chance":0.00},
 		{"id":"data/json/items/weapons/mining_laser.json", "chance":0.07},
+		{"id":"data/json/items/weapons/mining_laser_mk2.json", "chance":0.02},
 		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.1},
 		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.02},
 		{"id":"data/json/items/weapons/missile.json", "chance":0.0},

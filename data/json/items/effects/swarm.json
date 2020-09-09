@@ -1,7 +1,7 @@
 {
 	"name_id":"Swarm Weapon",
 	"type":"effect",
-	"prefix":"Swarm",
+	"prefix":"Swarm %s",
 	"attributes": {
 		"self_base_dam_multiplier":0.5,
 		"self_max_dam_multiplier":1.4,

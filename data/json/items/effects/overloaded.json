@@ -1,7 +1,7 @@
 {
 	"name_id":"Overloaded",
 	"type":"effect",
-	"prefix":"Overloaded",
+	"prefix":"Overloaded %s",
 	"attributes": {
 		"self_shield_multiplier":1.4,
 		"self_hp_regen_per_ap_multiplier":1.7,

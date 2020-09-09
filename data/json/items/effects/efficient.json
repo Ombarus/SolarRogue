@@ -1,7 +1,7 @@
 {
 	"name_id":"Efficient",
 	"type":"effect",
-	"prefix":"Efficient",
+	"prefix":"Efficient %s",
 	"attributes": {
 		"self_hp_regen_per_ap_multiplier":0.5, 
 		"self_energy_cost_per_hp_multiplier":0.5,

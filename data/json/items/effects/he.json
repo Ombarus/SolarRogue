@@ -1,7 +1,7 @@
 {
 	"name_id":"HE Shield",
 	"type":"effect",
-	"prefix":"HE",
+	"prefix":"HE %s",
 	"attributes": {
 		"self_dam_shield_multiplier":0.5,
 		"self_dam_hull_multiplier":1.5,

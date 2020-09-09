@@ -1,7 +1,7 @@
 {
 	"name_id":"Compact",
 	"type":"effect",
-	"prefix":"Compact",
+	"prefix":"Compact %s",
 	"attributes": {
 		"global_move_multiplier":0.8,
 		"self_shield_multiplier":0.6,

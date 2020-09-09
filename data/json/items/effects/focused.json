@@ -1,7 +1,7 @@
 {
 	"name_id":"Focused Weapon",
 	"type":"effect",
-	"prefix":"Focused",
+	"prefix":"Focused %s",
 	"attributes": {
 		"self_base_dam_multiplier":1.3,
 		"self_max_dam_multiplier":0.9,

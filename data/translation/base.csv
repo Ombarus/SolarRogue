@@ -665,22 +665,22 @@ Shield Bypass,Shield Bypass,Redirection de Bouclier,Shield Bypass
 Weapon Bypass,Weapon Bypass,Redirection d’Arme,Weapon Bypass
 Targeting Computer,Targeting Computer,Système de visé,Targeting Computer
 Jammer,Jammer,Brouilleur,Jammer
-Blocking,Blocking,Bloquant,Blocking
-Compact,Compact,Compacte,Compact
-Efficient,Efficient,Efficace,Efficient
-EM,EM,EM,EM
-Fast,Fast,Rapide,Fast
-Focused,Focused,Concentré,Focused
-HE,HE,Explosif,HE
-Leaden,Leaden,Lourd,Leaden
-Linked,Linked,Maillé,Linked
-Long Range,Long Range,Longue Porté,Long Range
-Mimetic,Mimetic,Mimétique,Mimetic
-Overloaded,Overloaded,Surchargé,Overloaded
-Precision,Precision,Précis,Precision
-Salvage,Salvage,Conservation,Salvage
-Swarm,Swarm,Volé,Swarm
-Widebeam,Widebeam,Diffus,Widebeam
+Blocking %s,Blocking %s,%s Bloquant,Blocking %s
+Compact %s,Compact %s,%s Compact,Compact %s
+Efficient %s,Efficient %s,%s Efficace,Efficient %s
+EM %s,EM %s,%s EM,EM
+Fast %s,Fast %s,%s Rapide,Fast %s
+Focused %s,Focused %s,%s Concentré,Focused %s
+HE %s,HE %s,%s Explosif,HE %s
+Leaden %s,Leaden %s,%s Lourd,Leaden %s
+Linked %s,Linked %s,%s Maillé,Linked %s
+Long Range %s,Long Range %s,%s Longue Porté,Long Range %s
+Mimetic %s,Mimetic %s,%s Mimétique,Mimetic %s
+Overloaded %s,Overloaded %s,%s Surchargé,Overloaded %s
+Precision %s,Precision %s,%s Précis,Precision %s
+Salvage %s,Salvage %s,%s de Recyclage,Salvage %s
+Swarm %s,Swarm %s,%s en Volé,Swarm %s
+Widebeam %s,Widebeam %s,%s Diffus,Widebeam %s
 Weapon Damage,Weapon Damage,Dommage,Weapon Damage
 Ship Movement,Ship Movement,Mouvement,Ship Movement
 Shield Damage,Shield Damage,Dommage aux Boucliers,Shield Damage

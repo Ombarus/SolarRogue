@@ -1,30 +1,13 @@
 #tool
 extends Node2D
 
-export(bool) var show_in_editor = false setget reset_set, reset_get
-
 var _arrays := []
 var _uv_array := []
 var _dirty_block = []
 
-
 var levelSize := Vector2(80,80)
 var tileSize := 128
 
-func reset_set(value):
-	if not Engine.editor_hint:
-		return
-	show_in_editor = value
-	if value == true:
-		_ready()
-	else:
-		_clear()
-	
-func reset_get():
-	if not Engine.editor_hint:
-		return
-	return show_in_editor
-	
 
 const uv_lit = [Vector2(0.0, 0.25), Vector2(0.25, 0.0)]
 const uv_explored_plain = [Vector2(0.25, 0.25), Vector2(0.5, 0.0)]
@@ -212,7 +195,7 @@ func _x_y_to_memory_index(x, y):
 	
 func _get_memory(tile_memory, x, y):
 		
-	if x < 0 or y < 0 or x > levelSize.x or y > levelSize.y:
+	if x < 0 or y < 0 or x >= levelSize.x or y >= levelSize.y:
 		return 255.0
 		
 	#var index_base = 
@@ -222,32 +205,42 @@ func _get_memory(tile_memory, x, y):
 	return tile_memory[((((y+1) * (levelSize.x+2)) + (x+1))*4)]
 	
 func _x_y_to_uv_index(tile):
-		
 	return ((tile.y*levelSize.x) + tile.x) * 4
+
+
+func ResetUV():
+	_uv_array = []
+		
+	var num_vertices : int = levelSize.x * levelSize.y * 4
+	var num_indices : int = levelSize.x * levelSize.y * 6
 	
-var fake_tile_memory = []
-func debug_init_fake_memory():
-	fake_tile_memory = []
-	for x in range(levelSize.x + 2):
-		for y in range(levelSize.y + 2):
-			if x == 0 or y == 0 or x == levelSize.x+1 or y == levelSize.y + 1:
-				fake_tile_memory.push_back(0.0) # having issues on iOS with R8 and gles2... trying to force RGBA8
-				fake_tile_memory.push_back(0.0)
-				fake_tile_memory.push_back(0.0)
-				fake_tile_memory.push_back(0.0)
-			else:
-				fake_tile_memory.push_back(255.0)
-				fake_tile_memory.push_back(255.0)
-				fake_tile_memory.push_back(255.0)
-				fake_tile_memory.push_back(255.0)
+	_uv_array.resize(num_vertices)
+	
+	for r in range(levelSize.y):
+		for c in range(levelSize.x):
+			var lower_left := Vector3(c * tileSize - (tileSize/2.0), r * tileSize - (tileSize/2.0), 0.0)
+			var upper_left := Vector3(lower_left.x, lower_left.y + tileSize, 0.0)
+			var upper_right := Vector3(upper_left.x + tileSize, upper_left.y, 0.0)
+			var lower_right := Vector3(upper_right.x, lower_left.y, 0.0)
+			var index_base = ((r*levelSize.x) + c) * 4
+			var indice_index_base = ((r*levelSize.x) + c) * 6
+			
+			_uv_array[index_base + 0] = Vector2(uv_explored_plain[0].x, uv_explored_plain[1].y) # upper_left
+			_uv_array[index_base + 1] = uv_explored_plain[0] # lower_left
+			_uv_array[index_base + 2] = Vector2(uv_explored_plain[1].x, uv_explored_plain[0].y) # lower_right
+			_uv_array[index_base + 3] = uv_explored_plain[1] # upper_right
+			
+	_arrays[Mesh.ARRAY_TEX_UV] = PoolVector2Array(_uv_array)
+	var _mesh := ArrayMesh.new()
+	_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, _arrays)
+	var mesh_instance = get_node("MeshInstance2D")
+	mesh_instance.mesh = _mesh
 
 func _ready():
 	if not Engine.editor_hint and Globals.LevelLoaderRef != null:
 		levelSize = Globals.LevelLoaderRef.levelSize
 		tileSize = Globals.LevelLoaderRef.tileSize
 		
-	debug_init_fake_memory()
-	
 	_arrays.resize(Mesh.ARRAY_MAX)
 	var normal_array := PoolVector3Array()
 	#var uv_array := PoolVector2Array()
@@ -310,43 +303,3 @@ func _ready():
 	_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, _arrays)
 	var mesh_instance = get_node("MeshInstance2D")
 	mesh_instance.mesh = _mesh
-	
-var cur_x = 2
-var t = 100000.0
-
-func _process(delta):
-	if Engine.editor_hint or Globals.LevelLoaderRef != null:
-		return
-		
-	t += delta
-	if t < 1000.0:
-		return
-		
-	t = 0.0
-	for y in range(2, 8):
-		for x in range(2, 12):
-			var tile = Vector2(x, y)
-			var base_index = _x_y_to_memory_index(tile.x, tile.y)
-			fake_tile_memory[base_index + 0] = 0.0
-			fake_tile_memory[base_index + 1] = 0.0
-			fake_tile_memory[base_index + 2] = 0.0
-			fake_tile_memory[base_index + 3] = 0.0
-			TagTile(tile)
-			
-	cur_x += 1
-	UpdateDirtyTiles(fake_tile_memory)
-	_update_memory_visual(fake_tile_memory)
-	
-func _update_memory_visual(tile_memory):
-	if not has_node("DEBUG/memory_visual"):
-		return
-		
-	var n = get_node("DEBUG/memory_visual")
-	var imageTexture = ImageTexture.new()
-	var dynImage = Image.new()
-	
-	dynImage.create_from_data(levelSize.x+2,levelSize.y+2,false,Image.FORMAT_RGBA8, tile_memory)
-	
-	imageTexture.create_from_image(dynImage)
-	n.texture = imageTexture
-	imageTexture.resource_name = "The created texture!"

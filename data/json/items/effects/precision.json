@@ -1,7 +1,7 @@
 {
 	"name_id":"Precision",
 	"type":"effect",
-	"prefix":"Precision",
+	"prefix":"Precision %s",
 	"attributes": {
 		"self_fire_speed_multiplier":1.25,
 		"self_hit_chance_bonus":0.05,

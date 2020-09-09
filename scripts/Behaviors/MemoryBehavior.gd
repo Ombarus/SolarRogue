@@ -44,6 +44,9 @@ func OnLevelLoaded_Callback():
 		updated_fog_color = Color(col_array[0], col_array[1], col_array[2], col_array[3])
 	_occluder_ref.modulate = updated_fog_color
 	#_occluder_ref.material.set_shader_param("gray_color", updated_fog_color)
+
+	var fow = get_node("../../BG/FoW")
+	fow.ResetUV()
 	
 	# Give two frames for scanner to update
 	yield(get_tree(), "idle_frame")

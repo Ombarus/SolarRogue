@@ -1,7 +1,7 @@
 {
 	"name_id":"Fast Shield/Weapon",
 	"type":"effect",
-	"prefix":"Fast",
+	"prefix":"Fast %s",
 	"attributes": {
 		"self_hp_regen_per_ap_multiplier":2.0,
 		"self_energy_cost_per_hp_multiplier":2.0,

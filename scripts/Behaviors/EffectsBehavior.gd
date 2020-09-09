@@ -42,7 +42,7 @@ func get_object_display_name(obj) -> String:
 	
 	var variation_data = Globals.LevelLoaderRef.LoadJSON(variation_src)
 	if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
-		return Globals.mytr(variation_data["prefix"]) + " " + Globals.mytr(name_id)
+		return Globals.mytr(variation_data["prefix"], Globals.mytr(name_id))
 	else:
 		return Globals.mytr(name_id)
 	
@@ -54,7 +54,7 @@ func get_display_name(data, modified_attributes=null):
 	if not modified_attributes.empty() and modified_attributes.has("selected_variation"):
 		var variation_data = Globals.LevelLoaderRef.LoadJSON(modified_attributes["selected_variation"])
 		if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
-			display_name = Globals.mytr(variation_data["prefix"]) + " " + Globals.mytr(display_name)
+			display_name = Globals.mytr(variation_data["prefix"], Globals.mytr(display_name))
 			
 	return display_name
 	

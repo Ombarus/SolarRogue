@@ -14,6 +14,7 @@ signal OnOkPressed()
 signal OnCancelPressed()
 
 var _base = null
+var _dirty := false
 
 func set_signal(newval):
 	editor_trigger_signal = false
@@ -33,11 +34,15 @@ func set_dialog_cancel(val):
 		_base.dialog_cancel = dialog_cancel
 		
 func set_bottom_title(val):
+	if bottom_title == val:
+		return
 	bottom_title = val
 	if _base:
 		_base.bottom_title = bottom_title
 		
 func set_title(val, translate=true):
+	if title == val:
+		return
 	title = val
 	if _base:
 		_base.set_title(title, translate)
@@ -71,10 +76,16 @@ func _ready():
 	init()
 	
 func update():
+	if not _dirty:
+		_dirty = true
+		call_deferred("do_update")
+	
+func do_update():
 	var content_node = get_node("base/Content")
 	if _base.title.empty():
 		content_node.margin_top = 13
 	else:
 		content_node.margin_top = 54
 	content_node.bbcode_text = content
+	_dirty = false
 

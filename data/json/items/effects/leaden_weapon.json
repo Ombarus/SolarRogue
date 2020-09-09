@@ -1,7 +1,7 @@
 {
 	"name_id":"Leaden Weapon",
 	"type":"effect",
-	"prefix":"Leaden",
+	"prefix":"Leaden %s",
 	"attributes": {
 		"global_move_multiplier":1.1,
 		"self_base_dam_multiplier":1.5,

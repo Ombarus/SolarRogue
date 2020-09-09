@@ -51,6 +51,7 @@
 		{"name":"data/json/items/utilities/solar_array.json", "spawn_rate":0.000015625},
 		{"name":"data/json/items/weapons/laser_turret_mk1.json", "spawn_rate":0.00001302083333},
 		{"name":"data/json/items/weapons/mining_laser.json", "spawn_rate":0.0003, "max":2},
+		{"name":"data/json/items/weapons/mining_laser_mk2.json", "spawn_rate":0.0002, "max":1},
 		{"name":"data/json/items/weapons/missile.json", "spawn_rate":0.00001302083333},
 		{"name":"data/json/items/consumables/repair_nanobots.json", "spawn_rate":0.000015625},
 		{"name":"data/json/items/consumables/emergency_warp.json", "spawn_rate":0.000015625},

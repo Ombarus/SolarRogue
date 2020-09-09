@@ -17,7 +17,7 @@ func set_row_data(data):
 	if "selected_variation" in data and not data.selected_variation.empty():
 		var variation_data = Globals.LevelLoaderRef.LoadJSON(data.selected_variation)
 		if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
-			display_name = Globals.mytr(variation_data["prefix"]) + " " + display_name
+			display_name = Globals.mytr(variation_data["prefix"], display_name)
 		
 	get_node("HBoxContainer/Name").text = display_name
 		

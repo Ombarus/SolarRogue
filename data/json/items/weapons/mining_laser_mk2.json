@@ -1,5 +1,5 @@
 {
-	"name_id":"Mining Laser",
+	"name_id":"Mining Laser MK2",
 	"type":"weapon",
 	"sprite": "laser_turret",
 	"icon": {
@@ -10,32 +10,32 @@
 		"shoot": "scenes/tileset_source/LaserFX01.tscn"
 	},
 	"weapon_data": {
-		"base_dam":2.0,
-		"max_dam":6.0,
+		"base_dam":3.0,
+		"max_dam":8.0,
 		"fire_range":3.0,
 		"fire_pattern":"+",
-		"fire_energy_cost":500.0,
+		"fire_energy_cost":650.0,
 		"fire_speed":1.0,
 		"base_hit_chance":0.9,
 		"crit_chance":0.0,
 		"crit_multiplier":1.5,
-		"planet_bonus":0.15
+		"planet_bonus":0.35
 	},
 	"equipment": {
 		"slot":"weapon",
-		"volume":60.0,
+		"volume":70.0,
 		"equip_ap":3.0,
 		"unequip_ap":3.0
 	},
 	"recyclable": {
-		"energy": 400,
-		"player_sale_range": [800,1200],
-		"player_buy_range": [1400,1800]
+		"energy": 875,
+		"player_sale_range": [1100,1500],
+		"player_buy_range": [1800,3050]
 	},
 	"disassembling": {
 		"produce":"data/json/items/misc/spare_parts.json",
-		"count":1,
-		"energy_cost":500
+		"count":2,
+		"energy_cost":700
 	},
 	"variations": [
 		{"src":"data/json/items/effects/normal.json", "chance": 50},

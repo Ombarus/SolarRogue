@@ -1,7 +1,7 @@
 {
 	"name_id":"Linked Shield/Weapon",
 	"type":"effect",
-	"prefix":"Linked",
+	"prefix":"Linked %s",
 	"attributes": {
 		"linked_shield_multiplier":1.10,
 		"linked_hit_chance_bonus":1.10,

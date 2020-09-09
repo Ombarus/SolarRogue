@@ -1,7 +1,7 @@
 {
 	"name_id":"Leaden Shield",
 	"type":"effect",
-	"prefix":"Leaden",
+	"prefix":"Leaden %s",
 	"attributes": {
 		"global_move_multiplier":1.25,
 		"self_shield_multiplier":1.5,
