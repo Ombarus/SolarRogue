@@ -1,9 +1,0 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
-
-[ext_resource path="res://scenes/GUI/Mockups/popfx.shader" type="Shader" id=1]
-
-[resource]
-shader = ExtResource( 1 )
-shader_param/percent = 0.7
-shader_param/width = 0.02
-

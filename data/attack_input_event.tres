@@ -1,8 +1,0 @@
-[gd_resource type="ShortCut" load_steps=2 format=2]
-
-[ext_resource path="res://data/weapon_inputeventaction.tres" type="InputEventAction" id=1]
-
-[resource]
-
-shortcut = ExtResource( 1 )
-
