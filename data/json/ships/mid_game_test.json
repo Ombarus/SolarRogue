@@ -9,10 +9,10 @@
 		"region":[0,1024,128,128]
 	},
 	"mounts": {
-		"weapon": ["data/json/items/weapons/laser_turret_mk2.json"],
+		"weapon": ["data/json/items/weapons/laser_turret_mk2.json", "", ""],
 		"shield": ["data/json/items/shields/shield_mk2.json", "", ""],
 		"scanner": ["data/json/items/scanners/long_range_scanner_mk2.json"],
-		"converter": ["data/json/items/converters/converter_mk1.json"],
+		"converter": ["data/json/items/converters/converter_mk2.json"],
 		"utility": ["data/json/items/utilities/speed_boost.json"]
 	},
 	"destroyable": {
@@ -24,25 +24,29 @@
 		"energy_cost":5
 	},
 	"cargo": {
-		"capacity":320,
+		"capacity":3200,
 		"pickup_ap":1.0,
 		"drop_ap":1.0,
 		"transferable":true,
 		"content":[
 			{"src":"data/json/items/consumables/repair_nanobots.json", "count":1},
-			{"src":"data/json/items/misc/uranium.json", "count":3},
+			{"src":"data/json/items/misc/uranium.json", "count":10},
 			{"src":"data/json/items/misc/spare_parts.json", "count":3},
-			{"src":"data/json/items/shields/shield_mk1.json", "count":1, 
+			{"src":"data/json/items/weapons/laser_turret_mk2.json", "count":1, 
 				"modified_attributes": {
-					"selected_variation":"data/json/items/effects/compact.json"
+					"selected_variation":"data/json/items/effects/precision.json"
 			}},
-			{"src":"data/json/items/shields/shield_mk1.json", "count":1},
-			{"src":"data/json/items/shields/shield_mk1.json", "count":1},
-			{"src":"data/json/items/shields/shield_mk1.json", "count":1},
-			{"src":"data/json/items/shields/shield_mk1.json", "count":1},
-			{"src":"data/json/items/shields/shield_mk1.json", "count":1},
-			{"src":"data/json/items/shields/shield_mk1.json", "count":1},
-			{"src":"data/json/items/shields/shield_mk1.json", "count":1}
+			{"src":"data/json/items/weapons/laser_turret_mk2.json", "count":1, 
+				"modified_attributes": {
+					"selected_variation":"data/json/items/effects/precision.json"
+			}},
+			{"src":"data/json/items/shields/shield_mk2.json", "count":1},
+			{"src":"data/json/items/scanners/ultimate_scanner.json", "count":1},
+			{"src":"data/json/items/utilities/power_amplifier.json", "count":1},
+			{"src":"data/json/items/utilities/gravitic_compactor.json", "count":1},
+			{"src":"data/json/items/misc/scout_body.json", "count":1},
+			{"src":"data/json/items/utilities/speed_boost.json", "count":1},
+			{"src":"data/json/items/utilities/targeting_computer.json", "count":1}
 		]
 	},
 	"converter": {

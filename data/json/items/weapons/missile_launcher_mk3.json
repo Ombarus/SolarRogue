@@ -13,7 +13,7 @@
 		"base_dam":6.0,
 		"max_dam":10.0,
 		"ammo":"data/json/items/weapons/missile.json",
-		"fire_range":3.0,
+		"fire_range":2.0,
 		"fire_pattern":"o",
 		"fire_energy_cost":225.0,
 		"fire_speed":0.5,

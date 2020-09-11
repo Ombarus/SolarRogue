@@ -15,7 +15,7 @@
 		"fire_range":8.0,
 		"fire_pattern":"*",
 		"fire_energy_cost":850.0,
-		"fire_speed":1.5,
+		"fire_speed":2.1,
 		"base_hit_chance":0.6,
 		"crit_chance":0.0,
 		"crit_multiplier":1.5,

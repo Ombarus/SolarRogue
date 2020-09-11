@@ -80,7 +80,7 @@
 			},
 			{
 				"name": "Human Frigate",
-				"requirements":[{"type":"energy", "amount":2500}, {"type":"frigate_hull", "amount":1}], 
+				"requirements":[{"type":"energy", "amount":5000}, {"type":"frigate_hull", "amount":1}], 
 				"produce":"data/json/ships/human/player_frigate.json",
 				"ap_cost":7.0,
 				"amount":1

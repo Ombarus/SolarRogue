@@ -3,7 +3,7 @@
 	"type":"effect",
 	"prefix":"Precision %s",
 	"attributes": {
-		"self_fire_speed_multiplier":1.25,
+		"self_fire_speed_multiplier":1.5,
 		"self_hit_chance_bonus":0.05,
 		"self_crit_chance_bonus":0.05
 	}

@@ -71,7 +71,7 @@ func GetLevelID():
 func _ready():
 	if _TEST_MID_GAME == true:
 		startLevel = "data/json/levels/human_branch/branch04.json"
-		current_depth = 4
+		current_depth = 1
 	Globals.LevelLoaderRef = self
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
 	BehaviorEvents.connect("OnRequestLevelChange", self, "OnRequestLevelChange_Callback")
@@ -596,6 +596,8 @@ func CreateAndInitNode(data, pos, modified_data = null):
 func UpdatePosition(obj, newPos, teleport=false):	
 	var old_tile = World_to_Tile(obj.position)
 	var new_tile = World_to_Tile(newPos)
+	if old_tile == new_tile:
+		return
 	
 	var content = levelTiles[old_tile.x][old_tile.y]
 	content.erase(obj)
@@ -604,7 +606,8 @@ func UpdatePosition(obj, newPos, teleport=false):
 	var has_movement_anim : bool = obj.find_node("MovementAnimations", true, false) != null
 	# ghost are not moved with animation because they teleport when scanner update
 	has_movement_anim = has_movement_anim and obj.get_attrib("ghost_memory") == null
-	if not has_movement_anim or teleport == true:
+	#print("%s : %s" % [obj.name, obj.visible])
+	if not has_movement_anim or teleport == true or obj.visible == false:
 		obj.position = newPos
 		BehaviorEvents.emit_signal("OnPositionUpdated", obj)
 

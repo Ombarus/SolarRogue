@@ -95,7 +95,7 @@
 			},
 			{
 				"name": "Human Frigate",
-				"requirements":[{"type":"energy", "amount":2500}, {"type":"frigate_hull", "amount":1}], 
+				"requirements":[{"type":"energy", "amount":5000}, {"type":"frigate_hull", "amount":1}], 
 				"produce":"data/json/ships/human/player_frigate.json",
 				"ap_cost":7.0,
 				"amount":1
@@ -103,7 +103,7 @@
 			{
 				"name": "Human Battleship",
 				"requirements":[
-					{"type":"energy", "amount":7500},
+					{"type":"energy", "amount":10000},
 					{"type":"battleship_hull", "amount":1}
 				],
 				"produce":"data/json/ships/human/player_battleship.json",
@@ -134,7 +134,7 @@
 			},
 			{
 				"name": "Jerg Frigate", 
-				"requirements":[{"type":"energy", "amount":2500}, {"type":"frigate_hull", "amount":2}], 
+				"requirements":[{"type":"energy", "amount":5000}, {"type":"frigate_hull", "amount":2}], 
 				"produce":"data/json/ships/jerg/player_frigate.json",
 				"ap_cost":7.0,
 				"amount":1
@@ -142,7 +142,7 @@
 			{
 				"name": "Jerg Battleship", 
 				"requirements":[
-					{"type":"energy", "amount":7500},
+					{"type":"energy", "amount":10000},
 					{"type":"battleship_hull", "amount":1}, 
 					{"type":"frigate_hull", "amount":1},
 					{"type":"utility", "amount":2}
@@ -176,7 +176,7 @@
 			{
 				"name": "Vorg Frigate", 
 				"requirements":[
-					{"type":"energy", "amount":2500}, 
+					{"type":"energy", "amount":5000}, 
 					{"type":"frigate_hull", "amount":1},
 					{"type":"shield", "amount":1},
 					{"type":"utility", "amount":1}
@@ -188,7 +188,7 @@
 			{
 				"name": "Vorg Battleship", 
 				"requirements":[
-					{"type":"energy", "amount":7500},
+					{"type":"energy", "amount":10000},
 					{"type":"battleship_hull", "amount":1}, 
 					{"type":"frigate_hull", "amount":1},
 					{"type":"shield", "amount":2}

@@ -37,7 +37,7 @@ enum INPUT_STATE {
 }
 
 func get_first_player() -> Node2D:
-	if "player" in Globals.LevelLoaderRef.objByType and Globals.LevelLoaderRef.objByType["player"].size() > 0:
+	if Globals.LevelLoaderRef != null and "player" in Globals.LevelLoaderRef.objByType and Globals.LevelLoaderRef.objByType["player"].size() > 0:
 		return Globals.LevelLoaderRef.objByType["player"][0]
 	return null
 
