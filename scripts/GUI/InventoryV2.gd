@@ -73,7 +73,7 @@ func Desc_Callback():
 	var owner = null
 	# Only show ship-wide effects if item is equipped, otherwise show only effect of selected item
 	if "key" in selected and "idx" in selected:
-		print("showing global effect for selected mounted item")
+		#print("showing global effect for selected mounted item")
 		owner = _obj
 	
 	BehaviorEvents.emit_signal("OnPushGUI", "Description", {"json":data, "owner":owner, "modified_attributes":selected.get("modified_attributes", {}), "scanner_level":scanner_level})
