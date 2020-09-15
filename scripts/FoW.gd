@@ -59,10 +59,7 @@ func UpdateDirtyTiles(tile_memory : Array):
 			
 	_arrays[Mesh.ARRAY_TEX_UV] = PoolVector2Array(_uv_array)
 	
-	var _mesh := ArrayMesh.new()
-	_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, _arrays)
-	var mesh_instance = get_node("MeshInstance2D")
-	mesh_instance.mesh = _mesh
+	call_deferred("_update_mesh")
 	
 	_dirty_block = []
 	
@@ -231,10 +228,9 @@ func ResetUV():
 			_uv_array[index_base + 3] = uv_explored_plain[1] # upper_right
 			
 	_arrays[Mesh.ARRAY_TEX_UV] = PoolVector2Array(_uv_array)
-	var _mesh := ArrayMesh.new()
-	_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, _arrays)
-	var mesh_instance = get_node("MeshInstance2D")
-	mesh_instance.mesh = _mesh
+	
+	call_deferred("_update_mesh")
+	
 
 func _ready():
 	if not Engine.editor_hint and Globals.LevelLoaderRef != null:
@@ -299,6 +295,9 @@ func _ready():
 	
 	#yield(get_tree(), "idle_frame")
 	
+	call_deferred("_update_mesh")
+	
+func _update_mesh():
 	var _mesh := ArrayMesh.new()
 	_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, _arrays)
 	var mesh_instance = get_node("MeshInstance2D")

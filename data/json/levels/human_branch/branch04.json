@@ -1,6 +1,6 @@
 {
 	"name_id":"Wormhole",
-	"display_name":"The Homeworld 3",
+	"display_name":"The Human Coalition",
 	"level_data":"data/json/levels/human_branch/branch04.json",
 	"type":"wormhole",
 	"sprite":"wormhole",

@@ -6,6 +6,7 @@ func _ready():
 	BehaviorEvents.connect("OnObjectDestroyed", self, "OnObjectDestroyed_Callback")
 	BehaviorEvents.connect("OnStatusChanged", self, "OnStatusChanged_Callback")
 
+
 func OnStatusChanged_Callback(obj):
 	if obj.get_attrib("ai.aggressive", false) == false:
 		return

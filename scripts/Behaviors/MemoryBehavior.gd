@@ -196,6 +196,8 @@ func _update_occlusion(o):
 			fow.TagTile(t)
 	
 	for t in scanned_tiles:
+		if typeof(t) == TYPE_STRING:
+			t = str2var("Vector2" + t)
 		_tag_tile(t, tile_memory) # "lit" tile
 		fow.TagTile(t)
 		

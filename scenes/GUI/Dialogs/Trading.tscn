@@ -68,6 +68,9 @@ margin_bottom = 46.0
 bbcode_enabled = true
 bbcode_text = "[right](127/212)[/right]"
 text = "(127/212)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Control" type="Control" parent="HBoxContainer"]
 margin_left = 417.0
