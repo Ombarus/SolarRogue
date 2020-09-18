@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/private/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -44,7 +44,6 @@
 [ext_resource path="res://scripts/CamControl.gd" type="Script" id=42]
 [ext_resource path="res://scripts/Behaviors/RandomLogBehavior.gd" type="Script" id=44]
 [ext_resource path="res://scripts/Behaviors/EffectsBehavior.gd" type="Script" id=45]
-[ext_resource path="res://scenes/FoW.tscn" type="PackedScene" id=48]
 [ext_resource path="res://scenes/GUI/TargettingHUD.tscn" type="PackedScene" id=51]
 [ext_resource path="res://scenes/GUI/Dialogs/SelectableTarget.tscn" type="PackedScene" id=52]
 [ext_resource path="res://scenes/GUI/Dialogs/Options.tscn" type="PackedScene" id=53]
@@ -370,9 +369,6 @@ __meta__ = {
 }
 parallax = 3000.0
 camera = NodePath("../../../Camera2D")
-
-[node name="FoW" parent="BG" instance=ExtResource( 48 )]
-position = Vector2( -5184, -5184 )
 
 [node name="Occlusion" type="Sprite" parent="BG"]
 modulate = Color( 0.196078, 0.321569, 1, 0.921569 )

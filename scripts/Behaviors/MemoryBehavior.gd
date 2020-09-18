@@ -7,6 +7,8 @@ var _dirty_occlusion := true
 var default_occluder_color : Color
 onready var _occluder_ref = get_node(Occluder)
 
+const fow_ref = "../../BG/FoW"
+
 func _ready():
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 	BehaviorEvents.connect("OnScannerUpdated", self, "OnScannerUpdated_Callback")
@@ -45,8 +47,9 @@ func OnLevelLoaded_Callback():
 	_occluder_ref.modulate = updated_fog_color
 	#_occluder_ref.material.set_shader_param("gray_color", updated_fog_color)
 
-	var fow = get_node("../../BG/FoW")
-	fow.ResetUV()
+	if has_node(fow_ref):
+		var fow = get_node(fow_ref)
+		fow.ResetUV()
 	
 	# Give two frames for scanner to update
 	yield(get_tree(), "idle_frame")
@@ -93,11 +96,12 @@ func ExecuteFullSweep():
 			is_ultimate = true
 			break
 		
-	var fow = get_node("../../BG/FoW")
-	if is_ultimate:
-		fow.visible = false
-	else:
-		fow.visible = true
+	if has_node(fow_ref):
+		var fow = get_node(fow_ref)
+		if is_ultimate:
+			fow.visible = false
+		else:
+			fow.visible = true
 		
 	for key in Globals.LevelLoaderRef.objById:
 		var obj = Globals.LevelLoaderRef.objById[key]
@@ -145,8 +149,8 @@ func _update_occlusion_texture():
 	_occluder_ref.texture = imageTexture
 	imageTexture.resource_name = "The created texture!"
 	
-	if tile_memory != null:
-		var fow = get_node("../../BG/FoW")
+	if tile_memory != null and has_node(fow_ref):
+		var fow = get_node(fow_ref)
 		fow.UpdateDirtyTiles(tile_memory)
 	
 	
@@ -169,7 +173,9 @@ func _update_occlusion(o):
 	var scanned_tiles = o.get_attrib("scanner_result.scanned_tiles." + level_id, [])
 	var prev_scanned_tiles = o.get_attrib("scanner_result.previous_scanned_tiles." + level_id, [])
 	
-	var fow = get_node("../../BG/FoW")
+	var fow = null
+	if has_node(fow_ref):
+		fow = get_node(fow_ref)
 	var tile_memory = _playerNode.get_attrib("memory." + level_id + ".tiles")
 	
 	if tile_memory == null:
@@ -193,13 +199,15 @@ func _update_occlusion(o):
 			t = str2var("Vector2" + t)
 		if not t in scanned_tiles:
 			_tag_tile(t, tile_memory, 120.0) # explored, grayed-out
-			fow.TagTile(t)
+			if fow != null:
+				fow.TagTile(t)
 	
 	for t in scanned_tiles:
 		if typeof(t) == TYPE_STRING:
 			t = str2var("Vector2" + t)
 		_tag_tile(t, tile_memory) # "lit" tile
-		fow.TagTile(t)
+		if fow != null:
+			fow.TagTile(t)
 		
 	_playerNode.set_attrib("memory." + level_id + ".tiles", tile_memory)
 	_update_occlusion_texture()
