@@ -6,7 +6,7 @@ export(PackedScene) var mobile_hud
 
 func _ready():
 	var n
-	if true or Globals.is_mobile():
+	if Globals.is_mobile():
 		n = mobile_hud.instance()
 	else:
 		n = pc_hud.instance()
