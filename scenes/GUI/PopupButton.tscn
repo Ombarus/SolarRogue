@@ -27,13 +27,15 @@ margin_bottom = 845.0
 script = ExtResource( 2 )
 
 [node name="PopupSize" type="Control" parent="."]
+modulate = Color( 0.129412, 1, 0.129412, 0 )
 margin_right = 327.0
 margin_bottom = 266.0
 mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Popup" parent="PopupSize" instance=ExtResource( 3 )]
-visible = false
-modulate = Color( 0.129412, 1, 0.129412, 0 )
 margin_left = 133.0
 margin_right = 153.0
 margin_bottom = 184.0
@@ -49,6 +51,7 @@ margin_bottom = 323.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[b]oard"
 ShortcutKey = "b"
+EmitEventBus = "OnHUDBoardPressed"
 
 [node name="Take" parent="PopupSize/Popup" groups=[
 "more_btn",
@@ -60,6 +63,7 @@ margin_bottom = 213.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[t]ransfer"
 ShortcutKey = "t"
+EmitEventBus = "OnHUDTakePressed"
 
 [node name="Look" parent="PopupSize/Popup" groups=[
 "more_btn",
@@ -71,6 +75,7 @@ margin_bottom = 103.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[l]ook"
 ShortcutKey = "l"
+EmitEventBus = "OnHUDLookPressed"
 
 [node name="Wait" parent="PopupSize/Popup" groups=[
 "more_btn",
@@ -82,6 +87,7 @@ margin_bottom = 433.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[5] wait"
 ShortcutKey = "5"
+EmitEventBus = "OnHUDWaitPressed"
 
 [node name="Crew" parent="PopupSize/Popup" groups=[
 "more_btn",
@@ -95,6 +101,7 @@ margin_bottom = 103.0
 rect_min_size = Vector2( 110, 90 )
 Text = "c[r]ew"
 ShortcutKey = "r"
+EmitEventBus = "OnHUDCrewPressed"
 
 [node name="Comm" parent="PopupSize/Popup" groups=[
 "more_btn",
@@ -109,12 +116,13 @@ rect_min_size = Vector2( 110, 90 )
 Text = "co[m]m"
 ShortcutKey = "m"
 Disabled = true
+EmitEventBus = "OnHUDCommPressed"
+signal_creation = true
 
 [node name="More" parent="." instance=ExtResource( 4 )]
 margin_right = 110.0
 margin_bottom = 90.0
 Text = "..."
-IsHUD = true
 
 [node name="Close" type="Button" parent="."]
 visible = false

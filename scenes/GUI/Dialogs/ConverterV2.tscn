@@ -58,7 +58,7 @@ CanDropOnList = false
 
 [node name="Control" type="Control" parent="HBoxContainer"]
 margin_left = 414.0
-margin_right = 824.0
+margin_right = 825.0
 margin_bottom = 680.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -315,7 +315,7 @@ ShortcutEnum = 16777217
 [node name="Materials" parent="HBoxContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 828.0
+margin_left = 829.0
 margin_right = 1240.0
 margin_bottom = 680.0
 size_flags_horizontal = 3

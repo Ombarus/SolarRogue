@@ -26,9 +26,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -189.0
-margin_top = -308.0
+margin_top = -326.0
 margin_right = 189.0
-margin_bottom = 245.0
+margin_bottom = 314.0
 dialog_cancel = true
 title = "Game Menu"
 
@@ -40,6 +40,9 @@ margin_top = 63.0
 margin_right = -63.0
 margin_bottom = -35.0
 custom_constants/separation = 22
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Save" parent="base/vbox" instance=ExtResource( 4 )]
 margin_right = 254.0
@@ -64,14 +67,23 @@ rect_min_size = Vector2( 0, 90 )
 Text = "[o]ptions"
 ShortcutKey = "o"
 
-[node name="SaveAndQuit" parent="base/vbox" instance=ExtResource( 4 )]
+[node name="Help" parent="base/vbox" instance=ExtResource( 4 )]
 margin_top = 336.0
 margin_right = 254.0
 margin_bottom = 426.0
+rect_min_size = Vector2( 0, 90 )
+Text = "[?]help"
+ShortcutKey = "?"
+
+[node name="SaveAndQuit" parent="base/vbox" instance=ExtResource( 4 )]
+margin_top = 448.0
+margin_right = 254.0
+margin_bottom = 538.0
 rect_min_size = Vector2( 0, 90 )
 Text = "save & [q]uit"
 ShortcutKey = "q"
 [connection signal="pressed" from="base/vbox/Save" to="." method="_on_Save_pressed"]
 [connection signal="pressed" from="base/vbox/Suicide" to="." method="_on_Suicide_pressed"]
 [connection signal="pressed" from="base/vbox/Settings" to="." method="_on_Settings_pressed"]
+[connection signal="pressed" from="base/vbox/Help" to="." method="_on_Help_pressed"]
 [connection signal="pressed" from="base/vbox/SaveAndQuit" to="." method="_on_SaveAndQuit_pressed"]

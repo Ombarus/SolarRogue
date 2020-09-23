@@ -68,7 +68,6 @@ func Init(init_param):
 			var defaults := []
 			if "default" in row:
 				defaults = get_names(row.default)
-			var i := 0
 			var formatdict := {}
 			var is_valid := true
 			for i in range(names.size()):
@@ -107,6 +106,8 @@ func Init(init_param):
 					row.value = Globals.mytr2(row.value, formatdict)
 				else:
 					row.value = row.value.format(formatdict)
+			elif not "translate_value" in row or row.translate_value == true:
+				row.value = Globals.mytr(row.value)
 			
 			if is_valid == true:
 				final_list.push_back(row)

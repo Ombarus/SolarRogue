@@ -74,7 +74,7 @@
 				{"name":"Critical Chance", "value":"{weapon_data.crit_chance+crit_chance_bonus}%", "translate_value":false, "display_percent":true},
 				{"name":"Critical Multiplier", "value":"x{weapon_data.crit_multiplier}", "translate_value":false},
 				{"name":"Ammo", "value":"None"},
-				{"name":"Special", "value":"Can shoot outside of radar range"}
+				{"name":"Special", "value":"Blind Shooting"}
 			]
 		}
 	}

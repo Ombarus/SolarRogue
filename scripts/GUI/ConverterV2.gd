@@ -17,7 +17,7 @@ onready var _turn_cost : RichTextLabel = get_node("HBoxContainer/Control/VBoxCon
 onready var _energy_ship : RichTextLabel = get_node("HBoxContainer/Control/VBoxContainer/ShipInfoContainer/HBoxContainer4/EnergyShip")
 onready var _hull_ship : RichTextLabel = get_node("HBoxContainer/Control/VBoxContainer/ShipInfoContainer/HBoxContainer5/HullShip")
 onready var _shield_ship : RichTextLabel = get_node("HBoxContainer/Control/VBoxContainer/ShipInfoContainer/HBoxContainer6/ShieldShip")
-onready var _desc_btn : BaseButton = get_node("HBoxContainer/Control/VBoxContainer/IconContainer/DescBtn")
+onready var _desc_btn : ButtonBase = get_node("HBoxContainer/Control/VBoxContainer/IconContainer/DescBtn")
 
 onready var _behavior = get_node(CraftingBehavior)
 

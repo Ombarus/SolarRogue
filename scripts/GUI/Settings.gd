@@ -28,7 +28,6 @@ func _ready():
 	_lang_options.set_item_metadata(2, "ja")
 	
 	if Globals.is_mobile():
-		get_node("base/ScrollContainer/VBoxContainer/HideHUD").visible = false
 		get_node("base/ScrollContainer/VBoxContainer/Label2").visible = false
 		get_node("base/ScrollContainer/VBoxContainer/FullScreen").visible = false
 		get_node("base/ScrollContainer/VBoxContainer/VSync").visible = false
@@ -122,11 +121,6 @@ func _on_FPSCounter_toggled(button_pressed):
 		BehaviorEvents.emit_signal("OnShowGUI", "FPSCounter", {})
 	else:
 		BehaviorEvents.emit_signal("OnHideGUI", "FPSCounter")
-
-
-func _on_HideHUD_toggled(button_pressed):
-	PermSave.set_attrib("settings.hide_hud", button_pressed)
-	BehaviorEvents.emit_signal("OnHUDVisiblityChanged")
 
 
 func _on_LangOption_item_selected(ID):

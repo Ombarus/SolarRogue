@@ -13,15 +13,12 @@ export(NodePath) var TargettingHUD
 #export(NodePath) var OptionBtn
 #export(NodePath) var QuestionBtn
 
-onready var WeaponAction : Control = get_node("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Weapon")
-onready var GrabAction : Control = get_node("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Grab")
-onready var InventoryAction : Control = get_node("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Inventory")
-onready var CraftingAction : Control = get_node("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Converter")
-onready var FTLAction : Control = get_node("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Wormhole")
-onready var FTLAction2 : Control = get_node("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Control/Wormhole2")
-onready var PopupButtons : Control = get_node("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/PopupButton")
-onready var OptionBtn : Control = get_node("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Options")
-onready var QuestionBtn : Control = get_node("../../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/Question")
+
+var weapon_btn_ref = null
+var conv_btn_ref = null
+var ftl_btn_ref_1 = null
+var comm_btn_ref = null
+
 
 var playerNode : Node2D = null
 var levelLoaderRef : Node
@@ -65,32 +62,25 @@ func _ready():
 	# Initialization here
 	levelLoaderRef = get_node(levelLoaderNode)
 	
-	#var action = get_node(WeaponAction)
-	WeaponAction.connect("pressed", self, "Pressed_Weapon_Callback")
-	#action = get_node(GrabAction)
-	GrabAction.connect("pressed", self, "Pressed_Grab_Callback")
-	#action = get_node(InventoryAction)
-	InventoryAction.connect("pressed", self, "Pressed_Inventory_Callback")
-	#action = get_node(FTLAction)
-	FTLAction.connect("pressed", self, "Pressed_FTL_Callback")
-	#action = get_node(FTLAction2)
-	FTLAction2.connect("pressed", self, "Pressed_FTL_Callback")
-	#action = get_node(CraftingAction)
-	CraftingAction.connect("pressed", self, "Pressed_Crafting_Callback")
-	#action = get_node(PopupButtons)
-	PopupButtons.connect("look_pressed", self, "Pressed_Look_Callback")
-	PopupButtons.connect("board_pressed", self, "Pressed_Board_Callback")
-	PopupButtons.connect("take_pressed", self, "Pressed_Take_Callback")
-	PopupButtons.connect("wait_pressed", self, "Pressed_Wait_Callback")
-	PopupButtons.connect("crew_pressed", self, "Pressed_Crew_Callback")
-	PopupButtons.connect("comm_pressed", self, "Pressed_Comm_Callback")
+	BehaviorEvents.connect("OnButtonReady", self, "OnButtonReady_Callback")
+	
+	BehaviorEvents.connect("OnHUDWeaponPressed", self, "Pressed_Weapon_Callback")
+	BehaviorEvents.connect("OnHUDGrabPressed", self, "Pressed_Grab_Callback")
+	BehaviorEvents.connect("OnHUDInventoryPressed", self, "Pressed_Inventory_Callback")
+	BehaviorEvents.connect("OnHUDFTLPressed", self, "Pressed_FTL_Callback")
+	BehaviorEvents.connect("OnHUDCraftingPressed", self, "Pressed_Crafting_Callback")
+	BehaviorEvents.connect("OnHUDLookPressed", self, "Pressed_Look_Callback")
+	BehaviorEvents.connect("OnHUDBoardPressed", self, "Pressed_Board_Callback")
+	BehaviorEvents.connect("OnHUDTakePressed", self, "Pressed_Take_Callback")
+	BehaviorEvents.connect("OnHUDWaitPressed", self, "Pressed_Wait_Callback")
+	BehaviorEvents.connect("OnHUDCrewPressed", self, "Pressed_Crew_Callback")
+	BehaviorEvents.connect("OnHUDCommPressed", self, "Pressed_Comm_Callback")
+	BehaviorEvents.connect("OnHUDOptionPressed", self, "Pressed_Option_Callback")
+	BehaviorEvents.connect("OnHUDQuestionPressed", self, "Pressed_Question_Callback")
+	
 	var action = get_node(InventoryDialog)
 	action.connect("drop_pressed", self, "OnDropIventory_Callback")
 	action.connect("use_pressed", self, "OnUseInventory_Callback")
-	#action = get_node(OptionBtn)
-	OptionBtn.connect("pressed", self, "Pressed_Option_Callback")
-	#action = get_node(QuestionBtn)
-	QuestionBtn.connect("pressed", self, "Pressed_Question_Callback")
 	
 	get_node(TargettingHUD).connect("cancel_pressed", self, "cancel_targetting_pressed_Callback")
 	
@@ -104,6 +94,17 @@ func _ready():
 	BehaviorEvents.connect("OnDifficultyChanged", self, "OnDifficultyChanged_Callback")
 	BehaviorEvents.connect("OnCameraDragged", self, "OnCameraDragged_Callback")
 	
+	
+func OnButtonReady_Callback(btn):
+	var btn_name = btn.name
+	if btn_name == "Weapon":
+		weapon_btn_ref = btn
+	elif btn_name == "Wormhole":
+		ftl_btn_ref_1 = btn
+	elif btn_name == "Converter":
+		conv_btn_ref = btn
+	elif btn_name == "Comm":
+		comm_btn_ref = btn
 	
 func OnDifficultyChanged_Callback(new_diff):
 	if playerNode == null:
@@ -205,24 +206,24 @@ func Pressed_Comm_Callback():
 func UpdateButtonVisibility():
 	var hide_hud = PermSave.get_attrib("settings.hide_hud")
 	var weapons = playerNode.get_attrib("mounts.weapon")
-	var weapon_btn = WeaponAction
+	var weapon_btn = weapon_btn_ref
 	var valid = false
 	for weapon in weapons:
 		if weapon != null and weapon != "":
 			valid = true
 			break
 	valid = valid and not hide_hud
-	weapon_btn.visible = valid
+	weapon_btn.Disabled = not valid
 		
 	var converters = playerNode.get_attrib("mounts.converter")
-	var converter_btn = CraftingAction
+	var converter_btn = conv_btn_ref
 	valid = false
 	for c in converters:
 		if c != null and c != "":
 			valid = true
 			break
 	valid = valid and not hide_hud	
-	converter_btn.visible = valid
+	converter_btn.Disabled = not valid
 	
 func OnMountAdded_Callback(obj, mount, src, modified_attributes):
 	if obj != playerNode:
@@ -445,7 +446,6 @@ func Pressed_Weapon_Callback():
 	var weapon_attributes = playerNode.get_attrib("mount_attributes.weapon")
 		
 	_weapon_shots = []
-	var index = 0
 	for index in range(weapons_data.size()):
 		var data = weapons_data[index]
 		var attrib_data = weapon_attributes[index]
@@ -957,7 +957,7 @@ func UpdateMovementBasedButton():
 		if c != playerNode and c.get_attrib("type") in ["trade_port"]:
 			trade_port = c
 			
-	var btn = FTLAction
+	var btn = ftl_btn_ref_1
 	if wormhole != null:
 		btn.visible = true
 		var cur_depth : int = Globals.LevelLoaderRef.current_depth
@@ -969,7 +969,7 @@ func UpdateMovementBasedButton():
 	else:
 		btn.visible = false
 		
-	btn = PopupButtons
+	btn = comm_btn_ref
 	btn.EnableComm(trade_port != null)
 	if trade_port != null:
 		BehaviorEvents.emit_signal("OnLogLine", "Select 'Comm' to open a trading console")

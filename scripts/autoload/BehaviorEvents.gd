@@ -75,6 +75,21 @@ signal OnResetHighlight()
 signal OnHUDVisiblityChanged()
 signal OnLocaleChanged()
 
+signal OnButtonReady(btn)
+signal OnHUDWeaponPressed
+signal OnHUDGrabPressed
+signal OnHUDInventoryPressed
+signal OnHUDFTLPressed
+signal OnHUDCraftingPressed
+signal OnHUDLookPressed
+signal OnHUDBoardPressed
+signal OnHUDTakePressed
+signal OnHUDWaitPressed
+signal OnHUDCrewPressed
+signal OnHUDCommPressed
+signal OnHUDOptionPressed
+signal OnHUDQuestionPressed
+
 
 func _ready():
 	pass

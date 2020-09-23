@@ -12,6 +12,9 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ModalBG" type="Panel" parent="."]
 anchor_right = 1.0
@@ -52,7 +55,7 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="base/ScrollContainer"]
 margin_right = 725.0
-margin_bottom = 666.0
+margin_bottom = 612.0
 rect_min_size = Vector2( 725, 0 )
 size_flags_vertical = 3
 
@@ -189,52 +192,22 @@ margin_bottom = 9.8158
 rect_scale = Vector2( 1.5, 1.5 )
 pressed = true
 
-[node name="HideHUD" type="Panel" parent="base/ScrollContainer/VBoxContainer"]
+[node name="spacer2" type="Label" parent="base/ScrollContainer/VBoxContainer"]
 margin_top = 242.0
 margin_right = 725.0
-margin_bottom = 292.0
-rect_min_size = Vector2( 0, 50 )
-mouse_filter = 2
-size_flags_horizontal = 3
-custom_styles/panel = ExtResource( 5 )
-
-[node name="Label" type="Label" parent="base/ScrollContainer/VBoxContainer/HideHUD"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 20.0
-margin_top = -1.3833
-margin_bottom = -1.3833
-text = "Hide HUD Buttons (shortcut only)"
-valign = 1
-
-[node name="HideHUD" type="CheckButton" parent="base/ScrollContainer/VBoxContainer/HideHUD"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -115.601
-margin_top = -29.9808
-margin_right = -39.6012
-margin_bottom = 10.0192
-rect_scale = Vector2( 1.5, 1.5 )
-pressed = true
-
-[node name="spacer2" type="Label" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 296.0
-margin_right = 725.0
-margin_bottom = 318.0
+margin_bottom = 264.0
 
 [node name="Label2" type="Label" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 322.0
+margin_top = 268.0
 margin_right = 725.0
-margin_bottom = 344.0
+margin_bottom = 290.0
 theme = ExtResource( 4 )
 text = "Video"
 
 [node name="FullScreen" type="Panel" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 348.0
+margin_top = 294.0
 margin_right = 725.0
-margin_bottom = 398.0
+margin_bottom = 344.0
 rect_min_size = Vector2( 0, 50 )
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -261,9 +234,9 @@ margin_bottom = 11.8241
 rect_scale = Vector2( 1.5, 1.5 )
 
 [node name="VSync" type="Panel" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 402.0
+margin_top = 348.0
 margin_right = 725.0
-margin_bottom = 452.0
+margin_bottom = 398.0
 rect_min_size = Vector2( 0, 50 )
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -290,21 +263,21 @@ margin_bottom = 8.62243
 rect_scale = Vector2( 1.5, 1.5 )
 
 [node name="spacer" type="Label" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 456.0
+margin_top = 402.0
 margin_right = 725.0
-margin_bottom = 478.0
+margin_bottom = 424.0
 
 [node name="Label" type="Label" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 482.0
+margin_top = 428.0
 margin_right = 725.0
-margin_bottom = 504.0
+margin_bottom = 450.0
 theme = ExtResource( 4 )
 text = "Sound"
 
 [node name="MasterVolume" type="Panel" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 508.0
+margin_top = 454.0
 margin_right = 725.0
-margin_bottom = 558.0
+margin_bottom = 504.0
 rect_min_size = Vector2( 0, 50 )
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -337,9 +310,9 @@ exp_edit = true
 ticks_on_borders = true
 
 [node name="SFXVolume" type="Panel" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 562.0
+margin_top = 508.0
 margin_right = 725.0
-margin_bottom = 612.0
+margin_bottom = 558.0
 rect_min_size = Vector2( 0, 50 )
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -373,9 +346,9 @@ __meta__ = {
 }
 
 [node name="MusicVolume" type="Panel" parent="base/ScrollContainer/VBoxContainer"]
-margin_top = 616.0
+margin_top = 562.0
 margin_right = 725.0
-margin_bottom = 666.0
+margin_bottom = 612.0
 rect_min_size = Vector2( 0, 50 )
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -409,6 +382,5 @@ exp_edit = true
 [connection signal="toggled" from="base/ScrollContainer/VBoxContainer/Enable Tutorial/TutoCheck" to="." method="_on_TutoCheck_toggled"]
 [connection signal="item_selected" from="base/ScrollContainer/VBoxContainer/Difficulty/DiffOptions" to="." method="_on_DiffOptions_item_selected"]
 [connection signal="toggled" from="base/ScrollContainer/VBoxContainer/FPS/FPSCounter" to="." method="_on_FPSCounter_toggled"]
-[connection signal="toggled" from="base/ScrollContainer/VBoxContainer/HideHUD/HideHUD" to="." method="_on_HideHUD_toggled"]
 [connection signal="toggled" from="base/ScrollContainer/VBoxContainer/FullScreen/CheckButton" to="." method="_on_fullscreen_toggled"]
 [connection signal="toggled" from="base/ScrollContainer/VBoxContainer/VSync/CheckButton" to="." method="_on_vsync_toggled"]

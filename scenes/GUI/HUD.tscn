@@ -65,7 +65,8 @@ rect_min_size = Vector2( 110, 90 )
 mouse_filter = 2
 Text = "[w]eapon"
 ShortcutKey = "w"
-IsHUD = true
+EmitEventBus = "OnHUDWeaponPressed"
+signal_creation = true
 
 [node name="Grab" parent="Buttons" instance=ExtResource( 12 )]
 anchor_left = 1.0
@@ -79,6 +80,7 @@ margin_bottom = -439.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[g]rab"
 ShortcutKey = "g"
+EmitEventBus = "OnHUDGrabPressed"
 
 [node name="Wormhole" parent="Buttons" instance=ExtResource( 12 )]
 anchor_left = 1.0
@@ -92,7 +94,8 @@ margin_bottom = -219.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[<]FTL"
 ShortcutKey = "<"
-IsHUD = true
+EmitEventBus = "OnHUDFTLPressed"
+signal_creation = true
 
 [node name="Control" type="Control" parent="Buttons"]
 visible = false
@@ -111,7 +114,7 @@ margin_bottom = 460.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[<]FTL"
 ShortcutKey = ">"
-IsHUD = true
+EmitEventBus = "OnHUDFTLPressed"
 
 [node name="Inventory" parent="Buttons" instance=ExtResource( 12 )]
 anchor_left = 1.0
@@ -125,7 +128,7 @@ margin_bottom = -329.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[i]nv"
 ShortcutKey = "i"
-IsHUD = true
+EmitEventBus = "OnHUDInventoryPressed"
 
 [node name="Converter" parent="Buttons" instance=ExtResource( 12 )]
 anchor_top = 1.0
@@ -137,7 +140,8 @@ margin_bottom = -329.0
 rect_min_size = Vector2( 110, 90 )
 Text = "[c]onv"
 ShortcutKey = "c"
-IsHUD = true
+EmitEventBus = "OnHUDCraftingPressed"
+signal_creation = true
 
 [node name="PopupButton" parent="Buttons" instance=ExtResource( 14 )]
 anchor_top = 1.0
@@ -156,7 +160,6 @@ margin_top = -165.0
 margin_right = -8.9469
 margin_bottom = -100.0
 Text = "+"
-IsHUD = true
 
 [node name="ZoomOut" parent="Buttons" instance=ExtResource( 12 )]
 anchor_left = 1.0
@@ -168,7 +171,6 @@ margin_top = -87.0
 margin_right = -9.0
 margin_bottom = -22.0
 Text = "-"
-IsHUD = true
 
 [node name="Options" parent="Buttons" instance=ExtResource( 12 )]
 anchor_left = 1.0
@@ -179,6 +181,7 @@ margin_right = -8.0
 margin_bottom = 127.614
 ShortcutEnum = 16777217
 AlwaysOnShortcut = false
+EmitEventBus = "OnHUDOptionPressed"
 
 [node name="Sprite" type="Sprite" parent="Buttons/Options"]
 position = Vector2( 32, 33 )
@@ -198,7 +201,7 @@ margin_right = -278.0
 margin_bottom = -136.0
 Text = "?"
 ShortcutKey = "?"
-IsHUD = true
+EmitEventBus = "OnHUDQuestionPressed"
 
 [node name="StatusBar" type="Control" parent="."]
 anchor_right = 1.0

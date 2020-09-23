@@ -1,0 +1,141 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scripts/GUI/PopupButton.gd" type="Script" id=1]
+[ext_resource path="res://scripts/GUI/PopupScreenBlock.gd" type="Script" id=2]
+[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=4]
+[ext_resource path="res://data/styles/trans.tres" type="StyleBox" id=5]
+[ext_resource path="res://data/animations/popin.tres" type="Animation" id=6]
+
+[node name="PopupButton" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScreenBlock" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -2249.1
+margin_top = -1609.06
+margin_right = 326.897
+margin_bottom = 198.938
+script = ExtResource( 2 )
+
+[node name="PopupSize" type="Control" parent="."]
+modulate = Color( 0.129412, 1, 0.129412, 0 )
+margin_left = 90.7692
+margin_right = 417.769
+margin_bottom = 266.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Popup" parent="PopupSize" instance=ExtResource( 3 )]
+margin_left = -649.0
+margin_top = -87.0
+margin_right = -355.0
+margin_bottom = -286.0
+border_style = "━"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupSize"]
+margin_left = -632.145
+margin_top = -75.0135
+margin_right = 97.8553
+margin_bottom = -35.0135
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Board" parent="PopupSize/HBoxContainer" groups=[
+"more_btn",
+] instance=ExtResource( 4 )]
+margin_right = 130.0
+margin_bottom = 39.0
+rect_min_size = Vector2( 130, 30 )
+Text = "[b]oard"
+ShortcutKey = "b"
+EmitEventBus = "OnHUDBoardPressed"
+
+[node name="Take" parent="PopupSize/HBoxContainer" groups=[
+"more_btn",
+] instance=ExtResource( 4 )]
+margin_left = 150.0
+margin_right = 280.0
+margin_bottom = 39.0
+rect_min_size = Vector2( 130, 30 )
+Text = "[t]ransfer"
+ShortcutKey = "t"
+EmitEventBus = "OnHUDTakePressed"
+
+[node name="Crew" parent="PopupSize/HBoxContainer" groups=[
+"more_btn",
+] instance=ExtResource( 4 )]
+margin_left = 300.0
+margin_right = 430.0
+margin_bottom = 39.0
+rect_min_size = Vector2( 130, 30 )
+Text = "c[r]ew"
+ShortcutKey = "r"
+EmitEventBus = "OnHUDCrewPressed"
+
+[node name="Comm" parent="PopupSize/HBoxContainer" groups=[
+"more_btn",
+] instance=ExtResource( 4 )]
+margin_left = 450.0
+margin_right = 580.0
+margin_bottom = 39.0
+rect_min_size = Vector2( 130, 30 )
+Text = "co[m]m"
+ShortcutKey = "m"
+Disabled = true
+EmitEventBus = "OnHUDCommPressed"
+signal_creation = true
+
+[node name="Look" parent="PopupSize/HBoxContainer" groups=[
+"more_btn",
+] instance=ExtResource( 4 )]
+visible = false
+margin_left = 600.0
+margin_right = 730.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 130, 30 )
+Text = "[?] help"
+
+[node name="Wait" parent="PopupSize/HBoxContainer" groups=[
+"more_btn",
+] instance=ExtResource( 4 )]
+visible = false
+margin_left = 20.5
+margin_top = 343.0
+margin_right = 160.5
+margin_bottom = 433.0
+rect_min_size = Vector2( 110, 90 )
+Text = "[5] wait"
+
+[node name="More" parent="." instance=ExtResource( 4 )]
+margin_right = 45.0
+margin_bottom = 30.0
+Text = "..."
+
+[node name="Close" type="Button" parent="."]
+visible = false
+margin_right = 140.0
+margin_bottom = 102.0
+custom_styles/normal = ExtResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../PopupSize/Popup")
+anims/popin = ExtResource( 6 )
+[connection signal="pressed" from="PopupSize/HBoxContainer/Board" to="." method="_on_Board_pressed"]
+[connection signal="pressed" from="PopupSize/HBoxContainer/Take" to="." method="_on_Take_pressed"]
+[connection signal="pressed" from="PopupSize/HBoxContainer/Crew" to="." method="_on_Crew_pressed"]
+[connection signal="pressed" from="PopupSize/HBoxContainer/Comm" to="." method="_on_Comm_pressed"]
+[connection signal="pressed" from="PopupSize/HBoxContainer/Look" to="." method="_on_Look_pressed"]
+[connection signal="pressed" from="PopupSize/HBoxContainer/Wait" to="." method="_on_Wait_pressed"]

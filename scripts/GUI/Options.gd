@@ -34,3 +34,7 @@ func On_Suicide_Confirmed_Callback():
 
 func _on_Settings_pressed():
 	BehaviorEvents.emit_signal("OnPushGUI", "Settings", {})
+
+
+func _on_Help_pressed():
+	BehaviorEvents.emit_signal("OnPushGUI", "Tutorial", {})

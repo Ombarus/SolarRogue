@@ -4,12 +4,12 @@
 [ext_resource path="res://scenes/GUI/SlidePanel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/GUI/SlidePanelRight.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/GUI/GUILayoutBase.gd" type="Script" id=4]
+[ext_resource path="res://scenes/GUI/PopupButtonPC.tscn" type="PackedScene" id=5]
 [ext_resource path="res://data/fonts/DejaVuSansMono_text.tres" type="DynamicFont" id=6]
 [ext_resource path="res://scripts/GUI/LogSystem.gd" type="Script" id=8]
 [ext_resource path="res://scripts/GUI/StatusBarSystem.gd" type="Script" id=11]
 [ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/GUI/PopupButton.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/GUI/StringContentDialog.tscn" type="PackedScene" id=15]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -101,149 +101,65 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Question" parent="Buttons" instance=ExtResource( 12 )]
+[node name="PopupButton2" parent="Buttons" instance=ExtResource( 5 )]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 269.892
-margin_top = -173.906
-margin_right = 302.892
-margin_bottom = -143.906
-Text = "?"
-ShortcutKey = "?"
-IsHUD = true
-
-[node name="Weapon" parent="Buttons" instance=ExtResource( 12 )]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 1397.71
-margin_top = -565.78
-margin_right = 1527.71
-margin_bottom = -540.78
-rect_min_size = Vector2( 130, 25 )
-mouse_filter = 2
-Text = "[l]ook"
-ShortcutKey = "w"
-IsHUD = true
-
-[node name="Grab" parent="Buttons" instance=ExtResource( 12 )]
-visible = false
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 540.278
-margin_top = -369.015
-margin_right = 650.278
-margin_bottom = -279.015
-rect_min_size = Vector2( 110, 90 )
-Text = "[g]rab"
-ShortcutKey = "g"
-IsHUD = true
+margin_left = 252.963
+margin_top = -175.917
+margin_right = 252.963
+margin_bottom = -175.917
 
 [node name="Wormhole" parent="Buttons" instance=ExtResource( 12 )]
-visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -1271.73
-margin_top = -513.771
-margin_right = -1161.73
-margin_bottom = -423.771
+margin_left = -141.182
+margin_top = -145.236
+margin_right = -31.1816
+margin_bottom = -55.2357
 rect_min_size = Vector2( 110, 90 )
 Text = "[<]FTL"
 ShortcutKey = "<"
-IsHUD = true
+AlwaysBlink = true
+EmitEventBus = "OnHUDFTLPressed"
+signal_creation = true
 
 [node name="Control" type="Control" parent="Buttons"]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -40.0
 
 [node name="Wormhole2" parent="Buttons/Control" instance=ExtResource( 12 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -31.2983
-margin_top = 165.229
-margin_right = 78.7017
-margin_bottom = 255.229
+margin_left = -140.698
+margin_top = -144.585
+margin_right = -30.6984
+margin_bottom = -54.5846
 rect_min_size = Vector2( 110, 90 )
 Text = "[<]FTL"
 ShortcutKey = ">"
-IsHUD = true
-
-[node name="Inventory" parent="Buttons" instance=ExtResource( 12 )]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 119.464
-margin_top = -530.338
-margin_right = 249.464
-margin_bottom = -505.337
-rect_min_size = Vector2( 130, 25 )
-Text = "[i]nv"
-ShortcutKey = "i"
-IsHUD = true
-
-[node name="Converter" parent="Buttons" instance=ExtResource( 12 )]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 1398.44
-margin_top = -492.806
-margin_right = 1528.44
-margin_bottom = -467.806
-rect_min_size = Vector2( 130, 25 )
-Text = "[c]onv"
-ShortcutKey = "c"
-IsHUD = true
-
-[node name="PopupButton" parent="Buttons" instance=ExtResource( 14 )]
-anchor_top = 1.0
-margin_left = 1399.36
-margin_top = -451.771
-margin_right = 1539.36
-margin_bottom = -35.7708
-
-[node name="ZoomIn" parent="Buttons" instance=ExtResource( 12 )]
-visible = false
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -149.0
-margin_top = -200.0
-margin_right = -84.0
-margin_bottom = -135.0
-Text = "+"
-
-[node name="ZoomOut" parent="Buttons" instance=ExtResource( 12 )]
-visible = false
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -74.0
-margin_top = -201.0
-margin_right = -9.0
-margin_bottom = -136.0
-Text = "-"
+AlwaysBlink = true
+EmitEventBus = "OnHUDFTLPressed"
 
 [node name="Options" parent="Buttons" instance=ExtResource( 12 )]
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -54.0
-margin_top = -660.0
-margin_right = -13.0
-margin_bottom = -618.0
+margin_left = -52.3462
+margin_top = 65.4072
+margin_right = -11.3462
+margin_bottom = 107.407
 ShortcutEnum = 16777217
 AlwaysOnShortcut = false
+EmitEventBus = "OnHUDOptionPressed"
 
 [node name="Sprite" type="Sprite" parent="Buttons/Options"]
 position = Vector2( 20.3933, 21.3934 )

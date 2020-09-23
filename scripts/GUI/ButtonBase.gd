@@ -9,7 +9,10 @@ export(bool) var AlwaysOnShortcut = true
 #export(ShortCut) var Action = null setget set_action
 export(bool) var Disabled = false setget set_disabled
 export(StyleBox) var HighlightStyle
-export(bool) var IsHUD = false
+export(bool) var AlwaysBlink = false
+export(String) var EmitEventBus := ""
+export(bool) var signal_creation := false
+
 signal pressed
 signal down
 signal up
@@ -37,19 +40,19 @@ func OnLocaleChanged_Callback():
 func _ready():
 	BehaviorEvents.connect("OnHighlightUIElement", self, "Hightlight_Callback")
 	BehaviorEvents.connect("OnResetHighlight", self, "ResetHightlight_Callback")
-	BehaviorEvents.connect("OnHUDVisiblityChanged", self, "OnHUDVisiblityChanged_Callback")
 	BehaviorEvents.connect("OnLocaleChanged", self, "OnLocaleChanged_Callback")
 	get_node("base").connect("OnUpdateLayout", self, "OnUpdateLayout_Callback")
 	#set_text(Text)
 	OnUpdateLayout_Callback()
-	if IsHUD == true and Engine.is_editor_hint() == false:
-		self.visible = not PermSave.get_attrib("settings.hide_hud")
-
-func OnHUDVisiblityChanged_Callback():
-	if IsHUD and Engine.is_editor_hint() == false:
-		self.visible = not PermSave.get_attrib("settings.hide_hud")
+	if AlwaysBlink == true:
+		Hightlight_Callback(name)
+		
+	if signal_creation == true:
+		BehaviorEvents.emit_signal("OnButtonReady", self)
 
 func ResetHightlight_Callback():
+	if AlwaysBlink == true:
+		return
 	get_node("AnimationPlayer").stop(true)
 	if _prev_style != null:
 		get_node("btn").set('custom_styles/normal', _prev_style)
@@ -72,10 +75,13 @@ func _on_btn_pressed():
 	# ShortcutManager can sometimes trigger the button even when it's disabled
 	if Disabled == true:
 		return
+		
 	if get_node("btn").get("custom_styles/normal") == HighlightStyle:
 		BehaviorEvents.emit_signal("OnResetHighlight")
 	get_node("ClickSFX").play()
 	emit_signal("pressed")
+	if not EmitEventBus.empty():
+		BehaviorEvents.emit_signal(EmitEventBus)
 
 func RegisterShortcut():
 	if ShortcutKey != "":
