@@ -60,9 +60,6 @@ func Init(init_param):
 	var show_fps : bool = PermSave.get_attrib("settings.display_fps")
 	get_node("base/ScrollContainer/VBoxContainer/FPS/FPSCounter").pressed = show_fps
 	
-	var show_hud : bool = PermSave.get_attrib("settings.hide_hud")
-	get_node("base/ScrollContainer/VBoxContainer/HideHUD/HideHUD").pressed = show_hud
-	
 	var lang : String = PermSave.get_attrib("settings.lang", TranslationServer.get_locale())
 	_lang_options.select(get_lang_by_metadata(lang))
 	

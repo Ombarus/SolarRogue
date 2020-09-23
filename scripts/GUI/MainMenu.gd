@@ -4,6 +4,12 @@ extends Node
 func _ready():
 	OS.set_window_fullscreen(PermSave.get_attrib("settings.full_screen", false))
 	OS.set_use_vsync(PermSave.get_attrib("settings.vsync", true))
+	
+	if Globals.is_mobile():
+		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_EXPAND, Vector2(1280, 720))
+	else:
+		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_EXPAND, Vector2(1920, 1080))
+	
 	#OS.set_window_size(Vector2(2208, 1242))
 	var lang = PermSave.get_attrib("settings.lang")
 	if lang != null:
@@ -14,12 +20,12 @@ func _ready():
 	
 	var cur_save = get_node("LocalSave").get_latest_save()
 	
-	get_node("CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/MenuBtn/Continue").Disabled = cur_save == null or cur_save.empty()
+	get_node("CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn/Continue").Disabled = cur_save == null or cur_save.empty()
 	BehaviorEvents.call_deferred("emit_signal", "OnPushGUI", "MenuRoot", {})
 	#BehaviorEvents.emit_signal("OnPushGUI", "MenuRoot", {})
 	
 	if Globals.is_ios():
-		get_node("CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/MenuBtn/Quit").visible = false
+		get_node("CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn/Quit").visible = false
 
 #func OnPopGUI_Callback():
 #	var name_diag = get_node("PlayerName")

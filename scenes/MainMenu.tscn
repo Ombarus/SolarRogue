@@ -96,20 +96,47 @@ __meta__ = {
 }
 Transition = false
 
-[node name="MenuBtn" type="Control" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot"]
+[node name="Label" type="Label" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot"]
+anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 46.0
-margin_top = 84.0
-margin_right = 429.0
+margin_left = 36.3677
+margin_top = -39.5347
+margin_right = 76.3677
+margin_bottom = -25.5347
+text = "Version 0.5.0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="GameTitle" type="TextureRect" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/MenuBtn"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot"]
 anchor_right = 1.0
-margin_bottom = 62.0
+anchor_bottom = 1.0
+margin_left = 28.0
+margin_top = 40.0
+margin_right = -42.0
+margin_bottom = -31.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuBtn" type="Control" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer"]
+margin_right = 500.0
+margin_bottom = 1009.0
+rect_min_size = Vector2( 500, 0 )
+
+[node name="GameTitle" type="TextureRect" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn"]
+anchor_right = 1.0
+margin_right = -3.05176e-05
+margin_bottom = 92.0
 texture = ExtResource( 8 )
 expand = true
 stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Continue" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/MenuBtn" instance=ExtResource( 9 )]
+[node name="Continue" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn" instance=ExtResource( 9 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -124,7 +151,7 @@ ShortcutKey = "c"
 AlwaysOnShortcut = false
 Disabled = true
 
-[node name="NewGameBTN" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/MenuBtn" instance=ExtResource( 9 )]
+[node name="NewGameBTN" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn" instance=ExtResource( 9 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -138,7 +165,7 @@ Text = "[n]ew game"
 ShortcutKey = "n"
 AlwaysOnShortcut = false
 
-[node name="Setting" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/MenuBtn" instance=ExtResource( 9 )]
+[node name="Setting" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn" instance=ExtResource( 9 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -152,7 +179,7 @@ Text = "[s]ettings"
 ShortcutKey = "s"
 AlwaysOnShortcut = false
 
-[node name="Credits" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/MenuBtn" instance=ExtResource( 9 )]
+[node name="Credits" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn" instance=ExtResource( 9 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -166,7 +193,7 @@ Text = "[?]credits"
 ShortcutKey = "?"
 AlwaysOnShortcut = false
 
-[node name="Quit" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/MenuBtn" instance=ExtResource( 9 )]
+[node name="Quit" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn" instance=ExtResource( 9 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -180,14 +207,23 @@ Text = "[q]uit"
 ShortcutKey = "q"
 AlwaysOnShortcut = false
 
-[node name="base" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot" instance=ExtResource( 10 )]
-anchor_left = 1.0
-margin_left = -735.0
-margin_top = 32.0
-margin_right = -34.0
-margin_bottom = -27.0
+[node name="Control" type="Control" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer"]
+margin_left = 500.0
+margin_right = 837.0
+margin_bottom = 1009.0
+size_flags_horizontal = 3
 
-[node name="Leaderboard" type="Control" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/base"]
+[node name="base" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer" instance=ExtResource( 10 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 837.0
+margin_right = 1850.0
+margin_bottom = 1009.0
+rect_min_size = Vector2( 710, 0 )
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="Leaderboard" type="Control" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/base"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -200,25 +236,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="leaderlist" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/base/Leaderboard" instance=ExtResource( 12 )]
+[node name="leaderlist" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/base/Leaderboard" instance=ExtResource( 12 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 0.0
 margin_bottom = 0.0
 mouse_filter = 1
 Row = ExtResource( 13 )
-
-[node name="Label" type="Label" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 36.3677
-margin_top = -39.5347
-margin_right = 76.3677
-margin_bottom = -25.5347
-text = "Version 0.5.0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PlayerNameRoot" type="Control" parent="CanvasLayer/SafeArea"]
 anchor_right = 1.0
@@ -278,13 +302,13 @@ __meta__ = {
 }
 
 [node name="Viewport" type="Viewport" parent="CanvasLayer/ViewportContainer"]
-size = Vector2( 1280, 720 )
+size = Vector2( 1920, 1080 )
 transparent_bg = true
 handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
-[connection signal="pressed" from="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/MenuBtn/Continue" to="." method="_on_Continue_pressed"]
-[connection signal="pressed" from="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/MenuBtn/NewGameBTN" to="." method="_on_newgame_pressed"]
-[connection signal="pressed" from="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/MenuBtn/Setting" to="." method="_on_Setting_pressed"]
-[connection signal="pressed" from="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/MenuBtn/Credits" to="." method="_on_Credits_pressed"]
-[connection signal="pressed" from="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/MenuBtn/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn/NewGameBTN" to="." method="_on_newgame_pressed"]
+[connection signal="pressed" from="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn/Setting" to="." method="_on_Setting_pressed"]
+[connection signal="pressed" from="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn/Credits" to="." method="_on_Credits_pressed"]
+[connection signal="pressed" from="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn/Quit" to="." method="_on_Quit_pressed"]

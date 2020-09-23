@@ -32,14 +32,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
 margin_top = 20.0
-margin_right = -20.0
+margin_right = -19.0
 margin_bottom = -20.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Recipes" parent="HBoxContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 410.0
 margin_bottom = 680.0
+rect_min_size = Vector2( 410, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 title = "Converter MK1"
@@ -57,19 +62,22 @@ SelectGroup = SubResource( 1 )
 CanDropOnList = false
 
 [node name="Control" type="Control" parent="HBoxContainer"]
-margin_left = 414.0
-margin_right = 825.0
+margin_left = 420.0
+margin_right = 820.0
 margin_bottom = 680.0
+rect_min_size = Vector2( 400, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="Control" parent="HBoxContainer/Control"]
-anchor_right = 1.0
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = 32.0
-margin_top = 7.0
-margin_right = -25.0
-margin_bottom = -104.0
+margin_left = -183.0
+margin_right = 182.0
+margin_bottom = -108.0
+rect_min_size = Vector2( 365, 0 )
+size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -110,6 +118,9 @@ margin_right = 369.0
 margin_bottom = 282.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="RecipeName" type="RichTextLabel" parent="HBoxContainer/Control/VBoxContainer/RecipeInfoContainer"]
 margin_right = 369.0
@@ -315,9 +326,10 @@ ShortcutEnum = 16777217
 [node name="Materials" parent="HBoxContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 829.0
-margin_right = 1240.0
+margin_left = 830.0
+margin_right = 1241.0
 margin_bottom = 680.0
+rect_min_size = Vector2( 411, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 title = "Select Materials"
