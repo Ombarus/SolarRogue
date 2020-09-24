@@ -39,8 +39,8 @@ margin_bottom = -27.0
 [node name="Mounts" parent="HBoxContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 413.0
-margin_bottom = 656.0
+margin_right = 626.0
+margin_bottom = 1016.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 title = "Ship's Mounts"
@@ -58,9 +58,9 @@ SelectGroup = ExtResource( 8 )
 CanDropOnList = false
 
 [node name="Control" type="Control" parent="HBoxContainer"]
-margin_left = 417.0
-margin_right = 830.0
-margin_bottom = 656.0
+margin_left = 630.0
+margin_right = 1257.0
+margin_bottom = 1016.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -81,6 +81,9 @@ margin_top = -328.0
 margin_right = 152.5
 margin_bottom = 326.0
 mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Remove" parent="HBoxContainer/Control/Normal" instance=ExtResource( 9 )]
 anchor_right = 1.0
@@ -148,12 +151,18 @@ ShortcutEnum = 16777217
 AlwaysOnShortcut = false
 
 [node name="Mounting" type="Control" parent="HBoxContainer/Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 55.0
-margin_right = -53.0
-margin_bottom = 9.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -151.5
+margin_top = -347.0
+margin_right = 152.5
+margin_bottom = 335.0
 mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Cancel" parent="HBoxContainer/Control/Mounting" instance=ExtResource( 9 )]
 anchor_top = 1.0
@@ -171,9 +180,9 @@ AlwaysOnShortcut = false
 [node name="Cargo" parent="HBoxContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 834.0
-margin_right = 1248.0
-margin_bottom = 656.0
+margin_left = 1261.0
+margin_right = 1888.0
+margin_bottom = 1016.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 title = "Cargo Holds"

@@ -122,7 +122,7 @@ __meta__ = {
 
 [node name="MenuBtn" type="Control" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer"]
 margin_right = 500.0
-margin_bottom = 1009.0
+margin_bottom = 649.0
 rect_min_size = Vector2( 500, 0 )
 
 [node name="GameTitle" type="TextureRect" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn"]
@@ -209,16 +209,16 @@ AlwaysOnShortcut = false
 
 [node name="Control" type="Control" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer"]
 margin_left = 500.0
-margin_right = 837.0
-margin_bottom = 1009.0
+margin_right = 500.0
+margin_bottom = 649.0
 size_flags_horizontal = 3
 
 [node name="base" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer" instance=ExtResource( 10 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 837.0
-margin_right = 1850.0
-margin_bottom = 1009.0
+margin_left = 500.0
+margin_right = 1210.0
+margin_bottom = 649.0
 rect_min_size = Vector2( 710, 0 )
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -302,7 +302,7 @@ __meta__ = {
 }
 
 [node name="Viewport" type="Viewport" parent="CanvasLayer/ViewportContainer"]
-size = Vector2( 1920, 1080 )
+size = Vector2( 1280, 720 )
 transparent_bg = true
 handle_input_locally = false
 usage = 0

@@ -658,7 +658,7 @@ __meta__ = {
 }
 
 [node name="Viewport" type="Viewport" parent="Camera-GUI/ViewportContainer"]
-size = Vector2( 1920, 1080 )
+size = Vector2( 1280, 720 )
 transparent_bg = true
 handle_input_locally = false
 usage = 0

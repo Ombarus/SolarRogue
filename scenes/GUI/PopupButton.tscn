@@ -27,6 +27,7 @@ margin_bottom = 845.0
 script = ExtResource( 2 )
 
 [node name="PopupSize" type="Control" parent="."]
+visible = false
 modulate = Color( 0.129412, 1, 0.129412, 0 )
 margin_right = 327.0
 margin_bottom = 266.0
