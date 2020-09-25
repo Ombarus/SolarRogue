@@ -119,7 +119,7 @@
 				{"name":"Speed", "value":"{moving.speed}", "translate_value":false},
 				{"name":"Weapon mounts", "value":"2", "translate_value":false},
 				{"name":"Shield mounts", "value":"0", "translate_value":false},
-				{"name":"Utility mounts", "value":"4", "translate_value":false},
+				{"name":"Utility mounts", "value":"6", "translate_value":false},
 				{"name":"Special", "value": "Jerg Regen"}
 			]
 		},
