@@ -46,7 +46,7 @@ func Init(init_param):
 	var cat_dict : Dictionary = str2var(var2str(get_custom("description", {})))
 	
 	var variation_src = _modified_attributes.get("selected_variation")
-	if variation_src != null:
+	if variation_src != null and not variation_src.empty():
 		var variation_data : Dictionary = Globals.LevelLoaderRef.LoadJSON(variation_src)
 		var extra_desc = str2var(var2str(variation_data.get("description", {})))
 		for key in extra_desc.keys():

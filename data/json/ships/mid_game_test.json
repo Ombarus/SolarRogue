@@ -64,7 +64,7 @@
 				{"name":"Cargo", "value":"{cargo.capacity}", "translate_value":false},
 				{"name":"Weapon mounts", "value":"1", "translate_value":false},
 				{"name":"Shield mounts", "value":"1", "translate_value":false},
-				{"name":"Utility mounts", "value":"0", "translate_value":false}
+				{"name":"Utility mounts", "value":"1", "translate_value":false}
 			]
 		},
 		"Status": {
