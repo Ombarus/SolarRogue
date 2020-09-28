@@ -1,0 +1,137 @@
+{
+	"name_id":"The Jerg Queen",
+	"type":"ship",
+	"sprite":"jerg_queen",
+	"icon": {
+		"texture":"data/private/textures/space-sprite.png",
+		"region":[1792,128,128,128]
+	},
+	"animation": {
+		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
+	},
+	"action_point":0,
+	"mounts": {
+		"weapon": [
+			"data/json/items/weapons/laser_turret_mk2.json",
+			"data/json/items/weapons/laser_turret_mk2.json",
+			"data/json/items/weapons/rail_gun_mk2.json"
+		],
+		"scanner": ["data/json/items/scanners/scanner_mk2.json"],
+		"converter": ["data/json/items/converters/converter_mk1.json"],
+		"utility":[
+			"data/json/items/utilities/jammer.json",
+			"data/json/items/utilities/speed_boost_mk2.json",
+			"data/json/items/utilities/targeting_computer.json"
+		]
+	},
+	"mount_attributes": {
+		"weapon": [{},{}],
+		"scanner": [{}],
+		"converter": [{}],
+		"utility":[{},{}]
+	},
+	"destroyable": {
+		"hull":200
+	},
+	"moving": {
+		"speed":1.6,
+		"can_use_wormhole":true,
+		"wander_speed":1.6
+	},
+	"ai": {
+		"aggressive":true,
+		"pathfinding":"queen_jerg",
+		"run_if_attacked":false,
+		"hit_chance_malus":0.05
+	},
+	"consumable": {
+		"hull_regen": [
+			{"data":"data/json/items/special/jerg_natural_regen.json"}
+		]
+	},
+	"drop_on_death": [
+		{"id":"data/json/items/converters/converter_mk1.json", "chance":0.001},
+		{"id":"data/json/items/converters/converter_mk2.json", "chance":0.001},
+		{"id":"data/json/items/converters/converter_mk3.json", "chance":0.001},
+		{"id":"data/json/items/converters/jerg_converter_mk1.json", "chance":0.06666666667},
+		{"id":"data/json/items/converters/vorg_converter_mk1.json", "chance":0.001},
+		{"id":"data/json/items/misc/battleship_body.json", "chance":0.1},
+		{"id":"data/json/items/misc/frigate_body.json", "chance":0.0},
+		{"id":"data/json/items/misc/probe_body.json", "chance":0.0},
+		{"id":"data/json/items/misc/scout_body.json", "chance":0.0},
+		{"id":"data/json/items/scanners/scanner_mk1.json", "chance":0.01},
+		{"id":"data/json/items/scanners/scanner_mk2.json", "chance":0.05},
+		{"id":"data/json/items/shields/shield_mk1.json", "chance":0.0},
+		{"id":"data/json/items/utilities/gravitic_compactor.json", "chance":0.025},
+		{"id":"data/json/items/utilities/solar_array.json", "chance":0.025},
+		{"id":"data/json/items/weapons/missile_launcher_mk1.json", "chance":0.15},
+		{"id":"data/json/items/weapons/mining_laser.json", "chance":0.03},
+		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.15},
+		{"id":"data/json/items/weapons/missile.json", "chance":0.15},
+		{"id":"data/json/items/weapons/missile.json", "chance":0.15},
+		{"id":"data/json/items/weapons/missile.json", "chance":0.15},
+		{"id":"data/json/items/weapons/missile.json", "chance":0.10},
+		{"id":"data/json/items/weapons/missile.json", "chance":0.05},
+		{"id":"data/json/items/consumables/repair_nanobots.json", "chance":0.01},
+		{"id":"data/json/items/consumables/emergency_warp.json", "chance":0.01},
+		
+		{"id":"data/json/items/shields/shield_mk2.json", "chance":0.0045},
+		{"id":"data/json/items/shields/shield_mk3.json", "chance":0.0045},
+		
+		{"id":"data/json/items/weapons/torpedo_launcher_mk1.json", "chance":0.012},
+		{"id":"data/json/items/weapons/torpedo.json", "chance":0.01},
+		{"id":"data/json/items/utilities/power_amplifier.json", "chance":0.02},
+		{"id":"data/json/items/utilities/power_amplifier_mk2.json", "chance":0.02},
+		{"id":"data/json/items/utilities/power_amplifier_mk3.json", "chance":0.02},
+		{"id":"data/json/items/utilities/speed_boost.json", "chance":0.02},
+		{"id":"data/json/items/utilities/speed_boost_mk2.json", "chance":0.02},
+		
+		
+		{"id":"data/json/items/weapons/missile_launcher_mk2.json", "chance":0.032},
+		{"id":"data/json/items/weapons/laser_turret_mk2.json", "chance":0.022},
+		{"id":"data/json/items/scanners/scanner_mk3.json", "chance":0.005},
+		{"id":"data/json/items/scanners/long_range_scanner_mk1.json", "chance":0.01},
+		{"id":"data/json/items/scanners/long_range_scanner_mk2.json", "chance":0.01},
+		{"id":"data/json/items/scanners/long_range_scanner_mk3.json", "chance":0.005},
+		{"id":"data/json/items/scanners/ultimate_scanner.json", "chance":0.002, "global_max":1},
+		{"id":"data/json/items/misc/oxygen.json", "chance":0.05},
+		{"id":"data/json/items/misc/oxygen.json", "chance":0.05},
+		{"id":"data/json/items/misc/oxygen.json", "chance":0.05},
+		{"id":"data/json/items/misc/uranium.json", "chance":0.02},
+		
+		{"id":"data/json/items/weapons/rail_gun_mk1.json", "chance":0.018},
+		{"id":"data/json/items/weapons/rail_gun_mk2.json", "chance":0.012},
+		{"id":"data/json/items/weapons/depleted_uranium.json", "chance":0.02},
+		
+		{"id":"data/json/items/utilities/hull_analyzer.json", "chance":0.025},
+		{"id":"data/json/items/utilities/shield_analyzer.json", "chance":0.025},
+		{"id":"data/json/items/utilities/shield_bypass.json", "chance":0.025},
+		{"id":"data/json/items/utilities/weapon_bypass.json", "chance":0.025},
+		{"id":"data/json/items/utilities/targeting_computer.json", "chance":0.025},
+		{"id":"data/json/items/utilities/jammer.json", "chance":0.025},
+		
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
+	],
+	"description": {
+		"text":"There is always only one queen for a local quadrant. She is the thoughest, meanest sob this side of the galaxy!",
+		"Overview": {
+			"min_level":0, 
+			"fields":[
+				{"name":"Max hull", "value":"{destroyable.hull}", "translate_value":false},
+				{"name":"Speed", "value":"{moving.speed}", "translate_value":false},
+				{"name":"Weapon mounts", "value":"3", "translate_value":false},
+				{"name":"Shield mounts", "value":"0", "translate_value":false},
+				{"name":"Utility mounts", "value":"3", "translate_value":false},
+				{"name":"Special", "value": "Jerg Regen"}
+				{"name":"Special2", "value": "Spawns Drones"}
+			]
+		},
+		"Status": {
+			"min_level":1,
+			"fields": [
+				{"name":"Current hull", "value":"{destroyable.current_hull}", "default":"{destroyable.hull}", "translate_value":false}
+			]
+		}
+	}
+}
