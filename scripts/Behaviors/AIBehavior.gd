@@ -125,7 +125,8 @@ func OnScannerUpdated_Callback(obj):
 			break
 	
 	if in_range == true:
-		obj.set_attrib("ai.pathfinding", "attack")
+		if obj.get_attrib("ai.pathfinding") != "queen":
+			obj.set_attrib("ai.pathfinding", "attack")
 		obj.set_attrib("ai.target", player)
 		obj.set_attrib("wandering", false)
 		BehaviorEvents.emit_signal("OnStatusChanged", obj)
@@ -145,7 +146,8 @@ func OnDamageTaken_Callback(target, shooter, damage_type):
 		
 	# handle the case where the player has better weapon and shoot a ship that hasn't seen it yet
 	if target.get_attrib("ai.aggressive", false) == true:
-		target.set_attrib("ai.pathfinding", "attack")
+		if target.get_attrib("ai.pathfinding") != "queen":
+			target.set_attrib("ai.pathfinding", "attack")
 		target.set_attrib("ai.target", shooter.get_attrib("unique_id"))
 		target.set_attrib("wandering", false)
 		BehaviorEvents.emit_signal("OnStatusChanged", target)
@@ -192,7 +194,8 @@ func OnObjTurn_Callback(obj):
 		
 	var is_aggressive = obj.get_attrib("ai.aggressive")
 	
-	
+	if pathfinding == "queen":
+		DoJergQueenPathfinding(obj)
 	if pathfinding == "simple" or pathfinding == "group_leader":
 		DoSimplePathFinding(obj)
 	elif pathfinding == "group":
@@ -219,6 +222,46 @@ func FindRandomTile():
 	var y = MersenneTwister.rand(Globals.LevelLoaderRef.levelSize.y)
 	return Vector2(x,y)
 
+func RotatedTileContent(obj, offset : Vector2) -> Array:
+	var center_tile : Vector2 = Globals.LevelLoaderRef.World_to_Tile(obj.position)
+	var desired_tile : Vector2 = center_tile + offset
+	desired_tile = desired_tile.rotated(obj.rotation)
+	desired_tile = desired_tile.round()
+	return Globals.LevelLoaderRef.GetTile(desired_tile)
+
+func DoJergQueenPathfinding(obj):
+	var ai_target = obj.get_attrib("ai.target")
+	var queen_drones = []
+	if "drone" in Globals.LevelLoaderRef.objByType:
+		queen_drones = Globals.LevelLoaderRef.objByType["drone"]
+		
+	if queen_drones.size() < obj.get_attrib("spawner.max", 0) and ai_target == null:
+		var queen_pos : Vector2 = Globals.LevelLoaderRef.World_to_Tile(obj.position)
+		var positions = obj.get_attrib("spawner.favored_position", [])
+		var spawned = false
+		for offset in positions:
+			if RotatedTileContent(obj, Vector2(offset[0], offset[1])).empty():
+				spawned = true
+				var drone_node = Globals.LevelLoaderRef.RequestObject(obj.get_attrib("spawner.spawn"), queen_pos + Vector2(offset[0], offset[1]))
+				drone_node.rotation = obj.rotation
+		if spawned == false:
+			var fallback_pos = obj.get_attrib("spawner.fallback_position", [0, 0])
+			var drone_node = Globals.LevelLoaderRef.RequestObject(obj.get_attrib("spawner.spawn"), queen_pos + Vector2(fallback_pos[0], fallback_pos[1]))
+			drone_node.rotation = obj.rotation
+		BehaviorEvents.emit_signal("OnUseAP", obj, obj.get_attrib("spawner.speed"))
+		return
+		
+	elif ai_target == null:
+		DoSimplePathFinding(obj)
+		return
+		
+	if queen_drones.size() > 0 and ai_target != null:
+		DoAttackPathFinding(obj)
+		return
+	elif ai_target != null:
+		DoRunAwayPathFinding(obj)
+		
+
 func DoFollowGroupLeader(obj):
 	if obj.get_attrib("ai.target") == null:
 		
@@ -228,7 +271,10 @@ func DoFollowGroupLeader(obj):
 		var nearest = null
 		var nearest_dist = 0
 		for ship in ships:
-			if ship != null and ship.get_attrib("ai.pathfinding") == "group_leader":
+			var pathfinding = ""
+			if ship != null:
+				pathfinding = ship.get_attrib("ai.pathfinding")
+			if pathfinding == "group_leader" or pathfinding == "queen":
 				var dist = (ship.position - obj.position).length()
 				if nearest == null or nearest_dist > dist:
 					nearest_dist = dist
@@ -308,37 +354,7 @@ func DoAttackPathFinding(obj):
 		var best_move = _targetting.ClosestFiringSolution(obj, obj_tile, player_tile, {"weapon_data":data, "modified_attributes":attrib_data})
 		var is_destroyed = player.get_attrib("destroyable.destroyed")
 		if best_move.length() == 0 and (is_destroyed == null or is_destroyed == false):
-#			var chance = obj.get_attrib("ai.hit_chance")
-#			chance = 1.0 - (diff_chance_mult * (1.0 - chance))
-#			if chance == null or MersenneTwister.rand_float() < chance:
 			BehaviorEvents.emit_signal("OnDealDamage", [player], obj, data, attrib_data, player_tile)
-#			else:
-#				var log_choices = {
-#					"The enemy missed":50,
-#					"Enemy shot wide!":50,
-#					"The enemy can't shoot a fish in a barrel!":5,
-#					"Evasive maneuver beta two successful!":30,
-#					"Evasive maneuver beta nine successful!":30,
-#					"Evasive pattern gamma six successful!":30,
-#					"Evasive pattern delta successful!":30,
-#					"Evasive pattern lambda ten successful!":30,
-#					"Evasive maneuver omega three successful!":30,
-#					"Evasive sequence 010 successful!":10,
-#					"Evasive sequence beta four successful!":10,
-#					"That was a close one!":5,
-#					"Evasive maneuver gamma one successful!":30,
-#					"Evasive pattern sigma ten successful!":30,
-#					"Evasive sequence delta detla successful!":10,
-#					"Evasive maneuver pi alpha two successful!":5,
-#					"Evasive pattern Riker successful!":1,
-#					"Evasive pattern Kirk Epsilon successful!":1
-#				}
-#				BehaviorEvents.emit_signal("OnLogLine", log_choices)
-#				 # play the animation but no damage
-#				BehaviorEvents.emit_signal("OnShotFired", player_tile, obj, data)
-#				var fire_speed = Globals.get_data(data, "weapon_data.fire_speed")
-#				var speed_mult = Globals.EffectRef.GetMultiplierValue(obj, data.src, attrib_data, "fire_speed_multiplier")
-#				BehaviorEvents.emit_signal("OnUseAP", obj, fire_speed * speed_mult)
 			shot = true
 		if minimal_move == null or minimal_move.length() > best_move.length():
 			minimal_move = best_move

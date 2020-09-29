@@ -1,6 +1,6 @@
 {
 	"name_id":"A Jerg Drone",
-	"type":"ship",
+	"type":"drone",
 	"sprite":"jerg_drone",
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
@@ -43,7 +43,7 @@
 	},
 	"moving": {
 		"speed":0.5,
-		"wander_speed":1.25,
+		"wander_speed":1.0,
 		"can_use_wormhole":false
 	},
 	"description": {
