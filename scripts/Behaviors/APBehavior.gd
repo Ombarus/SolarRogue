@@ -1,7 +1,6 @@
 extends Node
 class_name APBehavior
 
-export(NodePath) var LogWindow
 export(int) var day_length = 100
 var log_window_ref
 var action_list = []
@@ -13,7 +12,6 @@ var _waiting_on_anim = false
 var _need_sort = true
 
 func _ready():
-	log_window_ref = get_node(LogWindow)
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 	BehaviorEvents.connect("OnUseAP", self, "OnUseAP_Callback")
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
@@ -26,6 +24,10 @@ func _ready():
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	
 	BehaviorEvents.connect("OnLocaleChanged", self, "OnLocaleChanged_Callback")
+	BehaviorEvents.connect("OnHUDCreated", self, "OnHUDCreated_Callback")
+	
+func OnHUDCreated_Callback():
+	log_window_ref = get_node("../../Camera-GUI/SafeArea/HUD_root/HUD/Log/LogWindow")
 	
 func OnLocaleChanged_Callback():
 	UpdateLogTitle()

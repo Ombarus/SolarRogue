@@ -22,7 +22,7 @@
 	},
 	"ai": {
 		"aggressive":true,
-		"pathfinding":"simple",
+		"pathfinding":"group",
 		"run_if_attacked":false,
 		"hit_chance_malus":0.2
 	},

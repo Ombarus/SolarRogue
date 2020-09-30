@@ -11,4 +11,8 @@ func _ready():
 	else:
 		n = pc_hud.instance()
 		
-	call_deferred("add_child", n)
+	call_deferred("deferred_add", n)
+
+func deferred_add(n):
+	add_child(n)
+	BehaviorEvents.emit_signal("OnHUDCreated")

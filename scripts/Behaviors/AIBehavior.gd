@@ -224,41 +224,59 @@ func FindRandomTile():
 
 func RotatedTileContent(obj, offset : Vector2) -> Array:
 	var center_tile : Vector2 = Globals.LevelLoaderRef.World_to_Tile(obj.position)
-	var desired_tile : Vector2 = center_tile + offset
-	desired_tile = desired_tile.rotated(obj.rotation)
+	var desired_tile : Vector2 = center_tile + offset.rotated(obj.rotation)
 	desired_tile = desired_tile.round()
+	var tile_content = Globals.LevelLoaderRef.GetTile(desired_tile)
+	print("Evalutation (%d, %d) : content %s" % [desired_tile.x, desired_tile.y, str(tile_content)])
 	return Globals.LevelLoaderRef.GetTile(desired_tile)
 
 func DoJergQueenPathfinding(obj):
 	var ai_target = obj.get_attrib("ai.target")
+	var runaway_cooldown = obj.get_attrib("ai.run_cooldown", 0)
 	var queen_drones = []
 	if "drone" in Globals.LevelLoaderRef.objByType:
 		queen_drones = Globals.LevelLoaderRef.objByType["drone"]
 		
-	if queen_drones.size() < obj.get_attrib("spawner.max", 0) and ai_target == null:
+	if runaway_cooldown > 0:
+		runaway_cooldown -= 1
+		obj.set_attrib("ai.run_cooldown", runaway_cooldown)
+		
+	if (queen_drones.size() < obj.get_attrib("spawner.max", 0) and ai_target == null) or \
+		(ai_target != null and MersenneTwister.rand(10) < 2):
+			
 		var queen_pos : Vector2 = Globals.LevelLoaderRef.World_to_Tile(obj.position)
 		var positions = obj.get_attrib("spawner.favored_position", [])
 		var spawned = false
 		for offset in positions:
 			if RotatedTileContent(obj, Vector2(offset[0], offset[1])).empty():
 				spawned = true
-				var drone_node = Globals.LevelLoaderRef.RequestObject(obj.get_attrib("spawner.spawn"), queen_pos + Vector2(offset[0], offset[1]))
+				var offset_v := Vector2(offset[0], offset[1])
+				var drone_node = Globals.LevelLoaderRef.RequestObject(obj.get_attrib("spawner.spawn"), (queen_pos + offset_v.rotated(obj.rotation)).round())
 				drone_node.rotation = obj.rotation
+				print("Spawned drone at (%.3f, %.3f) with rotation %.3f" % [drone_node.position.x, drone_node.position.y, drone_node.rotation])
+				break
 		if spawned == false:
 			var fallback_pos = obj.get_attrib("spawner.fallback_position", [0, 0])
 			var drone_node = Globals.LevelLoaderRef.RequestObject(obj.get_attrib("spawner.spawn"), queen_pos + Vector2(fallback_pos[0], fallback_pos[1]))
 			drone_node.rotation = obj.rotation
 		BehaviorEvents.emit_signal("OnUseAP", obj, obj.get_attrib("spawner.speed"))
+		print("JERG QUEEN COMPUTE : No more drone and no target, spawn drones")
 		return
 		
 	elif ai_target == null:
 		DoSimplePathFinding(obj)
+		print("JERG QUEEN COMPUTE : Enough drones and no target. Wander")
 		return
 		
-	if queen_drones.size() > 0 and ai_target != null:
+	if (runaway_cooldown > 0 or queen_drones.size() > 0) and ai_target != null:
+		print("JERG QUEEN COMPUTE : %d drones and target. ATTACK!" % [queen_drones.size()])
 		DoAttackPathFinding(obj)
 		return
 	elif ai_target != null:
+		if obj.get_attrib("ai.run_from") == null:
+			print("JERG QUEEN COMPUTE : %d drones and target. Initialize Retreat!" % [queen_drones.size()])
+			obj.set_attrib("ai.run_from", ai_target)
+			obj.set_attrib("ai.unseen_for", 0)
 		DoRunAwayPathFinding(obj)
 		
 
@@ -285,6 +303,7 @@ func DoFollowGroupLeader(obj):
 			var leader_tile = Globals.LevelLoaderRef.World_to_Tile(nearest.position)
 			var my_tile = Globals.LevelLoaderRef.World_to_Tile(obj.position)
 			var offset = my_tile - leader_tile
+			offset = offset.rotated(-nearest.rotation).round()
 			obj.set_attrib("ai.target", id)
 			obj.set_attrib("ai.target_offset", offset)
 				
@@ -305,7 +324,7 @@ func DoFollowGroupLeader(obj):
 	# player and the other ships will only attack once they get in range of the player instead of
 	# breaking formation and heading as quickly as possible to the player individually
 	obj.set_attrib("ai.aggressive", target_obj.get_attrib("ai.aggressive", true))
-		
+	
 	var target_offset = obj.get_attrib("ai.target_offset")
 	target_offset = target_offset.rotated(target_obj.rotation)
 	target_offset.x = round(target_offset.x)
@@ -416,20 +435,42 @@ func DoRunAwayPathFinding(obj):
 		var scanner_data = Globals.LevelLoaderRef.LoadJSON(scanner_json)
 		scanner_range = scanner_data.scanning.radius
 	var distance = my_pos - scary_pos
-	if distance.length_squared() >= scanner_range * scanner_range:
+	var distance_f = distance.length()
+	if distance_f >= scanner_range:
 		obj.set_attrib("ai.unseen_for", obj.get_attrib("ai.unseen_for") + 1)
+		print("JERG QUEEN COMPUTE : %.3f away from scary, increment unseen counter to %d " % [distance_f, obj.get_attrib("ai.unseen_for")])
+		
+	var cancel_run := false
+	var failed_max = obj.get_attrib("ai.failed_run_attempt", 0)
+	if failed_max > 0:
+		var cur_attempt = obj.get_attrib("ai.failed_run_cur_attempt", 0)
+		var prev_dist = obj.get_attrib("ai.prev_run_distance", 0)
+		if distance_f <= prev_dist:
+			print("JERG QUEEN COMPUTE : failed to run. Current distance %.3f, was %.3f" % [distance_f, prev_dist])
+			cur_attempt += 1
+		if cur_attempt >= failed_max:
+			print("JERG QUEEN COMPUTE : Tried to run but failed too many times. Canceling running")
+			obj.set_attrib("ai.run_cooldown", obj.get_attrib("ai.failed_cooldown"))
+			cancel_run = true
+		obj.set_attrib("ai.failed_run_cur_attempt", cur_attempt)
+		obj.set_attrib("ai.prev_run_distance", distance_f)
 	
-	if obj.get_attrib("ai.unseen_for") > obj.get_attrib("ai.stop_running_after"):
+	if cancel_run or obj.get_attrib("ai.unseen_for") > obj.get_attrib("ai.stop_running_after"):
+		print("JERG QUEEN COMPUTE : hasn't seen scary for a long time, go back to normal")
 		#TODO: Maybe wrap this in a method too ?
 		obj.modified_attributes.ai.erase("pathfinding")
 		obj.modified_attributes.ai.erase("run_from")
 		obj.modified_attributes.ai.erase("unseen_for")
+		if not cancel_run: # don't clear target if we couldn't run away
+			obj.modified_attributes.ai.erase("target")
+		obj.modified_attributes.ai.erase("failed_run_cur_attempt")
+		obj.modified_attributes.ai.erase("prev_run_distance")
 		obj.modified_attributes.erase("wandering")
-		BehaviorEvents.emit_signal("OnUseAP", obj, 1.0)
+		BehaviorEvents.emit_signal("OnUseAP", obj, 0.1) # trick to make the AI act again quickly
 		return
 		
 		
-	if distance.length_squared() <= 0:
+	if distance_f <= 0.1:
 		BehaviorEvents.emit_signal("OnMovement", obj, Vector2(1, 0))
 		return
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=2]
+[gd_scene load_steps=86 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/private/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -47,6 +47,7 @@
 [ext_resource path="res://scripts/Behaviors/EffectsBehavior.gd" type="Script" id=45]
 [ext_resource path="res://scenes/GUI/HUD_pc.tscn" type="PackedScene" id=46]
 [ext_resource path="res://scenes/GUI/HUD_swapper.gd" type="Script" id=47]
+[ext_resource path="res://scripts/Behaviors/Runes/JergQueen.gd" type="Script" id=48]
 [ext_resource path="res://scenes/GUI/TargettingHUD.tscn" type="PackedScene" id=51]
 [ext_resource path="res://scenes/GUI/Dialogs/SelectableTarget.tscn" type="PackedScene" id=52]
 [ext_resource path="res://scenes/GUI/Dialogs/Options.tscn" type="PackedScene" id=53]
@@ -345,6 +346,9 @@ script = ExtResource( 73 )
 
 [node name="NewFriend" type="Node" parent="Behaviors/Runes"]
 script = ExtResource( 75 )
+
+[node name="JergQueen" type="Node" parent="Behaviors/Runes"]
+script = ExtResource( 48 )
 
 [node name="RandomLog" type="Node" parent="Behaviors"]
 script = ExtResource( 44 )

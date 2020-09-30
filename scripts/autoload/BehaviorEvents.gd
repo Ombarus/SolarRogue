@@ -74,6 +74,7 @@ signal OnHighlightUIElement(element_name)
 signal OnResetHighlight()
 signal OnHUDVisiblityChanged()
 signal OnLocaleChanged()
+signal OnHUDCreated()
 
 signal OnButtonReady(btn)
 signal OnHUDWeaponPressed
