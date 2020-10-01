@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=2]
+[gd_scene load_steps=87 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/private/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -48,6 +48,7 @@
 [ext_resource path="res://scenes/GUI/HUD_pc.tscn" type="PackedScene" id=46]
 [ext_resource path="res://scenes/GUI/HUD_swapper.gd" type="Script" id=47]
 [ext_resource path="res://scripts/Behaviors/Runes/JergQueen.gd" type="Script" id=48]
+[ext_resource path="res://scenes/GUI/Dialogs/Fade.tscn" type="PackedScene" id=49]
 [ext_resource path="res://scenes/GUI/TargettingHUD.tscn" type="PackedScene" id=51]
 [ext_resource path="res://scenes/GUI/Dialogs/SelectableTarget.tscn" type="PackedScene" id=52]
 [ext_resource path="res://scenes/GUI/Dialogs/Options.tscn" type="PackedScene" id=53]
@@ -415,6 +416,8 @@ script = ExtResource( 42 )
 follow_smooth = 35.0
 levelLoaderNode = NodePath("../Behaviors/LevelLoader")
 
+[node name="Tween" type="Tween" parent="Camera2D"]
+
 [node name="Camera-GUI" type="CanvasLayer" parent="."]
 
 [node name="SafeArea" type="Control" parent="Camera-GUI"]
@@ -638,6 +641,18 @@ __meta__ = {
 
 [node name="Crew" parent="Camera-GUI/SafeArea/CrewRoot" instance=ExtResource( 74 )]
 visible = false
+
+[node name="Fade_root" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fade" parent="Camera-GUI/SafeArea/Fade_root" instance=ExtResource( 49 )]
+visible = false
+Transition = false
 
 [node name="DeathScreenRoot" type="Control" parent="Camera-GUI/SafeArea"]
 anchor_right = 1.0

@@ -10,6 +10,9 @@ func _ready():
 	BehaviorEvents.connect("OnPlayerDeath", self, "OnPlayerDeath_Callback")
 	
 func OnPlayerDeath_Callback():
+	Engine.time_scale = 0.2
+	#BehaviorEvents.emit_signal("OnPushGUI", "Fade", {"fade_out":2.0, "delay":0.3333, "color":[0, 0, 0], "starfield":true})
+	
 	var player = Globals.LevelLoaderRef.objByType["player"][0]
 	var cur_level = Globals.LevelLoaderRef.current_depth
 	var player_name = player.get_attrib("player_name")
@@ -18,6 +21,7 @@ func OnPlayerDeath_Callback():
 	var game_won = player.get_attrib("game_won")
 	var result = null
 	if game_won != null and game_won == true:
+		BehaviorEvents.emit_signal("OnPushGUI", "Fade", {"fade_out":1.0, "delay":0.0, "color":[1, 0, 0], "starfield":true})
 		message_success += Globals.mytr("SUCCESS_CONGRATS")
 		message_v2 += "[center]%s \n%s:\n" % [Globals.mytr("The crew of the"), player_name]
 		message_v2 += _crew_message(player)
@@ -33,6 +37,7 @@ func OnPlayerDeath_Callback():
 		message_v2 += Globals.mytr("self destructed")
 		result = PermSave.END_GAME_STATE.suicide
 	if game_won == null or game_won == false:
+		BehaviorEvents.emit_signal("OnPushGUI", "Fade", {"fade_out":2.0, "delay":0.3333, "color":[0, 0, 0], "starfield":false})
 		message_v2 += "\n" + Globals.mytr("on the %dth wormhole", [cur_level+1])
 	message_v2 += "\n" + Globals.mytr("EPITAPH_VISITED", [Globals.LevelLoaderRef.num_generated_level])
 	var lowest_diff = player.get_attrib("lowest_diff")
@@ -52,7 +57,11 @@ func OnPlayerDeath_Callback():
 		"callback_object":self,
 		"callback_method":"ScoreDone_Callback"
 	}
-	BehaviorEvents.emit_signal("OnPushGUI", "DeathScreen", death_screen_data)
+	yield(get_tree().create_timer(1.3), "timeout")
+	Engine.time_scale = 1.0
+	BehaviorEvents.emit_signal("OnPushGUI", "DeathScreen", death_screen_data, "slow_popin")
+	
+	
 
 func CalculateScore(player, game_won):
 	var final_score = 0

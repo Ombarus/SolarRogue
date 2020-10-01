@@ -324,6 +324,7 @@ func ProcessDamage(target, shooter, weapon_data, modified_attributes):
 		hull_dam *= hull_dam_mult
 		var max_hull = target.get_attrib("destroyable.hull")
 		target.set_attrib("destroyable.current_hull", target.get_attrib("destroyable.current_hull", max_hull) - hull_dam)
+		target.set_attrib("destroyable.damage_source", shooter.get_attrib("name_id"))
 		if target.get_attrib("destroyable.current_hull") <= 0:
 			target.set_attrib("destroyable.destroyed", true) # so other systems can check if their reference is valid or not
 			if is_target_player:
@@ -336,7 +337,6 @@ func ProcessDamage(target, shooter, weapon_data, modified_attributes):
 			var cur_shield = target.get_attrib("shield.current_hp")
 			var max_shield = target.get_max_shield()
 			shield_per = stepify(cur_shield / max_shield * 100.0, 0.1)
-		target.set_attrib("destroyable.damage_source", shooter.get_attrib("name_id"))
 		
 		var damage_type = Globals.DAMAGE_TYPE.shield_hit
 		if hull_dam > 0:

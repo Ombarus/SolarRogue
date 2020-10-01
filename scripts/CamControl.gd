@@ -33,6 +33,8 @@ func _ready():
 	BehaviorEvents.connect("OnWaitForAnimation", self, "OnWaitForAnimation_Callback")
 	BehaviorEvents.connect("OnAnimationDone", self, "OnAnimationDone_Callback")
 	
+	BehaviorEvents.connect("OnPlayerDeath", self, "OnPlayerDeath_Callback")
+	
 	if has_node("../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/ZoomIn"):
 		var zoom_in_btn = get_node("../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/ZoomIn")
 		var zoom_out_btn = get_node("../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/ZoomOut")
@@ -55,6 +57,31 @@ func OnWaitForAnimation_Callback():
 	
 func OnAnimationDone_Callback():
 	_wait_for_anim = false
+	
+func OnPlayerDeath_Callback():
+	var player = Globals.get_first_player()
+	if player == null:
+		return
+		
+	var tweener = get_node("Tween")
+	
+	var pos_time = 0.3
+	var zoom_time = 2.0
+	var target_value : Vector2 = player.position
+	var target_zoom := Vector2(0.5,0.5)
+	tweener.interpolate_property(
+		self, 
+		"position", 
+		null,
+		target_value,
+		pos_time, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+	tweener.interpolate_property(
+		self, 
+		"zoom", 
+		null,
+		target_zoom,
+		zoom_time, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+	tweener.start()
 		
 # Very ugly hack so that when we're in "look around" mode everything else is locked but the camera still handle inputs
 func OnPlayerInputStateChanged_callback(playerObj, inputState):

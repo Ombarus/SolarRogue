@@ -70,7 +70,8 @@ func GetLevelID():
 
 func _ready():
 	if _TEST_MID_GAME == true:
-		startLevel = "data/json/levels/human_branch/branch04.json"
+		#startLevel = "data/json/levels/jerg_branch/branch06.json"
+		#startLevel = "data/json/levels/human_branch/branch04.json"
 		current_depth = 1
 	Globals.LevelLoaderRef = self
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
@@ -106,6 +107,10 @@ func _ready():
 	#cur_save.player_data["position_y"] = World_to_Tile(objByType["player"][0].position).x
 	#cur_save.player_data["modified_attributes"] = objByType["player"][0].modified_attributes
 	#if not cur_save.has("modified_levels"):
+	
+	Globals.total_turn = 0
+	Globals.last_delta_turn = 0
+	
 	if cur_save != null and cur_save.size() > 0:
 		startLevel = cur_save.current_level_src
 		current_depth = cur_save.depth
@@ -469,8 +474,6 @@ func _do_remove(obj):
 func OnPlayerDeath_Callback():
 	_save_manager.delete_save()
 	# Maybe this should not be in a Global eh ?
-	Globals.total_turn = 0
-	Globals.last_delta_turn = 0
 	#var data = LoadJSON(startLevel)
 	#if data != null:
 	#	call_deferred("ExecuteLoadLevel", data)
