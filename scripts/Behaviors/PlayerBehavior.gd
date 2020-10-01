@@ -741,6 +741,8 @@ func _unhandled_input(event):
 		
 		if event.scancode == KEY_KP_5:
 			wait_one_turn(playerNode)
+		if _last_unicode == '?':
+			BehaviorEvents.emit_signal("OnHUDQuestionPressed")
 	if dir != null:
 		#next_touch_is_a_goto = true
 		BehaviorEvents.emit_signal("OnMovement", playerNode, dir)

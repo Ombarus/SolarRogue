@@ -29,6 +29,8 @@ func OnPlayerCreated_Callback(player):
 		data["log"] = "We could use a good cook..."
 		data["color"] = [0.1,0.1,0.1]
 		player.set_attrib("runes.%s" % self.name, data)
+		# By default we fail the rune if we don't have a cook
+		player.set_attrib("runes.%s.completed" % self.name, false)
 	BehaviorEvents.disconnect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
 	
 func OnLevelReady_Callback():
