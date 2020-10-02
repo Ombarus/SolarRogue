@@ -24,6 +24,7 @@ func _ready():
 	BehaviorEvents.connect("OnDropMount", self, "OnDropMount_Callback")
 	BehaviorEvents.connect("OnObjectsPicked", self, "OnPickup_Callback")
 	BehaviorEvents.connect("OnTradingDone", self, "OnTradingDone_Callback")
+	BehaviorEvents.connect("OnScannerPickup", self, "OnScannerPickup_Callback")
 	
 	var vol : float = PermSave.get_attrib("settings.master_volume", 8.0)
 	_set_bus_volume("Master", vol)
@@ -43,6 +44,21 @@ func _set_bus_volume(bus_name, vol):
 		AudioServer.set_bus_mute(bus, true)
 	else:
 		AudioServer.set_bus_mute(bus, false)
+	
+func OnScannerPickup_Callback(type):
+	var ship_sfx := ["trade_port", "ship", "drone", "anomaly"]
+	var planet_sfx := ["wormhole", "sun", "planet"]
+	var item_sfx := ["consumable", "converter", "battleship_hull", "frigate_hull", "probe_hull", "scout_hull", "food", "uranium", "scanner", "utility", "weapon", "ammo"]
+	var sfx_root = null
+	if type in ship_sfx:
+		sfx_root = get_node("scanner/ship")
+	elif type in planet_sfx:
+		sfx_root = get_node("scanner/planet")
+	else:
+		sfx_root = get_node("scanner/item")
+		
+	if not sfx_root.playing:
+		sfx_root.play()
 	
 func OnTradingDone_Callback(shipa, shipb):
 	if shipa.get_attrib("type") != "player" and shipb.get_attrib("type") != "player":

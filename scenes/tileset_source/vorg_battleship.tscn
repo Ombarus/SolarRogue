@@ -30,4 +30,3 @@ region_rect = Rect2( 1536, 256, 128, 128 )
 [node name="hit_fx" parent="." instance=ExtResource( 5 )]
 z_index = 2
 region_override = Rect2( 1536, 256, 128, 128 )
-

@@ -59,7 +59,7 @@ func OnMovement_callback(obj, dir):
 	BehaviorEvents.emit_signal("OnMovementValidated", obj, dir)
 	
 	var has_movement_anim : bool = obj.find_node("MovementAnimations", true, false) != null
-	if not has_movement_anim:
+	if not has_movement_anim or obj.visible == false:
 		var angle = Vector2(0.0, 0.0).angle_to_point(dir) - deg2rad(90.0)
 		obj.rotation = angle
 	

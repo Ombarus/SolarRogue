@@ -62,7 +62,7 @@ func OnPlayerDeath_Callback():
 	var player = Globals.get_first_player()
 	if player == null:
 		return
-		
+	
 	var tweener = get_node("Tween")
 	
 	var pos_time = 0.3

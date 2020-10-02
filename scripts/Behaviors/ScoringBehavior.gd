@@ -11,8 +11,7 @@ func _ready():
 	
 func OnPlayerDeath_Callback():
 	Engine.time_scale = 0.2
-	#BehaviorEvents.emit_signal("OnPushGUI", "Fade", {"fade_out":2.0, "delay":0.3333, "color":[0, 0, 0], "starfield":true})
-	
+
 	var player = Globals.LevelLoaderRef.objByType["player"][0]
 	var cur_level = Globals.LevelLoaderRef.current_depth
 	var player_name = player.get_attrib("player_name")
@@ -21,7 +20,7 @@ func OnPlayerDeath_Callback():
 	var game_won = player.get_attrib("game_won")
 	var result = null
 	if game_won != null and game_won == true:
-		BehaviorEvents.emit_signal("OnPushGUI", "Fade", {"fade_out":1.0, "delay":0.0, "color":[1, 0, 0], "starfield":true})
+		BehaviorEvents.emit_signal("OnPushGUI", "Fade", {"fade_out":2.0, "delay":0.0, "color":[0, 0, 0], "starfield":true})
 		message_success += Globals.mytr("SUCCESS_CONGRATS")
 		message_v2 += "[center]%s \n%s:\n" % [Globals.mytr("The crew of the"), player_name]
 		message_v2 += _crew_message(player)

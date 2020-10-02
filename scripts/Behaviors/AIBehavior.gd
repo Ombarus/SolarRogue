@@ -69,6 +69,13 @@ func ConsiderInterests(obj):
 					BehaviorEvents.emit_signal("OnLogLine", log_choices, [Globals.mytr(o.get_attrib("type"))])
 				filtered.push_back(id)
 				break
+			
+	if filtered.size() > 0:
+		for id in filtered:
+			var o : Node2D = Globals.LevelLoaderRef.GetObjectById(filtered[0])
+			if o != null:
+				BehaviorEvents.emit_signal("OnScannerPickup", o.get_attrib("type", ""))
+				break
 		
 	# Disable if enemy ship in range
 	var cur_objs : Array = obj.get_attrib("scanner_result.cur_in_range." + level_id, [])
@@ -105,6 +112,7 @@ func ConsiderInterests(obj):
 		if is_player == true:
 			BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Energy too low for autopilot ![/color]")
 		obj.set_attrib("ai.disabled", true)
+	
 	
 func OnScannerUpdated_Callback(obj):
 			

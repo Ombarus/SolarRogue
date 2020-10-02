@@ -77,6 +77,7 @@ func _ready():
 	BehaviorEvents.connect("OnHUDCommPressed", self, "Pressed_Comm_Callback")
 	BehaviorEvents.connect("OnHUDOptionPressed", self, "Pressed_Option_Callback")
 	BehaviorEvents.connect("OnHUDQuestionPressed", self, "Pressed_Question_Callback")
+	BehaviorEvents.connect("OnPlayerDeath", self, "OnPlayerDeath_Callback")
 	
 	var action = get_node(InventoryDialog)
 	action.connect("drop_pressed", self, "OnDropIventory_Callback")
@@ -94,6 +95,11 @@ func _ready():
 	BehaviorEvents.connect("OnDifficultyChanged", self, "OnDifficultyChanged_Callback")
 	BehaviorEvents.connect("OnCameraDragged", self, "OnCameraDragged_Callback")
 	
+func OnPlayerDeath_Callback():
+	if playerNode == null:
+		return
+	
+	lock_input = true
 	
 func OnButtonReady_Callback(btn):
 	var btn_name = btn.name

@@ -6,14 +6,16 @@
 [node name="Fade" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Starfield" parent="." instance=ExtResource( 2 )]
+modulate = Color( 1, 0, 0, 1 )
+
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
+show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -22,6 +24,3 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="."]
-
-[node name="Starfield" parent="." instance=ExtResource( 2 )]
-modulate = Color( 1, 0, 0, 1 )

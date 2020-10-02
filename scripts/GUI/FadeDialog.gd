@@ -26,9 +26,9 @@ func Init(init_param):
 		stars = init_param.starfield
 	
 	_panel.color = color
-	_stars.modulate = color
+	#_stars.modulate = color
 	_stars.visible = stars
-	_panel.visible = not stars
+	_panel.visible = true
 	var target = _panel
 	var property = "color:a"
 	if stars:
@@ -49,10 +49,15 @@ func Init(init_param):
 	if to_black:
 		alpha_target = 1.0
 		
-		
 	_tween.interpolate_property(
-		target, 
-		property,
+		_panel, 
+		"color:a",
+		null,
+		alpha_target,
+		fade_time, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+	_tween.interpolate_property(
+		_stars, 
+		"modulate:a",
 		null,
 		alpha_target,
 		fade_time, Tween.TRANS_CUBIC, Tween.EASE_OUT)
