@@ -445,7 +445,6 @@ func Pressed_Weapon_Callback():
 	var weapon_attributes = playerNode.get_attrib("mount_attributes.weapon")
 		
 	_weapon_shots = []
-	var index = 0
 	for index in range(weapons_data.size()):
 		var data = weapons_data[index]
 		var attrib_data = weapon_attributes[index]

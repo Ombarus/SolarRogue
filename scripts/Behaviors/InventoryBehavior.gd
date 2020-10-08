@@ -202,7 +202,7 @@ func OnDropCargo_Callback(dropper, item_id, modified_attributes, count):
 			var item_volume = data.equipment.volume * volume_mult
 			dropper.set_attrib("cargo.volume_used", dropper.get_attrib("cargo.volume_used") - (item_volume*amount_dropped))
 			total_ap_cost += drop_speed * amount_dropped
-			for i in range(amount_dropped):
+			for t in range(amount_dropped):
 				BehaviorEvents.emit_signal("OnItemDropped", dropper, item_id, modified_attributes)
 				Globals.LevelLoaderRef.RequestObject(item.src, Globals.LevelLoaderRef.World_to_Tile(dropper.position), modif_data)
 			# found item, we can quit the loop

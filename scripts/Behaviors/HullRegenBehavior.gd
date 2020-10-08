@@ -24,8 +24,8 @@ func OnObjTurn_Callback(obj):
 	if finished.size() == regen_data.size():
 		obj.modified_attributes.consumable.erase("hull_regen")
 	else:
-		for index in finished:
-			regen_data.remove(index)
+		for v in finished:
+			regen_data.remove(v)
 		# probably not needed if array is passed as ref... just in case
 		obj.set_attrib("consumable.hull_regen", regen_data)
 	
