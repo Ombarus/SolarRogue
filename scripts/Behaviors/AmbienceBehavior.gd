@@ -125,8 +125,7 @@ func OnLevelLoaded_Callback():
 	if has_node("BG") == true:
 		get_node("BG").play()
 		
-func OnPlayerDeath_Callback():
-	var player = Globals.LevelLoaderRef.objByType["player"][0]
+func OnPlayerDeath_Callback(player):
 	var game_won = player.get_attrib("game_won")
 	if has_node("BG") == true:
 		get_node("BG").stop()

@@ -287,6 +287,8 @@ script = ExtResource( 15 )
 levelLoaderNode = NodePath("../LevelLoader")
 ghost_material = ExtResource( 16 )
 
+[node name="Tween" type="Tween" parent="Behaviors/SpriteLoader"]
+
 [node name="Merchant" type="Node" parent="Behaviors"]
 script = ExtResource( 81 )
 

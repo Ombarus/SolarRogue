@@ -9,6 +9,7 @@ func _ready():
 	BehaviorEvents.connect("OnMountAdded", self, "OnMountAdded_Callback")
 	BehaviorEvents.connect("OnMountRemoved", self, "OnMountRemoved_Callback")
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
+	BehaviorEvents.connect("OnConsumeItem", self, "OnConsumeItem_Callback")
 	
 	
 func OnObjectLoaded_Callback(obj):
@@ -83,3 +84,22 @@ func OnMountRemoved_Callback(obj, slot, src, modified_attributes):
 		
 	cur_hp = min(cur_hp, max_hp)
 	obj.set_attrib("shield.current_hp", cur_hp)
+	
+
+func OnConsumeItem_Callback(obj, item_data):
+	if not "shield_regen" in item_data:
+		return
+
+	BehaviorEvents.emit_signal("OnLogLine", "[color=yelllow]Shield Recharged![/color]")
+	
+	var max_hp = obj.get_max_shield()
+	var cur_hp = obj.get_attrib("shield.current_hp")
+	if cur_hp == null:
+		obj.set_attrib("shield.current_hp", max_hp)
+		return
+		
+	if cur_hp < max_hp:
+		var heal = Globals.get_data(item_data, "shield_regen.point")
+		var new_hp = min(cur_hp + heal, max_hp)
+		obj.set_attrib("shield.current_hp", new_hp)
+	

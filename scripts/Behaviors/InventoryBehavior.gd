@@ -93,7 +93,7 @@ func OnUseEnergy_Callback(obj, amount):
 	if cur_energy <= 0 and obj.get_attrib("type") == "player":
 		# prevent calling OnPlayerDeath multiple times
 		obj.set_attrib("destroyable.destroyed", true)
-		BehaviorEvents.emit_signal("OnPlayerDeath")
+		BehaviorEvents.emit_signal("OnPlayerDeath", obj)
 	else:
 		BehaviorEvents.emit_signal("OnEnergyChanged", obj)
 	

@@ -328,7 +328,7 @@ func ProcessDamage(target, shooter, weapon_data, modified_attributes):
 		if target.get_attrib("destroyable.current_hull") <= 0:
 			target.set_attrib("destroyable.destroyed", true) # so other systems can check if their reference is valid or not
 			if is_target_player:
-				BehaviorEvents.emit_signal("OnPlayerDeath")
+				BehaviorEvents.emit_signal("OnPlayerDeath", target)
 			if shooter is Attributes:
 				target.set_attrib("destroyable.destroyer", shooter.get_attrib("unique_id"))
 			BehaviorEvents.emit_signal("OnObjectDestroyed", target)

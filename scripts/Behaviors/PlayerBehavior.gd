@@ -95,10 +95,7 @@ func _ready():
 	BehaviorEvents.connect("OnDifficultyChanged", self, "OnDifficultyChanged_Callback")
 	BehaviorEvents.connect("OnCameraDragged", self, "OnCameraDragged_Callback")
 	
-func OnPlayerDeath_Callback():
-	if playerNode == null:
-		return
-	
+func OnPlayerDeath_Callback(player):
 	lock_input = true
 	
 func OnButtonReady_Callback(btn):
@@ -314,7 +311,7 @@ func ProcessGoingHome():
 		BehaviorEvents.emit_signal("OnPlayerDeath")
 	else:
 		var in_cargo = false
-		var cargo = playerNode.get_attrib("cargo.content")
+		var cargo = playerNode.get_attrib("cargo.content", playerNode)
 		for item in cargo:
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			if item.count > 0 and Globals.get_data(data, "end_game") == true:

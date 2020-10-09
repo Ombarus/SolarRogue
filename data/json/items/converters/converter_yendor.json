@@ -212,6 +212,13 @@
 				"amount":1
 			},
 			{
+				"name": "Shield Battery", 
+				"requirements":[{"type":"energy", "amount":3000}, {"type":"spare_parts", "amount":2}, {"src":"data/json/items/misc/diluted_cristals.json"}, "amount":1],
+				"produce":"data/json/items/consumables/shield_battery.json",
+				"ap_cost":6.0,
+				"amount":1
+			},
+			{
 				"name": "Gravitic Compactor", 
 				"requirements":[{"type":"energy", "amount":750}, {"type":"spare_parts", "amount":2}], 
 				"produce":"data/json/items/utilities/gravitic_compactor.json",

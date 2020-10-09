@@ -471,7 +471,7 @@ func _do_remove(obj):
 	obj.get_parent().remove_child(obj)
 	obj.queue_free()
 	
-func OnPlayerDeath_Callback():
+func OnPlayerDeath_Callback(player):
 	_save_manager.delete_save()
 	# Maybe this should not be in a Global eh ?
 	#var data = LoadJSON(startLevel)

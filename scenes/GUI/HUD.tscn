@@ -160,6 +160,7 @@ margin_top = -165.0
 margin_right = -8.9469
 margin_bottom = -100.0
 Text = "+"
+signal_creation = true
 
 [node name="ZoomOut" parent="Buttons" instance=ExtResource( 12 )]
 anchor_left = 1.0
@@ -171,6 +172,7 @@ margin_top = -87.0
 margin_right = -9.0
 margin_bottom = -22.0
 Text = "-"
+signal_creation = true
 
 [node name="Options" parent="Buttons" instance=ExtResource( 12 )]
 anchor_left = 1.0

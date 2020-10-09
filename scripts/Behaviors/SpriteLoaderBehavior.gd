@@ -11,6 +11,27 @@ func _ready():
 	levelLoaderRef = get_node(levelLoaderNode)
 	#tileNodeRef = get_node(TileNode)
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
+	BehaviorEvents.connect("OnPlayerDeath", self, "OnPlayerDeath_Callback")
+	
+func OnPlayerDeath_Callback(player):
+	if player.get_attrib("converter.stored_energy") <= 0:
+		var player_ghost_mat = ghost_material.duplicate(true)
+		var child = player.get_children()[0]
+		if child is Sprite:
+			child.material = player_ghost_mat
+		for subchild in child.get_children():
+			if subchild is Sprite:
+				subchild.material = player_ghost_mat
+				
+		var tweener = get_node("Tween")
+		var pos_time = 1.0
+		tweener.interpolate_property(
+			player_ghost_mat, 
+			"shader_param/saturation",
+			1.0,
+			0.0,
+			pos_time, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+		tweener.start()
 
 func OnObjectLoaded_Callback(obj):
 	var node = null

@@ -34,23 +34,23 @@ func _ready():
 	BehaviorEvents.connect("OnAnimationDone", self, "OnAnimationDone_Callback")
 	
 	BehaviorEvents.connect("OnPlayerDeath", self, "OnPlayerDeath_Callback")
-	
-	if has_node("../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/ZoomIn"):
-		var zoom_in_btn = get_node("../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/ZoomIn")
-		var zoom_out_btn = get_node("../Camera-GUI/SafeArea/HUD_root/HUD/Buttons/ZoomOut")
-		zoom_in_btn.connect("down", self, "_on_ZoomIn_down")
-		zoom_out_btn.connect("down", self, "_on_ZoomOut_down")
-	
-		zoom_in_btn.connect("up", self, "_on_Zoom_up")
-		zoom_out_btn.connect("up", self, "_on_Zoom_up")
-	
+	BehaviorEvents.connect("OnButtonReady", self, "OnButtonReady_Callback")
+		
 	if not Globals.is_mobile():
 		zoom = Vector2(2.5, 2.5)
-	
 	
 	if p != null:
 		self.position = p.position
 		_last_cam_pos = self.position
+		
+func OnButtonReady_Callback(btn):
+	var btn_name = btn.name
+	if btn_name == "ZoomIn":
+		btn.connect("down", self, "_on_ZoomIn_down")
+		btn.connect("up", self, "_on_Zoom_up")
+	elif btn_name == "ZoomOut":
+		btn.connect("down", self, "_on_ZoomOut_down")
+		btn.connect("up", self, "_on_Zoom_up")
 		
 func OnWaitForAnimation_Callback():
 	_wait_for_anim = true
@@ -58,11 +58,7 @@ func OnWaitForAnimation_Callback():
 func OnAnimationDone_Callback():
 	_wait_for_anim = false
 	
-func OnPlayerDeath_Callback():
-	var player = Globals.get_first_player()
-	if player == null:
-		return
-	
+func OnPlayerDeath_Callback(player):	
 	var tweener = get_node("Tween")
 	
 	var pos_time = 0.3

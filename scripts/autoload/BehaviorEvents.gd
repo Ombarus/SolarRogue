@@ -39,7 +39,7 @@ signal OnRemoveItem(holder, item_id, modified_attributes, amount)
 signal OnMoveCargo(from, to)
 signal OnTradingDone(shipa, shipb)
 signal OnScannerUpdated(obj)
-signal OnPlayerDeath()
+signal OnPlayerDeath(player)
 signal OnObjectDestroyed(obj) # for vfx
 signal OnRequestTargettingOverlay(player, targetting_data, callback_obj, callback_method)
 signal OnTargetClick(click_pos, target_type)

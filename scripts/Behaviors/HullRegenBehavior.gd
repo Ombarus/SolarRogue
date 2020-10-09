@@ -57,7 +57,7 @@ func _process_healing(obj, data, item_data):
 			obj.set_attrib("destroyable.damage_source", "Radiation")
 			obj.set_attrib("destroyable.destroyed", true) # so other systems can check if their reference is valid or not
 			if obj.get_attrib("type") == "player":
-				BehaviorEvents.emit_signal("OnPlayerDeath")
+				BehaviorEvents.emit_signal("OnPlayerDeath", obj)
 			BehaviorEvents.emit_signal("OnObjectDestroyed", obj)
 			BehaviorEvents.emit_signal("OnRequestObjectUnload", obj)
 		elif heal < 0:

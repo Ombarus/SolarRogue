@@ -693,3 +693,10 @@ Hit Chance,Hit Chance,Chance de Toucher,Hit Chance
 Critical Chance,Critical Chance,Chance de Critique,Critical Chance
 Critical Multiplier,Critical Multiplier,Bonus sur Critique,Critical Multiplier
 That's it! the converter is inside the broken battleship hull somewhere in the middle of the system. There's a huge war going on and you're going to have to go right through it! They're not going to make it easy for you!,That's it! the converter is inside the broken battleship hull somewhere in the middle of the system. There's a huge war going on and you're going to have to go right through it! They're not going to make it easy for you!,Vous y êtes! Le Convertisseur de Yendor est dans la carcasse d'un Cuirrassé quelque pars au milieu du système. Le système est à feu et à sang et vous allez devoir passé directement à travers! Ce ne sera pas facile!,That's it! the converter is inside the broken battleship hull somewhere in the middle of the system. There's a huge war going on and you're going to have to go right through it! They're not going to make it easy for you!
+Wasted fuel (wait),Wasted fuel (wait),Gaspillage de resources (Attendre 1 tour),Wasted fuel (wait)
+Some R&R increased the crew's morale (wait),Some R&R increased the crew's morale (wait),C'est bon pour le moral (Attendre 1 tour),Some R&R increased the crew's morale (wait)
+All system green (wait),All system green (wait),Système nominal (Attendre 1 tour),All system green (wait)
+System reboot complete (wait),System reboot complete (wait),Redémarrage complété (Attendre 1 tour),System reboot complete (wait)
+Powering down (wait),Powering down (wait),Extinction (Attendre 1 tour),Powering down (wait)
+Awaiting next order (wait),Awaiting next order (wait),Vos ordres commandant? (Attendre 1 tour),Awaiting next order (wait)
+Network purged (wait),Network purged (wait),Système purgé (Attendre 1 tour),Network purged (wait)

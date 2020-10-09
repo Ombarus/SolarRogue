@@ -85,7 +85,7 @@ func OnUseAP_Callback(obj, amount):
 		return
 	
 	var base_ap_energy_cost = obj.get_attrib("converter.base_ap_energy_cost")
-	var effect_multiplier = Globals.EffectRef.GetBonusValue(obj, "", null, "base_ap_cost_multiplier")
+	var effect_multiplier = Globals.EffectRef.GetMultiplierValue(obj, "", null, "base_ap_cost_multiplier")
 	var extra_cost = obj.get_attrib("converter.extra_ap_energy_cost", 0)
 	if base_ap_energy_cost != null and base_ap_energy_cost > 0:
 		base_ap_energy_cost *= effect_multiplier
