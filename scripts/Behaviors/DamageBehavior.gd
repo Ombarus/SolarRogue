@@ -527,6 +527,20 @@ func display_damage_log(player_shooter : bool,
 	
 	var player_hit_enemy = "[color=yellow]You do %d damage[/color]"
 	
+	var player_destroyed = {
+		"[color=red]Your ship has been destroyed![/color]":50,
+		"[color=red]Your ship blows up![/color]":50,
+		"[color=red]System Critical, abandon ship![/color]":50,
+		"[color=red]This is the end![/color]":50,
+		"[color=red]All things must pass![/color]":50,
+		"[color=red]Better luck next time![/color]":20,
+		"[color=red]Ashes to ashes, dust to dust![/color]":10,
+		"[color=red]You kick the bucket![/color]":10,
+		"[color=red]Another one bite the dust![/color]":4,
+		"[color=red]Old soldiers never die, they simply fade away![/color]":4,
+		"[color=red]Hasta la vista, baby![/color]":1
+	}
+	
 	if is_critical:
 		if player_shooter:
 			txt = player_crit_choices
@@ -556,7 +570,9 @@ func display_damage_log(player_shooter : bool,
 	if is_destroyed:
 		if player_shooter and is_destroyed and not boardable:
 			txt = enemy_destroyed_choices
-		if player_shooter and boardable:
+		elif player_shooter and boardable:
 			txt = boardable_destroyed
+		elif player_target and is_destroyed:
+			txt = player_destroyed
 			
 		BehaviorEvents.emit_signal("OnLogLine", txt, fmt)
