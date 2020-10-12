@@ -99,7 +99,8 @@
 			{"src":"data/json/items/utilities/shield_bypass.json", "chance":10},
 			{"src":"data/json/items/utilities/weapon_bypass.json", "chance":10},
 			{"src":"data/json/items/utilities/targeting_computer.json", "chance":10},
-			{"src":"data/json/items/utilities/jammer.json", "chance":10}
+			{"src":"data/json/items/utilities/jammer.json", "chance":10},
+			{"src":"data/json/items/consumables/shield_battery.json", "chance":5}
 		]
 	},
 	"cargo": {
