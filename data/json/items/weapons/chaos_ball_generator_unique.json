@@ -1,5 +1,5 @@
 {
-	"name_id":"Chaos Ball Generator",
+	"name_id":"Vorpal Blade",
 	"type":"weapon",
 	"sprite": "chaos_generator",
 	"icon": {
@@ -10,16 +10,15 @@
 		"shoot": "scenes/tileset_source/chaos_fx.tscn"
 	},
 	"weapon_data": {
-		"base_dam":4.0,
-		"max_dam":30.0,
-		"fire_range":7.0,
-		"fire_minimum_range":3.0,
+		"base_dam":5.0,
+		"max_dam":35.0,
+		"fire_range":8.0,
 		"fire_pattern":"*",
-		"fire_energy_cost":850.0,
+		"fire_energy_cost":900.0,
 		"fire_speed":2.1,
 		"base_hit_chance":0.6,
 		"crit_chance":0.0,
-		"crit_multiplier":1.5,
+		"crit_multiplier":2.0,
 		"shoot_empty":true
 	},
 	"equipment": {
@@ -55,7 +54,7 @@
 		{"src":"data/json/items/effects/overloaded.json", "chance":20}
 	],
 	"description": {
-		"text":"Unstable Wormhole Generator. So chaotic that it's only mode of opperation is lovingly refered to as 'shoot and pray'",
+		"text":"Hexosehr enhanced Chaos Ball Generator. More powerful and capable of short range fire.",
 		"Overview": {
 			"min_level":0,
 			"fields":[

@@ -7,4 +7,4 @@ scale = Vector2( 0.75, 0.75 )
 z_index = 20
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 1536, 384, 128, 128 )
+region_rect = Rect2( 1536, 385, 128, 125 )

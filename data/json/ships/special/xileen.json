@@ -88,7 +88,7 @@
 		
 		{"id":"data/json/items/consumables/shield_battery.json", "chance":0.04},
 		
-		{"id":"data/json/items/weapons/chaos_ball_generator.json", "chance":0.2},
+		{"id":"data/json/items/weapons/chaos_ball_generator_unique.json", "chance":1.0},
 		{"id":"data/json/items/weapons/minigun.json", "chance":0.5},
 		{"id":"data/json/items/weapons/bullet_clip.json", "chance":0.25},
 		{"id":"data/json/items/weapons/bullet_clip.json", "chance":0.25},
