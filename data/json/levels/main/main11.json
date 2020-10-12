@@ -76,7 +76,9 @@
 		{"name":"data/json/items/utilities/shield_bypass.json", "spawn_rate":0.000015625},
 		{"name":"data/json/items/utilities/weapon_bypass.json", "spawn_rate":0.000015625},
 		{"name":"data/json/items/utilities/targeting_computer.json", "spawn_rate":0.000015625},
-		{"name":"data/json/items/utilities/jammer.json", "spawn_rate":0.000015625}
+		{"name":"data/json/items/utilities/jammer.json", "spawn_rate":0.000015625},
+		
+		{"name":"data/json/items/consumables/shield_battery.json", "spawn_rate":0.000010416667}
 	],
 	"description": {
 		"text":"Wormholes allow us to travel between solar systems. This is the final wormhole. There must be something in here that can help us."

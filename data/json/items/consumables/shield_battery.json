@@ -24,7 +24,7 @@
 		"player_buy_range": [10000,12000]
 	},
 	"description": {
-		"text":"An energy matrix specially aligned with the harmonics our shield generator. Can quickly be emptied in the generator in case of emergency.",
+		"text":"An energy matrix specially aligned with the harmonics of our shield generator. Can quickly be emptied in the generator in case of emergency.",
 		"Overview": {
 			"min_level":0, 
 			"fields":[
