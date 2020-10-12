@@ -37,22 +37,6 @@
 		"count":5,
 		"energy_cost":1000
 	},
-	"variations": [
-		{"src":"data/json/items/effects/normal.json", "chance": 50},
-		{"src":"data/json/items/effects/em.json", "chance":20},
-		{"src":"data/json/items/effects/he.json", "chance":10},
-		{"src":"data/json/items/effects/salvage.json", "chance":5},
-		{"src":"data/json/items/effects/leaden_weapon.json", "chance":20},
-		{"src":"data/json/items/effects/linked.json", "chance":5},
-		{"src":"data/json/items/effects/compact.json", "chance":20},
-		{"src":"data/json/items/effects/efficient.json", "chance":20},
-		{"src":"data/json/items/effects/long_range.json", "chance":5},
-		{"src":"data/json/items/effects/precision.json", "chance":5},
-		{"src":"data/json/items/effects/fast.json", "chance":10},
-		{"src":"data/json/items/effects/swarm.json", "chance":10},
-		{"src":"data/json/items/effects/focused.json", "chance":20},
-		{"src":"data/json/items/effects/overloaded.json", "chance":20}
-	],
 	"description": {
 		"text":"Hexosehr enhanced Chaos Ball Generator. More powerful and capable of short range fire.",
 		"Overview": {

@@ -1,0 +1,14 @@
+{
+	"name_id":"Broken",
+	"type":"effect",
+	"prefix":"Broken %s",
+	"attributes": {
+		"self_shield_multiplier":0.75,
+		"self_base_dam_multiplier":0.75,
+		"self_max_dam_multiplier":0.75,
+		"self_hp_regen_per_ap_multiplier":0.8,
+		"self_energy_cost_per_hp_multiplier":2.0,
+		"self_fire_speed_multiplier":1.2,
+		"self_hit_chance_bonus":-0.05
+	}
+}

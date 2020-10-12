@@ -40,6 +40,7 @@
 	},
 	"variations": [
 		{"src":"data/json/items/effects/normal.json", "chance": 50},
+		{"src":"data/json/items/effects/broken.json", "chance": 50},
 		{"src":"data/json/items/effects/em.json", "chance":20},
 		{"src":"data/json/items/effects/he.json", "chance":10},
 		{"src":"data/json/items/effects/salvage.json", "chance":5},
