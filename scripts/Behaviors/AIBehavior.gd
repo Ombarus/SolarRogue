@@ -137,6 +137,7 @@ func OnScannerUpdated_Callback(obj):
 			obj.set_attrib("ai.pathfinding", "attack")
 		obj.set_attrib("ai.target", player)
 		obj.set_attrib("wandering", false)
+		obj.set_attrib("ai.unseen_for", 0)
 		BehaviorEvents.emit_signal("OnStatusChanged", obj)
 	
 
@@ -158,11 +159,13 @@ func OnDamageTaken_Callback(target, shooter, damage_type):
 			target.set_attrib("ai.pathfinding", "attack")
 		target.set_attrib("ai.target", shooter.get_attrib("unique_id"))
 		target.set_attrib("wandering", false)
+		target.set_attrib("ai.unseen_for", 0)
 		BehaviorEvents.emit_signal("OnStatusChanged", target)
 		
 	if target.get_attrib("ai.aggressive_if_attacked", false) == true:
 		target.set_attrib("ai.pathfinding", "attack")
 		target.set_attrib("ai.aggressive", true)
+		target.set_attrib("ai.unseen_for", 0)
 		target.set_attrib("ai.target", shooter.get_attrib("unique_id"))
 		target.set_attrib("wandering", false)
 		BehaviorEvents.emit_signal("OnStatusChanged", target)
@@ -172,6 +175,7 @@ func OnDamageTaken_Callback(target, shooter, damage_type):
 		for ship in Globals.LevelLoaderRef.objByType["ship"]:
 			if ship.get_attrib("ai.police_awareness", false) == true:
 				ship.set_attrib("ai.aggressive", true)
+				ship.set_attrib("ai.unseen_for", 0)
 				ship.set_attrib("ai.pathfinding", "attack")
 				ship.set_attrib("ai.target", shooter.get_attrib("unique_id"))
 				ship.set_attrib("wandering", false)
@@ -340,13 +344,36 @@ func DoFollowGroupLeader(obj):
 	obj.set_attrib("ai.objective", desired_tile)
 	DoSimplePathFinding(obj)
 	
+func update_unseen(obj : Attributes, target : Attributes) -> Vector2:
+	var my_pos = obj.position
+	var target_pos = target.position
+	my_pos = Globals.LevelLoaderRef.World_to_Tile(my_pos)
+	target_pos = Globals.LevelLoaderRef.World_to_Tile(target_pos)
+	var scanner_range = 0
+	var scanner = obj.get_attrib("mounts.scanner")
+	var scanner_json = null
+	if scanner != null:
+		scanner_json = scanner[0]
+	if scanner_json != null and scanner_json != "":
+		var scanner_data = Globals.LevelLoaderRef.LoadJSON(scanner_json)
+		scanner_range = scanner_data.scanning.radius
+	var distance = my_pos - target_pos
+	var distance_f = distance.length()
+	if distance_f > scanner_range:
+		obj.set_attrib("ai.unseen_for", obj.get_attrib("ai.unseen_for", 0) + 1)
+	else:
+		obj.set_attrib("ai.unseen_for", 0)
+		
+	return distance
 
 func DoAttackPathFinding(obj):
 	var player = Globals.LevelLoaderRef.GetObjectById(obj.get_attrib("ai.target"))
+	
 	if player == null:
 		obj.set_attrib("ai.pathfinding", "simple")
 		obj.set_attrib("ai.target", null)
 		obj.set_attrib("wandering", true)
+		BehaviorEvents.emit_signal("OnStatusChanged", obj)
 		return
 		
 	if player.get_attrib("animation.in_movement") == true:
@@ -355,16 +382,22 @@ func DoAttackPathFinding(obj):
 		obj.set_attrib("ap.ai_acted", true) # hack to make the AI exit without using it's turn
 		return
 		
+	var distance = update_unseen(obj, player)
+	var stop_running_after = obj.get_attrib("ai.stop_running_after", 0)
+	
+	if stop_running_after > 0 and obj.get_attrib("ai.unseen_for", 0) > stop_running_after:
+		obj.set_attrib("ai.pathfinding", "simple")
+		obj.set_attrib("ai.target", null)
+		obj.set_attrib("wandering", true)
+		BehaviorEvents.emit_signal("OnStatusChanged", obj)
+		return
+		
+		
 	var player_tile = Globals.LevelLoaderRef.World_to_Tile(player.position)
 	var obj_tile = Globals.LevelLoaderRef.World_to_Tile(obj.position)
 	var weapons = obj.get_attrib("mounts.weapon")
 	var modified_attributes = obj.get_attrib("mount_attributes.weapon")
 	var weapons_data = Globals.LevelLoaderRef.LoadJSONArray(weapons)
-	#if weapons_data != null and weapons_data.size() > 0
-	
-	#var cur_difficulty : int = PermSave.get_attrib("settings.difficulty")
-	#var diff_chance_mult : float = 1.0
-	#diff_chance_mult = (4.0 - cur_difficulty) / 2.0
 	
 	var minimal_move = null
 	var shot = false
@@ -423,23 +456,11 @@ func DoSimplePathFinding(obj):
 func DoRunAwayPathFinding(obj):
 	var my_pos = obj.position
 	var from_id = Globals.LevelLoaderRef.objById[obj.modified_attributes.ai.run_from]
-	var scary_pos := Vector2(0.0, 0.0)
+	var distance := Vector2(1.0, 0.0)
 	if from_id != null:
-		scary_pos = from_id.position
-	my_pos = Globals.LevelLoaderRef.World_to_Tile(my_pos)
-	scary_pos = Globals.LevelLoaderRef.World_to_Tile(scary_pos)
-	var scanner_range = 0
-	var scanner = obj.get_attrib("mounts.scanner")
-	var scanner_json = null
-	if scanner != null:
-		scanner_json = scanner[0]
-	if scanner_json != null and scanner_json != "":
-		var scanner_data = Globals.LevelLoaderRef.LoadJSON(scanner_json)
-		scanner_range = scanner_data.scanning.radius
-	var distance = my_pos - scary_pos
-	var distance_f = distance.length()
-	if distance_f >= scanner_range:
-		obj.set_attrib("ai.unseen_for", obj.get_attrib("ai.unseen_for") + 1)
+		distance = update_unseen(obj, from_id)
+		
+	var distance_f := distance.length()
 		
 	var cancel_run := false
 	var failed_max = obj.get_attrib("ai.failed_run_attempt", 0)

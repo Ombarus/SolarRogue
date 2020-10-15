@@ -24,7 +24,8 @@
 		"aggressive":true,
 		"pathfinding":"simple",
 		"run_if_attacked":false,
-		"hit_chance_malus":0.2
+		"hit_chance_malus":0.2,
+		"stop_running_after":12
 	},
 	"consumable": {
 		"hull_regen": [
