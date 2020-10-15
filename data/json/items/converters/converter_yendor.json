@@ -213,7 +213,7 @@
 			},
 			{
 				"name": "Shield Battery", 
-				"requirements":[{"type":"energy", "amount":3000}, {"type":"spare_parts", "amount":2}, {"src":"data/json/items/misc/diluted_cristals.json"}, "amount":1],
+				"requirements":[{"type":"energy", "amount":3000}, {"type":"spare_parts", "amount":2}, {"src":"data/json/items/misc/diluted_cristals.json", "amount":1}],
 				"produce":"data/json/items/consumables/shield_battery.json",
 				"ap_cost":6.0,
 				"amount":1

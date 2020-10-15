@@ -36,6 +36,8 @@ enum INPUT_STATE {
 	test
 }
 
+var selected_screen_size := Vector2(1280, 720)
+
 func get_first_player() -> Node2D:
 	if Globals.LevelLoaderRef != null and "player" in Globals.LevelLoaderRef.objByType and Globals.LevelLoaderRef.objByType["player"].size() > 0:
 		return Globals.LevelLoaderRef.objByType["player"][0]

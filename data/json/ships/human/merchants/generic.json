@@ -23,6 +23,14 @@
 			"data/json/items/utilities/power_amplifier_mk2.json"
 		]
 	},
+	"applied_effect": [
+		{
+			"global_base_dam_multiplier":1.5,
+			"global_max_dam_multiplier":1.5,
+			"global_fire_energy_cost_multiplier":1.5,
+			"src":"data/json/items/utilities/power_amplifier_mk2.json"
+		}
+	],
 	"mount_attributes": {
 		"weapon": [
 			{}, 

@@ -393,7 +393,7 @@ script = ExtResource( 35 )
 __meta__ = {
 "_editor_description_": ""
 }
-parallax = 3000.0
+parallax = 4000.0
 camera = NodePath("../../../Camera2D")
 
 [node name="FoW" parent="BG" instance=ExtResource( 43 )]

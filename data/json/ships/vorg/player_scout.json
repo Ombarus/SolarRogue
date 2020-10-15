@@ -47,7 +47,7 @@
 			"min_level":0, 
 			"fields":[
 				{"name":"Max hull", "value":"{destroyable.hull}", "translate_value":false},
-				{"name":"Speed", "value":"{moving.speed}", "translate_value":false},
+				{"name":"Speed", "value":"{moving.speed*move_multiplier}", "translate_value":false, "positive_good":false},
 				{"name":"Weapon mounts", "value":"2", "translate_value":false},
 				{"name":"Shield mounts", "value":"1", "translate_value":false},
 				{"name":"Utility mounts", "value":"0", "translate_value":false}

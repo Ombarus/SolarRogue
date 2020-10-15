@@ -29,6 +29,14 @@
 		"converter": [{}],
 		"utility":[{}]
 	},
+	"applied_effect": [
+		{
+			"global_base_dam_multiplier":1.5,
+			"global_max_dam_multiplier":1.5,
+			"global_fire_energy_cost_multiplier":1.5,
+			"src":"data/json/items/utilities/power_amplifier_mk2.json"
+		}
+	],
 	"destroyable": {
 		"hull":23
 	},
@@ -119,7 +127,7 @@
 			"min_level":0, 
 			"fields":[
 				{"name":"Max hull", "value":"{destroyable.hull}", "translate_value":false},
-				{"name":"Speed", "value":"{moving.speed}", "translate_value":false},
+				{"name":"Speed", "value":"{moving.speed*move_multiplier}", "translate_value":false, "positive_good":false},
 				{"name":"Weapon mounts", "value":"2", "translate_value":false},
 				{"name":"Shield mounts", "value":"2", "translate_value":false},
 				{"name":"Utility mounts", "value":"2", "translate_value":false}

@@ -23,6 +23,11 @@ var _keep_centered : bool = true
 var _wait_for_anim = false
 
 func _ready():
+	var ideal_size := 1920.0
+	var ratio : float = ideal_size / Globals.selected_screen_size.x
+	max_zoom = max_zoom * ratio
+	min_zoom = min_zoom * ratio
+	
 	var p = Globals.get_first_player()
 	levelLoaderRef = get_node(levelLoaderNode)
 	BehaviorEvents.connect("OnPlayerCreated", self, "OnPlayerCreated_callback")

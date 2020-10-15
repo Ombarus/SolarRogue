@@ -6,9 +6,12 @@ func _ready():
 	OS.set_use_vsync(PermSave.get_attrib("settings.vsync", true))
 	
 	if Globals.is_mobile():
-		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_EXPAND, Vector2(1280, 720))
+		Globals.selected_screen_size = Vector2(1280,720)
 	else:
-		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_EXPAND, Vector2(1920, 1080))
+		Globals.selected_screen_size = Vector2(1920,1080)
+	#Globals.selected_screen_size = Vector2(3840,2160)
+	
+	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_EXPAND, Globals.selected_screen_size)
 	
 	#OS.set_window_size(Vector2(2208, 1242))
 	var lang = PermSave.get_attrib("settings.lang")

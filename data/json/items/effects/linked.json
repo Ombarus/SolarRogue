@@ -4,8 +4,8 @@
 	"prefix":"Linked %s",
 	"attributes": {
 		"linked_shield_multiplier":1.10,
-		"linked_hit_chance_bonus":1.10,
-		"linked_crit_chance_bonus":1.10
+		"linked_hit_chance_bonus":0.10,
+		"linked_crit_chance_bonus":0.10
 	},
 	"description": {
 		"Extra": {
