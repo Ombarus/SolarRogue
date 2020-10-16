@@ -141,6 +141,7 @@ func OnPickup_Callback(picker, picked):
 		#	continue
 		BehaviorEvents.emit_signal("OnPickObject", picker, obj) # warning, obj will be invalid after this call
 		var modified_attrib = obj.modified_attributes
+		modified_attrib.erase("unique_id")
 		var volume_mult = Globals.EffectRef.GetMultiplierValue(picker, obj.get_attrib("src"), modified_attrib, "volume_multiplier")
 		var item_volume = obj.get_attrib("equipment.volume") * volume_mult
 		picker.set_attrib("cargo.volume_used", picker.get_attrib("cargo.volume_used") + item_volume)
