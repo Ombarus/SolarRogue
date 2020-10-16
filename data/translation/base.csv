@@ -700,3 +700,19 @@ System reboot complete (wait),System reboot complete (wait),Redémarrage complé
 Powering down (wait),Powering down (wait),Extinction (Attendre 1 tour),Powering down (wait)
 Awaiting next order (wait),Awaiting next order (wait),Vos ordres commandant? (Attendre 1 tour),Awaiting next order (wait)
 Network purged (wait),Network purged (wait),Système purgé (Attendre 1 tour),Network purged (wait)
+[color=red]Your ship has been destroyed![/color],[color=red]Your ship has been destroyed![/color],[color=red]Votre vaisseau a été détruit![/color],[color=red]Your ship has been destroyed![/color]
+[color=red]Your ship blows up![/color],[color=red]Your ship blows up![/color],[color=red]Votre vaisseau explose en milles morceaux[/color],[color=red]Your ship blows up![/color]
+"[color=red]System Critical, abandon ship![/color]","[color=red]System Critical, abandon ship![/color]",[color=red]Abandonnez le navire![/color],"[color=red]System Critical, abandon ship![/color]"
+[color=red]This is the end![/color],[color=red]This is the end![/color],[color=red]C’est la fin![/color],[color=red]This is the end![/color]
+[color=red]All things must pass![/color],[color=red]All things must pass![/color],[color=red]Toute bonne chose à une fin![/color],[color=red]All things must pass![/color]
+[color=red]Better luck next time![/color],[color=red]Better luck next time![/color],[color=red]Meilleure chance la prochaine fois[/color],[color=red]Better luck next time![/color]
+"[color=red]Ashes to ashes, dust to dust![/color]","[color=red]Ashes to ashes, dust to dust![/color]","[color=red]Les cendres épousent les cendres, la terre retourne à la terre![/color]","[color=red]Ashes to ashes, dust to dust![/color]"
+[color=red]You kick the bucket![/color],[color=red]You kick the bucket![/color],[color=red]Passez l’arme à gauche![/color],[color=red]You kick the bucket![/color]
+[color=red]Another one bite the dust![/color],[color=red]Another one bite the dust![/color],[color=red]Delta - Charlie - Delta[/color],[color=red]Another one bite the dust![/color]
+"[color=red]Old soldiers never die, they simply fade away![/color]","[color=red]Old soldiers never die, they simply fade away![/color]","[color=red]Un vieux soldat ne meurt pas, il s’efface[/color]","[color=red]Old soldiers never die, they simply fade away![/color]"
+"[color=red]Hasta la vista, baby![/color]","[color=red]Hasta la vista, baby![/color]","[color=red]Hasta la vista, baby![/color]","[color=red]Hasta la vista, baby![/color]"
+Shield Battery,Shield Battery,Recharge de Bouclier,Shield Battery
+An energy matrix specially aligned with the harmonics of our shield generator. Can quickly be emptied in the generator in case of emergency.,An energy matrix specially aligned with the harmonics of our shield generator. Can quickly be emptied in the generator in case of emergency.,Une matrice énergétique spécifiquement aligné avec les harmoniques du générateur de bouclier. Peut être rapidement déchargé en cas d’urgence.,An energy matrix specially aligned with the harmonics of our shield generator. Can quickly be emptied in the generator in case of emergency.
+Vorpal Blade,Vorpal Blade,Vorpal Blade,Vorpal Blade
+Hexosehr enhanced Chaos Ball Generator. More powerful and capable of short range fire.,Hexosehr enhanced Chaos Ball Generator. More powerful and capable of short range fire.,Un générateur de chaos amilioré par les Hexosehr. Plus puissant et capable de tir à courte porté.,Hexosehr enhanced Chaos Ball Generator. More powerful and capable of short range fire.
++{shield_regen.point} points,+{shield_regen.point} points,+{shield_regen.point} points,+{shield_regen.point} 点
