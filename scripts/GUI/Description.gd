@@ -83,6 +83,10 @@ func Init(init_param):
 					val = get_custom(defaults[min(i, defaults.size())])
 				if val == null:
 					is_valid = false
+					
+				if is_valid == false:
+					continue
+					
 				var base_val = val
 				if abs(mult - 1.0) > 0.0001:
 					val *= mult
@@ -93,12 +97,15 @@ func Init(init_param):
 				var per_mult = 1.0
 				if row.get("display_percent", false) == true:
 					per_mult = 100.0
+				var final_val = val
+				if typeof(val) in [TYPE_INT, TYPE_REAL]:
+					final_val = val*per_mult
 				if (base_val > val and positive_good == false) or (base_val < val and positive_good == true):
-					val = "[color=lime]" + str(val*per_mult) + "[/color]"
+					val = "[color=lime]" + str(final_val) + "[/color]"
 				elif base_val != val:
-					val = "[color=red]" + str(val*per_mult) + "[/color]"
+					val = "[color=red]" + str(final_val) + "[/color]"
 				else:
-					val = str(val * per_mult)
+					val = str(final_val)
 				formatdict[names[i]] = val
 			
 			if formatdict.size() > 0:
