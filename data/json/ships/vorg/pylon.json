@@ -1,0 +1,66 @@
+{
+	"name_id":"A Strange Energy Pylon",
+	"type":"ship",
+	"sprite":"vorg_pylon",
+	"icon": {
+		"texture":"data/private/textures/space-sprite.png",
+		"region":[384,1280,128,128]
+	},
+	"animation": {
+		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
+	},
+	"action_point":0,
+	"mounts": {
+		"weapon": [
+			""
+		],
+		"shield": [
+			"data/json/items/shields/shield_mk3.json"],
+		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
+		"converter": ["data/json/items/converters/converter_mk1.json"]
+	},
+	"mount_attributes": {
+		"weapon": [{},{},{},{}],
+		"shield": [{},{}],
+		"scanner": [{}],
+		"converter": [{}]
+	},
+	"destroyable": {
+		"hull":120
+	},
+	"ai": {
+		"aggressive":false,
+		"pathfinding":"pylon",
+		"run_if_attacked":false
+	},
+	"drop_on_death": [
+		{"id":"data/json/items/misc/diluted_cristals.json", "chance":1.0},
+		{"id":"data/json/items/misc/diluted_cristals.json", "chance":0.3},
+		{"id":"data/json/items/misc/diluted_cristals.json", "chance":0.1},
+		{"id":"data/json/items/misc/diluted_cristals.json", "chance":0.1},
+		{"id":"data/json/items/misc/diluted_cristals.json", "chance":0.01},
+		{"id":"data/json/items/misc/diluted_cristals.json", "chance":0.01},
+		{"id":"data/json/items/consumables/shield_battery.json", "chance":0.08},
+		{"id":"data/json/items/consumables/shield_battery.json", "chance":0.08}
+	],
+	"description": {
+		"text":"Some strange structure surrounding cristals the size of which you have never seen. It seems to have been built to harvest and transmit energy within the current system.",
+		"Overview": {
+			"min_level":0, 
+			"fields":[
+				{"name":"Max hull", "value":"{destroyable.hull}", "translate_value":false},
+				{"name":"Speed", "value":"{moving.speed*move_multiplier}", "translate_value":false, "positive_good":false},
+				{"name":"Weapon mounts", "value":"0", "translate_value":false},
+				{"name":"Shield mounts", "value":"1", "translate_value":false},
+				{"name":"Utility mounts", "value":"0", "translate_value":false}
+			]
+		},
+		"Status": {
+			"min_level":1,
+			"fields": [
+				{"name":"Current hull", "value":"{destroyable.current_hull}", "default":"{destroyable.hull}", "translate_value":false},
+				{"name":"Current shield", "value":"{shield.current_hp}", "translate_value":false}
+			]
+		}
+	}
+}

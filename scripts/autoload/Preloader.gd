@@ -7,4 +7,6 @@ var EnTable = preload("res://data/translation/base.en.translation")
 var JaTable = preload("res://data/translation/base.ja.translation")
 var FrTable = preload("res://data/translation/base.fr.translation")
 
+var PylonFX = preload("res://scenes/tileset_source/pylon_fx.tscn")
+
 var JsonCache = {}

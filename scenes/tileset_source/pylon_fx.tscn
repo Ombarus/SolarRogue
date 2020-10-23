@@ -1,0 +1,106 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scripts/animations/pylon_fx.gd" type="Script" id=1]
+[ext_resource path="res://data/private/textures/space-sprite.png" type="Texture" id=2]
+[ext_resource path="res://data/private/textures/bullet_bw.png" type="Texture" id=3]
+[ext_resource path="res://data/private/sounds/sfx/chaos/sfx_sounds_negative1.wav" type="AudioStream" id=4]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0.4 ), 0.0, 0.0, 0, 0, Vector2( 0.201133, 0.836364 ), 0.411422, 0.411422, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.787879, 1 )
+colors = PoolColorArray( 0.111267, 0.650543, 0.890137, 1, 0.121569, 0.596078, 0.933333, 1, 0.141176, 0.560784, 0.929412, 0 )
+
+[sub_resource type="CanvasItemMaterial" id=6]
+blend_mode = 1
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0, 0.989773 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.326136 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Animation" id=5]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/path = NodePath("CPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="pylon_fx" type="Node2D"]
+position = Vector2( 162.881, 296.953 )
+scale = Vector2( 0.5, 0.4 )
+script = ExtResource( 1 )
+ttl = 1.0
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+material = SubResource( 1 )
+scale = Vector2( 1, 0.261 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 1306, 898, 74, 124 )
+
+[node name="Particles2D" type="CPUParticles2D" parent="."]
+visible = false
+material = SubResource( 2 )
+rotation = 3.14159
+amount = 250
+lifetime = 0.5
+local_coords = false
+texture = ExtResource( 3 )
+flag_align_y = true
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 200.0
+damping = 500.0
+damping_random = 0.35
+scale_amount = 0.5
+scale_amount_random = 0.51
+scale_amount_curve = SubResource( 3 )
+color_ramp = SubResource( 4 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource( 6 )
+amount = 12
+lifetime = 0.5
+emission_shape = 2
+emission_rect_extents = Vector2( 40, 1 )
+spread = 80.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 300.0
+scale_amount = 17.44
+scale_amount_curve = SubResource( 7 )
+color = Color( 0.333333, 0.831373, 0.870588, 0.729412 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+anims/default = SubResource( 5 )

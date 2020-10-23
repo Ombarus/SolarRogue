@@ -206,9 +206,11 @@ func OnObjTurn_Callback(obj):
 		
 	var is_aggressive = obj.get_attrib("ai.aggressive")
 	
-	if pathfinding == "queen":
+	if pathfinding == "pylon":
+		DoPylonPathfinding(obj)
+	elif pathfinding == "queen":
 		DoJergQueenPathfinding(obj)
-	if pathfinding == "simple" or pathfinding == "group_leader":
+	elif pathfinding == "simple" or pathfinding == "group_leader":
 		DoSimplePathFinding(obj)
 	elif pathfinding == "group":
 		DoFollowGroupLeader(obj)
@@ -285,6 +287,29 @@ func DoJergQueenPathfinding(obj):
 			obj.set_attrib("ai.unseen_for", 0)
 		DoRunAwayPathFinding(obj)
 		
+
+func DoPylonPathfinding(obj):
+	var target = null
+	if "mothership" in Globals.LevelLoaderRef.objByType:
+		var motherships : Array = Globals.LevelLoaderRef.objByType["mothership"]
+		if motherships.size() > 0:
+			target = motherships[0]
+			
+	if target == null:
+		BehaviorEvents.emit_signal("OnUseAP", obj, 10.0)
+		return
+		
+	BehaviorEvents.emit_signal("OnWaitForAnimation")
+	var n : Node2D = Preloader.PylonFX.instance()
+	n.position = obj.position
+	var r = get_node("/root/Root/GameTiles")
+	call_deferred("safe_start", n, r, target.position)
+	BehaviorEvents.emit_signal("OnUseAP", obj, 2.0)
+	
+func safe_start(n, r, target_pos):
+	r.add_child(n)
+	n.Start(target_pos)
+	
 
 func DoFollowGroupLeader(obj):
 	if obj.get_attrib("ai.target") == null:
