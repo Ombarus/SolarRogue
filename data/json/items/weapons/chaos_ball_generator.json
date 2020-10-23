@@ -53,7 +53,8 @@
 		{"src":"data/json/items/effects/fast.json", "chance":10},
 		{"src":"data/json/items/effects/swarm.json", "chance":10},
 		{"src":"data/json/items/effects/focused.json", "chance":20},
-		{"src":"data/json/items/effects/overloaded.json", "chance":20}
+		{"src":"data/json/items/effects/overloaded.json", "chance":20},
+		{"src":"data/json/items/effects/lucky.json", "chance":20}
 	],
 	"description": {
 		"text":"Unstable Wormhole Generator. So chaotic that it's only mode of opperation is lovingly refered to as 'shoot and pray'",

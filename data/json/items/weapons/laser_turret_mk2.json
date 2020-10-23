@@ -50,7 +50,8 @@
 		{"src":"data/json/items/effects/fast.json", "chance":10},
 		{"src":"data/json/items/effects/widebeam.json", "chance":10},
 		{"src":"data/json/items/effects/focused.json", "chance":10},
-		{"src":"data/json/items/effects/overloaded.json", "chance":20}
+		{"src":"data/json/items/effects/overloaded.json", "chance":20},
+		{"src":"data/json/items/effects/lucky.json", "chance":20}
 	],
 	"description": {
 		"text":"Highly cohesive beam of high-energy photons allows long range targetting in a straight line.",

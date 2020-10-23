@@ -58,7 +58,8 @@
 				{"name":"Speed", "value":"{moving.speed*move_multiplier}", "translate_value":false, "positive_good":false},
 				{"name":"Weapon mounts", "value":"1", "translate_value":false},
 				{"name":"Shield mounts", "value":"1", "translate_value":false},
-				{"name":"Utility mounts", "value":"1", "translate_value":false}
+				{"name":"Utility mounts", "value":"1", "translate_value":false},
+				{"name":"Energy Upkeep", "value":"{converter.base_ap_energy_cost*base_ap_cost_multiplier} / turn", "translate_value":true, "positive_good":false}
 			]
 		},
 		"Status": {

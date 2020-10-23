@@ -51,7 +51,8 @@
 		{"src":"data/json/items/effects/efficient.json", "chance":20},
 		{"src":"data/json/items/effects/precision.json", "chance":20},
 		{"src":"data/json/items/effects/fast.json", "chance":20},
-		{"src":"data/json/items/effects/overloaded.json", "chance":20}
+		{"src":"data/json/items/effects/overloaded.json", "chance":20},
+		{"src":"data/json/items/effects/lucky.json", "chance":20}
 	],
 	"description": {
 		"text":"Can hit multiple enemies in a area. A short fuse prevents nearby detonation. Sadly it's not long enough to hit far away targets.",

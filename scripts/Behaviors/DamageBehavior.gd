@@ -82,7 +82,7 @@ func OnObjectLoaded_Callback(obj):
 func OnDealDamage_Callback(targets, shooter, weapon_data, modified_attributes, shot_tile):
 	var shot_fired := false
 	for target in targets:
-		if validate_action(target, shooter, weapon_data) == true:
+		if validate_action(target, shooter, weapon_data, modified_attributes) == true:
 			if shot_fired == false:
 				shot_fired = true
 				# Should only be triggered once per weapon, but needs to happen before we send event for destroyed ship
@@ -93,7 +93,7 @@ func OnDealDamage_Callback(targets, shooter, weapon_data, modified_attributes, s
 			else:
 				ProcessDamage(target, shooter, weapon_data, modified_attributes)
 	if targets.empty() and Globals.get_data(weapon_data, "weapon_data.shoot_empty", false) == true:
-		if validate_action(null, shooter, weapon_data) == true:
+		if validate_action(null, shooter, weapon_data, modified_attributes) == true:
 			shot_fired = true
 			var log_choices = {
 				"Scans report no hit sir!":150,
@@ -131,7 +131,7 @@ func consume(shooter, weapon_data, modified_attributes):
 				
 	
 	
-func validate_action(target, shooter, weapon_data):
+func validate_action(target, shooter, weapon_data, modified_attributes):
 	if target != null:
 		var defense_deployed = target.get_attrib("harvestable.defense_deployed")
 		if defense_deployed != null and defense_deployed == true:
@@ -178,6 +178,17 @@ func validate_action(target, shooter, weapon_data):
 		#TODO: will ammo have variations/effect? if so, need to pass modified_attrib here
 		BehaviorEvents.emit_signal("OnLogLine", log_choices, [Globals.EffectRef.get_display_name(ammo_data, {})])
 		return false
+		
+	
+	if "fire_energy_cost" in weapon_data.weapon_data:
+		var energy_mult = Globals.EffectRef.GetMultiplierValue(shooter, weapon_data.src, modified_attributes, "fire_energy_cost_multiplier")
+		var cost : float = weapon_data.weapon_data.fire_energy_cost #* _get_power_amplifier_stack(shooter, "energy_percent")
+		cost = cost * energy_mult
+		var cur_energy = shooter.get_attrib("converter.stored_energy", cost+1)
+		if cur_energy < cost:
+			if is_player == true:
+				BehaviorEvents.emit_signal("OnLogLine", "[color=red]Not enough energy to power weapons![/color]")
+				return false
 	
 	#if "fire_energy_cost" in weapon_data.weapon_data:
 	#	BehaviorEvents.emit_signal("OnUseEnergy", shooter, weapon_data.weapon_data.fire_energy_cost)
@@ -364,28 +375,6 @@ func ProcessDeathSpawns(target):
 		if can_spawn and MersenneTwister.rand_float() < (stuff.chance * global_chance_mult):
 			Globals.LevelLoaderRef.RequestObject(stuff.id, Globals.LevelLoaderRef.World_to_Tile(target.position), modif_data)
 
-func _get_power_amplifier_stack(shooter, type):
-	var utilities : Array = shooter.get_attrib("mounts.utility", [])
-	var utilities_data : Array = Globals.LevelLoaderRef.LoadJSONArray(utilities)
-	
-	var power_amp := []
-	for data in utilities_data:
-		var boost = Globals.get_data(data, "damage_boost." + type)
-		if boost != null:
-			power_amp.push_back(boost / 100.0) # displayed as percentage, we want a fraction
-			
-	if power_amp.size() <= 0:
-		return 1.0
-	
-	power_amp.sort()
-	power_amp.invert()
-	var max_boost := 0.0
-	var count := 0
-	for val in power_amp:
-		max_boost += val / pow(2, count) # 1, 0.5, 0.25, 0.125, etc.
-		count += 1
-		
-	return max_boost
 
 func _hit_shield(target, dam, shooter, weapon_data, modified_attributes):
 	var cur_hp = target.get_attrib("shield.current_hp")

@@ -304,6 +304,9 @@ func OnAddItem_Callback(picker, item_id, modified_attributes):
 		picker.init_cargo()
 	if modified_attributes == null:
 		modified_attributes = {}
+		
+	BehaviorEvents.emit_signal("OnPickItem", picker, item_id, modified_attributes) # for effect system to add modified_attributes if needed
+		
 	var cargo = picker.get_attrib("cargo.content")
 	var data = Globals.LevelLoaderRef.LoadJSON(item_id)
 	

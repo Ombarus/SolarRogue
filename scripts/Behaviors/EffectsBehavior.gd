@@ -27,7 +27,7 @@ func _ready():
 	BehaviorEvents.connect("OnPickObject", self, "OnPickObject_Callback")
 	BehaviorEvents.connect("OnMountRemoved", self, "OnMountRemoved_Callback")
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
-	BehaviorEvents.connect("OnAddItem", self, "OnAddItem_Callback")
+	BehaviorEvents.connect("OnPickItem", self, "OnAddItem_Callback")
 	BehaviorEvents.connect("OnRemoveItem", self, "OnremoveItem_Callback")
 	BehaviorEvents.connect("OnItemDropped", self, "OnItemDropped_Callback")
 	

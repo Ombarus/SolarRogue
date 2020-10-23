@@ -58,6 +58,7 @@ __meta__ = {
 
 [node name="HoverSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
+volume_db = -16.524
 bus = "Sfx"
 
 [node name="ClickSFX" type="AudioStreamPlayer" parent="."]

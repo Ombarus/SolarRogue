@@ -1,0 +1,9 @@
+{
+	"name_id":"Lucky",
+	"type":"effect",
+	"prefix":"Lucky %s",
+	"attributes": {
+		"self_hit_chance_bonus":0.05,
+		"self_crit_chance_bonus":0.15
+	}
+}

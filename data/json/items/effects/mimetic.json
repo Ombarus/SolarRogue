@@ -5,13 +5,14 @@
 	"attributes": {
 		"self_shield_multiplier":0.7,
 		"global_dodge_chance_bonus":0.1,
-		"self_base_ap_cost_multiplier":1.5
+		"global_base_ap_cost_multiplier":1.5
 	},
 	"description": {
 		"Extra": {
 			"min_level":0,
 			"fields": [
-				{"name":"Dodge Chances", "value":"[color=lime]+10%[/color]"}
+				{"name":"Dodge Chances", "value":"[color=lime]+10%[/color]"},
+				{"name":"Energy Upkeep", "value":"[color=red]1.5x[/color]"}
 			]
 		}
 	}

@@ -257,6 +257,7 @@ text = "[esc]Cancel"
 
 [node name="HoverSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+volume_db = -16.523
 bus = "Sfx"
 
 [node name="ClickSFX" type="AudioStreamPlayer" parent="."]
