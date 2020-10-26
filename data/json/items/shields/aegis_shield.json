@@ -2,6 +2,7 @@
 	"name_id":"Aegis Shield",
 	"type":"shield",
 	"sprite": "shield",
+	"artifact":true,
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
 		"region":[384,128,128,128]
@@ -49,7 +50,7 @@
 		"Special": {
 			"min_level":0,
 			"fields": [
-				{"name":"5% chance", "value":"Convert damage to shield"}
+				{"name":"[color=yellow]Damage Regen Shield[/color]", "value":"[color=yellow]5% chance[/color]"}
 			]
 		}
 	}

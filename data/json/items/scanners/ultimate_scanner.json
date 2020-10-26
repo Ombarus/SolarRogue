@@ -2,6 +2,7 @@
 	"name_id":"Ultimate Scanner",
 	"type":"scanner",
 	"sprite": "scanner",
+	"artifact":true,
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
 		"region":[512,128,128,128]
@@ -41,9 +42,9 @@
 		"Scanning": {
 			"min_level":0,
 			"fields": [
-				{"name":"Radius", "value":"Monstrous"},
+				{"name":"[color=yellow]Radius[/color]", "value":"[color=yellow]Monstrous[/color]"},
 				{"name":"Level", "value":"{scanning.level}", "translate_value":false},
-				{"name":"Special", "value":"Unique Radar"}
+				{"name":"[color=yellow]Special[/color]", "value":"[color=yellow]Unique Radar[/color]"}
 			]
 		}
 	}

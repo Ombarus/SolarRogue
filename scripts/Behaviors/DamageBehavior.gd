@@ -329,6 +329,19 @@ func ProcessDamage(target, shooter, weapon_data, modified_attributes):
 		if MersenneTwister.rand_float() < crit_chance + bonus_crit:
 			dam = dam * Globals.get_data(weapon_data, "weapon_data.crit_multiplier", 1.0)
 			is_critical = true
+			
+		var aegis_conversion = _aegis_conversion(target, dam)
+		if aegis_conversion > 0:
+			var cur_shield = target.get_attrib("shield.current_hp")
+			var max_shield = target.get_max_shield()
+			if cur_shield + aegis_conversion > max_shield:
+				aegis_conversion = max_shield - cur_shield
+			target.set_attrib("shield.current_hp", cur_shield + aegis_conversion)
+			BehaviorEvents.emit_signal("OnDamageTaken", target, null, Globals.DAMAGE_TYPE.shield_hit)
+			if is_target_player:
+				BehaviorEvents.emit_signal("OnLogLine", "[color=lime]The Aegis Shield reacts to the shot and regenerate %d points![/color]", [aegis_conversion])
+			return
+			
 		var dam_absorbed_by_shield = _hit_shield(target, dam, shooter, weapon_data, modified_attributes)
 		var hull_dam_mult : float = Globals.EffectRef.GetMultiplierValue(shooter, weapon_data.src, modified_attributes, "dam_hull_multiplier")
 		hull_dam = dam - dam_absorbed_by_shield
@@ -375,6 +388,17 @@ func ProcessDeathSpawns(target):
 		if can_spawn and MersenneTwister.rand_float() < (stuff.chance * global_chance_mult):
 			Globals.LevelLoaderRef.RequestObject(stuff.id, Globals.LevelLoaderRef.World_to_Tile(target.position), modif_data)
 
+
+func _aegis_conversion(target, dam) -> float:
+	var shields = target.get_attrib("mounts.shield")
+	var shields_data = Globals.LevelLoaderRef.LoadJSONArray(shields)
+	for shield_data in shields_data:
+		var conversion_chance : float = Globals.get_data(shield_data, "shielding.damage_conversion", 0.0)
+		if conversion_chance > 0.0:
+			var conv_roll : float = MersenneTwister.rand_float()
+			if conv_roll < conversion_chance:
+				return dam
+	return 0.0
 
 func _hit_shield(target, dam, shooter, weapon_data, modified_attributes):
 	var cur_hp = target.get_attrib("shield.current_hp")

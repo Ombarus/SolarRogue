@@ -32,7 +32,11 @@ func Init(init_param):
 	if "owner" in init_param and init_param.owner != null:
 		_owner = init_param["owner"]
 	
-	get_node("base").title = get_display_name_id()
+	var is_artifact = get_custom("artifact", false)
+	if is_artifact:
+		get_node("base").title = "[color=yellow]" + get_display_name_id() + "[/color]"
+	else:
+		get_node("base").title = get_display_name_id()
 	
 	var base_desc : String = get_custom("description.text", "")
 	if base_desc != "":

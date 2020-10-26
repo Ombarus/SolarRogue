@@ -2,6 +2,7 @@
 	"name_id":"Vorpal Blade",
 	"type":"weapon",
 	"sprite": "chaos_generator",
+	"artifact":true,
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
 		"region":[384,256,128,128]
@@ -58,7 +59,8 @@
 				{"name":"Critical Chance", "value":"{weapon_data.crit_chance+crit_chance_bonus}%", "translate_value":false, "display_percent":true},
 				{"name":"Critical Multiplier", "value":"x{weapon_data.crit_multiplier}", "translate_value":false},
 				{"name":"Ammo", "value":"None"},
-				{"name":"Special", "value":"Blind Shooting"}
+				{"name":"Special", "value":"Blind Shooting"},
+				{"name":"[color=yellow]Legendary Artifact[/color]", "value":"[color=yellow]Very Rare[/color]"}
 			]
 		}
 	}
