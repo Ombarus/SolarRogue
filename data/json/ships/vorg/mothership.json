@@ -25,13 +25,50 @@
 		"converter": ["data/json/items/converters/converter_mk1.json"]
 	},
 	"mount_attributes": {
-		"weapon": [{},{},{},{}],
-		"shield": [{},{}],
+		"weapon": [{"selected_variation":"data/json/items/effects/focused.json"},
+			{"selected_variation":"data/json/items/effects/focused.json"},
+			{"selected_variation":"data/json/items/effects/focused.json"},
+			{"selected_variation":"data/json/items/effects/focused.json"}],
+		"shield": [{},{},{}],
 		"scanner": [{}],
 		"converter": [{}]
 	},
+	"applied_effects": [
+		{
+			"self_base_dam_multiplier":1.3,
+			"self_max_dam_multiplier":0.9,
+			"self_hit_chance_bonus":-0.05,
+			"self_crit_chance_bonus":0.05,
+			"self_range_bonus":1,
+			"src":"data/json/items/effects/focused.json"
+		},
+		{
+			"self_base_dam_multiplier":1.3,
+			"self_max_dam_multiplier":0.9,
+			"self_hit_chance_bonus":-0.05,
+			"self_crit_chance_bonus":0.05,
+			"self_range_bonus":1,
+			"src":"data/json/items/effects/focused.json"
+		},
+		{
+			"self_base_dam_multiplier":1.3,
+			"self_max_dam_multiplier":0.9,
+			"self_hit_chance_bonus":-0.05,
+			"self_crit_chance_bonus":0.05,
+			"self_range_bonus":1,
+			"src":"data/json/items/effects/focused.json"
+		},
+		{
+			"self_base_dam_multiplier":1.3,
+			"self_max_dam_multiplier":0.9,
+			"self_hit_chance_bonus":-0.05,
+			"self_crit_chance_bonus":0.05,
+			"self_range_bonus":1,
+			"src":"data/json/items/effects/focused.json"
+		}
+	],
 	"destroyable": {
-		"hull":40
+		"hull":75
 	},
 	"moving": {
 		"speed":4.0,
@@ -46,26 +83,11 @@
 		"stop_running_after":30
 	},
 	"drop_on_death": [
-		{"id":"data/json/items/converters/converter_mk1.json", "chance":0.001},
-		{"id":"data/json/items/converters/converter_mk2.json", "chance":0.001},
-		{"id":"data/json/items/converters/converter_mk3.json", "chance":0.001},
-		{"id":"data/json/items/converters/jerg_converter_mk1.json", "chance":0.001},
-		{"id":"data/json/items/converters/vorg_converter_mk1.json", "chance":0.06666666667},
-		{"id":"data/json/items/misc/battleship_body.json", "chance":0.1},
-		{"id":"data/json/items/misc/frigate_body.json", "chance":0.0},
-		{"id":"data/json/items/misc/probe_body.json", "chance":0.0},
-		{"id":"data/json/items/misc/scout_body.json", "chance":0.0},
+		{"id":"data/json/items/converters/vorg_converter_mk1.json", "chance":1.0},
+		{"id":"data/json/items/shields/aegis_shield.json", "chance":1.0, "global_max":1},
+		{"id":"data/json/items/misc/battleship_body.json", "chance":1.0},
 		{"id":"data/json/items/scanners/scanner_mk1.json", "chance":0.05},
 		{"id":"data/json/items/scanners/scanner_mk2.json", "chance":0.05},
-		{"id":"data/json/items/shields/shield_mk1.json", "chance":0.1},
-		{"id":"data/json/items/shields/shield_mk1.json", "chance":0.08},
-		{"id":"data/json/items/shields/shield_mk1.json", "chance":0.05},
-		{"id":"data/json/items/utilities/gravitic_compactor.json", "chance":0.008},
-		{"id":"data/json/items/utilities/solar_array.json", "chance":0.01428571429},
-		{"id":"data/json/items/weapons/mining_laser.json", "chance":0.01},
-		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.08},
-		{"id":"data/json/items/weapons/missile_launcher_mk1.json", "chance":0.16},
-		{"id":"data/json/items/weapons/missile_launcher_mk1.json", "chance":0.04},
 		{"id":"data/json/items/weapons/missile.json", "chance":0.2},
 		{"id":"data/json/items/weapons/missile.json", "chance":0.2},
 		{"id":"data/json/items/weapons/missile.json", "chance":0.15},
@@ -73,54 +95,27 @@
 		{"id":"data/json/items/weapons/missile.json", "chance":0.15},
 		{"id":"data/json/items/weapons/missile.json", "chance":0.15},
 		{"id":"data/json/items/weapons/missile.json", "chance":0.15},
-		{"id":"data/json/items/consumables/repair_nanobots.json", "chance":0.01},
 		{"id":"data/json/items/consumables/emergency_warp.json", "chance":0.01},
 		
-		{"id":"data/json/items/shields/shield_mk2.json", "chance":0.09},
-		{"id":"data/json/items/shields/shield_mk3.json", "chance":0.06},
-		
-		
 		{"id":"data/json/items/weapons/missile_launcher_mk2.json", "chance":0.044},
-		{"id":"data/json/items/weapons/missile_launcher_mk3.json", "chance":0.022},
-		{"id":"data/json/items/weapons/laser_turret_mk2.json", "chance":0.03},
+		{"id":"data/json/items/weapons/missile_launcher_mk3.json", "chance":0.5},
 		{"id":"data/json/items/scanners/scanner_mk3.json", "chance":0.015},
 		{"id":"data/json/items/scanners/long_range_scanner_mk1.json", "chance":0.035},
 		{"id":"data/json/items/scanners/long_range_scanner_mk2.json", "chance":0.03},
 		{"id":"data/json/items/scanners/long_range_scanner_mk3.json", "chance":0.010},
 		{"id":"data/json/items/scanners/ultimate_scanner.json", "chance":0.01, "global_max":1},
-		{"id":"data/json/items/misc/oxygen.json", "chance":0.0},
 		{"id":"data/json/items/misc/uranium.json", "chance":0.6},
 		{"id":"data/json/items/misc/uranium.json", "chance":0.5},
-		{"id":"data/json/items/misc/diluted_cristals.json", "chance":0.2},
+		{"id":"data/json/items/misc/diluted_cristals.json", "chance":0.5},
+		{"id":"data/json/items/misc/diluted_cristals.json", "chance":0.25},
+		{"id":"data/json/items/misc/diluted_cristals.json", "chance":0.25},
 		
-		{"id":"data/json/items/weapons/torpedo_launcher_mk1.json", "chance":0.012},
-		{"id":"data/json/items/weapons/torpedo.json", "chance":0.01},
 		{"id":"data/json/items/utilities/power_amplifier.json", "chance":0.02},
 		{"id":"data/json/items/utilities/power_amplifier_mk2.json", "chance":0.02},
 		{"id":"data/json/items/utilities/power_amplifier_mk3.json", "chance":0.02},
-		{"id":"data/json/items/utilities/speed_boost.json", "chance":0.02},
-		{"id":"data/json/items/utilities/speed_boost_mk2.json", "chance":0.02},
 		
-		{"id":"data/json/items/weapons/minigun.json", "chance":0.05},
-		{"id":"data/json/items/weapons/bullet_clip.json", "chance":0.02},
-		{"id":"data/json/items/weapons/bullet_clip.json", "chance":0.02},
-		{"id":"data/json/items/weapons/bullet_clip.json", "chance":0.02},
-		
-		{"id":"data/json/items/weapons/rail_gun_mk1.json", "chance":0.022},
-		{"id":"data/json/items/weapons/rail_gun_mk2.json", "chance":0.004},
-		{"id":"data/json/items/weapons/depleted_uranium.json", "chance":0.02},
-		
-		{"id":"data/json/items/utilities/hull_analyzer.json", "chance":0.014},
-		{"id":"data/json/items/utilities/shield_analyzer.json", "chance":0.014},
-		{"id":"data/json/items/utilities/shield_bypass.json", "chance":0.014},
-		{"id":"data/json/items/utilities/weapon_bypass.json", "chance":0.014},
-		{"id":"data/json/items/utilities/targeting_computer.json", "chance":0.014},
-		{"id":"data/json/items/utilities/jammer.json", "chance":0.014},
-		
-		{"id":"data/json/items/consumables/shield_battery.json", "chance":0.04},
-		
-		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
-		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
+		{"id":"data/json/items/consumables/shield_battery.json", "chance":0.2},
+		{"id":"data/json/items/consumables/shield_battery.json", "chance":0.1}
 	],
 	"description": {
 		"text":"This is the Vorg Mothership responsible for this sector of space. It's a moving fortress armed to the teeth that will assimilate anything that come too close",

@@ -2,8 +2,11 @@
 
 [ext_resource path="res://scripts/animations/pylon_fx.gd" type="Script" id=1]
 [ext_resource path="res://data/private/textures/space-sprite.png" type="Texture" id=2]
-[ext_resource path="res://data/private/textures/bullet_bw.png" type="Texture" id=3]
-[ext_resource path="res://data/private/sounds/sfx/chaos/sfx_sounds_negative1.wav" type="AudioStream" id=4]
+[ext_resource path="res://data/private/sounds/sfx/pylon/charge/charge03.wav" type="AudioStream" id=7]
+[ext_resource path="res://data/private/sounds/sfx/pylon/fire/fire06.wav" type="AudioStream" id=14]
+[ext_resource path="res://data/private/sounds/sfx/pylon/fire/fire07.wav" type="AudioStream" id=15]
+[ext_resource path="res://data/private/sounds/sfx/pylon/fire/fire10.wav" type="AudioStream" id=18]
+[ext_resource path="res://data/private/sounds/sfx/pylon/fire/fire18.wav" type="AudioStream" id=26]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
@@ -12,19 +15,9 @@ blend_mode = 1
 blend_mode = 1
 
 [sub_resource type="Curve" id=3]
-_data = [ Vector2( 0, 0.4 ), 0.0, 0.0, 0, 0, Vector2( 0.201133, 0.836364 ), 0.411422, 0.411422, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="Gradient" id=4]
-offsets = PoolRealArray( 0, 0.787879, 1 )
-colors = PoolColorArray( 0.111267, 0.650543, 0.890137, 1, 0.121569, 0.596078, 0.933333, 1, 0.141176, 0.560784, 0.929412, 0 )
-
-[sub_resource type="CanvasItemMaterial" id=6]
-blend_mode = 1
-
-[sub_resource type="Curve" id=7]
 _data = [ Vector2( 0, 0.989773 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.326136 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "default"
 tracks/0/type = "value"
 tracks/0/path = NodePath("CPUParticles2D:emitting")
@@ -50,46 +43,36 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "PlayFireSound"
+} ]
+}
 
 [node name="pylon_fx" type="Node2D"]
 position = Vector2( 162.881, 296.953 )
 scale = Vector2( 0.5, 0.4 )
 script = ExtResource( 1 )
-ttl = 1.0
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 material = SubResource( 1 )
 scale = Vector2( 1, 0.261 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 1306, 898, 74, 124 )
 
-[node name="Particles2D" type="CPUParticles2D" parent="."]
-visible = false
-material = SubResource( 2 )
-rotation = 3.14159
-amount = 250
-lifetime = 0.5
-local_coords = false
-texture = ExtResource( 3 )
-flag_align_y = true
-spread = 180.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 200.0
-damping = 500.0
-damping_random = 0.35
-scale_amount = 0.5
-scale_amount_random = 0.51
-scale_amount_curve = SubResource( 3 )
-color_ramp = SubResource( 4 )
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 4 )
-autoplay = true
-
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-material = SubResource( 6 )
+material = SubResource( 2 )
+emitting = false
 amount = 12
 lifetime = 0.5
 emission_shape = 2
@@ -98,9 +81,43 @@ spread = 80.0
 gravity = Vector2( 0, 0 )
 initial_velocity = 300.0
 scale_amount = 17.44
-scale_amount_curve = SubResource( 7 )
+scale_amount_curve = SubResource( 3 )
 color = Color( 0.333333, 0.831373, 0.870588, 0.729412 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "default"
-anims/default = SubResource( 5 )
+anims/default = SubResource( 4 )
+
+[node name="charge" type="Node2D" parent="."]
+
+[node name="charge_sfx" type="AudioStreamPlayer2D" parent="charge"]
+stream = ExtResource( 7 )
+max_distance = 5000.0
+attenuation = 1.7411
+bus = "Sfx"
+
+[node name="fire" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer6" type="AudioStreamPlayer2D" parent="fire"]
+stream = ExtResource( 14 )
+max_distance = 5000.0
+attenuation = 1.7411
+bus = "Sfx"
+
+[node name="AudioStreamPlayer7" type="AudioStreamPlayer2D" parent="fire"]
+stream = ExtResource( 15 )
+max_distance = 5000.0
+attenuation = 1.7411
+bus = "Sfx"
+
+[node name="AudioStreamPlayer10" type="AudioStreamPlayer2D" parent="fire"]
+stream = ExtResource( 18 )
+max_distance = 5000.0
+attenuation = 1.7411
+bus = "Sfx"
+
+[node name="AudioStreamPlayer15" type="AudioStreamPlayer2D" parent="fire"]
+stream = ExtResource( 26 )
+max_distance = 5000.0
+attenuation = 1.7411
+bus = "Sfx"

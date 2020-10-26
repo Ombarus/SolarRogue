@@ -299,12 +299,24 @@ func DoPylonPathfinding(obj):
 		BehaviorEvents.emit_signal("OnUseAP", obj, 10.0)
 		return
 		
+	var cur_shield = target.get_attrib("shield.current_hp")
+	var max_shield = target.get_max_shield()
+	var pylon_heal = obj.get_attrib("ai.pylon_heal")
+	var cooldown_range = obj.get_attrib("ai.pylon_cooldown")
+	var cooldown = MersenneTwister.rand(cooldown_range[1] - cooldown_range[0]) + cooldown_range[0]
+	if cur_shield > max_shield - pylon_heal: # nothing to heal
+		BehaviorEvents.emit_signal("OnUseAP", obj, cooldown)
+		return
+		
+	target.set_attrib("shield.current_hp", min(max_shield, cur_shield + pylon_heal))
+	
 	BehaviorEvents.emit_signal("OnWaitForAnimation")
 	var n : Node2D = Preloader.PylonFX.instance()
 	n.position = obj.position
 	var r = get_node("/root/Root/GameTiles")
 	call_deferred("safe_start", n, r, target.position)
-	BehaviorEvents.emit_signal("OnUseAP", obj, 2.0)
+	BehaviorEvents.emit_signal("OnUseAP", obj, cooldown)
+	BehaviorEvents.emit_signal("OnDamageTaken", target, null, Globals.DAMAGE_TYPE.shield_hit)
 	
 func safe_start(n, r, target_pos):
 	r.add_child(n)

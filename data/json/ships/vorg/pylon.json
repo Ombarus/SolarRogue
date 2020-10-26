@@ -31,7 +31,9 @@
 	"ai": {
 		"aggressive":false,
 		"pathfinding":"pylon",
-		"run_if_attacked":false
+		"run_if_attacked":false,
+		"pylon_cooldown":[2,5],
+		"pylon_heal":40
 	},
 	"drop_on_death": [
 		{"id":"data/json/items/misc/diluted_cristals.json", "chance":1.0},

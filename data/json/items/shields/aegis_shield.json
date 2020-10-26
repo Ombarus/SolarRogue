@@ -1,0 +1,56 @@
+{
+	"name_id":"Aegis Shield",
+	"type":"shield",
+	"sprite": "shield",
+	"icon": {
+		"texture":"data/private/textures/space-sprite.png",
+		"region":[384,128,128,128]
+	},
+	"equipment": {
+		"slot":"shield",
+		"volume":60.0,
+		"equip_ap":3.0,
+		"unequip_ap":3.0
+	},
+	"shielding": {
+		"max_hp":45,
+		"hp_regen_per_ap":0.8,
+		"energy_cost_per_hp":30.0,
+		"damage_conversion":0.05
+	},
+	"recyclable": {
+		"energy": 5000,
+		"player_sale_range": [10000,20000],
+		"player_buy_range": [20000,30000]
+	},
+	"disassembling": {
+		"produce":"data/json/items/misc/spare_parts.json",
+		"count":20,
+		"energy_cost":1500
+	},
+	"description": {
+		"text":"This legendary artifact from the Vorg uses lost technology to rebalance the shield's harmonics so that the energy from an enemy weapon can sometimes be converted back into the shield's defensive matrix.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume*volume_multiplier}", "translate_value":false, "positive_good":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
+				{"name":"Mount Point", "value":"Shield"}
+			]
+		},
+		"Shielding": {
+			"min_level":0,
+			"fields": [
+				{"name":"Max Shield", "value":"{shielding.max_hp*shield_multiplier} points"},
+				{"name":"Regen Rate", "value":"{shielding.hp_regen_per_ap*hp_regen_per_ap_multiplier} point / turn"},
+				{"name":"Energy Cost", "value":"{shielding.energy_cost_per_hp*energy_cost_per_hp_multiplier} per point", "positive_good":false}
+			]
+		},
+		"Special": {
+			"min_level":0,
+			"fields": [
+				{"name":"5% chance", "value":"Convert damage to shield"}
+			]
+		}
+	}
+}

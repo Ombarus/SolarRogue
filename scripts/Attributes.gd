@@ -115,20 +115,22 @@ func init_cargo():
 
 func init_mounts():
 	if base_attributes.has("mounts") and not modified_attributes.has("mount_attributes"):
-		var mounts = get_attrib("mounts")
-		var mount_variations = {}
-		for key in mounts:
-			for item in mounts[key]:
-				if not mount_variations.has(key):
-					mount_variations[key] = []
-				mount_variations[key].push_back({})
-				
-		set_attrib("mount_attributes", mount_variations)
+		if base_attributes.has("mount_attributes"):
+			modified_attributes["mount_attributes"] = str2var(var2str(base_attributes.mount_attributes))
+		else:
+			var mounts = get_attrib("mounts")
+			var mount_variations = {}
+			for key in mounts:
+				for item in mounts[key]:
+					if not mount_variations.has(key):
+						mount_variations[key] = []
+					mount_variations[key].push_back({})
+					
+			set_attrib("mount_attributes", mount_variations)
 		
 	if modified_attributes.has("mounts") or not base_attributes.has("mounts"):
 		return
 		
-	#TODO: this is just going to create a reference isn't ? Might cause issues if I start caching baseattributes
 	modified_attributes["mounts"] = str2var(var2str(base_attributes.mounts))
 
 func _ready():
