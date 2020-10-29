@@ -59,6 +59,13 @@
 				"amount":1
 			},
 			{
+				"name": "Repair Kit",
+				"requirements":[{"type":"energy", "amount":1500}, {"type":"converter", "amount":1}, {"type":"spare_parts", "amount":5}], 
+				"produce":"data/json/items/consumables/repair_kit.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
 				"name": "Vorg Scout", 
 				"requirements":[
 					{"type":"energy", "amount":1800},

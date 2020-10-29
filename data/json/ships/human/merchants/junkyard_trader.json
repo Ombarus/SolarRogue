@@ -78,6 +78,9 @@
 			{"src":"data/json/items/weapons/mining_laser_mk2.json", "chance":5},
 			{"src":"data/json/items/weapons/missile.json", "chance":5, "count":[10,20]},
 			{"src":"data/json/items/consumables/repair_nanobots.json", "chance":5},
+			{"src":"data/json/items/consumables/repair_kit.json", "chance":40},
+			{"src":"data/json/items/consumables/repair_kit.json", "chance":30},
+			{"src":"data/json/items/consumables/repair_kit.json", "chance":5},
 			{"src":"data/json/items/weapons/bullet_clip.json", "chance":20, "count":[50,80]},
 			{"src":"data/json/items/weapons/depleted_uranium.json", "chance":10, "count":[5,20]}
 		]

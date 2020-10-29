@@ -190,6 +190,8 @@ func UpdateMaterialsList(recipe_data):
 				add_item = true
 			if "src" in r and Globals.clean_path(r.src) == Globals.clean_path(item.src):
 				add_item = true
+			if data.get("end_game", false) == true:
+				add_item = false
 			if add_item == true:
 				has_item_to_use = true
 				if not cargo_index in added_to_data:

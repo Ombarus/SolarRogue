@@ -67,6 +67,13 @@
 				"amount":5
 			},
 			{
+				"name": "Repair Kit",
+				"requirements":[{"type":"energy", "amount":1500}, {"type":"converter", "amount":1}, {"type":"spare_parts", "amount":5}], 
+				"produce":"data/json/items/consumables/repair_kit.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
 				"name": "Probe Ship",
 				"requirements":[{"type":"energy", "amount":1500}, {"type":"probe_hull", "amount":1}], 
 				"produce":"data/json/ships/human/player_probe.json",

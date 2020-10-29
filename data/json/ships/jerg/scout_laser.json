@@ -53,6 +53,7 @@
 		{"id":"data/json/items/weapons/missile.json", "chance":0.0},
 		{"id":"data/json/items/consumables/repair_nanobots.json", "chance":0.01},
 		{"id":"data/json/items/consumables/emergency_warp.json", "chance":0.01},
+		{"id":"data/json/items/consumables/repair_kit.json", "chance":0.01},
 		
 		{"id":"data/json/items/shields/shield_mk2.json", "chance":0.0022},
 		{"id":"data/json/items/shields/shield_mk3.json", "chance":0.0012},

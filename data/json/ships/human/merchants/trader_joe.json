@@ -132,6 +132,7 @@
 		{"id":"data/json/items/utilities/targeting_computer.json", "chance":0.02},
 		{"id":"data/json/items/utilities/jammer.json", "chance":0.02},
 		
+		{"id":"data/json/items/consumables/repair_kit.json", "chance":0.02},
 		
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.1},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},

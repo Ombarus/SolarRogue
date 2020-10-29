@@ -81,6 +81,7 @@
 			{"src":"data/json/items/weapons/missile.json", "chance":30, "count":[10,20]},
 			{"src":"data/json/items/consumables/repair_nanobots.json", "chance":10},
 			{"src":"data/json/items/consumables/emergency_warp.json", "chance":10},
+			{"src":"data/json/items/consumables/repair_kit.json", "chance":10},
 			{"src":"data/json/items/shields/shield_mk2.json", "chance":10},
 			{"src":"data/json/items/shields/shield_mk3.json", "chance":1},
 			{"src":"data/json/items/weapons/missile_launcher_mk2.json", "chance":10},
@@ -175,6 +176,8 @@
 		{"id":"data/json/items/utilities/weapon_bypass.json", "chance":0.02},
 		{"id":"data/json/items/utilities/targeting_computer.json", "chance":0.02},
 		{"id":"data/json/items/utilities/jammer.json", "chance":0.02},
+		
+		{"id":"data/json/items/consumables/repair_kit.json", "chance":0.02},
 		
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
