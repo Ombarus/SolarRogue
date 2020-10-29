@@ -33,7 +33,7 @@ func _process(delta):
 	if _current_state == LOG_ANIMATION_STATE.text_animation:
 		var final_text := ""
 		for i in range(_log_lines.size() - _lines_to_animate.size()):
-			final_text += _log_lines[i] + "\n"
+			final_text += "[color=gray]~$>[/color]" + _log_lines[i] + "\n"
 		
 		var num_char : int = floor(_delta_acc / sec_between_char)
 		_delta_acc -= sec_between_char * num_char
@@ -42,7 +42,7 @@ func _process(delta):
 			var cur_log : String = _log_lines[-(_lines_to_animate.size() - i)]
 			var left_log : String = _lines_to_animate[i]
 			if left_log.empty():
-				final_text += cur_log + "\n"
+				final_text += "[color=gray]~$>[/color]" + cur_log + "\n"
 			else:
 				all_anim_done = false
 				var to_add : int = num_char
@@ -60,7 +60,7 @@ func _process(delta):
 						continue
 					to_add -= 1
 					
-				final_text += _log_lines[-(_lines_to_animate.size() - i)] + "[color=lime]█[/color]\n"
+				final_text += "[color=gray]~$>[/color]" + _log_lines[-(_lines_to_animate.size() - i)] + "[color=lime]█[/color]\n"
 				
 		if all_anim_done:
 			_lines_to_animate = []
@@ -74,7 +74,7 @@ func _process(delta):
 		
 		var final_text := ""
 		for i in range(_log_lines.size()):
-			final_text += _log_lines[i] + "\n"
+			final_text += "[color=gray]~$>[/color]" + _log_lines[i] + "\n"
 			
 		if _delta_acc <= 0.1:
 			final_text += "[color=gray]~$>[/color]"

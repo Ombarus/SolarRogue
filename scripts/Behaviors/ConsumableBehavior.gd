@@ -43,8 +43,6 @@ func OnValidateConsumption_Callback(obj, data, key, attrib):
 		Globals.set_data(new_data, "consumable.charge", charge)
 		BehaviorEvents.emit_signal("OnUpdateInvAttribute", obj, key, attrib, new_data)
 	elif charge != null:
-		if is_player:
-			BehaviorEvents.emit_signal("OnLogLine", "Your %s uses one of it's charge", [Globals.EffectRef.get_display_name(data, attrib)])
 		charge -= 1
 		
 	if charge == null or charge < 1:
