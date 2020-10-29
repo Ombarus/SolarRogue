@@ -15,7 +15,7 @@ func _ready():
 	BehaviorEvents.connect("OnCrafting", self, "OnCrafting_Callback")
 	BehaviorEvents.connect("OnMountRemoved", self, "OnMountRemoved_Callback")
 	BehaviorEvents.connect("OnMountAdded", self, "OnMountAdded_Callback")
-	BehaviorEvents.connect("OnConsumeItem", self, "OnConsumeItem_Callback")
+	BehaviorEvents.connect("OnValidateConsumption", self, "OnConsumeItem_Callback")
 	#BehaviorEvents.connect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
 	BehaviorEvents.connect("OnRequestLevelChange", self, "OnPlayerCreated_Callback")
 	BehaviorEvents.connect("OnMoveCargo", self, "OnMoveCargo_Callback")
@@ -100,7 +100,7 @@ func OnPlayerCreated_Callback(player):
 		return
 	sfx.play()
 	
-func OnConsumeItem_Callback(obj, data):
+func OnConsumeItem_Callback(obj, data, key, attrib):
 	var sfx : AudioStreamPlayer = get_node("UseItem")
 	if obj.get_attrib("type") != "player" or sfx.playing == true:
 		return

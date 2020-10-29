@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=2]
+[gd_scene load_steps=91 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/private/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -86,6 +86,7 @@
 [ext_resource path="res://data/private/sounds/music/sr-victory-theme.ogg" type="AudioStream" id=84]
 [ext_resource path="res://data/private/sounds/music/sr-defeat-theme.ogg" type="AudioStream" id=85]
 [ext_resource path="res://data/private/sounds/sfx/scanner/ship4.wav" type="AudioStream" id=86]
+[ext_resource path="res://scripts/Behaviors/ConsumableBehavior.gd" type="Script" id=87]
 
 [sub_resource type="Animation" id=1]
 resource_name = "slow_popin"
@@ -376,6 +377,9 @@ script = ExtResource( 44 )
 [node name="Effects" type="Node" parent="Behaviors"]
 script = ExtResource( 45 )
 
+[node name="Consumable" type="Node" parent="Behaviors"]
+script = ExtResource( 87 )
+
 [node name="BG" type="Sprite" parent="."]
 position = Vector2( 5120, 5120 )
 region_enabled = true
@@ -471,17 +475,6 @@ __meta__ = {
 visible = false
 Transition = false
 
-[node name="SelectTargetRoot" type="Control" parent="Camera-GUI/SafeArea"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="SelectTarget" parent="Camera-GUI/SafeArea/SelectTargetRoot" instance=ExtResource( 52 )]
-visible = false
-
 [node name="OptionsRoot" type="Control" parent="Camera-GUI/SafeArea"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -558,6 +551,17 @@ __meta__ = {
 }
 
 [node name="Trading" parent="Camera-GUI/SafeArea/TradingRoot" instance=ExtResource( 80 )]
+visible = false
+
+[node name="SelectTargetRoot" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SelectTarget" parent="Camera-GUI/SafeArea/SelectTargetRoot" instance=ExtResource( 52 )]
 visible = false
 
 [node name="SettingsRoot" type="Control" parent="Camera-GUI/SafeArea"]

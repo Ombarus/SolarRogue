@@ -325,14 +325,7 @@ func ProcessGoingHome():
 
 func OnUseInventory_Callback(key, attrib):
 	var data = Globals.LevelLoaderRef.LoadJSON(key)
-	var energy_used = Globals.get_data(data, "consumable.energy")
-	var ap_used = Globals.get_data(data, "consumable.ap")
-	BehaviorEvents.emit_signal("OnConsumeItem", playerNode, data)
-	if ap_used != null and ap_used > 0:
-		BehaviorEvents.emit_signal("OnUseAP", playerNode, ap_used)
-	if energy_used != null and energy_used > 0:
-		BehaviorEvents.emit_signal("OnUseEnergy", playerNode, energy_used)
-	BehaviorEvents.emit_signal("OnRemoveItem", playerNode, key, attrib)
+	BehaviorEvents.emit_signal("OnConsumeItem", playerNode, data, key, attrib)
 	
 
 func OnDropIventory_Callback(dropped_mounts, dropped_cargo):

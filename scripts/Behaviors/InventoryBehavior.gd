@@ -18,6 +18,7 @@ func _ready():
 	BehaviorEvents.connect("OnReplaceCargo", self, "OnReplaceCargo_Callback")
 	BehaviorEvents.connect("OnUpdateCargoVolume", self, "OnUpdateCargoVolume_Callback")
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
+	BehaviorEvents.connect("OnUpdateInvAttribute", self, "OnUpdateInvAttribute_Callback")
 	
 
 func sort_by_chance(a, b):
@@ -365,6 +366,20 @@ func OnRemoveItem_Callback(holder, item_id, modified_attributes, num_remove=1): 
 		holder.set_attrib("equipment.disabled", should_enable)
 		
 		
+func OnUpdateInvAttribute_Callback(obj, item_id, old_attrib, new_attrib):
+	if not obj.modified_attributes.has("cargo"):
+		obj.init_cargo()
+	if old_attrib == null:
+		old_attrib = {}
+	var cargo = obj.get_attrib("cargo.content")
+	var item_variation = Globals.clean_path(old_attrib.get("selected_variation", ""))
+	var item_charge = Globals.get_data(old_attrib, "consumable.charge", null)
+	for item in cargo:
+		var cargo_variation = Globals.clean_path(Globals.get_data(item, "modified_attributes.selected_variation", ""))
+		var cargo_charge = Globals.get_data(item, "modified_attributes.consumable.charge", null)
+		if Globals.clean_path(item_id) == Globals.clean_path(item.src) and cargo_variation == item_variation and item_charge == cargo_charge:
+			item.modified_attributes = new_attrib
+			break
 
 #TODO: Implement this and replace bad code in player's OnTransferItemCompleted_Callback()	
 func OnReplaceCargo_Callback(obj, new_cargo):

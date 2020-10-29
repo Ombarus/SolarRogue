@@ -1,0 +1,44 @@
+{
+	"name_id":"Repair Kit",
+	"type":"consumable",
+	"sprite": "repair_kit",
+	"icon": {
+		"texture":"data/private/textures/space-sprite.png",
+		"region":[0,1536,128,128]
+	},
+	"consumable": {
+		"ap": 4.0,
+		"energy":500,
+		"random_charge":[2,8],
+		"close_inventory":false
+	},
+	"update_effect": {
+		"remove":"data/json/items/effects/broken.json"
+	},
+	"equipment": {
+		"slot":"cargo",
+		"volume":25.0,
+		"stackable":false
+	},
+	"recyclable": {
+		"energy": 5000,
+		"player_sale_range": [7000,8000],
+		"player_buy_range": [10000,12000]
+	},
+	"description": {
+		"text":"A butchered converter capable of patching broken components with a few spare parts and a lot of tape.",
+		"Overview": {
+			"min_level":0, 
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false},
+				{"name":"Turn used", "value":"{consumable.ap}", "translate_value":false}
+			]
+		},
+		"Effect": {
+			"min_level":0,
+			"fields": [
+				{"name":"Repair", "value":"Broken items", "translate_value":true}
+			]
+		}
+	}
+}

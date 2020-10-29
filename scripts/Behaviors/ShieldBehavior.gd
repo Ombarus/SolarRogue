@@ -86,7 +86,7 @@ func OnMountRemoved_Callback(obj, slot, src, modified_attributes):
 	obj.set_attrib("shield.current_hp", cur_hp)
 	
 
-func OnConsumeItem_Callback(obj, item_data):
+func OnConsumeItem_Callback(obj, item_data, key, attrib):
 	if not "shield_regen" in item_data:
 		return
 
@@ -94,6 +94,7 @@ func OnConsumeItem_Callback(obj, item_data):
 	
 	var max_hp = obj.get_max_shield()
 	var cur_hp = obj.get_attrib("shield.current_hp")
+	BehaviorEvents.emit_signal("OnValidateConsumption", obj, item_data, key, attrib)
 	if cur_hp == null:
 		obj.set_attrib("shield.current_hp", max_hp)
 		return

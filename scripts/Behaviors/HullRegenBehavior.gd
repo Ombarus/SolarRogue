@@ -68,7 +68,7 @@ func _process_healing(obj, data, item_data):
 	return data
 	
 	
-func OnConsumeItem_Callback(obj, item_data):
+func OnConsumeItem_Callback(obj, item_data, key, attrib):
 	if not "hull_regen" in item_data:
 		return
 		
@@ -86,5 +86,7 @@ func OnConsumeItem_Callback(obj, item_data):
 	if item_data.hull_regen.duration > 1.0:
 		regen_data.push_back(cur_data)
 		obj.set_attrib("consumable.hull_regen", regen_data)
+		
+	BehaviorEvents.emit_signal("OnValidateConsumption", obj, item_data, key, attrib)
 	
 	

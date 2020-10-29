@@ -30,6 +30,7 @@ func _ready():
 	BehaviorEvents.connect("OnPickItem", self, "OnAddItem_Callback")
 	BehaviorEvents.connect("OnRemoveItem", self, "OnremoveItem_Callback")
 	BehaviorEvents.connect("OnItemDropped", self, "OnItemDropped_Callback")
+	BehaviorEvents.connect("OnConsumeItem", self, "OnConsumeItem_Callback")
 	
 func _exit_tree():
 	Globals.EffectRef = null
@@ -208,6 +209,62 @@ func OnObjectLoaded_Callback(obj):
 	selected_variation = MersenneTwister.rand_weight(variations, "src", "chance")
 	
 	obj.set_attrib("selected_variation", selected_variation)
+	
+
+func OnConsumeItem_Callback(obj, item_data, key, attrib):
+	var update_effect = Globals.get_data(item_data, "update_effect")
+	var triggering_data = {"item_data":item_data, "key":key, "attrib":attrib}
+	if update_effect == null:
+		return
+	
+	# for now we can only remove effects
+	var effect_to_remove = Globals.clean_path(update_effect.get("remove", ""))
+	if effect_to_remove.empty():
+		return
+		
+	# find all broken item
+	var affected_src := []
+	var mounts = obj.get_attrib("mounts")
+	for key in mounts:
+		var items = mounts[key]
+		var attributes = obj.get_attrib("mount_attributes." + key)
+		for i in range(items.size()):
+			if Globals.clean_path(Globals.get_data(attributes[i], "selected_variation", "")) == effect_to_remove:
+				var affected_data = Globals.LevelLoaderRef.LoadJSON(items[i])
+				affected_src.push_back({"key":key, "idx":i, "item_id":items[i], "modified_attributes":attributes[i], "item_data":affected_data, "triggering_data":triggering_data})
+			
+	var cargo = obj.get_attrib("cargo.content")
+	for item in cargo:
+		if Globals.clean_path(Globals.get_data(item, "modified_attributes.selected_variation", "")) == effect_to_remove:
+			var affected_data = Globals.LevelLoaderRef.LoadJSON(item.src)
+			affected_src.push_back({"item_id":item.src, "modified_attributes":item.get("modified_attributes", {}), "item_data":affected_data, "triggering_data":triggering_data})
+	
+	# display choice dialog
+	BehaviorEvents.emit_signal("OnPushGUI", "SelectTarget", {"targets":affected_src, "callback_object":self, "callback_method":"SelectedTarget_Callback"})
+	
+
+func SelectedTarget_Callback(selected_targets):
+	# process choice
+	var modified_attributes = selected_targets[0].modified_attributes
+	var item_data = selected_targets[0].item_data
+	var item_id = selected_targets[0].item_id
+	var key = selected_targets[0].get("key", null)
+	var mount_idx = selected_targets[0].get("idx", null)
+	var player = Globals.get_first_player()
+	
+	var triggering_data = selected_targets[0].triggering_data
+	
+	if key == null:
+		# update inventory
+		var new_data = str2var(var2str(modified_attributes))
+		Globals.set_data(new_data, "selected_variation", "data/json/items/effects/normal.json")
+		BehaviorEvents.emit_signal("OnUpdateInvAttribute", player, item_id, modified_attributes, new_data)
+	else:
+		var item_attributes = player.get_attrib("mount_attributes." + key)
+		item_attributes[mount_idx].selected_variation = "data/json/items/effects/normal.json"
+		
+	BehaviorEvents.emit_signal("OnLogLine", "%s has been successfully repaired!", [self.get_display_name(item_data, modified_attributes)])
+	BehaviorEvents.emit_signal("OnValidateConsumption", player, triggering_data.item_data, triggering_data.key, triggering_data.attrib)
 	
 
 func process_recipes_attributes(obj):

@@ -41,11 +41,21 @@ func Init(init_param):
 	
 	var target_obj = []
 	for item in targets:
-		var icon = item.get_attrib("icon")
-		if icon == null:
-			target_obj.push_back({"name_id": item.get_attrib("name_id"), "key":item})
+		if item is Attributes:
+			var icon = item.get_attrib("icon")
+			var display_name = Globals.EffectRef.get_object_display_name(item)
+			if icon == null:
+				target_obj.push_back({"name_id": display_name, "key":item})
+			else:
+				target_obj.push_back({"name_id": display_name, "key":item, "icon":item.get_attrib("icon")})
 		else:
-			target_obj.push_back({"name_id": item.get_attrib("name_id"), "key":item, "icon":item.get_attrib("icon")})
+			var icon = Globals.get_data(item, "item_data.icon")
+			var display_name = Globals.EffectRef.get_display_name(item.item_data, item.get("modified_attributes", {}))
+			if icon == null:
+				target_obj.push_back({"name_id": display_name, "key":item})
+			else:
+				target_obj.push_back({"name_id": display_name, "key":item, "icon":icon})
+				
 	_list.Content = target_obj
 	
 	#get_node("base").Content = result_string

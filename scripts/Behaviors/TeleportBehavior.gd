@@ -53,7 +53,7 @@ func _process_teleport(obj, data, item_data):
 	return data
 	
 	
-func OnConsumeItem_Callback(obj, item_data):
+func OnConsumeItem_Callback(obj, item_data, key, attrib):
 	if not "teleport" in item_data:
 		return
 		
@@ -69,5 +69,7 @@ func OnConsumeItem_Callback(obj, item_data):
 	if item_data.teleport.duration > 1.0:
 		teleport_data.push_back(cur_data)
 		obj.set_attrib("consumable.teleport", teleport_data)
+		
+	BehaviorEvents.emit_signal("OnValidateConsumption", obj, item_data, key, attrib)
 	
 	

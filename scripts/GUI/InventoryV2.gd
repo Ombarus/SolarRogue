@@ -43,6 +43,13 @@ func _ready():
 	_cargo_list.connect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
 	_cargo_list.connect("OnDragDropCompleted", self, "OnDragDropCompleted_Callback")
 	get_node("HBoxContainer/Control/DropDrag").connect("OnDragDropCompleted", self, "OnDragDropCompleted_Callback")
+	
+	BehaviorEvents.connect("OnValidateConsumption", self, "OnValidateConsumption_Callback")
+
+func OnValidateConsumption_Callback(obj, data, key, attrib):
+	if self.visible == true and obj == _obj:
+		Init({"object":_obj})
+
 
 func Desc_Callback():
 	var scanner_level := 0
@@ -179,10 +186,10 @@ func Use_Callback():
 				selected_attrib.push_back(item.get("modified_attributes", {}))
 	
 	if selected_cargo.size() > 0:
-		
+		var data = Globals.LevelLoaderRef.LoadJSON(selected_cargo[0])
 		emit_signal("use_pressed", selected_cargo[0], selected_attrib[0])
-		Close_Callback()
-		#TODO: Might want to close only on some consumable but not all ?
+		if Globals.get_data(data, "consumable.close_inventory", true) == true:
+			Close_Callback()
 		#Init({"object":_obj}) # refresh list
 	else:
 		BehaviorEvents.emit_signal("OnLogLine", "No selected item can be used like that")
@@ -198,6 +205,7 @@ func Close_Callback():
 	# reset content or we might end up with dangling references
 	_mounts_list.Content = []
 	_cargo_list.Content = []
+	_obj = null
 	
 
 func sort_categories(var a, var b):
