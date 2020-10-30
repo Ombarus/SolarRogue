@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=2]
+[gd_scene load_steps=92 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/private/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -87,6 +87,7 @@
 [ext_resource path="res://data/private/sounds/music/sr-defeat-theme.ogg" type="AudioStream" id=85]
 [ext_resource path="res://data/private/sounds/sfx/scanner/ship4.wav" type="AudioStream" id=86]
 [ext_resource path="res://scripts/Behaviors/ConsumableBehavior.gd" type="Script" id=87]
+[ext_resource path="res://scripts/Behaviors/Runes/Assimilation.gd" type="Script" id=88]
 
 [sub_resource type="Animation" id=1]
 resource_name = "slow_popin"
@@ -370,6 +371,9 @@ script = ExtResource( 75 )
 
 [node name="JergQueen" type="Node" parent="Behaviors/Runes"]
 script = ExtResource( 48 )
+
+[node name="Assimilation" type="Node" parent="Behaviors/Runes"]
+script = ExtResource( 88 )
 
 [node name="RandomLog" type="Node" parent="Behaviors"]
 script = ExtResource( 44 )

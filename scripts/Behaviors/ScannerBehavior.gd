@@ -12,7 +12,7 @@ func _ready():
 	BehaviorEvents.connect("OnMountRemoved", self, "OnMountRemoved_Callback")
 	BehaviorEvents.connect("OnTriggerAnomaly", self, "OnTriggerAnomaly_Callback")
 	BehaviorEvents.connect("OnAnomalyEffectGone", self, "OnAnomalyEffectGone_Callback")
-	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
+	BehaviorEvents.connect("OnPlayerTurn", self, "OnPlayerTurn_Callback")
 	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_Callback")
 
 func OnTransferPlayer_Callback(old_player, new_player):
@@ -59,11 +59,10 @@ func update_no_scanner(old_player, new_player):
 	BehaviorEvents.call_deferred("emit_signal", "OnScannerUpdated", new_player)
 	#BehaviorEvents.emit_signal("OnScannerUpdated", new_player)
 
-func OnObjTurn_Callback(obj):
-	if obj.get_attrib("type") == "player":
-		do_anomaly_detection(obj)
-		# need to make sure everything is invisible if we removed our scanner
-		process_empty_scanner(obj)
+func OnPlayerTurn_Callback(obj):
+	do_anomaly_detection(obj)
+	# need to make sure everything is invisible if we removed our scanner
+	process_empty_scanner(obj)
 	
 func OnAnomalyEffectGone_Callback(obj, effect_data):
 	if Globals.get_data(effect_data, "type") == "scanner":

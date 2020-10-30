@@ -49,7 +49,7 @@ func OnPlayerCreated_Callback(player):
 		data["title"] = "CSO"
 		data["name"] = "Leonard Grayson"
 		data["status"] = "Active"
-		data["log"] = "No Recommendation"
+		data["log"] = "Know-it-all"
 		data["color"] = [0.1,0.1,0.1]
 		player.set_attrib("runes.%s" % self.name, data)
 	BehaviorEvents.disconnect("OnPlayerCreated", self, "OnPlayerCreated_Callback")

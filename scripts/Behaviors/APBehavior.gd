@@ -103,6 +103,8 @@ func OnUseAP_Callback(obj, amount):
 func validate_emit_OnObjTurn(obj):
 	# if object has been removed from list before it had a chance to act. Ignore it
 	if action_list.find(obj) != -1 and _disable == false:
+		if obj.get_attrib("type") == "player": # optim to avoid calling certain behaviors 100 times when we only care about the player
+			BehaviorEvents.emit_signal("OnPlayerTurn", obj)
 		BehaviorEvents.emit_signal("OnObjTurn", obj)
 
 # Top action is always 0 AP. This way when we insert a new object it will be the first to act

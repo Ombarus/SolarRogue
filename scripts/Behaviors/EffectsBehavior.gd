@@ -31,6 +31,8 @@ func _ready():
 	BehaviorEvents.connect("OnRemoveItem", self, "OnremoveItem_Callback")
 	BehaviorEvents.connect("OnItemDropped", self, "OnItemDropped_Callback")
 	BehaviorEvents.connect("OnConsumeItem", self, "OnConsumeItem_Callback")
+	BehaviorEvents.connect("OnUpdateMountAttribute", self, "OnUpdateMountAttribute_Callback")
+	
 	
 func _exit_tree():
 	Globals.EffectRef = null
@@ -58,6 +60,18 @@ func get_display_name(data, modified_attributes=null):
 			display_name = Globals.mytr(variation_data["prefix"], Globals.mytr(display_name))
 			
 	return display_name
+	
+func OnUpdateMountAttribute_Callback(obj, key, idx, new_attrib):
+	var mount_attributes = obj.get_attrib("mount_attributes.%s" % key)
+	var mounts = obj.get_attrib("mounts.%s" % key)
+	var old_variation = mount_attributes[idx].get("selected_variation", "")
+	
+	# fake add/remove to reset applied_effects
+	OnMountRemoved_Callback(obj, key, mounts[idx], mount_attributes[idx])
+	OnMountAdded_Callback(obj, key, mounts[idx], new_attrib)
+	
+	mount_attributes[idx] = new_attrib
+	obj.set_attrib("mount_attributes.%s" % key, mount_attributes)
 	
 	
 func OnItemDropped_Callback(dropper, item_id, modified_attributes):
@@ -173,6 +187,7 @@ func OnMountAdded_Callback(obj, slot, src, modified_attributes):
 	
 	
 func OnMountRemoved_Callback(obj, slot, src, modified_attributes):
+	# Remove effects from object like utility
 	var applied_effects : Array = obj.get_attrib("applied_effects", [])
 	for index in range(applied_effects.size()):
 		var effect = applied_effects[index]
@@ -183,6 +198,7 @@ func OnMountRemoved_Callback(obj, slot, src, modified_attributes):
 	if modified_attributes == null or not modified_attributes.has("selected_variation"):
 		return
 		
+	# Remove effects from variations
 	var variation_src : String = Globals.clean_path(modified_attributes.get("selected_variation"))
 	for index in range(applied_effects.size()):
 		var effect = applied_effects[index]
@@ -261,7 +277,9 @@ func SelectedTarget_Callback(selected_targets):
 		BehaviorEvents.emit_signal("OnUpdateInvAttribute", player, item_id, modified_attributes, new_data)
 	else:
 		var item_attributes = player.get_attrib("mount_attributes." + key)
-		item_attributes[mount_idx].selected_variation = "data/json/items/effects/normal.json"
+		var new_data = str2var(var2str(item_attributes[mount_idx]))
+		new_data["selected_variation"] = "data/json/items/effects/normal.json"
+		BehaviorEvents.emit_signal("OnUpdateMountAttribute", player, key, mount_idx, new_data)
 		
 	BehaviorEvents.emit_signal("OnLogLine", "%s has been successfully repaired!", [self.get_display_name(item_data, modified_attributes)])
 	BehaviorEvents.emit_signal("OnValidateConsumption", player, triggering_data.item_data, triggering_data.key, triggering_data.attrib)

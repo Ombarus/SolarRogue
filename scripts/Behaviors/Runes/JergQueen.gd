@@ -8,7 +8,7 @@ func _ready():
 	BehaviorEvents.connect("OnLevelReady", self, "OnLevelReady_Callback")
 	BehaviorEvents.connect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
 	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_Callback")
-	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
+	BehaviorEvents.connect("OnPlayerTurn", self, "OnPlayerTurn_Callback")
 	BehaviorEvents.connect("OnDamageTaken", self, "OnDamageTaken_Callback")
 	
 func OnTransferPlayer_Callback(old_player, new_player):
@@ -29,7 +29,7 @@ func OnPlayerCreated_Callback(player):
 		data["title"] = "XO"
 		data["name"] = "Kane Nostro"
 		data["status"] = "Active"
-		data["log"] = "No Recommendation"
+		data["log"] = "Loves Micromanaging"
 		data["color"] = [0.1,0.1,0.1]
 		player.set_attrib("runes.%s" % self.name, data)
 	BehaviorEvents.disconnect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
@@ -39,11 +39,7 @@ func OnLevelReady_Callback():
 	if "jerg_branch" in current_level_data.src:
 		TriggerBeginning()
 
-func OnObjTurn_Callback(obj):
-	var is_player : bool = obj.get_attrib("type") == "player"
-	if not is_player:
-		return
-	
+func OnPlayerTurn_Callback(obj):	
 	var deadline : float = obj.get_attrib("runes.%s.deadline" % self.name, 0)
 	var failed = obj.get_attrib("runes.%s.completed" % self.name, null)
 	if deadline <= 0 or failed != null:

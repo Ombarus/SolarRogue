@@ -10,13 +10,13 @@ var _cur_cooldown = cooldown
 
 func _ready():
 	BehaviorEvents.connect("OnLogLine", self, "OnLogLine_Callback")
-	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
+	BehaviorEvents.connect("OnPlayerTurn", self, "OnPlayerTurn_Callback")
 
 func OnLogLine_Callback(msg, fmt=[]):
 	_cur_chance = base_chance
 	_log_last_turn = true
 	
-func OnObjTurn_Callback(obj):
+func OnPlayerTurn_Callback(obj):
 	
 	var log_choices = {
 		"[color=teal]Reminder, Crew meeting today at 6:00[/color]":75,
@@ -57,10 +57,6 @@ func OnObjTurn_Callback(obj):
 		"[color=teal]Not enough power, we require additional Pylons[/color]":5,
 	}
 	
-	
-	if obj.get_attrib("type") != "player":
-		return
-		
 	if _cur_cooldown > 0:
 		_cur_cooldown -= 1
 		_cur_chance = base_chance
