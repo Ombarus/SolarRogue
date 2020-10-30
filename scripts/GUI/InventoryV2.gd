@@ -44,9 +44,9 @@ func _ready():
 	_cargo_list.connect("OnDragDropCompleted", self, "OnDragDropCompleted_Callback")
 	get_node("HBoxContainer/Control/DropDrag").connect("OnDragDropCompleted", self, "OnDragDropCompleted_Callback")
 	
-	BehaviorEvents.connect("OnValidateConsumption", self, "OnValidateConsumption_Callback")
+	BehaviorEvents.connect("OnPlayerTurn", self, "OnPlayerTurn_Callback")
 
-func OnValidateConsumption_Callback(obj, data, key, attrib):
+func OnPlayerTurn_Callback(obj):
 	if self.visible == true and obj == _obj:
 		Init({"object":_obj})
 

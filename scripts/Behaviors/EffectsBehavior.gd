@@ -269,16 +269,25 @@ func SelectedTarget_Callback(selected_targets):
 	var player = Globals.get_first_player()
 	
 	var triggering_data = selected_targets[0].triggering_data
+	var default_variation = "data/json/items/effects/normal.json"
 	
 	if key == null:
 		# update inventory
 		var new_data = str2var(var2str(modified_attributes))
-		Globals.set_data(new_data, "selected_variation", "data/json/items/effects/normal.json")
+		var previous_variation = new_data.get("previous_variation", "")
+		if not previous_variation.empty():
+			default_variation = previous_variation
+			new_data.erase("previous_variation")
+		Globals.set_data(new_data, "selected_variation", default_variation)
 		BehaviorEvents.emit_signal("OnUpdateInvAttribute", player, item_id, modified_attributes, new_data)
 	else:
 		var item_attributes = player.get_attrib("mount_attributes." + key)
 		var new_data = str2var(var2str(item_attributes[mount_idx]))
-		new_data["selected_variation"] = "data/json/items/effects/normal.json"
+		var previous_variation = new_data.get("previous_variation", "")
+		if not previous_variation.empty():
+			default_variation = previous_variation
+			new_data.erase("previous_variation")
+		new_data["selected_variation"] = default_variation
 		BehaviorEvents.emit_signal("OnUpdateMountAttribute", player, key, mount_idx, new_data)
 		
 	BehaviorEvents.emit_signal("OnLogLine", "%s has been successfully repaired!", [self.get_display_name(item_data, modified_attributes)])
