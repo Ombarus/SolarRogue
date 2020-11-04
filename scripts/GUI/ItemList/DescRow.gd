@@ -23,7 +23,7 @@ func set_row_data(data):
 	if _name == null:
 		return
 
-	_name.bbcode_text = data.name
+	_name.bbcode_text = Globals.mytr(data.name)
 	
 	_value.scroll_active = false
 		

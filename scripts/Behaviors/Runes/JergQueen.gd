@@ -183,7 +183,7 @@ func Intro_Done_Callback():
 	player.set_attrib("runes.%s.intro_done" % self.name, true)
 	# Set Completed to false so it's considered "failed" if we don't go back for him
 	#player.set_attrib("runes.%s.completed" % self.name, false)
-	var deadline : int = MersenneTwister.rand(5000 - 3000) + 3000
+	var deadline : int = MersenneTwister.rand(3500 - 1500) + 1500
 	player.set_attrib("runes.%s.deadline" % self.name, Globals.total_turn + deadline)
 	player.set_attrib("runes.%s.lifetime" % self.name, deadline)
 	BehaviorEvents.emit_signal("OnAnimationDone")
