@@ -687,10 +687,12 @@ func _unhandled_input(event):
 					"pathfinding":"simple",
 					"disable_on_interest":true,
 					"disable_wandering":true,
-					"skip_check":1, # make sure we move at least one tile, this means when danger is close we move one tile at a time
-					"objective":clicked_tile
+					"skip_check":1 # make sure we move at least one tile, this means when danger is close we move one tile at a time
+					#"objective":clicked_tile
 				}
 				playerNode.set_attrib("ai", ai_data)
+				# Need to be done like this so Vector2 will be serialized properly
+				playerNode.set_attrib("ai.objective", clicked_tile)
 				BehaviorEvents.emit_signal("OnAttributeAdded", playerNode, "ai")
 		elif event.is_action_released("touch") && _input_state == Globals.INPUT_STATE.camera_dragged:
 			#print("player::_unhandled_input reset drag")

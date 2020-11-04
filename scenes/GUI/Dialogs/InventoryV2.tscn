@@ -135,45 +135,18 @@ Text = "?"
 ShortcutKey = "?"
 AlwaysOnShortcut = false
 
-[node name="Close" parent="HBoxContainer/Control/Normal" instance=ExtResource( 9 )]
+[node name="Close" parent="HBoxContainer/Control" instance=ExtResource( 9 )]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -152.0
-margin_top = -90.0
-margin_right = 152.0
-margin_bottom = 0.0
+margin_left = -151.5
+margin_top = -92.0
+margin_right = 152.5
+margin_bottom = -2.0
 rect_min_size = Vector2( 0, 90 )
 size_flags_horizontal = 3
 Text = "[esc] close"
-ShortcutEnum = 16777217
-AlwaysOnShortcut = false
-
-[node name="Mounting" type="Control" parent="HBoxContainer/Control"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -151.5
-margin_top = -347.0
-margin_right = 152.5
-margin_bottom = 335.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Cancel" parent="HBoxContainer/Control/Mounting" instance=ExtResource( 9 )]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -100.804
-margin_right = 0.0
-margin_bottom = -10.804
-rect_min_size = Vector2( 0, 90 )
-size_flags_horizontal = 3
-Text = "[esc]Cancel"
 ShortcutEnum = 16777217
 AlwaysOnShortcut = false
 

@@ -14,7 +14,7 @@ var _use_btn : ButtonBase = null
 var _desc_btn : ButtonBase = null
 
 var _normal_btns : Control = null
-var _mounting_btns : Control = null
+var _close_btn : Control = null
 
 var _dropped_cargo := []
 
@@ -23,8 +23,7 @@ func _ready():
 	get_node("HBoxContainer/Cargo").connect("OnCancelPressed", self, "Close_Callback")
 	
 	_normal_btns = get_node("HBoxContainer/Control/Normal")
-	_mounting_btns = get_node("HBoxContainer/Control/Mounting")
-	_mounting_btns.get_node("Cancel").connect("pressed", self, "OnCancelMounting_Callback")
+	_close_btn = get_node("HBoxContainer/Control/Close")
 	
 	_remove_btn = get_node("HBoxContainer/Control/Normal/Remove")
 	_remove_btn.connect("pressed", self, "Remove_Callback")
@@ -37,7 +36,7 @@ func _ready():
 	_desc_btn = get_node("HBoxContainer/Control/Normal/Desc")
 	_desc_btn.connect("pressed", self, "Desc_Callback")
 	
-	get_node("HBoxContainer/Control/Normal/Close").connect("pressed", self, "Close_Callback")
+	_close_btn.connect("pressed", self, "Close_Callback")
 	_mounts_list.connect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
 	_mounts_list.connect("OnDragDropCompleted", self, "OnDragDropCompleted_Callback")
 	_cargo_list.connect("OnSelectionChanged", self, "OnSelectionChanged_Callback")
@@ -131,15 +130,13 @@ func Swap_Callback():
 		_mounts_list.Content = mount_points
 	
 		_normal_btns.visible = false
-		_mounting_btns.visible = true
+		_close_btn.Text = "[esc]Cancel"
+		#_mounting_btns.visible = true
 	else:
 		BehaviorEvents.emit_signal("OnEquipMount", _obj, last_mount.key, last_mount.idx, selected_cargo.src, selected_cargo.get("modified_attributes", null))
 		Init({"object":_obj}) # refresh list
 		pass
-	
-func OnCancelMounting_Callback():
-	# reset everything without doing anything special
-	Init({"object":_obj})	
+
 	
 func Drop_Callback():
 	var dropped_mounts = []
@@ -195,17 +192,21 @@ func Use_Callback():
 		BehaviorEvents.emit_signal("OnLogLine", "No selected item can be used like that")
 	
 func Close_Callback():
-	BehaviorEvents.emit_signal("OnPopGUI")
-	get_node("HBoxContainer/Mounts").disabled = true
-	get_node("HBoxContainer/Cargo").disabled = true
-	get_node("HBoxContainer/Control/Normal/Close").Disabled = true
-	
-	var c = _cargo_list.Content
-	
-	# reset content or we might end up with dangling references
-	_mounts_list.Content = []
-	_cargo_list.Content = []
-	_obj = null
+	if _normal_btns.visible == true:
+		BehaviorEvents.emit_signal("OnPopGUI")
+		get_node("HBoxContainer/Mounts").disabled = true
+		get_node("HBoxContainer/Cargo").disabled = true
+		_close_btn.Disabled = true
+		
+		var c = _cargo_list.Content
+		
+		# reset content or we might end up with dangling references
+		_mounts_list.Content = []
+		_cargo_list.Content = []
+		_obj = null
+	else:
+		# Cancel Mounting
+		Init({"object":_obj})	
 	
 
 func sort_categories(var a, var b):
@@ -215,10 +216,11 @@ func sort_categories(var a, var b):
 func Init(init_param):
 	get_node("HBoxContainer/Mounts").disabled = false
 	get_node("HBoxContainer/Cargo").disabled = false
-	get_node("HBoxContainer/Control/Normal/Close").Disabled = false
+	_close_btn.Disabled = false
 	
 	_normal_btns.visible = true
-	_mounting_btns.visible = false
+	_close_btn.Text = "[esc] close"
+	#_mounting_btns.visible = false
 	get_node("HBoxContainer/Mounts").title = "Ship's Mounts"
 	_obj = init_param["object"]
 	
