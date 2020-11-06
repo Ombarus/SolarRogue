@@ -68,12 +68,7 @@ func OnObjectLoaded_Callback(obj):
 						added = true
 						item.count += 1
 			if added == false:
-				var modified_attributes = {}
-				var item_data = Globals.LevelLoaderRef.LoadJSON(selected_item)
-				var variations = Globals.get_data(item_data, "variations", [])
-				if variations.size() > 0:
-					modified_attributes = {"selected_variation":MersenneTwister.rand_weight(variations, "src", "chance")}
-				
+				var modified_attributes = Globals.EffectRef.GenerateAttributesFromInventory(selected_item)
 				var c = {"src":selected_item, "count":1}
 				if modified_attributes != null and not modified_attributes.empty():
 					c["modified_attributes"] = modified_attributes

@@ -25,12 +25,12 @@ func Start(target):
 	var angle = Vector2(0.0, 0.0).angle_to_point(dir)
 	self.rotation = angle
 	
-	var base_length = 40
+	var base_length = 128
 	var dist = (target - self.global_position)
 	var desired_scale = dist.length() / base_length
 	get_node("Sprite").scale.x = desired_scale
-	get_node("CPUParticles2D").emission_rect_extents.x = dist.length()
 	var cpu_particle = get_node("CPUParticles2D")
+	cpu_particle.emission_rect_extents.x = dist.length() / 2.0
 	var prev_am = cpu_particle.amount
 	cpu_particle.amount = desired_scale * prev_am
 	self.position = self.global_position + (dist / 2.0)

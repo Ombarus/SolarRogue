@@ -59,28 +59,24 @@ tracks/2/keys = {
 }
 
 [node name="pylon_fx" type="Node2D"]
-position = Vector2( 162.881, 296.953 )
-scale = Vector2( 0.5, 0.4 )
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
-scale = Vector2( 1, 0.261 )
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 1306, 898, 74, 124 )
+region_rect = Rect2( 1408, 950, 128, 20 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 material = SubResource( 2 )
-emitting = false
-amount = 12
+amount = 70
 lifetime = 0.5
 emission_shape = 2
-emission_rect_extents = Vector2( 40, 1 )
+emission_rect_extents = Vector2( 64, 1 )
 spread = 80.0
 gravity = Vector2( 0, 0 )
 initial_velocity = 300.0
-scale_amount = 17.44
+scale_amount = 11.58
 scale_amount_curve = SubResource( 3 )
 color = Color( 0.333333, 0.831373, 0.870588, 0.729412 )
 

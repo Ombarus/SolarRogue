@@ -38,7 +38,7 @@
 		"Effect": {
 			"min_level":0,
 			"fields": [
-				{"name":"Shield Damage Multiplier", "value":"{attributes.global_dam_shield_multiplier}", "translate_value":false}
+				{"name":"Shield Dam. Mult.", "value":"{attributes.global_dam_shield_multiplier}", "translate_value":false}
 			]
 		}
 	}

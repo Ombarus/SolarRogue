@@ -140,7 +140,6 @@ func _break_something(obj):
 	
 	
 func OnDamageTaken_Callback(target, shooter, damage_type):
-	return
 	var destroyed = target.get_attrib("destroyable.destroyed", false)
 	var is_mothership = target.get_attrib("sprite", "") == "vorg_mothership"
 	if not destroyed or not is_mothership:
@@ -155,7 +154,7 @@ func TriggerSuccess():
 	if _can_prompt == false:
 		yield(BehaviorEvents, "OnAnimationDone")
 	BehaviorEvents.emit_signal("OnWaitForAnimation")
-	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "As the Vorg Mothership blows up your CSO start yelling in pain and collapses on the ground. Medical examination discovers Vorg Technology implanted in his nervous system. He was likely assimilated by the Vorg and placed as a disruptive agent. After being released from the Vorg control he admits to having performed act of sabotages on the ship's system.", "title":"XO Kane Nostro"})
+	BehaviorEvents.emit_signal("OnPushGUI", "StoryPrompt", {"text": "RUNE_ASSIMILATION_SUCCESS", "title":"CSO Major Bren Derlin"})
 	yield(BehaviorEvents, "OnPopGUI")
 	
 	BehaviorEvents.emit_signal("OnLogLine", "[color=lime]Vorg Implants have been removed from Major Bren Derlin![/color]")

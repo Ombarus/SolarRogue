@@ -293,6 +293,30 @@ func SelectedTarget_Callback(selected_targets):
 	BehaviorEvents.emit_signal("OnLogLine", "%s has been successfully repaired!", [self.get_display_name(item_data, modified_attributes)])
 	BehaviorEvents.emit_signal("OnValidateConsumption", player, triggering_data.item_data, triggering_data.key, triggering_data.attrib)
 	
+func GenerateAttributesFromInventory(item_src):
+	var modified_attributes = {}
+	var item_data = Globals.LevelLoaderRef.LoadJSON(item_src)
+	var variations = Globals.get_data(item_data, "variations", [])
+	if variations.size() > 0:
+		modified_attributes = {"selected_variation":MersenneTwister.rand_weight(variations, "src", "chance")}
+		
+	if item_data.get("converter", null) != null:
+		var recipe_variations = []
+		var recipes = Globals.get_data(item_data, "converter.recipes", [])
+		for index in range(recipes.size()):
+			var recipe = recipes[index]
+			var variation_src = ""
+			if ".json" in recipe.produce:
+				var recipe_data = Globals.LevelLoaderRef.LoadJSON(recipe.produce)
+				var item_variations = Globals.get_data(recipe_data, "variations", [])
+				if item_variations.size() > 0:
+					variation_src = MersenneTwister.rand_weight(item_variations, "src", "chance")
+			recipe_variations.push_back(variation_src)
+	
+		if recipe_variations.size() > 0:
+			Globals.set_data(modified_attributes, "converter.selected_variations", recipe_variations)
+	return modified_attributes
+	
 
 func process_recipes_attributes(obj):
 	var recipe_variations = obj.get_attrib("converter.selected_variations", null)

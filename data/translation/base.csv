@@ -441,6 +441,7 @@ c[r]ew,c[r]ew,[r]équipage,[r]クルー
 Depleted Uranium,Depleted Uranium,Uranium Appauvri,劣化ウラン
 Ammo for the Railgun. 68.4% denser then lead and accelerated at a fraction of the speed of light it can penetrate anything.,Ammo for the Railgun. 68.4% denser then lead and accelerated at a fraction of the speed of light it can penetrate anything.,Munition pour le Railgun. 68.4% plus dense que le plomb et accéléré à une fraction importante de la vitesse de la lumière cet obus perce les boucliers sans problème.,Ammo for the Railgun. 68.4% denser then lead and accelerated at a fraction of the speed of light it can penetrate anything.
 Mining Laser,Mining Laser,Laser Minier,Mining Laser
+Mining Laser MK2,Mining Laser MK2,Laser Minier v2,Mining Laser MK2
 A laser combined with a tractor beam that can drastically increase the chance of getting useful material from planets.,A laser combined with a tractor beam that can drastically increase the chance of getting useful material from planets.,Un laser combiné à un rayon tracteur. Augmente sensiblement les chances d’obtenir des matériaux utiles lors de bombardement planétaire.,A laser combined with a tractor beam that can drastically increase the chance of getting useful material from planets.
 Drop Bonus {weapon_data.planet_bonus},Drop Bonus {weapon_data.planet_bonus},Bonus {weapon_data.planet_bonus},ボーナス {weapon_data.planet_bonus}
 Railgun MK1,Railgun MK1,Railgun v1,Railgun MK1
@@ -666,7 +667,7 @@ Weapon Bypass,Weapon Bypass,Redirection d’Arme,Weapon Bypass
 Targeting Computer,Targeting Computer,Système de visé,Targeting Computer
 Jammer,Jammer,Brouilleur,Jammer
 Blocking %s,Blocking %s,%s Bloquant,Blocking %s
-Compact %s,Compact %s,%s Compact,Compact %s
+Compact %s,Compact %s,%s Compacte,Compact %s
 Efficient %s,Efficient %s,%s Efficace,Efficient %s
 EM %s,EM %s,%s EM,EM
 Fast %s,Fast %s,%s Rapide,Fast %s
@@ -727,3 +728,32 @@ A dedicated processor capable of performing surgical strikes on unsuspecting pat
 All power to Shields!,All power to Shields!,Toute la puissance aux boucliers!,All power to Shields!
 [color=red]Not enough energy to power weapons![/color],[color=red]Not enough energy to power weapons![/color],[color=red]Pas assez d'énergie pour faire feu![/color],[color=red]Not enough energy to power weapons![/color]
 Lucky %s,Lucky %s,%s Chanceux,Lucky %s
+Hull Dam. Mult.,Hull Dam. Mult.,Dommage Coque,Hull Dam. Mult.
+Enemy's Hit Chance,Enemy's Hit Chance,Précision Ennemi,Enemy's Hit Chance
+Shield Dam. Mult.,Shield Dam. Mult.,Dommage Bouclier,Shield Dam. Mult.
+Total Shield,Total Shield,Puissance Bouclier,Total Shield
+Shield Regen,Shield Regen,Récup Bouclier,Shield Regen
+Turn Mult,Turn Mult,Vitesse,Turn Mult
+Crit Chance,Crit Chance,Critiques,Crit Chance
+Repair Kit,Repair Kit,Boîte à outils,修理キット
+A butchered converter capable of patching broken components with a few spare parts and a lot of tape.,A butchered converter capable of patching broken components with a few spare parts and a lot of tape.,Une boîte à outils faite à partir des restes d’un convertisseur capable de réparé à peu prêt n’importe quoi à l’aide de quelques pièces détachées et de beaucoup de papier collant.,A butchered converter capable of patching broken components with a few spare parts and a lot of tape.
+Repair,Repair,Répare,Repair
+Broken items,Broken items,Items ‘Brisé’,Broken items
+Self-Reliant,Self-Reliant,Indépendant,Self-Reliant
+Know-it-all,Know-it-all,Monsieur je-sais-tout,Know-it-all
+Loves Micromanaging,Loves Micromanaging,Adore la microgestion,Loves Micromanaging
+Very Reclusive,Very Reclusive,Aime être seul,Very Reclusive
+[color=red]Our %s Just Broke![/color],[color=red]Our %s Just Broke![/color],[color=red]Notre %s vient de se brisé![/color],[color=red]Our %s Just Broke![/color]
+[color=red]Something's wrong with our %s[/color],[color=red]Something's wrong with our %s[/color],[color=red]Quelque chose ne va pas avec notre %s[/color],[color=red]Something's wrong with our %s[/color]
+[color=red]%s just went out of alignment[/color],[color=red]%s just went out of alignment[/color],[color=red]Erreur dans le processeur du %s[/color],[color=red]%s just went out of alignment[/color]
+[color=red]Engineering report a broken %s[/color],[color=red]Engineering report a broken %s[/color],[color=red]Ingénierie à passerelle. Le %s vient de nous lâcher[/color],[color=red]Engineering report a broken %s[/color]
+[color=red]There seems to be a problem with %s[/color],[color=red]There seems to be a problem with %s[/color],[color=red]Il semble y avoir un problème avec le %s[/color],[color=red]There seems to be a problem with %s[/color]
+[color=red]%s just exceeded it's designed operating conditions![/color],[color=red]%s just exceeded it's designed operating conditions![/color],[color=red]le %s vient d’éxcéder ses paramètres d’utilisation[/color],[color=red]%s just exceeded it's designed operating conditions![/color]
+[color=red]Something just happened to %s[/color],[color=red]Something just happened to %s[/color],[color=red]Quelque chose ne va pas avec %s[/color],[color=red]Something just happened to %s[/color]
+[color=red]What the hell happened to %s?![/color],[color=red]What the hell happened to %s?![/color],[color=red]Bordel mais qu’est-ce que notre %s nous fait?![/color],[color=red]What the hell happened to %s?![/color]
+[color=red]%s is a real piece of crap![/color],[color=red]%s is a real piece of crap![/color],[color=red]%s est vraiment une sale merde![/color],[color=red]%s is a real piece of crap![/color]
+"[color=red]Bloody Hell, what's wrong with %s?![/color]","[color=red]Bloody Hell, what's wrong with %s?![/color]","[color=red]Bordel, %s fait des siennes![/color]","[color=red]Bloody Hell, what's wrong with %s?![/color]"
+Liberated,Liberated,Libéré,Liberated
+Former Vorg Drone,Former Vorg Drone,Était un Drone Vorg,Former Vorg Drone
+RUNE_ASSIMILATION_SUCCESS,As the Vorg Mothership blows up your CSO start yelling in pain and collapses on the ground. Medical examination discovers Vorg Technology implanted in his nervous system. He was likely assimilated by the Vorg and placed as a disruptive agent. After being released from the Vorg control he admits to having performed act of sabotages on the ship's system.,"Au moment ou le Vaisseau Mère Vorg explose le CSO, Major Bren Derlin pousse un hurlement assourdissant et s’effondre au sol. Après une examination approfondit on découvre des implants Vorg intégré à son système nerveux. Bren aurait été assimilé par les Vorg et placé dans notre équipage comme saboteur. Après avoir été libéré du contrôle Vorg il admet avoir régulièrement performé des actes de sabotages sur les systèmes du vaisseau!",As the Vorg Mothership blows up your CSO start yelling in pain and collapses on the ground. Medical examination discovers Vorg Technology implanted in his nervous system. He was likely assimilated by the Vorg and placed as a disruptive agent. After being released from the Vorg control he admits to having performed act of sabotages on the ship's system.
+[color=lime]Vorg Implants have been removed from Major Bren Derlin![/color],[color=lime]Vorg Implants have been removed from Major Bren Derlin![/color],[color=lime]Les implants Vorg ont été retiré du Major Bren Derlin![/color],[color=lime]Vorg Implants have been removed from Major Bren Derlin![/color]
