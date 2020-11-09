@@ -7,7 +7,8 @@
 		"region":[768,256,128,128]
 	},
 	"animation": {
-		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
+		"destroyed": "scenes/tileset_source/explosion_fx.tscn",
+		"crafted": [768,256,128,128]
 	},
 	"boardable":true,
 	"mounts": {

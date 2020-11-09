@@ -180,7 +180,8 @@ func Craft(recipe_data, input_list, crafter):
 				
 			for i in range(recipe_data.amount):
 				if not "equipment" in product_data:
-					Globals.LevelLoaderRef.RequestObject(recipe_data.produce, Globals.LevelLoaderRef.World_to_Tile(crafter.position), modified_attributes)
+					var n = Globals.LevelLoaderRef.RequestObject(recipe_data.produce, choose_ideal_position(crafter), modified_attributes)
+					do_crafting_anim(n)
 				else:
 					BehaviorEvents.emit_signal("OnAddItem", crafter, recipe_data.produce, modified_attributes)
 		
@@ -196,3 +197,38 @@ func Craft(recipe_data, input_list, crafter):
 		result = Globals.CRAFT_RESULT.success
 	BehaviorEvents.emit_signal("OnCrafting", crafter, result)
 	return result
+
+func do_crafting_anim(n):
+	if n.get_attrib("animation.crafted", "").empty():
+		return
+		
+	n.visible = false
+	n.modulate.a = 0
+	
+	var fx = Preloader.CraftShipFX.instance()
+	fx.position = n.position
+	var r = get_node("/root/Root/GameTiles")
+	call_deferred("safe_start", fx, r, n)
+	
+func safe_start(fx, r, target):
+	r.add_child(fx)
+	fx.Start(target)
+	
+
+func choose_ideal_position(crafter):
+	var levelLoaderRef = Globals.LevelLoaderRef
+	var offset_list : Array = [Vector2(-1, 0), Vector2(-1,-1), Vector2(-1,1), Vector2(1,0), Vector2(1,-1), Vector2(1,1), Vector2(0, -1), Vector2(0, 1)]
+	
+	var crafter_tile = levelLoaderRef.World_to_Tile(crafter.position)
+	var best_tile = crafter_tile
+	var item_count = -1
+	for offset in offset_list:
+		var target_tile = crafter_tile + offset
+		if levelLoaderRef.IsValidTile(target_tile):
+			var content = levelLoaderRef.GetTile(target_tile)
+			if item_count < 0 or item_count > content.size():
+				best_tile = target_tile
+				item_count = content.size()
+				if content.size() == 0:
+					break
+	return best_tile

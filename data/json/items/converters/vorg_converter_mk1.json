@@ -74,7 +74,8 @@
 				],
 				"produce":"data/json/ships/vorg/player_scout.json",
 				"ap_cost":6.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "Vorg Bomber",
@@ -85,7 +86,8 @@
 				],
 				"produce":"data/json/ships/vorg/player_bomber.json",
 				"ap_cost":6.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "Vorg Frigate", 
@@ -97,7 +99,8 @@
 				], 
 				"produce":"data/json/ships/vorg/player_frigate.json",
 				"ap_cost":7.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "Vorg Battleship", 
@@ -109,7 +112,8 @@
 				],
 				"produce":"data/json/ships/vorg/player_battleship.json",
 				"ap_cost":8.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "Emergency Warp", 

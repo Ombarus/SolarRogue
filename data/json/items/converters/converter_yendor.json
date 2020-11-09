@@ -78,7 +78,8 @@
 				"requirements":[{"type":"energy", "amount":1500}, {"type":"probe_hull", "amount":1}], 
 				"produce":"data/json/ships/human/player_probe.json",
 				"ap_cost":5.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "(Starting) Human Scout",
@@ -88,7 +89,8 @@
 				],
 				"produce":"data/json/ships/human/player_scout.json",
 				"ap_cost":6.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "Human Bomber",
@@ -98,14 +100,16 @@
 				],
 				"produce":"data/json/ships/human/player_bomber.json",
 				"ap_cost":6.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "Human Frigate",
 				"requirements":[{"type":"energy", "amount":5000}, {"type":"frigate_hull", "amount":1}], 
 				"produce":"data/json/ships/human/player_frigate.json",
 				"ap_cost":7.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "Human Battleship",
@@ -115,7 +119,8 @@
 				],
 				"produce":"data/json/ships/human/player_battleship.json",
 				"ap_cost":8.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "Jerg Scout", 
@@ -126,7 +131,8 @@
 				],
 				"produce":"data/json/ships/jerg/player_scout.json",
 				"ap_cost":6.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "Jerg Bomber",
@@ -137,14 +143,16 @@
 				],
 				"produce":"data/json/ships/jerg/player_bomber.json",
 				"ap_cost":6.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "Jerg Frigate", 
 				"requirements":[{"type":"energy", "amount":5000}, {"type":"frigate_hull", "amount":2}], 
 				"produce":"data/json/ships/jerg/player_frigate.json",
 				"ap_cost":7.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "Jerg Battleship", 
@@ -156,7 +164,8 @@
 				],
 				"produce":"data/json/ships/jerg/player_battleship.json",
 				"ap_cost":8.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "Vorg Scout", 
@@ -167,7 +176,8 @@
 				],
 				"produce":"data/json/ships/vorg/player_scout.json",
 				"ap_cost":6.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "Vorg Bomber",
@@ -178,7 +188,8 @@
 				],
 				"produce":"data/json/ships/vorg/player_bomber.json",
 				"ap_cost":6.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "Vorg Frigate", 
@@ -190,7 +201,8 @@
 				], 
 				"produce":"data/json/ships/vorg/player_frigate.json",
 				"ap_cost":7.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "Vorg Battleship", 
@@ -202,7 +214,8 @@
 				],
 				"produce":"data/json/ships/vorg/player_battleship.json",
 				"ap_cost":8.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "Repair Nanobots", 

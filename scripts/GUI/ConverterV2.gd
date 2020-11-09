@@ -30,6 +30,8 @@ var _dst_data = null
 
 var _current_data = {"count":0, "ap":0, "energy":0}
 
+var _pop_called = false
+
 func _ready():
 	get_node("HBoxContainer/Control/VBoxContainer/Close").connect("pressed", self, "Close_Callback")
 	_desc_btn.connect("pressed", self, "DescBtn_Callback")
@@ -65,9 +67,14 @@ func CraftButtonPressed_Callback():
 		
 	var using_content = _material_list.Content	
 	using_content.push_back("energy")
+	_pop_called = false
 	_callback_obj.call(_callback_method, _current_crafting_selected, using_content)
 	
 	var last_selected :int = _current_crafting_selected.index
+	
+	if _pop_called == true:
+		_pop_called = false
+		return
 	
 	ReInit()
 	# ReInit now add child on the next frame for layout reason. So give it
@@ -76,6 +83,7 @@ func CraftButtonPressed_Callback():
 
 
 func Close_Callback():
+	_pop_called = true
 	BehaviorEvents.emit_signal("OnPopGUI")
 	get_node("HBoxContainer/Control/VBoxContainer/Close").Disabled = true
 	

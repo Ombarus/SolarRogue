@@ -77,7 +77,8 @@
 				"requirements":[{"type":"energy", "amount":1500}, {"type":"probe_hull", "amount":1}], 
 				"produce":"data/json/ships/human/player_probe.json",
 				"ap_cost":5.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "(Starting) Human Scout",
@@ -87,7 +88,8 @@
 				],
 				"produce":"data/json/ships/human/player_scout.json",
 				"ap_cost":6.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "Human Bomber",
@@ -97,14 +99,16 @@
 				],
 				"produce":"data/json/ships/human/player_bomber.json",
 				"ap_cost":6.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "Human Frigate",
 				"requirements":[{"type":"energy", "amount":5000}, {"type":"frigate_hull", "amount":1}], 
 				"produce":"data/json/ships/human/player_frigate.json",
 				"ap_cost":7.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "Human Battleship",
@@ -114,7 +118,8 @@
 				],
 				"produce":"data/json/ships/human/player_battleship.json",
 				"ap_cost":8.0,
-				"amount":1
+				"amount":1,
+				"close_gui":true
 			},
 			{
 				"name": "Gravitic Compactor", 

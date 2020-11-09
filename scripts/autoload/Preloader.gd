@@ -9,4 +9,6 @@ var FrTable = preload("res://data/translation/base.fr.translation")
 
 var PylonFX = preload("res://scenes/tileset_source/pylon_fx.tscn")
 
+var CraftShipFX = preload("res://scenes/Animations/CraftShipFX.tscn")
+
 var JsonCache = {}

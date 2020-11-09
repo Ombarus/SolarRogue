@@ -16,7 +16,8 @@
 		"converter": [{}]
 	},
 	"animation": {
-		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
+		"destroyed": "scenes/tileset_source/explosion_fx.tscn",
+		"crafted": [1664,256,128,128]
 	},
 	"destroyable": {
 		"hull":10

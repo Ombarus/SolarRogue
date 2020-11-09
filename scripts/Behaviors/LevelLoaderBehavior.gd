@@ -56,6 +56,13 @@ func GetObjectById(id):
 	else:
 		return null
 
+func IsValidTile(coord):
+	if coord.x >= levelTiles.size() || coord.y >= levelTiles[coord.x].size():
+		return false
+	if coord.x < 0 || coord.y < 0:
+		return false
+	return true
+
 func GetTile(coord):
 	if coord.x >= levelTiles.size() || coord.y >= levelTiles[coord.x].size():
 		return []
@@ -71,7 +78,8 @@ func GetLevelID():
 func _ready():
 	if _TEST_MID_GAME == true:
 		#startLevel = "data/json/levels/jerg_branch/branch06.json"
-		#startLevel = "data/json/levels/human_branch/branch04.json"
+		startLevel = "data/json/levels/human_branch/branch04.json"
+		#startLevel = "data/json/levels/vorg_branch/branch08.json"
 		current_depth = 1
 	Globals.LevelLoaderRef = self
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")

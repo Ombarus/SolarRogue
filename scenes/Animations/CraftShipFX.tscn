@@ -1,0 +1,123 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://data/private/textures/space-sprite.png" type="Texture" id=1]
+[ext_resource path="res://scripts/animations/CraftShipFX.gd" type="Script" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float interpol = 0.0;
+
+uniform vec3 color = vec3(0.71,0.28,0.42);
+uniform vec3 color2 = vec3(0.0,0.0,0.6588);
+
+float rand(vec2 coord) {
+	return fract(sin(dot(coord, vec2(56,78))*1000.0)*1000.0);
+}
+
+float noise(vec2 coord) {
+	vec2 i = floor(coord);
+	vec2 f = fract(coord);
+	
+	float a = rand(i);
+	float b = rand(i + vec2(1.0, 0.0));
+	float c = rand(i + vec2(0.0, 1.0));
+	float d = rand(i + vec2(1.0, 1.0));
+	
+	vec2 cubic = f * f * (3.0 - 2.0 * f);
+	
+	return mix(a,b, cubic.x) + (c-a) * cubic.y * (1.0 - cubic.x) + (d-b) * cubic.x * cubic.y;
+	
+}
+
+float fbm(vec2 coord) {
+	float value = 0.0;
+	float scale = 0.5;
+	for (int i = 0; i < 8; i++) {
+		value += noise(coord) * scale;
+		coord *= 2.0;
+		scale *= 0.5;
+	}
+	return value;
+}
+
+void fragment() {
+	vec2 my_uv = SCREEN_UV * 50.0;
+	
+	vec2 motion = vec2(fbm(my_uv + TIME * 2.0));
+	float final = fbm(my_uv + motion);
+	
+	//COLOR = vec4(my_uv.x, my_uv.y, 0.0, 1.0);
+	vec4 screen_color = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0f);
+	vec4 tile_color = textureLod(TEXTURE, UV, 0.0f);
+	
+	vec3 cloud_color = mix(color2, color, final);
+	
+	vec4 fx_color = vec4(screen_color.rgb + cloud_color, (final+0.4) * tile_color.a);
+	fx_color = mix(fx_color, tile_color, interpol);
+	
+	COLOR = fx_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/interpol = 0.0
+shader_param/color = Vector3( 0.71, 0.28, 0.42 )
+shader_param/color2 = Vector3( 0, 0, 0.6588 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "craft"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/interpol")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "AnimationEnd"
+} ]
+}
+
+[node name="CraftShipFX" type="Node2D"]
+z_index = 910
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+material = SubResource( 2 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 512, 256, 128, 128 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite")
+anims/craft = SubResource( 3 )

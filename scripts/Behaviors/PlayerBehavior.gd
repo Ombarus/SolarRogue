@@ -255,6 +255,8 @@ func OnCraft_Callback(recipe_data, input_list):
 	var result = craftingSystem.Craft(recipe_data, input_list, playerNode)
 	if result == Globals.CRAFT_RESULT.success:
 		BehaviorEvents.emit_signal("OnLogLine", "Production sucessful")
+		if Globals.get_data(recipe_data, "close_gui", false) == true:
+			get_node("../../Camera-GUI/SafeArea/ConverterRoot/ConverterV2").Close_Callback()
 	elif result == Globals.CRAFT_RESULT.not_enough_resources:
 		BehaviorEvents.emit_signal("OnLogLine", "Missing resources")
 	elif result == Globals.CRAFT_RESULT.not_enough_energy:
