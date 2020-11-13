@@ -62,6 +62,7 @@
 			{"src":"data/json/items/scanners/long_range_scanner_mk2.json", "chance":20},
 			{"src":"data/json/items/scanners/long_range_scanner_mk3.json", "chance":5},
 			{"src":"data/json/items/weapons/torpedo_launcher_mk1.json", "chance":30},
+			{"src":"data/json/items/weapons/torpedo_launcher_mk2.json", "chance":10},
 			{"src":"data/json/items/weapons/torpedo.json", "chance":50, "count":[10,20]},
 			{"src":"data/json/items/utilities/power_amplifier.json", "chance":50},
 			{"src":"data/json/items/utilities/power_amplifier_mk2.json", "chance":30},

@@ -53,7 +53,7 @@
 		{"id":"data/json/items/shields/shield_mk2.json", "chance":0.042},
 		{"id":"data/json/items/shields/shield_mk3.json", "chance":0.018},
 		
-		{"id":"data/json/items/weapons/torpedo_launcher_mk1.json", "chance":0.3},
+		{"id":"data/json/items/weapons/torpedo_launcher_mk2.json", "chance":0.3},
 		{"id":"data/json/items/weapons/torpedo.json", "chance":0.2},
 		{"id":"data/json/items/weapons/torpedo.json", "chance":0.2},
 		{"id":"data/json/items/weapons/torpedo.json", "chance":0.1},

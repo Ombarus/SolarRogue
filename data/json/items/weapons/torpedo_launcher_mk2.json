@@ -1,5 +1,5 @@
 {
-	"name_id":"Torpedo Launcher",
+	"name_id":"Torpedo Launcher MK2",
 	"type":"weapon",
 	"sprite":"torpedo_launcher",
 	"icon": {
@@ -11,14 +11,14 @@
 		"hit": "scenes/tileset_source/explosion_fx.tscn"
 	},
 	"weapon_data": {
-		"base_dam":9.0,
-		"max_dam":15.0,
+		"base_dam":13.0,
+		"max_dam":19.0,
 		"area_effect":1,
 		"ammo":"data/json/items/weapons/torpedo.json",
-		"fire_range":2.0,
+		"fire_range":3.0,
 		"fire_minimum_range":2.0,
 		"fire_pattern":"o",
-		"fire_energy_cost":200.0,
+		"fire_energy_cost":400.0,
 		"fire_speed":1.2,
 		"base_hit_chance":0.75,
 		"crit_chance":0.0,
@@ -26,19 +26,19 @@
 	},
 	"equipment": {
 		"slot":"weapon",
-		"volume":60.0,
+		"volume":70.0,
 		"equip_ap":3.0,
 		"unequip_ap":3.0
 	},
 	"recyclable": {
-		"energy": 875,
-		"player_sale_range": [1100,1500],
-		"player_buy_range": [1800,3050]
+		"energy": 1100,
+		"player_sale_range": [1500,2175],
+		"player_buy_range": [2450,3900]
 	},
 	"disassembling": {
 		"produce":"data/json/items/misc/spare_parts.json",
-		"count":2,
-		"energy_cost":700
+		"count":4,
+		"energy_cost":1000
 	},
 	"variations": [
 		{"src":"data/json/items/effects/normal.json", "chance": 50},
@@ -55,7 +55,7 @@
 		{"src":"data/json/items/effects/lucky.json", "chance":20}
 	],
 	"description": {
-		"text":"Can hit multiple enemies in a area. A short fuse prevents nearby detonation. Sadly it's not long enough to hit far away targets.",
+		"text":"Can hit multiple enemies in a area. A short fuse prevents nearby detonation. The MK2 version manages to improve both range and damage output.",
 		"Overview": {
 			"min_level":0,
 			"fields":[

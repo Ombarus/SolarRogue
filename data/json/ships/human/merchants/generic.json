@@ -109,7 +109,8 @@
 			{"src":"data/json/items/utilities/weapon_bypass.json", "chance":10},
 			{"src":"data/json/items/utilities/targeting_computer.json", "chance":10},
 			{"src":"data/json/items/utilities/jammer.json", "chance":10},
-			{"src":"data/json/items/consumables/shield_battery.json", "chance":5}
+			{"src":"data/json/items/consumables/shield_battery.json", "chance":5},
+			{"src":"data/json/items/weapons/torpedo_launcher_mk2.json", "chance":10}
 		]
 	},
 	"cargo": {

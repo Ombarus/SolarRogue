@@ -70,6 +70,7 @@
 		{"id":"data/json/items/misc/uranium.json", "chance":0.02},
 		
 		{"id":"data/json/items/weapons/torpedo_launcher_mk1.json", "chance":0.35},
+		{"id":"data/json/items/weapons/torpedo_launcher_mk2.json", "chance":0.15},
 		{"id":"data/json/items/weapons/torpedo.json", "chance":0.2},
 		{"id":"data/json/items/weapons/torpedo.json", "chance":0.2},
 		{"id":"data/json/items/weapons/torpedo.json", "chance":0.1},
