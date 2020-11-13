@@ -15,6 +15,7 @@
 		"weapon": ["", "", "", ""],
 		"shield": ["", "", ""],
 		"scanner": [""],
+		"utility": ["",""],
 		"converter": [""]
 	},
 	"mount_attributes": {

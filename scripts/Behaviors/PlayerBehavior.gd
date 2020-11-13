@@ -26,7 +26,7 @@ var click_start_pos
 var click_start_time
 var lock_input = false # when it's not player turn, inputs are locked
 var _weapon_shots = []
-var _last_unicode = 0
+var _last_unicode = ""
 
 enum SHOOTING_STATE {
 	init,
@@ -531,6 +531,9 @@ func OnLevelLoaded_Callback():
 			playerNode.set_attrib("played_messages", played_messages)
 	
 func _input(event):
+	if OS.is_debug_build() and event.is_action_released("hide_hud"):
+		get_node("../../Camera-GUI/SafeArea").visible = not get_node("../../Camera-GUI/SafeArea").visible
+		get_node("../../Camera-GUI/ViewportContainer").visible = not get_node("../../Camera-GUI/ViewportContainer").visible
 	if event.is_action_released("screenshot"):
 		var cur_datetime : Dictionary = OS.get_datetime()
 		var save_file_path = "user://screenshot-%s%s%s-%s%s%s.png" % [cur_datetime["year"], cur_datetime["month"], cur_datetime["day"], cur_datetime["hour"], cur_datetime["minute"], cur_datetime["second"]]

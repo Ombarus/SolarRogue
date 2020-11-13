@@ -186,8 +186,20 @@ func ClosestFiringSolution(obj, shooter_tile, target_tile, weapon):
 	var best_dist = null
 	for tile in shootable_tiles:
 		var dist = target_tile - tile
+		var move = dist
+		move.x = clamp(move.x, -1, 1)
+		move.y = clamp(move.y, -1, 1)
+		var shooter_new_tile = obj_tile + move
+		var tile_content = Globals.LevelLoaderRef.GetTile(shooter_new_tile)
+		var can_use = true
+		if obj.get_attrib("type") != "player" and not tile_content.empty():
+			for l in tile_content:
+				if l != obj and l.get_attrib("type") in ["player", "ship", "anomaly", "planet", "mothership", "drone"]:
+					can_use = false
+					break
+					
 		var length = dist.length()
-		if min_length == null or min_length > length:
+		if min_length == null or (can_use and min_length > length):
 			min_length = length
 			best_dist = dist
 			

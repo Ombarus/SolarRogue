@@ -202,6 +202,7 @@ func do_crafting_anim(n):
 	if n.get_attrib("animation.crafted", "").empty():
 		return
 		
+	BehaviorEvents.emit_signal("OnWaitForAnimation")
 	n.visible = false
 	n.modulate.a = 0
 	

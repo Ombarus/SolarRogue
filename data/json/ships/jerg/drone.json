@@ -18,7 +18,8 @@
 		"utility":[{}]
 	},
 	"animation": {
-		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
+		"destroyed": "scenes/tileset_source/explosion_fx.tscn",
+		"crafted": [1792,256,128,128]
 	},
 	"ai": {
 		"aggressive":true,

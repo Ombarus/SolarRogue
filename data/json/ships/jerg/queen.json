@@ -25,10 +25,10 @@
 		]
 	},
 	"mount_attributes": {
-		"weapon": [{},{}],
+		"weapon": [{},{}, {}],
 		"scanner": [{}],
 		"converter": [{}],
-		"utility":[{},{}]
+		"utility":[{},{}, {}]
 	},
 	"applied_effects": [
 		{

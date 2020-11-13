@@ -266,6 +266,7 @@ func DoJergQueenPathfinding(obj):
 				var offset_v := Vector2(offset[0], offset[1])
 				var drone_node = Globals.LevelLoaderRef.RequestObject(obj.get_attrib("spawner.spawn"), (queen_pos + offset_v.rotated(obj.rotation)).round())
 				drone_node.rotation = obj.rotation
+				animate_spawn(drone_node)
 				break
 		if spawned == false:
 			var fallback_pos = obj.get_attrib("spawner.fallback_position", [0, 0])
@@ -287,6 +288,21 @@ func DoJergQueenPathfinding(obj):
 			obj.set_attrib("ai.unseen_for", 0)
 		DoRunAwayPathFinding(obj)
 		
+func animate_spawn(n):
+	if n.get_attrib("animation.crafted", "").empty():
+		return
+		
+	print("%s spawned" % [n.name])
+	BehaviorEvents.emit_signal("OnWaitForAnimation")
+	n.visible = false
+	n.modulate.a = 0
+	
+	var fx = Preloader.CraftShipFX.instance()
+	fx.position = n.position
+	fx.rotation = n.rotation
+	var r = get_node("/root/Root/GameTiles")
+	#BehaviorEvents.emit_signal("OnAddToAnimationQueue", self, "call_deferred", ["safe_start", fx, r, n], 200)
+	call_deferred("safe_start", fx, r, n)
 
 func DoPylonPathfinding(obj):
 	var target = null

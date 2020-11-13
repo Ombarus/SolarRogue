@@ -14,7 +14,7 @@
 	},
 	"attributes": {
 		"global_hit_chance_bonus":0.05,
-		"global_crit_chance_bonus":0.1,
+		"global_crit_chance_bonus":0.1
 	},
 	"recyclable": {
 		"energy": 700,
