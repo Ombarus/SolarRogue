@@ -82,7 +82,7 @@ func OnTargetClick_Callback(click_pos, target_type):
 		elif not is_ghost and obj_type != "player" and target_type == Globals.VALID_TARGET.loot and Globals.is_(obj.get_attrib("cargo.transferable"), true):
 			potential_targets.push_back(obj)
 	if potential_targets.size() == 0:
-		if Globals.get_data(_targetting_data.weapon_data, "weapon_data.shoot_empty", false) == false:
+		if Globals.get_data(weapon_data, "shoot_empty", false) == false:
 			var log_choices = {
 				"There's nothing there sir...":50,
 				"Unable to resolve target...":50,
@@ -97,7 +97,7 @@ func OnTargetClick_Callback(click_pos, target_type):
 			BehaviorEvents.emit_signal("OnLogLine", "Target is outside of our range sir !")
 			_callback_obj.call(_callback_method, null, null)
 	else:
-		var area_size : int = Globals.get_data(weapon_data, "weapon_data.area_effect", 0)
+		var area_size : int = Globals.get_data(weapon_data, "area_effect", 0)
 			
 		if not IsValidTile(fire_radius, player_tile, tile, _targetting_data):
 			BehaviorEvents.emit_signal("OnLogLine", "Target is outside of our range sir !")
