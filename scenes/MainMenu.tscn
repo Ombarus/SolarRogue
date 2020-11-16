@@ -148,8 +148,12 @@ margin_bottom = -148.0
 rect_min_size = Vector2( 140, 90 )
 Text = "[c]ontinue"
 ShortcutKey = "c"
+ShortcutEnum = 0
 AlwaysOnShortcut = false
 Disabled = true
+AlwaysBlink = false
+EmitEventBus = ""
+signal_creation = false
 
 [node name="NewGameBTN" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn" instance=ExtResource( 9 )]
 anchor_left = 0.5
@@ -163,7 +167,12 @@ margin_bottom = -38.0
 rect_min_size = Vector2( 140, 90 )
 Text = "[n]ew game"
 ShortcutKey = "n"
+ShortcutEnum = 0
 AlwaysOnShortcut = false
+Disabled = false
+AlwaysBlink = false
+EmitEventBus = ""
+signal_creation = false
 
 [node name="Setting" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn" instance=ExtResource( 9 )]
 anchor_left = 0.5
@@ -177,7 +186,12 @@ margin_bottom = 72.0
 rect_min_size = Vector2( 140, 90 )
 Text = "[s]ettings"
 ShortcutKey = "s"
+ShortcutEnum = 0
 AlwaysOnShortcut = false
+Disabled = false
+AlwaysBlink = false
+EmitEventBus = ""
+signal_creation = false
 
 [node name="Credits" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn" instance=ExtResource( 9 )]
 anchor_left = 0.5
@@ -191,7 +205,12 @@ margin_bottom = 182.0
 rect_min_size = Vector2( 140, 90 )
 Text = "[?]credits"
 ShortcutKey = "?"
+ShortcutEnum = 0
 AlwaysOnShortcut = false
+Disabled = false
+AlwaysBlink = false
+EmitEventBus = ""
+signal_creation = false
 
 [node name="Quit" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn" instance=ExtResource( 9 )]
 anchor_left = 0.5
@@ -205,7 +224,12 @@ margin_bottom = 292.0
 rect_min_size = Vector2( 140, 90 )
 Text = "[q]uit"
 ShortcutKey = "q"
+ShortcutEnum = 0
 AlwaysOnShortcut = false
+Disabled = false
+AlwaysBlink = false
+EmitEventBus = ""
+signal_creation = false
 
 [node name="Control" type="Control" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer"]
 margin_left = 500.0
@@ -222,6 +246,12 @@ margin_bottom = 649.0
 rect_min_size = Vector2( 710, 0 )
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
+dialog_ok = false
+dialog_cancel = false
+disabled = false
+bottom_title = ""
+title = ""
+border_style = "═"
 
 [node name="Leaderboard" type="Control" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/base"]
 anchor_right = 1.0

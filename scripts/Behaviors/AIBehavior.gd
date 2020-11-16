@@ -288,11 +288,23 @@ func DoJergQueenPathfinding(obj):
 			obj.set_attrib("ai.unseen_for", 0)
 		DoRunAwayPathFinding(obj)
 		
-func animate_spawn(n):
+func animate_spawn(n : Attributes):
 	if n.get_attrib("animation.crafted", "").empty():
 		return
 		
-	print("%s spawned" % [n.name])
+	# This whole thing is to check if the spawned drone is visible to the player
+	# if it's not visible, skip the spawn animation
+	# I do this by checking the current result of the scanner's tilemap value for the spawned tile
+	var fow = get_node("../../BG/FoW")
+	if fow.visible == true:
+		var player = Globals.get_first_player()
+		var level_id = Globals.LevelLoaderRef.GetLevelID()
+		var tile_memory = player.get_attrib("memory." + level_id + ".tiles")
+		var tile = Globals.LevelLoaderRef.World_to_Tile(n.position)
+		var memory_index = (((tile.y+1) * (Globals.LevelLoaderRef.levelSize.x+2)) + (tile.x+1))*4+0
+		if memory_index < tile_memory.size() and tile_memory[memory_index] > 1.0:
+			return
+		
 	BehaviorEvents.emit_signal("OnWaitForAnimation")
 	n.visible = false
 	n.modulate.a = 0
@@ -301,7 +313,6 @@ func animate_spawn(n):
 	fx.position = n.position
 	fx.rotation = n.rotation
 	var r = get_node("/root/Root/GameTiles")
-	#BehaviorEvents.emit_signal("OnAddToAnimationQueue", self, "call_deferred", ["safe_start", fx, r, n], 200)
 	call_deferred("safe_start", fx, r, n)
 
 func DoPylonPathfinding(obj):

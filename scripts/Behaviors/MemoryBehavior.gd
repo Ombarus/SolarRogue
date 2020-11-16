@@ -21,6 +21,7 @@ func _ready():
 	if _occluder_ref != null:
 		default_occluder_color = _occluder_ref.modulate
 
+
 func OnPositionUpdated_Callback(obj):
 	if obj.get_attrib("type") == "player":
 		_dirty_occlusion = true
@@ -73,9 +74,35 @@ func OnTransferPlayer_Callback(old_player, new_player):
 func OnObjectLoaded_Callback(obj):
 	if obj.get_attrib("type") == "player":
 		_playerNode = obj
-		BehaviorEvents.disconnect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
+		#BehaviorEvents.disconnect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 		BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
 		_update_occlusion_texture()
+	elif _playerNode != null:
+		var scanners = Globals.LevelLoaderRef.LoadJSONArray(_playerNode.get_attrib("mounts.scanner"))
+		var is_ultimate : bool = false
+		var level_id = Globals.LevelLoaderRef.GetLevelID()
+		var player_scan = _playerNode.get_attrib("scanner_result.cur_in_range." + level_id)
+		var known_anomalies = _playerNode.get_attrib("scanner_result.known_anomalies." + level_id, {})
+		var key = obj.get_attrib("unique_id")
+		for s_data in scanners:
+			if Globals.is_(Globals.get_data(s_data, "scanning.fully_mapped"), true):
+				is_ultimate = true
+				break
+				
+		_dirty_occlusion = true
+		var disable_fow = is_ultimate or (Globals.LevelLoaderRef.GetCurrentLevelData().has("fully_mapped") and Globals.LevelLoaderRef.GetCurrentLevelData().fully_mapped == true)
+		var not_invisible_anomaly : bool = obj.get_attrib("type") != "anomaly" or (key in known_anomalies and known_anomalies[key] == true)
+		var is_player : bool = obj == _playerNode
+		var is_a_ghost : bool = obj.get_attrib("ghost_memory") != null or obj.get_attrib("is_fake_ghost_memory", false) == true
+		var in_scanner_range : bool = player_scan != null and key in player_scan
+		
+		if  not_invisible_anomaly and (disable_fow or is_player or is_a_ghost or in_scanner_range):
+			obj.visible = true
+			if obj != null and obj.get_attrib("has_ghost_memory"):
+				_remove_ghost_from_real(obj)
+		else:
+			obj.visible = false
+			
 	
 func OnRequestObjectUnload_Callback(obj):
 	if obj == _playerNode:
