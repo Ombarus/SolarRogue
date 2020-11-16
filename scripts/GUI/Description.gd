@@ -5,6 +5,7 @@ var _json : Dictionary = {}
 var _modified_attributes : Dictionary = {} # only for json
 var _owner : Attributes = null
 
+
 func _ready():
 	get_node("base").connect("OnOkPressed", self, "Ok_Callback")
 	get_node("base").connect("OnCancelPressed", self, "Ok_Callback")
