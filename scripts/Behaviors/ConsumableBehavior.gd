@@ -48,6 +48,6 @@ func OnValidateConsumption_Callback(obj, data, key, attrib):
 		charge -= 1
 		
 	if charge == null or charge < 1:
-		if is_player:
+		if charge != null and is_player:
 			BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Your %s used it's last charge[/color]", [Globals.EffectRef.get_display_name(data, attrib)])
 		BehaviorEvents.emit_signal("OnRemoveItem", obj, key, attrib)

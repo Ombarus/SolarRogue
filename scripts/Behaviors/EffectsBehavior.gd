@@ -59,7 +59,7 @@ func get_display_name(data, modified_attributes=null):
 		if not variation_data["prefix"].empty(): # "normal" effects might have an empty prefix
 			display_name = Globals.mytr(variation_data["prefix"], Globals.mytr(display_name))
 			
-	return display_name
+	return Globals.mytr(display_name)
 	
 func OnUpdateMountAttribute_Callback(obj, key, idx, new_attrib):
 	var mount_attributes = obj.get_attrib("mount_attributes.%s" % key)
