@@ -34,7 +34,7 @@ func OnPlayerCreated_Callback(player):
 	BehaviorEvents.disconnect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
 
 func OnPlayerTurn_Callback(obj):
-	var cooldown := 500.0
+	var cooldown := 1000.0
 	var event_range := 1500.0
 #	var cooldown := 5.0
 #	var event_range := 15.0

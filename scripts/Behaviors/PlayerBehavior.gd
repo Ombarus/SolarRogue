@@ -310,7 +310,7 @@ func ProcessGoingHome():
 	if converter_data != null and Globals.get_data(converter_data, "end_game") == true:
 		BehaviorEvents.emit_signal("OnLogLine", "The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! You made it !")
 		playerNode.set_attrib("game_won", true)
-		BehaviorEvents.emit_signal("OnPlayerDeath")
+		BehaviorEvents.emit_signal("OnPlayerDeath", playerNode)
 	else:
 		var in_cargo = false
 		var cargo = playerNode.get_attrib("cargo.content", playerNode)

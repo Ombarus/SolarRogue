@@ -77,8 +77,8 @@ func GetLevelID():
 
 func _ready():
 	if _TEST_MID_GAME == true:
-		#startLevel = "data/json/levels/jerg_branch/branch06.json"
-		startLevel = "data/json/levels/human_branch/branch04.json"
+		startLevel = "data/json/levels/jerg_branch/branch06.json"
+		#startLevel = "data/json/levels/human_branch/branch04.json"
 		#startLevel = "data/json/levels/vorg_branch/branch08.json"
 		current_depth = 1
 	Globals.LevelLoaderRef = self
