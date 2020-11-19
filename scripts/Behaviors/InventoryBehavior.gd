@@ -136,7 +136,9 @@ func OnPickup_Callback(picker, picked):
 		#		BehaviorEvents.emit_signal("OnLogLine", "Cannot pick up " + obj.get_attrib("name_id") + " Cargo holds are full")
 		#	continue
 		BehaviorEvents.emit_signal("OnPickObject", picker, obj) # warning, obj will be invalid after this call
-		var modified_attrib = obj.modified_attributes
+		# THIS CRASHES ON ANDROID IN RELEASE ONLY UNLESS I COPY THE DATA BEFORE MODIFYING IT.
+		# I HAVE NO IDEA WHY!!
+		var modified_attrib = str2var(var2str(obj.modified_attributes))
 		modified_attrib.erase("unique_id")
 		var volume_mult = Globals.EffectRef.GetMultiplierValue(picker, obj.get_attrib("src"), modified_attrib, "volume_multiplier")
 		var item_volume = obj.get_attrib("equipment.volume") * volume_mult
