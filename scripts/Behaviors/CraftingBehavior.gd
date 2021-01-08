@@ -14,7 +14,7 @@ func LoadInput(var input_list : Array) -> Array:
 		else:
 			var data = Globals.LevelLoaderRef.LoadJSON(item.src)
 			var modif_attrib = item.get("modified_attributes", {})
-			loaded_input_data.push_back({"data":data, "modified_attributes":modif_attrib, "type":data["type"], "src":item.src, "amount":item.selected})
+			loaded_input_data.push_back({"data":data, "modified_attributes":modif_attrib, "type":data["type"], "src":item.src, "amount":item.get("selected", 0)})
 	return loaded_input_data
 
 

@@ -47,7 +47,12 @@ margin_bottom = 680.0
 rect_min_size = Vector2( 410, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
+dialog_ok = false
+dialog_cancel = false
+disabled = false
+bottom_title = ""
 title = "Converter MK1"
+border_style = "═"
 
 [node name="MyItemList" parent="HBoxContainer/Recipes" instance=ExtResource( 6 )]
 anchor_right = 1.0
@@ -332,7 +337,12 @@ margin_bottom = 680.0
 rect_min_size = Vector2( 411, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
+dialog_ok = false
+dialog_cancel = false
+disabled = false
+bottom_title = ""
 title = "Select Materials"
+border_style = "═"
 
 [node name="MyItemList" parent="HBoxContainer/Materials" instance=ExtResource( 6 )]
 anchor_right = 1.0

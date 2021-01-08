@@ -209,7 +209,9 @@ func UpdateMaterialsList(recipe_data):
 					input_data.push_back({"display_name_id":display_name, "name_id":d.name_id, "modified_attributes":modified_attrib, "max":item.count, "src":item.src, "selected":item.count})
 					added_to_data[cargo_index] = true
 			cargo_index += 1
-	var using_content = _material_list.Content	
+	# I'm faking a result so I can figure out what's missing. Since I'm adding stuff
+	# that's usually only added when processing the result I want a copy
+	var using_content = str2var(var2str(list_data))
 	using_content.push_back("energy")
 			
 			
