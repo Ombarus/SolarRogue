@@ -36,7 +36,11 @@ margin_top = -329.0
 margin_right = 596.0
 margin_bottom = 311.0
 dialog_ok = true
+dialog_cancel = false
+disabled = false
+bottom_title = ""
 title = "MAN(1) Solar Rogue General Commands Manual"
+border_style = "═"
 
 [node name="en" type="RichTextLabel" parent="base" groups=[
 "Tuto_Lang",
@@ -152,7 +156,7 @@ custom_fonts/italics_font = ExtResource( 6 )
 custom_fonts/bold_font = ExtResource( 7 )
 custom_fonts/normal_font = ExtResource( 4 )
 bbcode_enabled = true
-bbcode_text = "[b]CONTROLES DE BASE[/b][indent][Pavé 1 à 9] ou [Clicker dans l'espace] ------ Déplacement
+bbcode_text = "[b]CONTROLES DE BASE[/b][indent][Pavé 1 à 9] ou [Cliquer dans l'espace] ------ Déplacement
 [Pavé 5] ou [Clicker sur soi-même] ----------- Attendre un tour
 [c] ou [Bouton Conv] ------------------------- Menu de fabrication
 [w] ou [Button Tir] ou [Click sur les ennemis]-Mode sélection de cible
@@ -161,15 +165,15 @@ bbcode_text = "[b]CONTROLES DE BASE[/b][indent][Pavé 1 à 9] ou [Clicker dans l
 [>] ou [Button Saut] ------------------------- Active le Trou Noir pour changer de niveau
 [+] ------------------------------------------ Zoom Plus
 [-] ------------------------------------------ Zoom Moins
-[Icône d'engrenage] -------------------------- Menu Principale pour Sauvegarder, Quitter et changer les Options
+[Icône d'engrenage] -------------------------- Menu Principal pour Sauvegarder, Quitter et changer les Options
 [/indent]
 [b]CONTROLES AVANCES[/b]
 [b]Appuyez sur le bouton \"...\"[/b][indent]
-[l] ou [Button Analyze] ---- Affiche une description détaillé de l'item en clickant dessus
+[l] ou [Button Analyze] ---- Affiche une description détaillé de l'item en cliquant dessus
 [ b] ou [Boutton Embar] ---- Transfer les controles vers un autre vaisseau [u]fabriqué[/u]
-[t] ou [Boutton Transfert] - Transfert de l'inventaire entre vaisseau
+[t] ou [Boutton Transfert] - Transfert de l'inventaire entre vaisseaux
 [Boutton Attendre] --------- Attendre un tour
-[r] ou [Bouton Equipage] --- Les Trophés pour la Partie en Cours
+[r] ou [Bouton Equipage] --- Les Trophées pour la Partie en Cours
 [m] ou [Bouton Comm] ------- Acheter ou Vendre sur une Amarre Marchande
 [/indent]
 [b]HUD[/b]
@@ -180,7 +184,7 @@ bbcode_text = "[b]CONTROLES DE BASE[/b][indent][Pavé 1 à 9] ou [Clicker dans l
 [b]En bas[/b][indent][Journal Stardate] -- Nombre de tour survécu
 [Texte] --- Toute information importante sur ce qui s'est passé au dernier tour
 [/indent]
-[b]COMMENT JOUER[/b][indent]Explorez chaque niveau. Utilisez votre armement pour tirer la plupart des planètes et des vaisseaux que vous rencontrez. Ramassez toutes les ressources que vous trouverez. Installez ce que vous pouvez à partir de l'inventaire ou convertissez les items en énergie dans le convertisseur. Si vous trouvez une coque vide vous pouvez l'utiliser pour créer un nouveau vaisseau à l'aide du convertisseur. Certain convertisseur sont plus puissant et peuvent donner accès à des armes plus fortes ou des vaissaux extra-terrestre.
+[b]COMMENT JOUER[/b][indent]Explorez chaque niveau. Utiliser votre armement pour tirer la plupart des planètes et des vaisseaux que vous rencontrez. Ramasser toutes les ressources que vous trouverez. Installer ce que vous pouvez à partir de l'inventaire ou convertisser les items en énergie dans le convertisseur. Si vous trouvez une coque vide vous pouvez l'utiliser pour créer un nouveau vaisseau à l'aide du convertisseur. Certain convertisseur sont plus puissant et peuvent donner accès à des armes plus fortes ou des vaissaux extra-terrestre.
 
 Pour complété le jeu, il faut trouver le Convertisseur de Yendor au fin fond du 12e Système Solaire et le ramener au tout premier Trou Noir où vous êtes apparu la première fois. Avec le Convertisseur équippé il vous suffit alors de faire le Saut !
 
@@ -193,7 +197,7 @@ Le tout multiplié par la difficulté choisit
 [/indent]
 
 [/indent]"
-text = "CONTROLES DE BASE	[Pavé 1 à 9] ou [Clicker dans l'espace] ------ Déplacement
+text = "CONTROLES DE BASE	[Pavé 1 à 9] ou [Cliquer dans l'espace] ------ Déplacement
 [Pavé 5] ou [Clicker sur soi-même] ----------- Attendre un tour
 [c] ou [Bouton Conv] ------------------------- Menu de fabrication
 [w] ou [Button Tir] ou [Click sur les ennemis]-Mode sélection de cible
@@ -202,15 +206,15 @@ text = "CONTROLES DE BASE	[Pavé 1 à 9] ou [Clicker dans l'espace] ------ Dépl
 [>] ou [Button Saut] ------------------------- Active le Trou Noir pour changer de niveau
 [+] ------------------------------------------ Zoom Plus
 [-] ------------------------------------------ Zoom Moins
-[Icône d'engrenage] -------------------------- Menu Principale pour Sauvegarder, Quitter et changer les Options
+[Icône d'engrenage] -------------------------- Menu Principal pour Sauvegarder, Quitter et changer les Options
 
 CONTROLES AVANCES
 Appuyez sur le bouton \"...\"	
-[l] ou [Button Analyze] ---- Affiche une description détaillé de l'item en clickant dessus
+[l] ou [Button Analyze] ---- Affiche une description détaillé de l'item en cliquant dessus
 [ b] ou [Boutton Embar] ---- Transfer les controles vers un autre vaisseau fabriqué
-[t] ou [Boutton Transfert] - Transfert de l'inventaire entre vaisseau
+[t] ou [Boutton Transfert] - Transfert de l'inventaire entre vaisseaux
 [Boutton Attendre] --------- Attendre un tour
-[r] ou [Bouton Equipage] --- Les Trophés pour la Partie en Cours
+[r] ou [Bouton Equipage] --- Les Trophées pour la Partie en Cours
 [m] ou [Bouton Comm] ------- Acheter ou Vendre sur une Amarre Marchande
 
 HUD
@@ -221,7 +225,7 @@ Haut	[Intégrité] -------- Point de vie du vaisseau. Ne se régénère pas natu
 En bas	[Journal Stardate] -- Nombre de tour survécu
 [Texte] --- Toute information importante sur ce qui s'est passé au dernier tour
 
-COMMENT JOUER	Explorez chaque niveau. Utilisez votre armement pour tirer la plupart des planètes et des vaisseaux que vous rencontrez. Ramassez toutes les ressources que vous trouverez. Installez ce que vous pouvez à partir de l'inventaire ou convertissez les items en énergie dans le convertisseur. Si vous trouvez une coque vide vous pouvez l'utiliser pour créer un nouveau vaisseau à l'aide du convertisseur. Certain convertisseur sont plus puissant et peuvent donner accès à des armes plus fortes ou des vaissaux extra-terrestre.
+COMMENT JOUER	Explorez chaque niveau. Utiliser votre armement pour tirer la plupart des planètes et des vaisseaux que vous rencontrez. Ramasser toutes les ressources que vous trouverez. Installer ce que vous pouvez à partir de l'inventaire ou convertisser les items en énergie dans le convertisseur. Si vous trouvez une coque vide vous pouvez l'utiliser pour créer un nouveau vaisseau à l'aide du convertisseur. Certain convertisseur sont plus puissant et peuvent donner accès à des armes plus fortes ou des vaissaux extra-terrestre.
 
 Pour complété le jeu, il faut trouver le Convertisseur de Yendor au fin fond du 12e Système Solaire et le ramener au tout premier Trou Noir où vous êtes apparu la première fois. Avec le Convertisseur équippé il vous suffit alors de faire le Saut !
 

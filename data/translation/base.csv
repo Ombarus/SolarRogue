@@ -5,7 +5,7 @@ Cooling reactor (wait),Cooling reactor (wait),Réacteur stabilisé (Attendre 1 t
 [color=red]You take %d damage[/color],[color=red]You take %d damage[/color],[color=red]Nous avons reçu %d de dommage[/color],[color=red]%d ダメージが貰った[/color]
 [color=red]You destroy the enemy ![/color],[color=red]You destroy the enemy ![/color],[color=red]Vous avez détruit l'ennemi ![/color],[color=red]敵が倒れた！[/color]
 Ship in range of %s,Ship in range of %s,Nous survolons %s,%sが近くに通る
-Multiple Objects Detected,Multiple Objects Detected,Plusieurs Objects,色々な物
+Multiple Objects Detected,Multiple Objects Detected,Plusieurs Objets,色々な物
 There's nothing there sir...,There's nothing there sir...,Il n'y a rien ici...,ここは何も無い...
 Target is outside of our range sir !,Target is outside of our range sir !,La cible est hors de porté Commandant !,届かない船長！
 Scanners have discovered an Anomaly close by,Scanners have discovered an Anomaly close by,Le radar à détecté une anomalie dans les environs,異常発見
@@ -19,7 +19,7 @@ Crafting failed,Crafting failed,Production échoué,生産失敗
 The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! You made it !,The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! You made it !,"Le convertisseur de Yendor assimile l’énergie du trou noir lui-même et ouvre une brèche dans l’espace. Sans hésiter, vous engagé les réacteurs. De l’autre côté, un monde familié vous attend, vous avez réussi, vous êtes enfin chez vous !",The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! You made it !
 The Converter of Yendor will not work unless it is mounted on the ship !,The Converter of Yendor will not work unless it is mounted on the ship !,Le convertisseur de Yendor doit être monté sur le vaisseau!,The Converter of Yendor will not work unless it is mounted on the ship !
 [color=yellow]This wormhole emits a strange energy signature that prevents you from jumping back home![/color],[color=yellow]This wormhole emits a strange energy signature that prevents you from jumping back home![/color],[color=yellow]Ce trou noir émet une énergie inconnue qui vous empêche de retourner chez vous[/color],[color=yellow]This wormhole emits a strange energy signature that prevents you from jumping back home![/color]
-Mount some weapon first,Mount some weapon first,Vous devez monté une arme,武器綱がってない
+Mount some weapon first,Mount some weapon first,Vous devez monter une arme,武器綱がってない
 Nothing but empty space,Nothing but empty space,Il n'y a rien ici…,虚空
 Ship transfer canceled,Ship transfer canceled,Transfer cancellé,転送停止
 Item transfer canceled,Item transfer canceled,Aucun item transferé,転送停止
@@ -76,7 +76,7 @@ Log Stardate %d.%d.%d,Log Stardate %d.%d.%d,Journal Stardate %d.%d.%d,Log Starda
 [o]ptions,[o]ptions,[o]ptions,[o]設定
 save & [q]uit,save & [q]uit,sauvegarde & [q]uitter,[q]保存と終了
 > remove,> remove,> retirer,> 取る
-< mount,< mount,< monté,< 付ける
+< mount,< mount,< monter,< 付ける
 [d]rop,[d]rop,[d]expulser,[d]落とす
 [u]se,[u]se,[u]tiliser,[u]使う
 ?,?,?,?
@@ -95,7 +95,7 @@ save & [q]uit,save & [q]uit,sauvegarde & [q]uitter,[q]保存と終了
 [<]FTL,[<]FTL,[<]Saut,[<]FTL
 TUTO refill our energy,"Captain, Lets refill our energy by converting this %s\n1. Select 'Recycle Energy' from the list on the left\n2. Select the '%s' on the right\n3. Click the 'Craft' Button","Commandant, Récupérons de l’énergie en convertissant %s\n1. Choisir ‘Recyclage’ dans la liste de gauche\n2. Choisir %s à droite\n3. Cliquer sur le bouton ‘Produire’","Captain, Lets refill our energy by converting this %s\n1. Select 'Recycle Energy' from the list on the left\n2. Select the '%s' on the right\n3. Click the 'Craft' Button"
 Tutorial: Converter,Tutorial: Converter,Tutoriel: Convertisseur,Tutorial: Converter
-TUTO equip our new,"Captain, To equip our new %s just select it in the cargo list on the right and select the 'mount' button to install or replace the currently equiped %s","Commandant, Pour équiper notre nouveau %s il suffit de le sélectionner dans la liste à droite et cliquer sur le bouton ‘monté’ pour l’installer ou remplacé le %s actuel","Captain, To equip our new %s just select it in the cargo list on the right and select the 'mount' button to install or replace the currently equiped %s"
+TUTO equip our new,"Captain, To equip our new %s just select it in the cargo list on the right and select the 'mount' button to install or replace the currently equiped %s","Commandant, Pour équiper notre nouveau %s il suffit de le sélectionner dans la liste à droite et cliquer sur le bouton ‘monter’ pour l’installer ou remplacé le %s actuel","Captain, To equip our new %s just select it in the cargo list on the right and select the 'mount' button to install or replace the currently equiped %s"
 Tutorial: Inventory,Tutorial: Inventory,Tutoriel: Inventaire,Tutorial: Inventory
 TUTO order the helm,"Captain, order the helm to move by using the numpad keys, clicking or taping the screen\n\n[i]You can turn off tutorial prompts in the settings[/i]","Commandant, donnez vos ordres au pilote avec le pavé numérique, en cliquant ou en tapant dans l’écran\n\n[i]Vous pouvez désactiver les tutoriels dans le menu d’options[/i]","Captain, order the helm to move by using the numpad keys, clicking or taping the screen\n\n[i]You can turn off tutorial prompts in the settings[/i]"
 Tutorial: Ship Movement,Tutorial: Ship Movement,Tutoriel: Déplacement,Tutorial: Ship Movement
@@ -171,7 +171,7 @@ Torpedo,Torpedo,Torpille,魚雷
 Torpedo Launcher MK1,Torpedo Launcher MK1,Lance-Torpilles v1,Torpedo Launcher MK1
 Torpedo Launcher,Torpedo Launcher,Lance-Torpilles,Torpedo Launcher
 Wormhole,Wormhole,Trou Noir,ブラックホール
-Unknown Object,Unknown Object,Object Inconnu,知らない物
+Unknown Object,Unknown Object,Objet Inconnu,知らない物
 A Human Battleship,A Human Battleship,Un Cuirassé Humain,A Human Battleship
 A Human Bomber,A Human Bomber,Un Bombardier Humain,A Human Bomber
 A Human Frigate,A Human Frigate,Une Frégate Humaine,A Human Frigate
@@ -305,7 +305,7 @@ None,None,Aucun,None
 "Launches a flurry of guided-missile to any target in the viscinity. Due to it's slow speed, range is limited.","Launches a flurry of guided-missile to any target in the viscinity. Due to it's slow speed, range is limited.","Lance une rafale de missiles guidés vers la cible la plus proche. Parce qu’ils doivent être accélérer, leur porté est limité","Launches a flurry of guided-missile to any target in the viscinity. Due to it's slow speed, range is limited."
 Launches a flurry of guided-missile to any target in the viscinity. Improved launch sequence allow for slightly bigger range.,Launches a flurry of guided-missile to any target in the viscinity. Improved launch sequence allow for slightly bigger range.,Lance une rafale de missiles guidés vers la cible la plus proche. Cette version viens avec un système de pré-lancement qui augmente la porté.,Launches a flurry of guided-missile to any target in the viscinity. Improved launch sequence allow for slightly bigger range.
 "Launches a flurry of guided-missile to any target in the viscinity. Extra missile bays allow for stacked shooting and reloading, allowing near-continuous shooting.","Launches a flurry of guided-missile to any target in the viscinity. Extra missile bays allow for stacked shooting and reloading, allowing near-continuous shooting.",Lance une rafale de missiles guidés vers la cible la plus proche. Cette version viens avec plusieurs tubes placés en série permettant un tir presque ininterrompu de missile.,"Launches a flurry of guided-missile to any target in the viscinity. Extra missile bays allow for stacked shooting and reloading, allowing near-continuous shooting."
-Ammo for the Torpedo Launcher. It's massive but it makes even bigger holes !,Ammo for the Torpedo Launcher. It's massive but it makes even bigger holes !,"Munition pour le lance-torpille. Nettement plus gros qu’un missile, les trous qu’ils font sont encore plus impressionnant!",Ammo for the Torpedo Launcher. It's massive but it makes even bigger holes !
+Ammo for the Torpedo Launcher. It's massive but it makes even bigger holes !,Ammo for the Torpedo Launcher. It's massive but it makes even bigger holes !,"Munition pour le lance-torpille. Nettement plus gros qu’un missile, les trous qu’elles font sont encore plus impressionnant!",Ammo for the Torpedo Launcher. It's massive but it makes even bigger holes !
 Can hit multiple enemies in a area. A short fuse prevents nearby detonation. Sadly it's not long enough to hit far away targets.,Can hit multiple enemies in a area. A short fuse prevents nearby detonation. Sadly it's not long enough to hit far away targets.,L’explosion touche les cases avoisinante. Une courte mèche empêche les détonations trop risqué. Malheureusement elle empêche aussi les tirs longues portés.,Can hit multiple enemies in a area. A short fuse prevents nearby detonation. Sadly it's not long enough to hit far away targets.
 Weapon Stats,Weapon Stats,Caractéristiques,Weapon Stats
 Shielding,Shielding,Bouclier,Shielding
@@ -374,7 +374,7 @@ Saw %d solar systems,Saw %d solar systems,A vu %d systèmes,Saw %d solar systems
 Difficulty : %d,Difficulty : %d,Difficulté : %d,Difficulty : %d
 You WON!,You WON!,C'est Gagné!,勝ちました！
 The %s,The %s,Le %s,%s戦艦
-Disassemble,Disassemble,Désasembler,解体
+Disassemble,Disassemble,Désassembler,解体
 A Simple Probe,A Simple Probe,Une Simple Sonde,ボロボロな探査船
 [>]FTL,[>]FTL,[>]Saut,[>]FTL
 %d Item(s) for %d Spare Part(s),%d Item(s) for %d Spare Part(s),%d Item(s) pour %d Pièces Détachées,%d Item(s) for %d Spare Part(s)
@@ -560,7 +560,7 @@ We've done enough damaged for now,We've done enough damaged for now,Nous avons f
 You... monster!,You... monster!,Vous êtes…. un MONSTRE!,You... monster!
 Our Holds don't hold any %s,Our Holds don't hold any %s,Aucun %s dans notre cargo,Our Holds don't hold any %s
 We need %s,We need %s,Il nous faut un %s,We need %s
-Sir! we should craft more %s,Sir! we should craft more %s,Commandant! Il faut convertir des %s,Sir! we should craft more %s
+Sir! we should craft more %s,Sir! we should craft more %s,Commandant! Il faut fabriquer des %s,Sir! we should craft more %s
 Will do sir! as soon as the converter makes more %s!,Will do sir! as soon as the converter makes more %s!,Aussitôt que le convertisseur nous fabrique plus de %s!,Will do sir! as soon as the converter makes more %s!
 [color=red]Oops! I guess someone was living here. They've deployed planetary defenses![/color],[color=red]Oops! I guess someone was living here. They've deployed planetary defenses![/color],[color=red]Oups! On dirait que quelqu’un vivait ici. Ils ont déployé des défenses![/color],[color=red]Oops! I guess someone was living here. They've deployed planetary defenses![/color]
 [color=red]Ships inbound! This planet is defended![/color],[color=red]Ships inbound! This planet is defended![/color],[color=red]Vaisseau en vue! Cette planète était défendu![/color],[color=red]Ships inbound! This planet is defended![/color]

@@ -30,7 +30,11 @@ margin_top = -259.5
 margin_right = 421.5
 margin_bottom = 259.5
 dialog_ok = true
+dialog_cancel = false
+disabled = false
+bottom_title = ""
 title = "Welcome Ombarus..."
+border_style = "═"
 
 [node name="en" type="RichTextLabel" parent="base" groups=[
 "welcome_lang",
@@ -99,7 +103,7 @@ Ce qui est clair c'est que votre moteur hyperspatial n'est pas assez puissant po
 Utilisez vos ressources pour retrouver votre chemin.
 [indent]
 Ne laissez pas votre [u]intégrité[/u] ou votre [u]énergie[/u] tomber à 0.
-Vos armes peuvent être utilisé sur les planètes pour récolter des ressources.
+Vos armes peuvent être utilisées sur les planètes pour récolter des ressources.
 Cherchez l'artifact ultime : [u]Le Convertisseur de Yendor,[/u]
 [/indent]
 C'est sans doute la seule chose assez puissante pour vous ramener chez vous..."
@@ -112,7 +116,7 @@ Ce qui est clair c'est que votre moteur hyperspatial n'est pas assez puissant po
 Utilisez vos ressources pour retrouver votre chemin.
 	
 Ne laissez pas votre intégrité ou votre énergie tomber à 0.
-Vos armes peuvent être utilisé sur les planètes pour récolter des ressources.
+Vos armes peuvent être utilisées sur les planètes pour récolter des ressources.
 Cherchez l'artifact ultime : Le Convertisseur de Yendor,
 
 C'est sans doute la seule chose assez puissante pour vous ramener chez vous..."
