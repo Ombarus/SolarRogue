@@ -40,6 +40,8 @@ func _ready():
 	
 	BehaviorEvents.connect("OnPlayerDeath", self, "OnPlayerDeath_Callback")
 	BehaviorEvents.connect("OnButtonReady", self, "OnButtonReady_Callback")
+	
+	BehaviorEvents.connect("OnDoubleTap", self, "OnDoubleTap_Callback")
 		
 	if not Globals.is_mobile():
 		zoom = Vector2(2.5, 2.5)
@@ -47,7 +49,10 @@ func _ready():
 	if p != null:
 		self.position = p.position
 		_last_cam_pos = self.position
-		
+	
+func OnDoubleTap_Callback():
+	_keep_centered = true
+	
 func OnButtonReady_Callback(btn):
 	var btn_name = btn.name
 	if btn_name == "ZoomIn":
@@ -100,7 +105,7 @@ func _input(event):
 func _unhandled_input(event):
 	if levelLoaderRef == null:
 		return
-		
+	
 	# Handle actual Multi-touch from capable devices
 	if event is InputEventScreenTouch and event.pressed == true:
 		_touches[event.index] = {"start":event, "current":event}
@@ -302,7 +307,8 @@ func _process(delta):
 		_zoom_camera(20.0 * delta * zoom.x)
 		
 	var target : Attributes = levelLoaderRef.objByType["player"][0]
-	if target.get_attrib("animation.in_movement") == true or _keep_centered:
+	var autocenter : bool = PermSave.get_attrib("settings.cam_follow", true)
+	if (target.get_attrib("animation.in_movement") == true and autocenter == true) or _keep_centered:
 		#self.position = target.get_child(0).global_position
 		_keep_centered = true
 		smooth_goto(target.get_child(0).global_position, delta)

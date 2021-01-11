@@ -1,17 +1,8 @@
 extends Node
 
 export(NodePath) var levelLoaderNode
-#export(NodePath) var WeaponAction
-#export(NodePath) var GrabAction
-#export(NodePath) var InventoryAction
 export(NodePath) var InventoryDialog
-#export(NodePath) var CraftingAction
-#export(NodePath) var FTLAction
-#export(NodePath) var FTLAction2
-#export(NodePath) var PopupButtons
 export(NodePath) var TargettingHUD
-#export(NodePath) var OptionBtn
-#export(NodePath) var QuestionBtn
 
 
 var weapon_btn_ref = null
@@ -27,6 +18,9 @@ var click_start_time
 var lock_input = false # when it's not player turn, inputs are locked
 var _weapon_shots = []
 var _last_unicode = ""
+var _double_tap_timer : float = 0
+var _double_tap_action = ""
+var _double_tap_tile
 
 enum SHOOTING_STATE {
 	init,
@@ -208,7 +202,7 @@ func Pressed_Comm_Callback():
 	
 func UpdateButtonVisibility():
 	var hide_hud = PermSave.get_attrib("settings.hide_hud")
-	var weapons = playerNode.get_attrib("mounts.weapon")
+	var weapons = playerNode.get_attrib("mounts.weapon", [])
 	var weapon_btn = weapon_btn_ref
 	var valid = false
 	for weapon in weapons:
@@ -550,7 +544,10 @@ func _input(event):
 	# because otherwise _unhandled_input will trigger and send the ship somewhere else
 	if (event is InputEventMouseButton or event is InputEventKey) and playerNode != null and playerNode.get_attrib("ai") != null and playerNode.get_attrib("ai.disable_on_interest", false) == true and playerNode.get_attrib("ai.skip_check") <= 0:
 		if event.is_pressed() == false:
+			print("stop automove")
 			playerNode.set_attrib("ai.disabled", true)
+			_double_tap_timer = 0.2
+			_double_tap_action = "" # do nothing if not double-tap
 		get_tree().set_input_as_handled() # don't do anything else this turn
 	
 	if _input_state != Globals.INPUT_STATE.look_around or not event is InputEventMouseButton:
@@ -640,6 +637,7 @@ func OnCameraDragged_Callback():
 		#print("player::OnCameraDragged_Callback set input to CAMERA_DRAGGED")
 		set_input_state(Globals.INPUT_STATE.camera_dragged)
 
+
 func _unhandled_input(event):
 	if lock_input or _input_state == Globals.INPUT_STATE.look_around or playerNode == null:
 		return
@@ -684,21 +682,32 @@ func _unhandled_input(event):
 				if abs(click_dir.x) < levelLoaderRef.tileSize / 2 && abs(click_dir.y) < levelLoaderRef.tileSize / 2:
 					wait_one_turn(playerNode)
 					return
-					
-				# goto click pos
 				
-				var ai_data = {
-					"aggressive":false,
-					"pathfinding":"simple",
-					"disable_on_interest":true,
-					"disable_wandering":true,
-					"skip_check":1 # make sure we move at least one tile, this means when danger is close we move one tile at a time
-					#"objective":clicked_tile
-				}
-				playerNode.set_attrib("ai", ai_data)
-				# Need to be done like this so Vector2 will be serialized properly
-				playerNode.set_attrib("ai.objective", clicked_tile)
-				BehaviorEvents.emit_signal("OnAttributeAdded", playerNode, "ai")
+				##################
+				if _double_tap_timer > 0.0:
+					print("detected double tap")
+					_double_tap_timer = 0.0
+					_double_tap_action = ""
+					BehaviorEvents.emit_signal("OnDoubleTap")
+				else:
+					print("wait 0.2")
+					_double_tap_timer = 0.2
+					_double_tap_action = "apply_goto"
+					_double_tap_tile = clicked_tile
+				
+#				# goto click pos
+#				var ai_data = {
+#					"aggressive":false,
+#					"pathfinding":"simple",
+#					"disable_on_interest":true,
+#					"disable_wandering":true,
+#					"skip_check":1 # make sure we move at least one tile, this means when danger is close we move one tile at a time
+#					#"objective":clicked_tile
+#				}
+#				playerNode.set_attrib("ai", ai_data)
+#				# Need to be done like this so Vector2 will be serialized properly
+#				playerNode.set_attrib("ai.objective", clicked_tile)
+#				BehaviorEvents.emit_signal("OnAttributeAdded", playerNode, "ai")
 		elif event.is_action_released("touch") && _input_state == Globals.INPUT_STATE.camera_dragged:
 			#print("player::_unhandled_input reset drag")
 			set_input_state(_saved_input_state)
@@ -749,6 +758,31 @@ func _unhandled_input(event):
 	if dir != null:
 		#next_touch_is_a_goto = true
 		BehaviorEvents.emit_signal("OnMovement", playerNode, dir)
+
+func _process(delta):
+	if _double_tap_timer > 0.0:
+		_double_tap_timer -= delta
+		if _double_tap_timer <= 0.0 and not _double_tap_action.empty():
+			self.call(_double_tap_action)
+			_double_tap_action = ""
+
+func apply_goto():
+	print("double-tap timeout, do automove")
+	_double_tap_timer = 0.0
+	_double_tap_action = ""
+	# goto click pos
+	var ai_data = {
+		"aggressive":false,
+		"pathfinding":"simple",
+		"disable_on_interest":true,
+		"disable_wandering":true,
+		"skip_check":1 # make sure we move at least one tile, this means when danger is close we move one tile at a time
+		#"objective":clicked_tile
+	}
+	playerNode.set_attrib("ai", ai_data)
+	# Need to be done like this so Vector2 will be serialized properly
+	playerNode.set_attrib("ai.objective", _double_tap_tile)
+	BehaviorEvents.emit_signal("OnAttributeAdded", playerNode, "ai")
 
 
 func do_contextual_actions(tile, player_tile):

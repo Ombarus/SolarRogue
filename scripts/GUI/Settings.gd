@@ -66,6 +66,9 @@ func Init(init_param):
 	var tuto_active : bool = PermSave.get_attrib("tutorial.enabled", true)
 	get_node("base/ScrollContainer/VBoxContainer/Enable Tutorial/TutoCheck").pressed = tuto_active
 	
+	var cam_follow : bool = PermSave.get_attrib("settings.cam_follow", true)
+	get_node("base/ScrollContainer/VBoxContainer/AutoFollow/AutoFollowSwitch").pressed = cam_follow
+	
 
 func get_lang_by_metadata(lang):
 	#print("before %s" % lang)
@@ -125,3 +128,7 @@ func _on_LangOption_item_selected(ID):
 	PermSave.set_attrib("settings.lang", lang_str)
 	TranslationServer.set_locale(lang_str)
 	BehaviorEvents.emit_signal("OnLocaleChanged")
+
+
+func _on_AutoFollowSwitch_toggled(button_pressed):
+	PermSave.set_attrib("settings.cam_follow", button_pressed)

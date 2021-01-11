@@ -66,6 +66,7 @@ signal OnDifficultyChanged(newdiff)
 signal OnPlayerInputStateChanged(playerObj, inputState)
 signal OnAddToAnimationQueue(callback_obj, callback_name, args, priority)
 signal OnScannerPickup(type)
+signal OnDoubleTap()
 
 signal OnGUILoaded(name, obj)
 signal OnPushGUI(name, init_param, transition_name)

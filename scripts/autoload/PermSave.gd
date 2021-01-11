@@ -8,7 +8,7 @@ enum END_GAME_STATE {
 	won
 }
 
-const CURRENT_VERSION := 8
+const CURRENT_VERSION := 9
 
 #TODO: Might want to add more info about the player (cargo inventory, # of turn spent, etc.
 var _perm_save = {
@@ -23,7 +23,8 @@ var _perm_save = {
 		"difficulty":2,
 		"display_fps":false,
 		"hide_hud":false,
-		"lang":null
+		"lang":null,
+		"cam_follow":true
 	},
 	"leaderboard": [
 		{"player_name":"Ombarus the greatest", "final_score":100000, "status":END_GAME_STATE.won, "generated_levels":20, "died_on":-1},
@@ -51,9 +52,18 @@ func _ready():
 		if "version" in tmp and tmp.version == CURRENT_VERSION:
 			_perm_save = tmp
 		else:
-			# TODO: port save instead of reset when game is published
 			var msg : String = str(tmp.version) if 'version' in tmp else 'missing'
-			print("WARNING : Savefile version does not match (" + msg + " != " + str(CURRENT_VERSION) + "). Perm save reset")
+			print("WARNING : Savefile version does not match (" + msg + " != " + str(CURRENT_VERSION) + "). Perm save update")
+			var valid := true
+			if tmp.version < 9 and tmp.version >= 8:
+				tmp["settings"]["cam_follow"] = _perm_save["settings"]["cam_follow"]
+			if tmp.version < 8:
+				valid = false
+			if valid:
+				tmp.version = CURRENT_VERSION
+				_perm_save = tmp
+				save()
+				
 
 func get_attrib(path, default=null):
 	return Globals.get_data(_perm_save, path, default)
