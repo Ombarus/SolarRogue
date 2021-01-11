@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scripts/GUI/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://scripts/Behaviors/LocalSaveBehavior.gd" type="Script" id=19]
 [ext_resource path="res://data/shaders/ui_vfx.shader" type="Shader" id=20]
 [ext_resource path="res://data/animations/popin_shader.tres" type="Animation" id=21]
+[ext_resource path="res://scenes/GUI/Dialogs/ValidateDiag.tscn" type="PackedScene" id=22]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 20 )
@@ -222,12 +223,6 @@ margin_bottom = 649.0
 rect_min_size = Vector2( 710, 0 )
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
-dialog_ok = false
-dialog_cancel = false
-disabled = false
-bottom_title = ""
-title = ""
-border_style = "═"
 
 [node name="Leaderboard" type="Control" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/base"]
 anchor_right = 1.0
@@ -283,6 +278,17 @@ __meta__ = {
 }
 
 [node name="Settings" parent="CanvasLayer/SafeArea/SettingsRoot" instance=ExtResource( 16 )]
+visible = false
+
+[node name="ValidateRoot" type="Control" parent="CanvasLayer/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ValidateDiag" parent="CanvasLayer/SafeArea/ValidateRoot" instance=ExtResource( 22 )]
 visible = false
 
 [node name="FPSCounter" parent="CanvasLayer/SafeArea" instance=ExtResource( 17 )]

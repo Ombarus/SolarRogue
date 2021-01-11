@@ -47,11 +47,17 @@ func _on_newgame_pressed():
 	
 
 func _on_choose_name_callback(name):
-	get_node("LocalSave").delete_save()
-	
+	var cur_save = get_node("LocalSave").get_latest_save()
 	PermSave.set_attrib("settings.default_name", name)
+	if cur_save == null or cur_save.empty():
+		_start_game()
+	else:
+		BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"callback_object":self, "callback_method":"_start_game", "custom_text":"Are you sure?\nStarting a new game will delete your current game!"})
+		
+		
+func _start_game():
+	get_node("LocalSave").delete_save()
 	get_tree().change_scene("res://scenes/main.tscn")
-	
 
 func _on_Continue_pressed():
 	get_tree().change_scene("res://scenes/main.tscn")
