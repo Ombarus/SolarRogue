@@ -344,7 +344,7 @@ func GetMultiplierValue(obj, item_src, item_attributes, attrib_base_name) -> flo
 	return _get_value(obj, item_src, item_attributes, attrib_base_name, COMPOUNDING_TYPE.multiply, 1.0)
 	
 	
-func GetBonusValue(obj, item_src, item_attributes, attrib_base_name) -> float:	
+func GetBonusValue(obj, item_src, item_attributes, attrib_base_name) -> float:
 	return _get_value(obj, item_src, item_attributes, attrib_base_name, COMPOUNDING_TYPE.add, 0.0)
 	
 
@@ -422,3 +422,4 @@ func _get_value(obj, item_src, item_attributes, attrib_base_name, compound_type=
 #		print(debug_msg)
 	
 	return result
+

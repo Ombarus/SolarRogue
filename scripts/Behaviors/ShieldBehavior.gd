@@ -10,7 +10,22 @@ func _ready():
 	BehaviorEvents.connect("OnMountRemoved", self, "OnMountRemoved_Callback")
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 	BehaviorEvents.connect("OnConsumeItem", self, "OnConsumeItem_Callback")
+	BehaviorEvents.connect("OnSystemDisabled", self, "OnSystemDisabled_Callback")
+	BehaviorEvents.connect("OnSystemEnabled", self, "OnSystemEnabled_Callback")
 	
+
+func OnSystemEnabled_Callback(obj, system):
+	if not "shield" in system:
+		return
+	
+	obj.set_attrib("shield.current_hp", obj.get_attrib("shield.disabled_hp", 0.0))
+
+func OnSystemDisabled_Callback(obj, system):
+	if not "shield" in system:
+		return
+	
+	obj.set_attrib("shield.disabled_hp", obj.get_attrib("shield.current_hp", 0.0))
+	obj.set_attrib("shield.current_hp", 0.0)
 	
 func OnObjectLoaded_Callback(obj):
 	var cur_shield = obj.get_attrib("shield.current_hp")
@@ -20,6 +35,10 @@ func OnObjectLoaded_Callback(obj):
 func OnObjTurn_Callback(obj):
 	var shields = obj.get_attrib("mounts.shield")
 	var shields_data = Globals.LevelLoaderRef.LoadJSONArray(shields)
+	if obj.get_attrib("offline_systems.shield", 0.0) > 0.0:
+		obj.set_attrib("shield.tmp_max_shield", Globals.mytr("Disabled"))
+		obj.set_attrib("shield.last_turn_update", Globals.total_turn)
+		return
 	if shields_data.size() <= 0:
 		obj.set_attrib("shield.tmp_max_shield", Globals.mytr("Missing"))
 		return

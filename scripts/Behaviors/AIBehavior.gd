@@ -465,13 +465,14 @@ func DoAttackPathFinding(obj):
 	
 	var minimal_move = null
 	var shot = false
+	var weapon_enabled : bool = obj.get_attrib("offline_systems.weapon", 0.0) <= 0.0
 	BehaviorEvents.emit_signal("OnBeginParallelAction", obj)
 	for index in range(weapons_data.size()):
 		var data = weapons_data[index]
 		var attrib_data = modified_attributes[index]
 		var best_move = _targetting.ClosestFiringSolution(obj, obj_tile, player_tile, {"weapon_data":data, "modified_attributes":attrib_data})
 		var is_destroyed = player.get_attrib("destroyable.destroyed")
-		if best_move.length() == 0 and (is_destroyed == null or is_destroyed == false):
+		if weapon_enabled == true and best_move.length() == 0 and (is_destroyed == null or is_destroyed == false):
 			BehaviorEvents.emit_signal("OnDealDamage", [player], obj, data, attrib_data, player_tile)
 			shot = true
 		if minimal_move == null or minimal_move.length() > best_move.length():
@@ -482,7 +483,11 @@ func DoAttackPathFinding(obj):
 		var move_by = Vector2(0, 0)
 		move_by.x = clamp(minimal_move.x, -1, 1)
 		move_by.y = clamp(minimal_move.y, -1, 1)
-		BehaviorEvents.emit_signal("OnMovement", obj, move_by)
+		if move_by.length_squared() > 0.0:
+			BehaviorEvents.emit_signal("OnMovement", obj, move_by)
+		else:
+			obj.set_attrib("ai.run_from", obj.get_attrib("ai.target"))
+			DoRunAwayPathFinding(obj)
 
 func DoSimplePathFinding(obj):
 	if obj.get_attrib("wandering") == null and obj.get_attrib("ai.disable_wandering") == null or obj.get_attrib("ai.disable_wandering") == false:
@@ -539,7 +544,7 @@ func DoRunAwayPathFinding(obj):
 		obj.set_attrib("ai.failed_run_cur_attempt", cur_attempt)
 		obj.set_attrib("ai.prev_run_distance", distance_f)
 	
-	if cancel_run or obj.get_attrib("ai.unseen_for") > obj.get_attrib("ai.stop_running_after"):
+	if cancel_run or obj.get_attrib("ai.unseen_for") > obj.get_attrib("ai.stop_running_after", 1):
 		#TODO: Maybe wrap this in a method too ?
 		obj.modified_attributes.ai.erase("pathfinding")
 		obj.modified_attributes.ai.erase("run_from")

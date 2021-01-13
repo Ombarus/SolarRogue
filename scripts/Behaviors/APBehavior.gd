@@ -93,12 +93,29 @@ func OnUseAP_Callback(obj, amount):
 		BehaviorEvents.emit_signal("OnUseEnergy", obj, base_ap_energy_cost*amount)
 	obj.modified_attributes.action_point += amount
 	
+	update_cooldowns(obj, amount)
+	
 	action_list.erase(obj)
 	Insert(obj, obj.get_attrib("action_point"))
 	
 	_need_sort = true
 	BehaviorEvents.emit_signal("OnAPUsed", obj, amount)
 	
+func update_cooldowns(obj, amount):
+	var offline_systems = obj.get_attrib("offline_systems", {})
+	if offline_systems.size() == 0:
+		return
+		
+	var to_erase = []
+	for system in offline_systems:
+		if offline_systems[system] > 0.0:
+			offline_systems[system] -= amount
+		if offline_systems[system] <= 0.0:
+			BehaviorEvents.emit_signal("OnSystemEnabled", obj, system)
+			to_erase.push_back(system)
+	for system in to_erase:
+		offline_systems.erase(system)
+	obj.set_attrib("offline_systems", offline_systems)
 	
 func validate_emit_OnObjTurn(obj):
 	# if object has been removed from list before it had a chance to act. Ignore it

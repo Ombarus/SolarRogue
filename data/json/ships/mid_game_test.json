@@ -39,6 +39,9 @@
 		"drop_ap":1.0,
 		"transferable":true,
 		"content":[
+			{"src":"data/json/items/weapons/emp.json", "count":1},
+			{"src":"data/json/items/weapons/boarding_pods.json", "count":1},
+			{"src":"data/json/items/weapons/remote_datajack.json", "count":1},
 			{"src":"data/json/items/converters/converter_yendor.json", "count":1},
 			{"src":"data/json/items/consumables/repair_nanobots.json", "count":1},
 			{"src":"data/json/items/weapons/chaos_ball_generator_unique.json", "count":1},

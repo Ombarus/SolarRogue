@@ -1,0 +1,83 @@
+{
+	"name_id":"Boarding Pods",
+	"type":"weapon",
+	"sprite": "laser_turret",
+	"icon": {
+		"texture":"data/private/textures/space-sprite.png",
+		"region":[0,128,128,128]
+	},
+	"animation": {
+		"shoot": "scenes/tileset_source/LaserFX01.tscn"
+	},
+	"weapon_data": {
+		"base_dam":1.0,
+		"max_dam":2.0,
+		"fire_range":1.0,
+		"fire_pattern":"+",
+		"fire_energy_cost":500.0,
+		"fire_speed":1.0,
+		"base_hit_chance":0.8,
+		"crit_chance":0.0,
+		"crit_multiplier":1.5,
+		"destroy_weapon_chance":0.25,
+		"destroy_shield_chance":0.25,
+		"destroy_scanner_chance":0.3,
+		"destroy_converter_chance":0.4,
+		"destroy_utilities_chance":0.4,
+		"take_ship_chance":0.1,
+	},
+	"equipment": {
+		"slot":"weapon",
+		"volume":60.0,
+		"equip_ap":3.0,
+		"unequip_ap":3.0
+	},
+	"recyclable": {
+		"energy": 500,
+		"player_sale_range": [700,1100],
+		"player_buy_range": [1300,1700]
+	},
+	"disassembling": {
+		"produce":"data/json/items/misc/spare_parts.json",
+		"count":1,
+		"energy_cost":500
+	},
+	"variations": [
+		{"src":"data/json/items/effects/normal.json", "chance": 50}
+	],
+	"description": {
+		"text":"",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume*volume_multiplier}", "translate_value":false, "positive_good":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
+				{"name":"Mount Point", "value":"Weapon"}
+			]
+		},
+		"Weapon Stats": {
+			"min_level":0,
+			"fields": [
+				{"name":"Damage", "value":"{weapon_data.base_dam*base_dam_multiplier}~{weapon_data.max_dam*max_dam_multiplier}", "translate_value":false},
+				{"name":"Range", "value":"{weapon_data.fire_range+range_bonus}", "translate_value":false},
+				{"name":"Energy Cost", "value":"{weapon_data.fire_energy_cost*fire_energy_cost_multiplier}", "translate_value":false, "positive_good":false},
+				{"name":"Speed", "value":"{weapon_data.fire_speed*fire_speed_multiplier} turns", "positive_good":false},
+				{"name":"Hit Chance", "value":"{weapon_data.base_hit_chance+hit_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Critical Chance", "value":"{weapon_data.crit_chance+crit_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Critical Multiplier", "value":"x{weapon_data.crit_multiplier}", "translate_value":false},
+				{"name":"Ammo", "value":"None"}
+			]
+		},
+		"Boarding Stats": {
+			"min_level":0,
+			"fields": [
+				{"name":"Destroy Weapon", "value":"{weapon_data.destroy_weapon_chance}%", "translate_value":false, "display_percent":true},
+				{"name":"Destroy Shield", "value":"{weapon_data.destroy_shield_chance}%", "translate_value":false, "display_percent":true},
+				{"name":"Destroy Scanner", "value":"{weapon_data.destroy_scanner_chance}%", "translate_value":false, "display_percent":true},
+				{"name":"Destroy Converter", "value":"{weapon_data.destroy_converter_chance}%", "translate_value":false, "display_percent":true},
+				{"name":"Destroy Utility", "value":"{weapon_data.destroy_utilities_chance}%", "translate_value":false, "display_percent":true},
+				{"name":"Take Over", "value":"{weapon_data.take_ship_chance}%", "translate_value":false, "display_percent":true}
+			]
+		}
+	}
+}

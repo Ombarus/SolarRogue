@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=2]
+[gd_scene load_steps=93 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/private/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -88,6 +88,7 @@
 [ext_resource path="res://data/private/sounds/sfx/scanner/ship4.wav" type="AudioStream" id=86]
 [ext_resource path="res://scripts/Behaviors/ConsumableBehavior.gd" type="Script" id=87]
 [ext_resource path="res://scripts/Behaviors/Runes/Assimilation.gd" type="Script" id=88]
+[ext_resource path="res://scenes/GUI/Dialogs/HackTarget.tscn" type="PackedScene" id=89]
 
 [sub_resource type="Animation" id=1]
 resource_name = "slow_popin"
@@ -566,6 +567,17 @@ __meta__ = {
 }
 
 [node name="SelectTarget" parent="Camera-GUI/SafeArea/SelectTargetRoot" instance=ExtResource( 52 )]
+visible = false
+
+[node name="SelectHackRoot" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HackTarget" parent="Camera-GUI/SafeArea/SelectHackRoot" instance=ExtResource( 89 )]
 visible = false
 
 [node name="SettingsRoot" type="Control" parent="Camera-GUI/SafeArea"]

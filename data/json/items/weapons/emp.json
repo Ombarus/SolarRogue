@@ -1,0 +1,78 @@
+{
+	"name_id":"EMP",
+	"type":"weapon",
+	"sprite":"missile_launcher",
+	"icon": {
+		"texture":"data/private/textures/space-sprite.png",
+		"region":[128,128,128,128]
+	},
+	"animation": {
+		"shoot": "scenes/tileset_source/missile_fx.tscn"
+	},
+	"weapon_data": {
+		"base_dam":2.0,
+		"max_dam":6.0,
+		"fire_range":0.0,
+		"area_effect":2,
+		"fire_pattern":"o",
+		"fire_energy_cost":200.0,
+		"fire_speed":1.0,
+		"cooldown":10.0,
+		"base_hit_chance":0.75,
+		"crit_chance":0.0,
+		"crit_multiplier":1.5,
+		"disable_ship_chance":0.7,
+		"disable_duration_min":2,
+		"disable_duration_max":5
+	},
+	"equipment": {
+		"slot":"weapon",
+		"volume":70.0,
+		"equip_ap":3.0,
+		"unequip_ap":3.0
+	},
+	"recyclable": {
+		"energy": 875,
+		"player_sale_range": [1100,1500],
+		"player_buy_range": [1800,3050]
+	},
+	"disassembling": {
+		"produce":"data/json/items/misc/spare_parts.json",
+		"count":2,
+		"energy_cost":700
+	},
+	"variations": [
+		{"src":"data/json/items/effects/normal.json", "chance": 50}
+	],
+	"description": {
+		"text":"Discharge a pulse of electromagnetic charges that can disable any ship in the vicinity. After firing the capacitors must be recharged before it can be fired again.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume*volume_multiplier}", "translate_value":false, "positive_good":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
+				{"name":"Mount Point", "value":"Weapon"}
+			]
+		},
+		"Weapon Stats": {
+			"min_level":0,
+			"fields": [
+				{"name":"Damage", "value":"{weapon_data.base_dam*base_dam_multiplier}~{weapon_data.max_dam*max_dam_multiplier}", "translate_value":false},
+				{"name":"Range", "value":"{weapon_data.fire_range+range_bonus}", "translate_value":false},
+				{"name":"Energy Cost", "value":"{weapon_data.fire_energy_cost*fire_energy_cost_multiplier}", "translate_value":false, "positive_good":false},
+				{"name":"Speed", "value":"{weapon_data.fire_speed*fire_speed_multiplier} turns", "positive_good":false},
+				{"name":"Hit Chance", "value":"{weapon_data.base_hit_chance+hit_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Critical Chance", "value":"{weapon_data.crit_chance+crit_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Critical Multiplier", "value":"x{weapon_data.crit_multiplier}", "translate_value":false},
+				{"name":"Ammo", "value":"Missile"}
+			]
+		},
+		"Pulse Stats": {
+			"min_level":0,
+			"fields": [
+				{"name":"Shutdown", "value":"{weapon_data.disable_ship_chance}%", "translate_value":false, "display_percent":true},
+				{"name":"Duration", "value":"{weapon_data.disable_duration_min}~{weapon_data.disable_duration_max} Turns", "translate_value":true}
+			]
+		}
+	}
+}

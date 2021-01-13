@@ -72,6 +72,7 @@ func _ready():
 	BehaviorEvents.connect("OnHUDOptionPressed", self, "Pressed_Option_Callback")
 	BehaviorEvents.connect("OnHUDQuestionPressed", self, "Pressed_Question_Callback")
 	BehaviorEvents.connect("OnPlayerDeath", self, "OnPlayerDeath_Callback")
+	BehaviorEvents.connect("OnResumeAttack", self, "OnResumeAttack_Callback")
 	
 	var action = get_node(InventoryDialog)
 	action.connect("drop_pressed", self, "OnDropIventory_Callback")
@@ -544,7 +545,6 @@ func _input(event):
 	# because otherwise _unhandled_input will trigger and send the ship somewhere else
 	if (event is InputEventMouseButton or event is InputEventKey) and playerNode != null and playerNode.get_attrib("ai") != null and playerNode.get_attrib("ai.disable_on_interest", false) == true and playerNode.get_attrib("ai.skip_check") <= 0:
 		if event.is_pressed() == false:
-			print("stop automove")
 			playerNode.set_attrib("ai.disabled", true)
 			_double_tap_timer = 0.2
 			_double_tap_action = "" # do nothing if not double-tap
@@ -685,12 +685,10 @@ func _unhandled_input(event):
 				
 				##################
 				if _double_tap_timer > 0.0:
-					print("detected double tap")
 					_double_tap_timer = 0.0
 					_double_tap_action = ""
 					BehaviorEvents.emit_signal("OnDoubleTap")
 				else:
-					print("wait 0.2")
 					_double_tap_timer = 0.2
 					_double_tap_action = "apply_goto"
 					_double_tap_tile = clicked_tile
@@ -767,7 +765,6 @@ func _process(delta):
 			_double_tap_action = ""
 
 func apply_goto():
-	print("double-tap timeout, do automove")
 	_double_tap_timer = 0.0
 	_double_tap_action = ""
 	# goto click pos
@@ -871,6 +868,10 @@ func cancel_targetting_pressed_Callback():
 	set_input_state(Globals.INPUT_STATE.hud)
 	
 
+func OnResumeAttack_Callback():
+	# At this point, all targets should already be selected, we resume applying damage and don't need parameters
+	ProcessAttackSelection(null, null)
+
 #TODO: if target is out-of-range the sequence will be aborted. Should probably fix that if you have more than one weapon
 #TODO: when firing multiple weapon. If the slowest weapon would allow the fastest to attack twice it should query twice.
 func ProcessAttackSelection(target, shot_tile):
@@ -909,8 +910,17 @@ func ProcessAttackSelection(target, shot_tile):
 	if all_canceled == true:
 		return
 	
-	BehaviorEvents.emit_signal("OnBeginParallelAction", playerNode)
+	var started = false
 	for shot in _weapon_shots:
+		if shot.state == SHOOTING_STATE.done:
+			started = true
+			continue
+		# if any weapon shot is "done" but we're still looping it means we were waiting for
+		# electronic warfare select screen and we are already in a parallel action phase
+		if started == false:
+			print("weapon begin parallel action")
+			BehaviorEvents.emit_signal("OnBeginParallelAction", playerNode)
+			started = true
 		var shoot_empty = Globals.get_data(shot.weapon_data, "weapon_data.shoot_empty", false)
 		if shot.target != null:
 			var valid_target := []
@@ -924,7 +934,13 @@ func ProcessAttackSelection(target, shot_tile):
 			BehaviorEvents.emit_signal("OnDealDamage", valid_target, playerNode, shot.weapon_data, shot.modified_attributes, shot.tile)
 		elif shot.target == null and shoot_empty and "tile" in shot and shot.tile != null:
 			BehaviorEvents.emit_signal("OnDealDamage", [], playerNode, shot.weapon_data, shot.modified_attributes, shot.tile)
-	BehaviorEvents.emit_signal("OnEndParallelAction", playerNode)
+		shot.state = SHOOTING_STATE.done
+		if playerNode.get_attrib("wait_for_hack", false) == true:
+			print("player waiting for hack")
+			break
+	if playerNode.get_attrib("wait_for_hack", false) == false:
+		print("weapon end parallel action")
+		BehaviorEvents.emit_signal("OnEndParallelAction", playerNode)
 	
 func ProcessBoardSelection(target, tile):
 	BehaviorEvents.emit_signal("OnPopGUI")

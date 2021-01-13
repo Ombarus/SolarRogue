@@ -132,6 +132,10 @@ func consume(shooter, weapon_data, modified_attributes):
 	
 	
 func validate_action(target, shooter, weapon_data, modified_attributes):
+	if shooter.get_attrib("offline_systems.weapon", 0.0) > 0.0:
+		BehaviorEvents.emit_signal("OnLogLine", "[color=red]Weapon System Offline![/color]")
+		return false
+		
 	if target != null:
 		var defense_deployed = target.get_attrib("harvestable.defense_deployed")
 		if defense_deployed != null and defense_deployed == true:
@@ -254,7 +258,6 @@ func ProcessDefense(target, shooter, weapon_data):
 	
 	
 func ProcessHarvest(target, shooter, weapon_data):
-	#TODO modulate chance based on weapon data
 	var chance = target.get_attrib("harvestable.actual_rate")
 	var bonus_chance = Globals.get_data(weapon_data, "weapon_data.planet_bonus", 0.0)
 	chance = chance + bonus_chance
@@ -312,10 +315,12 @@ func ProcessDamage(target, shooter, weapon_data, modified_attributes):
 	var chance : float = Globals.get_data(weapon_data, "weapon_data.base_hit_chance", 1.0)
 	var effect_bonus : float = Globals.EffectRef.GetBonusValue(shooter, weapon_data.src, modified_attributes, "hit_chance_bonus")
 	var dodge_bonus : float = Globals.EffectRef.GetBonusValue(target, weapon_data.src, null, "dodge_chance_bonus")
+	var electro_success := false
 	chance = chance - ai_malus + effect_bonus - dodge_bonus
 	chance = clamp(chance, 0.1, 1.0) # minimum 10% chance always because I say so!
 	var dam := 0.0
 	if chance == null or MersenneTwister.rand_float() < chance:
+		electro_success = true
 		dam = MersenneTwister.rand(max_dam-min_dam) + min_dam
 		#dam = dam * _get_power_amplifier_stack(shooter, "damage_percent")
 		
@@ -367,8 +372,63 @@ func ProcessDamage(target, shooter, weapon_data, modified_attributes):
 			damage_type = Globals.DAMAGE_TYPE.hull_hit
 		
 		BehaviorEvents.emit_signal("OnDamageTaken", target, shooter, damage_type)
+		
+	if electro_success and target.get_attrib("destroyable.destroyed", false) == false:
+		_handle_electronic_warfare(target, shooter, weapon_data, modified_attributes)
 	
 	display_damage_log(is_player, is_target_player, dam, hull_dam, shield_per, target.get_attrib("destroyable.current_hull", target.get_attrib("destroyable.hull")) <= 0, is_critical, target.get_attrib("boardable", false))
+	
+func _handle_electronic_warfare(target, shooter, weapon_data, modified_attributes):
+	var is_player = shooter.get_attrib("type") == "player"
+	var weapon_detail = weapon_data.get("weapon_data", {})
+	var weapon_keys : Array = weapon_detail.keys()
+	var warfare_choices := []
+	for key in weapon_keys:
+		if ("destroy_" in key or "disable_" in key or "take_ship" in key) and not "duration" in key:
+			#TODO: Add bonus/malus effects from variations and utilities
+			warfare_choices.push_back({
+				"name_id":key, 
+				"chance":weapon_detail[key], 
+				"target":target, "shooter":shooter, 
+				"duration_min":weapon_detail.get("disable_duration_min", 0), # optional, default 0
+				"duration_max":weapon_detail.get("disable_duration_max", 0)
+			})
+			
+	if warfare_choices.size() > 1:
+		if is_player:
+			print("weapon: show hack target gui")
+			BehaviorEvents.emit_signal("OnPushGUI", "HackTarget", {"callback_object":self, "callback_method":"apply_warfare_choice", "targets":warfare_choices})
+			shooter.set_attrib("wait_for_hack", true)
+		else:
+			# make a choice for the AI
+			#TODO: this is to test shield disabling, make the AI choose randomly?
+			for line in warfare_choices:
+				if "shield" in line.name_id:
+					apply_warfare_choice([line])
+					break
+	elif warfare_choices.size() == 1:
+		apply_warfare_choice(warfare_choices)
+	
+func apply_warfare_choice(selected_targets):
+	var target : Attributes = selected_targets[0].target
+	var shooter : Attributes = selected_targets[0].shooter
+	shooter.set_attrib("wait_for_hack", false)
+	var action : String = selected_targets[0].name_id
+	var chance : float = selected_targets[0].chance
+	var duration_min : int = selected_targets[0].duration_min
+	var duration_max : int = selected_targets[0].duration_max
+	
+	if MersenneTwister.rand_float() < chance:
+		if "disable_" in action:
+			var disable_turn : int = MersenneTwister.rand(duration_max - duration_min) + duration_min
+			var part : String = action.replace("disable_", "").replace("_chance", "")
+			disable_turn = max(disable_turn, target.get_attrib("offline_systems.%s" % part, 0.0))
+			target.set_attrib("offline_systems.%s" % part, disable_turn)
+			BehaviorEvents.emit_signal("OnSystemDisabled", target, part)
+		#TODO: destroy & take over
+	print("weapon: hack done, resume attack")
+	BehaviorEvents.emit_signal("OnResumeAttack")
+	
 	
 func OnObjectDestroyed_Callback(target):
 	if target.get_attrib("drop_on_death") != null:
