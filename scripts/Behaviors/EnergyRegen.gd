@@ -5,6 +5,9 @@ func _ready():
 	BehaviorEvents.connect("OnMountAdded", self, "OnMountAdded_Callback")
 	
 func OnObjTurn_Callback(obj):
+	if obj.get_attrib("offline_systems.utility", 0.0) > 0.0:
+		return false
+	
 	var utils = obj.get_attrib("mounts.utility")
 	var utils_data = Globals.LevelLoaderRef.LoadJSONArray(utils)
 	var converters_data = Globals.LevelLoaderRef.LoadJSONArray(obj.get_attrib("mounts.converter"))

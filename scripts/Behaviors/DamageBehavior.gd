@@ -403,7 +403,7 @@ func _handle_electronic_warfare(target, shooter, weapon_data, modified_attribute
 			# make a choice for the AI
 			#TODO: this is to test shield disabling, make the AI choose randomly?
 			for line in warfare_choices:
-				if "shield" in line.name_id:
+				if "utility" in line.name_id:
 					apply_warfare_choice([line])
 					break
 	elif warfare_choices.size() == 1:
@@ -412,7 +412,6 @@ func _handle_electronic_warfare(target, shooter, weapon_data, modified_attribute
 func apply_warfare_choice(selected_targets):
 	var target : Attributes = selected_targets[0].target
 	var shooter : Attributes = selected_targets[0].shooter
-	shooter.set_attrib("wait_for_hack", false)
 	var action : String = selected_targets[0].name_id
 	var chance : float = selected_targets[0].chance
 	var duration_min : int = selected_targets[0].duration_min
@@ -422,12 +421,16 @@ func apply_warfare_choice(selected_targets):
 		if "disable_" in action:
 			var disable_turn : int = MersenneTwister.rand(duration_max - duration_min) + duration_min
 			var part : String = action.replace("disable_", "").replace("_chance", "")
-			disable_turn = max(disable_turn, target.get_attrib("offline_systems.%s" % part, 0.0))
+			var previous_timer : float = target.get_attrib("offline_systems.%s" % part, 0.0)
+			disable_turn = max(disable_turn, previous_timer)
 			target.set_attrib("offline_systems.%s" % part, disable_turn)
-			BehaviorEvents.emit_signal("OnSystemDisabled", target, part)
+			if previous_timer <= 0.0: # only trigger disable if we weren't already disabled
+				BehaviorEvents.emit_signal("OnSystemDisabled", target, part)
 		#TODO: destroy & take over
-	print("weapon: hack done, resume attack")
-	BehaviorEvents.emit_signal("OnResumeAttack")
+	print("%s: weapon: hack done, resume attack" % shooter.get_name())
+	if shooter.get_attrib("wait_for_hack", false) == true:
+		shooter.set_attrib("wait_for_hack", false)
+		BehaviorEvents.emit_signal("OnResumeAttack")
 	
 	
 func OnObjectDestroyed_Callback(target):

@@ -32,7 +32,9 @@ func _ready():
 	BehaviorEvents.connect("OnItemDropped", self, "OnItemDropped_Callback")
 	BehaviorEvents.connect("OnConsumeItem", self, "OnConsumeItem_Callback")
 	BehaviorEvents.connect("OnUpdateMountAttribute", self, "OnUpdateMountAttribute_Callback")
-	
+	BehaviorEvents.connect("OnSystemDisabled", self, "OnSystemDisabled_Callback")
+	BehaviorEvents.connect("OnSystemEnabled", self, "OnSystemEnabled_Callback")
+
 	
 func _exit_tree():
 	Globals.EffectRef = null
@@ -61,14 +63,38 @@ func get_display_name(data, modified_attributes=null):
 			
 	return Globals.mytr(display_name)
 	
+func OnSystemDisabled_Callback(obj, system):
+	if not system in ["weapon", "shield", "scanner", "converter", "utility"]:
+		return
+	
+	var mounts : Array = obj.get_attrib("mounts.%s" % system, [])
+	var mount_attributes : Array = obj.get_attrib("mount_attributes.%s" % system, [])
+	# temporarily remove the effect while the system is disabled
+	# ***CAREFUL not to remove it twice while it's disabled***
+	for idx in range(mounts.size()):
+		if not mounts[idx].empty():
+			OnMountRemoved_Callback(obj, system, mounts[idx], mount_attributes[idx], true)
+	
+	
+func OnSystemEnabled_Callback(obj, system):
+	if not system in ["weapon", "shield", "scanner", "converter", "utility"]:
+		return
+		
+	var mounts : Array = obj.get_attrib("mounts.%s" % system, [])
+	var mount_attributes : Array = obj.get_attrib("mount_attributes.%s" % system, [])
+	for idx in range(mounts.size()):
+		if not mounts[idx].empty():
+			OnMountAdded_Callback(obj, system, mounts[idx], mount_attributes[idx], true)
+	
 func OnUpdateMountAttribute_Callback(obj, key, idx, new_attrib):
 	var mount_attributes = obj.get_attrib("mount_attributes.%s" % key)
 	var mounts = obj.get_attrib("mounts.%s" % key)
-	var old_variation = mount_attributes[idx].get("selected_variation", "")
+	#var old_variation = mount_attributes[idx].get("selected_variation", "")
 	
 	# fake add/remove to reset applied_effects
-	OnMountRemoved_Callback(obj, key, mounts[idx], mount_attributes[idx])
-	OnMountAdded_Callback(obj, key, mounts[idx], new_attrib)
+	if obj.get_attrib("offline_systems.%s" % key, 0.0) <= 0.0:
+		OnMountRemoved_Callback(obj, key, mounts[idx], mount_attributes[idx])
+		OnMountAdded_Callback(obj, key, mounts[idx], new_attrib)
 	
 	mount_attributes[idx] = new_attrib
 	obj.set_attrib("mount_attributes.%s" % key, mount_attributes)
@@ -149,7 +175,11 @@ func OnAddItem_Callback(picker, item_id, modified_attributes):
 		picker.set_attrib("applied_effects", applied_effects)
 		
 
-func OnMountAdded_Callback(obj, slot, src, modified_attributes):
+func OnMountAdded_Callback(obj, slot, src, modified_attributes, force=false):
+	# If a mount is disabled, we'll add the attributes automatically when the mount is re-enabled
+	if obj.get_attrib("offline_systems.%s" % slot, 0.0) > 0.0 and force == false:
+		return
+		
 	var src_data = Globals.LevelLoaderRef.LoadJSON(src)
 	var obj_attributes = src_data.get("attributes", {})
 	if obj_attributes.size() > 0:
@@ -186,7 +216,11 @@ func OnMountAdded_Callback(obj, slot, src, modified_attributes):
 	obj.set_attrib("applied_effects", applied_effects)
 	
 	
-func OnMountRemoved_Callback(obj, slot, src, modified_attributes):
+func OnMountRemoved_Callback(obj, slot, src, modified_attributes, force=false):
+	# If a mount is disabled, we've already removed the attributes
+	if obj.get_attrib("offline_systems.%s" % slot, 0.0) > 0.0 and force == false:
+		return
+		
 	# Remove effects from object like utility
 	var applied_effects : Array = obj.get_attrib("applied_effects", [])
 	for index in range(applied_effects.size()):

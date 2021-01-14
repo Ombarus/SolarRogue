@@ -36,15 +36,12 @@ func OnObjTurn_Callback(obj):
 	var shields = obj.get_attrib("mounts.shield")
 	var shields_data = Globals.LevelLoaderRef.LoadJSONArray(shields)
 	if obj.get_attrib("offline_systems.shield", 0.0) > 0.0:
-		obj.set_attrib("shield.tmp_max_shield", Globals.mytr("Disabled"))
 		obj.set_attrib("shield.last_turn_update", Globals.total_turn)
 		return
 	if shields_data.size() <= 0:
-		obj.set_attrib("shield.tmp_max_shield", Globals.mytr("Missing"))
 		return
 	
 	var max_hp = obj.get_max_shield()
-	obj.set_attrib("shield.tmp_max_shield", max_hp)
 	var cur_hp = obj.get_attrib("shield.current_hp")
 	if cur_hp == null:
 		obj.set_attrib("shield.current_hp", max_hp)

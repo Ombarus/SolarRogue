@@ -8,6 +8,25 @@ func _ready():
 	BehaviorEvents.connect("OnMountRemoved", self, "OnMountRemoved_Callback")
 	BehaviorEvents.connect("OnMountAdded", self, "OnMountAdded_Callback")
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
+	BehaviorEvents.connect("OnSystemDisabled", self, "OnSystemDisabled_Callback")
+	BehaviorEvents.connect("OnSystemEnabled", self, "OnSystemEnabled_Callback")
+
+func OnSystemDisabled_Callback(obj, system):
+	if not "utility" in system:
+		return
+		
+	var applied = obj.get_attrib("cargo.applied_bonus")
+	if applied == null or applied == false:
+		return # no applied bonus, nothing to do
+		
+	var utils = str2var(var2str(obj.get_attrib("mounts.utility")))
+	_reset_cargo(obj, utils)
+
+func OnSystemEnabled_Callback(obj, system):
+	if not "utility" in system:
+		return
+		
+	OnObjectLoaded_Callback(obj)
 
 func _sort_by_cargo_rate(a, b):
 	var rate_a = a.cargo_optimizer.per_cargo_space

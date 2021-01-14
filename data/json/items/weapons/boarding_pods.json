@@ -23,7 +23,7 @@
 		"destroy_shield_chance":0.25,
 		"destroy_scanner_chance":0.3,
 		"destroy_converter_chance":0.4,
-		"destroy_utilities_chance":0.4,
+		"destroy_utility_chance":0.4,
 		"take_ship_chance":0.1,
 	},
 	"equipment": {

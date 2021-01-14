@@ -13,8 +13,16 @@ func _ready():
 	BehaviorEvents.connect("OnLevelLoaded", self, "OnLevelLoaded_Callback")
 	BehaviorEvents.connect("OnTransferPlayer", self, "OnTransferPlayer_Callback")
 	BehaviorEvents.connect("OnLocaleChanged", self, "OnLocaleChanged_Callback")
+	BehaviorEvents.connect("OnSystemDisabled", self, "OnSystemDisabled_Callback")
+	BehaviorEvents.connect("OnSystemEnabled", self, "OnSystemDisabled_Callback")
 	if Globals.LevelLoaderRef != null:
 		OnLevelLoaded_Callback()
+
+func OnSystemDisabled_Callback(obj, system):
+	var is_player = obj.get_attrib("type") == "player"
+	if not is_player:
+		return
+	UpdateStatusBar(obj)
 
 func OnLocaleChanged_Callback():
 	var p := Globals.get_first_player()
@@ -92,6 +100,8 @@ func UpdateStatusBar(player_obj):
 	var cur_shield = player_obj.get_attrib("shield.current_hp")
 	if missing_shield:
 		status_str += "[color=yellow]%s[/color]" % [Globals.mytr("Missing")]
+	elif player_obj.get_attrib("offline_systems.shield", 0.0) > 0.0:
+		status_str += "[color=red]%s[/color]" % [Globals.mytr("Disabled!")]
 	elif cur_shield != null and cur_shield < 1:
 		status_str += "[color=red]%s[/color]" % [Globals.mytr("Down!")]
 	else:
