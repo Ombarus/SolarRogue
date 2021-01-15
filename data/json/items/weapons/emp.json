@@ -1,5 +1,5 @@
 {
-	"name_id":"EMP",
+	"name_id":"E.M.P.",
 	"type":"weapon",
 	"sprite":"missile_launcher",
 	"icon": {
@@ -15,15 +15,15 @@
 		"fire_range":0.0,
 		"area_effect":2,
 		"fire_pattern":"o",
-		"fire_energy_cost":200.0,
-		"fire_speed":1.0,
+		"fire_energy_cost":1500.0,
+		"fire_speed":0.5,
 		"cooldown":10.0,
-		"base_hit_chance":0.75,
+		"base_hit_chance":0.99,
 		"crit_chance":0.0,
 		"crit_multiplier":1.5,
-		"disable_ship_chance":0.7,
-		"disable_duration_min":2,
-		"disable_duration_max":5
+		"disable_ship_chance":0.85,
+		"disable_duration_min":3,
+		"disable_duration_max":6
 	},
 	"equipment": {
 		"slot":"weapon",

@@ -31,6 +31,12 @@ func OnMovement_callback(obj, dir):
 			BehaviorEvents.emit_signal("OnLogLine", "We have too much cargo, choose what to leave behind before we go")
 			obj.set_attrib("moving.moved", false)
 			return
+			
+	if obj.get_attrib("offline_systems.movement", 0.0) > 0.0:
+		if obj.get_attrib("type") == "player":
+			BehaviorEvents.emit_signal("OnLogLine", "Engine Offline!")
+		obj.set_attrib("moving.moved", false)
+		return
 	
 	var move_speed = obj.get_attrib("moving.speed")
 	var energy_cost = obj.get_attrib("moving.energy_cost")

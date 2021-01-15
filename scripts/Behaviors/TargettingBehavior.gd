@@ -153,6 +153,7 @@ func IsValidTile(fire_radius, player_tile, target_tile, targetting_data):
 func ClosestFiringSolution(obj, shooter_tile, target_tile, weapon):
 	var shootable_tiles = []
 	var fire_radius = weapon.weapon_data.weapon_data.fire_range + Globals.EffectRef.GetBonusValue(obj, "", weapon.modified_attributes, "range_bonus")
+	var area_size : int = Globals.get_data(weapon.weapon_data, "weapon_data.area_effect", 0)
 	var offset = Vector2(0,0)
 	var obj_tile = shooter_tile
 	var bounds = Globals.LevelLoaderRef.levelSize
@@ -184,6 +185,7 @@ func ClosestFiringSolution(obj, shooter_tile, target_tile, weapon):
 		
 	var min_length = null
 	var best_dist = null
+	var best_tile = null
 	for tile in shootable_tiles:
 		var dist = target_tile - tile
 		var move = dist
@@ -198,12 +200,17 @@ func ClosestFiringSolution(obj, shooter_tile, target_tile, weapon):
 					can_use = false
 					break
 					
-		var length = dist.length()
+		# For AoE weapons this is probably not perfect but it should be close enough
+		# I want to avoid adding all the tiles inside the area of effect, I feel it would be too expensive
+		# This should return 0 if the player is inside the area of effect which is good
+		# not sure about diagonals tough
+		var length = max(0.0, dist.length() - area_size)
 		if min_length == null or (can_use and min_length > length):
 			min_length = length
 			best_dist = dist
+			best_tile = tile
 			
-	return best_dist
+	return [best_dist, best_tile, min_length]
 		
 
 func _DoTargetting(player, weapon):

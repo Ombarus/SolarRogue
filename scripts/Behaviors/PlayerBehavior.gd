@@ -73,6 +73,8 @@ func _ready():
 	BehaviorEvents.connect("OnHUDQuestionPressed", self, "Pressed_Question_Callback")
 	BehaviorEvents.connect("OnPlayerDeath", self, "OnPlayerDeath_Callback")
 	BehaviorEvents.connect("OnResumeAttack", self, "OnResumeAttack_Callback")
+	BehaviorEvents.connect("OnSystemDisabled", self, "OnSystemDisabled_Callback")
+	BehaviorEvents.connect("OnSystemEnabled", self, "OnSystemEnabled_Callback")
 	
 	var action = get_node(InventoryDialog)
 	action.connect("drop_pressed", self, "OnDropIventory_Callback")
@@ -90,6 +92,19 @@ func _ready():
 	BehaviorEvents.connect("OnDifficultyChanged", self, "OnDifficultyChanged_Callback")
 	BehaviorEvents.connect("OnCameraDragged", self, "OnCameraDragged_Callback")
 	
+
+func OnSystemDisabled_Callback(obj, system):
+	if obj != playerNode:
+		return
+	
+	UpdateButtonVisibility()
+	
+func OnSystemEnabled_Callback(obj, system):
+	if obj != playerNode:
+		return
+	
+	UpdateButtonVisibility()
+
 func OnPlayerDeath_Callback(player):
 	lock_input = true
 	
@@ -220,8 +235,10 @@ func UpdateButtonVisibility():
 		if c != null and c != "":
 			valid = true
 			break
-	valid = valid and not hide_hud	
+	valid = valid and not hide_hud
+	valid = valid and playerNode.get_attrib("offline_systems.converter", 0.0) <= 0.0
 	converter_btn.Disabled = not valid
+
 	
 func OnMountAdded_Callback(obj, mount, src, modified_attributes):
 	if obj != playerNode:
@@ -240,6 +257,10 @@ func Pressed_Crafting_Callback():
 	var converter = playerNode.get_attrib("mounts.converter")
 	if converter == null or converter.size() <= 0 or converter[0].empty():
 		BehaviorEvents.emit_signal("OnLogLine", "The ship cannot function without a converter installed!")
+		return
+		
+	if playerNode.get_attrib("offline_systems.converter", 0.0) > 0.0:
+		BehaviorEvents.emit_signal("OnLogLine", "Our converter has been disabled by the enemy!")
 		return
 		
 	#BehaviorEvents.emit_signal("OnPushGUI", "Converter", {"object":playerNode, "callback_object":self, "callback_method":"OnCraft_Callback"})
@@ -352,6 +373,14 @@ func OnObjTurn_Callback(obj):
 		BehaviorEvents.emit_signal("OnWaitForAnimation")
 		return
 		
+	var disabled_ship_turn = obj.get_attrib("offline_systems.ship", 0.0)
+	if is_player and disabled_ship_turn > 0.0:
+		lock_input = true
+		var wait_time = min(1.0, disabled_ship_turn)
+		BehaviorEvents.emit_signal("OnUseAP", obj, wait_time)
+		return
+		
+		
 	# sometimes we put the player on cruise control. when we give him back control "ai" component will be disabled
 	if is_player and obj.get_attrib("ai") == null:
 		lock_input = false
@@ -442,7 +471,14 @@ func Pressed_Weapon_Callback():
 	for index in range(weapons_data.size()):
 		var data = weapons_data[index]
 		var attrib_data = weapon_attributes[index]
-		_weapon_shots.push_back({"state":SHOOTING_STATE.init, "weapon_data":data, "modified_attributes":attrib_data})
+		if not Globals.EffectRef.IsInCooldown(playerNode, attrib_data):
+			_weapon_shots.push_back({"state":SHOOTING_STATE.init, "weapon_data":data, "modified_attributes":attrib_data})
+		else:
+			BehaviorEvents.emit_signal("OnLogLine", "%s is in cooldown and need time to recharge", Globals.EffectRef.get_display_name(data, attrib_data))
+		
+	if _weapon_shots.size() <= 0:
+		BehaviorEvents.emit_signal("OnLogLine", "None of our weapons are ready Captain!")
+		return
 		
 	var cur_weapon = _weapon_shots[0]
 	cur_weapon.state = SHOOTING_STATE.wait_targetting
@@ -839,8 +875,9 @@ func do_contextual_actions(tile, player_tile):
 				for i in range(weapons_data.size()):
 					var w = weapons_data[i]
 					var attrib = weapons_attributes[i]
-					var best_move = targetting_behavior.ClosestFiringSolution(playerNode, player_tile, tile, {"weapon_data":w, "modified_attributes":attrib})
-					if best_move.length() == 0:
+					var firing_data = targetting_behavior.ClosestFiringSolution(playerNode, player_tile, tile, {"weapon_data":w, "modified_attributes":attrib})
+					var min_length = firing_data[2] # take AoE into account
+					if min_length == 0:
 						if o.get_attrib("destroyable") != null and priority < 200:
 							priority = 200 # enemy ships have very high priority
 							method_to_call = "Pressed_Weapon_Callback"
@@ -918,7 +955,6 @@ func ProcessAttackSelection(target, shot_tile):
 		# if any weapon shot is "done" but we're still looping it means we were waiting for
 		# electronic warfare select screen and we are already in a parallel action phase
 		if started == false:
-			print("weapon begin parallel action")
 			BehaviorEvents.emit_signal("OnBeginParallelAction", playerNode)
 			started = true
 		var shoot_empty = Globals.get_data(shot.weapon_data, "weapon_data.shoot_empty", false)
@@ -936,10 +972,8 @@ func ProcessAttackSelection(target, shot_tile):
 			BehaviorEvents.emit_signal("OnDealDamage", [], playerNode, shot.weapon_data, shot.modified_attributes, shot.tile)
 		shot.state = SHOOTING_STATE.done
 		if playerNode.get_attrib("wait_for_hack", false) == true:
-			print("player waiting for hack")
 			break
 	if playerNode.get_attrib("wait_for_hack", false) == false:
-		print("weapon end parallel action")
 		BehaviorEvents.emit_signal("OnEndParallelAction", playerNode)
 	
 func ProcessBoardSelection(target, tile):

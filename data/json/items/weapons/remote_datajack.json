@@ -27,7 +27,7 @@
 		"disable_movement_chance":0.95,
 		"disable_ship_chance":0.95,
 		"disable_duration_min":2,
-		"disable_duration_max":5
+		"disable_duration_max":7
 	},
 	"equipment": {
 		"slot":"weapon",

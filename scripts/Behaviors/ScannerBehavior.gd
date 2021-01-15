@@ -117,9 +117,12 @@ func process_empty_scanner(obj):
 	var scanners = obj.get_attrib("mounts.scanner")
 	if scanners == null or scanners.size() <= 0:
 		return
+	
+	# Should only called for player
+	var is_offline : bool = obj.get_attrib("offline_systems.scanner", 0.0) > 0.0
 		
 	var scanner_name = scanners[0]
-	if scanner_name == null or scanner_name == "":
+	if is_offline or scanner_name == null or scanner_name == "":
 		var level_id = Globals.LevelLoaderRef.GetLevelID()
 		var cur_in_range = obj.get_attrib("scanner_result.cur_in_range." + level_id, [])
 		if cur_in_range.size() > 0:
@@ -207,11 +210,12 @@ func _update_scanned_obj(obj, scanner_data):
 	
 	# Perf Hack: AIs for now don't really need scanner, they just need to check if the player is in their "vision" range
 	if obj.get_attrib("type") != "player":
-		var player_new_range = []
-		var player_cur_range = []
-		var all_players = []
+		var player_new_range := []
+		var player_cur_range := []
+		var all_players := []
 		var old_range = obj.get_attrib("scanner_result.cur_in_range." + level_id, [])
-		if "player" in Globals.LevelLoaderRef.objByType and Globals.LevelLoaderRef.objByType["player"].size() > 0:
+		var scanner_disabled : bool = obj.get_attrib("offline_systems.scanner", 0.0) > 0.0
+		if  scanner_disabled == false and "player" in Globals.LevelLoaderRef.objByType and Globals.LevelLoaderRef.objByType["player"].size() > 0:
 			all_players = Globals.LevelLoaderRef.objByType["player"]
 		for p in all_players:
 			var p_tile = Globals.LevelLoaderRef.World_to_Tile(p.position)
@@ -226,6 +230,10 @@ func _update_scanned_obj(obj, scanner_data):
 		obj.set_attrib("scanner_result.cur_in_range." + level_id, player_cur_range)
 		obj.set_attrib("scanner_result.new_in_range." + level_id, player_new_range)
 		BehaviorEvents.emit_signal("OnScannerUpdated", obj)
+		return
+		
+	# do not update scanner if offline
+	if obj.get_attrib("offline_systems.scanner", 0.0) > 0.0:
 		return
 		
 	var last_frame_tiles = obj.get_attrib("scanner_result.scanned_tiles." + level_id, [])

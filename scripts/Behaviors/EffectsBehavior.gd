@@ -371,6 +371,12 @@ func process_recipes_attributes(obj):
 		
 	obj.set_attrib("converter.selected_variations", recipe_variations)
 
+func SetCooldown(obj, item_attributes, cooldown):
+	item_attributes["cooldown_turn"] = Globals.total_turn + cooldown
+	
+func IsInCooldown(obj, item_attributes) -> bool:
+	return item_attributes.get("cooldown_turn", Globals.total_turn) > Globals.total_turn
+
 #TODO: might want to cache the results until an event request a refresh
 #		if all the params are the same, the result should be the same as long as
 #		no equipment changed

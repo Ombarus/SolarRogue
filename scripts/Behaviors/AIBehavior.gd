@@ -10,7 +10,17 @@ func _ready():
 	BehaviorEvents.connect("OnScannerUpdated", self, "OnScannerUpdated_Callback")
 	BehaviorEvents.connect("OnAttributeAdded", self, "OnAttributeAdded_Callback")
 	BehaviorEvents.connect("OnTriggerAnomaly", self, "OnTriggerAnomaly_Callback")
+	BehaviorEvents.connect("OnSystemDisabled", self, "OnSystemDisabled_Callback")
 	
+func OnSystemDisabled_Callback(obj, system):
+	if not "scanner" in system or obj.get_attrib("ai") == null:
+		return
+		
+	if obj.get_attrib("ai.target") != null:
+		obj.set_attrib("ai.pathfinding", "simple")
+		obj.set_attrib("ai.target", null)
+		obj.set_attrib("wandering", true)
+		BehaviorEvents.emit_signal("OnStatusChanged", obj)
 	
 func OnAttributeAdded_Callback(obj, added_name):
 	if added_name == "ai":
@@ -192,6 +202,12 @@ func OnObjTurn_Callback(obj):
 		obj.set_attrib("animation.waiting_moving", true)
 		return
 		
+	var disabled_ship_turn = obj.get_attrib("offline_systems.ship", 0.0)
+	if disabled_ship_turn > 0.0:
+		var wait_time = min(1.0, disabled_ship_turn)
+		BehaviorEvents.emit_signal("OnUseAP", obj, wait_time)
+		return
+		
 	if obj.get_attrib("ai.disable_on_interest") == true:
 		ConsiderInterests(obj)
 		if obj.get_attrib("ai") == null:
@@ -254,8 +270,9 @@ func DoJergQueenPathfinding(obj):
 		runaway_cooldown -= 1
 		obj.set_attrib("ai.run_cooldown", runaway_cooldown)
 		
-	if (queen_drones.size() < obj.get_attrib("spawner.max", 0) and ai_target == null) or \
-		(ai_target != null and MersenneTwister.rand(10) < 2):
+	if obj.get_attrib("offline_systems.converter", 0.0) <= 0.0 and ( \
+		(queen_drones.size() < obj.get_attrib("spawner.max", 0) and ai_target == null) or \
+		(ai_target != null and MersenneTwister.rand(10) < 2)):
 			
 		var queen_pos : Vector2 = Globals.LevelLoaderRef.World_to_Tile(obj.position)
 		var positions = obj.get_attrib("spawner.favored_position", [])
@@ -470,10 +487,14 @@ func DoAttackPathFinding(obj):
 	for index in range(weapons_data.size()):
 		var data = weapons_data[index]
 		var attrib_data = modified_attributes[index]
-		var best_move = _targetting.ClosestFiringSolution(obj, obj_tile, player_tile, {"weapon_data":data, "modified_attributes":attrib_data})
+		weapon_enabled = weapon_enabled and not Globals.EffectRef.IsInCooldown(obj, attrib_data)
+		var move_info = _targetting.ClosestFiringSolution(obj, obj_tile, player_tile, {"weapon_data":data, "modified_attributes":attrib_data})
+		var best_move = move_info[0]
+		var best_tile = move_info[1]
+		var min_length = move_info[2] # take AoE into account
 		var is_destroyed = player.get_attrib("destroyable.destroyed")
-		if weapon_enabled == true and best_move.length() == 0 and (is_destroyed == null or is_destroyed == false):
-			BehaviorEvents.emit_signal("OnDealDamage", [player], obj, data, attrib_data, player_tile)
+		if weapon_enabled == true and min_length == 0 and (is_destroyed == null or is_destroyed == false):
+			BehaviorEvents.emit_signal("OnDealDamage", [player], obj, data, attrib_data, best_tile)
 			shot = true
 		if minimal_move == null or minimal_move.length() > best_move.length():
 			minimal_move = best_move

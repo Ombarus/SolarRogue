@@ -116,6 +116,8 @@ func consume(shooter, weapon_data, modified_attributes):
 	if "fire_speed" in weapon_data.weapon_data:
 		var speed_mult = Globals.EffectRef.GetMultiplierValue(shooter, weapon_data.src, modified_attributes, "fire_speed_multiplier")
 		BehaviorEvents.emit_signal("OnUseAP", shooter, weapon_data.weapon_data.fire_speed * speed_mult)
+	if "cooldown" in weapon_data.weapon_data:
+		Globals.EffectRef.SetCooldown(shooter, modified_attributes, weapon_data.weapon_data.cooldown)
 	
 	var ammo = null
 	if weapon_data.weapon_data.has("ammo"):
@@ -396,14 +398,13 @@ func _handle_electronic_warfare(target, shooter, weapon_data, modified_attribute
 			
 	if warfare_choices.size() > 1:
 		if is_player:
-			print("weapon: show hack target gui")
 			BehaviorEvents.emit_signal("OnPushGUI", "HackTarget", {"callback_object":self, "callback_method":"apply_warfare_choice", "targets":warfare_choices})
 			shooter.set_attrib("wait_for_hack", true)
 		else:
 			# make a choice for the AI
 			#TODO: this is to test shield disabling, make the AI choose randomly?
 			for line in warfare_choices:
-				if "utility" in line.name_id:
+				if "ship" in line.name_id:
 					apply_warfare_choice([line])
 					break
 	elif warfare_choices.size() == 1:
@@ -426,8 +427,6 @@ func apply_warfare_choice(selected_targets):
 			target.set_attrib("offline_systems.%s" % part, disable_turn)
 			if previous_timer <= 0.0: # only trigger disable if we weren't already disabled
 				BehaviorEvents.emit_signal("OnSystemDisabled", target, part)
-		#TODO: destroy & take over
-	print("%s: weapon: hack done, resume attack" % shooter.get_name())
 	if shooter.get_attrib("wait_for_hack", false) == true:
 		shooter.set_attrib("wait_for_hack", false)
 		BehaviorEvents.emit_signal("OnResumeAttack")
