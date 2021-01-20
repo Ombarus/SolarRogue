@@ -398,7 +398,8 @@ func _handle_electronic_warfare(target, shooter, weapon_data, modified_attribute
 			
 	if warfare_choices.size() > 1:
 		if is_player:
-			BehaviorEvents.emit_signal("OnPushGUI", "HackTarget", {"callback_object":self, "callback_method":"apply_warfare_choice", "targets":warfare_choices})
+			BehaviorEvents.emit_signal("OnAddToAnimationQueue", BehaviorEvents, "emit_signal", ["OnPushGUI", "HackTarget", {"callback_object":self, "callback_method":"apply_warfare_choice", "targets":warfare_choices}], 500)
+			#$BehaviorEvents.emit_signal("OnPushGUI", "HackTarget", {"callback_object":self, "callback_method":"apply_warfare_choice", "targets":warfare_choices})
 			shooter.set_attrib("wait_for_hack", true)
 		else:
 			# make a choice for the AI

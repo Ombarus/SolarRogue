@@ -1,13 +1,13 @@
 {
 	"name_id":"Remote Datajack",
 	"type":"weapon",
-	"sprite": "laser_turret",
+	"sprite": "remote_datajack",
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
-		"region":[0,128,128,128]
+		"region":[128,1536,128,128]
 	},
 	"animation": {
-		"shoot": "scenes/tileset_source/LaserFX01.tscn"
+		"shoot": "scenes/tileset_source/hack_fx.tscn"
 	},
 	"weapon_data": {
 		"base_dam":0.0,

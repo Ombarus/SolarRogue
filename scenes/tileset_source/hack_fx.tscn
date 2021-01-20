@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://data/private/textures/arial10x10.png" type="Texture" id=1]
+[ext_resource path="res://scripts/animations/hack_fx.gd" type="Script" id=4]
+[ext_resource path="res://data/private/sounds/sfx/hacking.wav" type="AudioStream" id=5]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform vec4 c : hint_color;
+
+vec2 uv_offset_from_seed(vec2 seed) {
+	float u = floor(seed.x * 32.0) / 32.0;
+	float v = floor(seed.y * 8.0) / 8.0;
+	return vec2(u,v);
+}
+
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV + uv_offset_from_seed(vec2(COLOR.r, COLOR.b)));
+	COLOR = vec4(c.r, c.g, c.b, color.r * COLOR.a);
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/c = Color( 0.14902, 0.709804, 0.301961, 1 )
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 10, 10 )
+
+[sub_resource type="Gradient" id=5]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[node name="hack_fx" type="Node2D"]
+script = ExtResource( 4 )
+speed = 700.0
+rand_offset_x = Vector2( -30, 30 )
+rand_offset_y = Vector2( -30, 30 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource( 3 )
+amount = 50
+lifetime = 0.3
+local_coords = false
+texture = SubResource( 1 )
+direction = Vector2( 0, 1 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 78.43
+initial_velocity_random = 0.39
+linear_accel = 77.12
+angle = 360.0
+angle_random = 1.0
+scale_amount = 2.16
+scale_amount_random = 0.39
+color_ramp = SubResource( 5 )
+hue_variation = 1.0
+hue_variation_random = 1.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
+bus = "Sfx"
