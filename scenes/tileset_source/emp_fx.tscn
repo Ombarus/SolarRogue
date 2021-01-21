@@ -1,0 +1,125 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://data/private/textures/arial10x10.png" type="Texture" id=1]
+[ext_resource path="res://scripts/animations/hack_fx.gd" type="Script" id=4]
+[ext_resource path="res://data/private/sounds/sfx/hacking.wav" type="AudioStream" id=5]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec4 c : hint_color;
+
+vec2 uv_offset_from_seed(vec2 seed) {
+	float u = floor(seed.x * 32.0) / 32.0;
+	float v = floor(seed.y * 8.0) / 8.0;
+	return vec2(u,v);
+}
+
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV + uv_offset_from_seed(vec2(COLOR.r, COLOR.b)));
+	COLOR = vec4(c.r, c.g, c.b, color.r * COLOR.a);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/c = Color( 0.14902, 0.709804, 0.301961, 1 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 10, 10 )
+
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0, 0.990099, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.194719, 1, 1, 1, 0 )
+
+[sub_resource type="Gradient" id=4]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "boom"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("area:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("boom:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+
+[node name="hack_fx" type="Node2D"]
+script = ExtResource( 4 )
+speed = 700.0
+rand_offset_x = Vector2( -30, 30 )
+rand_offset_y = Vector2( -30, 30 )
+
+[node name="area" type="CPUParticles2D" parent="."]
+material = SubResource( 2 )
+scale = Vector2( 2, 2 )
+emitting = false
+amount = 200
+lifetime = 0.5
+texture = SubResource( 3 )
+emission_shape = 1
+emission_sphere_radius = 128.0
+direction = Vector2( 0, 1 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 43.62
+initial_velocity_random = 0.57
+linear_accel = 77.12
+angle = 360.0
+angle_random = 1.0
+scale_amount = 1.16
+scale_amount_random = 0.39
+color_ramp = SubResource( 6 )
+hue_variation = 1.0
+hue_variation_random = 1.0
+
+[node name="boom" type="CPUParticles2D" parent="."]
+material = SubResource( 2 )
+scale = Vector2( 1.3, 1.3 )
+amount = 70
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+texture = SubResource( 3 )
+direction = Vector2( 0, 1 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 422.71
+linear_accel = 77.12
+angle = 360.0
+angle_random = 1.0
+scale_amount = 2.16
+scale_amount_random = 0.39
+color_ramp = SubResource( 4 )
+hue_variation = 1.0
+hue_variation_random = 1.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
+bus = "Sfx"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "boom"
+anims/boom = SubResource( 5 )

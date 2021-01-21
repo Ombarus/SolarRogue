@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://data/private/textures/space-sprite.png" type="Texture" id=1]
 [ext_resource path="res://scripts/GUI/GUILayoutBase.gd" type="Script" id=4]
@@ -6,7 +6,6 @@
 [ext_resource path="res://scripts/GUI/LogSystem.gd" type="Script" id=8]
 [ext_resource path="res://scripts/GUI/StatusBarSystem.gd" type="Script" id=11]
 [ext_resource path="res://scenes/GUI/ButtonBase.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/GUI/DialogWindowBaseASCII.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/GUI/PopupButton.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/GUI/StringContentDialog.tscn" type="PackedScene" id=15]
 
@@ -212,6 +211,9 @@ margin_top = -1.0
 margin_bottom = -623.0
 mouse_filter = 2
 script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 warning_energy_level = 5001
 danger_energy_level = 1001
 
@@ -237,9 +239,3 @@ custom_fonts/font = ExtResource( 6 )
 text = "start"
 align = 2
 valign = 1
-
-[node name="base2" parent="StatusBar" instance=ExtResource( 13 )]
-visible = false
-margin_top = 1.0
-margin_right = -1114.0
-margin_bottom = -601.0

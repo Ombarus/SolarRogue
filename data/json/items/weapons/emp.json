@@ -1,10 +1,10 @@
 {
 	"name_id":"E.M.P.",
 	"type":"weapon",
-	"sprite":"missile_launcher",
+	"sprite":"emp",
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
-		"region":[128,128,128,128]
+		"region":[256,1536,128,128]
 	},
 	"animation": {
 		"shoot": "scenes/tileset_source/missile_fx.tscn"

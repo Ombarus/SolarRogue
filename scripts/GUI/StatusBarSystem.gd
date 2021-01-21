@@ -116,6 +116,16 @@ func UpdateStatusBar(player_obj):
 				changed_color = true
 			status_str += "="
 		status_str += "[/color]"
+		
+	var disabled_systems = player_obj.get_attrib("offline_systems", [])
+	if disabled_systems.size() > 0:
+		status_str += "[color=red]"
+	for system in disabled_systems:
+		if disabled_systems[system] > 0:
+			status_str += " " + system
+		
+	if disabled_systems.size() > 0:
+		status_str += "[/color]"
 	
 	_window.content = status_str
 	_window.bottom_title = bottom_title_str
