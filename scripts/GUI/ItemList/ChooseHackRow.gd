@@ -26,7 +26,11 @@ func set_row_data(data):
 		get_node("HBoxContainer/Wrapper/TextureRect").texture = null
 		
 	get_node("HBoxContainer/Name").text = Globals.mytr(data.name_id)
+	var text_color = Color.red
+	text_color.g = range_lerp(data.chance, 0.1, 0.6, 0.0, 1.0)
+	text_color.r = range_lerp(data.chance, 0.6, 0.8, 1.0, 0.0)
 	get_node("HBoxContainer/Chance").text = "%.0f%%" % [data.chance * 100.0]
+	get_node("HBoxContainer/Chance").set("custom_colors/font_color", text_color)
 		
 	
 func get_row_data():

@@ -22,6 +22,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 2 )
 script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="base" parent="." instance=ExtResource( 3 )]
 anchor_left = 0.5
@@ -32,8 +35,7 @@ margin_left = -187.0
 margin_top = -247.5
 margin_right = 187.0
 margin_bottom = 247.5
-dialog_cancel = true
-title = "Choose Target"
+title = "Unhandled Exception in..."
 
 [node name="TargetList" parent="base" instance=ExtResource( 4 )]
 anchor_right = 1.0

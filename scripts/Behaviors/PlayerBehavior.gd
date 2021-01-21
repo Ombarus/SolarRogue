@@ -383,6 +383,9 @@ func OnObjTurn_Callback(obj):
 		
 	# sometimes we put the player on cruise control. when we give him back control "ai" component will be disabled
 	if is_player and obj.get_attrib("ai") == null:
+		if obj.get_attrib("wait_for_hack", false) == true:
+			print("********INVESTIGATE, WAIT_FOR_HACK IS TRUE WHILE WE ARE STARTING A NEW TURN!!!!!*********")
+			
 		lock_input = false
 		Globals.LevelLoaderRef.SaveState(Globals.LevelLoaderRef.GetCurrentLevelData())
 		

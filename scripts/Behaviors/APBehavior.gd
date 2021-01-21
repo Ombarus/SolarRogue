@@ -113,6 +113,19 @@ func update_cooldowns(obj, amount):
 		if offline_systems[system] <= 0.0:
 			BehaviorEvents.emit_signal("OnSystemEnabled", obj, system)
 			to_erase.push_back(system)
+			var is_player : bool = obj.get_attrib("type") == "player"
+			if is_player:
+				var choices = {
+					"%s back online!":50,
+					"Our %s have finished rebooting":50
+				}
+				BehaviorEvents.emit_signal("OnLogLine", choices, [system])
+			if not is_player and obj.visible == true:
+				var choices = {
+					"The enemy's %s is back online!":50,
+					"Energy signature detected in enemy's %s":50
+				}
+				BehaviorEvents.emit_signal("OnLogLine", choices, [system])
 	for system in to_erase:
 		offline_systems.erase(system)
 	obj.set_attrib("offline_systems", offline_systems)

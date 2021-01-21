@@ -763,3 +763,10 @@ Your %s uses one of it's charge,Your %s uses one of it's charge,La %s utilise un
 [color=yellow]Your %s used it's last charge[/color],[color=yellow]Your %s used it's last charge[/color],[color=yellow]Votre %s a utilisé sa dernière charge[/color],[color=yellow]Your %s used it's last charge[/color]
 %s has been successfully repaired!,%s has been successfully repaired!,%s a été réparé,%s治った
 trade_port,Trade Port,Amarre Marchande,Trade Port
+disable_weapon_chance,Weapons System,Désactiver l’Armement,武器を無効にする
+disable_shield_chance,Shields System,Désactiver les Boucliers,シールドを無効にする
+disable_scanner_chance,Scanners System,Désactiver les Radars,スキャナーを無効にする
+disable_converter_chance,Converter System,Désactiver le Convertisseur,Disable Converter
+disable_utility_chance,Utilities System,Désactiver les Accessoires,付き物を無効にする
+disable_movement_chance,Engines Room,Désactiver les Moteurs,エンジンを無効にする
+disable_ship_chance,Complete Shutdown,Désactiver la Totalité du Vaisseau,シャットダウン

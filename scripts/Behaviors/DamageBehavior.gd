@@ -378,7 +378,7 @@ func ProcessDamage(target, shooter, weapon_data, modified_attributes):
 	if electro_success and target.get_attrib("destroyable.destroyed", false) == false:
 		_handle_electronic_warfare(target, shooter, weapon_data, modified_attributes)
 	
-	display_damage_log(is_player, is_target_player, dam, hull_dam, shield_per, target.get_attrib("destroyable.current_hull", target.get_attrib("destroyable.hull")) <= 0, is_critical, target.get_attrib("boardable", false))
+	display_damage_log(is_player, is_target_player, dam, hull_dam, shield_per, target.get_attrib("destroyable.current_hull", target.get_attrib("destroyable.hull")) <= 0, is_critical, target.get_attrib("boardable", false), electro_success)
 	
 func _handle_electronic_warfare(target, shooter, weapon_data, modified_attributes):
 	var is_player = shooter.get_attrib("type") == "player"
@@ -393,7 +393,8 @@ func _handle_electronic_warfare(target, shooter, weapon_data, modified_attribute
 				"chance":weapon_detail[key], 
 				"target":target, "shooter":shooter, 
 				"duration_min":weapon_detail.get("disable_duration_min", 0), # optional, default 0
-				"duration_max":weapon_detail.get("disable_duration_max", 0)
+				"duration_max":weapon_detail.get("disable_duration_max", 0),
+				"is_pulse":weapon_detail.get("area_effect", 0) > 0
 			})
 			
 	if warfare_choices.size() > 1:
@@ -403,11 +404,16 @@ func _handle_electronic_warfare(target, shooter, weapon_data, modified_attribute
 			shooter.set_attrib("wait_for_hack", true)
 		else:
 			# make a choice for the AI
-			#TODO: this is to test shield disabling, make the AI choose randomly?
+			# We're breaking AI encapsulation, yeah baby! </sarcasm>
+			# Current idea is to select a random action weighted by the most likely to succeed
+			# That should mean the AI will usually do the most obvious thing but might try it's luck
+			# from time to time
+			var formatted_choices = []
 			for line in warfare_choices:
-				if "ship" in line.name_id:
-					apply_warfare_choice([line])
-					break
+				# rand_weight expect ints, so multiply chance by 100
+				formatted_choices.push_back({"data":line, "chance":line.chance * 100.0})
+			var selected = MersenneTwister.rand_weight(formatted_choices, "data", "chance", "Error loading random line")
+			apply_warfare_choice([selected])
 	elif warfare_choices.size() == 1:
 		apply_warfare_choice(warfare_choices)
 	
@@ -418,13 +424,19 @@ func apply_warfare_choice(selected_targets):
 	var chance : float = selected_targets[0].chance
 	var duration_min : int = selected_targets[0].duration_min
 	var duration_max : int = selected_targets[0].duration_max
+	var is_pulse : bool = selected_targets[0].is_pulse
+	var success := false
+	var part := ""
+	var turn_count : int = 0
 	
 	if MersenneTwister.rand_float() < chance:
 		if "disable_" in action:
+			success = true
 			var disable_turn : int = MersenneTwister.rand(duration_max - duration_min) + duration_min
-			var part : String = action.replace("disable_", "").replace("_chance", "")
+			part = action.replace("disable_", "").replace("_chance", "")
 			var previous_timer : float = target.get_attrib("offline_systems.%s" % part, 0.0)
 			disable_turn = max(disable_turn, previous_timer)
+			turn_count = disable_turn
 			target.set_attrib("offline_systems.%s" % part, disable_turn)
 			if previous_timer <= 0.0: # only trigger disable if we weren't already disabled
 				BehaviorEvents.emit_signal("OnSystemDisabled", target, part)
@@ -432,6 +444,83 @@ func apply_warfare_choice(selected_targets):
 		shooter.set_attrib("wait_for_hack", false)
 		BehaviorEvents.emit_signal("OnResumeAttack")
 	
+	var target_ship_name : String = target.get_attrib("name_id")
+	display_electro_log(success, part, target.get_attrib("type") == "player", shooter.get_attrib("type") == "player", is_pulse, target_ship_name, turn_count)
+	
+func display_electro_log(success : bool, 
+	part : String, 
+	player_target : bool, 
+	player_shooter : bool,
+	is_pulse : bool,
+	target_ship_name : String,
+	turn_count : int):
+		
+	var player_miss_choices = {
+		"Their Firewall is too good, can't break through!":50,
+		"Counter-Intrusion measure detected, Hacking failed!":50
+	}
+	var enemy_miss_choices = {
+		"Enemy Virus detected and removed!":50,
+		"Hack attempt avoided!":50
+	}
+	var player_miss_pulse = {
+		"The %s is shaken but otherwise unafected by the pulse!":50,
+		"The %s shields deflected most of the pulse!":50
+	}
+	var enemy_miss_pulse = {
+		"We survived the pulse!":50,
+		"Enemy pulse deflected, all our electronics surived!":50
+	}
+	var player_hit_choices = {
+		"We found an exploit, their %s system is down for at least %d turns!":50,
+		"Hack successful, %s system down for the next %d turns!":50
+	}
+	var enemy_hit_choices = {
+		"Our %s system is rebooting! Estimated time %d turns!":50,
+		"Virus in our %s system! It'll take %d turns to purge!":50,
+		"%s system down! We'll be back up in %d turns":50
+	}
+	var player_hit_pulse = {
+		"The pulse knocked down their %s for %d turns!":50,
+		"The shockwave disabled their %s for %d turns!":50
+	}
+	var enemy_hit_pulse = {
+		"This shockwave fried our %s, we're down for %d turns!":50,
+		"Pulse Wave hit, %s down for another %d turns!":50
+	}
+	
+	var txt := {}
+	var fmt := []
+	if success == false and player_shooter == false:
+		if is_pulse:
+			txt = enemy_miss_pulse
+			fmt = [target_ship_name]
+		else:
+			txt = enemy_miss_choices
+	if success == false and player_shooter == true:
+		if is_pulse:
+			txt = player_miss_pulse
+		else:
+			txt = player_miss_choices
+			
+	if success == true and player_shooter == false:
+		if is_pulse:
+			txt = enemy_hit_pulse
+			fmt = [part, turn_count]
+		else:
+			txt = enemy_hit_choices
+			fmt = [part, turn_count]
+	if success == true and player_shooter == true:
+		if is_pulse:
+			txt = player_hit_pulse
+			fmt = [part, turn_count]
+		else:
+			txt = player_hit_choices
+			fmt = [part, turn_count]
+			
+	if not txt.empty():
+		BehaviorEvents.emit_signal("OnLogLine", txt, fmt)
+		
 	
 func OnObjectDestroyed_Callback(target):
 	if target.get_attrib("drop_on_death") != null:
@@ -489,7 +578,8 @@ func display_damage_log(player_shooter : bool,
 	shield_per : float,
 	is_destroyed : bool, 
 	is_critical : bool, 
-	boardable : bool):
+	boardable : bool,
+	electronic_warfare : bool):
 		
 	var txt
 	var fmt : Array = []
@@ -626,9 +716,9 @@ func display_damage_log(player_shooter : bool,
 		BehaviorEvents.emit_signal("OnLogLine", txt, fmt)
 	
 	fmt = []
-	if player_shooter and dam == 0:
+	if player_shooter and dam == 0 and electronic_warfare == false:
 		txt = player_miss_choices
-	if player_target and dam == 0:
+	if player_target and dam == 0 and electronic_warfare == false:
 		txt = enemy_miss_choices
 	if player_target and hull_dam > 0.0:
 		txt = player_hull_dam_choices
@@ -640,7 +730,9 @@ func display_damage_log(player_shooter : bool,
 		txt = player_hit_enemy
 		fmt = [dam]
 
-	BehaviorEvents.emit_signal("OnLogLine", txt, fmt)
+	# Could be empty if waiting for electronic warfare
+	if txt != null and not txt.empty():
+		BehaviorEvents.emit_signal("OnLogLine", txt, fmt)
 	
 	fmt = []
 	if is_destroyed:
