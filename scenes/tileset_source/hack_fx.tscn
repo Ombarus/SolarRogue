@@ -1,33 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://data/private/textures/arial10x10.png" type="Texture" id=1]
+[ext_resource path="res://data/private/textures/Haberdash_curses_12x12.png" type="Texture" id=1]
+[ext_resource path="res://data/shaders/emp_particle.tres" type="Material" id=2]
 [ext_resource path="res://scripts/animations/hack_fx.gd" type="Script" id=4]
 [ext_resource path="res://data/private/sounds/sfx/hacking.wav" type="AudioStream" id=5]
 
-[sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
-
-uniform vec4 c : hint_color;
-
-vec2 uv_offset_from_seed(vec2 seed) {
-	float u = floor(seed.x * 32.0) / 32.0;
-	float v = floor(seed.y * 8.0) / 8.0;
-	return vec2(u,v);
-}
-
-
-void fragment() {
-	vec4 color = texture(TEXTURE, UV + uv_offset_from_seed(vec2(COLOR.r, COLOR.b)));
-	COLOR = vec4(c.r, c.g, c.b, color.r * COLOR.a);
-}"
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
-shader_param/c = Color( 0.14902, 0.709804, 0.301961, 1 )
-
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 10, 10 )
+region = Rect2( 0, 0, 12, 12 )
 
 [sub_resource type="Gradient" id=4]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
@@ -39,7 +19,7 @@ rand_offset_x = Vector2( -30, 30 )
 rand_offset_y = Vector2( -30, 30 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-material = SubResource( 2 )
+material = ExtResource( 2 )
 amount = 50
 lifetime = 0.3
 local_coords = false

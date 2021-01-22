@@ -1,0 +1,30 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode blend_add;
+
+uniform vec4 c : hint_color;
+uniform vec4 highlight : hint_color;
+
+vec2 uv_offset_from_seed(vec2 seed) {
+	float u = floor(seed.x * 16.0) / 16.0;
+	float v = floor(seed.y * 16.0) / 16.0;
+	return vec2(u,v);
+}
+
+vec3 lerp(vec3 colorone, vec3 colortwo, float value)
+{
+    return (colorone + value*(colortwo-colorone));
+} 
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV + uv_offset_from_seed(vec2(COLOR.r, COLOR.b)));
+	vec3 final_color = lerp(c.rgb, highlight.rgb, color.a * COLOR.a);
+	COLOR = vec4(final_color.r, final_color.g, final_color.b, color.a * COLOR.a);
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/c = Color( 0.0745098, 0.32549, 0.0705882, 1 )
+shader_param/highlight = Color( 0.341176, 0.980392, 0.333333, 1 )
