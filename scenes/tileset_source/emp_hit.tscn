@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://data/private/textures/arial10x10.png" type="Texture" id=1]
 [ext_resource path="res://scripts/animations/emp_fx.gd" type="Script" id=2]
-[ext_resource path="res://data/private/sounds/sfx/hacking.wav" type="AudioStream" id=5]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -33,11 +32,8 @@ region = Rect2( 0, 0, 10, 10 )
 offsets = PoolRealArray( 0, 0.990099, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.194719, 1, 1, 1, 0 )
 
-[sub_resource type="Gradient" id=5]
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
-
-[sub_resource type="Animation" id=6]
-length = 3.0
+[sub_resource type="Animation" id=5]
+length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("area:emitting")
 tracks/0/interp = 1
@@ -45,62 +41,35 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 1.5 ),
+"times": PoolRealArray( 0, 0.4, 0.9 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, true, false ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("boom:emitting")
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ true, false, false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("area:emission_sphere_radius")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.6, 1.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 0.01, 0.01, 128.0, 128.0 ]
-}
-tracks/3/type = "method"
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0.6 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "TriggerAnimDone"
-} ]
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"values": [  ]
 }
 
-[node name="emp_fx" type="Node2D"]
+[node name="emp_hit_fx" type="Node2D"]
 z_index = 1000
 script = ExtResource( 2 )
 
 [node name="area" type="CPUParticles2D" parent="."]
 material = SubResource( 2 )
 scale = Vector2( 2, 2 )
-amount = 200
+amount = 60
 lifetime = 0.5
 texture = SubResource( 3 )
 emission_shape = 1
-emission_sphere_radius = 0.01
+emission_sphere_radius = 35.14
 direction = Vector2( 0, 1 )
 spread = 180.0
 gravity = Vector2( 0, 0 )
@@ -113,34 +82,7 @@ color_ramp = SubResource( 4 )
 hue_variation = 1.0
 hue_variation_random = 1.0
 
-[node name="boom" type="CPUParticles2D" parent="."]
-material = SubResource( 2 )
-scale = Vector2( 1.3, 1.3 )
-emitting = false
-amount = 150
-lifetime = 0.5
-one_shot = true
-explosiveness = 1.0
-texture = SubResource( 3 )
-direction = Vector2( 0, 1 )
-spread = 180.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 422.71
-linear_accel = 77.12
-angle = 360.0
-angle_random = 1.0
-scale_amount = 2.16
-scale_amount_random = 0.39
-color_ramp = SubResource( 5 )
-hue_variation = 1.0
-hue_variation_random = 1.0
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 5 )
-autoplay = true
-bus = "Sfx"
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "boom"
-anims/boom = SubResource( 6 )
+anims/boom = SubResource( 5 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

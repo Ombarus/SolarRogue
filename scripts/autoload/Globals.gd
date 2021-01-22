@@ -10,7 +10,8 @@ enum DAMAGE_TYPE {
 	shield_hit,
 	hull_hit,
 	radiation,
-	healing
+	healing,
+	emp
 }
 
 enum CRAFT_RESULT {

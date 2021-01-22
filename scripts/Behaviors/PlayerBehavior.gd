@@ -380,6 +380,18 @@ func OnObjTurn_Callback(obj):
 		BehaviorEvents.emit_signal("OnUseAP", obj, wait_time)
 		return
 		
+	var delayed_logs = obj.get_attrib("delayed_logs", [])
+	if is_player and not delayed_logs.empty():
+		var msg_data
+		var to_remove = []
+		for index in range(delayed_logs.size()):
+			msg_data = delayed_logs[index]
+			if msg_data.get("msg_turn", Globals.total_turn) <= Globals.total_turn:
+				BehaviorEvents.emit_signal("OnLogLine", msg_data.get("msg"), msg_data.get("msg_params"))
+				to_remove.push_back(index)
+		for index in to_remove:
+			delayed_logs.remove(index)
+		obj.set_attrib("delayed_logs", delayed_logs)
 		
 	# sometimes we put the player on cruise control. when we give him back control "ai" component will be disabled
 	if is_player and obj.get_attrib("ai") == null:

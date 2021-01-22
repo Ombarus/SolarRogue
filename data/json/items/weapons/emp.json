@@ -7,7 +7,7 @@
 		"region":[256,1536,128,128]
 	},
 	"animation": {
-		"shoot": "scenes/tileset_source/missile_fx.tscn"
+		"shoot": "scenes/tileset_source/emp_fx.tscn"
 	},
 	"weapon_data": {
 		"base_dam":2.0,

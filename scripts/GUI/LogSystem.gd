@@ -99,6 +99,10 @@ func _process(delta):
 func OnLogLine_CallBack(text, fmt=[]):
 	if _log_lines.size() > max_log:
 		_log_lines.pop_front()
+	# This happened to me while testing and being lock into an infinite ship_disable loop
+	# I *assume* this will at least preven the crash...
+	if _lines_to_animate.size() > max_log:
+		_lines_to_animate.pop_front()
 		
 	var l = text
 	if typeof(text) == TYPE_DICTIONARY:

@@ -243,6 +243,8 @@ func Init(init_param):
 				var item = Globals.LevelLoaderRef.LoadJSON(src)
 				var variation = mount_variations[key][index]
 				var display_name = Globals.EffectRef.get_display_name(item, variation)
+				if Globals.EffectRef.IsInCooldown(_obj, variation):
+					display_name += Globals.mytr(" (cooldown %d)", [ceil(Globals.EffectRef.GetRemainingCooldown(_obj, variation))]) 
 				mount_content.push_back({"src":mounts[key][index], "key":key, "idx":index, "modified_attributes":variation, "display_name_id":display_name, "name_id":item.name_id, "equipped":false, "header":false, "icon":item.icon})
 			else:
 				mount_content.push_back({"src":"", "key":key, "idx":index, "name_id":"Empty", "equipped":false, "header":false})
@@ -269,6 +271,9 @@ func Init(init_param):
 			
 		var display_name = counting
 		display_name += Globals.EffectRef.get_display_name(data, row.get("modified_attributes", {}))
+		# that will be weird if we have a stackable object with cooldown (don't do that please)
+		if Globals.EffectRef.IsInCooldown(_obj, row.get("modified_attributes", {})):
+			display_name += Globals.mytr(" (cooldown %d)", [ceil(Globals.EffectRef.GetRemainingCooldown(_obj, row.get("modified_attributes", {})))]) 
 		cargo_item_by_category[cat].push_back({"src":row.src, "modified_attributes":row.get("modified_attributes", null), "count":row.count, "display_name_id": display_name, "name_id": display_name, "equipped":false, "header":false, "icon":icon_data})
 		
 	keys = cargo_item_by_category.keys()

@@ -77,6 +77,8 @@ func OnDamageTaken_Callback(target, shooter, damage_type):
 		elif damage_type == Globals.DAMAGE_TYPE.healing:
 			#TODO: Add some healing sfx / animation ?
 			pass
+		elif damage_type == Globals.DAMAGE_TYPE.emp:
+			hit_root.play_emp_hit()
 		else:
 			hit_root.play_hull_hit()
 	

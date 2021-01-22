@@ -371,12 +371,24 @@ func process_recipes_attributes(obj):
 		
 	obj.set_attrib("converter.selected_variations", recipe_variations)
 
-func SetCooldown(obj, item_attributes, cooldown):
+func SetCooldown(obj, item_attributes, cooldown, name_id):
 	item_attributes["cooldown_turn"] = Globals.total_turn + cooldown
+	var delayed_logs : Array = obj.get_attrib("delayed_logs", [])
+	var msg_choices = {
+		"%s is ready for action":50,
+		"%s fully recharged":50,
+		"%s cooldown completed":50
+	}
+	delayed_logs.push_back({"msg_turn": item_attributes["cooldown_turn"], "msg":msg_choices, "msg_params":[name_id]})
+	obj.set_attrib("delayed_logs", delayed_logs)
+	
 	
 func IsInCooldown(obj, item_attributes) -> bool:
 	return item_attributes.get("cooldown_turn", Globals.total_turn) > Globals.total_turn
-
+	
+func GetRemainingCooldown(obj, item_attributes) -> float:
+	return item_attributes.get("cooldown_turn", Globals.total_turn) - Globals.total_turn
+	
 #TODO: might want to cache the results until an event request a refresh
 #		if all the params are the same, the result should be the same as long as
 #		no equipment changed

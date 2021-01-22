@@ -4,7 +4,7 @@
 [ext_resource path="res://scripts/animations/hack_fx.gd" type="Script" id=4]
 [ext_resource path="res://data/private/sounds/sfx/hacking.wav" type="AudioStream" id=5]
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform vec4 c : hint_color;
@@ -21,15 +21,15 @@ void fragment() {
 	COLOR = vec4(c.r, c.g, c.b, color.r * COLOR.a);
 }"
 
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 shader_param/c = Color( 0.14902, 0.709804, 0.301961, 1 )
 
-[sub_resource type="AtlasTexture" id=1]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 10, 10 )
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=4]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [node name="hack_fx" type="Node2D"]
@@ -39,11 +39,11 @@ rand_offset_x = Vector2( -30, 30 )
 rand_offset_y = Vector2( -30, 30 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 amount = 50
 lifetime = 0.3
 local_coords = false
-texture = SubResource( 1 )
+texture = SubResource( 3 )
 direction = Vector2( 0, 1 )
 spread = 180.0
 gravity = Vector2( 0, 0 )
@@ -54,7 +54,7 @@ angle = 360.0
 angle_random = 1.0
 scale_amount = 2.16
 scale_amount_random = 0.39
-color_ramp = SubResource( 5 )
+color_ramp = SubResource( 4 )
 hue_variation = 1.0
 hue_variation_random = 1.0
 

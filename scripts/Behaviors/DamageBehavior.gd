@@ -117,7 +117,7 @@ func consume(shooter, weapon_data, modified_attributes):
 		var speed_mult = Globals.EffectRef.GetMultiplierValue(shooter, weapon_data.src, modified_attributes, "fire_speed_multiplier")
 		BehaviorEvents.emit_signal("OnUseAP", shooter, weapon_data.weapon_data.fire_speed * speed_mult)
 	if "cooldown" in weapon_data.weapon_data:
-		Globals.EffectRef.SetCooldown(shooter, modified_attributes, weapon_data.weapon_data.cooldown)
+		Globals.EffectRef.SetCooldown(shooter, modified_attributes, weapon_data.weapon_data.cooldown, weapon_data.name_id)
 	
 	var ammo = null
 	if weapon_data.weapon_data.has("ammo"):
@@ -445,6 +445,8 @@ func apply_warfare_choice(selected_targets):
 		BehaviorEvents.emit_signal("OnResumeAttack")
 	
 	var target_ship_name : String = target.get_attrib("name_id")
+	if success:
+		BehaviorEvents.emit_signal("OnDamageTaken", target, shooter, Globals.DAMAGE_TYPE.emp)
 	display_electro_log(success, part, target.get_attrib("type") == "player", shooter.get_attrib("type") == "player", is_pulse, target_ship_name, turn_count)
 	
 func display_electro_log(success : bool, 

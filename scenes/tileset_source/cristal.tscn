@@ -7,4 +7,3 @@ z_index = 10
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 1152, 128, 128, 128 )
-

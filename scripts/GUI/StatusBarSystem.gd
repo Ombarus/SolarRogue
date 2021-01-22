@@ -119,7 +119,7 @@ func UpdateStatusBar(player_obj):
 		
 	var disabled_systems = player_obj.get_attrib("offline_systems", [])
 	if disabled_systems.size() > 0:
-		status_str += "[color=red]"
+		status_str += " | [color=red]"
 	for system in disabled_systems:
 		if disabled_systems[system] > 0:
 			status_str += " " + system
