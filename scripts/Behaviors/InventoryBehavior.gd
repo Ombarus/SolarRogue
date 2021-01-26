@@ -31,6 +31,9 @@ func OnObjectLoaded_Callback(obj):
 	if choice_table.size() <= 0:
 		return
 		
+	if obj.get_attrib("cargo.randomized", false) == true:
+		return
+		
 	var inv_size_range = obj.get_attrib("cargo.random_content_size")
 
 	choice_table.sort_custom(self, "sort_by_chance")
@@ -75,6 +78,7 @@ func OnObjectLoaded_Callback(obj):
 				actual_content.push_back(c)
 		
 	obj.set_attrib("cargo.content", actual_content)
+	obj.set_attrib("cargo.randomized", true)
 	
 	
 func OnUseEnergy_Callback(obj, amount):
