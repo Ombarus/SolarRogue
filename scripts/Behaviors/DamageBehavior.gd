@@ -327,15 +327,16 @@ func ProcessDamage(target, shooter, weapon_data, modified_attributes):
 		#dam = dam * _get_power_amplifier_stack(shooter, "damage_percent")
 		
 	var is_critical := false
+	var crit_chance = Globals.get_data(weapon_data, "weapon_data.crit_chance", 0.0)
+	var bonus_crit = Globals.EffectRef.GetBonusValue(shooter, weapon_data.src, modified_attributes, "crit_chance_bonus")
+	if MersenneTwister.rand_float() < crit_chance + bonus_crit:
+		is_critical = true
 	var hull_dam = 0.0
 	var shield_per = 100.0
 	
 	if dam > 0:
-		var crit_chance = Globals.get_data(weapon_data, "weapon_data.crit_chance", 0.0)
-		var bonus_crit = Globals.EffectRef.GetBonusValue(shooter, weapon_data.src, modified_attributes, "crit_chance_bonus")
-		if MersenneTwister.rand_float() < crit_chance + bonus_crit:
+		if is_critical:
 			dam = dam * Globals.get_data(weapon_data, "weapon_data.crit_multiplier", 1.0)
-			is_critical = true
 			
 		var aegis_conversion = _aegis_conversion(target, dam)
 		if aegis_conversion > 0:
@@ -376,11 +377,11 @@ func ProcessDamage(target, shooter, weapon_data, modified_attributes):
 		BehaviorEvents.emit_signal("OnDamageTaken", target, shooter, damage_type)
 		
 	if electro_success and target.get_attrib("destroyable.destroyed", false) == false:
-		_handle_electronic_warfare(target, shooter, weapon_data, modified_attributes)
+		_handle_electronic_warfare(target, shooter, weapon_data, modified_attributes, is_critical)
 	
-	display_damage_log(is_player, is_target_player, dam, hull_dam, shield_per, target.get_attrib("destroyable.current_hull", target.get_attrib("destroyable.hull")) <= 0, is_critical, target.get_attrib("boardable", false), electro_success)
+	display_damage_log(is_player, is_target_player, dam, hull_dam, shield_per, target.get_attrib("destroyable.current_hull", target.get_attrib("destroyable.hull")) <= 0, is_critical and (electro_success or hull_dam > 0), target.get_attrib("boardable", false), electro_success)
 	
-func _handle_electronic_warfare(target, shooter, weapon_data, modified_attributes):
+func _handle_electronic_warfare(target, shooter, weapon_data, modified_attributes, is_critical):
 	var is_player = shooter.get_attrib("type") == "player"
 	var weapon_detail = weapon_data.get("weapon_data", {})
 	var weapon_keys : Array = weapon_detail.keys()
@@ -388,9 +389,13 @@ func _handle_electronic_warfare(target, shooter, weapon_data, modified_attribute
 	for key in weapon_keys:
 		if ("destroy_" in key or "disable_" in key or "take_ship" in key) and not "duration" in key:
 			#TODO: Add bonus/malus effects from variations and utilities
+			var crit_mult = 1.0
+			if is_critical == true:
+				crit_mult = Globals.get_data(weapon_data, "weapon_data.crit_multiplier", 1.0)
+			var target_defense = target.get_attrib("destroyable.%s" % key, 0.0)
 			warfare_choices.push_back({
 				"name_id":key, 
-				"chance":weapon_detail[key], 
+				"chance":clamp(weapon_detail[key] * crit_mult - target_defense, 0.0, 0.95),
 				"target":target, "shooter":shooter, 
 				"duration_min":weapon_detail.get("disable_duration_min", 0), # optional, default 0
 				"duration_max":weapon_detail.get("disable_duration_max", 0),
@@ -718,6 +723,7 @@ func display_damage_log(player_shooter : bool,
 		BehaviorEvents.emit_signal("OnLogLine", txt, fmt)
 	
 	fmt = []
+	txt = ""
 	if player_shooter and dam == 0 and electronic_warfare == false:
 		txt = player_miss_choices
 	if player_target and dam == 0 and electronic_warfare == false:

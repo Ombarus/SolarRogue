@@ -57,8 +57,7 @@ func OnPlayerTurn_Callback(obj):
 		"[color=teal]Not enough power, we require additional Pylons[/color]":5,
 	}
 	
-	if _cur_cooldown > 0:
-		_cur_cooldown -= 1
+	if _cur_cooldown > Globals.total_turn:
 		_cur_chance = base_chance
 		return
 		
@@ -69,6 +68,6 @@ func OnPlayerTurn_Callback(obj):
 	var target = MersenneTwister.rand_float()
 	if target < _cur_chance:
 		BehaviorEvents.emit_signal("OnLogLine", log_choices)
-		_cur_cooldown = cooldown
+		_cur_cooldown = Globals.total_turn + cooldown
 	else:
 		_cur_chance += chance_increment

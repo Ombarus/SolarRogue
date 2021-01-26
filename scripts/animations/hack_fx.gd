@@ -34,6 +34,8 @@ func _process(delta):
 		_cur_time += delta
 		get_parent().remove_child(self)
 		queue_free()
+	elif _delete_me == true:
+		return
 			
 	_cur_time -= delta
 		

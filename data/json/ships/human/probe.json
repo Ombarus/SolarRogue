@@ -39,7 +39,14 @@
 		{"id":"data/json/items/scanners/ultimate_scanner.json", "chance":0.01, "global_max":1}
 	],
 	"destroyable": {
-		"hull":10
+		"hull":10,
+		"disable_weapon_chance":0.0,
+		"disable_shield_chance":0.0,
+		"disable_scanner_chance":0.50,
+		"disable_converter_chance":0.0,
+		"disable_utility_chance":0.0,
+		"disable_movement_chance":0.10,
+		"disable_ship_chance":0.10
 	},
 	"moving": {
 		"speed":0.7,

@@ -4,15 +4,15 @@
 [ext_resource path="res://scripts/animations/emp_fx.gd" type="Script" id=2]
 [ext_resource path="res://data/shaders/emp_particle.tres" type="Material" id=3]
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 12, 12 )
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.990099, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.194719, 1, 1, 1, 0 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("area:emitting")
@@ -48,7 +48,7 @@ scale = Vector2( 2, 2 )
 z_index = 1000
 amount = 60
 lifetime = 0.5
-texture = SubResource( 6 )
+texture = SubResource( 1 )
 emission_shape = 1
 emission_sphere_radius = 35.14
 direction = Vector2( 0, 1 )
@@ -59,11 +59,11 @@ angle = 360.0
 angle_random = 1.0
 scale_amount = 1.16
 scale_amount_random = 0.39
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 2 )
 hue_variation = 1.0
 hue_variation_random = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "boom"
-anims/boom = SubResource( 5 )
+anims/boom = SubResource( 3 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
