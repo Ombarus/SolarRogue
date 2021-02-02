@@ -1,34 +1,30 @@
 {
-	"name_id":"Remote Datahack",
+	"name_id":"E.M.P. MK1",
 	"type":"weapon",
-	"sprite": "remote_datajack",
+	"sprite":"emp",
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
-		"region":[128,1536,128,128]
+		"region":[256,1536,128,128]
 	},
 	"animation": {
-		"shoot": "scenes/tileset_source/hack_fx.tscn"
+		"shoot": "scenes/tileset_source/emp_fx.tscn"
 	},
 	"weapon_data": {
-		"base_dam":0.0,
-		"max_dam":0.0,
-		"fire_range":3.0,
-		"fire_pattern":"+",
-		"fire_energy_cost":650.0,
-		"fire_speed":1.0,
-		"base_hit_chance":0.9,
-		"crit_chance":0.75,
+		"base_dam":2.0,
+		"max_dam":6.0,
+		"fire_range":0.0,
+		"area_effect":2,
+		"fire_pattern":"o",
+		"fire_energy_cost":1500.0,
+		"fire_speed":0.5,
+		"cooldown":10.0,
+		"base_hit_chance":0.99,
+		"crit_chance":0.0,
 		"crit_multiplier":1.5,
 		"can_harvest":false,
-		"disable_weapon_chance":0.25,
-		"disable_shield_chance":0.25,
-		"disable_scanner_chance":0.25,
-		"disable_converter_chance":0.25,
-		"disable_utility_chance":0.25,
-		"disable_movement_chance":0.25,
-		"disable_ship_chance":0.25,
-		"disable_duration_min":2,
-		"disable_duration_max":7
+		"disable_ship_chance":0.70,
+		"disable_duration_min":3,
+		"disable_duration_max":6
 	},
 	"equipment": {
 		"slot":"weapon",
@@ -50,7 +46,7 @@
 		{"src":"data/json/items/effects/normal.json", "chance": 50}
 	],
 	"description": {
-		"text":"Uses vulnerabilities in the ennemy's comm network to send exploits and disable ship's systems. Useless on planets.",
+		"text":"Discharge a pulse of electromagnetic charges that can disable any ship in the vicinity. After firing the capacitors must be recharged before it can be fired again. Useless on planets.",
 		"Overview": {
 			"min_level":0,
 			"fields":[
@@ -69,20 +65,15 @@
 				{"name":"Hit Chance", "value":"{weapon_data.base_hit_chance+hit_chance_bonus}%", "translate_value":false, "display_percent":true},
 				{"name":"Critical Chance", "value":"{weapon_data.crit_chance+crit_chance_bonus}%", "translate_value":false, "display_percent":true},
 				{"name":"Critical Multiplier", "value":"x{weapon_data.crit_multiplier}", "translate_value":false},
-				{"name":"Ammo", "value":"None"}
+				{"name":"Ammo", "value":"Missile"}
 			]
 		},
-		"Hacking Stats": {
+		"Pulse Stats": {
 			"min_level":0,
 			"fields": [
-				{"name":"Weapon Disabling", "value":"{weapon_data.disable_weapon_chance}%", "translate_value":false, "display_percent":true},
-				{"name":"Shield Disabling", "value":"{weapon_data.disable_shield_chance}%", "translate_value":false, "display_percent":true},
-				{"name":"Scanner Disabling", "value":"{weapon_data.disable_scanner_chance}%", "translate_value":false, "display_percent":true},
-				{"name":"Converter Disabling", "value":"{weapon_data.disable_converter_chance}%", "translate_value":false, "display_percent":true},
-				{"name":"Utilities Disabling", "value":"{weapon_data.disable_utilities_chance}%", "translate_value":false, "display_percent":true},
-				{"name":"Immobilize", "value":"{weapon_data.disable_movement_chance}%", "translate_value":false, "display_percent":true},
 				{"name":"Shutdown", "value":"{weapon_data.disable_ship_chance}%", "translate_value":false, "display_percent":true},
-				{"name":"Duration", "value":"{weapon_data.disable_duration_min}~{weapon_data.disable_duration_max} Turns", "translate_value":true}
+				{"name":"Duration", "value":"{weapon_data.disable_duration_min}~{weapon_data.disable_duration_max} Turns", "translate_value":true},
+				{"name":"Cooldown", "value":"{weapon_data.cooldown} Turns", "translate_value":true}
 			]
 		}
 	}

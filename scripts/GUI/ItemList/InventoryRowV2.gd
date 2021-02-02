@@ -2,6 +2,8 @@ extends "res://scripts/GUI/ItemList/DefaultRow.gd"
 
 export(Theme) var normal_theme = preload("res://data/theme/default_ui_text.tres")
 export(Theme) var header_theme = preload("res://data/theme/header_ui_text.tres")
+export(Theme) var disabled_header_theme = preload("res://data/theme/disabled_ui_text.tres")
+export(Theme) var disabled_normal_theme = preload("res://data/theme/disabled_normal_ui_text.tres")
 
 #func _ready():
 #	var data = {"icon": { "texture":"data/textures/space-sprite.png", "region":[256,128,128,128] }, "name_id":"Matter-to-Energy Converter MK2", "equipped":false, "header":true}
@@ -34,12 +36,19 @@ func set_row_data(data):
 		get_node("BtnWrap/HBoxContainer/Icon").texture = null
 		
 	if "header" in data and data.header == true:
-		self.theme = header_theme
+		if "disabled" in data and data["disabled"] > 0:
+			get_node("BtnWrap/HBoxContainer/Wrap/Name").text += Globals.mytr(" (disabled:%d)", [data["disabled"]])
+			self.theme = disabled_header_theme
+		else:
+			self.theme = header_theme
 		get_node("BtnWrap/Toggle").visible = false
 		get_node("BtnWrap/HBoxContainer/Icon").visible = false
 		#get_node("Equipped").visible = false
 	else:
-		self.theme = normal_theme
+		if "disabled" in data and data["disabled"] > 0:
+			self.theme = disabled_normal_theme
+		else:
+			self.theme = normal_theme
 		get_node("BtnWrap/HBoxContainer/Icon").visible = true
 	
 	if _metadata.origin.is_connected("OnSelectionChanged", self, "OnSelectionChanged_Callback"):

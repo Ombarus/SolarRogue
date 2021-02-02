@@ -235,7 +235,8 @@ func Init(init_param):
 	var keys : Array = mounts.keys()
 	keys.sort_custom(self, "sort_categories")
 	for key in keys:
-		mount_content.push_back({"key":key, "name_id":key, "equipped":false, "header":true})
+		var disable = _obj.get_attrib("offline_systems.%s" % [key], 0.0)
+		mount_content.push_back({"key":key, "name_id":key, "equipped":false, "header":true, "disabled":disable})
 		var items : Array = mounts[key]
 		var index = 0
 		for src in items:
@@ -245,9 +246,9 @@ func Init(init_param):
 				var display_name = Globals.EffectRef.get_display_name(item, variation)
 				if Globals.EffectRef.IsInCooldown(_obj, variation):
 					display_name += Globals.mytr(" (cooldown %d)", [ceil(Globals.EffectRef.GetRemainingCooldown(_obj, variation))]) 
-				mount_content.push_back({"src":mounts[key][index], "key":key, "idx":index, "modified_attributes":variation, "display_name_id":display_name, "name_id":item.name_id, "equipped":false, "header":false, "icon":item.icon})
+				mount_content.push_back({"src":mounts[key][index], "key":key, "idx":index, "modified_attributes":variation, "display_name_id":display_name, "name_id":item.name_id, "equipped":false, "header":false, "icon":item.icon, "disabled":disable})
 			else:
-				mount_content.push_back({"src":"", "key":key, "idx":index, "name_id":"Empty", "equipped":false, "header":false})
+				mount_content.push_back({"src":"", "key":key, "idx":index, "name_id":"Empty", "equipped":false, "header":false, "disabled":disable})
 			index += 1
 	_mounts_list.Content = mount_content
 	

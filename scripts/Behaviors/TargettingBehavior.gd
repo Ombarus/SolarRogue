@@ -75,7 +75,10 @@ func OnTargetClick_Callback(click_pos, target_type):
 	for obj in tile_content:
 		var obj_type = obj.get_attrib("type")
 		var is_ghost = obj.get_attrib("ghost_memory") != null
-		if not is_ghost and obj_type != "player" and target_type == Globals.VALID_TARGET.attack and (obj.get_attrib("destroyable") != null || obj.get_attrib("harvestable") != null):
+		if not is_ghost and obj_type != "player" and\
+			target_type == Globals.VALID_TARGET.attack and \
+			(obj.get_attrib("destroyable") != null || \
+			(obj.get_attrib("harvestable") != null and weapon_data.get("can_harvest", true) == true)):
 			potential_targets.push_back(obj)
 		elif not is_ghost and obj_type != "player" and target_type == Globals.VALID_TARGET.board and obj.get_attrib("boardable") == true:
 			potential_targets.push_back(obj)
@@ -116,7 +119,7 @@ func _gather_tile_contents(tile, targetting_data):
 	var tile_content := []
 	for x in range(tile.x - area_size, tile.x + area_size+1):
 		for y in range(tile.y - area_size, tile.y + area_size+1):
-			tile_content += Globals.LevelLoaderRef.levelTiles[x][y]
+			tile_content += Globals.LevelLoaderRef.GetTile(Vector2(x, y))
 	return tile_content
 	
 func SelectTarget_Callback(selected_targets):

@@ -26,7 +26,14 @@
 		"converter": [{}]
 	},
 	"destroyable": {
-		"hull":50
+		"hull":50,
+		"disable_weapon_chance":0.20,
+		"disable_shield_chance":0.20,
+		"disable_scanner_chance":0.05,
+		"disable_converter_chance":0.05,
+		"disable_utility_chance":0.10,
+		"disable_movement_chance":0.05,
+		"disable_ship_chance":0.25
 	},
 	"moving": {
 		"speed":2.0,

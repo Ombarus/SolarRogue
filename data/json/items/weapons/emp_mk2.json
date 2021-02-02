@@ -1,5 +1,5 @@
 {
-	"name_id":"E.M.P.",
+	"name_id":"E.M.P. MK2",
 	"type":"weapon",
 	"sprite":"emp",
 	"icon": {
@@ -13,15 +13,16 @@
 		"base_dam":2.0,
 		"max_dam":6.0,
 		"fire_range":0.0,
-		"area_effect":2,
+		"area_effect":3,
 		"fire_pattern":"o",
-		"fire_energy_cost":1500.0,
+		"fire_energy_cost":2000.0,
 		"fire_speed":0.5,
 		"cooldown":10.0,
 		"base_hit_chance":0.99,
 		"crit_chance":0.0,
 		"crit_multiplier":1.5,
-		"disable_ship_chance":0.85,
+		"can_harvest":false,
+		"disable_ship_chance":0.80,
 		"disable_duration_min":3,
 		"disable_duration_max":6
 	},
@@ -45,7 +46,7 @@
 		{"src":"data/json/items/effects/normal.json", "chance": 50}
 	],
 	"description": {
-		"text":"Discharge a pulse of electromagnetic charges that can disable any ship in the vicinity. After firing the capacitors must be recharged before it can be fired again.",
+		"text":"Discharge a pulse of electromagnetic charges that can disable any ship in the vicinity. After firing the capacitors must be recharged before it can be fired again. Useless on planets.",
 		"Overview": {
 			"min_level":0,
 			"fields":[
@@ -71,7 +72,8 @@
 			"min_level":0,
 			"fields": [
 				{"name":"Shutdown", "value":"{weapon_data.disable_ship_chance}%", "translate_value":false, "display_percent":true},
-				{"name":"Duration", "value":"{weapon_data.disable_duration_min}~{weapon_data.disable_duration_max} Turns", "translate_value":true}
+				{"name":"Duration", "value":"{weapon_data.disable_duration_min}~{weapon_data.disable_duration_max} Turns", "translate_value":true},
+				{"name":"Cooldown", "value":"{weapon_data.cooldown} Turns", "translate_value":true}
 			]
 		}
 	}

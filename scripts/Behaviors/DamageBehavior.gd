@@ -715,12 +715,14 @@ func display_damage_log(player_shooter : bool,
 	}
 	
 	if is_critical:
+		txt = ""
 		if player_shooter:
 			txt = player_crit_choices
-		if player_target:
+		if player_target and dam > 0:
 			txt = enemy_crit_choices
 		
-		BehaviorEvents.emit_signal("OnLogLine", txt, fmt)
+		if txt != null and not txt.empty():
+			BehaviorEvents.emit_signal("OnLogLine", txt, fmt)
 	
 	fmt = []
 	txt = ""

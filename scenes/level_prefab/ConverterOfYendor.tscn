@@ -8,6 +8,7 @@
 [node name="converter" parent="." instance=ExtResource( 1 )]
 PreloadData = "res://data/json/items/misc/battleship_body.json"
 PreloadJSON = "{
+	\"name_id\":\"The Rodney\",
 	\"equipment\":{\"disabled\":true},
 	\"cargo\": {
 			\"capacity\":500,
@@ -54,7 +55,6 @@ region_enabled = true
 region_rect = Rect2( 1280, 256, 128, 128 )
 
 [node name="human_frigate" parent="." instance=ExtResource( 1 )]
-editor/display_folded = true
 position = Vector2( 384, -256 )
 PreloadData = "res://data/json/ships/human/frigate.json"
 PreloadJSON = "{
@@ -75,7 +75,6 @@ region_enabled = true
 region_rect = Rect2( 896, 256, 128, 128 )
 
 [node name="jerg_battleship" parent="." instance=ExtResource( 1 )]
-editor/display_folded = true
 position = Vector2( 128, 128 )
 PreloadData = "res://data/json/ships/jerg/battleship.json"
 PreloadJSON = "{
@@ -96,7 +95,6 @@ region_enabled = true
 region_rect = Rect2( 1408, 256, 128, 128 )
 
 [node name="jerg_frigate" parent="." instance=ExtResource( 1 )]
-editor/display_folded = true
 position = Vector2( 0, 512 )
 PreloadData = "res://data/json/ships/jerg/frigate.json"
 PreloadJSON = "{
@@ -117,7 +115,6 @@ region_enabled = true
 region_rect = Rect2( 1024, 256, 128, 128 )
 
 [node name="vorg_battleship" parent="." instance=ExtResource( 1 )]
-editor/display_folded = true
 position = Vector2( -128, 128 )
 PreloadData = "res://data/json/ships/vorg/battleship.json"
 PreloadJSON = "{
@@ -138,7 +135,6 @@ region_enabled = true
 region_rect = Rect2( 1536, 256, 128, 128 )
 
 [node name="vorg_frigate" parent="." instance=ExtResource( 1 )]
-editor/display_folded = true
 position = Vector2( -384, -256 )
 PreloadData = "res://data/json/ships/vorg/frigate.json"
 PreloadJSON = "{
@@ -159,7 +155,6 @@ region_enabled = true
 region_rect = Rect2( 1152, 256, 128, 128 )
 
 [node name="debris01" parent="." instance=ExtResource( 1 )]
-editor/display_folded = true
 position = Vector2( -128, -768 )
 PreloadData = "res://data/json/items/misc/probe_body.json"
 base_attributes = {
@@ -175,7 +170,6 @@ region_enabled = true
 region_rect = Rect2( 1664, 384, 128, 128 )
 
 [node name="debris02" parent="." instance=ExtResource( 1 )]
-editor/display_folded = true
 position = Vector2( 128, -640 )
 PreloadData = "res://data/json/items/misc/probe_body.json"
 base_attributes = {
@@ -191,7 +185,6 @@ region_enabled = true
 region_rect = Rect2( 1664, 384, 128, 128 )
 
 [node name="debris03" parent="." instance=ExtResource( 1 )]
-editor/display_folded = true
 position = Vector2( 768, -1024 )
 PreloadData = "res://data/json/items/misc/probe_body.json"
 base_attributes = {
@@ -207,7 +200,6 @@ region_enabled = true
 region_rect = Rect2( 1664, 384, 128, 128 )
 
 [node name="debris04" parent="." instance=ExtResource( 1 )]
-editor/display_folded = true
 position = Vector2( -1024, -384 )
 PreloadData = "res://data/json/items/misc/probe_body.json"
 base_attributes = {
@@ -223,7 +215,6 @@ region_enabled = true
 region_rect = Rect2( 1664, 384, 128, 128 )
 
 [node name="debris05" parent="." instance=ExtResource( 1 )]
-editor/display_folded = true
 position = Vector2( 1152, 768 )
 PreloadData = "res://data/json/items/misc/probe_body.json"
 base_attributes = {
@@ -239,7 +230,6 @@ region_enabled = true
 region_rect = Rect2( 1664, 384, 128, 128 )
 
 [node name="debris06" parent="." instance=ExtResource( 1 )]
-editor/display_folded = true
 position = Vector2( -512, 896 )
 PreloadData = "res://data/json/items/misc/probe_body.json"
 base_attributes = {
@@ -255,7 +245,6 @@ region_enabled = true
 region_rect = Rect2( 1664, 384, 128, 128 )
 
 [node name="debris07" parent="." instance=ExtResource( 1 )]
-editor/display_folded = true
 position = Vector2( -1152, 384 )
 PreloadData = "res://data/json/items/misc/probe_body.json"
 base_attributes = {
@@ -271,7 +260,6 @@ region_enabled = true
 region_rect = Rect2( 1664, 384, 128, 128 )
 
 [node name="debris08" parent="." instance=ExtResource( 1 )]
-editor/display_folded = true
 position = Vector2( 1664, -256 )
 PreloadData = "res://data/json/items/misc/probe_body.json"
 base_attributes = {
@@ -287,7 +275,6 @@ region_enabled = true
 region_rect = Rect2( 1664, 384, 128, 128 )
 
 [node name="debris09" parent="." instance=ExtResource( 1 )]
-editor/display_folded = true
 position = Vector2( 1024, -512 )
 PreloadData = "res://data/json/items/misc/scout_body.json"
 base_attributes = {
@@ -303,7 +290,6 @@ region_enabled = true
 region_rect = Rect2( 512, 384, 128, 128 )
 
 [node name="debris10" parent="." instance=ExtResource( 1 )]
-editor/display_folded = true
 position = Vector2( -768, 0 )
 PreloadData = "res://data/json/items/misc/scout_body.json"
 base_attributes = {
@@ -319,7 +305,6 @@ region_enabled = true
 region_rect = Rect2( 512, 384, 128, 128 )
 
 [node name="debris11" parent="." instance=ExtResource( 1 )]
-editor/display_folded = true
 position = Vector2( 128, 1152 )
 PreloadData = "res://data/json/items/misc/scout_body.json"
 base_attributes = {
@@ -333,4 +318,3 @@ modified_attributes = {
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 512, 384, 128, 128 )
-
