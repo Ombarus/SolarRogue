@@ -1,5 +1,5 @@
 {
-	"name_id":"Remote Datahack",
+	"name_id":"Remote Datahack MK1",
 	"type":"weapon",
 	"sprite": "remote_datajack",
 	"icon": {
@@ -20,12 +20,12 @@
 		"crit_chance":0.75,
 		"crit_multiplier":1.5,
 		"can_harvest":false,
-		"disable_weapon_chance":0.25,
-		"disable_shield_chance":0.25,
-		"disable_scanner_chance":0.25,
-		"disable_converter_chance":0.25,
-		"disable_utility_chance":0.25,
-		"disable_movement_chance":0.25,
+		"disable_weapon_chance":0.35,
+		"disable_shield_chance":0.35,
+		"disable_scanner_chance":0.35,
+		"disable_converter_chance":0.35,
+		"disable_utility_chance":0.35,
+		"disable_movement_chance":0.35,
 		"disable_ship_chance":0.25,
 		"disable_duration_min":2,
 		"disable_duration_max":7

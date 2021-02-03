@@ -49,13 +49,13 @@
 	],
 	"destroyable": {
 		"hull":200,
-		"disable_weapon_chance":0.20,
-		"disable_shield_chance":0.20,
-		"disable_scanner_chance":0.05,
-		"disable_converter_chance":0.05,
-		"disable_utility_chance":0.10,
-		"disable_movement_chance":0.05,
-		"disable_ship_chance":0.25
+		"disable_weapon_chance":0.40,
+		"disable_shield_chance":0.40,
+		"disable_scanner_chance":0.10,
+		"disable_converter_chance":0.10,
+		"disable_utility_chance":0.20,
+		"disable_movement_chance":0.10,
+		"disable_ship_chance":0.50
 	},
 	"moving": {
 		"speed":1.6,

@@ -48,7 +48,7 @@
 		"disable_converter_chance":0.05,
 		"disable_utility_chance":0.05,
 		"disable_movement_chance":0.12,
-		"disable_ship_chance":0.05
+		"disable_ship_chance":0.00
 	},
 	"moving": {
 		"speed":0.5,
