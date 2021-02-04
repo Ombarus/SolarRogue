@@ -8,6 +8,7 @@ class_name EffectBehavior
 # "self_" -> only apply effect to self (ex: weapon damage increase)
 # "global_" -> apply to final result (ex: to all weapon damage or to global cargo capacity, etc.)
 # "inv_" -> by default, apply only if item is equipped, use inv_ to specify effect applies from inventory too
+# "mount_" -> if the item equipment slot matches one of the words in the effect (mount_disable_weapon_chance) will only work on items that can be mounted in weapon mount
 
 # "inv_" is a bit special, it needs to be added separate from other effects
 #		so we're going to create a duplicate of the attributes to add to effect list
@@ -372,6 +373,7 @@ func process_recipes_attributes(obj):
 	obj.set_attrib("converter.selected_variations", recipe_variations)
 
 func SetCooldown(obj, item_attributes, cooldown, name_id):
+	var mod_cooldown = cooldown * GetMultiplierValue(obj, "", item_attributes, "cooldown_multiplier")
 	item_attributes["cooldown_turn"] = Globals.total_turn + cooldown
 	var delayed_logs : Array = obj.get_attrib("delayed_logs", [])
 	var msg_choices = {
@@ -447,6 +449,18 @@ func _get_value(obj, item_src, item_attributes, attrib_base_name, compound_type=
 				self_effects.push_back(effect.src)
 				debug_applied.push_back(effect.src)
 				continue
+				
+			if "mount_" in key:
+				var item_data = Globals.LevelLoaderRef.LoadJSON(effect.src)
+				if Globals.get_data(item_data, "equipment.slot", "") in attrib_base_name:
+					if compound_type == COMPOUNDING_TYPE.add:
+						result = result + effect[key]
+					elif compound_type == COMPOUNDING_TYPE.multiply:
+						result = result * effect[key]
+					else:
+						result = result - effect[key]
+					debug_applied.push_back(effect.src)
+					continue
 				
 			# Linked is basically the opposite of self_. We skip it once assuming it's us. Then we apply the "others" bonus
 			if "linked_" in key and effect.src == item_attributes.get("selected_variation") and not effect.src in linked_effects:

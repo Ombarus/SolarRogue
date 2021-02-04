@@ -23,6 +23,12 @@
 		"player_sale_range": [1050,1450],
 		"player_buy_range": [1700,2950]
 	},
+	"variations": [
+		{"src":"data/json/items/effects/normal.json", "chance": 50},
+		{"src":"data/json/items/effects/transciever.json", "chance":10},
+		{"src":"data/json/items/effects/transponder.json", "chance":10},
+		{"src":"data/json/items/effects/shielded.json", "chance":20}
+	],
 	"disassembling": {
 		"produce":"data/json/items/misc/spare_parts.json",
 		"count":2,

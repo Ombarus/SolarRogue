@@ -1,0 +1,8 @@
+{
+	"name_id":"Cooled X",
+	"type":"effect",
+	"prefix":"Cooled %s",
+	"attributes": {
+		"self_cooldown_multiplier":0.5
+	}
+}

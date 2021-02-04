@@ -54,7 +54,8 @@
 		{"src":"data/json/items/effects/widebeam.json", "chance":5},
 		{"src":"data/json/items/effects/focused.json", "chance":20},
 		{"src":"data/json/items/effects/overloaded.json", "chance":20},
-		{"src":"data/json/items/effects/lucky.json", "chance":20}
+		{"src":"data/json/items/effects/lucky.json", "chance":20},
+		{"src":"data/json/items/effects/shielded.json", "chance":20}
 	],
 	"description": {
 		"text":"Try Not To Die When Firing This Even Bigger Beast.",

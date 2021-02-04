@@ -53,7 +53,8 @@
 		{"src":"data/json/items/effects/swarm.json", "chance":10},
 		{"src":"data/json/items/effects/focused.json", "chance":10},
 		{"src":"data/json/items/effects/overloaded.json", "chance":20},
-		{"src":"data/json/items/effects/lucky.json", "chance":20}
+		{"src":"data/json/items/effects/lucky.json", "chance":20},
+		{"src":"data/json/items/effects/shielded.json", "chance":20}
 	],
 	"description": {
 		"text":"A old machine gun with many rotating barrels capable of firing several thousand rounds per seconds. It's a relic from the past but the ability to produce the bullets from scrap metal makes it a very cheap alternative to more advanced weaponery.",

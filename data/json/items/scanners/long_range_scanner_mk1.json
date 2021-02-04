@@ -17,6 +17,12 @@
 		"level":0,
 		"detection_bonus":0.01
 	},
+	"variations": [
+		{"src":"data/json/items/effects/normal.json", "chance": 50},
+		{"src":"data/json/items/effects/transciever.json", "chance":10},
+		{"src":"data/json/items/effects/transponder.json", "chance":10},
+		{"src":"data/json/items/effects/shielded.json", "chance":20}
+	],
 	"recyclable": {
 		"energy": 500,
 		"player_sale_range": [700,1100],

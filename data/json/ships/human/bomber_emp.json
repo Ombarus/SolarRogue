@@ -1,0 +1,145 @@
+{
+	"name_id":"A Human Bomber",
+	"type":"ship",
+	"sprite":"human_bomber",
+	"icon": {
+		"texture":"data/private/textures/space-sprite.png",
+		"region":[0,1024,128,128]
+	},
+	"action_point":0,
+	"mounts": {
+		"weapon": ["data/json/items/weapons/emp_mk1.json"],
+		"shield": [""],
+		"scanner": ["data/json/items/scanners/scanner_mk1.json"],
+		"utility": ["", ""],
+		"converter": [""]
+	},
+	"mount_attributes": {
+		"weapon": [{}],
+		"shield": [{}],
+		"scanner": [{}],
+		"utility": [{}, {}],
+		"converter": [{}]
+	},
+	"animation": {
+		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
+	},
+	"ai": {
+		"aggressive":true,
+		"pathfinding":"simple",
+		"run_if_attacked":false,
+		"hit_chance_malus":0.2,
+		"stop_running_after":12
+	},
+	"drop_on_death": [
+		{"id":"data/json/items/converters/converter_mk1.json", "chance":0.06},
+		{"id":"data/json/items/converters/converter_mk2.json", "chance":0.05},
+		{"id":"data/json/items/converters/converter_mk3.json", "chance":0.01},
+		{"id":"data/json/items/converters/jerg_converter_mk1.json", "chance":0.0005},
+		{"id":"data/json/items/converters/vorg_converter_mk1.json", "chance":0.0005},
+		{"id":"data/json/items/misc/battleship_body.json", "chance":0.0},
+		{"id":"data/json/items/misc/frigate_body.json", "chance":0.0},
+		{"id":"data/json/items/misc/probe_body.json", "chance":0.0},
+		{"id":"data/json/items/misc/scout_body.json", "chance":0.1},
+		{"id":"data/json/items/scanners/scanner_mk1.json", "chance":0.03333333333},
+		{"id":"data/json/items/scanners/scanner_mk2.json", "chance":0.01333333333},
+		{"id":"data/json/items/shields/shield_mk1.json", "chance":0.06},
+		{"id":"data/json/items/utilities/gravitic_compactor.json", "chance":0.005},
+		{"id":"data/json/items/utilities/solar_array.json", "chance":0.01},
+		{"id":"data/json/items/weapons/missile_launcher_mk1.json", "chance":0.04846153846},
+		{"id":"data/json/items/weapons/laser_turret_mk1.json", "chance":0.0},
+		{"id":"data/json/items/weapons/mining_laser.json", "chance":0.0},
+		{"id":"data/json/items/weapons/missile.json", "chance":0.1},
+		{"id":"data/json/items/consumables/repair_nanobots.json", "chance":0.01},
+		{"id":"data/json/items/consumables/emergency_warp.json", "chance":0.01},
+		{"id":"data/json/items/consumables/repair_kit.json", "chance":0.01},
+		
+		{"id":"data/json/items/shields/shield_mk2.json", "chance":0.040},
+		{"id":"data/json/items/shields/shield_mk3.json", "chance":0.012},
+		
+		{"id":"data/json/items/weapons/missile_launcher_mk2.json", "chance":0.0152},
+		{"id":"data/json/items/weapons/missile_launcher_mk3.json", "chance":0.0152},
+		{"id":"data/json/items/scanners/scanner_mk3.json", "chance":0.007},
+		{"id":"data/json/items/scanners/long_range_scanner_mk1.json", "chance":0.01},
+		{"id":"data/json/items/scanners/long_range_scanner_mk2.json", "chance":0.01},
+		{"id":"data/json/items/scanners/long_range_scanner_mk3.json", "chance":0.005},
+		{"id":"data/json/items/scanners/ultimate_scanner.json", "chance":0.002, "global_max":1},
+		{"id":"data/json/items/misc/oxygen.json", "chance":0.05},
+		{"id":"data/json/items/misc/oxygen.json", "chance":0.05},
+		{"id":"data/json/items/misc/oxygen.json", "chance":0.05},
+		{"id":"data/json/items/misc/uranium.json", "chance":0.02},
+		
+		{"id":"data/json/items/weapons/torpedo_launcher_mk1.json", "chance":0.44},
+		{"id":"data/json/items/weapons/torpedo_launcher_mk2.json", "chance":0.015},
+		{"id":"data/json/items/weapons/torpedo.json", "chance":0.2},
+		{"id":"data/json/items/weapons/torpedo.json", "chance":0.2},
+		{"id":"data/json/items/weapons/torpedo.json", "chance":0.1},
+		{"id":"data/json/items/weapons/torpedo.json", "chance":0.02},
+		{"id":"data/json/items/utilities/power_amplifier.json", "chance":0.002},
+		{"id":"data/json/items/utilities/power_amplifier_mk2.json", "chance":0.002},
+		{"id":"data/json/items/utilities/power_amplifier_mk3.json", "chance":0.002},
+		{"id":"data/json/items/utilities/speed_boost.json", "chance":0.002},
+		{"id":"data/json/items/utilities/speed_boost_mk2.json", "chance":0.002},
+		
+		{"id":"data/json/items/weapons/minigun.json", "chance":0.018},
+		{"id":"data/json/items/weapons/bullet_clip.json", "chance":0.02},
+		
+		{"id":"data/json/items/weapons/rail_gun_mk1.json", "chance":0.018},
+		{"id":"data/json/items/weapons/rail_gun_mk2.json", "chance":0.010},
+		{"id":"data/json/items/weapons/depleted_uranium.json", "chance":0.02},
+		
+		{"id":"data/json/items/utilities/hull_analyzer.json", "chance":0.01},
+		{"id":"data/json/items/utilities/shield_analyzer.json", "chance":0.01},
+		{"id":"data/json/items/utilities/shield_bypass.json", "chance":0.01},
+		{"id":"data/json/items/utilities/weapon_bypass.json", "chance":0.01},
+		{"id":"data/json/items/utilities/targeting_computer.json", "chance":0.01},
+		{"id":"data/json/items/utilities/jammer.json", "chance":0.01},
+
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.1},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
+		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
+	],
+	"destroyable": {
+		"hull":15,
+		"disable_weapon_chance":0.12,
+		"disable_shield_chance":0.05,
+		"disable_scanner_chance":0.05,
+		"disable_converter_chance":0.05,
+		"disable_utility_chance":0.05,
+		"disable_movement_chance":0.05,
+		"disable_ship_chance":0.05
+	},
+	"moving": {
+		"speed":1.25,
+		"wander_speed":2.5,
+		"can_use_wormhole":false
+	},
+	"cargo": {
+		"capacity":300,
+		"pickup_ap":1.0,
+		"drop_ap":1.0,
+		"content":[
+			{"src":"data/json/items/weapons/torpedo.json", "count":200}
+		]
+	},
+	"description": {
+		"text":"Similar in size to scouts but carries Torpedos. It'll blow everything up or die trying.",
+		"Overview": {
+			"min_level":0, 
+			"fields":[
+				{"name":"Max hull", "value":"{destroyable.hull}", "translate_value":false},
+				{"name":"Speed", "value":"{moving.speed*move_multiplier}", "translate_value":false, "positive_good":false},
+				{"name":"Weapon mounts", "value":"1", "translate_value":false},
+				{"name":"Shield mounts", "value":"1", "translate_value":false},
+				{"name":"Utility mounts", "value":"2", "translate_value":false}
+			]
+		},
+		"Status": {
+			"min_level":1,
+			"fields": [
+				{"name":"Current hull", "value":"{destroyable.current_hull}", "default":"{destroyable.hull}", "translate_value":false},
+				{"name":"Current shield", "value":"{shield.current_hp}", "translate_value":false}
+			]
+		}
+	}
+}

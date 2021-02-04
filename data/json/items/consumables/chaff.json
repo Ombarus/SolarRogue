@@ -1,0 +1,39 @@
+{
+	"name_id":"Chaff",
+	"type":"consumable",
+	"sprite": "shield_battery",
+	"icon": {
+		"texture":"data/private/textures/space-sprite.png",
+		"region":[1920,0,128,128]
+	},
+	"consumable": {
+		"ap": 1.0,
+		"energy":0
+	},
+	"equipment": {
+		"slot":"cargo",
+		"volume":10.0,
+		"stackable":true
+	},
+	"recyclable": {
+		"energy": 5000,
+		"player_sale_range": [7000,8000],
+		"player_buy_range": [10000,12000]
+	},
+	"description": {
+		"text":"Releases a cloud of different length metallic strips, which reflect different frequencies, to create a large area of false returns in which a real contact would be difficult to detect.",
+		"Overview": {
+			"min_level":0, 
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false},
+				{"name":"Turn used", "value":"{consumable.ap}", "translate_value":false}
+			]
+		},
+		"Effect": {
+			"min_level":0,
+			"fields": [
+				{"name":"Shield", "value":"+{shield_regen.point} points", "translate_value":true}
+			]
+		}
+	}
+}

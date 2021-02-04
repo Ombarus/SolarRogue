@@ -1,0 +1,47 @@
+{
+	"name_id":"Transciever Scanner",
+	"type":"effect",
+	"prefix":"Transciever %s",
+	"attributes": {
+		"global_destroyable_disable_weapon_chance_bonus":0.5,
+		"global_destroyable_disable_shield_chance_bonus":0.5,
+		"global_destroyable_disable_scanner_chance_bonus":0.5,
+		"global_destroyable_disable_converter_chance_bonus":0.5,
+		"global_destroyable_disable_utility_chance_bonus":0.5,
+		"global_destroyable_disable_movement_chance_bonus":0.5,
+		"global_destroyable_disable_ship_chance_bonus":0.5,
+		"global_weapon_disable_weapon_chance_bonus":0.5,
+		"global_weapon_disable_shield_chance_bonus":0.5,
+		"global_weapon_disable_scanner_chance_bonus":0.5,
+		"global_weapon_disable_converter_chance_bonus":0.5,
+		"global_weapon_disable_utility_chance_bonus":0.5,
+		"global_weapon_disable_movement_chance_bonus":0.5,
+		"global_weapon_disable_ship_chance_bonus":0.5
+	},
+	"description": {
+		"Hacking Bonus": {
+			"min_level":0,
+			"fields": [
+				{"name":"Weapon", "value":"+50%", "translate_value":false},
+				{"name":"Shield", "value":"+50%", "translate_value":false},
+				{"name":"Scanner", "value":"+50%", "translate_value":false},
+				{"name":"Converter", "value":"+50%", "translate_value":false},
+				{"name":"Utility", "value":"+50%", "translate_value":false},
+				{"name":"Engine", "value":"+50%", "translate_value":false},
+				{"name":"Knockout", "value":"+50%", "translate_value":false}
+			]
+		},
+		"Hacking Protection": {
+			"min_level":0,
+			"fields": [
+				{"name":"Weapon", "value":"+50%", "translate_value":false},
+				{"name":"Shield", "value":"+50%", "translate_value":false},
+				{"name":"Scanner", "value":"+50%", "translate_value":false},
+				{"name":"Converter", "value":"+50%", "translate_value":false},
+				{"name":"Utility", "value":"+50%", "translate_value":false},
+				{"name":"Engine", "value":"+50%", "translate_value":false},
+				{"name":"Knockout", "value":"+50%", "translate_value":false}
+			]
+		}
+	}
+}

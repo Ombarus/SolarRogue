@@ -1,0 +1,16 @@
+{
+	"name_id":"Weapon Vulnerability",
+	"type":"effect",
+	"prefix":"Weapon %s",
+	"attributes": {
+		"global_weapon_disable_weapon_chance_bonus":0.5
+	},
+	"description": {
+		"Hacking Bonus": {
+			"min_level":0,
+			"fields": [
+				{"name":"Weapon", "value":"+50%", "translate_value":false}
+			]
+		}
+	}
+}

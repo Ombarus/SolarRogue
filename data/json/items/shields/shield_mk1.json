@@ -37,7 +37,8 @@
 		{"src":"data/json/items/effects/fast.json", "chance":20},
 		{"src":"data/json/items/effects/blocking.json", "chance":20},
 		{"src":"data/json/items/effects/mimetic.json", "chance":10},
-		{"src":"data/json/items/effects/overloaded.json", "chance":10}
+		{"src":"data/json/items/effects/overloaded.json", "chance":10},
+		{"src":"data/json/items/effects/shielded.json", "chance":20}
 	],
 	"description": {
 		"text":"A type of force field that surrounds the ship protecting it against all form of energy and projectile weaponry. Consumes large amount of energy and recharges slowly over time. Stacked shields offer diminishing returns.",

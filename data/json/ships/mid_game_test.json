@@ -9,17 +9,24 @@
 		"region":[0,1024,128,128]
 	},
 	"mounts": {
-		"weapon": ["data/json/items/weapons/laser_turret_mk2.json", "data/json/items/weapons/laser_turret_mk2.json", "data/json/items/weapons/minigun.json"],
+		"weapon": ["data/json/items/weapons/torpedo_launcher_mk1.json", "data/json/items/weapons/laser_turret_mk2.json", "data/json/items/weapons/minigun.json"],
 		"shield": ["data/json/items/shields/shield_mk2.json", "", ""],
 		"scanner": ["data/json/items/scanners/scanner_mk3.json"],
 		"converter": ["data/json/items/converters/converter_mk3.json"],
-		"utility": ["data/json/items/utilities/speed_boost.json", "", "", "", ""]
+		"utility": ["", "", "", "", ""]
 	},
 	"animation": {
 		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
 	},
 	"destroyable": {
-		"hull":15
+		"hull":15,
+		"disable_weapon_chance":0.05,
+		"disable_shield_chance":0.05,
+		"disable_scanner_chance":0.05,
+		"disable_converter_chance":0.05,
+		"disable_utility_chance":0.05,
+		"disable_movement_chance":0.12,
+		"disable_ship_chance":0.05
 	},
 	"applied_effects":[
 		{
@@ -34,32 +41,45 @@
 		"energy_cost":5
 	},
 	"cargo": {
-		"capacity":3200,
+		"capacity":10000,
 		"pickup_ap":1.0,
 		"drop_ap":1.0,
 		"transferable":true,
 		"content":[
-			{"src":"data/json/items/weapons/emp.json", "count":1},
-			{"src":"data/json/items/weapons/boarding_pods.json", "count":1},
-			{"src":"data/json/items/weapons/remote_datajack.json", "count":1},
+			{"src":"data/json/items/weapons/emp_mk1.json", "count":1,
+				"modified_attributes": {
+					"selected_variation":"data/json/items/effects/cooled.json"
+			}},
+			{"src":"data/json/items/weapons/remote_datajack_mk1.json", "count":1},
 			{"src":"data/json/items/converters/converter_yendor.json", "count":1},
 			{"src":"data/json/items/consumables/repair_nanobots.json", "count":1},
 			{"src":"data/json/items/weapons/chaos_ball_generator_unique.json", "count":1},
 			{"src":"data/json/items/misc/uranium.json", "count":10},
 			{"src":"data/json/items/misc/diluted_cristals.json", "count":10},
-			{"src":"data/json/items/misc/spare_parts.json", "count":3},
-			{"src":"data/json/items/weapons/missile.json", "count":50},
-			{"src":"data/json/items/weapons/laser_turret_mk2.json", "count":1, 
+			{"src":"data/json/items/misc/spare_parts.json", "count":20},
+			{"src":"data/json/items/shields/shield_mk2.json", "count":1,
 				"modified_attributes": {
-					"selected_variation":"data/json/items/effects/linked.json"
+					"selected_variation":"data/json/items/effects/shielded.json"
+			}},
+			{"src":"data/json/items/scanners/long_range_scanner_mk2.json", "count":1,
+				"modified_attributes": {
+					"selected_variation":"data/json/items/effects/transciever.json"
+			}},
+			{"src":"data/json/items/scanners/long_range_scanner_mk3.json", "count":1,
+				"modified_attributes": {
+					"selected_variation":"data/json/items/effects/transponder.json"
 			}},
 			{"src":"data/json/items/weapons/laser_turret_mk2.json", "count":1, 
 				"modified_attributes": {
 					"selected_variation":"data/json/items/effects/linked.json"
 			}},
-			{"src":"data/json/items/shields/shield_mk2.json", "count":1},
-			{"src":"data/json/items/scanners/ultimate_scanner.json", "count":1},
-			{"src":"data/json/items/utilities/shield_analyzer.json", "count":1}
+			{"src":"data/json/items/utilities/boost_antenna.json", "count":1},
+			{"src":"data/json/items/utilities/firewall.json", "count":1},
+			{"src":"data/json/items/utilities/tinfoil.json", "count":1},
+			{"src":"data/json/items/utilities/vulnerability_scanner.json", "count":1,
+				"modified_attributes": {
+					"selected_variation":"data/json/items/effects/weapon_hack.json"
+			}}
 			
 		]
 	},
@@ -86,6 +106,18 @@
 			"fields": [
 				{"name":"Current hull", "value":"{destroyable.current_hull}", "default":"{destroyable.hull}", "translate_value":false},
 				{"name":"Current shield", "value":"{shield.current_hp}", "translate_value":false}
+			]
+		},
+		"Electronics": {
+			"min_level":1,
+			"fields": [
+				{"name":"Weapon Shielding", "value":"{destroyable.disable_weapon_chance+destroyable_disable_weapon_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Shield Shielding", "value":"{destroyable.disable_shield_chance+destroyable_disable_shield_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Scanner Shielding", "value":"{destroyable.disable_scanner_chance+destroyable_disable_scanner_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Converter Shielding", "value":"{destroyable.disable_converter_chance+destroyable_disable_converter_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Utility Shielding", "value":"{destroyable.disable_utility_chance+destroyable_disable_utility_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Engine Shielding", "value":"{destroyable.disable_movement_chance+destroyable_disable_movement_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Knockout Shielding", "value":"{destroyable.disable_ship_chance+destroyable_disable_ship_chance_bonus}%", "translate_value":false, "display_percent":true},
 			]
 		}
 	}

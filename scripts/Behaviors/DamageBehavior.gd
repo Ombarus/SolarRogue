@@ -392,13 +392,17 @@ func _handle_electronic_warfare(target, shooter, weapon_data, modified_attribute
 			var crit_mult = 1.0
 			if is_critical == true:
 				crit_mult = Globals.get_data(weapon_data, "weapon_data.crit_multiplier", 1.0)
-			var target_defense = target.get_attrib("destroyable.%s" % key, 0.0)
+			#TODO: Can I get "self" bonus that apply to targetted mounts?
+			var target_defense = target.get_attrib("destroyable.%s" % key, 0.0) + Globals.EffectRef.GetBonusValue(target, weapon_data.src, null, "destroyable_%s_bonus" % key)
+			var base_chance = weapon_detail[key] + Globals.EffectRef.GetBonusValue(shooter, weapon_data.src, modified_attributes, "weapon_%s_bonus" % key)
+			var min_duration = weapon_detail.get("disable_duration_min", 0) + Globals.EffectRef.GetBonusValue(shooter, weapon_data.src, modified_attributes, "weapon_disable_duration_min_bonus")
+			var max_duration = weapon_detail.get("disable_duration_max", 0) + Globals.EffectRef.GetBonusValue(shooter, weapon_data.src, modified_attributes, "weapon_disable_duration_max_bonus")
 			warfare_choices.push_back({
 				"name_id":key, 
 				"chance":clamp(weapon_detail[key] * crit_mult - target_defense, 0.0, 0.95),
 				"target":target, "shooter":shooter, 
-				"duration_min":weapon_detail.get("disable_duration_min", 0), # optional, default 0
-				"duration_max":weapon_detail.get("disable_duration_max", 0),
+				"duration_min":min_duration, # optional, default 0
+				"duration_max":max_duration,
 				"is_pulse":weapon_detail.get("area_effect", 0) > 0
 			})
 			

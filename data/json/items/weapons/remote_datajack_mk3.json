@@ -47,7 +47,8 @@
 		"energy_cost":700
 	},
 	"variations": [
-		{"src":"data/json/items/effects/normal.json", "chance": 50}
+		{"src":"data/json/items/effects/normal.json", "chance": 50},
+		{"src":"data/json/items/effects/shielded.json", "chance":20}
 	],
 	"description": {
 		"text":"Uses vulnerabilities in the ennemy's comm network to send exploits and disable ship's systems. Useless on planets.",
@@ -75,14 +76,14 @@
 		"Hacking Stats": {
 			"min_level":0,
 			"fields": [
-				{"name":"Weapon Disabling", "value":"{weapon_data.disable_weapon_chance}%", "translate_value":false, "display_percent":true},
-				{"name":"Shield Disabling", "value":"{weapon_data.disable_shield_chance}%", "translate_value":false, "display_percent":true},
-				{"name":"Scanner Disabling", "value":"{weapon_data.disable_scanner_chance}%", "translate_value":false, "display_percent":true},
-				{"name":"Converter Disabling", "value":"{weapon_data.disable_converter_chance}%", "translate_value":false, "display_percent":true},
-				{"name":"Utilities Disabling", "value":"{weapon_data.disable_utilities_chance}%", "translate_value":false, "display_percent":true},
-				{"name":"Immobilize", "value":"{weapon_data.disable_movement_chance}%", "translate_value":false, "display_percent":true},
-				{"name":"Shutdown", "value":"{weapon_data.disable_ship_chance}%", "translate_value":false, "display_percent":true},
-				{"name":"Duration", "value":"{weapon_data.disable_duration_min}~{weapon_data.disable_duration_max} Turns", "translate_value":true}
+				{"name":"Weapon Disabling", "value":"{weapon_data.disable_weapon_chance+weapon_disable_weapon_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Shield Disabling", "value":"{weapon_data.disable_shield_chance+weapon_disable_shield_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Scanner Disabling", "value":"{weapon_data.disable_scanner_chance+weapon_disable_scanner_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Converter Disabling", "value":"{weapon_data.disable_converter_chance+weapon_disable_converter_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Utilities Disabling", "value":"{weapon_data.disable_utilities_chance+weapon_disable_utility_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Immobilize", "value":"{weapon_data.disable_movement_chance+weapon_disable_movement_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Shutdown", "value":"{weapon_data.disable_ship_chance+weapon_disable_ship_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Duration", "value":"{weapon_data.disable_duration_min+weapon_disable_duration_min_bonus}~{weapon_data.disable_duration_max+weapon_disable_duration_max_bonus} Turns", "translate_value":true}
 			]
 		}
 	}

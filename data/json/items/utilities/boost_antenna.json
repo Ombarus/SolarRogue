@@ -1,0 +1,57 @@
+{
+	"name_id":"Boost Antenna",
+	"type":"utility",
+	"sprite": "weapon_bypass",
+	"icon": {
+		"texture":"data/private/textures/space-sprite.png",
+		"region":[256,1408,128,128]
+	},
+	"equipment": {
+		"slot":"utility",
+		"volume":45.0,
+		"equip_ap":3.0,
+		"unequip_ap":3.0
+	},
+	"attributes": {
+		"global_weapon_disable_weapon_chance_bonus":0.5,
+		"global_weapon_disable_shield_chance_bonus":0.5,
+		"global_weapon_disable_scanner_chance_bonus":0.5,
+		"global_weapon_disable_converter_chance_bonus":0.5,
+		"global_weapon_disable_utility_chance_bonus":0.5,
+		"global_weapon_disable_movement_chance_bonus":0.5,
+		"global_weapon_disable_ship_chance_bonus":0.5
+	},
+	"recyclable": {
+		"energy": 700,
+		"player_sale_range": [1000,1400],
+		"player_buy_range": [1650,2900]
+	},
+	"disassembling": {
+		"produce":"data/json/items/misc/spare_parts.json",
+		"count":2,
+		"energy_cost":700
+	},
+	"description": {
+		"text":"Selection of Low-Band and High-Band Antennas designed to increase the range and power of all communication system including, you know, less amiable ones",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
+				{"name":"Mount Point", "value":"Utility"}
+			]
+		},
+		"Hacking Bonus": {
+			"min_level":0,
+			"fields": [
+				{"name":"Weapon", "value":"+{attributes.global_weapon_disable_weapon_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Shield", "value":"+{attributes.global_weapon_disable_shield_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Scanner", "value":"+{attributes.global_weapon_disable_scanner_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Converter", "value":"+{attributes.global_weapon_disable_converter_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Utility", "value":"+{attributes.global_weapon_disable_utility_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Engine", "value":"+{attributes.global_weapon_disable_movement_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Knockout", "value":"+{attributes.global_weapon_disable_ship_chance_bonus}%", "translate_value":false, "display_percent":true}
+			]
+		}
+	}
+}

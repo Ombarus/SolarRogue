@@ -52,7 +52,8 @@
 		{"src":"data/json/items/effects/swarm.json", "chance":20},
 		{"src":"data/json/items/effects/focused.json", "chance":10},
 		{"src":"data/json/items/effects/overloaded.json", "chance":20},
-		{"src":"data/json/items/effects/lucky.json", "chance":20}
+		{"src":"data/json/items/effects/lucky.json", "chance":20},
+		{"src":"data/json/items/effects/shielded.json", "chance":20}
 	],
 	"description": {
 		"text":"Launches a flurry of guided-missile to any target in the viscinity. Due to it's slow speed, range is limited.",
