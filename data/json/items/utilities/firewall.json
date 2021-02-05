@@ -1,10 +1,10 @@
 {
 	"name_id":"Firewall",
 	"type":"utility",
-	"sprite": "weapon_bypass",
+	"sprite": "firewall",
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
-		"region":[256,1408,128,128]
+		"region":[512,1408,128,128]
 	},
 	"equipment": {
 		"slot":"utility",
@@ -13,13 +13,13 @@
 		"unequip_ap":3.0
 	},
 	"attributes": {
-		"global_destroyable_disable_weapon_chance_bonus":0.5,
-		"global_destroyable_disable_shield_chance_bonus":0.5,
-		"global_destroyable_disable_scanner_chance_bonus":0.5,
-		"global_destroyable_disable_converter_chance_bonus":0.5,
-		"global_destroyable_disable_utility_chance_bonus":0.5,
-		"global_destroyable_disable_movement_chance_bonus":0.5,
-		"global_destroyable_disable_ship_chance_bonus":0.5
+		"global_destroyable_disable_weapon_chance_bonus":0.05,
+		"global_destroyable_disable_shield_chance_bonus":0.05,
+		"global_destroyable_disable_scanner_chance_bonus":0.05,
+		"global_destroyable_disable_converter_chance_bonus":0.05,
+		"global_destroyable_disable_utility_chance_bonus":0.05,
+		"global_destroyable_disable_movement_chance_bonus":0.05,
+		"global_destroyable_disable_ship_chance_bonus":0.05
 	},
 	"recyclable": {
 		"energy": 700,

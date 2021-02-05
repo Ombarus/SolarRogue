@@ -3,13 +3,13 @@
 	"type":"effect",
 	"prefix":"Weapon %s",
 	"attributes": {
-		"global_weapon_disable_weapon_chance_bonus":0.5
+		"global_weapon_disable_weapon_chance_bonus":0.2
 	},
 	"description": {
 		"Hacking Bonus": {
 			"min_level":0,
 			"fields": [
-				{"name":"Weapon", "value":"+50%", "translate_value":false}
+				{"name":"Weapon", "value":"+20%", "translate_value":false}
 			]
 		}
 	}

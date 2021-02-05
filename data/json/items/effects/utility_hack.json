@@ -1,0 +1,16 @@
+{
+	"name_id":"Utility Vulnerability",
+	"type":"effect",
+	"prefix":"Utility %s",
+	"attributes": {
+		"global_weapon_disable_utility_chance_bonus":0.2
+	},
+	"description": {
+		"Hacking Bonus": {
+			"min_level":0,
+			"fields": [
+				{"name":"Utility", "value":"+20%", "translate_value":false}
+			]
+		}
+	}
+}

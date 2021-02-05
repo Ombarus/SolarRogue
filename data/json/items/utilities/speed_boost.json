@@ -14,7 +14,8 @@
 	},
 	"attributes": {
 		"global_move_multiplier":0.8,
-		"global_move_energy_cost_multiplier":1.5
+		"global_move_energy_cost_multiplier":1.5,
+		"global_weapon_disable_movement_chance_bonus":-0.1
 	},
 	"recyclable": {
 		"energy": 500,
@@ -41,6 +42,12 @@
 			"fields": [
 				{"name":"Turn Mult", "value":"{attributes.global_move_multiplier}%", "translate_value":false, "display_percent":true},
 				{"name":"Move Energy Cost", "value":"{attributes.global_move_energy_cost_multiplier}%", "translate_value":false, "display_percent":true}
+			]
+		},
+		"Hacking Protection": {
+			"min_level":0,
+			"fields": [
+				{"name":"Engine", "value":"-{attributes.global_weapon_disable_movement_chance_bonus}%", "translate_value":false, "display_percent":true}
 			]
 		}
 	}

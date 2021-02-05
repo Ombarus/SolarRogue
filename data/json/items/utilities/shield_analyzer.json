@@ -13,7 +13,8 @@
 		"unequip_ap":3.0
 	},
 	"attributes": {
-		"global_dam_shield_multiplier":1.2
+		"global_dam_shield_multiplier":1.2,
+		"global_weapon_disable_shield_chance_bonus":0.05
 	},
 	"recyclable": {
 		"energy": 700,
@@ -39,6 +40,7 @@
 			"min_level":0,
 			"fields": [
 				{"name":"Shield Dam. Mult.", "value":"{attributes.global_dam_shield_multiplier}", "translate_value":false}
+				{"name":"Shield Hacking", "value":"{attributes.global_weapon_disable_shield_chance_bonus}", "translate_value":false, "translate_value":false}
 			]
 		}
 	}

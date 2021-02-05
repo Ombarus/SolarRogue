@@ -1,0 +1,16 @@
+{
+	"name_id":"Engine Vulnerability",
+	"type":"effect",
+	"prefix":"Engine %s",
+	"attributes": {
+		"global_weapon_disable_movement_chance_bonus":0.2
+	},
+	"description": {
+		"Hacking Bonus": {
+			"min_level":0,
+			"fields": [
+				{"name":"Engine", "value":"+20%", "translate_value":false}
+			]
+		}
+	}
+}

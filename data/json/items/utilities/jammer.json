@@ -14,7 +14,21 @@
 	},
 	"attributes": {
 		"global_hit_chance_bonus":-0.1,
-		"global_dodge_chance_bonus":0.1
+		"global_dodge_chance_bonus":0.1,
+		"global_destroyable_disable_weapon_chance_bonus":0.05,
+		"global_destroyable_disable_shield_chance_bonus":0.05,
+		"global_destroyable_disable_scanner_chance_bonus":0.05,
+		"global_destroyable_disable_converter_chance_bonus":0.05,
+		"global_destroyable_disable_utility_chance_bonus":0.05,
+		"global_destroyable_disable_movement_chance_bonus":0.05,
+		"global_destroyable_disable_ship_chance_bonus":0.05,
+		"global_weapon_disable_weapon_chance_bonus":-0.05,
+		"global_weapon_disable_shield_chance_bonus":-0.05,
+		"global_weapon_disable_scanner_chance_bonus":-0.05,
+		"global_weapon_disable_converter_chance_bonus":-0.05,
+		"global_weapon_disable_utility_chance_bonus":-0.05,
+		"global_weapon_disable_movement_chance_bonus":-0.05,
+		"global_weapon_disable_ship_chance_bonus":-0.20
 	},
 	"recyclable": {
 		"energy": 700,
@@ -41,6 +55,30 @@
 			"fields": [
 				{"name":"Hit Chance", "value":"{attributes.global_hit_chance_bonus}%", "translate_value":false, "display_percent":true},
 				{"name":"Enemy's Hit Chance", "value":"-{attributes.global_dodge_chance_bonus}%", "translate_value":false, "display_percent":true}
+			]
+		},
+		"Hacking Malus": {
+			"min_level":0,
+			"fields": [
+				{"name":"Weapon", "value":"-{attributes.global_weapon_disable_weapon_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Shield", "value":"-{attributes.global_weapon_disable_shield_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Scanner", "value":"-{attributes.global_weapon_disable_scanner_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Converter", "value":"-{attributes.global_weapon_disable_converter_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Utility", "value":"-{attributes.global_weapon_disable_utility_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Engine", "value":"-{attributes.global_weapon_disable_movement_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Knockout", "value":"-{attributes.global_weapon_disable_ship_chance_bonus}%", "translate_value":false, "display_percent":true}
+			]
+		},
+		"Hacking Protection": {
+			"min_level":0,
+			"fields": [
+				{"name":"Weapon", "value":"+{attributes.global_destroyable_disable_weapon_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Shield", "value":"+{attributes.global_destroyable_disable_shield_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Scanner", "value":"+{attributes.global_destroyable_disable_scanner_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Converter", "value":"+{attributes.global_destroyable_disable_converter_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Utility", "value":"+{attributes.global_destroyable_disable_utility_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Engine", "value":"+{attributes.global_destroyable_disable_movement_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Knockout", "value":"+{attributes.global_destroyable_disable_ship_chance_bonus}%", "translate_value":false, "display_percent":true}
 			]
 		}
 	}

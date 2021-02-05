@@ -3,17 +3,17 @@
 	"type":"effect",
 	"prefix":"Shielded %s",
 	"attributes": {
-		"mount_destroyable_disable_weapon_chance_bonus":0.5,
-		"mount_destroyable_disable_shield_chance_bonus":1.4,
-		"mount_destroyable_disable_scanner_chance_bonus":0.25,
-		"mount_destroyable_disable_converter_chance_bonus":-0.10,
-		"mount_destroyable_disable_utility_chance_bonus":-0.10
+		"mount_destroyable_disable_weapon_chance_bonus":0.20,
+		"mount_destroyable_disable_shield_chance_bonus":0.20,
+		"mount_destroyable_disable_scanner_chance_bonus":0.20,
+		"mount_destroyable_disable_converter_chance_bonus":0.20,
+		"mount_destroyable_disable_utility_chance_bonus":0.20
 	},
 	"description": {
 		"Hack Protection": {
 			"min_level":0,
 			"fields": [
-				{"name":"Mount", "value":"+50%", "translate_value":false}
+				{"name":"Mount", "value":"+20%", "translate_value":false}
 			]
 		}
 	}
