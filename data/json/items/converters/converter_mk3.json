@@ -12,6 +12,10 @@
 		"equip_ap":3.0,
 		"unequip_ap":3.0
 	},
+	"variations": [
+		{"src":"data/json/items/effects/normal.json", "chance": 90},
+		{"src":"data/json/items/effects/shielded_converter.json", "chance": 10}
+	],
 	"converter": {
 		"maximum_energy":100000,
 		"recipes": [

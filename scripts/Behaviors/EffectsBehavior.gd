@@ -245,6 +245,10 @@ func OnMountRemoved_Callback(obj, slot, src, modified_attributes, force=false):
 
 
 func OnObjectLoaded_Callback(obj):
+	var timeout_data = obj.get_attrib("effect_timeout", [])
+	if not timeout_data.empty() and not BehaviorEvents.is_connected("OnObjTurn", self, "OnObjTurn_Callback"):
+		BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
+	
 	var selected_variation = obj.get_attrib("selected_variation")
 	if selected_variation != null:
 		return
@@ -262,6 +266,33 @@ func OnObjectLoaded_Callback(obj):
 	obj.set_attrib("selected_variation", selected_variation)
 	
 
+
+func OnObjTurn_Callback(obj):
+	var timeout_data = obj.get_attrib("effect_timeout")
+	if timeout_data == null:
+		return
+	
+	var still_valid := []
+	var applied_effects : Array = obj.get_attrib("applied_effects", [])
+	for data in timeout_data:
+		var src = data["src"]
+		var time = data["timeout"]
+		if Globals.total_turn > time:
+			for index in range(applied_effects.size()):
+				var effect = applied_effects[index]
+				if Globals.clean_path(effect.src) == Globals.clean_path(src) and effect.get("from_inventory", false) == false:
+					applied_effects.remove(index)
+					BehaviorEvents.emit_signal("OnLogLine", "The Flares are dying down.")
+					break
+		else:
+			still_valid.push_back(data)
+			
+	obj.set_attrib("applied_effects", applied_effects)
+	obj.set_attrib("effect_timeout", still_valid)
+	if still_valid.empty():
+		BehaviorEvents.disconnect("OnObjTurn", self, "OnObjTurn_Callback")
+	
+
 func OnConsumeItem_Callback(obj, item_data, key, attrib):
 	var update_effect = Globals.get_data(item_data, "update_effect")
 	var triggering_data = {"item_data":item_data, "key":key, "attrib":attrib}
@@ -269,9 +300,43 @@ func OnConsumeItem_Callback(obj, item_data, key, attrib):
 		return
 	
 	# for now we can only remove effects
-	var effect_to_remove = Globals.clean_path(update_effect.get("remove", ""))
-	if effect_to_remove.empty():
-		return
+	var effect_to_remove : String = update_effect.get("remove", "")
+	var effect_to_add : String = update_effect.get("add", "")
+	if not effect_to_remove.empty():
+		_remove_effect(obj, item_data, triggering_data, effect_to_remove)
+	if not effect_to_add.empty():
+		_add_effect(obj, item_data, triggering_data, effect_to_add)
+		
+	
+func _add_effect(obj, item_data, triggering_data, effect_to_add):
+	var variation_data : Dictionary = Globals.LevelLoaderRef.LoadJSON(effect_to_add)
+	var effect_data = variation_data["attributes"]
+	
+	var global_effect = {}
+	
+	for key in effect_data.keys():
+		if "global_" in key:
+			global_effect[key] = effect_data[key]
+	
+	if not global_effect.empty():
+		global_effect["src"] = effect_to_add
+		var applied_effects : Array = obj.get_attrib("applied_effects", [])
+		applied_effects.push_back(global_effect)
+		var timeout_data = obj.get_attrib("effect_timeout", [])
+		var effect_timeout = {
+			"src":effect_to_add,
+			"timeout":Globals.get_data(item_data, "update_effect.duration", 0)+Globals.total_turn
+		}
+		timeout_data.push_back(effect_timeout)
+		obj.set_attrib("effect_timeout", timeout_data)
+		obj.set_attrib("applied_effects", applied_effects)
+		if not BehaviorEvents.is_connected("OnObjTurn", self, "OnObjTurn_Callback"):
+			BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
+		BehaviorEvents.emit_signal("OnLogLine", "Flare & Chaff are sticking to the Hull, disrupting incoming communications!")
+		BehaviorEvents.emit_signal("OnValidateConsumption", obj, item_data, triggering_data.key, triggering_data.attrib)
+	
+func _remove_effect(obj, item_data, triggering_data, effect_to_remove):
+	effect_to_remove = Globals.clean_path(effect_to_remove)
 		
 	# find all broken item
 	var affected_src := []
@@ -292,6 +357,7 @@ func OnConsumeItem_Callback(obj, item_data, key, attrib):
 	
 	# display choice dialog
 	BehaviorEvents.emit_signal("OnPushGUI", "SelectTarget", {"targets":affected_src, "callback_object":self, "callback_method":"SelectedTarget_Callback"})
+	
 	
 
 func SelectedTarget_Callback(selected_targets):

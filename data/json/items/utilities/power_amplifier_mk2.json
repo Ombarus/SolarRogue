@@ -15,7 +15,8 @@
 	"attributes": {
 		"global_base_dam_multiplier":1.20,
 		"global_max_dam_multiplier":1.20,
-		"global_fire_energy_cost_multiplier":1.5
+		"global_fire_energy_cost_multiplier":1.5,
+		"global_destroyable_disable_weapon_chance_bonus":-0.10
 	},
 	"recyclable": {
 		"energy": 700,
@@ -42,6 +43,12 @@
 			"fields": [
 				{"name":"Damage Boost", "value":"[color=lime]+20%[/color]", "translate_value":false},
 				{"name":"Weapon Energy Cost", "value":"[color=red]+50%[/color]", "translate_value":false}
+			]
+		},
+		"Hacking Protection": {
+			"min_level":0,
+			"fields": [
+				{"name":"Weapon", "value":"{attributes.global_destroyable_disable_weapon_chance_bonus}%", "translate_value":false, "display_percent":true}
 			]
 		}
 	}

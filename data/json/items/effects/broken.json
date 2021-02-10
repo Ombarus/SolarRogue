@@ -9,6 +9,13 @@
 		"self_hp_regen_per_ap_multiplier":0.8,
 		"self_energy_cost_per_hp_multiplier":2.0,
 		"self_fire_speed_multiplier":1.2,
-		"self_hit_chance_bonus":-0.05
+		"self_hit_chance_bonus":-0.05,
+		"self_weapon_disable_weapon_chance_bonus":-0.15,
+		"self_weapon_disable_shield_chance_bonus":-0.15,
+		"self_weapon_disable_scanner_chance_bonus":-0.15,
+		"self_weapon_disable_converter_chance_bonus":-0.15,
+		"self_weapon_disable_utility_chance_bonus":-0.15,
+		"self_weapon_disable_movement_chance_bonus":-0.15,
+		"self_weapon_disable_ship_chance_bonus":-0.15
 	}
 }

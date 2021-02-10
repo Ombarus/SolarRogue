@@ -1,0 +1,14 @@
+{
+	"name_id":"Chaff Effect",
+	"type":"effect",
+	"prefix":"",
+	"attributes": {
+		"global_destroyable_disable_weapon_chance_bonus":0.9,
+		"global_destroyable_disable_shield_chance_bonus":0.9,
+		"global_destroyable_disable_scanner_chance_bonus":0.9,
+		"global_destroyable_disable_converter_chance_bonus":0.9,
+		"global_destroyable_disable_utility_chance_bonus":0.9,
+		"global_destroyable_disable_movement_chance_bonus":0.9,
+		"global_destroyable_disable_ship_chance_bonus":0.4
+	}
+}

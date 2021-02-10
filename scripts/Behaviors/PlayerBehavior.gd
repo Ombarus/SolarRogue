@@ -226,6 +226,7 @@ func UpdateButtonVisibility():
 			valid = true
 			break
 	valid = valid and not hide_hud
+	valid = valid and playerNode.get_attrib("offline_systems.weapon", 0.0) <= 0.0
 	weapon_btn.Disabled = not valid
 		
 	var converters = playerNode.get_attrib("mounts.converter")
