@@ -365,6 +365,13 @@
 				"amount":1
 			},
 			{
+				"name": "Electronic Warfare Converter", 
+				"requirements":[{"type":"energy", "amount":2500}, {"type":"spare_parts", "amount":10}], 
+				"produce":"data/json/items/converters/electro_warfare.json",
+				"ap_cost":6.0,
+				"amount":1
+			},
+			{
 				"name": "Short Range Scanner MK3", 
 				"requirements":[{"type":"energy", "amount":1500}, {"type":"spare_parts", "amount":8}], 
 				"produce":"data/json/items/scanners/scanner_mk3.json",

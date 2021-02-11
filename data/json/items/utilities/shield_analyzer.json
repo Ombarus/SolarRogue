@@ -39,7 +39,7 @@
 		"Effect": {
 			"min_level":0,
 			"fields": [
-				{"name":"Shield Dam. Mult.", "value":"{attributes.global_dam_shield_multiplier}", "translate_value":false}
+				{"name":"Shield Dam. Mult.", "value":"{attributes.global_dam_shield_multiplier}", "translate_value":false},
 				{"name":"Shield Hacking", "value":"{attributes.global_weapon_disable_shield_chance_bonus}", "translate_value":false, "translate_value":false}
 			]
 		}

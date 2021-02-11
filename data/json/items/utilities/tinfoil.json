@@ -17,14 +17,9 @@
 		"global_destroyable_disable_ship_chance_bonus":0.20
 	},
 	"recyclable": {
-		"energy": 700,
-		"player_sale_range": [1000,1400],
-		"player_buy_range": [1650,2900]
-	},
-	"disassembling": {
-		"produce":"data/json/items/misc/spare_parts.json",
-		"count":2,
-		"energy_cost":700
+		"energy": 450,
+		"player_sale_range": [600,950],
+		"player_buy_range": [1175,1400]
 	},
 	"description": {
 		"text":"Paranoid much? Well at least now your systems are protected against EMPs",

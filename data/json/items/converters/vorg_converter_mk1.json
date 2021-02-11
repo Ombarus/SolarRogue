@@ -204,6 +204,27 @@
 				"amount":1
 			},
 			{
+				"name": "E.M.P. MK2", 
+				"requirements":[{"type":"energy", "amount":1150}, {"type":"spare_parts", "amount":4}], 
+				"produce":"data/json/items/weapons/emp_mk2.json",
+				"ap_cost":5.0,
+				"amount":1
+			},
+			{
+				"name": "Remote Datahack MK2", 
+				"requirements":[{"type":"energy", "amount":1150}, {"type":"spare_parts", "amount":4}], 
+				"produce":"data/json/items/weapons/remote_datajack_mk2.json",
+				"ap_cost":5.0,
+				"amount":1
+			},
+			{
+				"name": "Electronic Warfare Converter", 
+				"requirements":[{"type":"energy", "amount":2500}, {"type":"spare_parts", "amount":10}], 
+				"produce":"data/json/items/converters/electro_warfare.json",
+				"ap_cost":6.0,
+				"amount":1
+			},
+			{
 				"name": "Short Range Scanner MK2", 
 				"requirements":[{"type":"energy", "amount":1000}, {"type":"spare_parts", "amount":4}], 
 				"produce":"data/json/items/scanners/scanner_mk2.json",

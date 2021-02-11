@@ -1,0 +1,215 @@
+{
+	"name_id":"Electronic Warfare Converter",
+	"type":"converter",
+	"sprite":"converter",
+	"icon": {
+		"texture":"data/private/textures/space-sprite.png",
+		"region":[256,128,128,128]
+	},
+	"equipment": {
+		"slot":"converter",
+		"volume":60.0,
+		"equip_ap":3.0,
+		"unequip_ap":3.0
+	},
+	"variations": [
+		{"src":"data/json/items/effects/normal.json", "chance": 90},
+		{"src":"data/json/items/effects/shielded_converter.json", "chance": 60}
+	],
+	"converter": {
+		"maximum_energy":100000,
+		"recipes": [
+			{
+				"name": "Recycle Energy",
+				"icon": {
+					"texture":"data/private/textures/space-sprite.png",
+				    "region":[256,0,128,128]
+				},
+				"requirements": [{"type":"recyclable", "amount":1}], 
+				"produce":"energy",
+				"ap_cost":1.0,
+				"amount":1500
+			},
+			{
+				"name": "Disassemble",
+				"icon": {
+					"texture":"data/private/textures/space-sprite.png",
+					"region":[1536,128,128,128]
+				},
+				"requirements": [{"type":"disassembling", "amount":1}], 
+				"produce":"spare_parts",
+				"ap_cost":1.0,
+				"amount":1500
+			},
+			{
+				"name": "Missile",
+				"requirements":[{"type":"energy", "amount":500}], 
+				"produce":"data/json/items/weapons/missile.json",
+				"ap_cost":0.5,
+				"amount":1
+			},
+			{
+				"name": "Bullets",
+				"requirements":[{"type":"energy", "amount":200}], 
+				"produce":"data/json/items/weapons/bullet_clip.json",
+				"ap_cost":0.5,
+				"amount":1
+			},
+			{
+				"name": "Torpedo",
+				"requirements":[{"type":"energy", "amount":550}], 
+				"produce":"data/json/items/weapons/torpedo.json",
+				"ap_cost":0.7,
+				"amount":1
+			},
+			{
+				"name": "Depleted Uranium",
+				"requirements":[{"src":"data/json/items/misc/uranium.json", "amount":1}], 
+				"produce":"data/json/items/weapons/depleted_uranium.json",
+				"ap_cost":2.0,
+				"amount":5
+			},
+			{
+				"name": "Chaff", 
+				"requirements":[{"type":"energy", "amount":850}, {"type":"spare_parts", "amount":3}], 
+				"produce":"data/json/items/consumables/chaff.json",
+				"ap_cost":4.0,
+				"amount":2
+			},
+			{
+				"name": "Boost Antenna", 
+				"requirements":[{"type":"energy", "amount":1600}, {"type":"spare_parts", "amount":8}], 
+				"produce":"data/json/items/utilities/boost_antenna.json",
+				"ap_cost":5.0,
+				"amount":1
+			},
+			{
+				"name": "Firewall", 
+				"requirements":[{"type":"energy", "amount":1600}, {"type":"spare_parts", "amount":8}], 
+				"produce":"data/json/items/utilities/firewall.json",
+				"ap_cost":5.0,
+				"amount":1
+			},
+			{
+				"name": "Jammer", 
+				"requirements":[{"type":"energy", "amount":875}, {"type":"spare_parts", "amount":3}], 
+				"produce":"data/json/items/utilities/jammer.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
+				"name": "Shield Analyzer", 
+				"requirements":[{"type":"energy", "amount":875}, {"type":"spare_parts", "amount":3}], 
+				"produce":"data/json/items/utilities/shield_analyzer.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
+				"name": "Tinfoil", 
+				"requirements":[{"type":"energy", "amount":800}, {"type":"spare_parts", "amount":1}], 
+				"produce":"data/json/items/utilities/tinfoil.json",
+				"ap_cost":3.0,
+				"amount":1
+			},
+			{
+				"name": "Weapon Vulnerability Scanner", 
+				"requirements":[{"type":"energy", "amount":1150}, {"type":"spare_parts", "amount":4}], 
+				"produce":"data/json/items/utilities/vulnerability_scanner.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
+				"name": "Shield Vulnerability Scanner", 
+				"requirements":[{"type":"energy", "amount":1150}, {"type":"spare_parts", "amount":4}],
+				"produce":"data/json/items/utilities/vulnerability_scanner.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
+				"name": "Utility Vulnerability Scanner", 
+				"requirements":[{"type":"energy", "amount":1150}, {"type":"spare_parts", "amount":4}],
+				"produce":"data/json/items/utilities/vulnerability_scanner.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
+				"name": "Scanner Vulnerability Scanner", 
+				"requirements":[{"type":"energy", "amount":1150}, {"type":"spare_parts", "amount":4}],
+				"produce":"data/json/items/utilities/vulnerability_scanner.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
+				"name": "Engine Vulnerability Scanner", 
+				"requirements":[{"type":"energy", "amount":1150}, {"type":"spare_parts", "amount":4}],
+				"produce":"data/json/items/utilities/vulnerability_scanner.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
+				"name": "E.M.P MK3", 
+				"requirements":[{"type":"energy", "amount":1600}, {"type":"spare_parts", "amount":6}], 
+				"produce":"data/json/items/weapons/emp_mk3.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
+				"name": "Remote Datahack MK3", 
+				"requirements":[{"type":"energy", "amount":1600}, {"type":"spare_parts", "amount":6}], 
+				"produce":"data/json/items/weapons/remote_datajack_mk3.json",
+				"ap_cost":5.0,
+				"amount":1
+			}
+		],
+		"selected_variations": [
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"data/json/items/effects/weapon_hack.json",
+			"data/json/items/effects/shield_hack.json",
+			"data/json/items/effects/utility_hack.json",
+			"data/json/items/effects/scanner_hack.json",
+			"data/json/items/effects/movement_hack.json",
+			"",
+			""
+		]
+	},
+	"recyclable": {
+		"energy": 2000,
+		"player_sale_range": [3000,3700],
+		"player_buy_range": [4000,6500]
+	},
+	"disassembling": {
+		"produce":"data/json/items/misc/spare_parts.json",
+		"count":12,
+		"energy_cost":1400
+	},
+	"description": {
+		"text":"This converter contains special systems and blueprints designed specifically to mess with other ships without causing lethal damages.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
+				{"name":"Mount Point", "value":"Converter"}
+			]
+		},
+		"Converter": {
+			"min_level":0,
+			"fields": [
+				{"name":"Maximum Energy Reserve", "value":"{converter.maximum_energy}", "translate_value":false},
+				{"name":"Recipes", "value":"20", "translate_value":false}
+			]
+		}
+	}
+}

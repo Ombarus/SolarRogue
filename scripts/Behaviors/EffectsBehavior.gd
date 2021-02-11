@@ -282,7 +282,7 @@ func OnObjTurn_Callback(obj):
 				var effect = applied_effects[index]
 				if Globals.clean_path(effect.src) == Globals.clean_path(src) and effect.get("from_inventory", false) == false:
 					applied_effects.remove(index)
-					BehaviorEvents.emit_signal("OnLogLine", "The Flares are dying down.")
+					BehaviorEvents.emit_signal("OnLogLine", "The Chaff is losing effectiveness.")
 					break
 		else:
 			still_valid.push_back(data)
@@ -332,7 +332,7 @@ func _add_effect(obj, item_data, triggering_data, effect_to_add):
 		obj.set_attrib("applied_effects", applied_effects)
 		if not BehaviorEvents.is_connected("OnObjTurn", self, "OnObjTurn_Callback"):
 			BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
-		BehaviorEvents.emit_signal("OnLogLine", "Flare & Chaff are sticking to the Hull, disrupting incoming communications!")
+		BehaviorEvents.emit_signal("OnLogLine", "Chaff is sticking to the Hull, disrupting incoming communications!")
 		BehaviorEvents.emit_signal("OnValidateConsumption", obj, item_data, triggering_data.key, triggering_data.attrib)
 	
 func _remove_effect(obj, item_data, triggering_data, effect_to_remove):
