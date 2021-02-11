@@ -77,9 +77,10 @@ func GetLevelID():
 
 func _ready():
 	if _TEST_MID_GAME == true:
-		startLevel = "data/json/levels/jerg_branch/branch06.json"
+		#startLevel = "data/json/levels/jerg_branch/branch06.json"
 		#startLevel = "data/json/levels/human_branch/branch04.json"
 		#startLevel = "data/json/levels/vorg_branch/branch08.json"
+		#startLevel = "data/json/levels/main/main11.json"
 		current_depth = 1
 	Globals.LevelLoaderRef = self
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
@@ -591,6 +592,8 @@ func CreateAndInitNode(data, pos, modified_data = null):
 		n.modified_attributes["unique_id"] = _sequence_id
 		_sequence_id += 1
 	objById[n.modified_attributes["unique_id"]] = n
+	if n.get_attrib("animation.waiting_moving") == true:
+		n.set_attrib("animation.waiting_moving", false)
 	if n.get_attrib("animation.in_movement") == true:
 		n.set_attrib("animation.in_movement", false)
 	BehaviorEvents.emit_signal("OnObjectLoaded", n)

@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/Attributes.gd" type="Script" id=1]
+[ext_resource path="res://scenes/tileset_source/human_bomber.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/tileset_source/human_battleship.tscn" type="PackedScene" id=3]
+
+[node name="electro_bomber_battleship" type="Node2D"]
+
+[node name="bomber_emp" type="Node2D" parent="."]
+script = ExtResource( 1 )
+PreloadData = "res://data/json/ships/human/bomber_emp.json"
+PreloadJSON = "{
+	\"ai\": {
+		\"pathfinding\":\"group_leader\"
+	}
+}"
+base_attributes = {
+
+}
+modified_attributes = {
+
+}
+
+[node name="bomber_root" parent="bomber_emp" instance=ExtResource( 2 )]
+
+[node name="battleship" type="Node2D" parent="."]
+position = Vector2( 0, 128 )
+script = ExtResource( 1 )
+PreloadData = "res://data/json/ships/human/battleship.json"
+PreloadJSON = "{
+	\"ai\": {
+		\"pathfinding\":\"group\",
+		\"disable_wandering\":true
+	}
+}"
+base_attributes = {
+
+}
+modified_attributes = {
+
+}
+
+[node name="battleship_root" parent="battleship" instance=ExtResource( 3 )]

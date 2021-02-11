@@ -12,8 +12,10 @@
 	},
 	"objects": [
 		{"name":"data/json/ships/human/frigate.json", "spawn_rate":0.1, "max":2},
+		{"name":"data/json/ships/human/frigate_electro.json", "spawn_rate":0.1, "max":1},
 		{"name":"data/json/ships/jerg/scout_laser.json", "spawn_rate":0.0003125, "max":3},
 		{"name":"data/json/ships/vorg/frigate.json", "spawn_rate":0.0003125, "max":2},
+		{"name":"data/json/ships/vorg/frigate_electro.json", "spawn_rate":0.0003125, "max":2},
 		{"name":"data/json/ships/vorg/scout_missile.json", "spawn_rate":0.1, "max":8},
 		{"name":"data/json/ships/vorg/bomber.json", "spawn_rate":0.1, "max":3},
 		{"name":"data/json/stellar/planetlvl2.json", "spawn_rate":0.1, "max":7, "sprite_margin":[1,1]},

@@ -505,7 +505,6 @@ func display_electro_log(success : bool,
 	if success == false and player_shooter == false:
 		if is_pulse:
 			txt = enemy_miss_pulse
-			fmt = [target_ship_name]
 		else:
 			txt = enemy_miss_choices
 	if success == false and player_shooter == true:
