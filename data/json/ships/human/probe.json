@@ -71,6 +71,18 @@
 				{"name":"Current hull", "value":"{destroyable.current_hull}", "default":"{destroyable.hull}", "translate_value":false},
 				{"name":"Current shield", "value":"None", "translate_value":false}
 			]
+		},
+		"Hacking Protection": {
+			"min_level":1,
+			"fields": [
+				{"name":"Weapons", "value":"{destroyable.disable_weapon_chance+destroyable_disable_weapon_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Shields", "value":"{destroyable.disable_shield_chance+destroyable_disable_shield_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Scanner", "value":"{destroyable.disable_scanner_chance+destroyable_disable_scanner_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Converter", "value":"{destroyable.disable_converter_chance+destroyable_disable_converter_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Utilities", "value":"{destroyable.disable_utility_chance+destroyable_disable_utility_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Engine", "value":"{destroyable.disable_movement_chance+destroyable_disable_movement_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Knockout", "value":"{destroyable.disable_ship_chance+destroyable_disable_ship_chance_bonus}%", "translate_value":false, "display_percent":true},
+			]
 		}
 	}
 }
