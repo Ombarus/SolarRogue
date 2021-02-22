@@ -156,7 +156,7 @@
 				{"name":"Converter", "value":"{destroyable.disable_converter_chance+destroyable_disable_converter_chance_bonus}%", "translate_value":false, "display_percent":true},
 				{"name":"Utilities", "value":"{destroyable.disable_utility_chance+destroyable_disable_utility_chance_bonus}%", "translate_value":false, "display_percent":true},
 				{"name":"Engine", "value":"{destroyable.disable_movement_chance+destroyable_disable_movement_chance_bonus}%", "translate_value":false, "display_percent":true},
-				{"name":"Knockout", "value":"{destroyable.disable_ship_chance+destroyable_disable_ship_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Knockout", "value":"{destroyable.disable_ship_chance+destroyable_disable_ship_chance_bonus}%", "translate_value":false, "display_percent":true}
 			]
 		}
 	}
