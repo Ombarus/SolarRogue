@@ -20,6 +20,7 @@
 		{"name":"scenes/level_prefab/human/electro_bomber_scout.tscn", "spawn_rate":0.0005208333333, "max":2},
 		{"name":"scenes/level_prefab/jerg/double_scouts.tscn", "spawn_rate":0.0003125, "max":3},
 		{"name":"scenes/level_prefab/jerg/scouts_electro.tscn", "spawn_rate":0.0003125, "max":1},
+		{"name":"data/json/ships/human/merchants/electro_trader.json", "spawn_rate":0.000039, "max":1, "global_max":1},
 		{"name":"data/json/stellar/planet.json", "spawn_rate":0.1, "max":5, "sprite_margin":[1,1]},
 		{"name":"data/json/stellar/planetlvl2.json", "spawn_rate":0.1, "max":5, "sprite_margin":[1,1]},
 		{"name":"data/json/stellar/sun.json", "min":1, "max":1, "pos":[40,40], "sprite_margin":[1,1]},
@@ -95,6 +96,18 @@
 		{"name":"data/json/items/utilities/jammer.json", "spawn_rate":0.000015625},
 		
 		{"name":"data/json/items/consumables/shield_battery.json", "spawn_rate":0.000010416667},
+		
+		{"name":"data/json/items/consumables/chaff.json", "spawn_rate":0.000012784},
+		{"name":"data/json/items/utilities/boost_antenna.json", "spawn_rate":0.000012784},
+		{"name":"data/json/items/utilities/firewall.json", "spawn_rate":0.000012784},
+		{"name":"data/json/items/utilities/tinfoil.json", "spawn_rate":0.000012784},
+		{"name":"data/json/items/utilities/vulnerability_scanner.json", "spawn_rate":0.000012784},
+		{"name":"data/json/items/weapons/emp_mk1.json", "spawn_rate":0.000013784},
+		{"name":"data/json/items/weapons/emp_mk2.json", "spawn_rate":0.000011784},
+		{"name":"data/json/items/weapons/emp_mk3.json", "spawn_rate":0.000010784},
+		{"name":"data/json/items/weapons/remote_datajack_mk1.json", "spawn_rate":0.000013784},
+		{"name":"data/json/items/weapons/remote_datajack_mk2.json", "spawn_rate":0.000011784},
+		{"name":"data/json/items/weapons/remote_datajack_mk3.json", "spawn_rate":0.000010784},
 		
 		{"name":"data/json/levels/main/main06.json", "spawn_rate":1.0, "max":1, "sprite_margin":[1,1]},
 		{"name":"data/json/levels/jerg_branch/branch04.json", "spawn_rate":0.0000390625, "max":1, "global_max":1, "sprite_margin":[1,1]}
