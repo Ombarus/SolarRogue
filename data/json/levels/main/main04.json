@@ -19,6 +19,9 @@
 		{"name":"scenes/level_prefab/human/electro_bomber_scout.tscn", "spawn_rate":0.0005208333333, "max":2},
 		{"name":"scenes/level_prefab/jerg/double_scouts.tscn", "spawn_rate":0.0003125, "max":3},
 		{"name":"scenes/level_prefab/jerg/scouts_electro.tscn", "spawn_rate":0.0003125, "max":1},
+		
+		{"name":"data/json/ships/human/merchants/electro_trader.json", "spawn_rate":0.000039, "max":1, "global_max":1},
+		
 		{"name":"data/json/stellar/planet.json", "spawn_rate":0.1, "max":6, "sprite_margin":[1,1]},
 		{"name":"data/json/stellar/planetlvl2.json", "spawn_rate":0.1, "max":4, "sprite_margin":[1,1]},
 		{"name":"data/json/stellar/sun.json", "min":1, "max":1, "pos":[40,40], "sprite_margin":[1,1]},

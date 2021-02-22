@@ -10,12 +10,12 @@
 	"mounts": {
 		"weapon": ["data/json/items/weapons/emp_mk2.json"],
 		"scanner": ["data/json/items/scanners/long_range_scanner_mk1.json"],
-		"utility": ["data/json/items/utilities/speed_boost.json", ""]
+		"utility": ["data/json/items/utilities/speed_boost.json", "data/json/items/utilities/tinfoil.json"]
 	},
 	"mount_attributes": {
 		"weapon": [{}],
 		"scanner": [{}],
-		"utility":[{"data/json/items/utilities/tinfoil.json"},{}]
+		"utility":[{},{}]
 	},
 	"applied_effects": [
 		{

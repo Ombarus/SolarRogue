@@ -1,58 +1,67 @@
 {
-	"name_id":"A Weapons Dealer",
+	"name_id":"Shady-e",
 	"type":"ship",
-	"sprite":"human_battleship",
+	"sprite":"vorg_frigate",
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
-		"region":[1280,256,128,128]
+		"region":[1152,256,128,128]
 	},
 	"animation": {
 		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
 	},
 	"action_point":0,
 	"mounts": {
-		"weapon": [
-			"data/json/items/weapons/missile_launcher_mk3.json", 
-			"data/json/items/weapons/missile_launcher_mk3.json",
-			"data/json/items/weapons/missile_launcher_mk3.json"
-		],
-		"shield": ["data/json/items/shields/shield_mk2.json", "data/json/items/shields/shield_mk2.json"],
+		"weapon": ["data/json/items/weapons/emp_mk2.json", "data/json/items/weapons/minigun.json"],
+		"shield": ["data/json/items/shields/shield_mk3.json", "data/json/items/shields/shield_mk2.json"],
 		"scanner": ["data/json/items/scanners/long_range_scanner_mk1.json"],
-		"converter": ["data/json/items/converters/converter_mk1.json"],
-		"utility":[
-			"data/json/items/utilities/power_amplifier_mk2.json"
-		]
+		"utility":["", ""],
+		"converter": ["data/json/items/converters/converter_mk1.json"]
 	},
 	"mount_attributes": {
-		"weapon": [{},{},{}],
-		"shield": [{},{}],
-		"scanner": [{}],
-		"converter": [{}],
-		"utility":[{}]
+		"weapon": [{"selected_variation":"data/json/items/effects/cooled.json"}, {}],
+		"shield": [{}, {}],
+		"scanner": [{"selected_variation":"data/json/items/effects/transciever.json"}],
+		"utility": [{}, {}],
+		"converter": [{}]
+	},
+	"destroyable": {
+		"hull":23,
+		"disable_weapon_chance":0.06,
+		"disable_shield_chance":0.06,
+		"disable_scanner_chance":0.02,
+		"disable_converter_chance":0.02,
+		"disable_utility_chance":0.15,
+		"disable_movement_chance":0.02,
+		"disable_ship_chance":0.06
+	},
+	"moving": {
+		"speed":1.8,
+		"can_use_wormhole":true,
+		"energy_cost":5
 	},
 	"applied_effect": [
 		{
-			"global_base_dam_multiplier":1.5,
-			"global_max_dam_multiplier":1.5,
-			"global_fire_energy_cost_multiplier":1.5,
-			"src":"data/json/items/utilities/power_amplifier_mk2.json"
+			"self_cooldown_multiplier":0.5,
+			"src":"data/json/items/effects/cooled.json"
+		},
+		{
+			"global_destroyable_disable_weapon_chance_bonus":0.1,
+			"global_destroyable_disable_shield_chance_bonus":0.1,
+			"global_destroyable_disable_scanner_chance_bonus":0.1,
+			"global_destroyable_disable_converter_chance_bonus":0.1,
+			"global_destroyable_disable_utility_chance_bonus":0.1,
+			"global_destroyable_disable_movement_chance_bonus":0.1,
+			"global_destroyable_disable_ship_chance_bonus":0.05,
+			"global_weapon_disable_weapon_chance_bonus":0.05,
+			"global_weapon_disable_shield_chance_bonus":0.05,
+			"global_weapon_disable_scanner_chance_bonus":0.05,
+			"global_weapon_disable_converter_chance_bonus":0.05,
+			"global_weapon_disable_utility_chance_bonus":0.05,
+			"global_weapon_disable_movement_chance_bonus":0.05,
+			"global_weapon_disable_ship_chance_bonus":0.20,
+			"src":"data/json/items/effects/transciever.json"
 		}
 	],
-	"destroyable": {
-		"hull":50,
-		"disable_weapon_chance":0.20,
-		"disable_shield_chance":0.20,
-		"disable_scanner_chance":0.05,
-		"disable_converter_chance":0.05,
-		"disable_utility_chance":0.10,
-		"disable_movement_chance":0.05,
-		"disable_ship_chance":0.25
-	},
-	"moving": {
-		"speed":2.0,
-		"can_use_wormhole":true,
-		"wander_speed":2.5
-	},
 	"ai": {
 		"aggressive":false,
 		"pathfinding":"merchant",
@@ -64,51 +73,30 @@
 		"trade_ports":[[-1,0]],
 		"inventory_size":[8,15],
 		"pondered_inventory_content": [
-			{"src":"data/json/items/shields/shield_mk1.json", "chance":10},
-			{"src":"data/json/items/weapons/missile_launcher_mk1.json", "chance":10},
-			{"src":"data/json/items/weapons/mining_laser.json", "chance":5},
-			{"src":"data/json/items/weapons/mining_laser_mk2.json", "chance":1},
-			{"src":"data/json/items/weapons/laser_turret_mk1.json", "chance":10},
-			{"src":"data/json/items/weapons/missile.json", "chance":20, "count":[10,20]},
-			{"src":"data/json/items/consumables/repair_nanobots.json", "chance":10},
+			{"src":"data/json/items/scanners/long_range_scanner_mk1.json", "chance":8},
+			{"src":"data/json/items/scanners/long_range_scanner_mk2.json", "chance":8},
+			{"src":"data/json/items/scanners/long_range_scanner_mk3.json", "chance":8},
+			{"src":"data/json/items/scanners/scanner_mk2.json", "chance":8},
+			{"src":"data/json/items/scanners/scanner_mk3.json", "chance":8},
+			
 			{"src":"data/json/items/consumables/emergency_warp.json", "chance":8},
-			{"src":"data/json/items/consumables/shield_battery.json", "chance":2},
-			{"src":"data/json/items/shields/shield_mk2.json", "chance":10},
-			{"src":"data/json/items/shields/shield_mk3.json", "chance":2},
-			{"src":"data/json/items/weapons/missile_launcher_mk2.json", "chance":10},
-			{"src":"data/json/items/weapons/missile_launcher_mk3.json", "chance":2},
-			{"src":"data/json/items/weapons/laser_turret_mk2.json", "chance":8},
-			{"src":"data/json/items/weapons/torpedo_launcher_mk1.json", "chance":15},
-			{"src":"data/json/items/weapons/torpedo_launcher_mk2.json", "chance":10},
-			{"src":"data/json/items/weapons/torpedo.json", "chance":10, "count":[10,20]},
-			{"src":"data/json/items/utilities/power_amplifier.json", "chance":10},
-			{"src":"data/json/items/utilities/power_amplifier_mk2.json", "chance":10},
-			{"src":"data/json/items/utilities/power_amplifier_mk3.json", "chance":3},
-			{"src":"data/json/items/weapons/minigun.json", "chance":10},
-			{"src":"data/json/items/weapons/bullet_clip.json", "chance":10, "count":[50,80]},
-			{"src":"data/json/items/weapons/rail_gun_mk1.json", "chance":10},
-			{"src":"data/json/items/weapons/rail_gun_mk2.json", "chance":10},
-			{"src":"data/json/items/weapons/depleted_uranium.json", "chance":10, "count":[10,20]},
-			{"src":"data/json/items/utilities/hull_analyzer.json", "chance":5},
 			{"src":"data/json/items/utilities/shield_analyzer.json", "chance":5},
-			{"src":"data/json/items/utilities/shield_bypass.json", "chance":5},
-			{"src":"data/json/items/utilities/weapon_bypass.json", "chance":5},
 			{"src":"data/json/items/utilities/targeting_computer.json", "chance":5},
 			{"src":"data/json/items/utilities/jammer.json", "chance":5},
 			
-			{"src":"data/json/items/consumables/chaff.json", "chance":10, "count":[1,10]},
-			{"src":"data/json/items/utilities/boost_antenna.json", "chance":2},
-			{"src":"data/json/items/utilities/firewall.json", "chance":2},
-			{"src":"data/json/items/utilities/tinfoil.json", "chance":2},
-			{"src":"data/json/items/utilities/vulnerability_scanner.json", "chance":3},
-			{"src":"data/json/items/utilities/vulnerability_scanner.json", "chance":2},
-			{"src":"data/json/items/utilities/vulnerability_scanner.json", "chance":1},
-			{"src":"data/json/items/weapons/emp_mk1.json", "chance":10},
-			{"src":"data/json/items/weapons/emp_mk2.json", "chance":5},
-			{"src":"data/json/items/weapons/emp_mk3.json", "chance":2},
-			{"src":"data/json/items/weapons/remote_datajack_mk1.json", "chance":10},
-			{"src":"data/json/items/weapons/remote_datajack_mk2.json", "chance":5},
-			{"src":"data/json/items/weapons/remote_datajack_mk3.json", "chance":2}
+			{"src":"data/json/items/consumables/chaff.json", "chance":10, "count":[4,10]},
+			{"src":"data/json/items/utilities/boost_antenna.json", "chance":10},
+			{"src":"data/json/items/utilities/firewall.json", "chance":10},
+			{"src":"data/json/items/utilities/tinfoil.json", "chance":10},
+			{"src":"data/json/items/utilities/vulnerability_scanner.json", "chance":10},
+			{"src":"data/json/items/utilities/vulnerability_scanner.json", "chance":8},
+			{"src":"data/json/items/utilities/vulnerability_scanner.json", "chance":6},
+			{"src":"data/json/items/weapons/emp_mk1.json", "chance":5},
+			{"src":"data/json/items/weapons/emp_mk2.json", "chance":10},
+			{"src":"data/json/items/weapons/emp_mk3.json", "chance":3},
+			{"src":"data/json/items/weapons/remote_datajack_mk1.json", "chance":5},
+			{"src":"data/json/items/weapons/remote_datajack_mk2.json", "chance":10},
+			{"src":"data/json/items/weapons/remote_datajack_mk3.json", "chance":3}
 		]
 	},
 	"cargo": {
@@ -180,7 +168,7 @@
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
 	],
 	"description": {
-		"text":"A battleship part of the human trader guild.",
+		"text":"Sales borderline illegal hacking tools and tactical electro-magnetic weapons. Just don't ask where he got them.",
 		"Overview": {
 			"min_level":0,
 			"fields":[
