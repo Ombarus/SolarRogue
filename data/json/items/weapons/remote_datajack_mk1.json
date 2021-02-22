@@ -17,7 +17,7 @@
 		"fire_energy_cost":650.0,
 		"fire_speed":1.0,
 		"base_hit_chance":0.9,
-		"crit_chance":0.75,
+		"crit_chance":0.05,
 		"crit_multiplier":1.5,
 		"can_harvest":false,
 		"disable_weapon_chance":0.35,
