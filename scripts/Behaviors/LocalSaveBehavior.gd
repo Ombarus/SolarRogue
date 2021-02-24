@@ -58,6 +58,16 @@ func get_latest_save():
 		print("!!!!!!!!!!!!CORRUPTED SAVE. RESETTING. THIS IS REALLY BAD!!!!!!!!!!!!!")
 		cur_save = {}
 		
+	
+	#var save_path = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS) + "/solar-rogue-backup.json"#SYSTEM_DIR_DOWNLOADS
+	#print("SOLAR ROGUE ---- BEGIN SAVE DUMP (%s) ---" % [save_path])
+	#var save_str = to_json(cur_save)
+	#var save_game = File.new()
+	#save_game.open(save_path, File.WRITE)
+	#save_game.store_line(to_json(cur_save))
+	#save_game.close()
+	#print("SOLAR ROGUE ---- END SAVE DUMP -----")
+		
 	return cur_save
 	
 func LoadJSON_with_available_method(filepath):

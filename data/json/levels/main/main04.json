@@ -33,7 +33,7 @@
 		{"name":"data/json/items/misc/containers/drop_probe_body.json", "spawn_rate":0.0000325, "max":2},
 		{"name":"data/json/items/misc/containers/drop_scout_body.json", "spawn_rate":0.0000325, "max":2},
 		{"name":"data/json/items/misc/containers/drop_frigate_body.json", "spawn_rate":0.0000325, "max":2},
-		{"name":"data/json/items/misc/containers/drop_battleship_body.json", "spawn_rate":0.0000325, "max":2},
+		{"name":"data/json/items/misc/containers/drop_battleship_body.json", "spawn_rate":0.0000125, "max":1},
 		
 		
 		{"name":"data/json/items/converters/converter_mk1.json", "spawn_rate":0.0001},
