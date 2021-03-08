@@ -1,30 +1,28 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://data/theme/default_ui_text.tres" type="Theme" id=1]
-[ext_resource path="res://scripts/GUI/ItemList/CraftingMaterialRow.gd" type="Script" id=2]
-[ext_resource path="res://data/theme/crafting/all_selection.tres" type="Theme" id=3]
-[ext_resource path="res://data/theme/crafting/partial_selection.tres" type="Theme" id=4]
-[ext_resource path="res://scripts/GUI/Audio/ToggleBtnAudio.gd" type="Script" id=5]
+[ext_resource path="res://scripts/GUI/ItemList/ChooseGrabRow.gd" type="Script" id=2]
+[ext_resource path="res://scripts/GUI/Audio/ToggleBtnAudio.gd" type="Script" id=3]
+[ext_resource path="res://data/theme/crafting/all_selection.tres" type="Theme" id=4]
+[ext_resource path="res://data/theme/crafting/partial_selection.tres" type="Theme" id=5]
 
-[node name="CraftingMaterialRow" type="Control"]
+[node name="ChooseTargetRow" type="Control"]
 margin_right = 377.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
-mouse_filter = 1
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-full_selection = ExtResource( 3 )
-partial_selection = ExtResource( 4 )
+full_selection = ExtResource( 4 )
+partial_selection = ExtResource( 5 )
 
 [node name="Toggle" type="Button" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 1
 toggle_mode = true
-script = ExtResource( 5 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -32,7 +30,11 @@ __meta__ = {
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = -10.0
 mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Wrapper" type="Control" parent="HBoxContainer"]
 margin_right = 50.0
@@ -40,29 +42,28 @@ margin_bottom = 50.0
 rect_min_size = Vector2( 50, 0 )
 mouse_filter = 2
 
-[node name="Count" type="Label" parent="HBoxContainer/Wrapper"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -25.0
-margin_top = -12.5
-margin_right = 25.0
-margin_bottom = 12.5
-rect_min_size = Vector2( 50, 25 )
-text = "✓"
-align = 1
-valign = 1
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Wrapper"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Name" type="Label" parent="HBoxContainer"]
 margin_left = 54.0
-margin_right = 377.0
+margin_right = 341.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 size_flags_vertical = 6
+text = "2x Hydrogen"
 valign = 1
 autowrap = true
+
+[node name="Direction" type="Label" parent="HBoxContainer"]
+margin_left = 345.0
+margin_top = 14.0
+margin_right = 367.0
+margin_bottom = 36.0
+text = "NW"

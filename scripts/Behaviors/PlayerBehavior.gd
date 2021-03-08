@@ -285,8 +285,40 @@ func OnCraft_Callback(recipe_data, input_list):
 func Pressed_Grab_Callback():
 	if lock_input:
 		return
-		
-	BehaviorEvents.emit_signal("OnPickup", playerNode, Globals.LevelLoaderRef.World_to_Tile(playerNode.position))
+	
+	var player_tile : Vector2 = Globals.LevelLoaderRef.World_to_Tile(playerNode.position)
+	var filtered_content := []
+	var directions : Array = ["NW", "W", "SW", "N", ".", "S", "NE", "E", "SE"]
+	var dir_count = 0
+	for x in range(player_tile.x - 1, player_tile.x + 2):
+		for y in range(player_tile.y - 1, player_tile.y + 2):
+			var tile_content = Globals.LevelLoaderRef.levelTiles[x][y]
+			for obj in tile_content:
+				if obj.visible == true and obj.get_attrib("equipment") != null:
+					var stackable = obj.get_attrib("equipment.stackable", false)
+					var skip = false
+					#TODO: Even if stackable I probably want to keep a reference on the OBJ
+					# so that I can just pass it to the inventory pickup
+					if stackable == true:
+						for item in filtered_content:
+							var same_variation = Globals.clean_path(item["obj"][0].get_attrib("modified_attributes.selected_variation", "")) == Globals.clean_path(obj.get_attrib("modified_attributes.selected_variation", ""))
+							if same_variation and item["obj"][0].get_attrib("src") == obj.get_attrib("src") and item["direction"] == directions[dir_count]:
+								item["count"] += 1
+								item["obj"].push_back(obj)
+								skip = true
+								break
+					if skip == false:
+						filtered_content.push_back({"obj":[obj], "count":1, "direction": directions[dir_count]})
+			dir_count += 1
+						
+	if filtered_content.size() > 0:
+		BehaviorEvents.emit_signal("OnPushGUI", "MultipleTarget", {"targets":filtered_content, "callback_object":self, "callback_method":"GrabMultiple_Callback"})
+
+
+func GrabMultiple_Callback(selected_targets):
+	for target in selected_targets:
+		for i in range(target["selected"]):
+			BehaviorEvents.emit_signal("OnPickup", playerNode, target["key"][i])
 	
 func Pressed_Inventory_Callback():
 	if lock_input:
