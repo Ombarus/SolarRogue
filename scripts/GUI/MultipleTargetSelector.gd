@@ -19,12 +19,12 @@ func Ok_Callback():
 		if data.selected > 0:
 			selected_targets.push_back(data)
 			
+	BehaviorEvents.emit_signal("OnPopGUI")
 	if selected_targets.size() > 0:
 		_base.disabled = true
 		_callback_obj.call(_callback_method, selected_targets)
 #		# reset content or we might end up with dangling references
 		_list.Content = []
-	BehaviorEvents.emit_signal("OnPopGUI")
 	
 func Cancel_Callback():
 	BehaviorEvents.emit_signal("OnPopGUI")

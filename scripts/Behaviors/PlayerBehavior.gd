@@ -310,8 +310,10 @@ func Pressed_Grab_Callback():
 					if skip == false:
 						filtered_content.push_back({"obj":[obj], "count":1, "direction": directions[dir_count]})
 			dir_count += 1
-						
-	if filtered_content.size() > 0:
+	
+	if filtered_content.size() == 1 and filtered_content[0]["count"] == 1:
+		BehaviorEvents.emit_signal("OnPickup", playerNode, filtered_content[0]["obj"][0])
+	elif filtered_content.size() > 0:
 		BehaviorEvents.emit_signal("OnPushGUI", "MultipleTarget", {"targets":filtered_content, "callback_object":self, "callback_method":"GrabMultiple_Callback"})
 
 
@@ -591,6 +593,13 @@ func OnLevelLoaded_Callback():
 			playerNode.set_attrib("player_name", PermSave.get_attrib("settings.default_name", "Ombarus"))
 		if playerNode.get_attrib("lowest_diff") == null:
 			playerNode.set_attrib("lowest_diff", PermSave.get_attrib("settings.difficulty"))
+		var player_converter = playerNode.get_attrib("mounts.converter", [])
+		# init the converter with random recipes if new player
+		if player_converter.size() > 0 and not player_converter[0].empty():
+			var converter_attrib = playerNode.get_attrib("mount_attributes.converter")
+			if converter_attrib[0].empty():
+				converter_attrib[0] = Globals.EffectRef.GenerateAttributesFromInventory(player_converter[0])
+				playerNode.set_attrib("mount_attributes.converter", converter_attrib)
 		
 		BehaviorEvents.emit_signal("OnPlayerCreated", playerNode)
 		
