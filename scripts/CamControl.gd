@@ -271,7 +271,7 @@ func update_pinch_gesture():
 		return
 	
 	var zoom_factor = (_touches_info["previous_radius"] - _touches_info["radius"]) / _touches_info["previous_radius"]
-	var final_zoom = zoom.x + zoom_factor
+	var final_zoom = zoom.x + (zoom_factor * zoom.x)
 
 	zoom = Vector2(final_zoom,final_zoom)
 	zoom.x = clamp(zoom.x, min_zoom, max_zoom)

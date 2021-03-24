@@ -452,6 +452,10 @@ levelLoaderNode = NodePath("../Behaviors/LevelLoader")
 [node name="SafeArea" type="Control" parent="Camera-GUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = 61.0
+margin_right = -42.0
+margin_bottom = -24.0
 mouse_filter = 2
 script = ExtResource( 41 )
 __meta__ = {
@@ -568,6 +572,7 @@ __meta__ = {
 }
 
 [node name="MultipleTarget" parent="Camera-GUI/SafeArea/SelectMultiTargetRoot" instance=ExtResource( 90 )]
+visible = false
 
 [node name="SelectTargetRoot" type="Control" parent="Camera-GUI/SafeArea"]
 anchor_right = 1.0

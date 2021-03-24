@@ -6,6 +6,7 @@
 margin_top = 169.0
 margin_right = 396.0
 margin_bottom = 200.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
@@ -17,23 +18,27 @@ __meta__ = {
 margin_right = 396.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 0, 22 )
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_top = 26.0
 margin_right = 396.0
 margin_bottom = 56.0
+mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="Indent" type="Control" parent="HBoxContainer"]
 margin_right = 20.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 20, 0 )
+mouse_filter = 2
 
 [node name="Name" type="RichTextLabel" parent="HBoxContainer"]
 margin_left = 24.0
 margin_right = 191.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 167, 0 )
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -55,6 +60,7 @@ text = ":"
 margin_left = 229.0
 margin_right = 396.0
 margin_bottom = 30.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true

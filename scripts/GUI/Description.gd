@@ -60,7 +60,7 @@ func Init(init_param):
 	
 	var final_list := []
 	for key in cat_dict:
-		if key == "text" or scanner_level < cat_dict[key].min_level:
+		if key == "text":
 			continue
 		
 		# we know the last category was empty if we're about to add a header and the previous row is also a header
@@ -68,6 +68,9 @@ func Init(init_param):
 		if final_list.size() > 0 and "header" in final_list[-1] and final_list[-1].header == true:
 			final_list.pop_back()
 		final_list.push_back({"name":key, "header":true})
+		if scanner_level < cat_dict[key].min_level:
+			final_list.push_back({"name":Globals.mytr("[color=gray]Min. Scanner Level[/color]"), "value":"[color=gray]%d[/color]" % [cat_dict[key].min_level]})
+			continue
 		for row in cat_dict[key].fields:
 			var names : Array = get_names(row.value)
 			var defaults := []
