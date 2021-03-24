@@ -39,13 +39,13 @@ vec4 chroma(vec2 uv, sampler2D tex) {
 }
 
 void fragment() {
-	vec2 normal_uv = SCREEN_UV;
-	vec4 normal_col = texture(TEXTURE, SCREEN_UV);
+	vec2 normal_uv = UV;
+	vec4 normal_col = texture(TEXTURE, UV);
     if (normal_uv.x < affected.x || normal_uv.y < affected.y || normal_uv.x > affected.x + affected.z || normal_uv.y > affected.y + affected.a) {
 		COLOR = normal_col;
 	}
 	else {
-		vec2 uv = pixelize(SCREEN_UV);
+		vec2 uv = pixelize(UV);
 		vec4 col = chroma(uv, TEXTURE);
 		col.a = col.a * alpha;
 		vec2 id = floor(uv * 10.0);
