@@ -74,14 +74,12 @@ func _on_base_mouse_exited(var overide_time_scale = 1.0):
 			current_target = Vector2(self.rect_size.x - move_by + offset, self.rect_size.y)
 			#print(str(self.rect_size.x) + " target " + str(current_target))
 			if initialized and current_target.x < default_rect_size.x:
-				print("CORRECTED LEFT!")
 				current_target = default_rect_size
 			target_name = "rect_size"
 		elif slide_side == SLIDE_SIDE.right:
 			current_target = self.margin_left + move_by + offset
 			#print(str(self.margin_left) + " target " + str(current_target))
 			if initialized and current_target > default_margin_left:
-				print("CORRECTED RIGHT!")
 				current_target = default_margin_left
 			target_name = "margin_left"
 		time_scale = abs(move_by + offset) / abs(move_by)

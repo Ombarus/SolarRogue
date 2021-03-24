@@ -27,6 +27,9 @@ func do_spawn():
 	var n = null
 	var coord = Vector2(0,0)
 	for file in files:
+		if "/effects/" in file:
+			print("Effect %s skipped" % file)
+			continue
 		print("Loading %s" % file)
 		n = Globals.LevelLoaderRef.RequestObject(file, coord)
 		coord.x += 3
