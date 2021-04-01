@@ -30,7 +30,8 @@
 			"min_level":0, 
 			"fields":[
 				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false},
-				{"name":"Turn used", "value":"{consumable.ap}", "translate_value":false}
+				{"name":"Turn used", "value":"{consumable.ap}", "translate_value":false},
+				{"name":"Duration", "value":"{update_effect.duration} Turns", "translate_value":true}
 			]
 		},
 		"Effect": {

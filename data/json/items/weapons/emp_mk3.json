@@ -78,7 +78,7 @@
 		"Pulse Stats": {
 			"min_level":0,
 			"fields": [
-				{"name":"Shutdown", "value":"{weapon_data.disable_ship_chance+weapon_disable_ship_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Knockout", "value":"{weapon_data.disable_ship_chance+weapon_disable_ship_chance_bonus}%", "translate_value":false, "display_percent":true},
 				{"name":"Duration", "value":"{weapon_data.disable_duration_min+weapon_disable_duration_min_bonus}~{weapon_data.disable_duration_max+weapon_disable_duration_max_bonus} Turns", "translate_value":true},
 				{"name":"Cooldown", "value":"{weapon_data.cooldown*cooldown_multiplier} Turns", "translate_value":true, "positive_good":false}
 			]

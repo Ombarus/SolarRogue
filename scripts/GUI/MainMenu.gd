@@ -52,7 +52,7 @@ func _on_choose_name_callback(name):
 	if cur_save == null or cur_save.empty():
 		_start_game()
 	else:
-		BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"callback_object":self, "callback_method":"_start_game", "custom_text":"Are you sure?\nStarting a new game will delete your current game!"})
+		BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"callback_object":self, "callback_method":"_start_game", "custom_text":"CONFIRM new game"})
 		
 		
 func _start_game():

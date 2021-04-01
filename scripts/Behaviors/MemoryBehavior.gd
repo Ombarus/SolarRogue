@@ -107,7 +107,6 @@ func OnObjectLoaded_Callback(obj):
 func OnRequestObjectUnload_Callback(obj):
 	if obj == _playerNode:
 		_playerNode = null
-		BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 		BehaviorEvents.disconnect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
 
 func ExecuteFullSweep():

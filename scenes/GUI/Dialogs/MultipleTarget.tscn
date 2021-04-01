@@ -37,7 +37,7 @@ margin_right = 343.0
 margin_bottom = 247.5
 dialog_ok = true
 dialog_cancel = true
-title = "Grab What ?"
+title = "Grab What?"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="base"]
 anchor_right = 1.0

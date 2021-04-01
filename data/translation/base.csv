@@ -770,3 +770,62 @@ disable_converter_chance,Converter System,Désactiver le Convertisseur,Disable C
 disable_utility_chance,Utilities System,Désactiver les Accessoires,付き物を無効にする
 disable_movement_chance,Engines Room,Désactiver les Moteurs,エンジンを無効にする
 disable_ship_chance,Complete Shutdown,Désactiver la Totalité du Vaisseau,シャットダウン
+[?]help,[?]help,[?]aide,[?]説明
+Grab What?,Grab What?,Prendre Quoi?,選択
+[a]ll,[a]ll,[a]tout,[a]全部
+[n]one,[n]one,[n]rien,[n]無
+Unhandled Exception in...,Unhandled Exception in...,Erreur Non-Traité dans...,Unhandled Exception in...
+[5]wait,[5]wait,[5]attend,[5]休憩
+Chaff,Chaff,Paillette,チャフ
+"Releases a cloud of different length metallic strips, which reflect different frequencies, blocking most communications and preventing potential exploits.","Releases a cloud of different length metallic strips, which reflect different frequencies, blocking most communications and preventing potential exploits.",Filaments métalliques utilisées pour brouiller un radar. Protège de la plupart des attaques électroniques.,"Releases a cloud of different length metallic strips, which reflect different frequencies, blocking most communications and preventing potential exploits."
+{update_effect.duration} Turns,{update_effect.duration} Turns,{update_effect.duration} Tours,{update_effect.duration} Turns
+Electronic Warfare Converter,Electronic Warfare Converter,Convertisseur Spécialisé Électronique,Electronic Warfare Converter
+Boost Antenna,Boost Antenna,Antenne Amplificateur,Boost Antenna
+Firewall,Firewall,Pare-feu,Firewall
+Tinfoil,Tinfoil,Papier d’aluminium,Tinfoil
+Weapon Vulnerability Scanner,Weapon Vulnerability Scanner,Scanneur de Système d’Armement,Weapon Vulnerability Scanner
+Shield Vulnerability Scanner,Shield Vulnerability Scanner,Scanneur de Système de Bouclier,Shield Vulnerability Scanner
+Utility Vulnerability Scanner,Utility Vulnerability Scanner,Scanneur de Systèmes Utilitaires,Utility Vulnerability Scanner
+Scanner Vulnerability Scanner,Scanner Vulnerability Scanner,Scanneur de Système de Radar,Scanner Vulnerability Scanner
+Engine Vulnerability Scanner,Engine Vulnerability Scanner,Scanneur de Système de Propulsion,Engine Vulnerability Scanner
+E.M.P MK3,E.M.P MK3,E.M.P v3,E.M.P MK3
+Remote Datahack MK3,Remote Datahack MK3,Pirateur de Système v3,Remote Datahack MK3
+This converter contains special systems and blueprints designed specifically to mess with other ships without causing lethal damages.,This converter contains special systems and blueprints designed specifically to mess with other ships without causing lethal damages.,Ce convertisseur contient des recettes spécialement conçues pour affecter certains des sous-systèmes d’un vaisseau sans toutefois causer des dommages important.,This converter contains special systems and blueprints designed specifically to mess with other ships without causing lethal damages.
+"Selection of Low-Band and High-Band Antennas designed to increase the range and power of all communication system including, you know, less amiable ones","Selection of Low-Band and High-Band Antennas designed to increase the range and power of all communication system including, you know, less amiable ones","Un groupes d’antenne capable de filtrer une grande quantité de signaux électriques permettant d’augmenter la puissance et la porté de toute forme de communication, incluant bien sûr certains outils de piratage moins amical.","Selection of Low-Band and High-Band Antennas designed to increase the range and power of all communication system including, you know, less amiable ones"
+Hacking Bonus,Hacking Bonus,Bonus au Piratage,Hacking Bonus
+Engine,Engine,Propulsion,Engine
+Knockout,Knockout,Désactivation,Knockout
+Doesn't actually prevent fires.,Doesn't actually prevent fires.,Ne protège pas vraiment des feux,Doesn't actually prevent fires.
+Hacking Protection,Hacking Protection,Défense contre Piratage,Hacking Protection
+Hacking Malus,Hacking Malus,Réduit vos Chances de Piratage,Hacking Malus
+Paranoid much? Well at least now your systems are protected against EMPs,Paranoid much? Well at least now your systems are protected against EMPs,Vous avez des tendances paranoïde sévère mais au moins vos systèmes sont maintenant protégé des attaques Électro-magnétiques,Paranoid much? Well at least now your systems are protected against EMPs
+Vulnerability Scanner,Vulnerability Scanner,Scanneur de,Vulnerability Scanner
+Specialized Communication Equipment that Scan enemy communications for exploitable vulnerabilities.,Specialized Communication Equipment that Scan enemy communications for exploitable vulnerabilities.,Système de communication spécialisé dans la détection et l’exploitation de failles dans les système de communication des vaisseaux ennemis,Specialized Communication Equipment that Scan enemy communications for exploitable vulnerabilities.
+Weapon %s,Weapon %s,%s Système d’Armement,Weapon %s
+Utility %s,Utility %s,%s Systèmes Utilitaires,Utility %s
+Shield %s,Shield %s,%s Système de Bouclier,Shield %s
+Scanner %s,Scanner %s,%s Système de Radar,Scanner %s
+Engine %s,Engine %s,%s Système de Propulsion,Engine %s
+E.M.P. MK1,E.M.P. MK1,E.M.P. v1,E.M.P. MK1
+Discharge a pulse of electromagnetic charges that can disable any ship in the vicinity. After firing the capacitors must be recharged before it can be fired again. Useless on planets.,Discharge a pulse of electromagnetic charges that can disable any ship in the vicinity. After firing the capacitors must be recharged before it can be fired again. Useless on planets.,Émet un champs Électro-Magnétique capable de désactivé tous les vaisseaux à proximité. Après avoir fait feu les capaciteurs doivent se recharger avant de pouvoir faire feu de nouveau. Ne peux être utilisé pour miner les planètes. ,Discharge a pulse of electromagnetic charges that can disable any ship in the vicinity. After firing the capacitors must be recharged before it can be fired again. Useless on planets.
+Pulse Stats,Pulse Stats,Effets,Pulse Stats
+{weapon_data.disable_duration_min+weapon_disable_duration_min_bonus}~{weapon_data.disable_duration_max+weapon_disable_duration_max_bonus} Turns,{weapon_data.disable_duration_min+weapon_disable_duration_min_bonus}~{weapon_data.disable_duration_max+weapon_disable_duration_max_bonus} Turns,{weapon_data.disable_duration_min+weapon_disable_duration_min_bonus}~{weapon_data.disable_duration_max+weapon_disable_duration_max_bonus} Tours,{weapon_data.disable_duration_min+weapon_disable_duration_min_bonus}~{weapon_data.disable_duration_max+weapon_disable_duration_max_bonus} Turns
+Cooldown,Cooldown,Recharge,Cooldown
+{weapon_data.cooldown*cooldown_multiplier} Turns,{weapon_data.cooldown*cooldown_multiplier} Turns,{weapon_data.cooldown*cooldown_multiplier} Tours,{weapon_data.cooldown*cooldown_multiplier} Turns
+E.M.P. MK2,E.M.P. MK2,E.M.P. v2,E.M.P. MK2
+Remote Datahack MK1,Remote Datahack MK1,Pirateur de Système v1,Remote Datahack MK1
+Remote Datahack MK2,Remote Datahack MK2,Pirateur de Système v2,Remote Datahack MK2
+Remote Datahack MK3,Remote Datahack MK3,Pirateur de Système v3,Remote Datahack MK3
+Uses vulnerabilities in the ennemy's comm network to send exploits and disable ship's systems. Useless on planets.,Uses vulnerabilities in the ennemy's comm network to send exploits and disable ship's systems. Useless on planets.,Utilise des vulnérabilités dans le système de communication de l’ennemi pour transmettre des commandes et désactivé certains sous-systèmes. Ne peut pas être utilisé pour miner des planètes.,Uses vulnerabilities in the ennemy's comm network to send exploits and disable ship's systems. Useless on planets.
+Hacking Stats,Hacking Stats,Chances de Piratage,Hacking Stats
+Weapon Disabling,Weapon Disabling,Armements,Weapon Disabling
+Shield Disabling,Shield Disabling,Boucliers,Shield Disabling
+Scanner Disabling,Scanner Disabling,Radar,Scanner Disabling
+Converter Disabling,Converter Disabling,Convertisseur,Converter Disabling
+Utilities Disabling,Utilities Disabling,Utilitaires,Utilities Disabling
+Immobilize,Immobilize,Propulsion,Immobilize
+{weapon_data.disable_duration_min+weapon_disable_duration_min_bonus}~{weapon_data.disable_duration_max+weapon_disable_duration_max_bonus} Turns,{weapon_data.disable_duration_min+weapon_disable_duration_min_bonus}~{weapon_data.disable_duration_max+weapon_disable_duration_max_bonus} Turns,{weapon_data.disable_duration_min+weapon_disable_duration_min_bonus}~{weapon_data.disable_duration_max+weapon_disable_duration_max_bonus} Tours,{weapon_data.disable_duration_min+weapon_disable_duration_min_bonus}~{weapon_data.disable_duration_max+weapon_disable_duration_max_bonus} Turns
+CONFIRM new game,Are you sure?\nStarting a new game will delete your current save!,Êtes-vous certain?\nDémarrer une nouvelle partie écrasera votre sauvegarde actuelle!,Are you sure?\nStarting a new game will delete your current save!
+Cooled %s,Cooled %s,%s Refroidit,Cooled %s
+Transciever %s,Transciever %s,%s Transcieveur,Transciever %s
+Transponder %s,Transponder %s,%s Transpondeur,Transponder %s
