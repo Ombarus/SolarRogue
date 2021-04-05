@@ -6,7 +6,7 @@
 		"global_destroyable_disable_converter_chance_bonus":0.20
 	},
 	"description": {
-		"Hack Protection": {
+		"Hacking Protection": {
 			"min_level":0,
 			"fields": [
 				{"name":"Converter", "value":"+20%", "translate_value":false}

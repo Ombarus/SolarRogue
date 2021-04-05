@@ -54,7 +54,7 @@
 		"can_use_wormhole":false
 	},
 	"description": {
-		"text":"Harmless. Originally designed to explore Uranus, it's now so far deep it can't see the sun. Comes with various telemetry equipment.",
+		"text":"Harmless autonomous exploration vehicule. Comes with various telemetry equipment.",
 		"Overview": {
 			"min_level":0, 
 			"fields":[

@@ -122,7 +122,12 @@ func ReInit():
 	
 	var recipe_content = []
 	var recipes = _converter_data.converter.recipes
-	var variations = Globals.get_data(_converter_attributes, "converter.selected_variations", [])
+	# gives me an opportunity to manually set the variations for each recipe (electro converter)
+	# but doing it like this means it doesn't need to get saved so I need to look not only in the
+	# saved modified_attributes but also in the base attributes.
+	var variations = Globals.get_data(_converter_data, "converter.selected_variations", null)
+	if variations == null:
+		variations = Globals.get_data(_converter_attributes, "converter.selected_variations", [])
 	for index in range(recipes.size()):
 		var recipe_data = recipes[index]
 		var variation_src = ""

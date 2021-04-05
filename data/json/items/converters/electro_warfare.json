@@ -112,35 +112,35 @@
 				"amount":1
 			},
 			{
-				"name": "Weapon Vulnerability Scanner", 
+				"name": "Vulnerability Scanner", 
 				"requirements":[{"type":"energy", "amount":1150}, {"type":"spare_parts", "amount":4}], 
 				"produce":"data/json/items/utilities/vulnerability_scanner.json",
 				"ap_cost":4.0,
 				"amount":1
 			},
 			{
-				"name": "Shield Vulnerability Scanner", 
+				"name": "Vulnerability Scanner", 
 				"requirements":[{"type":"energy", "amount":1150}, {"type":"spare_parts", "amount":4}],
 				"produce":"data/json/items/utilities/vulnerability_scanner.json",
 				"ap_cost":4.0,
 				"amount":1
 			},
 			{
-				"name": "Utility Vulnerability Scanner", 
+				"name": "Vulnerability Scanner", 
 				"requirements":[{"type":"energy", "amount":1150}, {"type":"spare_parts", "amount":4}],
 				"produce":"data/json/items/utilities/vulnerability_scanner.json",
 				"ap_cost":4.0,
 				"amount":1
 			},
 			{
-				"name": "Scanner Vulnerability Scanner", 
+				"name": "Vulnerability Scanner", 
 				"requirements":[{"type":"energy", "amount":1150}, {"type":"spare_parts", "amount":4}],
 				"produce":"data/json/items/utilities/vulnerability_scanner.json",
 				"ap_cost":4.0,
 				"amount":1
 			},
 			{
-				"name": "Engine Vulnerability Scanner", 
+				"name": "Vulnerability Scanner", 
 				"requirements":[{"type":"energy", "amount":1150}, {"type":"spare_parts", "amount":4}],
 				"produce":"data/json/items/utilities/vulnerability_scanner.json",
 				"ap_cost":4.0,
@@ -162,7 +162,6 @@
 			}
 		],
 		"selected_variations": [
-			"",
 			"",
 			"",
 			"",

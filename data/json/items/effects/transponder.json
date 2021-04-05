@@ -12,7 +12,7 @@
 		"global_destroyable_disable_ship_chance_bonus":0.05
 	},
 	"description": {
-		"Hack Protection": {
+		"Hacking Protection": {
 			"min_level":0,
 			"fields": [
 				{"name":"Weapon", "value":"+10%", "translate_value":false},
