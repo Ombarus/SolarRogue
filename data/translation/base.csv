@@ -827,6 +827,39 @@ Immobilize,Immobilize,Propulsion,Immobilize
 {weapon_data.disable_duration_min+weapon_disable_duration_min_bonus}~{weapon_data.disable_duration_max+weapon_disable_duration_max_bonus} Turns,{weapon_data.disable_duration_min+weapon_disable_duration_min_bonus}~{weapon_data.disable_duration_max+weapon_disable_duration_max_bonus} Turns,{weapon_data.disable_duration_min+weapon_disable_duration_min_bonus}~{weapon_data.disable_duration_max+weapon_disable_duration_max_bonus} Tours,{weapon_data.disable_duration_min+weapon_disable_duration_min_bonus}~{weapon_data.disable_duration_max+weapon_disable_duration_max_bonus} Turns
 CONFIRM new game,Are you sure?\nStarting a new game will delete your current save!,Êtes-vous certain?\nDémarrer une nouvelle partie écrasera votre sauvegarde actuelle!,Are you sure?\nStarting a new game will delete your current save!
 Cooled %s,Cooled %s,%s Refroidit,Cooled %s
-Transciever %s,Transciever %s,%s Transcieveur,Transciever %s
+Transciever %s,Transciever %s,%s Émetteur-Récepteur,Transciever %s
 Transponder %s,Transponder %s,%s Transpondeur,Transponder %s
+"Their Firewall is too good, can't break through!","Their Firewall is too good, can't break through!","Leur Pare-feu est trop bon, c’est un échec!","Their Firewall is too good, can't break through!"
+"Counter-Intrusion measure detected, Hacking failed!","Counter-Intrusion measure detected, Hacking failed!","Leur système anti-intrusion nous a détecté, le piratage a échoué!","Counter-Intrusion measure detected, Hacking failed!"
+Enemy Virus detected and removed!,Enemy Virus detected and removed!,Nos systèmes ont réussi à éliminer le Virus Ennemi,Enemy Virus detected and removed!
+Hack attempt avoided!,Hack attempt avoided!,L’ennemi tente de nous pirater mais sans succès!,Hack attempt avoided!
+The %s is shaken but otherwise unafected by the pulse!,The %s is shaken but otherwise unafected by the pulse!,Le %s résiste à l’attaque électromagnétique!,The %s is shaken but otherwise unafected by the pulse!
+The %s shields deflected most of the pulse!,The %s shields deflected most of the pulse!,Les boucliers du %s ont absorbés la majeur partie de l’attaque!,The %s shields deflected most of the pulse!
+We survived the pulse!,We survived the pulse!,Nous avons survécu ,We survived the pulse!
+"Enemy pulse deflected, all our electronics surived!","Enemy pulse deflected, all our electronics surived!",L’ennemi émet une forte impulsion électromagnétique mais nos systèmes survivent!,"Enemy pulse deflected, all our electronics surived!"
+"We found an exploit, their %s system is down for at least %d turns!","We found an exploit, their %s system is down for at least %d turns!","Pénétration réussi, leur %s sont désactivés pour les %d prochains tours","We found an exploit, their %s system is down for at least %d turns!"
+"Hack successful, %s system down for the next %d turns!","Hack successful, %s system down for the next %d turns!","Piratage réussi, %s désactivés pour au moins %d tours","Hack successful, %s system down for the next %d turns!"
+Our %s system is rebooting! Estimated time %d turns!,Our %s system is rebooting! Estimated time %d turns!,%s désactivé pour au moins %d tours!,Our %s system is rebooting! Estimated time %d turns!
+Virus in our %s system! It'll take %d turns to purge!,Virus in our %s system! It'll take %d turns to purge!,Virus dans nos %s! Le redémarrage nécessitera au moins %d tours!,Virus in our %s system! It'll take %d turns to purge!
+%s system down! We'll be back up in %d turns,%s system down! We'll be back up in %d turns,%s désactivé pour au moins %d tours!,%s system down! We'll be back up in %d turns
+The pulse knocked down their %s for %d turns!,The pulse knocked down their %s for %d turns!,L’impulsion à désactivé leur %s pour %d tours!,The pulse knocked down their %s for %d turns!
+The shockwave disabled their %s for %d turns!,The shockwave disabled their %s for %d turns!,Le champs électromagnétique a neutralisé leur %s pour %d tours!,The shockwave disabled their %s for %d turns!
+"This shockwave fried our %s, we're down for %d turns!","This shockwave fried our %s, we're down for %d turns!","L’impulsion à cuit notre %s, de retour dans %d tours!","This shockwave fried our %s, we're down for %d turns!"
+"Pulse Wave hit, %s down for another %d turns!","Pulse Wave hit, %s down for another %d turns!","Surcharge dans les systèmes, %s neutralisé pour les %d prochains tours!","Pulse Wave hit, %s down for another %d turns!"
+[color=red]Weapon System Offline![/color],[color=red]Weapon System Offline![/color],[color=red]Armement hors circuit![/color],[color=red]Weapon System Offline![/color]
+[color=lime]The Aegis Shield reacts to the shot and regenerate %d points![/color],[color=lime]The Aegis Shield reacts to the shot and regenerate %d points![/color],[color=lime]Le bouclier d’Égide absorbe l’énergie de l’impact et se régénère de %d points![/color],[color=lime]The Aegis Shield reacts to the shot and regenerate %d points![/color]
+%s back online!,%s back online!,%s est de nouveau fonctionnel!,%s back online!
+Our %s have finished rebooting,Our %s have finished rebooting,Nos %s sont de nouveau opérationnel,Our %s have finished rebooting
+The enemy's %s is back online!,The enemy's %s is back online!,Les %s ennemi sont de nouveau fonctionnel!,The enemy's %s is back online!
+Energy signature detected in enemy's %s,Energy signature detected in enemy's %s,Augmentation énergétique dans les %s de l’ennemi,Energy signature detected in enemy's %s
+The Chaff is losing effectiveness.,The Chaff is losing effectiveness.,La paillette perd de son efficacité,The Chaff is losing effectiveness.
+"Chaff is sticking to the Hull, disrupting incoming communications!","Chaff is sticking to the Hull, disrupting incoming communications!","La paillette colle à la coque du vaisseau, l’isolant contre les ondes électromagnétiques","Chaff is sticking to the Hull, disrupting incoming communications!"
+Engine Offline!,Engine Offline!,Moteurs Hors Ligne!,Engine Offline!
+Our converter has been disabled by the enemy!,Our converter has been disabled by the enemy!,Notre Convertisseur a été désactivé par l’ennemi!,Our converter has been disabled by the enemy!
+%s is in cooldown and need time to recharge,%s is in cooldown and need time to recharge,%s n’a pas finit de se recharger,%s is in cooldown and need time to recharge
+None of our weapons are ready Captain!,None of our weapons are ready Captain!,Aucune arme ne peut faire feu pour l’instant Commandant!,None of our weapons are ready Captain!
+Aegis Shield,Aegis Shield,Bouclier d’Égide,Aegis Shield
+This legendary artifact from the Vorg uses lost technology to rebalance the shield's harmonics so that the energy from an enemy weapon can sometimes be converted back into the shield's defensive matrix.,This legendary artifact from the Vorg uses lost technology to rebalance the shield's harmonics so that the energy from an enemy weapon can sometimes be converted back into the shield's defensive matrix.,Ce bouclier légendaire des Vorg utilise une ancienne technologie disparu qui rebalance les champs harmoniques des boucliers de façon à pouvoir rediriger directement l’énergie de l’impact d’une arme énnemi dans la matrice de défense du bouclier.,This legendary artifact from the Vorg uses lost technology to rebalance the shield's harmonics so that the energy from an enemy weapon can sometimes be converted back into the shield's defensive matrix.
+[color=yellow]Damage Regen Shield[/color],[color=yellow]Damage Regen Shield[/color],[color=yellow]Chance de Régen.[/color],[color=yellow]Damage Regen Shield[/color]
+[color=yellow]5% chance[/color],[color=yellow]5% chance[/color],[color=yellow]5% chance[/color],[color=yellow]5% chance[/color]
 Shielded %s,Shielded %s,%s Isolé,Shielded %s

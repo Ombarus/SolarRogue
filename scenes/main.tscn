@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=2]
+[gd_scene load_steps=93 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/private/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -62,7 +62,6 @@
 [ext_resource path="res://scenes/GUI/Dialogs/WelcomeScreen.tscn" type="PackedScene" id=60]
 [ext_resource path="res://scenes/GUI/Dialogs/HowManyDiag.tscn" type="PackedScene" id=61]
 [ext_resource path="res://scenes/GUI/Dialogs/Description.tscn" type="PackedScene" id=62]
-[ext_resource path="res://scenes/GUI/Debug/APBehaviorDebug.tscn" type="PackedScene" id=63]
 [ext_resource path="res://scenes/GUI/Dialogs/TutoPrompt.tscn" type="PackedScene" id=64]
 [ext_resource path="res://scenes/GUI/Debug/FPSCounter.tscn" type="PackedScene" id=65]
 [ext_resource path="res://scenes/GUI/Dialogs/DeathScreen.tscn" type="PackedScene" id=66]
@@ -635,14 +634,6 @@ __meta__ = {
 
 [node name="Description" parent="Camera-GUI/SafeArea/DescriptionRoot" instance=ExtResource( 62 )]
 visible = false
-
-[node name="ApDebugWindow" parent="Camera-GUI/SafeArea" instance=ExtResource( 63 )]
-visible = false
-margin_left = 421.113
-margin_top = 100.909
-margin_right = -394.887
-margin_bottom = 60.9087
-AP_behavior_path = NodePath("../../../Behaviors/AP")
 
 [node name="StoryPromptRoot" type="Control" parent="Camera-GUI/SafeArea"]
 anchor_right = 1.0

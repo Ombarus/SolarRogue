@@ -510,6 +510,7 @@ func display_electro_log(success : bool,
 	if success == false and player_shooter == true:
 		if is_pulse:
 			txt = player_miss_pulse
+			fmt = [target_ship_name]
 		else:
 			txt = player_miss_choices
 			
