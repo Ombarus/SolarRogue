@@ -122,7 +122,7 @@ func UpdateStatusBar(player_obj):
 		status_str += " | [color=red]"
 	for system in disabled_systems:
 		if disabled_systems[system] > 0:
-			status_str += " " + system
+			status_str += " " + Globals.mytr(system)
 		
 	if disabled_systems.size() > 0:
 		status_str += "[/color]"

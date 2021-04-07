@@ -71,3 +71,4 @@ func Init(init_param):
 			target_obj.push_back({"name_id": display_name, "key":item["obj"], "icon":item["obj"][0].get_attrib("icon"), "count":item["count"], "direction":item["direction"]})
 				
 	_list.Content = target_obj
+	OnSelectionChanged_Callback()

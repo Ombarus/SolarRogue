@@ -153,7 +153,6 @@ Short Range Scanner,Short Range Scanner,Radar,Short Range Scanner
 Short Range Scanner MK2,Short Range Scanner MK2,Radar v2,Short Range Scanner MK2
 Short Range Scanner MK3,Short Range Scanner MK3,Radar v3,Short Range Scanner MK3
 Ultimate Scanner,Ultimate Scanner,Le Radar Ultime,Ultimate Scanner
-Shield,Shield,Bouclier,盾
 Medium Shield,Medium Shield,Bouclier Grande Capacité,中盾
 Large Shield,Large Shield,Bouclier Extra Grande Capacité,大盾
 Gravitic Compactor,Gravitic Compactor,Compresseur Gravitationnel,Gravitic Compactor
@@ -863,3 +862,17 @@ This legendary artifact from the Vorg uses lost technology to rebalance the shie
 [color=yellow]Damage Regen Shield[/color],[color=yellow]Damage Regen Shield[/color],[color=yellow]Chance de Régen.[/color],[color=yellow]Damage Regen Shield[/color]
 [color=yellow]5% chance[/color],[color=yellow]5% chance[/color],[color=yellow]5% chance[/color],[color=yellow]5% chance[/color]
 Shielded %s,Shielded %s,%s Isolé,Shielded %s
+Camera Auto-Centering,Camera Auto-Centering,Centrer la Caméra Automatiquement,Camera Auto-Centering
+(double-tap to recenter),(double-tap to recenter),(double-tap pour re-centrer),(double-tap to recenter)
+Disabled!,Disabled!,Désactivé!,Disabled!
+movement,movement,mouvement,movement
+Total: %d items,Total: %d items,Total: %d items,数: %d個
+Will take %d turns,Will take %d turns,Prendra %d tours,Will take %d turns
+NW,NW,NO,北西
+W,W,O,西
+SW,SW,SO,南西
+N,N,N,北
+S,S,S,南
+NE,NE,NE,北東
+E,E,E,東
+SE,SE,SE,南東

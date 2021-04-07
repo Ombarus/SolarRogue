@@ -71,13 +71,13 @@ func Refresh():
 	seed(random_seed)
 	var imageTexture = ImageTexture.new()
 	var dynImage = Image.new()
-    
+	
 	dynImage.create(texture_size,texture_size,false,Image.FORMAT_RGBA8)
 	dynImage.fill(Color(color.r, color.g, color.b, 0.0))
 	dynImage.lock()
 	_generate_star(dynImage)
 	dynImage.unlock()
-    
+	
 	imageTexture.create_from_image(dynImage)
 	self.texture = imageTexture
 	imageTexture.resource_name = "The created texture!"
