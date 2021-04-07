@@ -3,13 +3,20 @@
 	"type":"effect",
 	"prefix":"Shield %s",
 	"attributes": {
-		"global_weapon_disable_shield_chance_bonus":0.2
+		"global_weapon_disable_shield_chance_bonus":0.2,
+		"global_dam_shield_multiplier":1.1,
 	},
 	"description": {
 		"Hacking Bonus": {
 			"min_level":0,
 			"fields": [
 				{"name":"Shield", "value":"+20%", "translate_value":false}
+			]
+		},
+		"Extra": {
+			"min_level":0,
+			"fields": [
+				{"name":"Shield Damage", "value":"[color=lime]+10%[/color]"}
 			]
 		}
 	}
