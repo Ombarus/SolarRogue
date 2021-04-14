@@ -256,6 +256,21 @@ def converter_recipe_report(params):
 			
 	print_as_csv(result)		
 	
+def count_mounts(params):
+	for ship in params["data"]:
+		name_id = ship["name_id"]
+		if "mounts" in ship:
+			if "mount_attributes" not in ship:
+				myprint("WARNING: {} is missing mount_attributes".format(name_id))
+				continue
+			checklist = ["weapon", "shield", "scanner", "converter", "utility"]
+			for m in checklist:
+				if m in ship["mounts"]:
+					if m not in ship["mount_attributes"]:
+						myprint("WARNING: {} is missing {} in mount_attributes".format(name_id, m))
+						if len(ship["mount_attributes"][m]) != len(ship["mounts"][m]):
+							myprint("ERROR: {} {} count doesn't match in mount_attributes".format(name_id, m))
+	
 		
 def do_actions(actions, params):
 	if "glob_json" in actions:
@@ -266,13 +281,16 @@ def do_actions(actions, params):
 		weapon_energy_report(params)
 	if "converter_recipe_report" in actions:
 		converter_recipe_report(params)
+	if "count_mounts" in actions:
+		count_mounts(params)
 		
 		
 if __name__ == '__main__':
 	actions = [
 		"glob_json",
+		"count_mounts",
 		#"crafting_report",
-		"weapon_energy_report",
+		#"weapon_energy_report",
 		#"converter_recipe_report",
 		"nothing" # just so I don't need to play with the last ,
 	]

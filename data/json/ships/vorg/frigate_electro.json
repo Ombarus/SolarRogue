@@ -24,7 +24,7 @@
 		]
 	},
 	"mount_attributes": {
-		"weapon": [{}],
+		"weapon": [{}, {}],
 		"shield": [{"selected_variation":"data/json/items/effects/shielded.json"},{}],
 		"scanner": [{"selected_variation":"data/json/items/effects/transciever.json"}],
 		"converter": [{}],
