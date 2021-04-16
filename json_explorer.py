@@ -11,7 +11,7 @@ import json
 
 
 DATA_FOLDER = "data"
-PRINT_LEVEL=0
+PRINT_LEVEL=2
 
 
 ###############################################################################
@@ -271,6 +271,34 @@ def count_mounts(params):
 						if len(ship["mount_attributes"][m]) != len(ship["mounts"][m]):
 							myprint("ERROR: {} {} count doesn't match in mount_attributes".format(name_id, m))
 	
+
+def search_invalid_filename(params):
+	for f in params["data"]:
+		search_dict(f)
+		
+def search_dict(root):
+	for comp in root:
+		comp_val = root[comp]
+		if type(comp_val) is dict:
+			search_dict(comp_val)
+		elif type(comp_val) is list:
+			search_list(comp_val)
+		elif type(comp_val) is str:
+			if "json" in comp_val or "tscn" in comp_val:
+				if not os.path.exists(comp_val):
+					myprint("ERROR: File not found {}".format(comp_val), 5)
+
+def search_list(root):
+	for comp_val in root:
+		if type(comp_val) is dict:
+			search_dict(comp_val)
+		elif type(comp_val) is list:
+			search_list(comp_val)
+		elif type(comp_val) is str:
+			if "json" in comp_val or "tscn" in comp_val:
+				if not os.path.exists(comp_val):
+					myprint("ERROR: File not found {}".format(comp_val), 5)
+	
 		
 def do_actions(actions, params):
 	if "glob_json" in actions:
@@ -283,12 +311,15 @@ def do_actions(actions, params):
 		converter_recipe_report(params)
 	if "count_mounts" in actions:
 		count_mounts(params)
+	if "search_invalid_filename" in actions:
+		search_invalid_filename(params)
 		
 		
 if __name__ == '__main__':
 	actions = [
 		"glob_json",
-		"count_mounts",
+		"search_invalid_filename",
+		#"count_mounts",
 		#"crafting_report",
 		#"weapon_energy_report",
 		#"converter_recipe_report",

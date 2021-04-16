@@ -34,7 +34,7 @@
 		"defense_chance":0.5,
 		"defense_size":[1,4],
 		"pondered_defense_list": [
-			{"src": "data/json/ships/jerg/scout_missile.json", "chance":35},
+			{"src": "data/json/ships/jerg/scout_laser.json", "chance":35},
 			{"src": "data/json/ships/jerg/scout_laser.json", "chance":35},
 			{"src": "data/json/ships/jerg/battleship.json", "chance":10},
 			{"src": "data/json/ships/jerg/frigate.json", "chance":20}
