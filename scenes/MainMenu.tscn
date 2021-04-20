@@ -104,7 +104,7 @@ margin_left = 36.3677
 margin_top = -39.5347
 margin_right = 76.3677
 margin_bottom = -25.5347
-text = "Version 0.6.2"
+text = "Version 0.6.4"
 __meta__ = {
 "_edit_use_anchors_": false
 }
