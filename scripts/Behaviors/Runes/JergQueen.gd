@@ -34,6 +34,7 @@ func OnPlayerCreated_Callback(player):
 		player.set_attrib("runes.%s" % self.name, data)
 	BehaviorEvents.disconnect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
 	
+	
 func OnLevelReady_Callback():
 	var current_level_data = Globals.LevelLoaderRef.GetCurrentLevelData()
 	if "jerg_branch" in current_level_data.src:

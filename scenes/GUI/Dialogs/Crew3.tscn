@@ -112,17 +112,17 @@ stretch_mode = 2
 
 [node name="Status" type="Label" parent="base/Content/Header/HBoxContainer"]
 margin_left = 350.0
-margin_right = 430.0
+margin_right = 470.0
 margin_bottom = 40.0
-rect_min_size = Vector2( 80, 0 )
+rect_min_size = Vector2( 120, 0 )
 size_flags_vertical = 7
 text = "Status"
 align = 1
 valign = 1
 
 [node name="TextureRect3" type="TextureRect" parent="base/Content/Header/HBoxContainer"]
-margin_left = 434.0
-margin_right = 436.0
+margin_left = 474.0
+margin_right = 476.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 2, 0 )
 texture = SubResource( 1 )
@@ -130,7 +130,7 @@ expand = true
 stretch_mode = 2
 
 [node name="Log" type="Label" parent="base/Content/Header/HBoxContainer"]
-margin_left = 440.0
+margin_left = 480.0
 margin_right = 1096.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
@@ -204,13 +204,13 @@ stretch_mode = 2
 
 [node name="StatusSpacer" type="Control" parent="base/Content/Control/HBoxContainer"]
 margin_left = 350.0
-margin_right = 430.0
+margin_right = 470.0
 margin_bottom = 472.0
-rect_min_size = Vector2( 80, 0 )
+rect_min_size = Vector2( 120, 0 )
 
 [node name="TextureRect6" type="TextureRect" parent="base/Content/Control/HBoxContainer"]
-margin_left = 434.0
-margin_right = 436.0
+margin_left = 474.0
+margin_right = 476.0
 margin_bottom = 472.0
 rect_min_size = Vector2( 2, 0 )
 texture = SubResource( 1 )

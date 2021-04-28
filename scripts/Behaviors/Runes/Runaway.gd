@@ -32,6 +32,7 @@ func OnPlayerCreated_Callback(player):
 		player.set_attrib("runes.%s" % self.name, data)
 	BehaviorEvents.disconnect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
 	
+	
 func OnLevelReady_Callback():
 	for wormhole in Globals.LevelLoaderRef.objByType["wormhole"]:
 		if "human_branch" in wormhole.get_attrib("src"):

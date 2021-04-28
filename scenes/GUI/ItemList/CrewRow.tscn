@@ -52,15 +52,15 @@ valign = 1
 
 [node name="CrewStatus" type="Label" parent="HBoxContainer"]
 margin_left = 346.0
-margin_right = 434.0
+margin_right = 466.0
 margin_bottom = 60.0
-rect_min_size = Vector2( 88, 0 )
+rect_min_size = Vector2( 120, 0 )
 size_flags_vertical = 7
 text = "KIA"
 valign = 1
 
 [node name="CrewLog" type="Label" parent="HBoxContainer"]
-margin_left = 438.0
+margin_left = 470.0
 margin_right = 1256.0
 margin_bottom = 60.0
 size_flags_horizontal = 3

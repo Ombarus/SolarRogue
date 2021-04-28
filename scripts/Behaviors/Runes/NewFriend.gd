@@ -33,6 +33,7 @@ func OnPlayerCreated_Callback(player):
 		player.set_attrib("runes.%s.completed" % self.name, false)
 	BehaviorEvents.disconnect("OnPlayerCreated", self, "OnPlayerCreated_Callback")
 	
+	
 func OnLevelReady_Callback():
 	var player : Attributes = Globals.get_first_player()
 	var level_id : String = Globals.LevelLoaderRef.GetLevelID()
