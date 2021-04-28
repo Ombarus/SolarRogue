@@ -9,7 +9,7 @@
 		"Hacking Protection": {
 			"min_level":0,
 			"fields": [
-				{"name":"Weapon", "value":"+20%", "translate_value":false}
+				{"name":"Weapon", "value":"[color=lime]+20% ↑[/color]", "translate_value":false}
 			]
 		}
 	}

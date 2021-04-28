@@ -11,7 +11,7 @@
 		"Extra": {
 			"min_level":0,
 			"fields": [
-				{"name":"Each identical item", "value":"[color=lime]10% boost[/color]"}
+				{"name":"Each identical item", "value":"[color=lime]10% boost ↑[/color]"}
 			]
 		}
 	}

@@ -291,7 +291,7 @@ Damage Boost,Damage Boost,Bonus,Damage Boost
 Weapon Energy Cost,Weapon Energy Cost,Coût Énergétique,Weapon Energy Cost
 Solar panels mounted on the ship's hull provide passive energy regeneration. Stacked panels will provide dimishing returns.,Solar panels mounted on the ship's hull provide passive energy regeneration. Stacked panels will provide dimishing returns.,Des panneaux solaires installé sur la coque du vaisseau recharge automatiquement notre énergie. Installer plusieurs panneaux n’offre pas un retour linéaire.,Solar panels mounted on the ship's hull provide passive energy regeneration. Stacked panels will provide dimishing returns.
 Energy Regen,Energy Regen,Régénération,Energy Regen
-{energy_regen.per_turn} / turn,{energy_regen.per_turn} / turn,{energy_regen.per_turn} / tour,{energy_regen.per_turn} / turn
+[color=lime]+{energy_regen.per_turn} / turn ↑[/color],[color=lime]+{energy_regen.per_turn} / turn ↑[/color],[color=lime]+{energy_regen.per_turn} / tour ↑[/color],[color=lime]+{energy_regen.per_turn} / turn ↑[/color]
 {cargo_optimizer.per_cargo_space} times,{cargo_optimizer.per_cargo_space} times,{cargo_optimizer.per_cargo_space} fois,{cargo_optimizer.per_cargo_space} times
 Highly cohesive beam of high-energy photons allows long range targetting in a straight line.,Highly cohesive beam of high-energy photons allows long range targetting in a straight line.,Un appareil qui produit un rayonnement lumineux spatialement et temporellement cohérent. Permet de tirer sur de longues distances mais en ligne droite seulement.,Highly cohesive beam of high-energy photons allows long range targetting in a straight line.
 Damage,Damage,Dommage,Damage

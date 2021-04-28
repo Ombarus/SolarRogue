@@ -11,7 +11,7 @@
 		"Extra": {
 			"min_level":0,
 			"fields": [
-				{"name":"Weapon Damage", "value":"[color=red]-20%[/color]"}
+				{"name":"Weapon Damage", "value":"[color=red]-20% ↓[/color]"}
 			]
 		}
 	}

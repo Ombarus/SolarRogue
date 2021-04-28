@@ -39,8 +39,8 @@
 		"Effect": {
 			"min_level":0,
 			"fields": [
-				{"name":"Hit Chance", "value":"{attributes.global_hit_chance_bonus}%", "translate_value":false, "display_percent":true},
-				{"name":"Crit Chance", "value":"{attributes.global_crit_chance_bonus}%", "translate_value":false, "display_percent":true}
+				{"name":"Hit Chance", "value":"[color=lime]{attributes.global_hit_chance_bonus}% ↑[/color]", "translate_value":false, "display_percent":true},
+				{"name":"Crit Chance", "value":"[color=lime]{attributes.global_crit_chance_bonus}% ↑[/color]", "translate_value":false, "display_percent":true}
 			]
 		}
 	}

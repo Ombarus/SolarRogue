@@ -34,8 +34,8 @@
 		"Hacking Protection": {
 			"min_level":0,
 			"fields": [
-				{"name":"Engine", "value":"+{attributes.global_destroyable_disable_movement_chance_bonus}%", "translate_value":false, "display_percent":true},
-				{"name":"Knockout", "value":"+{attributes.global_destroyable_disable_ship_chance_bonus}%", "translate_value":false, "display_percent":true}
+				{"name":"Engine", "value":"[color=lime]+{attributes.global_destroyable_disable_movement_chance_bonus}% ↑[/color]", "translate_value":false, "display_percent":true},
+				{"name":"Knockout", "value":"[color=lime]+{attributes.global_destroyable_disable_ship_chance_bonus}% ↑[/color]", "translate_value":false, "display_percent":true}
 			]
 		}
 	}

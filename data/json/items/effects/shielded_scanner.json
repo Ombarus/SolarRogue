@@ -9,7 +9,7 @@
 		"Hacking Protection": {
 			"min_level":0,
 			"fields": [
-				{"name":"Scanner", "value":"+20%", "translate_value":false}
+				{"name":"Scanner", "value":"[color=lime]+20% ↑[/color]", "translate_value":false}
 			]
 		}
 	}

@@ -9,7 +9,7 @@
 		"Hacking Bonus": {
 			"min_level":0,
 			"fields": [
-				{"name":"Engine", "value":"+20%", "translate_value":false}
+				{"name":"Engine", "value":"[color=lime]+20% ↑[/color]", "translate_value":false}
 			]
 		}
 	}

@@ -41,14 +41,14 @@
 		"Effect": {
 			"min_level":0,
 			"fields": [
-				{"name":"Damage Boost", "value":"[color=lime]+20%[/color]", "translate_value":false},
-				{"name":"Weapon Energy Cost", "value":"[color=red]+50%[/color]", "translate_value":false}
+				{"name":"[color=lime][/color]Damage Boost", "value":"[color=lime]+20% ↑[/color]", "translate_value":false},
+				{"name":"[color=red][/color]Weapon Energy Cost", "value":"[color=red]+50% ↓[/color]", "translate_value":false}
 			]
 		},
 		"Hacking Protection": {
 			"min_level":0,
 			"fields": [
-				{"name":"Weapon", "value":"{attributes.global_destroyable_disable_weapon_chance_bonus}%", "translate_value":false, "display_percent":true}
+				{"name":"[color=red][/color]Weapon", "value":"[color=red]{attributes.global_destroyable_disable_weapon_chance_bonus}% ↓[/color]", "translate_value":false, "display_percent":true}
 			]
 		}
 	}

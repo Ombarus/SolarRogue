@@ -15,13 +15,13 @@
 		"Hacking Protection": {
 			"min_level":0,
 			"fields": [
-				{"name":"Weapon", "value":"+10%", "translate_value":false},
-				{"name":"Shield", "value":"+10%", "translate_value":false},
-				{"name":"Scanner", "value":"+10%", "translate_value":false},
-				{"name":"Converter", "value":"+10%", "translate_value":false},
-				{"name":"Utility", "value":"+10%", "translate_value":false},
-				{"name":"Engine", "value":"+10%", "translate_value":false},
-				{"name":"Knockout", "value":"+5%", "translate_value":false}
+				{"name":"Weapon", "value":"[color=lime]+10% ↑[/color]", "translate_value":false},
+				{"name":"Shield", "value":"[color=lime]+10% ↑[/color]", "translate_value":false},
+				{"name":"Scanner", "value":"[color=lime]+10% ↑[/color]", "translate_value":false},
+				{"name":"Converter", "value":"[color=lime]+10% ↑[/color]", "translate_value":false},
+				{"name":"Utility", "value":"[color=lime]+10% ↑[/color]", "translate_value":false},
+				{"name":"Engine", "value":"[color=lime]+10% ↑[/color]", "translate_value":false},
+				{"name":"Knockout", "value":"[color=lime]+5% ↑[/color]", "translate_value":false}
 			]
 		}
 	}

@@ -38,7 +38,7 @@
 		"Effect": {
 			"min_level":0,
 			"fields": [
-				{"name":"Hull Dam. Mult.", "value":"{attributes.global_dam_hull_multiplier}x", "translate_value":false}
+				{"name":"Hull Dam. Mult.", "value":"[color=lime]{attributes.global_dam_hull_multiplier}x ↑[/color]", "translate_value":false}
 			]
 		}
 	}

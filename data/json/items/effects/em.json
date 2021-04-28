@@ -10,8 +10,8 @@
 		"Extra": {
 			"min_level":0,
 			"fields": [
-				{"name":"Shield Damage", "value":"[color=lime]+50%[/color]"},
-				{"name":"Hull Damage", "value":"[color=red]-50%[/color]"}
+				{"name":"Shield Damage", "value":"[color=lime]+50% ↑[/color]"},
+				{"name":"Hull Damage", "value":"[color=red]-50% ↓[/color]"}
 			]
 		}
 	}

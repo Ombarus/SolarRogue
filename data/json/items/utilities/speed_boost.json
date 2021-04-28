@@ -40,14 +40,14 @@
 		"Effect": {
 			"min_level":0,
 			"fields": [
-				{"name":"Turn Mult", "value":"{attributes.global_move_multiplier}%", "translate_value":false, "display_percent":true},
-				{"name":"Move Energy Cost", "value":"{attributes.global_move_energy_cost_multiplier}%", "translate_value":false, "display_percent":true}
+				{"name":"Turn Mult", "value":"[color=lime]{attributes.global_move_multiplier}% ↑[/color]", "translate_value":false, "display_percent":true},
+				{"name":"Move Energy Cost", "value":"[color=red]{attributes.global_move_energy_cost_multiplier}% ↓[/color]", "translate_value":false, "display_percent":true}
 			]
 		},
 		"Hacking Protection": {
 			"min_level":0,
 			"fields": [
-				{"name":"Engine", "value":"{attributes.global_weapon_disable_movement_chance_bonus}%", "translate_value":false, "display_percent":true}
+				{"name":"Engine", "value":"[color=lime]{attributes.global_weapon_disable_movement_chance_bonus}% ↑[/color]", "translate_value":false, "display_percent":true}
 			]
 		}
 	}

@@ -13,7 +13,7 @@
 		"Hacking Protection": {
 			"min_level":0,
 			"fields": [
-				{"name":"Mount", "value":"+20%", "translate_value":false}
+				{"name":"Mount", "value":"[color=lime]+20% ↑[/color]", "translate_value":false}
 			]
 		}
 	}

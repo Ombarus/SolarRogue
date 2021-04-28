@@ -38,7 +38,7 @@
 		"Effect": {
 			"min_level":0,
 			"fields": [
-				{"name":"Energy Regen", "value":"{energy_regen.per_turn} / turn"}
+				{"name":"Energy Regen", "value":"[color=lime]+{energy_regen.per_turn} / turn ↑[/color]"}
 			]
 		}
 	}

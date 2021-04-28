@@ -44,13 +44,13 @@
 		"Hacking Protection": {
 			"min_level":0,
 			"fields": [
-				{"name":"Weapon", "value":"+{attributes.global_destroyable_disable_weapon_chance_bonus}%", "translate_value":false, "display_percent":true},
-				{"name":"Shield", "value":"+{attributes.global_destroyable_disable_shield_chance_bonus}%", "translate_value":false, "display_percent":true},
-				{"name":"Scanner", "value":"+{attributes.global_destroyable_disable_scanner_chance_bonus}%", "translate_value":false, "display_percent":true},
-				{"name":"Converter", "value":"+{attributes.global_destroyable_disable_converter_chance_bonus}%", "translate_value":false, "display_percent":true},
-				{"name":"Utility", "value":"+{attributes.global_destroyable_disable_utility_chance_bonus}%", "translate_value":false, "display_percent":true},
-				{"name":"Engine", "value":"+{attributes.global_destroyable_disable_movement_chance_bonus}%", "translate_value":false, "display_percent":true},
-				{"name":"Knockout", "value":"+{attributes.global_destroyable_disable_ship_chance_bonus}%", "translate_value":false, "display_percent":true}
+				{"name":"Weapon", "value":"[color=lime]+{attributes.global_destroyable_disable_weapon_chance_bonus}% ↑[/color]", "translate_value":false, "display_percent":true},
+				{"name":"Shield", "value":"[color=lime]+{attributes.global_destroyable_disable_shield_chance_bonus}% ↑[/color]", "translate_value":false, "display_percent":true},
+				{"name":"Scanner", "value":"[color=lime]+{attributes.global_destroyable_disable_scanner_chance_bonus}% ↑[/color]", "translate_value":false, "display_percent":true},
+				{"name":"Converter", "value":"[color=lime]+{attributes.global_destroyable_disable_converter_chance_bonus}% ↑[/color]", "translate_value":false, "display_percent":true},
+				{"name":"Utility", "value":"[color=lime]+{attributes.global_destroyable_disable_utility_chance_bonus}% ↑[/color]", "translate_value":false, "display_percent":true},
+				{"name":"Engine", "value":"[color=lime]+{attributes.global_destroyable_disable_movement_chance_bonus}% ↑[/color]", "translate_value":false, "display_percent":true},
+				{"name":"Knockout", "value":"[color=lime]+{attributes.global_destroyable_disable_ship_chance_bonus}% ↑[/color]", "translate_value":false, "display_percent":true}
 			]
 		}
 	}

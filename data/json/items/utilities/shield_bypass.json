@@ -41,9 +41,9 @@
 		"Effect": {
 			"min_level":0,
 			"fields": [
-				{"name":"Total Shield", "value":"-25%", "translate_value":false},
-				{"name":"Shield Regen", "value":"-25%", "translate_value":false},
-				{"name":"Weapon Damage", "value":"+25%", "translate_value":false}
+				{"name":"Total Shield", "value":"[color=red]-25% ↓[/color]", "translate_value":false},
+				{"name":"Shield Regen", "value":"[color=red]-25% ↓[/color]", "translate_value":false},
+				{"name":"Weapon Damage", "value":"[color=lime]+25% ↑[/color]", "translate_value":false}
 			]
 		}
 	}

@@ -11,8 +11,8 @@
 		"Extra": {
 			"min_level":0,
 			"fields": [
-				{"name":"Dodge Chances", "value":"[color=lime]+10%[/color]"},
-				{"name":"Energy Upkeep", "value":"[color=red]1.5x[/color]"}
+				{"name":"Dodge Chances", "value":"[color=lime]+10% ↑[/color]"},
+				{"name":"Energy Upkeep", "value":"[color=red]1.5x ↓[/color]"}
 			]
 		}
 	}
