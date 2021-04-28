@@ -618,6 +618,50 @@ func OnLevelLoaded_Callback():
 			played_messages.push_back(message_to_play)
 			playerNode.set_attrib("played_messages", played_messages)
 	
+func _show_description():
+	var click_pos = playerNode.get_global_mouse_position()
+	
+	var tile = Globals.LevelLoaderRef.World_to_Tile(click_pos)
+	var tile_content = Globals.LevelLoaderRef.levelTiles[tile.x][tile.y]
+	var str_fmt = "There is %s here"
+	var filtered_content = []
+	for obj in tile_content:
+		if obj.visible == true:
+			var stackable = obj.get_attrib("equipment.stackable", false)
+			var skip = false
+			if stackable == true:
+				for item in filtered_content:
+					if item.get_attrib("src") == obj.get_attrib("src"):
+						skip = true
+						break
+			if skip == false:
+				filtered_content.push_back(obj)
+		
+	var scanner_level := 0
+	var scanner_data = Globals.LevelLoaderRef.LoadJSONArray(playerNode.get_attrib("mounts.scanner"))
+	if scanner_data != null and scanner_data.size() > 0:
+		scanner_level = Globals.get_data(scanner_data[0], "scanning.level")
+		
+	if filtered_content.size() == 1:
+		var owner = null
+		# when object is a ship and has equipment with effects active, show the modified stats
+		var applied_effects = filtered_content[0].get_attrib("applied_effects", [])
+		if applied_effects.size() > 0:
+			owner = filtered_content[0]
+		BehaviorEvents.emit_signal("OnPushGUI", "Description", {"obj":filtered_content[0], "owner":owner, "modified_attributes":filtered_content[0].modified_attributes, "scanner_level":scanner_level})
+	elif filtered_content.size() > 1:
+		BehaviorEvents.emit_signal("OnPushGUI", "SelectTarget", {"targets":filtered_content, "callback_object":self, "callback_method":"LookTarget_Callback"})
+	else:
+		var log_choices = {
+			"Nothing but empty space":150,
+			"When you look in the void, the void looks back":1,
+			"When you look in the void, the void didn't look back":10,
+			"There's billions of stars in this tiny space but nothing else":50,
+			"Analysis completed, nothing found":150,
+			"Gravity well nominal":20
+		}
+		BehaviorEvents.emit_signal("OnLogLine", "Nothing but empty space")
+	
 func _input(event):
 	if OS.is_debug_build() and event.is_action_released("hide_hud"):
 		get_node("../../Camera-GUI/SafeArea").visible = not get_node("../../Camera-GUI/SafeArea").visible
@@ -666,48 +710,7 @@ func _input(event):
 	BehaviorEvents.emit_signal("OnPushGUI", "HUD", null)
 	set_input_state(Globals.INPUT_STATE.hud)
 	
-	var click_pos = playerNode.get_global_mouse_position()
-	
-	var tile = Globals.LevelLoaderRef.World_to_Tile(click_pos)
-	var tile_content = Globals.LevelLoaderRef.levelTiles[tile.x][tile.y]
-	var str_fmt = "There is %s here"
-	var filtered_content = []
-	for obj in tile_content:
-		if obj.visible == true:
-			var stackable = obj.get_attrib("equipment.stackable", false)
-			var skip = false
-			if stackable == true:
-				for item in filtered_content:
-					if item.get_attrib("src") == obj.get_attrib("src"):
-						skip = true
-						break
-			if skip == false:
-				filtered_content.push_back(obj)
-		
-	var scanner_level := 0
-	var scanner_data = Globals.LevelLoaderRef.LoadJSONArray(playerNode.get_attrib("mounts.scanner"))
-	if scanner_data != null and scanner_data.size() > 0:
-		scanner_level = Globals.get_data(scanner_data[0], "scanning.level")
-		
-	if filtered_content.size() == 1:
-		var owner = null
-		# when object is a ship and has equipment with effects active, show the modified stats
-		var applied_effects = filtered_content[0].get_attrib("applied_effects", [])
-		if applied_effects.size() > 0:
-			owner = filtered_content[0]
-		BehaviorEvents.emit_signal("OnPushGUI", "Description", {"obj":filtered_content[0], "owner":owner, "modified_attributes":filtered_content[0].modified_attributes, "scanner_level":scanner_level})
-	elif filtered_content.size() > 1:
-		BehaviorEvents.emit_signal("OnPushGUI", "SelectTarget", {"targets":filtered_content, "callback_object":self, "callback_method":"LookTarget_Callback"})
-	else:
-		var log_choices = {
-			"Nothing but empty space":150,
-			"When you look in the void, the void looks back":1,
-			"When you look in the void, the void didn't look back":10,
-			"There's billions of stars in this tiny space but nothing else":50,
-			"Analysis completed, nothing found":150,
-			"Gravity well nominal":20
-		}
-		BehaviorEvents.emit_signal("OnLogLine", "Nothing but empty space")
+	_show_description()
 
 	
 func LookTarget_Callback(selected_targets):
@@ -740,6 +743,8 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("touch"):
 			click_start_time = OS.get_ticks_msec()
+		elif event.is_action_released("alt_touch") && _input_state == Globals.INPUT_STATE.hud:
+			_show_description()
 		elif event.is_action_released("touch") && _input_state != Globals.INPUT_STATE.camera_dragged :
 			#print("player::_unhandled_input handle release")
 			var click_pos = playerNode.get_global_mouse_position()
