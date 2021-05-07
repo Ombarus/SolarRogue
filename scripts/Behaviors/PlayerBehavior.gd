@@ -292,6 +292,8 @@ func Pressed_Grab_Callback():
 	var dir_count = 0
 	for x in range(player_tile.x - 1, player_tile.x + 2):
 		for y in range(player_tile.y - 1, player_tile.y + 2):
+			if not Globals.LevelLoaderRef.IsValidTile(Vector2(x,y)):
+				continue
 			var tile_content = Globals.LevelLoaderRef.levelTiles[x][y]
 			for obj in tile_content:
 				if obj.visible == true and obj.get_attrib("equipment") != null:

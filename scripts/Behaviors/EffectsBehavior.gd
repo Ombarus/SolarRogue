@@ -440,7 +440,7 @@ func process_recipes_attributes(obj):
 
 func SetCooldown(obj, item_attributes, cooldown, name_id):
 	var mod_cooldown = cooldown * GetMultiplierValue(obj, "", item_attributes, "cooldown_multiplier")
-	item_attributes["cooldown_turn"] = Globals.total_turn + cooldown
+	item_attributes["cooldown_turn"] = Globals.total_turn + mod_cooldown
 	var delayed_logs : Array = obj.get_attrib("delayed_logs", [])
 	var msg_choices = {
 		"%s is ready for action":50,
