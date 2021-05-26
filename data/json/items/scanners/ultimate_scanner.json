@@ -44,7 +44,7 @@
 			"fields": [
 				{"name":"[color=yellow]Radius[/color]", "value":"[color=yellow]Monstrous[/color]"},
 				{"name":"Level", "value":"{scanning.level}", "translate_value":false},
-				{"name":"[color=yellow]Special[/color]", "value":"[color=yellow]Unique Radar[/color]"}
+				{"name":"[color=yellow]Special[/color]", "value":"[color=yellow]Unique Scanner[/color]"}
 			]
 		}
 	}

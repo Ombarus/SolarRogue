@@ -143,7 +143,7 @@ common/physics_fps=5
 quality/driver/driver_name="GLES2"
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
-quality/2d/use_pixel_snap=true
+2d/snapping/use_gpu_pixel_snap=true
 threads/thread_model=2
 vram_compression/import_etc=true
 quality/directional_shadow/size=512
@@ -153,6 +153,7 @@ quality/shadow_atlas/size.mobile=256
 quality/filters/use_nearest_mipmap_filter=true
 environment/default_clear_color=Color( 0, 0, 0, 1 )
 environment/default_environment="res://default_env.tres"
+quality/2d/use_pixel_snap=true
 
 [tiled_importer]
 

@@ -363,7 +363,7 @@ Drop Chance,Drop Chance,Chance d'obtenir,Drop Chance
 Is Colonized,Is Colonized,Est colonisée,Is Colonized
 False,False,Non,False
 True,True,Oui,True
-Monstrous,Monstrous,Monstrueux,Monstrous
+[color=yellow]Monstrous[/color],[color=yellow]Monstrous[/color],[color=yellow]Monstrueux[/color],[color=yellow]Monstrous[/color]
 SUCCESS_CONGRATS,The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! \n\nYou made it !,"Le Convertisseur de Yendor absorbe l'énergie du trou noir lui-même pour ouvrir une brêche dans l'espace. Doucement, vous engagez les moteurs et de l'autre côté se trouve un territoire bien connu. \n\nVous avez réussi !",The Converter of Yendor uses the energy of the wormhole itself to rip a hole trough space. You spool up the engines and glide through it. On the other side HOME is waiting ! \n\nYou made it !
 Killed by %s,Killed by %s,Tué par %s,%sを殺された
 Stranded,Stranded,Sans Énergie,Stranded
@@ -876,3 +876,21 @@ S,S,S,南
 NE,NE,NE,北東
 E,E,E,東
 SE,SE,SE,南東
+Detect Large Objects,Detect Large Objects,Détecte Objets Larges,大きい物見える
+Detect Small Objects,Detect Small Objects,Détecte Petits Objets,小さい物見える
+[color=yellow]Unique Scanner[/color],[color=yellow]Unique Scanner[/color],[color=yellow]Radar Unique[/color],[color=yellow]Unique Scanner[/color]
+No sequels from the Jerg Plague,No sequels from the Jerg Plague,Aucune séquelle de l'infection Jerg,No sequels from the Jerg Plague
+[color=red]Kane is feverish and seem to be talking with something![/color],[color=red]Kane is feverish and seem to be talking with something![/color],[color=red]Kane est dans un état critique! Il hallucine et discute avec des fantômes![/color],[color=red]Kane is feverish and seem to be talking with something![/color]
+[color=red]Kane's condition is getting worse![/color],[color=red]Kane's condition is getting worse![/color],[color=red]L’état de Kane empire![/color],[color=red]Kane's condition is getting worse![/color]
+[color=red]Kane is complaining of severe headache![/color],[color=red]Kane is complaining of severe headache![/color],[color=red]Kane mentionne d’horrible maux de tête![/color],[color=red]Kane is complaining of severe headache![/color]
+The XO broke free of his restraints and started destroying everything on the ship while yelling in some kind of alien language. We had no choice but to kill him before he could do any more damage.,The XO broke free of his restraints and started destroying everything on the ship while yelling in some kind of alien language. We had no choice but to kill him before he could do any more damage.,Le XO devient fou et échappe aux gardes. Il commence à détruire les systèmes du vaisseau tout en hurlant dans une langue étrangère. La sécurité n’a eu d’autre choix que de l’abattre avant qu’il ne détruise le vaisseau.,The XO broke free of his restraints and started destroying everything on the ship while yelling in some kind of alien language. We had no choice but to kill him before he could do any more damage.
+[color=red]XO Kane Nostrum died from the Jerg Plague![/color],[color=red]XO Kane Nostrum died from the Jerg Plague![/color],[color=red]L’XO Kane Nostrum est mort de l’infection Jerg![/color],[color=red]XO Kane Nostrum died from the Jerg Plague![/color]
+Victim,Victim,Victime,Victim
+Died from the Jerg Plague,Died from the Jerg Plague,Mort de l’infection Jerg,Died from the Jerg Plague
+In the wreckage of the mothership you find a cure for the floating spores but it's too late...,In the wreckage of the mothership you find a cure for the floating spores but it's too late...,Dans les débris du vaisseau mère vous trouvez la cure pour l’infection Jerg mais trop tard...,In the wreckage of the mothership you find a cure for the floating spores but it's too late...
+Inside the wreckage of the mothership you find a cure for the spore infecting XO Kane. After a few days in the medbay he makes a full recovery!,Inside the wreckage of the mothership you find a cure for the spore infecting XO Kane. After a few days in the medbay he makes a full recovery!,Dans les débris du vaisseau mère vous trouvez la cure pour l’infection Jerg qui afflige votre XO Kane. Après quelques jours de convalescence il revient en pleine forme!,Inside the wreckage of the mothership you find a cure for the spore infecting XO Kane. After a few days in the medbay he makes a full recovery!
+[color=lime]XO Kane Nostrum was saved from the Jerg Plague![/color],[color=lime]XO Kane Nostrum was saved from the Jerg Plague![/color],[color=lime]Vous avez sauver votre XO Kane Nostrum de l’infection Jerg![/color],[color=lime]XO Kane Nostrum was saved from the Jerg Plague![/color]
+Immunized,Immunized,Immunisé,Immunized
+This region of space is covered in strange spores. The XO has been infected and is hearing voices...,This region of space is covered in strange spores. The XO has been infected and is hearing voices...,Cette région d’espace est couverte d’étranges spores. Votre XO a été infecté et depuis entend des voix...,This region of space is covered in strange spores. The XO has been infected and is hearing voices...
+Infected,Infected,Infecté,Infected
+The Jerg Homeworld must have a cure. His situation is getting worse,The Jerg Homeworld must have a cure. His situation is getting worse,Le vaisseau mère des Jergs doit avoir une cure. Sa condition empire à vu d’oeil,The Jerg Homeworld must have a cure. His situation is getting worse
