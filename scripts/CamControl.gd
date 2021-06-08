@@ -103,8 +103,8 @@ func _input(event):
 	_unhandled_input(event)
 
 func _unhandled_input(event):
-	if levelLoaderRef == null:
-		return
+	#if levelLoaderRef == null:
+	#	return
 	
 	# Handle actual Multi-touch from capable devices
 	if event is InputEventScreenTouch and event.pressed == true:
@@ -216,8 +216,12 @@ func do_multitouch_pan():
 	
 	var new_pos = self.position + (diff * zoom.x)
 	
-	var bounds = levelLoaderRef.levelSize
-	var tile_size = levelLoaderRef.tileSize
+	var bounds = Vector2(1000.0, 1000.0)
+	if levelLoaderRef != null:
+		bounds = levelLoaderRef.levelSize
+	var tile_size = 128
+	if levelLoaderRef != null:
+		tile_size = levelLoaderRef.tileSize
 	if new_pos.x < 0 or new_pos.x > (bounds.x * tile_size):
 		new_pos.x = self.position.x
 	if new_pos.y < 0 or new_pos.y > (bounds.y * tile_size):
@@ -297,18 +301,22 @@ func reset_smooth():
 func _process(delta):
 	if delta <= 0:
 		return
-		
-	if not "player" in Globals.LevelLoaderRef.objByType or Globals.LevelLoaderRef.objByType["player"].size() <= 0:
-		return
+	
+	if Globals.LevelLoaderRef != null:
+		if not "player" in Globals.LevelLoaderRef.objByType or Globals.LevelLoaderRef.objByType["player"].size() <= 0:
+			return
 		
 	if _zoomin == true:
 		_zoom_camera(-20.0 * delta * zoom.x)
 	if _zoomout == true:
 		_zoom_camera(20.0 * delta * zoom.x)
 		
-	var target : Attributes = levelLoaderRef.objByType["player"][0]
+	var target : Attributes = null
+	if levelLoaderRef != null:
+		target = levelLoaderRef.objByType["player"][0]
+		
 	var autocenter : bool = PermSave.get_attrib("settings.cam_follow", true)
-	if (target.get_attrib("animation.in_movement") == true and autocenter == true) or _keep_centered:
+	if target != null and ((target.get_attrib("animation.in_movement") == true and autocenter == true) or _keep_centered):
 		#self.position = target.get_child(0).global_position
 		_keep_centered = true
 		smooth_goto(target.get_child(0).global_position, delta)
@@ -322,8 +330,12 @@ func _process(delta):
 	if _touches.size() == 0:
 		do_real_smoothing(delta)
 			
-		var bounds = levelLoaderRef.levelSize
-		var tile_size = levelLoaderRef.tileSize
+		var bounds = Vector2(1000.0, 1000.0)
+		if levelLoaderRef != null:
+			bounds = levelLoaderRef.levelSize
+		var tile_size = 128
+		if levelLoaderRef != null:
+			tile_size = levelLoaderRef.tileSize
 		var x : float = clamp(self.position.x, 0, bounds.x * tile_size)
 		var y : float = clamp(self.position.y, 0, bounds.y * tile_size)
 		self.position = Vector2(x,y)

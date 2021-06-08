@@ -317,6 +317,7 @@ transparent_bg = true
 handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
+
 [connection signal="pressed" from="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn/NewGameBTN" to="." method="_on_newgame_pressed"]
 [connection signal="pressed" from="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn/Setting" to="." method="_on_Setting_pressed"]
