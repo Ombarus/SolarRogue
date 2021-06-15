@@ -1,0 +1,19 @@
+{
+	"name_id":"A Nebula",
+	"type":"nebula",
+	"sprite":"nebula_generator",
+	"icon": {
+		"texture":"data/private/textures/space-sprite.png", 
+		"region":[1280,128,128,128]
+	},
+	"nebula": {
+		"min_range":20,
+		"max_range":70,
+		"scanner": {
+			"range_bonus":-2
+		}
+	},
+	"description": {
+		"text":"An Interstellar cloud of dust, hydrogen, helium and other ionized gases. Plays tricks on sensors."
+	}
+}

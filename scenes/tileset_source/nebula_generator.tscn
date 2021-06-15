@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/tileset_source/nebula2.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/tests/nebula_debug_temp.gd" type="Script" id=2]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+seed = 22
+period = 10.7
+persistence = 0.879
+
+[node name="NebulaGenerator" type="Node2D"]
+script = ExtResource( 2 )
+noise_func = SubResource( 1 )
+map_size = 60
+noise_floor = 0.359
+exponent = 3.777
+
+[node name="Nebula2" parent="." instance=ExtResource( 1 )]
+position = Vector2( -64, -64 )

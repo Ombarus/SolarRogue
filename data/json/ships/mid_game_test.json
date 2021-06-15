@@ -1,53 +1,45 @@
 {
-	"name_id":"A Human Frigate",
+	"name_id":"A Vorg Frigate",
 	"type":"player",
-	"sprite":"human_battleship",
+	"sprite":"vorg_frigate",
 	"action_point":0,
 	"boardable":true,
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
-		"region":[0,1024,128,128]
+		"region":[1152,256,128,128]
+	},
+	"animation": {
+		"destroyed": "scenes/tileset_source/explosion_fx.tscn",
+		"crafted": [1152,256,128,128]
 	},
 	"mounts": {
 		"weapon": [
-			"data/json/items/weapons/remote_datajack_mk3.json", 
-			"data/json/items/weapons/emp_mk3.json", 
-			"data/json/items/weapons/minigun.json",
-			"data/json/items/weapons/minigun.json"],
-		"shield": ["data/json/items/shields/shield_mk3.json", "data/json/items/shields/shield_mk3.json", "data/json/items/shields/shield_mk3.json"],
-		"scanner": ["data/json/items/scanners/long_range_scanner_mk3.json"],
+			"data/json/items/weapons/rail_gun_mk2.json",
+			"data/json/items/weapons/rail_gun_mk2.json"],
+		"shield": ["data/json/items/shields/shield_mk3.json", "data/json/items/shields/shield_mk3.json"],
+		"scanner": ["data/json/items/scanners/ultimate_scanner.json"],
 		"converter": ["data/json/items/converters/converter_mk3.json"],
 		"utility": ["", "", "", "", ""]
 	},
 	"mount_attributes": {
-		"weapon": [{},{},{},{}],
-		"shield": [{},{},{}],
+		"weapon": [{},{}],
+		"shield": [{},{}],
 		"scanner": [{}],
 		"utility": [{},{},{},{},{}],
 		"converter": [{}]
 	},
-	"animation": {
-		"destroyed": "scenes/tileset_source/explosion_fx.tscn"
-	},
 	"destroyable": {
-		"hull":250,
-		"disable_weapon_chance":0.95,
-		"disable_shield_chance":0.95,
-		"disable_scanner_chance":0.95,
-		"disable_converter_chance":0.95,
-		"disable_utility_chance":0.95,
-		"disable_movement_chance":0.92,
-		"disable_ship_chance":0.95
+		"hull":230,
+		"disable_weapon_chance":0.06,
+		"disable_shield_chance":0.06,
+		"disable_scanner_chance":0.02,
+		"disable_converter_chance":0.02,
+		"disable_utility_chance":0.15,
+		"disable_movement_chance":0.02,
+		"disable_ship_chance":0.06
 	},
-	"applied_effects":[
-		{
-			"global_move_multiplier":0.8,
-			"global_move_energy_cost_multiplier":1.5,
-			"src":"data/json/items/utilities/speed_boost.json"
-		}
-	],
 	"moving": {
-		"speed":0.5,
+		"speed":1.8,
 		"can_use_wormhole":true,
 		"energy_cost":5
 	},
@@ -57,15 +49,12 @@
 		"drop_ap":1.0,
 		"transferable":true,
 		"content":[
-			{"src":"data/json/items/weapons/emp_mk1.json", "count":1,
-				"modified_attributes": {
-					"selected_variation":"data/json/items/effects/cooled.json"
-			}},
-			{"src":"data/json/items/weapons/remote_datajack_mk1.json", "count":1},
-			{"src":"data/json/items/converters/converter_yendor.json", "count":1},
 			{"src":"data/json/items/misc/uranium.json", "count":10},
+			{"src":"data/json/items/misc/scout_body.json", "count":1},
+			{"src":"data/json/items/misc/scout_body.json", "count":1},
 			{"src":"data/json/items/misc/diluted_cristals.json", "count":10},
-			{"src":"data/json/items/misc/spare_parts.json", "count":20},
+			{"src":"data/json/items/weapons/depleted_uranium.json", "count":200},
+			{"src":"data/json/items/misc/spare_parts.json", "count":40},
 			{"src":"data/json/items/consumables/chaff.json", "count":10},
 			{"src":"data/json/items/shields/shield_mk2.json", "count":1,
 				"modified_attributes": {
@@ -83,8 +72,13 @@
 				"modified_attributes": {
 					"selected_variation":"data/json/items/effects/linked.json"
 			}},
+			{"src":"data/json/items/weapons/emp_mk3.json", "count":1, 
+				"modified_attributes": {
+					"selected_variation":"data/json/items/effects/cooled.json"
+			}},
 			{"src":"data/json/items/utilities/boost_antenna.json", "count":1},
 			{"src":"data/json/items/utilities/firewall.json", "count":1},
+			{"src":"data/json/items/utilities/power_amplifier_mk2.json", "count":1},
 			{"src":"data/json/items/converters/electro_warfare.json", "count":1},
 			{"src":"data/json/items/utilities/tinfoil.json", "count":1},
 			{"src":"data/json/items/utilities/vulnerability_scanner.json", "count":1,
@@ -99,7 +93,7 @@
 		"base_ap_energy_cost":10
 	},
 	"description": {
-		"text":"A small, fast ship for forward exploration.",
+		"text":"A warship with mixed armaments generally used for convoy escort and support work. It's full of utility.",
 		"Overview": {
 			"min_level":0, 
 			"fields":[
@@ -107,9 +101,9 @@
 				{"name":"Max shield", "value":"{shield.tmp_max_shield}", "translate_value":false},
 				{"name":"Speed", "value":"{moving.speed*move_multiplier}", "translate_value":false, "positive_good":false},
 				{"name":"Cargo", "value":"{cargo.capacity}", "translate_value":false},
-				{"name":"Weapon mounts", "value":"1", "translate_value":false},
-				{"name":"Shield mounts", "value":"1", "translate_value":false},
-				{"name":"Utility mounts", "value":"1", "translate_value":false}
+				{"name":"Weapon mounts", "value":"2", "translate_value":false},
+				{"name":"Shield mounts", "value":"2", "translate_value":false},
+				{"name":"Utility mounts", "value":"2", "translate_value":false}
 			]
 		},
 		"Status": {

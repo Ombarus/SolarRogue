@@ -1,0 +1,74 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode skip_vertex_transform;
+
+uniform vec3 color = vec3(0.71,0.28,0.42);
+uniform vec3 color2 = vec3(0.0,0.0,0.6588);
+uniform int layers = 8;
+uniform float scale_multiplier = 60.0;
+uniform mat4 camera_view;
+
+const vec2 seed = vec2(56,78);
+varying vec2 world_p;
+
+float rand(vec2 coord) {
+	return fract(sin(dot(coord, seed)*10.0)*10.0);
+}
+
+float noise(vec2 coord) {
+	vec2 i = floor(coord);
+	vec2 f = fract(coord);
+	
+	float a = rand(i);
+	float b = rand(i + vec2(1.0, 0.0));
+	float c = rand(i + vec2(0.0, 1.0));
+	float d = rand(i + vec2(1.0, 1.0));
+	
+	vec2 cubic = f * f * (3.0 - 2.0 * f);
+	return mix(a,b, cubic.x) + (c-a) * cubic.y * (1.0 - cubic.x) + (d-b) * cubic.x * cubic.y;
+	
+}
+
+float fbm(vec2 coord, int l) {
+	float value = 0.0;
+	float scale = 0.5;
+	for (int i = 0; i < l; i++) {
+		value += noise(coord) * scale;
+		coord *= 2.0;
+		scale *= 0.5;
+	}
+	return value;
+}
+
+void fragment() {
+	vec2 my_uv = world_p / scale_multiplier;
+	
+	vec2 motion = vec2(fbm(my_uv + TIME * 0.5, layers));
+	float final = fbm(my_uv + motion, layers);
+	
+	//COLOR = vec4(my_uv.x, my_uv.y, 0.0, 1.0);
+	//vec4 screen_color = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0f);
+	vec4 tile_color = textureLod(TEXTURE, UV, 0.0f);
+	
+	vec3 cloud_color = mix(color2, color, final);
+	
+	COLOR = vec4(cloud_color, (final+0.4) * tile_color.a * 0.5);
+	//COLOR = vec4(world_p.x/2000.0, world_p.y/2000.0, 0.0, 1.0);
+}
+
+void vertex() {
+	world_p = (EXTRA_MATRIX * inverse(camera_view) * WORLD_MATRIX * vec4(VERTEX, 0.0, 1.0)).xy;
+	//world_p = VERTEX;
+	VERTEX = (EXTRA_MATRIX * (WORLD_MATRIX * vec4(VERTEX, 0.0, 1.0))).xy;
+	//world_p = VERTEX;
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/color = Vector3( 0.71, 0.28, 0.42 )
+shader_param/color2 = Vector3( 0, 0, 0.6588 )
+shader_param/layers = 3
+shader_param/scale_multiplier = 280.0
+shader_param/camera_view = Transform2D( 1, 0, 0, 1, 0, 0 )

@@ -43,6 +43,11 @@ _global_script_classes=[ {
 "class": "MyWindow",
 "language": "GDScript",
 "path": "res://scripts/GUI/DialogWindowBaseV2.gd"
+}, {
+"base": "Node2D",
+"class": "NebulaGenerator",
+"language": "GDScript",
+"path": "res://scripts/tests/nebula_debug_temp.gd"
 } ]
 _global_script_class_icons={
 "APBehavior": "",
@@ -51,7 +56,8 @@ _global_script_class_icons={
 "ButtonBase": "",
 "EffectBehavior": "",
 "MyItemList": "",
-"MyWindow": ""
+"MyWindow": "",
+"NebulaGenerator": ""
 }
 
 [application]

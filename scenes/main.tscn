@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=2]
+[gd_scene load_steps=97 format=2]
 
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=1]
 [ext_resource path="res://data/private/sounds/music/InGameBG01.ogg" type="AudioStream" id=2]
@@ -62,6 +62,7 @@
 [ext_resource path="res://scenes/GUI/Dialogs/WelcomeScreen.tscn" type="PackedScene" id=60]
 [ext_resource path="res://scenes/GUI/Dialogs/HowManyDiag.tscn" type="PackedScene" id=61]
 [ext_resource path="res://scenes/GUI/Dialogs/Description.tscn" type="PackedScene" id=62]
+[ext_resource path="res://scripts/SunGrading.gd" type="Script" id=63]
 [ext_resource path="res://scenes/GUI/Dialogs/TutoPrompt.tscn" type="PackedScene" id=64]
 [ext_resource path="res://scenes/GUI/Debug/FPSCounter.tscn" type="PackedScene" id=65]
 [ext_resource path="res://scenes/GUI/Dialogs/DeathScreen.tscn" type="PackedScene" id=66]
@@ -89,6 +90,7 @@
 [ext_resource path="res://scripts/Behaviors/Runes/Assimilation.gd" type="Script" id=88]
 [ext_resource path="res://scenes/GUI/Dialogs/HackTarget.tscn" type="PackedScene" id=89]
 [ext_resource path="res://scenes/GUI/Dialogs/MultipleTarget.tscn" type="PackedScene" id=90]
+[ext_resource path="res://scripts/Behaviors/NebulaBehavior.gd" type="Script" id=91]
 
 [sub_resource type="Animation" id=1]
 resource_name = "slow_popin"
@@ -155,7 +157,49 @@ tracks/4/keys = {
 "values": [ 0.0, 0.0, 0.4, 0.6, 0.9, 1.0, 1.0 ]
 }
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform float Hue : hint_range(-1, 1);
+uniform float Saturation : hint_range(0, 5) = 1.0;
+uniform float Brightness : hint_range(0, 5) = 1.0;
+
+vec3 rgb2hsv(vec3 c) {
+	vec4 K = vec4(0.0, -1.0/3.0, 2.0/3.0, -1.0);
+	vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
+	vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+	
+	float d = q.x - min(q.w, q.y);
+	float e = 1.0e-10;
+	return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+}
+
+vec3 hsv2rgb(vec3 c)
+{
+    vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+    vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+    return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+}
+
+
+void fragment() {
+	vec4 screen_color = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0);
+	vec3 hsv = rgb2hsv(screen_color.rgb);
+	hsv.x += mod(Hue, 1.0);
+	hsv.y *= clamp(Saturation, 0.0, 5.0);
+	hsv.z *= clamp(Brightness, 0.0, 5.0);
+	screen_color.rgb = hsv2rgb(hsv);
+	COLOR=screen_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+render_priority = -1
+shader = SubResource( 2 )
+shader_param/Hue = 0.524
+shader_param/Saturation = 1.0
+shader_param/Brightness = 1.34
+
+[sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 76 )
 shader_param/pixel = 1.0
 shader_param/red_offset = Vector2( 0, 0 )
@@ -165,7 +209,7 @@ shader_param/alpha = 1.0
 shader_param/rand_strength = 1.0
 shader_param/affected = Plane( 0, 0, 1, 1 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=5]
 length = 1.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -320,6 +364,9 @@ script = ExtResource( 22 )
 [node name="Anomaly" type="Node" parent="Behaviors"]
 script = ExtResource( 23 )
 
+[node name="Nebula" type="Node" parent="Behaviors"]
+script = ExtResource( 91 )
+
 [node name="Inventory" type="Node" parent="Behaviors"]
 script = ExtResource( 24 )
 
@@ -447,6 +494,17 @@ levelLoaderNode = NodePath("../Behaviors/LevelLoader")
 [node name="Tween" type="Tween" parent="Camera2D"]
 
 [node name="Camera-GUI" type="CanvasLayer" parent="."]
+
+[node name="debug_test_tint" type="ColorRect" parent="Camera-GUI"]
+visible = false
+material = SubResource( 3 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 63 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="SafeArea" type="Control" parent="Camera-GUI"]
 anchor_right = 1.0
@@ -708,7 +766,7 @@ __meta__ = {
 visible = false
 
 [node name="ViewportContainer" type="ViewportContainer" parent="Camera-GUI"]
-material = SubResource( 2 )
+material = SubResource( 4 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -731,4 +789,4 @@ render_target_update_mode = 3
 visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Loading-FX/Starfield"]
-anims/popout = SubResource( 3 )
+anims/popout = SubResource( 5 )
