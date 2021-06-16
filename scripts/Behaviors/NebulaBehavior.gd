@@ -3,12 +3,18 @@ extends Node
 var nebulas := []
 
 func _ready():
-	BehaviorEvents.connect("OnObjTurn", self, "OnObjTurn_Callback")
+	BehaviorEvents.connect("OnPositionUpdated", self, "OnPositionUpdated_Callback")
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
 	
 	
-func OnObjTurn_Callback(obj):
-	pass
+func OnPositionUpdated_Callback(obj : Attributes):
+	var tile : Vector2 = Globals.LevelLoaderRef.World_to_Tile(obj.position)
+	for nebula in nebulas:
+		var nebula_tile_offset : Vector2 = Globals.LevelLoaderRef.World_to_Tile(nebula.position)
+		var cell_index = nebula.get_child(0).get_cellv(tile - nebula_tile_offset)
+		if cell_index >= 0:
+			print("{name} is in Nebula!".format({"name":obj.get_attrib("name_id")}))
+		
 
 func OnObjectLoaded_Callback(obj : Attributes):
 	if obj.get_attrib("nebula") == null:
@@ -36,3 +42,4 @@ func defered_init(obj):
 	var nebula_seed : int = obj.get_attrib("nebula.seed")
 		
 	obj.get_child(0).Init(nebula_seed, real_range)
+	nebulas.append(obj)

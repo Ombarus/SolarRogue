@@ -13,6 +13,9 @@ func Init(noise_seed : int, nebula_range : int):
 	map_size = nebula_range
 	regen()
 	
+func get_cellv(coord : Vector2):
+	return tilemap.get_cellv(coord)
+	
 func _process(delta):
 	# final_transform seems to only contain the stretch from resizing the window
 	# and canvas_transform seems to be the view matrix
