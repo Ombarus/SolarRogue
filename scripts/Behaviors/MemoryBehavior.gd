@@ -95,8 +95,9 @@ func OnObjectLoaded_Callback(obj):
 		var is_player : bool = obj == _playerNode
 		var is_a_ghost : bool = obj.get_attrib("ghost_memory") != null or obj.get_attrib("is_fake_ghost_memory", false) == true
 		var in_scanner_range : bool = player_scan != null and key in player_scan
+		var is_a_nebula : bool = obj.get_attrib("nebula") != null
 		
-		if  not_invisible_anomaly and (disable_fow or is_player or is_a_ghost or in_scanner_range):
+		if  not_invisible_anomaly and (disable_fow or is_player or is_a_ghost or in_scanner_range or is_a_nebula):
 			obj.visible = true
 			if obj != null and obj.get_attrib("has_ghost_memory"):
 				_remove_ghost_from_real(obj)
@@ -140,8 +141,9 @@ func ExecuteFullSweep():
 		var is_player : bool = obj == _playerNode
 		var is_a_ghost : bool = obj.get_attrib("ghost_memory") != null or obj.get_attrib("is_fake_ghost_memory", false) == true
 		var in_scanner_range : bool = player_scan != null and key in player_scan
+		var is_a_nebula : bool = obj.get_attrib("nebula") != null
 		
-		if  not_invisible_anomaly and (disable_fow or is_player or is_a_ghost or in_scanner_range):
+		if  not_invisible_anomaly and (disable_fow or is_player or is_a_ghost or in_scanner_range or is_a_nebula):
 			obj.visible = true
 			if obj != null and obj.get_attrib("has_ghost_memory"):
 				_remove_ghost_from_real(obj)

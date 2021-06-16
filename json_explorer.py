@@ -299,6 +299,17 @@ def search_list(root):
 				if not os.path.exists(comp_val):
 					myprint("ERROR: File not found {}".format(comp_val), 5)
 	
+def list_types(params):
+	types = {}
+	for f in params["data"]:
+		if "type" in f:
+			if f["type"] not in types:
+				types[f["type"]] = 1
+			else:
+				types[f["type"]] += 1
+			
+	print(types)
+			
 		
 def do_actions(actions, params):
 	if "glob_json" in actions:
@@ -313,16 +324,19 @@ def do_actions(actions, params):
 		count_mounts(params)
 	if "search_invalid_filename" in actions:
 		search_invalid_filename(params)
+	if "list_types" in actions:
+		list_types(params)
 		
 		
 if __name__ == '__main__':
 	actions = [
 		"glob_json",
-		"search_invalid_filename",
+		#"search_invalid_filename",
 		#"count_mounts",
 		#"crafting_report",
 		#"weapon_energy_report",
 		#"converter_recipe_report",
+		"list_types",
 		"nothing" # just so I don't need to play with the last ,
 	]
 	params = {

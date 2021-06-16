@@ -3,7 +3,7 @@
 [ext_resource path="res://data/private/textures/space-sprite.png" type="Texture" id=1]
 
 [node name="unknow2" type="Sprite"]
+z_index = 2200
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 1664, 128, 128, 128 )
-

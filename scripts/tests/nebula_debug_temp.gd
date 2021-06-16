@@ -14,10 +14,10 @@ func Init(noise_seed : int, nebula_range : int):
 	regen()
 	
 func _process(delta):
-	var t = get_viewport().canvas_transform
-	t.translated(Vector2(100.0, 100.0))
+	# final_transform seems to only contain the stretch from resizing the window
+	# and canvas_transform seems to be the view matrix
+	var t = get_viewport().get_final_transform() * get_viewport().canvas_transform
 	tilemap.material.set_shader_param("camera_view", t)
-	print(tilemap.material.get_shader_param("camera_view"))
 
 func regen():
 	var level_size : Vector2 = Globals.LevelLoaderRef.levelSize

@@ -460,6 +460,7 @@ modulate = Color( 0.196078, 0.321569, 1, 0.921569 )
 material = ExtResource( 36 )
 position = Vector2( -64, -64 )
 scale = Vector2( 128, 128 )
+z_index = 2100
 
 [node name="base_green" parent="." instance=ExtResource( 37 )]
 position = Vector2( 5120, 5120 )
