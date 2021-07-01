@@ -19,7 +19,8 @@ func get_cellv(coord : Vector2):
 func _process(delta):
 	# final_transform seems to only contain the stretch from resizing the window
 	# and canvas_transform seems to be the view matrix
-	var t = get_viewport().get_final_transform() * get_viewport().canvas_transform
+	#print(get_viewport_transform())
+	var t = get_viewport_transform()#get_viewport().get_final_transform() * get_viewport().canvas_transform
 	tilemap.material.set_shader_param("camera_view", t)
 
 func regen():

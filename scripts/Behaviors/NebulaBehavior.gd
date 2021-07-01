@@ -9,11 +9,23 @@ func _ready():
 	
 func OnPositionUpdated_Callback(obj : Attributes):
 	var tile : Vector2 = Globals.LevelLoaderRef.World_to_Tile(obj.position)
+	var now_in_nebula : bool = false
+	var prev_nebula_bonus : int = obj.get_attrib("scanner_result.nebula_bonus", 0)
+	var cur_bonus : int = obj.get_attrib("scanner_result.range_bonus", 0)
 	for nebula in nebulas:
 		var nebula_tile_offset : Vector2 = Globals.LevelLoaderRef.World_to_Tile(nebula.position)
 		var cell_index = nebula.get_child(0).get_cellv(tile - nebula_tile_offset)
 		if cell_index >= 0:
-			print("{name} is in Nebula!".format({"name":obj.get_attrib("name_id")}))
+			now_in_nebula = true
+			if prev_nebula_bonus == 0:
+				var nebula_bonus : int = nebula.get_attrib("nebula.scanner.range_bonus")
+				obj.set_attrib("scanner_result.range_bonus", cur_bonus + nebula_bonus)
+				obj.set_attrib("scanner_result.nebula_bonus", nebula_bonus)
+	
+	if now_in_nebula == false and prev_nebula_bonus != 0:
+		obj.set_attrib("scanner_result.range_bonus", cur_bonus - prev_nebula_bonus)
+		obj.set_attrib("scanner_result.nebula_bonus", 0)
+		
 		
 
 func OnObjectLoaded_Callback(obj : Attributes):
