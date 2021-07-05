@@ -19,6 +19,7 @@
 		{"name":"data/json/stellar/planetlvl3.json", "spawn_rate":0.1, "max":10, "sprite_margin":[1,1]},
 		{"name":"data/json/stellar/sun.json", "min":1, "max":1, "pos":[40,40], "sprite_margin":[1,1]},
 		
+		{"name":"data/json/stellar/nebula.json", "spawn_rate":0.000048125, "max":1, "tile_margin":[10,10]},
 		{"name":"data/json/stellar/anomalies/energy_syphon.json", "spawn_rate":0.00015625, "max":3},
 		{"name":"data/json/stellar/anomalies/blind_anomaly.json", "spawn_rate":0.00015625, "max":3},
 		{"name":"data/json/stellar/anomalies/slow_anomaly.json", "spawn_rate":1.0, "max":3},

@@ -23,6 +23,7 @@
 		{"name":"data/json/stellar/planet_jerg_homeworld.json", "spawn_rate":0.05, "max":2, "sprite_margin":[1,1]},
 		{"name":"data/json/stellar/alien-sun.json", "min":1, "max":1, "pos":[40,40], "sprite_margin":[1,1]},
 		
+		{"name":"data/json/stellar/nebula.json", "spawn_rate":0.00048125, "max":1, "tile_margin":[10,10]},
 		{"name":"data/json/stellar/anomalies/energy_syphon.json", "spawn_rate":0.00015625, "max":1},
 		{"name":"data/json/stellar/anomalies/blind_anomaly.json", "spawn_rate":0.00015625, "max":1},
 		{"name":"data/json/stellar/anomalies/slow_anomaly.json", "spawn_rate":0.00015625, "max":1},

@@ -19,6 +19,8 @@
 	},
 	"variations": [
 		{"src":"data/json/items/effects/normal.json", "chance": 50},
+		{"src":"data/json/items/effects/dull.json", "chance":25},
+		{"src":"data/json/items/effects/sensitive.json", "chance":15},
 		{"src":"data/json/items/effects/transciever.json", "chance":10},
 		{"src":"data/json/items/effects/transponder.json", "chance":10},
 		{"src":"data/json/items/effects/shielded_scanner.json", "chance":20}
@@ -46,7 +48,7 @@
 		"Scanning": {
 			"min_level":0,
 			"fields": [
-				{"name":"Radius", "value":"{scanning.radius}", "translate_value":false},
+				{"name":"Radius", "value":"{scanning.radius+scanner_bonus}", "translate_value":false},
 				{"name":"Level", "value":"{scanning.level}", "translate_value":false}
 			]
 		}

@@ -8,8 +8,8 @@
 	},
 	"no_ghost":true,
 	"nebula": {
-		"min_range":20,
-		"max_range":90,
+		"min_range":15,
+		"max_range":40,
 		"scanner": {
 			"range_bonus":-2
 		}

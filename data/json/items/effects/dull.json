@@ -1,0 +1,8 @@
+{
+	"name_id":"Dull Scanner",
+	"type":"effect",
+	"prefix":"Dull %s",
+	"attributes": {
+		"global_scanner_bonus":-2
+	}
+}

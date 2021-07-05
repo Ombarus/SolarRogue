@@ -67,8 +67,8 @@ void vertex() {
 
 [resource]
 shader = SubResource( 1 )
-shader_param/color = Vector3( 0.71, 0.28, 0.42 )
-shader_param/color2 = Vector3( 0, 0, 0.6588 )
+shader_param/color = Vector3( 0.759, 0.21, 0.451 )
+shader_param/color2 = Vector3( 0, 0, 0.673 )
 shader_param/layers = 3
-shader_param/scale_multiplier = 280.0
+shader_param/scale_multiplier = 125.0
 shader_param/camera_view = Transform2D( 1, 0, 0, 1, 0, 0 )

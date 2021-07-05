@@ -25,28 +25,30 @@ func _process(delta):
 
 func regen():
 	var level_size : Vector2 = Globals.LevelLoaderRef.levelSize
-	var tile_offset = Globals.LevelLoaderRef.World_to_Tile(get_global_transform().origin)
+	var tile_offset : Vector2 = Globals.LevelLoaderRef.World_to_Tile(get_global_transform().origin)
 	for x in range(map_size):
-		if x + tile_offset.x < -1 or x + tile_offset.x > level_size.x:
+		var center_x = x - (map_size/2.0)
+		if center_x + tile_offset.x < -1 or center_x + tile_offset.x > level_size.x:
 			continue
 		for y in range(map_size):
-			if y + tile_offset.y < -1 or y + tile_offset.y > level_size.y:
+			var center_y = y - (map_size/2.0)
+			if center_y + tile_offset.y < -1 or center_y + tile_offset.y > level_size.y:
 				continue
-			var f : float = noise_func.get_noise_2d(x, y) + 1.0 / 2.0
-			var amplitude : float = calculate_amplitude(x, y)
+			var f : float = noise_func.get_noise_2d(center_x, center_y) + 1.0 / 2.0
+			var amplitude : float = calculate_amplitude(center_x, center_y)
 			var index : int = -1
 			f *= amplitude
 			if f >= noise_floor:
 				index = 0
-			tilemap.set_cell ( x, y, index )
+			tilemap.set_cell ( center_x, center_y, index )
 			
 	tilemap.set_cell(0, 0, 0)
 	tilemap.set_cell(map_size, map_size, 0)
 			
-	tilemap.update_bitmask_region ( Vector2.ZERO, Vector2(map_size,map_size) )
+	tilemap.update_bitmask_region ( Vector2.ZERO, Vector2(-map_size/2.0,map_size/2.0) )
 
 func calculate_amplitude(x, y) -> float:
-	var coord_centered := Vector2(x-map_size/2.0,y-map_size/2.0)
+	var coord_centered := Vector2(x,y)
 	var length := clamp(coord_centered.length(), 0.0, map_size/2.0)
 	var normalized = length / (map_size/2.0)
 	var result = -pow(normalized, exponent) + 1.0

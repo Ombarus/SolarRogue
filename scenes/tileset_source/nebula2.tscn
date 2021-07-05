@@ -4,7 +4,7 @@
 [ext_resource path="res://data/shaders/nebula.tres" type="Material" id=3]
 
 [node name="Nebula2" type="Node2D"]
-z_index = 1500
+z_index = 2000
 
 [node name="TileMap" type="TileMap" parent="."]
 material = ExtResource( 3 )

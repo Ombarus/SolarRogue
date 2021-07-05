@@ -5,7 +5,12 @@ var nebulas := []
 func _ready():
 	BehaviorEvents.connect("OnPositionUpdated", self, "OnPositionUpdated_Callback")
 	BehaviorEvents.connect("OnObjectLoaded", self, "OnObjectLoaded_Callback")
+	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")
 	
+	
+func OnRequestObjectUnload_Callback(obj):
+	if obj in nebulas:
+		nebulas.erase(obj)
 	
 func OnPositionUpdated_Callback(obj : Attributes):
 	var tile : Vector2 = Globals.LevelLoaderRef.World_to_Tile(obj.position)

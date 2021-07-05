@@ -203,7 +203,8 @@ func _update_scanned_obj(obj, scanner_data):
 		
 	var scan_radius = scanner_data.scanning.radius
 	var scan_bonus = obj.get_attrib("scanner_result.range_bonus", 0)
-	scan_radius += scan_bonus
+	var scan_bonus_2 = Globals.EffectRef.GetBonusValue(obj, "", scanner_data, "scanner_bonus")
+	scan_radius += scan_bonus + scan_bonus_2
 	var obj_tile = Globals.LevelLoaderRef.World_to_Tile(obj.position)
 	var bounds = Globals.LevelLoaderRef.levelSize
 	var level_id = Globals.LevelLoaderRef.GetLevelID()
