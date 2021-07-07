@@ -125,11 +125,11 @@
 		{"id":"data/json/items/utilities/vulnerability_scanner.json", "chance":0.01},
 		{"id":"data/json/items/utilities/vulnerability_scanner.json", "chance":0.01},
 		{"id":"data/json/items/weapons/emp_mk1.json", "chance":0.01},
-		{"id":"data/json/items/weapons/emp_mk2.json", "chance":0.01},
-		{"id":"data/json/items/weapons/emp_mk3.json", "chance":0.01},
+		{"id":"data/json/items/weapons/emp_mk2.json", "chance":0.007},
+		{"id":"data/json/items/weapons/emp_mk3.json", "chance":0.007},
 		{"id":"data/json/items/weapons/remote_datajack_mk1.json", "chance":0.01},
-		{"id":"data/json/items/weapons/remote_datajack_mk2.json", "chance":0.01},
-		{"id":"data/json/items/weapons/remote_datajack_mk3.json", "chance":0.01},
+		{"id":"data/json/items/weapons/remote_datajack_mk2.json", "chance":0.007},
+		{"id":"data/json/items/weapons/remote_datajack_mk3.json", "chance":0.007},
 		
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05},
 		{"id":"data/json/items/misc/hydrogen.json", "chance":0.05}
