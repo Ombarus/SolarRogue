@@ -24,8 +24,8 @@
 	"equipment": {
 		"slot":"weapon",
 		"volume":70.0,
-		"equip_ap":3.0,
-		"unequip_ap":3.0
+		"equip_ap":1.0,
+		"unequip_ap":1.0
 	},
 	"recyclable": {
 		"energy": 875,

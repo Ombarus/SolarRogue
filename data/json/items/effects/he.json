@@ -3,7 +3,7 @@
 	"type":"effect",
 	"prefix":"HE %s",
 	"attributes": {
-		"self_dam_shield_multiplier":0.5,
+		"self_dam_shield_multiplier":0.25,
 		"self_dam_hull_multiplier":1.5
 	},
 	"description": {
