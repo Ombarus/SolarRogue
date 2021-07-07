@@ -25,8 +25,8 @@
 	"equipment": {
 		"slot":"weapon",
 		"volume":60.0,
-		"equip_ap":3.0,
-		"unequip_ap":3.0
+		"equip_ap":4.0,
+		"unequip_ap":4.0
 	},
 	"recyclable": {
 		"energy": 2000,
@@ -44,7 +44,7 @@
 			"min_level":0,
 			"fields":[
 				{"name":"Cargo Volume", "value":"{equipment.volume*volume_multiplier}", "translate_value":false, "positive_good":false},
-				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap+equip_ap_bonus}", "translate_value":false, "positive_good":false},
 				{"name":"Mount Point", "value":"Weapon"}
 			]
 		},

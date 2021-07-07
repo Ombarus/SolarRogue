@@ -25,8 +25,8 @@
 	"equipment": {
 		"slot":"weapon",
 		"volume":60.0,
-		"equip_ap":3.0,
-		"unequip_ap":3.0
+		"equip_ap":4.0,
+		"unequip_ap":4.0
 	},
 	"recyclable": {
 		"energy": 2000,
@@ -41,6 +41,7 @@
 	"variations": [
 		{"src":"data/json/items/effects/normal.json", "chance": 50},
 		{"src":"data/json/items/effects/broken.json", "chance": 50},
+		{"src":"data/json/items/effects/hot_swap.json", "chance": 10},
 		{"src":"data/json/items/effects/em.json", "chance":20},
 		{"src":"data/json/items/effects/he.json", "chance":10},
 		{"src":"data/json/items/effects/salvage.json", "chance":5},
@@ -63,7 +64,7 @@
 			"min_level":0,
 			"fields":[
 				{"name":"Cargo Volume", "value":"{equipment.volume*volume_multiplier}", "translate_value":false, "positive_good":false},
-				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap+equip_ap_bonus}", "translate_value":false, "positive_good":false},
 				{"name":"Mount Point", "value":"Weapon"}
 			]
 		},

@@ -1,0 +1,11 @@
+{
+	"name_id":"Hot Swap",
+	"type":"effect",
+	"prefix":"Hot Swap %s",
+	"attributes": {
+		"self_equip_ap_bonus":-2,
+		"self_unequip_ap_bonus":-2,
+		"inv_self_equip_ap_bonus":-2,
+		"inv_self_unequip_ap_bonus":-2
+	}
+}

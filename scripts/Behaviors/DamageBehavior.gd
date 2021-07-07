@@ -442,13 +442,16 @@ func apply_warfare_choice(selected_targets):
 		if "disable_" in action:
 			success = true
 			var disable_turn : int = MersenneTwister.rand(duration_max - duration_min) + duration_min
+			var disable_defense = Globals.EffectRef.GetBonusValue(target, "", {}, "disable_bonus")
+			disable_turn = max(disable_turn - disable_defense, 0)
 			part = action.replace("disable_", "").replace("_chance", "")
 			var previous_timer : float = target.get_attrib("offline_systems.%s" % part, 0.0)
 			disable_turn = max(disable_turn, previous_timer)
 			turn_count = disable_turn
-			target.set_attrib("offline_systems.%s" % part, disable_turn)
-			if previous_timer <= 0.0: # only trigger disable if we weren't already disabled
-				BehaviorEvents.emit_signal("OnSystemDisabled", target, part)
+			if turn_count > 0:
+				target.set_attrib("offline_systems.%s" % part, disable_turn)
+				if previous_timer <= 0.0: # only trigger disable if we weren't already disabled
+					BehaviorEvents.emit_signal("OnSystemDisabled", target, part)
 	if shooter.get_attrib("wait_for_hack", false) == true:
 		shooter.set_attrib("wait_for_hack", false)
 		BehaviorEvents.emit_signal("OnResumeAttack")
@@ -465,6 +468,17 @@ func display_electro_log(success : bool,
 	is_pulse : bool,
 	target_ship_name : String,
 	turn_count : int):
+		
+	var player_zero_hack = {
+		"Your backup system takes over and saved you from the enemy's hack!":50,
+		"Our Backup System is Online. Hack failed.":50,
+		"Booting backup system. All system nominal.":50
+	}
+	
+	var enemy_zero_hack = {
+		"Our Hack was successful but the enemy seem to have some sort of backup system.":50,
+		"Their system should be down, I don't understand!":10
+	}
 		
 	var player_miss_choices = {
 		"Their Firewall is too good, can't break through!":50,
@@ -528,6 +542,14 @@ func display_electro_log(success : bool,
 		else:
 			txt = player_hit_choices
 			fmt = [part, turn_count]
+			
+	if success == true and turn_count == 0:
+		if player_shooter == true:
+			txt = enemy_zero_hack
+			fmt = []
+		else:
+			txt = player_zero_hack
+			fmt = []
 			
 	if not txt.empty():
 		BehaviorEvents.emit_signal("OnLogLine", txt, fmt)

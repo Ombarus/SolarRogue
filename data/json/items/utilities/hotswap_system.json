@@ -1,0 +1,46 @@
+{
+	"name_id":"Hotswap System",
+	"type":"utility",
+	"sprite": "targeting_computer",
+	"icon": {
+		"texture":"data/private/textures/space-sprite.png",
+		"region":[0,1280,128,128]
+	},
+	"equipment": {
+		"slot":"utility",
+		"volume":40.0,
+		"equip_ap":3.0,
+		"unequip_ap":3.0
+	},
+	"attributes": {
+		"global_equip_ap_bonus":-100,
+		"global_unequip_ap_bonus":-100
+	},
+	"recyclable": {
+		"energy": 700,
+		"player_sale_range": [1000,1400],
+		"player_buy_range": [1650,2900]
+	},
+	"disassembling": {
+		"produce":"data/json/items/misc/spare_parts.json",
+		"count":2,
+		"energy_cost":700
+	},
+	"description": {
+		"text":"A complex set of tools, instruments and software that allow your crew to replace any pieces of equipment in record times.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
+				{"name":"Mount Point", "value":"Utility"}
+			]
+		},
+		"Effect": {
+			"min_level":0,
+			"fields": [
+				{"name":"Equip/Unequip", "value":"[color=lime]Always 1 turn↑[/color]", "translate_value":true}
+			]
+		}
+	}
+}

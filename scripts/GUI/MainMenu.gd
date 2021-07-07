@@ -18,8 +18,6 @@ func _ready():
 	if lang != null:
 		TranslationServer.set_locale(lang)
 		BehaviorEvents.emit_signal("OnLocaleChanged")
-	#BehaviorEvents.connect("OnPushGUI", self, "OnPushGUI_Callback")
-	#BehaviorEvents.connect("OnPopGUI", self, "OnPopGUI_Callback")
 	
 	var cur_save = get_node("LocalSave").get_latest_save()
 	

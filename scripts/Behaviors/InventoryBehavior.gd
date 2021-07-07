@@ -237,7 +237,8 @@ func OnDropMount_Callback(dropper, slot_name, index):
 	var data = Globals.LevelLoaderRef.LoadJSON(item_id)
 	var drop_ap = 0
 	if "equipment" in data and "unequip_ap" in data.equipment and data.equipment.unequip_ap > 0:
-		BehaviorEvents.emit_signal("OnUseAP", dropper, data.equipment.unequip_ap)
+		var unequip_bonus = Globals.EffectRef.GetBonusValue(dropper, "", modif_data, "unequip_ap_bonus")
+		BehaviorEvents.emit_signal("OnUseAP", dropper, max(data.equipment.unequip_ap+unequip_bonus, 1))
 	Globals.LevelLoaderRef.RequestObject(item_id, Globals.LevelLoaderRef.World_to_Tile(dropper.position), modif_data)
 	items[index] = ""
 	item_attributes[index] = ""
@@ -247,18 +248,24 @@ func OnDropMount_Callback(dropper, slot_name, index):
 	
 func OnRemoveMount_Callback(dropper, slot_name, index):
 	var items = dropper.get_attrib("mounts." + slot_name)
+	var item_attributes = dropper.get_attrib("mount_attributes." + slot_name)
 	var item_id = items[index]
+	var item_attribute = item_attributes[index]
 	var data = Globals.LevelLoaderRef.LoadJSON(item_id)
 	var drop_ap = 0
+	var modif_data = null
+	if item_attribute != null and not item_attribute.empty():
+		modif_data = item_attribute
 	if "equipment" in data and "unequip_ap" in data.equipment and data.equipment.unequip_ap > 0:
-		BehaviorEvents.emit_signal("OnUseAP", dropper, data.equipment.unequip_ap)
+		var unequip_bonus = Globals.EffectRef.GetBonusValue(dropper, "", modif_data, "unequip_ap_bonus")
+		BehaviorEvents.emit_signal("OnUseAP", dropper, max(data.equipment.unequip_ap+unequip_bonus, 1))
 	#Globals.LevelLoaderRef.RequestObject(item_id, Globals.LevelLoaderRef.World_to_Tile(dropper.position))
-	var mount_attrib = dropper.get_attrib("mount_attributes." + slot_name)
-	mount_attrib = mount_attrib[index]
-	BehaviorEvents.emit_signal("OnAddItem", dropper, items[index], mount_attrib)
+	BehaviorEvents.emit_signal("OnAddItem", dropper, items[index], modif_data)
 	items[index] = ""
+	item_attributes[index] = ""
 	dropper.set_attrib("mounts." + slot_name, items)
-	BehaviorEvents.emit_signal("OnMountRemoved", dropper, slot_name, item_id, mount_attrib)
+	dropper.set_attrib("mount_attributes." + slot_name, item_attributes)
+	BehaviorEvents.emit_signal("OnMountRemoved", dropper, slot_name, item_id, modif_data)
 	
 func OnEquipMount_Callback(equipper, slot_name, index, item_id, modified_attributes):
 	# Check if slot already has something equipped
@@ -275,13 +282,16 @@ func OnEquipMount_Callback(equipper, slot_name, index, item_id, modified_attribu
 	var var_getter = "mount_attributes." + slot_name
 	var items = equipper.get_attrib(attrib_getter)
 	var variations = equipper.get_attrib(var_getter)
+	var max_time := 1.0
 	if items != null and items[index] != "":
 		BehaviorEvents.emit_signal("OnAddItem", equipper, items[index], variations[index])
 		var old_id = items[index]
 		var old_data : Dictionary = Globals.LevelLoaderRef.LoadJSON(items[index])
-		var unequip_ap : int = Globals.get_data(old_data, "equipment.equip_ap", 0)
+		var unequip_ap : int = Globals.get_data(old_data, "equipment.unequip_ap", 0)
 		if unequip_ap > 0:
-			BehaviorEvents.emit_signal("OnUseAP", equipper, unequip_ap)
+			max_time = 0.5
+			var unequip_bonus = Globals.EffectRef.GetBonusValue(equipper, "", variations[index], "unequip_ap_bonus")
+			BehaviorEvents.emit_signal("OnUseAP", equipper, max(unequip_ap+unequip_bonus, max_time))
 		if equipper.get_attrib("type") == "player" and old_data != null and new_data != null:
 			#BehaviorEvents.emit_signal("OnLogLine", "Replaced %s by %s", [Globals.mytr(old_data.name_id), Globals.mytr(new_data.name_id)])
 			BehaviorEvents.emit_signal("OnLogLine", "Replaced %s by %s", [Globals.EffectRef.get_display_name(old_data, variations[index]), Globals.EffectRef.get_display_name(new_data, modified_attributes)])
@@ -290,14 +300,17 @@ func OnEquipMount_Callback(equipper, slot_name, index, item_id, modified_attribu
 	elif equipper.get_attrib("type") == "player" and new_data != null:
 		BehaviorEvents.emit_signal("OnLogLine", "Installed %s", [Globals.EffectRef.get_display_name(new_data, modified_attributes)])
 		
-	BehaviorEvents.emit_signal("OnRemoveItem", equipper, item_id, modified_attributes)
 	items[index] = item_id
 	variations[index] = modified_attributes
 	equipper.set_attrib(attrib_getter, items)
 	equipper.set_attrib(var_getter, variations)
 	var equip_ap : int = Globals.get_data(new_data, "equipment.equip_ap", 0)
 	if equip_ap > 0:
-		BehaviorEvents.emit_signal("OnUseAP", equipper, equip_ap)
+		var equip_bonus = Globals.EffectRef.GetBonusValue(equipper, "", modified_attributes, "equip_ap_bonus")
+		BehaviorEvents.emit_signal("OnUseAP", equipper, max(equip_ap+equip_bonus, max_time))
+	# moved removeItem event after OnUseAP in case we have an "inventory" effect that should apply before
+	# we remove the item
+	BehaviorEvents.emit_signal("OnRemoveItem", equipper, item_id, modified_attributes)
 	BehaviorEvents.emit_signal("OnMountAdded", equipper, slot_name, item_id, modified_attributes)
 
 #TODO: Fix logic flaws (make sure we're not changing cargo in base_attributes), (check we won't exceed volume before adding)
