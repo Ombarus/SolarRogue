@@ -1,10 +1,10 @@
 {
 	"name_id":"Backup System",
 	"type":"utility",
-	"sprite": "targeting_computer",
+	"sprite": "backup_system",
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
-		"region":[0,1280,128,128]
+		"region":[0,1664,128,128]
 	},
 	"equipment": {
 		"slot":"utility",
@@ -25,20 +25,24 @@
 		"count":2,
 		"energy_cost":700
 	},
+	"variations": [
+		{"src":"data/json/items/effects/normal.json", "chance": 100},
+		{"src":"data/json/items/effects/hot_swap.json", "chance": 10}
+	],
 	"description": {
 		"text":"Duplicate systems reduce duration of hacks against you.",
 		"Overview": {
 			"min_level":0,
 			"fields":[
 				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false},
-				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap+equip_ap_bonus}", "translate_value":false, "positive_good":false},
 				{"name":"Mount Point", "value":"Utility"}
 			]
 		},
 		"Effect": {
 			"min_level":0,
 			"fields": [
-				{"name":"Hack Duration", "value":"[color=lime]-{attributes.global_disable_bonus}% ↑[/color]", "translate_value":false}
+				{"name":"Hack Duration", "value":"[color=lime]-{attributes.global_disable_bonus}↑[/color]", "translate_value":false}
 			]
 		}
 	}

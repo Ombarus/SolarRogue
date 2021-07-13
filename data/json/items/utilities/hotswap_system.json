@@ -1,10 +1,10 @@
 {
 	"name_id":"Hotswap System",
 	"type":"utility",
-	"sprite": "targeting_computer",
+	"sprite": "hotswap",
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
-		"region":[0,1280,128,128]
+		"region":[128,1664,128,128]
 	},
 	"equipment": {
 		"slot":"utility",
@@ -32,7 +32,7 @@
 			"min_level":0,
 			"fields":[
 				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false},
-				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap+equip_ap_bonus}", "translate_value":false, "positive_good":false},
 				{"name":"Mount Point", "value":"Utility"}
 			]
 		},

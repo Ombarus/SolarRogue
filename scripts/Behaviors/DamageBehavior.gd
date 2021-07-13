@@ -340,7 +340,7 @@ func ProcessDamage(target, shooter, weapon_data, modified_attributes):
 			
 		var aegis_conversion = _aegis_conversion(target, dam)
 		if aegis_conversion > 0:
-			var cur_shield = target.get_attrib("shield.current_hp")
+			var cur_shield = target.get_attrib("shield.current_hp", 0)
 			var max_shield = target.get_max_shield()
 			if cur_shield + aegis_conversion > max_shield:
 				aegis_conversion = max_shield - cur_shield
@@ -366,7 +366,7 @@ func ProcessDamage(target, shooter, weapon_data, modified_attributes):
 			BehaviorEvents.emit_signal("OnObjectDestroyed", target)
 			BehaviorEvents.emit_signal("OnRequestObjectUnload", target)
 		elif is_target_player and hull_dam <= 0.0:
-			var cur_shield = target.get_attrib("shield.current_hp")
+			var cur_shield = target.get_attrib("shield.current_hp", 0)
 			var max_shield = target.get_max_shield()
 			shield_per = stepify(cur_shield / max_shield * 100.0, 0.1)
 		

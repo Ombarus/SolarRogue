@@ -21,13 +21,17 @@
 		"player_sale_range": [600,950],
 		"player_buy_range": [1175,1400]
 	},
+	"variations": [
+		{"src":"data/json/items/effects/normal.json", "chance": 100},
+		{"src":"data/json/items/effects/hot_swap.json", "chance": 10}
+	],
 	"description": {
 		"text":"Paranoid much? Well at least now your systems are protected against EMPs",
 		"Overview": {
 			"min_level":0,
 			"fields":[
 				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false},
-				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap+equip_ap_bonus}", "translate_value":false, "positive_good":false},
 				{"name":"Mount Point", "value":"Utility"}
 			]
 		},

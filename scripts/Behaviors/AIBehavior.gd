@@ -343,7 +343,7 @@ func DoPylonPathfinding(obj):
 		BehaviorEvents.emit_signal("OnUseAP", obj, 10.0)
 		return
 		
-	var cur_shield = target.get_attrib("shield.current_hp")
+	var cur_shield = target.get_attrib("shield.current_hp", 0)
 	var max_shield = target.get_max_shield()
 	var pylon_heal = obj.get_attrib("ai.pylon_heal")
 	var cooldown_range = obj.get_attrib("ai.pylon_cooldown")

@@ -296,7 +296,7 @@ func Pressed_Grab_Callback():
 				continue
 			var tile_content = Globals.LevelLoaderRef.levelTiles[x][y]
 			for obj in tile_content:
-				if obj.visible == true and obj.get_attrib("equipment") != null:
+				if obj.get_attrib("equipment") != null and obj.get_attrib("ghost_memory") == null:
 					var stackable = obj.get_attrib("equipment.stackable", false)
 					var skip = false
 					#TODO: Even if stackable I probably want to keep a reference on the OBJ

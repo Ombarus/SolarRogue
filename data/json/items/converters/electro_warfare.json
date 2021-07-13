@@ -13,8 +13,9 @@
 		"unequip_ap":3.0
 	},
 	"variations": [
-		{"src":"data/json/items/effects/normal.json", "chance": 90},
-		{"src":"data/json/items/effects/shielded_converter.json", "chance": 60}
+		{"src":"data/json/items/effects/normal.json", "chance": 50},
+		{"src":"data/json/items/effects/shielded_converter.json", "chance": 40},
+		{"src":"data/json/items/effects/hot_swap.json", "chance": 10}
 	],
 	"converter": {
 		"maximum_energy":100000,
@@ -199,7 +200,7 @@
 			"min_level":0,
 			"fields":[
 				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false},
-				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap+equip_ap_bonus}", "translate_value":false, "positive_good":false},
 				{"name":"Mount Point", "value":"Converter"}
 			]
 		},

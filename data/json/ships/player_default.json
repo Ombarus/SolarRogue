@@ -22,11 +22,11 @@
 		"converter": ["data/json/items/converters/converter_mk1.json"]
 	},
 	"mount_attributes": {
-		"weapon": [{}],
-		"shield": [{}],
-		"scanner": [{}],
+		"weapon": [{"selected_variation":"data/json/items/effects/normal.json"}],
+		"shield": [{"selected_variation":"data/json/items/effects/normal.json"}],
+		"scanner": [{"selected_variation":"data/json/items/effects/normal.json"}],
 		"utility": [{}],
-		"converter": [{}]
+		"converter": [{"selected_variation":"data/json/items/effects/normal.json"}]
 	},
 	"destroyable": {
 		"hull":13,

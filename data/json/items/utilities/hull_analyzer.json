@@ -26,13 +26,17 @@
 		"count":2,
 		"energy_cost":700
 	},
+	"variations": [
+		{"src":"data/json/items/effects/normal.json", "chance": 100},
+		{"src":"data/json/items/effects/hot_swap.json", "chance": 10}
+	],
 	"description": {
 		"text":"A dedicated processor capable of finding microscopic cracks on a target's Hull and make them much much bigger.",
 		"Overview": {
 			"min_level":0,
 			"fields":[
 				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false},
-				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap+equip_ap_bonus}", "translate_value":false, "positive_good":false},
 				{"name":"Mount Point", "value":"Utility"}
 			]
 		},

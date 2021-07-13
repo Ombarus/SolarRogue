@@ -82,9 +82,11 @@
 			}},
 			{"src":"data/json/items/weapons/emp_mk3.json", "count":1, 
 				"modified_attributes": {
-					"selected_variation":"data/json/items/effects/cooled.json"
+					"selected_variation":"data/json/items/effects/hot_swap.json"
 			}},
 			{"src":"data/json/items/utilities/boost_antenna.json", "count":1},
+			{"src":"data/json/items/utilities/backup_system.json", "count":1},
+			{"src":"data/json/items/utilities/hotswap_system.json", "count":1},
 			{"src":"data/json/items/utilities/firewall.json", "count":1},
 			{"src":"data/json/items/utilities/power_amplifier_mk2.json", "count":1},
 			{"src":"data/json/items/converters/electro_warfare.json", "count":1},

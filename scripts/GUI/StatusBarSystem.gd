@@ -97,7 +97,7 @@ func UpdateStatusBar(player_obj):
 			if not shield.empty():
 				missing_shield = false
 				break
-	var cur_shield = player_obj.get_attrib("shield.current_hp")
+	var cur_shield = player_obj.get_attrib("shield.current_hp", 0)
 	if missing_shield:
 		status_str += "[color=yellow]%s[/color]" % [Globals.mytr("Missing")]
 	elif player_obj.get_attrib("offline_systems.shield", 0.0) > 0.0:

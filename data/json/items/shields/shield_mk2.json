@@ -28,17 +28,18 @@
 		"energy_cost":700
 	},
 	"variations": [
-		{"src":"data/json/items/effects/normal.json", "chance": 50},
-		{"src":"data/json/items/effects/broken.json", "chance": 50},
-		{"src":"data/json/items/effects/leaden_shield.json", "chance":20},
-		{"src":"data/json/items/effects/linked.json", "chance":20},
-		{"src":"data/json/items/effects/compact.json", "chance":20},
-		{"src":"data/json/items/effects/efficient.json", "chance":20},
-		{"src":"data/json/items/effects/fast.json", "chance":20},
-		{"src":"data/json/items/effects/blocking.json", "chance":20},
-		{"src":"data/json/items/effects/mimetic.json", "chance":10},
-		{"src":"data/json/items/effects/overloaded.json", "chance":10},
-		{"src":"data/json/items/effects/shielded_shield.json", "chance":20}
+		{"src":"data/json/items/effects/normal.json", "chance": 100},
+		{"src":"data/json/items/effects/broken.json", "chance": 100},
+		{"src":"data/json/items/effects/leaden_shield.json", "chance":15},
+		{"src":"data/json/items/effects/linked.json", "chance":15},
+		{"src":"data/json/items/effects/compact.json", "chance":15},
+		{"src":"data/json/items/effects/efficient.json", "chance":15},
+		{"src":"data/json/items/effects/fast.json", "chance":15},
+		{"src":"data/json/items/effects/blocking.json", "chance":15},
+		{"src":"data/json/items/effects/shielded_shield.json", "chance":15},
+		{"src":"data/json/items/effects/mimetic.json", "chance":7},
+		{"src":"data/json/items/effects/overloaded.json", "chance":7},
+		{"src":"data/json/items/effects/hot_swap.json", "chance": 7}
 	],
 	"description": {
 		"text":"A type of advanced force field that surrounds the ship protecting it against all form of energy and projectile weaponry. Consumes large amount of energy and recharges slowly over time. Stacked shields offer diminishing returns.",
@@ -46,7 +47,7 @@
 			"min_level":0,
 			"fields":[
 				{"name":"Cargo Volume", "value":"{equipment.volume*volume_multiplier}", "translate_value":false, "positive_good":false},
-				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap+equip_ap_bonus}", "translate_value":false, "positive_good":false},
 				{"name":"Mount Point", "value":"Shield"}
 			]
 		},

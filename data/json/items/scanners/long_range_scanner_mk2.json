@@ -19,12 +19,13 @@
 		"detection_bonus":0.03
 	},
 	"variations": [
-		{"src":"data/json/items/effects/normal.json", "chance": 50},
+		{"src":"data/json/items/effects/normal.json", "chance": 90},
 		{"src":"data/json/items/effects/dull.json", "chance":25},
 		{"src":"data/json/items/effects/sensitive.json", "chance":15},
 		{"src":"data/json/items/effects/transciever.json", "chance":10},
 		{"src":"data/json/items/effects/transponder.json", "chance":10},
-		{"src":"data/json/items/effects/shielded_scanner.json", "chance":20}
+		{"src":"data/json/items/effects/shielded_scanner.json", "chance":20},
+		{"src":"data/json/items/effects/hot_swap.json", "chance": 10}
 	],
 	"recyclable": {
 		"energy": 950,
@@ -42,7 +43,7 @@
 			"min_level":0,
 			"fields":[
 				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false},
-				{"name":"Equip Turn", "value":"{equipment.equip_ap}", "translate_value":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap+equip_ap_bonus}", "translate_value":false, "positive_good":false},
 				{"name":"Mount Point", "value":"Scanner"}
 			]
 		},

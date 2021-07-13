@@ -349,7 +349,7 @@ func UpdateShipInfo():
 			if not shield.empty():
 				missing_shield = false
 				break
-	var cur_shield = _obj.get_attrib("shield.current_hp")
+	var cur_shield = _obj.get_attrib("shield.current_hp", 0)
 	var shield_str : String = ""
 	if missing_shield:
 		shield_str += "[color=yellow]%s[/color]" % Globals.mytr("Missing")

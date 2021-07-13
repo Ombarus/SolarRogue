@@ -331,12 +331,12 @@ def do_actions(actions, params):
 if __name__ == '__main__':
 	actions = [
 		"glob_json",
-		#"search_invalid_filename",
+		"search_invalid_filename",
 		#"count_mounts",
 		#"crafting_report",
 		#"weapon_energy_report",
 		#"converter_recipe_report",
-		"list_types",
+		#"list_types",
 		"nothing" # just so I don't need to play with the last ,
 	]
 	params = {

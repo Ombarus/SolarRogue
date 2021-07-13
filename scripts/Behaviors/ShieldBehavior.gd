@@ -30,7 +30,9 @@ func OnSystemDisabled_Callback(obj, system):
 func OnObjectLoaded_Callback(obj):
 	var cur_shield = obj.get_attrib("shield.current_hp")
 	if cur_shield == null:
-		obj.set_attrib("shield.current_hp", obj.get_max_shield())
+		var max_shield = obj.get_max_shield()
+		if max_shield != 0:
+			obj.set_attrib("shield.current_hp", max_shield)
 	
 func OnObjTurn_Callback(obj):
 	var shields = obj.get_attrib("mounts.shield")

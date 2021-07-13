@@ -20,7 +20,6 @@ func _ready():
 		BehaviorEvents.emit_signal("OnLocaleChanged")
 	
 	var cur_save = get_node("LocalSave").get_latest_save()
-	
 	get_node("CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn/Continue").Disabled = cur_save == null or cur_save.empty()
 	BehaviorEvents.call_deferred("emit_signal", "OnPushGUI", "MenuRoot", {})
 	#BehaviorEvents.emit_signal("OnPushGUI", "MenuRoot", {})
