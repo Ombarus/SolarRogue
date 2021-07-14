@@ -253,6 +253,13 @@
 				"amount":1
 			},
 			{
+				"name": "Hot Swap System", 
+				"requirements":[{"type":"energy", "amount":1000}, {"type":"spare_parts", "amount":4}], 
+				"produce":"data/json/items/utilities/hotswap_system.json",
+				"ap_cost":5.0,
+				"amount":1
+			},
+			{
 				"name": "Large Power Amplifier", 
 				"requirements":[{"type":"energy", "amount":1500}, {"type":"spare_parts", "amount":8}], 
 				"produce":"data/json/items/utilities/power_amplifier_mk3.json",

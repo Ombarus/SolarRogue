@@ -97,6 +97,8 @@
 		{"name":"data/json/items/utilities/targeting_computer.json", "spawn_rate":0.000015625},
 		{"name":"data/json/items/utilities/jammer.json", "spawn_rate":0.000015625},
 		
+		{"name":"data/json/items/utilities/backup_system.json", "spawn_rate":0.000015625},
+		{"name":"data/json/items/utilities/hotswap_system.json", "spawn_rate":0.000015625},
 		{"name":"data/json/items/consumables/shield_battery.json", "spawn_rate":0.000010416667},
 		
 		{"name":"data/json/items/consumables/chaff.json", "spawn_rate":0.000012784},

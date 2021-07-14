@@ -87,6 +87,8 @@
 		{"name":"data/json/items/utilities/weapon_bypass.json", "spawn_rate":0.000015625},
 		{"name":"data/json/items/utilities/targeting_computer.json", "spawn_rate":0.000015625},
 		{"name":"data/json/items/utilities/jammer.json", "spawn_rate":0.000015625},
+		{"name":"data/json/items/utilities/backup_system.json", "spawn_rate":0.000015625},
+		{"name":"data/json/items/utilities/hotswap_system.json", "spawn_rate":0.000015625},
 		
 		{"name":"data/json/items/consumables/shield_battery.json", "spawn_rate":0.000078125},
 		

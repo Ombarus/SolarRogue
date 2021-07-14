@@ -148,6 +148,13 @@
 				"amount":1
 			},
 			{
+				"name": "Backup System", 
+				"requirements":[{"type":"energy", "amount":1150}, {"type":"spare_parts", "amount":4}], 
+				"produce":"data/json/items/utilities/backup_system.json",
+				"ap_cost":4.0,
+				"amount":1
+			},
+			{
 				"name": "E.M.P MK3", 
 				"requirements":[{"type":"energy", "amount":1600}, {"type":"spare_parts", "amount":6}], 
 				"produce":"data/json/items/weapons/emp_mk3.json",
@@ -180,6 +187,7 @@
 			"data/json/items/effects/utility_hack.json",
 			"data/json/items/effects/scanner_hack.json",
 			"data/json/items/effects/movement_hack.json",
+			"",
 			"",
 			""
 		]

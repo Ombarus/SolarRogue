@@ -172,6 +172,13 @@
 				"amount":1
 			},
 			{
+				"name": "Hot Swap System", 
+				"requirements":[{"type":"energy", "amount":1000}, {"type":"spare_parts", "amount":4}], 
+				"produce":"data/json/items/utilities/hotswap_system.json",
+				"ap_cost":5.0,
+				"amount":1
+			},
+			{
 				"name": "Mining Laser", 
 				"requirements":[{"type":"energy", "amount":600}, {"type":"spare_parts", "amount":2}], 
 				"produce":"data/json/items/weapons/mining_laser.json",

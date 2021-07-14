@@ -90,6 +90,8 @@
 		{"name":"data/json/items/utilities/weapon_bypass.json", "spawn_rate":0.00004125},
 		{"name":"data/json/items/utilities/targeting_computer.json", "spawn_rate":0.00004125},
 		{"name":"data/json/items/utilities/jammer.json", "spawn_rate":0.00004125},
+		{"name":"data/json/items/utilities/backup_system.json", "spawn_rate":0.00004125},
+		{"name":"data/json/items/utilities/hotswap_system.json", "spawn_rate":0.00004125},
 		
 		{"name":"data/json/items/consumables/chaff.json", "spawn_rate":0.000012784},
 		{"name":"data/json/items/utilities/boost_antenna.json", "spawn_rate":0.000012784},
