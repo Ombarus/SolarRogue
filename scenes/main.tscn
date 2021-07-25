@@ -435,6 +435,7 @@ copy_mode = 2
 script = ExtResource( 38 )
 
 [node name="targetting" parent="OverlayTiles/mouse_targetting" instance=ExtResource( 39 )]
+z_index = 2100
 
 [node name="GameTiles" type="Node2D" parent="."]
 

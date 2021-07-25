@@ -83,7 +83,7 @@ func OnTriggerAnomaly_Callback(obj, anomaly):
 	effect_info = anomaly.get_attrib("anomaly.scanner")
 	if effect_info != null:
 		var amount : int = Globals.get_data(effect_info, "range_bonus")
-		var cur_bonus : int = obj.set_attrib("scanner_result.range_bonus", 0)
+		var cur_bonus : int = obj.get_attrib("scanner_result.range_bonus", 0)
 		obj.set_attrib("scanner_result.range_bonus", cur_bonus + amount)
 		add_to_ongoing_effect(obj, effect_info, "scanner")
 		if is_player:
