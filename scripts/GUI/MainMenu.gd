@@ -47,12 +47,12 @@ func _on_choose_name_callback(name):
 	var cur_save = get_node("LocalSave").get_latest_save()
 	PermSave.set_attrib("settings.default_name", name)
 	if cur_save == null or cur_save.empty():
-		_start_game()
+		_start_game(null)
 	else:
 		BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"callback_object":self, "callback_method":"_start_game", "custom_text":"CONFIRM new game"})
 		
 		
-func _start_game():
+func _start_game(param):
 	get_node("LocalSave").delete_save()
 	get_tree().change_scene("res://scenes/main.tscn")
 

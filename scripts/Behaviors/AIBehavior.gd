@@ -113,7 +113,10 @@ func ConsiderInterests(obj):
 				if is_player == true:
 					o.set_attrib("memory.was_seen_by", true)
 			
+	var should_ask = obj.get_attrib("ai.ask_on_interest", false)
 	if filtered.size() > 0:
+		if should_ask:
+			BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"callback_object":self, "callback_method":"On_Interest_Callback", "cancel_method":"On_Interest_Continue", "callback_param":obj, "custom_text":"Enemy in range! Stop current activity?"})
 		obj.set_attrib("ai.disabled", true)
 		
 	# Disable if energy is low
@@ -121,7 +124,19 @@ func ConsiderInterests(obj):
 	if cur_energy != null and cur_energy <= 500:
 		if is_player == true:
 			BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Energy too low for autopilot ![/color]")
+		if should_ask:
+			BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"callback_object":self, "callback_method":"On_Interest_Callback", "cancel_method":"On_Interest_Continue", "callback_param":obj, "custom_text":"Energy Low! Stop current activity?"})
 		obj.set_attrib("ai.disabled", true)
+	
+func On_Interest_Callback(obj):
+	obj.set_attrib("ai.disabled", true)
+	if obj.get_attrib("ai.pathfinding") == "crafting":
+		BehaviorEvents.emit_signal("OnCancelCrafting", obj)
+	
+func On_Interest_Continue(obj):
+	obj.set_attrib("ai.disabled", false)
+	# will make AI take a turn
+	BehaviorEvents.emit_signal("OnAttributeAdded", obj, "ai")
 	
 	
 func OnScannerUpdated_Callback(obj):
@@ -222,7 +237,9 @@ func OnObjTurn_Callback(obj):
 		
 	var is_aggressive = obj.get_attrib("ai.aggressive")
 	
-	if pathfinding == "pylon":
+	if pathfinding == "crafting":
+		DoCraftingWait(obj)
+	elif pathfinding == "pylon":
 		DoPylonPathfinding(obj)
 	elif pathfinding == "queen":
 		DoJergQueenPathfinding(obj)
@@ -258,6 +275,17 @@ func RotatedTileContent(obj, offset : Vector2) -> Array:
 	desired_tile = desired_tile.round()
 	var tile_content = Globals.LevelLoaderRef.GetTile(desired_tile)
 	return Globals.LevelLoaderRef.GetTile(desired_tile)
+
+func DoCraftingWait(obj):
+	var ap_left = obj.get_attrib("ai.objective")
+	var consume = min(1.0, ap_left)
+	if consume > 0.0:
+		ap_left -= consume
+		obj.set_attrib("ai.objective", ap_left)
+		if ap_left <= 0.0:
+			obj.set_attrib("ai.disabled", true) # disable here so that OnUseAP re-activate the player
+			BehaviorEvents.emit_signal("OnResumeCrafting", obj)
+		BehaviorEvents.emit_signal("OnUseAP", obj, consume)
 
 func DoJergQueenPathfinding(obj):
 	var ai_target = obj.get_attrib("ai.target")

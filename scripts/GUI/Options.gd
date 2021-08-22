@@ -28,7 +28,7 @@ func _on_Suicide_pressed():
 func _on_SaveAndQuit_pressed():
 	Globals.LevelLoaderRef.SaveStateAndQuit(Globals.LevelLoaderRef.GetCurrentLevelData())
 
-func On_Suicide_Confirmed_Callback():
+func On_Suicide_Confirmed_Callback(param):
 	BehaviorEvents.emit_signal("OnPopGUI")
 	BehaviorEvents.emit_signal("OnPlayerDeath", Globals.get_first_player())
 

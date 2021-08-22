@@ -3,6 +3,11 @@ extends Node
 # recipe_data = {"name": "Energy", "requirements": [{"type":"food", "amount":1}], "produce":"energy", "amount":1500}
 # input_list = ["data/json/items/weapons/missile.json", "data/json/items/weapons/missile.json", ...]
 # crafter = Node with Attributes.gd
+var CraftingStack := {}
+
+func _ready():
+	BehaviorEvents.connect("OnResumeCrafting", self, "ResumeCraft")
+	BehaviorEvents.connect("OnCancelCrafting", self, "CancelCraft")
 
 func LoadInput(var input_list : Array) -> Array:
 	var loaded_input_data = []
@@ -101,25 +106,35 @@ func TestRequirements(var recipe_data : Dictionary, var loaded_input_data : Arra
 	else:
 		return true
 	
-	
-func Craft(recipe_data, input_list, crafter):
-	# Init, Read and load data we will need
-	var loaded_input_data := LoadInput(input_list)
-	var result = Globals.CRAFT_RESULT.not_enough_resources # kinda obsolete since the UI won't let you try to craft stuff if you don't have the requirements
+func CancelCraft(crafter):
+	var result = Globals.CRAFT_RESULT.success
+	var loaded_input_data = CraftingStack[crafter]["loaded_input_data"]
+	var net_energy_change = CraftingStack[crafter]["net_energy_change"]
+	var recipe_data = CraftingStack[crafter]["recipe_data"]
+	var num_produced = CraftingStack[crafter]["num_produced"]
 	var can_produce = true
 	var cur_energy = crafter.get_attrib("converter.stored_energy")
-	var net_energy_change = 0
+	CraftingStack.erase(crafter)
 	
-	var num_produced = 0
+	if num_produced > 0:
+		#BehaviorEvents.emit_signal("OnUseAP", crafter, recipe_data.ap_cost * num_produced)
+		BehaviorEvents.emit_signal("OnUseEnergy", crafter, -net_energy_change)
+		result = Globals.CRAFT_RESULT.success
+	BehaviorEvents.emit_signal("OnCrafting", crafter, result)
+	
+	
+func ResumeCraft(crafter):
+	var result = Globals.CRAFT_RESULT.success
+	var loaded_input_data = CraftingStack[crafter]["loaded_input_data"]
+	var net_energy_change = CraftingStack[crafter]["net_energy_change"]
+	var recipe_data = CraftingStack[crafter]["recipe_data"]
+	var num_produced = CraftingStack[crafter]["num_produced"]
+	var can_produce = true
+	var cur_energy = crafter.get_attrib("converter.stored_energy")
+	CraftingStack.erase(crafter)
 	
 	# Produce as many as the input_list allows
 	while (can_produce == true):
-		result = Globals.CRAFT_RESULT.success
-		# Validate that we can produce the thing
-		can_produce = TestRequirements(recipe_data, loaded_input_data, cur_energy+net_energy_change)
-		if can_produce == false:
-			break
-			
 		# Consume Resources
 		var consumed_data = []
 		for require in recipe_data.requirements:
@@ -190,13 +205,74 @@ func Craft(recipe_data, input_list, crafter):
 		# Really weird use case for missile that only require energy. Produce only one at a time
 		if recipe_data.requirements.size() == 1 and "type" in recipe_data.requirements[0] and recipe_data.requirements[0].type == "energy":
 			can_produce = false
+		
+		if can_produce:
+			can_produce = TestRequirements(recipe_data, loaded_input_data, cur_energy+net_energy_change)
+			if can_produce == false:
+				break
+				
+			CraftingStack[crafter] = {
+				"loaded_input_data": loaded_input_data,
+				"net_energy_change": net_energy_change,
+				"recipe_data": recipe_data,
+				"num_produced": num_produced
+			}
+			var ai_data = {
+				"aggressive":false,
+				"pathfinding":"crafting",
+				"disable_on_interest":true,
+				"disable_wandering":true,
+				"ask_on_interest":true,
+				"skip_check":1 # make sure we move at least one tile, this means when danger is close we move one tile at a time
+			}
+			crafter.set_attrib("ai", ai_data)
+			crafter.set_attrib("ai.objective", recipe_data.ap_cost)
+			BehaviorEvents.emit_signal("OnAttributeAdded", crafter, "ai")
+			return
 			
 	if num_produced > 0:
-		BehaviorEvents.emit_signal("OnUseAP", crafter, recipe_data.ap_cost * num_produced)
+		#BehaviorEvents.emit_signal("OnUseAP", crafter, recipe_data.ap_cost * num_produced)
 		BehaviorEvents.emit_signal("OnUseEnergy", crafter, -net_energy_change)
 		result = Globals.CRAFT_RESULT.success
 	BehaviorEvents.emit_signal("OnCrafting", crafter, result)
-	return result
+	
+	
+func Craft(recipe_data, input_list, crafter):
+	# Init, Read and load data we will need
+	var loaded_input_data := LoadInput(input_list)
+	var result = Globals.CRAFT_RESULT.not_enough_resources # kinda obsolete since the UI won't let you try to craft stuff if you don't have the requirements
+	var can_produce = true
+	var cur_energy = crafter.get_attrib("converter.stored_energy")
+	var net_energy_change = 0
+	
+	var num_produced = 0
+	
+	# Produce as many as the input_list allows
+	while (can_produce == true):
+		result = Globals.CRAFT_RESULT.success
+		# Validate that we can produce the thing
+		can_produce = TestRequirements(recipe_data, loaded_input_data, cur_energy+net_energy_change)
+		if can_produce == false:
+			break
+			
+		CraftingStack[crafter] = {
+			"loaded_input_data": loaded_input_data,
+			"net_energy_change": net_energy_change,
+			"recipe_data": recipe_data,
+			"num_produced": num_produced
+		}
+		var ai_data = {
+			"aggressive":false,
+			"pathfinding":"crafting",
+			"disable_on_interest":true,
+			"disable_wandering":true,
+			"ask_on_interest":true,
+			"skip_check":1 # make sure we move at least one tile, this means when danger is close we move one tile at a time
+		}
+		crafter.set_attrib("ai", ai_data)
+		crafter.set_attrib("ai.objective", recipe_data.ap_cost)
+		BehaviorEvents.emit_signal("OnAttributeAdded", crafter, "ai")
+		return result
 
 func do_crafting_anim(n):
 	if n.get_attrib("animation.crafted", "").empty():

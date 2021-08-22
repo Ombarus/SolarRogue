@@ -510,17 +510,6 @@ __meta__ = {
 [node name="Options" parent="Camera-GUI/SafeArea/OptionsRoot" instance=ExtResource( 53 )]
 visible = false
 
-[node name="ValidateDiagRoot" type="Control" parent="Camera-GUI/SafeArea"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ValidateDiag" parent="Camera-GUI/SafeArea/ValidateDiagRoot" instance=ExtResource( 54 )]
-visible = false
-
 [node name="TutorialRoot" type="Control" parent="Camera-GUI/SafeArea"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -575,6 +564,17 @@ __meta__ = {
 }
 
 [node name="Trading" parent="Camera-GUI/SafeArea/TradingRoot" instance=ExtResource( 80 )]
+visible = false
+
+[node name="ValidateDiagRoot" type="Control" parent="Camera-GUI/SafeArea"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ValidateDiag" parent="Camera-GUI/SafeArea/ValidateDiagRoot" instance=ExtResource( 54 )]
 visible = false
 
 [node name="SelectMultiTargetRoot" type="Control" parent="Camera-GUI/SafeArea"]
