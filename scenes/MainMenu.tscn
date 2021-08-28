@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scripts/GUI/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=2]
@@ -23,11 +23,172 @@
 [ext_resource path="res://data/animations/popin_shader.tres" type="Animation" id=21]
 [ext_resource path="res://scenes/GUI/Dialogs/ValidateDiag.tscn" type="PackedScene" id=22]
 [ext_resource path="res://scenes/tileset_source/human_scout.tscn" type="PackedScene" id=23]
+[ext_resource path="res://scenes/tileset_source/vorg_battleship.tscn" type="PackedScene" id=24]
+[ext_resource path="res://scenes/tileset_source/jerg_frigate.tscn" type="PackedScene" id=25]
+[ext_resource path="res://scenes/tileset_source/minigun_fx.tscn" type="PackedScene" id=26]
+[ext_resource path="res://scenes/tileset_source/missile_fx.tscn" type="PackedScene" id=27]
+[ext_resource path="res://scenes/tileset_source/probe.tscn" type="PackedScene" id=28]
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+void fragment()
+{
+	vec2 uv = UV;
+	uv.x += TIME / 100.0;
+	uv.y += TIME / 75.0f;
+	vec4 col = texture(TEXTURE, uv);
+	COLOR = col;
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "frigate_vs"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("frigate_vs/frigate_root:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3, 5.4, 5.7, 7.8, 10 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 640, 1152 ), Vector2( 640, 512 ), Vector2( 640, 512 ), Vector2( 640, 512 ), Vector2( -160, -288 ), Vector2( -160, -288 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("frigate_vs/frigate_root:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3, 5.4, 5.7, 7.8, 10 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, -45.0, -45.0, -45.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("frigate_vs/battleship_root:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 3, 5.4, 6, 9.5, 9.501, 10 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2048, 384 ), Vector2( 768, 384 ), Vector2( 768, 384 ), Vector2( 768, 384 ), Vector2( 2000, 384 ), Vector2( 2000, 384 ), Vector2( 2000, 384 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("frigate_vs/battleship_root:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 3, 5.4, 6, 9.5, 10 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -90.0, -90.0, -90.0, 90.0, 90.0, 90.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("frigate_vs/battleship_root/minigun_fx:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 3.2, 3.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("frigate_vs/frigate_root/hit_fx")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 3.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_hull_hit"
+} ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("frigate_vs/missile_fx:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 3.7, 4.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/7/type = "method"
+tracks/7/path = NodePath("frigate_vs/missile_fx")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 3.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ Vector2( 768, 384 ), false ],
+"method": "Start"
+} ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("frigate_vs/missile_fx/AudioStreamPlayer2D:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 3.7, 4.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("frigate_vs/battleship_root/minigun_fx/AudioStreamPlayer2D:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 3.2, 3.8, 5.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, false ]
+}
+tracks/10/type = "method"
+tracks/10/path = NodePath("frigate_vs/battleship_root/hit_fx")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 4.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_shield_hit"
+} ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "passing_scout"
 length = 7.0
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("scout_root:position")
 tracks/0/interp = 1
@@ -77,6 +238,58 @@ tracks/3/keys = {
 "values": [ 135.0, 135.0, 135.0, 135.0 ]
 }
 
+[sub_resource type="Animation" id=4]
+resource_name = "poor_probe"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("poor_probe/probe_root:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.8, 3.5, 4.2, 5.7, 10 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2304, 640 ), Vector2( 1024, 640 ), Vector2( 1024, 640 ), Vector2( 1024, 640 ), Vector2( -384, 640 ), Vector2( -384, 640 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("poor_probe/probe_root:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.8, 3.5, 3.7, 4.2, 5.7, 10 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -90.0, -90.0, 90.0, 90.0, -90.0, -90.0, -90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("scout_root:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 4.3, 9.2, 10 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2304, 640 ), Vector2( 2304, 640 ), Vector2( -384, 640 ), Vector2( -384, 640 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("scout_root:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 5, 9.2, 10 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -90.0, -90.0, -90.0, -90.0 ]
+}
+
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 20 )
 shader_param/pixel = 1.0
@@ -111,6 +324,7 @@ anims/popin = ExtResource( 21 )
 script = ExtResource( 19 )
 
 [node name="BG" type="TextureRect" parent="."]
+material = SubResource( 6 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 6 )
@@ -123,16 +337,51 @@ __meta__ = {
 [node name="Animated" type="Node2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Animated"]
-autoplay = "passing_scout"
+anims/frigate_vs = SubResource( 3 )
 anims/passing_scout = SubResource( 2 )
+anims/poor_probe = SubResource( 4 )
 
 [node name="scout_root" parent="Animated" instance=ExtResource( 23 )]
-position = Vector2( -90, 580 )
-rotation = 1.5708
+position = Vector2( 2304, 640 )
+rotation = -1.5708
 
 [node name="scout_root2" parent="Animated" instance=ExtResource( 23 )]
 position = Vector2( 0, -120 )
 rotation = 2.35619
+
+[node name="frigate_vs" type="Node2D" parent="Animated"]
+
+[node name="frigate_root" parent="Animated/frigate_vs" instance=ExtResource( 25 )]
+position = Vector2( 640, 1152 )
+rotation = 0.0
+
+[node name="missile_fx" parent="Animated/frigate_vs" instance=ExtResource( 27 )]
+visible = false
+position = Vector2( 640, 512 )
+
+[node name="AudioStreamPlayer2D" parent="Animated/frigate_vs/missile_fx" index="2"]
+autoplay = false
+
+[node name="battleship_root" parent="Animated/frigate_vs" instance=ExtResource( 24 )]
+position = Vector2( 2048, 384 )
+rotation = -1.5708
+
+[node name="minigun_fx" parent="Animated/frigate_vs/battleship_root" instance=ExtResource( 26 )]
+visible = false
+rotation = 0.785398
+
+[node name="muzzle" parent="Animated/frigate_vs/battleship_root/minigun_fx" index="1"]
+frame = 5
+
+[node name="AudioStreamPlayer2D" parent="Animated/frigate_vs/battleship_root/minigun_fx" index="2"]
+visible = false
+autoplay = false
+
+[node name="poor_probe" type="Node2D" parent="Animated"]
+
+[node name="probe_root" parent="Animated/poor_probe" instance=ExtResource( 28 )]
+position = Vector2( 2304, 640 )
+rotation = -1.5708
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -404,3 +653,8 @@ render_target_update_mode = 3
 [connection signal="pressed" from="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn/Setting" to="." method="_on_Setting_pressed"]
 [connection signal="pressed" from="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn/Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn/Quit" to="." method="_on_Quit_pressed"]
+
+[editable path="Animated/frigate_vs/frigate_root"]
+[editable path="Animated/frigate_vs/missile_fx"]
+[editable path="Animated/frigate_vs/battleship_root"]
+[editable path="Animated/frigate_vs/battleship_root/minigun_fx"]

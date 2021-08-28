@@ -1,5 +1,6 @@
 extends Node
 
+onready var _cute_anim : AnimationPlayer = get_node("Animated/AnimationPlayer")
 
 func _ready():
 	OS.set_window_fullscreen(PermSave.get_attrib("settings.full_screen", false))
@@ -26,10 +27,20 @@ func _ready():
 	
 	if Globals.is_ios():
 		get_node("CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/MenuBtn/Quit").visible = false
+		
+	_cute_anim.connect("animation_finished", self, "animation_finished_Callback")
+	play_next_anim()
 
-#func OnPopGUI_Callback():
-#	var name_diag = get_node("PlayerName")
-#	name_diag.visible = false
+func play_next_anim():
+	var anim_count = _cute_anim.get_animation_list().size()
+	var idx = MersenneTwister.rand(anim_count, false)
+	_cute_anim.play(_cute_anim.get_animation_list()[idx])
+
+func animation_finished_Callback(anim_name):
+	yield(get_tree().create_timer(3.0), "timeout")
+	play_next_anim()
+
+
 func _input(event):
 	if event.is_action_released("screenshot"):
 		var cur_datetime : Dictionary = OS.get_datetime()

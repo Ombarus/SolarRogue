@@ -75,7 +75,7 @@ scale_amount_curve = SubResource( 1 )
 position = Vector2( -12, 0 )
 rotation = -1.5708
 frames = SubResource( 9 )
-frame = 3
+frame = 6
 playing = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

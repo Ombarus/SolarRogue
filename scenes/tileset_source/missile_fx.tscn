@@ -47,7 +47,6 @@ position = Vector2( -0.209351, 1.88412 )
 
 [node name="Particles2D" type="CPUParticles2D" parent="smoke_root"]
 rotation = 1.57161
-scale = Vector2( 1, 1 )
 amount = 200
 local_coords = false
 texture = ExtResource( 3 )

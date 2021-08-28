@@ -7,6 +7,8 @@
 [ext_resource path="res://scenes/Animations/ship_base_hit_fx.tscn" type="PackedScene" id=5]
 
 [node name="frigate_root" type="Node2D"]
+position = Vector2( -128, -128 )
+rotation = -0.785398
 z_index = 900
 
 [node name="BG" parent="." instance=ExtResource( 1 )]

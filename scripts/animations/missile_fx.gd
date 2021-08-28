@@ -14,6 +14,7 @@ var _center = Vector2(0.0, 0.0)
 var _random_offset : Vector2
 
 const DEBUG = false
+var _cleanup = true
 
 func _ready():
 	_radial_speed_deg = arc_deg / ttl
@@ -28,7 +29,8 @@ func _unhandled_input(event):
 			Start(click_pos)
 			
 	
-func Start(target):
+func Start(target, cleanup=true):
+	_cleanup = cleanup
 	_active = true
 	get_node("body_root/Sprite/AnimationPlayer").play("moving")
 	
@@ -62,7 +64,7 @@ func _process(delta):
 		position = _center - _orig_vec
 		rotation = 0
 		_active = false
-		if DEBUG != true:
+		if DEBUG != true and _cleanup == true:
 			BehaviorEvents.emit_signal("OnAnimationDone")
 			get_parent().remove_child(self)
 			queue_free()
