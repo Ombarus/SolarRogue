@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scripts/GUI/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=2]
@@ -22,6 +22,60 @@
 [ext_resource path="res://data/shaders/ui_vfx.shader" type="Shader" id=20]
 [ext_resource path="res://data/animations/popin_shader.tres" type="Animation" id=21]
 [ext_resource path="res://scenes/GUI/Dialogs/ValidateDiag.tscn" type="PackedScene" id=22]
+[ext_resource path="res://scenes/tileset_source/human_scout.tscn" type="PackedScene" id=23]
+
+[sub_resource type="Animation" id=2]
+resource_name = "passing_scout"
+length = 7.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("scout_root:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 2.3, 5, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -90, 580 ), Vector2( 600, 580 ), Vector2( 600, 580 ), Vector2( 1300, -120 ), Vector2( 1300, -120 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("scout_root:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2, 2.3, 5, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 90.0, 90.0, 45.0, 45.0, 45.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("scout_root2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 6, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -120 ), Vector2( 0, -120 ), Vector2( 1500, 1380 ), Vector2( 1500, 1380 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("scout_root2:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1, 6, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 135.0, 135.0, 135.0, 135.0 ]
+}
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 20 )
@@ -65,6 +119,20 @@ stretch_mode = 7
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Animated" type="Node2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Animated"]
+autoplay = "passing_scout"
+anims/passing_scout = SubResource( 2 )
+
+[node name="scout_root" parent="Animated" instance=ExtResource( 23 )]
+position = Vector2( -90, 580 )
+rotation = 1.5708
+
+[node name="scout_root2" parent="Animated" instance=ExtResource( 23 )]
+position = Vector2( 0, -120 )
+rotation = 2.35619
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -214,17 +282,24 @@ margin_right = 500.0
 margin_bottom = 649.0
 size_flags_horizontal = 3
 
-[node name="base" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer" instance=ExtResource( 10 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer"]
 margin_left = 500.0
 margin_right = 1210.0
 margin_bottom = 649.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="base" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/VBoxContainer" instance=ExtResource( 10 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 710.0
+margin_bottom = 445.0
 rect_min_size = Vector2( 710, 0 )
 size_flags_horizontal = 3
+size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="Leaderboard" type="Control" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/base"]
+[node name="Leaderboard" type="Control" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/VBoxContainer/base"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -237,13 +312,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="leaderlist" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/base/Leaderboard" instance=ExtResource( 12 )]
+[node name="leaderlist" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/VBoxContainer/base/Leaderboard" instance=ExtResource( 12 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 0.0
 margin_bottom = 0.0
 mouse_filter = 1
 Row = ExtResource( 13 )
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/SafeArea/MenuRootRoot/MenuRoot/HBoxContainer/VBoxContainer"]
+margin_top = 449.0
+margin_right = 710.0
+margin_bottom = 649.0
+rect_min_size = Vector2( 0, 200 )
 
 [node name="PlayerNameRoot" type="Control" parent="CanvasLayer/SafeArea"]
 anchor_right = 1.0

@@ -114,29 +114,34 @@ func ConsiderInterests(obj):
 					o.set_attrib("memory.was_seen_by", true)
 			
 	var should_ask = obj.get_attrib("ai.ask_on_interest", false)
-	if filtered.size() > 0:
+	if filtered.size() > 0 and obj.get_attrib("ai.crafting_continued_enemy", false) == false:
 		if should_ask:
-			BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"callback_object":self, "callback_method":"On_Interest_Callback", "cancel_method":"On_Interest_Continue", "callback_param":obj, "custom_text":"Enemy in range! Stop current activity?"})
+			obj.set_attrib("ai.crafting_continued_enemy", true)
+			BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"callback_object":self, "callback_method":"On_Interest_Continue", "cancel_method":"On_Interest_Callback", "callback_param":obj, "custom_text":"Enemy in range! Continue Crafting?"})
 		obj.set_attrib("ai.disabled", true)
 		
 	# Disable if energy is low
 	var cur_energy = obj.get_attrib("converter.stored_energy")
-	if cur_energy != null and cur_energy <= 500:
+	if cur_energy != null and cur_energy <= 500 and obj.get_attrib("ai.crafting_continued_energy", false) == false:
 		if is_player == true:
 			BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Energy too low for autopilot ![/color]")
 		if should_ask:
-			BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"callback_object":self, "callback_method":"On_Interest_Callback", "cancel_method":"On_Interest_Continue", "callback_param":obj, "custom_text":"Energy Low! Stop current activity?"})
+			obj.set_attrib("ai.crafting_continued_energy", true)
+			BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"callback_object":self, "callback_method":"On_Interest_Continue", "cancel_method":"On_Interest_Callback", "callback_param":obj, "custom_text":"Energy Low! Continue Crafting?"})
 		obj.set_attrib("ai.disabled", true)
 	
 func On_Interest_Callback(obj):
-	obj.set_attrib("ai.disabled", true)
+	obj.set_attrib("ai.disabled", false)
 	if obj.get_attrib("ai.pathfinding") == "crafting":
+		BehaviorEvents.emit_signal("OnLogLine", "Crafting Canceled by Captain's order")
 		BehaviorEvents.emit_signal("OnCancelCrafting", obj)
+		obj.set_attrib("ai.disabled", true)
 	
 func On_Interest_Continue(obj):
 	obj.set_attrib("ai.disabled", false)
 	# will make AI take a turn
-	BehaviorEvents.emit_signal("OnAttributeAdded", obj, "ai")
+	BehaviorEvents.call_deferred("emit_signal", "OnAttributeAdded", obj, "ai")
+	#BehaviorEvents.emit_signal("OnAttributeAdded", obj, "ai")
 	
 	
 func OnScannerUpdated_Callback(obj):
@@ -169,6 +174,12 @@ func OnScannerUpdated_Callback(obj):
 	
 func OnDamageTaken_Callback(target, shooter, damage_type):
 	if target.get_attrib("ai") == null or shooter == null:
+		return
+		
+	if target.get_attrib("ai.pathfinding", "") == "crafting":
+		target.set_attrib("ai.crafting_continued_energy", true)
+		BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"callback_object":self, "callback_method":"On_Interest_Continue", "cancel_method":"On_Interest_Callback", "callback_param":target, "custom_text":"We've taken damage! Continue Crafting?"})
+		target.set_attrib("ai.disabled", true)
 		return
 	
 	var run_if_attacked = target.get_attrib("ai.run_if_attacked")
@@ -277,15 +288,20 @@ func RotatedTileContent(obj, offset : Vector2) -> Array:
 	return Globals.LevelLoaderRef.GetTile(desired_tile)
 
 func DoCraftingWait(obj):
+	if obj.get_attrib("offline_systems.converter", 0.0) > 0.0:
+		BehaviorEvents.emit_signal("OnLogLine", "Our converter has been disabled by the enemy!")
+		On_Interest_Callback(obj)
+		return
+	
 	var ap_left = obj.get_attrib("ai.objective")
 	var consume = min(1.0, ap_left)
 	if consume > 0.0:
 		ap_left -= consume
 		obj.set_attrib("ai.objective", ap_left)
-		if ap_left <= 0.0:
-			obj.set_attrib("ai.disabled", true) # disable here so that OnUseAP re-activate the player
-			BehaviorEvents.emit_signal("OnResumeCrafting", obj)
 		BehaviorEvents.emit_signal("OnUseAP", obj, consume)
+		if ap_left <= 0.0:
+			#obj.set_attrib("ai.disabled", true) # disable here so that OnUseAP re-activate the player
+			BehaviorEvents.emit_signal("OnResumeCrafting", obj)
 
 func DoJergQueenPathfinding(obj):
 	var ai_target = obj.get_attrib("ai.target")

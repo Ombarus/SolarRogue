@@ -73,6 +73,8 @@ func CraftButtonPressed_Callback():
 	var last_selected :int = _current_crafting_selected.index
 	
 	if _pop_called == true:
+		if BehaviorEvents.is_connected("OnRefreshGUI", self, "OnRefreshGUI_Callback"):
+			BehaviorEvents.disconnect("OnRefreshGUI", self, "OnRefreshGUI_Callback")
 		_pop_called = false
 		return
 	
@@ -83,6 +85,8 @@ func CraftButtonPressed_Callback():
 
 
 func Close_Callback():
+	if BehaviorEvents.is_connected("OnRefreshGUI", self, "OnRefreshGUI_Callback"):
+		BehaviorEvents.disconnect("OnRefreshGUI", self, "OnRefreshGUI_Callback")
 	_pop_called = true
 	BehaviorEvents.emit_signal("OnPopGUI")
 	get_node("HBoxContainer/Control/VBoxContainer/Close").Disabled = true
@@ -102,6 +106,8 @@ func OnFocusLost():
 
 
 func Init(init_param):
+	if not BehaviorEvents.is_connected("OnRefreshGUI", self, "OnRefreshGUI_Callback"):
+		BehaviorEvents.connect("OnRefreshGUI", self, "OnRefreshGUI_Callback")
 	get_node("HBoxContainer/Control/VBoxContainer/Close").Disabled = false
 	_obj = init_param["object"]
 	_callback_obj = init_param["callback_object"]
@@ -114,6 +120,14 @@ func Init(init_param):
 	get_node("HBoxContainer/Recipes").title = _converter_data.name_id
 	
 	ReInit()
+	
+func OnRefreshGUI_Callback():
+	var last_selected :int = _current_crafting_selected.index
+	
+	ReInit()
+	# ReInit now add child on the next frame for layout reason. So give it
+	# a chance to populate before we re-select the previous recipe
+	_recipe_list.call_deferred("select", last_selected)
 	
 func ReInit():
 	

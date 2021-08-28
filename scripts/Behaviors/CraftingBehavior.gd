@@ -121,6 +121,7 @@ func CancelCraft(crafter):
 		BehaviorEvents.emit_signal("OnUseEnergy", crafter, -net_energy_change)
 		result = Globals.CRAFT_RESULT.success
 	BehaviorEvents.emit_signal("OnCrafting", crafter, result)
+	BehaviorEvents.emit_signal("OnRefreshGUI")
 	
 	
 func ResumeCraft(crafter):
@@ -202,6 +203,11 @@ func ResumeCraft(crafter):
 		
 		
 		num_produced += 1
+		
+		if net_energy_change != 0.0:
+			BehaviorEvents.emit_signal("OnUseEnergy", crafter, -net_energy_change)
+			net_energy_change = 0.0
+		
 		# Really weird use case for missile that only require energy. Produce only one at a time
 		if recipe_data.requirements.size() == 1 and "type" in recipe_data.requirements[0] and recipe_data.requirements[0].type == "energy":
 			can_produce = false
@@ -223,17 +229,24 @@ func ResumeCraft(crafter):
 				"disable_on_interest":true,
 				"disable_wandering":true,
 				"ask_on_interest":true,
-				"skip_check":1 # make sure we move at least one tile, this means when danger is close we move one tile at a time
+				"skip_check":1, # make sure we move at least one tile, this means when danger is close we move one tile at a time
+				"crafting_continued_enemy":crafter.get_attrib("ai.crafting_continued_enemy", false), # on resume, remember previous settings
+				"crafting_continued_energy":crafter.get_attrib("ai.crafting_continued_energy", false)
 			}
 			crafter.set_attrib("ai", ai_data)
 			crafter.set_attrib("ai.objective", recipe_data.ap_cost)
-			BehaviorEvents.emit_signal("OnAttributeAdded", crafter, "ai")
+			# on resume no need to fire attributeadded, we were already an AI
+			#BehaviorEvents.emit_signal("OnAttributeAdded", crafter, "ai")
 			return
+	
+	if can_produce == false:
+		crafter.set_attrib("ai.disabled", true)
 			
 	if num_produced > 0:
 		#BehaviorEvents.emit_signal("OnUseAP", crafter, recipe_data.ap_cost * num_produced)
-		BehaviorEvents.emit_signal("OnUseEnergy", crafter, -net_energy_change)
+		#BehaviorEvents.emit_signal("OnUseEnergy", crafter, -net_energy_change)
 		result = Globals.CRAFT_RESULT.success
+		BehaviorEvents.emit_signal("OnRefreshGUI")
 	BehaviorEvents.emit_signal("OnCrafting", crafter, result)
 	
 	

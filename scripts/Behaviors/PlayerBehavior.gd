@@ -682,7 +682,7 @@ func _input(event):
 	
 	# if player is moving using pathfinding AI and we click anywhere we stop the ship. it must be on button "released"
 	# because otherwise _unhandled_input will trigger and send the ship somewhere else
-	if (event is InputEventMouseButton or event is InputEventKey) and playerNode != null and playerNode.get_attrib("ai") != null and playerNode.get_attrib("ai.disable_on_interest", false) == true and playerNode.get_attrib("ai.skip_check") <= 0:
+	if (event is InputEventMouseButton or event is InputEventKey) and playerNode != null and playerNode.get_attrib("ai") != null and playerNode.get_attrib("ai.disable_on_interest", false) == true and playerNode.get_attrib("ai.skip_check") <= 0 and playerNode.get_attrib("ai.pathfinding") != "crafting":
 		if event.is_pressed() == false:
 			playerNode.set_attrib("ai.disabled", true)
 			_double_tap_timer = 0.2

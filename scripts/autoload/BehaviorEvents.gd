@@ -87,6 +87,7 @@ signal OnResetHighlight()
 signal OnHUDVisiblityChanged()
 signal OnLocaleChanged()
 signal OnHUDCreated()
+signal OnRefreshGUI()
 
 signal OnButtonReady(btn)
 signal OnHUDWeaponPressed
