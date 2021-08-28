@@ -12,9 +12,10 @@ func Start(target):
 	get_node("AnimationPlayer").play("craft")
 
 func AnimationEnd():
-	_target_ref.visible = true
-	_target_ref.modulate.a = 1.0
-	self.visible = false
-	BehaviorEvents.emit_signal("OnAnimationDone")
-	get_parent().remove_child(self)
-	queue_free()
+	if _target_ref != null:
+		_target_ref.visible = true
+		_target_ref.modulate.a = 1.0
+		self.visible = false
+		BehaviorEvents.emit_signal("OnAnimationDone")
+		get_parent().remove_child(self)
+		queue_free()

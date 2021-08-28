@@ -112,7 +112,6 @@ z_index = 910
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 material = SubResource( 2 )
 texture = ExtResource( 1 )
 region_enabled = true

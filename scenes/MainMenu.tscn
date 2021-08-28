@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://scripts/GUI/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Behaviors/AmbienceBehavior.gd" type="Script" id=2]
@@ -28,6 +28,9 @@
 [ext_resource path="res://scenes/tileset_source/minigun_fx.tscn" type="PackedScene" id=26]
 [ext_resource path="res://scenes/tileset_source/missile_fx.tscn" type="PackedScene" id=27]
 [ext_resource path="res://scenes/tileset_source/probe.tscn" type="PackedScene" id=28]
+[ext_resource path="res://scenes/Animations/CraftShipFX.tscn" type="PackedScene" id=29]
+[ext_resource path="res://scenes/tileset_source/jerg_queen.tscn" type="PackedScene" id=30]
+[ext_resource path="res://scenes/Animations/warp_trail_tile.tscn" type="PackedScene" id=31]
 
 [sub_resource type="Shader" id=5]
 code = "shader_type canvas_item;
@@ -57,7 +60,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 3, 5.4, 5.7, 7.8, 10 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 640, 1152 ), Vector2( 640, 512 ), Vector2( 640, 512 ), Vector2( 640, 512 ), Vector2( -160, -288 ), Vector2( -160, -288 ) ]
+"values": [ Vector2( 640, 1792 ), Vector2( 640, 512 ), Vector2( 640, 512 ), Vector2( 640, 512 ), Vector2( -160, -288 ), Vector2( -160, -288 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("frigate_vs/frigate_root:rotation_degrees")
@@ -81,7 +84,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 3, 5.4, 6, 9.5, 9.501, 10 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 2048, 384 ), Vector2( 768, 384 ), Vector2( 768, 384 ), Vector2( 768, 384 ), Vector2( 2000, 384 ), Vector2( 2000, 384 ), Vector2( 2000, 384 ) ]
+"values": [ Vector2( 2304, 384 ), Vector2( 768, 384 ), Vector2( 768, 384 ), Vector2( 768, 384 ), Vector2( 2000, 384 ), Vector2( 2000, 384 ), Vector2( 2304, 384 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("frigate_vs/battleship_root:rotation_degrees")
@@ -184,6 +187,208 @@ tracks/10/keys = {
 "args": [  ],
 "method": "play_shield_hit"
 } ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "jerg_queen"
+length = 12.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("jerg_queen/battleship_root:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.9, 2.8, 12 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("jerg_queen/Starfield:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.7, 2.4, 3, 12 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("jerg_queen/CraftShipFX/AnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 3.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "craft", -1, 1.0, false ],
+"method": "play"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("jerg_queen/CraftShipFX:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 3.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("jerg_queen/CraftShipFX2/AnimationPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "craft", -1, 1.0, false ],
+"method": "play"
+} ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("jerg_queen/CraftShipFX3/AnimationPlayer")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "craft", -1, 1.0, false ],
+"method": "play"
+} ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("jerg_queen/CraftShipFX2:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("jerg_queen/CraftShipFX3:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("jerg_queen/battleship_root:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 8.2, 8.6, 12 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 512, 512 ), Vector2( 512, 512 ), Vector2( 512, 512 ), Vector2( 1112, -88 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("jerg_queen/battleship_root:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 8.2, 8.6, 12 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 45.0, 45.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("jerg_queen/CraftShipFX3:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 8.6, 12 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 512, 384 ), Vector2( 512, 384 ), Vector2( 512, -256 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("jerg_queen/CraftShipFX3:rotation_degrees")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 8.6, 12 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("jerg_queen/CraftShipFX:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 7.2, 7.7, 8.5, 8.8, 12 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 640, 640 ), Vector2( 640, 640 ), Vector2( 640, 640 ), Vector2( 768, 640 ), Vector2( 768, 640 ), Vector2( 1768, 1640 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("jerg_queen/CraftShipFX:rotation_degrees")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 7.2, 7.7, 8.5, 8.8, 12 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 90.0, 90.0, 135.0, 135.0 ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("jerg_queen/CraftShipFX2:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 8.1, 8.6, 12 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 384, 640 ), Vector2( 384, 640 ), Vector2( 384, 640 ), Vector2( -384, 640 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("jerg_queen/CraftShipFX2:rotation_degrees")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 8.1, 8.6, 12 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -90.0, -90.0 ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -290,7 +495,165 @@ tracks/3/keys = {
 "values": [ -90.0, -90.0, -90.0, -90.0 ]
 }
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float interpol = 0.0;
+
+uniform vec3 color = vec3(0.71,0.28,0.42);
+uniform vec3 color2 = vec3(0.0,0.0,0.6588);
+
+float rand(vec2 coord) {
+	return fract(sin(dot(coord, vec2(56,78))*1000.0)*1000.0);
+}
+
+float noise(vec2 coord) {
+	vec2 i = floor(coord);
+	vec2 f = fract(coord);
+	
+	float a = rand(i);
+	float b = rand(i + vec2(1.0, 0.0));
+	float c = rand(i + vec2(0.0, 1.0));
+	float d = rand(i + vec2(1.0, 1.0));
+	
+	vec2 cubic = f * f * (3.0 - 2.0 * f);
+	
+	return mix(a,b, cubic.x) + (c-a) * cubic.y * (1.0 - cubic.x) + (d-b) * cubic.x * cubic.y;
+	
+}
+
+float fbm(vec2 coord) {
+	float value = 0.0;
+	float scale = 0.5;
+	for (int i = 0; i < 8; i++) {
+		value += noise(coord) * scale;
+		coord *= 2.0;
+		scale *= 0.5;
+	}
+	return value;
+}
+
+void fragment() {
+	vec2 my_uv = SCREEN_UV * 50.0;
+	
+	vec2 motion = vec2(fbm(my_uv + TIME * 2.0));
+	float final = fbm(my_uv + motion);
+	
+	//COLOR = vec4(my_uv.x, my_uv.y, 0.0, 1.0);
+	vec4 screen_color = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0f);
+	vec4 tile_color = textureLod(TEXTURE, UV, 0.0f);
+	
+	vec3 cloud_color = mix(color2, color, final);
+	
+	vec4 fx_color = vec4(screen_color.rgb + cloud_color, (final+0.4) * tile_color.a);
+	fx_color = mix(fx_color, tile_color, interpol);
+	
+	COLOR = fx_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = SubResource( 1 )
+shader_param/interpol = 0.0
+shader_param/color = Vector3( 0.71, 0.28, 0.42 )
+shader_param/color2 = Vector3( 0, 0, 0.6588 )
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = SubResource( 1 )
+shader_param/interpol = 0.0
+shader_param/color = Vector3( 0.71, 0.28, 0.42 )
+shader_param/color2 = Vector3( 0, 0, 0.6588 )
+
+[sub_resource type="Animation" id=8]
+resource_name = "craft"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/interpol")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "AnimationEnd"
+} ]
+}
+
+[sub_resource type="ShaderMaterial" id=12]
+shader = SubResource( 1 )
+shader_param/interpol = 0.0
+shader_param/color = Vector3( 0.71, 0.28, 0.42 )
+shader_param/color2 = Vector3( 0, 0, 0.6588 )
+
+[sub_resource type="Animation" id=9]
+resource_name = "craft"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/interpol")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "AnimationEnd"
+} ]
+}
+
+[sub_resource type="ShaderMaterial" id=13]
 shader = ExtResource( 20 )
 shader_param/pixel = 1.0
 shader_param/red_offset = Vector2( 0, 0 )
@@ -338,6 +701,7 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Animated"]
 anims/frigate_vs = SubResource( 3 )
+anims/jerg_queen = SubResource( 7 )
 anims/passing_scout = SubResource( 2 )
 anims/poor_probe = SubResource( 4 )
 
@@ -352,7 +716,7 @@ rotation = 2.35619
 [node name="frigate_vs" type="Node2D" parent="Animated"]
 
 [node name="frigate_root" parent="Animated/frigate_vs" instance=ExtResource( 25 )]
-position = Vector2( 640, 1152 )
+position = Vector2( 640, 1792 )
 rotation = 0.0
 
 [node name="missile_fx" parent="Animated/frigate_vs" instance=ExtResource( 27 )]
@@ -363,15 +727,12 @@ position = Vector2( 640, 512 )
 autoplay = false
 
 [node name="battleship_root" parent="Animated/frigate_vs" instance=ExtResource( 24 )]
-position = Vector2( 2048, 384 )
+position = Vector2( 2304, 384 )
 rotation = -1.5708
 
 [node name="minigun_fx" parent="Animated/frigate_vs/battleship_root" instance=ExtResource( 26 )]
 visible = false
 rotation = 0.785398
-
-[node name="muzzle" parent="Animated/frigate_vs/battleship_root/minigun_fx" index="1"]
-frame = 5
 
 [node name="AudioStreamPlayer2D" parent="Animated/frigate_vs/battleship_root/minigun_fx" index="2"]
 visible = false
@@ -382,6 +743,48 @@ autoplay = false
 [node name="probe_root" parent="Animated/poor_probe" instance=ExtResource( 28 )]
 position = Vector2( 2304, 640 )
 rotation = -1.5708
+
+[node name="jerg_queen" type="Node2D" parent="Animated"]
+
+[node name="battleship_root" parent="Animated/jerg_queen" instance=ExtResource( 30 )]
+position = Vector2( 1112, -88 )
+rotation = 0.785398
+
+[node name="CraftShipFX" parent="Animated/jerg_queen" instance=ExtResource( 29 )]
+position = Vector2( 1768, 1640 )
+rotation = 2.35619
+
+[node name="Sprite" parent="Animated/jerg_queen/CraftShipFX" index="0"]
+modulate = Color( 1, 1, 1, 0 )
+material = SubResource( 10 )
+region_rect = Rect2( 1792, 256, 128, 128 )
+
+[node name="CraftShipFX2" parent="Animated/jerg_queen" instance=ExtResource( 29 )]
+position = Vector2( -384, 640 )
+rotation = -1.5708
+
+[node name="Sprite" parent="Animated/jerg_queen/CraftShipFX2" index="0"]
+modulate = Color( 1, 1, 1, 0 )
+material = SubResource( 11 )
+region_rect = Rect2( 1792, 256, 128, 128 )
+
+[node name="AnimationPlayer" parent="Animated/jerg_queen/CraftShipFX2" index="1"]
+anims/craft = SubResource( 8 )
+
+[node name="CraftShipFX3" parent="Animated/jerg_queen" instance=ExtResource( 29 )]
+position = Vector2( 512, -256 )
+
+[node name="Sprite" parent="Animated/jerg_queen/CraftShipFX3" index="0"]
+modulate = Color( 1, 1, 1, 0 )
+material = SubResource( 12 )
+region_rect = Rect2( 1792, 256, 128, 128 )
+
+[node name="AnimationPlayer" parent="Animated/jerg_queen/CraftShipFX3" index="1"]
+anims/craft = SubResource( 9 )
+
+[node name="Starfield" parent="Animated/jerg_queen" instance=ExtResource( 31 )]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 512, 512 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -631,7 +1034,7 @@ margin_bottom = 73.8228
 Transition = false
 
 [node name="ViewportContainer" type="ViewportContainer" parent="CanvasLayer"]
-material = SubResource( 1 )
+material = SubResource( 13 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -658,3 +1061,6 @@ render_target_update_mode = 3
 [editable path="Animated/frigate_vs/missile_fx"]
 [editable path="Animated/frigate_vs/battleship_root"]
 [editable path="Animated/frigate_vs/battleship_root/minigun_fx"]
+[editable path="Animated/jerg_queen/CraftShipFX"]
+[editable path="Animated/jerg_queen/CraftShipFX2"]
+[editable path="Animated/jerg_queen/CraftShipFX3"]

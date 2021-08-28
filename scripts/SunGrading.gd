@@ -7,6 +7,10 @@ func OnObjectLoaded_Callback(obj):
 	if !obj.get_attrib("type") == "sun":
 		return
 		
+	# defered because SpriteLoader will make the decision in idle_time because it sets materials
+	call_deferred("check_palette", obj)
+
+func check_palette(obj):
 	var palette = obj.get_attrib("palette", "")
 	var palette_list = obj.get_attrib("palettes", [])
 	if palette.empty() or palette_list.empty():
