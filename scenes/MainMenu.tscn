@@ -32,7 +32,7 @@
 [ext_resource path="res://scenes/tileset_source/jerg_queen.tscn" type="PackedScene" id=30]
 [ext_resource path="res://scenes/Animations/warp_trail_tile.tscn" type="PackedScene" id=31]
 
-[sub_resource type="Shader" id=5]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 void fragment()
@@ -44,8 +44,8 @@ void fragment()
 	COLOR = col;
 }"
 
-[sub_resource type="ShaderMaterial" id=6]
-shader = SubResource( 5 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "frigate_vs"
@@ -189,7 +189,7 @@ tracks/10/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=4]
 resource_name = "jerg_queen"
 length = 12.0
 tracks/0/type = "value"
@@ -391,8 +391,7 @@ tracks/15/keys = {
 "values": [ 0.0, 0.0, -90.0, -90.0 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "passing_scout"
+[sub_resource type="Animation" id=5]
 length = 7.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("scout_root:position")
@@ -443,8 +442,7 @@ tracks/3/keys = {
 "values": [ 135.0, 135.0, 135.0, 135.0 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "poor_probe"
+[sub_resource type="Animation" id=6]
 length = 10.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("poor_probe/probe_root:position")
@@ -495,7 +493,7 @@ tracks/3/keys = {
 "values": [ -90.0, -90.0, -90.0, -90.0 ]
 }
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=7]
 code = "shader_type canvas_item;
 
 uniform float interpol = 0.0;
@@ -551,20 +549,19 @@ void fragment() {
 	COLOR = fx_color;
 }"
 
-[sub_resource type="ShaderMaterial" id=10]
-shader = SubResource( 1 )
+[sub_resource type="ShaderMaterial" id=8]
+shader = SubResource( 7 )
 shader_param/interpol = 0.0
 shader_param/color = Vector3( 0.71, 0.28, 0.42 )
 shader_param/color2 = Vector3( 0, 0, 0.6588 )
 
-[sub_resource type="ShaderMaterial" id=11]
-shader = SubResource( 1 )
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 7 )
 shader_param/interpol = 0.0
 shader_param/color = Vector3( 0.71, 0.28, 0.42 )
 shader_param/color2 = Vector3( 0, 0, 0.6588 )
 
-[sub_resource type="Animation" id=8]
-resource_name = "craft"
+[sub_resource type="Animation" id=10]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:material:shader_param/interpol")
@@ -605,14 +602,13 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="ShaderMaterial" id=12]
-shader = SubResource( 1 )
+[sub_resource type="ShaderMaterial" id=11]
+shader = SubResource( 7 )
 shader_param/interpol = 0.0
 shader_param/color = Vector3( 0.71, 0.28, 0.42 )
 shader_param/color2 = Vector3( 0, 0, 0.6588 )
 
-[sub_resource type="Animation" id=9]
-resource_name = "craft"
+[sub_resource type="Animation" id=12]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:material:shader_param/interpol")
@@ -687,7 +683,7 @@ anims/popin = ExtResource( 21 )
 script = ExtResource( 19 )
 
 [node name="BG" type="TextureRect" parent="."]
-material = SubResource( 6 )
+material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 6 )
@@ -701,9 +697,9 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Animated"]
 anims/frigate_vs = SubResource( 3 )
-anims/jerg_queen = SubResource( 7 )
-anims/passing_scout = SubResource( 2 )
-anims/poor_probe = SubResource( 4 )
+anims/jerg_queen = SubResource( 4 )
+anims/passing_scout = SubResource( 5 )
+anims/poor_probe = SubResource( 6 )
 
 [node name="scout_root" parent="Animated" instance=ExtResource( 23 )]
 position = Vector2( 2304, 640 )
@@ -734,6 +730,9 @@ rotation = -1.5708
 visible = false
 rotation = 0.785398
 
+[node name="muzzle" parent="Animated/frigate_vs/battleship_root/minigun_fx" index="1"]
+frame = 3
+
 [node name="AudioStreamPlayer2D" parent="Animated/frigate_vs/battleship_root/minigun_fx" index="2"]
 visible = false
 autoplay = false
@@ -747,40 +746,41 @@ rotation = -1.5708
 [node name="jerg_queen" type="Node2D" parent="Animated"]
 
 [node name="battleship_root" parent="Animated/jerg_queen" instance=ExtResource( 30 )]
-position = Vector2( 1112, -88 )
-rotation = 0.785398
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 512, 512 )
 
 [node name="CraftShipFX" parent="Animated/jerg_queen" instance=ExtResource( 29 )]
-position = Vector2( 1768, 1640 )
-rotation = 2.35619
+visible = false
+position = Vector2( 640, 640 )
 
 [node name="Sprite" parent="Animated/jerg_queen/CraftShipFX" index="0"]
 modulate = Color( 1, 1, 1, 0 )
-material = SubResource( 10 )
+material = SubResource( 8 )
 region_rect = Rect2( 1792, 256, 128, 128 )
 
 [node name="CraftShipFX2" parent="Animated/jerg_queen" instance=ExtResource( 29 )]
-position = Vector2( -384, 640 )
-rotation = -1.5708
+visible = false
+position = Vector2( 384, 640 )
 
 [node name="Sprite" parent="Animated/jerg_queen/CraftShipFX2" index="0"]
+modulate = Color( 1, 1, 1, 0 )
+material = SubResource( 9 )
+region_rect = Rect2( 1792, 256, 128, 128 )
+
+[node name="AnimationPlayer" parent="Animated/jerg_queen/CraftShipFX2" index="1"]
+anims/craft = SubResource( 10 )
+
+[node name="CraftShipFX3" parent="Animated/jerg_queen" instance=ExtResource( 29 )]
+visible = false
+position = Vector2( 512, 384 )
+
+[node name="Sprite" parent="Animated/jerg_queen/CraftShipFX3" index="0"]
 modulate = Color( 1, 1, 1, 0 )
 material = SubResource( 11 )
 region_rect = Rect2( 1792, 256, 128, 128 )
 
-[node name="AnimationPlayer" parent="Animated/jerg_queen/CraftShipFX2" index="1"]
-anims/craft = SubResource( 8 )
-
-[node name="CraftShipFX3" parent="Animated/jerg_queen" instance=ExtResource( 29 )]
-position = Vector2( 512, -256 )
-
-[node name="Sprite" parent="Animated/jerg_queen/CraftShipFX3" index="0"]
-modulate = Color( 1, 1, 1, 0 )
-material = SubResource( 12 )
-region_rect = Rect2( 1792, 256, 128, 128 )
-
 [node name="AnimationPlayer" parent="Animated/jerg_queen/CraftShipFX3" index="1"]
-anims/craft = SubResource( 9 )
+anims/craft = SubResource( 12 )
 
 [node name="Starfield" parent="Animated/jerg_queen" instance=ExtResource( 31 )]
 modulate = Color( 1, 1, 1, 0 )

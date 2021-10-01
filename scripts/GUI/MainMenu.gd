@@ -32,12 +32,12 @@ func _ready():
 	play_next_anim()
 
 func play_next_anim():
+	yield(get_tree().create_timer(4.0), "timeout")
 	var anim_count = _cute_anim.get_animation_list().size()
 	var idx = MersenneTwister.rand(anim_count, false)
 	_cute_anim.play(_cute_anim.get_animation_list()[idx])
 
 func animation_finished_Callback(anim_name):
-	yield(get_tree().create_timer(3.0), "timeout")
 	play_next_anim()
 
 

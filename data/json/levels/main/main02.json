@@ -30,7 +30,7 @@
 		{"name":"data/json/items/converters/converter_mk2.json", "spawn_rate":0.00003125},
 		{"name":"data/json/items/converters/jerg_converter_mk1.json", "spawn_rate":0.0000015625},
 		{"name":"data/json/items/converters/vorg_converter_mk1.json", "spawn_rate":0.0000015625},
-		{"name":"data/json/items/misc/battleship_body.json", "spawn_rate":0.000015625},
+		{"name":"data/json/items/misc/battleship_body.json", "spawn_rate":0.0000078125},
 		{"name":"data/json/items/misc/frigate_body.json", "spawn_rate":0.00003125},
 		{"name":"data/json/items/misc/hydrogen.json", "spawn_rate":0.000078125},
 		{"name":"data/json/items/misc/probe_body.json", "spawn_rate":0.0000390625},

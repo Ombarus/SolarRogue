@@ -44,8 +44,8 @@
 		"Effect": {
 			"min_level":0,
 			"fields": [
-				{"name":"Shield Dam. Mult.", "value":"[color=lime]{attributes.global_dam_shield_multiplier} ↑[/color]", "translate_value":false},
-				{"name":"Shield Hacking", "value":"[color=lime]{attributes.global_weapon_disable_shield_chance_bonus} ↑[/color]", "translate_value":false, "translate_value":false},
+				{"name":"Shield Dam. Mult.", "value":"[color=lime]+25% ↑[/color]", "translate_value":false},
+				{"name":"Shield Hacking", "value":"[color=lime]{attributes.global_weapon_disable_shield_chance_bonus}% ↑[/color]", "translate_value":false, "display_percent":true},
 				{"name":"Weapon Energy Cost", "value":"[color=red]+20% ↓[/color]", "translate_value":false}
 			]
 		}

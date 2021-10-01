@@ -43,4 +43,4 @@ shader = SubResource( 1 )
 shader_param/Hue = 0.0
 shader_param/Saturation = 1.0
 shader_param/Brightness = 1.253
-shader_param/multiplier = Vector3( 1, 0.9, 0.6 )
+shader_param/multiplier = Vector3( 1, 0.9, 0.725 )

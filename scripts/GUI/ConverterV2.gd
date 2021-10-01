@@ -65,12 +65,12 @@ func CraftButtonPressed_Callback():
 	if _callback_obj == null:
 		return
 		
-	var using_content = _material_list.Content	
+	var using_content = _material_list.Content
 	using_content.push_back("energy")
 	_pop_called = false
-	_callback_obj.call(_callback_method, _current_crafting_selected, using_content)
-	
 	var last_selected :int = _current_crafting_selected.index
+	
+	_callback_obj.call(_callback_method, _current_crafting_selected, using_content)
 	
 	if _pop_called == true:
 		if BehaviorEvents.is_connected("OnRefreshGUI", self, "OnRefreshGUI_Callback"):
@@ -78,10 +78,10 @@ func CraftButtonPressed_Callback():
 		_pop_called = false
 		return
 	
-	ReInit()
+	#ReInit()
 	# ReInit now add child on the next frame for layout reason. So give it
 	# a chance to populate before we re-select the previous recipe
-	_recipe_list.call_deferred("select", last_selected)
+	#_recipe_list.call_deferred("select", last_selected)
 
 
 func Close_Callback():
