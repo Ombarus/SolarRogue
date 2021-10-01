@@ -36,6 +36,10 @@ func Init(init_param):
 		_callback_param = init_param["callback_param"]
 	if "cancel_method" in init_param:
 		_cancel_method = init_param["cancel_method"]
+	if "ok_text" in init_param:
+		get_node("base").ok_text = init_param["ok_text"]
+	else:
+		get_node("base").ok_text = "[o]k"
 	
 	var info_text : String = _default_text
 	if "custom_text" in init_param:

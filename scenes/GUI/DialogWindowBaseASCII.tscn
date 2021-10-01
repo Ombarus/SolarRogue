@@ -263,6 +263,7 @@ bus = "Sfx"
 [node name="ClickSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 bus = "Sfx"
+
 [connection signal="mouse_entered" from="Btn/Ok" to="." method="_on_btn_mouse_entered"]
 [connection signal="pressed" from="Btn/Ok" to="." method="_on_Ok_pressed"]
 [connection signal="mouse_entered" from="Btn/Cancel" to="." method="_on_btn_mouse_entered"]

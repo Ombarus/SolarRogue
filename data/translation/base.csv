@@ -894,3 +894,18 @@ Immunized,Immunized,Immunisé,Immunized
 This region of space is covered in strange spores. The XO has been infected and is hearing voices...,This region of space is covered in strange spores. The XO has been infected and is hearing voices...,Cette région d’espace est couverte d’étranges spores. Votre XO a été infecté et depuis entend des voix...,This region of space is covered in strange spores. The XO has been infected and is hearing voices...
 Infected,Infected,Infecté,Infected
 The Jerg Homeworld must have a cure. His situation is getting worse,The Jerg Homeworld must have a cure. His situation is getting worse,Le vaisseau mère des Jergs doit avoir une cure. Sa condition empire à vu d’oeil,The Jerg Homeworld must have a cure. His situation is getting worse
+Hot Swap %s,Hot Swap %s,%s Interchangeable,Hot Swap %s
+Hot Swap System,Hot Swap System,Système d’interchange universel,Hot Swap System
+"A complex set of tools, instruments and software that allow your crew to replace any pieces of equipment in record times.","A complex set of tools, instruments and software that allow your crew to replace any pieces of equipment in record times.","Un système complexe d’outil, d’équipement et de logiciels permettant à votre équipage de remplacer n’importe quelle pièces en un temps record.","A complex set of tools, instruments and software that allow your crew to replace any pieces of equipment in record times."
+Equip/Unequip,Equip/Unequip,Installé/Retiré,Equip/Unequip
+[color=lime]Always 1 turn↑[/color],[color=lime]Always 1 turn↑[/color],[color=lime]Touours 1 tour↑[/color],[color=lime]Always 1 turn↑[/color]
+Backup System,Backup System,Système de Sauvegarde,Backup System
+Duplicate systems reduce duration of hacks against you.,Duplicate systems reduce duration of hacks against you.,Une copie des systèmes essentiels du vaisseau permet de récupérer plus rapidement d’un piratage.,Duplicate systems reduce duration of hacks against you.
+Hack Duration,Hack Duration,Durée du Piratage,Hack Duration
+Dull %s,Dull %s,%s Affaibli,Dull %s
+Sensitive %s,Sensitive %s,%s Sensible,Sensitive %s
+Crafting Canceled by Captain's order,Crafting Canceled by Captain's order,Production Annulé par ordre du Commandant,Crafting Canceled by Captain's order
+Energy Low! Continue Crafting?,Energy Low! Continue Crafting?,Énergie Faible! Annulé la production?,Energy Low! Continue Crafting?
+Enemy in range! Continue Crafting?,Enemy in range! Continue Crafting?,Ennemie en approche! Annulé la production?,Enemy in range! Continue Crafting?
+We've taken damage! Continue Crafting?,We've taken damage! Continue Crafting?,Nous avons subit des dégâts! Annulé la production?,We've taken damage! Continue Crafting?
+Continue,Continue,Continuer,続く

@@ -8,12 +8,18 @@ export(bool) var disabled = false setget set_disabled
 export(String) var bottom_title = "" setget set_reverse_title
 export(String) var title = "" setget set_title
 export(String, "═", "─", "━", " ") var border_style = "═" setget set_style
+export(String) var ok_text = "[o]k" setget set_ok_text
 
 var translate_title := false
 
 signal OnUpdateLayout()
 signal OnOkPressed()
 signal OnCancelPressed()
+
+func set_ok_text(val):
+	ok_text = val
+	get_node("Btn/Ok").text = ok_text
+	
 
 func GetFrameSize():
 	return self.rect_size
@@ -118,6 +124,7 @@ func update_visual():
 	else:
 		get_node("TitleUp").bbcode_text = Globals.mytr(title)
 	get_node("TitleBottom").text = bottom_title
+	get_node("Btn/Ok").text = ok_text
 	
 func on_size_changed():
 	call_deferred("emit_signal", "OnUpdateLayout")

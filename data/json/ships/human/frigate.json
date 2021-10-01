@@ -122,8 +122,6 @@
 		{"id":"data/json/items/utilities/firewall.json", "chance":0.06},
 		{"id":"data/json/items/utilities/tinfoil.json", "chance":0.06},
 		{"id":"data/json/items/utilities/vulnerability_scanner.json", "chance":0.06},
-		{"id":"data/json/items/utilities/vulnerability_scanner.json", "chance":0.04},
-		{"id":"data/json/items/utilities/vulnerability_scanner.json", "chance":0.01},
 		{"id":"data/json/items/weapons/emp_mk1.json", "chance":0.01},
 		{"id":"data/json/items/weapons/emp_mk2.json", "chance":0.007},
 		{"id":"data/json/items/weapons/emp_mk3.json", "chance":0.007},

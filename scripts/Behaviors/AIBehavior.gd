@@ -117,7 +117,7 @@ func ConsiderInterests(obj):
 	if filtered.size() > 0 and obj.get_attrib("ai.crafting_continued_enemy", false) == false:
 		if should_ask:
 			obj.set_attrib("ai.crafting_continued_enemy", true)
-			BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"callback_object":self, "callback_method":"On_Interest_Continue", "cancel_method":"On_Interest_Callback", "callback_param":obj, "custom_text":"Enemy in range! Continue Crafting?"})
+			BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"ok_text":"Continue", "callback_object":self, "callback_method":"On_Interest_Continue", "cancel_method":"On_Interest_Callback", "callback_param":obj, "custom_text":"Enemy in range! Continue Crafting?"})
 		obj.set_attrib("ai.disabled", true)
 		
 	# Disable if energy is low
@@ -127,7 +127,7 @@ func ConsiderInterests(obj):
 			BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Energy too low for autopilot ![/color]")
 		if should_ask:
 			obj.set_attrib("ai.crafting_continued_energy", true)
-			BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"callback_object":self, "callback_method":"On_Interest_Continue", "cancel_method":"On_Interest_Callback", "callback_param":obj, "custom_text":"Energy Low! Continue Crafting?"})
+			BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"ok_text":"Continue", "callback_object":self, "callback_method":"On_Interest_Continue", "cancel_method":"On_Interest_Callback", "callback_param":obj, "custom_text":"Energy Low! Continue Crafting?"})
 		obj.set_attrib("ai.disabled", true)
 	
 func On_Interest_Callback(obj):
@@ -178,7 +178,7 @@ func OnDamageTaken_Callback(target, shooter, damage_type):
 		
 	if target.get_attrib("ai.pathfinding", "") == "crafting":
 		target.set_attrib("ai.crafting_continued_energy", true)
-		BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"callback_object":self, "callback_method":"On_Interest_Continue", "cancel_method":"On_Interest_Callback", "callback_param":target, "custom_text":"We've taken damage! Continue Crafting?"})
+		BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"ok_text":"Continue", "callback_object":self, "callback_method":"On_Interest_Continue", "cancel_method":"On_Interest_Callback", "callback_param":target, "custom_text":"We've taken damage! Continue Crafting?"})
 		target.set_attrib("ai.disabled", true)
 		return
 	
