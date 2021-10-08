@@ -1,10 +1,10 @@
 {
 	"name_id":"A Vorg Bomber",
 	"type":"ship",
-	"sprite":"vorg_scout",
+	"sprite":"vorg_bomber",
 	"icon": {
 		"texture":"data/private/textures/space-sprite.png",
-		"region":[768,256,128,128]
+		"region":[256,1024,128,128]
 	},
 	"action_point":0,
 	"mounts": {
