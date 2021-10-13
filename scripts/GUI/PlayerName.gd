@@ -12,7 +12,11 @@ var random_names : Array = [
 	"Jules Verne", "Pioneer 11", "Shenzhou", "Hayabusa", "Pathfinder", "Rosetta", 
 	"Chernobyl", "Bebop", "Excelsior", "Icarus I", "Icarus II", "Serenity", "Yamato", 
 	"Amaterasu", "Ark", "Battlestar", "Hyperion", "Liberator", "Normandy SR-X", "Prometheus",
-	"Red Dwarf", "SDF-1", "NCC-1701-j"]
+	"Red Dwarf", "SDF-1", "NCC-1701-j", "Orion III", "Daedalus", "Explorer", "SSTO-TAV-37B",
+	"Intrepid", "Odyssey", "Pleiades", "X-71", "Armageddon", "Aries Ib", "F-302", "Mars I",
+	"Nightflyer", "Orbit Jet", "USSC Discovery", "USS Cygnus", "Thunderbirds", "Amaterasu",
+	"Basroil", "C-57D", "Conquistador", "Derelict", "Event Horizon", "Jupiter 2", "Nautilus",
+	"Nemesis", "Star Destroyer", "Sleeper Service", "Death glider", "Destiny", "TARDIS"]
 
 func _ready():
 	get_node("base").connect("OnOkPressed", self, "Ok_Callback")

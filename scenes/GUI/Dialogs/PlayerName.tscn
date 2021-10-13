@@ -80,6 +80,9 @@ margin_right = 4.43201
 margin_bottom = 86.1053
 icon = SubResource( 2 )
 flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Info2" type="Label" parent="base/Control"]
 anchor_top = 1.0
@@ -98,4 +101,5 @@ margin_right = -167.0
 margin_bottom = -39.0
 custom_styles/normal = SubResource( 3 )
 text = "Harder"
+
 [connection signal="pressed" from="base/Control/Randomize" to="." method="_on_Randomize_pressed"]
