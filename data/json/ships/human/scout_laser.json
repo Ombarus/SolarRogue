@@ -52,7 +52,7 @@
 		{"id":"data/json/items/shields/shield_mk2.json", "chance":0.040},
 		{"id":"data/json/items/shields/shield_mk3.json", "chance":0.015},
 		
-		{"id":"data/json/items/weapons/laser_turret_mk2.json", "chance":0.018},
+		{"id":"data/json/items/weapons/laser_turret_mk2.json", "chance":0.012},
 		{"id":"data/json/items/scanners/scanner_mk3.json", "chance":0.007},
 		{"id":"data/json/items/scanners/long_range_scanner_mk1.json", "chance":0.015},
 		{"id":"data/json/items/scanners/long_range_scanner_mk2.json", "chance":0.012},
