@@ -14,7 +14,7 @@
 		"Extra": {
 			"min_level":0,
 			"fields": [
-				{"name":"Ship Movement", "value":"[color=red]-10% ↓[/color]"},
+				{"name":"Ship Movement", "value":"[color=red]+10% ↓[/color]"},
 				{"name":"Loot Drops", "value":"[color=red]-20% ↓[/color]"}
 			]
 		}

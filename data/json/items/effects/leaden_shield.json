@@ -12,7 +12,7 @@
 		"Extra": {
 			"min_level":0,
 			"fields": [
-				{"name":"Ship Movement", "value":"[color=red]-25% ↓[/color]"}
+				{"name":"Ship Movement", "value":"[color=red]+25% ↓[/color]"}
 			]
 		}
 	}
