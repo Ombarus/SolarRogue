@@ -1,7 +1,7 @@
 {
 	"name_id":"A Vorg Frigate",
 	"type":"player",
-	"sprite":"vorg_frigate",
+	"sprite":"human_battleship",
 	"action_point":0,
 	"boardable":true,
 	"icon": {
@@ -15,21 +15,25 @@
 	"mounts": {
 		"weapon": [
 			"data/json/items/weapons/rail_gun_mk2.json",
-			"data/json/items/weapons/rail_gun_mk2.json"],
+			"data/json/items/weapons/chaos_ball_generator_unique.json",
+			"data/json/items/weapons/minigun.json",
+			"data/json/items/weapons/remote_datajack_mk3.json"],
 		"shield": ["data/json/items/shields/shield_mk3.json", "data/json/items/shields/shield_mk3.json"],
-		"scanner": ["data/json/items/scanners/ultimate_scanner.json"],
+		"scanner": ["data/json/items/scanners/scanner_mk3.json"],
 		"converter": ["data/json/items/converters/converter_mk3.json"],
-		"utility": ["", "", "", "", ""]
+		"utility": ["data/json/items/utilities/hotswap_system.json",
+			"data/json/items/utilities/speed_boost_mk2.json", 
+			"data/json/items/utilities/targeting_computer.json", "", ""]
 	},
 	"mount_attributes": {
-		"weapon": [{},{}],
+		"weapon": [{},{},{},{}],
 		"shield": [{},{}],
 		"scanner": [{}],
 		"utility": [{},{},{},{},{}],
 		"converter": [{}]
 	},
 	"destroyable": {
-		"hull":230,
+		"hull":100,
 		"disable_weapon_chance":0.06,
 		"disable_shield_chance":0.06,
 		"disable_scanner_chance":0.02,
@@ -50,28 +54,12 @@
 		"transferable":true,
 		"content":[
 			{"src":"data/json/items/misc/uranium.json", "count":10},
-			{"src":"data/json/items/misc/scout_body.json", "count":1},
-			{"src":"data/json/items/misc/scout_body.json", "count":1},
+			{"src":"data/json/items/misc/battleship_body.json", "count":1},
 			{"src":"data/json/items/misc/diluted_cristals.json", "count":10},
 			{"src":"data/json/items/weapons/depleted_uranium.json", "count":200},
+			{"src":"data/json/items/weapons/bullet_clip.json", "count":200},
 			{"src":"data/json/items/misc/spare_parts.json", "count":40},
 			{"src":"data/json/items/consumables/chaff.json", "count":10},
-			{"src":"data/json/items/scanners/scanner_mk2.json", "count":1,
-				"modified_attributes": {
-					"selected_variation":"data/json/items/effects/sensitive.json"
-			}},
-			{"src":"data/json/items/scanners/long_range_scanner_mk3.json", "count":1,
-				"modified_attributes": {
-					"selected_variation":"data/json/items/effects/dull.json"
-			}},
-			{"src":"data/json/items/shields/shield_mk2.json", "count":1,
-				"modified_attributes": {
-					"selected_variation":"data/json/items/effects/shielded_shield.json"
-			}},
-			{"src":"data/json/items/scanners/long_range_scanner_mk2.json", "count":1,
-				"modified_attributes": {
-					"selected_variation":"data/json/items/effects/transciever.json"
-			}},
 			{"src":"data/json/items/scanners/long_range_scanner_mk3.json", "count":1,
 				"modified_attributes": {
 					"selected_variation":"data/json/items/effects/transponder.json"

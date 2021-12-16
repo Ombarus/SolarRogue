@@ -77,11 +77,11 @@ func GetLevelID():
 
 func _ready():
 	if _TEST_MID_GAME == true:
-		#startLevel = "data/json/levels/jerg_branch/branch06.json"
+		startLevel = "data/json/levels/jerg_branch/branch06.json"
 		#startLevel = "data/json/levels/human_branch/branch04.json"
 		#startLevel = "data/json/levels/vorg_branch/branch08.json"
 		#startLevel = "data/json/levels/main/main11.json"
-		startLevel = "data/json/levels/test.json"
+		#startLevel = "data/json/levels/test.json"
 		current_depth = 1
 	Globals.LevelLoaderRef = self
 	BehaviorEvents.connect("OnRequestObjectUnload", self, "OnRequestObjectUnload_Callback")

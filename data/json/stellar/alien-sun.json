@@ -3,14 +3,14 @@
 	"type":"sun",
 	"sprite":"sun",
 	"palettes":[
-		{"path":"data/private/textures/sun_palette/blue-light.png", "chance":6},
-		{"path":"data/private/textures/sun_palette/blue-navy.png", "chance":3},
-		{"path":"data/private/textures/sun_palette/blue-rich.png", "chance":1},
-		{"path":"data/private/textures/sun_palette/blue-white.png", "chance":1},
-		{"path":"data/private/textures/sun_palette/green-alien.png", "chance":70},
-		{"path":"data/private/textures/sun_palette/orig.png", "chance":1},
-		{"path":"data/private/textures/sun_palette/purple.png", "chance":3},
-		{"path":"data/private/textures/sun_palette/purple2.png", "chance":9},
-		{"path":"data/private/textures/sun_palette/red-dark.png", "chance":6}
+		{"path":"data/private/textures/sun_palette/blue-light.png", "tone":[0.0, 1.0, 1.747], "multiplier":[0.5, 0.6, 1.0], "chance":6},
+		{"path":"data/private/textures/sun_palette/blue-navy.png", "tone":[0.0, 1.0, 1.9], "multiplier":[0.45, 0.5, 1.0], "chance":3},
+		{"path":"data/private/textures/sun_palette/blue-rich.png", "tone":[0.0, 0.8, 1.2], "multiplier":[0.8, 0.85, 1.0], "chance":1},
+		{"path":"data/private/textures/sun_palette/blue-white.png", "tone":[0.0, 1.0, 1.847], "multiplier":[0.5, 0.6, 1.0], "chance":1},
+		{"path":"data/private/textures/sun_palette/green-alien.png", "tone":[0.0, 1.0, 1.157], "multiplier":[0.7, 1.0, 0.7], "chance":70},
+		{"path":"data/private/textures/sun_palette/orig.png", "tone":[0.0, 1.0, 1.0], "multiplier":[1.0, 1.0, 1.0], "chance":1},
+		{"path":"data/private/textures/sun_palette/purple.png", "tone":[0.0, 1.0, 1.454], "multiplier":[0.8, 0.6, 1.0], "chance":3},
+		{"path":"data/private/textures/sun_palette/purple2.png", "tone":[0.0, 1.0, 1.55], "multiplier":[0.8, 0.6, 1.0], "chance":9},
+		{"path":"data/private/textures/sun_palette/red-dark.png", "tone":[0.0, 1.0, 1.253], "multiplier":[1.0, 0.9, 0.725], "chance":6}
 	]
 }

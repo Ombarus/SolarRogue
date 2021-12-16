@@ -731,7 +731,7 @@ visible = false
 rotation = 0.785398
 
 [node name="muzzle" parent="Animated/frigate_vs/battleship_root/minigun_fx" index="1"]
-frame = 2
+frame = 3
 
 [node name="AudioStreamPlayer2D" parent="Animated/frigate_vs/battleship_root/minigun_fx" index="2"]
 visible = false
@@ -824,7 +824,7 @@ margin_left = 36.3677
 margin_top = -39.5347
 margin_right = 76.3677
 margin_bottom = -25.5347
-text = "Version 1.0.0"
+text = "Version 1.0.1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
