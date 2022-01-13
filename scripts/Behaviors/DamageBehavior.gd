@@ -28,13 +28,12 @@ func OnObjectLoaded_Callback(obj):
 	if obj.get_attrib("harvestable") == null or obj.get_attrib("harvestable.inventory") != null:
 		return
 		
-		
 	var cur_difficulty : int = PermSave.get_attrib("settings.difficulty")
 	var diff_inv_bonus : int = 0.0
 	# arbitrary, should be tweaked (at diff 0 (normal), min inventory + 4, diff of impossible, min inventory - 4)
 	diff_inv_bonus = 4 - (cur_difficulty*2)
 	
-	var inv_size = obj.get_attrib("harvestable.inventory_size")
+	var inv_size = str2var(var2str(obj.get_attrib("harvestable.inventory_size")))
 	inv_size[0] = max(0, inv_size[0]+diff_inv_bonus)
 	inv_size[1] = max(0, inv_size[1]+(diff_inv_bonus*1.5))
 	
