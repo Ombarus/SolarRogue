@@ -44,6 +44,8 @@ enum PLAYER_ORIGIN {
 var _current_origin = PLAYER_ORIGIN.saved
 var _wormhole_src = null # for positioning the player when he goes up or down
 
+var PickupStack := [] # for async pickup (inspired by CraftingStack)
+
 func _ready():
 	OS.set_ime_active(true)
 	
@@ -92,6 +94,8 @@ func _ready():
 	BehaviorEvents.connect("OnDifficultyChanged", self, "OnDifficultyChanged_Callback")
 	BehaviorEvents.connect("OnCameraDragged", self, "OnCameraDragged_Callback")
 	
+	BehaviorEvents.connect("OnResumePickup", self, "ResumePickup")
+	BehaviorEvents.connect("OnCancelPickup", self, "CancelPickup")
 
 func OnSystemDisabled_Callback(obj, system):
 	if obj != playerNode:
@@ -320,9 +324,57 @@ func Pressed_Grab_Callback():
 
 
 func GrabMultiple_Callback(selected_targets):
+	PickupStack = selected_targets
+	
 	for target in selected_targets:
-		for i in range(target["selected"]):
-			BehaviorEvents.emit_signal("OnPickup", playerNode, target["key"][i])
+		for i in range(target["selected"], 0, -1):
+			BehaviorEvents.emit_signal("OnPickup", playerNode, target["key"][i-1])
+			target["selected"] -= 1
+			PickupStack = selected_targets
+			var ai_data = {
+				"aggressive":false,
+				"pathfinding":"pickup",
+				"disable_on_interest":true,
+				"disable_wandering":true,
+				"ask_on_interest":true,
+				"skip_check":1, # make sure we move at least one tile, this means when danger is close we move one tile at a time
+				"pickup_continued_enemy":playerNode.get_attrib("ai.pickup_continued_enemy", false), # on resume, remember previous settings
+				"pickup_continued_energy":playerNode.get_attrib("ai.pickup_continued_energy", false)
+			}
+			playerNode.set_attrib("ai", ai_data)
+			playerNode.set_attrib("ai.objective", 1)
+			return
+			
+func ResumePickup(picker):
+	var selected_targets = PickupStack
+	for target in selected_targets:
+		for i in range(target["selected"], 0, -1): # reverse iterate so we don't need to re-arrange the array
+			BehaviorEvents.emit_signal("OnPickup", picker, target["key"][i-1])
+			target["selected"] -= 1
+			PickupStack = selected_targets
+			var ai_data = {
+				"aggressive":false,
+				"pathfinding":"pickup",
+				"disable_on_interest":true,
+				"disable_wandering":true,
+				"ask_on_interest":true,
+				"skip_check":1, # make sure we move at least one tile, this means when danger is close we move one tile at a time
+				"pickup_continued_enemy":picker.get_attrib("ai.pickup_continued_enemy", false), # on resume, remember previous settings
+				"pickup_continued_energy":picker.get_attrib("ai.pickup_continued_energy", false)
+			}
+			picker.set_attrib("ai", ai_data)
+			picker.set_attrib("ai.objective", 1)
+			return
+			
+	# if we got here then there's nothing left to pickup
+	picker.set_attrib("ai.disabled", true)
+	PickupStack = []
+	# hack to force AP Behavior to re-evaluate player after disabling AI in the same turn
+	BehaviorEvents.emit_signal("OnUseAP", picker, 0.01)
+	
+func CancelPickup(picker):
+	PickupStack = []
+	
 	
 func Pressed_Inventory_Callback():
 	if lock_input:

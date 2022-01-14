@@ -114,20 +114,37 @@ func ConsiderInterests(obj):
 					o.set_attrib("memory.was_seen_by", true)
 			
 	var should_ask = obj.get_attrib("ai.ask_on_interest", false)
-	if filtered.size() > 0 and obj.get_attrib("ai.crafting_continued_enemy", false) == false:
+	if filtered.size() > 0 and obj.get_attrib("ai.pathfinding") != "crafting" and obj.get_attrib("ai.pathfinding") != "pickup":
+		obj.set_attrib("ai.disabled", true)
+	if filtered.size() > 0 and obj.get_attrib("ai.pathfinding") == "crafting" and obj.get_attrib("ai.crafting_continued_enemy", false) == false:
 		if should_ask:
 			obj.set_attrib("ai.crafting_continued_enemy", true)
 			BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"ok_text":"Continue", "callback_object":self, "callback_method":"On_Interest_Continue", "cancel_method":"On_Interest_Callback", "callback_param":obj, "custom_text":"Enemy in range! Continue Crafting?"})
 		obj.set_attrib("ai.disabled", true)
+	if filtered.size() > 0 and obj.get_attrib("ai.pathfinding") == "pickup" and obj.get_attrib("ai.pickup_continued_enemy", false) == false:
+		if should_ask:
+			obj.set_attrib("ai.pickup_continued_enemy", true)
+			BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"ok_text":"Continue", "callback_object":self, "callback_method":"On_Interest_Continue", "cancel_method":"On_Interest_Callback", "callback_param":obj, "custom_text":"Enemy in range! Continue Pickup?"})
+		obj.set_attrib("ai.disabled", true)
 		
 	# Disable if energy is low
 	var cur_energy = obj.get_attrib("converter.stored_energy")
-	if cur_energy != null and cur_energy <= 500 and obj.get_attrib("ai.crafting_continued_energy", false) == false:
+	var is_low_energy = cur_energy != null and cur_energy <= 500
+	if is_low_energy and obj.get_attrib("ai.pathfinding") != "crafting" and obj.get_attrib("ai.pathfinding") != "pickup":
 		if is_player == true:
 			BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]Energy too low for autopilot ![/color]")
+		obj.set_attrib("ai.disabled", true)
+		
+	if is_low_energy and obj.get_attrib("ai.pathfinding") == "crafting" and obj.get_attrib("ai.crafting_continued_energy", false) == false:
 		if should_ask:
 			obj.set_attrib("ai.crafting_continued_energy", true)
 			BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"ok_text":"Continue", "callback_object":self, "callback_method":"On_Interest_Continue", "cancel_method":"On_Interest_Callback", "callback_param":obj, "custom_text":"Energy Low! Continue Crafting?"})
+		obj.set_attrib("ai.disabled", true)
+		
+	if is_low_energy and obj.get_attrib("ai.pathfinding") == "pickup" and obj.get_attrib("ai.pickup_continued_energy", false) == false:
+		if should_ask:
+			obj.set_attrib("ai.pickup_continued_energy", true)
+			BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"ok_text":"Continue", "callback_object":self, "callback_method":"On_Interest_Continue", "cancel_method":"On_Interest_Callback", "callback_param":obj, "custom_text":"Energy Low! Continue Pickup?"})
 		obj.set_attrib("ai.disabled", true)
 	
 func On_Interest_Callback(obj):
@@ -135,6 +152,10 @@ func On_Interest_Callback(obj):
 	if obj.get_attrib("ai.pathfinding") == "crafting":
 		BehaviorEvents.emit_signal("OnLogLine", "Crafting Canceled by Captain's order")
 		BehaviorEvents.emit_signal("OnCancelCrafting", obj)
+		obj.set_attrib("ai.disabled", true)
+	elif obj.get_attrib("ai.pathfinding") == "pickup":
+		BehaviorEvents.emit_signal("OnLogLine", "Tractor Beam Disabled by Captain's order")
+		BehaviorEvents.emit_signal("OnCancelPickup", obj)
 		obj.set_attrib("ai.disabled", true)
 	
 func On_Interest_Continue(obj):
@@ -179,6 +200,12 @@ func OnDamageTaken_Callback(target, shooter, damage_type):
 	if target.get_attrib("ai.pathfinding", "") == "crafting":
 		target.set_attrib("ai.crafting_continued_energy", true)
 		BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"ok_text":"Continue", "callback_object":self, "callback_method":"On_Interest_Continue", "cancel_method":"On_Interest_Callback", "callback_param":target, "custom_text":"We've taken damage! Continue Crafting?"})
+		target.set_attrib("ai.disabled", true)
+		return
+		
+	if target.get_attrib("ai.pathfinding", "") == "pickup":
+		target.set_attrib("ai.pickup_continued_energy", true)
+		BehaviorEvents.emit_signal("OnPushGUI", "ValidateDiag", {"ok_text":"Continue", "callback_object":self, "callback_method":"On_Interest_Continue", "cancel_method":"On_Interest_Callback", "callback_param":target, "custom_text":"We've taken damage! Continue Pickup?"})
 		target.set_attrib("ai.disabled", true)
 		return
 	
@@ -250,6 +277,8 @@ func OnObjTurn_Callback(obj):
 	
 	if pathfinding == "crafting":
 		DoCraftingWait(obj)
+	elif pathfinding == "pickup":
+		DoPickupWait(obj)
 	elif pathfinding == "pylon":
 		DoPylonPathfinding(obj)
 	elif pathfinding == "queen":
@@ -302,6 +331,9 @@ func DoCraftingWait(obj):
 		if ap_left <= 0.0:
 			#obj.set_attrib("ai.disabled", true) # disable here so that OnUseAP re-activate the player
 			BehaviorEvents.emit_signal("OnResumeCrafting", obj)
+
+func DoPickupWait(obj):
+	BehaviorEvents.emit_signal("OnResumePickup", obj)
 
 func DoJergQueenPathfinding(obj):
 	var ai_target = obj.get_attrib("ai.target")

@@ -31,6 +31,8 @@ signal OnPickup(picker, picked)
 signal OnObjectsPicked(picker)
 signal OnPickObject(picker, obj)
 signal OnPickItem(picker, item_id, modified_attributes) # called before adding item to iventory to give chance to apply effects
+signal OnResumePickup(picker)
+signal OnCancelPickup(picker)
 signal OnDropCargo(dropper, item_id, variation_src, count)
 signal OnItemDropped(dropper, item_id, modified_attributes)
 signal OnDropMount(dropper, item_id, index)
