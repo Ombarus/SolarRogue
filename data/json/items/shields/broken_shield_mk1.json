@@ -1,0 +1,53 @@
+{
+	"name_id":"Shield",
+	"type":"shield",
+	"sprite": "shield",
+	"icon": {
+		"texture":"data/private/textures/space-sprite.png",
+		"region":[384,128,128,128]
+	},
+	"equipment": {
+		"slot":"shield",
+		"volume":50.0,
+		"equip_ap":3.0,
+		"unequip_ap":3.0
+	},
+	"shielding": {
+		"max_hp":15,
+		"hp_regen_per_ap":0.2,
+		"energy_cost_per_hp":22.0
+	},
+	"recyclable": {
+		"energy": 400,
+		"player_sale_range": [800,1200],
+		"player_buy_range": [1400,1800]
+	},
+	"disassembling": {
+		"produce":"data/json/items/misc/spare_parts.json",
+		"count":1,
+		"energy_cost":500
+	},
+	"variations": [
+		{"src":"data/json/items/effects/normal.json", "chance": 1},
+		{"src":"data/json/items/effects/broken.json", "chance": 99}
+	],
+	"description": {
+		"text":"A type of force field that surrounds the ship protecting it against all form of energy and projectile weaponry. Consumes large amount of energy and recharges slowly over time. Stacked shields offer diminishing returns.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume*volume_multiplier}", "translate_value":false, "positive_good":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap+equip_ap_bonus}", "translate_value":false, "positive_good":false},
+				{"name":"Mount Point", "value":"Shield"}
+			]
+		},
+		"Shielding": {
+			"min_level":0,
+			"fields": [
+				{"name":"Max Shield", "value":"{shielding.max_hp*shield_multiplier} points"},
+				{"name":"Regen Rate", "value":"{shielding.hp_regen_per_ap*hp_regen_per_ap_multiplier} point / turn"},
+				{"name":"Energy Cost", "value":"{shielding.energy_cost_per_hp*energy_cost_per_hp_multiplier} per point", "positive_good":false}
+			]
+		}
+	}
+}

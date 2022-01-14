@@ -1,0 +1,52 @@
+{
+	"name_id":"Long Range Scanner",
+	"type":"scanner",
+	"sprite": "scanner",
+	"icon": {
+		"texture":"data/private/textures/space-sprite.png",
+		"region":[512,128,128,128]
+	},
+	"equipment": {
+		"slot":"scanner",
+		"volume":50.0,
+		"equip_ap":3.0,
+		"unequip_ap":3.0
+	},
+	"scanning": {
+		"radius":8,
+		"level":0,
+		"detection_bonus":0.01
+	},
+	"variations": [
+		{"src":"data/json/items/effects/normal.json", "chance": 1},
+		{"src":"data/json/items/effects/dull.json", "chance":99}
+	],
+	"recyclable": {
+		"energy": 500,
+		"player_sale_range": [700,1100],
+		"player_buy_range": [1300,1700]
+	},
+	"disassembling": {
+		"produce":"data/json/items/misc/spare_parts.json",
+		"count":1,
+		"energy_cost":500
+	},
+	"description": {
+		"text":"This extra-powerful radar extends beyond the average weapon range allowing us time to get into a flanking position before battle.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume}", "translate_value":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap+equip_ap_bonus}", "translate_value":false, "positive_good":false},
+				{"name":"Mount Point", "value":"Scanner"}
+			]
+		},
+		"Scanning": {
+			"min_level":0,
+			"fields": [
+				{"name":"Radius", "value":"{scanning.radius+scanner_bonus}", "translate_value":false},
+				{"name":"Level", "value":"{scanning.level}", "translate_value":false}
+			]
+		}
+	}
+}

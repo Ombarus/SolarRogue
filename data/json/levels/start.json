@@ -21,6 +21,13 @@
 		{"name":"data/json/levels/main/main01.json", "spawn_rate":1.0, "max":1, "sprite_margin":[1,1]},
 		{"name":"data/json/stellar/small_nebula.json", "max":1, "spawn_rate":0.000058125, "tile_margin":[5,5]},
 		
+		{"name":"data/json/items/scanners/broken_long_range_scanner_mk1.json", "spawn_rate":0.02, "max":2},
+		{"name":"data/json/items/scanners/broken_scanner_mk1.json", "spawn_rate":0.02, "max":3},
+		{"name":"data/json/items/shields/broken_shield_mk1.json", "spawn_rate":0.1, "max":4},
+		{"name":"data/json/items/shields/broken_shield_mk2.json", "spawn_rate":0.02, "max":3},
+		{"name":"data/json/items/weapons/broken_missile_launcher_mk1.json", "spawn_rate":0.1, "max":4},
+		{"name":"data/json/items/weapons/broken_laser_turret_mk1.json", "spawn_rate":0.02, "max":2},
+		
 		{"name":"data/json/stellar/anomalies/energy_syphon.json", "spawn_rate":0.000052, "max":1},
 		{"name":"data/json/stellar/anomalies/blind_anomaly.json", "spawn_rate":0.000052, "max":1},
 		{"name":"data/json/stellar/anomalies/slow_anomaly.json", "spawn_rate":0.000052, "max":1}

@@ -33,7 +33,7 @@
 		{"id":"data/json/items/converters/converter_mk1.json", "chance":0.02},
 		{"id":"data/json/items/scanners/scanner_mk2.json", "chance":0.1},
 		{"id":"data/json/items/scanners/scanner_mk3.json", "chance":0.005},
-		{"id":"data/json/items/scanners/long_range_scanner_mk1.json", "chance":0.04},
+		{"id":"data/json/items/scanners/long_range_scanner_mk1.json", "chance":0.1},
 		{"id":"data/json/items/scanners/long_range_scanner_mk2.json", "chance":0.02},
 		{"id":"data/json/items/scanners/long_range_scanner_mk3.json", "chance":0.003},
 		{"id":"data/json/items/scanners/ultimate_scanner.json", "chance":0.01, "global_max":1}

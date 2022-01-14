@@ -1,0 +1,68 @@
+{
+	"name_id":"Missile Launcher MK1",
+	"type":"weapon",
+	"sprite":"missile_launcher",
+	"icon": {
+		"texture":"data/private/textures/space-sprite.png",
+		"region":[128,128,128,128]
+	},
+	"animation": {
+		"shoot": "scenes/tileset_source/missile_fx.tscn"
+	},
+	"weapon_data": {
+		"base_dam":4.0,
+		"max_dam":9.0,
+		"ammo":"data/json/items/weapons/missile.json",
+		"fire_range":1.0,
+		"fire_pattern":"o",
+		"fire_energy_cost":100.0,
+		"fire_speed":1.0,
+		"base_hit_chance":0.75,
+		"crit_chance":0.0,
+		"crit_multiplier":1.5
+	},
+	"equipment": {
+		"slot":"weapon",
+		"volume":60.0,
+		"equip_ap":3.0,
+		"unequip_ap":3.0
+	},
+	"recyclable": {
+		"energy": 500,
+		"player_sale_range": [700,1100],
+		"player_buy_range": [1300,1700]
+	},
+	"disassembling": {
+		"produce":"data/json/items/misc/spare_parts.json",
+		"count":1,
+		"energy_cost":500
+	},
+	"variations": [
+		{"src":"data/json/items/effects/normal.json", "chance": 1},
+		{"src":"data/json/items/effects/broken.json", "chance": 99}
+	],
+	"description": {
+		"text":"Launches a flurry of guided-missile to any target in the viscinity. Due to it's slow speed, range is limited.",
+		"Overview": {
+			"min_level":0,
+			"fields":[
+				{"name":"Cargo Volume", "value":"{equipment.volume*volume_multiplier}", "translate_value":false, "positive_good":false},
+				{"name":"Equip Turn", "value":"{equipment.equip_ap+equip_ap_bonus}", "translate_value":false, "positive_good":false},
+				{"name":"Mount Point", "value":"Weapon"}
+			]
+		},
+		"Weapon Stats": {
+			"min_level":0,
+			"fields": [
+				{"name":"Damage", "value":"{weapon_data.base_dam*base_dam_multiplier}~{weapon_data.max_dam*max_dam_multiplier}", "translate_value":false},
+				{"name":"Range", "value":"{weapon_data.fire_range+range_bonus}", "translate_value":false},
+				{"name":"Energy Cost", "value":"{weapon_data.fire_energy_cost*fire_energy_cost_multiplier}", "translate_value":false, "positive_good":false},
+				{"name":"Speed", "value":"{weapon_data.fire_speed*fire_speed_multiplier} turns", "positive_good":false},
+				{"name":"Hit Chance", "value":"{weapon_data.base_hit_chance+hit_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Critical Chance", "value":"{weapon_data.crit_chance+crit_chance_bonus}%", "translate_value":false, "display_percent":true},
+				{"name":"Critical Multiplier", "value":"x{weapon_data.crit_multiplier}", "translate_value":false},
+				{"name":"Ammo", "value":"Missile"}
+			]
+		}
+	}
+}
