@@ -52,29 +52,29 @@ func OnTriggerAnomaly_Callback(obj, anomaly):
 		known_anomalies[anomaly_id] = true
 		obj.set_attrib("scanner_result.known_anomalies." + level_id, known_anomalies)
 		anomaly.visible = true
+		
 	var effect_info = anomaly.get_attrib("anomaly.speed")
 	if effect_info != null:
 		#TODO: add fx
 		var moving_data : float = obj.get_attrib("moving.speed")
 		if moving_data != null:
-			#QUESTION: can anomaly stack ? what if you pass multiple time on the same anomaly ?
-			#QUESTION: should slow affect only movement or all actions (including crafting, shooting, etc, ?)
-			obj.set_attrib("moving.special_multiplier", effect_info.multiplier)
-			add_to_ongoing_effect(obj, effect_info, "speed")
-			if is_player:
-				#TODO: check if there's already an active effect of same type ?
-				BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]The anomaly has corrupted your warp drives, engine at half power[/color]")
-	
+			var special_speed_mult = max(effect_info.multiplier, obj.get_attrib("moving.special_multiplier", 0))
+			obj.set_attrib("moving.special_multiplier", special_speed_mult)
+			var already_exist = add_to_ongoing_effect(obj, effect_info, "speed")
+			if is_player and not already_exist:
+				#TODO: change text to be dynamic based on special_speed_mult
+				BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]The anomaly has corrupted your warp drives, engine at half power[/color]")	
+				
 	effect_info = anomaly.get_attrib("anomaly.energy")
 	if effect_info != null:
 		var amount : float = Globals.get_data(effect_info, "amount", 0)
 		var duration = Globals.get_data(effect_info, "duration_turn")
-		if duration == null or duration <= 0:
+		var already_exist = add_to_ongoing_effect(obj, effect_info, "energy")
+		if not already_exist and (duration == null or duration <= 0):
 			BehaviorEvents.emit_signal("OnUseEnergy", obj, -amount)
-		else:
+		elif not already_exist:
 			obj.set_attrib("converter.extra_ap_energy_cost", -amount)
-		add_to_ongoing_effect(obj, effect_info, "energy")
-		if is_player:
+		if is_player and not already_exist:
 			if amount < 0:
 				BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]The anomaly is syphoning energy from the ship ![/color]")
 			else:
@@ -84,29 +84,42 @@ func OnTriggerAnomaly_Callback(obj, anomaly):
 	if effect_info != null:
 		var amount : int = Globals.get_data(effect_info, "range_bonus")
 		var cur_bonus : int = obj.get_attrib("scanner_result.range_bonus", 0)
-		obj.set_attrib("scanner_result.range_bonus", cur_bonus + amount)
-		add_to_ongoing_effect(obj, effect_info, "scanner")
-		if is_player:
-			if amount < 0:
-				BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]A magnetic pulse from the Anomaly has disabled our scanners ![/color]")
-			else:
-				BehaviorEvents.emit_signal("OnLogLine", "[color=lime]The anomaly resonate with our scanners giving them a boost ![/color]")
+		var already_exist = add_to_ongoing_effect(obj, effect_info, "scanner")
+		if not already_exist:
+			obj.set_attrib("scanner_result.range_bonus", cur_bonus + amount)
+			if is_player:
+				if amount < 0:
+					BehaviorEvents.emit_signal("OnLogLine", "[color=yellow]A magnetic pulse from the Anomaly has disabled our scanners ![/color]")
+				else:
+					BehaviorEvents.emit_signal("OnLogLine", "[color=lime]The anomaly resonate with our scanners giving them a boost ![/color]")
+
 		
-
-
 func add_to_ongoing_effect(obj, effect_info, type):
+	var current_effects = obj.get_attrib("anomaly.effects", [])
+	var existing_data = null
+	for f_data in current_effects:
+		if f_data.type == type:
+			existing_data = f_data
+			break
+	
 	var duration = Globals.get_data(effect_info, "duration_turn")
-	if duration == null or duration <= 0:
+	if duration == null:
 		return
+	
+	if existing_data == null:
+		var effect_data = str2var(var2str(effect_info))
+		if duration == 0:
+			effect_data["duration_turn"] = 1.0 # give a cooldown so the effect doesn't re-trigger every fraction of a turn
+		effect_data["type"] = type
+		effect_data["last_turn_update"] = Globals.total_turn
+		var obj_effect_list = obj.get_attrib("anomaly.effects", [])
+		obj_effect_list.push_back(effect_data)
+		obj.set_attrib("anomaly.effects", obj_effect_list)
+	else:
+		existing_data["duration_turn"] = max(duration, existing_data["duration_turn"])
+		existing_data["last_turn_update"] = Globals.total_turn
 		
-	var effect_data = str2var(var2str(effect_info))
-	effect_data["type"] = type
-	effect_data["last_turn_update"] = Globals.total_turn
-	var obj_effect_list = obj.get_attrib("anomaly.effects")
-	if obj_effect_list == null:
-		obj_effect_list = []
-	obj_effect_list.push_back(effect_data)
-	obj.set_attrib("anomaly.effects", obj_effect_list)
+	return existing_data != null
 	
 	
 func update_effect(obj, effect_list):
@@ -117,8 +130,8 @@ func update_effect(obj, effect_list):
 			effect.last_turn_update = Globals.total_turn
 		
 		if not "duration_turn" in effect or effect.duration_turn <= 0:
-			to_clear.push_back(effect)
 			remove_effect(obj, effect)
+			to_clear.push_back(effect)
 				
 	for effect in to_clear:
 		effect_list.erase(effect)
@@ -134,10 +147,11 @@ func remove_effect(obj, effect):
 			BehaviorEvents.emit_signal("OnLogLine", "[color=lime]Purge complete, all system back online[/color]")
 	if effect.type == "energy":
 		var converter_data = obj.get_attrib("converter")
-		converter_data.erase("extra_ap_energy_cost")
-		obj.set_attrib("converter", converter_data)
-		if obj.get_attrib("type") == "player":
-			BehaviorEvents.emit_signal("OnLogLine", "[color=lime]The energy Syphon has subsided[/color]")
+		if "extra_ap_energy_cost" in converter_data:
+			converter_data.erase("extra_ap_energy_cost")
+			obj.set_attrib("converter", converter_data)
+			if obj.get_attrib("type") == "player":
+				BehaviorEvents.emit_signal("OnLogLine", "[color=lime]The energy Syphon has subsided[/color]")
 	if effect.type == "scanner":
 		var amount : int = Globals.get_data(effect, "range_bonus")
 		var prev_bonus : int = obj.get_attrib("scanner_result.range_bonus")

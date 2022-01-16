@@ -98,6 +98,9 @@ func Init(init_param):
 				var base_val = val
 				if abs(mult - 1.0) > 0.0001:
 					val *= mult
+				var special_mult_string = row.get("special_multiplier", null)
+				if special_mult_string != null:
+					val *= get_custom(special_mult_string, 1.0)
 				if abs(bonus) > 0.00001:
 					val += bonus
 					

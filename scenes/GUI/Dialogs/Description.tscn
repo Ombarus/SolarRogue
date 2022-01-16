@@ -64,6 +64,8 @@ text = "This is a basic description
 autowrap = true
 
 [node name="MyItemList" parent="base/VBoxContainer" instance=ExtResource( 6 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 80.0
 margin_right = 510.0
 margin_bottom = 495.0
