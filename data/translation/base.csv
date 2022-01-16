@@ -912,3 +912,7 @@ Continue,Continue,Continuer,続く
 Composition,Composition,Composition,Composition
 [color=gray]Min. Scanner Level[/color],[color=gray]Min. Scanner Level[/color],[color=gray]Niveau Scanner Min.[/color],[color=gray]Min. Scanner Level[/color]
 Life Scan,Life Scan,Scan Vie,Life Scan
+Tractor Beam Disabled by Captain's order ,Tractor Beam Disabled by Captain's order ,Traction Annulé par ordre du Commandant,Tractor Beam Disabled by Captain's order 
+We've taken damage! Continue Pickup? ,We've taken damage! Continue Pickup? ,Nous avons subit des dégâts! Annulé le ramassage?,We've taken damage! Continue Pickup? 
+Energy Low! Continue Pickup? ,Energy Low! Continue Pickup? ,Énergie Faible! Annulé le ramassage?,Energy Low! Continue Pickup? 
+Enemy in range! Continue Pickup? ,Enemy in range! Continue Pickup? ,Ennemie en approche! Annulé le ramassage?,Enemy in range! Continue Pickup? 
