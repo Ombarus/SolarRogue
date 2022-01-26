@@ -11,6 +11,7 @@ var _cur_cooldown = cooldown
 func _ready():
 	BehaviorEvents.connect("OnLogLine", self, "OnLogLine_Callback")
 	BehaviorEvents.connect("OnPlayerTurn", self, "OnPlayerTurn_Callback")
+	BehaviorEvents.connect("OnPickObject", self, "OnPickObject_Callback")
 
 func OnLogLine_Callback(msg, fmt=[]):
 	_cur_chance = base_chance
@@ -21,10 +22,10 @@ func OnPlayerTurn_Callback(obj):
 	
 	var log_choices = {
 		"[color=teal]Reminder, Crew meeting today at 6:00[/color]":75,
+		"[color=teal]Captain to the bridge[/color]":75,
 		"[color=teal]A new baby girl was born today![/color]":50,
 		"[color=teal]A new baby boy was born today![/color]":50,
 		"[color=teal]The engineers have finished refiting the deuterium relay couplers[/color]":50,
-		"[color=teal]Captain to the bridge[/color]":75,
 		"[color=teal]We've completed the analysis of the latest planetary samples. Nothing new.[/color]":50,
 		"[color=teal]Captain on deck![/color]":50,
 		"[color=teal]Data indicate that this sun is still in it's main phase[/color]":50,
@@ -58,6 +59,8 @@ func OnPlayerTurn_Callback(obj):
 		"[color=teal]Not enough power, we require additional Pylons[/color]":5,
 	}
 	
+	gather_conditional_hint(obj, log_choices)
+	
 	if _cur_cooldown > Globals.total_turn:
 		_cur_chance = base_chance
 		return
@@ -72,3 +75,107 @@ func OnPlayerTurn_Callback(obj):
 		_cur_cooldown = Globals.total_turn + cooldown
 	else:
 		_cur_chance += chance_increment
+
+func gather_conditional_hint(player : Attributes, log_choices : Dictionary) -> Dictionary:
+	var default_rarity = 200
+	var cargo_contents : Array = player.get_attrib("cargo.content")
+	var mount_attrib = player.get_attrib("mount_attributes", {})
+	var weapons : Array = player.get_attrib("mounts.weapon")
+	var weapons_data = Globals.LevelLoaderRef.LoadJSONArray(weapons)
+	if weapons_data == null or weapons_data.size() <= 0:
+		log_choices["[color=teal]Status report: Weapon Missing[/color]"] = default_rarity + 500
+		weapons_data = []
+	
+	for data in weapons_data:
+		if "ammo" in data["weapon_data"]:
+			var ammo_src : String = data["weapon_data"]["ammo"]
+			var ammo_name : String = Globals.mytr(Globals.LevelLoaderRef.LoadJSON(ammo_src)["name_id"])
+			var remaining_ammo : int = 0
+			for cargo in cargo_contents:
+				if cargo["src"] == ammo_src:
+					remaining_ammo += cargo["count"]
+			if remaining_ammo <= 5:
+				log_choices[Globals.mytr("[color=teal]Warning: %s reserve dangerously low[/color]", [ammo_name])] = default_rarity + 200
+	##################
+	var energy_left = player.get_attrib("converter.stored_energy")
+	if energy_left < 5000:
+		log_choices["[color=teal]Captain, Energy expenditure reports show concerningly low level of stored energy[/color]"] = default_rarity + 300
+		
+	##################
+	if not Globals.is_mobile():
+		log_choices["[color=teal]Hold down the mouse click to force move to your desired location[/color]"] = default_rarity - 150
+		log_choices["[color=teal]Use the Numpad numbers to move around with the keyboard[/color]"] = default_rarity - 150
+		log_choices["[color=teal]Use the Numpad 5 to wait one turn[/color]"] = default_rarity - 150
+		log_choices["[color=teal]You can move the ship with the Numpad[/color]"] = default_rarity - 150
+		log_choices["[color=teal]Letters between [] show the corresponding keyboard shortcut[/color]"] = default_rarity - 150
+	else:
+		log_choices["[color=teal]You can use Pinch to zoom[/color]"] = default_rarity - 150
+	
+	##################
+	var max_hull = player.get_attrib("destroyable.hull")
+	var max_shield = player.get_max_shield()
+	var current_depth = Globals.LevelLoaderRef.current_depth
+	if current_depth > 2 and (max_hull + max_shield) < 40.0:
+		log_choices["[color=teal]Captain, we detect rather large ships signature in this region, our ship might not be equipped to handle such large opponent.[/color]"] = default_rarity
+		log_choices["[color=teal]Captain, we must proceed with caution![/color]"] = default_rarity
+	if current_depth > 6 and (max_hull + max_shield) < 49:
+		log_choices["[color=teal]Captain, we detect rather large ships signature in this region, our ship might not be equipped to handle such large opponent.[/color]"] = default_rarity
+		log_choices["[color=teal]Captain, we must proceed with caution![/color]"] = default_rarity
+	
+	##################
+	player.init_cargo()
+	var cargo_capacity = player.get_attrib("cargo.capacity")
+	var cargo_used = player.get_attrib("cargo.volume_used")
+	if cargo_used + 20.0 > cargo_capacity:
+		log_choices["[color=teal]Captain, our holds are near capacity[/color]"] = default_rarity - 25
+		log_choices["[color=teal]Captain, We're running out of space![/color]"] = default_rarity - 25
+		log_choices["[color=teal]Captain, We should install additional Gravitic Compactor to free some cargo space![/color]"] = default_rarity - 25
+
+	##################
+	for cargo in cargo_contents:
+		var effect = Globals.get_data(cargo, "modified_attributes.selected_variation", "")
+		if "broken" in effect:
+			log_choices["[color=teal]Captain, Engineering reports mission critical item outside of specification.[/color]"] = default_rarity + 75
+			log_choices["[color=teal]Captain, Engineering also wants to keep our broken stuff.[/color]"] = default_rarity + 75
+			log_choices["[color=teal]Captain, Engineering might have broken some stuff... again.[/color]"] = default_rarity - 150
+			break
+			
+	for key in mount_attrib:
+		var found : bool = false
+		for attrib in mount_attrib[key]:
+			if "broken" in attrib.get("selected_variation", ""):
+				log_choices["[color=teal]Captain, Engineering thinks it's a bad idea to install broken components[/color]"] = default_rarity + 200
+				found = true
+				break
+		if found:
+			break
+	
+	##################
+	if player.get_attrib("visiting.been_to_human", false) == false:
+		log_choices["[color=teal]Captain, There are rumors of a Neutral Human Coalition somewhere.[/color]"] = default_rarity - 150
+	
+	##################
+	if player.get_attrib("visiting.seen_jerg", false) == true:
+		log_choices["[color=teal]Analysis show that Jerg have semi-organic ship capable of regeneration[/color]"] = default_rarity - 25
+		log_choices["[color=teal]Analysis show that Jerg prefer traveling in swarms[/color]"] = default_rarity - 25
+		log_choices["[color=teal]Analysis show that Jerg technology favor utility over firepower[/color]"] = default_rarity - 25
+		log_choices["[color=teal]Analysis show that Jerg regeneration interfers with shield harmonics[/color]"] = default_rarity - 100
+		if player.get_attrib("visiting.been_to_jerg", false) == false:
+			log_choices["[color=teal]The Jerg must have a base of operation somewhere.[/color]"] = default_rarity + 100
+	if player.get_attrib("visiting.seen_vorg", false) == true:
+		log_choices["[color=teal]Analysis show that the Vorg rely heavily on advance technology to overpower their enemies[/color]"] = default_rarity - 25
+		log_choices["[color=teal]Analysis show that the Vorg prefer heavily shielded ships over anything else[/color]"] = default_rarity - 25
+		log_choices["[color=teal]Analysis show that Vorg ships tend to be slow but deadly[/color]"] = default_rarity - 25
+		if player.get_attrib("visiting.been_to_vorg", false) == false:
+			log_choices["[color=teal]The Vorg must have a base of operation somewhere.[/color]"] = default_rarity + 100
+			
+	##################
+	if player.get_attrib("visiting.seen_cristal", false) == false:
+		log_choices["[color=teal]There are rumors of crystals that can power battleships for months[/color]"] = default_rarity - 150
+	
+	return log_choices
+
+func OnPickObject_Callback(picker : Attributes, picked : Attributes):
+	if "diluted_cristals" in picked.get_attrib("src"):
+		picker.set_attrib("visiting.seen_cristal", true)
+		BehaviorEvents.disconnect("OnPickObject", self, "OnPickObject_Callback")

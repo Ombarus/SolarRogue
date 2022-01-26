@@ -565,6 +565,11 @@ func ProcessDeathSpawns(target):
 	# Mark as seen so that goto doesn't interrupt for items we're sure to have seen before
 	if destroyer != null and destroyer.get_attrib("type") == "player":
 		modif_data = {"memory": {"was_seen_by":true}}
+		# Activate display of related log about these races
+		if "jerg" in target.get_attrib("src"):
+			target.set_attrib("visiting.seen_jerg", true)
+		if "vorg" in target.get_attrib("src"):
+			target.set_attrib("visiting.seen_vorg", true)
 	var global_chance_mult = Globals.EffectRef.GetMultiplierValue(destroyer, destroyer.get_attrib("name_id"), {}, "drop_chance_multiplier")
 	for stuff in target.get_attrib("drop_on_death"):
 		var spawned = Globals.LevelLoaderRef.GetGlobalSpawn(stuff.id)

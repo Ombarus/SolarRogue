@@ -671,6 +671,12 @@ func OnLevelLoaded_Callback():
 			BehaviorEvents.emit_signal("OnLogLine", message_to_play)
 			played_messages.push_back(message_to_play)
 			playerNode.set_attrib("played_messages", played_messages)
+	if "human_branch" in level_data["src"]:
+		playerNode.set_attrib("visiting.been_to_human", true)
+	if "jerg_branch" in level_data["src"]:
+		playerNode.set_attrib("visiting.been_to_jerg", true)
+	if "vorg_branch" in level_data["src"]:
+		playerNode.set_attrib("visiting.been_to_vorg", true)
 	
 func _show_description():
 	var click_pos = playerNode.get_global_mouse_position()

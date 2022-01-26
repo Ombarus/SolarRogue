@@ -309,6 +309,76 @@ def list_types(params):
 				types[f["type"]] += 1
 			
 	print(types)
+	
+def shield_hull_report(params):
+	ship_list = []
+	shield_list = []
+	
+	for f in params["data"]:
+		if "type" in f:
+			if f["type"] == "ship" and "boardable" in f and f["boardable"] == True:
+				max_shield = 0
+				if "shield" in f["mounts"]:
+					max_shield = len(f["mounts"]["shield"])
+				ship_list.append({
+					"name":f["name_id"], 
+					"max_shields":max_shield,
+					"hull":f["destroyable"]["hull"]
+				})
+			if f["type"] == "shield":
+				shield_list.append({"name":f["name_id"], "shield":f["shielding"]["max_hp"]})
+				
+	csv_result = [["setup", "hull", "shield", "total"]]
+	for ship in ship_list:			
+			setup_name = "{} only".format(ship["name"])
+			csv_result.append([setup_name, ship["hull"], 0, ship["hull"]])
+			if ship["max_shields"] > 0:
+				for shield in shield_list:
+					# 1, 0.5, 0.25, 0.125, etc.
+					count = 0
+					shield_hp_sum = 0
+					for i in range(ship["max_shields"]):
+						shield_hp_sum += shield["shield"] / pow(2, count)
+						count += 1
+					setup_name = "{} + {}".format(ship["name"], shield["name"])
+					csv_result.append([setup_name, ship["hull"], shield_hp_sum, ship["hull"] + shield_hp_sum])
+	
+	print(len(csv_result))
+	print_as_csv(csv_result, 5)
+	
+	
+def shield_hull_report_mob(params):
+	ship_list = []
+	shield_list = {}
+	
+	for f in params["data"]:
+		if "type" in f:
+			if f["type"] == "ship" and "ai" in f and "aggressive" in f["ai"] and f["ai"]["aggressive"] == True:
+				mob_shields = []
+				if "shield" in f["mounts"]:
+					mob_shields = f["mounts"]["shield"]
+				ship_list.append({
+					"name":f["name_id"], 
+					"max_shields":mob_shields,
+					"hull":f["destroyable"]["hull"]
+				})
+			if f["type"] == "shield":
+				shield_list[f["src"]] = f["shielding"]["max_hp"]
+				
+	csv_result = [["mob name", "hull", "shield", "total"]]
+	print(shield_list)
+	for ship in ship_list:			
+			setup_name = "{}".format(ship["name"])
+			shield_hp_sum = 0
+			count = 0
+			for mob_shield_src in ship["max_shields"]:
+				if mob_shield_src != "":
+					shield_hp_sum += shield_list[mob_shield_src]/ pow(2, count)
+					count += 1
+			csv_result.append([setup_name, ship["hull"], shield_hp_sum, ship["hull"] + shield_hp_sum])
+	
+	print(len(csv_result))
+	print_as_csv(csv_result, 5)
 			
 		
 def do_actions(actions, params):
@@ -326,12 +396,18 @@ def do_actions(actions, params):
 		search_invalid_filename(params)
 	if "list_types" in actions:
 		list_types(params)
+	if "shield_hull_report" in actions:
+		shield_hull_report(params)
+	if "shield_hull_report_mob" in actions:
+		shield_hull_report_mob(params)
 		
 		
 if __name__ == '__main__':
 	actions = [
 		"glob_json",
-		"search_invalid_filename",
+		#"search_invalid_filename",
+		#"shield_hull_report", # Create a list of ship + shield = how much HP (Was trying to figure out how to know a ship is under-leveled for it's current depth)
+		"shield_hull_report_mob", # Create a list of ship + shield = how much HP (Was trying to figure out how to know a ship is under-leveled for it's current depth)
 		#"count_mounts",
 		#"crafting_report",
 		#"weapon_energy_report",

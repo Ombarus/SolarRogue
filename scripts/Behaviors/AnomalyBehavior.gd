@@ -147,7 +147,7 @@ func remove_effect(obj, effect):
 			BehaviorEvents.emit_signal("OnLogLine", "[color=lime]Purge complete, all system back online[/color]")
 	if effect.type == "energy":
 		var converter_data = obj.get_attrib("converter")
-		if "extra_ap_energy_cost" in converter_data:
+		if converter_data != null and "extra_ap_energy_cost" in converter_data:
 			converter_data.erase("extra_ap_energy_cost")
 			obj.set_attrib("converter", converter_data)
 			if obj.get_attrib("type") == "player":
