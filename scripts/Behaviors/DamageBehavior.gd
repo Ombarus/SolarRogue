@@ -567,9 +567,9 @@ func ProcessDeathSpawns(target):
 		modif_data = {"memory": {"was_seen_by":true}}
 		# Activate display of related log about these races
 		if "jerg" in target.get_attrib("src"):
-			target.set_attrib("visiting.seen_jerg", true)
+			destroyer.set_attrib("visiting.seen_jerg", true)
 		if "vorg" in target.get_attrib("src"):
-			target.set_attrib("visiting.seen_vorg", true)
+			destroyer.set_attrib("visiting.seen_vorg", true)
 	var global_chance_mult = Globals.EffectRef.GetMultiplierValue(destroyer, destroyer.get_attrib("name_id"), {}, "drop_chance_multiplier")
 	for stuff in target.get_attrib("drop_on_death"):
 		var spawned = Globals.LevelLoaderRef.GetGlobalSpawn(stuff.id)

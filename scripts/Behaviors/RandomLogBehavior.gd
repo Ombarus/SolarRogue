@@ -59,7 +59,6 @@ func OnPlayerTurn_Callback(obj):
 		"[color=teal]Not enough power, we require additional Pylons[/color]":5,
 	}
 	
-	gather_conditional_hint(obj, log_choices)
 	
 	if _cur_cooldown > Globals.total_turn:
 		_cur_chance = base_chance
@@ -71,6 +70,7 @@ func OnPlayerTurn_Callback(obj):
 		
 	var target = MersenneTwister.rand_float()
 	if target < _cur_chance:
+		gather_conditional_hint(obj, log_choices)
 		BehaviorEvents.emit_signal("OnLogLine", log_choices)
 		_cur_cooldown = Globals.total_turn + cooldown
 	else:
@@ -100,16 +100,17 @@ func gather_conditional_hint(player : Attributes, log_choices : Dictionary) -> D
 	var energy_left = player.get_attrib("converter.stored_energy")
 	if energy_left < 5000:
 		log_choices["[color=teal]Captain, Energy expenditure reports show concerningly low level of stored energy[/color]"] = default_rarity + 300
+		log_choices["[color=teal]Captain, We're burning through our energy reserves dangerously quickly[/color]"] = default_rarity + 100
 		
 	##################
 	if not Globals.is_mobile():
 		log_choices["[color=teal]Hold down the mouse click to force move to your desired location[/color]"] = default_rarity - 150
 		log_choices["[color=teal]Use the Numpad numbers to move around with the keyboard[/color]"] = default_rarity - 150
 		log_choices["[color=teal]Use the Numpad 5 to wait one turn[/color]"] = default_rarity - 150
-		log_choices["[color=teal]You can move the ship with the Numpad[/color]"] = default_rarity - 150
 		log_choices["[color=teal]Letters between [] show the corresponding keyboard shortcut[/color]"] = default_rarity - 150
 	else:
 		log_choices["[color=teal]You can use Pinch to zoom[/color]"] = default_rarity - 150
+		log_choices["[color=teal]Hold down your finger 2 seconds to force move to your desired location[/color]"] = default_rarity - 100
 	
 	##################
 	var max_hull = player.get_attrib("destroyable.hull")
@@ -155,23 +156,33 @@ func gather_conditional_hint(player : Attributes, log_choices : Dictionary) -> D
 		log_choices["[color=teal]Captain, There are rumors of a Neutral Human Coalition somewhere.[/color]"] = default_rarity - 150
 	
 	##################
+	var has_human_branch := false
+	var has_jerg_branch := false
+	var has_vorg_branch := false
+	for wormhole in Globals.LevelLoaderRef.objByType["wormhole"]:
+		if "human_branch" in wormhole.get_attrib("src"):
+			has_human_branch = true
+		elif "vorg_branch" in wormhole.get_attrib("src"):
+			has_vorg_branch = true
+		elif "jerg_branch" in wormhole.get_attrib("src"):
+			has_jerg_branch = true
 	if player.get_attrib("visiting.seen_jerg", false) == true:
 		log_choices["[color=teal]Analysis show that Jerg have semi-organic ship capable of regeneration[/color]"] = default_rarity - 25
 		log_choices["[color=teal]Analysis show that Jerg prefer traveling in swarms[/color]"] = default_rarity - 25
 		log_choices["[color=teal]Analysis show that Jerg technology favor utility over firepower[/color]"] = default_rarity - 25
 		log_choices["[color=teal]Analysis show that Jerg regeneration interfers with shield harmonics[/color]"] = default_rarity - 100
-		if player.get_attrib("visiting.been_to_jerg", false) == false:
-			log_choices["[color=teal]The Jerg must have a base of operation somewhere.[/color]"] = default_rarity + 100
+		if player.get_attrib("visiting.been_to_jerg", false) == false and has_jerg_branch:
+			log_choices["[color=teal]The Jerg must have a base of operation somewhere.[/color]"] = default_rarity + 250
 	if player.get_attrib("visiting.seen_vorg", false) == true:
 		log_choices["[color=teal]Analysis show that the Vorg rely heavily on advance technology to overpower their enemies[/color]"] = default_rarity - 25
 		log_choices["[color=teal]Analysis show that the Vorg prefer heavily shielded ships over anything else[/color]"] = default_rarity - 25
 		log_choices["[color=teal]Analysis show that Vorg ships tend to be slow but deadly[/color]"] = default_rarity - 25
-		if player.get_attrib("visiting.been_to_vorg", false) == false:
-			log_choices["[color=teal]The Vorg must have a base of operation somewhere.[/color]"] = default_rarity + 100
+		if player.get_attrib("visiting.been_to_vorg", false) == false and has_vorg_branch:
+			log_choices["[color=teal]The Vorg must have a base of operation somewhere.[/color]"] = default_rarity + 250
 			
 	##################
 	if player.get_attrib("visiting.seen_cristal", false) == false:
-		log_choices["[color=teal]There are rumors of crystals that can power battleships for months[/color]"] = default_rarity - 150
+		log_choices["[color=teal]There are rumors of crystals that can power battleships for months[/color]"] = 30
 	
 	return log_choices
 
