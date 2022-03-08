@@ -15,7 +15,7 @@ func _ready():
 
 func OnLogLine_Callback(msg, fmt=[]):
 	_cur_chance = base_chance
-	_cur_cooldown = Globals.total_turn + 10.0
+	_cur_cooldown = max(_cur_cooldown, Globals.total_turn + 10.0)
 	_log_last_turn = true
 	
 func OnPlayerTurn_Callback(obj):
