@@ -144,7 +144,7 @@ func gather_conditional_hint(player : Attributes, log_choices : Dictionary) -> D
 	for key in mount_attrib:
 		var found : bool = false
 		for attrib in mount_attrib[key]:
-			if "broken" in attrib.get("selected_variation", ""):
+			if not attrib.empty() and "broken" in attrib.get("selected_variation", ""):
 				log_choices["[color=teal]Captain, Engineering thinks it's a bad idea to install broken components[/color]"] = default_rarity + 200
 				found = true
 				break
