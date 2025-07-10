@@ -77,16 +77,9 @@ func rand(upper : int, is_critical:=true) -> int:
 	y = _cap(y ^ (_cap(y >> 18)));
 	
 	_index = (_index + 1) % GENERATOR_ARRAY_SIZE
-	
-	#if first_ten < 10:
-	#	#print(y)
-	#	first_ten += 1
-	#	var myprint := "y = %d, RNG_MAX = %d, upper = %d, RNG_MAX / upper + 1 = %d, result = %d" % [y, RNG_MAX, upper, RNG_MAX / upper + 1, y / (RNG_MAX / upper + 1)]
-	#	print(myprint)
-		
+
 	y = y / (RNG_MAX / upper + 1)
 	
-		
 	return int(y)
 	
 func rand_float():
